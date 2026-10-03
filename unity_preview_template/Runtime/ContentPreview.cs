@@ -152,11 +152,12 @@ namespace CatCafePreview
             for (int i = 0; i < sceneButtons.Length; i++)
             {
                 sceneButtons[i].onClick = new Button.ButtonClickedEvent();
-                sceneButtons[i].GetComponentInChildren<Text>().text = new[] { "出勤にする", "休養にする", "営業（準備中）", "保存（準備中）" }[i];
+                sceneButtons[i].GetComponentInChildren<Text>().text = new[] { "出勤にする", "休養にする", "営業開始", "保存（準備中）" }[i];
                 sceneButtons[i].interactable = false;
             }
             sceneButtons[0].onClick.AddListener(client.WorkSelected);
             sceneButtons[1].onClick.AddListener(client.RestSelected);
+            sceneButtons[2].onClick.AddListener(client.ProgressBusiness);
         }
 
         public void RefreshPythonControls()
@@ -166,7 +167,9 @@ namespace CatCafePreview
             var cat = pythonState.cats[cats.value];
             sceneButtons[0].interactable = client.CanChangeShifts && !cat.working && cat.health_status == "healthy" && cat.activity == "cafe";
             sceneButtons[1].interactable = client.CanChangeShifts && cat.working;
-            sceneButtons[2].interactable = sceneButtons[3].interactable = false;
+            sceneButtons[2].interactable = client.CanProgressBusiness;
+            sceneButtons[2].GetComponentInChildren<Text>().text = pythonState.closed ? "営業終了" : pythonState.can_set_shifts ? "営業開始" : "1刻み進める";
+            sceneButtons[3].interactable = false;
         }
 
         public void PythonNotice(string message) { status.text = message + "\n" + status.text; }
@@ -188,8 +191,29 @@ namespace CatCafePreview
                 description.text = cat.name + "\n対応する素材が未登録です。";
             }
             description.text += "\n\nPythonのゲーム状態\n体力 " + cat.stamina + "/" + cat.max_stamina
-                + "\n予定：" + (cat.working ? "出勤" : "休養") + "\n健康：" + cat.health_status + "\n活動：" + cat.activity;
-            status.text = "Python接続中：" + pythonState.day + "日目 / 時刻 " + pythonState.tick + " / 資金 " + pythonState.funds;
+                + "\n予定：" + (cat.working ? "出勤" : "休養") + "\n健康：" + cat.health_status + "\n活動：" + cat.activity
+                + "\n疲労 " + cat.fatigue + " / ストレス " + cat.stress;
+            if (pythonState.seats != null)
+            {
+                description.text += "\n\n席の利用状況";
+                foreach (var seat in pythonState.seats)
+                {
+                    var assigned = Array.Find(pythonState.cats, item => item.cat_id == seat.cat_id);
+                    description.text += "\n" + seat.seat_id + "：" + (string.IsNullOrEmpty(seat.customer_id) ? "空席" : "接客中 / " + (assigned == null ? seat.cat_id : assigned.name));
+                }
+                description.text += "\n待機客 " + pythonState.waiting_count + "人 / 接客完了 " + pythonState.completed_interactions + "件";
+            }
+            if (pythonState.closed && pythonState.finance != null)
+            {
+                var finance = pythonState.finance;
+                description.text += "\n\n閉店結果\n売上 " + pythonState.revenue + "\n総収入 " + finance.total_income
+                    + "\n支出 " + finance.total_expenses + "\n収支 " + finance.net_cash_flow + "\n終了資金 " + finance.closing_funds
+                    + "\n\n猫の状態";
+                foreach (var item in pythonState.cats)
+                    description.text += "\n" + item.name + "：体力 " + item.stamina + " / 疲労 " + item.fatigue + " / ストレス " + item.stress;
+            }
+            status.text = "Python接続中：" + pythonState.day + "日目 / 時刻 " + pythonState.tick + "/" + pythonState.opening_ticks
+                + " / 資金 " + pythonState.funds + (pythonState.closed ? " / 閉店" : pythonState.can_set_shifts ? " / 営業準備" : " / 営業中");
             RefreshPythonControls();
         }
 

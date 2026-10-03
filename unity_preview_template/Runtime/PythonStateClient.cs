@@ -8,7 +8,7 @@ namespace CatCafePreview
     [Serializable] public class PythonCatState
     {
         public string cat_id, content_cat_id, name, health_status, activity;
-        public float stamina, max_stamina;
+        public float stamina, max_stamina, fatigue, stress;
         public bool working;
     }
     [Serializable] public class PythonCafeState
@@ -17,8 +17,19 @@ namespace CatCafePreview
         public string instance_id;
         public int revision;
         public bool can_set_shifts;
+        public bool closed;
+        public string phase;
+        public int opening_ticks, waiting_count, completed_interactions;
+        public float revenue;
+        public PythonSeatState[] seats;
+        public PythonFinanceState finance;
         public float funds;
         public PythonCatState[] cats;
+    }
+    [Serializable] public class PythonSeatState { public string seat_id, customer_id, cat_id; }
+    [Serializable] public class PythonFinanceState
+    {
+        public float opening_funds, total_income, total_expenses, net_cash_flow, closing_funds;
     }
     [Serializable] public class PythonShiftCommand
     {
@@ -39,7 +50,18 @@ namespace CatCafePreview
         private PythonShiftCommand pending;
         private bool online;
         private ContentPreview preview;
+        public PythonCafeState CurrentState { get { return current; } }
         public bool CanChangeShifts { get { return online && pending == null && current != null && current.can_set_shifts; } }
+        public bool CanProgressBusiness { get { return online && pending == null && current != null && !current.closed
+            && (!current.can_set_shifts || Array.Exists(current.cats, cat => cat.working)); } }
+        public void ProgressBusiness()
+        {
+            if (!CanProgressBusiness) return;
+            pending = new PythonShiftCommand { request_id = Guid.NewGuid().ToString("N"), instance_id = current.instance_id,
+                expected_revision = current.revision, working_cats = new string[0],
+                kind = current.can_set_shifts ? "start_business" : "advance_business" };
+            preview.RefreshPythonControls();
+        }
         public void WorkSelected() { QueueShift(true); }
         public void RestSelected() { QueueShift(false); }
         private void QueueShift(bool working)
@@ -87,7 +109,8 @@ namespace CatCafePreview
                                 if (request.result == UnityWebRequest.Result.Success)
                                 {
                                     var reply = JsonUtility.FromJson<PythonCommandReply>(request.downloadHandler.text);
-                                    Accept(reply.state); notice = "出勤・休養を変更しました。";
+                                    Accept(reply.state); notice = command.kind == "set_shifts" ? "出勤・休養を変更しました。"
+                                        : reply.state.closed ? "閉店しました。結果を確認してください。" : "営業を進めました。";
                                 }
                                 else
                                 {
