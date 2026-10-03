@@ -28,6 +28,7 @@ namespace CatCafePreview
         private string sceneKey = "normal";
         private PythonCafeState pythonState;
         public bool PythonMode { get { return GetComponent<PythonStateClient>() != null; } }
+        public string SelectedPythonCatId { get { return pythonState == null ? "" : pythonState.cats[cats.value].cat_id; } }
 
         public string CurrentCatId { get { return bundle == null ? "" : bundle.cats[selected].cat_id; } }
         public string CurrentSceneKey { get { return sceneKey; } }
@@ -36,7 +37,7 @@ namespace CatCafePreview
         private void Start()
         {
             Initialize();
-            if (PythonMode) return;
+            if (PythonMode) { ConfigurePythonButtons(); return; }
             var labels = new[] { "次の交流", "遊ぶ", "撫でる", "休む" };
             for (int i = 0; i < sceneButtons.Length; i++) sceneButtons[i].GetComponentInChildren<Text>().text = labels[i];
         }
@@ -145,6 +146,31 @@ namespace CatCafePreview
             DisplayPythonCat(cats.value);
         }
 
+        public void ConfigurePythonButtons()
+        {
+            var client = GetComponent<PythonStateClient>();
+            for (int i = 0; i < sceneButtons.Length; i++)
+            {
+                sceneButtons[i].onClick = new Button.ButtonClickedEvent();
+                sceneButtons[i].GetComponentInChildren<Text>().text = new[] { "出勤にする", "休養にする", "営業（準備中）", "保存（準備中）" }[i];
+                sceneButtons[i].interactable = false;
+            }
+            sceneButtons[0].onClick.AddListener(client.WorkSelected);
+            sceneButtons[1].onClick.AddListener(client.RestSelected);
+        }
+
+        public void RefreshPythonControls()
+        {
+            var client = GetComponent<PythonStateClient>();
+            if (client == null || pythonState == null) return;
+            var cat = pythonState.cats[cats.value];
+            sceneButtons[0].interactable = client.CanChangeShifts && !cat.working && cat.health_status == "healthy" && cat.activity == "cafe";
+            sceneButtons[1].interactable = client.CanChangeShifts && cat.working;
+            sceneButtons[2].interactable = sceneButtons[3].interactable = false;
+        }
+
+        public void PythonNotice(string message) { status.text = message + "\n" + status.text; }
+
         private void DisplayPythonCat(int index)
         {
             if (index < 0 || index >= pythonState.cats.Length) return;
@@ -164,6 +190,7 @@ namespace CatCafePreview
             description.text += "\n\nPythonのゲーム状態\n体力 " + cat.stamina + "/" + cat.max_stamina
                 + "\n予定：" + (cat.working ? "出勤" : "休養") + "\n健康：" + cat.health_status + "\n活動：" + cat.activity;
             status.text = "Python接続中：" + pythonState.day + "日目 / 時刻 " + pythonState.tick + " / 資金 " + pythonState.funds;
+            RefreshPythonControls();
         }
 
         public void PythonConnectionError(string message)
