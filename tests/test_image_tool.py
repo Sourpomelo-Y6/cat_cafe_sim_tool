@@ -2,6 +2,8 @@ import os
 import sys
 import tempfile
 import unittest
+import time
+from unittest.mock import patch
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from content_images import ImageRegistry
@@ -60,3 +62,32 @@ class ToolTests(unittest.TestCase):
             self.assertIn('disabled', tool.save_button.state())
             tool.window.destroy()
             root.update()
+
+    @unittest.skipUnless(os.environ.get('CAT_CAFE_TEST_GUI') == '1', 'requires a display')
+    def test_generation_returns_unregistered_candidate(self):
+        import tkinter as tk
+        from image_tool_gui import ContentImageToolWindow
+        root = tk.Tk()
+        root.withdraw()
+        self.addCleanup(root.destroy)
+        with tempfile.TemporaryDirectory() as directory:
+            registry = ImageRegistry(directory)
+            tool = ContentImageToolWindow(root, lambda: {'cat-1': 'ミケ'}, registry=registry)
+            tool.open_generation()
+            generation = tool.generation_window
+            generation.fields['seed'].set('-1')
+            generation.start()
+            self.assertFalse(generation.running)
+            generation.fields['seed'].set('42')
+            with patch('comfy_generation_gui.ComfyClient.generate', return_value=ASSET):
+                generation.start()
+                deadline = time.monotonic() + 5
+                while generation.running and time.monotonic() < deadline:
+                    root.update()
+                    time.sleep(0.01)
+            self.assertFalse(generation.running)
+            self.assertEqual(tool.pending, ASSET)
+            self.assertFalse(registry.path.exists())
+            generation.close()
+            self.assertIsNone(generation.timer)
+            tool.window.destroy()

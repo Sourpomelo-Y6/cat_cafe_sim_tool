@@ -33,6 +33,7 @@ class ContentImageToolWindow:
         self.save_button = ttk.Button(controls, text='この画像を登録', command=self.save)
         self.save_button.pack(side='left', padx=8)
         ttk.Button(controls, text='猫一覧を更新', command=self.reload_cats).pack(side='left')
+        ttk.Button(controls, text='ComfyUIで生成…', command=self.open_generation).pack(side='left', padx=8)
         self.image_label = ttk.Label(frame, anchor='center')
         self.image_label.pack(fill='both', expand=True)
         self.notice = tk.StringVar(master=self.window)
@@ -110,3 +111,20 @@ class ContentImageToolWindow:
             self.notice.set('登録しました。「猫の画像」の自動表示へ反映されます。')
         except (OSError, ValueError) as exc:
             self.notice.set(f'登録できません：{exc}')
+
+    def open_generation(self):
+        from comfy_generation_gui import ComfyGenerationWindow
+        existing = getattr(self, 'generation_window', None)
+        if existing is not None and existing.window.winfo_exists():
+            existing.window.lift()
+            return
+        try:
+            target = self.selection()
+            def result(path):
+                if self.selection() != target:
+                    self.notice.set(f'生成中に猫・場面が変更されました。画像は保存済みです：{path}')
+                    return
+                self.select_file(path)
+            self.generation_window = ComfyGenerationWindow(self.window, result)
+        except (ValueError, OSError) as exc:
+            self.notice.set(f'生成画面を開けません：{exc}')
