@@ -26,6 +26,8 @@ namespace CatCafePreview
         private bool displayOnly;
         private int selected;
         private string sceneKey = "normal";
+        private PythonCafeState pythonState;
+        public bool PythonMode { get { return GetComponent<PythonStateClient>() != null; } }
 
         public string CurrentCatId { get { return bundle == null ? "" : bundle.cats[selected].cat_id; } }
         public string CurrentSceneKey { get { return sceneKey; } }
@@ -34,6 +36,7 @@ namespace CatCafePreview
         private void Start()
         {
             Initialize();
+            if (PythonMode) return;
             var labels = new[] { "次の交流", "遊ぶ", "撫でる", "休む" };
             for (int i = 0; i < sceneButtons.Length; i++) sceneButtons[i].GetComponentInChildren<Text>().text = labels[i];
         }
@@ -79,7 +82,7 @@ namespace CatCafePreview
         public void ShowScene(string key)
         {
             if (bundle == null) return;
-            if (Application.isPlaying && !displayOnly)
+            if (Application.isPlaying && !displayOnly && !PythonMode)
             {
                 if (!PerformAction(key)) return;
             }
@@ -88,7 +91,7 @@ namespace CatCafePreview
             var scene = Array.Find(cat.scenes, value => value.key == key);
             if (scene == null) return;
             description.text = cat.name + "\n\n" + cat.introduction + "\n\n" + scene.label + "\n" + scene.text;
-            if (Application.isPlaying) description.text += "\n\n" + CurrentInteraction.Summary;
+            if (Application.isPlaying && !PythonMode) description.text += "\n\n" + CurrentInteraction.Summary;
             scroll.verticalNormalizedPosition = 1;
             var texture = scene.image == "" ? null : Resources.Load<Texture2D>(resourceRoot + scene.image.Substring(0, scene.image.Length - 4));
             picture.texture = texture;
@@ -100,6 +103,7 @@ namespace CatCafePreview
 
         public void SelectCat(int index)
         {
+            if (PythonMode && pythonState != null) { DisplayPythonCat(index); return; }
             if (bundle == null || index < 0 || index >= bundle.cats.Length) throw new ArgumentOutOfRangeException("index");
             cats.SetValueWithoutNotify(index);
             selected = index;
@@ -116,6 +120,7 @@ namespace CatCafePreview
         }
         public bool PerformAction(string key)
         {
+            if (PythonMode) return false;
             if (bundle == null) return false;
             if (key == "normal") { CurrentInteraction.NextSet(); return true; }
             if (!CurrentInteraction.Act(key))
@@ -124,6 +129,50 @@ namespace CatCafePreview
                 return false;
             }
             return true;
+        }
+
+        public void ApplyPythonState(PythonCafeState state)
+        {
+            string previous = pythonState == null || cats.value >= pythonState.cats.Length ? "" : pythonState.cats[cats.value].cat_id;
+            pythonState = state;
+            cats.options.Clear();
+            foreach (var cat in state.cats) cats.options.Add(new Dropdown.OptionData(cat.name));
+            int index = Array.FindIndex(state.cats, cat => cat.cat_id == previous);
+            cats.SetValueWithoutNotify(Math.Max(0, index));
+            cats.RefreshShownValue();
+            cats.interactable = true;
+            foreach (var button in sceneButtons) button.interactable = false;
+            DisplayPythonCat(cats.value);
+        }
+
+        private void DisplayPythonCat(int index)
+        {
+            if (index < 0 || index >= pythonState.cats.Length) return;
+            cats.SetValueWithoutNotify(index);
+            var cat = pythonState.cats[index];
+            int assetIndex = bundle == null ? -1 : Array.FindIndex(bundle.cats, item => item.cat_id == cat.content_cat_id);
+            if (assetIndex >= 0)
+            {
+                selected = assetIndex;
+                ShowScene(cat.working && cat.health_status == "healthy" && cat.activity == "cafe" ? "normal" : "sleep");
+            }
+            else
+            {
+                picture.texture = null; picture.enabled = false; emptyImage.enabled = true;
+                description.text = cat.name + "\n対応する素材が未登録です。";
+            }
+            description.text += "\n\nPythonのゲーム状態\n体力 " + cat.stamina + "/" + cat.max_stamina
+                + "\n予定：" + (cat.working ? "出勤" : "休養") + "\n健康：" + cat.health_status + "\n活動：" + cat.activity;
+            status.text = "Python接続中：" + pythonState.day + "日目 / 時刻 " + pythonState.tick + " / 資金 " + pythonState.funds;
+        }
+
+        public void PythonConnectionError(string message)
+        {
+            cats.interactable = false;
+            foreach (var button in sceneButtons) button.interactable = false;
+            status.text = "Python未接続：" + message;
+            description.text = "Python状態サーバーを起動してください。接続は自動で再試行します。";
+            picture.texture = null; picture.enabled = false; emptyImage.enabled = true;
         }
     }
 }
