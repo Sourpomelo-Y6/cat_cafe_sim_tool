@@ -10,6 +10,40 @@ namespace CatCafePreview.Editor
 {
     public static class ContentPreviewSetup
     {
+        public static void VerifyInteraction()
+        {
+            var state = new CatInteractionState();
+            state.Act("play");
+            if (state.Stamina != 95 || state.Engagement != 12 || state.Turns != 9) throw new Exception("Play mismatch");
+            state.Act("play");
+            if (Math.Abs(state.Engagement - 22.2f) > .001) throw new Exception("Boredom mismatch");
+            state.Act("pet");
+            if (state.Stamina != 88 || Math.Abs(state.Engagement - 30.2f) > .001) throw new Exception("Pet mismatch");
+            state.Act("sleep");
+            if (state.Stamina != 90) throw new Exception("Rest mismatch");
+            while (state.Turns > 0 && state.EndReason == "") state.Act("sleep");
+            if (state.Act("play")) throw new Exception("Ended set accepted action");
+            state.NextSet();
+            if (state.Turns != 10 || state.Engagement != 0 || state.Stamina != 100) throw new Exception("Next set mismatch");
+            for (int i = 0; i < 20; i++)
+            {
+                state.NextSet();
+                for (int j = 0; j < 10; j++) state.Act("play");
+            }
+            if (state.Stamina != 0) throw new Exception("Exhaustion mismatch");
+            state.NextSet(); state.Act("sleep");
+            if (state.Stamina != 2) throw new Exception("Rest after exhaustion mismatch");
+            VerifyAndCapture();
+            var preview = UnityEngine.Object.FindObjectOfType<ContentPreview>();
+            var first = preview.CurrentInteraction;
+            preview.PerformAction("play");
+            preview.SelectCat(1);
+            if (preview.CurrentInteraction.Stamina != 100) throw new Exception("Cat states mixed");
+            preview.SelectCat(0);
+            if (preview.CurrentInteraction != first || first.Stamina != 95) throw new Exception("Selection changed state");
+            Debug.Log("CAT_CAFE_INTERACTION_OK: rules, rest, limits, exhaustion, independent cat states");
+        }
+
         private const string ScenePath = "Assets/Scenes/CatCafeContentPreview.unity";
         [MenuItem("Cat Cafe/Import Content Pack…")]
         public static void ImportMenu()

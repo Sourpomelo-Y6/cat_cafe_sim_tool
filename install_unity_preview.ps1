@@ -6,7 +6,7 @@ if (-not (Test-Path -LiteralPath (Join-Path $projectRoot 'ProjectSettings/Projec
 }
 $templateRoot = Join-Path $PSScriptRoot 'unity_preview_template'
 $targetRoot = Join-Path $projectRoot 'Assets/CatCafePreview'
-$previewFiles = @('Runtime/ContentBundle.cs', 'Runtime/ContentPreview.cs', 'Editor/ContentPreviewSetup.cs', 'Editor/ContentPreviewLayout.cs', 'Fonts/MPLUS1p-Regular.ttf', 'Fonts/OFL.txt', 'Fonts/README.md')
+$previewFiles = @('Runtime/ContentBundle.cs', 'Runtime/CatInteractionState.cs', 'Runtime/ContentPreview.cs', 'Editor/ContentPreviewSetup.cs', 'Editor/ContentPreviewLayout.cs', 'Fonts/MPLUS1p-Regular.ttf', 'Fonts/OFL.txt', 'Fonts/README.md')
 foreach ($relative in $previewFiles) {
     $target = Join-Path $targetRoot $relative
     if (Test-Path -LiteralPath $target) { throw "既存のファイルがあります。上書きしません: $target" }
