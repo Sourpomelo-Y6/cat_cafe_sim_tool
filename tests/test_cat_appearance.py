@@ -22,7 +22,8 @@ class AppearanceToolTests(unittest.TestCase):
             presets.save('playtest-sora', 'normal', fields)
             reopened = PromptPresets(presets.path)
             self.assertIn('eye_color: blue', reopened.assemble('playtest-sora', 'play'))
-            self.assertEqual(reopened.appearance_profile('playtest-tama')['eye_color'], '')
+            self.assertEqual(reopened.appearance_profile('playtest-tama'),
+                             catalog_profiles()['playtest-tama']['appearance'])
             profiles = catalog_profiles()
             profiles['playtest-sora']['appearance'] = reopened.appearance_profile('playtest-sora')
             folder, _ = export_bundle({'playtest-sora': 'ソラ'}, ImageRegistry(root / 'images'),
