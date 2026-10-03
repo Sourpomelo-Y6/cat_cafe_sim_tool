@@ -10,6 +10,8 @@ DEFAULT_CATALOG = Path(__file__).resolve().parent.parent / 'cat_cafe_sim' / 'con
 
 def load_catalog(path):
     rows = json.loads(Path(path).read_text(encoding='utf-8'))
+    if isinstance(rows, dict):
+        rows = rows.get('cats')
     if not isinstance(rows, list):
         raise ValueError('猫一覧はcat_idとnameを持つ配列にしてください。')
     result = {}

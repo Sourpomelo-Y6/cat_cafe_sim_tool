@@ -17,12 +17,14 @@ SCENES = (
 )
 
 
-def export_bundle(catalog, registry, texts, destination):
+def export_bundle(catalog, registry, texts, destination, *, profiles=None):
     if (not isinstance(catalog, dict) or not catalog or any(
             not isinstance(key, str) or not key or not isinstance(name, str) or not name
             for key, name in catalog.items())):
         raise ValueError('有効な猫一覧が必要です。')
     images = registry.read()
+    from cat_appearance import catalog_profiles, validate_appearance
+    profiles = catalog_profiles() if profiles is None else profiles
     records = texts.read()
     destination = Path(destination).resolve()
     if destination == registry.directory.resolve() or registry.directory.resolve() in destination.parents:
@@ -36,6 +38,9 @@ def export_bundle(catalog, registry, texts, destination):
         if not introduction:
             warnings.append(f'{name}（{cat_id}）：紹介文が未登録。定型文を使用します。')
         cat = {'cat_id': cat_id, 'name': name, 'introduction': introduction or f'{name}の様子をご覧ください。', 'scenes': []}
+        profile = profiles.get(cat_id, {})
+        cat['appearance'] = validate_appearance(profile.get('appearance', {}))
+        cat['features'] = list(profile.get('features', []))
         for key, label, fallback in SCENES:
             text = record.get('scenes', {}).get(key, '').strip()
             if not text:
@@ -83,8 +88,15 @@ def main():
     parser.add_argument('--source', type=Path, default=DEFAULT_DIRECTORY)
     parser.add_argument('--destination', type=Path, required=True)
     args = parser.parse_args()
+    from cat_appearance import catalog_profiles
+    from prompt_presets import PromptPresets
+    profiles = catalog_profiles(args.catalog)
+    overrides = PromptPresets().read().get('appearance_profiles', {})
+    for key, profile in profiles.items():
+        if key in overrides:
+            profile['appearance'] = overrides[key]
     folder, report = export_bundle(load_catalog(args.catalog), ImageRegistry(args.source),
-                                  TextStore(args.source / 'texts.json'), args.destination)
+                                  TextStore(args.source / 'texts.json'), args.destination, profiles=profiles)
     print(folder)
     print(f"猫 {report['cat_count']}匹 / 画像 {report['image_count']}枚 / 注意 {len(report['warnings'])}件")
 

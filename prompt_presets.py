@@ -37,16 +37,38 @@ class PromptPresets:
             if any(not isinstance(key, str) or not key or not isinstance(value, str) or not value.strip()
                    for key, value in mapping.items()):
                 raise ValueError('外見・行動の設定が不正です。')
+        from cat_appearance import validate_appearance
+        profiles = data.get('appearance_profiles', {})
+        if not isinstance(profiles, dict):
+            raise ValueError('外見プロフィールの形式が不正です。')
+        for cat_id, profile in profiles.items():
+            if not isinstance(cat_id, str) or not cat_id:
+                raise ValueError('外見プロフィールの猫IDが不正です。')
+            validate_appearance(profile)
         return data
 
     def fields(self, cat_id, scene):
         data = self.read()
-        return dict(appearance=data['cats'].get(cat_id, GENERIC_CAT), action=data['actions'][scene],
+        from cat_appearance import catalog_profiles
+        features = catalog_profiles().get(cat_id, {}).get('features', [])
+        base = 'one adult cat' + (', ' + ', '.join(features) if features else ', consistent coat markings and body proportions')
+        return dict(appearance=data['cats'].get(cat_id, base), action=data['actions'][scene],
                     background=data['background'], style=data['style'])
+
+    def appearance_profile(self, cat_id):
+        from cat_appearance import catalog_profiles, validate_appearance
+        data = self.read()
+        value = data.get('appearance_profiles', {}).get(cat_id)
+        if value is None:
+            value = catalog_profiles().get(cat_id, {}).get('appearance', {})
+        return validate_appearance(value)
 
     def assemble(self, cat_id, scene):
         fields = self.fields(cat_id, scene)
-        return ', '.join(fields[key].strip().rstrip(',') for key in ('style', 'appearance', 'action', 'background'))
+        details = self.appearance_profile(cat_id)
+        parts = [fields[key].strip().rstrip(',') for key in ('style', 'appearance', 'action', 'background')]
+        parts.extend(f'{key}: {value}' for key, value in details.items() if value)
+        return ', '.join(parts)
 
     def save(self, cat_id, scene, fields):
         if not isinstance(cat_id, str) or not cat_id or scene not in DEFAULTS['actions']:
@@ -55,6 +77,9 @@ class PromptPresets:
                for key in ('appearance', 'action', 'background', 'style')):
             raise ValueError('外見・行動・背景・画風をすべて入力してください。')
         data = self.read()
+        if 'appearance_profile' in fields:
+            from cat_appearance import validate_appearance
+            data.setdefault('appearance_profiles', {})[cat_id] = validate_appearance(fields['appearance_profile'])
         data['cats'][cat_id] = fields['appearance'].strip()
         data['actions'][scene] = fields['action'].strip()
         data.update(background=fields['background'].strip(), style=fields['style'].strip())

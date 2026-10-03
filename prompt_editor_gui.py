@@ -23,6 +23,17 @@ class PromptEditorWindow:
             entry.pack(fill='x', pady=(0, 6))
             self.fields[key] = entry
         self.preview = tk.Text(frame, height=4, width=70, wrap='word', state='disabled')
+        from cat_appearance import FIELDS
+        self.appearance_fields = {}
+        profile = presets.appearance_profile(cat_id)
+        for key, title in FIELDS.items():
+            row = ttk.Frame(frame)
+            row.pack(fill='x', pady=2)
+            ttk.Label(row, text=title, width=14).pack(side='left')
+            entry = ttk.Entry(row, width=65)
+            entry.insert(0, profile[key])
+            entry.pack(side='left', fill='x', expand=True)
+            self.appearance_fields[key] = entry
         self.preview.pack(fill='x', pady=4)
         controls = ttk.Frame(frame)
         controls.pack(fill='x')
@@ -34,13 +45,18 @@ class PromptEditorWindow:
         self.show_preview()
 
     def values(self):
-        return {key: widget.get('1.0', 'end').strip() for key, widget in self.fields.items()}
+        values = {key: widget.get('1.0', 'end').strip() for key, widget in self.fields.items()}
+        values['appearance_profile'] = {key: widget.get().strip() for key, widget in self.appearance_fields.items()}
+        return values
 
     def show_preview(self):
         fields = self.values()
         self.preview.configure(state='normal')
         self.preview.delete('1.0', 'end')
         self.preview.insert('1.0', ', '.join(fields[key].rstrip(',') for key in ('style', 'appearance', 'action', 'background')))
+        details = ', '.join(f'{key}: {value}' for key, value in fields['appearance_profile'].items() if value)
+        if details:
+            self.preview.insert('end', ', ' + details)
         self.preview.configure(state='disabled')
 
     def save(self):

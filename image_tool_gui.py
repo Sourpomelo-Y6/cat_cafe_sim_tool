@@ -256,7 +256,11 @@ class ContentImageToolWindow:
         if not parent:
             return
         try:
-            folder, report = export_bundle(self.catalog_provider(), self.registry, self.published_texts, parent)
+            from cat_appearance import catalog_profiles
+            defaults = catalog_profiles()
+            profiles = {key: dict(defaults.get(key, {}), appearance=self.presets.appearance_profile(key))
+                        for key in self.catalog_provider()}
+            folder, report = export_bundle(self.catalog_provider(), self.registry, self.published_texts, parent, profiles=profiles)
             self.notice.set(f"書き出しました：{folder}\n猫{report['cat_count']}匹・画像{report['image_count']}枚。")
             self.show_export_report(folder, report)
         except (OSError, ValueError) as exc:
