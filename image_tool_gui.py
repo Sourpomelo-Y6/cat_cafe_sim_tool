@@ -6,13 +6,16 @@ SCENES = (('normal', '通常'), ('play', '遊ぶ'), ('pet', '撫でられる'), 
 
 
 class ContentImageToolWindow:
-    def __init__(self, parent, catalog_provider, *, registry=None, cat_id=None, presets=None, references=None, lora_settings=None):
+    def __init__(self, parent, catalog_provider, *, registry=None, cat_id=None, presets=None, references=None, lora_settings=None, text_drafts=None):
         import tkinter as tk
         from tkinter import ttk
         self.window = tk.Toplevel(parent)
         self.window.title('猫の画像制作 — 登録とプレビュー')
         self.catalog_provider = catalog_provider
         self.registry = registry or ImageRegistry()
+        from content_texts import TextStore, DEFAULT_DRAFT_PATH
+        self.text_drafts = text_drafts or TextStore(DEFAULT_DRAFT_PATH)
+        self.published_texts = TextStore(self.registry.directory / 'texts.json')
         from prompt_presets import PromptPresets
         self.presets = presets or PromptPresets()
         from lora_settings import LoraSettings
@@ -42,6 +45,7 @@ class ContentImageToolWindow:
         ttk.Button(controls, text='ComfyUIで生成…', command=self.open_generation).pack(side='left', padx=8)
         ttk.Button(frame, text='外見・行動・背景の設定…', command=self.open_prompt_editor).pack(anchor='w', pady=(0, 8))
         ttk.Button(frame, text='デザイン・ポーズLoRAの設定…', command=self.open_lora_editor).pack(anchor='w', pady=(0, 8))
+        ttk.Button(frame, text='紹介文・行動描写の編集…', command=self.open_text_editor).pack(anchor='w', pady=(0, 8))
         reference_controls = ttk.Frame(frame)
         reference_controls.pack(fill='x', pady=(0, 8))
         ttk.Button(reference_controls, text='基準画像を選ぶ…', command=self.choose_reference).pack(side='left')
@@ -229,3 +233,17 @@ class ContentImageToolWindow:
                                                 f'{self.cat.get()} / {self.scene.get()}')
         except (OSError, ValueError) as exc:
             self.notice.set(f'LoRA設定を開けません：{exc}')
+
+    def open_text_editor(self):
+        from text_editor_gui import TextEditorWindow
+        existing = getattr(self, 'text_editor', None)
+        if existing is not None and existing.window.winfo_exists():
+            existing.window.lift()
+            self.notice.set('開いている文章編集画面の猫を確認してください。別の猫は閉じてから開きます。')
+            return
+        try:
+            cat_id, _ = self.selection()
+            self.text_editor = TextEditorWindow(self.window, self.text_drafts, self.published_texts,
+                                                cat_id, self.cat.get())
+        except (OSError, ValueError) as exc:
+            self.notice.set(f'文章編集画面を開けません：{exc}')
