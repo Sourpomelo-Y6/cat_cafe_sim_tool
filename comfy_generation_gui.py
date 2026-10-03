@@ -10,11 +10,12 @@ DEFAULT_POSITIVE = ('clean lines, best quality, soft 2d illustration, one adult 
 
 
 class ComfyGenerationWindow:
-    def __init__(self, parent, on_result):
+    def __init__(self, parent, on_result, *, positive=DEFAULT_POSITIVE, prompt_provider=None, label=''):
         import tkinter as tk
         from tkinter import ttk
         self.window = tk.Toplevel(parent)
-        self.window.title('ComfyUIで画像生成')
+        self.window.title('ComfyUIで画像生成' + (f' — {label}' if label else ''))
+        self.prompt_provider = prompt_provider
         self.on_result = on_result
         self.cancel = threading.Event()
         self.messages = queue.Queue()
@@ -41,7 +42,7 @@ class ComfyGenerationWindow:
         ttk.Label(frame, text='プロンプト（猫の外見・行動・固定背景）').grid(row=8, columnspan=2, sticky='w', pady=(8, 0))
         self.positive = tk.Text(frame, height=5, width=65, wrap='word')
         self.positive.grid(row=9, columnspan=2, sticky='ew')
-        self.positive.insert('1.0', DEFAULT_POSITIVE)
+        self.positive.insert('1.0', positive)
         ttk.Label(frame, text='ネガティブプロンプト').grid(row=10, columnspan=2, sticky='w', pady=(8, 0))
         self.negative = tk.Text(frame, height=3, width=65, wrap='word')
         self.negative.grid(row=11, columnspan=2, sticky='ew')
@@ -50,11 +51,26 @@ class ComfyGenerationWindow:
         controls.grid(row=12, columnspan=2, sticky='ew', pady=8)
         self.generate_button = ttk.Button(controls, text='1枚生成', command=self.start)
         self.generate_button.pack(side='left')
+        if prompt_provider is not None:
+            ttk.Button(controls, text='保存設定を読み直す', command=self.reload_prompt).pack(side='left', padx=8)
         ttk.Button(controls, text='seedをランダムに', command=lambda: self.fields['seed'].set(str(random_seed()))).pack(side='left', padx=8)
         ttk.Button(controls, text='閉じる', command=self.close).pack(side='right')
         self.status = tk.StringVar(master=self.window, value='生成結果は制作画面へ戻します。登録は確認後に行ってください。')
         ttk.Label(frame, textvariable=self.status, wraplength=570).grid(row=13, columnspan=2, sticky='w')
         ttk.Label(frame, text='閉じてもComfyUI側のジョブは継続します。結果の受け取りだけを中止します。', wraplength=570).grid(row=14, columnspan=2, sticky='w', pady=(6, 0))
+
+    def reload_prompt(self):
+        if self.running:
+            return
+        from tkinter import messagebox
+        if not messagebox.askyesno('プロンプトを読み直す', '現在のプロンプトを保存設定の文章に置き換えますか？', parent=self.window):
+            return
+        try:
+            text = self.prompt_provider()
+            self.positive.delete('1.0', 'end')
+            self.positive.insert('1.0', text)
+        except (OSError, ValueError) as exc:
+            self.status.set(f'設定を読み込めません：{exc}')
 
     def start(self):
         if self.running:

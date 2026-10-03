@@ -6,13 +6,15 @@ SCENES = (('normal', '通常'), ('play', '遊ぶ'), ('pet', '撫でられる'), 
 
 
 class ContentImageToolWindow:
-    def __init__(self, parent, catalog_provider, *, registry=None, cat_id=None):
+    def __init__(self, parent, catalog_provider, *, registry=None, cat_id=None, presets=None):
         import tkinter as tk
         from tkinter import ttk
         self.window = tk.Toplevel(parent)
         self.window.title('猫の画像制作 — 登録とプレビュー')
         self.catalog_provider = catalog_provider
         self.registry = registry or ImageRegistry()
+        from prompt_presets import PromptPresets
+        self.presets = presets or PromptPresets()
         self.pending = None
         self.image = None
         frame = ttk.Frame(self.window, padding=12)
@@ -34,6 +36,7 @@ class ContentImageToolWindow:
         self.save_button.pack(side='left', padx=8)
         ttk.Button(controls, text='猫一覧を更新', command=self.reload_cats).pack(side='left')
         ttk.Button(controls, text='ComfyUIで生成…', command=self.open_generation).pack(side='left', padx=8)
+        ttk.Button(frame, text='外見・行動・背景の設定…', command=self.open_prompt_editor).pack(anchor='w', pady=(0, 8))
         self.image_label = ttk.Label(frame, anchor='center')
         self.image_label.pack(fill='both', expand=True)
         self.notice = tk.StringVar(master=self.window)
@@ -114,17 +117,43 @@ class ContentImageToolWindow:
 
     def open_generation(self):
         from comfy_generation_gui import ComfyGenerationWindow
-        existing = getattr(self, 'generation_window', None)
-        if existing is not None and existing.window.winfo_exists():
-            existing.window.lift()
-            return
         try:
             target = self.selection()
+        except ValueError as exc:
+            self.notice.set(f'生成画面を開けません：{exc}')
+            return
+        existing = getattr(self, 'generation_window', None)
+        if existing is not None and existing.window.winfo_exists():
+            if self.generation_target == target:
+                existing.window.lift()
+                return
+            if existing.running:
+                self.notice.set('生成中です。完了後に別の猫・場面の生成画面を開いてください。')
+                return
+            existing.close()
+        try:
+            initial_prompt = self.presets.assemble(*target)
             def result(path):
                 if self.selection() != target:
                     self.notice.set(f'生成中に猫・場面が変更されました。画像は保存済みです：{path}')
                     return
                 self.select_file(path)
-            self.generation_window = ComfyGenerationWindow(self.window, result)
+            self.generation_target = target
+            self.generation_window = ComfyGenerationWindow(self.window, result, positive=initial_prompt,
+                prompt_provider=lambda: self.presets.assemble(*target),
+                label=f'{self.cat.get()} / {self.scene.get()}')
         except (ValueError, OSError) as exc:
             self.notice.set(f'生成画面を開けません：{exc}')
+
+    def open_prompt_editor(self):
+        from prompt_editor_gui import PromptEditorWindow
+        existing = getattr(self, 'prompt_editor', None)
+        if existing is not None and existing.window.winfo_exists():
+            existing.window.lift()
+            return
+        try:
+            cat_id, scene = self.selection()
+            self.prompt_editor = PromptEditorWindow(self.window, self.presets, cat_id, scene,
+                                                    f'{self.cat.get()} / {self.scene.get()}')
+        except (OSError, ValueError) as exc:
+            self.notice.set(f'設定画面を開けません：{exc}')

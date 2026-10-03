@@ -91,3 +91,41 @@ class ToolTests(unittest.TestCase):
             generation.close()
             self.assertIsNone(generation.timer)
             tool.window.destroy()
+
+    @unittest.skipUnless(os.environ.get('CAT_CAFE_TEST_GUI') == '1', 'requires a display')
+    def test_saved_parts_fill_generation_for_selected_cat_and_scene(self):
+        import tkinter as tk
+        from image_tool_gui import ContentImageToolWindow
+        from prompt_presets import PromptPresets
+        root = tk.Tk()
+        root.withdraw()
+        self.addCleanup(root.destroy)
+        with tempfile.TemporaryDirectory() as directory:
+            presets = PromptPresets(Path(directory) / 'prompts.json')
+            tool = ContentImageToolWindow(root, lambda: {'cat-a': 'ミケ'},
+                registry=ImageRegistry(Path(directory) / 'images'), presets=presets)
+            root.update()
+            tool.open_prompt_editor()
+            editor = tool.prompt_editor
+            editor.fields['appearance'].delete('1.0', 'end')
+            editor.fields['appearance'].insert('1.0', 'one black cat with amber eyes')
+            editor.save()
+            self.assertTrue(presets.path.exists())
+            editor.window.destroy()
+            tool.open_generation()
+            generation = tool.generation_window
+            self.assertIn('one black cat with amber eyes', generation.positive.get('1.0', 'end'))
+            self.assertIn('sitting calmly', generation.positive.get('1.0', 'end'))
+            generation.positive.delete('1.0', 'end')
+            generation.positive.insert('1.0', 'temporary edit')
+            with patch('tkinter.messagebox.askyesno', return_value=True):
+                generation.reload_prompt()
+            self.assertIn('one black cat', generation.positive.get('1.0', 'end'))
+            tool.scene.set('眠る')
+            tool.refresh()
+            tool.open_generation()
+            self.assertIn('asleep', tool.generation_window.positive.get('1.0', 'end'))
+            self.assertIn('one black cat', tool.generation_window.positive.get('1.0', 'end'))
+            tool.generation_window.close()
+            tool.window.destroy()
+            root.update()
