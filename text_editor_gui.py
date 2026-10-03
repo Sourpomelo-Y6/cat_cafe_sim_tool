@@ -14,6 +14,7 @@ class TextEditorWindow:
             record = published.get(cat_id)
         record = record or {'introduction': '', 'scenes': {}}
         self.drafts, self.published, self.cat_id = drafts, published, cat_id
+        self.label = label
         self.reviewed = None
         self.window = tk.Toplevel(parent)
         self.window.title(f'紹介文・行動描写 — {label}')
@@ -31,6 +32,7 @@ class TextEditorWindow:
             self.fields[key] = widget
         controls = ttk.Frame(frame)
         controls.pack(fill='x', pady=6)
+        ttk.Button(frame, text='ローカルLLMで文章案を生成…', command=self.open_generation).pack(anchor='w', pady=4)
         ttk.Button(controls, text='下書きを保存', command=self.save_draft).pack(side='left')
         ttk.Button(controls, text='登録内容を確認', command=self.preview).pack(side='left', padx=8)
         ttk.Button(controls, text='確認した文章を登録', command=self.register).pack(side='left')
@@ -81,3 +83,30 @@ class TextEditorWindow:
             self.notice.set('文章を登録しました。ゲームの「猫の画像…」へ反映されます。下書きは別途保存できます。')
         except (OSError, ValueError) as exc:
             self.notice.set(f'登録できません：{exc}')
+
+    def open_generation(self):
+        from llm_generation_gui import LlmGenerationWindow
+        existing = getattr(self, 'generation_window', None)
+        if existing is not None and existing.window.winfo_exists():
+            existing.window.lift()
+            return
+        try:
+            baseline = self.values()
+        except ValueError as exc:
+            self.notice.set(str(exc))
+            return
+        def result(record):
+            try:
+                validate_record(record)
+                if self.values() != baseline:
+                    return False
+            except ValueError:
+                return False
+            for key, widget in self.fields.items():
+                widget.delete('1.0', 'end')
+                widget.insert('1.0', record['introduction'] if key == 'introduction' else record['scenes'][key])
+            self.reviewed = None
+            self.set_preview('')
+            self.notice.set('生成案を取り込みました。未保存・未登録です。修正して確認してください。')
+            return True
+        self.generation_window = LlmGenerationWindow(self.window, result, self.cat_id, self.label)
