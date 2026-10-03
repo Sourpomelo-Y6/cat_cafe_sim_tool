@@ -151,3 +151,11 @@ denoiseが低いと元の柄・背景を残しやすい一方、姿勢も残り�
 実装は[llama.cppサーバーのAPI仕様](https://github.com/ggml-org/llama.cpp/blob/master/tools/server/README.md)に沿って、`GET /v1/models` と `POST /v1/chat/completions`（非ストリーミング・JSON形式）を使います。認証なしのローカルサーバー向けで、APIキー入力やOllama専用APIへの切り替えは未実装です。
 
 検証：GUIを含む23件のテストが成功しました。モデル一覧、生成JSON検証、出力中断・不正応答、生成記録、確認後の取り込み、編集中の文章の保護、手動編集の維持、画面終了時の受け取り中止を確認しました。起動中の8080番のGemmaで日本語の紹介文と4場面を実際に生成・取得しました。確認候補は下書き保存・ゲーム登録していません。
+
+## Unity向けに素材を書き出す
+
+「Unity向けに書き出す…」で保存先を選ぶと、新しい `CatCafeContent-<ID>` フォルダを作成します。猫一覧と採用済みの紹介文・4場面の描写・PNGを、`bundle.json` と `images/` にまとめます。下書き・生成候補・基準画像は書き出しません。同じPNGはハッシュでまとめ、未登録文章は定型文、欠落画像は画像なしで書き出します。確認事項は結果画面と `validation.json` に記録します。以前の出力は上書きしません。
+
+Unity 2021.3.45f2の表示試作を `C:\Users\hi-wa\unity_workspase\CatCafeSim` に追加しました。Unityの `Cat Cafe > Import Content Pack…` でパックフォルダを選び、`Cat Cafe > Open Content Preview` からPlayすると猫と4場面を切り替えられます。今回の登録素材は取り込み済みです。取り込み後はPlayを再開してください。
+
+詳細な保存形式・導入方法・検証結果は[Unity向け素材書き出しと表示試作](../Docs/UnityContentPreview.md)を参照してください。制作ツールのGUIを含む26件のテスト、Unityコンパイルと猫5匹・全20場面の表示検証が成功しました。営業・交流などのゲーム処理と実行ファイルのビルドは後続です。

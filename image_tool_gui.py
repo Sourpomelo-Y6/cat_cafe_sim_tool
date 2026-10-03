@@ -46,6 +46,7 @@ class ContentImageToolWindow:
         ttk.Button(frame, text='外見・行動・背景の設定…', command=self.open_prompt_editor).pack(anchor='w', pady=(0, 8))
         ttk.Button(frame, text='デザイン・ポーズLoRAの設定…', command=self.open_lora_editor).pack(anchor='w', pady=(0, 8))
         ttk.Button(frame, text='紹介文・行動描写の編集…', command=self.open_text_editor).pack(anchor='w', pady=(0, 8))
+        ttk.Button(frame, text='Unity向けに書き出す…', command=self.export_unity).pack(anchor='w', pady=(0, 8))
         reference_controls = ttk.Frame(frame)
         reference_controls.pack(fill='x', pady=(0, 8))
         ttk.Button(reference_controls, text='基準画像を選ぶ…', command=self.choose_reference).pack(side='left')
@@ -247,3 +248,32 @@ class ContentImageToolWindow:
                                                 cat_id, self.cat.get())
         except (OSError, ValueError) as exc:
             self.notice.set(f'文章編集画面を開けません：{exc}')
+
+    def export_unity(self):
+        from tkinter import filedialog
+        from unity_export import export_bundle
+        parent = filedialog.askdirectory(parent=self.window, title='新しい素材パックを作る保存先を選ぶ')
+        if not parent:
+            return
+        try:
+            folder, report = export_bundle(self.catalog_provider(), self.registry, self.published_texts, parent)
+            self.notice.set(f"書き出しました：{folder}\n猫{report['cat_count']}匹・画像{report['image_count']}枚。")
+            self.show_export_report(folder, report)
+        except (OSError, ValueError) as exc:
+            self.notice.set(f'書き出せません：{exc}')
+
+    def show_export_report(self, folder, report):
+        import tkinter as tk
+        from tkinter import ttk
+        from tkinter.scrolledtext import ScrolledText
+        window = tk.Toplevel(self.window)
+        window.title('Unity向け素材の書き出し結果')
+        frame = ttk.Frame(window, padding=12)
+        frame.pack(fill='both', expand=True)
+        ttk.Label(frame, text=f'保存先：{folder}\nUnityの Cat Cafe → Import Content Pack… から、このフォルダを選んでください。',
+                  wraplength=650).pack(anchor='w')
+        body = ScrolledText(frame, width=85, height=18, wrap='word')
+        body.pack(fill='both', expand=True, pady=8)
+        body.insert('1.0', '\n'.join(report['warnings']) or '登録素材に欠落はありません。')
+        body.configure(state='disabled')
+        ttk.Button(frame, text='閉じる', command=window.destroy).pack(anchor='e')
