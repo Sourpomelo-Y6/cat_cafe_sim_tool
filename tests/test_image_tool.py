@@ -13,6 +13,56 @@ ASSET = Path(__file__).resolve().parents[2] / 'Docs' / 'Prototypes' / 'CalicoAct
 
 
 class ToolTests(unittest.TestCase):
+    @unittest.skipUnless(os.environ.get('CAT_CAFE_TEST_GUI') == '1', 'requires a display')
+    def test_lora_editor_save_and_generation_toggle(self):
+        import tkinter as tk
+        from image_tool_gui import ContentImageToolWindow
+        from lora_settings import LoraSettings
+        root = tk.Tk()
+        root.withdraw()
+        self.addCleanup(root.destroy)
+        with tempfile.TemporaryDirectory() as directory:
+            settings = LoraSettings(Path(directory) / 'loras.json')
+            tool = ContentImageToolWindow(root, lambda: {'cat-a': 'ミケ'},
+                registry=ImageRegistry(Path(directory) / 'images'), lora_settings=settings)
+            root.update()
+            tool.open_lora_editor()
+            editor = tool.lora_editor
+            with patch('lora_editor_gui.ComfyClient.list_loras', return_value=['design.safetensors', 'pose.safetensors']):
+                editor.fetch()
+                deadline = time.monotonic() + 5
+                while editor.timer is not None and time.monotonic() < deadline:
+                    root.update()
+                    time.sleep(0.01)
+            self.assertIn('design.safetensors', editor.selectors[0].cget('values'))
+            editor.rows[0]['enabled'].set(True)
+            editor.rows[0]['name'].set('design.safetensors')
+            editor.rows[0]['trigger'].set('mikecat')
+            editor.save()
+            self.assertTrue(settings.path.exists())
+            editor.window.destroy()
+            tool.open_generation()
+            generation = tool.generation_window
+            self.assertTrue(generation.use_loras.get())
+            self.assertEqual(generation.loras[0]['name'], 'design.safetensors')
+            captured = []
+            def generate(client, values, *args, **kwargs):
+                captured.append(values)
+                return ASSET
+            with patch('comfy_generation_gui.ComfyClient.generate', new=generate):
+                for enabled in (True, False):
+                    generation.use_loras.set(enabled)
+                    generation.start()
+                    deadline = time.monotonic() + 5
+                    while generation.running and time.monotonic() < deadline:
+                        root.update()
+                        time.sleep(0.01)
+            self.assertEqual(captured[0]['loras'][0]['trigger'], 'mikecat')
+            self.assertEqual(captured[1]['loras'], [])
+            generation.close()
+            tool.window.destroy()
+            root.update()
+
     def test_catalog_and_copy_registration(self):
         self.assertIn('playtest-mike', load_catalog(DEFAULT_CATALOG))
         with tempfile.TemporaryDirectory() as directory:

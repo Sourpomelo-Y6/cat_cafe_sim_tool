@@ -6,7 +6,7 @@ SCENES = (('normal', '通常'), ('play', '遊ぶ'), ('pet', '撫でられる'), 
 
 
 class ContentImageToolWindow:
-    def __init__(self, parent, catalog_provider, *, registry=None, cat_id=None, presets=None, references=None):
+    def __init__(self, parent, catalog_provider, *, registry=None, cat_id=None, presets=None, references=None, lora_settings=None):
         import tkinter as tk
         from tkinter import ttk
         self.window = tk.Toplevel(parent)
@@ -15,6 +15,8 @@ class ContentImageToolWindow:
         self.registry = registry or ImageRegistry()
         from prompt_presets import PromptPresets
         self.presets = presets or PromptPresets()
+        from lora_settings import LoraSettings
+        self.lora_settings = lora_settings or LoraSettings()
         self.references = references or ImageRegistry(Path(__file__).resolve().parent / 'user_data' / 'reference_images')
         self.reference_image = None
         self.pending = None
@@ -39,6 +41,7 @@ class ContentImageToolWindow:
         ttk.Button(controls, text='猫一覧を更新', command=self.reload_cats).pack(side='left')
         ttk.Button(controls, text='ComfyUIで生成…', command=self.open_generation).pack(side='left', padx=8)
         ttk.Button(frame, text='外見・行動・背景の設定…', command=self.open_prompt_editor).pack(anchor='w', pady=(0, 8))
+        ttk.Button(frame, text='デザイン・ポーズLoRAの設定…', command=self.open_lora_editor).pack(anchor='w', pady=(0, 8))
         reference_controls = ttk.Frame(frame)
         reference_controls.pack(fill='x', pady=(0, 8))
         ttk.Button(reference_controls, text='基準画像を選ぶ…', command=self.choose_reference).pack(side='left')
@@ -159,7 +162,8 @@ class ContentImageToolWindow:
             self.generation_target = target
             self.generation_window = ComfyGenerationWindow(self.window, result, positive=initial_prompt,
                 prompt_provider=lambda: self.presets.assemble(*target),
-                label=f'{self.cat.get()} / {self.scene.get()}', reference_path=reference)
+                label=f'{self.cat.get()} / {self.scene.get()}', reference_path=reference,
+                loras=self.lora_settings.active(*target))
         except (ValueError, OSError) as exc:
             self.notice.set(f'生成画面を開けません：{exc}')
 
@@ -212,3 +216,16 @@ class ContentImageToolWindow:
             self.set_reference(path)
         except (OSError, ValueError) as exc:
             self.notice.set(f'基準画像を選べません：{exc}')
+
+    def open_lora_editor(self):
+        from lora_editor_gui import LoraEditorWindow
+        existing = getattr(self, 'lora_editor', None)
+        if existing is not None and existing.window.winfo_exists():
+            existing.window.lift()
+            return
+        try:
+            cat_id, scene = self.selection()
+            self.lora_editor = LoraEditorWindow(self.window, self.lora_settings, cat_id, scene,
+                                                f'{self.cat.get()} / {self.scene.get()}')
+        except (OSError, ValueError) as exc:
+            self.notice.set(f'LoRA設定を開けません：{exc}')

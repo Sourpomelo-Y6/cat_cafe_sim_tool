@@ -10,13 +10,14 @@ DEFAULT_POSITIVE = ('clean lines, best quality, soft 2d illustration, one adult 
 
 
 class ComfyGenerationWindow:
-    def __init__(self, parent, on_result, *, positive=DEFAULT_POSITIVE, prompt_provider=None, label='', reference_path=None):
+    def __init__(self, parent, on_result, *, positive=DEFAULT_POSITIVE, prompt_provider=None, label='', reference_path=None, loras=None):
         import tkinter as tk
         from tkinter import ttk
         self.window = tk.Toplevel(parent)
         self.window.title('ComfyUIで画像生成' + (f' — {label}' if label else ''))
         self.prompt_provider = prompt_provider
         self.reference_path = reference_path
+        self.loras = loras or []
         self.on_result = on_result
         self.cancel = threading.Event()
         self.messages = queue.Queue()
@@ -70,6 +71,10 @@ class ComfyGenerationWindow:
         self.status = tk.StringVar(master=self.window, value='生成結果は制作画面へ戻します。登録は確認後に行ってください。')
         ttk.Label(frame, textvariable=self.status, wraplength=570).grid(row=15, columnspan=2, sticky='w')
         ttk.Label(frame, text='閉じてもComfyUI側のジョブは継続します。結果の受け取りだけを中止します。', wraplength=570).grid(row=16, columnspan=2, sticky='w', pady=(6, 0))
+        self.use_loras = tk.BooleanVar(master=self.window, value=bool(self.loras))
+        ttk.Checkbutton(frame, text='保存済みLoRAを適用（外すとLoRAなしで比較）', variable=self.use_loras).grid(row=17, columnspan=2, sticky='w')
+        summary = '\n'.join(f"{row['name']} / MODEL {row['strength_model']} / CLIP {row['strength_clip']} / {row['trigger']}" for row in self.loras)
+        ttk.Label(frame, text=summary or '有効なLoRAはありません。制作画面のLoRA設定で選択・保存してください。', wraplength=570).grid(row=18, columnspan=2, sticky='w')
 
     def reload_prompt(self):
         if self.running:
@@ -95,6 +100,7 @@ class ComfyGenerationWindow:
                             steps=int(self.fields['steps'].get()), cfg=float(self.fields['cfg'].get()),
                             positive=self.positive.get('1.0', 'end').strip(),
                             negative=self.negative.get('1.0', 'end').strip())
+            settings['loras'] = self.loras if self.use_loras.get() else []
             if self.use_reference.get():
                 if self.reference_path is None or not self.reference_path.exists():
                     raise ValueError('基準画像が見つかりません。')

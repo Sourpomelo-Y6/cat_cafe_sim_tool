@@ -62,6 +62,25 @@ def build_prompt(settings, reference_name=None):
         prompt['5'] = {'class_type': 'KSampler', 'inputs': {'model': ['1', 0], 'positive': ['2', 0],
             'negative': ['3', 0], 'latent_image': ['12', 0], 'seed': s['seed'], 'steps': s['steps'],
             'cfg': s['cfg'], 'sampler_name': s['sampler'], 'scheduler': s['scheduler'], 'denoise': s['denoise']}}
+    from lora_settings import validate_lora
+    model, clip = ['1', 0], ['1', 1]
+    triggers = []
+    for index, row in enumerate(s.get('loras', [])):
+        row = validate_lora(row)
+        if not row['enabled']:
+            continue
+        node_id = str(20 + index)
+        prompt[node_id] = {'class_type': 'LoraLoader', 'inputs': {
+            'model': model, 'clip': clip, 'lora_name': row['name'],
+            'strength_model': row['strength_model'], 'strength_clip': row['strength_clip']}}
+        model, clip = [node_id, 0], [node_id, 1]
+        if row['trigger'].strip() and row['trigger'].strip() not in triggers:
+            triggers.append(row['trigger'].strip())
+    prompt['5']['inputs']['model'] = model
+    prompt['2']['inputs']['clip'] = clip
+    prompt['3']['inputs']['clip'] = clip
+    if triggers:
+        prompt['2']['inputs']['text'] = ', '.join([s['positive']] + triggers)
     return prompt
 
 
@@ -88,11 +107,27 @@ class ComfyClient:
             raise ValueError(f'ComfyUI HTTP {exc.code}: {detail}') from exc
         return raw if binary else json.loads(raw)
 
+    def list_loras(self):
+        info = self.request('/object_info/LoraLoader')
+        try:
+            names = info['LoraLoader']['input']['required']['lora_name'][0]
+        except (KeyError, IndexError, TypeError) as exc:
+            raise ValueError('ComfyUIにLoraLoaderノードがありません。') from exc
+        if not isinstance(names, list) or any(not isinstance(name, str) for name in names):
+            raise ValueError('LoRA一覧の形式が不正です。')
+        return names
+
     def generate(self, settings, cancel=None, progress=lambda message: None, timeout=600):
         cancel = cancel or threading.Event()
         prompt = build_prompt(settings)
         if cancel.is_set():
             raise GenerationCancelled()
+        enabled_loras = [row for row in settings.get('loras', []) if row['enabled']]
+        if enabled_loras:
+            available = self.list_loras()
+            missing = [row['name'] for row in enabled_loras if row['name'] not in available]
+            if missing:
+                raise ValueError('ComfyUIにLoRAが見つかりません：' + ', '.join(missing))
         reference_bytes = None
         if settings.get('reference_path'):
             reference_bytes = Path(settings['reference_path']).read_bytes()
