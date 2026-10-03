@@ -59,8 +59,8 @@ class ImageRegistry:
         return self.directory / filename
 
 
-def load_display_image(master, path):
+def load_display_image(master, path, max_width=640, max_height=420):
     import tkinter as tk
     image = tk.PhotoImage(master=master, file=str(path))
-    scale = max(1, (image.width() + 639) // 640, (image.height() + 419) // 420)
+    scale = max(1, (image.width() + max_width - 1) // max_width, (image.height() + max_height - 1) // max_height)
     return image.subsample(scale, scale)

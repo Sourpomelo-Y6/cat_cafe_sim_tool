@@ -1,5 +1,6 @@
 """標準ライブラリだけでComfyUIへ生成依頼し、PNGを取得する。"""
 import json
+import hashlib
 import secrets
 import threading
 import time
@@ -24,7 +25,7 @@ def workflow_defaults():
                 steps=sampler[3], cfg=sampler[4], sampler=sampler[5], scheduler=sampler[6])
 
 
-def build_prompt(settings):
+def build_prompt(settings, reference_name=None):
     s = settings
     if not s['positive'].strip() or not s['model'].strip():
         raise ValueError('モデル名とプロンプトを入力してください。')
@@ -35,7 +36,7 @@ def build_prompt(settings):
     if not 1 <= s['steps'] <= 100 or not 0 <= s['cfg'] <= 30:
         raise ValueError('Stepsは1～100、CFGは0～30にしてください。')
     # 添付の単純なt2iグラフをAPI形式へ組み立てる。seedは直接渡す。
-    return {
+    prompt = {
         '1': {'class_type': 'CheckpointLoaderSimple', 'inputs': {'ckpt_name': s['model']}},
         '2': {'class_type': 'CLIPTextEncode', 'inputs': {'clip': ['1', 1], 'text': s['positive']}},
         '3': {'class_type': 'CLIPTextEncode', 'inputs': {'clip': ['1', 1], 'text': s['negative']}},
@@ -48,6 +49,20 @@ def build_prompt(settings):
         '6': {'class_type': 'VAEDecode', 'inputs': {'samples': ['5', 0], 'vae': ['1', 2]}},
         '7': {'class_type': 'SaveImage', 'inputs': {'images': ['6', 0], 'filename_prefix': 'CatCafeSimTool/cat'}},
     }
+    if s.get('reference_path'):
+        if not reference_name:
+            reference_name = 'reference.png'  # GUI側の入力検証用。
+        if not 0 < s.get('denoise', 0) <= 1:
+            raise ValueError('denoiseは0より大きく1以下にしてください。')
+        prompt['10'] = {'class_type': 'LoadImage', 'inputs': {'image': reference_name}}
+        prompt['11'] = {'class_type': 'ImageScale', 'inputs': {'image': ['10', 0], 'upscale_method': 'area',
+            'width': s['width'], 'height': s['height'], 'crop': 'disabled'}}
+        prompt['12'] = {'class_type': 'VAEEncode', 'inputs': {'pixels': ['11', 0], 'vae': ['1', 2]}}
+        prompt.pop('8')
+        prompt['5'] = {'class_type': 'KSampler', 'inputs': {'model': ['1', 0], 'positive': ['2', 0],
+            'negative': ['3', 0], 'latent_image': ['12', 0], 'seed': s['seed'], 'steps': s['steps'],
+            'cfg': s['cfg'], 'sampler_name': s['sampler'], 'scheduler': s['scheduler'], 'denoise': s['denoise']}}
+    return prompt
 
 
 class GenerationCancelled(Exception):
@@ -78,6 +93,16 @@ class ComfyClient:
         prompt = build_prompt(settings)
         if cancel.is_set():
             raise GenerationCancelled()
+        reference_bytes = None
+        if settings.get('reference_path'):
+            reference_bytes = Path(settings['reference_path']).read_bytes()
+            if not reference_bytes.startswith(b'\x89PNG\r\n\x1a\n'):
+                raise ValueError('基準画像にはPNGを指定してください。')
+            progress('基準画像をComfyUIへ送っています…')
+            reference_name = self.upload_image(reference_bytes)
+            if cancel.is_set():
+                raise GenerationCancelled()
+            prompt = build_prompt(settings, reference_name)
         submitted = self.request('/prompt', {'prompt': prompt, 'client_id': str(uuid.uuid4())})
         if submitted.get('node_errors'):
             raise ValueError(f"ワークフロー検証エラー：{submitted['node_errors']}")
@@ -103,13 +128,30 @@ class ComfyClient:
                     self.output_directory.mkdir(parents=True, exist_ok=True)
                     path = self.output_directory / f'{uuid.uuid4().hex}.png'
                     path.write_bytes(raw)
+                    reference_metadata = None
+                    if reference_bytes is not None:
+                        reference_path = path.with_suffix('.reference.png')
+                        reference_path.write_bytes(reference_bytes)
+                        reference_metadata = dict(file=reference_path.name, sha256=hashlib.sha256(reference_bytes).hexdigest())
                     path.with_suffix('.json').write_text(json.dumps(dict(settings=settings, prompt_id=prompt_id,
-                        source_workflow=SOURCE_WORKFLOW.name, prompt=prompt), ensure_ascii=False, indent=2), encoding='utf-8')
+                        source_workflow='i2prompt-source.json' if reference_bytes is not None else SOURCE_WORKFLOW.name,
+                        reference=reference_metadata, prompt=prompt), ensure_ascii=False, indent=2), encoding='utf-8')
                     return path
                 if status.get('completed'):
                     raise ValueError('生成は完了しましたが、保存画像がありません。')
             cancel.wait(0.5)
         raise TimeoutError('生成待ちが10分を超えました。ComfyUI側の履歴を確認してください。')
+
+    def upload_image(self, raw):
+        boundary = 'CatCafeBoundary' + uuid.uuid4().hex
+        filename = 'cat-reference-' + uuid.uuid4().hex + '.png'
+        body = (f'--{boundary}\r\nContent-Disposition: form-data; name="image"; filename="{filename}"\r\n'
+                'Content-Type: image/png\r\n\r\n').encode('ascii') + raw + f'\r\n--{boundary}--\r\n'.encode('ascii')
+        request = Request(self.base_url + '/upload/image', data=body,
+                          headers={'Content-Type': 'multipart/form-data; boundary=' + boundary})
+        with urlopen(request, timeout=30) as response:
+            uploaded = json.loads(response.read())
+        return '/'.join(part for part in (uploaded.get('subfolder', ''), uploaded['name']) if part)
 
 
 def random_seed():

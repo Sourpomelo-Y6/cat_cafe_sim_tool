@@ -10,12 +10,13 @@ DEFAULT_POSITIVE = ('clean lines, best quality, soft 2d illustration, one adult 
 
 
 class ComfyGenerationWindow:
-    def __init__(self, parent, on_result, *, positive=DEFAULT_POSITIVE, prompt_provider=None, label=''):
+    def __init__(self, parent, on_result, *, positive=DEFAULT_POSITIVE, prompt_provider=None, label='', reference_path=None):
         import tkinter as tk
         from tkinter import ttk
         self.window = tk.Toplevel(parent)
         self.window.title('ComfyUIで画像生成' + (f' — {label}' if label else ''))
         self.prompt_provider = prompt_provider
+        self.reference_path = reference_path
         self.on_result = on_result
         self.cancel = threading.Event()
         self.messages = queue.Queue()
@@ -39,16 +40,27 @@ class ComfyGenerationWindow:
             self.fields[key] = variable
             ttk.Entry(frame, textvariable=variable, width=55).grid(row=row, column=1, sticky='ew', pady=2)
         ttk.Label(frame, text=f"Sampler: {defaults['sampler']} / Scheduler: {defaults['scheduler']}").grid(row=7, columnspan=2, sticky='w')
-        ttk.Label(frame, text='プロンプト（猫の外見・行動・固定背景）').grid(row=8, columnspan=2, sticky='w', pady=(8, 0))
+        reference_controls = ttk.Frame(frame)
+        reference_controls.grid(row=8, columnspan=2, sticky='ew')
+        self.use_reference = tk.BooleanVar(master=self.window, value=reference_path is not None)
+        self.denoise = tk.StringVar(master=self.window, value='0.65')
+        checkbox = ttk.Checkbutton(reference_controls, text='基準画像から差分を生成（img2img）', variable=self.use_reference)
+        checkbox.pack(side='left')
+        if reference_path is None:
+            checkbox.state(['disabled'])
+        ttk.Label(reference_controls, text='denoise').pack(side='left', padx=8)
+        ttk.Entry(reference_controls, textvariable=self.denoise, width=6).pack(side='left')
+        ttk.Label(frame, text='低い値：元画像を残す / 高い値：ポーズを変えやすい。完全な個体一致は保証されません。', wraplength=570).grid(row=9, columnspan=2, sticky='w')
+        ttk.Label(frame, text='プロンプト（猫の外見・行動・固定背景）').grid(row=10, columnspan=2, sticky='w', pady=(8, 0))
         self.positive = tk.Text(frame, height=5, width=65, wrap='word')
-        self.positive.grid(row=9, columnspan=2, sticky='ew')
+        self.positive.grid(row=11, columnspan=2, sticky='ew')
         self.positive.insert('1.0', positive)
-        ttk.Label(frame, text='ネガティブプロンプト').grid(row=10, columnspan=2, sticky='w', pady=(8, 0))
+        ttk.Label(frame, text='ネガティブプロンプト').grid(row=12, columnspan=2, sticky='w', pady=(8, 0))
         self.negative = tk.Text(frame, height=3, width=65, wrap='word')
-        self.negative.grid(row=11, columnspan=2, sticky='ew')
+        self.negative.grid(row=13, columnspan=2, sticky='ew')
         self.negative.insert('1.0', defaults['negative'])
         controls = ttk.Frame(frame)
-        controls.grid(row=12, columnspan=2, sticky='ew', pady=8)
+        controls.grid(row=14, columnspan=2, sticky='ew', pady=8)
         self.generate_button = ttk.Button(controls, text='1枚生成', command=self.start)
         self.generate_button.pack(side='left')
         if prompt_provider is not None:
@@ -56,8 +68,8 @@ class ComfyGenerationWindow:
         ttk.Button(controls, text='seedをランダムに', command=lambda: self.fields['seed'].set(str(random_seed()))).pack(side='left', padx=8)
         ttk.Button(controls, text='閉じる', command=self.close).pack(side='right')
         self.status = tk.StringVar(master=self.window, value='生成結果は制作画面へ戻します。登録は確認後に行ってください。')
-        ttk.Label(frame, textvariable=self.status, wraplength=570).grid(row=13, columnspan=2, sticky='w')
-        ttk.Label(frame, text='閉じてもComfyUI側のジョブは継続します。結果の受け取りだけを中止します。', wraplength=570).grid(row=14, columnspan=2, sticky='w', pady=(6, 0))
+        ttk.Label(frame, textvariable=self.status, wraplength=570).grid(row=15, columnspan=2, sticky='w')
+        ttk.Label(frame, text='閉じてもComfyUI側のジョブは継続します。結果の受け取りだけを中止します。', wraplength=570).grid(row=16, columnspan=2, sticky='w', pady=(6, 0))
 
     def reload_prompt(self):
         if self.running:
@@ -83,6 +95,10 @@ class ComfyGenerationWindow:
                             steps=int(self.fields['steps'].get()), cfg=float(self.fields['cfg'].get()),
                             positive=self.positive.get('1.0', 'end').strip(),
                             negative=self.negative.get('1.0', 'end').strip())
+            if self.use_reference.get():
+                if self.reference_path is None or not self.reference_path.exists():
+                    raise ValueError('基準画像が見つかりません。')
+                settings.update(reference_path=str(self.reference_path), denoise=float(self.denoise.get()))
             build_prompt(settings)
             client = ComfyClient(self.fields['url'].get().strip())
         except (ValueError, OSError) as exc:

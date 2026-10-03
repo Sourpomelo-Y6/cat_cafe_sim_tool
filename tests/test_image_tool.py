@@ -105,6 +105,7 @@ class ToolTests(unittest.TestCase):
             tool = ContentImageToolWindow(root, lambda: {'cat-a': 'ミケ'},
                 registry=ImageRegistry(Path(directory) / 'images'), presets=presets)
             root.update()
+
             tool.open_prompt_editor()
             editor = tool.prompt_editor
             editor.fields['appearance'].delete('1.0', 'end')
@@ -127,5 +128,47 @@ class ToolTests(unittest.TestCase):
             self.assertIn('asleep', tool.generation_window.positive.get('1.0', 'end'))
             self.assertIn('one black cat', tool.generation_window.positive.get('1.0', 'end'))
             tool.generation_window.close()
+            tool.window.destroy()
+            root.update()
+
+    @unittest.skipUnless(os.environ.get('CAT_CAFE_TEST_GUI') == '1', 'requires a display')
+    def test_reference_is_per_cat_and_used_in_generation(self):
+        import tkinter as tk
+        from image_tool_gui import ContentImageToolWindow
+        root = tk.Tk()
+        root.withdraw()
+        self.addCleanup(root.destroy)
+        with tempfile.TemporaryDirectory() as directory:
+            references = ImageRegistry(Path(directory) / 'references')
+            tool = ContentImageToolWindow(root, lambda: {'cat-a': 'ミケ', 'cat-b': 'タマ'},
+                registry=ImageRegistry(Path(directory) / 'images'), references=references)
+            root.update()
+            tool.set_reference(ASSET)
+            self.assertTrue(references.image_path('cat-a', 'normal').exists())
+            self.assertIsNotNone(tool.reference_image)
+            tool.scene.set('眠る')
+            tool.refresh()
+            tool.open_generation()
+            generation = tool.generation_window
+            self.assertTrue(generation.use_reference.get())
+            self.assertEqual(generation.reference_path, references.image_path('cat-a', 'normal'))
+            captured = []
+            def generate(client, settings, *args, **kwargs):
+                captured.append(settings)
+                return ASSET
+            with patch('comfy_generation_gui.ComfyClient.generate', new=generate):
+                generation.start()
+                deadline = time.monotonic() + 5
+                while generation.running and time.monotonic() < deadline:
+                    root.update()
+                    time.sleep(0.01)
+            self.assertEqual(captured[0]['denoise'], 0.65)
+            self.assertIn('asleep', captured[0]['positive'])
+            self.assertIsNotNone(tool.pending)
+            self.assertFalse(tool.registry.path.exists())
+            generation.close()
+            tool.cat.set(next(label for label, key in tool.cats.items() if key == 'cat-b'))
+            tool.refresh()
+            self.assertIsNone(tool.reference_image)
             tool.window.destroy()
             root.update()

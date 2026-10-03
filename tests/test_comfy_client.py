@@ -55,3 +55,27 @@ class ComfyTests(unittest.TestCase):
         with patch.object(client, 'request', return_value={'prompt_id': 'a'}):
             with self.assertRaises(TimeoutError):
                 client.generate(self.settings(), timeout=0)
+
+    def test_img2img_graph_and_reference_snapshot(self):
+        with tempfile.TemporaryDirectory() as directory:
+            reference = Path(directory) / 'source.png'
+            reference.write_bytes(b'\x89PNG\r\n\x1a\nsource')
+            settings = dict(self.settings(), reference_path=str(reference), denoise=0.75)
+            prompt = build_prompt(settings, 'uploaded.png')
+            self.assertEqual(prompt['5']['class_type'], 'KSampler')
+            self.assertEqual(prompt['5']['inputs']['latent_image'], ['12', 0])
+            self.assertEqual(prompt['10']['inputs']['image'], 'uploaded.png')
+            self.assertNotIn('8', prompt)
+            client = ComfyClient(output_directory=Path(directory) / 'output')
+            responses = [{'prompt_id': 'job'}, {'job': {'outputs': {'7': {'images': [dict(filename='cat.png', type='output')]}}}},
+                         b'\x89PNG\r\n\x1a\nresult']
+            with patch.object(client, 'upload_image', return_value='uploaded.png') as upload, \
+                    patch.object(client, 'request', side_effect=responses):
+                output = client.generate(settings)
+            upload.assert_called_once_with(reference.read_bytes())
+            metadata = json.loads(output.with_suffix('.json').read_text(encoding='utf-8'))
+            self.assertEqual((output.parent / metadata['reference']['file']).read_bytes(), reference.read_bytes())
+            self.assertEqual(metadata['source_workflow'], 'i2prompt-source.json')
+            for denoise in (0, -0.1, 1.1, float('nan')):
+                with self.assertRaises(ValueError):
+                    build_prompt(dict(settings, denoise=denoise))

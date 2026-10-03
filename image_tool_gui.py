@@ -6,7 +6,7 @@ SCENES = (('normal', '通常'), ('play', '遊ぶ'), ('pet', '撫でられる'), 
 
 
 class ContentImageToolWindow:
-    def __init__(self, parent, catalog_provider, *, registry=None, cat_id=None, presets=None):
+    def __init__(self, parent, catalog_provider, *, registry=None, cat_id=None, presets=None, references=None):
         import tkinter as tk
         from tkinter import ttk
         self.window = tk.Toplevel(parent)
@@ -15,6 +15,8 @@ class ContentImageToolWindow:
         self.registry = registry or ImageRegistry()
         from prompt_presets import PromptPresets
         self.presets = presets or PromptPresets()
+        self.references = references or ImageRegistry(Path(__file__).resolve().parent / 'user_data' / 'reference_images')
+        self.reference_image = None
         self.pending = None
         self.image = None
         frame = ttk.Frame(self.window, padding=12)
@@ -37,8 +39,20 @@ class ContentImageToolWindow:
         ttk.Button(controls, text='猫一覧を更新', command=self.reload_cats).pack(side='left')
         ttk.Button(controls, text='ComfyUIで生成…', command=self.open_generation).pack(side='left', padx=8)
         ttk.Button(frame, text='外見・行動・背景の設定…', command=self.open_prompt_editor).pack(anchor='w', pady=(0, 8))
-        self.image_label = ttk.Label(frame, anchor='center')
-        self.image_label.pack(fill='both', expand=True)
+        reference_controls = ttk.Frame(frame)
+        reference_controls.pack(fill='x', pady=(0, 8))
+        ttk.Button(reference_controls, text='基準画像を選ぶ…', command=self.choose_reference).pack(side='left')
+        ttk.Button(reference_controls, text='登録済み通常画像を基準に', command=self.use_normal_reference).pack(side='left', padx=8)
+        images = ttk.Frame(frame)
+        images.pack(fill='both', expand=True)
+        images.columnconfigure(0, weight=1)
+        images.columnconfigure(1, weight=1)
+        ttk.Label(images, text='基準画像（個体別）').grid(row=0, column=0)
+        ttk.Label(images, text='登録画像・生成候補').grid(row=0, column=1)
+        self.reference_label = ttk.Label(images, anchor='center')
+        self.reference_label.grid(row=1, column=0, sticky='nsew', padx=4)
+        self.image_label = ttk.Label(images, anchor='center')
+        self.image_label.grid(row=1, column=1, sticky='nsew', padx=4)
         self.notice = tk.StringVar(master=self.window)
         ttk.Label(frame, textvariable=self.notice, wraplength=540).pack(anchor='w', pady=8)
         ttk.Button(frame, text='閉じる', command=self.window.destroy).pack(anchor='e')
@@ -63,7 +77,7 @@ class ContentImageToolWindow:
         return cat_id, key
 
     def display(self, path):
-        image = load_display_image(self.window, path)
+        image = load_display_image(self.window, path, 420, 360)
         self.image = image
         self.image_label.configure(image=image, text='')
 
@@ -75,6 +89,7 @@ class ContentImageToolWindow:
         self.image_label.configure(image='', text='未登録：ゲームでは仮画像を使います。')
         try:
             cat_id, key = self.selection()
+            self.show_reference(cat_id)
             path = self.registry.image_path(cat_id, key)
             if path:
                 self.display(path)
@@ -133,6 +148,9 @@ class ContentImageToolWindow:
             existing.close()
         try:
             initial_prompt = self.presets.assemble(*target)
+            reference = self.references.image_path(target[0], 'normal')
+            if reference is not None and not reference.exists():
+                raise ValueError('基準画像が見つかりません。基準画像を選び直してください。')
             def result(path):
                 if self.selection() != target:
                     self.notice.set(f'生成中に猫・場面が変更されました。画像は保存済みです：{path}')
@@ -141,7 +159,7 @@ class ContentImageToolWindow:
             self.generation_target = target
             self.generation_window = ComfyGenerationWindow(self.window, result, positive=initial_prompt,
                 prompt_provider=lambda: self.presets.assemble(*target),
-                label=f'{self.cat.get()} / {self.scene.get()}')
+                label=f'{self.cat.get()} / {self.scene.get()}', reference_path=reference)
         except (ValueError, OSError) as exc:
             self.notice.set(f'生成画面を開けません：{exc}')
 
@@ -157,3 +175,40 @@ class ContentImageToolWindow:
                                                     f'{self.cat.get()} / {self.scene.get()}')
         except (OSError, ValueError) as exc:
             self.notice.set(f'設定画面を開けません：{exc}')
+
+    def show_reference(self, cat_id):
+        self.reference_image = None
+        self.reference_label.configure(image='', text='基準画像は未登録')
+        path = self.references.image_path(cat_id, 'normal')
+        if path is not None:
+            self.reference_image = load_display_image(self.window, path, 420, 360)
+            self.reference_label.configure(image=self.reference_image, text='')
+
+    def choose_reference(self):
+        from tkinter import filedialog
+        path = filedialog.askopenfilename(parent=self.window, title='この猫の基準PNGを選ぶ',
+                                         filetypes=[('PNG画像', '*.png')])
+        if path:
+            self.set_reference(path)
+
+    def set_reference(self, path):
+        import tkinter as tk
+        try:
+            cat_id, _ = self.selection()
+            # 読み込める画像だけを登録する。
+            load_display_image(self.window, path, 420, 360)
+            self.references.register(cat_id, 'normal', path)
+            self.show_reference(cat_id)
+            self.notice.set('基準画像を保存しました。生成画面を閉じて開き直すと反映されます。')
+        except (OSError, ValueError, tk.TclError) as exc:
+            self.notice.set(f'基準画像を登録できません：{exc}')
+
+    def use_normal_reference(self):
+        try:
+            cat_id, _ = self.selection()
+            path = self.registry.image_path(cat_id, 'normal')
+            if path is None:
+                raise ValueError('この猫の通常画像を先に登録してください。')
+            self.set_reference(path)
+        except (OSError, ValueError) as exc:
+            self.notice.set(f'基準画像を選べません：{exc}')
