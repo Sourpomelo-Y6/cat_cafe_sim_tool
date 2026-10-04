@@ -66,8 +66,11 @@ namespace CatCafePreview
         public void RestSelected() { QueueShift(false); }
         private void QueueShift(bool working)
         {
+            SetCatShift(preview.SelectedPythonCatId, working);
+        }
+        public void SetCatShift(string id, bool working)
+        {
             if (!CanChangeShifts) return;
-            string id = preview.SelectedPythonCatId;
             var selected = Array.Find(current.cats, cat => cat.cat_id == id);
             if (selected == null || selected.working == working) return;
             var ids = new System.Collections.Generic.List<string>();

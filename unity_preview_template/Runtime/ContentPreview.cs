@@ -144,6 +144,18 @@ namespace CatCafePreview
             cats.interactable = true;
             foreach (var button in sceneButtons) button.interactable = false;
             DisplayPythonCat(cats.value);
+            var roster = GetComponent<PythonCatRoster>();
+            if (roster != null) roster.Apply(state);
+        }
+
+        public Texture2D PythonCatTexture(PythonCatState cat)
+        {
+            var content = bundle == null ? null : Array.Find(bundle.cats, item => item.cat_id == cat.content_cat_id);
+            if (content == null) return null;
+            string key = cat.working && cat.health_status == "healthy" && cat.activity == "cafe" ? "normal" : "sleep";
+            var scene = Array.Find(content.scenes, item => item.key == key);
+            return scene == null || string.IsNullOrEmpty(scene.image) ? null
+                : Resources.Load<Texture2D>(resourceRoot + scene.image.Substring(0, scene.image.Length - 4));
         }
 
         public void ConfigurePythonButtons()
@@ -162,6 +174,8 @@ namespace CatCafePreview
 
         public void RefreshPythonControls()
         {
+            var roster = GetComponent<PythonCatRoster>();
+            if (roster != null) roster.RefreshControls();
             var client = GetComponent<PythonStateClient>();
             if (client == null || pythonState == null) return;
             var cat = pythonState.cats[cats.value];
@@ -219,6 +233,8 @@ namespace CatCafePreview
 
         public void PythonConnectionError(string message)
         {
+            var roster = GetComponent<PythonCatRoster>();
+            if (roster != null) roster.Disconnect();
             cats.interactable = false;
             foreach (var button in sceneButtons) button.interactable = false;
             status.text = "Python未接続：" + message;

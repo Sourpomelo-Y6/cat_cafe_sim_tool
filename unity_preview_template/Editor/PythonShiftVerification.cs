@@ -58,12 +58,13 @@ namespace CatCafePreview.Editor
                 if (!EditorApplication.isPlaying) return;
                 var preview = UnityEngine.Object.FindObjectOfType<ContentPreview>();
                 var client = preview.GetComponent<PythonStateClient>();
+                var roster = preview.GetComponent<PythonCatRoster>();
                 if (stage <= 3 && !client.CanChangeShifts) return;
                 if (stage == 1)
                 {
                     preview.SelectCat(0);
                     if (!preview.GetSceneButton(1).interactable) throw new Exception("Rest button not ready");
-                    preview.GetSceneButton(1).onClick.Invoke();
+                    if(roster != null) roster.GetCard(0).rest.onClick.Invoke(); else preview.GetSceneButton(1).onClick.Invoke();
                     if (preview.GetSceneButton(1).interactable) throw new Exception("Busy button enabled");
                     SessionState.SetInt(Key, 2);
                 }
@@ -71,7 +72,7 @@ namespace CatCafePreview.Editor
                 {
                     if (!preview.GetSceneButton(0).interactable) return;
                     if (preview.CurrentSceneKey != "sleep" || !preview.DisplayText.Contains("予定：休養")) throw new Exception("Rest state not reflected");
-                    preview.GetSceneButton(0).onClick.Invoke();
+                    if(roster != null) roster.GetCard(0).work.onClick.Invoke(); else preview.GetSceneButton(0).onClick.Invoke();
                     SessionState.SetInt(Key, 3);
                 }
                 else if (stage == 3)
@@ -95,6 +96,8 @@ namespace CatCafePreview.Editor
                 {
                     if (client.CurrentState == null) return;
                     var state = client.CurrentState;
+                    if(roster != null && (roster.Count != state.cats.Length || roster.CustomerCount != Array.FindAll(state.seats,seat=>!string.IsNullOrEmpty(seat.customer_id)).Length))
+                        throw new Exception("Roster live customer matching failed");
                     if (state.seats != null && Array.Exists(state.seats, seat => !string.IsNullOrEmpty(seat.customer_id)))
                         SessionState.SetBool(Key + "occupied", true);
                     if (state.closed)
