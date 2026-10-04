@@ -96,6 +96,9 @@ namespace CatCafePreview.Editor
                 {
                     if (client.CurrentState == null) return;
                     var state = client.CurrentState;
+                    var service = preview.GetComponent<PythonServiceScreen>();
+                    if(service != null && state.tick>0 && (service.ShowingSeats == state.closed || service.OccupiedCount != Array.FindAll(state.seats,seat=>!string.IsNullOrEmpty(seat.customer_id)).Length && !state.closed))
+                        throw new Exception("Live service screen mismatch");
                     if(roster != null && (roster.Count != state.cats.Length || roster.CustomerCount != Array.FindAll(state.seats,seat=>!string.IsNullOrEmpty(seat.customer_id)).Length))
                         throw new Exception("Roster live customer matching failed");
                     if (state.seats != null && Array.Exists(state.seats, seat => !string.IsNullOrEmpty(seat.customer_id)))

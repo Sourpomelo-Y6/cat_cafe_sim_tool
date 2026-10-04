@@ -146,7 +146,10 @@ namespace CatCafePreview
             DisplayPythonCat(cats.value);
             var roster = GetComponent<PythonCatRoster>();
             if (roster != null) roster.Apply(state);
+            var service = GetComponent<PythonServiceScreen>();
+            if (service != null) service.Apply(state);
         }
+        public void SetServiceDescription(string text) { description.text = text; }
 
         public Texture2D PythonCatTexture(PythonCatState cat)
         {
@@ -235,6 +238,8 @@ namespace CatCafePreview
         {
             var roster = GetComponent<PythonCatRoster>();
             if (roster != null) roster.Disconnect();
+            var service = GetComponent<PythonServiceScreen>();
+            if (service != null) service.Disconnect();
             cats.interactable = false;
             foreach (var button in sceneButtons) button.interactable = false;
             status.text = "Python未接続：" + message;

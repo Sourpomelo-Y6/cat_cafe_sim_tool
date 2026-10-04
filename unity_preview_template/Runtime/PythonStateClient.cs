@@ -22,11 +22,13 @@ namespace CatCafePreview
         public int opening_ticks, waiting_count, completed_interactions;
         public float revenue;
         public PythonSeatState[] seats;
+        public PythonCustomerState[] customers;
         public PythonFinanceState finance;
         public float funds;
         public PythonCatState[] cats;
     }
-    [Serializable] public class PythonSeatState { public string seat_id, customer_id, cat_id; }
+    [Serializable] public class PythonSeatState { public string seat_id, customer_id, customer_name, cat_id; }
+    [Serializable] public class PythonCustomerState { public string customer_id, name, status, seat_id; }
     [Serializable] public class PythonFinanceState
     {
         public float opening_funds, total_income, total_expenses, net_cash_flow, closing_funds;
