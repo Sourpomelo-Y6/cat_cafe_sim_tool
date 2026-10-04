@@ -25,8 +25,16 @@ namespace CatCafePreview
         public PythonCustomerState[] customers;
         public PythonFinanceState finance;
         public PythonIntakeState intake_request;
+        public PythonHousingState housing;
         public float funds;
         public PythonCatState[] cats;
+    }
+    [Serializable] public class PythonHousingState
+    {
+        public bool configured, can_expand;
+        public int count, capacity, free, stage, next_capacity;
+        public string kind, reason;
+        public float cost, funds_after, daily_cost, next_daily_cost, operating_cost, next_operating_cost;
     }
     [Serializable] public class PythonSeatState { public string seat_id, customer_id, customer_name, cat_id; }
     [Serializable] public class PythonIntakeState
@@ -68,6 +76,14 @@ namespace CatCafePreview
         public bool CanManageSaves { get { return online && pending == null && current != null; } }
         public void SaveGame() { QueueSave("save_game", ""); }
         public void LoadSaved(string id) { QueueSave("load_game", id); }
+        public bool CanExpandHousing { get { return CanManageSaves && current.housing != null && current.housing.can_expand; } }
+        public void ExpandHousing()
+        {
+            if (!CanExpandHousing) return;
+            pending = new PythonShiftCommand { request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,
+                expected_revision=current.revision,working_cats=new string[0],kind=current.housing.kind };
+            preview.RefreshPythonControls();
+        }
         public bool CanRespondIntake(bool accept)
         {
             var intake = current == null ? null : current.intake_request;
@@ -154,6 +170,7 @@ namespace CatCafePreview
                                         : command.kind == "save_game" ? "保存しました。" : command.kind == "load_game" ? "保存したゲームを再開しました。"
                                         : command.kind == "next_day" ? "翌日の営業準備へ進みました。出勤・休養を設定してください。"
                                         : command.kind == "resolve_intake" ? (command.choice == "accept" ? "保護猫を迎えました。休養予定で猫一覧に加わりました。" : "受け入れ依頼を見送りました。")
+                                        : command.kind == "purchase_housing" || command.kind == "upgrade_housing" ? "飼育スペースを拡張しました。"
                                         : reply.state.closed ? "閉店しました。結果を確認してください。" : "営業を進めました。";
                                 }
                                 else
