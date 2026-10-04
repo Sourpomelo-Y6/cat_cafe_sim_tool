@@ -149,7 +149,12 @@ namespace CatCafePreview
             var service = GetComponent<PythonServiceScreen>();
             if (service != null) service.Apply(state);
         }
-        public void SetServiceDescription(string text) { description.text = text; }
+        public void SetServiceDescription(string text)
+        {
+            description.text = text;
+            if (pythonState != null && !string.IsNullOrEmpty(pythonState.required_action))
+                description.text += "\n\n進行に必要な操作\n" + pythonState.required_action;
+        }
 
         public Texture2D PythonCatTexture(PythonCatState cat)
         {
@@ -186,7 +191,7 @@ namespace CatCafePreview
             sceneButtons[0].interactable = client.CanChangeShifts && !cat.working && cat.health_status == "healthy" && cat.activity == "cafe";
             sceneButtons[1].interactable = client.CanChangeShifts && cat.working;
             sceneButtons[2].interactable = client.CanProgressBusiness;
-            sceneButtons[2].GetComponentInChildren<Text>().text = pythonState.closed ? "営業終了" : pythonState.can_set_shifts ? "営業開始" : "1刻み進める";
+            sceneButtons[2].GetComponentInChildren<Text>().text = pythonState.closed ? "翌日へ" : pythonState.can_set_shifts ? "営業開始" : "1刻み進める";
             sceneButtons[3].interactable = client.CanManageSaves;
             var savePanel = GetComponent<PythonSavePanel>();
             if(savePanel != null) savePanel.RefreshControls();
@@ -234,6 +239,8 @@ namespace CatCafePreview
             }
             status.text = "Python接続中：" + pythonState.day + "日目 / 時刻 " + pythonState.tick + "/" + pythonState.opening_ticks
                 + " / 資金 " + pythonState.funds + (pythonState.closed ? " / 閉店" : pythonState.can_set_shifts ? " / 営業準備" : " / 営業中");
+            if (!string.IsNullOrEmpty(pythonState.required_action))
+                description.text += "\n\n進行に必要な操作\n" + pythonState.required_action;
             RefreshPythonControls();
         }
 

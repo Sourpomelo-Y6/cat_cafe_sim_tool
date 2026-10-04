@@ -107,7 +107,7 @@ namespace CatCafePreview.Editor
                     {
                         if (!preview.DisplayText.Contains("閉店結果") || !preview.DisplayText.Contains("支出")
                             || state.completed_interactions <= 0 || !SessionState.GetBool(Key + "occupied", false)
-                            || preview.GetSceneButton(2).interactable || preview.GetSceneButton(0).interactable)
+                            || !preview.GetSceneButton(2).interactable || preview.GetSceneButton(0).interactable)
                             throw new Exception("Closing result mismatch");
                         Debug.Log("CAT_CAFE_BUSINESS_PLAY_OK: shift UI / start / ticks / automatic service / occupied seats / closing finances / cat health");
                         SessionState.SetInt(Key, 0); SessionState.SetBool(Key + "business", false);

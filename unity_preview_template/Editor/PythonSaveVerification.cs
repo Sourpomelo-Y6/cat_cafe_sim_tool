@@ -10,6 +10,26 @@ namespace CatCafePreview.Editor
     {
         const string Key="CatCafeSaveTest";
         static PythonSaveVerification() { EditorApplication.update+=Update; }
+        public static void VerifyRequiredAction()
+        {
+            EditorSceneManager.OpenScene("Assets/Scenes/CatCafePythonState.unity");
+            var preview=UnityEngine.Object.FindObjectOfType<ContentPreview>(); preview.Initialize();
+            var state=PythonServiceSetup.Sample(); state.required_action="保護猫の受け入れ依頼に回答してください。";
+            var service=preview.GetComponent<PythonServiceScreen>();
+            foreach(var phase in new[]{"open","closed","preparation"})
+            {
+                state.closed=phase=="closed"; state.can_set_shifts=phase=="preparation";
+                state.finance=state.closed ? new PythonFinanceState() : null;
+                preview.ApplyPythonState(state);
+                if(!preview.DisplayText.Contains(state.required_action))throw new Exception("Required action missing in "+phase);
+                if(phase=="open")
+                {
+                    service.ShowCats(); if(!preview.DisplayText.Contains(state.required_action))throw new Exception("Required action missing on cat tab");
+                    service.ShowSeats();
+                }
+            }
+            Debug.Log("CAT_CAFE_REQUIRED_ACTION_OK: preparation / seats / cats / closed result");
+        }
         public static void Run()
         {
             EditorSceneManager.OpenScene("Assets/Scenes/CatCafePythonState.unity");
@@ -48,7 +68,30 @@ namespace CatCafePreview.Editor
                 }
                 else if(stage==8 && panel.Count>=2)
                 {
-                    Debug.Log("CAT_CAFE_SAVE_PLAY_OK: real save button / saved game list / resume active seats and stamina / closed save / busy guard");
+                    if(!preview.GetSceneButton(2).interactable || preview.GetSceneButton(2).GetComponentInChildren<UnityEngine.UI.Text>().text!="翌日へ")
+                        throw new Exception("Next day button missing");
+                    preview.GetSceneButton(2).onClick.Invoke(); SessionState.SetInt(Key,9);
+                }
+                else if(stage==9 && client.CurrentState.day==2 && client.CurrentState.can_set_shifts)
+                {
+                    if(preview.GetComponent<PythonServiceScreen>().ShowingSeats || !client.CanChangeShifts)
+                        throw new Exception("Next day roster preparation missing");
+                    var cat=Array.Find(client.CurrentState.cats,item=>item.working);
+                    client.SetCatShift(cat.cat_id,false); SessionState.SetString(Key+"resting",cat.cat_id); SessionState.SetInt(Key,10);
+                }
+                else if(stage==10 && !Array.Find(client.CurrentState.cats,item=>item.cat_id==SessionState.GetString(Key+"resting","")).working)
+                {
+                    SessionState.SetString(Key+"day2",JsonUtility.ToJson(client.CurrentState));
+                    preview.GetSceneButton(3).onClick.Invoke(); SessionState.SetInt(Key,11);
+                }
+                else if(stage==11 && panel.Count>=3) { preview.GetSceneButton(2).onClick.Invoke(); SessionState.SetInt(Key,12); }
+                else if(stage==12 && client.CurrentState.day==2 && client.CurrentState.tick>0)
+                { panel.saves.SetValueWithoutNotify(0); panel.resume.onClick.Invoke(); SessionState.SetInt(Key,13); }
+                else if(stage==13 && client.CurrentState.day==2 && client.CurrentState.tick==0)
+                {
+                    var expected=JsonUtility.FromJson<PythonCafeState>(SessionState.GetString(Key+"day2","")); expected.revision=client.CurrentState.revision;
+                    if(JsonUtility.ToJson(expected)!=JsonUtility.ToJson(client.CurrentState))throw new Exception("Next day save resume mismatch");
+                    Debug.Log("CAT_CAFE_SAVE_PLAY_OK: active and closed save / next day button / preparation roster / shift settings / day two save and resume");
                     SessionState.SetInt(Key,0); EditorApplication.ExitPlaymode(); EditorApplication.delayCall+=()=>EditorApplication.Exit(0);
                 }
             }

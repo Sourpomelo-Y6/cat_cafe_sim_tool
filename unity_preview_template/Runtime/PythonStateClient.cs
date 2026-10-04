@@ -18,7 +18,7 @@ namespace CatCafePreview
         public int revision;
         public bool can_set_shifts;
         public bool closed;
-        public string phase;
+        public string phase, required_action;
         public int opening_ticks, waiting_count, completed_interactions;
         public float revenue;
         public PythonSeatState[] seats;
@@ -67,14 +67,15 @@ namespace CatCafePreview
             preview.RefreshPythonControls();
         }
         public bool CanChangeShifts { get { return online && pending == null && current != null && current.can_set_shifts; } }
-        public bool CanProgressBusiness { get { return online && pending == null && current != null && !current.closed
-            && (!current.can_set_shifts || Array.Exists(current.cats, cat => cat.working)); } }
+        public bool CanProgressBusiness { get { return online && pending == null && current != null
+            && string.IsNullOrEmpty(current.required_action)
+            && (current.closed || !current.can_set_shifts || Array.Exists(current.cats, cat => cat.working)); } }
         public void ProgressBusiness()
         {
             if (!CanProgressBusiness) return;
             pending = new PythonShiftCommand { request_id = Guid.NewGuid().ToString("N"), instance_id = current.instance_id,
                 expected_revision = current.revision, working_cats = new string[0],
-                kind = current.can_set_shifts ? "start_business" : "advance_business" };
+                kind = current.closed ? "next_day" : current.can_set_shifts ? "start_business" : "advance_business" };
             preview.RefreshPythonControls();
         }
         public void WorkSelected() { QueueShift(true); }
@@ -129,6 +130,7 @@ namespace CatCafePreview
                                     var reply = JsonUtility.FromJson<PythonCommandReply>(request.downloadHandler.text);
                                     Accept(reply.state); notice = command.kind == "set_shifts" ? "出勤・休養を変更しました。"
                                         : command.kind == "save_game" ? "保存しました。" : command.kind == "load_game" ? "保存したゲームを再開しました。"
+                                        : command.kind == "next_day" ? "翌日の営業準備へ進みました。出勤・休養を設定してください。"
                                         : reply.state.closed ? "閉店しました。結果を確認してください。" : "営業を進めました。";
                                 }
                                 else
