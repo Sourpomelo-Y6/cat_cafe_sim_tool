@@ -12,6 +12,7 @@ $previewFiles += @('Runtime/PythonServiceScreen.cs', 'Editor/PythonServiceSetup.
 $previewFiles += @('Runtime/PythonSavePanel.cs', 'Editor/PythonSaveSetup.cs', 'Editor/PythonSaveVerification.cs')
 $previewFiles += @('Runtime/PythonIntakePanel.cs', 'Editor/PythonIntakeSetup.cs', 'Editor/PythonIntakeVerification.cs')
 $previewFiles += @('Runtime/PythonHousingPanel.cs', 'Editor/PythonHousingSetup.cs', 'Editor/PythonHousingVerification.cs')
+$previewFiles += @('Runtime/PythonGoalPanel.cs', 'Editor/PythonGoalSetup.cs', 'Editor/PythonGoalVerification.cs')
 foreach ($relative in $previewFiles) {
     $target = Join-Path $targetRoot $relative
     if (Test-Path -LiteralPath $target) { throw "既存のファイルがあります。上書きしません: $target" }

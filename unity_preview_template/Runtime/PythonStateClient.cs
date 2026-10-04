@@ -26,8 +26,16 @@ namespace CatCafePreview
         public PythonFinanceState finance;
         public PythonIntakeState intake_request;
         public PythonHousingState housing;
+        public PythonGoalResult goal_result;
         public float funds;
         public PythonCatState[] cats;
+    }
+    [Serializable] public class PythonGoalResult
+    {
+        public string status, reason;
+        public int stage, started_day, deadline, resolved_day;
+        public float target, popularity, funds;
+        public bool can_continue;
     }
     [Serializable] public class PythonHousingState
     {
@@ -76,6 +84,14 @@ namespace CatCafePreview
         public bool CanManageSaves { get { return online && pending == null && current != null; } }
         public void SaveGame() { QueueSave("save_game", ""); }
         public void LoadSaved(string id) { QueueSave("load_game", id); }
+        public bool CanContinueGoal { get { return CanManageSaves && current.goal_result != null && current.goal_result.can_continue; } }
+        public void ContinueGoal()
+        {
+            if (!CanContinueGoal) return;
+            pending = new PythonShiftCommand { request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,
+                expected_revision=current.revision,working_cats=new string[0],kind="continue_goal" };
+            preview.RefreshPythonControls();
+        }
         public bool CanExpandHousing { get { return CanManageSaves && current.housing != null && current.housing.can_expand; } }
         public void ExpandHousing()
         {
@@ -137,7 +153,10 @@ namespace CatCafePreview
 
         private void Accept(PythonCafeState state)
         {
-            Validate(state); current = state; online = true; preview.ApplyPythonState(state);
+            Validate(state);
+            // JsonUtility can materialize a JSON null nested object with empty fields.
+            if (state.goal_result != null && string.IsNullOrEmpty(state.goal_result.status)) state.goal_result = null;
+            current = state; online = true; preview.ApplyPythonState(state);
         }
         private IEnumerator Start()
         {
@@ -171,6 +190,7 @@ namespace CatCafePreview
                                         : command.kind == "next_day" ? "翌日の営業準備へ進みました。出勤・休養を設定してください。"
                                         : command.kind == "resolve_intake" ? (command.choice == "accept" ? "保護猫を迎えました。休養予定で猫一覧に加わりました。" : "受け入れ依頼を見送りました。")
                                         : command.kind == "purchase_housing" || command.kind == "upgrade_housing" ? "飼育スペースを拡張しました。"
+                                        : command.kind == "continue_goal" ? "目標結果を確認しました。営業を続けられます。"
                                         : reply.state.closed ? "閉店しました。結果を確認してください。" : "営業を進めました。";
                                 }
                                 else

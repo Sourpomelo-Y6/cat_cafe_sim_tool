@@ -8,7 +8,7 @@ namespace CatCafePreview
         public GameObject panel;
         public Text details, notice;
         public Button open, expand, close;
-        public void Open() { panel.SetActive(true); Apply(GetComponent<PythonStateClient>().CurrentState); }
+        public void Open() { panel.SetActive(true); panel.transform.SetAsLastSibling(); Apply(GetComponent<PythonStateClient>().CurrentState); }
         public void Close() { panel.SetActive(false); }
         public void Expand() { GetComponent<PythonStateClient>().ExpandHousing(); }
         public void Apply(PythonCafeState state)
