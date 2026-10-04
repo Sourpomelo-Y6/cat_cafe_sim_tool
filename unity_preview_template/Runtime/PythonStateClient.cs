@@ -24,10 +24,18 @@ namespace CatCafePreview
         public PythonSeatState[] seats;
         public PythonCustomerState[] customers;
         public PythonFinanceState finance;
+        public PythonIntakeState intake_request;
         public float funds;
         public PythonCatState[] cats;
     }
     [Serializable] public class PythonSeatState { public string seat_id, customer_id, customer_name, cat_id; }
+    [Serializable] public class PythonIntakeState
+    {
+        public string cat_id, name, status, personality, features, trait, housing, response_reason, accept_reason;
+        public int day;
+        public float cost;
+        public bool can_accept, can_decline;
+    }
     [Serializable] public class PythonCustomerState { public string customer_id, name, status, seat_id; }
     [Serializable] public class PythonFinanceState
     {
@@ -39,6 +47,7 @@ namespace CatCafePreview
         public int expected_revision;
         public string[] working_cats;
         public string save_id = "";
+        public string choice = "";
     }
     [Serializable] public class PythonCommandReply
     {
@@ -59,6 +68,19 @@ namespace CatCafePreview
         public bool CanManageSaves { get { return online && pending == null && current != null; } }
         public void SaveGame() { QueueSave("save_game", ""); }
         public void LoadSaved(string id) { QueueSave("load_game", id); }
+        public bool CanRespondIntake(bool accept)
+        {
+            var intake = current == null ? null : current.intake_request;
+            return CanManageSaves && intake != null && intake.status == "waiting"
+                && (accept ? intake.can_accept : intake.can_decline);
+        }
+        public void RespondIntake(bool accept)
+        {
+            if (!CanRespondIntake(accept)) return;
+            pending = new PythonShiftCommand { request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,
+                expected_revision=current.revision,working_cats=new string[0],kind="resolve_intake",choice=accept ? "accept" : "decline" };
+            preview.RefreshPythonControls();
+        }
         private void QueueSave(string kind, string id)
         {
             if (!CanManageSaves) return;
@@ -131,6 +153,7 @@ namespace CatCafePreview
                                     Accept(reply.state); notice = command.kind == "set_shifts" ? "出勤・休養を変更しました。"
                                         : command.kind == "save_game" ? "保存しました。" : command.kind == "load_game" ? "保存したゲームを再開しました。"
                                         : command.kind == "next_day" ? "翌日の営業準備へ進みました。出勤・休養を設定してください。"
+                                        : command.kind == "resolve_intake" ? (command.choice == "accept" ? "保護猫を迎えました。休養予定で猫一覧に加わりました。" : "受け入れ依頼を見送りました。")
                                         : reply.state.closed ? "閉店しました。結果を確認してください。" : "営業を進めました。";
                                 }
                                 else

@@ -148,6 +148,8 @@ namespace CatCafePreview
             if (roster != null) roster.Apply(state);
             var service = GetComponent<PythonServiceScreen>();
             if (service != null) service.Apply(state);
+            var intake = GetComponent<PythonIntakePanel>();
+            if (intake != null) intake.Apply(state);
         }
         public void SetServiceDescription(string text)
         {
@@ -195,9 +197,16 @@ namespace CatCafePreview
             sceneButtons[3].interactable = client.CanManageSaves;
             var savePanel = GetComponent<PythonSavePanel>();
             if(savePanel != null) savePanel.RefreshControls();
+            var intake = GetComponent<PythonIntakePanel>();
+            if (intake != null) intake.RefreshControls();
         }
 
-        public void PythonNotice(string message) { status.text = message + "\n" + status.text; }
+        public void PythonNotice(string message)
+        {
+            status.text = message + "\n" + status.text;
+            var intake = GetComponent<PythonIntakePanel>();
+            if (intake != null && intake.panel.activeSelf) intake.notice.text = message;
+        }
 
         private void DisplayPythonCat(int index)
         {
@@ -252,6 +261,8 @@ namespace CatCafePreview
             if (service != null) service.Disconnect();
             var savePanel = GetComponent<PythonSavePanel>();
             if(savePanel != null) savePanel.Disconnect();
+            var intake = GetComponent<PythonIntakePanel>();
+            if (intake != null) intake.Disconnect();
             cats.interactable = false;
             foreach (var button in sceneButtons) button.interactable = false;
             status.text = "Python未接続：" + message;
