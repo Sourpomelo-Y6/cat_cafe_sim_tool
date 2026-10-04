@@ -33,7 +33,7 @@ namespace CatCafePreview
         public PythonCatState[] cats;
     }
     [Serializable] public class PythonGrowthChoice
-    { public string cat_id, name; public float experience, threshold, service, rest, dispatch; public PythonEventChoice[] choices; }
+    { public string cat_id, name, kind, title, learned; public float experience, threshold, service, rest, dispatch, play, contact, quiet; public PythonEventChoice[] choices; }
     [Serializable] public class PythonStoreEvent
     { public string kind, title; public int day; public float funds; public PythonEventChoice[] choices; }
     [Serializable] public class PythonEventChoice
@@ -132,7 +132,7 @@ namespace CatCafePreview
             if(!CanRespondGrowth(index))return;
             StopAutomatic(); var row=current.growth_choices[0];
             pending=new PythonShiftCommand { request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,
-                expected_revision=current.revision,working_cats=new string[0],kind="resolve_growth",cat_id=row.cat_id,choice=row.choices[index].choice };
+                expected_revision=current.revision,working_cats=new string[0],kind=string.IsNullOrEmpty(row.kind) ? "resolve_growth" : row.kind,cat_id=row.cat_id,choice=row.choices[index].choice };
             preview.RefreshPythonControls();
         }
         public bool CanRespondStore(int index)

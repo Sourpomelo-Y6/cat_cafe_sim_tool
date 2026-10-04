@@ -16,8 +16,10 @@ namespace CatCafePreview
             panel.SetActive(rows != null && rows.Length>0);
             if(!panel.activeSelf) return;
             var ev=rows[0];
-            title.text=ev.name+"の得意分野を選択";
+            bool mastery=ev.kind == "resolve_growth_mastery";
+            title.text=ev.name+"の"+(string.IsNullOrEmpty(ev.title) ? "得意分野" : ev.title)+"を選択";
             details.text="選択待ち："+rows.Length+"匹 / 経験："+ev.experience+"（必要："+ev.threshold+"）\n接客："+ev.service+" / 休養："+ev.rest+" / 派遣："+ev.dispatch+"\n\n";
+            if(mastery) details.text="選択待ち："+rows.Length+"匹 / 接客実績："+ev.experience+"（必要："+ev.threshold+"）\n遊び："+ev.play+" / 触れ合い："+ev.contact+" / 静かな交流："+ev.quiet+"\n習得済み："+(string.IsNullOrEmpty(ev.learned) ? "なし" : ev.learned)+"\n\n";
             for(int i=0;i<choices.Length;i++)
             {
                 bool exists=ev.choices != null && i<ev.choices.Length;
@@ -27,7 +29,7 @@ namespace CatCafePreview
                 choices[i].GetComponentInChildren<Text>().text=option.label;
                 details.text+=option.label+"\n"+option.detail+"\n"+(option.can_select ? "" : option.reason+"\n")+"\n";
             }
-            notice.text="得意分野を1つ選びます。選択後の自動進行は手動で再開してください。";
+            notice.text="1つ選ぶと確定します。選び直しはできません。\n選択後の自動進行は手動で再開してください。";
             RefreshControls();
         }
         public void RefreshControls()

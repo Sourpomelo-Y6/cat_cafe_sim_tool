@@ -73,7 +73,19 @@ namespace CatCafePreview.Editor
             if(!panel.panel.activeSelf || !panel.choices[0].interactable || client.CanProgressBusiness) throw new Exception("Event display guard failed");
             Canvas.ForceUpdateCanvases();
             typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{preview,"Logs/GrowthChoice.png"});
+            var growth=state.growth_choices[0]; growth.kind="resolve_growth_mastery"; growth.title="得意な交流";
+            growth.play=10; growth.contact=5; growth.quiet=0; growth.experience=15; growth.threshold=15;
+            growth.choices=new [] {
+                new PythonEventChoice {choice="play",label="遊び",detail="通常行動の関心増加×1.1。",can_select=true},
+                new PythonEventChoice {choice="contact",label="触れ合い",detail="通常行動の関心増加×1.1。",can_select=true},
+                new PythonEventChoice {choice="quiet",label="静かな交流",detail="通常行動の関心増加×1.1。",reason="接客実績が不足しています。"}};
+            preview.ApplyPythonState(state);
+            if(!panel.title.text.Contains("得意な交流") || panel.choices[2].interactable || !panel.details.text.Contains("遊び：10")) throw new Exception("Mastery display failed");
+            Canvas.ForceUpdateCanvases();
+            typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{preview,"Logs/InteractionMastery.png"});
             panel.First(); if(panel.choices[0].interactable || panel.choices[1].interactable) throw new Exception("Pending guard failed");
+            var pending=(PythonShiftCommand)typeof(PythonStateClient).GetField("pending",flags).GetValue(client);
+            if(pending.kind!="resolve_growth_mastery" || pending.choice!="play" || pending.cat_id!=growth.cat_id) throw new Exception("Mastery command failed");
             typeof(PythonStateClient).GetField("pending",flags).SetValue(client,null);
             state.growth_choices[0].choices[2].can_select=false; state.growth_choices[0].choices[2].reason="先に受け入れ依頼に回答してください。"; preview.ApplyPythonState(state);
             if(panel.choices[2].interactable || !panel.details.text.Contains("受け入れ")) throw new Exception("Rule guard failed");
