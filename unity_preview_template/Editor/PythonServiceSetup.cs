@@ -30,6 +30,8 @@ namespace CatCafePreview.Editor
                                 new PythonCustomerState{customer_id="guest-3",name="高橋さん",status="waiting"},
                                 new PythonCustomerState{customer_id="guest-4",name="田中さん",status="departed"}}};
             for(int i=0;i<5;i++) state.cats[i]=new PythonCatState{cat_id="cat-"+ids[i],content_cat_id="playtest-"+ids[i],name=names[i],working=true,health_status="healthy",activity="cafe",stamina=85,max_stamina=100};
+            Array.Resize(ref state.seats,8);
+            for(int i=3;i<8;i++) state.seats[i]=new PythonSeatState{seat_id="seat-"+(i+1)};
             return state;
         }
         public static void BuildAndVerify()
@@ -43,6 +45,22 @@ namespace CatCafePreview.Editor
             var service=preview.GetComponent<PythonServiceScreen>() ?? preview.gameObject.AddComponent<PythonServiceScreen>();
             service.rosterPanel=root.Find("Cat Roster Scroll").gameObject; service.seatPanel=panel;
             service.seatContent=panel.GetComponent<ScrollRect>().content; service.cardPrefab=roster.cardPrefab;
+            var panelRect=panel.GetComponent<RectTransform>(); panelRect.sizeDelta=new Vector2(944,550);
+            var viewport=panel.GetComponent<ScrollRect>().viewport; viewport.sizeDelta=new Vector2(944,550);
+            service.seatContent.sizeDelta=new Vector2(944,550);
+            var grid=service.seatContent.GetComponent<GridLayoutGroup>(); grid.constraintCount=4; grid.cellSize=new Vector2(230,266);
+            panel.GetComponent<ScrollRect>().vertical=false;
+            var seatTemplate=UnityEngine.Object.Instantiate(roster.cardPrefab);
+            seatTemplate.name="Seat Card";
+            seatTemplate.GetComponent<RectTransform>().sizeDelta=new Vector2(230,266);
+            seatTemplate.picture.rectTransform.anchoredPosition=new Vector2(40,-36);
+            seatTemplate.customerIcon.GetComponent<RectTransform>().anchoredPosition=new Vector2(186,-6);
+            seatTemplate.stateText.rectTransform.sizeDelta=new Vector2(210,38);
+            const string seatPrefab="Assets/CatCafePreview/Prefabs/PythonSeatCard.prefab";
+            PrefabUtility.SaveAsPrefabAsset(seatTemplate.gameObject,seatPrefab); UnityEngine.Object.DestroyImmediate(seatTemplate.gameObject);
+            service.cardPrefab=AssetDatabase.LoadAssetAtPath<GameObject>(seatPrefab).GetComponent<PythonCatCard>();
+            service.detailPanel=root.Find("Description Scroll").GetComponent<RectTransform>();
+            service.detailText=service.detailPanel.GetComponentInChildren<Text>();
             service.heading=root.Find("Roster Heading").GetComponent<Text>();
             service.seatsTab=Tab(root,"Seats Tab","席一覧",384); service.catsTab=Tab(root,"Cats Tab","猫一覧",562);
             UnityEventTools.AddPersistentListener(service.seatsTab.onClick,service.ShowSeats); UnityEventTools.AddPersistentListener(service.catsTab.onClick,service.ShowCats);

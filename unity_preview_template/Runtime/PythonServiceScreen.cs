@@ -12,6 +12,8 @@ namespace CatCafePreview
         public PythonCatCard cardPrefab;
         public Text heading;
         public Button seatsTab, catsTab;
+        public RectTransform detailPanel;
+        public Text detailText;
         private PythonCafeState state;
         private string phase;
         private bool showSeats;
@@ -33,6 +35,12 @@ namespace CatCafePreview
             seatsTab.interactable = catsTab.interactable = true;
             seatsTab.gameObject.SetActive(phase == "open"); catsTab.gameObject.SetActive(phase == "open");
             rosterPanel.SetActive(!showSeats); seatPanel.SetActive(showSeats);
+            if(detailPanel != null)
+            {
+                detailPanel.anchoredPosition = new Vector2(showSeats ? 992 : 804,-188);
+                detailPanel.sizeDelta = new Vector2(showSeats ? 264 : 452,550);
+                detailText.fontSize = showSeats ? 20 : 22;
+            }
             heading.text = phase == "closed" ? "閉店結果・猫の状態" : showSeats ? "席一覧　　人物アイコン：接客中のお客さん" : "猫一覧";
             if(!showSeats)
             {
@@ -60,7 +68,7 @@ namespace CatCafePreview
             {
                 string label = customer.status == "seated" ? "接客中" : customer.status == "departed" ? "退店済み" : "待機中";
                 int index = Array.FindIndex(seats,seat=>seat.seat_id == customer.seat_id);
-                text += customer.name + "　" + label + (index >= 0 ? " / 席 " + (index+1) : "") + "\n\n";
+                text += customer.name + "\n" + label + (index >= 0 ? " / 席 " + (index+1) : "") + "\n\n";
             }
             GetComponent<ContentPreview>().SetServiceDescription(text);
         }
