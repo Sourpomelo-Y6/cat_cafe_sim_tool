@@ -167,12 +167,13 @@ namespace CatCafePreview
             for (int i = 0; i < sceneButtons.Length; i++)
             {
                 sceneButtons[i].onClick = new Button.ButtonClickedEvent();
-                sceneButtons[i].GetComponentInChildren<Text>().text = new[] { "出勤にする", "休養にする", "営業開始", "保存（準備中）" }[i];
+                sceneButtons[i].GetComponentInChildren<Text>().text = new[] { "出勤にする", "休養にする", "営業開始", "保存" }[i];
                 sceneButtons[i].interactable = false;
             }
             sceneButtons[0].onClick.AddListener(client.WorkSelected);
             sceneButtons[1].onClick.AddListener(client.RestSelected);
             sceneButtons[2].onClick.AddListener(client.ProgressBusiness);
+            sceneButtons[3].onClick.AddListener(client.SaveGame);
         }
 
         public void RefreshPythonControls()
@@ -186,7 +187,9 @@ namespace CatCafePreview
             sceneButtons[1].interactable = client.CanChangeShifts && cat.working;
             sceneButtons[2].interactable = client.CanProgressBusiness;
             sceneButtons[2].GetComponentInChildren<Text>().text = pythonState.closed ? "営業終了" : pythonState.can_set_shifts ? "営業開始" : "1刻み進める";
-            sceneButtons[3].interactable = false;
+            sceneButtons[3].interactable = client.CanManageSaves;
+            var savePanel = GetComponent<PythonSavePanel>();
+            if(savePanel != null) savePanel.RefreshControls();
         }
 
         public void PythonNotice(string message) { status.text = message + "\n" + status.text; }
@@ -240,6 +243,8 @@ namespace CatCafePreview
             if (roster != null) roster.Disconnect();
             var service = GetComponent<PythonServiceScreen>();
             if (service != null) service.Disconnect();
+            var savePanel = GetComponent<PythonSavePanel>();
+            if(savePanel != null) savePanel.Disconnect();
             cats.interactable = false;
             foreach (var button in sceneButtons) button.interactable = false;
             status.text = "Python未接続：" + message;

@@ -79,7 +79,7 @@ namespace CatCafePreview.Editor
                 {
                     if (!preview.GetSceneButton(1).interactable) return;
                     if (preview.CurrentSceneKey != "normal" || !preview.DisplayText.Contains("予定：出勤")) throw new Exception("Work state not reflected");
-                    if (!preview.GetSceneButton(2).interactable || preview.GetSceneButton(3).interactable) throw new Exception("Business controls mismatch");
+                    if (!preview.GetSceneButton(2).interactable || !preview.GetSceneButton(3).interactable) throw new Exception("Business controls mismatch");
                     if (SessionState.GetBool(Key + "business", false))
                     {
                         preview.GetSceneButton(2).onClick.Invoke();

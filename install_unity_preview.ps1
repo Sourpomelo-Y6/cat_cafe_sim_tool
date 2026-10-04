@@ -9,6 +9,7 @@ $targetRoot = Join-Path $projectRoot 'Assets/CatCafePreview'
 $previewFiles = @('Runtime/ContentBundle.cs', 'Runtime/CatInteractionState.cs', 'Runtime/ContentPreview.cs', 'Editor/ContentPreviewSetup.cs', 'Editor/ContentPreviewLayout.cs', 'Fonts/MPLUS1p-Regular.ttf', 'Fonts/OFL.txt', 'Fonts/README.md')
 $previewFiles += @('Runtime/PythonStateClient.cs', 'Runtime/PythonCatCard.cs', 'Runtime/PythonCatRoster.cs', 'Editor/PythonStateSetup.cs', 'Editor/PythonShiftVerification.cs', 'Editor/PythonRosterSetup.cs')
 $previewFiles += @('Runtime/PythonServiceScreen.cs', 'Editor/PythonServiceSetup.cs')
+$previewFiles += @('Runtime/PythonSavePanel.cs', 'Editor/PythonSaveSetup.cs', 'Editor/PythonSaveVerification.cs')
 foreach ($relative in $previewFiles) {
     $target = Join-Path $targetRoot $relative
     if (Test-Path -LiteralPath $target) { throw "既存のファイルがあります。上書きしません: $target" }

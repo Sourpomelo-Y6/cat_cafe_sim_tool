@@ -38,12 +38,15 @@ namespace CatCafePreview
         public string request_id, instance_id, kind = "set_shifts";
         public int expected_revision;
         public string[] working_cats;
+        public string save_id = "";
     }
     [Serializable] public class PythonCommandReply
     {
         public string error;
         public PythonCafeState state;
     }
+    [Serializable] public class PythonSavedGame { public string save_id, label, created_at; }
+    [Serializable] public class PythonSaveList { public PythonSavedGame[] saves; }
     [RequireComponent(typeof(ContentPreview))]
     public class PythonStateClient : MonoBehaviour
     {
@@ -53,6 +56,16 @@ namespace CatCafePreview
         private bool online;
         private ContentPreview preview;
         public PythonCafeState CurrentState { get { return current; } }
+        public bool CanManageSaves { get { return online && pending == null && current != null; } }
+        public void SaveGame() { QueueSave("save_game", ""); }
+        public void LoadSaved(string id) { QueueSave("load_game", id); }
+        private void QueueSave(string kind, string id)
+        {
+            if (!CanManageSaves) return;
+            pending = new PythonShiftCommand { request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,
+                expected_revision=current.revision,working_cats=new string[0],kind=kind,save_id=id };
+            preview.RefreshPythonControls();
+        }
         public bool CanChangeShifts { get { return online && pending == null && current != null && current.can_set_shifts; } }
         public bool CanProgressBusiness { get { return online && pending == null && current != null && !current.closed
             && (!current.can_set_shifts || Array.Exists(current.cats, cat => cat.working)); } }
@@ -115,6 +128,7 @@ namespace CatCafePreview
                                 {
                                     var reply = JsonUtility.FromJson<PythonCommandReply>(request.downloadHandler.text);
                                     Accept(reply.state); notice = command.kind == "set_shifts" ? "出勤・休養を変更しました。"
+                                        : command.kind == "save_game" ? "保存しました。" : command.kind == "load_game" ? "保存したゲームを再開しました。"
                                         : reply.state.closed ? "閉店しました。結果を確認してください。" : "営業を進めました。";
                                 }
                                 else
@@ -143,6 +157,22 @@ namespace CatCafePreview
                             if (notice != "") preview.PythonNotice(notice);
                         }
                         catch (Exception ex) { online = false; preview.PythonConnectionError(ex.Message); }
+                    }
+                }
+                var panel = GetComponent<PythonSavePanel>();
+                if (panel != null)
+                {
+                    using (var listRequest = UnityWebRequest.Get("http://127.0.0.1:" + port + "/saves"))
+                    {
+                        listRequest.timeout = 3;
+                        yield return listRequest.SendWebRequest();
+                        try
+                        {
+                            if(listRequest.result == UnityWebRequest.Result.Success)
+                                panel.Apply(JsonUtility.FromJson<PythonSaveList>(listRequest.downloadHandler.text));
+                            else panel.ListUnavailable();
+                        }
+                        catch(Exception) { panel.ListUnavailable(); }
                     }
                 }
                 float until = Time.realtimeSinceStartup + 2;
