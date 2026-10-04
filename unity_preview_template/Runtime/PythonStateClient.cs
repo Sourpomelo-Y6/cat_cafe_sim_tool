@@ -33,7 +33,7 @@ namespace CatCafePreview
         public PythonCatState[] cats;
     }
     [Serializable] public class PythonGrowthChoice
-    { public string cat_id, name, kind, title, learned; public float experience, threshold, service, rest, dispatch, play, contact, quiet; public PythonEventChoice[] choices; }
+    { public string cat_id, name, kind, title, learned, group, effect; public float experience, threshold, service, rest, dispatch, play, contact, quiet; public PythonEventChoice[] choices; }
     [Serializable] public class PythonStoreEvent
     { public string kind, title; public int day; public float funds; public PythonEventChoice[] choices; }
     [Serializable] public class PythonEventChoice
