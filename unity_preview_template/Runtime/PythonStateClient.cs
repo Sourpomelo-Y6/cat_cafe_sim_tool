@@ -80,6 +80,26 @@ namespace CatCafePreview
         private PythonShiftCommand pending;
         private bool online;
         private ContentPreview preview;
+        private bool automatic, fast, pendingAutomatic, sendingCommand;
+        private float nextAutomaticTick;
+        public bool Automatic { get { return automatic; } }
+        public bool Fast { get { return fast; } }
+        public bool CanStartAutomatic { get { return CanManageSaves && IsOpen(current); } }
+        private static bool IsOpen(PythonCafeState state)
+        { return state != null && !state.closed && !state.can_set_shifts && string.IsNullOrEmpty(state.required_action); }
+        public void ToggleAutomatic()
+        {
+            if (automatic) StopAutomatic();
+            else if (CanStartAutomatic) { automatic=true; ResetAutomaticTimer(); }
+            preview.RefreshPythonControls();
+        }
+        public void ToggleSpeed() { fast=!fast; ResetAutomaticTimer(); preview.RefreshPythonControls(); }
+        private void ResetAutomaticTimer() { nextAutomaticTick=Time.realtimeSinceStartup+(fast ? .25f : 1f); }
+        private void StopAutomatic()
+        {
+            automatic=false;
+            if(pendingAutomatic && !sendingCommand) { pending=null; pendingAutomatic=false; }
+        }
         public PythonCafeState CurrentState { get { return current; } }
         public bool CanManageSaves { get { return online && pending == null && current != null; } }
         public void SaveGame() { QueueSave("save_game", ""); }
@@ -116,20 +136,25 @@ namespace CatCafePreview
         private void QueueSave(string kind, string id)
         {
             if (!CanManageSaves) return;
+            if (kind == "load_game") StopAutomatic();
             pending = new PythonShiftCommand { request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,
                 expected_revision=current.revision,working_cats=new string[0],kind=kind,save_id=id };
             preview.RefreshPythonControls();
         }
         public bool CanChangeShifts { get { return online && pending == null && current != null && current.can_set_shifts; } }
-        public bool CanProgressBusiness { get { return online && pending == null && current != null
+        public bool CanProgressBusiness { get { return online && pending == null && current != null && !automatic
             && string.IsNullOrEmpty(current.required_action)
             && (current.closed || !current.can_set_shifts || Array.Exists(current.cats, cat => cat.working)); } }
         public void ProgressBusiness()
         {
             if (!CanProgressBusiness) return;
+            QueueBusiness(current.closed ? "next_day" : current.can_set_shifts ? "start_business" : "advance_business");
+        }
+        private void QueueBusiness(string kind)
+        {
             pending = new PythonShiftCommand { request_id = Guid.NewGuid().ToString("N"), instance_id = current.instance_id,
                 expected_revision = current.revision, working_cats = new string[0],
-                kind = current.closed ? "next_day" : current.can_set_shifts ? "start_business" : "advance_business" };
+                kind = kind };
             preview.RefreshPythonControls();
         }
         public void WorkSelected() { QueueShift(true); }
@@ -156,6 +181,7 @@ namespace CatCafePreview
             Validate(state);
             // JsonUtility can materialize a JSON null nested object with empty fields.
             if (state.goal_result != null && string.IsNullOrEmpty(state.goal_result.status)) state.goal_result = null;
+            if (!IsOpen(state) || (current != null && (state.instance_id != current.instance_id || state.day != current.day))) StopAutomatic();
             current = state; online = true; preview.ApplyPythonState(state);
         }
         private IEnumerator Start()
@@ -170,6 +196,7 @@ namespace CatCafePreview
                 if (pending != null)
                 {
                     var command = pending;
+                    sendingCommand=true;
                     // Retry once with the SAME request ID if the reply was lost.
                     for (int attempt = 0; attempt < 2; attempt++)
                     {
@@ -179,6 +206,7 @@ namespace CatCafePreview
                             request.downloadHandler = new DownloadHandlerBuffer();
                             request.SetRequestHeader("Content-Type", "application/json"); request.timeout = 3;
                             yield return request.SendWebRequest();
+                            if (request.result != UnityWebRequest.Result.Success) StopAutomatic();
                             if (request.result == UnityWebRequest.Result.ConnectionError && attempt == 0) continue;
                             try
                             {
@@ -199,17 +227,18 @@ namespace CatCafePreview
                                     notice = reply != null && !string.IsNullOrEmpty(reply.error) ? reply.error : "操作結果を確認できません。最新状態を取得します。";
                                 }
                             }
-                            catch (Exception) { notice = "操作結果を確認できません。最新状態を取得します。"; }
+                            catch (Exception) { StopAutomatic(); notice = "操作結果を確認できません。最新状態を取得します。"; }
                             break;
                         }
                     }
                     pending = null;
+                    pendingAutomatic=false; sendingCommand=false;
                 }
                 using (var request = UnityWebRequest.Get("http://127.0.0.1:" + port + "/state"))
                 {
                     request.timeout = 3;
                     yield return request.SendWebRequest();
-                    if (request.result != UnityWebRequest.Result.Success) { online = false; preview.PythonConnectionError(request.error); }
+                    if (request.result != UnityWebRequest.Result.Success) { StopAutomatic(); online = false; preview.PythonConnectionError(request.error); }
                     else
                     {
                         try
@@ -218,7 +247,7 @@ namespace CatCafePreview
                             Accept(state);
                             if (notice != "") preview.PythonNotice(notice);
                         }
-                        catch (Exception ex) { online = false; preview.PythonConnectionError(ex.Message); }
+                        catch (Exception ex) { StopAutomatic(); online = false; preview.PythonConnectionError(ex.Message); }
                     }
                 }
                 var panel = GetComponent<PythonSavePanel>();
@@ -232,13 +261,23 @@ namespace CatCafePreview
                         {
                             if(listRequest.result == UnityWebRequest.Result.Success)
                                 panel.Apply(JsonUtility.FromJson<PythonSaveList>(listRequest.downloadHandler.text));
-                            else panel.ListUnavailable();
+                            else { StopAutomatic(); panel.ListUnavailable(); }
                         }
-                        catch(Exception) { panel.ListUnavailable(); }
+                        catch(Exception) { StopAutomatic(); panel.ListUnavailable(); }
                     }
                 }
                 float until = Time.realtimeSinceStartup + 2;
-                while (pending == null && Time.realtimeSinceStartup < until) yield return null;
+                if(automatic) ResetAutomaticTimer();
+                preview.RefreshPythonControls();
+                while (pending == null && Time.realtimeSinceStartup < until)
+                {
+                    if(automatic && CanStartAutomatic && Time.realtimeSinceStartup >= nextAutomaticTick)
+                    {
+                        pendingAutomatic=true; QueueBusiness("advance_business");
+                        break;
+                    }
+                    yield return null;
+                }
             }
         }
         public static void Validate(PythonCafeState state)

@@ -207,6 +207,8 @@ namespace CatCafePreview
             if (housing != null) housing.RefreshControls();
             var goal = GetComponent<PythonGoalPanel>();
             if (goal != null) goal.RefreshControls();
+            var auto = GetComponent<PythonAutoPanel>();
+            if (auto != null) auto.RefreshControls();
         }
 
         public void PythonNotice(string message)
@@ -279,6 +281,8 @@ namespace CatCafePreview
             if (housing != null) housing.Disconnect();
             var goal = GetComponent<PythonGoalPanel>();
             if (goal != null) goal.Disconnect();
+            var auto = GetComponent<PythonAutoPanel>();
+            if (auto != null) auto.RefreshControls();
             cats.interactable = false;
             foreach (var button in sceneButtons) button.interactable = false;
             status.text = "Python未接続：" + message;
