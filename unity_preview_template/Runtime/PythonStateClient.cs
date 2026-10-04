@@ -28,9 +28,12 @@ namespace CatCafePreview
         public PythonHousingState housing;
         public PythonGoalResult goal_result;
         public PythonStoreEvent store_event;
+        public PythonGrowthChoice[] growth_choices;
         public float funds;
         public PythonCatState[] cats;
     }
+    [Serializable] public class PythonGrowthChoice
+    { public string cat_id, name; public float experience, threshold, service, rest, dispatch; public PythonEventChoice[] choices; }
     [Serializable] public class PythonStoreEvent
     { public string kind, title; public int day; public float funds; public PythonEventChoice[] choices; }
     [Serializable] public class PythonEventChoice
@@ -69,6 +72,7 @@ namespace CatCafePreview
         public string[] working_cats;
         public string save_id = "";
         public string choice = "";
+        public string cat_id = "";
     }
     [Serializable] public class PythonCommandReply
     {
@@ -115,6 +119,20 @@ namespace CatCafePreview
             if (!CanContinueGoal) return;
             pending = new PythonShiftCommand { request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,
                 expected_revision=current.revision,working_cats=new string[0],kind="continue_goal" };
+            preview.RefreshPythonControls();
+        }
+        public bool CanRespondGrowth(int index)
+        {
+            var rows=current == null ? null : current.growth_choices;
+            return CanManageSaves && rows != null && rows.Length>0 && rows[0].choices != null
+                && index>=0 && index<rows[0].choices.Length && rows[0].choices[index].can_select;
+        }
+        public void RespondGrowth(int index)
+        {
+            if(!CanRespondGrowth(index))return;
+            StopAutomatic(); var row=current.growth_choices[0];
+            pending=new PythonShiftCommand { request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,
+                expected_revision=current.revision,working_cats=new string[0],kind="resolve_growth",cat_id=row.cat_id,choice=row.choices[index].choice };
             preview.RefreshPythonControls();
         }
         public bool CanRespondStore(int index)
@@ -238,6 +256,7 @@ namespace CatCafePreview
                                         : command.kind == "resolve_intake" ? (command.choice == "accept" ? "保護猫を迎えました。休養予定で猫一覧に加わりました。" : "受け入れ依頼を見送りました。")
                                         : command.kind == "purchase_housing" || command.kind == "upgrade_housing" ? "飼育スペースを拡張しました。"
                                         : command.kind == "resolve_store_event" ? (command.choice == "close" ? "休業し、翌日の営業準備へ進みました。" : "店舗イベントに回答しました。")
+                                        : command.kind == "resolve_growth" ? "得意分野を選びました。"
                                         : command.kind == "continue_goal" ? "目標結果を確認しました。営業を続けられます。"
                                         : reply.state.closed ? "閉店しました。結果を確認してください。" : "営業を進めました。";
                                 }

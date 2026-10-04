@@ -1,0 +1,64 @@
+using System;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+namespace CatCafePreview.Editor
+{
+    [InitializeOnLoad]
+    public static class PythonGrowthVerification
+    {
+        const string Key="CatCafeGrowthTest";
+        static PythonGrowthVerification() { EditorApplication.update+=Update; }
+        public static void Run()
+        {
+            EditorSceneManager.OpenScene("Assets/Scenes/CatCafePythonState.unity");
+            var client=UnityEngine.Object.FindObjectOfType<PythonStateClient>(); var serialized=new SerializedObject(client);
+            serialized.FindProperty("port").intValue=8191; serialized.ApplyModifiedPropertiesWithoutUndo();
+            SessionState.SetInt(Key,1); SessionState.SetFloat(Key+"deadline",(float)EditorApplication.timeSinceStartup+100); EditorApplication.EnterPlaymode();
+        }
+        static void Update()
+        {
+            int stage=SessionState.GetInt(Key,0); if(stage==0)return;
+            try
+            {
+                if(EditorApplication.timeSinceStartup>SessionState.GetFloat(Key+"deadline",0))throw new Exception("Store test timeout stage "+stage);
+                if(!EditorApplication.isPlaying)return;
+                var preview=UnityEngine.Object.FindObjectOfType<ContentPreview>(); var client=preview.GetComponent<PythonStateClient>();
+                if(!client.CanManageSaves)return;
+                var state=client.CurrentState; var panel=preview.GetComponent<PythonGrowthPanel>(); var saves=preview.GetComponent<PythonSavePanel>();
+                if(stage==1)
+                {
+                    if(state.growth_choices.Length==0 || !panel.panel.activeSelf || !panel.choices[1].interactable || client.CanProgressBusiness || client.CanStartAutomatic)throw new Exception("Pending event guard failed");
+                    preview.GetSceneButton(3).onClick.Invoke(); SessionState.SetInt(Key,2);
+                }
+                else if(stage==2 && saves.Count==1 && panel.choices[1].interactable)
+                { panel.choices[1].onClick.Invoke(); if(panel.choices[0].interactable)throw new Exception("Busy event guard failed"); SessionState.SetInt(Key,3); }
+                else if(stage==3 && panel.choices[0].interactable)
+                {
+                    if(state.growth_choices.Length!=4 || client.Automatic || client.CanProgressBusiness)throw new Exception("Multiple pending cats guard failed");
+                    saves.saves.SetValueWithoutNotify(0); saves.resume.onClick.Invoke(); SessionState.SetInt(Key,4);
+                }
+                else if(stage==4 && state.growth_choices.Length>0 && panel.choices[0].interactable)
+                { if(state.growth_choices.Length!=5 || !panel.panel.activeSelf || !panel.choices[0].interactable)throw new Exception("Restored event UI failed"); panel.choices[0].onClick.Invoke(); SessionState.SetInt(Key,5); }
+                else if(stage==5)
+                {
+                    if(state.growth_choices.Length>0)
+                    { if(panel.choices[1].interactable) panel.choices[1].onClick.Invoke(); }
+                    else if(client.CanProgressBusiness && preview.GetSceneButton(2).interactable)
+                    { if(panel.panel.activeSelf)throw new Exception("Growth panel stayed open"); preview.GetSceneButton(2).onClick.Invoke(); SessionState.SetInt(Key,6); }
+                }
+                else if(stage==6 && state.tick>0 && preview.GetComponent<PythonAutoPanel>().toggle.interactable)
+                {
+                    if(!client.CanStartAutomatic || client.Automatic)throw new Exception("Manual restart guard failed");
+                    preview.GetComponent<PythonAutoPanel>().toggle.onClick.Invoke(); SessionState.SetInt(Key,7);
+                }
+                else if(stage==7 && state.tick>=2)
+                {
+                    Debug.Log("CAT_CAFE_GROWTH_PLAY_OK: event / save / answer button / busy / restore / manual opening / automatic restart");
+                    SessionState.SetInt(Key,0); EditorApplication.ExitPlaymode(); EditorApplication.delayCall+=()=>EditorApplication.Exit(0);
+                }
+            }
+            catch(Exception ex) { SessionState.SetInt(Key,0); Debug.LogException(ex); EditorApplication.Exit(1); }
+        }
+    }
+}

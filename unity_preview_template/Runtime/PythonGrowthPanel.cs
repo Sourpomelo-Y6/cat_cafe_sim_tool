@@ -1,0 +1,41 @@
+using UnityEngine;
+using UnityEngine.UI;
+namespace CatCafePreview
+{
+    public class PythonGrowthPanel : MonoBehaviour
+    {
+        public GameObject panel;
+        public Text title, details, notice;
+        public Button[] choices;
+        public void First() { GetComponent<PythonStateClient>().RespondGrowth(0); }
+        public void Second() { GetComponent<PythonStateClient>().RespondGrowth(1); }
+        public void Third() { GetComponent<PythonStateClient>().RespondGrowth(2); }
+        public void Apply(PythonCafeState state)
+        {
+            var rows=state.growth_choices;
+            panel.SetActive(rows != null && rows.Length>0);
+            if(!panel.activeSelf) return;
+            var ev=rows[0];
+            title.text=ev.name+"の得意分野を選択";
+            details.text="選択待ち："+rows.Length+"匹 / 経験："+ev.experience+"（必要："+ev.threshold+"）\n接客："+ev.service+" / 休養："+ev.rest+" / 派遣："+ev.dispatch+"\n\n";
+            for(int i=0;i<choices.Length;i++)
+            {
+                bool exists=ev.choices != null && i<ev.choices.Length;
+                choices[i].gameObject.SetActive(exists);
+                if(!exists) continue;
+                var option=ev.choices[i];
+                choices[i].GetComponentInChildren<Text>().text=option.label;
+                details.text+=option.label+"\n"+option.detail+"\n"+(option.can_select ? "" : option.reason+"\n")+"\n";
+            }
+            notice.text="得意分野を1つ選びます。選択後の自動進行は手動で再開してください。";
+            RefreshControls();
+        }
+        public void RefreshControls()
+        { for(int i=0;i<choices.Length;i++) choices[i].interactable=GetComponent<PythonStateClient>().CanRespondGrowth(i); }
+        public void Disconnect()
+        {
+            foreach(var button in choices) button.interactable=false;
+            if(panel.activeSelf) notice.text="Python未接続です。再接続後に回答できます。";
+        }
+    }
+}

@@ -156,6 +156,8 @@ namespace CatCafePreview
             if (goal != null) goal.Apply(state);
             var store = GetComponent<PythonStoreEventPanel>();
             if (store != null) store.Apply(state);
+            var growth = GetComponent<PythonGrowthPanel>();
+            if (growth != null) growth.Apply(state);
         }
         public void SetServiceDescription(string text)
         {
@@ -211,6 +213,8 @@ namespace CatCafePreview
             if (goal != null) goal.RefreshControls();
             var store = GetComponent<PythonStoreEventPanel>();
             if (store != null) store.RefreshControls();
+            var growth = GetComponent<PythonGrowthPanel>();
+            if (growth != null) growth.RefreshControls();
             var auto = GetComponent<PythonAutoPanel>();
             if (auto != null) auto.RefreshControls();
         }
@@ -226,6 +230,8 @@ namespace CatCafePreview
             if (goal != null && goal.panel.activeSelf) goal.notice.text = message;
             var store = GetComponent<PythonStoreEventPanel>();
             if (store != null && store.panel.activeSelf) store.notice.text=message;
+            var growth = GetComponent<PythonGrowthPanel>();
+            if (growth != null && growth.panel.activeSelf) growth.notice.text=message;
         }
 
         private void DisplayPythonCat(int index)
@@ -289,6 +295,8 @@ namespace CatCafePreview
             if (goal != null) goal.Disconnect();
             var store = GetComponent<PythonStoreEventPanel>();
             if (store != null) store.Disconnect();
+            var growth = GetComponent<PythonGrowthPanel>();
+            if (growth != null) growth.Disconnect();
             var auto = GetComponent<PythonAutoPanel>();
             if (auto != null) auto.RefreshControls();
             cats.interactable = false;
