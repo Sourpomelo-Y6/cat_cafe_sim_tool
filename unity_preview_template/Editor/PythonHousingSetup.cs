@@ -9,7 +9,7 @@ namespace CatCafePreview.Editor
 {
     public static class PythonHousingSetup
     {
-        [MenuItem("Cat Cafe/Build Housing Panel")]
+        [MenuItem("Cat Cafe/開発用/UI再生成/飼育スペース", false, 2)]
         public static void Build()
         {
             var scene=EditorSceneManager.OpenScene("Assets/Scenes/CatCafePythonState.unity");

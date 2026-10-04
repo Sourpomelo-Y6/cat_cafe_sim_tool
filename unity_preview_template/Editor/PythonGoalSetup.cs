@@ -9,7 +9,7 @@ namespace CatCafePreview.Editor
 {
     public static class PythonGoalSetup
     {
-        [MenuItem("Cat Cafe/Build Goal Result Panel")]
+        [MenuItem("Cat Cafe/開発用/UI再生成/目標の結果", false, 4)]
         public static void Build()
         {
             var scene=EditorSceneManager.OpenScene("Assets/Scenes/CatCafePythonState.unity");

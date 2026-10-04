@@ -8,7 +8,7 @@ namespace CatCafePreview.Editor
     public static class PythonStateSetup
     {
         const string Path = "Assets/Scenes/CatCafePythonState.unity";
-        [MenuItem("Cat Cafe/Open Python State Preview")]
+        [MenuItem("Cat Cafe/プレビュー/営業画面を開く", false, 0)]
         public static void Open()
         {
             if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) return;

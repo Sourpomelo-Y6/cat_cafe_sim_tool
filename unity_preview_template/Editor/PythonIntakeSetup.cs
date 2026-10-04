@@ -9,7 +9,7 @@ namespace CatCafePreview.Editor
 {
     public static class PythonIntakeSetup
     {
-        [MenuItem("Cat Cafe/Build Intake Request Panel")]
+        [MenuItem("Cat Cafe/開発用/UI再生成/猫の受け入れ依頼", false, 1)]
         public static void Build()
         {
             var scene = EditorSceneManager.OpenScene("Assets/Scenes/CatCafePythonState.unity");

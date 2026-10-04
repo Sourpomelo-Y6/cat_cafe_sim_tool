@@ -9,7 +9,7 @@ namespace CatCafePreview.Editor
 {
     public static class PythonAutoSetup
     {
-        [MenuItem("Cat Cafe/Build Automatic Business Controls")]
+        [MenuItem("Cat Cafe/開発用/UI再生成/自動営業の操作", false, 5)]
         public static void Build()
         {
             var scene=EditorSceneManager.OpenScene("Assets/Scenes/CatCafePythonState.unity");

@@ -9,7 +9,7 @@ namespace CatCafePreview.Editor
 {
     public static class PythonStoreEventSetup
     {
-        [MenuItem("Cat Cafe/Build Store Event Panel")]
+        [MenuItem("Cat Cafe/開発用/UI再生成/店舗イベント", false, 3)]
         public static void Build()
         {
             var scene = EditorSceneManager.OpenScene("Assets/Scenes/CatCafePythonState.unity");

@@ -158,7 +158,7 @@ denoiseが低いと元の柄・背景を残しやすい一方、姿勢も残り�
 
 「Unity向けに書き出す…」で保存先を選ぶと、新しい `CatCafeContent-<ID>` フォルダを作成します。猫一覧と採用済みの紹介文・4場面の描写・PNGを、`bundle.json` と `images/` にまとめます。下書き・生成候補・基準画像は書き出しません。同じPNGはハッシュでまとめ、未登録文章は定型文、欠落画像は画像なしで書き出します。確認事項は結果画面と `validation.json` に記録します。以前の出力は上書きしません。
 
-Unity 2021.3.45f2の表示試作を `C:\Users\hi-wa\unity_workspase\CatCafeSim` に追加しました。Unityの `Cat Cafe > Import Content Pack…` でパックフォルダを選び、`Cat Cafe > Open Content Preview` からPlayすると猫と4場面を切り替えられます。今回の登録素材は取り込み済みです。取り込み後はPlayを再開してください。
+Unity 2021.3.45f2の表示試作を `C:\Users\hi-wa\unity_workspase\CatCafeSim` に追加しました。Unityの `Cat Cafe > 素材 > 素材パックを取り込む…` でパックフォルダを選び、`Cat Cafe > プレビュー > 素材プレビューを開く` からPlayすると猫と4場面を切り替えられます。今回の登録素材は取り込み済みです。取り込み後はPlayを再開してください。
 
 詳細な保存形式・導入方法・検証結果は[Unity向け素材書き出しと表示試作](../Docs/UnityContentPreview.md)を参照してください。制作ツールのGUIを含む26件のテスト、Unityコンパイルと猫5匹・全20場面の表示検証が成功しました。営業・交流などのゲーム処理と実行ファイルのビルドは後続です。
 

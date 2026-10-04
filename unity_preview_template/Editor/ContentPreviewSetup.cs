@@ -45,12 +45,12 @@ namespace CatCafePreview.Editor
         }
 
         private const string ScenePath = "Assets/Scenes/CatCafeContentPreview.unity";
-        [MenuItem("Cat Cafe/Import Content Pack…")]
+        [MenuItem("Cat Cafe/素材/素材パックを取り込む…", false, 0)]
         public static void ImportMenu()
         {
             var folder = EditorUtility.OpenFolderPanel("制作ツールで書き出した素材パックを選ぶ", "", "");
             if (folder == "") return;
-            try { Import(folder); EditorUtility.DisplayDialog("素材を取り込みました", "Cat Cafe → Open Content Preview を開き、Playで確認してください。", "OK"); }
+            try { Import(folder); EditorUtility.DisplayDialog("素材を取り込みました", "Cat Cafe → プレビュー → 素材プレビューを開く を開き、Playで確認してください。", "OK"); }
             catch (Exception ex) { Debug.LogException(ex); EditorUtility.DisplayDialog("取り込みできません", ex.Message, "OK"); }
         }
 
@@ -131,7 +131,7 @@ namespace CatCafePreview.Editor
             VerifyAndCapture();
         }
 
-        [MenuItem("Cat Cafe/Open Content Preview")]
+        [MenuItem("Cat Cafe/プレビュー/素材プレビューを開く", false, 1)]
         public static void OpenPreview()
         {
             if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) return;
@@ -190,13 +190,13 @@ namespace CatCafePreview.Editor
             if (changed) EditorSceneManager.SaveScene(preview.gameObject.scene, ScenePath);
         }
 
-        [MenuItem("Cat Cafe/Refresh Displayed Content")]
+        [MenuItem("Cat Cafe/素材/表示内容を更新", false, 1)]
         public static void RefreshDisplayedContent()
         {
             var preview = UnityEngine.Object.FindObjectOfType<ContentPreview>();
             if (preview == null || !preview.HasUIBindings)
             {
-                EditorUtility.DisplayDialog("プレビューを開いてください", "Cat Cafe → Open Content Preview から開いてください。", "OK");
+                EditorUtility.DisplayDialog("プレビューを開いてください", "Cat Cafe → プレビュー → 素材プレビューを開く から開いてください。", "OK");
                 return;
             }
             Undo.RecordObjects(preview.GetComponentsInChildren<Component>(true), "Refresh preview content");

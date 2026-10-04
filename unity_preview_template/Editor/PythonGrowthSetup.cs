@@ -9,7 +9,7 @@ namespace CatCafePreview.Editor
 {
     public static class PythonGrowthSetup
     {
-        [MenuItem("Cat Cafe/Build Growth Choice Panel")]
+        [MenuItem("Cat Cafe/開発用/UI再生成/猫の成長・習得選択", false, 0)]
         public static void Build()
         {
             var scene = EditorSceneManager.OpenScene("Assets/Scenes/CatCafePythonState.unity");
