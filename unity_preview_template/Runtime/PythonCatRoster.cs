@@ -32,6 +32,7 @@ namespace CatCafePreview
             {
                 card.picture.texture = null; card.picture.enabled = false;
                 card.customerIcon.SetActive(false); card.work.interactable = card.rest.interactable = false;
+                if(card.details != null) card.details.interactable=false;
                 card.stateText.text = "未接続";
             }
         }

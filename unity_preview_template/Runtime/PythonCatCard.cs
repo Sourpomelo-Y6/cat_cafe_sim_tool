@@ -10,7 +10,7 @@ namespace CatCafePreview
         public RawImage picture;
         public Text catName, stateText;
         public GameObject customerIcon;
-        public Button work, rest;
+        public Button work, rest, details;
         [NonSerialized] public PythonCatState state;
         public void Set(PythonCatState cat, PythonCafeState cafe, ContentPreview preview, PythonStateClient client)
         {
@@ -26,10 +26,16 @@ namespace CatCafePreview
             work.onClick.RemoveAllListeners(); rest.onClick.RemoveAllListeners();
             work.onClick.AddListener(() => client.SetCatShift(cat.cat_id, true));
             rest.onClick.AddListener(() => client.SetCatShift(cat.cat_id, false));
+            if(details != null)
+            {
+                details.onClick.RemoveAllListeners();
+                details.onClick.AddListener(() => preview.GetComponent<PythonCatDetailsPanel>().Open(cat.cat_id));
+            }
             Refresh(client);
         }
         public void Refresh(PythonStateClient client)
         {
+            if(details != null) details.interactable=client != null && client.CanManageSaves && state != null;
             bool ready = client != null && client.CanChangeShifts && state != null;
             work.interactable = ready && !state.working && state.health_status == "healthy" && state.activity == "cafe";
             rest.interactable = ready && state.working;

@@ -7,7 +7,7 @@ namespace CatCafePreview
 {
     [Serializable] public class PythonCatState
     {
-        public string cat_id, content_cat_id, name, health_status, activity;
+        public string cat_id, content_cat_id, name, health_status, activity, health_label, activity_label, growth_details;
         public float stamina, max_stamina, fatigue, stress;
         public bool working;
     }

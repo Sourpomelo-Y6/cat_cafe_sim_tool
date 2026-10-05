@@ -15,6 +15,7 @@ $previewFiles += @('Runtime/PythonHousingPanel.cs', 'Editor/PythonHousingSetup.c
 $previewFiles += @('Runtime/PythonGoalPanel.cs', 'Editor/PythonGoalSetup.cs', 'Editor/PythonGoalVerification.cs')
 $previewFiles += @('Runtime/PythonGrowthPanel.cs', 'Editor/PythonGrowthSetup.cs', 'Editor/PythonGrowthVerification.cs')
 $previewFiles += @('Runtime/PythonStoreEventPanel.cs', 'Editor/PythonStoreEventSetup.cs', 'Editor/PythonStoreEventVerification.cs')
+$previewFiles += @('Runtime/PythonCatDetailsPanel.cs', 'Editor/PythonCatDetailsSetup.cs')
 $previewFiles += @('Runtime/PythonAutoPanel.cs', 'Editor/PythonAutoSetup.cs', 'Editor/PythonAutoVerification.cs')
 foreach ($relative in $previewFiles) {
     $target = Join-Path $targetRoot $relative

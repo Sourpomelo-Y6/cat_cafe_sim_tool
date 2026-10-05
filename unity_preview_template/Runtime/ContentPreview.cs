@@ -156,6 +156,8 @@ namespace CatCafePreview
             if (goal != null) goal.Apply(state);
             var store = GetComponent<PythonStoreEventPanel>();
             if (store != null) store.Apply(state);
+            var detail = GetComponent<PythonCatDetailsPanel>();
+            if(detail != null) detail.Apply(state);
             var growth = GetComponent<PythonGrowthPanel>();
             if (growth != null) growth.Apply(state);
         }
@@ -283,6 +285,8 @@ namespace CatCafePreview
         {
             var roster = GetComponent<PythonCatRoster>();
             if (roster != null) roster.Disconnect();
+            var detail = GetComponent<PythonCatDetailsPanel>();
+            if(detail != null) detail.Disconnect();
             var service = GetComponent<PythonServiceScreen>();
             if (service != null) service.Disconnect();
             var savePanel = GetComponent<PythonSavePanel>();
