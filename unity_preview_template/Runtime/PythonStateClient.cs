@@ -18,7 +18,8 @@ namespace CatCafePreview
         public int revision;
         public bool can_set_shifts;
         public bool closed;
-        public string phase, required_action;
+        public string phase, required_action, objective;
+        public PythonNewGameOption[] new_game_options;
         public int opening_ticks, waiting_count, completed_interactions;
         public float revenue;
         public PythonSeatState[] seats;
@@ -32,6 +33,7 @@ namespace CatCafePreview
         public float funds;
         public PythonCatState[] cats;
     }
+    [Serializable] public class PythonNewGameOption { public string choice, label, detail, conditions; }
     [Serializable] public class PythonGrowthChoice
     { public string cat_id, name, kind, title, learned, group, effect; public float experience, threshold, service, rest, dispatch, play, contact, quiet; public PythonEventChoice[] choices; }
     [Serializable] public class PythonStoreEvent
@@ -111,6 +113,14 @@ namespace CatCafePreview
         }
         public PythonCafeState CurrentState { get { return current; } }
         public bool CanManageSaves { get { return online && pending == null && current != null; } }
+        public void NewGame(string objective)
+        {
+            if(!CanManageSaves || current.new_game_options == null || !Array.Exists(current.new_game_options,row=>row.choice==objective)) return;
+            StopAutomatic();
+            pending=new PythonShiftCommand {request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,
+                expected_revision=current.revision,working_cats=new string[0],kind="new_game",choice=objective};
+            preview.RefreshPythonControls();
+        }
         public void SaveGame() { QueueSave("save_game", ""); }
         public void LoadSaved(string id) { QueueSave("load_game", id); }
         public bool CanContinueGoal { get { return CanManageSaves && current.goal_result != null && current.goal_result.can_continue; } }
@@ -250,8 +260,11 @@ namespace CatCafePreview
                                 if (request.result == UnityWebRequest.Result.Success)
                                 {
                                     var reply = JsonUtility.FromJson<PythonCommandReply>(request.downloadHandler.text);
-                                    Accept(reply.state); notice = command.kind == "set_shifts" ? "出勤・休養を変更しました。"
+                                    Accept(reply.state);
+                                    if(command.kind=="new_game" || command.kind=="load_game") { var menu=GetComponent<PythonNewGamePanel>(); if(menu!=null) menu.Close(); }
+                                    notice = command.kind == "set_shifts" ? "出勤・休養を変更しました。"
                                         : command.kind == "save_game" ? "保存しました。" : command.kind == "load_game" ? "保存したゲームを再開しました。"
+                                        : command.kind == "new_game" ? "新規ゲームを作成し、初期状態を保存しました。出勤・休養を設定して営業を始めてください。"
                                         : command.kind == "next_day" ? "翌日の営業準備へ進みました。出勤・休養を設定してください。"
                                         : command.kind == "resolve_intake" ? (command.choice == "accept" ? "保護猫を迎えました。休養予定で猫一覧に加わりました。" : "受け入れ依頼を見送りました。")
                                         : command.kind == "purchase_housing" || command.kind == "upgrade_housing" ? "飼育スペースを拡張しました。"

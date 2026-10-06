@@ -156,6 +156,7 @@ namespace CatCafePreview
             if (goal != null) goal.Apply(state);
             var store = GetComponent<PythonStoreEventPanel>();
             if (store != null) store.Apply(state);
+            var menu=GetComponent<PythonNewGamePanel>();if(menu!=null) menu.Apply(state);
             var detail = GetComponent<PythonCatDetailsPanel>();
             if(detail != null) detail.Apply(state);
             var growth = GetComponent<PythonGrowthPanel>();
@@ -195,6 +196,7 @@ namespace CatCafePreview
 
         public void RefreshPythonControls()
         {
+            var menu=GetComponent<PythonNewGamePanel>();if(menu!=null) menu.RefreshControls();
             var roster = GetComponent<PythonCatRoster>();
             if (roster != null) roster.RefreshControls();
             var client = GetComponent<PythonStateClient>();
@@ -223,6 +225,7 @@ namespace CatCafePreview
 
         public void PythonNotice(string message)
         {
+            var menu=GetComponent<PythonNewGamePanel>();if(menu!=null && menu.panel.activeSelf) menu.notice.text=message;
             status.text = message + "\n" + status.text;
             var intake = GetComponent<PythonIntakePanel>();
             if (intake != null && intake.panel.activeSelf) intake.notice.text = message;
@@ -283,6 +286,7 @@ namespace CatCafePreview
 
         public void PythonConnectionError(string message)
         {
+            var menu=GetComponent<PythonNewGamePanel>();if(menu!=null) menu.Disconnect();
             var roster = GetComponent<PythonCatRoster>();
             if (roster != null) roster.Disconnect();
             var detail = GetComponent<PythonCatDetailsPanel>();
