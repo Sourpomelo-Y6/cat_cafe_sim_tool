@@ -2,7 +2,7 @@
 from pathlib import Path
 from content_images import ImageRegistry, load_display_image
 
-from interaction_scenes import INTERACTION_SCENES, MODE_ACTIONS, ACTION_LABELS
+from interaction_scenes import INTERACTION_SCENES, MODE_ACTIONS, ACTION_LABELS, SPECIAL_ACTIONS
 SCENES = (('normal', '通常'), ('play', '遊ぶ'), ('pet', '撫でられる'), ('sleep', '眠る')) + INTERACTION_SCENES
 
 
@@ -90,12 +90,15 @@ class ContentImageToolWindow:
             raise ValueError('猫一覧を更新して、登録する猫を選んでください。')
         key = next(row[0] for row in SCENES if row[1] == self.scene.get())
         allowed = MODE_ACTIONS.get(key, ())
-        labels = ['動作の共通画像'] + [ACTION_LABELS[action] for action in allowed]
+        choices = [(action, ACTION_LABELS[action]) for action in allowed]
+        if allowed:
+            choices += list(SPECIAL_ACTIONS)
+        labels = ['動作の共通画像'] + [label for _, label in choices]
         self.action_selector.configure(values=labels, state='readonly' if allowed else 'disabled')
         if self.action.get() not in labels:
             self.action.set(labels[0])
         if self.action.get() != labels[0]:
-            key += '__' + next(action for action in allowed if ACTION_LABELS[action] == self.action.get())
+            key += '__' + next(action for action, label in choices if label == self.action.get())
         return cat_id, key
 
     def display(self, path):

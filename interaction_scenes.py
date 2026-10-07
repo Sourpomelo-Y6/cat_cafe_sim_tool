@@ -24,3 +24,14 @@ PAUSE_PROMPTS = dict(teaser='cat watching a motionless feather wand', ball='cat 
                      voice='cat looking toward a quiet offscreen person', presence='cat relaxing near an offscreen person')
 ACTION_PROMPTS.update({mode + '__' + action: (PAUSE_PROMPTS[mode] if action == 'pause' else MODE_PROMPTS[mode]) + ', ' + MODIFIERS[action] + ', no human face, no human body'
                        for mode in MODE_LABELS for action in MODE_ACTIONS[mode]})
+
+# 各動作で共有する特殊行動は2種類だけ。通常行動ごとには増やさない。
+SPECIAL_ACTIONS = (('open_up', '（なにか）+心を開く'), ('simultaneous', '心をつかむ+心を開く'))
+SPECIAL_SCENES = tuple((mode + '__' + action, label + ' × ' + title)
+                       for mode, label in MODE_LABELS.items() for action, title in SPECIAL_ACTIONS)
+SPECIAL_PROMPTS = dict(open_up='cat opening up, relaxed trusting expression, affectionate body language',
+                       simultaneous='cat responding with joyful affection, mutual connection and trust')
+ACTION_PROMPTS.update({mode + '__' + action: MODE_PROMPTS[mode] + ', ' + SPECIAL_PROMPTS[action]
+                      for mode in MODE_LABELS for action, _ in SPECIAL_ACTIONS})
+# 以前の共通設定を読み込めるよう保持する。表示・新規登録には使わない。
+ACTION_PROMPTS.update(SPECIAL_PROMPTS)

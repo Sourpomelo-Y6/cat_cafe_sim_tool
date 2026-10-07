@@ -185,14 +185,15 @@ namespace CatCafePreview
                 description.text += "\n\n進行に必要な操作\n" + pythonState.required_action;
         }
 
-        public Texture2D PlayerTexture(string catId, string key, string imageKey = null)
+        public Texture2D PlayerTexture(string catId, string key, string imageKey = null, string eventKey = null)
         {
             var cat = bundle == null ? null : Array.Find(bundle.cats, item => item.cat_id == catId);
             if (cat == null) return null;
             string mode = string.IsNullOrEmpty(imageKey) ? key : imageKey.Split(new[] { "__" }, StringSplitOptions.None)[0];
             string fallback = mode == "brush" || mode == "pet" ? "pet"
                 : mode == "teaser" || mode == "ball" || mode == "plush" || mode == "tunnel" ? "play" : "normal";
-            foreach (var candidate in new[] { imageKey, mode, key, fallback, "normal" })
+            if(eventKey != mode + "__open_up" && eventKey != mode + "__simultaneous")eventKey=null;
+            foreach (var candidate in new[] { eventKey, imageKey, mode, key, fallback, "normal" })
             {
                 var scene = Array.Find(cat.scenes, item => item.key == candidate);
                 if (scene == null || string.IsNullOrEmpty(scene.image)) continue;

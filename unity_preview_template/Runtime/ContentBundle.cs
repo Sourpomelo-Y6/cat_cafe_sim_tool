@@ -12,13 +12,14 @@ namespace CatCafePreview
 
     public static class ContentValidation
     {
-        public static readonly string[] SceneKeys = { "normal", "play", "pet", "sleep", "teaser", "ball", "plush", "tunnel", "brush", "voice", "presence", "pause" };
+        public static readonly string[] SceneKeys = { "normal", "play", "pet", "sleep", "teaser", "ball", "plush", "tunnel", "brush", "voice", "presence", "pause", "open_up", "simultaneous" };
         public static bool ValidSceneKey(string key)
         {
             if (Array.IndexOf(SceneKeys, key) >= 0) return true;
             if (string.IsNullOrEmpty(key)) return false;
             var parts = key.Split(new[] { "__" }, StringSplitOptions.None);
             if (parts.Length != 2 || Array.IndexOf(new[] { "teaser", "ball", "plush", "tunnel", "pet", "brush", "voice", "presence" }, parts[0]) < 0) return false;
+            if (parts[1] == "open_up" || parts[1] == "simultaneous") return true;
             if (parts[1] == "intense") return parts[0] == "teaser" || parts[0] == "ball" || parts[0] == "tunnel";
             if (parts[1] == "feint") return parts[0] == "teaser" || parts[0] == "ball" || parts[0] == "plush" || parts[0] == "tunnel";
             return Array.IndexOf(new[] { "direct", "adapt", "pause", "switch", "connect" }, parts[1]) >= 0;

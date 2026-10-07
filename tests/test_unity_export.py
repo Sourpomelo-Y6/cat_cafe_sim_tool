@@ -92,6 +92,23 @@ class UnityExportTests(unittest.TestCase):
             settings.save('a', 'ball__feint', EMPTY, EMPTY)
             self.assertIn('ball__feint', settings.read()['scenes'])
 
+    def test_mode_special_reaction_images(self):
+        from prompt_presets import PromptPresets
+        from lora_settings import LoraSettings, EMPTY
+        from interaction_scenes import SPECIAL_SCENES
+        self.assertEqual(len(SPECIAL_SCENES), 16)
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            registry = ImageRegistry(root / 'source')
+            for key in ('ball__open_up', 'ball__simultaneous'):
+                registry.register('a', key, ASSET)
+                self.assertIn('trust', PromptPresets(root / 'presets.json').assemble('a', key))
+                settings = LoraSettings(root / 'loras.json')
+                settings.save('a', key, EMPTY, EMPTY)
+            folder, _ = export_bundle({'a':'ミケ'}, registry, TextStore(root / 'texts.json'), root / 'exports')
+            scenes = json.loads((folder / 'bundle.json').read_text(encoding='utf-8'))['cats'][0]['scenes']
+            self.assertEqual({row['key'] for row in scenes}, {'normal','play','pet','sleep','ball__open_up','ball__simultaneous'})
+
     def test_corrupt_sources_do_not_create_output(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

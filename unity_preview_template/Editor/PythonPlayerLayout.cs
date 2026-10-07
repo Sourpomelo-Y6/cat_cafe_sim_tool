@@ -98,6 +98,16 @@ namespace CatCafePreview.Editor
             if(player.picture.texture!=preview.PlayerTexture(state.cats[0].content_cat_id,"pet"))throw new Exception("Combination image priority incorrect");
             state.player_interaction.image_key="teaser__feint";apply();
             if(player.picture.texture!=preview.PlayerTexture(state.cats[0].content_cat_id,"play"))throw new Exception("Combination image fallback incorrect");
+            expanded.Add(new SceneContent{key="teaser__open_up",label="test",text="test",image=Array.Find(originalScenes,scene=>scene.key=="normal").image});
+            expanded.Add(new SceneContent{key="teaser__simultaneous",label="test",text="test",image=petScene.image});
+            contentCat.scenes=expanded.ToArray();ContentValidation.Validate(content);
+            state.player_interaction.image_key="teaser__direct";state.player_interaction.event_image_key="teaser__open_up";apply();
+            if(player.picture.texture!=preview.PlayerTexture(state.cats[0].content_cat_id,"normal"))throw new Exception("Open up did not override action image");
+            state.player_interaction.event_image_key="teaser__simultaneous";apply();
+            if(player.picture.texture!=preview.PlayerTexture(state.cats[0].content_cat_id,"pet"))throw new Exception("Simultaneous image incorrect");
+            contentCat.scenes=originalScenes;apply();
+            if(player.picture.texture!=preview.PlayerTexture(state.cats[0].content_cat_id,"play"))throw new Exception("Missing special image fallback incorrect");
+            state.player_interaction.event_image_key=null;
             contentCat.scenes=originalScenes;state.player_interaction.image_key=null;
             state.player_interaction.scene_key="brush";apply();
             if(player.picture.texture!=preview.PlayerTexture(state.cats[0].content_cat_id,"pet"))throw new Exception("Brush fallback incorrect");

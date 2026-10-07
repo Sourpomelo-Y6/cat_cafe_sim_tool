@@ -5,8 +5,8 @@ import uuid
 from pathlib import Path
 
 DEFAULT_DIRECTORY = Path(__file__).resolve().parent.parent / 'cat_cafe_sim' / 'saves' / 'content_images'
-from interaction_scenes import INTERACTION_SCENES, COMBINATION_SCENES
-SCENE_IDS = ('normal', 'play', 'pet', 'sleep') + tuple(key for key, _ in INTERACTION_SCENES + COMBINATION_SCENES)
+from interaction_scenes import INTERACTION_SCENES, COMBINATION_SCENES, SPECIAL_SCENES
+SCENE_IDS = ('normal', 'play', 'pet', 'sleep', 'open_up', 'simultaneous') + tuple(key for key, _ in INTERACTION_SCENES + COMBINATION_SCENES + SPECIAL_SCENES)
 
 
 class ImageRegistry:

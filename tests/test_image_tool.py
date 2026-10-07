@@ -35,6 +35,13 @@ class ToolTests(unittest.TestCase):
             tool.scene.set('通常');tool.refresh()
             self.assertEqual(tool.selection(), ('cat-a', 'normal'))
             self.assertTrue(tool.action_selector.instate(['disabled']))
+            tool.scene.set('ボール遊び');tool.refresh()
+            tool.action.set('（なにか）+心を開く');tool.refresh()
+            self.assertEqual(tool.selection(), ('cat-a', 'ball__open_up'))
+            tool.action.set('心をつかむ+心を開く');tool.refresh()
+            self.assertEqual(tool.selection(), ('cat-a', 'ball__simultaneous'))
+            special = [label for label in tool.action_selector['values'] if '+心を開く' in label]
+            self.assertEqual(len(special), 2)
             tool.window.destroy()
 
     @unittest.skipUnless(os.environ.get('CAT_CAFE_TEST_GUI') == '1', 'requires a display')
