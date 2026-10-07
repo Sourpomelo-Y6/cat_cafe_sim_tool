@@ -28,6 +28,7 @@ namespace CatCafePreview
         public PythonIntakeState intake_request;
         public PythonHousingState housing;
         public PythonGoalResult goal_result;
+        public PythonNextGoal next_goal;
         public PythonObjectiveProgress objective_progress;
         public PythonStoreEvent store_event;
         public PythonGrowthChoice[] growth_choices;
@@ -42,6 +43,8 @@ namespace CatCafePreview
     [Serializable] public class PythonEventChoice
     { public string choice, label, detail, reason; public bool can_select; }
     [Serializable] public class PythonObjectiveProgress { public string mode, label, status, summary, details; }
+    [Serializable] public class PythonNextGoal
+    { public int stage, started_day, deadline, days; public float target; public bool can_advance; public string reason; }
     [Serializable] public class PythonGoalResult
     {
         public string status, reason, kind, title, details;
@@ -126,6 +129,15 @@ namespace CatCafePreview
         public void SaveGame() { QueueSave("save_game", ""); }
         public void LoadSaved(string id) { QueueSave("load_game", id); }
         public bool CanContinueGoal { get { return CanManageSaves && current.goal_result != null && current.goal_result.can_continue; } }
+        public bool CanAdvanceGoal { get { return CanManageSaves && current.next_goal != null && current.next_goal.can_advance; } }
+        public void AdvanceGoal()
+        {
+            if(!CanAdvanceGoal)return;
+            StopAutomatic();
+            pending=new PythonShiftCommand {request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,
+                expected_revision=current.revision,working_cats=new string[0],kind="advance_goal"};
+            preview.RefreshPythonControls();
+        }
         public void ContinueGoal()
         {
             if (!CanContinueGoal) return;
@@ -229,6 +241,7 @@ namespace CatCafePreview
             Validate(state);
             // JsonUtility can materialize a JSON null nested object with empty fields.
             if (state.goal_result != null && string.IsNullOrEmpty(state.goal_result.status)) state.goal_result = null;
+            if(state.next_goal != null && state.next_goal.stage < 2)state.next_goal=null;
             if(state.store_event != null && string.IsNullOrEmpty(state.store_event.kind)) state.store_event=null;
             if (!IsOpen(state) || (current != null && (state.instance_id != current.instance_id || state.day != current.day))) StopAutomatic();
             current = state; online = true; preview.ApplyPythonState(state);
@@ -272,6 +285,7 @@ namespace CatCafePreview
                                         : command.kind == "purchase_housing" || command.kind == "upgrade_housing" ? "飼育スペースを拡張しました。"
                                         : command.kind == "resolve_store_event" ? (command.choice == "close" ? "休業し、翌日の営業準備へ進みました。" : "店舗イベントに回答しました。")
                                         : command.kind == "resolve_growth" ? "得意分野を選びました。"
+                                        : command.kind == "advance_goal" ? "次の人気目標への挑戦を開始しました。"
                                         : (command.kind == "continue_goal" || command.kind == "continue_patron" || command.kind == "continue_bond_goal") ? "目標結果を確認しました。営業を続けられます。"
                                         : reply.state.closed ? "閉店しました。結果を確認してください。" : "営業を進めました。";
                                 }
