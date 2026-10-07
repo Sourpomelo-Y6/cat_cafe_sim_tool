@@ -26,34 +26,59 @@ namespace CatCafePreview.Editor
             var go=DefaultControls.CreateButton(new DefaultControls.Resources());go.name=name;go.transform.SetParent(parent,false);
             Place(go.GetComponent<RectTransform>(),x,y,w,40);var text=go.GetComponentInChildren<Text>();text.font=ContentPreviewLayout.LoadFont();text.fontSize=18;text.text=caption;return go.GetComponent<Button>();
         }
+        static Text ScrollText(Transform parent,string name,float x,float y,float w,float h,int size,out ScrollRect scroll)
+        {
+            var area=Box(parent,name,x,y,w,h,new Color(.93f,.94f,.89f));scroll=area.AddComponent<ScrollRect>();scroll.horizontal=false;scroll.movementType=ScrollRect.MovementType.Clamped;
+            var viewport=Box(area.transform,"Viewport",8,6,w-32,h-12,Color.white);viewport.AddComponent<Mask>().showMaskGraphic=false;
+            var text=Label(viewport.transform,"Text",0,0,w-32,h-12,size);text.lineSpacing=1;text.gameObject.AddComponent<ContentSizeFitter>().verticalFit=ContentSizeFitter.FitMode.PreferredSize;
+            scroll.viewport=viewport.GetComponent<RectTransform>();scroll.content=text.rectTransform;
+            var bar=DefaultControls.CreateScrollbar(new DefaultControls.Resources());bar.transform.SetParent(area.transform,false);Place(bar.GetComponent<RectTransform>(),w-18,6,12,h-12);scroll.verticalScrollbar=bar.GetComponent<Scrollbar>();scroll.verticalScrollbar.direction=Scrollbar.Direction.BottomToTop;
+            return text;
+        }
         [MenuItem("Cat Cafe/開発用/UI再生成/営業準備の案内",false,12)]
         public static void Build()
         {
             var scene=EditorSceneManager.OpenScene("Assets/Scenes/CatCafePythonState.unity");var preview=UnityEngine.Object.FindObjectOfType<ContentPreview>();var root=preview.transform.Find("Content Canvas/Background");
-            foreach(var name in new[]{"Preparation Guide","Preparation Entry"}){var old=root.Find(name);if(old!=null)UnityEngine.Object.DestroyImmediate(old.gameObject);}
+            var old=root.Find("Preparation Guide");if(old!=null)UnityEngine.Object.DestroyImmediate(old.gameObject);
             var overlay=Box(root,"Preparation Guide",0,174,1280,626,new Color(0,0,0,.55f));var card=Box(overlay.transform,"Guide Card",170,8,940,600,new Color(.98f,.97f,.93f,1));
             var panel=preview.GetComponent<PythonPreparationPanel>() ?? preview.gameObject.AddComponent<PythonPreparationPanel>();panel.panel=overlay;
-            Label(card.transform,"Title",24,20,892,40,25).text="営業を始める前に";
-            var area=Box(card.transform,"Scroll",24,76,892,406,Color.clear);var scroll=area.AddComponent<ScrollRect>();scroll.horizontal=false;scroll.movementType=ScrollRect.MovementType.Clamped;
-            var viewport=Box(area.transform,"Viewport",0,0,866,406,Color.white);viewport.AddComponent<Mask>().showMaskGraphic=false;
-            panel.details=Label(viewport.transform,"Details",0,0,866,406,18);panel.details.gameObject.AddComponent<ContentSizeFitter>().verticalFit=ContentSizeFitter.FitMode.PreferredSize;scroll.content=panel.details.rectTransform;scroll.viewport=viewport.GetComponent<RectTransform>();
-            var bar=DefaultControls.CreateScrollbar(new DefaultControls.Resources());bar.transform.SetParent(area.transform,false);Place(bar.GetComponent<RectTransform>(),872,0,20,406);scroll.verticalScrollbar=bar.GetComponent<Scrollbar>();scroll.verticalScrollbar.direction=Scrollbar.Direction.BottomToTop;
-            panel.notice=Label(card.transform,"Notice",24,490,892,56,16);
-            panel.close=Button(card.transform,"Close","案内を閉じて猫を選ぶ",24,550,892);UnityEventTools.AddPersistentListener(panel.close.onClick,panel.Close);
-            panel.open=Button(root,"Preparation Entry","営業準備の案内",332,24,240);UnityEventTools.AddPersistentListener(panel.open.onClick,panel.Open);
+            panel.title=Label(card.transform,"Title",24,18,892,40,25);panel.title.text="営業の準備";
+            var status=Box(card.transform,"Status",24,70,892,70,new Color(.91f,.93f,.87f));panel.summary=Label(status.transform,"Summary",12,8,868,58,18);
+            Label(card.transform,"Goal Heading",24,150,340,28,18).text="目標と営業の進め方";
+            panel.details=ScrollText(card.transform,"Goal Scroll",24,184,340,298,17,out panel.goalScroll);
+            var drop=DefaultControls.CreateDropdown(new DefaultControls.Resources());drop.name="Cats";drop.transform.SetParent(card.transform,false);Place(drop.GetComponent<RectTransform>(),388,150,528,40);panel.cats=drop.GetComponent<Dropdown>();
+            foreach(var text in drop.GetComponentsInChildren<Text>(true)){text.font=ContentPreviewLayout.LoadFont();text.fontSize=17;text.color=new Color(.16f,.25f,.21f);}
+            panel.cats.itemText.rectTransform.parent.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,36);panel.cats.template.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,180);panel.cats.itemText.verticalOverflow=VerticalWrapMode.Overflow;
+            drop.transform.Find("Arrow").GetComponent<Image>().color=Color.clear;Label(drop.transform,"Dropdown Arrow",494,7,26,26,16).text="▼";
+            UnityEventTools.AddPersistentListener(panel.cats.onValueChanged,panel.SelectCat);
+            panel.selectedDetails=Label(card.transform,"Selected Details",388,202,528,96,17);
+            panel.work=Button(card.transform,"Work","出勤にする",388,302,250);UnityEventTools.AddPersistentListener(panel.work.onClick,panel.Work);
+            panel.rest=Button(card.transform,"Rest","休養にする",656,302,260);UnityEventTools.AddPersistentListener(panel.rest.onClick,panel.Rest);
+            panel.work.GetComponent<Image>().color=new Color(.88f,.91f,.84f);
+            panel.catsDetails=ScrollText(card.transform,"Cats Scroll",388,354,528,128,16,out panel.catsScroll);
+            ScrollRect noticeScroll;panel.notice=ScrollText(card.transform,"Notice Scroll",24,490,892,54,14,out noticeScroll);
+            panel.start=Button(card.transform,"Start Business","営業開始",24,550,432);UnityEventTools.AddPersistentListener(panel.start.onClick,panel.StartBusiness);
+            panel.start.GetComponent<Image>().color=new Color(.2f,.38f,.3f);panel.start.GetComponentInChildren<Text>().color=Color.white;
+            panel.close=Button(card.transform,"Close","閉じて猫一覧へ",480,550,436);UnityEventTools.AddPersistentListener(panel.close.onClick,panel.Close);
+            var entry=root.Find("Preparation Entry");if(entry!=null)panel.open=entry.GetComponent<Button>();else {panel.open=Button(root,"Preparation Entry","営業準備の案内",332,24,240);UnityEventTools.AddPersistentListener(panel.open.onClick,panel.Open);}
             panel.open.gameObject.SetActive(false);overlay.SetActive(false);EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);Debug.Log("CAT_CAFE_PREPARATION_UI_OK");
         }
         public static void BuildAndVerify()
         {
             Build();var preview=UnityEngine.Object.FindObjectOfType<ContentPreview>();preview.Initialize();var client=preview.GetComponent<PythonStateClient>();var flags=System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic;typeof(PythonStateClient).GetField("preview",flags).SetValue(client,preview);
-            var state=PythonServiceSetup.Sample();state.instance_id="guide-first";state.day=1;state.tick=0;state.closed=false;state.can_set_shifts=true;state.required_action="";state.objective="free";state.new_game_options=new[]{new PythonNewGameOption{choice="free",label="自由営業",detail="期限なし・自由に営業",conditions="初期猫：5匹 / 席：2席 / 資金：1000"}};
+            var state=PythonServiceSetup.Sample();state.seats=new[]{new PythonSeatState(),new PythonSeatState()};state.instance_id="guide-first";state.day=1;state.tick=0;state.closed=false;state.can_set_shifts=true;state.required_action="";state.objective="free";state.new_game_options=new[]{new PythonNewGameOption{choice="free",label="自由営業",detail="期限なし・自由に営業",conditions="初期猫：5匹 / 席：2席 / 資金：1000"}};
             Action apply=()=>typeof(PythonStateClient).GetMethod("Accept",flags).Invoke(client,new object[]{state});apply();var panel=preview.GetComponent<PythonPreparationPanel>();
-            if(!panel.panel.activeSelf || !panel.details.text.Contains("自由営業") || !panel.details.text.Contains("自動進行") || !panel.details.text.Contains("1000"))throw new Exception("First preparation guide missing");
+            if(!panel.panel.activeSelf || !panel.details.text.Contains("自由営業") || !panel.details.text.Contains("自動進行") || !panel.summary.text.Contains("1000"))throw new Exception("First preparation guide missing");
+            if(!panel.summary.text.Contains("出勤 5匹") || !panel.summary.text.Contains("席 2席") || !panel.start.interactable)throw new Exception("Working count or start control missing");
+            state.cats[0].working=false;state.cats[0].health_status="sick";state.cats[0].health_label="病気";panel.SelectCat(0);apply();if(panel.work.interactable || !panel.selectedDetails.text.Contains("出勤できません"))throw new Exception("Unavailable cat enabled");
+            state.cats[0].health_status="healthy";state.cats[0].health_label="健康";state.cats[0].working=true;apply();
             panel.Close();apply();if(panel.panel.activeSelf)throw new Exception("Polling reopened dismissed guide");
-            foreach(var cat in state.cats)cat.working=false;panel.Open();apply();if(!panel.notice.text.Contains("出勤する猫がいません"))throw new Exception("No working cat reason missing");
-            state.required_action="先に帰還を確認してください。";apply();if(!panel.notice.text.Contains("帰還"))throw new Exception("Required action reason missing");
-            panel.Disconnect();if(!panel.notice.text.Contains("未接続"))throw new Exception("Offline guide missing");apply();if(panel.notice.text.Contains("未接続"))throw new Exception("Offline message persisted");
-            state.required_action="";Canvas.ForceUpdateCanvases();typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{preview,"Logs/PreparationGuide.png"});
+            foreach(var cat in state.cats)cat.working=false;panel.Open();apply();if(panel.start.interactable || !panel.notice.text.Contains("出勤する猫がいません"))throw new Exception("No working cat reason missing");
+            state.required_action="先に帰還を確認してください。";apply();if(panel.start.interactable || !panel.notice.text.Contains("帰還"))throw new Exception("Required action reason missing");
+            panel.Disconnect();if(panel.work.interactable || panel.start.interactable || !panel.notice.text.Contains("未接続"))throw new Exception("Offline guide missing");apply();if(panel.notice.text.Contains("未接続"))throw new Exception("Offline message persisted");
+            state.required_action="";foreach(var cat in state.cats){cat.health_label="健康";cat.activity_label="在店";}apply();
+            state.day=2;apply();if(!panel.panel.activeSelf || !panel.title.text.Contains("2日目"))throw new Exception("Next day preparation missing");
+            Canvas.ForceUpdateCanvases();if(panel.summary.preferredHeight>panel.summary.rectTransform.rect.height+1 || panel.selectedDetails.preferredHeight>panel.selectedDetails.rectTransform.rect.height+1)throw new Exception("Preparation summary clipped");typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{preview,"Logs/PreparationGuide.png"});
             state.can_set_shifts=false;apply();if(panel.panel.activeSelf || panel.open.gameObject.activeSelf)throw new Exception("Guide remained in business");
             state.can_set_shifts=true;state.game_over=new PythonGameOver{reason="funds",day=1};apply();if(panel.panel.activeSelf || panel.open.gameObject.activeSelf)throw new Exception("Guide obscured game over");
             state.game_over=null;state.instance_id="guide-new";apply();if(!panel.panel.activeSelf)throw new Exception("New game did not show guide");
