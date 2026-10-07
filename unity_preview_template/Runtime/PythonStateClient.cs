@@ -34,6 +34,8 @@ namespace CatCafePreview
         public PythonNextGoal next_goal;
         public PythonPlayerInteraction player_interaction;
         public PythonPatronDispatch patron_dispatch;
+        public PythonMissingCat[] missing_cats;
+        public PythonMissingRest missing_rest;
         public PythonObjectiveProgress objective_progress;
         public PythonStoreEvent store_event;
         public PythonGrowthChoice[] growth_choices;
@@ -167,6 +169,14 @@ namespace CatCafePreview
             pending=new PythonShiftCommand{request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,
                 expected_revision=current.revision,working_cats=new string[0],kind=kind,cat_id=catId,choice=choice,target_type=target};
             preview.RefreshPythonControls();
+        }
+        public void RestForMissing()
+        { if(CanManageSaves && current.missing_rest!=null && current.missing_rest.can_rest)QueuePlayer("rest_for_missing","","",""); }
+        public void ResolveMissing(string eventId)
+        {
+            if(!CanManageSaves || current.missing_cats==null)return;
+            var row=Array.Find(current.missing_cats,r=>r.choice==eventId && r.can_resolve);
+            if(row!=null)QueuePlayer("resolve_missing",row.cat_id,row.choice,"");
         }
         public void DispatchPatron(string catId,string destination)
         {
@@ -338,6 +348,8 @@ namespace CatCafePreview
                                         : command.kind == "purchase_housing" || command.kind == "upgrade_housing" ? "飼育スペースを拡張しました。"
                                         : command.kind == "resolve_store_event" ? (command.choice == "close" ? "休業し、翌日の営業準備へ進みました。" : "店舗イベントに回答しました。")
                                         : command.kind == "resolve_growth" ? "得意分野を選びました。"
+                                        : command.kind == "rest_for_missing" ? "休業し、帰還までの日数を進めました。結果を確認してください。"
+                                        : command.kind == "resolve_missing" ? "猫の帰還と費用を確定しました。出勤設定を確認してください。"
                                         : command.kind == "dispatch_patron" ? "有力者への派遣を開始しました。"
                                         : command.kind == "receive_patron" ? "帰還を確認し、報酬と満足度を受け取りました。出勤設定を確認してください。"
                                         : command.kind == "player_begin" ? "猫との交流を開始しました。"

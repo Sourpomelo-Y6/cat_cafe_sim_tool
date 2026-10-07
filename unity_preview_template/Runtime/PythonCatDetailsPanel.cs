@@ -8,7 +8,8 @@ namespace CatCafePreview
         public GameObject panel;
         public Text title, details;
         public ScrollRect scroll;
-        public Button interact, previousInteraction, dispatch;
+        public Button interact, previousInteraction, dispatch, missing;
+        public void Missing() { GetComponent<PythonMissingPanel>().Open(selectedId); }
         public void Dispatch() { GetComponent<PythonDispatchPanel>().Open(selectedId); }
         public Text interactionNotice;
         private string selectedId;
@@ -53,6 +54,7 @@ namespace CatCafePreview
         }
         public void RefreshControls()
         {
+            if(missing!=null)missing.interactable=GetComponent<PythonStateClient>().CanManageSaves && selectedId!=null;
             if(dispatch!=null)dispatch.interactable=GetComponent<PythonStateClient>().CanManageSaves && selectedId!=null;
             if(interact==null)return;
             var client=GetComponent<PythonStateClient>();
