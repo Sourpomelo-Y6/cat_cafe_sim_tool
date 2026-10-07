@@ -148,6 +148,7 @@ namespace CatCafePreview
             if (roster != null) roster.Apply(state);
             var service = GetComponent<PythonServiceScreen>();
             if (service != null) service.Apply(state);
+            var closing=GetComponent<PythonClosingPanel>();if(closing!=null)closing.Apply(state);
             var intake = GetComponent<PythonIntakePanel>();
             if (intake != null) intake.Apply(state);
             var housing = GetComponent<PythonHousingPanel>();
@@ -208,6 +209,7 @@ namespace CatCafePreview
 
         public void RefreshPythonControls()
         {
+            var closing=GetComponent<PythonClosingPanel>();if(closing!=null)closing.RefreshControls();
             var player=GetComponent<PythonPlayerPanel>();if(player!=null)player.RefreshControls();
             var dispatch=GetComponent<PythonDispatchPanel>();if(dispatch!=null)dispatch.RefreshControls();
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.RefreshControls();
@@ -244,6 +246,7 @@ namespace CatCafePreview
 
         public void PythonNotice(string message)
         {
+            var closing=GetComponent<PythonClosingPanel>();if(closing!=null && closing.panel.activeSelf)closing.Notify(message);
             var player=GetComponent<PythonPlayerPanel>();if(player!=null && player.panel.activeSelf)player.notice.text=message;
             var dispatch=GetComponent<PythonDispatchPanel>();if(dispatch!=null && dispatch.panel.activeSelf)dispatch.notice.text=message;
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null && missing.panel.activeSelf && !string.IsNullOrEmpty(message))missing.notice.text=message;
@@ -312,6 +315,7 @@ namespace CatCafePreview
 
         public void PythonConnectionError(string message)
         {
+            var closing=GetComponent<PythonClosingPanel>();if(closing!=null)closing.Disconnect();
             var menu=GetComponent<PythonNewGamePanel>();if(menu!=null) menu.Disconnect();
             var roster = GetComponent<PythonCatRoster>();
             if (roster != null) roster.Disconnect();
