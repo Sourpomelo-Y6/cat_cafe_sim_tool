@@ -57,7 +57,7 @@ namespace CatCafePreview
         public string session_id, cat_id, name, mode, history, reason;
         public bool active, can_finish;
         public int remaining_ticks, remaining_sets;
-        public float affinity_before, affinity_after, affinity_delta, stamina, engagement, tension;
+        public float affinity_before, affinity_after, affinity_delta, stamina_before, stamina, engagement, tension;
         public PythonEventChoice[] actions, targets;
     }
     [Serializable] public class PythonNextGoal

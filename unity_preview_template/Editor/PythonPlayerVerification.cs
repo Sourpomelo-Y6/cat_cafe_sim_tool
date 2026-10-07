@@ -46,14 +46,14 @@ namespace CatCafePreview.Editor
                 else if(stage==6 && state.player_interaction.remaining_ticks==9)
                 {
                     if(JsonUtility.ToJson(state.player_interaction)!=SessionState.GetString(Key+"midway","") || !player.panel.activeSelf)throw new Exception("Midway save restore mismatch");
-                    player.Close();detail.Open("cat-mugi");if(detail.interact.GetComponentInChildren<UnityEngine.UI.Text>().text!="交流を再開")throw new Exception("Resume entry missing");
+                    player.back.onClick.Invoke();if(player.panel.activeSelf || !detail.panel.activeSelf)throw new Exception("Live return to details failed");if(detail.interact.GetComponentInChildren<UnityEngine.UI.Text>().text!="交流を再開")throw new Exception("Resume entry missing");
                     detail.interact.onClick.Invoke();if(!player.panel.activeSelf)throw new Exception("Resume button failed");
                     player.targets.value=Array.FindIndex(state.player_interaction.targets,row=>row.choice=="teaser");player.actions[5].onClick.Invoke();move(7);
                 }
                 else if(stage==7 && state.player_interaction.mode=="ねこじゃらし") { player.actions[0].onClick.Invoke();move(8); }
                 else if(stage==8 && state.player_interaction.remaining_ticks==7)
                 {
-                    Canvas.ForceUpdateCanvases();Capture(preview,"Logs/PlayerLive.png");player.finish.onClick.Invoke();if(player.finish.interactable)throw new Exception("Player finish busy guard failed");move(9);
+                    if(player.panel.transform.GetSiblingIndex()!=player.panel.transform.parent.childCount-1)throw new Exception("Interaction obscured by another panel");Canvas.ForceUpdateCanvases();Capture(preview,"Logs/PlayerLive.png");player.finish.onClick.Invoke();if(player.finish.interactable)throw new Exception("Player finish busy guard failed");move(9);
                 }
                 else if(stage==9 && !state.player_interaction.active)
                 {

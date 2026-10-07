@@ -251,7 +251,10 @@ namespace CatCafePreview
         private void PrioritizeRequiredPanel()
         {
             var client=GetComponent<PythonStateClient>();var state=client?.CurrentState;
-            if(state==null || state.game_over!=null || string.IsNullOrEmpty(state.required_action))return;
+            if(state==null || state.game_over!=null)return;
+            var player=GetComponent<PythonPlayerPanel>();
+            if(state.player_interaction!=null && player!=null && player.panel.activeSelf){player.panel.transform.SetAsLastSibling();return;}
+            if(string.IsNullOrEmpty(state.required_action))return;
             var intake=GetComponent<PythonIntakePanel>();if(intake!=null && Front(intake.panel,intake.accept,intake.decline))return;
             var growth=GetComponent<PythonGrowthPanel>();if(growth!=null && Front(growth.panel,growth.choices))return;
             var store=GetComponent<PythonStoreEventPanel>();if(store!=null && Front(store.panel,store.choices))return;
