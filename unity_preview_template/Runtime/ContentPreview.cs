@@ -168,6 +168,7 @@ namespace CatCafePreview
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.Apply(state);
             var preparation=GetComponent<PythonPreparationPanel>();if(preparation!=null)preparation.Apply(state);
             var ended=GetComponent<PythonGameOverPanel>();if(ended!=null)ended.Apply(state);
+            PrioritizeRequiredPanel();
         }
         private void AppendObjectiveProgress()
         {
@@ -209,6 +210,7 @@ namespace CatCafePreview
 
         public void RefreshPythonControls()
         {
+            var navigation=GetComponent<PythonReturnToTitle>();if(navigation!=null)navigation.RefreshControls();
             var closing=GetComponent<PythonClosingPanel>();if(closing!=null)closing.RefreshControls();
             var player=GetComponent<PythonPlayerPanel>();if(player!=null)player.RefreshControls();
             var dispatch=GetComponent<PythonDispatchPanel>();if(dispatch!=null)dispatch.RefreshControls();
@@ -242,6 +244,25 @@ namespace CatCafePreview
             if (growth != null) growth.RefreshControls();
             var auto = GetComponent<PythonAutoPanel>();
             if (auto != null) auto.RefreshControls();
+            PrioritizeRequiredPanel();
+        }
+
+        private void PrioritizeRequiredPanel()
+        {
+            var client=GetComponent<PythonStateClient>();var state=client?.CurrentState;
+            if(state==null || state.game_over!=null || string.IsNullOrEmpty(state.required_action))return;
+            var intake=GetComponent<PythonIntakePanel>();if(intake!=null && Front(intake.panel,intake.accept,intake.decline))return;
+            var growth=GetComponent<PythonGrowthPanel>();if(growth!=null && Front(growth.panel,growth.choices))return;
+            var store=GetComponent<PythonStoreEventPanel>();if(store!=null && Front(store.panel,store.choices))return;
+            var goal=GetComponent<PythonGoalPanel>();if(goal!=null && Front(goal.panel,goal.resume,goal.advance))return;
+            var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null && Front(adoption.panel,adoption.accept,adoption.decline,adoption.confirmAccept))return;
+            var missing=GetComponent<PythonMissingPanel>();if(missing!=null && Front(missing.panel,missing.confirm))return;
+            var dispatch=GetComponent<PythonDispatchPanel>();if(dispatch!=null)Front(dispatch.panel,dispatch.receive);
+        }
+        private static bool Front(GameObject panel,params Button[] buttons)
+        {
+            if(panel==null || !panel.activeSelf || buttons==null || !Array.Exists(buttons,b=>b!=null && b.gameObject.activeInHierarchy && b.interactable))return false;
+            panel.transform.SetAsLastSibling();return true;
         }
 
         public void PythonNotice(string message)
@@ -315,6 +336,7 @@ namespace CatCafePreview
 
         public void PythonConnectionError(string message)
         {
+            var navigation=GetComponent<PythonReturnToTitle>();if(navigation!=null)navigation.RefreshControls();
             var closing=GetComponent<PythonClosingPanel>();if(closing!=null)closing.Disconnect();
             var menu=GetComponent<PythonNewGamePanel>();if(menu!=null) menu.Disconnect();
             var roster = GetComponent<PythonCatRoster>();

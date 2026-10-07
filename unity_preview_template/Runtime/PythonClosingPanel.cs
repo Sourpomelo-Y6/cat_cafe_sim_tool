@@ -19,10 +19,10 @@ namespace CatCafePreview
             if(identity!=key || (closed && !wasClosed)){identity=key;message="";panel.SetActive(closed && string.IsNullOrEmpty(state.required_action));}
             wasClosed=closed;
             if(!closed)panel.SetActive(false);
-            open.gameObject.SetActive(closed && (state.next_goal==null || state.goal_result!=null));
+            open.gameObject.SetActive(closed);
             Render();RefreshControls();
         }
-        public void Open() { if(current==null || !current.closed || current.game_over!=null)return;panel.SetActive(true);panel.transform.SetAsLastSibling();Render(); }
+        public void Open() { if(current==null || !current.closed || current.game_over!=null)return;panel.SetActive(true);panel.transform.SetAsLastSibling();Render();RefreshControls(); }
         public void Close() { panel.SetActive(false); }
         public void Save() { GetComponent<PythonStateClient>().SaveGame(); }
         public void Next() { if(current!=null && current.closed && next.interactable)GetComponent<PythonStateClient>().ProgressBusiness(); }

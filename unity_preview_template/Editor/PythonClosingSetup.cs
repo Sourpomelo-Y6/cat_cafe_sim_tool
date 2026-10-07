@@ -42,7 +42,7 @@ namespace CatCafePreview.Editor
             panel.save=Button(card.transform,"Save","保存",24,550,270);UnityEventTools.AddPersistentListener(panel.save.onClick,panel.Save);
             panel.next=Button(card.transform,"Next","翌日の準備へ",314,550,300);UnityEventTools.AddPersistentListener(panel.next.onClick,panel.Next);
             panel.close=Button(card.transform,"Close","閉じる",634,550,282);UnityEventTools.AddPersistentListener(panel.close.onClick,panel.Close);
-            panel.open=Button(root,"Closing Entry","1日の振り返り",332,24,240);UnityEventTools.AddPersistentListener(panel.open.onClick,panel.Open);
+            panel.open=Button(root,"Closing Entry","1日の振り返り",384,128,240);UnityEventTools.AddPersistentListener(panel.open.onClick,panel.Open);
             panel.open.gameObject.SetActive(false);overlay.SetActive(false);EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);Debug.Log("CAT_CAFE_CLOSING_UI_OK");
         }
         public static void BuildAndVerify()
