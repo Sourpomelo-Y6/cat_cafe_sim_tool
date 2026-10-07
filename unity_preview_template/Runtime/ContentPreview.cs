@@ -165,6 +165,7 @@ namespace CatCafePreview
             var dispatch=GetComponent<PythonDispatchPanel>();if(dispatch!=null)dispatch.Apply(state);
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.Apply(state);
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.Apply(state);
+            var preparation=GetComponent<PythonPreparationPanel>();if(preparation!=null)preparation.Apply(state);
             var ended=GetComponent<PythonGameOverPanel>();if(ended!=null)ended.Apply(state);
         }
         private void AppendObjectiveProgress()
@@ -211,6 +212,7 @@ namespace CatCafePreview
             var dispatch=GetComponent<PythonDispatchPanel>();if(dispatch!=null)dispatch.RefreshControls();
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.RefreshControls();
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.RefreshControls();
+            var preparation=GetComponent<PythonPreparationPanel>();if(preparation!=null)preparation.RefreshControls();
             var ended=GetComponent<PythonGameOverPanel>();if(ended!=null)ended.RefreshControls();
             var detail=GetComponent<PythonCatDetailsPanel>();if(detail!=null)detail.RefreshControls();
             var menu=GetComponent<PythonNewGamePanel>();if(menu!=null) menu.RefreshControls();
@@ -319,6 +321,7 @@ namespace CatCafePreview
             var dispatch=GetComponent<PythonDispatchPanel>();if(dispatch!=null)dispatch.Disconnect();
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.Disconnect();
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.Disconnect();
+            var preparation=GetComponent<PythonPreparationPanel>();if(preparation!=null)preparation.Disconnect();
             var ended=GetComponent<PythonGameOverPanel>();if(ended!=null)ended.Disconnect();
             var service = GetComponent<PythonServiceScreen>();
             if (service != null) service.Disconnect();
