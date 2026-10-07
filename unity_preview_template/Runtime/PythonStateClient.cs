@@ -36,6 +36,7 @@ namespace CatCafePreview
         public PythonPatronDispatch patron_dispatch;
         public PythonMissingCat[] missing_cats;
         public PythonMissingRest missing_rest;
+        public PythonAdoption adoption;
         public PythonObjectiveProgress objective_progress;
         public PythonStoreEvent store_event;
         public PythonGrowthChoice[] growth_choices;
@@ -96,6 +97,7 @@ namespace CatCafePreview
         public string choice = "";
         public string cat_id = "";
         public string target_type = "";
+        public string event_id = "";
     }
     [Serializable] public class PythonCommandReply
     {
@@ -169,6 +171,21 @@ namespace CatCafePreview
             pending=new PythonShiftCommand{request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,
                 expected_revision=current.revision,working_cats=new string[0],kind=kind,cat_id=catId,choice=choice,target_type=target};
             preview.RefreshPythonControls();
+        }
+        public void ToggleAdoption()
+        {
+            if(CanManageSaves && current.adoption!=null && current.adoption.can_configure)QueueAdoption("configure_adoption","",current.adoption.enabled ? "off" : "on","");
+        }
+        public void ResolveAdoption(string eventId,string choice)
+        {
+            if(!CanManageSaves || current.adoption==null || current.adoption.events==null)return;
+            var row=Array.Find(current.adoption.events,r=>r.event_id==eventId);
+            if(row!=null && (choice=="accept" ? row.can_accept : choice=="decline" && row.can_decline))QueueAdoption("resolve_adoption",row.cat_id,choice,eventId);
+        }
+        private void QueueAdoption(string kind,string catId,string choice,string eventId)
+        {
+            StopAutomatic();pending=new PythonShiftCommand{request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,
+                expected_revision=current.revision,working_cats=new string[0],kind=kind,cat_id=catId,choice=choice,event_id=eventId};preview.RefreshPythonControls();
         }
         public void RestForMissing()
         { if(CanManageSaves && current.missing_rest!=null && current.missing_rest.can_rest)QueuePlayer("rest_for_missing","","",""); }
@@ -339,7 +356,7 @@ namespace CatCafePreview
                                     Accept(reply.state);
                                     if(command.kind=="load_game")
                                     { var player=GetComponent<PythonPlayerPanel>();if(player!=null)player.Restore(); }
-                                    if(command.kind=="new_game" || command.kind=="load_game") { var menu=GetComponent<PythonNewGamePanel>(); if(menu!=null) menu.Close(); }
+                                    if(command.kind=="new_game" || command.kind=="load_game") { var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.ResetConfirmation();var menu=GetComponent<PythonNewGamePanel>(); if(menu!=null) menu.Close(); }
                                     notice = command.kind == "set_shifts" ? "出勤・休養を変更しました。"
                                         : command.kind == "save_game" ? "保存しました。" : command.kind == "load_game" ? "保存したゲームを再開しました。"
                                         : command.kind == "new_game" ? "新規ゲームを作成し、初期状態を保存しました。出勤・休養を設定して営業を始めてください。"
@@ -348,6 +365,8 @@ namespace CatCafePreview
                                         : command.kind == "purchase_housing" || command.kind == "upgrade_housing" ? "飼育スペースを拡張しました。"
                                         : command.kind == "resolve_store_event" ? (command.choice == "close" ? "休業し、翌日の営業準備へ進みました。" : "店舗イベントに回答しました。")
                                         : command.kind == "resolve_growth" ? "得意分野を選びました。"
+                                        : command.kind == "configure_adoption" ? "譲渡申し出の発生設定を変更しました。"
+                                        : command.kind == "resolve_adoption" ? (command.choice=="accept" ? "譲渡が成立しました。" : "譲渡申し出を見送りました。")
                                         : command.kind == "rest_for_missing" ? "休業し、帰還までの日数を進めました。結果を確認してください。"
                                         : command.kind == "resolve_missing" ? "猫の帰還と費用を確定しました。出勤設定を確認してください。"
                                         : command.kind == "dispatch_patron" ? "有力者への派遣を開始しました。"
