@@ -52,8 +52,15 @@ namespace CatCafePreview.Editor
             Place(panel.finish.GetComponent<RectTransform>(),24,550,432,40);
             var old=card.Find("History Scroll");if(old!=null)UnityEngine.Object.DestroyImmediate(old.gameObject);
             var heading=card.Find("History Heading");if(heading!=null)UnityEngine.Object.DestroyImmediate(heading.gameObject);
-            Label(card,"History Heading",480,72,436,28,18).text="行動と猫の反応";
-            panel.history=ScrollText(card,"History Scroll",480,110,436,428,17,out panel.historyScroll);
+            Label(card,"History Heading",480,292,436,28,18).text="行動と猫の反応";
+            panel.history=ScrollText(card,"History Scroll",480,330,436,208,17,out panel.historyScroll);
+            var oldPicture=card.Find("Action Picture");if(oldPicture!=null)UnityEngine.Object.DestroyImmediate(oldPicture.gameObject);
+            var oldNotice=card.Find("Image Notice");if(oldNotice!=null)UnityEngine.Object.DestroyImmediate(oldNotice.gameObject);
+            var frame=Box(card,"Action Picture",480,72,436,208,new Color(.93f,.94f,.89f));
+            var image=new GameObject("Image",typeof(RectTransform),typeof(RawImage),typeof(AspectRatioFitter));image.transform.SetParent(frame.transform,false);
+            panel.picture=image.GetComponent<RawImage>();panel.picture.raycastTarget=false;
+            image.GetComponent<AspectRatioFitter>().aspectMode=AspectRatioFitter.AspectMode.FitInParent;
+            panel.imageNotice=Label(card,"Image Notice",480,150,436,40,18);panel.imageNotice.alignment=TextAnchor.MiddleCenter;
             panel.back=card.Find("Close").GetComponent<Button>();panel.back.onClick=new Button.ButtonClickedEvent();
             UnityEventTools.AddPersistentListener(panel.back.onClick,panel.ReturnToDetails);
             panel.back.GetComponentInChildren<Text>().text="猫の詳細へ戻る";
@@ -66,11 +73,17 @@ namespace CatCafePreview.Editor
             var client=preview.GetComponent<PythonStateClient>();var flags=System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic;
             typeof(PythonStateClient).GetField("preview",flags).SetValue(client,preview);
             var state=PythonServiceSetup.Sample();state.cats[0].can_player_start=true;
-            state.player_interaction=new PythonPlayerInteraction{session_id="layout",cat_id=state.cats[0].cat_id,name="ミケ",active=true,remaining_ticks=8,remaining_sets=2,mode="ねこじゃらし",stamina_before=100,stamina=92,affinity_after=1.5f,affinity_delta=1.5f,can_finish=true,
+            state.player_interaction=new PythonPlayerInteraction{session_id="layout",cat_id=state.cats[0].cat_id,content_cat_id=state.cats[0].content_cat_id,scene_key="teaser",name="ミケ",active=true,remaining_ticks=8,remaining_sets=2,mode="ねこじゃらし",stamina_before=100,stamina=92,affinity_after=1.5f,affinity_delta=1.5f,can_finish=true,
                 actions=new[]{new PythonEventChoice{choice="direct",label="素直に動かす",can_select=true}},targets=new[]{new PythonEventChoice{choice="voice",label="声をかける"}},history="1：素直に動かす / 好意的に応じる\n体力 92 / 好感度 +1.5"};
             Action apply=()=>typeof(PythonStateClient).GetMethod("Accept",flags).Invoke(client,new object[]{state});apply();
             var player=preview.GetComponent<PythonPlayerPanel>();
             if(!player.summary.text.Contains("100 → 92") || !player.back.interactable)throw new Exception("Interaction summary or return missing");
+            if(player.picture.texture==null || player.picture.texture!=preview.PlayerTexture(state.cats[0].content_cat_id,"play"))throw new Exception("Play image fallback missing");
+            state.player_interaction.scene_key="brush";apply();
+            if(player.picture.texture!=preview.PlayerTexture(state.cats[0].content_cat_id,"pet"))throw new Exception("Brush fallback incorrect");
+            state.player_interaction.content_cat_id="missing-cat";apply();
+            if(player.picture.texture!=null || string.IsNullOrEmpty(player.imageNotice.text))throw new Exception("Missing image did not clear");
+            state.player_interaction.content_cat_id=state.cats[0].content_cat_id;state.player_interaction.scene_key="teaser";apply();
             Canvas.ForceUpdateCanvases();typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{preview,"Logs/PlayerLayout.png"});
             player.ReturnToDetails();if(player.panel.activeSelf || !preview.GetComponent<PythonCatDetailsPanel>().panel.activeSelf)throw new Exception("Return to details failed");
             player.Open();state.player_interaction.active=false;state.player_interaction.can_finish=false;apply();

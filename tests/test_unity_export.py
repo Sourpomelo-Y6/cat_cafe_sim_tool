@@ -41,6 +41,29 @@ class UnityExportTests(unittest.TestCase):
             self.assertNotEqual(folder, second)
             self.assertEqual(json.loads((folder / 'bundle.json').read_text(encoding='utf-8')), data)
 
+    def test_interaction_images_are_optional_and_exported(self):
+        from prompt_presets import PromptPresets, DEFAULTS
+        from interaction_scenes import ACTION_PROMPTS
+        from lora_settings import LoraSettings, EMPTY
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            registry = ImageRegistry(root / 'source')
+            registry.register('a', 'ball', ASSET)
+            folder, _ = export_bundle({'a': 'ミケ'}, registry, TextStore(root / 'texts.json'), root / 'exports')
+            scenes = json.loads((folder / 'bundle.json').read_text(encoding='utf-8'))['cats'][0]['scenes']
+            self.assertEqual(len(scenes), 5)
+            self.assertEqual(scenes[-1]['key'], 'ball')
+            self.assertTrue((folder / scenes[-1]['image']).is_file())
+            old = dict(DEFAULTS, actions={k: v for k, v in DEFAULTS['actions'].items() if k not in ACTION_PROMPTS})
+            path = root / 'presets.json'
+            path.write_text(json.dumps(old), encoding='utf-8')
+            presets = PromptPresets(path)
+            self.assertIn('small ball', presets.assemble('a', 'ball'))
+            self.assertEqual(json.loads(path.read_text(encoding='utf-8')), old)
+            lora = LoraSettings(root / 'lora.json')
+            lora.save('a', 'ball', EMPTY, EMPTY)
+            self.assertIn('ball', lora.read()['scenes'])
+
     def test_corrupt_sources_do_not_create_output(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

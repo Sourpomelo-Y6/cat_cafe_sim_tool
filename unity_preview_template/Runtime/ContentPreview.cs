@@ -185,6 +185,22 @@ namespace CatCafePreview
                 description.text += "\n\n進行に必要な操作\n" + pythonState.required_action;
         }
 
+        public Texture2D PlayerTexture(string catId, string key)
+        {
+            var cat = bundle == null ? null : Array.Find(bundle.cats, item => item.cat_id == catId);
+            if (cat == null) return null;
+            string fallback = key == "brush" || key == "pet" ? "pet"
+                : key == "teaser" || key == "ball" || key == "plush" || key == "tunnel" ? "play" : "normal";
+            foreach (var candidate in new[] { key, fallback, "normal" })
+            {
+                var scene = Array.Find(cat.scenes, item => item.key == candidate);
+                if (scene == null || string.IsNullOrEmpty(scene.image)) continue;
+                var texture = Resources.Load<Texture2D>(resourceRoot + scene.image.Substring(0, scene.image.Length - 4));
+                if (texture != null) return texture;
+            }
+            return null;
+        }
+
         public Texture2D PythonCatTexture(PythonCatState cat)
         {
             var content = bundle == null ? null : Array.Find(bundle.cats, item => item.cat_id == cat.content_cat_id);

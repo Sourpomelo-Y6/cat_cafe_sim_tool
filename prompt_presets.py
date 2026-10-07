@@ -17,6 +17,8 @@ DEFAULTS = {
         'sleep': 'curled up asleep on the mat, closed eyes, no people, no hands',
     },
 }
+from interaction_scenes import ACTION_PROMPTS
+DEFAULTS['actions'].update(ACTION_PROMPTS)
 GENERIC_CAT = 'one adult cat, consistent coat markings and body proportions'
 
 
@@ -31,7 +33,8 @@ class PromptPresets:
         if (not isinstance(data, dict) or data.get('version') != 1
                 or any(not isinstance(data.get(key), str) or not data[key].strip() for key in ('style', 'background'))
                 or not isinstance(data.get('cats'), dict) or not isinstance(data.get('actions'), dict)
-                or set(data['actions']) != set(DEFAULTS['actions'])):
+                or not {'normal', 'play', 'pet', 'sleep'}.issubset(data['actions'])
+                or not set(data['actions']).issubset(DEFAULTS['actions'])):
             raise ValueError('プロンプト設定の形式が不正です。')
         for mapping in (data['cats'], data['actions']):
             if any(not isinstance(key, str) or not key or not isinstance(value, str) or not value.strip()
@@ -45,6 +48,8 @@ class PromptPresets:
             if not isinstance(cat_id, str) or not cat_id:
                 raise ValueError('外見プロフィールの猫IDが不正です。')
             validate_appearance(profile)
+        for key, value in ACTION_PROMPTS.items():
+            data['actions'].setdefault(key, value)
         return data
 
     def fields(self, cat_id, scene):

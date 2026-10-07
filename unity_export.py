@@ -41,7 +41,10 @@ def export_bundle(catalog, registry, texts, destination, *, profiles=None):
         profile = profiles.get(cat_id, {})
         cat['appearance'] = validate_appearance(profile.get('appearance', {}))
         cat['features'] = list(profile.get('features', []))
-        for key, label, fallback in SCENES:
+        from interaction_scenes import INTERACTION_SCENES
+        extra = tuple((key, label, label + 'をしています。') for key, label in INTERACTION_SCENES
+                      if key in images['cats'].get(cat_id, {}))
+        for key, label, fallback in SCENES + extra:
             text = record.get('scenes', {}).get(key, '').strip()
             if not text:
                 warnings.append(f'{name} / {label}：描写が未登録。定型文を使用します。')

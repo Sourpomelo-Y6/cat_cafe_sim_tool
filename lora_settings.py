@@ -7,7 +7,7 @@ from pathlib import Path
 
 DEFAULT_PATH = Path(__file__).resolve().parent / 'user_data' / 'lora_settings.json'
 EMPTY = dict(enabled=False, name='', strength_model=0.7, strength_clip=0.7, trigger='')
-SCENES = ('normal', 'play', 'pet', 'sleep')
+from content_images import SCENE_IDS as SCENES
 
 
 def validate_lora(row):

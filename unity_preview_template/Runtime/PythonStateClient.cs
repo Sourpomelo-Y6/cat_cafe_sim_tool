@@ -54,7 +54,7 @@ namespace CatCafePreview
     [Serializable] public class PythonObjectiveProgress { public string mode, label, status, summary, details; }
     [Serializable] public class PythonPlayerInteraction
     {
-        public string session_id, cat_id, name, mode, history, reason;
+        public string session_id, cat_id, content_cat_id, scene_key, name, mode, history, reason;
         public bool active, can_finish;
         public int remaining_ticks, remaining_sets;
         public float affinity_before, affinity_after, affinity_delta, stamina_before, stamina, engagement, tension;

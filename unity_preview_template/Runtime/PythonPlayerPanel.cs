@@ -8,6 +8,8 @@ namespace CatCafePreview
     {
         public GameObject panel;
         public Text title, summary, history, notice, choiceLabel;
+        public RawImage picture;
+        public Text imageNotice;
         public Dropdown targets;
         public Button[] actions;
         public Button finish, back;
@@ -55,6 +57,14 @@ namespace CatCafePreview
                 +"\n好感度 "+current.affinity_before.ToString("0.#")+" → "+current.affinity_after.ToString("0.#")+"（"+current.affinity_delta.ToString("+0.#;-0.#;0")+"・"+(current.active ? "見込み" : "確定")+"）"
                 +"\n体力 "+current.stamina_before.ToString("0.#")+" → "+current.stamina.ToString("0.#")
                 +"\n関心 "+current.engagement.ToString("0.#")+" / テンション "+current.tension.ToString("0.#");
+            if(picture != null)
+            {
+                var texture=GetComponent<ContentPreview>().PlayerTexture(current.content_cat_id, current.scene_key);
+                picture.texture=texture;picture.enabled=texture!=null;
+                var fitter=picture.GetComponent<AspectRatioFitter>();
+                if(texture!=null && fitter!=null)fitter.aspectRatio=(float)texture.width/texture.height;
+                if(imageNotice!=null)imageNotice.text=texture==null ? "この猫の画像は未登録です。" : "";
+            }
             history.text=string.IsNullOrEmpty(current.history) ? "行動を選ぶと猫の反応を表示します。" : current.history;
             string selected=targets.options.Count>0 ? targets.options[targets.value].text : "";
             targets.options.Clear();

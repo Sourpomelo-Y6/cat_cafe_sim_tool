@@ -2,7 +2,8 @@
 from pathlib import Path
 from content_images import ImageRegistry, load_display_image
 
-SCENES = (('normal', '通常'), ('play', '遊ぶ'), ('pet', '撫でられる'), ('sleep', '眠る'))
+from interaction_scenes import INTERACTION_SCENES
+SCENES = (('normal', '通常'), ('play', '遊ぶ'), ('pet', '撫でられる'), ('sleep', '眠る')) + INTERACTION_SCENES
 
 
 class ContentImageToolWindow:

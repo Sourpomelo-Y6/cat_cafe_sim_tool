@@ -12,7 +12,7 @@ namespace CatCafePreview
 
     public static class ContentValidation
     {
-        public static readonly string[] SceneKeys = { "normal", "play", "pet", "sleep" };
+        public static readonly string[] SceneKeys = { "normal", "play", "pet", "sleep", "teaser", "ball", "plush", "tunnel", "brush", "voice", "presence", "pause" };
         public static void Validate(ContentBundle bundle)
         {
             if (bundle == null || bundle.version != 1 || !Regex.IsMatch(bundle.pack_id ?? "", "^[a-f0-9]{32}$")
@@ -23,7 +23,7 @@ namespace CatCafePreview
             {
                 if (cat == null || string.IsNullOrWhiteSpace(cat.cat_id) || !ids.Add(cat.cat_id)
                     || string.IsNullOrWhiteSpace(cat.name) || string.IsNullOrWhiteSpace(cat.introduction)
-                    || cat.introduction.Length > 2000 || cat.scenes == null || cat.scenes.Length != 4)
+                    || cat.introduction.Length > 2000 || cat.scenes == null || cat.scenes.Length < 4)
                     throw new ArgumentException("Invalid cat content.");
                 var keys = new HashSet<string>();
                 foreach (var scene in cat.scenes)
@@ -34,6 +34,8 @@ namespace CatCafePreview
                         || (scene.image != "" && !Regex.IsMatch(scene.image, "^images/[a-f0-9]{64}\\.png$")))
                         throw new ArgumentException("Invalid scene content or image path.");
                 }
+                foreach (var required in new[] { "normal", "play", "pet", "sleep" })
+                    if (!keys.Contains(required)) throw new ArgumentException("Missing base scene.");
             }
         }
     }
