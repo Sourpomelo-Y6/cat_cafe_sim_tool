@@ -28,6 +28,7 @@ namespace CatCafePreview
         public PythonIntakeState intake_request;
         public PythonHousingState housing;
         public PythonGoalResult goal_result;
+        public PythonObjectiveProgress objective_progress;
         public PythonStoreEvent store_event;
         public PythonGrowthChoice[] growth_choices;
         public float funds;
@@ -40,9 +41,10 @@ namespace CatCafePreview
     { public string kind, title; public int day; public float funds; public PythonEventChoice[] choices; }
     [Serializable] public class PythonEventChoice
     { public string choice, label, detail, reason; public bool can_select; }
+    [Serializable] public class PythonObjectiveProgress { public string mode, label, status, summary, details; }
     [Serializable] public class PythonGoalResult
     {
-        public string status, reason;
+        public string status, reason, kind, title, details;
         public int stage, started_day, deadline, resolved_day;
         public float target, popularity, funds;
         public bool can_continue;
@@ -128,7 +130,7 @@ namespace CatCafePreview
         {
             if (!CanContinueGoal) return;
             pending = new PythonShiftCommand { request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,
-                expected_revision=current.revision,working_cats=new string[0],kind="continue_goal" };
+                expected_revision=current.revision,working_cats=new string[0],kind=string.IsNullOrEmpty(current.goal_result.kind) ? "continue_goal" : current.goal_result.kind };
             preview.RefreshPythonControls();
         }
         public bool CanRespondGrowth(int index)
@@ -270,7 +272,7 @@ namespace CatCafePreview
                                         : command.kind == "purchase_housing" || command.kind == "upgrade_housing" ? "飼育スペースを拡張しました。"
                                         : command.kind == "resolve_store_event" ? (command.choice == "close" ? "休業し、翌日の営業準備へ進みました。" : "店舗イベントに回答しました。")
                                         : command.kind == "resolve_growth" ? "得意分野を選びました。"
-                                        : command.kind == "continue_goal" ? "目標結果を確認しました。営業を続けられます。"
+                                        : (command.kind == "continue_goal" || command.kind == "continue_patron" || command.kind == "continue_bond_goal") ? "目標結果を確認しました。営業を続けられます。"
                                         : reply.state.closed ? "閉店しました。結果を確認してください。" : "営業を進めました。";
                                 }
                                 else

@@ -14,13 +14,19 @@ namespace CatCafePreview
             var result=state.goal_result;
             panel.SetActive(result != null);
             if(result == null)return;
-            title.text=result.status=="cleared" ? "人気目標を達成しました" : "人気目標の期限を迎えました";
-            details.text="第" + result.stage + "段階の結果\n\n目標人気：" + result.target + "\n現在の人気：" + result.popularity
+            string previousDetails=details.text;
+            title.text=!string.IsNullOrEmpty(result.title) ? result.title : result.status=="cleared" ? "人気目標を達成しました" : "人気目標の期限を迎えました";
+            details.text=!string.IsNullOrEmpty(result.details) ? result.details : "第" + result.stage + "段階の結果\n\n目標人気：" + result.target + "\n現在の人気：" + result.popularity
                 + "\n結果：" + (result.status=="cleared" ? "達成" : "期限内未達")
                 + "\n挑戦期間：" + result.started_day + "〜" + result.deadline + "日目\n結果確定：" + result.resolved_day + "日目"
                 + "\n所持金：" + result.funds + "\n\n「継続営業」で結果を確認し、自由営業を続けます。"
                 + "\n猫や資金、人気を引き継いで遊べます。";
             notice.text=result.can_continue ? "内容を確認して「継続営業」を選んでください。" : result.reason;
+            if(previousDetails!=details.text)
+            {
+                var scroll=details.GetComponentInParent<ScrollRect>();
+                if(scroll!=null) { scroll.content.anchoredPosition=Vector2.zero; scroll.verticalNormalizedPosition=1; }
+            }
             RefreshControls();
         }
         public void RefreshControls() { resume.interactable=GetComponent<PythonStateClient>().CanContinueGoal; }

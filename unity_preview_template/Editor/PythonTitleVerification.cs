@@ -73,7 +73,13 @@ namespace CatCafePreview.Editor
                         if(!detail.panel.activeSelf || !detail.details.text.Contains("成長"))throw new Exception("Live cat details missing");
                         Canvas.ForceUpdateCanvases();
                         typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{preview,"Logs/FlowDetails-"+objective+".png"});
-                        detail.Close();SessionState.SetInt(Key+"tick",client.CurrentState.tick);SessionState.SetFloat(Key+"funds",client.CurrentState.funds);
+                        detail.Close();
+                        var progress=client.CurrentState.objective_progress;
+                        var heading=preview.GetComponent<PythonServiceScreen>().heading;
+                        Canvas.ForceUpdateCanvases();
+                        if(progress==null || progress.mode!=objective || !heading.text.Contains(progress.summary) || heading.preferredHeight>heading.rectTransform.rect.height || !preview.DisplayText.Contains(progress.details))throw new Exception("Live objective progress missing or clipped: "+objective);
+                        typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{preview,"Logs/Objective-"+objective+".png"});
+                        SessionState.SetInt(Key+"tick",client.CurrentState.tick);SessionState.SetFloat(Key+"funds",client.CurrentState.funds);
                         SessionState.SetInt(Key+"count",client.GetComponent<PythonSavePanel>().Count);
                         preview.GetSceneButton(3).onClick.Invoke();SessionState.SetInt(Key,25);
                     }
