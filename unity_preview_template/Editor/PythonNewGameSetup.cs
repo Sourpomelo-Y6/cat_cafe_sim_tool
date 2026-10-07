@@ -8,7 +8,6 @@ namespace CatCafePreview.Editor
 {
     public static class PythonNewGameSetup
     {
-        [MenuItem("Cat Cafe/開発用/UI再生成/新規ゲーム・開始条件",false,7)]
         public static void Build()
         {
             var scene=EditorSceneManager.OpenScene("Assets/Scenes/CatCafePythonState.unity");
@@ -61,7 +60,7 @@ namespace CatCafePreview.Editor
             var flags=System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic;
             typeof(PythonStateClient).GetField("preview",flags).SetValue(client,preview);
             var state=PythonServiceSetup.Sample();state.new_game_options=new[]{new PythonNewGameOption{choice="popularity",label="人気3段階",detail="期限内に人気を高めます。",conditions="初期猫：5匹 / 席：2席 / 資金：1000"},new PythonNewGameOption{choice="free",label="自由営業",detail="自由に営業します。",conditions="初期猫：5匹 / 席：2席 / 資金：1000"}};
-            typeof(PythonStateClient).GetMethod("Accept",flags).Invoke(client,new object[]{state});var panel=preview.GetComponent<PythonNewGamePanel>();
+            typeof(PythonStateClient).GetMethod("Accept",flags).Invoke(client,new object[]{state});var panel=preview.GetComponent<PythonNewGamePanel>();panel.Open();
             if(!panel.panel.activeSelf || !panel.start.interactable || !panel.details.text.Contains("1000"))throw new Exception("Start screen failed");
             Canvas.ForceUpdateCanvases();typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{preview,"Logs/NewGame.png"});
             panel.objectives.value=1;panel.Select(1);panel.StartGame();

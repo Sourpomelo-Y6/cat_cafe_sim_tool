@@ -10,7 +10,6 @@ namespace CatCafePreview
         public Text details, notice;
         public Button open, start;
         private PythonNewGameOption[] options=new PythonNewGameOption[0];
-        private bool initialized;
         public void Open() { panel.SetActive(true); RefreshControls(); }
         public void Close() { panel.SetActive(false); }
         public void Select(int index)
@@ -29,7 +28,6 @@ namespace CatCafePreview
             foreach(var row in options)objectives.options.Add(new Dropdown.OptionData(row.label));
             objectives.SetValueWithoutNotify(Math.Max(0,Array.FindIndex(options,row=>row.choice==previous)));objectives.RefreshShownValue();
             Select(objectives.value);
-            if(!initialized) { initialized=true; Open(); }
             RefreshControls();
         }
         public void RefreshControls()
