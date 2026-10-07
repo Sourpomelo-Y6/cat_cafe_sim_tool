@@ -165,6 +165,7 @@ namespace CatCafePreview
             var dispatch=GetComponent<PythonDispatchPanel>();if(dispatch!=null)dispatch.Apply(state);
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.Apply(state);
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.Apply(state);
+            var ended=GetComponent<PythonGameOverPanel>();if(ended!=null)ended.Apply(state);
         }
         private void AppendObjectiveProgress()
         {
@@ -210,6 +211,7 @@ namespace CatCafePreview
             var dispatch=GetComponent<PythonDispatchPanel>();if(dispatch!=null)dispatch.RefreshControls();
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.RefreshControls();
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.RefreshControls();
+            var ended=GetComponent<PythonGameOverPanel>();if(ended!=null)ended.RefreshControls();
             var detail=GetComponent<PythonCatDetailsPanel>();if(detail!=null)detail.RefreshControls();
             var menu=GetComponent<PythonNewGamePanel>();if(menu!=null) menu.RefreshControls();
             var roster = GetComponent<PythonCatRoster>();
@@ -244,6 +246,7 @@ namespace CatCafePreview
             var dispatch=GetComponent<PythonDispatchPanel>();if(dispatch!=null && dispatch.panel.activeSelf)dispatch.notice.text=message;
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null && missing.panel.activeSelf && !string.IsNullOrEmpty(message))missing.notice.text=message;
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null && adoption.panel.activeSelf)adoption.notice.text=message;
+            var ended=GetComponent<PythonGameOverPanel>();if(ended!=null && ended.panel.activeSelf)ended.notice.text=message;
             var detail=GetComponent<PythonCatDetailsPanel>();if(detail!=null && detail.panel.activeSelf && detail.interactionNotice!=null)detail.interactionNotice.text=message;
             var menu=GetComponent<PythonNewGamePanel>();if(menu!=null && menu.panel.activeSelf) menu.notice.text=message;
             status.text = message + "\n" + status.text;
@@ -316,6 +319,7 @@ namespace CatCafePreview
             var dispatch=GetComponent<PythonDispatchPanel>();if(dispatch!=null)dispatch.Disconnect();
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.Disconnect();
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.Disconnect();
+            var ended=GetComponent<PythonGameOverPanel>();if(ended!=null)ended.Disconnect();
             var service = GetComponent<PythonServiceScreen>();
             if (service != null) service.Disconnect();
             var savePanel = GetComponent<PythonSavePanel>();

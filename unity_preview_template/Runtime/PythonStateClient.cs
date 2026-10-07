@@ -37,6 +37,7 @@ namespace CatCafePreview
         public PythonMissingCat[] missing_cats;
         public PythonMissingRest missing_rest;
         public PythonAdoption adoption;
+        public PythonGameOver game_over;
         public PythonObjectiveProgress objective_progress;
         public PythonStoreEvent store_event;
         public PythonGrowthChoice[] growth_choices;
@@ -120,7 +121,7 @@ namespace CatCafePreview
         public bool Fast { get { return fast; } }
         public bool CanStartAutomatic { get { return CanManageSaves && IsOpen(current); } }
         private static bool IsOpen(PythonCafeState state)
-        { return state != null && !state.closed && !state.can_set_shifts && string.IsNullOrEmpty(state.required_action); }
+        { return state != null && state.game_over == null && !state.closed && !state.can_set_shifts && string.IsNullOrEmpty(state.required_action); }
         public void ToggleAutomatic()
         {
             if (automatic) StopAutomatic();
@@ -135,6 +136,7 @@ namespace CatCafePreview
             if(pendingAutomatic && !sendingCommand) { pending=null; pendingAutomatic=false; }
         }
         public PythonCafeState CurrentState { get { return current; } }
+        public bool CanLeaveResult { get { return pending == null; } }
         public bool CanManageSaves { get { return online && pending == null && current != null; } }
         public void NewGame(string objective)
         {
@@ -278,8 +280,8 @@ namespace CatCafePreview
                 expected_revision=current.revision,working_cats=new string[0],kind=kind,save_id=id };
             preview.RefreshPythonControls();
         }
-        public bool CanChangeShifts { get { return online && pending == null && current != null && current.can_set_shifts && (current.player_interaction==null || !current.player_interaction.active); } }
-        public bool CanProgressBusiness { get { return online && pending == null && current != null && !automatic
+        public bool CanChangeShifts { get { return online && pending == null && current != null && current.game_over == null && current.can_set_shifts && (current.player_interaction==null || !current.player_interaction.active); } }
+        public bool CanProgressBusiness { get { return online && pending == null && current != null && current.game_over == null && !automatic
             && string.IsNullOrEmpty(current.required_action)
             && (current.closed || !current.can_set_shifts || Array.Exists(current.cats, cat => cat.working)); } }
         public void ProgressBusiness()
@@ -321,6 +323,7 @@ namespace CatCafePreview
             if(state.next_goal != null && state.next_goal.stage < 2)state.next_goal=null;
             if(state.player_interaction!=null && string.IsNullOrEmpty(state.player_interaction.session_id))state.player_interaction=null;
             if(state.store_event != null && string.IsNullOrEmpty(state.store_event.kind)) state.store_event=null;
+            if(state.game_over!=null && string.IsNullOrEmpty(state.game_over.reason))state.game_over=null;
             if (!IsOpen(state) || (current != null && (state.instance_id != current.instance_id || state.day != current.day))) StopAutomatic();
             current = state; online = true; preview.ApplyPythonState(state);
         }
