@@ -24,6 +24,7 @@ namespace CatCafePreview
             else if(state.player_interaction!=null && state.player_interaction.active)hint.text="猫との交流中です。交流を終えると営業できます。";
             else if(state.can_set_shifts && !state.closed && !Array.Exists(state.cats,cat=>cat.working))hint.text="出勤する猫がいません。猫カードで選んでください。";
             else if(client.Automatic)hint.text="自動進行中です。停止すると手動で操作できます。";
+            else if(!string.IsNullOrEmpty(GetComponent<PythonEventPresentation>()?.Message))hint.text=GetComponent<PythonEventPresentation>().Message;
             else hint.text=state.closed ? "閉店しました。振り返りを確認し、保存して翌日へ。" : "進捗を残す場合は、先に保存してください。";
         }
     }

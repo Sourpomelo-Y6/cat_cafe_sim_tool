@@ -134,6 +134,7 @@ namespace CatCafePreview
 
         public void ApplyPythonState(PythonCafeState state)
         {
+            var feedback=GetComponent<PythonEventPresentation>();if(feedback!=null)feedback.Apply(state);
             var presentation=GetComponent<PythonPresentation>();if(presentation!=null)presentation.Apply(state);
             string previous = pythonState == null || cats.value >= pythonState.cats.Length ? "" : pythonState.cats[cats.value].cat_id;
             pythonState = state;

@@ -356,6 +356,7 @@ namespace CatCafePreview
                                 if (request.result == UnityWebRequest.Result.Success)
                                 {
                                     var reply = JsonUtility.FromJson<PythonCommandReply>(request.downloadHandler.text);
+                                    if(command.kind=="load_game" || command.kind=="new_game")GetComponent<PythonEventPresentation>()?.Clear();
                                     Accept(reply.state);
                                     if(command.kind=="load_game")
                                     { var player=GetComponent<PythonPlayerPanel>();if(player!=null)player.Restore(); }

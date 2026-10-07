@@ -7,6 +7,8 @@ namespace CatCafePreview
         public GameObject panel;
         public Text title, details, notice;
         public Button[] choices;
+        public Text[] choiceDetails;
+        private string key, prompt;
         public void First() { GetComponent<PythonStateClient>().RespondGrowth(0); }
         public void Second() { GetComponent<PythonStateClient>().RespondGrowth(1); }
         public void Third() { GetComponent<PythonStateClient>().RespondGrowth(2); }
@@ -22,7 +24,7 @@ namespace CatCafePreview
             details.text="選択待ち："+rows.Length+"匹 / 経験："+ev.experience+"（必要："+ev.threshold+"）\n接客："+ev.service+" / 休養："+ev.rest+" / 派遣："+ev.dispatch+"\n\n";
             if(mastery) details.text="選択待ち："+rows.Length+"匹 / 接客実績："+ev.experience+"（必要："+ev.threshold+"）\n遊び："+ev.play+" / 触れ合い："+ev.contact+" / 静かな交流："+ev.quiet+"\n習得済み："+(string.IsNullOrEmpty(ev.learned) ? "なし" : ev.learned)+"\n\n";
             bool individual=ev.kind == "resolve_growth_type_mastery";
-            details.fontSize=individual ? 17 : 19;
+            details.fontSize=17;
             details.lineSpacing=individual ? 1 : 1.12f;
             if(individual) details.text="分類："+ev.group+" / 選択待ち："+rows.Length+"件\n対象実績："+ev.experience+"（必要："+ev.threshold+"）\n習得済み："+(string.IsNullOrEmpty(ev.learned) ? "なし" : ev.learned)+"\n"+ev.effect+"\n\n";
             for(int i=0;i<choices.Length;i++)
@@ -32,13 +34,16 @@ namespace CatCafePreview
                 if(!exists) continue;
                 var option=ev.choices[i];
                 choices[i].GetComponentInChildren<Text>().text=option.label;
-                details.text+=option.label+"\n"+option.detail+"\n"+(option.can_select ? "" : option.reason+"\n")+(individual ? "" : "\n");
+                if(!PythonEventPresentation.HasDescriptions(choiceDetails))details.text+=option.label+"\n"+option.detail+"\n"+(option.can_select ? "" : option.reason+"\n")+(individual ? "" : "\n");
             }
-            notice.text="1つ選ぶと確定します。選び直しはできません。\n選択後の自動進行は手動で再開してください。";
+            PythonEventPresentation.Choices(choiceDetails,ev.choices);
+            if(PythonEventPresentation.HasDescriptions(choiceDetails))details.text+="営業を進める前に、この選択を確定してください。";
+            string nextKey=state.instance_id+"/"+PythonEventPresentation.GrowthKey(ev);if(key!=nextKey){key=nextKey;PythonEventPresentation.Reset(details,choiceDetails);}
+            prompt="1つ選ぶと確定します。選び直しはできません。\n次の確認がなければ画面を閉じます。自動進行は手動で再開してください。";
             RefreshControls();
         }
         public void RefreshControls()
-        { for(int i=0;i<choices.Length;i++) choices[i].interactable=GetComponent<PythonStateClient>().CanRespondGrowth(i); }
+        { var client=GetComponent<PythonStateClient>();for(int i=0;i<choices.Length;i++) choices[i].interactable=client.CanRespondGrowth(i);if(panel.activeSelf)notice.text=PythonEventPresentation.Notice(client,prompt); }
         public void Disconnect()
         {
             foreach(var button in choices) button.interactable=false;

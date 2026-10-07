@@ -24,7 +24,7 @@ namespace CatCafePreview.Editor
                 if(EditorApplication.timeSinceStartup>SessionState.GetFloat(Key+"deadline",0))throw new Exception("Store test timeout stage "+stage);
                 if(!EditorApplication.isPlaying)return;
                 var preview=UnityEngine.Object.FindObjectOfType<ContentPreview>(); var client=preview.GetComponent<PythonStateClient>();
-                if(!client.CanManageSaves)return;
+                if(!client.CanManageSaves)return;preview.RefreshPythonControls();
                 var state=client.CurrentState; var panel=preview.GetComponent<PythonStoreEventPanel>(); var saves=preview.GetComponent<PythonSavePanel>();
                 if(stage==1)
                 {
@@ -39,7 +39,7 @@ namespace CatCafePreview.Editor
                     saves.saves.SetValueWithoutNotify(0); saves.resume.onClick.Invoke(); SessionState.SetInt(Key,4);
                 }
                 else if(stage==4 && state.store_event!=null && panel.choices[0].interactable)
-                { if(!panel.panel.activeSelf || !panel.choices[0].interactable)throw new Exception("Restored event UI failed"); panel.choices[0].onClick.Invoke(); SessionState.SetInt(Key,5); }
+                { if(!string.IsNullOrEmpty(preview.GetComponent<PythonEventPresentation>().Message))throw new Exception("Loading event save reported a response");if(!panel.panel.activeSelf || !panel.choices[0].interactable)throw new Exception("Restored event UI failed"); panel.choices[0].onClick.Invoke(); SessionState.SetInt(Key,5); }
                 else if(stage==5 && state.store_event==null && client.CanProgressBusiness)
                 { preview.GetSceneButton(2).onClick.Invoke(); SessionState.SetInt(Key,6); }
                 else if(stage==6 && state.tick>0)
