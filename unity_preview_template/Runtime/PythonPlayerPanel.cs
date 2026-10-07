@@ -17,6 +17,8 @@ namespace CatCafePreview
         private PythonPlayerInteraction current;
         private string sessionId, instanceId;
         private bool showing;
+        private string renderedMode, renderedSession, renderedInstance;
+        public void TargetChanged(int value) { RefreshControls(); }
         public void Open()
         {
             if(current==null || !GetComponent<PythonStateClient>().CanManageSaves)return;
@@ -37,7 +39,9 @@ namespace CatCafePreview
         public void SelectAction(int index)
         {
             if(current==null || current.actions==null || index<0 || index>=current.actions.Length)return;
-            string target=current.targets!=null && targets.value<current.targets.Length ? current.targets[targets.value].choice : "";
+            int targetIndex=targets.value-1;
+            if(current.actions[index].choice=="switch" && targetIndex<0)return;
+            string target=current.targets!=null && targetIndex>=0 && targetIndex<current.targets.Length ? current.targets[targetIndex].choice : "";
             GetComponent<PythonStateClient>().PlayerAction(current.actions[index].choice,target);
         }
         public void Apply(PythonCafeState state)
@@ -67,9 +71,12 @@ namespace CatCafePreview
             }
             history.text=string.IsNullOrEmpty(current.history) ? "行動を選ぶと猫の反応を表示します。" : current.history;
             string selected=targets.options.Count>0 ? targets.options[targets.value].text : "";
+            bool changed=renderedMode!=current.mode || renderedSession!=current.session_id || renderedInstance!=instanceId;
             targets.options.Clear();
+            targets.options.Add(new Dropdown.OptionData(current.mode));
             foreach(var row in current.targets ?? new PythonEventChoice[0])targets.options.Add(new Dropdown.OptionData(row.label));
-            targets.SetValueWithoutNotify(Math.Max(0,targets.options.FindIndex(row=>row.text==selected)));targets.RefreshShownValue();
+            targets.SetValueWithoutNotify(changed ? 0 : Math.Max(0,targets.options.FindIndex(row=>row.text==selected)));targets.RefreshShownValue();
+            renderedMode=current.mode;renderedSession=current.session_id;renderedInstance=instanceId;
             notice.text=current.active ? (string.IsNullOrEmpty(current.reason) ? "好感度は終了時に確定します。営業時間は進みません。" : current.reason) : current.reason;
             for(int i=0;i<actions.Length;i++)
             {
@@ -86,7 +93,7 @@ namespace CatCafePreview
         public void RefreshControls()
         {
             var client=GetComponent<PythonStateClient>();
-            for(int i=0;i<actions.Length;i++)actions[i].interactable=current!=null && current.actions!=null && i<current.actions.Length && client.CanPlayerAction(current.actions[i].choice);
+            for(int i=0;i<actions.Length;i++)actions[i].interactable=current!=null && current.actions!=null && i<current.actions.Length && client.CanPlayerAction(current.actions[i].choice) && (current.actions[i].choice!="switch" || targets.value>0);
             if(back!=null)back.interactable=current!=null && client.CanManageSaves;
             targets.interactable=client.CanPlayerAction("switch");finish.interactable=client.CanFinishPlayer;
         }

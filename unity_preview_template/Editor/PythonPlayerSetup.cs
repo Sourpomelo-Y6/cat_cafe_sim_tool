@@ -41,9 +41,10 @@ namespace CatCafePreview.Editor
             Label(card.transform,"Switch Label",24,210,432,28,16).text="動作の切り替え先";
             var drop=DefaultControls.CreateDropdown(new DefaultControls.Resources());drop.name="Interaction Type";drop.transform.SetParent(card.transform,false);
             Place(drop.GetComponent<RectTransform>(),24,242,432,40);panel.targets=drop.GetComponent<Dropdown>();
+            UnityEventTools.AddPersistentListener(panel.targets.onValueChanged,panel.TargetChanged);
             foreach(var text in drop.GetComponentsInChildren<Text>(true)){text.font=ContentPreviewLayout.LoadFont();text.fontSize=18;}
             panel.targets.itemText.rectTransform.parent.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,36);
-            panel.targets.template.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,280);panel.targets.itemText.verticalOverflow=VerticalWrapMode.Overflow;
+            panel.targets.template.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,310);panel.targets.itemText.verticalOverflow=VerticalWrapMode.Overflow;
             panel.targets.itemText.alignment=TextAnchor.MiddleLeft;
             var arrow=drop.transform.Find("Arrow");arrow.GetComponent<Image>().color=Color.clear;
             var arrowLabel=Label(drop.transform,"Dropdown Arrow",402,7,26,26,16);arrowLabel.text="▼";
