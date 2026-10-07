@@ -55,7 +55,23 @@ namespace CatCafePreview.Editor
             dropdown.template.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,180);
             dropdown.itemText.verticalOverflow=VerticalWrapMode.Overflow;
             dropdown.itemText.alignment=TextAnchor.MiddleLeft;
+            ConfigureArrow(dropdown);
             return dropdown;
+        }
+        static void ConfigureArrow(UnityEngine.UI.Dropdown dropdown)
+        {
+            var arrow=dropdown.transform.Find("Arrow");if(arrow==null)return;
+            arrow.GetComponent<Image>().color=Color.clear;
+            var old=arrow.Find("Arrow Label");if(old!=null)UnityEngine.Object.DestroyImmediate(old.gameObject);
+            var go=new GameObject("Arrow Label",typeof(RectTransform),typeof(Text));go.transform.SetParent(arrow,false);
+            var rect=go.GetComponent<RectTransform>();rect.anchorMin=Vector2.zero;rect.anchorMax=Vector2.one;rect.offsetMin=rect.offsetMax=Vector2.zero;
+            var text=go.GetComponent<Text>();text.font=ContentPreviewLayout.LoadFont();text.fontSize=16;text.text="▼";text.color=new Color(.18f,.16f,.14f);text.alignment=TextAnchor.MiddleCenter;text.raycastTarget=false;
+        }
+        public static void ApplyDropdownArrows()
+        {
+            var scene=EditorSceneManager.OpenScene(TitlePath);var title=UnityEngine.Object.FindObjectOfType<PythonTitleScreen>();
+            ConfigureArrow(title.objectives);ConfigureArrow(title.saves);EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);
+            Debug.Log("CAT_CAFE_TITLE_ARROWS_OK");
         }
         [MenuItem("Cat Cafe/開発用/UI再生成/タイトル画面",false,8)]
         public static void Build()
