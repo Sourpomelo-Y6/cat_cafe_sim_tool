@@ -103,8 +103,10 @@ namespace CatCafePreview.Editor
             panel.savesPanel=Box(background.transform,"Saved Games",220,260,840,420,new Color(.99f,.98f,.95f,1));
             Label(panel.savesPanel.transform,"Resume Title",40,28,760,48,26).text="保存したゲームを選んでください";
             panel.saves=Dropdown(panel.savesPanel.transform,"Saves",110);
-            panel.resume=MakeButton(panel.savesPanel.transform,"Resume","このゲームを再開",40,270);UnityEventTools.AddPersistentListener(panel.resume.onClick,panel.Resume);
-            back=MakeButton(panel.savesPanel.transform,"Back","戻る",440,270);UnityEventTools.AddPersistentListener(back.onClick,panel.ShowHome);
+            panel.saveDetails=Label(panel.savesPanel.transform,"Save Details",40,174,760,132,19);
+            UnityEventTools.AddPersistentListener(panel.saves.onValueChanged,panel.SelectSave);
+            panel.resume=MakeButton(panel.savesPanel.transform,"Resume","このゲームを再開",40,340);UnityEventTools.AddPersistentListener(panel.resume.onClick,panel.Resume);
+            back=MakeButton(panel.savesPanel.transform,"Back","戻る",440,340);UnityEventTools.AddPersistentListener(back.onClick,panel.ShowHome);
             panel.notice=Label(background.transform,"Connection Notice",220,710,840,70,18);
             panel.ShowHome();EditorSceneManager.SaveScene(scene,TitlePath);
             var business=EditorSceneManager.OpenScene(BusinessPath);var preview=UnityEngine.Object.FindObjectOfType<ContentPreview>();var bg=preview.transform.Find("Content Canvas/Background");

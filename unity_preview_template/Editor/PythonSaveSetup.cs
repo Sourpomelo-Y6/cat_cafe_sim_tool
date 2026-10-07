@@ -38,6 +38,7 @@ namespace CatCafePreview.Editor
             PrefabUtility.RecordPrefabInstancePropertyModifications(preview.GetSceneButton(3));
             PrefabUtility.RecordPrefabInstancePropertyModifications(preview.GetSceneButton(3).GetComponentInChildren<Text>());
             EditorSceneManager.MarkSceneDirty(scene); EditorSceneManager.SaveScene(scene);
+            if(System.IO.File.Exists("Assets/Scenes/CatCafeTitle.unity"))PythonSaveLayout.Build();
             Debug.Log("CAT_CAFE_SAVE_UI_OK: save button / saved game dropdown / resume button");
         }
         static void Place(RectTransform rect,float x,float y,float width)

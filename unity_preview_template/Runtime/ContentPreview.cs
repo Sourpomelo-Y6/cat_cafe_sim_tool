@@ -273,6 +273,7 @@ namespace CatCafePreview
 
         public void PythonNotice(string message)
         {
+            GetComponent<PythonSavePanel>()?.Notify(message);
             var closing=GetComponent<PythonClosingPanel>();if(closing!=null && closing.panel.activeSelf)closing.Notify(message);
             var player=GetComponent<PythonPlayerPanel>();if(player!=null && player.panel.activeSelf)player.notice.text=message;
             var dispatch=GetComponent<PythonDispatchPanel>();if(dispatch!=null && dispatch.panel.activeSelf)dispatch.notice.text=message;

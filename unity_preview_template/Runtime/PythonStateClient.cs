@@ -105,7 +105,14 @@ namespace CatCafePreview
         public string error;
         public PythonCafeState state;
     }
-    [Serializable] public class PythonSavedGame { public string save_id, label, created_at; }
+    [Serializable] public class PythonSavedGame { public string save_id, label, created_at, objective_label, phase;
+        public string Details()
+        {
+            DateTimeOffset date;
+            string timestamp=DateTimeOffset.TryParse(created_at,out date) ? date.ToLocalTime().ToString("yyyy/MM/dd HH:mm:ss") : "日時不明";
+            string stage=phase=="closed" ? "閉店後" : phase=="preparation" ? "開店準備" : phase=="open" ? "営業中" : "記録なし";
+            return "保存日時："+timestamp+"\n経営目標："+(string.IsNullOrEmpty(objective_label) ? "記録なし（以前の保存データ）" : objective_label)+"　／　状態："+stage+"\n"+label;
+        } }
     [Serializable] public class PythonSaveList { public PythonSavedGame[] saves; }
     [RequireComponent(typeof(ContentPreview))]
     public class PythonStateClient : MonoBehaviour
@@ -278,6 +285,7 @@ namespace CatCafePreview
             if (kind == "load_game") StopAutomatic();
             pending = new PythonShiftCommand { request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,
                 expected_revision=current.revision,working_cats=new string[0],kind=kind,save_id=id };
+            GetComponent<PythonSavePanel>()?.Notify(kind=="save_game" ? "保存しています。完了までお待ちください。" : "保存したゲームを読み込んでいます。");
             preview.RefreshPythonControls();
         }
         public bool CanChangeShifts { get { return online && pending == null && current != null && current.game_over == null && current.can_set_shifts && (current.player_interaction==null || !current.player_interaction.active); } }
