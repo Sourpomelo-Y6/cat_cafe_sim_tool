@@ -162,6 +162,7 @@ namespace CatCafePreview
             var growth = GetComponent<PythonGrowthPanel>();
             if (growth != null) growth.Apply(state);
             var player=GetComponent<PythonPlayerPanel>();if(player!=null)player.Apply(state);
+            var dispatch=GetComponent<PythonDispatchPanel>();if(dispatch!=null)dispatch.Apply(state);
         }
         private void AppendObjectiveProgress()
         {
@@ -204,6 +205,7 @@ namespace CatCafePreview
         public void RefreshPythonControls()
         {
             var player=GetComponent<PythonPlayerPanel>();if(player!=null)player.RefreshControls();
+            var dispatch=GetComponent<PythonDispatchPanel>();if(dispatch!=null)dispatch.RefreshControls();
             var detail=GetComponent<PythonCatDetailsPanel>();if(detail!=null)detail.RefreshControls();
             var menu=GetComponent<PythonNewGamePanel>();if(menu!=null) menu.RefreshControls();
             var roster = GetComponent<PythonCatRoster>();
@@ -235,6 +237,7 @@ namespace CatCafePreview
         public void PythonNotice(string message)
         {
             var player=GetComponent<PythonPlayerPanel>();if(player!=null && player.panel.activeSelf)player.notice.text=message;
+            var dispatch=GetComponent<PythonDispatchPanel>();if(dispatch!=null && dispatch.panel.activeSelf)dispatch.notice.text=message;
             var detail=GetComponent<PythonCatDetailsPanel>();if(detail!=null && detail.panel.activeSelf && detail.interactionNotice!=null)detail.interactionNotice.text=message;
             var menu=GetComponent<PythonNewGamePanel>();if(menu!=null && menu.panel.activeSelf) menu.notice.text=message;
             status.text = message + "\n" + status.text;
@@ -304,6 +307,7 @@ namespace CatCafePreview
             var detail = GetComponent<PythonCatDetailsPanel>();
             if(detail != null) detail.Disconnect();
             var player=GetComponent<PythonPlayerPanel>();if(player!=null)player.Disconnect();
+            var dispatch=GetComponent<PythonDispatchPanel>();if(dispatch!=null)dispatch.Disconnect();
             var service = GetComponent<PythonServiceScreen>();
             if (service != null) service.Disconnect();
             var savePanel = GetComponent<PythonSavePanel>();
