@@ -47,6 +47,7 @@ namespace CatCafePreview.Editor
             Place(card.Find("Switch Label").GetComponent<RectTransform>(),24,238,432,26);
             panel.choiceLabel=card.Find("Switch Label").GetComponent<Text>();panel.choiceLabel.text="交流を変える：選択後に「切り替える」";
             Place(panel.targets.GetComponent<RectTransform>(),24,270,432,40);
+            panel.targets.template.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 280);
             for(int i=0;i<panel.actions.Length;i++)Place(panel.actions[i].GetComponent<RectTransform>(),24+(i%2)*222,324+(i/2)*44,210,38);
             Place(panel.notice.rectTransform,24,506,432,40);panel.notice.fontSize=14;
             Place(panel.finish.GetComponent<RectTransform>(),24,550,432,40);
@@ -75,6 +76,10 @@ namespace CatCafePreview.Editor
             var state=PythonServiceSetup.Sample();state.cats[0].can_player_start=true;
             state.player_interaction=new PythonPlayerInteraction{session_id="layout",cat_id=state.cats[0].cat_id,content_cat_id=state.cats[0].content_cat_id,scene_key="teaser",name="ミケ",active=true,remaining_ticks=8,remaining_sets=2,mode="ねこじゃらし",stamina_before=100,stamina=92,affinity_after=1.5f,affinity_delta=1.5f,can_finish=true,
                 actions=new[]{new PythonEventChoice{choice="direct",label="素直に動かす",can_select=true}},targets=new[]{new PythonEventChoice{choice="voice",label="声をかける"}},history="1：素直に動かす / 好意的に応じる\n体力 92 / 好感度 +1.5"};
+            var keys=new[]{"ball","plush","tunnel","pet","brush","voice","presence"};
+            var labels=new[]{"ボール遊び","ぬいぐるみ遊び","トンネル遊び","なでる","ブラッシング","声をかける","そばで見守る"};
+            state.player_interaction.targets=Array.ConvertAll(keys,key=>new PythonEventChoice{choice=key,label=labels[Array.IndexOf(keys,key)]});
+            state.player_interaction.actions=new[]{new PythonEventChoice{choice="direct",label="素直に動かす",can_select=true},new PythonEventChoice{choice="switch",label="動作を切り替える",can_select=true}};
             Action apply=()=>typeof(PythonStateClient).GetMethod("Accept",flags).Invoke(client,new object[]{state});apply();
             var player=preview.GetComponent<PythonPlayerPanel>();
             if(!player.summary.text.Contains("100 → 92") || !player.back.interactable)throw new Exception("Interaction summary or return missing");
@@ -85,6 +90,11 @@ namespace CatCafePreview.Editor
             if(player.picture.texture!=null || string.IsNullOrEmpty(player.imageNotice.text))throw new Exception("Missing image did not clear");
             state.player_interaction.content_cat_id=state.cats[0].content_cat_id;state.player_interaction.scene_key="teaser";apply();
             Canvas.ForceUpdateCanvases();typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{preview,"Logs/PlayerLayout.png"});
+            if(player.targets.options.Count!=7)throw new Exception("Switch targets were truncated");
+            typeof(Dropdown).GetMethod("Start",flags).Invoke(player.targets,null);
+            player.targets.alphaFadeSpeed=0;player.targets.Show();Canvas.ForceUpdateCanvases();
+            typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{preview,"Logs/PlayerTargets.png"});
+            player.targets.Hide();
             player.ReturnToDetails();if(player.panel.activeSelf || !preview.GetComponent<PythonCatDetailsPanel>().panel.activeSelf)throw new Exception("Return to details failed");
             player.Open();state.player_interaction.active=false;state.player_interaction.can_finish=false;apply();
             if(player.finish.gameObject.activeSelf || player.actions[0].gameObject.activeSelf || !player.summary.text.Contains("確定"))throw new Exception("Result actions remained visible");

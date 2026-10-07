@@ -43,7 +43,7 @@ namespace CatCafePreview.Editor
             Place(drop.GetComponent<RectTransform>(),24,242,432,40);panel.targets=drop.GetComponent<Dropdown>();
             foreach(var text in drop.GetComponentsInChildren<Text>(true)){text.font=ContentPreviewLayout.LoadFont();text.fontSize=18;}
             panel.targets.itemText.rectTransform.parent.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,36);
-            panel.targets.template.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,180);panel.targets.itemText.verticalOverflow=VerticalWrapMode.Overflow;
+            panel.targets.template.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,280);panel.targets.itemText.verticalOverflow=VerticalWrapMode.Overflow;
             panel.targets.itemText.alignment=TextAnchor.MiddleLeft;
             var arrow=drop.transform.Find("Arrow");arrow.GetComponent<Image>().color=Color.clear;
             var arrowLabel=Label(drop.transform,"Dropdown Arrow",402,7,26,26,16);arrowLabel.text="▼";
