@@ -12,8 +12,8 @@ namespace CatCafePreview
         {
             var client=GetComponent<PythonStateClient>();
             toggle.interactable=client.Automatic || client.CanStartAutomatic;
-            toggle.GetComponentInChildren<Text>().text=client.Automatic ? "自動進行を停止" : "自動進行";
-            speed.GetComponentInChildren<Text>().text=client.Fast ? "高速：0.25秒" : "通常：1秒";
+            toggle.GetComponentInChildren<Text>().text=client.Automatic ? "自動進行を停止" : "自動進行を開始";
+            speed.GetComponentInChildren<Text>().text=client.Fast ? "速度：高速" : "速度：通常";
         }
     }
 }

@@ -211,6 +211,7 @@ namespace CatCafePreview
 
         public void RefreshPythonControls()
         {
+            var service=GetComponent<PythonServiceScreen>();if(service!=null)service.RefreshControls();
             var navigation=GetComponent<PythonReturnToTitle>();if(navigation!=null)navigation.RefreshControls();
             var closing=GetComponent<PythonClosingPanel>();if(closing!=null)closing.RefreshControls();
             var player=GetComponent<PythonPlayerPanel>();if(player!=null)player.RefreshControls();

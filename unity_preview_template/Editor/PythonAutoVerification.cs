@@ -35,7 +35,7 @@ namespace CatCafePreview.Editor
                     }
                     return;
                 }
-                if(!client.CanManageSaves)return;
+                if(!client.CanManageSaves)return;preview.RefreshPythonControls();
                 if(stage==1)
                 {
                     if(panel.toggle.interactable)throw new Exception("Auto enabled before opening");
@@ -46,12 +46,14 @@ namespace CatCafePreview.Editor
                 else if(stage==3 && state.tick>=2)
                 {
                     if(Time.realtimeSinceStartup-SessionState.GetFloat(Key+"started",0)<.95f)throw new Exception("Normal speed advanced too early");
+                    var service=preview.GetComponent<PythonServiceScreen>();if(!service.serviceSummary.text.Contains("進行中") || !panel.toggle.GetComponentInChildren<UnityEngine.UI.Text>().text.Contains("停止"))throw new Exception("Live automatic status missing");
+                    Canvas.ForceUpdateCanvases();if(!service.detailText.text.Contains("来店客一覧"))throw new Exception("Live customer list missing");typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{preview,"Logs/ServiceLive.png"});
                     panel.toggle.onClick.Invoke(); SessionState.SetInt(Key+"stoppedTick",state.tick); SessionState.SetFloat(Key+"stopped",Time.realtimeSinceStartup); SessionState.SetInt(Key,4);
                 }
                 else if(stage==4 && Time.realtimeSinceStartup-SessionState.GetFloat(Key+"stopped",0)>2.5f)
                 {
                     if(state.tick!=SessionState.GetInt(Key+"stoppedTick",0) || client.Automatic)throw new Exception("Stop did not hold tick");
-                    panel.speed.onClick.Invoke(); if(!client.Fast)throw new Exception("Fast speed did not select");
+                    panel.speed.onClick.Invoke(); if(!client.Fast || !preview.GetComponent<PythonServiceScreen>().serviceSummary.text.Contains("0.25秒"))throw new Exception("Fast speed did not select");
                     panel.toggle.onClick.Invoke(); preview.GetSceneButton(3).onClick.Invoke(); SessionState.SetInt(Key,5);
                 }
                 else if(stage==5 && saves.Count==1 && state.tick>SessionState.GetInt(Key+"stoppedTick",0))
