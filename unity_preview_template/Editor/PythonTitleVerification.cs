@@ -19,6 +19,11 @@ namespace CatCafePreview.Editor
             UnityEngine.Object.FindObjectOfType<PythonTitleScreen>().port=8191;EditorSceneManager.SaveScene(SceneManager.GetActiveScene());
             SessionState.SetInt(Key,1);SessionState.SetFloat(Key+"deadline",(float)EditorApplication.timeSinceStartup+100);EditorApplication.EnterPlaymode();
         }
+        public static void RunDropdown()
+        {
+            EditorSceneManager.OpenScene("Assets/Scenes/CatCafeTitle.unity");
+            SessionState.SetInt(Key,10);SessionState.SetFloat(Key+"deadline",(float)EditorApplication.timeSinceStartup+30);EditorApplication.EnterPlaymode();
+        }
         static void Update()
         {
             int stage=SessionState.GetInt(Key,0);if(stage==0)return;
@@ -28,6 +33,38 @@ namespace CatCafePreview.Editor
                 if(!EditorApplication.isPlaying)return;
                 var title=UnityEngine.Object.FindObjectOfType<PythonTitleScreen>();
                 var client=UnityEngine.Object.FindObjectOfType<PythonStateClient>();
+                if(stage==10 && title!=null)
+                {
+                    var state=PythonServiceSetup.Sample();
+                    state.new_game_options=new[]{
+                        new PythonNewGameOption{choice="popularity",label="人気3段階"},
+                        new PythonNewGameOption{choice="patron",label="有力者の満足度"},
+                        new PythonNewGameOption{choice="bond",label="猫6匹との好感度"},
+                        new PythonNewGameOption{choice="free",label="自由営業"}};
+                    title.Apply(state);title.ShowConditions();SessionState.SetInt(Key,12);return;
+                }
+                if(stage==12 && title!=null)
+                {
+                    if(Time.frameCount<3)return;
+                    title.ShowConditions();title.objectives.Show();SessionState.SetInt(Key,11);return;
+                }
+                if(stage==11 && title!=null)
+                {
+                    Canvas.ForceUpdateCanvases();
+                    var list=title.objectives.transform.Find("Dropdown List");if(list==null)throw new Exception("Dropdown did not open");
+                    if(list.GetComponent<CanvasGroup>().alpha<.99f)return;
+                    int visible=0;
+                    foreach(var text in list.GetComponentsInChildren<UnityEngine.UI.Text>())
+                    {
+                        if(text.gameObject.name!="Item Label")continue;
+                        if(text.rectTransform.rect.height<30 || text.cachedTextGenerator.vertexCount==0)throw new Exception("Dropdown row text invisible: "+text.text);
+                        visible++;
+                    }
+                    if(visible!=4)throw new Exception("Dropdown option count mismatch: "+visible);
+                    typeof(PythonTitleSetup).GetMethod("Capture",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{"Logs/TitleDropdown.png"});
+                    Debug.Log("CAT_CAFE_TITLE_DROPDOWN_OK: four visible option labels / sufficient row height / real dropdown opened");
+                    SessionState.SetInt(Key,0);EditorApplication.ExitPlaymode();EditorApplication.delayCall+=()=>EditorApplication.Exit(0);return;
+                }
                 if(stage==1 && title!=null && title.newGame.interactable)
                 {
                     if(!title.home.activeSelf)throw new Exception("Title entry failed");

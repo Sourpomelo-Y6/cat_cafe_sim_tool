@@ -50,7 +50,12 @@ namespace CatCafePreview.Editor
             var go=DefaultControls.CreateDropdown(new DefaultControls.Resources());go.name=name;go.transform.SetParent(parent,false);
             Place(go.GetComponent<RectTransform>(),40,y,760,48);
             foreach(var text in go.GetComponentsInChildren<Text>(true)){text.font=ContentPreviewLayout.LoadFont();text.fontSize=20;}
-            return go.GetComponent<Dropdown>();
+            var dropdown=go.GetComponent<Dropdown>();
+            dropdown.itemText.rectTransform.parent.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,40);
+            dropdown.template.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,180);
+            dropdown.itemText.verticalOverflow=VerticalWrapMode.Overflow;
+            dropdown.itemText.alignment=TextAnchor.MiddleLeft;
+            return dropdown;
         }
         [MenuItem("Cat Cafe/開発用/UI再生成/タイトル画面",false,8)]
         public static void Build()
