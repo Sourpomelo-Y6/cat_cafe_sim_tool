@@ -14,6 +14,30 @@ ASSET = Path(__file__).resolve().parents[2] / 'Docs' / 'Prototypes' / 'CalicoAct
 
 class ToolTests(unittest.TestCase):
     @unittest.skipUnless(os.environ.get('CAT_CAFE_TEST_GUI') == '1', 'requires a display')
+    def test_combination_selector_and_registration(self):
+        import tkinter as tk
+        from image_tool_gui import ContentImageToolWindow
+        root = tk.Tk();root.withdraw();self.addCleanup(root.destroy)
+        with tempfile.TemporaryDirectory() as directory:
+            registry = ImageRegistry(Path(directory) / 'images')
+            tool = ContentImageToolWindow(root, lambda: {'cat-a': 'ミケ'}, registry=registry)
+            tool.scene.set('ボール遊び');tool.refresh()
+            tool.action.set('フェイントを入れる');tool.refresh()
+            self.assertEqual(tool.selection(), ('cat-a', 'ball__feint'))
+            tool.select_file(ASSET);tool.save()
+            self.assertTrue(registry.image_path('cat-a', 'ball__feint').is_file())
+            self.assertIsNone(registry.image_path('cat-a', 'ball'))
+            tool.scene.set('ブラッシング');tool.refresh()
+            self.assertEqual(tool.action.get(), '動作の共通画像')
+            self.assertNotIn('フェイントを入れる', tool.action_selector['values'])
+            tool.action.set('相手に合わせる');tool.refresh()
+            self.assertEqual(tool.selection(), ('cat-a', 'brush__adapt'))
+            tool.scene.set('通常');tool.refresh()
+            self.assertEqual(tool.selection(), ('cat-a', 'normal'))
+            self.assertTrue(tool.action_selector.instate(['disabled']))
+            tool.window.destroy()
+
+    @unittest.skipUnless(os.environ.get('CAT_CAFE_TEST_GUI') == '1', 'requires a display')
     def test_lora_editor_save_and_generation_toggle(self):
         import tkinter as tk
         from image_tool_gui import ContentImageToolWindow

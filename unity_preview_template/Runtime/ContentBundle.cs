@@ -13,6 +13,16 @@ namespace CatCafePreview
     public static class ContentValidation
     {
         public static readonly string[] SceneKeys = { "normal", "play", "pet", "sleep", "teaser", "ball", "plush", "tunnel", "brush", "voice", "presence", "pause" };
+        public static bool ValidSceneKey(string key)
+        {
+            if (Array.IndexOf(SceneKeys, key) >= 0) return true;
+            if (string.IsNullOrEmpty(key)) return false;
+            var parts = key.Split(new[] { "__" }, StringSplitOptions.None);
+            if (parts.Length != 2 || Array.IndexOf(new[] { "teaser", "ball", "plush", "tunnel", "pet", "brush", "voice", "presence" }, parts[0]) < 0) return false;
+            if (parts[1] == "intense") return parts[0] == "teaser" || parts[0] == "ball" || parts[0] == "tunnel";
+            if (parts[1] == "feint") return parts[0] == "teaser" || parts[0] == "ball" || parts[0] == "plush" || parts[0] == "tunnel";
+            return Array.IndexOf(new[] { "direct", "adapt", "pause", "switch", "connect" }, parts[1]) >= 0;
+        }
         public static void Validate(ContentBundle bundle)
         {
             if (bundle == null || bundle.version != 1 || !Regex.IsMatch(bundle.pack_id ?? "", "^[a-f0-9]{32}$")
@@ -28,7 +38,7 @@ namespace CatCafePreview
                 var keys = new HashSet<string>();
                 foreach (var scene in cat.scenes)
                 {
-                    if (scene == null || Array.IndexOf(SceneKeys, scene.key) < 0 || !keys.Add(scene.key)
+                    if (scene == null || !ValidSceneKey(scene.key) || !keys.Add(scene.key)
                         || string.IsNullOrWhiteSpace(scene.label) || string.IsNullOrWhiteSpace(scene.text)
                         || scene.text.Length > 500 || scene.image == null
                         || (scene.image != "" && !Regex.IsMatch(scene.image, "^images/[a-f0-9]{64}\\.png$")))

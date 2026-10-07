@@ -41,8 +41,8 @@ def export_bundle(catalog, registry, texts, destination, *, profiles=None):
         profile = profiles.get(cat_id, {})
         cat['appearance'] = validate_appearance(profile.get('appearance', {}))
         cat['features'] = list(profile.get('features', []))
-        from interaction_scenes import INTERACTION_SCENES
-        extra = tuple((key, label, label + 'をしています。') for key, label in INTERACTION_SCENES
+        from interaction_scenes import INTERACTION_SCENES, COMBINATION_SCENES
+        extra = tuple((key, label, label + 'をしています。') for key, label in INTERACTION_SCENES + COMBINATION_SCENES
                       if key in images['cats'].get(cat_id, {}))
         for key, label, fallback in SCENES + extra:
             text = record.get('scenes', {}).get(key, '').strip()

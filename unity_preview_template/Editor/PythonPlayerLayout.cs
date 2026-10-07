@@ -87,6 +87,18 @@ namespace CatCafePreview.Editor
             var player=preview.GetComponent<PythonPlayerPanel>();
             if(!player.summary.text.Contains("100 → 92") || !player.back.interactable)throw new Exception("Interaction summary or return missing");
             if(player.picture.texture==null || player.picture.texture!=preview.PlayerTexture(state.cats[0].content_cat_id,"play"))throw new Exception("Play image fallback missing");
+            if(!ContentValidation.ValidSceneKey("ball__feint") || ContentValidation.ValidSceneKey("brush__intense") || ContentValidation.ValidSceneKey("ball__missing"))throw new Exception("Combination keys invalid");
+            var content=(ContentBundle)typeof(ContentPreview).GetField("bundle",flags).GetValue(preview);
+            var contentCat=Array.Find(content.cats,cat=>cat.cat_id==state.cats[0].content_cat_id);
+            var originalScenes=contentCat.scenes;
+            var petScene=Array.Find(originalScenes,scene=>scene.key=="pet");
+            var expanded=new System.Collections.Generic.List<SceneContent>(originalScenes);
+            expanded.Add(new SceneContent{key="teaser__direct",label="test",text="test",image=petScene.image});contentCat.scenes=expanded.ToArray();ContentValidation.Validate(content);
+            state.player_interaction.image_key="teaser__direct";apply();
+            if(player.picture.texture!=preview.PlayerTexture(state.cats[0].content_cat_id,"pet"))throw new Exception("Combination image priority incorrect");
+            state.player_interaction.image_key="teaser__feint";apply();
+            if(player.picture.texture!=preview.PlayerTexture(state.cats[0].content_cat_id,"play"))throw new Exception("Combination image fallback incorrect");
+            contentCat.scenes=originalScenes;state.player_interaction.image_key=null;
             state.player_interaction.scene_key="brush";apply();
             if(player.picture.texture!=preview.PlayerTexture(state.cats[0].content_cat_id,"pet"))throw new Exception("Brush fallback incorrect");
             state.player_interaction.content_cat_id="missing-cat";apply();

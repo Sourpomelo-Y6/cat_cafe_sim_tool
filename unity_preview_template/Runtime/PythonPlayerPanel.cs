@@ -63,7 +63,7 @@ namespace CatCafePreview
                 +"\n関心 "+current.engagement.ToString("0.#")+" / テンション "+current.tension.ToString("0.#");
             if(picture != null)
             {
-                var texture=GetComponent<ContentPreview>().PlayerTexture(current.content_cat_id, current.scene_key);
+                var texture=GetComponent<ContentPreview>().PlayerTexture(current.content_cat_id, current.scene_key, current.image_key);
                 picture.texture=texture;picture.enabled=texture!=null;
                 var fitter=picture.GetComponent<AspectRatioFitter>();
                 if(texture!=null && fitter!=null)fitter.aspectRatio=(float)texture.width/texture.height;

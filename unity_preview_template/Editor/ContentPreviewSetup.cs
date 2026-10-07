@@ -246,6 +246,12 @@ namespace CatCafePreview.Editor
                 foreach (var scene in source.cats[index].scenes)
                 {
                     int buttonIndex = Array.IndexOf(ContentValidation.SceneKeys, scene.key);
+                    if (buttonIndex < 0 || buttonIndex >= 4)
+                    {
+                        preview.ShowScene(scene.key);
+                        if(preview.CurrentSceneKey!=scene.key || preview.HasImage!=(scene.image!=""))throw new Exception("Interaction scene preview mismatch.");
+                        continue;
+                    }
                     var button = preview.GetSceneButton(buttonIndex);
                     if (button.onClick.GetPersistentEventCount() != 1 || button.onClick.GetPersistentMethodName(0) != "ShowScene")
                         throw new Exception("Scene button has no serialized action.");

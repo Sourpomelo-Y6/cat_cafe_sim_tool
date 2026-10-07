@@ -2,7 +2,7 @@
 from pathlib import Path
 from content_images import ImageRegistry, load_display_image
 
-from interaction_scenes import INTERACTION_SCENES
+from interaction_scenes import INTERACTION_SCENES, MODE_ACTIONS, ACTION_LABELS
 SCENES = (('normal', '通常'), ('play', '遊ぶ'), ('pet', '撫でられる'), ('sleep', '眠る')) + INTERACTION_SCENES
 
 
@@ -35,6 +35,12 @@ class ContentImageToolWindow:
         self.scene_selector = ttk.Combobox(frame, textvariable=self.scene, state='readonly',
                                           values=[row[1] for row in SCENES])
         self.scene_selector.pack(fill='x')
+        self.action = tk.StringVar(master=self.window, value='動作の共通画像')
+        ttk.Label(frame, text='行動（動作との組み合わせ画像）').pack(anchor='w')
+        self.action_selector = ttk.Combobox(frame, textvariable=self.action, state='readonly',
+                                            values=['動作の共通画像'])
+        self.action_selector.pack(fill='x')
+        self.action_selector.bind('<<ComboboxSelected>>', lambda event: self.refresh())
         self.cat_selector.bind('<<ComboboxSelected>>', lambda event: self.refresh())
         self.scene_selector.bind('<<ComboboxSelected>>', lambda event: self.refresh())
         controls = ttk.Frame(frame)
@@ -83,6 +89,13 @@ class ContentImageToolWindow:
         if cat_id not in self.catalog_provider():
             raise ValueError('猫一覧を更新して、登録する猫を選んでください。')
         key = next(row[0] for row in SCENES if row[1] == self.scene.get())
+        allowed = MODE_ACTIONS.get(key, ())
+        labels = ['動作の共通画像'] + [ACTION_LABELS[action] for action in allowed]
+        self.action_selector.configure(values=labels, state='readonly' if allowed else 'disabled')
+        if self.action.get() not in labels:
+            self.action.set(labels[0])
+        if self.action.get() != labels[0]:
+            key += '__' + next(action for action in allowed if ACTION_LABELS[action] == self.action.get())
         return cat_id, key
 
     def display(self, path):
@@ -168,7 +181,7 @@ class ContentImageToolWindow:
             self.generation_target = target
             self.generation_window = ComfyGenerationWindow(self.window, result, positive=initial_prompt,
                 prompt_provider=lambda: self.presets.assemble(*target),
-                label=f'{self.cat.get()} / {self.scene.get()}', reference_path=reference,
+                label=f'{self.cat.get()} / {self.scene.get()} / {self.action.get()}', reference_path=reference,
                 loras=self.lora_settings.active(*target))
         except (ValueError, OSError) as exc:
             self.notice.set(f'生成画面を開けません：{exc}')
@@ -182,7 +195,7 @@ class ContentImageToolWindow:
         try:
             cat_id, scene = self.selection()
             self.prompt_editor = PromptEditorWindow(self.window, self.presets, cat_id, scene,
-                                                    f'{self.cat.get()} / {self.scene.get()}')
+                                                    f'{self.cat.get()} / {self.scene.get()} / {self.action.get()}')
         except (OSError, ValueError) as exc:
             self.notice.set(f'設定画面を開けません：{exc}')
 
@@ -232,7 +245,7 @@ class ContentImageToolWindow:
         try:
             cat_id, scene = self.selection()
             self.lora_editor = LoraEditorWindow(self.window, self.lora_settings, cat_id, scene,
-                                                f'{self.cat.get()} / {self.scene.get()}')
+                                                f'{self.cat.get()} / {self.scene.get()} / {self.action.get()}')
         except (OSError, ValueError) as exc:
             self.notice.set(f'LoRA設定を開けません：{exc}')
 

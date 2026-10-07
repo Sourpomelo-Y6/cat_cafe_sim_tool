@@ -64,6 +64,34 @@ class UnityExportTests(unittest.TestCase):
             lora.save('a', 'ball', EMPTY, EMPTY)
             self.assertIn('ball', lora.read()['scenes'])
 
+    def test_combination_registration_export_and_generation(self):
+        from interaction_scenes import MODE_ACTIONS, COMBINATION_SCENES
+        from prompt_presets import PromptPresets
+        from lora_settings import LoraSettings, EMPTY
+        config = json.loads((Path(__file__).resolve().parents[2] / 'cat_cafe_sim/config/human_cat_types.json').read_text(encoding='utf-8'))
+        self.assertEqual(len(COMBINATION_SCENES), 47)
+        for row in config['types']:
+            self.assertEqual(set(MODE_ACTIONS[row['id']]), set(row['actions']) | {'pause', 'switch', 'connect'})
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            registry = ImageRegistry(root / 'source')
+            registry.register('a', 'ball__feint', ASSET)
+            registry.register('a', 'brush__adapt', ASSET)
+            with self.assertRaises(ValueError):
+                registry.register('a', 'brush__intense', ASSET)
+            folder, report = export_bundle({'a': 'ミケ'}, registry, TextStore(root / 'texts.json'), root / 'exports')
+            scenes = json.loads((folder / 'bundle.json').read_text(encoding='utf-8'))['cats'][0]['scenes']
+            self.assertEqual({row['key'] for row in scenes}, {'normal','play','pet','sleep','ball__feint','brush__adapt'})
+            self.assertEqual(report['image_count'], 1)
+            presets = PromptPresets(root / 'prompts.json')
+            fields = presets.fields('a', 'ball__feint')
+            self.assertIn('change of direction', fields['action'])
+            presets.save('a', 'ball__feint', fields)
+            self.assertEqual(PromptPresets(presets.path).fields('a', 'ball__feint'), fields)
+            settings = LoraSettings(root / 'lora.json')
+            settings.save('a', 'ball__feint', EMPTY, EMPTY)
+            self.assertIn('ball__feint', settings.read()['scenes'])
+
     def test_corrupt_sources_do_not_create_output(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
