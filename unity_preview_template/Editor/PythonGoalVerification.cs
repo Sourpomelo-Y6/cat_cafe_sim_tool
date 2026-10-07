@@ -66,6 +66,7 @@ namespace CatCafePreview.Editor
             var expected=JsonUtility.FromJson<PythonCafeState>(SessionState.GetString(Key+name,"")); expected.revision=state.revision;
             if(expected.goal_result!=null && string.IsNullOrEmpty(expected.goal_result.status))expected.goal_result=null;
             if(expected.next_goal!=null && expected.next_goal.stage<2)expected.next_goal=null;
+            if(expected.player_interaction!=null && string.IsNullOrEmpty(expected.player_interaction.session_id))expected.player_interaction=null;
             if(JsonUtility.ToJson(expected)!=JsonUtility.ToJson(state))throw new Exception("Goal restore mismatch: "+name);
         }
         static void VerifyStages(int stage,ContentPreview preview,PythonStateClient client,PythonGoalPanel panel,PythonSavePanel saves,PythonCafeState state)

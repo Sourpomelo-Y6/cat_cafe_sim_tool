@@ -8,7 +8,10 @@ namespace CatCafePreview
     [Serializable] public class PythonCatState
     {
         public string cat_id, content_cat_id, name, health_status, activity, health_label, activity_label, growth_details;
-        public float stamina, max_stamina, fatigue, stress;
+        public float stamina, max_stamina, fatigue, stress, affinity;
+        public int remaining_sets;
+        public bool can_player_start;
+        public string player_reason;
         public bool working;
     }
     [Serializable] public class PythonCafeState
@@ -29,6 +32,7 @@ namespace CatCafePreview
         public PythonHousingState housing;
         public PythonGoalResult goal_result;
         public PythonNextGoal next_goal;
+        public PythonPlayerInteraction player_interaction;
         public PythonObjectiveProgress objective_progress;
         public PythonStoreEvent store_event;
         public PythonGrowthChoice[] growth_choices;
@@ -43,6 +47,14 @@ namespace CatCafePreview
     [Serializable] public class PythonEventChoice
     { public string choice, label, detail, reason; public bool can_select; }
     [Serializable] public class PythonObjectiveProgress { public string mode, label, status, summary, details; }
+    [Serializable] public class PythonPlayerInteraction
+    {
+        public string session_id, cat_id, name, mode, history, reason;
+        public bool active, can_finish;
+        public int remaining_ticks, remaining_sets;
+        public float affinity_before, affinity_after, affinity_delta, stamina, engagement, tension;
+        public PythonEventChoice[] actions, targets;
+    }
     [Serializable] public class PythonNextGoal
     { public int stage, started_day, deadline, days; public float target; public bool can_advance; public string reason; }
     [Serializable] public class PythonGoalResult
@@ -80,6 +92,7 @@ namespace CatCafePreview
         public string save_id = "";
         public string choice = "";
         public string cat_id = "";
+        public string target_type = "";
     }
     [Serializable] public class PythonCommandReply
     {
@@ -129,6 +142,31 @@ namespace CatCafePreview
         public void SaveGame() { QueueSave("save_game", ""); }
         public void LoadSaved(string id) { QueueSave("load_game", id); }
         public bool CanContinueGoal { get { return CanManageSaves && current.goal_result != null && current.goal_result.can_continue; } }
+        public bool CanBeginPlayer(string catId)
+        { return CanManageSaves && Array.Exists(current.cats,row=>row.cat_id==catId && row.can_player_start); }
+        public void BeginPlayer(string catId)
+        { if(CanBeginPlayer(catId))QueuePlayer("player_begin",catId,"",""); }
+        public bool CanPlayerAction(string choice)
+        {
+            var row=current==null ? null : current.player_interaction;
+            return CanManageSaves && row!=null && row.active && row.actions!=null && Array.Exists(row.actions,a=>a.choice==choice && a.can_select);
+        }
+        public void PlayerAction(string choice,string target)
+        {
+            if(!CanPlayerAction(choice))return;
+            var row=current.player_interaction;
+            if(choice=="switch" && (row.targets==null || !Array.Exists(row.targets,t=>t.choice==target)))return;
+            QueuePlayer("player_step",row.cat_id,choice,choice=="switch" ? target : "");
+        }
+        public bool CanFinishPlayer { get { return CanManageSaves && current.player_interaction!=null && current.player_interaction.active && current.player_interaction.can_finish; } }
+        public void FinishPlayer() { if(CanFinishPlayer)QueuePlayer("player_finish",current.player_interaction.cat_id,"",""); }
+        private void QueuePlayer(string kind,string catId,string choice,string target)
+        {
+            StopAutomatic();
+            pending=new PythonShiftCommand{request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,
+                expected_revision=current.revision,working_cats=new string[0],kind=kind,cat_id=catId,choice=choice,target_type=target};
+            preview.RefreshPythonControls();
+        }
         public bool CanAdvanceGoal { get { return CanManageSaves && current.next_goal != null && current.next_goal.can_advance; } }
         public void AdvanceGoal()
         {
@@ -201,7 +239,7 @@ namespace CatCafePreview
                 expected_revision=current.revision,working_cats=new string[0],kind=kind,save_id=id };
             preview.RefreshPythonControls();
         }
-        public bool CanChangeShifts { get { return online && pending == null && current != null && current.can_set_shifts; } }
+        public bool CanChangeShifts { get { return online && pending == null && current != null && current.can_set_shifts && (current.player_interaction==null || !current.player_interaction.active); } }
         public bool CanProgressBusiness { get { return online && pending == null && current != null && !automatic
             && string.IsNullOrEmpty(current.required_action)
             && (current.closed || !current.can_set_shifts || Array.Exists(current.cats, cat => cat.working)); } }
@@ -242,6 +280,7 @@ namespace CatCafePreview
             // JsonUtility can materialize a JSON null nested object with empty fields.
             if (state.goal_result != null && string.IsNullOrEmpty(state.goal_result.status)) state.goal_result = null;
             if(state.next_goal != null && state.next_goal.stage < 2)state.next_goal=null;
+            if(state.player_interaction!=null && string.IsNullOrEmpty(state.player_interaction.session_id))state.player_interaction=null;
             if(state.store_event != null && string.IsNullOrEmpty(state.store_event.kind)) state.store_event=null;
             if (!IsOpen(state) || (current != null && (state.instance_id != current.instance_id || state.day != current.day))) StopAutomatic();
             current = state; online = true; preview.ApplyPythonState(state);
@@ -276,6 +315,8 @@ namespace CatCafePreview
                                 {
                                     var reply = JsonUtility.FromJson<PythonCommandReply>(request.downloadHandler.text);
                                     Accept(reply.state);
+                                    if(command.kind=="load_game")
+                                    { var player=GetComponent<PythonPlayerPanel>();if(player!=null)player.Restore(); }
                                     if(command.kind=="new_game" || command.kind=="load_game") { var menu=GetComponent<PythonNewGamePanel>(); if(menu!=null) menu.Close(); }
                                     notice = command.kind == "set_shifts" ? "出勤・休養を変更しました。"
                                         : command.kind == "save_game" ? "保存しました。" : command.kind == "load_game" ? "保存したゲームを再開しました。"
@@ -285,6 +326,8 @@ namespace CatCafePreview
                                         : command.kind == "purchase_housing" || command.kind == "upgrade_housing" ? "飼育スペースを拡張しました。"
                                         : command.kind == "resolve_store_event" ? (command.choice == "close" ? "休業し、翌日の営業準備へ進みました。" : "店舗イベントに回答しました。")
                                         : command.kind == "resolve_growth" ? "得意分野を選びました。"
+                                        : command.kind == "player_begin" ? "猫との交流を開始しました。"
+                                        : command.kind == "player_step" || command.kind == "player_finish" ? "猫との交流を更新しました。"
                                         : command.kind == "advance_goal" ? "次の人気目標への挑戦を開始しました。"
                                         : (command.kind == "continue_goal" || command.kind == "continue_patron" || command.kind == "continue_bond_goal") ? "目標結果を確認しました。営業を続けられます。"
                                         : reply.state.closed ? "閉店しました。結果を確認してください。" : "営業を進めました。";

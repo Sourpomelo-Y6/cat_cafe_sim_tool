@@ -161,6 +161,7 @@ namespace CatCafePreview
             if(detail != null) detail.Apply(state);
             var growth = GetComponent<PythonGrowthPanel>();
             if (growth != null) growth.Apply(state);
+            var player=GetComponent<PythonPlayerPanel>();if(player!=null)player.Apply(state);
         }
         private void AppendObjectiveProgress()
         {
@@ -202,6 +203,8 @@ namespace CatCafePreview
 
         public void RefreshPythonControls()
         {
+            var player=GetComponent<PythonPlayerPanel>();if(player!=null)player.RefreshControls();
+            var detail=GetComponent<PythonCatDetailsPanel>();if(detail!=null)detail.RefreshControls();
             var menu=GetComponent<PythonNewGamePanel>();if(menu!=null) menu.RefreshControls();
             var roster = GetComponent<PythonCatRoster>();
             if (roster != null) roster.RefreshControls();
@@ -231,6 +234,8 @@ namespace CatCafePreview
 
         public void PythonNotice(string message)
         {
+            var player=GetComponent<PythonPlayerPanel>();if(player!=null && player.panel.activeSelf)player.notice.text=message;
+            var detail=GetComponent<PythonCatDetailsPanel>();if(detail!=null && detail.panel.activeSelf && detail.interactionNotice!=null)detail.interactionNotice.text=message;
             var menu=GetComponent<PythonNewGamePanel>();if(menu!=null && menu.panel.activeSelf) menu.notice.text=message;
             status.text = message + "\n" + status.text;
             var intake = GetComponent<PythonIntakePanel>();
@@ -298,6 +303,7 @@ namespace CatCafePreview
             if (roster != null) roster.Disconnect();
             var detail = GetComponent<PythonCatDetailsPanel>();
             if(detail != null) detail.Disconnect();
+            var player=GetComponent<PythonPlayerPanel>();if(player!=null)player.Disconnect();
             var service = GetComponent<PythonServiceScreen>();
             if (service != null) service.Disconnect();
             var savePanel = GetComponent<PythonSavePanel>();
