@@ -44,9 +44,9 @@ namespace CatCafePreview
             heading.text = phase == "closed" ? "閉店結果・猫の状態" : showSeats ? "席一覧　　人物アイコン：接客中のお客さん" : "猫一覧";
             if(state.objective_progress != null)
             {
-                heading.fontSize=18;
-                heading.rectTransform.anchoredPosition=new Vector2(24,-68);
-                heading.rectTransform.sizeDelta=new Vector2(750,58);
+                heading.fontSize=16;heading.lineSpacing=1;
+                heading.rectTransform.anchoredPosition=new Vector2(24,-78);
+                heading.rectTransform.sizeDelta=new Vector2(750,48);
                 heading.text=state.objective_progress.label + "\n" + state.objective_progress.summary;
             }
 

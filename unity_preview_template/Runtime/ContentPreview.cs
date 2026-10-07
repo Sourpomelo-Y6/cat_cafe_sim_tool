@@ -134,6 +134,7 @@ namespace CatCafePreview
 
         public void ApplyPythonState(PythonCafeState state)
         {
+            var presentation=GetComponent<PythonPresentation>();if(presentation!=null)presentation.Apply(state);
             string previous = pythonState == null || cats.value >= pythonState.cats.Length ? "" : pythonState.cats[cats.value].cat_id;
             pythonState = state;
             cats.options.Clear();
@@ -304,7 +305,7 @@ namespace CatCafePreview
                 picture.texture = null; picture.enabled = false; emptyImage.enabled = true;
                 description.text = cat.name + "\n対応する素材が未登録です。";
             }
-            description.text += "\n\nPythonのゲーム状態\n体力 " + cat.stamina + "/" + cat.max_stamina
+            description.text += "\n\n猫の状態\n体力 " + cat.stamina + "/" + cat.max_stamina
                 + "\n予定：" + (cat.working ? "出勤" : "休養") + "\n健康：" + cat.health_status + "\n活動：" + cat.activity
                 + "\n疲労 " + cat.fatigue + " / ストレス " + cat.stress;
             if (pythonState.seats != null)
@@ -336,6 +337,7 @@ namespace CatCafePreview
 
         public void PythonConnectionError(string message)
         {
+            var presentation=GetComponent<PythonPresentation>();if(presentation!=null)presentation.Disconnect();
             var navigation=GetComponent<PythonReturnToTitle>();if(navigation!=null)navigation.RefreshControls();
             var closing=GetComponent<PythonClosingPanel>();if(closing!=null)closing.Disconnect();
             var menu=GetComponent<PythonNewGamePanel>();if(menu!=null) menu.Disconnect();
