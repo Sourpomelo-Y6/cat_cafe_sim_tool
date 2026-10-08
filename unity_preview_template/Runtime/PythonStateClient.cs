@@ -32,6 +32,7 @@ namespace CatCafePreview
         public PythonFinanceState finance;
         public PythonFinanceHistory finance_history;
         public PythonPetShop pet_shop;
+        public PythonObjectiveStart objective_start;
         public PythonIntakeState intake_request;
         public PythonVisitingCat visiting_cat;
         public PythonRegularIntroduction regular_introduction;
@@ -180,6 +181,10 @@ namespace CatCafePreview
         { return CanManageSaves && current.pet_shop?.rows!=null && Array.Exists(current.pet_shop.rows,row=>row.cat_id==catId && row.can_purchase); }
         public void PurchaseCat(string catId)
         { if(CanPurchaseCat(catId))QueuePlayer("purchase_cat",catId,"",""); }
+        public bool CanStartObjective(string choice)
+        { return CanManageSaves && current.objective_start?.rows!=null && Array.Exists(current.objective_start.rows,row=>row.choice==choice && row.can_start); }
+        public void StartObjective(string choice)
+        { if(CanStartObjective(choice))QueuePlayer("start_objective","",choice,""); }
         public void BeginPlayer(string catId)
         { if(CanBeginPlayer(catId))QueuePlayer("player_begin",catId,"",""); }
         public bool CanPlayerAction(string choice)

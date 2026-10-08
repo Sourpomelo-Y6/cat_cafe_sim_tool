@@ -185,6 +185,7 @@ namespace CatCafePreview
             var customerDirectory=GetComponent<PythonCustomerDirectoryPanel>();if(customerDirectory!=null)customerDirectory.Apply(state);
             var financeHistory=GetComponent<PythonFinanceHistoryPanel>();if(financeHistory!=null)financeHistory.Apply(state);
             var petShop=GetComponent<PythonPetShopPanel>();if(petShop!=null)petShop.Apply(state);
+            var objectiveStart=GetComponent<PythonObjectiveStartPanel>();if(objectiveStart!=null)objectiveStart.Apply(state);
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.Apply(state);
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.Apply(state);
             var preparation=GetComponent<PythonPreparationPanel>();if(preparation!=null)preparation.Apply(state);
@@ -283,6 +284,7 @@ namespace CatCafePreview
             var customerDirectory=GetComponent<PythonCustomerDirectoryPanel>();if(customerDirectory!=null)customerDirectory.RefreshControls();
             var financeHistory=GetComponent<PythonFinanceHistoryPanel>();if(financeHistory!=null)financeHistory.RefreshControls();
             var petShop=GetComponent<PythonPetShopPanel>();if(petShop!=null)petShop.RefreshControls();
+            var objectiveStart=GetComponent<PythonObjectiveStartPanel>();if(objectiveStart!=null)objectiveStart.RefreshControls();
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.RefreshControls();
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.RefreshControls();
             var preparation=GetComponent<PythonPreparationPanel>();if(preparation!=null)preparation.RefreshControls();
@@ -368,6 +370,7 @@ namespace CatCafePreview
             var waitingArea=GetComponent<PythonWaitingAreaPanel>();if(waitingArea!=null && waitingArea.panel.activeSelf)waitingArea.notice.text=message;
             var customerDirectory=GetComponent<PythonCustomerDirectoryPanel>();if(customerDirectory!=null && customerDirectory.panel.activeSelf)customerDirectory.notice.text=message;
             var petShop=GetComponent<PythonPetShopPanel>();if(petShop!=null && petShop.panel.activeSelf)petShop.notice.text=message;
+            var objectiveStart=GetComponent<PythonObjectiveStartPanel>();if(objectiveStart!=null && objectiveStart.panel.activeSelf)objectiveStart.notice.text=message;
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null && missing.panel.activeSelf && !string.IsNullOrEmpty(message))missing.notice.text=message;
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null && adoption.panel.activeSelf)adoption.notice.text=message;
             var ended=GetComponent<PythonGameOverPanel>();if(ended!=null && ended.panel.activeSelf)ended.notice.text=message;
@@ -458,6 +461,7 @@ namespace CatCafePreview
             var customerDirectory=GetComponent<PythonCustomerDirectoryPanel>();if(customerDirectory!=null)customerDirectory.Disconnect();
             var financeHistory=GetComponent<PythonFinanceHistoryPanel>();if(financeHistory!=null)financeHistory.Disconnect();
             var petShop=GetComponent<PythonPetShopPanel>();if(petShop!=null)petShop.Disconnect();
+            var objectiveStart=GetComponent<PythonObjectiveStartPanel>();if(objectiveStart!=null)objectiveStart.Disconnect();
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.Disconnect();
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.Disconnect();
             var preparation=GetComponent<PythonPreparationPanel>();if(preparation!=null)preparation.Disconnect();
