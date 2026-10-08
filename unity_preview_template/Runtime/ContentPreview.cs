@@ -179,6 +179,7 @@ namespace CatCafePreview
             var items=GetComponent<PythonItemsPanel>();if(items!=null)items.Apply(state);
             var dayOff=GetComponent<PythonDayOffPanel>();if(dayOff!=null)dayOff.Apply(state);
             var expansion=GetComponent<PythonExpansionPanel>();if(expansion!=null)expansion.Apply(state);
+            var equipment=GetComponent<PythonSeatEquipmentPanel>();if(equipment!=null)equipment.Apply(state);
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.Apply(state);
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.Apply(state);
             var preparation=GetComponent<PythonPreparationPanel>();if(preparation!=null)preparation.Apply(state);
@@ -271,6 +272,7 @@ namespace CatCafePreview
             var items=GetComponent<PythonItemsPanel>();if(items!=null)items.RefreshControls();
             var dayOff=GetComponent<PythonDayOffPanel>();if(dayOff!=null)dayOff.RefreshControls();
             var expansion=GetComponent<PythonExpansionPanel>();if(expansion!=null)expansion.RefreshControls();
+            var equipment=GetComponent<PythonSeatEquipmentPanel>();if(equipment!=null)equipment.RefreshControls();
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.RefreshControls();
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.RefreshControls();
             var preparation=GetComponent<PythonPreparationPanel>();if(preparation!=null)preparation.RefreshControls();
@@ -351,6 +353,7 @@ namespace CatCafePreview
             var items=GetComponent<PythonItemsPanel>();if(items!=null && items.panel.activeSelf)items.notice.text=message;
             var dayOff=GetComponent<PythonDayOffPanel>();if(dayOff!=null && dayOff.panel.activeSelf)dayOff.notice.text=message;
             var expansion=GetComponent<PythonExpansionPanel>();if(expansion!=null && expansion.panel.activeSelf)expansion.notice.text=message;
+            var equipment=GetComponent<PythonSeatEquipmentPanel>();if(equipment!=null && equipment.panel.activeSelf)equipment.notice.text=message;
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null && missing.panel.activeSelf && !string.IsNullOrEmpty(message))missing.notice.text=message;
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null && adoption.panel.activeSelf)adoption.notice.text=message;
             var ended=GetComponent<PythonGameOverPanel>();if(ended!=null && ended.panel.activeSelf)ended.notice.text=message;
@@ -435,6 +438,7 @@ namespace CatCafePreview
             var items=GetComponent<PythonItemsPanel>();if(items!=null)items.Disconnect();
             var dayOff=GetComponent<PythonDayOffPanel>();if(dayOff!=null)dayOff.Disconnect();
             var expansion=GetComponent<PythonExpansionPanel>();if(expansion!=null)expansion.Disconnect();
+            var equipment=GetComponent<PythonSeatEquipmentPanel>();if(equipment!=null)equipment.Disconnect();
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.Disconnect();
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.Disconnect();
             var preparation=GetComponent<PythonPreparationPanel>();if(preparation!=null)preparation.Disconnect();

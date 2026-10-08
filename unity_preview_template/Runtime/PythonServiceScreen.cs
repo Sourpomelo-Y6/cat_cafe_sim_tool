@@ -73,6 +73,7 @@ namespace CatCafePreview
                 card.customerIcon.SetActive(occupied); card.work.gameObject.SetActive(false); card.rest.gameObject.SetActive(false);
                 card.state=cat;
                 card.stateText.text = occupied ? "お客さん："+seat.customer_name+"\n担当："+(cat == null ? "未配置" : cat.name)+ (cat==null ? "" : "\n体力 "+cat.stamina.ToString("0.#")+" / 疲労 "+cat.fatigue.ToString("0.#")) : "お客さんを待っています";
+                card.stateText.text += "\n"+(string.IsNullOrEmpty(seat.equipment_name) ? "設備なし" : seat.equipment_name);
                 if(card.details!=null)
                 {
                     card.details.gameObject.SetActive(occupied && cat!=null);card.details.onClick.RemoveAllListeners();
@@ -90,6 +91,7 @@ namespace CatCafePreview
                 int index = Array.FindIndex(seats,seat=>seat.seat_id == customer.seat_id);
                 text += customer.name + "\n" + label + (index >= 0 ? " / 席 " + (index+1) : "") + "\n\n";
             }
+            text += "\n各席の設備\n";foreach(var seat in seats)text+=seat.seat_id+"："+(seat.equipment_description ?? "設備なし")+"\n\n";
             GetComponent<ContentPreview>().SetServiceDescription(text);
         }
         public void RefreshControls()

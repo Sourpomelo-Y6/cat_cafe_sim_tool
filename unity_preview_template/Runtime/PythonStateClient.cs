@@ -44,6 +44,7 @@ namespace CatCafePreview
         public PythonItems items;
         public PythonDayOff day_off;
         public PythonExpansion expansion;
+        public PythonSeatEquipment seat_equipment;
         public PythonMissingCat[] missing_cats;
         public PythonMissingRest missing_rest;
         public PythonAdoption adoption;
@@ -86,7 +87,7 @@ namespace CatCafePreview
         public string kind, reason;
         public float cost, funds_after, daily_cost, next_daily_cost, operating_cost, next_operating_cost;
     }
-    [Serializable] public class PythonSeatState { public string seat_id, customer_id, customer_name, cat_id; }
+    [Serializable] public class PythonSeatState { public string seat_id, customer_id, customer_name, cat_id, equipment_id, equipment_description, equipment_name; }
     [Serializable] public class PythonIntakeState
     {
         public string cat_id, name, status, personality, features, trait, housing, response_reason, accept_reason;
@@ -370,6 +371,13 @@ namespace CatCafePreview
             preview.RefreshPythonControls();
         }
         public bool CanChangeShifts { get { return online && pending == null && current != null && current.game_over == null && current.can_set_shifts && (current.player_interaction==null || !current.player_interaction.active); } }
+        public bool CanSeatEquipment(string kind,string seat,string choice)
+        {
+            if(!CanManageSaves || current.game_over!=null || current.seat_equipment?.can_manage!=true || Array.Find(current.seat_equipment.seats,r=>r.seat_id==seat)==null)return false;
+            if(kind=="purchase_seat_equipment")return Array.Find(current.seat_equipment.catalog,r=>r.kind_id==choice)?.can_purchase==true;
+            return kind=="equip_seat" && (choice=="" || Array.Find(current.seat_equipment.owned,r=>r.item_id==choice)!=null);
+        }
+        public void SeatEquipment(string kind,string seat,string choice){if(CanSeatEquipment(kind,seat,choice))QueuePlayer(kind,"",choice,seat);}
         public bool CanExpandSeats { get { return CanManageSaves && current.game_over==null && current.expansion!=null && current.expansion.can_expand; } }
         public void ExpandSeats() { if(CanExpandSeats)QueuePlayer("expand_seats","","",""); }
         public bool CanDayOff { get { return CanManageSaves && current.game_over==null && current.day_off!=null && current.day_off.can_select; } }
