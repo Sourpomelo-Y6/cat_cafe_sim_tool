@@ -41,6 +41,7 @@ namespace CatCafePreview
         public PythonDispatchEncounter[] dispatch_choices;
         public PythonDispatchTrouble[] dispatch_troubles;
         public PythonDispatchIntroduction[] dispatch_introductions;
+        public PythonItems items;
         public PythonMissingCat[] missing_cats;
         public PythonMissingRest missing_rest;
         public PythonAdoption adoption;
@@ -222,6 +223,15 @@ namespace CatCafePreview
             var row=Array.Find(current.patron_dispatch.events,r=>r.choice==eventId && r.can_select);
             if(row!=null)QueuePlayer("receive_patron",row.cat_id,row.choice,"");
         }
+        public bool CanItemAction(string kind,string choice,string catId)
+        {
+            if(!CanManageSaves || current.items==null)return false;
+            if(kind=="purchase_item")return Array.Exists(current.items.shop ?? new PythonItemShop[0],r=>r.choice==choice && r.can_select);
+            var row=Array.Find(current.items.owned ?? new PythonOwnedItem[0],r=>r.choice==choice);if(row==null)return false;
+            return kind=="sell_item" ? row.can_sell : kind=="use_item" && Array.Exists(row.targets ?? new PythonItemTarget[0],r=>r.cat_id==catId && r.can_select);
+        }
+        public void ItemAction(string kind,string choice,string catId)
+        {if(CanItemAction(kind,choice,catId))QueuePlayer(kind,catId,choice,"");}
         public bool CanRespondDispatchIntroduction(string eventId,string choice)
         {
             var row=current?.dispatch_introductions==null ? null : Array.Find(current.dispatch_introductions,r=>r.event_id==eventId);

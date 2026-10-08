@@ -176,6 +176,7 @@ namespace CatCafePreview
             var dispatchChoice=GetComponent<PythonDispatchChoicePanel>();if(dispatchChoice!=null)dispatchChoice.Apply(state);
             var dispatchTrouble=GetComponent<PythonDispatchTroublePanel>();if(dispatchTrouble!=null)dispatchTrouble.Apply(state);
             var dispatchIntroduction=GetComponent<PythonDispatchIntroductionPanel>();if(dispatchIntroduction!=null)dispatchIntroduction.Apply(state);
+            var items=GetComponent<PythonItemsPanel>();if(items!=null)items.Apply(state);
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.Apply(state);
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.Apply(state);
             var preparation=GetComponent<PythonPreparationPanel>();if(preparation!=null)preparation.Apply(state);
@@ -265,6 +266,7 @@ namespace CatCafePreview
             var dispatchChoice=GetComponent<PythonDispatchChoicePanel>();if(dispatchChoice!=null)dispatchChoice.RefreshControls();
             var dispatchTrouble=GetComponent<PythonDispatchTroublePanel>();if(dispatchTrouble!=null)dispatchTrouble.RefreshControls();
             var dispatchIntroduction=GetComponent<PythonDispatchIntroductionPanel>();if(dispatchIntroduction!=null)dispatchIntroduction.RefreshControls();
+            var items=GetComponent<PythonItemsPanel>();if(items!=null)items.RefreshControls();
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.RefreshControls();
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.RefreshControls();
             var preparation=GetComponent<PythonPreparationPanel>();if(preparation!=null)preparation.RefreshControls();
@@ -342,6 +344,7 @@ namespace CatCafePreview
             var dispatchChoice=GetComponent<PythonDispatchChoicePanel>();if(dispatchChoice!=null && dispatchChoice.panel.activeSelf)dispatchChoice.notice.text=message;
             var dispatchTrouble=GetComponent<PythonDispatchTroublePanel>();if(dispatchTrouble!=null && dispatchTrouble.panel.activeSelf)dispatchTrouble.notice.text=message;
             var dispatchIntroduction=GetComponent<PythonDispatchIntroductionPanel>();if(dispatchIntroduction!=null && dispatchIntroduction.panel.activeSelf)dispatchIntroduction.notice.text=message;
+            var items=GetComponent<PythonItemsPanel>();if(items!=null && items.panel.activeSelf)items.notice.text=message;
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null && missing.panel.activeSelf && !string.IsNullOrEmpty(message))missing.notice.text=message;
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null && adoption.panel.activeSelf)adoption.notice.text=message;
             var ended=GetComponent<PythonGameOverPanel>();if(ended!=null && ended.panel.activeSelf)ended.notice.text=message;
@@ -423,6 +426,7 @@ namespace CatCafePreview
             var dispatchChoice=GetComponent<PythonDispatchChoicePanel>();if(dispatchChoice!=null)dispatchChoice.Disconnect();
             var dispatchTrouble=GetComponent<PythonDispatchTroublePanel>();if(dispatchTrouble!=null)dispatchTrouble.Disconnect();
             var dispatchIntroduction=GetComponent<PythonDispatchIntroductionPanel>();if(dispatchIntroduction!=null)dispatchIntroduction.Disconnect();
+            var items=GetComponent<PythonItemsPanel>();if(items!=null)items.Disconnect();
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.Disconnect();
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.Disconnect();
             var preparation=GetComponent<PythonPreparationPanel>();if(preparation!=null)preparation.Disconnect();
