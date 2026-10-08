@@ -22,6 +22,7 @@ $previewFiles += @('Runtime/PythonDispatchTroublePanel.cs', 'Editor/PythonDispat
 $previewFiles += @('Runtime/PythonDispatchIntroductionPanel.cs', 'Editor/PythonDispatchIntroductionSetup.cs')
 $previewFiles += @('Runtime/PythonItemsPanel.cs', 'Editor/PythonItemsSetup.cs')
 $previewFiles += @('Runtime/PythonDayOffPanel.cs', 'Editor/PythonDayOffSetup.cs')
+$previewFiles += @('Runtime/PythonExpansionPanel.cs', 'Editor/PythonExpansionSetup.cs')
 $previewFiles += @('Runtime/PythonHousingPanel.cs', 'Editor/PythonHousingSetup.cs', 'Editor/PythonHousingVerification.cs')
 $previewFiles += @('Runtime/PythonGoalPanel.cs', 'Editor/PythonGoalSetup.cs', 'Editor/PythonGoalVerification.cs')
 $previewFiles += @('Runtime/PythonGrowthPanel.cs', 'Editor/PythonGrowthSetup.cs', 'Editor/PythonGrowthVerification.cs')

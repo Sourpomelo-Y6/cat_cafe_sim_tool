@@ -21,10 +21,11 @@ namespace CatCafePreview.Editor
             var preparation=preview.GetComponent<PythonPreparationPanel>();
             var oldVisiting=preparation.close.transform.parent.Find("Visiting Cat Entry");
             if(oldVisiting!=null)UnityEngine.Object.DestroyImmediate(oldVisiting.gameObject);
-            Place(preparation.close.GetComponent<RectTransform>(),480,550,436,40);
+            if(preparation.dayOff==null)Place(preparation.close.GetComponent<RectTransform>(),480,550,436,40);
+            else Place(preparation.close.GetComponent<RectTransform>(),620,550,296,40);
             list.open=Button(root,"Event List Entry","イベント一覧",392,128,324,40);UnityEventTools.AddPersistentListener(list.open.onClick,list.Open);
             list.panel=Box(root,"Event List",0,174,1280,626,new Color(0,0,0,.55f));var card=Box(list.panel.transform,"Card",170,8,940,600,new Color(.98f,.97f,.93f));Label(card.transform,"Title",24,18,892,50,25).text="イベント一覧";
-            list.entries=new Button[15];var callbacks=new UnityEngine.Events.UnityAction[]{list.Visiting,list.Intake,list.Store,list.Growth,list.Missing,list.Adoption,list.Dispatch,list.Regular,list.Reservation,list.Trust,list.GeneralDispatch,list.DispatchChoice,list.DispatchTrouble,list.DispatchIntroduction,list.Items};
+            list.entries=new Button[16];var callbacks=new UnityEngine.Events.UnityAction[]{list.Visiting,list.Intake,list.Store,list.Growth,list.Missing,list.Adoption,list.Dispatch,list.Regular,list.Reservation,list.Trust,list.GeneralDispatch,list.DispatchChoice,list.DispatchTrouble,list.DispatchIntroduction,list.Items,list.Expansion};
             var area=Box(card.transform,"Events Scroll",24,76,892,404,new Color(.93f,.94f,.89f));var scroll=area.AddComponent<ScrollRect>();scroll.horizontal=false;scroll.movementType=ScrollRect.MovementType.Clamped;
             var viewport=Box(area.transform,"Viewport",0,0,872,404,Color.white);viewport.AddComponent<Mask>().showMaskGraphic=false;scroll.viewport=viewport.GetComponent<RectTransform>();
             var content=new GameObject("Content",typeof(RectTransform));content.transform.SetParent(viewport.transform,false);Place(content.GetComponent<RectTransform>(),0,0,872,list.entries.Length*40);scroll.content=content.GetComponent<RectTransform>();
