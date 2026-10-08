@@ -5,9 +5,11 @@ using UnityEngine.Networking;
 
 namespace CatCafePreview
 {
+    [Serializable] public class PythonCatRecords { public string events, relationships, history; }
     [Serializable] public class PythonCatState
     {
         public string cat_id, content_cat_id, name, health_status, activity, health_label, activity_label, growth_details;
+        public PythonCatRecords records;
         public float stamina, max_stamina, fatigue, stress, affinity;
         public int remaining_sets;
         public bool can_player_start;

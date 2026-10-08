@@ -9,6 +9,18 @@ namespace CatCafePreview
         public Text title, details, stateDetails, dispatchNotice, adoptionNotice;
         public ScrollRect scroll;
         public Button interact, previousInteraction, dispatch, missing, adoption;
+        public Button[] recordTabs;
+        private int recordPage;
+        private string instanceId;
+        public void GrowthRecords() { Records(0); }
+        public void EventRecords() { Records(1); }
+        public void RelationshipRecords() { Records(2); }
+        public void DailyRecords() { Records(3); }
+        private void Records(int page)
+        {
+            if(!GetComponent<PythonStateClient>().CanManageSaves || current==null || selectedId==null)return;
+            recordPage=page;Render();Canvas.ForceUpdateCanvases();scroll.verticalNormalizedPosition=1;
+        }
         public void Adoption() { GetComponent<PythonAdoptionPanel>().Open(selectedId); }
         public void Missing() { GetComponent<PythonMissingPanel>().Open(selectedId); }
         public void Dispatch() { GetComponent<PythonDispatchPanel>().Open(selectedId); }
@@ -19,6 +31,7 @@ namespace CatCafePreview
         {
             var client=GetComponent<PythonStateClient>();
             if(!client.CanManageSaves || current == null) return;
+            if(selectedId!=catId)recordPage=0;
             selectedId=catId;
             Render();
             Canvas.ForceUpdateCanvases();scroll.verticalNormalizedPosition=1;
@@ -35,7 +48,8 @@ namespace CatCafePreview
         public void PreviousInteraction() { GetComponent<PythonPlayerPanel>().Open(); }
         public void Apply(PythonCafeState state)
         {
-            current=state;
+            if(instanceId!=null && instanceId!=state.instance_id){Close();recordPage=0;}
+            instanceId=state.instance_id;current=state;
             if(selectedId != null) Render();
         }
         private void Render()
@@ -43,6 +57,7 @@ namespace CatCafePreview
             var cat=current.cats == null ? null : Array.Find(current.cats,row => row.cat_id==selectedId);
             if(cat == null) { Close(); return; }
             panel.SetActive(true);
+            panel.transform.SetAsLastSibling();
             title.text=cat.name+"の詳細";
             string health="体調と予定\n"+"体力："+cat.stamina.ToString("0.#")+" / "+cat.max_stamina.ToString("0.#")
                 +"\n疲労："+cat.fatigue.ToString("0.#")+" / ストレス："+cat.stress.ToString("0.#")
@@ -54,10 +69,13 @@ namespace CatCafePreview
                 ;
             if(stateDetails!=null)stateDetails.text=health;
             details.text=(stateDetails==null ? health+"\n\n" : "")+"成長・得意な交流\n"+(string.IsNullOrEmpty(cat.growth_details) ? "成長情報はありません。" : cat.growth_details);
+            if(recordPage>0)details.text=cat.records==null ? "記録情報はありません。" : recordPage==1 ? cat.records.events : recordPage==2 ? cat.records.relationships : cat.records.history;
+            if(recordTabs!=null)for(int i=0;i<recordTabs.Length;i++)recordTabs[i].GetComponent<Image>().color=i==recordPage ? new Color(.78f,.88f,.74f) : Color.white;
             RefreshControls();
         }
         public void RefreshControls()
         {
+            if(recordTabs!=null)foreach(var tab in recordTabs)tab.interactable=GetComponent<PythonStateClient>().CanManageSaves && current!=null && selectedId!=null;
             if(adoption!=null)adoption.interactable=GetComponent<PythonStateClient>().CanManageSaves && selectedId!=null;
             if(missing!=null)missing.interactable=GetComponent<PythonStateClient>().CanManageSaves && selectedId!=null;
             if(dispatch!=null)dispatch.interactable=GetComponent<PythonStateClient>().CanManageSaves && selectedId!=null;

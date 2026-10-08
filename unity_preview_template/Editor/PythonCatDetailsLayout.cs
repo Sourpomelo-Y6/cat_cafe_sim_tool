@@ -1,5 +1,6 @@
 using System;
 using UnityEditor;
+using UnityEditor.Events;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
@@ -40,8 +41,12 @@ namespace CatCafePreview.Editor
         public static void Build()
         {
             var scene=EditorSceneManager.OpenScene("Assets/Scenes/CatCafePythonState.unity");var preview=UnityEngine.Object.FindObjectOfType<ContentPreview>();var panel=preview.GetComponent<PythonCatDetailsPanel>();var card=panel.panel.transform.Find("Details Card");
-            foreach(var name in new[]{"Details Scroll","Interaction Notice","Health Section","Growth Section","Interaction Section","Dispatch Section","Adoption Section","Interaction Heading","Dispatch Heading","Adoption Heading"}){var old=card.Find(name);if(old!=null)UnityEngine.Object.DestroyImmediate(old.gameObject);}
-            ScrollRect health;panel.stateDetails=ScrollText(card,"Health Section",24,80,304,282,17,out health);panel.details=ScrollText(card,"Growth Section",348,80,488,282,18,out panel.scroll);
+            foreach(var name in new[]{"Details Scroll","Interaction Notice","Health Section","Growth Section","Interaction Section","Dispatch Section","Adoption Section","Interaction Heading","Dispatch Heading","Adoption Heading","Record Tab 0","Record Tab 1","Record Tab 2","Record Tab 3"}){var old=card.Find(name);if(old!=null)UnityEngine.Object.DestroyImmediate(old.gameObject);}
+            ScrollRect health;panel.stateDetails=ScrollText(card,"Health Section",24,80,304,282,17,out health);panel.details=ScrollText(card,"Growth Section",348,126,488,236,17,out panel.scroll);
+            var captions=new[]{"成長","出来事・加入","お客との関係","日次実績"};panel.recordTabs=new Button[4];
+            for(int i=0;i<4;i++){panel.recordTabs[i]=Button(card,"Record Tab "+i,captions[i],348+i*122,80,118);panel.recordTabs[i].GetComponentInChildren<Text>().fontSize=15;}
+            UnityEventTools.AddPersistentListener(panel.recordTabs[0].onClick,panel.GrowthRecords);UnityEventTools.AddPersistentListener(panel.recordTabs[1].onClick,panel.EventRecords);UnityEventTools.AddPersistentListener(panel.recordTabs[2].onClick,panel.RelationshipRecords);UnityEventTools.AddPersistentListener(panel.recordTabs[3].onClick,panel.DailyRecords);
+            foreach(var tab in panel.recordTabs)tab.onClick.SetPersistentListenerState(0,UnityEngine.Events.UnityEventCallState.EditorAndRuntime);
             Label(card,"Interaction Heading",24,374,250,26,18).text="猫との交流";Label(card,"Dispatch Heading",294,374,252,26,18).text="派遣・家出と帰還";Label(card,"Adoption Heading",566,374,270,26,18).text="譲渡の設定と履歴";
             Move(panel.interact,24,408,250,"猫と交流する");Move(panel.previousInteraction,24,456,250,"前回の交流を見る");Move(panel.dispatch,294,408,252,"派遣先・報酬を確認");Move(panel.missing,294,548,252,"家出・帰還の記録");Move(panel.adoption,566,408,270,"譲渡の設定・履歴");
             ScrollRect ignored;panel.interactionNotice=ScrollText(card,"Interaction Section",24,502,250,84,14,out ignored);panel.dispatchNotice=ScrollText(card,"Dispatch Section",294,456,252,84,14,out ignored);panel.adoptionNotice=ScrollText(card,"Adoption Section",566,456,270,130,14,out ignored);
@@ -55,8 +60,19 @@ namespace CatCafePreview.Editor
             if(!panel.stateDetails.text.Contains("体力") || !panel.details.text.Contains("ねこじゃらし") || panel.details.text.Contains("体力：") || panel.interact.interactable || !panel.interactionNotice.text.Contains("営業中") || !panel.dispatchNotice.text.Contains("営業準備") || !panel.adoptionNotice.text.Contains("OFF"))throw new Exception("Detail groups or reasons missing");
             Canvas.ForceUpdateCanvases();typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{preview,"Logs/CatDetailsLayout.png"});
             state.cats[0].growth_details=new string('長',4000);apply();Canvas.ForceUpdateCanvases();if(panel.scroll.content.rect.height<=panel.scroll.viewport.rect.height)throw new Exception("Growth did not scroll");
+            state.cats[0].records=new PythonCatRecords{events="加入経路：店先に通う猫\n加入日：3日目\n\n1日目 · 店先での交流 · 店先\n交流した\n\n3日目 · 加入 · 店先に通う猫\n初期費用 5000",relationships="保存済みの関係\n佐藤さん（guest-1）\n確定済み親しみ：25 / 顔なじみ / 交流済み",history="1日目\n営業区分：営業\n接客件数：2\n疲労変化：0 → 10\n親しみ増減合計：5"};apply();
+            panel.recordTabs[1].onClick.Invoke();if(!panel.details.text.Contains("加入日：3日目"))throw new Exception("Event tab missing");
+            Canvas.ForceUpdateCanvases();typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{preview,"Logs/CatRecords.png"});
+            panel.recordTabs[2].onClick.Invoke();if(!panel.details.text.Contains("親しみ：25"))throw new Exception("Relationship tab missing");
+            state.revision++;apply();if(!panel.details.text.Contains("親しみ：25"))throw new Exception("Record selection lost");
+            panel.recordTabs[3].onClick.Invoke();if(!panel.details.text.Contains("疲労変化"))throw new Exception("Daily tab missing");
+            state.cats[0].records.history=new string('長',4000);apply();Canvas.ForceUpdateCanvases();if(panel.scroll.content.rect.height<=panel.scroll.viewport.rect.height)throw new Exception("Records did not scroll");
+            panel.GrowthRecords();
             typeof(PythonStateClient).GetField("online",flags).SetValue(client,false);panel.Disconnect();if(panel.interact.interactable || panel.dispatch.interactable || panel.adoption.interactable || !panel.dispatchNotice.text.Contains("未接続"))throw new Exception("Offline actions enabled");
             state.cats[0].growth_details="得意な交流：静かな交流";state.cats[0].can_player_start=true;apply();if(!panel.interact.interactable || !panel.details.text.Contains("静かな交流"))throw new Exception("Reconnect lost selected cat");
+            state.instance_id="another-game";apply();if(panel.panel.activeSelf)throw new Exception("Loaded game kept previous records");
+            panel.Open(state.cats[0].cat_id);if(!panel.details.text.Contains("静かな交流"))throw new Exception("Loaded game did not reset tab");
+            if(typeof(PythonStateClient).GetField("pending",flags).GetValue(client)!=null)throw new Exception("Record browsing sent a command");
             Debug.Log("CAT_CAFE_CAT_DETAILS_LAYOUT_DISPLAY_OK");
         }
     }
