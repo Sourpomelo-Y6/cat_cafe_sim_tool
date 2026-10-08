@@ -174,6 +174,9 @@ namespace CatCafePreview
         }
         public void SaveGame() { QueueSave("save_game", ""); }
         public void LoadSaved(string id) { QueueSave("load_game", id); }
+        public void LoadPythonSaved(string id) { QueueSave("load_python_game", id); }
+        public int ServerPort => port;
+        public void PauseAutomaticForSave(){StopAutomatic();preview.RefreshPythonControls();}
         public bool CanContinueGoal { get { return CanManageSaves && current.goal_result != null && current.goal_result.can_continue; } }
         public bool CanBeginPlayer(string catId)
         { return CanManageSaves && Array.Exists(current.cats,row=>row.cat_id==catId && row.can_player_start); }
@@ -380,7 +383,7 @@ namespace CatCafePreview
         private void QueueSave(string kind, string id)
         {
             if (!CanManageSaves) return;
-            if (kind == "load_game") StopAutomatic();
+            if (kind == "load_game" || kind == "load_python_game") StopAutomatic();
             pending = new PythonShiftCommand { request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,
                 expected_revision=current.revision,working_cats=new string[0],kind=kind,save_id=id };
             GetComponent<PythonSavePanel>()?.Notify(kind=="save_game" ? "保存しています。完了までお待ちください。" : "保存したゲームを読み込んでいます。");
@@ -477,13 +480,14 @@ namespace CatCafePreview
                                 if (request.result == UnityWebRequest.Result.Success)
                                 {
                                     var reply = JsonUtility.FromJson<PythonCommandReply>(request.downloadHandler.text);
-                                    if(command.kind=="load_game" || command.kind=="new_game")GetComponent<PythonEventPresentation>()?.Clear();
+                                    if(command.kind=="load_game" || command.kind=="load_python_game" || command.kind=="new_game")GetComponent<PythonEventPresentation>()?.Clear();
                                     Accept(reply.state);
-                                    if(command.kind=="load_game")
+                                    if(command.kind=="load_python_game")GetComponent<PythonLegacySavePanel>()?.Close();
+                                    if(command.kind=="load_game" || command.kind=="load_python_game")
                                     { var player=GetComponent<PythonPlayerPanel>();if(player!=null)player.Restore(); }
-                                    if(command.kind=="new_game" || command.kind=="load_game") { var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.ResetConfirmation();var menu=GetComponent<PythonNewGamePanel>(); if(menu!=null) menu.Close(); }
+                                    if(command.kind=="new_game" || command.kind=="load_game" || command.kind=="load_python_game") { var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.ResetConfirmation();var menu=GetComponent<PythonNewGamePanel>(); if(menu!=null) menu.Close(); }
                                     notice = command.kind == "set_shifts" ? "出勤・休養を変更しました。"
-                                        : command.kind == "save_game" ? "保存しました。" : command.kind == "load_game" ? "保存したゲームを再開しました。"
+                                        : command.kind == "save_game" ? "保存しました。" : command.kind == "load_game" || command.kind == "load_python_game" ? "保存したゲームを再開しました。"
                                         : command.kind == "new_game" ? "新規ゲームを作成し、初期状態を保存しました。出勤・休養を設定して営業を始めてください。"
                                         : command.kind == "next_day" ? "翌日の営業準備へ進みました。出勤・休養を設定してください。"
                                         : command.kind == "resolve_intake" ? (command.choice == "accept" ? "保護猫を迎えました。休養予定で猫一覧に加わりました。" : "受け入れ依頼を見送りました。")

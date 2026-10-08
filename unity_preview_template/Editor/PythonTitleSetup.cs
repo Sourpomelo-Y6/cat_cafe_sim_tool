@@ -152,7 +152,7 @@ namespace CatCafePreview.Editor
             var title=UnityEngine.Object.FindObjectOfType<PythonTitleScreen>();
             var state=PythonServiceSetup.Sample();state.new_game_options=new[]{new PythonNewGameOption{choice="popularity",label="人気3段階",detail="20日以内に人気250 → 20日以内に人気450 → 25日以内に人気650",conditions="初期猫：5匹 / 席：2席 / 資金：1000"}};
             title.Apply(state);title.ApplySaves(new PythonSaveList{saves=new PythonSavedGame[0]});
-            if(!title.newGame.interactable || title.continueGame.interactable)throw new Exception("Title initial guards failed");
+            if(!title.newGame.interactable || !title.continueGame.interactable || title.resume.interactable)throw new Exception("Title initial guards failed");
             Canvas.ForceUpdateCanvases();Capture("Logs/TitleScreen.png");
             title.ShowConditions();if(!title.conditionsPanel.activeSelf || !title.conditions.text.Contains("1000"))throw new Exception("Conditions failed");
             Canvas.ForceUpdateCanvases();Capture("Logs/TitleConditions.png");

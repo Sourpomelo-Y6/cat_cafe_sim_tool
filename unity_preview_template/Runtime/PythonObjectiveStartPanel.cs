@@ -18,7 +18,7 @@ namespace CatCafePreview
         public void Open(){if(current?.objective_start==null || !GetComponent<PythonStateClient>().CanManageSaves)return;Clear();panel.SetActive(true);panel.transform.SetAsLastSibling();Render();ResetScroll();}
         public void Close(){Clear();panel.SetActive(false);}
         private void Clear(){selection=null;confirmation.SetActive(false);}
-        public void Popularity(){Select("popularity");}public void Bond(){Select("bond");}public void Patron(){Select("patron");}
+        public void Management(){Select("management");}public void Popularity(){Select("popularity");}public void Bond(){Select("bond");}public void Patron(){Select("patron");}
         private void Select(string choice){if(!online || selection!=null || !GetComponent<PythonStateClient>().CanManageSaves)return;selected=choice;Render();ResetScroll();}
         private void ResetScroll(){Canvas.ForceUpdateCanvases();details.transform.parent.parent.GetComponent<ScrollRect>().verticalNormalizedPosition=1;}
         public void Choose(){if(!online || !GetComponent<PythonStateClient>().CanStartObjective(selected))return;selection=selected;confirmation.SetActive(true);confirmation.transform.SetAsLastSibling();confirmationText.text=Row.label+"を開始しますか？\n\n"+Row.details;Canvas.ForceUpdateCanvases();confirmationText.GetComponentInParent<ScrollRect>().verticalNormalizedPosition=1;RefreshControls();}
@@ -30,12 +30,12 @@ namespace CatCafePreview
             current=state;online=true;string key=state.instance_id+"/"+state.revision+"/"+state.day;if(identity!=key){identity=key;Clear();}
             if(state.objective_start==null || state.game_over!=null)Close();Render();
         }
-        private void Render(){title.text="経営目標の開始・進捗";details.text=(Row?.label ?? "経営目標")+(Row?.started==true ? "（開始済み）" : "")+"\n\n"+(Row?.details ?? "情報はありません。");RefreshControls();}
+        private void Render(){title.text="経営ルール・目標の開始・進捗";details.text=(Row?.label ?? "経営目標")+(Row?.started==true ? "（開始済み）" : "")+"\n\n"+(Row?.details ?? "情報はありません。");RefreshControls();}
         public void RefreshControls()
         {
             var client=GetComponent<PythonStateClient>();bool ready=online && client.CanManageSaves && selection==null;
             foreach(var tab in tabs)tab.interactable=ready;proceed.interactable=ready && client.CanStartObjective(selected);confirm.interactable=online && selection!=null && client.CanStartObjective(selection);cancel.interactable=close.interactable=true;
-            string[] keys={"popularity","bond","patron"};for(int i=0;i<tabs.Length;i++)tabs[i].GetComponent<Image>().color=keys[i]==selected ? new Color(.78f,.88f,.74f) : Color.white;
+            string[] keys={"popularity","bond","patron","management"};for(int i=0;i<tabs.Length;i++)tabs[i].GetComponent<Image>().color=keys[i]==selected ? new Color(.78f,.88f,.74f) : Color.white;
             notice.text=!online ? "未接続です。再接続後に目標を開始できます。" : !client.CanManageSaves ? "操作を送信しています。完了までお待ちください。" : (Row?.started==true ? "開始済みです。現在の進捗を確認できます。" : Row?.reason ?? "")+"\n"+(current?.objective_start?.notes ?? "");
         }
         public void Disconnect(){online=false;Clear();RefreshControls();}

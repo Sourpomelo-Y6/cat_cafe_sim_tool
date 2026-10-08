@@ -186,6 +186,7 @@ namespace CatCafePreview
             var financeHistory=GetComponent<PythonFinanceHistoryPanel>();if(financeHistory!=null)financeHistory.Apply(state);
             var petShop=GetComponent<PythonPetShopPanel>();if(petShop!=null)petShop.Apply(state);
             var objectiveStart=GetComponent<PythonObjectiveStartPanel>();if(objectiveStart!=null)objectiveStart.Apply(state);
+            GetComponent<PythonLegacySavePanel>()?.Apply(state);
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.Apply(state);
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.Apply(state);
             var preparation=GetComponent<PythonPreparationPanel>();if(preparation!=null)preparation.Apply(state);
@@ -285,6 +286,7 @@ namespace CatCafePreview
             var financeHistory=GetComponent<PythonFinanceHistoryPanel>();if(financeHistory!=null)financeHistory.RefreshControls();
             var petShop=GetComponent<PythonPetShopPanel>();if(petShop!=null)petShop.RefreshControls();
             var objectiveStart=GetComponent<PythonObjectiveStartPanel>();if(objectiveStart!=null)objectiveStart.RefreshControls();
+            GetComponent<PythonLegacySavePanel>()?.RefreshControls();
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.RefreshControls();
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.RefreshControls();
             var preparation=GetComponent<PythonPreparationPanel>();if(preparation!=null)preparation.RefreshControls();
@@ -355,6 +357,7 @@ namespace CatCafePreview
         public void PythonNotice(string message)
         {
             GetComponent<PythonSavePanel>()?.Notify(message);
+            GetComponent<PythonLegacySavePanel>()?.Notify(message);
             var closing=GetComponent<PythonClosingPanel>();if(closing!=null && closing.panel.activeSelf)closing.Notify(message);
             var player=GetComponent<PythonPlayerPanel>();if(player!=null && player.panel.activeSelf)player.notice.text=message;
             var dispatch=GetComponent<PythonDispatchPanel>();if(dispatch!=null && dispatch.panel.activeSelf)dispatch.notice.text=message;
@@ -462,6 +465,7 @@ namespace CatCafePreview
             var financeHistory=GetComponent<PythonFinanceHistoryPanel>();if(financeHistory!=null)financeHistory.Disconnect();
             var petShop=GetComponent<PythonPetShopPanel>();if(petShop!=null)petShop.Disconnect();
             var objectiveStart=GetComponent<PythonObjectiveStartPanel>();if(objectiveStart!=null)objectiveStart.Disconnect();
+            GetComponent<PythonLegacySavePanel>()?.Disconnect();
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.Disconnect();
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.Disconnect();
             var preparation=GetComponent<PythonPreparationPanel>();if(preparation!=null)preparation.Disconnect();

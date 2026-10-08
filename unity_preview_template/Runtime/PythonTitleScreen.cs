@@ -15,6 +15,9 @@ namespace CatCafePreview
         public void SelectSave(int index) { if(saveDetails!=null)saveDetails.text=index>=0 && index<entries.Length ? entries[index].Details() : "保存したゲームはありません。"; }
         public Button newGame, continueGame, startGame, resume;
         public int port=8190;
+        public PythonCafeState CurrentState => state;
+        public bool CanManageSaves => online && !busy && state!=null;
+        public void ResumePython(string token){if(CanManageSaves)StartCoroutine(Send("load_python_game","",token));}
         private PythonCafeState state;
         private PythonSavedGame[] entries=new PythonSavedGame[0];
         private bool busy, online, savesAvailable;
@@ -30,12 +33,14 @@ namespace CatCafePreview
         {
             bool ready=online && !busy;
             newGame.interactable=startGame.interactable=objectives.interactable=ready && state.new_game_options!=null && state.new_game_options.Length>0;
-            continueGame.interactable=saves.interactable=resume.interactable=ready && savesAvailable && entries.Length>0;
+            continueGame.interactable=ready;
+            saves.interactable=resume.interactable=ready && savesAvailable && entries.Length>0;
+            GetComponent<PythonLegacySavePanel>()?.RefreshControls();
         }
         public void Apply(PythonCafeState latest)
         {
-            PythonStateClient.Validate(latest);string previous=state!=null && state.new_game_options!=null && objectives.value<state.new_game_options.Length ? state.new_game_options[objectives.value].choice : "";
-            state=latest;online=true;objectives.options.Clear();
+            PythonStateClient.Validate(latest);string previous=state!=null && state.new_game_options!=null && objectives.value>=0 && objectives.value<state.new_game_options.Length ? state.new_game_options[objectives.value].choice : "";
+            state=latest;online=true;GetComponent<PythonLegacySavePanel>()?.Apply(latest);objectives.options.Clear();
             foreach(var row in latest.new_game_options ?? new PythonNewGameOption[0])objectives.options.Add(new Dropdown.OptionData(row.label));
             objectives.SetValueWithoutNotify(Math.Max(0,Array.FindIndex(latest.new_game_options ?? new PythonNewGameOption[0],row=>row.choice==previous)));
             objectives.RefreshShownValue();SelectObjective(objectives.value);RefreshControls();
@@ -49,7 +54,7 @@ namespace CatCafePreview
             if(entries.Length==0)saves.options.Add(new Dropdown.OptionData("保存したゲームはありません"));
             saves.SetValueWithoutNotify(Math.Max(0,Array.FindIndex(entries,row=>row.save_id==previous)));saves.RefreshShownValue();SelectSave(saves.value);RefreshControls();
         }
-        public void Disconnect(string message) {online=false;notice.text=message;RefreshControls();}
+        public void Disconnect(string message) {online=false;GetComponent<PythonLegacySavePanel>()?.Disconnect();notice.text=message;RefreshControls();}
         private IEnumerator Start()
         {
             ShowHome();notice.text="接続しています。";RefreshControls();
@@ -78,7 +83,7 @@ namespace CatCafePreview
         public void Resume() {if(resume.interactable)StartCoroutine(Send("load_game","",entries[saves.value].save_id));}
         private IEnumerator Send(string kind,string choice,string saveId)
         {
-            busy=true;commandFailed=false;RefreshControls();notice.text=kind=="load_game" ? "保存したゲームを読み込んでいます。" : "新しいゲームを準備しています。";
+            busy=true;commandFailed=false;RefreshControls();notice.text=kind=="load_game" || kind=="load_python_game" ? "保存したゲームを読み込んでいます。" : "新しいゲームを準備しています。";
             var command=new PythonShiftCommand{request_id=Guid.NewGuid().ToString("N"),instance_id=state.instance_id,expected_revision=state.revision,
                 kind=kind,choice=choice,save_id=saveId,working_cats=new string[0]};
             for(int attempt=0;attempt<2;attempt++)
@@ -95,7 +100,7 @@ namespace CatCafePreview
                         if(request.result!=UnityWebRequest.Result.Success)throw new Exception(reply!=null && !string.IsNullOrEmpty(reply.error) ? reply.error : "通信に失敗しました。接続後に再試行してください。");
                         PythonStateClient.Validate(reply.state);accepted=true;
                     }
-                    catch(Exception ex){notice.text=ex.Message;commandFailed=true;online=false;}
+                    catch(Exception ex){notice.text=ex.Message;GetComponent<PythonLegacySavePanel>()?.Notify(ex.Message);commandFailed=true;online=false;}
                     if(accepted){SceneManager.LoadScene("CatCafePythonState");yield break;}
                     break;
                 }
