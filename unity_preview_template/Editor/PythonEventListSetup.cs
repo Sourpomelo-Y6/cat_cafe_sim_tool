@@ -24,8 +24,8 @@ namespace CatCafePreview.Editor
             Place(preparation.close.GetComponent<RectTransform>(),480,550,436,40);
             list.open=Button(root,"Event List Entry","イベント一覧",392,128,324,40);UnityEventTools.AddPersistentListener(list.open.onClick,list.Open);
             list.panel=Box(root,"Event List",0,174,1280,626,new Color(0,0,0,.55f));var card=Box(list.panel.transform,"Card",170,8,940,600,new Color(.98f,.97f,.93f));Label(card.transform,"Title",24,18,892,50,25).text="イベント一覧";
-            list.entries=new Button[11];var callbacks=new UnityEngine.Events.UnityAction[]{list.Visiting,list.Intake,list.Store,list.Growth,list.Missing,list.Adoption,list.Dispatch,list.Regular,list.Reservation,list.Trust,list.GeneralDispatch};
-            for(int i=0;i<11;i++){list.entries[i]=Button(card.transform,"Event "+i,"状態を取得しています",24,76+i*37,892,34);list.entries[i].GetComponentInChildren<Text>().alignment=TextAnchor.MiddleLeft;UnityEventTools.AddPersistentListener(list.entries[i].onClick,callbacks[i]);}
+            list.entries=new Button[12];var callbacks=new UnityEngine.Events.UnityAction[]{list.Visiting,list.Intake,list.Store,list.Growth,list.Missing,list.Adoption,list.Dispatch,list.Regular,list.Reservation,list.Trust,list.GeneralDispatch,list.DispatchChoice};
+            for(int i=0;i<12;i++){list.entries[i]=Button(card.transform,"Event "+i,"状態を取得しています",24,76+i*34,892,31);list.entries[i].GetComponentInChildren<Text>().alignment=TextAnchor.MiddleLeft;UnityEventTools.AddPersistentListener(list.entries[i].onClick,callbacks[i]);}
             list.notice=Label(card.transform,"Notice",24,492,892,50,16);list.close=Button(card.transform,"Close","閉じる",480,550,436,40);UnityEventTools.AddPersistentListener(list.close.onClick,list.Close);
             list.open.interactable=false;list.panel.SetActive(false);EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);Debug.Log("CAT_CAFE_EVENT_LIST_UI_OK");
         }

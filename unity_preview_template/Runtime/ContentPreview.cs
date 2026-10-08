@@ -173,6 +173,7 @@ namespace CatCafePreview
             var player=GetComponent<PythonPlayerPanel>();if(player!=null)player.Apply(state);
             var dispatch=GetComponent<PythonDispatchPanel>();if(dispatch!=null)dispatch.Apply(state);
             var generalDispatch=GetComponent<PythonGeneralDispatchPanel>();if(generalDispatch!=null)generalDispatch.Apply(state);
+            var dispatchChoice=GetComponent<PythonDispatchChoicePanel>();if(dispatchChoice!=null)dispatchChoice.Apply(state);
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.Apply(state);
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.Apply(state);
             var preparation=GetComponent<PythonPreparationPanel>();if(preparation!=null)preparation.Apply(state);
@@ -259,6 +260,7 @@ namespace CatCafePreview
             var player=GetComponent<PythonPlayerPanel>();if(player!=null)player.RefreshControls();
             var dispatch=GetComponent<PythonDispatchPanel>();if(dispatch!=null)dispatch.RefreshControls();
             var generalDispatch=GetComponent<PythonGeneralDispatchPanel>();if(generalDispatch!=null)generalDispatch.RefreshControls();
+            var dispatchChoice=GetComponent<PythonDispatchChoicePanel>();if(dispatchChoice!=null)dispatchChoice.RefreshControls();
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.RefreshControls();
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.RefreshControls();
             var preparation=GetComponent<PythonPreparationPanel>();if(preparation!=null)preparation.RefreshControls();
@@ -316,6 +318,7 @@ namespace CatCafePreview
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null && Front(missing.panel,missing.confirm))return;
             var dispatch=GetComponent<PythonDispatchPanel>();if(dispatch!=null)Front(dispatch.panel,dispatch.receive);
             var generalDispatch=GetComponent<PythonGeneralDispatchPanel>();if(generalDispatch!=null)Front(generalDispatch.panel,generalDispatch.receive);
+            var dispatchChoice=GetComponent<PythonDispatchChoicePanel>();if(dispatchChoice!=null)Front(dispatchChoice.panel,dispatchChoice.first,dispatchChoice.second,dispatchChoice.confirm);
         }
         private static bool Front(GameObject panel,params Button[] buttons)
         {
@@ -330,6 +333,7 @@ namespace CatCafePreview
             var player=GetComponent<PythonPlayerPanel>();if(player!=null && player.panel.activeSelf)player.notice.text=message;
             var dispatch=GetComponent<PythonDispatchPanel>();if(dispatch!=null && dispatch.panel.activeSelf)dispatch.notice.text=message;
             var generalDispatch=GetComponent<PythonGeneralDispatchPanel>();if(generalDispatch!=null && generalDispatch.panel.activeSelf)generalDispatch.notice.text=message;
+            var dispatchChoice=GetComponent<PythonDispatchChoicePanel>();if(dispatchChoice!=null && dispatchChoice.panel.activeSelf)dispatchChoice.notice.text=message;
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null && missing.panel.activeSelf && !string.IsNullOrEmpty(message))missing.notice.text=message;
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null && adoption.panel.activeSelf)adoption.notice.text=message;
             var ended=GetComponent<PythonGameOverPanel>();if(ended!=null && ended.panel.activeSelf)ended.notice.text=message;
@@ -408,6 +412,7 @@ namespace CatCafePreview
             var player=GetComponent<PythonPlayerPanel>();if(player!=null)player.Disconnect();
             var dispatch=GetComponent<PythonDispatchPanel>();if(dispatch!=null)dispatch.Disconnect();
             var generalDispatch=GetComponent<PythonGeneralDispatchPanel>();if(generalDispatch!=null)generalDispatch.Disconnect();
+            var dispatchChoice=GetComponent<PythonDispatchChoicePanel>();if(dispatchChoice!=null)dispatchChoice.Disconnect();
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.Disconnect();
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.Disconnect();
             var preparation=GetComponent<PythonPreparationPanel>();if(preparation!=null)preparation.Disconnect();

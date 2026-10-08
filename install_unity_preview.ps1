@@ -17,6 +17,7 @@ $previewFiles += @('Runtime/PythonRegularIntroductionPanel.cs', 'Editor/PythonRe
 $previewFiles += @('Runtime/PythonReservationPanel.cs', 'Editor/PythonReservationSetup.cs')
 $previewFiles += @('Runtime/PythonCustomerTrustPanel.cs', 'Editor/PythonCustomerTrustSetup.cs')
 $previewFiles += @('Runtime/PythonGeneralDispatchPanel.cs', 'Editor/PythonGeneralDispatchSetup.cs')
+$previewFiles += @('Runtime/PythonDispatchChoicePanel.cs', 'Editor/PythonDispatchChoiceSetup.cs')
 $previewFiles += @('Runtime/PythonHousingPanel.cs', 'Editor/PythonHousingSetup.cs', 'Editor/PythonHousingVerification.cs')
 $previewFiles += @('Runtime/PythonGoalPanel.cs', 'Editor/PythonGoalSetup.cs', 'Editor/PythonGoalVerification.cs')
 $previewFiles += @('Runtime/PythonGrowthPanel.cs', 'Editor/PythonGrowthSetup.cs', 'Editor/PythonGrowthVerification.cs')

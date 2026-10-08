@@ -34,7 +34,7 @@ namespace CatCafePreview.Editor
             Build();var preview=UnityEngine.Object.FindObjectOfType<ContentPreview>();preview.Initialize();var client=preview.GetComponent<PythonStateClient>();
             var flags=System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic;typeof(PythonStateClient).GetField("preview",flags).SetValue(client,preview);
             var state=PythonServiceSetup.Sample();state.instance_id="general-dispatch-test";
-            state.general_dispatch=new PythonPatronDispatch{options=new[]{new PythonDispatchOption{cat_id=state.cats[0].cat_id,choice="neighborhood_visit",label="ミケ / 近所のお店への訪問",days=1,reward=120,detail="健康・体力あり・疲労60以下 / 店内に席数分の猫を残します。\n歓迎条件：長毛 一致\n帰還時のストレス ＋5\n用品報酬：ケア用品\n選択・宿トラブル・猫紹介の回答は、この画面では未対応です。",can_select=true}},events=new PythonDispatchEvent[0]};
+            state.general_dispatch=new PythonPatronDispatch{options=new[]{new PythonDispatchOption{cat_id=state.cats[0].cat_id,choice="neighborhood_visit",label="ミケ / 近所のお店への訪問",days=1,reward=120,detail="健康・体力あり・疲労60以下 / 店内に席数分の猫を残します。\n歓迎条件：長毛 一致\n帰還時のストレス ＋5\n用品報酬：ケア用品\n宿トラブル・猫紹介の回答は未対応です。",can_select=true}},events=new PythonDispatchEvent[0]};
             Action apply=()=>typeof(PythonStateClient).GetMethod("Accept",flags).Invoke(client,new object[]{state});apply();var p=preview.GetComponent<PythonGeneralDispatchPanel>();
             var list=preview.GetComponent<PythonEventListPanel>();list.Open();list.GeneralDispatch();
             if(list.panel.activeSelf || !p.panel.activeSelf || !p.send.interactable || !p.details.text.Contains("ケア用品"))throw new Exception("General dispatch navigation failed");
