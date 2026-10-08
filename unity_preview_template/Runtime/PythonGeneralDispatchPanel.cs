@@ -25,10 +25,11 @@ namespace CatCafePreview
         {
             Open("");int index=Array.FindIndex(events,r=>r.choice==eventId);if(index>=0){returns.SetValueWithoutNotify(index);RenderDetails();}
         }
+        public void OpenOption(string catId,string destination){Open(catId);int index=Array.FindIndex(options,r=>r.cat_id==catId && r.choice==destination);if(index>=0){destinations.SetValueWithoutNotify(index);RenderDetails();}panel.transform.SetAsLastSibling();}
         public void Close() { showing=false;panel.SetActive(false); }
         public void Select(int _) { RenderDetails(); }
-        public void Send() { if(destinations.value<options.Length)GetComponent<PythonStateClient>().DispatchGeneral(options[destinations.value].cat_id,options[destinations.value].choice); }
-        public void Receive() { if(returns.value<events.Length)GetComponent<PythonStateClient>().ReceiveGeneral(events[returns.value].choice); }
+        public void Send() { if(destinations.value>=0 && destinations.value<options.Length)GetComponent<PythonStateClient>().DispatchGeneral(options[destinations.value].cat_id,options[destinations.value].choice); }
+        public void Receive() { if(returns.value>=0 && returns.value<events.Length)GetComponent<PythonStateClient>().ReceiveGeneral(events[returns.value].choice); }
         public void Apply(PythonCafeState value)
         {
             state=value;
@@ -59,9 +60,9 @@ namespace CatCafePreview
         private void RenderDetails()
         {
             if(state==null)return;
-            var option=destinations.value<options.Length ? options[destinations.value] : null;
+            var option=destinations.value>=0 && destinations.value<options.Length ? options[destinations.value] : null;
             details.text=option==null ? "派遣先はありません。" : option.days+"回の閉店で帰還 / 報酬 "+option.reward.ToString("0.#")+"\n"+option.detail;
-            var ev=returns.value<events.Length ? events[returns.value] : null;
+            var ev=returns.value>=0 && returns.value<events.Length ? events[returns.value] : null;
             progress.text=ev==null ? "派遣の記録はありません。" : (ev.status=="travelling" ? "あと "+ev.remaining+"回の閉店で帰還" : ev.status=="waiting" ? "帰還しました。報酬を受け取ってください。" : ev.status=="resolved" ? "帰還・報酬の受け取り済み" : "宿のトラブルへの対応待ち")+"\n報酬 "+ev.reward.ToString("0.#")+"\n"+ev.detail;
 
             notice.text=(option?.reason ?? "")+(ev!=null && !string.IsNullOrEmpty(ev.reason) ? "\n"+ev.reason : "");
@@ -72,8 +73,8 @@ namespace CatCafePreview
         {
             bool ready=GetComponent<PythonStateClient>().CanManageSaves;
             destinations.interactable=ready && options.Length>0;returns.interactable=ready && events.Length>0;
-            send.interactable=ready && destinations.value<options.Length && options[destinations.value].can_select;
-            receive.interactable=ready && returns.value<events.Length && events[returns.value].can_select;
+            send.interactable=ready && destinations.value>=0 && destinations.value<options.Length && options[destinations.value].can_select;
+            receive.interactable=ready && returns.value>=0 && returns.value<events.Length && events[returns.value].can_select;
             close.interactable=true;
         }
         public void Disconnect()

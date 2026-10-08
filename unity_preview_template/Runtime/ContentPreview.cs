@@ -186,6 +186,7 @@ namespace CatCafePreview
             var financeHistory=GetComponent<PythonFinanceHistoryPanel>();if(financeHistory!=null)financeHistory.Apply(state);
             var petShop=GetComponent<PythonPetShopPanel>();if(petShop!=null)petShop.Apply(state);
             var objectiveStart=GetComponent<PythonObjectiveStartPanel>();if(objectiveStart!=null)objectiveStart.Apply(state);
+            GetComponent<PythonDispatchComparisonPanel>()?.Apply(state);
             GetComponent<PythonLegacySavePanel>()?.Apply(state);
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.Apply(state);
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.Apply(state);
@@ -286,6 +287,7 @@ namespace CatCafePreview
             var financeHistory=GetComponent<PythonFinanceHistoryPanel>();if(financeHistory!=null)financeHistory.RefreshControls();
             var petShop=GetComponent<PythonPetShopPanel>();if(petShop!=null)petShop.RefreshControls();
             var objectiveStart=GetComponent<PythonObjectiveStartPanel>();if(objectiveStart!=null)objectiveStart.RefreshControls();
+            GetComponent<PythonDispatchComparisonPanel>()?.RefreshControls();
             GetComponent<PythonLegacySavePanel>()?.RefreshControls();
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.RefreshControls();
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.RefreshControls();
@@ -465,6 +467,7 @@ namespace CatCafePreview
             var financeHistory=GetComponent<PythonFinanceHistoryPanel>();if(financeHistory!=null)financeHistory.Disconnect();
             var petShop=GetComponent<PythonPetShopPanel>();if(petShop!=null)petShop.Disconnect();
             var objectiveStart=GetComponent<PythonObjectiveStartPanel>();if(objectiveStart!=null)objectiveStart.Disconnect();
+            GetComponent<PythonDispatchComparisonPanel>()?.Disconnect();
             GetComponent<PythonLegacySavePanel>()?.Disconnect();
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.Disconnect();
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.Disconnect();

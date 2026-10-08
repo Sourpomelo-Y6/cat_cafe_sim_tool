@@ -33,6 +33,7 @@ namespace CatCafePreview
         public PythonFinanceHistory finance_history;
         public PythonPetShop pet_shop;
         public PythonObjectiveStart objective_start;
+        public PythonDispatchComparison dispatch_comparison;
         public PythonIntakeState intake_request;
         public PythonVisitingCat visiting_cat;
         public PythonRegularIntroduction regular_introduction;
@@ -483,6 +484,7 @@ namespace CatCafePreview
                                     if(command.kind=="load_game" || command.kind=="load_python_game" || command.kind=="new_game")GetComponent<PythonEventPresentation>()?.Clear();
                                     Accept(reply.state);
                                     if(command.kind=="load_python_game")GetComponent<PythonLegacySavePanel>()?.Close();
+                                    if(command.kind=="load_game" || command.kind=="load_python_game" || command.kind=="new_game")GetComponent<PythonDispatchComparisonPanel>()?.ResetSelection();
                                     if(command.kind=="load_game" || command.kind=="load_python_game")
                                     { var player=GetComponent<PythonPlayerPanel>();if(player!=null)player.Restore(); }
                                     if(command.kind=="new_game" || command.kind=="load_game" || command.kind=="load_python_game") { var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.ResetConfirmation();var menu=GetComponent<PythonNewGamePanel>(); if(menu!=null) menu.Close(); }
