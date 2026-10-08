@@ -39,9 +39,8 @@ namespace CatCafePreview.Editor
             panel.confirm=Button(panel.confirmation.transform,"Confirm","この内容で確定する",100,380,340);UnityEventTools.AddPersistentListener(panel.confirm.onClick,panel.Confirm);
             panel.cancel=Button(panel.confirmation.transform,"Cancel","戻る",500,380,340);UnityEventTools.AddPersistentListener(panel.cancel.onClick,panel.Cancel);
             var preparation=preview.GetComponent<PythonPreparationPanel>();var parent=preparation.close.transform.parent;var entry=parent.Find("Visiting Cat Entry");if(entry!=null)UnityEngine.Object.DestroyImmediate(entry.gameObject);
-            Place(preparation.close.GetComponent<RectTransform>(),706,550,210,40);preparation.close.GetComponentInChildren<Text>().fontSize=17;
-            panel.open=Button(parent,"Visiting Cat Entry","店先に通う猫",480,550,210);UnityEventTools.AddPersistentListener(panel.open.onClick,panel.Open);
-            panel.open.gameObject.SetActive(false);panel.confirmation.SetActive(false);panel.panel.SetActive(false);
+            Place(preparation.close.GetComponent<RectTransform>(),480,550,436,40);preparation.close.GetComponentInChildren<Text>().fontSize=17;
+            panel.confirmation.SetActive(false);panel.panel.SetActive(false);
             EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);Debug.Log("CAT_CAFE_VISITING_UI_OK");
         }
         public static void BuildAndVerify()
@@ -59,9 +58,9 @@ namespace CatCafePreview.Editor
             Canvas.ForceUpdateCanvases();typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{preview,"Logs/VisitingCat.png"});
             panel.Disconnect();if(panel.accept.interactable || panel.confirm.interactable)throw new Exception("Offline visiting enabled");apply();
             cat.can_accept=false;cat.accept_reason="飼育スペースが足りません。";apply();if(panel.accept.interactable || !panel.notice.text.Contains("飼育スペース"))throw new Exception("Housing guard missing");
-            state.can_set_shifts=false;apply();if(panel.panel.activeSelf || panel.open.gameObject.activeSelf)throw new Exception("Visiting stayed in business");
+            state.can_set_shifts=false;apply();if(panel.panel.activeSelf)throw new Exception("Visiting stayed in business");
             state.can_set_shifts=true;cat.status="accepted";cat.accepted_day=4;apply();panel.Open();if(!panel.notice.text.Contains("迎えました"))throw new Exception("Joined history missing");
-            state.visiting_cat=null;apply();if(panel.panel.activeSelf || panel.open.gameObject.activeSelf)throw new Exception("Legacy visiting entry visible");
+            state.visiting_cat=null;apply();if(panel.panel.activeSelf)throw new Exception("Legacy visiting entry visible");
             Debug.Log("CAT_CAFE_VISITING_DISPLAY_OK");
         }
     }

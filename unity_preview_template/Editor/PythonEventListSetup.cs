@@ -18,6 +18,10 @@ namespace CatCafePreview.Editor
             var scene=EditorSceneManager.OpenScene("Assets/Scenes/CatCafePythonState.unity");var preview=UnityEngine.Object.FindObjectOfType<ContentPreview>();var root=preview.transform.Find("Content Canvas/Background");
             foreach(var name in new[]{"Event List","Event List Entry"}){var old=root.Find(name);if(old!=null)UnityEngine.Object.DestroyImmediate(old.gameObject);}
             var list=preview.GetComponent<PythonEventListPanel>() ?? preview.gameObject.AddComponent<PythonEventListPanel>();
+            var preparation=preview.GetComponent<PythonPreparationPanel>();
+            var oldVisiting=preparation.close.transform.parent.Find("Visiting Cat Entry");
+            if(oldVisiting!=null)UnityEngine.Object.DestroyImmediate(oldVisiting.gameObject);
+            Place(preparation.close.GetComponent<RectTransform>(),480,550,436,40);
             list.open=Button(root,"Event List Entry","イベント一覧",392,128,324,40);UnityEventTools.AddPersistentListener(list.open.onClick,list.Open);
             list.panel=Box(root,"Event List",0,174,1280,626,new Color(0,0,0,.55f));var card=Box(list.panel.transform,"Card",170,8,940,600,new Color(.98f,.97f,.93f));Label(card.transform,"Title",24,18,892,50,25).text="イベント一覧";
             list.entries=new Button[7];var callbacks=new UnityEngine.Events.UnityAction[]{list.Visiting,list.Intake,list.Store,list.Growth,list.Missing,list.Adoption,list.Dispatch};
@@ -30,6 +34,7 @@ namespace CatCafePreview.Editor
             Build();var preview=UnityEngine.Object.FindObjectOfType<ContentPreview>();preview.Initialize();var client=preview.GetComponent<PythonStateClient>();var flags=System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic;typeof(PythonStateClient).GetField("preview",flags).SetValue(client,preview);
             var state=PythonServiceSetup.Sample();state.instance_id="event-list-test";state.can_set_shifts=true;state.required_action="";state.visiting_cat=new PythonVisitingCat{cat_id="visiting-cat-1",content_cat_id="visiting-cat-1",name="ココ",status="visiting",progress=1,required=3,can_interact=true,can_skip=true};
             Action apply=()=>typeof(PythonStateClient).GetMethod("Accept",flags).Invoke(client,new object[]{state});apply();var list=preview.GetComponent<PythonEventListPanel>();list.Open();
+            if(preview.GetComponent<PythonPreparationPanel>().close.transform.parent.Find("Visiting Cat Entry")!=null)throw new Exception("Old visiting entry remains");
             if(!list.panel.activeSelf || !list.entries[0].interactable || list.entries[1].interactable || !list.entries[0].GetComponentInChildren<Text>().text.Contains("1/3"))throw new Exception("Event list status mismatch");
             Canvas.ForceUpdateCanvases();typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{preview,"Logs/EventList.png"});
             list.Visiting();if(list.panel.activeSelf || !preview.GetComponent<PythonVisitingCatPanel>().panel.activeSelf)throw new Exception("Visiting navigation failed");

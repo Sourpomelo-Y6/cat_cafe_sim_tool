@@ -15,7 +15,7 @@ namespace CatCafePreview
         public GameObject panel, confirmation;
         public RawImage picture;
         public Text title, details, notice, confirmationText;
-        public Button open, interact, skip, accept, housing, close, confirm, cancel;
+        public Button interact, skip, accept, housing, close, confirm, cancel;
         private PythonCafeState current;
         private string identity, selection;
         private bool online;
@@ -54,13 +54,11 @@ namespace CatCafePreview
             string key=state.instance_id+"/"+state.day+"/"+cat?.cat_id+"/"+cat?.status+"/"+cat?.progress+"/"+cat?.history+"/"+state.revision;
             if(identity!=key){identity=key;ClearConfirmation();}
             if(cat==null || !state.can_set_shifts || state.closed || state.game_over!=null)panel.SetActive(false);
-            open.gameObject.SetActive(cat!=null && state.can_set_shifts && !state.closed && state.game_over==null);
             Render();RefreshControls();
         }
         private void Render()
         {
             var cat=current?.visiting_cat;if(cat==null)return;
-            open.GetComponentInChildren<Text>().text=cat.status=="accepted" ? "店先の猫の加入記録" : "店先に通う猫";
             title.text=cat.name+" · 店先での交流 "+cat.progress+"/"+cat.required+"回";
             picture.texture=GetComponent<ContentPreview>().CandidateCatTexture(cat.content_cat_id);picture.enabled=picture.texture!=null;
             if(picture.texture!=null)picture.GetComponent<AspectRatioFitter>().aspectRatio=(float)picture.texture.width/picture.texture.height;
@@ -73,7 +71,7 @@ namespace CatCafePreview
         {
             var client=GetComponent<PythonStateClient>();var cat=current?.visiting_cat;
             bool ready=online && client.CanManageSaves && cat!=null;
-            open.interactable=ready;interact.interactable=ready && selection==null && cat.can_interact;
+            interact.interactable=ready && selection==null && cat.can_interact;
             skip.interactable=ready && selection==null && cat.can_skip;accept.interactable=ready && selection==null && cat.can_accept;
             housing.interactable=ready && selection==null && (cat.status=="visiting" || cat.status=="ready");
             confirm.interactable=ready && selection!=null && client.CanRespondVisiting(selection);cancel.interactable=true;close.interactable=true;
