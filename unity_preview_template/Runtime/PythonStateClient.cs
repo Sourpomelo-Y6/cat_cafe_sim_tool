@@ -30,6 +30,7 @@ namespace CatCafePreview
         public PythonFinanceState finance;
         public PythonIntakeState intake_request;
         public PythonVisitingCat visiting_cat;
+        public PythonRegularIntroduction regular_introduction;
         public PythonHousingState housing;
         public PythonGoalResult goal_result;
         public PythonNextGoal next_goal;
@@ -285,6 +286,13 @@ namespace CatCafePreview
             var cat=current?.visiting_cat;
             return CanManageSaves && cat!=null && (choice=="interact" ? cat.can_interact : choice=="skip" ? cat.can_skip : choice=="accept" && cat.can_accept);
         }
+        public bool CanRespondRegular(string choice)
+        {
+            var row=current?.regular_introduction;
+            return CanManageSaves && row!=null && row.status=="waiting" && (choice=="accept" ? row.can_accept : choice=="decline" && row.can_decline);
+        }
+        public void RespondRegular(string choice)
+        { if(CanRespondRegular(choice))QueuePlayer("resolve_regular_introduction",current.regular_introduction.cat_id,choice,""); }
         public void RespondVisiting(string choice)
         {
             if(!CanRespondVisiting(choice))return;
@@ -385,6 +393,7 @@ namespace CatCafePreview
                                         : command.kind == "new_game" ? "新規ゲームを作成し、初期状態を保存しました。出勤・休養を設定して営業を始めてください。"
                                         : command.kind == "next_day" ? "翌日の営業準備へ進みました。出勤・休養を設定してください。"
                                         : command.kind == "resolve_intake" ? (command.choice == "accept" ? "保護猫を迎えました。休養予定で猫一覧に加わりました。" : "受け入れ依頼を見送りました。")
+                                        : command.kind == "resolve_regular_introduction" ? (command.choice == "accept" ? "常連から紹介された猫を迎えました。休養予定で猫一覧に加わりました。" : "常連からの猫紹介を見送りました。")
                                         : command.kind == "purchase_housing" || command.kind == "upgrade_housing" ? "飼育スペースを拡張しました。"
                                         : command.kind == "resolve_store_event" ? (command.choice == "close" ? "休業し、翌日の営業準備へ進みました。" : "店舗イベントに回答しました。")
                                         : command.kind == "resolve_growth" ? "得意分野を選びました。"

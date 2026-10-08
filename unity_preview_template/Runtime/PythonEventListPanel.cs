@@ -16,6 +16,7 @@ namespace CatCafePreview
         public void Close(){panel.SetActive(false);}
         public void Visiting(){Show(0);} public void Intake(){Show(1);} public void Store(){Show(2);} public void Growth(){Show(3);}
         public void Missing(){Show(4);} public void Adoption(){Show(5);} public void Dispatch(){Show(6);}
+        public void Regular(){Show(7);}
         private bool Available(int i)
         {
             if(current==null)return false;
@@ -27,6 +28,7 @@ namespace CatCafePreview
                 case 4:return current.missing_cats!=null && current.missing_cats.Length>0;
                 case 5:return current.adoption!=null;
                 case 6:return current.patron_dispatch?.events?.Length>0 || current.patron_dispatch?.options?.Length>0;
+                case 7:return current.regular_introduction!=null;
                 default:return false;
             }
         }
@@ -36,6 +38,7 @@ namespace CatCafePreview
             GameObject target=null;
             switch(i){
                 case 0:var v=GetComponent<PythonVisitingCatPanel>();v.Open();target=v.panel;break;
+                case 7:var r=GetComponent<PythonRegularIntroductionPanel>();r.Open();target=r.panel;break;
                 case 1:target=GetComponent<PythonIntakePanel>().panel;break;
                 case 2:target=GetComponent<PythonStoreEventPanel>().panel;break;
                 case 3:target=GetComponent<PythonGrowthPanel>().panel;break;
@@ -57,7 +60,8 @@ namespace CatCafePreview
                 "猫の成長："+(current.growth_choices?.Length ?? 0)+"件の選択待ち",
                 "猫の家出・帰還："+missing.Count(r=>r.status=="waiting")+"件の帰還待ち / 家出中 "+missing.Count(r=>r.status=="missing")+"匹 / 記録 "+missing.Length+"件",
                 "譲渡の申し出："+adoption.Count(r=>r.status=="waiting")+"件の確認待ち / 記録 "+adoption.Length+"件",
-                "有力者への派遣："+dispatch.Count(r=>r.status=="waiting")+"件の帰還待ち / 派遣中 "+dispatch.Count(r=>r.status=="travelling")+"匹"};
+                "有力者への派遣："+dispatch.Count(r=>r.status=="waiting")+"件の帰還待ち / 派遣中 "+dispatch.Count(r=>r.status=="travelling")+"匹",
+                "常連からの猫紹介："+(current.regular_introduction==null ? "対象なし" : current.regular_introduction.status=="untriggered" ? "まだ届いていません" : current.regular_introduction.name+" / "+(current.regular_introduction.status=="waiting" ? "確認待ち" : current.regular_introduction.status=="accepted" ? "加入済み" : "見送り済み"))};
             for(int i=0;i<entries.Length;i++){entries[i].GetComponentInChildren<Text>().text=captions[i];entries[i].interactable=online && client.CanManageSaves && Available(i);}
             notice.text=!online ? "Python未接続です。再接続後にイベントを開けます。" : !client.CanManageSaves ? "操作を送信しています。完了するまでお待ちください。" : "項目を選んで確認します。店先の猫は任意です。確認待ちに回答すると営業を再開できます。";
         }

@@ -155,6 +155,7 @@ namespace CatCafePreview
             var closing=GetComponent<PythonClosingPanel>();if(closing!=null)closing.Apply(state);
             var intake = GetComponent<PythonIntakePanel>();
             if (intake != null) intake.Apply(state);
+            var regular=GetComponent<PythonRegularIntroductionPanel>();if(regular!=null)regular.Apply(state);
             var visiting=GetComponent<PythonVisitingCatPanel>();if(visiting!=null)visiting.Apply(state);
             var housing = GetComponent<PythonHousingPanel>();
             if (housing != null) housing.Apply(state);
@@ -274,6 +275,7 @@ namespace CatCafePreview
             if(savePanel != null) savePanel.RefreshControls();
             var intake = GetComponent<PythonIntakePanel>();
             if (intake != null) intake.RefreshControls();
+            var regular=GetComponent<PythonRegularIntroductionPanel>();if(regular!=null)regular.RefreshControls();
             var eventList=GetComponent<PythonEventListPanel>();if(eventList!=null)eventList.RefreshControls();
             var visiting=GetComponent<PythonVisitingCatPanel>();if(visiting!=null)visiting.RefreshControls();
             var housing = GetComponent<PythonHousingPanel>();
@@ -298,6 +300,7 @@ namespace CatCafePreview
             if(state.player_interaction!=null && player!=null && player.panel.activeSelf){player.panel.transform.SetAsLastSibling();return;}
             if(string.IsNullOrEmpty(state.required_action))return;
             var intake=GetComponent<PythonIntakePanel>();if(intake!=null && Front(intake.panel,intake.accept,intake.decline))return;
+            var regular=GetComponent<PythonRegularIntroductionPanel>();if(regular!=null && Front(regular.panel,regular.accept,regular.decline,regular.confirm))return;
             var growth=GetComponent<PythonGrowthPanel>();if(growth!=null && Front(growth.panel,growth.choices))return;
             var store=GetComponent<PythonStoreEventPanel>();if(store!=null && Front(store.panel,store.choices))return;
             var goal=GetComponent<PythonGoalPanel>();if(goal!=null && Front(goal.panel,goal.resume,goal.advance))return;
@@ -404,6 +407,7 @@ namespace CatCafePreview
             if(savePanel != null) savePanel.Disconnect();
             var intake = GetComponent<PythonIntakePanel>();
             if (intake != null) intake.Disconnect();
+            var regular=GetComponent<PythonRegularIntroductionPanel>();if(regular!=null)regular.Disconnect();
             var eventList=GetComponent<PythonEventListPanel>();if(eventList!=null)eventList.Disconnect();
             var visiting=GetComponent<PythonVisitingCatPanel>();if(visiting!=null)visiting.Disconnect();
             var housing = GetComponent<PythonHousingPanel>();

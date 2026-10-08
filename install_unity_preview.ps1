@@ -13,6 +13,7 @@ $previewFiles += @('Runtime/PythonSavePanel.cs', 'Editor/PythonSaveSetup.cs', 'E
 $previewFiles += @('Runtime/PythonIntakePanel.cs', 'Editor/PythonIntakeSetup.cs', 'Editor/PythonIntakeVerification.cs')
 $previewFiles += @('Runtime/PythonVisitingCatPanel.cs', 'Editor/PythonVisitingCatSetup.cs')
 $previewFiles += @('Runtime/PythonEventListPanel.cs', 'Editor/PythonEventListSetup.cs')
+$previewFiles += @('Runtime/PythonRegularIntroductionPanel.cs', 'Editor/PythonRegularIntroductionSetup.cs')
 $previewFiles += @('Runtime/PythonHousingPanel.cs', 'Editor/PythonHousingSetup.cs', 'Editor/PythonHousingVerification.cs')
 $previewFiles += @('Runtime/PythonGoalPanel.cs', 'Editor/PythonGoalSetup.cs', 'Editor/PythonGoalVerification.cs')
 $previewFiles += @('Runtime/PythonGrowthPanel.cs', 'Editor/PythonGrowthSetup.cs', 'Editor/PythonGrowthVerification.cs')
