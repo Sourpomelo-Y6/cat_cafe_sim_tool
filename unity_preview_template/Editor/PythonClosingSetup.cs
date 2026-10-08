@@ -43,6 +43,8 @@ namespace CatCafePreview.Editor
             var overlay=Box(root,"Closing Review",0,174,1280,626,new Color(0,0,0,.55f));var card=Box(overlay.transform,"Review Card",170,8,940,600,new Color(.98f,.97f,.93f,1));
             var panel=preview.GetComponent<PythonClosingPanel>() ?? preview.gameObject.AddComponent<PythonClosingPanel>();panel.panel=overlay;
             panel.title=Label(card.transform,"Title",24,18,892,40,25);panel.title.text="営業の振り返り";
+            panel.title.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,600);
+            panel.history=Button(card.transform,"History","収支の内訳・日次比較",660,18,256);UnityEventTools.AddPersistentListener(panel.history.onClick,panel.History);panel.history.onClick.SetPersistentListenerState(0,UnityEngine.Events.UnityEventCallState.EditorAndRuntime);
             var finance=Box(card.transform,"Finance",24,70,892,126,new Color(.91f,.93f,.87f));
             panel.financeDetails=Label(finance.transform,"Finance Details",12,8,868,112,18);
             Label(card.transform,"Goal Heading",24,208,340,28,18).text="目標の進捗";

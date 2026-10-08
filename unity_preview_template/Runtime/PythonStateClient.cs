@@ -30,6 +30,7 @@ namespace CatCafePreview
         public PythonSeatState[] seats;
         public PythonCustomerState[] customers;
         public PythonFinanceState finance;
+        public PythonFinanceHistory finance_history;
         public PythonIntakeState intake_request;
         public PythonVisitingCat visiting_cat;
         public PythonRegularIntroduction regular_introduction;

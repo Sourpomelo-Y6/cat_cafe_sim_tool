@@ -183,6 +183,7 @@ namespace CatCafePreview
             var restSpace=GetComponent<PythonRestSpacePanel>();if(restSpace!=null)restSpace.Apply(state);
             var waitingArea=GetComponent<PythonWaitingAreaPanel>();if(waitingArea!=null)waitingArea.Apply(state);
             var customerDirectory=GetComponent<PythonCustomerDirectoryPanel>();if(customerDirectory!=null)customerDirectory.Apply(state);
+            var financeHistory=GetComponent<PythonFinanceHistoryPanel>();if(financeHistory!=null)financeHistory.Apply(state);
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.Apply(state);
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.Apply(state);
             var preparation=GetComponent<PythonPreparationPanel>();if(preparation!=null)preparation.Apply(state);
@@ -279,6 +280,7 @@ namespace CatCafePreview
             var restSpace=GetComponent<PythonRestSpacePanel>();if(restSpace!=null)restSpace.RefreshControls();
             var waitingArea=GetComponent<PythonWaitingAreaPanel>();if(waitingArea!=null)waitingArea.RefreshControls();
             var customerDirectory=GetComponent<PythonCustomerDirectoryPanel>();if(customerDirectory!=null)customerDirectory.RefreshControls();
+            var financeHistory=GetComponent<PythonFinanceHistoryPanel>();if(financeHistory!=null)financeHistory.RefreshControls();
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.RefreshControls();
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.RefreshControls();
             var preparation=GetComponent<PythonPreparationPanel>();if(preparation!=null)preparation.RefreshControls();
@@ -451,6 +453,7 @@ namespace CatCafePreview
             var restSpace=GetComponent<PythonRestSpacePanel>();if(restSpace!=null)restSpace.Disconnect();
             var waitingArea=GetComponent<PythonWaitingAreaPanel>();if(waitingArea!=null)waitingArea.Disconnect();
             var customerDirectory=GetComponent<PythonCustomerDirectoryPanel>();if(customerDirectory!=null)customerDirectory.Disconnect();
+            var financeHistory=GetComponent<PythonFinanceHistoryPanel>();if(financeHistory!=null)financeHistory.Disconnect();
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.Disconnect();
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.Disconnect();
             var preparation=GetComponent<PythonPreparationPanel>();if(preparation!=null)preparation.Disconnect();

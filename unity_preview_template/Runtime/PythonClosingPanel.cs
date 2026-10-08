@@ -9,6 +9,8 @@ namespace CatCafePreview
         public Text details, notice, title, financeDetails, goalDetails;
         public ScrollRect catsScroll, goalScroll;
         public Button open, save, next, close;
+        public Button history;
+        public void History(){GetComponent<PythonFinanceHistoryPanel>().Open();}
         private PythonCafeState current;
         private string identity, message;
         private bool online, wasClosed;
@@ -54,6 +56,7 @@ namespace CatCafePreview
         public void RefreshControls()
         {
             var client=GetComponent<PythonStateClient>();
+            if(history!=null)history.interactable=client.CanManageSaves && current!=null;
             save.interactable=client.CanManageSaves && current!=null && current.closed && current.game_over==null;
             next.interactable=client.CanProgressBusiness && current!=null && current.closed && current.game_over==null;
             close.interactable=true;open.interactable=current!=null;
