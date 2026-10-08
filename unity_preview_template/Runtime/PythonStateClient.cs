@@ -34,6 +34,7 @@ namespace CatCafePreview
         public PythonPetShop pet_shop;
         public PythonObjectiveStart objective_start;
         public PythonDispatchComparison dispatch_comparison;
+        public PythonServiceAssignment service_assignment;
         public PythonIntakeState intake_request;
         public PythonVisitingCat visiting_cat;
         public PythonRegularIntroduction regular_introduction;
@@ -119,6 +120,7 @@ namespace CatCafePreview
         public string cat_id = "";
         public string target_type = "";
         public string event_id = "";
+        public string customer_id = "", seat_id = "";
     }
     [Serializable] public class PythonCommandReply
     {
@@ -148,7 +150,7 @@ namespace CatCafePreview
         public bool Fast { get { return fast; } }
         public bool CanStartAutomatic { get { return CanManageSaves && IsOpen(current); } }
         private static bool IsOpen(PythonCafeState state)
-        { return state != null && state.game_over == null && !state.closed && !state.can_set_shifts && string.IsNullOrEmpty(state.required_action); }
+        { return state != null && state.game_over == null && !state.closed && !state.can_set_shifts && state.service_assignment?.waiting!=true && string.IsNullOrEmpty(state.required_action); }
         public void ToggleAutomatic()
         {
             if (automatic) StopAutomatic();
@@ -406,8 +408,12 @@ namespace CatCafePreview
         public void ExpandSeats() { if(CanExpandSeats)QueuePlayer("expand_seats","","",""); }
         public bool CanDayOff { get { return CanManageSaves && current.game_over==null && current.day_off!=null && current.day_off.can_select; } }
         public void DayOff() { if(CanDayOff){StopAutomatic();QueuePlayer("day_off","","","");} }
+        public bool CanChangeAutoAssignment => CanManageSaves && current.game_over==null;
+        public void ToggleAutoAssignment(){if(!CanChangeAutoAssignment || current.service_assignment==null)return;StopAutomatic();QueuePlayer("set_auto_assignment","",current.service_assignment.auto_assign ? "manual" : "automatic","");}
+        public bool CanAssignService(string customer,string cat,string seat){var view=current?.service_assignment;return CanManageSaves && view?.can_assign==true && Array.Exists(view.customers ?? new PythonAssignmentCustomer[0],r=>r.customer_id==customer) && Array.Exists(view.cats ?? new PythonAssignmentCat[0],r=>r.cat_id==cat && r.available) && Array.Exists(view.seats ?? new PythonAssignmentSeat[0],r=>r.seat_id==seat && r.available);}
+        public void AssignService(string customer,string cat,string seat){if(!CanAssignService(customer,cat,seat))return;StopAutomatic();pending=new PythonShiftCommand{request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,expected_revision=current.revision,kind="assign_service",customer_id=customer,cat_id=cat,seat_id=seat,working_cats=new string[0]};preview.RefreshPythonControls();}
         public bool CanProgressBusiness { get { return online && pending == null && current != null && current.game_over == null && !automatic
-            && string.IsNullOrEmpty(current.required_action)
+            && string.IsNullOrEmpty(current.required_action) && current.service_assignment?.waiting!=true
             && (current.closed || !current.can_set_shifts || Array.Exists(current.cats, cat => cat.working)); } }
         public void ProgressBusiness()
         {
@@ -484,11 +490,11 @@ namespace CatCafePreview
                                     if(command.kind=="load_game" || command.kind=="load_python_game" || command.kind=="new_game")GetComponent<PythonEventPresentation>()?.Clear();
                                     Accept(reply.state);
                                     if(command.kind=="load_python_game")GetComponent<PythonLegacySavePanel>()?.Close();
-                                    if(command.kind=="load_game" || command.kind=="load_python_game" || command.kind=="new_game")GetComponent<PythonDispatchComparisonPanel>()?.ResetSelection();
+                                    if(command.kind=="load_game" || command.kind=="load_python_game" || command.kind=="new_game"){GetComponent<PythonDispatchComparisonPanel>()?.ResetSelection();GetComponent<PythonServiceAssignmentPanel>()?.ResetSelection();}
                                     if(command.kind=="load_game" || command.kind=="load_python_game")
                                     { var player=GetComponent<PythonPlayerPanel>();if(player!=null)player.Restore(); }
                                     if(command.kind=="new_game" || command.kind=="load_game" || command.kind=="load_python_game") { var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.ResetConfirmation();var menu=GetComponent<PythonNewGamePanel>(); if(menu!=null) menu.Close(); }
-                                    notice = command.kind == "set_shifts" ? "出勤・休養を変更しました。"
+                                    notice = command.kind == "assign_service" ? "選んだ客・猫・席で接客を開始しました。営業を進める操作で交流を進めます。" : command.kind == "set_auto_assignment" ? "自動割り当て設定を変更しました。" : command.kind == "set_shifts" ? "出勤・休養を変更しました。"
                                         : command.kind == "save_game" ? "保存しました。" : command.kind == "load_game" || command.kind == "load_python_game" ? "保存したゲームを再開しました。"
                                         : command.kind == "new_game" ? "新規ゲームを作成し、初期状態を保存しました。出勤・休養を設定して営業を始めてください。"
                                         : command.kind == "next_day" ? "翌日の営業準備へ進みました。出勤・休養を設定してください。"

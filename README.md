@@ -169,3 +169,5 @@ Unity 2021.3.45f2の表示試作を `C:\Users\hi-wa\unity_workspase\CatCafeSim` 
 UnityのUIはシーン・Prefabに保存する方式へ変更しました。Play前からSceneビューで見え、RectTransform・色・文字サイズを手で調整できます。実行時コードは保存済みUIを参照し、配置を再生成しません。日本語フォントM PLUS 1pとライセンスも導入用テンプレートに同梱しています。
 
 Unityテンプレートには交流試作も含まれます。Play中の4ボタンは「次の交流」「遊ぶ」「撫でる」「休む」です。猫ごとに体力・関心度と10手の交流セットを保持します。状態保存・営業・好感度は未実装です。詳細は親フォルダのDocs/UnityContentPreview.mdを参照してください。
+
+Unityの接客に[手動割り当て画面](../Docs/UnityServiceAssignment.md)を追加しました。イベント一覧から自動割り当てをOFFにし、待機客・猫・空席を選びます。割り当て設定と接客状態は保存・再開できます。テンプレート導入後は `PythonServiceAssignmentSetup.Build` で画面を生成します。

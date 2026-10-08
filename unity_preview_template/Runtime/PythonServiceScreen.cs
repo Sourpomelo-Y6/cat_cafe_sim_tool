@@ -101,7 +101,7 @@ namespace CatCafePreview
             if(state==null || serviceSummary==null)return;
             var seats=state.seats ?? new PythonSeatState[0];int occupied=Array.FindAll(seats,seat=>!string.IsNullOrEmpty(seat.customer_id)).Length;
             serviceSummary.text="営業時間 "+state.tick+" / "+state.opening_ticks+"刻　接客中 "+occupied+" / "+seats.Length+"席　待ち "+state.waiting_count+"人"
-                +"\n自動進行："+(client.Automatic ? "進行中" : "停止中")+"　速度："+(client.Fast ? "高速（0.25秒 / 刻）" : "通常（1秒 / 刻）");
+                +"\n自動割り当て："+(state.service_assignment?.auto_assign==false ? "OFF" : "ON")+(state.service_assignment?.waiting==true ? "（客・猫・席の配置待ち）" : "")+"　自動進行："+(client.Automatic ? "進行中" : "停止中")+"　速度："+(client.Fast ? "高速（0.25秒 / 刻）" : "通常（1秒 / 刻）");
             if(dayProgress!=null){dayProgress.maxValue=Math.Max(1,state.opening_ticks);dayProgress.value=state.tick;}
         }
         public void Disconnect()
