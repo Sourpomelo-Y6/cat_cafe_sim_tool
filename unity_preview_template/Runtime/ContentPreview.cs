@@ -155,6 +155,8 @@ namespace CatCafePreview
             var closing=GetComponent<PythonClosingPanel>();if(closing!=null)closing.Apply(state);
             var intake = GetComponent<PythonIntakePanel>();
             if (intake != null) intake.Apply(state);
+            var trust=GetComponent<PythonCustomerTrustPanel>();if(trust!=null)trust.Apply(state);
+            var reservation=GetComponent<PythonReservationPanel>();if(reservation!=null)reservation.Apply(state);
             var regular=GetComponent<PythonRegularIntroductionPanel>();if(regular!=null)regular.Apply(state);
             var visiting=GetComponent<PythonVisitingCatPanel>();if(visiting!=null)visiting.Apply(state);
             var housing = GetComponent<PythonHousingPanel>();
@@ -275,6 +277,8 @@ namespace CatCafePreview
             if(savePanel != null) savePanel.RefreshControls();
             var intake = GetComponent<PythonIntakePanel>();
             if (intake != null) intake.RefreshControls();
+            var trust=GetComponent<PythonCustomerTrustPanel>();if(trust!=null)trust.RefreshControls();
+            var reservation=GetComponent<PythonReservationPanel>();if(reservation!=null)reservation.RefreshControls();
             var regular=GetComponent<PythonRegularIntroductionPanel>();if(regular!=null)regular.RefreshControls();
             var eventList=GetComponent<PythonEventListPanel>();if(eventList!=null)eventList.RefreshControls();
             var visiting=GetComponent<PythonVisitingCatPanel>();if(visiting!=null)visiting.RefreshControls();
@@ -300,6 +304,8 @@ namespace CatCafePreview
             if(state.player_interaction!=null && player!=null && player.panel.activeSelf){player.panel.transform.SetAsLastSibling();return;}
             if(string.IsNullOrEmpty(state.required_action))return;
             var intake=GetComponent<PythonIntakePanel>();if(intake!=null && Front(intake.panel,intake.accept,intake.decline))return;
+            var trust=GetComponent<PythonCustomerTrustPanel>();if(trust!=null && Front(trust.panel,trust.recover,trust.ignore,trust.confirm))return;
+            var reservation=GetComponent<PythonReservationPanel>();if(reservation!=null && Front(reservation.panel,reservation.accept,reservation.decline,reservation.confirm))return;
             var regular=GetComponent<PythonRegularIntroductionPanel>();if(regular!=null && Front(regular.panel,regular.accept,regular.decline,regular.confirm))return;
             var growth=GetComponent<PythonGrowthPanel>();if(growth!=null && Front(growth.panel,growth.choices))return;
             var store=GetComponent<PythonStoreEventPanel>();if(store!=null && Front(store.panel,store.choices))return;
@@ -407,6 +413,8 @@ namespace CatCafePreview
             if(savePanel != null) savePanel.Disconnect();
             var intake = GetComponent<PythonIntakePanel>();
             if (intake != null) intake.Disconnect();
+            var trust=GetComponent<PythonCustomerTrustPanel>();if(trust!=null)trust.Disconnect();
+            var reservation=GetComponent<PythonReservationPanel>();if(reservation!=null)reservation.Disconnect();
             var regular=GetComponent<PythonRegularIntroductionPanel>();if(regular!=null)regular.Disconnect();
             var eventList=GetComponent<PythonEventListPanel>();if(eventList!=null)eventList.Disconnect();
             var visiting=GetComponent<PythonVisitingCatPanel>();if(visiting!=null)visiting.Disconnect();

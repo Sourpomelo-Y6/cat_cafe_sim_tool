@@ -31,6 +31,8 @@ namespace CatCafePreview
         public PythonIntakeState intake_request;
         public PythonVisitingCat visiting_cat;
         public PythonRegularIntroduction regular_introduction;
+        public PythonReservation reservation;
+        public PythonCustomerTrust customer_trust;
         public PythonHousingState housing;
         public PythonGoalResult goal_result;
         public PythonNextGoal next_goal;
@@ -291,6 +293,14 @@ namespace CatCafePreview
             var row=current?.regular_introduction;
             return CanManageSaves && row!=null && row.status=="waiting" && (choice=="accept" ? row.can_accept : choice=="decline" && row.can_decline);
         }
+        public bool CanRespondReservation(string choice)
+        {
+            var row=current?.reservation;
+            return CanManageSaves && row!=null && row.status=="waiting" && (choice=="accept" ? row.can_accept : choice=="decline" && row.can_decline);
+        }
+        public void RespondReservation(string choice){if(CanRespondReservation(choice))QueueAdoption("resolve_reservation","",choice,current.reservation.event_id);}
+        public bool CanRespondTrust(string id){return CanManageSaves && current.customer_trust?.events!=null && Array.Exists(current.customer_trust.events,e=>e.event_id==id && e.can_respond);}
+        public void RespondTrust(string id,string choice){if(CanRespondTrust(id) && (choice=="recover" || choice=="ignore"))QueueAdoption("resolve_customer_trust","",choice,id);}
         public void RespondRegular(string choice)
         { if(CanRespondRegular(choice))QueuePlayer("resolve_regular_introduction",current.regular_introduction.cat_id,choice,""); }
         public void RespondVisiting(string choice)
@@ -394,6 +404,8 @@ namespace CatCafePreview
                                         : command.kind == "next_day" ? "翌日の営業準備へ進みました。出勤・休養を設定してください。"
                                         : command.kind == "resolve_intake" ? (command.choice == "accept" ? "保護猫を迎えました。休養予定で猫一覧に加わりました。" : "受け入れ依頼を見送りました。")
                                         : command.kind == "resolve_regular_introduction" ? (command.choice == "accept" ? "常連から紹介された猫を迎えました。休養予定で猫一覧に加わりました。" : "常連からの猫紹介を見送りました。")
+                                        : command.kind == "resolve_reservation" ? (command.choice == "accept" ? "予約を引き受けました。来店日と担当猫の条件を確認してください。" : "予約を辞退しました。")
+                                        : command.kind == "resolve_customer_trust" ? (command.choice == "recover" ? "信頼回復に取り組みます。今後の接客結果を確認してください。" : "対応せず、お客さんの永久離脱を確定しました。")
                                         : command.kind == "purchase_housing" || command.kind == "upgrade_housing" ? "飼育スペースを拡張しました。"
                                         : command.kind == "resolve_store_event" ? (command.choice == "close" ? "休業し、翌日の営業準備へ進みました。" : "店舗イベントに回答しました。")
                                         : command.kind == "resolve_growth" ? "得意分野を選びました。"
