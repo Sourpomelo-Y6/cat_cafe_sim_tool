@@ -1,0 +1,41 @@
+using System;
+using UnityEditor;
+using UnityEditor.Events;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+using UnityEngine.UI;
+namespace CatCafePreview.Editor
+{
+    public static class PythonRestSpaceSetup
+    {
+        static T Copy<T>(T source,Transform root,Transform target) where T:Component{return target.Find(AnimationUtility.CalculateTransformPath(source.transform,root)).GetComponent<T>();}
+        static void Place(RectTransform r,float x,float y,float w,float h){r.anchorMin=r.anchorMax=r.pivot=new Vector2(0,1);r.anchoredPosition=new Vector2(x,-y);r.sizeDelta=new Vector2(w,h);}
+        static void Bind(Button b,UnityEngine.Events.UnityAction action){b.onClick=new Button.ButtonClickedEvent();UnityEventTools.AddPersistentListener(b.onClick,action);}
+        [MenuItem("Cat Cafe/開発用/UI再生成/休養スペース",false,33)]
+        public static void Build()
+        {
+            var scene=EditorSceneManager.OpenScene("Assets/Scenes/CatCafePythonState.unity");var preview=UnityEngine.Object.FindObjectOfType<ContentPreview>();var source=preview.GetComponent<PythonDayOffPanel>();var root=source.panel.transform.parent;var old=root.Find("Rest Space");if(old!=null)UnityEngine.Object.DestroyImmediate(old.gameObject);
+            var p=preview.GetComponent<PythonRestSpacePanel>() ?? preview.gameObject.AddComponent<PythonRestSpacePanel>();p.panel=UnityEngine.Object.Instantiate(source.panel,root);p.panel.name="Rest Space";var s=source.panel.transform;var t=p.panel.transform;
+            p.title=Copy(source.title,s,t);p.details=Copy(source.details,s,t);p.notice=Copy(source.notice,s,t);p.confirmationText=Copy(source.confirmationText,s,t);p.confirmation=t.Find(AnimationUtility.CalculateTransformPath(source.confirmation.transform,s)).gameObject;
+            p.purchase=Copy(source.proceed,s,t);p.close=Copy(source.close,s,t);p.confirm=Copy(source.confirm,s,t);p.cancel=Copy(source.cancel,s,t);
+            p.upgrade=UnityEngine.Object.Instantiate(p.purchase,p.purchase.transform.parent);p.upgrade.name="Upgrade Rest Space";p.soundproof=UnityEngine.Object.Instantiate(p.purchase,p.purchase.transform.parent);p.soundproof.name="Soundproof Rest Space";
+            Place(p.purchase.GetComponent<RectTransform>(),24,550,210,40);Place(p.upgrade.GetComponent<RectTransform>(),252,550,210,40);Place(p.soundproof.GetComponent<RectTransform>(),480,550,210,40);Place(p.close.GetComponent<RectTransform>(),708,550,208,40);
+            p.purchase.GetComponentInChildren<Text>().text="購入・設置（確認）";p.upgrade.GetComponentInChildren<Text>().text="強化（確認）";p.soundproof.GetComponentInChildren<Text>().text="防音改修（確認）";
+            Bind(p.purchase,p.Purchase);Bind(p.upgrade,p.Upgrade);Bind(p.soundproof,p.Soundproof);Bind(p.close,p.Close);Bind(p.confirm,p.Confirm);Bind(p.cancel,p.Cancel);p.confirmation.SetActive(false);p.panel.SetActive(false);EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);PythonEventListSetup.Build();Debug.Log("CAT_CAFE_REST_SPACE_UI_OK");
+        }
+        public static void BuildAndVerify()
+        {
+            Build();var preview=UnityEngine.Object.FindObjectOfType<ContentPreview>();preview.Initialize();var client=preview.GetComponent<PythonStateClient>();var f=System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic;typeof(PythonStateClient).GetField("preview",f).SetValue(client,preview);
+            var state=PythonServiceSetup.Sample();state.instance_id="rest-space-test";state.can_set_shifts=true;state.closed=false;state.required_action="";state.funds=3000;
+            state.rest_space=new PythonRestSpace{status="未購入",details="休養スペース：未購入 / 所持金：3000\n現在の追加回復：疲労＋0 / ストレス＋0\n\n在店して休養・療養する猫が対象です。疲労回復は特性の倍率を適用した後に加算します。\n購入・改修した日の閉店・休業から有効です。購入時には回復しません。\n出勤中・不在の猫には適用しません。療養日数は変えません。\n\n解放条件\n購入：出勤・病気ルールが有効な営業準備中\n強化：人気第1段階達成後\n防音改修：人気第2段階達成後・経営ルールが有効\n各操作は1回限り。支払い後に資金が残る必要があります。\n\n購入・設置：費用400 / 資金3000 → 2600 / 疲労＋10\n強化：費用800 / 疲労＋20\n防音改修：費用1000 / ストレス＋10\n\n購入・改修履歴\nまだ記録はありません。",notes="在店して休養・療養する猫が対象です。疲労回復は特性の倍率を適用した後に加算します。\n購入・改修した日の閉店・休業から有効です。購入時には回復しません。\n出勤中・不在の猫には適用しません。防音改修は休養ストレス回復のみ加算し、療養日数は変えません。",actions=new[]{new PythonRestSpaceAction{kind="purchase_rest_space",label="購入・設置",can_execute=true,cost=400,funds_after=2600,recovery_after=10},new PythonRestSpaceAction{kind="upgrade_rest_space",label="強化",reason="人気第1段階達成後",cost=800,funds_after=2200,recovery_after=20},new PythonRestSpaceAction{kind="soundproof_rest_space",label="防音改修",reason="人気第2段階達成後",cost=1000,funds_after=2000,stress_after=10}}};
+            Action apply=()=>typeof(PythonStateClient).GetMethod("Accept",f).Invoke(client,new object[]{state});apply();var p=preview.GetComponent<PythonRestSpacePanel>();var list=preview.GetComponent<PythonEventListPanel>();list.Open();if(list.entries.Length!=18 || !list.entries[17].interactable || !list.entries[17].GetComponentInChildren<Text>().text.Contains("未購入"))throw new Exception("Rest space entry failed");list.RestSpace();if(list.panel.activeSelf || !p.panel.activeSelf || !p.purchase.interactable || p.upgrade.interactable || p.soundproof.interactable)throw new Exception("Rest space navigation/gates failed");Capture(preview,"Logs/RestSpace.png");
+            p.Purchase();CheckConfirmation(p,"2600");Capture(preview,"Logs/RestSpaceConfirmation.png");p.Cancel();if(typeof(PythonStateClient).GetField("pending",f).GetValue(client)!=null)throw new Exception("Rest space cancel queued action");p.Purchase();state.revision++;apply();if(p.confirmation.activeSelf)throw new Exception("Stale rest confirmation retained");p.Disconnect();if(p.purchase.interactable || p.confirm.interactable)throw new Exception("Offline rest space enabled");apply();p.Purchase();p.Confirm();CheckQueue(client,f,"purchase_rest_space");
+            typeof(PythonStateClient).GetField("pending",f).SetValue(client,null);state.revision++;state.rest_space.status="設置済み";state.rest_space.recovery_bonus=10;state.rest_space.actions[0].can_execute=false;state.rest_space.actions[1].can_execute=true;state.rest_space.actions[1].recovery_before=10;state.rest_space.details="休養スペース：設置済み\n疲労追加回復＋10\n\n購入・改修履歴\n1日目：購入・設置 / 支払額400 / 疲労＋10\n\n強化：人気第1段階達成済み / 費用800\n防音改修：人気第2段階達成後";apply();p.Upgrade();CheckConfirmation(p,"＋10 → ＋20");p.Confirm();CheckQueue(client,f,"upgrade_rest_space");
+            typeof(PythonStateClient).GetField("pending",f).SetValue(client,null);state.revision++;state.rest_space.status="強化済み";state.rest_space.actions[1].can_execute=false;state.rest_space.actions[2].can_execute=true;state.rest_space.actions[2].recovery_before=state.rest_space.actions[2].recovery_after=20;apply();p.Soundproof();CheckConfirmation(p,"＋0 → ＋10");Capture(preview,"Logs/RestSpaceSoundproof.png");p.Confirm();CheckQueue(client,f,"soundproof_rest_space");
+            typeof(PythonStateClient).GetField("pending",f).SetValue(client,null);state.revision++;state.rest_space.status="強化済み・防音改修済み";state.rest_space.actions[2].can_execute=false;apply();if(p.purchase.interactable || p.upgrade.interactable || p.soundproof.interactable || !p.details.text.Contains("支払額400"))throw new Exception("Completed rest space/history failed");state.instance_id="loaded";apply();if(p.panel.activeSelf)throw new Exception("Rest space retained across load");Debug.Log("CAT_CAFE_REST_SPACE_DISPLAY_OK");
+        }
+        static void CheckConfirmation(PythonRestSpacePanel p,string expected){Canvas.ForceUpdateCanvases();if(!p.confirmation.activeSelf || !p.confirmationText.text.Contains(expected) || p.confirmationText.preferredHeight>p.confirmationText.rectTransform.rect.height || p.confirmation.transform.GetSiblingIndex()!=p.confirmation.transform.parent.childCount-1)throw new Exception("Rest space confirmation missing/clipped/covered");}
+        static void CheckQueue(PythonStateClient client,System.Reflection.BindingFlags f,string kind){var row=(PythonShiftCommand)typeof(PythonStateClient).GetField("pending",f).GetValue(client);if(row?.kind!=kind || row.choice!="" || row.cat_id!="" || client.CanRestSpace(kind))throw new Exception("Rest space command queue failed");}
+        static void Capture(ContentPreview preview,string path){Canvas.ForceUpdateCanvases();typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{preview,path});}
+    }
+}
