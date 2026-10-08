@@ -174,6 +174,7 @@ namespace CatCafePreview
             var preparation=GetComponent<PythonPreparationPanel>();if(preparation!=null)preparation.Apply(state);
             var ended=GetComponent<PythonGameOverPanel>();if(ended!=null)ended.Apply(state);
             PrioritizeRequiredPanel();
+            var eventList=GetComponent<PythonEventListPanel>();if(eventList!=null)eventList.Apply(state);
         }
         private void AppendObjectiveProgress()
         {
@@ -273,6 +274,7 @@ namespace CatCafePreview
             if(savePanel != null) savePanel.RefreshControls();
             var intake = GetComponent<PythonIntakePanel>();
             if (intake != null) intake.RefreshControls();
+            var eventList=GetComponent<PythonEventListPanel>();if(eventList!=null)eventList.RefreshControls();
             var visiting=GetComponent<PythonVisitingCatPanel>();if(visiting!=null)visiting.RefreshControls();
             var housing = GetComponent<PythonHousingPanel>();
             if (housing != null) housing.RefreshControls();
@@ -289,6 +291,7 @@ namespace CatCafePreview
 
         private void PrioritizeRequiredPanel()
         {
+            var eventList=GetComponent<PythonEventListPanel>();if(eventList!=null && eventList.panel.activeSelf)return;
             var client=GetComponent<PythonStateClient>();var state=client?.CurrentState;
             if(state==null || state.game_over!=null)return;
             var player=GetComponent<PythonPlayerPanel>();
@@ -401,6 +404,7 @@ namespace CatCafePreview
             if(savePanel != null) savePanel.Disconnect();
             var intake = GetComponent<PythonIntakePanel>();
             if (intake != null) intake.Disconnect();
+            var eventList=GetComponent<PythonEventListPanel>();if(eventList!=null)eventList.Disconnect();
             var visiting=GetComponent<PythonVisitingCatPanel>();if(visiting!=null)visiting.Disconnect();
             var housing = GetComponent<PythonHousingPanel>();
             if (housing != null) housing.Disconnect();

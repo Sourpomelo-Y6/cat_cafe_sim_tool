@@ -1,0 +1,42 @@
+using System;
+using UnityEditor;
+using UnityEditor.Events;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+using UnityEngine.UI;
+namespace CatCafePreview.Editor
+{
+    public static class PythonEventListSetup
+    {
+        static void Place(RectTransform r,float x,float y,float w,float h){r.anchorMin=r.anchorMax=r.pivot=new Vector2(0,1);r.anchoredPosition=new Vector2(x,-y);r.sizeDelta=new Vector2(w,h);}
+        static GameObject Box(Transform p,string n,float x,float y,float w,float h,Color c){var g=new GameObject(n,typeof(RectTransform),typeof(Image));g.transform.SetParent(p,false);Place(g.GetComponent<RectTransform>(),x,y,w,h);g.GetComponent<Image>().color=c;return g;}
+        static Text Label(Transform p,string n,float x,float y,float w,float h,int size){var g=new GameObject(n,typeof(RectTransform),typeof(Text));g.transform.SetParent(p,false);Place(g.GetComponent<RectTransform>(),x,y,w,h);var t=g.GetComponent<Text>();t.font=ContentPreviewLayout.LoadFont();t.fontSize=size;t.color=new Color(.16f,.21f,.18f);t.raycastTarget=false;t.supportRichText=false;return t;}
+        static Button Button(Transform p,string n,string caption,float x,float y,float w,float h){var g=DefaultControls.CreateButton(new DefaultControls.Resources());g.name=n;g.transform.SetParent(p,false);Place(g.GetComponent<RectTransform>(),x,y,w,h);var t=g.GetComponentInChildren<Text>();t.font=ContentPreviewLayout.LoadFont();t.fontSize=18;t.text=caption;t.supportRichText=false;return g.GetComponent<Button>();}
+        [MenuItem("Cat Cafe/開発用/UI再生成/イベント一覧",false,21)]
+        public static void Build()
+        {
+            var scene=EditorSceneManager.OpenScene("Assets/Scenes/CatCafePythonState.unity");var preview=UnityEngine.Object.FindObjectOfType<ContentPreview>();var root=preview.transform.Find("Content Canvas/Background");
+            foreach(var name in new[]{"Event List","Event List Entry"}){var old=root.Find(name);if(old!=null)UnityEngine.Object.DestroyImmediate(old.gameObject);}
+            var list=preview.GetComponent<PythonEventListPanel>() ?? preview.gameObject.AddComponent<PythonEventListPanel>();
+            list.open=Button(root,"Event List Entry","イベント一覧",392,128,324,40);UnityEventTools.AddPersistentListener(list.open.onClick,list.Open);
+            list.panel=Box(root,"Event List",0,174,1280,626,new Color(0,0,0,.55f));var card=Box(list.panel.transform,"Card",170,8,940,600,new Color(.98f,.97f,.93f));Label(card.transform,"Title",24,18,892,50,25).text="イベント一覧";
+            list.entries=new Button[7];var callbacks=new UnityEngine.Events.UnityAction[]{list.Visiting,list.Intake,list.Store,list.Growth,list.Missing,list.Adoption,list.Dispatch};
+            for(int i=0;i<7;i++){list.entries[i]=Button(card.transform,"Event "+i,"状態を取得しています",24,80+i*58,892,48);list.entries[i].GetComponentInChildren<Text>().alignment=TextAnchor.MiddleLeft;UnityEventTools.AddPersistentListener(list.entries[i].onClick,callbacks[i]);}
+            list.notice=Label(card.transform,"Notice",24,492,892,50,16);list.close=Button(card.transform,"Close","閉じる",480,550,436,40);UnityEventTools.AddPersistentListener(list.close.onClick,list.Close);
+            list.open.interactable=false;list.panel.SetActive(false);EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);Debug.Log("CAT_CAFE_EVENT_LIST_UI_OK");
+        }
+        public static void BuildAndVerify()
+        {
+            Build();var preview=UnityEngine.Object.FindObjectOfType<ContentPreview>();preview.Initialize();var client=preview.GetComponent<PythonStateClient>();var flags=System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic;typeof(PythonStateClient).GetField("preview",flags).SetValue(client,preview);
+            var state=PythonServiceSetup.Sample();state.instance_id="event-list-test";state.can_set_shifts=true;state.required_action="";state.visiting_cat=new PythonVisitingCat{cat_id="visiting-cat-1",content_cat_id="visiting-cat-1",name="ココ",status="visiting",progress=1,required=3,can_interact=true,can_skip=true};
+            Action apply=()=>typeof(PythonStateClient).GetMethod("Accept",flags).Invoke(client,new object[]{state});apply();var list=preview.GetComponent<PythonEventListPanel>();list.Open();
+            if(!list.panel.activeSelf || !list.entries[0].interactable || list.entries[1].interactable || !list.entries[0].GetComponentInChildren<Text>().text.Contains("1/3"))throw new Exception("Event list status mismatch");
+            Canvas.ForceUpdateCanvases();typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{preview,"Logs/EventList.png"});
+            list.Visiting();if(list.panel.activeSelf || !preview.GetComponent<PythonVisitingCatPanel>().panel.activeSelf)throw new Exception("Visiting navigation failed");
+            list.Open();list.Disconnect();if(list.entries[0].interactable)throw new Exception("Offline event navigation enabled");apply();
+            state.intake_request=new PythonIntakeState{cat_id="test",name="ハル",status="waiting",can_decline=true};state.required_action="受け入れに回答してください。";apply();list.Open();preview.RefreshPythonControls();if(list.panel.transform.GetSiblingIndex()!=list.panel.transform.parent.childCount-1)throw new Exception("Pending event covered list");
+            list.Intake();if(list.panel.activeSelf || !preview.GetComponent<PythonIntakePanel>().panel.activeSelf)throw new Exception("Intake navigation failed");
+            list.Open();state.instance_id="new-game";apply();if(list.panel.activeSelf)throw new Exception("Old list persisted across load");Debug.Log("CAT_CAFE_EVENT_LIST_DISPLAY_OK");
+        }
+    }
+}
