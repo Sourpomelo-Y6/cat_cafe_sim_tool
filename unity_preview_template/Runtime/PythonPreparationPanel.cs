@@ -8,7 +8,7 @@ namespace CatCafePreview
     {
         public GameObject panel;
         public Text details, notice, title, summary, selectedDetails, catsDetails;
-        public Button open, close, work, rest, start;
+        public Button open, close, work, rest, start, dayOff;
         public Dropdown cats;
         public ScrollRect goalScroll, catsScroll;
         private PythonCafeState current;
@@ -35,6 +35,7 @@ namespace CatCafePreview
             Canvas.ForceUpdateCanvases();if(goalScroll!=null)goalScroll.verticalNormalizedPosition=1;if(catsScroll!=null)catsScroll.verticalNormalizedPosition=1;
         }
         public void Close() { panel.SetActive(false); }
+        public void OpenDayOff() { if(dayOff!=null && dayOff.interactable)GetComponent<PythonDayOffPanel>()?.Open(); }
         public void Work() { SetShift(true); }
         public void Rest() { SetShift(false); }
         private void SetShift(bool working)
@@ -99,6 +100,7 @@ namespace CatCafePreview
             if(rest!=null)rest.interactable=ready && cat.working;
             if(cats!=null)cats.interactable=online && client.CanManageSaves && current?.cats!=null && current.cats.Length>0;
             if(start!=null)start.interactable=online && current!=null && current.can_set_shifts && !current.closed && current.game_over==null && client.CanProgressBusiness;
+            if(dayOff!=null)dayOff.interactable=online && client.CanManageSaves && current!=null && current.day_off!=null;
             open.interactable=current!=null;close.interactable=true;if(current!=null)RenderNotice();
         }
         public void Disconnect() { online=false;RefreshControls(); }

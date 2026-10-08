@@ -42,6 +42,7 @@ namespace CatCafePreview
         public PythonDispatchTrouble[] dispatch_troubles;
         public PythonDispatchIntroduction[] dispatch_introductions;
         public PythonItems items;
+        public PythonDayOff day_off;
         public PythonMissingCat[] missing_cats;
         public PythonMissingRest missing_rest;
         public PythonAdoption adoption;
@@ -368,6 +369,8 @@ namespace CatCafePreview
             preview.RefreshPythonControls();
         }
         public bool CanChangeShifts { get { return online && pending == null && current != null && current.game_over == null && current.can_set_shifts && (current.player_interaction==null || !current.player_interaction.active); } }
+        public bool CanDayOff { get { return CanManageSaves && current.game_over==null && current.day_off!=null && current.day_off.can_select; } }
+        public void DayOff() { if(CanDayOff){StopAutomatic();QueuePlayer("day_off","","","");} }
         public bool CanProgressBusiness { get { return online && pending == null && current != null && current.game_over == null && !automatic
             && string.IsNullOrEmpty(current.required_action)
             && (current.closed || !current.can_set_shifts || Array.Exists(current.cats, cat => cat.working)); } }

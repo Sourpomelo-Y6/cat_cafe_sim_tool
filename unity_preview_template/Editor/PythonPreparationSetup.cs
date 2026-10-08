@@ -57,9 +57,10 @@ namespace CatCafePreview.Editor
             panel.work.GetComponent<Image>().color=new Color(.88f,.91f,.84f);
             panel.catsDetails=ScrollText(card.transform,"Cats Scroll",388,354,528,128,16,out panel.catsScroll);
             ScrollRect noticeScroll;panel.notice=ScrollText(card.transform,"Notice Scroll",24,490,892,54,14,out noticeScroll);
-            panel.start=Button(card.transform,"Start Business","営業開始",24,550,432);UnityEventTools.AddPersistentListener(panel.start.onClick,panel.StartBusiness);
+            panel.start=Button(card.transform,"Start Business","営業開始",24,550,282);UnityEventTools.AddPersistentListener(panel.start.onClick,panel.StartBusiness);
             panel.start.GetComponent<Image>().color=new Color(.2f,.38f,.3f);panel.start.GetComponentInChildren<Text>().color=Color.white;
-            panel.close=Button(card.transform,"Close","閉じて猫一覧へ",480,550,436);UnityEventTools.AddPersistentListener(panel.close.onClick,panel.Close);
+            panel.dayOff=Button(card.transform,"Day Off","今日は休業する",322,550,282);UnityEventTools.AddPersistentListener(panel.dayOff.onClick,panel.OpenDayOff);
+            panel.close=Button(card.transform,"Close","閉じて猫一覧へ",620,550,296);UnityEventTools.AddPersistentListener(panel.close.onClick,panel.Close);
             var entry=root.Find("Preparation Entry");if(entry!=null)panel.open=entry.GetComponent<Button>();else {panel.open=Button(root,"Preparation Entry","営業準備の案内",332,24,240);UnityEventTools.AddPersistentListener(panel.open.onClick,panel.Open);}
             panel.open.gameObject.SetActive(false);overlay.SetActive(false);EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);Debug.Log("CAT_CAFE_PREPARATION_UI_OK");
         }
