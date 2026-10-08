@@ -26,6 +26,7 @@ $previewFiles += @('Runtime/PythonExpansionPanel.cs', 'Editor/PythonExpansionSet
 $previewFiles += @('Runtime/PythonSeatEquipmentPanel.cs', 'Editor/PythonSeatEquipmentSetup.cs')
 $previewFiles += @('Runtime/PythonRestSpacePanel.cs', 'Editor/PythonRestSpaceSetup.cs')
 $previewFiles += @('Runtime/PythonWaitingAreaPanel.cs', 'Editor/PythonWaitingAreaSetup.cs')
+$previewFiles += @('Runtime/PythonCustomerDirectoryPanel.cs', 'Editor/PythonCustomerDirectorySetup.cs')
 $previewFiles += @('Runtime/PythonHousingPanel.cs', 'Editor/PythonHousingSetup.cs', 'Editor/PythonHousingVerification.cs')
 $previewFiles += @('Runtime/PythonGoalPanel.cs', 'Editor/PythonGoalSetup.cs', 'Editor/PythonGoalVerification.cs')
 $previewFiles += @('Runtime/PythonGrowthPanel.cs', 'Editor/PythonGrowthSetup.cs', 'Editor/PythonGrowthVerification.cs')

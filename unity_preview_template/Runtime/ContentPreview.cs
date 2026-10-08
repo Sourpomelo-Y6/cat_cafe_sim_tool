@@ -182,6 +182,7 @@ namespace CatCafePreview
             var equipment=GetComponent<PythonSeatEquipmentPanel>();if(equipment!=null)equipment.Apply(state);
             var restSpace=GetComponent<PythonRestSpacePanel>();if(restSpace!=null)restSpace.Apply(state);
             var waitingArea=GetComponent<PythonWaitingAreaPanel>();if(waitingArea!=null)waitingArea.Apply(state);
+            var customerDirectory=GetComponent<PythonCustomerDirectoryPanel>();if(customerDirectory!=null)customerDirectory.Apply(state);
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.Apply(state);
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.Apply(state);
             var preparation=GetComponent<PythonPreparationPanel>();if(preparation!=null)preparation.Apply(state);
@@ -277,6 +278,7 @@ namespace CatCafePreview
             var equipment=GetComponent<PythonSeatEquipmentPanel>();if(equipment!=null)equipment.RefreshControls();
             var restSpace=GetComponent<PythonRestSpacePanel>();if(restSpace!=null)restSpace.RefreshControls();
             var waitingArea=GetComponent<PythonWaitingAreaPanel>();if(waitingArea!=null)waitingArea.RefreshControls();
+            var customerDirectory=GetComponent<PythonCustomerDirectoryPanel>();if(customerDirectory!=null)customerDirectory.RefreshControls();
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.RefreshControls();
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.RefreshControls();
             var preparation=GetComponent<PythonPreparationPanel>();if(preparation!=null)preparation.RefreshControls();
@@ -360,6 +362,7 @@ namespace CatCafePreview
             var equipment=GetComponent<PythonSeatEquipmentPanel>();if(equipment!=null && equipment.panel.activeSelf)equipment.notice.text=message;
             var restSpace=GetComponent<PythonRestSpacePanel>();if(restSpace!=null && restSpace.panel.activeSelf)restSpace.notice.text=message;
             var waitingArea=GetComponent<PythonWaitingAreaPanel>();if(waitingArea!=null && waitingArea.panel.activeSelf)waitingArea.notice.text=message;
+            var customerDirectory=GetComponent<PythonCustomerDirectoryPanel>();if(customerDirectory!=null && customerDirectory.panel.activeSelf)customerDirectory.notice.text=message;
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null && missing.panel.activeSelf && !string.IsNullOrEmpty(message))missing.notice.text=message;
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null && adoption.panel.activeSelf)adoption.notice.text=message;
             var ended=GetComponent<PythonGameOverPanel>();if(ended!=null && ended.panel.activeSelf)ended.notice.text=message;
@@ -447,6 +450,7 @@ namespace CatCafePreview
             var equipment=GetComponent<PythonSeatEquipmentPanel>();if(equipment!=null)equipment.Disconnect();
             var restSpace=GetComponent<PythonRestSpacePanel>();if(restSpace!=null)restSpace.Disconnect();
             var waitingArea=GetComponent<PythonWaitingAreaPanel>();if(waitingArea!=null)waitingArea.Disconnect();
+            var customerDirectory=GetComponent<PythonCustomerDirectoryPanel>();if(customerDirectory!=null)customerDirectory.Disconnect();
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.Disconnect();
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.Disconnect();
             var preparation=GetComponent<PythonPreparationPanel>();if(preparation!=null)preparation.Disconnect();

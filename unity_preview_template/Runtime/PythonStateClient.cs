@@ -47,6 +47,7 @@ namespace CatCafePreview
         public PythonSeatEquipment seat_equipment;
         public PythonRestSpace rest_space;
         public PythonWaitingArea waiting_area;
+        public PythonCustomerDirectory customer_directory;
         public PythonMissingCat[] missing_cats;
         public PythonMissingRest missing_rest;
         public PythonAdoption adoption;
