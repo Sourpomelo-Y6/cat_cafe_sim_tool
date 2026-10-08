@@ -59,6 +59,11 @@ namespace CatCafePreview.Editor
             var store=preview.GetComponent<PythonStoreEventPanel>();store.choiceDetails=Layout(store.panel,store.title,store.choices,out store.details,out store.notice);
             var growth=preview.GetComponent<PythonGrowthPanel>();growth.choiceDetails=Layout(growth.panel,growth.title,growth.choices,out growth.details,out growth.notice);
             var intake=preview.GetComponent<PythonIntakePanel>();intake.choiceDetails=Layout(intake.panel,intake.title,new[]{intake.accept,intake.decline},out intake.details,out intake.notice);
+            intake.picture=PythonIntakeSetup.Portrait(intake.panel.transform.Find("Request Card"),24,86,304,168);
+            var intakeScroll=intake.details.transform.parent.parent.GetComponent<ScrollRect>();
+            Place(intakeScroll.GetComponent<RectTransform>(),24,266,304,216);
+            Place(intakeScroll.viewport,8,6,272,204);
+            Place(intakeScroll.verticalScrollbar.GetComponent<RectTransform>(),286,6,12,204);
             EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);Debug.Log("CAT_CAFE_EVENT_LAYOUT_OK");
         }
         public static void BuildAndVerify()
@@ -80,7 +85,9 @@ namespace CatCafePreview.Editor
             growth.choiceDetails[1].text=new string('猫',4000);Canvas.ForceUpdateCanvases();var choiceScroll=growth.choiceDetails[1].GetComponentInParent<ScrollRect>();if(choiceScroll.content.rect.height<=choiceScroll.viewport.rect.height)throw new Exception("Long choice cannot scroll");
             state.growth_choices=null;state.required_action="";preview.GetComponent<PythonServiceScreen>().ShowCats();apply();if(!preview.GetComponent<PythonServiceScreen>().ShowingSeats)throw new Exception("Resolved event did not return to service");
             state.can_set_shifts=true;state.required_action="保護猫の受け入れに回答してください。";state.intake_request=new PythonIntakeState{status="waiting",cat_id="new-cat",name="ハル",personality="穏やか",features="人懐っこい",housing="空きなし",day=1,cost=100,can_accept=false,can_decline=true,accept_reason="飼育スペースが足りません。"};apply();var intake=preview.GetComponent<PythonIntakePanel>();
-            if(intake.accept.interactable || !intake.decline.interactable || !intake.choiceDetails[0].text.Contains("飼育スペース"))throw new Exception("Intake blocked reason missing");Canvas.ForceUpdateCanvases();Capture(preview,"Logs/EventIntakeLayout.png");
+            if(intake.accept.interactable || !intake.decline.interactable || !intake.choiceDetails[0].text.Contains("飼育スペース"))throw new Exception("Intake blocked reason missing");
+            if(intake.picture==null || !intake.picture.enabled || intake.picture.texture!=ContentPreview.CatPlaceholderTexture() || intake.picture.texture==null)throw new Exception("Intake silhouette missing");
+            Canvas.ForceUpdateCanvases();Capture(preview,"Logs/EventIntakeLayout.png");
             state.intake_request.status="declined";state.required_action="";apply();if(intake.panel.activeSelf)throw new Exception("Intake remained after response");
             state.tick++;apply();if(!string.IsNullOrEmpty(preview.GetComponent<PythonEventPresentation>().Message))throw new Exception("Old response feedback persisted after progress");
             Debug.Log("CAT_CAFE_EVENT_LAYOUT_DISPLAY_OK: context / choices / reasons / busy / growth / offline / long text / intake / feedback / return to service");

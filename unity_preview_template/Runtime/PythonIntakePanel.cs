@@ -8,6 +8,7 @@ namespace CatCafePreview
         public GameObject panel;
         public Text title, details, notice;
         public Button accept, decline;
+        public RawImage picture;
         public Text[] choiceDetails;
         private string key, prompt;
         public void Accept() { GetComponent<PythonStateClient>().RespondIntake(true); }
@@ -17,6 +18,13 @@ namespace CatCafePreview
             var intake = state.intake_request;
             panel.SetActive(intake != null && intake.status == "waiting");
             if (!panel.activeSelf) return;
+            if (picture != null)
+            {
+                picture.texture = GetComponent<ContentPreview>().CandidateCatTexture(intake.cat_id);
+                picture.enabled = picture.texture != null;
+                var aspect = picture.GetComponent<AspectRatioFitter>();
+                if (aspect != null && picture.texture != null) aspect.aspectRatio = (float)picture.texture.width / picture.texture.height;
+            }
             title.text = "保護猫の受け入れ依頼：" + intake.name;
             details.text = intake.day + "日目に届いた依頼\n\n名前 / 個性：" + intake.name + " / " + intake.personality
                 + "\n特徴：" + intake.features + "\n" + intake.trait + "\n飼育スペース：" + intake.housing

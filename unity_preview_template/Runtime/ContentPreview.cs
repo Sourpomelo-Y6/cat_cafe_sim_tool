@@ -95,11 +95,13 @@ namespace CatCafePreview
             if (Application.isPlaying && !PythonMode) description.text += "\n\n" + CurrentInteraction.Summary;
             scroll.verticalNormalizedPosition = 1;
             var texture = scene.image == "" ? null : Resources.Load<Texture2D>(resourceRoot + scene.image.Substring(0, scene.image.Length - 4));
+            var registeredTexture = texture;
+            texture = texture ?? CatPlaceholderTexture();
             picture.texture = texture;
             picture.enabled = texture != null;
             emptyImage.enabled = texture == null;
             if (texture != null) aspect.aspectRatio = (float)texture.width / texture.height;
-            status.text = cat.name + " / " + scene.label + (texture == null ? "：画像は未登録または読込失敗です。" : "：登録済み素材を表示中");
+            status.text = cat.name + " / " + scene.label + (registeredTexture == null ? "：画像は未登録または読込失敗です。" : "：登録済み素材を表示中");
         }
 
         public void SelectCat(int index)
@@ -153,6 +155,7 @@ namespace CatCafePreview
             var closing=GetComponent<PythonClosingPanel>();if(closing!=null)closing.Apply(state);
             var intake = GetComponent<PythonIntakePanel>();
             if (intake != null) intake.Apply(state);
+            var visiting=GetComponent<PythonVisitingCatPanel>();if(visiting!=null)visiting.Apply(state);
             var housing = GetComponent<PythonHousingPanel>();
             if (housing != null) housing.Apply(state);
             var goal = GetComponent<PythonGoalPanel>();
@@ -188,7 +191,7 @@ namespace CatCafePreview
         public Texture2D PlayerTexture(string catId, string key, string imageKey = null, string eventKey = null)
         {
             var cat = bundle == null ? null : Array.Find(bundle.cats, item => item.cat_id == catId);
-            if (cat == null) return null;
+            if (cat == null) return CatPlaceholderTexture();
             string mode = string.IsNullOrEmpty(imageKey) ? key : imageKey.Split(new[] { "__" }, StringSplitOptions.None)[0];
             string fallback = mode == "brush" || mode == "pet" ? "pet"
                 : mode == "teaser" || mode == "ball" || mode == "plush" || mode == "tunnel" ? "play" : "normal";
@@ -200,17 +203,32 @@ namespace CatCafePreview
                 var texture = Resources.Load<Texture2D>(resourceRoot + scene.image.Substring(0, scene.image.Length - 4));
                 if (texture != null) return texture;
             }
-            return null;
+            return CatPlaceholderTexture();
+        }
+
+        public static Texture2D CatPlaceholderTexture()
+        {
+            return Resources.Load<Texture2D>("CatCafeDefaults/cat-silhouette-v1");
+        }
+
+        public Texture2D CandidateCatTexture(string catId)
+        {
+            var content = bundle == null ? null : Array.Find(bundle.cats, item => item.cat_id == catId);
+            var scene = content == null ? null : Array.Find(content.scenes, item => item.key == "normal");
+            var texture = scene == null || string.IsNullOrEmpty(scene.image) ? null
+                : Resources.Load<Texture2D>(resourceRoot + scene.image.Substring(0, scene.image.Length - 4));
+            return texture ?? CatPlaceholderTexture();
         }
 
         public Texture2D PythonCatTexture(PythonCatState cat)
         {
             var content = bundle == null ? null : Array.Find(bundle.cats, item => item.cat_id == cat.content_cat_id);
-            if (content == null) return null;
+            if (content == null) return CatPlaceholderTexture();
             string key = cat.working && cat.health_status == "healthy" && cat.activity == "cafe" ? "normal" : "sleep";
             var scene = Array.Find(content.scenes, item => item.key == key);
-            return scene == null || string.IsNullOrEmpty(scene.image) ? null
+            var texture = scene == null || string.IsNullOrEmpty(scene.image) ? null
                 : Resources.Load<Texture2D>(resourceRoot + scene.image.Substring(0, scene.image.Length - 4));
+            return texture ?? CatPlaceholderTexture();
         }
 
         public void ConfigurePythonButtons()
@@ -255,6 +273,7 @@ namespace CatCafePreview
             if(savePanel != null) savePanel.RefreshControls();
             var intake = GetComponent<PythonIntakePanel>();
             if (intake != null) intake.RefreshControls();
+            var visiting=GetComponent<PythonVisitingCatPanel>();if(visiting!=null)visiting.RefreshControls();
             var housing = GetComponent<PythonHousingPanel>();
             if (housing != null) housing.RefreshControls();
             var goal = GetComponent<PythonGoalPanel>();
@@ -326,7 +345,8 @@ namespace CatCafePreview
             }
             else
             {
-                picture.texture = null; picture.enabled = false; emptyImage.enabled = true;
+                picture.texture = CatPlaceholderTexture(); picture.enabled = picture.texture != null; emptyImage.enabled = picture.texture == null;
+                if (picture.texture != null) aspect.aspectRatio = (float)picture.texture.width / picture.texture.height;
                 description.text = cat.name + "\n対応する素材が未登録です。";
             }
             description.text += "\n\n猫の状態\n体力 " + cat.stamina + "/" + cat.max_stamina
@@ -381,6 +401,7 @@ namespace CatCafePreview
             if(savePanel != null) savePanel.Disconnect();
             var intake = GetComponent<PythonIntakePanel>();
             if (intake != null) intake.Disconnect();
+            var visiting=GetComponent<PythonVisitingCatPanel>();if(visiting!=null)visiting.Disconnect();
             var housing = GetComponent<PythonHousingPanel>();
             if (housing != null) housing.Disconnect();
             var goal = GetComponent<PythonGoalPanel>();

@@ -29,6 +29,7 @@ namespace CatCafePreview
         public PythonCustomerState[] customers;
         public PythonFinanceState finance;
         public PythonIntakeState intake_request;
+        public PythonVisitingCat visiting_cat;
         public PythonHousingState housing;
         public PythonGoalResult goal_result;
         public PythonNextGoal next_goal;
@@ -278,6 +279,16 @@ namespace CatCafePreview
             pending = new PythonShiftCommand { request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,
                 expected_revision=current.revision,working_cats=new string[0],kind="resolve_intake",choice=accept ? "accept" : "decline" };
             preview.RefreshPythonControls();
+        }
+        public bool CanRespondVisiting(string choice)
+        {
+            var cat=current?.visiting_cat;
+            return CanManageSaves && cat!=null && (choice=="interact" ? cat.can_interact : choice=="skip" ? cat.can_skip : choice=="accept" && cat.can_accept);
+        }
+        public void RespondVisiting(string choice)
+        {
+            if(!CanRespondVisiting(choice))return;
+            QueuePlayer("resolve_visiting_cat",current.visiting_cat.cat_id,choice,"");
         }
         private void QueueSave(string kind, string id)
         {

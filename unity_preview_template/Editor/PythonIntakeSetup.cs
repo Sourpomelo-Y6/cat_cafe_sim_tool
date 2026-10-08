@@ -21,7 +21,8 @@ namespace CatCafePreview.Editor
             var panel = preview.GetComponent<PythonIntakePanel>() ?? preview.gameObject.AddComponent<PythonIntakePanel>();
             panel.panel = overlay;
             panel.title = Label(card.transform,"Title",30,22,652,54,25);
-            panel.details = Label(card.transform,"Cat Details",30,86,652,400,19);
+            panel.picture = Portrait(card.transform,30,86,180,180);
+            panel.details = Label(card.transform,"Cat Details",230,86,452,400,19);
             panel.notice = Label(card.transform,"Response Notice",30,502,652,50,17);
             panel.notice.lineSpacing=1;
             panel.accept = Button(card.transform,"Accept Cat","迎える",142,558);
@@ -39,6 +40,18 @@ namespace CatCafePreview.Editor
         {
             rect.anchorMin=rect.anchorMax=rect.pivot=new Vector2(0,1);
             rect.anchoredPosition=new Vector2(x,-y); rect.sizeDelta=new Vector2(width,height);
+        }
+        public static RawImage Portrait(Transform parent,float x,float y,float width,float height)
+        {
+            var frame = Box(parent,"Cat Portrait",x,y,width,height,new Color(.88f,.90f,.84f,1));
+            var image = new GameObject("Picture",typeof(RectTransform),typeof(RawImage),typeof(AspectRatioFitter));
+            image.transform.SetParent(frame.transform,false);
+            var rect = image.GetComponent<RectTransform>();
+            rect.anchorMin=Vector2.zero;rect.anchorMax=Vector2.one;rect.pivot=new Vector2(.5f,.5f);rect.offsetMin=rect.offsetMax=Vector2.zero;
+            var picture=image.GetComponent<RawImage>();picture.texture=ContentPreview.CatPlaceholderTexture();picture.raycastTarget=false;
+            var aspect=image.GetComponent<AspectRatioFitter>();aspect.aspectMode=AspectRatioFitter.AspectMode.FitInParent;
+            aspect.aspectRatio=picture.texture == null ? 1 : (float)picture.texture.width/picture.texture.height;
+            return picture;
         }
         static GameObject Box(Transform parent,string name,float x,float y,float width,float height,Color color)
         {
