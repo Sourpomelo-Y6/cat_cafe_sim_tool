@@ -46,6 +46,7 @@ namespace CatCafePreview
         public PythonExpansion expansion;
         public PythonSeatEquipment seat_equipment;
         public PythonRestSpace rest_space;
+        public PythonWaitingArea waiting_area;
         public PythonMissingCat[] missing_cats;
         public PythonMissingRest missing_rest;
         public PythonAdoption adoption;
@@ -381,6 +382,8 @@ namespace CatCafePreview
         public void SeatEquipment(string kind,string seat,string choice){if(CanSeatEquipment(kind,seat,choice))QueuePlayer(kind,"",choice,seat);}
         public bool CanRestSpace(string kind){return CanManageSaves && current.game_over==null && Array.Find(current.rest_space?.actions ?? new PythonRestSpaceAction[0],r=>r.kind==kind)?.can_execute==true;}
         public void RestSpace(string kind){if(CanRestSpace(kind))QueuePlayer(kind,"","","");}
+        public bool CanWaitingArea(string kind){return CanManageSaves && current.game_over==null && Array.Find(current.waiting_area?.actions ?? new PythonWaitingAreaAction[0],r=>r.kind==kind)?.can_execute==true;}
+        public void WaitingArea(string kind){if(CanWaitingArea(kind))QueuePlayer(kind,"","","");}
         public bool CanExpandSeats { get { return CanManageSaves && current.game_over==null && current.expansion!=null && current.expansion.can_expand; } }
         public void ExpandSeats() { if(CanExpandSeats)QueuePlayer("expand_seats","","",""); }
         public bool CanDayOff { get { return CanManageSaves && current.game_over==null && current.day_off!=null && current.day_off.can_select; } }

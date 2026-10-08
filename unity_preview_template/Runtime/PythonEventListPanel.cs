@@ -26,6 +26,7 @@ namespace CatCafePreview
         public void Expansion(){Show(15);}
         public void SeatEquipment(){Show(16);}
         public void RestSpace(){Show(17);}
+        public void WaitingArea(){Show(18);}
         public void Items(){Show(14);}
         private bool Available(int i)
         {
@@ -41,6 +42,7 @@ namespace CatCafePreview
                 case 7:return current.regular_introduction!=null;
                 case 8:return current.reservation!=null;
                 case 9:return current.customer_trust!=null;
+                case 18:return current.waiting_area!=null;
                 case 17:return current.rest_space!=null;
                 case 16:return current.seat_equipment!=null;
                 case 15:return current.expansion!=null;
@@ -57,6 +59,7 @@ namespace CatCafePreview
             if(!online || !GetComponent<PythonStateClient>().CanManageSaves || !Available(i))return;
             GameObject target=null;
             switch(i){
+                case 18:var waitingArea=GetComponent<PythonWaitingAreaPanel>();waitingArea.Open();target=waitingArea.panel;break;
                 case 17:var restSpace=GetComponent<PythonRestSpacePanel>();restSpace.Open();target=restSpace.panel;break;
                 case 16:var equipment=GetComponent<PythonSeatEquipmentPanel>();equipment.Open();target=equipment.panel;break;
                 case 15:var expansion=GetComponent<PythonExpansionPanel>();expansion.Open();target=expansion.panel;break;
@@ -92,7 +95,7 @@ namespace CatCafePreview
                 "譲渡の申し出："+adoption.Count(r=>r.status=="waiting")+"件の確認待ち / 記録 "+adoption.Length+"件",
                 "有力者への派遣："+dispatch.Count(r=>r.status=="waiting")+"件の帰還待ち / 派遣中 "+dispatch.Count(r=>r.status=="travelling")+"匹",
                 "常連からの猫紹介："+(current.regular_introduction==null ? "対象なし" : current.regular_introduction.status=="untriggered" ? "まだ届いていません" : current.regular_introduction.name+" / "+(current.regular_introduction.status=="waiting" ? "確認待ち" : current.regular_introduction.status=="accepted" ? "加入済み" : "見送り済み"))};
-            for(int i=0;i<entries.Length;i++){entries[i].GetComponentInChildren<Text>().text=i<captions.Length ? captions[i] : i==17 ? "休養スペース："+(current.rest_space?.status ?? "情報なし") : i==16 ? "席の接客設備：所持 "+(current.seat_equipment?.owned?.Length ?? 0)+"個 / "+(current.seat_equipment?.can_manage==true ? "購入・配置" : "条件を確認") : i==15 ? "席数の増設："+(current.expansion?.seats ?? 0)+"席 / "+(current.expansion?.can_expand==true ? "増設可能" : current.expansion?.has_next==true ? "条件を確認" : "追加できる席なし") : i==14 ? "用品・猫のケア：所持 "+(current.items?.count ?? 0)+"個" : i==13 ? "派遣先からの猫紹介："+(current.dispatch_introductions ?? new PythonDispatchIntroduction[0]).Count(e=>e.status=="waiting")+"件の回答待ち / 記録 "+(current.dispatch_introductions?.Length ?? 0)+"件" : i==12 ? "山あいの宿のトラブル："+(current.dispatch_troubles ?? new PythonDispatchTrouble[0]).Count(e=>e.status=="waiting")+"件の回答待ち / 記録 "+(current.dispatch_troubles?.Length ?? 0)+"件" : i==11 ? "派遣中の選択イベント："+(current.dispatch_choices ?? new PythonDispatchEncounter[0]).Count(e=>e.status=="waiting")+"件の回答待ち / 記録 "+(current.dispatch_choices?.Length ?? 0)+"件" : i==10 ? "一般派遣・帰還："+(current.general_dispatch?.events ?? new PythonDispatchEvent[0]).Count(e=>e.status=="waiting")+"件の帰還待ち / 派遣中 "+(current.general_dispatch?.events ?? new PythonDispatchEvent[0]).Count(e=>e.status=="travelling")+"匹" : i==9 ? "顧客の信頼回復："+(current.customer_trust==null ? "対象なし" : (current.customer_trust.events ?? new PythonTrustEvent[0]).Count(e=>e.status=="waiting")+"件の回答待ち / 記録 "+(current.customer_trust.events?.Length ?? 0)+"件") : "特別予約："+(current.reservation==null ? "対象なし" : current.reservation.status=="untriggered" ? "解放前" : current.reservation.visit_day+"日目 / "+(current.reservation.status=="waiting" ? "確認待ち" : current.reservation.status=="declined" ? "辞退済み" : "引き受け済み"));entries[i].interactable=online && client.CanManageSaves && Available(i);}
+            for(int i=0;i<entries.Length;i++){entries[i].GetComponentInChildren<Text>().text=i<captions.Length ? captions[i] : i==18 ? "待合スペース："+(current.waiting_area?.status ?? "この営業では利用できません") : i==17 ? "休養スペース："+(current.rest_space?.status ?? "情報なし") : i==16 ? "席の接客設備：所持 "+(current.seat_equipment?.owned?.Length ?? 0)+"個 / "+(current.seat_equipment?.can_manage==true ? "購入・配置" : "条件を確認") : i==15 ? "席数の増設："+(current.expansion?.seats ?? 0)+"席 / "+(current.expansion?.can_expand==true ? "増設可能" : current.expansion?.has_next==true ? "条件を確認" : "追加できる席なし") : i==14 ? "用品・猫のケア：所持 "+(current.items?.count ?? 0)+"個" : i==13 ? "派遣先からの猫紹介："+(current.dispatch_introductions ?? new PythonDispatchIntroduction[0]).Count(e=>e.status=="waiting")+"件の回答待ち / 記録 "+(current.dispatch_introductions?.Length ?? 0)+"件" : i==12 ? "山あいの宿のトラブル："+(current.dispatch_troubles ?? new PythonDispatchTrouble[0]).Count(e=>e.status=="waiting")+"件の回答待ち / 記録 "+(current.dispatch_troubles?.Length ?? 0)+"件" : i==11 ? "派遣中の選択イベント："+(current.dispatch_choices ?? new PythonDispatchEncounter[0]).Count(e=>e.status=="waiting")+"件の回答待ち / 記録 "+(current.dispatch_choices?.Length ?? 0)+"件" : i==10 ? "一般派遣・帰還："+(current.general_dispatch?.events ?? new PythonDispatchEvent[0]).Count(e=>e.status=="waiting")+"件の帰還待ち / 派遣中 "+(current.general_dispatch?.events ?? new PythonDispatchEvent[0]).Count(e=>e.status=="travelling")+"匹" : i==9 ? "顧客の信頼回復："+(current.customer_trust==null ? "対象なし" : (current.customer_trust.events ?? new PythonTrustEvent[0]).Count(e=>e.status=="waiting")+"件の回答待ち / 記録 "+(current.customer_trust.events?.Length ?? 0)+"件") : "特別予約："+(current.reservation==null ? "対象なし" : current.reservation.status=="untriggered" ? "解放前" : current.reservation.visit_day+"日目 / "+(current.reservation.status=="waiting" ? "確認待ち" : current.reservation.status=="declined" ? "辞退済み" : "引き受け済み"));entries[i].interactable=online && client.CanManageSaves && Available(i);}
             notice.text=!online ? "Python未接続です。再接続後にイベントを開けます。" : !client.CanManageSaves ? "操作を送信しています。完了するまでお待ちください。" : "項目を選んで確認します。店先の猫は任意です。確認待ちに回答すると営業を再開できます。";
         }
         public void Disconnect(){online=false;RefreshControls();}
