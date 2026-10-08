@@ -8,7 +8,7 @@ namespace CatCafePreview
     [Serializable] public class PythonDispatchOption
     { public string cat_id, choice, label, detail, reason; public int days; public float reward, satisfaction; public bool can_select; }
     [Serializable] public class PythonDispatchEvent
-    { public string cat_id, choice, label, status, reason; public int remaining; public float reward, satisfaction; public bool can_select; }
+    { public string cat_id, choice, label, status, reason, detail; public int remaining; public float reward, satisfaction; public bool can_select, needs_response; }
     public class PythonDispatchPanel : MonoBehaviour
     {
         public GameObject panel;

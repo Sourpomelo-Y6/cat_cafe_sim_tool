@@ -37,7 +37,7 @@ namespace CatCafePreview
         public PythonGoalResult goal_result;
         public PythonNextGoal next_goal;
         public PythonPlayerInteraction player_interaction;
-        public PythonPatronDispatch patron_dispatch;
+        public PythonPatronDispatch patron_dispatch, general_dispatch;
         public PythonMissingCat[] missing_cats;
         public PythonMissingRest missing_rest;
         public PythonAdoption adoption;
@@ -218,6 +218,17 @@ namespace CatCafePreview
             if(!CanManageSaves || current.patron_dispatch==null)return;
             var row=Array.Find(current.patron_dispatch.events,r=>r.choice==eventId && r.can_select);
             if(row!=null)QueuePlayer("receive_patron",row.cat_id,row.choice,"");
+        }
+        public void DispatchGeneral(string catId,string destination)
+        {
+            if(!CanManageSaves || current.general_dispatch==null || !Array.Exists(current.general_dispatch.options,r=>r.cat_id==catId && r.choice==destination && r.can_select))return;
+            QueuePlayer("dispatch_general",catId,destination,"");
+        }
+        public void ReceiveGeneral(string eventId)
+        {
+            if(!CanManageSaves || current.general_dispatch==null)return;
+            var row=Array.Find(current.general_dispatch.events,r=>r.choice==eventId && r.can_select);
+            if(row!=null)QueuePlayer("receive_general",row.cat_id,row.choice,"");
         }
         public bool CanAdvanceGoal { get { return CanManageSaves && current.next_goal != null && current.next_goal.can_advance; } }
         public void AdvanceGoal()
