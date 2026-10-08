@@ -21,6 +21,10 @@ namespace CatCafePreview
             if(!GetComponent<PythonStateClient>().CanManageSaves)return;
             showing=true;GetComponent<PythonCatDetailsPanel>().Close();Render();
         }
+        public void OpenReturn(string eventId)
+        {
+            Open("");int index=Array.FindIndex(events,r=>r.choice==eventId);if(index>=0){returns.SetValueWithoutNotify(index);RenderDetails();}
+        }
         public void Close() { showing=false;panel.SetActive(false); }
         public void Select(int _) { RenderDetails(); }
         public void Send() { if(destinations.value<options.Length)GetComponent<PythonStateClient>().DispatchGeneral(options[destinations.value].cat_id,options[destinations.value].choice); }

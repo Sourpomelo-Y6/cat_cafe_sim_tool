@@ -39,6 +39,7 @@ namespace CatCafePreview
         public PythonPlayerInteraction player_interaction;
         public PythonPatronDispatch patron_dispatch, general_dispatch;
         public PythonDispatchEncounter[] dispatch_choices;
+        public PythonDispatchTrouble[] dispatch_troubles;
         public PythonMissingCat[] missing_cats;
         public PythonMissingRest missing_rest;
         public PythonAdoption adoption;
@@ -220,6 +221,13 @@ namespace CatCafePreview
             var row=Array.Find(current.patron_dispatch.events,r=>r.choice==eventId && r.can_select);
             if(row!=null)QueuePlayer("receive_patron",row.cat_id,row.choice,"");
         }
+        public bool CanRespondDispatchTrouble(string eventId,string choice)
+        {
+            var row=current?.dispatch_troubles==null ? null : Array.Find(current.dispatch_troubles,r=>r.event_id==eventId);
+            return CanManageSaves && row?.choices!=null && Array.Exists(row.choices,r=>r.choice==choice && r.can_select);
+        }
+        public void RespondDispatchTrouble(string eventId,string choice)
+        {if(CanRespondDispatchTrouble(eventId,choice))QueueAdoption("resolve_dispatch_trouble","",choice,eventId);}
         public bool CanRespondDispatchChoice(string eventId,string choice)
         {
             var row=current?.dispatch_choices==null ? null : Array.Find(current.dispatch_choices,r=>r.event_id==eventId);
