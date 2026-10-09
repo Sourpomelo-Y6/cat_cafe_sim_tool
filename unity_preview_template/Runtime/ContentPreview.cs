@@ -197,6 +197,7 @@ namespace CatCafePreview
             PrioritizeRequiredPanel();
             var eventList=GetComponent<PythonEventListPanel>();if(eventList!=null)eventList.Apply(state);
             GetComponent<PythonMenuPanel>()?.Apply(state);
+            GetComponent<PythonBusinessLogPanel>()?.Apply(state);
         }
         private void AppendObjectiveProgress()
         {
@@ -319,6 +320,7 @@ namespace CatCafePreview
             var regular=GetComponent<PythonRegularIntroductionPanel>();if(regular!=null)regular.RefreshControls();
             var eventList=GetComponent<PythonEventListPanel>();if(eventList!=null)eventList.RefreshControls();
             GetComponent<PythonMenuPanel>()?.RefreshControls();
+            GetComponent<PythonBusinessLogPanel>()?.RefreshControls();
             var visiting=GetComponent<PythonVisitingCatPanel>();if(visiting!=null)visiting.RefreshControls();
             var housing = GetComponent<PythonHousingPanel>();
             if (housing != null) housing.RefreshControls();
@@ -332,6 +334,7 @@ namespace CatCafePreview
             if (auto != null) auto.RefreshControls();
             PrioritizeRequiredPanel();
             GetComponent<PythonAutoPlayPanel>()?.Focus();
+            GetComponent<PythonBusinessLogPanel>()?.Focus();
         }
 
         private void PrioritizeRequiredPanel()
@@ -480,6 +483,7 @@ namespace CatCafePreview
             GetComponent<PythonDispatchComparisonPanel>()?.Disconnect();
             GetComponent<PythonServiceAssignmentPanel>()?.Disconnect();
             GetComponent<PythonAutoPlayPanel>()?.Disconnect();
+            GetComponent<PythonBusinessLogPanel>()?.Disconnect();
             GetComponent<PythonLegacySavePanel>()?.Disconnect();
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.Disconnect();
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.Disconnect();
@@ -496,6 +500,7 @@ namespace CatCafePreview
             var regular=GetComponent<PythonRegularIntroductionPanel>();if(regular!=null)regular.Disconnect();
             var eventList=GetComponent<PythonEventListPanel>();if(eventList!=null)eventList.Disconnect();
             GetComponent<PythonMenuPanel>()?.RefreshControls();
+            GetComponent<PythonBusinessLogPanel>()?.RefreshControls();
             var visiting=GetComponent<PythonVisitingCatPanel>();if(visiting!=null)visiting.Disconnect();
             var housing = GetComponent<PythonHousingPanel>();
             if (housing != null) housing.Disconnect();

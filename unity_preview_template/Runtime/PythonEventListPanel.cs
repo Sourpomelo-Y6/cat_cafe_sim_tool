@@ -12,7 +12,7 @@ namespace CatCafePreview
         private PythonCafeState current;
         private bool online;
         private string instance;
-        public void Open(){if(current==null)return;GetComponent<PythonMenuPanel>()?.Close();panel.SetActive(true);panel.transform.SetAsLastSibling();RefreshControls();}
+        public void Open(){if(current==null)return;GetComponent<PythonMenuPanel>()?.Close();GetComponent<PythonBusinessLogPanel>()?.Close();panel.SetActive(true);panel.transform.SetAsLastSibling();RefreshControls();}
         public void Close(){panel.SetActive(false);}
         public void Visiting(){Show(0);} public void Intake(){Show(1);} public void Store(){Show(2);} public void Growth(){Show(3);}
         public void Missing(){Show(4);} public void Adoption(){Show(5);} public void Dispatch(){Show(6);}
