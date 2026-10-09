@@ -12,6 +12,7 @@ namespace CatCafePreview
         public Button[] recordTabs;
         private int recordPage;
         private string instanceId;
+        public void Profile() { Records(4); }
         public void GrowthRecords() { Records(0); }
         public void EventRecords() { Records(1); }
         public void RelationshipRecords() { Records(2); }
@@ -69,7 +70,8 @@ namespace CatCafePreview
                 ;
             if(stateDetails!=null)stateDetails.text=health;
             details.text=(stateDetails==null ? health+"\n\n" : "")+"成長・得意な交流\n"+(string.IsNullOrEmpty(cat.growth_details) ? "成長情報はありません。" : cat.growth_details);
-            if(recordPage>0)details.text=cat.records==null ? "記録情報はありません。" : recordPage==1 ? cat.records.events : recordPage==2 ? cat.records.relationships : cat.records.history;
+            if(recordPage==4)details.text=string.IsNullOrEmpty(cat.profile_details) ? "プロフィール情報はありません。" : cat.profile_details;
+            else if(recordPage>0)details.text=cat.records==null ? "記録情報はありません。" : recordPage==1 ? cat.records.events : recordPage==2 ? cat.records.relationships : cat.records.history;
             if(recordTabs!=null)for(int i=0;i<recordTabs.Length;i++)recordTabs[i].GetComponent<Image>().color=i==recordPage ? new Color(.78f,.88f,.74f) : Color.white;
             RefreshControls();
         }
