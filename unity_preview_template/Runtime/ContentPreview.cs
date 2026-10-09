@@ -188,6 +188,7 @@ namespace CatCafePreview
             var objectiveStart=GetComponent<PythonObjectiveStartPanel>();if(objectiveStart!=null)objectiveStart.Apply(state);
             GetComponent<PythonDispatchComparisonPanel>()?.Apply(state);
             GetComponent<PythonServiceAssignmentPanel>()?.Apply(state);
+            GetComponent<PythonAutoPlayPanel>()?.Apply(state);
             GetComponent<PythonLegacySavePanel>()?.Apply(state);
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.Apply(state);
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.Apply(state);
@@ -290,6 +291,7 @@ namespace CatCafePreview
             var objectiveStart=GetComponent<PythonObjectiveStartPanel>();if(objectiveStart!=null)objectiveStart.RefreshControls();
             GetComponent<PythonDispatchComparisonPanel>()?.RefreshControls();
             GetComponent<PythonServiceAssignmentPanel>()?.RefreshControls();
+            GetComponent<PythonAutoPlayPanel>()?.RefreshControls();
             GetComponent<PythonLegacySavePanel>()?.RefreshControls();
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.RefreshControls();
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.RefreshControls();
@@ -327,6 +329,7 @@ namespace CatCafePreview
             var auto = GetComponent<PythonAutoPanel>();
             if (auto != null) auto.RefreshControls();
             PrioritizeRequiredPanel();
+            GetComponent<PythonAutoPlayPanel>()?.Focus();
         }
 
         private void PrioritizeRequiredPanel()
@@ -363,6 +366,7 @@ namespace CatCafePreview
             GetComponent<PythonSavePanel>()?.Notify(message);
             GetComponent<PythonLegacySavePanel>()?.Notify(message);
             GetComponent<PythonServiceAssignmentPanel>()?.Notify(message);
+            GetComponent<PythonAutoPlayPanel>()?.Notify(message);
             var closing=GetComponent<PythonClosingPanel>();if(closing!=null && closing.panel.activeSelf)closing.Notify(message);
             var player=GetComponent<PythonPlayerPanel>();if(player!=null && player.panel.activeSelf)player.notice.text=message;
             var dispatch=GetComponent<PythonDispatchPanel>();if(dispatch!=null && dispatch.panel.activeSelf)dispatch.notice.text=message;
@@ -472,6 +476,7 @@ namespace CatCafePreview
             var objectiveStart=GetComponent<PythonObjectiveStartPanel>();if(objectiveStart!=null)objectiveStart.Disconnect();
             GetComponent<PythonDispatchComparisonPanel>()?.Disconnect();
             GetComponent<PythonServiceAssignmentPanel>()?.Disconnect();
+            GetComponent<PythonAutoPlayPanel>()?.Disconnect();
             GetComponent<PythonLegacySavePanel>()?.Disconnect();
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.Disconnect();
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.Disconnect();

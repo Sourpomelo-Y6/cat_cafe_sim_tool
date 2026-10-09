@@ -35,6 +35,7 @@ namespace CatCafePreview
         public PythonObjectiveStart objective_start;
         public PythonDispatchComparison dispatch_comparison;
         public PythonServiceAssignment service_assignment;
+        public PythonAutoPlay autoplay;
         public PythonIntakeState intake_request;
         public PythonVisitingCat visiting_cat;
         public PythonRegularIntroduction regular_introduction;
@@ -121,6 +122,7 @@ namespace CatCafePreview
         public string target_type = "";
         public string event_id = "";
         public string customer_id = "", seat_id = "";
+        public string autoplay_objective="",autoplay_mode="";public int autoplay_days;
     }
     [Serializable] public class PythonCommandReply
     {
@@ -145,6 +147,11 @@ namespace CatCafePreview
         private bool online;
         private ContentPreview preview;
         private bool automatic, fast, pendingAutomatic, sendingCommand;
+        private bool batchAutomatic,batchStopRequested;
+        public bool BatchAutomatic => batchAutomatic;
+        public bool BatchStopping => batchStopRequested;
+        public bool AutoPlayRunning => current?.autoplay?.running==true;
+        public bool CanSendCommands => online && pending==null && current!=null;
         private float nextAutomaticTick;
         public bool Automatic { get { return automatic; } }
         public bool Fast { get { return fast; } }
@@ -165,8 +172,8 @@ namespace CatCafePreview
             if(pendingAutomatic && !sendingCommand) { pending=null; pendingAutomatic=false; }
         }
         public PythonCafeState CurrentState { get { return current; } }
-        public bool CanLeaveResult { get { return pending == null; } }
-        public bool CanManageSaves { get { return online && pending == null && current != null; } }
+        public bool CanLeaveResult { get { return pending == null && !AutoPlayRunning && !batchAutomatic && !batchStopRequested; } }
+        public bool CanManageSaves { get { return CanSendCommands && !AutoPlayRunning; } }
         public void NewGame(string objective)
         {
             if(!CanManageSaves || current.new_game_options == null || !Array.Exists(current.new_game_options,row=>row.choice==objective)) return;
@@ -408,11 +415,16 @@ namespace CatCafePreview
         public void ExpandSeats() { if(CanExpandSeats)QueuePlayer("expand_seats","","",""); }
         public bool CanDayOff { get { return CanManageSaves && current.game_over==null && current.day_off!=null && current.day_off.can_select; } }
         public void DayOff() { if(CanDayOff){StopAutomatic();QueuePlayer("day_off","","","");} }
+        public bool CanStartAutoPlay(string objective,string mode,int days){var view=current?.autoplay;return CanManageSaves && view?.can_start==true && days>=1 && days<=10 && Array.Exists(view.objectives ?? new PythonAutoPlayOption[0],r=>r.choice==objective && r.can_start) && Array.Exists(view.modes ?? new PythonAutoPlayOption[0],r=>r.choice==mode);}
+        public void StartAutoPlay(string objective,string mode,int days){if(!CanStartAutoPlay(objective,mode,days))return;StopAutomatic();batchAutomatic=true;batchStopRequested=false;pending=new PythonShiftCommand{kind="start_autoplay",request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,expected_revision=current.revision,working_cats=new string[0],autoplay_objective=objective,autoplay_mode=mode,autoplay_days=days};preview.RefreshPythonControls();}
+        public void ResumeAutoPlay(){if(!CanSendCommands || !AutoPlayRunning || batchStopRequested)return;StopAutomatic();batchAutomatic=true;preview.RefreshPythonControls();}
+        public void StopAutoPlay(){if(!AutoPlayRunning && !batchAutomatic && pending?.kind!="start_autoplay")return;batchAutomatic=false;batchStopRequested=true;StopAutomatic();QueueAutoPlay();preview.RefreshPythonControls();}
+        private void QueueAutoPlay(){if(!CanSendCommands)return;if(batchStopRequested && !AutoPlayRunning){batchStopRequested=false;return;}if(!AutoPlayRunning || (!batchAutomatic && !batchStopRequested))return;pending=new PythonShiftCommand{kind=batchStopRequested ? "stop_autoplay" : "step_autoplay",request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,expected_revision=current.revision,working_cats=new string[0]};preview.RefreshPythonControls();}
         public bool CanChangeAutoAssignment => CanManageSaves && current.game_over==null;
         public void ToggleAutoAssignment(){if(!CanChangeAutoAssignment || current.service_assignment==null)return;StopAutomatic();QueuePlayer("set_auto_assignment","",current.service_assignment.auto_assign ? "manual" : "automatic","");}
         public bool CanAssignService(string customer,string cat,string seat){var view=current?.service_assignment;return CanManageSaves && view?.can_assign==true && Array.Exists(view.customers ?? new PythonAssignmentCustomer[0],r=>r.customer_id==customer) && Array.Exists(view.cats ?? new PythonAssignmentCat[0],r=>r.cat_id==cat && r.available) && Array.Exists(view.seats ?? new PythonAssignmentSeat[0],r=>r.seat_id==seat && r.available);}
         public void AssignService(string customer,string cat,string seat){if(!CanAssignService(customer,cat,seat))return;StopAutomatic();pending=new PythonShiftCommand{request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,expected_revision=current.revision,kind="assign_service",customer_id=customer,cat_id=cat,seat_id=seat,working_cats=new string[0]};preview.RefreshPythonControls();}
-        public bool CanProgressBusiness { get { return online && pending == null && current != null && current.game_over == null && !automatic
+        public bool CanProgressBusiness { get { return CanManageSaves && current.game_over == null && !automatic
             && string.IsNullOrEmpty(current.required_action) && current.service_assignment?.waiting!=true
             && (current.closed || !current.can_set_shifts || Array.Exists(current.cats, cat => cat.working)); } }
         public void ProgressBusiness()
@@ -450,12 +462,15 @@ namespace CatCafePreview
         {
             Validate(state);
             // JsonUtility can materialize a JSON null nested object with empty fields.
+            if(state.autoplay?.report!=null && string.IsNullOrEmpty(state.autoplay.report.run_id))state.autoplay.report=null;
             if (state.goal_result != null && string.IsNullOrEmpty(state.goal_result.status)) state.goal_result = null;
             if(state.next_goal != null && state.next_goal.stage < 2)state.next_goal=null;
             if(state.player_interaction!=null && string.IsNullOrEmpty(state.player_interaction.session_id))state.player_interaction=null;
             if(state.store_event != null && string.IsNullOrEmpty(state.store_event.kind)) state.store_event=null;
             if(state.game_over!=null && string.IsNullOrEmpty(state.game_over.reason))state.game_over=null;
             if (!IsOpen(state) || (current != null && (state.instance_id != current.instance_id || state.day != current.day))) StopAutomatic();
+            if(current!=null && state.instance_id!=current.instance_id){batchAutomatic=false;batchStopRequested=false;}
+            if(state.autoplay?.running!=true && pending?.kind!="start_autoplay"){batchAutomatic=false;batchStopRequested=false;}
             current = state; online = true; preview.ApplyPythonState(state);
         }
         private IEnumerator Start()
@@ -480,7 +495,7 @@ namespace CatCafePreview
                             request.downloadHandler = new DownloadHandlerBuffer();
                             request.SetRequestHeader("Content-Type", "application/json"); request.timeout = 3;
                             yield return request.SendWebRequest();
-                            if (request.result != UnityWebRequest.Result.Success) StopAutomatic();
+                            if (request.result != UnityWebRequest.Result.Success) {StopAutomatic();batchAutomatic=false;}
                             if (request.result == UnityWebRequest.Result.ConnectionError && attempt == 0) continue;
                             try
                             {
@@ -490,11 +505,11 @@ namespace CatCafePreview
                                     if(command.kind=="load_game" || command.kind=="load_python_game" || command.kind=="new_game")GetComponent<PythonEventPresentation>()?.Clear();
                                     Accept(reply.state);
                                     if(command.kind=="load_python_game")GetComponent<PythonLegacySavePanel>()?.Close();
-                                    if(command.kind=="load_game" || command.kind=="load_python_game" || command.kind=="new_game"){GetComponent<PythonDispatchComparisonPanel>()?.ResetSelection();GetComponent<PythonServiceAssignmentPanel>()?.ResetSelection();}
+                                    if(command.kind=="load_game" || command.kind=="load_python_game" || command.kind=="new_game"){GetComponent<PythonDispatchComparisonPanel>()?.ResetSelection();GetComponent<PythonServiceAssignmentPanel>()?.ResetSelection();GetComponent<PythonAutoPlayPanel>()?.ResetSelection();}
                                     if(command.kind=="load_game" || command.kind=="load_python_game")
                                     { var player=GetComponent<PythonPlayerPanel>();if(player!=null)player.Restore(); }
                                     if(command.kind=="new_game" || command.kind=="load_game" || command.kind=="load_python_game") { var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.ResetConfirmation();var menu=GetComponent<PythonNewGamePanel>(); if(menu!=null) menu.Close(); }
-                                    notice = command.kind == "assign_service" ? "選んだ客・猫・席で接客を開始しました。営業を進める操作で交流を進めます。" : command.kind == "set_auto_assignment" ? "自動割り当て設定を変更しました。" : command.kind == "set_shifts" ? "出勤・休養を変更しました。"
+                                    notice = command.kind == "start_autoplay" ? "おまかせを開始しました。" : command.kind == "stop_autoplay" ? "おまかせを中止しました。実行結果を保存できます。" : command.kind == "step_autoplay" ? "" : command.kind == "assign_service" ? "選んだ客・猫・席で接客を開始しました。営業を進める操作で交流を進めます。" : command.kind == "set_auto_assignment" ? "自動割り当て設定を変更しました。" : command.kind == "set_shifts" ? "出勤・休養を変更しました。"
                                         : command.kind == "save_game" ? "保存しました。" : command.kind == "load_game" || command.kind == "load_python_game" ? "保存したゲームを再開しました。"
                                         : command.kind == "new_game" ? "新規ゲームを作成し、初期状態を保存しました。出勤・休養を設定して営業を始めてください。"
                                         : command.kind == "next_day" ? "翌日の営業準備へ進みました。出勤・休養を設定してください。"
@@ -523,7 +538,7 @@ namespace CatCafePreview
                                     notice = reply != null && !string.IsNullOrEmpty(reply.error) ? reply.error : "操作結果を確認できません。最新状態を取得します。";
                                 }
                             }
-                            catch (Exception) { StopAutomatic(); notice = "操作結果を確認できません。最新状態を取得します。"; }
+                            catch (Exception) { StopAutomatic();batchAutomatic=false; notice = "操作結果を確認できません。最新状態を取得します。"; }
                             break;
                         }
                     }
@@ -534,7 +549,7 @@ namespace CatCafePreview
                 {
                     request.timeout = 3;
                     yield return request.SendWebRequest();
-                    if (request.result != UnityWebRequest.Result.Success) { StopAutomatic(); online = false; preview.PythonConnectionError(request.error); }
+                    if (request.result != UnityWebRequest.Result.Success) { StopAutomatic();batchAutomatic=false; online = false; preview.PythonConnectionError(request.error); }
                     else
                     {
                         try
@@ -543,7 +558,7 @@ namespace CatCafePreview
                             Accept(state);
                             if (notice != "") preview.PythonNotice(notice);
                         }
-                        catch (Exception ex) { StopAutomatic(); online = false; preview.PythonConnectionError(ex.Message); }
+                        catch (Exception ex) { StopAutomatic();batchAutomatic=false; online = false; preview.PythonConnectionError(ex.Message); }
                     }
                 }
                 var panel = GetComponent<PythonSavePanel>();
@@ -557,9 +572,9 @@ namespace CatCafePreview
                         {
                             if(listRequest.result == UnityWebRequest.Result.Success)
                                 panel.Apply(JsonUtility.FromJson<PythonSaveList>(listRequest.downloadHandler.text));
-                            else { StopAutomatic(); panel.ListUnavailable(); }
+                            else { StopAutomatic();batchAutomatic=false; panel.ListUnavailable(); }
                         }
-                        catch(Exception) { StopAutomatic(); panel.ListUnavailable(); }
+                        catch(Exception) { StopAutomatic();batchAutomatic=false; panel.ListUnavailable(); }
                     }
                 }
                 float until = Time.realtimeSinceStartup + 2;
@@ -567,6 +582,7 @@ namespace CatCafePreview
                 preview.RefreshPythonControls();
                 while (pending == null && Time.realtimeSinceStartup < until)
                 {
+                    if(batchAutomatic || batchStopRequested){QueueAutoPlay();if(pending!=null)break;}
                     if(automatic && CanStartAutomatic && Time.realtimeSinceStartup >= nextAutomaticTick)
                     {
                         pendingAutomatic=true; QueueBusiness("advance_business");

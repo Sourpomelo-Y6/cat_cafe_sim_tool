@@ -171,3 +171,5 @@ UnityのUIはシーン・Prefabに保存する方式へ変更しました。Play
 Unityテンプレートには交流試作も含まれます。Play中の4ボタンは「次の交流」「遊ぶ」「撫でる」「休む」です。猫ごとに体力・関心度と10手の交流セットを保持します。状態保存・営業・好感度は未実装です。詳細は親フォルダのDocs/UnityContentPreview.mdを参照してください。
 
 Unityの接客に[手動割り当て画面](../Docs/UnityServiceAssignment.md)を追加しました。イベント一覧から自動割り当てをOFFにし、待機客・猫・空席を選びます。割り当て設定と接客状態は保存・再開できます。テンプレート導入後は `PythonServiceAssignmentSetup.Build` で画面を生成します。
+
+Unityに[おまかせ画面](../Docs/UnityAutoPlay.md)を追加しました。イベント一覧から目標・3方針・1〜10日を選び、確認して進めます。中止と回答待ち停止、実行結果・判断理由・操作ログ、結果の保存再開に対応します。テンプレート導入後は `PythonAutoPlaySetup.Build` で生成します。
