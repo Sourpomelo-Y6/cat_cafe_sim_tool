@@ -32,7 +32,7 @@ namespace CatCafePreview
         public PythonSeatState[] seats;
         public PythonCustomerState[] customers;
         public PythonFinanceState finance;
-        public PythonFinanceHistory finance_history;
+        public PythonFinanceHistory finance_history, business_history;
         public PythonPetShop pet_shop;
         public PythonObjectiveStart objective_start;
         public PythonDispatchComparison dispatch_comparison;

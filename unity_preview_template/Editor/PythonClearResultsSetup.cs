@@ -27,7 +27,7 @@ namespace CatCafePreview.Editor
             Build();var preview=UnityEngine.Object.FindObjectOfType<ContentPreview>();preview.Initialize();var client=preview.GetComponent<PythonStateClient>();var flags=System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic;typeof(PythonStateClient).GetField("preview",flags).SetValue(client,preview);
             var state=PythonServiceSetup.Sample();state.instance_id="clear-ui";state.clear_results=new PythonClearResults{rows=new PythonClearRecord[0],notes="人気の最終段階・有力者・猫との好感度の達成結果を、ここで見返せます。"};
             Action apply=()=>typeof(PythonStateClient).GetMethod("Accept",flags).Invoke(client,new object[]{state});apply();var p=preview.GetComponent<PythonClearResultsPanel>();var menu=preview.GetComponent<PythonMenuPanel>();menu.Open();
-            if(menu.entries.Length!=15 || !menu.entries[14].interactable || !menu.entries[14].GetComponentInChildren<Text>().text.Contains("クリア記録"))throw new Exception("Clear menu missing");
+            if(menu.entries.Length!=PythonMenuPanel.Routes.Length || !menu.entries[14].interactable || !menu.entries[14].GetComponentInChildren<Text>().text.Contains("クリア記録"))throw new Exception("Clear menu missing");
             Canvas.ForceUpdateCanvases();typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{preview,"Logs/ClearResultsMenu.png"});
             menu.Select(14);if(menu.panel.activeSelf || !p.panel.activeSelf || p.goals.interactable || !p.details.text.Contains("まだありません"))throw new Exception("Empty clear view failed");
             state.clear_results.rows=new[]{

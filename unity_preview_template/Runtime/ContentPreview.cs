@@ -345,6 +345,7 @@ namespace CatCafePreview
             GetComponent<PythonAutoPlayPanel>()?.Focus();
             GetComponent<PythonBusinessLogPanel>()?.Focus();
             GetComponent<PythonClearResultsPanel>()?.Focus();
+            GetComponent<PythonFinanceHistoryPanel>()?.Focus();
             GetComponent<PythonPersistPanel>()?.Focus();
         }
 
