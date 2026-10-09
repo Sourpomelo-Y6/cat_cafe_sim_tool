@@ -46,6 +46,7 @@ namespace CatCafePreview
         public PythonCustomerTrust customer_trust;
         public PythonHousingState housing;
         public PythonGoalResult goal_result;
+        public PythonClearResults clear_results;
         public PythonNextGoal next_goal;
         public PythonPlayerInteraction player_interaction;
         public PythonPatronDispatch patron_dispatch, general_dispatch;
