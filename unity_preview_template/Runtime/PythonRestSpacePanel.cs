@@ -10,7 +10,7 @@ namespace CatCafePreview
     public class PythonRestSpacePanel : MonoBehaviour
     {
         public GameObject panel,confirmation;
-        public Text title,details,notice,confirmationText;
+        public Text title,details,notice,confirmationText,summary;
         public Button purchase,upgrade,soundproof,close,confirm,cancel;
         private PythonCafeState current;
         private string instance,identity,selected;
@@ -40,7 +40,7 @@ namespace CatCafePreview
             var key=state.instance_id+"/"+state.revision;if(identity!=key){identity=key;Clear();}
             current=state;online=true;if(state.game_over!=null || state.rest_space==null)Close();Render();
         }
-        private void Render(){title.text="休養スペース";details.text=current?.rest_space?.details ?? "休養設備の情報を取得していません。";details.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,Math.Max(392,details.preferredHeight+12));RefreshControls();}
+        private void Render(){title.text="休養スペース";if(summary!=null)summary.text="現在："+(current?.rest_space?.status ?? "情報なし")+" / 資金："+(current?.funds ?? 0).ToString("0.#")+"\n追加の回復：疲労 ＋"+(current?.rest_space?.recovery_bonus ?? 0).ToString("0.#")+" / ストレス ＋"+(current?.rest_space?.stress_recovery_bonus ?? 0).ToString("0.#");details.text="購入・強化の費用と条件\n"+string.Join("\n\n",Array.ConvertAll(current?.rest_space?.actions ?? new PythonRestSpaceAction[0],a=>a.label+"：費用 "+a.cost.ToString("0.#")+" / 購入後の資金 "+a.funds_after.ToString("0.#")+"\n追加の疲労回復 ＋"+a.recovery_before.ToString("0.#")+" → ＋"+a.recovery_after.ToString("0.#")+" / ストレス回復 ＋"+a.stress_before.ToString("0.#")+" → ＋"+a.stress_after.ToString("0.#")+"\n"+(a.can_execute?"実行できます。":"実行できない理由："+a.reason)))+"\n\n設備の詳細・解放条件・履歴\n"+(current?.rest_space?.details ?? "休養設備の情報を取得していません。");details.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,Math.Max(392,details.preferredHeight+12));RefreshControls();}
         public void RefreshControls()
         {
             purchase.interactable=online && selected==null && Client.CanRestSpace("purchase_rest_space");upgrade.interactable=online && selected==null && Client.CanRestSpace("upgrade_rest_space");soundproof.interactable=online && selected==null && Client.CanRestSpace("soundproof_rest_space");confirm.interactable=online && selected!=null && Client.CanRestSpace(selected);close.interactable=cancel.interactable=true;

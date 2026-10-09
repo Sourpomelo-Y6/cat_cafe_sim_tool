@@ -10,7 +10,7 @@ namespace CatCafePreview
     public class PythonWaitingAreaPanel : MonoBehaviour
     {
         public GameObject panel,confirmation;
-        public Text title,details,notice,confirmationText;
+        public Text title,details,notice,confirmationText,summary;
         public Button purchase,upgrade,close,confirm,cancel;
         private PythonCafeState current;
         private string instance,identity,selected;
@@ -39,7 +39,7 @@ namespace CatCafePreview
             var key=state.instance_id+"/"+state.revision;if(identity!=key){identity=key;Clear();}
             current=state;online=true;if(state.game_over!=null || state.waiting_area==null)Close();Render();
         }
-        private void Render(){title.text="待合スペース";details.text=current?.waiting_area?.details ?? "待合の情報を取得していません。";details.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,Math.Max(392,details.preferredHeight+12));RefreshControls();}
+        private void Render(){title.text="待合スペース";if(summary!=null)summary.text="現在："+(current?.waiting_area?.status ?? "情報なし")+" / 資金："+(current?.funds ?? 0).ToString("0.#")+"\n待機上限："+(current?.waiting_area?.capacity ?? 0)+"人 / 待機猶予："+(current?.waiting_area?.max_wait_ticks ?? 0)+"刻 / 維持費："+(current?.waiting_area?.daily_cost ?? 0).ToString("0.#")+" / 日";details.text="購入・強化の費用と条件\n"+string.Join("\n\n",Array.ConvertAll(current?.waiting_area?.actions ?? new PythonWaitingAreaAction[0],a=>a.label+"：費用 "+a.cost.ToString("0.#")+" / 購入後の資金 "+a.funds_after.ToString("0.#")+"\n待機上限 "+a.capacity_before.ToString("0")+" → "+a.capacity_after.ToString("0")+"人 / 待機猶予 "+a.wait_before.ToString("0")+" → "+a.wait_after.ToString("0")+"刻\n維持費 "+a.daily_before.ToString("0.#")+" → "+a.daily_after.ToString("0.#")+" / 日次運営費合計 "+a.operating_before.ToString("0.#")+" → "+a.operating_after.ToString("0.#")+"\n"+(a.can_execute?"実行できます。":"実行できない理由："+a.reason)))+"\n\n設備の詳細・解放条件・履歴\n"+(current?.waiting_area?.details ?? "待合の情報を取得していません。");details.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,Math.Max(392,details.preferredHeight+12));RefreshControls();}
         public void RefreshControls()
         {
             purchase.interactable=online && selected==null && Client.CanWaitingArea("purchase_waiting_area");upgrade.interactable=online && selected==null && Client.CanWaitingArea("upgrade_waiting_area");confirm.interactable=online && selected!=null && Client.CanWaitingArea(selected);close.interactable=cancel.interactable=true;

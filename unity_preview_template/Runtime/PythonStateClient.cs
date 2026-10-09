@@ -529,7 +529,7 @@ namespace CatCafePreview
                                 if (request.result == UnityWebRequest.Result.Success)
                                 {
                                     var reply = JsonUtility.FromJson<PythonCommandReply>(request.downloadHandler.text);
-                                    if(command.kind=="load_game" || command.kind=="load_python_game" || command.kind=="new_game"){GetComponent<PythonEventPresentation>()?.Clear();GetComponent<PythonEventListPanel>()?.ResetNavigation();GetComponent<PythonCatDetailsPanel>()?.ResetSelection();}
+                                    if(command.kind=="load_game" || command.kind=="load_python_game" || command.kind=="new_game"){GetComponent<PythonEventPresentation>()?.Clear();GetComponent<PythonEventListPanel>()?.ResetNavigation();GetComponent<PythonCatDetailsPanel>()?.ResetSelection();GetComponent<PythonMenuPanel>()?.ResetFacilities();}
                                     Accept(reply.state);
                                     if(command.kind=="load_python_game")GetComponent<PythonLegacySavePanel>()?.Close();
                                     if(command.kind=="load_game" || command.kind=="load_python_game" || command.kind=="new_game"){GetComponent<PythonDispatchComparisonPanel>()?.ResetSelection();GetComponent<PythonServiceAssignmentPanel>()?.ResetSelection();GetComponent<PythonAutoPlayPanel>()?.ResetSelection();}

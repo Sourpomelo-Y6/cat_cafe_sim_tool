@@ -37,7 +37,7 @@ namespace CatCafePreview.Editor
             BuildActivity(preview,root);
             list.notice=Label(card.transform,"Notice",24,492,892,50,16);list.close=Button(card.transform,"Close","閉じる",480,550,436,40);UnityEventTools.AddPersistentListener(list.close.onClick,list.Close);
             if(preview.GetComponent<PythonBusinessHeader>()!=null)PythonBusinessHeaderSetup.Configure(preview);
-            list.open.interactable=false;list.panel.SetActive(false);EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);Debug.Log("CAT_CAFE_EVENT_LIST_UI_OK");
+            list.open.interactable=false;list.panel.SetActive(false);EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);PythonFacilityLayout.RefreshIfReady();Debug.Log("CAT_CAFE_EVENT_LIST_UI_OK");
         }
         static void BuildReturnRoutes(ContentPreview preview,PythonEventListPanel list)
         {

@@ -27,9 +27,16 @@ namespace CatCafePreview.Editor
             UnityEventTools.AddPersistentListener(panel.open.onClick,panel.Open);
             UnityEventTools.AddPersistentListener(panel.expand.onClick,panel.Expand);
             UnityEventTools.AddPersistentListener(panel.close.onClick,panel.Close);
+            panel.confirmation=Box(card.transform,"Housing Confirmation",0,0,712,610,new Color(.98f,.97f,.93f,1));
+            panel.confirmationText=Label(panel.confirmation.transform,"Confirmation Text",24,48,664,430,18);
+            panel.confirm=Button(panel.confirmation.transform,"Confirm","確定する",24,530,320,44);
+            panel.cancel=Button(panel.confirmation.transform,"Cancel","取り消す",368,530,320,44);
+            UnityEventTools.AddPersistentListener(panel.confirm.onClick,panel.Confirm);UnityEventTools.AddPersistentListener(panel.cancel.onClick,panel.Cancel);panel.confirmation.SetActive(false);
+            if(preview.GetComponent<PythonBusinessHeader>()!=null)PythonBusinessHeaderSetup.Configure(preview);
             panel.open.interactable=panel.expand.interactable=false;
             panel.details.text="飼育スペースの状態と拡張費用を表示します。"; overlay.SetActive(false);
             EditorSceneManager.MarkSceneDirty(scene); EditorSceneManager.SaveScene(scene);
+            PythonFacilityLayout.RefreshIfReady();
             Debug.Log("CAT_CAFE_HOUSING_UI_OK: saved housing panel / header entry / expand / close");
         }
         static void Place(RectTransform rect,float x,float y,float width,float height)
@@ -68,7 +75,7 @@ namespace CatCafePreview.Editor
             Canvas.ForceUpdateCanvases(); typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic)
                 .Invoke(null,new object[]{preview,"Logs/HousingPanel.png"});
             state.housing.can_expand=false; state.housing.reason="購入後に資金が残る必要があります。"; preview.ApplyPythonState(state);
-            if(panel.expand.interactable || !panel.notice.text.Contains("資金"))throw new Exception("Housing funds guard failed");
+            if(panel.expand.interactable || !panel.details.text.Contains("資金"))throw new Exception("Housing funds guard failed");
             panel.Disconnect(); if(panel.open.interactable || panel.expand.interactable)throw new Exception("Housing offline guard failed");
             panel.Close(); if(panel.panel.activeSelf)throw new Exception("Housing close failed");
             Debug.Log("CAT_CAFE_HOUSING_DISPLAY_OK: counts / costs / maintenance / insufficient funds / offline / close");

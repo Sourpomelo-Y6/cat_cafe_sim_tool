@@ -36,7 +36,7 @@ namespace CatCafePreview.Editor
                 }
                 else if(stage==2 && saves.Count==1)
                 {
-                    panel.expand.onClick.Invoke(); if(panel.expand.interactable)throw new Exception("Housing busy guard failed"); SessionState.SetInt(Key,3);
+                    panel.expand.onClick.Invoke();panel.confirm.onClick.Invoke(); if(panel.expand.interactable)throw new Exception("Housing busy guard failed"); SessionState.SetInt(Key,3);
                 }
                 else if(stage==3 && state.housing.stage==1 && intake.accept.interactable)
                 {
@@ -52,7 +52,7 @@ namespace CatCafePreview.Editor
                     saves.saves.SetValueWithoutNotify(0); saves.resume.onClick.Invoke(); SessionState.SetInt(Key,6);
                 }
                 else if(stage==6 && state.housing.stage==1)
-                { CheckRestored("expanded",state); panel.expand.onClick.Invoke(); SessionState.SetInt(Key,7); }
+                { CheckRestored("expanded",state); panel.Open();panel.expand.onClick.Invoke();panel.confirm.onClick.Invoke(); SessionState.SetInt(Key,7); }
                 else if(stage==7 && state.housing.stage==2)
                 {
                     if(panel.expand.interactable || client.CanExpandHousing)throw new Exception("Completed housing expansion remains enabled");

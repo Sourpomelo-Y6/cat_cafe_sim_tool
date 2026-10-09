@@ -11,7 +11,7 @@ namespace CatCafePreview
     public class PythonSeatEquipmentPanel : MonoBehaviour
     {
         public GameObject panel,confirmation;
-        public Text title,details,notice,confirmationText;
+        public Text title,details,notice,confirmationText,summary;
         public Button seatSelector,kindSelector,itemSelector,purchase,equip,remove,close,confirm,cancel;
         private PythonCafeState current;
         private string identity,instance,seatId,kindId,itemId,chosenKind,chosenSeat,chosenItem;
@@ -53,12 +53,12 @@ namespace CatCafePreview
         }
         private void Render()
         {
-            title.text="席の接客設備";
+            title.text="席の接客設備";if(summary!=null)summary.text="資金："+(current?.funds ?? 0).ToString("0.#")+" / 所持設備："+(Data?.owned?.Length ?? 0)+"個 / 設置先："+(seatId ?? "なし")+"\n"+(Kind==null?"購入候補なし":"購入："+Kind.name+" / 費用："+Kind.cost.ToString("0.#")+" / 購入後の資金："+Kind.funds_after.ToString("0.#"));
             seatSelector.GetComponentInChildren<Text>().text="設置先："+(seatId ?? "なし")+"　▶";
             kindSelector.GetComponentInChildren<Text>().text="購入："+(Kind?.name ?? "なし")+"　▶";
             itemSelector.GetComponentInChildren<Text>().text="所持："+(Item==null ? "なし" : Item.name+" / "+itemId)+"　▶";
             string text=Data?.details ?? "設備の情報を取得していません。";
-            if(Data!=null){text="所持金："+current.funds.ToString("0.#")+" / 設備："+Data.owned.Length+"個\n"+text+"\n\n各席の設備\n"+string.Join("\n",Data.seats.Select(r=>r.seat_id+"："+r.description));
+            if(Data!=null){text="選んだ席の設備\n"+(Seat?.description ?? "席なし")+"\n\n"+(Kind==null?"":"購入候補："+Kind.name+"\n効果："+Kind.effect+"\n\n")+"購入と配置の条件\n"+(Data.can_manage?"営業準備中に操作できます。":Data.reason)+"\n"+(Kind==null?"購入候補なし":Kind.can_purchase?"購入できます。":"購入できない理由：購入後に資金が残る必要があります。")+"\n\n"+text+"\n\n各席の設備\n"+string.Join("\n",Data.seats.Select(r=>r.seat_id+"："+r.description));
                 if(Kind!=null)text+="\n\n購入候補："+Kind.name+" / 費用 "+Kind.cost.ToString("0.#")+"\n"+Kind.effect+" / 購入後の資金 "+Kind.funds_after.ToString("0.#");
                 text+="\n\n購入済み設備・履歴\n"+(Data.owned.Length==0 ? "まだありません。" : string.Join("\n\n",Data.owned.Select(r=>r.name+"（"+r.item_id+"）/ "+r.day+"日目 / 費用 "+r.cost.ToString("0.#")+"\n"+r.effect+" / "+(string.IsNullOrEmpty(r.seat_id) ? "保管中" : r.seat_id))));}
             details.text=text;details.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,Math.Max(270,details.preferredHeight+12));RefreshControls();

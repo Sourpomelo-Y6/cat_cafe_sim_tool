@@ -8,7 +8,7 @@ namespace CatCafePreview
     public class PythonExpansionPanel : MonoBehaviour
     {
         public GameObject panel,confirmation;
-        public Text title,details,notice,confirmationText;
+        public Text title,details,notice,confirmationText,summary;
         public Button proceed,close,confirm,cancel;
         private PythonCafeState current;
         private string identity,dayIdentity;
@@ -39,7 +39,7 @@ namespace CatCafePreview
         private void Render()
         {
             if(current==null)return;title.text="席数の増設";
-            var row=current.expansion;details.text=row==null ? "席数の情報を取得していません。" : row.details;
+            var row=current.expansion;if(summary!=null)summary.text=row==null?"情報なし":"現在："+row.seats+"席 / 上限："+row.max_seats+"席 / 資金："+current.funds.ToString("0.#")+"\n"+(row.has_next?"次の増設："+row.next_seats+"席 / 費用："+row.cost.ToString("0.#")+" / 購入後の資金："+row.funds_after.ToString("0.#"):"増設できる席はありません。");details.text=row==null ? "席数の情報を取得していません。" : row.details;
             details.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,Math.Max(392,details.preferredHeight+12));RefreshControls();
         }
         public void RefreshControls()
