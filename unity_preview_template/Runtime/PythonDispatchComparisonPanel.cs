@@ -30,6 +30,7 @@ namespace CatCafePreview
             if(!online || !GetComponent<PythonStateClient>().CanManageSaves || Row==null)return;
             var row=Row;Close();
             if(row.kind=="patron")GetComponent<PythonDispatchPanel>().OpenOption(catId,row.choice);else GetComponent<PythonGeneralDispatchPanel>().OpenOption(catId,row.choice);
+            GetComponent<PythonMenuPanel>()?.TransferReturn(panel,row.kind=="patron" ? GetComponent<PythonDispatchPanel>().panel : GetComponent<PythonGeneralDispatchPanel>().panel);
         }
         public void Apply(PythonCafeState state){if(instance!=state.instance_id){instance=state.instance_id;ResetSelection();}current=state;online=true;if(state.dispatch_comparison==null)Close();Render();}
         static void Fill(Dropdown dropdown,string[] labels,int index){dropdown.options.Clear();foreach(var label in labels)dropdown.options.Add(new Dropdown.OptionData(label));if(labels.Length==0)dropdown.options.Add(new Dropdown.OptionData("比較対象なし"));dropdown.SetValueWithoutNotify(Math.Max(0,index));dropdown.RefreshShownValue();}
