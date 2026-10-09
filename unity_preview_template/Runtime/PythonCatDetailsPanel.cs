@@ -8,7 +8,8 @@ namespace CatCafePreview
         public GameObject panel;
         public Text title, details, stateDetails, dispatchNotice, adoptionNotice;
         public ScrollRect scroll;
-        public Button interact, previousInteraction, dispatch, missing, adoption;
+        public Button interact, previousInteraction, dispatch, missing, adoption,care;
+        private bool showingCare;private ScrollRect originScroll;private float originPosition;private bool originSeats;
         public Button[] recordTabs;
         private int recordPage;
         private string instanceId;
@@ -28,10 +29,18 @@ namespace CatCafePreview
         public Text interactionNotice;
         private string selectedId;
         private PythonCafeState current;
+        public void OpenFromList(string catId,bool seats)
+        {
+            Open(catId);if(!panel.activeSelf)return;var service=GetComponent<PythonServiceScreen>();originSeats=seats;originScroll=(seats?service.seatPanel:service.rosterPanel).GetComponent<ScrollRect>();originPosition=originScroll.verticalNormalizedPosition;
+            var close=panel.transform.Find("Details Card/Close").GetComponent<Button>();close.GetComponentInChildren<Text>().text=seats?"席一覧へ戻る":"猫一覧へ戻る";
+        }
+        public void ResetSelection(){originScroll=null;Close();recordPage=0;}
+        public void Care(){var items=GetComponent<PythonItemsPanel>();if(items==null)return;items.Open();showingCare=items.panel.activeSelf;}
         public void Open(string catId)
         {
             var client=GetComponent<PythonStateClient>();
             if(!client.CanManageSaves || current == null) return;
+            showingCare=false;originScroll=null;panel.transform.Find("Details Card/Close").GetComponentInChildren<Text>().text="閉じる";
             if(selectedId!=catId)recordPage=0;
             selectedId=catId;
             Render();
@@ -39,7 +48,7 @@ namespace CatCafePreview
             if(stateDetails!=null){var healthScroll=stateDetails.GetComponentInParent<ScrollRect>();if(healthScroll!=null)healthScroll.verticalNormalizedPosition=1;}
         }
         public void RefreshVisibility(){if(selectedId!=null && Array.Find(GetComponent<ContentPreview>().VisiblePythonCats,row=>row.cat_id==selectedId)==null)Close();}
-        public void Close() { panel.SetActive(false); selectedId=null; }
+        public void Close() { if(showingCare)GetComponent<PythonItemsPanel>()?.Close();showingCare=false;panel.SetActive(false); selectedId=null;if(originScroll!=null){var service=GetComponent<PythonServiceScreen>();if(originSeats)service.ShowSeats();else service.ShowCats();Canvas.ForceUpdateCanvases();originScroll.StopMovement();originScroll.verticalNormalizedPosition=originPosition;originScroll=null;} }
         public void Interact()
         {
             var client=GetComponent<PythonStateClient>();var active=current==null ? null : current.player_interaction;
@@ -50,7 +59,7 @@ namespace CatCafePreview
         public void PreviousInteraction() { GetComponent<PythonPlayerPanel>().Open(); }
         public void Apply(PythonCafeState state)
         {
-            if(instanceId!=null && instanceId!=state.instance_id){Close();recordPage=0;}
+            if(instanceId!=null && instanceId!=state.instance_id){originScroll=null;Close();recordPage=0;}
             instanceId=state.instance_id;current=state;
             if(selectedId != null) Render();
         }
@@ -59,13 +68,13 @@ namespace CatCafePreview
             var cat=current.cats == null ? null : Array.Find(current.cats,row => row.cat_id==selectedId);
             if(cat == null) { Close(); return; }
             panel.SetActive(true);
-            panel.transform.SetAsLastSibling();
+            if(!showingCare || GetComponent<PythonItemsPanel>()?.panel.activeSelf!=true){showingCare=false;panel.transform.SetAsLastSibling();}
             title.text=cat.name+"の詳細";
             string health="体調と予定\n"+"体力："+cat.stamina.ToString("0.#")+" / "+cat.max_stamina.ToString("0.#")
                 +"\n疲労："+cat.fatigue.ToString("0.#")+" / ストレス："+cat.stress.ToString("0.#")
-                +"\n体調："+(string.IsNullOrEmpty(cat.health_label) ? cat.health_status : cat.health_label)
-                +"\n活動："+(string.IsNullOrEmpty(cat.activity_label) ? cat.activity : cat.activity_label)
-                +" / 予定："+(cat.working ? "出勤" : "休養")
+                +"\n体調："+PythonCatCard.Health(cat)
+                +"\n活動："+PythonCatCard.Activity(cat,Array.Exists(current.seats ?? new PythonSeatState[0],seat=>seat.cat_id==cat.cat_id && !string.IsNullOrEmpty(seat.customer_id)))
+                +" / 予定："+(cat.activity!="cafe"?"不在":cat.working?"出勤":"休養")
                 +"\nプレイヤー好感度："+cat.affinity.ToString("0.#")+" / 100"
                 +"\n本日の交流：あと "+cat.remaining_sets+"セット"
                 ;
@@ -78,6 +87,7 @@ namespace CatCafePreview
         }
         public void RefreshControls()
         {
+            if(care!=null)care.interactable=GetComponent<PythonStateClient>().CanManageSaves && current?.items!=null && selectedId!=null;
             if(recordTabs!=null)foreach(var tab in recordTabs)tab.interactable=GetComponent<PythonStateClient>().CanManageSaves && current!=null && selectedId!=null;
             if(adoption!=null)adoption.interactable=GetComponent<PythonStateClient>().CanManageSaves && selectedId!=null;
             if(missing!=null)missing.interactable=GetComponent<PythonStateClient>().CanManageSaves && selectedId!=null;

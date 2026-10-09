@@ -41,8 +41,10 @@ namespace CatCafePreview.Editor
         public static void Build()
         {
             var scene=EditorSceneManager.OpenScene("Assets/Scenes/CatCafePythonState.unity");var preview=UnityEngine.Object.FindObjectOfType<ContentPreview>();var panel=preview.GetComponent<PythonCatDetailsPanel>();var card=panel.panel.transform.Find("Details Card");
-            foreach(var name in new[]{"Details Scroll","Interaction Notice","Health Section","Growth Section","Interaction Section","Dispatch Section","Adoption Section","Interaction Heading","Dispatch Heading","Adoption Heading","Record Tab 0","Record Tab 1","Record Tab 2","Record Tab 3","Record Tab 4"}){var old=card.Find(name);if(old!=null)UnityEngine.Object.DestroyImmediate(old.gameObject);}
-            ScrollRect health;panel.stateDetails=ScrollText(card,"Health Section",24,80,304,282,17,out health);panel.details=ScrollText(card,"Growth Section",348,126,488,236,17,out panel.scroll);
+            foreach(var name in new[]{"Details Scroll","Interaction Notice","Health Section","Growth Section","Interaction Section","Dispatch Section","Adoption Section","Interaction Heading","Dispatch Heading","Adoption Heading","Record Tab 0","Record Tab 1","Record Tab 2","Record Tab 3","Record Tab 4","Care Entry"}){var old=card.Find(name);if(old!=null)UnityEngine.Object.DestroyImmediate(old.gameObject);}
+            ScrollRect health;panel.stateDetails=ScrollText(card,"Health Section",24,80,304,212,17,out health);panel.details=ScrollText(card,"Growth Section",348,126,488,236,17,out panel.scroll);
+            panel.care=Button(card,"Care Entry","用品・ケアを開く",24,318,304);UnityEventTools.AddPersistentListener(panel.care.onClick,panel.Care);panel.care.onClick.SetPersistentListenerState(0,UnityEngine.Events.UnityEventCallState.EditorAndRuntime);
+            Move(card.Find("Close").GetComponent<Button>(),600,20,236,"閉じる");card.Find("Close").GetComponent<Button>().onClick.SetPersistentListenerState(0,UnityEngine.Events.UnityEventCallState.EditorAndRuntime);
             var captions=new[]{"成長","出来事・加入","客との関係","日次実績","個性・外見"};panel.recordTabs=new Button[5];
             for(int i=0;i<5;i++){panel.recordTabs[i]=Button(card,"Record Tab "+i,captions[i],348+i*98,80,94);panel.recordTabs[i].GetComponentInChildren<Text>().fontSize=14;}
             UnityEventTools.AddPersistentListener(panel.recordTabs[0].onClick,panel.GrowthRecords);UnityEventTools.AddPersistentListener(panel.recordTabs[1].onClick,panel.EventRecords);UnityEventTools.AddPersistentListener(panel.recordTabs[2].onClick,panel.RelationshipRecords);UnityEventTools.AddPersistentListener(panel.recordTabs[3].onClick,panel.DailyRecords);UnityEventTools.AddPersistentListener(panel.recordTabs[4].onClick,panel.Profile);
@@ -50,7 +52,7 @@ namespace CatCafePreview.Editor
             Label(card,"Interaction Heading",24,374,250,26,18).text="猫との交流";Label(card,"Dispatch Heading",294,374,252,26,18).text="派遣・家出と帰還";Label(card,"Adoption Heading",566,374,270,26,18).text="譲渡の設定と履歴";
             Move(panel.interact,24,408,250,"猫と交流する");Move(panel.previousInteraction,24,456,250,"前回の交流を見る");Move(panel.dispatch,294,408,252,"派遣先・報酬を確認");Move(panel.missing,294,548,252,"家出・帰還の記録");Move(panel.adoption,566,408,270,"譲渡の設定・履歴");
             ScrollRect ignored;panel.interactionNotice=ScrollText(card,"Interaction Section",24,502,250,84,14,out ignored);panel.dispatchNotice=ScrollText(card,"Dispatch Section",294,456,252,84,14,out ignored);panel.adoptionNotice=ScrollText(card,"Adoption Section",566,456,270,130,14,out ignored);
-            Place(panel.title.rectTransform,24,20,670,48);panel.panel.SetActive(false);EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);Debug.Log("CAT_CAFE_CAT_DETAILS_LAYOUT_OK");
+            Place(panel.title.rectTransform,24,20,550,48);panel.panel.SetActive(false);EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);Debug.Log("CAT_CAFE_CAT_DETAILS_LAYOUT_OK");
         }
         public static void BuildAndVerify()
         {

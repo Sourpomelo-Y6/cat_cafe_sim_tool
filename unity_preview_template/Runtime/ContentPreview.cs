@@ -454,7 +454,7 @@ namespace CatCafePreview
                 description.text = cat.name + "\n対応する素材が未登録です。";
             }
             description.text += "\n\n猫の状態\n体力 " + cat.stamina + "/" + cat.max_stamina
-                + "\n予定：" + (cat.working ? "出勤" : "休養") + "\n健康：" + cat.health_status + "\n活動：" + cat.activity
+                + "\n予定：" + (cat.activity != "cafe" ? "不在" : cat.working ? "出勤" : "休養") + "\n健康：" + PythonCatCard.Health(cat) + "\n活動：" + PythonCatCard.Activity(cat, pythonState.seats != null && Array.Exists(pythonState.seats, seat => seat.cat_id == cat.cat_id && !string.IsNullOrEmpty(seat.customer_id)))
                 + "\n疲労 " + cat.fatigue + " / ストレス " + cat.stress;
             if (pythonState.seats != null)
             {

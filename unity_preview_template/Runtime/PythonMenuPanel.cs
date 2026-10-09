@@ -20,7 +20,7 @@ namespace CatCafePreview
         public void Close(){ClearReturnContext();panel.SetActive(false);}
         public void CloseDetails()
         {
-            GetComponent<PythonAutoPlayPanel>()?.Close();GetComponent<PythonServiceAssignmentPanel>()?.Close();GetComponent<PythonObjectiveStartPanel>()?.Close();
+            GetComponent<PythonCatDetailsPanel>()?.Close();GetComponent<PythonAutoPlayPanel>()?.Close();GetComponent<PythonServiceAssignmentPanel>()?.Close();GetComponent<PythonObjectiveStartPanel>()?.Close();
             GetComponent<PythonItemsPanel>()?.Close();GetComponent<PythonExpansionPanel>()?.Close();GetComponent<PythonSeatEquipmentPanel>()?.Close();
             GetComponent<PythonRestSpacePanel>()?.Close();GetComponent<PythonWaitingAreaPanel>()?.Close();GetComponent<PythonCustomerDirectoryPanel>()?.Close();
             GetComponent<PythonPetShopPanel>()?.Close();GetComponent<PythonDispatchComparisonPanel>()?.Close();GetComponent<PythonDispatchPanel>()?.Close();

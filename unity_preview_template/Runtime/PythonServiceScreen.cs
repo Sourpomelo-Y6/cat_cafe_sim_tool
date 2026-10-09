@@ -78,7 +78,7 @@ namespace CatCafePreview
                 if(card.details!=null)
                 {
                     card.details.gameObject.SetActive(occupied && cat!=null);card.details.onClick.RemoveAllListeners();
-                    string catId=cat?.cat_id;card.details.onClick.AddListener(()=>GetComponent<PythonCatDetailsPanel>().Open(catId));
+                    string catId=cat?.cat_id;card.details.onClick.AddListener(()=>GetComponent<PythonCatDetailsPanel>().OpenFromList(catId,true));
                     card.details.GetComponentInChildren<Text>().text="担当猫の詳細";
                 }
             }
