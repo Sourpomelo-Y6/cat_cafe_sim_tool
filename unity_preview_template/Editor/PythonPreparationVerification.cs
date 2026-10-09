@@ -41,6 +41,16 @@ namespace CatCafePreview.Editor
                 else if(stage==6 && client.CurrentState.cats[1].working)
                 {
                     Canvas.ForceUpdateCanvases();typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{preview,"Logs/PreparationReady.png"});
+                    panel.propose.onClick.Invoke();if(!panel.HasProposal || panel.start.interactable || !panel.notice.text.Contains("未確定"))throw new Exception("Live draft failed");
+                    panel.cancelProposal.onClick.Invoke();if(panel.HasProposal || !panel.start.interactable)throw new Exception("Live cancel failed");
+                    panel.propose.onClick.Invoke();panel.cats.value=0;panel.work.onClick.Invoke();panel.confirmProposal.onClick.Invoke();
+                    if(panel.HasProposal || panel.confirmProposal.interactable || panel.start.interactable)throw new Exception("Live confirm busy failed");SessionState.SetInt(Key,7);
+                }
+                else if(stage==7)
+                {
+                    if(!client.CurrentState.cats[0].working || Array.FindAll(client.CurrentState.cats,cat=>cat.working).Length!=4)throw new Exception("Live proposal not applied");
+                    if(!panel.selectedDetails.text.Contains("前日接客") || !panel.selectedDetails.text.Contains("記録なし"))throw new Exception("Live initial forecast missing");
+                    Debug.Log("CAT_CAFE_REST_PROPOSAL_PLAY_OK: real buttons / HTTP / manual draft / cancel / confirm / busy");
                     panel.start.onClick.Invoke();if(panel.start.interactable || panel.work.interactable)throw new Exception("Start pending guard failed");SessionState.SetInt(Key,3);
                 }
                 else if(stage==3 && !client.CurrentState.can_set_shifts)

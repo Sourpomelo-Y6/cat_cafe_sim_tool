@@ -8,7 +8,22 @@ namespace CatCafePreview
     {
         public GameObject panel;
         public Text details, notice, title, summary, selectedDetails, catsDetails;
-        public Button open, close, work, rest, start, dayOff;
+        public Button open, close, work, rest, start, dayOff, propose, confirmProposal, cancelProposal;
+        private System.Collections.Generic.HashSet<string> draft;
+        private int draftRevision;
+        public bool HasProposal { get { return draft!=null; } }
+        private bool Working(PythonCatState cat) { return draft==null ? cat.working : draft.Contains(cat.cat_id); }
+        public void ProposeRest()
+        {
+            if(propose==null || !propose.interactable)return;
+            draft=new System.Collections.Generic.HashSet<string>(current.rest_proposal ?? new string[0]);draftRevision=current.revision;Render();RefreshControls();
+        }
+        public void CancelProposal() { draft=null;Render();RefreshControls(); }
+        public void ConfirmProposal()
+        {
+            if(confirmProposal==null || !confirmProposal.interactable)return;
+            var ids=new string[draft.Count];draft.CopyTo(ids);Array.Sort(ids,StringComparer.Ordinal);draft=null;GetComponent<PythonStateClient>().SetShifts(ids);Render();RefreshControls();
+        }
         public Dropdown cats;
         public ScrollRect goalScroll, catsScroll;
         private PythonCafeState current;
@@ -16,6 +31,7 @@ namespace CatCafePreview
         private bool online,wasAutomatic;
         public void Apply(PythonCafeState state)
         {
+            if(draft!=null && (current==null || current.instance_id!=state.instance_id || current.day!=state.day || draftRevision!=state.revision))draft=null;
             current=state;online=true;
             bool preparation=state.can_set_shifts && !state.closed && state.game_over==null;
             string key=state.instance_id+"/"+state.day;
@@ -36,14 +52,15 @@ namespace CatCafePreview
             panel.SetActive(true);panel.transform.SetAsLastSibling();Render();
             Canvas.ForceUpdateCanvases();if(goalScroll!=null)goalScroll.verticalNormalizedPosition=1;if(catsScroll!=null)catsScroll.verticalNormalizedPosition=1;
         }
-        public void Close() { panel.SetActive(false); }
+        public void Close() { draft=null;panel.SetActive(false);Render();RefreshControls(); }
         public void OpenDayOff() { if(dayOff!=null && dayOff.interactable)GetComponent<PythonDayOffPanel>()?.Open(); }
         public void Work() { SetShift(true); }
         public void Rest() { SetShift(false); }
         private void SetShift(bool working)
         {
             if((working ? work : rest)==null || !(working ? work : rest).interactable)return;
-            GetComponent<PythonStateClient>().SetCatShift(selectedId,working);
+            if(draft!=null){if(working)draft.Add(selectedId);else draft.Remove(selectedId);Render();RefreshControls();}
+            else GetComponent<PythonStateClient>().SetCatShift(selectedId,working);
         }
         public void StartBusiness()
         { if(start!=null && start.interactable)GetComponent<PythonStateClient>().ProgressBusiness(); }
@@ -58,21 +75,21 @@ namespace CatCafePreview
             if(current==null)return;
             var rows=current.cats ?? new PythonCatState[0];
             if(title!=null)title.text=current.day+"日目・営業の準備";
-            int working=Array.FindAll(rows,cat=>cat.working).Length;
+            int working=Array.FindAll(rows,cat=>Working(cat)).Length;
             if(summary!=null)summary.text="出勤 "+working+"匹 / 休養・不在 "+(rows.Length-working)+"匹 / 席 "+(current.seats?.Length ?? 0)+"席 / 資金 "+current.funds.ToString("0.#")+"\n猫の体調と疲労を確認し、今日の出勤を選びましょう。";
             var option=Array.Find(current.new_game_options ?? new PythonNewGameOption[0],row=>row.choice==current.objective);
             var text=new StringBuilder("経営目標："+(current.objective_progress?.label ?? option?.label ?? "自由営業"));
             text.Append("\n"+(current.objective_progress?.details ?? option?.detail ?? "目標情報を取得していません。"));
-            text.Append("\n\n営業開始後は「自動進行」で接客を進めます。もう一度押すと停止します。\n\n疲れた猫は休養にして休ませましょう。病気・派遣中・行方不明・譲渡済みの猫は出勤できません。\n\n席数より多くの猫を出勤させることもできます。");
+            text.Append("\n\n営業開始後は「自動進行」で接客を進めます。もう一度押すと停止します。\n\n「休養案を作成」は健康な在店猫を疲労順（同値はID順）に最大2匹休養、残りを出勤にします。案は手動変更・確定・取消できます。疲れた猫は休養にして休ませましょう。病気・派遣中・行方不明・譲渡済みの猫は出勤できません。\n\n席数より多くの猫を出勤させることもできます。");
             if(option!=null)text.Append("\n\n標準の開始条件\n"+option.conditions);
             details.text=text.ToString();
             if(cats!=null)
             {
-                cats.ClearOptions();foreach(var cat in rows)cats.options.Add(new Dropdown.OptionData(cat.name+"（"+(cat.working ? "出勤" : "休養・不在")+"）"));
+                cats.ClearOptions();foreach(var cat in rows)cats.options.Add(new Dropdown.OptionData(cat.name+"（"+(Working(cat) ? "出勤" : "休養・不在")+"）"));
                 int index=Array.FindIndex(rows,cat=>cat.cat_id==selectedId);index=Math.Max(0,index);
                 selectedId=rows.Length>0 ? rows[index].cat_id : null;cats.SetValueWithoutNotify(index);cats.RefreshShownValue();
             }
-            var roster=new StringBuilder();foreach(var cat in rows)roster.Append(cat.name+"："+(cat.working ? "出勤" : cat.activity=="cafe" && cat.health_status=="healthy" ? "休養" : cat.health_label+" / "+cat.activity_label)+"\n体力 "+cat.stamina.ToString("0.#")+"/"+cat.max_stamina.ToString("0.#")+" / 疲労 "+cat.fatigue.ToString("0.#")+"\n\n");
+            var roster=new StringBuilder();foreach(var cat in rows)roster.Append(cat.name+"："+(Working(cat) ? "出勤" : cat.activity=="cafe" && cat.health_status=="healthy" ? "休養" : cat.health_label+" / "+cat.activity_label)+"\n体力 "+cat.stamina.ToString("0.#")+"/"+cat.max_stamina.ToString("0.#")+" / 疲労 "+cat.fatigue.ToString("0.#")+"\n\n");
             if(catsDetails!=null)catsDetails.text=roster.ToString();
             RenderSelected();RenderNotice();
         }
@@ -81,8 +98,9 @@ namespace CatCafePreview
             if(selectedDetails==null)return;var cat=Selected;
             if(cat==null){selectedDetails.text="選択できる猫がいません。";return;}
             string condition=cat.health_label+" / "+cat.activity_label;
-            selectedDetails.text=cat.name+"："+(cat.working ? "出勤" : "休養・不在")+" / "+condition
+            selectedDetails.text=cat.name+"："+(Working(cat) ? "出勤" : "休養・不在")+" / "+condition
                 +"\n体力 "+cat.stamina.ToString("0.#")+"/"+cat.max_stamina.ToString("0.#")+" / 疲労 "+cat.fatigue.ToString("0.#")+" / ストレス "+cat.stress.ToString("0.#")
+                +"\n"+cat.shift_forecast
                 +"\n"+(cat.health_status!="healthy" || cat.activity!="cafe" ? "体調・活動の状態により出勤できません。" : "「出勤にする」「休養にする」で切り替えます。");
         }
         private void RenderNotice()
@@ -91,6 +109,7 @@ namespace CatCafePreview
             var client=GetComponent<PythonStateClient>();
             if(!client.CanLeaveResult){notice.text="操作を送信しています。完了するまでお待ちください。";return;}
             if(!string.IsNullOrEmpty(current.required_action)){notice.text="営業開始前に確認してください："+current.required_action;return;}
+            if(draft!=null){notice.text="休養案（未確定）：手動で変更し「案を確定」を押してください。閉じる・取消で破棄します。全員休養の場合は確定後に休業できます。";return;}
             if(!Array.Exists(current.cats ?? new PythonCatState[0],cat=>cat.working)){notice.text="出勤する猫がいません。猫を選んで「出勤にする」を押してください。";return;}
             notice.text="出勤する猫を確認したら「営業開始」を押してください。";
         }
@@ -98,11 +117,15 @@ namespace CatCafePreview
         {
             var client=GetComponent<PythonStateClient>();var cat=Selected;
             bool ready=online && client.CanChangeShifts && cat!=null && string.IsNullOrEmpty(current.required_action);
-            if(work!=null)work.interactable=ready && !cat.working && cat.health_status=="healthy" && cat.activity=="cafe";
-            if(rest!=null)rest.interactable=ready && cat.working;
+            if(work!=null)work.interactable=ready && !Working(cat) && cat.health_status=="healthy" && cat.activity=="cafe";
+            if(rest!=null)rest.interactable=ready && Working(cat);
             if(cats!=null)cats.interactable=online && client.CanManageSaves && current?.cats!=null && current.cats.Length>0;
-            if(start!=null)start.interactable=online && current!=null && current.can_set_shifts && !current.closed && current.game_over==null && client.CanProgressBusiness;
-            if(dayOff!=null)dayOff.interactable=online && client.CanManageSaves && current!=null && current.day_off!=null;
+            if(start!=null)start.interactable=online && current!=null && current.can_set_shifts && !current.closed && current.game_over==null && client.CanProgressBusiness && draft==null;
+            if(dayOff!=null)dayOff.interactable=draft==null && online && client.CanManageSaves && current!=null && current.day_off!=null;
+            bool proposalReady=online && client.CanChangeShifts && current!=null && string.IsNullOrEmpty(current.required_action);
+            if(propose!=null)propose.interactable=proposalReady && current.rest_proposal!=null;
+            if(confirmProposal!=null)confirmProposal.interactable=proposalReady && draft!=null;
+            if(cancelProposal!=null)cancelProposal.interactable=draft!=null;
             open.interactable=current!=null;close.interactable=true;if(current!=null)RenderNotice();
         }
         public void Disconnect() { online=false;RefreshControls(); }

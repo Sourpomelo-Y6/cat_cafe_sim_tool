@@ -9,6 +9,7 @@ namespace CatCafePreview
     [Serializable] public class PythonCatState
     {
         public string cat_id, content_cat_id, name, health_status, activity, health_label, activity_label, growth_details, profile_details;
+        public string shift_forecast;
         public PythonCatRecords records;
         public float stamina, max_stamina, fatigue, stress, affinity;
         public int remaining_sets;
@@ -20,6 +21,7 @@ namespace CatCafePreview
     {
         public int version, day, tick;
         public string instance_id;
+        public string[] rest_proposal;
         public int revision;
         public bool can_set_shifts;
         public bool closed;
@@ -464,6 +466,13 @@ namespace CatCafePreview
                 if (cat.cat_id == id ? working : cat.working) ids.Add(cat.cat_id);
             pending = new PythonShiftCommand { request_id = Guid.NewGuid().ToString("N"), instance_id = current.instance_id,
                 expected_revision = current.revision, working_cats = ids.ToArray() };
+            preview.RefreshPythonControls();
+        }
+
+        public void SetShifts(string[] ids)
+        {
+            if(!CanChangeShifts || !string.IsNullOrEmpty(current.required_action))return;
+            pending=new PythonShiftCommand { request_id=Guid.NewGuid().ToString("N"), instance_id=current.instance_id, expected_revision=current.revision, working_cats=ids };
             preview.RefreshPythonControls();
         }
 

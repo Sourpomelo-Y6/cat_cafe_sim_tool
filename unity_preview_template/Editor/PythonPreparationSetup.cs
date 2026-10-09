@@ -45,17 +45,22 @@ namespace CatCafePreview.Editor
             panel.title=Label(card.transform,"Title",24,18,892,40,25);panel.title.text="営業の準備";
             var status=Box(card.transform,"Status",24,70,892,70,new Color(.91f,.93f,.87f));panel.summary=Label(status.transform,"Summary",12,8,868,58,18);
             Label(card.transform,"Goal Heading",24,150,340,28,18).text="目標と営業の進め方";
-            panel.details=ScrollText(card.transform,"Goal Scroll",24,184,340,298,17,out panel.goalScroll);
+            panel.details=ScrollText(card.transform,"Goal Scroll",24,184,340,238,17,out panel.goalScroll);
             var drop=DefaultControls.CreateDropdown(new DefaultControls.Resources());drop.name="Cats";drop.transform.SetParent(card.transform,false);Place(drop.GetComponent<RectTransform>(),388,150,528,40);panel.cats=drop.GetComponent<Dropdown>();
             foreach(var text in drop.GetComponentsInChildren<Text>(true)){text.font=ContentPreviewLayout.LoadFont();text.fontSize=17;text.color=new Color(.16f,.25f,.21f);}
             panel.cats.itemText.rectTransform.parent.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,36);panel.cats.template.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,180);panel.cats.itemText.verticalOverflow=VerticalWrapMode.Overflow;
             drop.transform.Find("Arrow").GetComponent<Image>().color=Color.clear;Label(drop.transform,"Dropdown Arrow",494,7,26,26,16).text="▼";
             UnityEventTools.AddPersistentListener(panel.cats.onValueChanged,panel.SelectCat);
-            panel.selectedDetails=Label(card.transform,"Selected Details",388,202,528,96,17);
-            panel.work=Button(card.transform,"Work","出勤にする",388,302,250);UnityEventTools.AddPersistentListener(panel.work.onClick,panel.Work);
-            panel.rest=Button(card.transform,"Rest","休養にする",656,302,260);UnityEventTools.AddPersistentListener(panel.rest.onClick,panel.Rest);
+            ScrollRect forecastScroll;panel.selectedDetails=ScrollText(card.transform,"Selected Details",388,202,528,174,15,out forecastScroll);
+            panel.work=Button(card.transform,"Work","出勤にする",388,382,250);UnityEventTools.AddPersistentListener(panel.work.onClick,panel.Work);
+            panel.rest=Button(card.transform,"Rest","休養にする",656,382,260);UnityEventTools.AddPersistentListener(panel.rest.onClick,panel.Rest);
             panel.work.GetComponent<Image>().color=new Color(.88f,.91f,.84f);
-            panel.catsDetails=ScrollText(card.transform,"Cats Scroll",388,354,528,128,16,out panel.catsScroll);
+            panel.catsDetails=ScrollText(card.transform,"Cats Scroll",388,430,528,52,15,out panel.catsScroll);
+            panel.propose=Button(card.transform,"Rest Proposal","休養案を作成",24,430,140);UnityEventTools.AddPersistentListener(panel.propose.onClick,panel.ProposeRest);
+            panel.confirmProposal=Button(card.transform,"Confirm Proposal","案を確定",174,430,90);UnityEventTools.AddPersistentListener(panel.confirmProposal.onClick,panel.ConfirmProposal);
+            panel.cancelProposal=Button(card.transform,"Cancel Proposal","取消",274,430,90);UnityEventTools.AddPersistentListener(panel.cancelProposal.onClick,panel.CancelProposal);
+            panel.confirmProposal.GetComponentInChildren<Text>().fontSize=16;
+            panel.details.text="";
             ScrollRect noticeScroll;panel.notice=ScrollText(card.transform,"Notice Scroll",24,490,892,54,14,out noticeScroll);
             panel.start=Button(card.transform,"Start Business","営業開始",24,550,282);UnityEventTools.AddPersistentListener(panel.start.onClick,panel.StartBusiness);
             panel.start.GetComponent<Image>().color=new Color(.2f,.38f,.3f);panel.start.GetComponentInChildren<Text>().color=Color.white;
@@ -79,10 +84,26 @@ namespace CatCafePreview.Editor
             panel.Disconnect();if(panel.work.interactable || panel.start.interactable || !panel.notice.text.Contains("未接続"))throw new Exception("Offline guide missing");apply();if(panel.notice.text.Contains("未接続"))throw new Exception("Offline message persisted");
             state.required_action="";foreach(var cat in state.cats){cat.health_label="健康";cat.activity_label="在店";}apply();
             state.day=2;apply();if(!panel.panel.activeSelf || !panel.title.text.Contains("2日目"))throw new Exception("Next day preparation missing");
-            Canvas.ForceUpdateCanvases();if(panel.summary.preferredHeight>panel.summary.rectTransform.rect.height+1 || panel.selectedDetails.preferredHeight>panel.selectedDetails.rectTransform.rect.height+1)throw new Exception("Preparation summary clipped");typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{preview,"Logs/PreparationGuide.png"});
+            Canvas.ForceUpdateCanvases();if(panel.summary.preferredHeight>panel.summary.rectTransform.rect.height+1)throw new Exception("Preparation summary clipped");typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{preview,"Logs/PreparationGuide.png"});
             state.can_set_shifts=false;apply();if(panel.panel.activeSelf || panel.open.gameObject.activeSelf)throw new Exception("Guide remained in business");
             state.can_set_shifts=true;state.game_over=new PythonGameOver{reason="funds",day=1};apply();if(panel.panel.activeSelf || panel.open.gameObject.activeSelf)throw new Exception("Guide obscured game over");
             state.game_over=null;state.instance_id="guide-new";apply();if(!panel.panel.activeSelf)throw new Exception("New game did not show guide");
+            foreach(var cat in state.cats)cat.working=true;
+            state.rest_proposal=new[]{state.cats[2].cat_id,state.cats[3].cat_id,state.cats[4].cat_id};
+            state.cats[0].shift_forecast="前日接客：6行動\n出勤：疲労 / 発症 66 / 12.0% / ストレス 8\n休養：疲労 / 発症 40 / 0.0% / ストレス 0\n前日の接客6行動を基準にしています。当日の担当回数や交流時間によって、実際の疲労・発症確率・ストレスは変わります。";
+            apply();panel.SelectCat(0);panel.ProposeRest();
+            if(!panel.HasProposal || !panel.summary.text.Contains("出勤 3匹") || panel.start.interactable || !panel.confirmProposal.interactable || !state.cats[0].working || !panel.selectedDetails.text.Contains("12.0%"))throw new Exception("Rest draft: "+panel.HasProposal+" / "+panel.summary.text+" / "+panel.propose.interactable+" / "+panel.confirmProposal.interactable+" / "+panel.selectedDetails.text);
+            panel.Work();if(!panel.summary.text.Contains("出勤 4匹") || !panel.HasProposal)throw new Exception("Manual draft edit failed");
+            panel.CancelProposal();if(panel.HasProposal || !panel.summary.text.Contains("出勤 5匹"))throw new Exception("Cancel changed shifts");
+            panel.ProposeRest();panel.Disconnect();if(panel.confirmProposal.interactable || panel.propose.interactable)throw new Exception("Offline draft enabled");apply();
+            panel.Close();panel.Open();if(panel.HasProposal)throw new Exception("Close retained draft");
+            panel.ProposeRest();state.revision++;apply();if(panel.HasProposal)throw new Exception("Stale draft retained");
+            panel.SelectCat(0);Canvas.ForceUpdateCanvases();
+            typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",flags | System.Reflection.BindingFlags.Static).Invoke(null,new object[]{preview,"Logs/ShiftForecast.png"});
+            panel.ProposeRest();panel.ConfirmProposal();
+            var command=(PythonShiftCommand)typeof(PythonStateClient).GetField("pending",flags).GetValue(client);
+            if(command==null || command.working_cats.Length!=3 || panel.confirmProposal.interactable || panel.work.interactable || panel.start.interactable)throw new Exception("Confirmation command or busy guards failed");
+            Debug.Log("CAT_CAFE_SHIFT_FORECAST_OK: forecasts / draft / manual edit / cancel / close / stale / offline / confirmation");
             Debug.Log("CAT_CAFE_PREPARATION_DISPLAY_OK");
         }
     }
