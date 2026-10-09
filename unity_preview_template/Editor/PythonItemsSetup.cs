@@ -26,7 +26,7 @@ namespace CatCafePreview.Editor
             Place(p.buy.GetComponent<RectTransform>(),624,62,292,40);Place(p.sell.GetComponent<RectTransform>(),624,164,292,40);p.buy.GetComponentInChildren<Text>().text="1個購入（確認へ）";p.sell.GetComponentInChildren<Text>().text="1個売却（確認へ）";
             p.use=UnityEngine.Object.Instantiate(p.buy,p.buy.transform.parent);p.use.name="Use";Place(p.use.GetComponent<RectTransform>(),24,550,432,40);p.use.GetComponentInChildren<Text>().text="選んだ猫に1個使う（確認へ）";Place(p.close.GetComponent<RectTransform>(),480,550,436,40);
             var scroll=p.details.transform.parent.parent.GetComponent<RectTransform>();Place(scroll,24,258,892,224);Place(p.details.transform.parent.GetComponent<RectTransform>(),6,6,862,212);scroll.GetComponent<ScrollRect>().verticalScrollbar.GetComponent<RectTransform>().sizeDelta=new Vector2(12,212);
-            Bind(p.buy,p.Buy);Bind(p.sell,p.Sell);Bind(p.use,p.Use);Bind(p.close,p.Close);Bind(p.confirm,p.Confirm);Bind(p.cancel,p.Cancel);p.confirmation.transform.SetAsLastSibling();p.confirmation.SetActive(false);p.panel.SetActive(false);EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);PythonEventListSetup.Build();Debug.Log("CAT_CAFE_ITEMS_UI_OK");
+            Bind(p.buy,p.Buy);Bind(p.sell,p.Sell);Bind(p.use,p.Use);Bind(p.close,p.Close);Bind(p.confirm,p.Confirm);Bind(p.cancel,p.Cancel);p.confirmation.transform.SetAsLastSibling();p.confirmation.SetActive(false);p.panel.SetActive(false);EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);PythonItemsLayout.Build();Debug.Log("CAT_CAFE_ITEMS_UI_OK");
         }
         public static void BuildAndVerify()
         {

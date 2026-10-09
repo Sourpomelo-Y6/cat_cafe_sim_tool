@@ -35,7 +35,7 @@ namespace CatCafePreview
             var close=panel.transform.Find("Details Card/Close").GetComponent<Button>();close.GetComponentInChildren<Text>().text=seats?"席一覧へ戻る":"猫一覧へ戻る";
         }
         public void ResetSelection(){originScroll=null;Close();recordPage=0;}
-        public void Care(){var items=GetComponent<PythonItemsPanel>();if(items==null)return;items.Open();showingCare=items.panel.activeSelf;}
+        public void Care(){var items=GetComponent<PythonItemsPanel>();if(items==null)return;items.OpenForCat(selectedId);showingCare=items.panel.activeSelf;}
         public void Open(string catId)
         {
             var client=GetComponent<PythonStateClient>();
