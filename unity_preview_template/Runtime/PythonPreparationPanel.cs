@@ -64,10 +64,12 @@ namespace CatCafePreview
         }
         public void StartBusiness()
         { if(start!=null && start.interactable)GetComponent<PythonStateClient>().ProgressBusiness(); }
+        private PythonCatState[] VisibleCats=>GetComponent<PythonCatVisibility>()?.Filter(current?.cats) ?? current?.cats ?? new PythonCatState[0];
+        public void RefreshVisibility(){Render();RefreshControls();}
         public void SelectCat(int index)
         {
-            if(current==null || current.cats==null || index<0 || index>=current.cats.Length)return;
-            selectedId=current.cats[index].cat_id;RenderSelected();RefreshControls();
+            if(current==null || index<0 || index>=VisibleCats.Length)return;
+            selectedId=VisibleCats[index].cat_id;RenderSelected();RefreshControls();
         }
         private PythonCatState Selected { get { return current?.cats==null ? null : Array.Find(current.cats,cat=>cat.cat_id==selectedId); } }
         private void Render()
@@ -83,13 +85,14 @@ namespace CatCafePreview
             text.Append("\n\n営業開始後は「自動進行」で接客を進めます。もう一度押すと停止します。\n\n「休養案を作成」は健康な在店猫を疲労順（同値はID順）に最大2匹休養、残りを出勤にします。案は手動変更・確定・取消できます。疲れた猫は休養にして休ませましょう。病気・派遣中・行方不明・譲渡済みの猫は出勤できません。\n\n席数より多くの猫を出勤させることもできます。");
             if(option!=null)text.Append("\n\n標準の開始条件\n"+option.conditions);
             details.text=text.ToString();
+            var visible=VisibleCats;
             if(cats!=null)
             {
-                cats.ClearOptions();foreach(var cat in rows)cats.options.Add(new Dropdown.OptionData(cat.name+"（"+(Working(cat) ? "出勤" : "休養・不在")+"）"));
-                int index=Array.FindIndex(rows,cat=>cat.cat_id==selectedId);index=Math.Max(0,index);
-                selectedId=rows.Length>0 ? rows[index].cat_id : null;cats.SetValueWithoutNotify(index);cats.RefreshShownValue();
+                cats.ClearOptions();foreach(var cat in visible)cats.options.Add(new Dropdown.OptionData(cat.name+"（"+(Working(cat) ? "出勤" : "休養・不在")+"）"));
+                int index=Array.FindIndex(visible,cat=>cat.cat_id==selectedId);index=Math.Max(0,index);
+                selectedId=visible.Length>0 ? visible[index].cat_id : null;cats.SetValueWithoutNotify(index);cats.RefreshShownValue();
             }
-            var roster=new StringBuilder();foreach(var cat in rows)roster.Append(cat.name+"："+(Working(cat) ? "出勤" : cat.activity=="cafe" && cat.health_status=="healthy" ? "休養" : cat.health_label+" / "+cat.activity_label)+"\n体力 "+cat.stamina.ToString("0.#")+"/"+cat.max_stamina.ToString("0.#")+" / 疲労 "+cat.fatigue.ToString("0.#")+"\n\n");
+            var roster=new StringBuilder();foreach(var cat in visible)roster.Append(cat.name+"："+(Working(cat) ? "出勤" : cat.activity=="cafe" && cat.health_status=="healthy" ? "休養" : cat.health_label+" / "+cat.activity_label)+"\n体力 "+cat.stamina.ToString("0.#")+"/"+cat.max_stamina.ToString("0.#")+" / 疲労 "+cat.fatigue.ToString("0.#")+"\n\n");
             if(catsDetails!=null)catsDetails.text=roster.ToString();
             RenderSelected();RenderNotice();
         }
@@ -119,7 +122,7 @@ namespace CatCafePreview
             bool ready=online && client.CanChangeShifts && cat!=null && string.IsNullOrEmpty(current.required_action);
             if(work!=null)work.interactable=ready && !Working(cat) && cat.health_status=="healthy" && cat.activity=="cafe";
             if(rest!=null)rest.interactable=ready && Working(cat);
-            if(cats!=null)cats.interactable=online && client.CanManageSaves && current?.cats!=null && current.cats.Length>0;
+            if(cats!=null)cats.interactable=online && client.CanManageSaves && VisibleCats.Length>0;
             if(start!=null)start.interactable=online && current!=null && current.can_set_shifts && !current.closed && current.game_over==null && client.CanProgressBusiness && draft==null;
             if(dayOff!=null)dayOff.interactable=draft==null && online && client.CanManageSaves && current!=null && current.day_off!=null;
             bool proposalReady=online && client.CanChangeShifts && current!=null && string.IsNullOrEmpty(current.required_action);

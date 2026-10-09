@@ -10,19 +10,20 @@ namespace CatCafePreview
         public RectTransform content;
         public PythonCatCard cardPrefab;
         private readonly List<PythonCatCard> cards = new List<PythonCatCard>();
-        public int Count { get { return cards.Count; } }
-        public int CustomerCount { get { return cards.FindAll(card => card.customerIcon.activeSelf).Count; } }
-        public PythonCatCard GetCard(int index) { return cards[index]; }
+        public int Count { get { return cards.FindAll(card=>card.gameObject.activeSelf).Count; } }
+        public int CustomerCount { get { return cards.FindAll(card => card.gameObject.activeSelf && card.customerIcon.activeSelf).Count; } }
+        public PythonCatCard GetCard(int index) { return cards.FindAll(card=>card.gameObject.activeSelf)[index]; }
         public void Apply(PythonCafeState state)
         {
             if (content == null || cardPrefab == null) return;
             if (cards.Count == 0)
                 cards.AddRange(content.GetComponentsInChildren<PythonCatCard>(true));
-            while (cards.Count < state.cats.Length) cards.Add(Instantiate(cardPrefab, content));
+            var rows=GetComponent<PythonCatVisibility>()?.Filter(state.cats) ?? state.cats;
+            while (cards.Count < rows.Length) cards.Add(Instantiate(cardPrefab, content));
             for (int i = 0; i < cards.Count; i++)
             {
-                cards[i].gameObject.SetActive(i < state.cats.Length);
-                if (i < state.cats.Length) cards[i].Set(state.cats[i], state, GetComponent<ContentPreview>(), GetComponent<PythonStateClient>());
+                cards[i].gameObject.SetActive(i < rows.Length);
+                if (i < rows.Length) cards[i].Set(rows[i], state, GetComponent<ContentPreview>(), GetComponent<PythonStateClient>());
             }
         }
         public void RefreshControls() { foreach (var card in cards) card.Refresh(GetComponent<PythonStateClient>()); }

@@ -98,7 +98,7 @@ namespace CatCafePreview.Editor
             roster.Apply(state); if(roster.CustomerCount != 2) throw new Exception("Customer icons mismatch");
             state.seats = new PythonSeatState[0]; roster.Apply(state);
             if(roster.CustomerCount != 0) throw new Exception("Stale customer icon");
-            EditorSceneManager.MarkSceneDirty(scene); EditorSceneManager.SaveScene(scene);
+            PythonCatVisibilitySetup.Configure(preview);EditorSceneManager.MarkSceneDirty(scene); EditorSceneManager.SaveScene(scene);
             Debug.Log("CAT_CAFE_ROSTER_OK: 5 visible cats / shared customer icon / seat matching / departed customer cleared");
         }
         public static void Capture()

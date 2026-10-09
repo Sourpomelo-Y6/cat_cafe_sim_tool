@@ -34,6 +34,7 @@ namespace CatCafePreview
         }
         private void Render()
         {
+            GetComponent<PythonCatVisibility>()?.RefreshControls();
             if(state == null) return;
             seatsTab.interactable = catsTab.interactable = true;
             seatsTab.gameObject.SetActive(phase == "open"); catsTab.gameObject.SetActive(phase == "open");

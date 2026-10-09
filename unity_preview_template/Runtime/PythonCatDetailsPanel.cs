@@ -38,6 +38,7 @@ namespace CatCafePreview
             Canvas.ForceUpdateCanvases();scroll.verticalNormalizedPosition=1;
             if(stateDetails!=null){var healthScroll=stateDetails.GetComponentInParent<ScrollRect>();if(healthScroll!=null)healthScroll.verticalNormalizedPosition=1;}
         }
+        public void RefreshVisibility(){if(selectedId!=null && Array.Find(GetComponent<ContentPreview>().VisiblePythonCats,row=>row.cat_id==selectedId)==null)Close();}
         public void Close() { panel.SetActive(false); selectedId=null; }
         public void Interact()
         {

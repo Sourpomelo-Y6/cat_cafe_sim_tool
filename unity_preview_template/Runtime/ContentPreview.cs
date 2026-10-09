@@ -28,7 +28,9 @@ namespace CatCafePreview
         private string sceneKey = "normal";
         private PythonCafeState pythonState;
         public bool PythonMode { get { return GetComponent<PythonStateClient>() != null; } }
-        public string SelectedPythonCatId { get { return pythonState == null ? "" : pythonState.cats[cats.value].cat_id; } }
+        private string selectedPythonId;
+        public PythonCatState[] VisiblePythonCats { get { var rows=pythonState?.cats ?? new PythonCatState[0];return GetComponent<PythonCatVisibility>()?.Filter(rows) ?? rows; } }
+        public string SelectedPythonCatId { get { var rows=VisiblePythonCats;return cats.value>=0 && cats.value<rows.Length ? rows[cats.value].cat_id : ""; } }
 
         public string CurrentCatId { get { return bundle == null ? "" : bundle.cats[selected].cat_id; } }
         public string CurrentSceneKey { get { return sceneKey; } }
@@ -138,14 +140,16 @@ namespace CatCafePreview
         {
             var feedback=GetComponent<PythonEventPresentation>();if(feedback!=null)feedback.Apply(state);
             var presentation=GetComponent<PythonPresentation>();if(presentation!=null)presentation.Apply(state);
-            string previous = pythonState == null || cats.value >= pythonState.cats.Length ? "" : pythonState.cats[cats.value].cat_id;
+            string previous = selectedPythonId;
             pythonState = state;
+            GetComponent<PythonCatVisibility>()?.Apply(state);
+            var visible=VisiblePythonCats;
             cats.options.Clear();
-            foreach (var cat in state.cats) cats.options.Add(new Dropdown.OptionData(cat.name));
-            int index = Array.FindIndex(state.cats, cat => cat.cat_id == previous);
+            foreach (var cat in visible) cats.options.Add(new Dropdown.OptionData(cat.name));
+            int index = Array.FindIndex(visible, cat => cat.cat_id == previous);
             cats.SetValueWithoutNotify(Math.Max(0, index));
             cats.RefreshShownValue();
-            cats.interactable = true;
+            cats.interactable = visible.Length>0;
             foreach (var button in sceneButtons) button.interactable = false;
             DisplayPythonCat(cats.value);
             var roster = GetComponent<PythonCatRoster>();
@@ -307,9 +311,9 @@ namespace CatCafePreview
             if (roster != null) roster.RefreshControls();
             var client = GetComponent<PythonStateClient>();
             if (client == null || pythonState == null) return;
-            var cat = pythonState.cats[cats.value];
-            sceneButtons[0].interactable = client.CanChangeShifts && !cat.working && cat.health_status == "healthy" && cat.activity == "cafe";
-            sceneButtons[1].interactable = client.CanChangeShifts && cat.working;
+            var cat = Array.Find(VisiblePythonCats,row=>row.cat_id==SelectedPythonCatId);
+            sceneButtons[0].interactable = client.CanChangeShifts && cat!=null && !cat.working && cat.health_status == "healthy" && cat.activity == "cafe";
+            sceneButtons[1].interactable = client.CanChangeShifts && cat!=null && cat.working;
             sceneButtons[2].interactable = client.CanProgressBusiness;
             sceneButtons[2].GetComponentInChildren<Text>().text = pythonState.closed ? "翌日へ" : pythonState.can_set_shifts ? "営業開始" : "1刻み進める";
             sceneButtons[3].interactable = client.CanManageSaves;
@@ -324,6 +328,7 @@ namespace CatCafePreview
             GetComponent<PythonMenuPanel>()?.RefreshControls();
             GetComponent<PythonBusinessLogPanel>()?.RefreshControls();
             GetComponent<PythonClearResultsPanel>()?.RefreshControls();
+            GetComponent<PythonCatVisibility>()?.RefreshControls();
             GetComponent<PythonPersistPanel>()?.RefreshControls();
             var visiting=GetComponent<PythonVisitingCatPanel>();if(visiting!=null)visiting.RefreshControls();
             var housing = GetComponent<PythonHousingPanel>();
@@ -414,11 +419,21 @@ namespace CatCafePreview
             if (growth != null && growth.panel.activeSelf) growth.notice.text=message;
         }
 
+        public void RefreshCatVisibility()
+        {
+            if(pythonState==null)return;
+            string previous=selectedPythonId;var visible=VisiblePythonCats;
+            cats.ClearOptions();foreach(var cat in visible)cats.options.Add(new Dropdown.OptionData(cat.name));
+            int index=Array.FindIndex(visible,cat=>cat.cat_id==previous);cats.SetValueWithoutNotify(Math.Max(0,index));cats.RefreshShownValue();cats.interactable=visible.Length>0;
+            DisplayPythonCat(cats.value);GetComponent<PythonCatRoster>()?.Apply(pythonState);RefreshPythonControls();
+        }
         private void DisplayPythonCat(int index)
         {
-            if (index < 0 || index >= pythonState.cats.Length) return;
+            var visible=VisiblePythonCats;
+            if (visible.Length==0){selectedPythonId=null;description.text="表示できる猫がいません。「譲渡済みも表示」で過去の猫を確認できます。";picture.texture=null;picture.enabled=false;emptyImage.enabled=false;return;}
+            if (index < 0 || index >= visible.Length) return;
             cats.SetValueWithoutNotify(index);
-            var cat = pythonState.cats[index];
+            var cat = visible[index];selectedPythonId=cat.cat_id;
             int assetIndex = bundle == null ? -1 : Array.FindIndex(bundle.cats, item => item.cat_id == cat.content_cat_id);
             if (assetIndex >= 0)
             {
@@ -511,6 +526,7 @@ namespace CatCafePreview
             GetComponent<PythonMenuPanel>()?.RefreshControls();
             GetComponent<PythonBusinessLogPanel>()?.RefreshControls();
             GetComponent<PythonClearResultsPanel>()?.RefreshControls();
+            GetComponent<PythonCatVisibility>()?.RefreshControls();
             var visiting=GetComponent<PythonVisitingCatPanel>();if(visiting!=null)visiting.Disconnect();
             var housing = GetComponent<PythonHousingPanel>();
             if (housing != null) housing.Disconnect();
