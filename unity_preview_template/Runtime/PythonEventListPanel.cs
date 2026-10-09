@@ -12,7 +12,7 @@ namespace CatCafePreview
         private PythonCafeState current;
         private bool online;
         private string instance;
-        public void Open(){if(current==null)return;GetComponent<PythonMenuPanel>()?.Close();GetComponent<PythonBusinessLogPanel>()?.Close();GetComponent<PythonClearResultsPanel>()?.Close();GetComponent<PythonFinanceHistoryPanel>()?.Close();panel.SetActive(true);panel.transform.SetAsLastSibling();RefreshControls();}
+        public void Open(){if(current==null)return;GetComponent<PythonMenuPanel>()?.Close();GetComponent<PythonRecruitmentPanel>()?.Close();GetComponent<PythonBusinessLogPanel>()?.Close();GetComponent<PythonClearResultsPanel>()?.Close();GetComponent<PythonFinanceHistoryPanel>()?.Close();panel.SetActive(true);panel.transform.SetAsLastSibling();RefreshControls();}
         public void Close(){panel.SetActive(false);}
         public void Visiting(){Show(0);} public void Intake(){Show(1);} public void Store(){Show(2);} public void Growth(){Show(3);}
         public void Missing(){Show(4);} public void Adoption(){Show(5);} public void Dispatch(){Show(6);}
@@ -99,7 +99,7 @@ namespace CatCafePreview
                 case 5:var a=GetComponent<PythonAdoptionPanel>();a.Open(current.adoption.events?.FirstOrDefault(r=>r.status=="waiting")?.cat_id ?? "");target=a.panel;break;
                 case 6:var d=GetComponent<PythonDispatchPanel>();d.Open(current.patron_dispatch.events?.FirstOrDefault(r=>r.status=="waiting")?.cat_id ?? current.patron_dispatch.options?.FirstOrDefault()?.cat_id ?? current.patron_dispatch.events?.FirstOrDefault()?.cat_id);target=d.panel;break;
             }
-            if(target!=null){GetComponent<PythonMenuPanel>()?.Close();Close();target.SetActive(true);target.transform.SetAsLastSibling();}
+            if(target!=null){GetComponent<PythonMenuPanel>()?.Close();GetComponent<PythonRecruitmentPanel>()?.Close();Close();target.SetActive(true);target.transform.SetAsLastSibling();}
         }
         public void Apply(PythonCafeState s){if(instance!=s.instance_id){instance=s.instance_id;Close();}current=s;online=true;RefreshControls();}
         public void RefreshControls()

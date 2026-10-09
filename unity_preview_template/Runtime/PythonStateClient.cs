@@ -34,6 +34,7 @@ namespace CatCafePreview
         public PythonFinanceState finance;
         public PythonFinanceHistory finance_history, business_history;
         public PythonPetShop pet_shop;
+        public PythonRecruitment recruitment;
         public PythonObjectiveStart objective_start;
         public PythonDispatchComparison dispatch_comparison;
         public PythonServiceAssignment service_assignment;
@@ -206,6 +207,9 @@ namespace CatCafePreview
         { return CanManageSaves && current.pet_shop?.rows!=null && Array.Exists(current.pet_shop.rows,row=>row.cat_id==catId && row.can_purchase); }
         public void PurchaseCat(string catId)
         { if(CanPurchaseCat(catId))QueuePlayer("purchase_cat",catId,"",""); }
+        public bool CanRecruitCat(string catId){return CanManageSaves && current.recruitment?.rows!=null && Array.Exists(current.recruitment.rows,r=>r.cat_id==catId && r.can_purchase);}
+        public void RecruitCat(string catId){if(CanRecruitCat(catId))QueuePlayer("recruit_cat",catId,"","");}
+        public void OpenRecruitment(){if(CanManageSaves && current.recruitment?.can_refresh==true)QueuePlayer("open_recruitment","","","");}
         public bool CanStartObjective(string choice)
         { return CanManageSaves && current.objective_start?.rows!=null && Array.Exists(current.objective_start.rows,row=>row.choice==choice && row.can_start); }
         public void StartObjective(string choice)
