@@ -471,6 +471,10 @@ namespace CatCafePreview
         {
             Validate(state);
             // JsonUtility can materialize a JSON null nested object with empty fields.
+            if(state.intake_request!=null && string.IsNullOrEmpty(state.intake_request.status))state.intake_request=null;
+            if(state.visiting_cat!=null && string.IsNullOrEmpty(state.visiting_cat.status))state.visiting_cat=null;
+            if(state.regular_introduction!=null && string.IsNullOrEmpty(state.regular_introduction.status))state.regular_introduction=null;
+            if(state.reservation!=null && string.IsNullOrEmpty(state.reservation.status))state.reservation=null;
             if(state.autoplay?.report!=null && string.IsNullOrEmpty(state.autoplay.report.run_id))state.autoplay.report=null;
             if (state.goal_result != null && string.IsNullOrEmpty(state.goal_result.status)) state.goal_result = null;
             if(state.next_goal != null && state.next_goal.stage < 2)state.next_goal=null;
