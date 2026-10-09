@@ -13,18 +13,20 @@ namespace CatCafePreview
         public ScrollRect goalScroll, catsScroll;
         private PythonCafeState current;
         private string identity, selectedId;
-        private bool online;
+        private bool online,wasAutomatic;
         public void Apply(PythonCafeState state)
         {
             current=state;online=true;
             bool preparation=state.can_set_shifts && !state.closed && state.game_over==null;
             string key=state.instance_id+"/"+state.day;
-            if(identity!=key)
+            bool automatic=state.autoplay?.running==true;
+            if(identity!=key || (wasAutomatic && !automatic))
             {
                 identity=key;selectedId=null;
-                panel.SetActive(preparation && state.next_goal==null && string.IsNullOrEmpty(state.required_action));
+                panel.SetActive(!automatic && preparation && state.next_goal==null && string.IsNullOrEmpty(state.required_action));
             }
-            if(!preparation)panel.SetActive(false);
+            wasAutomatic=automatic;
+            if(!preparation || automatic)panel.SetActive(false);
             open.gameObject.SetActive(preparation && state.next_goal==null);
             Render();RefreshControls();
         }

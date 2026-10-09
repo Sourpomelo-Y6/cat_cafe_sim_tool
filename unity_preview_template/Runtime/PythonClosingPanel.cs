@@ -13,15 +13,17 @@ namespace CatCafePreview
         public void History(){GetComponent<PythonFinanceHistoryPanel>().Open();}
         private PythonCafeState current;
         private string identity, message;
-        private bool online, wasClosed;
+        private bool online, wasClosed, wasAutomatic;
         public void Apply(PythonCafeState state)
         {
             current=state;online=true;
             bool closed=state.closed && state.game_over==null;
             string key=state.instance_id+"/"+state.day;
-            if(identity!=key || (closed && !wasClosed)){identity=key;message="";ResetScroll();panel.SetActive(closed && string.IsNullOrEmpty(state.required_action));}
+            bool automatic=state.autoplay?.running==true;
+            if(identity!=key || (closed && !wasClosed) || (wasAutomatic && !automatic)){identity=key;message="";ResetScroll();panel.SetActive(!automatic && closed && string.IsNullOrEmpty(state.required_action));}
             wasClosed=closed;
-            if(!closed)panel.SetActive(false);
+            wasAutomatic=automatic;
+            if(!closed || automatic)panel.SetActive(false);
             open.gameObject.SetActive(closed);
             Render();RefreshControls();
         }

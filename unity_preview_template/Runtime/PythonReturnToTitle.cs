@@ -17,7 +17,7 @@ namespace CatCafePreview
             if(entry!=null)entry.interactable=client.CanLeaveResult;
             if(hint==null)return;
             var state=client.CurrentState;
-            if(client.AutoPlayRunning)hint.text="おまかせ実行中です。中止してから通常操作や保存へ戻れます。";
+            if(client.AutoPlayRunning)hint.text="おまかせ実行中：上部から停止できます。";
             else if(!client.CanLeaveResult)hint.text="操作を送信しています。完了までお待ちください。";
             else if(!client.CanManageSaves)hint.text="Python未接続です。再接続を待っています。";
             else if(state.game_over!=null)hint.text="経営が終了しました。結果を保存できます。";

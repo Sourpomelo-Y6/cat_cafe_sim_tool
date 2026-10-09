@@ -16,7 +16,7 @@ namespace CatCafePreview
         public ScrollRect historyScroll;
         private PythonPlayerInteraction current;
         private string sessionId, instanceId;
-        private bool showing;
+        private bool showing,wasAutomatic;
         private string renderedMode, renderedSession, renderedInstance;
         public void TargetChanged(int value) { RefreshControls(); }
         public void Open()
@@ -48,8 +48,11 @@ namespace CatCafePreview
         {
             current=state.player_interaction;
             if(current==null) { showing=false;sessionId=null;panel.SetActive(false);return; }
-            if(sessionId!=current.session_id || instanceId!=state.instance_id)
+            bool automatic=state.autoplay?.running==true;
+            if(sessionId!=current.session_id || instanceId!=state.instance_id || (wasAutomatic && !automatic))
             { showing=true;sessionId=current.session_id;instanceId=state.instance_id;historyScroll.verticalNormalizedPosition=1; }
+            wasAutomatic=automatic;
+            if(automatic)showing=false;
             if(showing)GetComponent<PythonCatDetailsPanel>().Close();
             Render();
         }

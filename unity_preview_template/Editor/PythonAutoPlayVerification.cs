@@ -19,11 +19,11 @@ namespace CatCafePreview.Editor
             try
             {
                 if(EditorApplication.timeSinceStartup>SessionState.GetFloat(Key+"deadline",0))throw new Exception("Auto play HTTP test timed out at "+stage);
-                if(!EditorApplication.isPlaying)return;var client=UnityEngine.Object.FindObjectOfType<PythonStateClient>();if(client==null || client.CurrentState==null)return;var state=client.CurrentState;var p=client.GetComponent<PythonAutoPlayPanel>();var preview=client.GetComponent<ContentPreview>();var saves=client.GetComponent<PythonSavePanel>();var report=state.autoplay?.report;preview.RefreshPythonControls();
+                if(!EditorApplication.isPlaying)return;var client=UnityEngine.Object.FindObjectOfType<PythonStateClient>();if(client==null || client.CurrentState==null)return;var state=client.CurrentState;var p=client.GetComponent<PythonAutoPlayPanel>();var preview=client.GetComponent<ContentPreview>();var saves=client.GetComponent<PythonSavePanel>();var report=state.autoplay?.report;preview.RefreshPythonControls();if(client.BatchAutomatic && client.AutoPlayRunning && (client.GetComponent<PythonPreparationPanel>().panel.activeSelf || client.GetComponent<PythonClosingPanel>().panel.activeSelf || client.GetComponent<PythonPlayerPanel>().panel.activeSelf))throw new Exception("Automatic business was covered by a phase window");
                 if(stage==1 && client.CanManageSaves)
                 {if(report!=null || p.save.interactable)throw new Exception("JSON null report became a result");p.Open();p.SelectDays(9);p.Choose();p.Confirm();SessionState.SetInt(Key,2);Debug.Log("AUTOPLAY_PLAY_STAGE: started");}
                 else if(stage==2 && client.AutoPlayRunning && report.operations>0)
-                {p.Stop();SessionState.SetInt(Key,3);}
+                {if(p.panel.activeSelf || !p.activity.activeSelf || !p.activityStop.interactable)throw new Exception("Business view hidden or persistent stop unavailable");Capture(preview,"Logs/AutoPlayBusinessLive.png");p.activityStop.onClick.Invoke();SessionState.SetInt(Key,3);}
                 else if(stage==3 && client.CanManageSaves && !client.AutoPlayRunning)
                 {if(report.reason!="cancelled" || report.operations<1 || state.service_assignment.auto_assign)throw new Exception("Cancel or assignment restore failed");SessionState.SetString(Key+"report",report.run_id);p.Save();SessionState.SetInt(Key,4);}
                 else if(stage==4 && client.CanManageSaves && saves.Count==1)
@@ -31,19 +31,19 @@ namespace CatCafePreview.Editor
                 else if(stage==5 && client.CanManageSaves && report?.run_id==SessionState.GetString(Key+"report",""))
                 {if(client.BatchAutomatic || !p.details.text.Contains("中断"))throw new Exception("Save/load result lost or resumed");p.Open();p.SelectMode(1);p.SelectDays(0);p.Choose();p.Confirm();SessionState.SetInt(Key,6);}
                 else if(stage==6 && client.CanManageSaves && !client.AutoPlayRunning && report?.run_id!=SessionState.GetString(Key+"report","") && report?.reason=="day_limit")
-                {if(report.days!=1 || client.BatchAutomatic || !p.save.interactable)throw new Exception("Day limit did not stop: days="+report.days+" automatic="+client.BatchAutomatic+" save="+p.save.interactable);Capture(preview,"Logs/AutoPlayLiveResult.png");p.SelectMode(0);p.SelectDays(9);p.Choose();p.Confirm();SessionState.SetInt(Key,7);}
+                {if(report.days!=1 || client.BatchAutomatic || !p.save.interactable)throw new Exception("Day limit did not stop: days="+report.days+" automatic="+client.BatchAutomatic+" save="+p.save.interactable);p.Open();Capture(preview,"Logs/AutoPlayLiveResult.png");p.SelectMode(0);p.SelectDays(9);p.Choose();p.Confirm();SessionState.SetInt(Key,7);}
                 else if(stage==7 && client.AutoPlayRunning && report.operations>0)
                 {var serialized=new SerializedObject(client);serialized.FindProperty("port").intValue=0;serialized.ApplyModifiedPropertiesWithoutUndo();SessionState.SetInt(Key,8);}
                 else if(stage==8 && !client.CanSendCommands && !client.BatchAutomatic)
                 {var serialized=new SerializedObject(client);serialized.FindProperty("port").intValue=SessionState.GetInt(Key+"port",0);serialized.ApplyModifiedPropertiesWithoutUndo();SessionState.SetInt(Key,9);}
                 else if(stage==9 && client.CanSendCommands && client.AutoPlayRunning)
-                {if(client.BatchAutomatic || !p.proceed.interactable)throw new Exception("Reconnection resumed automatically");SessionState.SetInt(Key+"held",report.operations);SessionState.SetFloat(Key+"heldAt",Time.realtimeSinceStartup);SessionState.SetInt(Key,10);}
+                {p.activityDetails.onClick.Invoke();if(client.BatchAutomatic || !p.proceed.interactable)throw new Exception("Reconnection resumed automatically");SessionState.SetInt(Key+"held",report.operations);SessionState.SetFloat(Key+"heldAt",Time.realtimeSinceStartup);SessionState.SetInt(Key,10);}
                 else if(stage==10 && client.CanSendCommands && Time.realtimeSinceStartup-SessionState.GetFloat(Key+"heldAt",0)>2.5f)
                 {if(report.operations!=SessionState.GetInt(Key+"held",0))throw new Exception("Disconnected run kept progressing");p.Choose();SessionState.SetInt(Key,11);}
                 else if(stage==11 && client.AutoPlayRunning && report.operations>SessionState.GetInt(Key+"held",0))
-                {p.Close();SessionState.SetInt(Key,12);}
+                {p.Open();p.Close();if(!client.BatchAutomatic || client.BatchStopping || p.panel.activeSelf)throw new Exception("Closing the details stopped the run");p.activityStop.onClick.Invoke();SessionState.SetInt(Key,12);}
                 else if(stage==12 && client.CanManageSaves && !client.AutoPlayRunning)
-                {if(p.panel.activeSelf || report.reason!="cancelled")throw new Exception("Return to normal did not stop");Debug.Log("CAT_CAFE_AUTOPLAY_PLAY_OK: HTTP start / deferred cancel / manual mode restore / save and load report / one-day limit / network pause / explicit resume / close stops run");SessionState.SetInt(Key,0);EditorApplication.ExitPlaymode();EditorApplication.delayCall+=()=>EditorApplication.Exit(0);}
+                {if(p.panel.activeSelf || report.reason!="cancelled")throw new Exception("Return to normal did not stop");Debug.Log("CAT_CAFE_AUTOPLAY_PLAY_OK: HTTP start / deferred cancel / manual mode restore / save and load report / one-day limit / network pause / explicit resume / close continues run / persistent stop");SessionState.SetInt(Key,0);EditorApplication.ExitPlaymode();EditorApplication.delayCall+=()=>EditorApplication.Exit(0);}
             }
             catch(Exception error){SessionState.SetInt(Key,0);Debug.LogException(error);EditorApplication.Exit(1);}
         }
