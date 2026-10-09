@@ -138,6 +138,7 @@ namespace CatCafePreview
 
         public void ApplyPythonState(PythonCafeState state)
         {
+            var header=GetComponent<PythonBusinessHeader>();if(header!=null)header.Connected=true;
             var feedback=GetComponent<PythonEventPresentation>();if(feedback!=null)feedback.Apply(state);
             var presentation=GetComponent<PythonPresentation>();if(presentation!=null)presentation.Apply(state);
             string previous = selectedPythonId;
@@ -199,6 +200,7 @@ namespace CatCafePreview
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.Apply(state);
             var preparation=GetComponent<PythonPreparationPanel>();if(preparation!=null)preparation.Apply(state);
             var ended=GetComponent<PythonGameOverPanel>();if(ended!=null)ended.Apply(state);
+            GetComponent<PythonBusinessHeader>()?.RefreshControls();
             PrioritizeRequiredPanel();
             var eventList=GetComponent<PythonEventListPanel>();if(eventList!=null)eventList.Apply(state);
             GetComponent<PythonMenuPanel>()?.Apply(state);
@@ -343,6 +345,7 @@ namespace CatCafePreview
             if (growth != null) growth.RefreshControls();
             var auto = GetComponent<PythonAutoPanel>();
             if (auto != null) auto.RefreshControls();
+            GetComponent<PythonBusinessHeader>()?.RefreshControls();
             PrioritizeRequiredPanel();
             GetComponent<PythonAutoPlayPanel>()?.Focus();
             GetComponent<PythonBusinessLogPanel>()?.Focus();
@@ -473,6 +476,7 @@ namespace CatCafePreview
                     description.text += "\n" + item.name + "：体力 " + item.stamina + " / 疲労 " + item.fatigue + " / ストレス " + item.stress;
             }
             AppendObjectiveProgress();
+            GetComponent<PythonBusinessHeader>()?.RefreshControls();
             status.text = "Python接続中：" + pythonState.day + "日目 / 時刻 " + pythonState.tick + "/" + pythonState.opening_ticks
                 + " / 資金 " + pythonState.funds + (pythonState.closed ? " / 閉店" : pythonState.can_set_shifts ? " / 営業準備" : " / 営業中");
             if (!string.IsNullOrEmpty(pythonState.required_action))
@@ -545,6 +549,7 @@ namespace CatCafePreview
             if (auto != null) auto.RefreshControls();
             cats.interactable = false;
             foreach (var button in sceneButtons) button.interactable = false;
+            var header=GetComponent<PythonBusinessHeader>();if(header!=null){header.Connected=false;header.RefreshControls();}
             status.text = "Python未接続：" + message;
             description.text = "Python状態サーバーを起動してください。接続は自動で再試行します。";
             picture.texture = null; picture.enabled = false; emptyImage.enabled = true;

@@ -23,8 +23,8 @@ namespace CatCafePreview
         public bool ShowingSeats { get { return showSeats; } }
         public int OccupiedCount { get { return cards.FindAll(card=>card.gameObject.activeSelf && card.customerIcon.activeSelf).Count; } }
         public PythonCatCard GetSeatCard(int index) { return cards[index]; }
-        public void ShowSeats() { showSeats = true; Render(); }
-        public void ShowCats() { showSeats = false; Render(); }
+        public void ShowSeats() { showSeats = true; Render();GetComponent<PythonBusinessHeader>()?.RefreshControls(); }
+        public void ShowCats() { showSeats = false; Render();GetComponent<PythonBusinessHeader>()?.RefreshControls(); }
         public void Apply(PythonCafeState value)
         {
             state = value;
