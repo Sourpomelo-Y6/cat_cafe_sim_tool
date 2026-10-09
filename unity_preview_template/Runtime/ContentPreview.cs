@@ -198,6 +198,7 @@ namespace CatCafePreview
             var eventList=GetComponent<PythonEventListPanel>();if(eventList!=null)eventList.Apply(state);
             GetComponent<PythonMenuPanel>()?.Apply(state);
             GetComponent<PythonBusinessLogPanel>()?.Apply(state);
+            GetComponent<PythonPersistPanel>()?.Apply(state);
         }
         private void AppendObjectiveProgress()
         {
@@ -321,6 +322,7 @@ namespace CatCafePreview
             var eventList=GetComponent<PythonEventListPanel>();if(eventList!=null)eventList.RefreshControls();
             GetComponent<PythonMenuPanel>()?.RefreshControls();
             GetComponent<PythonBusinessLogPanel>()?.RefreshControls();
+            GetComponent<PythonPersistPanel>()?.RefreshControls();
             var visiting=GetComponent<PythonVisitingCatPanel>();if(visiting!=null)visiting.RefreshControls();
             var housing = GetComponent<PythonHousingPanel>();
             if (housing != null) housing.RefreshControls();
@@ -335,6 +337,7 @@ namespace CatCafePreview
             PrioritizeRequiredPanel();
             GetComponent<PythonAutoPlayPanel>()?.Focus();
             GetComponent<PythonBusinessLogPanel>()?.Focus();
+            GetComponent<PythonPersistPanel>()?.Focus();
         }
 
         private void PrioritizeRequiredPanel()
@@ -369,6 +372,7 @@ namespace CatCafePreview
 
         public void PythonNotice(string message)
         {
+            GetComponent<PythonPersistPanel>()?.Notify(message);
             GetComponent<PythonSavePanel>()?.Notify(message);
             GetComponent<PythonLegacySavePanel>()?.Notify(message);
             GetComponent<PythonServiceAssignmentPanel>()?.Notify(message);
@@ -484,6 +488,7 @@ namespace CatCafePreview
             GetComponent<PythonServiceAssignmentPanel>()?.Disconnect();
             GetComponent<PythonAutoPlayPanel>()?.Disconnect();
             GetComponent<PythonBusinessLogPanel>()?.Disconnect();
+            GetComponent<PythonPersistPanel>()?.Disconnect();
             GetComponent<PythonLegacySavePanel>()?.Disconnect();
             var missing=GetComponent<PythonMissingPanel>();if(missing!=null)missing.Disconnect();
             var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.Disconnect();

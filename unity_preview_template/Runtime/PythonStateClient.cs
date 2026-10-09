@@ -36,6 +36,7 @@ namespace CatCafePreview
         public PythonDispatchComparison dispatch_comparison;
         public PythonServiceAssignment service_assignment;
         public PythonAutoPlay autoplay;
+        public PythonPendingResults pending_results;
         public PythonIntakeState intake_request;
         public PythonVisitingCat visiting_cat;
         public PythonRegularIntroduction regular_introduction;
@@ -172,8 +173,16 @@ namespace CatCafePreview
             if(pendingAutomatic && !sendingCommand) { pending=null; pendingAutomatic=false; }
         }
         public PythonCafeState CurrentState { get { return current; } }
-        public bool CanLeaveResult { get { return pending == null && !AutoPlayRunning && !batchAutomatic && !batchStopRequested; } }
-        public bool CanManageSaves { get { return CanSendCommands && !AutoPlayRunning; } }
+        public bool CanLeaveResult { get { return pending == null && !HasPendingResults && !AutoPlayRunning && !batchAutomatic && !batchStopRequested; } }
+        public bool HasPendingResults => current?.pending_results?.count>0;
+        public bool CanRetryPersist => CanSendCommands && HasPendingResults;
+        public bool CanManageSaves { get { return CanSendCommands && !AutoPlayRunning && !HasPendingResults; } }
+        public void RetryPersist()
+        {
+            if(!CanRetryPersist)return;StopAutomatic();batchAutomatic=false;
+            pending=new PythonShiftCommand{kind="persist_retry",request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,expected_revision=current.revision,working_cats=new string[0]};
+            preview.RefreshPythonControls();
+        }
         public void NewGame(string objective)
         {
             if(!CanManageSaves || current.new_game_options == null || !Array.Exists(current.new_game_options,row=>row.choice==objective)) return;
@@ -399,7 +408,7 @@ namespace CatCafePreview
             GetComponent<PythonSavePanel>()?.Notify(kind=="save_game" ? "保存しています。完了までお待ちください。" : "保存したゲームを読み込んでいます。");
             preview.RefreshPythonControls();
         }
-        public bool CanChangeShifts { get { return online && pending == null && current != null && current.game_over == null && current.can_set_shifts && (current.player_interaction==null || !current.player_interaction.active); } }
+        public bool CanChangeShifts { get { return online && pending == null && current != null && !HasPendingResults && current.game_over == null && current.can_set_shifts && (current.player_interaction==null || !current.player_interaction.active); } }
         public bool CanSeatEquipment(string kind,string seat,string choice)
         {
             if(!CanManageSaves || current.game_over!=null || current.seat_equipment?.can_manage!=true || Array.Find(current.seat_equipment.seats,r=>r.seat_id==seat)==null)return false;
@@ -417,9 +426,9 @@ namespace CatCafePreview
         public void DayOff() { if(CanDayOff){StopAutomatic();QueuePlayer("day_off","","","");} }
         public bool CanStartAutoPlay(string objective,string mode,int days){var view=current?.autoplay;return CanManageSaves && view?.can_start==true && days>=1 && days<=10 && Array.Exists(view.objectives ?? new PythonAutoPlayOption[0],r=>r.choice==objective && r.can_start) && Array.Exists(view.modes ?? new PythonAutoPlayOption[0],r=>r.choice==mode);}
         public void StartAutoPlay(string objective,string mode,int days){if(!CanStartAutoPlay(objective,mode,days))return;StopAutomatic();batchAutomatic=true;batchStopRequested=false;pending=new PythonShiftCommand{kind="start_autoplay",request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,expected_revision=current.revision,working_cats=new string[0],autoplay_objective=objective,autoplay_mode=mode,autoplay_days=days};preview.RefreshPythonControls();}
-        public void ResumeAutoPlay(){if(!CanSendCommands || !AutoPlayRunning || batchStopRequested)return;StopAutomatic();batchAutomatic=true;preview.RefreshPythonControls();}
+        public void ResumeAutoPlay(){if(!CanSendCommands || HasPendingResults || !AutoPlayRunning || batchStopRequested)return;StopAutomatic();batchAutomatic=true;preview.RefreshPythonControls();}
         public void StopAutoPlay(){if(!AutoPlayRunning && !batchAutomatic && pending?.kind!="start_autoplay")return;batchAutomatic=false;batchStopRequested=true;StopAutomatic();QueueAutoPlay();preview.RefreshPythonControls();}
-        private void QueueAutoPlay(){if(!CanSendCommands)return;if(batchStopRequested && !AutoPlayRunning){batchStopRequested=false;return;}if(!AutoPlayRunning || (!batchAutomatic && !batchStopRequested))return;pending=new PythonShiftCommand{kind=batchStopRequested ? "stop_autoplay" : "step_autoplay",request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,expected_revision=current.revision,working_cats=new string[0]};preview.RefreshPythonControls();}
+        private void QueueAutoPlay(){if(!CanSendCommands || HasPendingResults)return;if(batchStopRequested && !AutoPlayRunning){batchStopRequested=false;return;}if(!AutoPlayRunning || (!batchAutomatic && !batchStopRequested))return;pending=new PythonShiftCommand{kind=batchStopRequested ? "stop_autoplay" : "step_autoplay",request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,expected_revision=current.revision,working_cats=new string[0]};preview.RefreshPythonControls();}
         public bool CanChangeAutoAssignment => CanManageSaves && current.game_over==null;
         public void ToggleAutoAssignment(){if(!CanChangeAutoAssignment || current.service_assignment==null)return;StopAutomatic();QueuePlayer("set_auto_assignment","",current.service_assignment.auto_assign ? "manual" : "automatic","");}
         public bool CanAssignService(string customer,string cat,string seat){var view=current?.service_assignment;return CanManageSaves && view?.can_assign==true && Array.Exists(view.customers ?? new PythonAssignmentCustomer[0],r=>r.customer_id==customer) && Array.Exists(view.cats ?? new PythonAssignmentCat[0],r=>r.cat_id==cat && r.available) && Array.Exists(view.seats ?? new PythonAssignmentSeat[0],r=>r.seat_id==seat && r.available);}
@@ -471,7 +480,7 @@ namespace CatCafePreview
             if (!IsOpen(state) || (current != null && (state.instance_id != current.instance_id || state.day != current.day))) StopAutomatic();
             if(current!=null && state.instance_id!=current.instance_id){batchAutomatic=false;batchStopRequested=false;}
             if(state.autoplay?.running!=true && pending?.kind!="start_autoplay"){batchAutomatic=false;batchStopRequested=false;}
-            current = state; online = true; preview.ApplyPythonState(state);
+            current = state; online = true;if(HasPendingResults){StopAutomatic();batchAutomatic=false;} preview.ApplyPythonState(state);
         }
         private IEnumerator Start()
         {
@@ -510,7 +519,7 @@ namespace CatCafePreview
                                     { var player=GetComponent<PythonPlayerPanel>();if(player!=null)player.Restore(); }
                                     if(command.kind=="new_game" || command.kind=="load_game" || command.kind=="load_python_game") { var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.ResetConfirmation();var menu=GetComponent<PythonNewGamePanel>(); if(menu!=null) menu.Close(); }
                                     notice = command.kind == "start_autoplay" ? "おまかせを開始しました。" : command.kind == "stop_autoplay" ? "おまかせを中止しました。実行結果を保存できます。" : command.kind == "step_autoplay" ? "" : command.kind == "assign_service" ? "選んだ客・猫・席で接客を開始しました。営業を進める操作で交流を進めます。" : command.kind == "set_auto_assignment" ? "自動割り当て設定を変更しました。" : command.kind == "set_shifts" ? "出勤・休養を変更しました。"
-                                        : command.kind == "save_game" ? "保存しました。" : command.kind == "load_game" || command.kind == "load_python_game" ? "保存したゲームを再開しました。"
+                                        : command.kind == "persist_retry" ? "交流結果を確定しました。セーブで進捗を保存してください。" : command.kind == "save_game" ? "保存しました。" : command.kind == "load_game" || command.kind == "load_python_game" ? "保存したゲームを再開しました。"
                                         : command.kind == "new_game" ? "新規ゲームを作成し、初期状態を保存しました。出勤・休養を設定して営業を始めてください。"
                                         : command.kind == "next_day" ? "翌日の営業準備へ進みました。出勤・休養を設定してください。"
                                         : command.kind == "resolve_intake" ? (command.choice == "accept" ? "保護猫を迎えました。休養予定で猫一覧に加わりました。" : "受け入れ依頼を見送りました。")
