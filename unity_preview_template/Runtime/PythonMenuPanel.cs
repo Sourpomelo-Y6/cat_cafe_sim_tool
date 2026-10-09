@@ -18,7 +18,7 @@ namespace CatCafePreview
         private PythonEventListPanel List=>GetComponent<PythonEventListPanel>();
         public void Open(){ClearReturnContext();CloseDetails();List.Close();panel.SetActive(true);panel.transform.SetAsLastSibling();RefreshControls();}
         public void Close(){ClearReturnContext();panel.SetActive(false);}
-        private void CloseDetails()
+        public void CloseDetails()
         {
             GetComponent<PythonAutoPlayPanel>()?.Close();GetComponent<PythonServiceAssignmentPanel>()?.Close();GetComponent<PythonObjectiveStartPanel>()?.Close();
             GetComponent<PythonItemsPanel>()?.Close();GetComponent<PythonExpansionPanel>()?.Close();GetComponent<PythonSeatEquipmentPanel>()?.Close();

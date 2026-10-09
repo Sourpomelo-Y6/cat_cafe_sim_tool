@@ -24,19 +24,31 @@ namespace CatCafePreview.Editor
             if(preparation.dayOff==null)Place(preparation.close.GetComponent<RectTransform>(),480,550,436,40);
             else Place(preparation.close.GetComponent<RectTransform>(),620,550,296,40);
             list.open=Button(root,"Event List Entry","イベント一覧",560,128,156,40);UnityEventTools.AddPersistentListener(list.open.onClick,list.Open);
-            list.panel=Box(root,"Event List",0,174,1280,626,new Color(0,0,0,.55f));var card=Box(list.panel.transform,"Card",170,8,940,600,new Color(.98f,.97f,.93f));Label(card.transform,"Title",24,18,892,50,25).text="イベント一覧";
+            list.panel=Box(root,"Event List",0,174,1280,626,new Color(0,0,0,.55f));var card=Box(list.panel.transform,"Card",170,8,940,600,new Color(.98f,.97f,.93f));list.title=Label(card.transform,"Title",24,18,892,50,25);list.title.text="イベント一覧";list.tabs=new Button[4];for(int i=0;i<4;i++){list.tabs[i]=Button(card.transform,"Category "+i,PythonEventListPanel.GroupNames[i],24+i*226,76,214,44);UnityEventTools.AddIntPersistentListener(list.tabs[i].onClick,list.SelectGroup,i);list.tabs[i].onClick.SetPersistentListenerState(0,UnityEngine.Events.UnityEventCallState.EditorAndRuntime);}
             list.entries=new Button[25];var callbacks=new UnityEngine.Events.UnityAction[]{list.Visiting,list.Intake,list.Store,list.Growth,list.Missing,list.Adoption,list.Dispatch,list.Regular,list.Reservation,list.Trust,list.GeneralDispatch,list.DispatchChoice,list.DispatchTrouble,list.DispatchIntroduction,list.Items,list.Expansion,list.SeatEquipment,list.RestSpace,list.WaitingArea,list.CustomerDirectory,list.PetShop,list.ObjectiveStart,list.DispatchComparison,list.ServiceAssignment,list.AutoPlay};
-            var area=Box(card.transform,"Events Scroll",24,76,892,404,new Color(.93f,.94f,.89f));var scroll=area.AddComponent<ScrollRect>();scroll.horizontal=false;scroll.movementType=ScrollRect.MovementType.Clamped;
-            var viewport=Box(area.transform,"Viewport",0,0,872,404,Color.white);viewport.AddComponent<Mask>().showMaskGraphic=false;scroll.viewport=viewport.GetComponent<RectTransform>();
-            var content=new GameObject("Content",typeof(RectTransform));content.transform.SetParent(viewport.transform,false);Place(content.GetComponent<RectTransform>(),0,0,872,14*40);scroll.content=content.GetComponent<RectTransform>();
-            var bar=DefaultControls.CreateScrollbar(new DefaultControls.Resources());bar.name="Scrollbar";bar.transform.SetParent(area.transform,false);Place(bar.GetComponent<RectTransform>(),878,0,14,404);scroll.verticalScrollbar=bar.GetComponent<Scrollbar>();scroll.verticalScrollbar.direction=Scrollbar.Direction.BottomToTop;
+            var area=Box(card.transform,"Events Scroll",24,138,892,342,new Color(.93f,.94f,.89f));var scroll=area.AddComponent<ScrollRect>();list.scroll=scroll;scroll.horizontal=false;scroll.movementType=ScrollRect.MovementType.Clamped;
+            var viewport=Box(area.transform,"Viewport",0,0,872,342,Color.white);viewport.AddComponent<Mask>().showMaskGraphic=false;scroll.viewport=viewport.GetComponent<RectTransform>();
+            var content=new GameObject("Content",typeof(RectTransform));content.transform.SetParent(viewport.transform,false);Place(content.GetComponent<RectTransform>(),0,0,872,14*40);scroll.content=content.GetComponent<RectTransform>();list.content=scroll.content;
+            var bar=DefaultControls.CreateScrollbar(new DefaultControls.Resources());bar.name="Scrollbar";bar.transform.SetParent(area.transform,false);Place(bar.GetComponent<RectTransform>(),878,0,14,342);scroll.verticalScrollbar=bar.GetComponent<Scrollbar>();scroll.verticalScrollbar.direction=Scrollbar.Direction.BottomToTop;
             // Keep legacy route slots for serialized scenes; only event routes appear in this list.
-            for(int i=0;i<list.entries.Length;i++){list.entries[i]=Button(content.transform,"Event "+i,"状態を取得しています",4,i*40,860,36);list.entries[i].GetComponentInChildren<Text>().alignment=TextAnchor.MiddleLeft;UnityEventTools.AddPersistentListener(list.entries[i].onClick,callbacks[i]);list.entries[i].gameObject.SetActive(i<14);}
+            for(int i=0;i<list.entries.Length;i++){list.entries[i]=Button(content.transform,"Event "+i,"状態を取得しています",4,i*46,860,42);list.entries[i].GetComponentInChildren<Text>().alignment=TextAnchor.MiddleLeft;list.entries[i].GetComponentInChildren<Text>().fontSize=16;UnityEventTools.AddPersistentListener(list.entries[i].onClick,callbacks[i]);list.entries[i].onClick.SetPersistentListenerState(0,UnityEngine.Events.UnityEventCallState.EditorAndRuntime);list.entries[i].gameObject.SetActive(i==0 || i==1 || i==7 || i==8);}
+            BuildReturnRoutes(preview,list);
             BuildMenu(preview,root,list);
             BuildActivity(preview,root);
             list.notice=Label(card.transform,"Notice",24,492,892,50,16);list.close=Button(card.transform,"Close","閉じる",480,550,436,40);UnityEventTools.AddPersistentListener(list.close.onClick,list.Close);
             if(preview.GetComponent<PythonBusinessHeader>()!=null)PythonBusinessHeaderSetup.Configure(preview);
             list.open.interactable=false;list.panel.SetActive(false);EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);Debug.Log("CAT_CAFE_EVENT_LIST_UI_OK");
+        }
+        static void BuildReturnRoutes(ContentPreview preview,PythonEventListPanel list)
+        {
+            string[] names={"PythonVisitingCatPanel","PythonIntakePanel","PythonStoreEventPanel","PythonGrowthPanel","PythonMissingPanel","PythonAdoptionPanel","PythonDispatchPanel","PythonRegularIntroductionPanel","PythonReservationPanel","PythonCustomerTrustPanel","PythonGeneralDispatchPanel","PythonDispatchChoicePanel","PythonDispatchTroublePanel","PythonDispatchIntroductionPanel"};
+            list.detailPanels=new GameObject[14];list.detailClose=new Button[14];
+            for(int i=0;i<14;i++)
+            {
+                var component=preview.GetComponent(names[i]);if(component==null)continue;var target=(GameObject)component.GetType().GetField("panel").GetValue(component);list.detailPanels[i]=target;
+                var field=component.GetType().GetField("close");if(field!=null)list.detailClose[i]=(Button)field.GetValue(component);
+                else{var card=target.transform.Find("Request Card");var old=card.Find("Event List Return");if(old!=null)UnityEngine.Object.DestroyImmediate(old.gameObject);list.detailClose[i]=Button(card,"Event List Return","イベント一覧へ戻る",480,550,436,40);list.detailClose[i].gameObject.SetActive(false);}
+            }
         }
         static void BuildMenu(ContentPreview preview,Transform root,PythonEventListPanel list)
         {
@@ -63,7 +75,7 @@ namespace CatCafePreview.Editor
             Action apply=()=>typeof(PythonStateClient).GetMethod("Accept",flags).Invoke(client,new object[]{state});apply();var list=preview.GetComponent<PythonEventListPanel>();list.Open();
             if(preview.GetComponent<PythonPreparationPanel>().close.transform.parent.Find("Visiting Cat Entry")!=null)throw new Exception("Old visiting entry remains");
             if(!list.panel.activeSelf || !list.entries[0].interactable || list.entries[1].interactable || !list.entries[0].GetComponentInChildren<Text>().text.Contains("1/3"))throw new Exception("Event list status mismatch");
-            if(Array.FindAll(list.entries,b=>b.gameObject.activeSelf).Length!=14)throw new Exception("Management items remain in event list");var menu=preview.GetComponent<PythonMenuPanel>();menu.Open();if(list.panel.activeSelf || !menu.panel.activeSelf || menu.entries.Length!=PythonMenuPanel.Routes.Length)throw new Exception("Menu and event list are not separated");list.Open();if(menu.panel.activeSelf)throw new Exception("Opening events did not close menu");
+            if(list.entries.Length!=25 || list.tabs.Length!=4 || Array.FindAll(list.entries,b=>b.gameObject.activeSelf).Length!=4)throw new Exception("Management items remain in event list");var menu=preview.GetComponent<PythonMenuPanel>();menu.Open();if(list.panel.activeSelf || !menu.panel.activeSelf || menu.entries.Length!=PythonMenuPanel.Routes.Length)throw new Exception("Menu and event list are not separated");list.Open();if(menu.panel.activeSelf)throw new Exception("Opening events did not close menu");
             Canvas.ForceUpdateCanvases();typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{preview,"Logs/EventList.png"});
             list.Visiting();if(list.panel.activeSelf || !preview.GetComponent<PythonVisitingCatPanel>().panel.activeSelf)throw new Exception("Visiting navigation failed");
             list.Open();list.Disconnect();if(list.entries[0].interactable)throw new Exception("Offline event navigation enabled");apply();
