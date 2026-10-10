@@ -517,11 +517,8 @@ namespace CatCafePreview
                     // Retry once with the SAME request ID if the reply was lost.
                     for (int attempt = 0; attempt < 2; attempt++)
                     {
-                        using (var request = new UnityWebRequest("http://127.0.0.1:" + port + "/commands", "POST"))
+                        using (var request = new CafeRequest(CafeBackends.Resolve(port), "/commands", JsonUtility.ToJson(command)))
                         {
-                            request.uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(JsonUtility.ToJson(command)));
-                            request.downloadHandler = new DownloadHandlerBuffer();
-                            request.SetRequestHeader("Content-Type", "application/json"); request.timeout = 3;
                             yield return request.SendWebRequest();
                             if (request.result != UnityWebRequest.Result.Success) {StopAutomatic();batchAutomatic=false;}
                             if (request.result == UnityWebRequest.Result.ConnectionError && attempt == 0) continue;
@@ -529,7 +526,7 @@ namespace CatCafePreview
                             {
                                 if (request.result == UnityWebRequest.Result.Success)
                                 {
-                                    var reply = JsonUtility.FromJson<PythonCommandReply>(request.downloadHandler.text);
+                                    var reply = JsonUtility.FromJson<PythonCommandReply>(request.Text);
                                     if(command.kind=="load_game" || command.kind=="load_python_game" || command.kind=="new_game"){GetComponent<PythonEventPresentation>()?.Clear();GetComponent<PythonEventListPanel>()?.ResetNavigation();GetComponent<PythonCatDetailsPanel>()?.ResetSelection();GetComponent<PythonMenuPanel>()?.ResetFacilities();GetComponent<PythonCatAcquisitionNavigation>()?.ResetNavigation();}
                                     Accept(reply.state);
                                     if(command.kind=="load_python_game")GetComponent<PythonLegacySavePanel>()?.Close();if(command.kind=="load_game" || command.kind=="load_python_game")GetComponent<PythonSaveBrowser>()?.Close();
@@ -562,7 +559,7 @@ namespace CatCafePreview
                                 }
                                 else
                                 {
-                                    var reply = JsonUtility.FromJson<PythonCommandReply>(request.downloadHandler.text);
+                                    var reply = JsonUtility.FromJson<PythonCommandReply>(request.Text);
                                     notice = reply != null && !string.IsNullOrEmpty(reply.error) ? reply.error : "操作結果を確認できません。最新状態を取得します。";
                                 }
                             }
@@ -573,16 +570,15 @@ namespace CatCafePreview
                     pending = null;
                     pendingAutomatic=false; sendingCommand=false;
                 }
-                using (var request = UnityWebRequest.Get("http://127.0.0.1:" + port + "/state"))
+                using (var request = new CafeRequest(CafeBackends.Resolve(port), "/state"))
                 {
-                    request.timeout = 3;
                     yield return request.SendWebRequest();
                     if (request.result != UnityWebRequest.Result.Success) { StopAutomatic();batchAutomatic=false; online = false; preview.PythonConnectionError(request.error); }
                     else
                     {
                         try
                         {
-                            var state = JsonUtility.FromJson<PythonCafeState>(request.downloadHandler.text);
+                            var state = JsonUtility.FromJson<PythonCafeState>(request.Text);
                             Accept(state);
                             if (notice != "") preview.PythonNotice(notice);
                         }
@@ -592,14 +588,13 @@ namespace CatCafePreview
                 var panel = GetComponent<PythonSavePanel>();
                 if (panel != null)
                 {
-                    using (var listRequest = UnityWebRequest.Get("http://127.0.0.1:" + port + "/saves"))
+                    using (var listRequest = new CafeRequest(CafeBackends.Resolve(port), "/saves"))
                     {
-                        listRequest.timeout = 3;
                         yield return listRequest.SendWebRequest();
                         try
                         {
                             if(listRequest.result == UnityWebRequest.Result.Success)
-                                panel.Apply(JsonUtility.FromJson<PythonSaveList>(listRequest.downloadHandler.text));
+                                panel.Apply(JsonUtility.FromJson<PythonSaveList>(listRequest.Text));
                             else { StopAutomatic();batchAutomatic=false; panel.ListUnavailable(); }
                         }
                         catch(Exception) { StopAutomatic();batchAutomatic=false; panel.ListUnavailable(); }

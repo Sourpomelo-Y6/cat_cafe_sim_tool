@@ -28,14 +28,14 @@ namespace CatCafePreview
         private IEnumerator ReadPreview()
         {
             Invalidate();int ticket=generation;inspecting=true;notice.text="保存内容を確認しています。";RefreshControls();
-            using(var request=UnityWebRequest.Get("http://127.0.0.1:"+Port+"/python-save?path="+UnityWebRequest.EscapeURL(path.text.Trim().Trim('"'))))
+            using(var request=new CafeRequest(CafeBackends.Resolve(Port),"/python-save?path="+UnityWebRequest.EscapeURL(path.text.Trim().Trim('"'))))
             {
                 request.timeout=30;yield return request.SendWebRequest();
                 if(ticket!=generation)yield break;
                 inspecting=false;
                 try
                 {
-                    var row=JsonUtility.FromJson<PythonLegacySavePreview>(request.downloadHandler.text);
+                    var row=JsonUtility.FromJson<PythonLegacySavePreview>(request.Text);
                     if(request.result!=UnityWebRequest.Result.Success)throw new Exception(!string.IsNullOrEmpty(row?.error) ? row.error : "内容を確認できません。接続とパスを確認してください。");
                     AcceptPreview(row);
                 }

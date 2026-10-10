@@ -70,17 +70,17 @@ namespace CatCafePreview
             {
                 if(!busy)
                 {
-                    using(var request=UnityWebRequest.Get("http://127.0.0.1:"+port+"/state"))
+                    using(var request=new CafeRequest(CafeBackends.Resolve(port),"/state"))
                     {
-                        request.timeout=3;yield return request.SendWebRequest();
+                        yield return request.SendWebRequest();
                         if(busy)continue;
                         if(request.result!=UnityWebRequest.Result.Success)Disconnect("Python未接続です。状態サーバーを起動してください。");
-                        else {try{Apply(JsonUtility.FromJson<PythonCafeState>(request.downloadHandler.text));if(!commandFailed)notice.text=Guide;}catch(Exception ex){Disconnect(ex.Message);}}
+                        else {try{Apply(JsonUtility.FromJson<PythonCafeState>(request.Text));if(!commandFailed)notice.text=Guide;}catch(Exception ex){Disconnect(ex.Message);}}
                     }
-                    if(online && !busy)using(var request=UnityWebRequest.Get("http://127.0.0.1:"+port+"/saves"))
+                    if(online && !busy)using(var request=new CafeRequest(CafeBackends.Resolve(port),"/saves"))
                     {
-                        request.timeout=3;yield return request.SendWebRequest();if(busy)continue;
-                        try {if(request.result!=UnityWebRequest.Result.Success)throw new Exception("保存一覧を取得できません。");ApplySaves(JsonUtility.FromJson<PythonSaveList>(request.downloadHandler.text));}
+                        yield return request.SendWebRequest();if(busy)continue;
+                        try {if(request.result!=UnityWebRequest.Result.Success)throw new Exception("保存一覧を取得できません。");ApplySaves(JsonUtility.FromJson<PythonSaveList>(request.Text));}
                         catch(Exception ex){savesAvailable=false;GetComponent<PythonSaveBrowser>()?.Unavailable();if(saveDetails!=null)saveDetails.text="保存一覧を取得できません。接続を確認してください。";notice.text=ex.Message;RefreshControls();}
                     }
                 }
@@ -97,15 +97,14 @@ namespace CatCafePreview
                 kind=kind,choice=choice,save_id=saveId,working_cats=new string[0]};
             for(int attempt=0;attempt<2;attempt++)
             {
-                using(var request=new UnityWebRequest("http://127.0.0.1:"+port+"/commands","POST"))
+                using(var request=new CafeRequest(CafeBackends.Resolve(port),"/commands",JsonUtility.ToJson(command)))
                 {
-                    request.uploadHandler=new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(JsonUtility.ToJson(command)));request.downloadHandler=new DownloadHandlerBuffer();
-                    request.SetRequestHeader("Content-Type","application/json");request.timeout=5;yield return request.SendWebRequest();
+                    request.timeout=5;yield return request.SendWebRequest();
                     if(request.result==UnityWebRequest.Result.ConnectionError && attempt==0)continue;
                     bool accepted=false;
                     try
                     {
-                        var reply=JsonUtility.FromJson<PythonCommandReply>(request.downloadHandler.text);
+                        var reply=JsonUtility.FromJson<PythonCommandReply>(request.Text);
                         if(request.result!=UnityWebRequest.Result.Success)throw new Exception(reply!=null && !string.IsNullOrEmpty(reply.error) ? reply.error : "通信に失敗しました。接続後に再試行してください。");
                         PythonStateClient.Validate(reply.state);accepted=true;
                     }

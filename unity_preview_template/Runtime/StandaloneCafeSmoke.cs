@@ -1,0 +1,61 @@
+using System;
+using System.IO;
+using UnityEngine;
+using UnityEngine.Networking;
+
+namespace CatCafePreview
+{
+    public static class StandaloneCafeSmoke
+    {
+        private static int checks;
+        private static void Check(bool condition, string message) { checks++; if (!condition) throw new Exception(message); }
+        private static CafeResponse Request(LocalCafeBackend b, string route, string body = null)
+        {
+            CafeResponse response = null; var request = b.Request(route, body, r => response = r);
+            while (request.MoveNext()) { }
+            return response;
+        }
+        private static PythonShiftCommand Command(LocalCafeBackend b, string kind, int slot = 1) => new PythonShiftCommand
+        {
+            request_id = Guid.NewGuid().ToString("N"), instance_id = b.Simulation.State.instance_id, expected_revision = b.Simulation.State.revision,
+            kind = kind, choice = "free", working_cats = new string[0], save_slot = slot, save_id = slot.ToString()
+        };
+        private static void Send(LocalCafeBackend b, string kind, int slot = 1)
+        {
+            var reply = Request(b, "/commands", JsonUtility.ToJson(Command(b, kind, slot)));
+            Check(reply.result == UnityWebRequest.Result.Success, kind + ": " + reply.error);
+        }
+        public static void Run(string reportPath)
+        {
+            checks = 0;
+            string directory = Path.Combine(Path.GetDirectoryName(Path.GetFullPath(reportPath)), "player-smoke-saves");
+            var b = new LocalCafeBackend(directory);
+            bool restarted = b.ListSaves().saves.Length > 0;
+            if (restarted) { Send(b, "load_game", 3); Check(b.Simulation.State.day == 2 && b.Simulation.State.phase == "preparation", "Cross-process restart"); }
+            Send(b, "new_game");
+            var command = Command(b, "start_business"); string payload = JsonUtility.ToJson(command);
+            var first = Request(b, "/commands", payload); Check(first.result == UnityWebRequest.Result.Success, "Start failed");
+            int tick = b.Simulation.State.tick; double funds = b.Simulation.State.funds;
+            Check(Request(b, "/commands", payload).text == first.text && b.Simulation.State.tick == tick && b.Simulation.State.funds == funds, "Duplicate command changed state");
+            command.kind = "advance_business";
+            Check(Request(b, "/commands", JsonUtility.ToJson(command)).result == UnityWebRequest.Result.ProtocolError && b.Simulation.State.tick == tick, "Reused ID accepted");
+            var stale = Command(b, "advance_business"); stale.expected_revision--;
+            Check(Request(b, "/commands", JsonUtility.ToJson(stale)).result == UnityWebRequest.Result.ProtocolError && b.Simulation.State.tick == tick, "Stale command accepted");
+            while (b.Simulation.State.tick < 11) Send(b, "advance_business");
+            Check(b.Simulation.State.exchanges.Count > 0, "No active service at checkpoint"); Send(b, "save_game", 2);
+            while (b.Simulation.State.phase != "closed") Send(b, "advance_business");
+            funds = b.Simulation.State.funds; double revenue = b.Simulation.State.revenue; int completed = b.Simulation.State.completed;
+            Send(b, "load_game", 2);
+            while (b.Simulation.State.phase != "closed") Send(b, "advance_business");
+            Check(b.Simulation.State.funds == funds && b.Simulation.State.revenue == revenue && b.Simulation.State.completed == completed, "Resume changed settlement");
+            Send(b, "save_game", 2); Send(b, "load_game", 2);
+            Check(b.Simulation.State.funds == funds, "Closed save charged expenses again");
+            Send(b, "next_day"); Send(b, "save_game", 3);
+            Check(Request(b, "/python-save?path=unused").result == UnityWebRequest.Result.ProtocolError, "Unsupported legacy route accepted");
+            var bad = Command(b, "load_game"); bad.save_id = "../anything";
+            Check(Request(b, "/commands", JsonUtility.ToJson(bad)).result == UnityWebRequest.Result.ProtocolError, "Path used as save ID");
+            Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(reportPath)));
+            File.WriteAllText(reportPath, "{\"passed\":true,\"checks\":" + checks + ",\"cross_process_restart\":" + restarted.ToString().ToLowerInvariant() + ",\"day\":" + b.Simulation.State.day + ",\"funds\":" + funds.ToString(System.Globalization.CultureInfo.InvariantCulture) + "}");
+        }
+    }
+}

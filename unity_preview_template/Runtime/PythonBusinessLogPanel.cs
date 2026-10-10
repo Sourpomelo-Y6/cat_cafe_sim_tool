@@ -31,12 +31,12 @@ namespace CatCafePreview
         {
             int ticket=++generation;busy=true;RefreshControls();notice.text=output ? "営業ログを出力しています。" : "営業ログを確認しています。";
             string route=output ? "/business-log/export" : "/business-log?offset="+offset+"&path="+UnityWebRequest.EscapeURL(source);
-            using(var request=UnityWebRequest.Get("http://127.0.0.1:"+Client.ServerPort+route))
+            using(var request=new CafeRequest(CafeBackends.Resolve(Client.ServerPort),route))
             {
                 request.timeout=60;yield return request.SendWebRequest();if(ticket!=generation)yield break;busy=false;
                 try
                 {
-                    var row=JsonUtility.FromJson<PythonBusinessLogView>(request.downloadHandler.text);
+                    var row=JsonUtility.FromJson<PythonBusinessLogView>(request.Text);
                     if(request.result!=UnityWebRequest.Result.Success)throw new Exception(row?.error ?? "接続とファイルのパスを確認してください。");
                     if(!Client.CanManageSaves || row.instance_id!=Client.CurrentState.instance_id || row.revision!=Client.CurrentState.revision)throw new Exception("営業状態が変わりました。現在のログを選び直してください。");
                     if(output){string file=WriteExport(row.log_json,exportDirectory);path.SetTextWithoutNotify(file);notice.text="出力しました：\n"+file;}
