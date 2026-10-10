@@ -12,7 +12,10 @@ namespace CatCafePreview
         private System.Collections.Generic.HashSet<string> draft;
         private int draftRevision;
         public bool HasProposal { get { return draft!=null; } }
-        private bool Working(PythonCatState cat) { return draft==null ? cat.working : draft.Contains(cat.cat_id); }
+        public PythonCafeState CurrentState=>current;
+        public string SelectedCatId=>selectedId;
+        public PythonCatState[] Rows=>VisibleCats;
+        public bool Working(PythonCatState cat) { return draft==null ? cat.working : draft.Contains(cat.cat_id); }
         public void ProposeRest()
         {
             if(propose==null || !propose.interactable)return;
@@ -48,12 +51,15 @@ namespace CatCafePreview
         }
         public void Open()
         {
-            if(current==null || !current.can_set_shifts || current.closed || current.game_over!=null)return;
+            if(current==null || !current.can_set_shifts || current.closed || current.game_over!=null || GetComponent<PythonStateClient>().AutoPlayRunning)return;
             panel.SetActive(true);panel.transform.SetAsLastSibling();Render();
             Canvas.ForceUpdateCanvases();if(goalScroll!=null)goalScroll.verticalNormalizedPosition=1;if(catsScroll!=null)catsScroll.verticalNormalizedPosition=1;
         }
         public void Close() { draft=null;panel.SetActive(false);Render();RefreshControls(); }
         public void OpenDayOff() { if(dayOff!=null && dayOff.interactable)GetComponent<PythonDayOffPanel>()?.Open(); }
+        public bool CanShift(string id,bool working){var cat=current?.cats==null?null:Array.Find(current.cats,c=>c.cat_id==id);return online && cat!=null && !GetComponent<PythonStateClient>().AutoPlayRunning && GetComponent<PythonStateClient>().CanChangeShifts && string.IsNullOrEmpty(current.required_action) && (working?!Working(cat) && cat.health_status=="healthy" && cat.activity=="cafe":Working(cat));}
+        public void SelectCatId(string id){int index=Array.FindIndex(VisibleCats,c=>c.cat_id==id);if(index>=0)SelectCat(index);}
+        public void ShiftCat(string id,bool working){if(!CanShift(id,working))return;SelectCatId(id);SetShift(working);}
         public void Work() { SetShift(true); }
         public void Rest() { SetShift(false); }
         private void SetShift(bool working)
@@ -100,37 +106,40 @@ namespace CatCafePreview
         {
             if(selectedDetails==null)return;var cat=Selected;
             if(cat==null){selectedDetails.text="選択できる猫がいません。";return;}
-            string condition=cat.health_label+" / "+cat.activity_label;
+            string condition=PythonCatCard.Health(cat)+" / "+PythonCatCard.Activity(cat,false);
             selectedDetails.text=cat.name+"："+(Working(cat) ? "出勤" : "休養・不在")+" / "+condition
                 +"\n体力 "+cat.stamina.ToString("0.#")+"/"+cat.max_stamina.ToString("0.#")+" / 疲労 "+cat.fatigue.ToString("0.#")+" / ストレス "+cat.stress.ToString("0.#")
                 +"\n"+cat.shift_forecast
-                +"\n"+(cat.health_status!="healthy" || cat.activity!="cafe" ? "体調・活動の状態により出勤できません。" : "「出勤にする」「休養にする」で切り替えます。");
+                +"\n"+(cat.health_status!="healthy" || cat.activity!="cafe" ? "体調・活動の状態により出勤できません。" : "一覧の「出勤」「休養」で切り替えます。");
         }
         private void RenderNotice()
         {
             if(!online){notice.text="Python未接続です。再接続後に出勤の変更と営業開始ができます。";return;}
             var client=GetComponent<PythonStateClient>();
+            if(client.HasPendingResults){notice.text="接客結果の保存を再試行してから、営業準備を進めてください。";return;}
+            if(client.AutoPlayRunning){notice.text="おまかせ実行中です。停止してから出勤を変更できます。";return;}
+            if(current.player_interaction?.active==true){notice.text="猫との交流を終了してから、営業準備を進めてください。";return;}
             if(!client.CanLeaveResult){notice.text="操作を送信しています。完了するまでお待ちください。";return;}
             if(!string.IsNullOrEmpty(current.required_action)){notice.text="営業開始前に確認してください："+current.required_action;return;}
-            if(draft!=null){notice.text="休養案（未確定）：手動で変更し「案を確定」を押してください。閉じる・取消で破棄します。全員休養の場合は確定後に休業できます。";return;}
-            if(!Array.Exists(current.cats ?? new PythonCatState[0],cat=>cat.working)){notice.text="出勤する猫がいません。猫を選んで「出勤にする」を押してください。";return;}
+            if(draft!=null){notice.text="休養案（未確定）：一覧で変更し「休養案を確定」を押してください。閉じる・取消で破棄します。全員休養の場合は確定後に休業できます。";return;}
+            if(!Array.Exists(current.cats ?? new PythonCatState[0],cat=>cat.working)){notice.text="出勤する猫がいません。一覧の「出勤」を押してください。";return;}
             notice.text="出勤する猫を確認したら「営業開始」を押してください。";
         }
         public void RefreshControls()
         {
             var client=GetComponent<PythonStateClient>();var cat=Selected;
-            bool ready=online && client.CanChangeShifts && cat!=null && string.IsNullOrEmpty(current.required_action);
+            bool ready=online && !client.AutoPlayRunning && client.CanChangeShifts && cat!=null && string.IsNullOrEmpty(current.required_action);
             if(work!=null)work.interactable=ready && !Working(cat) && cat.health_status=="healthy" && cat.activity=="cafe";
             if(rest!=null)rest.interactable=ready && Working(cat);
             if(cats!=null)cats.interactable=online && client.CanManageSaves && VisibleCats.Length>0;
             if(start!=null)start.interactable=online && current!=null && current.can_set_shifts && !current.closed && current.game_over==null && client.CanProgressBusiness && draft==null;
             if(dayOff!=null)dayOff.interactable=draft==null && online && client.CanManageSaves && current!=null && current.day_off!=null;
-            bool proposalReady=online && client.CanChangeShifts && current!=null && string.IsNullOrEmpty(current.required_action);
+            bool proposalReady=online && !client.AutoPlayRunning && client.CanChangeShifts && current!=null && string.IsNullOrEmpty(current.required_action);
             if(propose!=null)propose.interactable=proposalReady && current.rest_proposal!=null;
             if(confirmProposal!=null)confirmProposal.interactable=proposalReady && draft!=null;
             if(cancelProposal!=null)cancelProposal.interactable=draft!=null;
-            open.interactable=current!=null;close.interactable=true;if(current!=null)RenderNotice();
+            open.interactable=current!=null && !client.AutoPlayRunning;close.interactable=true;if(current!=null)RenderNotice();GetComponent<PythonPreparationRoster>()?.Refresh();
         }
-        public void Disconnect() { online=false;RefreshControls(); }
+        public void Disconnect() { online=false;draft=null;Render();RefreshControls(); }
     }
 }

@@ -67,7 +67,7 @@ namespace CatCafePreview.Editor
             panel.dayOff=Button(card.transform,"Day Off","今日は休業する",322,550,282);UnityEventTools.AddPersistentListener(panel.dayOff.onClick,panel.OpenDayOff);
             panel.close=Button(card.transform,"Close","閉じて猫一覧へ",620,550,296);UnityEventTools.AddPersistentListener(panel.close.onClick,panel.Close);
             var entry=root.Find("Preparation Entry");if(entry!=null)panel.open=entry.GetComponent<Button>();else {panel.open=Button(root,"Preparation Entry","営業準備の案内",332,24,240);UnityEventTools.AddPersistentListener(panel.open.onClick,panel.Open);}
-            panel.open.gameObject.SetActive(false);overlay.SetActive(false);PythonCatVisibilitySetup.Configure(preview);EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);Debug.Log("CAT_CAFE_PREPARATION_UI_OK");
+            panel.open.gameObject.SetActive(false);overlay.SetActive(false);PythonCatVisibilitySetup.Configure(preview);EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);PythonPreparationLayout.RefreshIfReady();Debug.Log("CAT_CAFE_PREPARATION_UI_OK");
         }
         public static void BuildAndVerify()
         {

@@ -31,7 +31,7 @@ namespace CatCafePreview.Editor
         [MenuItem("Cat Cafe/開発用/UI再生成/譲渡済み猫の表示切替",false,44)]
         public static void Build()
         {
-            var scene=EditorSceneManager.OpenScene("Assets/Scenes/CatCafePythonState.unity");Configure(UnityEngine.Object.FindObjectOfType<ContentPreview>());EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);Debug.Log("CAT_CAFE_CAT_VISIBILITY_UI_OK");
+            var scene=EditorSceneManager.OpenScene("Assets/Scenes/CatCafePythonState.unity");Configure(UnityEngine.Object.FindObjectOfType<ContentPreview>());EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);PythonPreparationLayout.RefreshIfReady();Debug.Log("CAT_CAFE_CAT_VISIBILITY_UI_OK");
         }
         public static void BuildAndVerify()
         {
