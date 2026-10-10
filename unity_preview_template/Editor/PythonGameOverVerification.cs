@@ -30,10 +30,10 @@ namespace CatCafePreview.Editor
                 var client=UnityEngine.Object.FindObjectOfType<PythonStateClient>();var title=UnityEngine.Object.FindObjectOfType<PythonTitleScreen>();
                 if(stage==1 && client!=null && client.CanManageSaves)
                 {
-                    Check(client);SessionState.SetInt(Key+"count",client.GetComponent<PythonSavePanel>().Count);client.GetComponent<PythonGameOverPanel>().save.onClick.Invoke();
+                    Check(client);SessionState.SetInt(Key+"revision",client.CurrentState.revision);client.GetComponent<PythonGameOverPanel>().save.onClick.Invoke();var browser=client.GetComponent<PythonSaveBrowser>();browser.cards[0].onClick.Invoke();browser.Choose();browser.Confirm();
                     if(client.GetComponent<PythonGameOverPanel>().save.interactable || client.GetComponent<PythonGameOverPanel>().title.interactable)throw new Exception("Pending result guard failed");SessionState.SetInt(Key,2);
                 }
-                else if(stage==2 && client!=null && client.CanManageSaves && client.GetComponent<PythonSavePanel>().Count>SessionState.GetInt(Key+"count",0))
+                else if(stage==2 && client!=null && client.CanManageSaves && client.CurrentState.revision>SessionState.GetInt(Key+"revision",0) && client.GetComponent<PythonSavePanel>().Count>0)
                 {Check(client);client.GetComponent<PythonGameOverPanel>().title.onClick.Invoke();SessionState.SetInt(Key,3);}
                 else if(stage==3 && title!=null && title.continueGame.interactable)
                 {title.continueGame.onClick.Invoke();title.saves.value=0;title.resume.onClick.Invoke();SessionState.SetInt(Key,4);}
@@ -43,7 +43,7 @@ namespace CatCafePreview.Editor
                     client.GetComponent<PythonGameOverPanel>().title.onClick.Invoke();SessionState.SetInt(Key,5);
                 }
                 else if(stage==5 && title!=null && title.newGame.interactable)
-                {title.newGame.onClick.Invoke();title.objectives.value=3;title.SelectObjective(3);title.startGame.onClick.Invoke();SessionState.SetInt(Key,6);}
+                {title.newGame.onClick.Invoke();title.objectives.value=3;title.SelectObjective(3);title.startGame.onClick.Invoke();title.startGame.onClick.Invoke();SessionState.SetInt(Key,6);}
                 else if(stage==6 && client!=null && client.CanManageSaves)
                 {
                     if(client.CurrentState.game_over!=null || client.GetComponent<PythonGameOverPanel>().panel.activeSelf || !client.CanChangeShifts)throw new Exception("New game did not clear result");

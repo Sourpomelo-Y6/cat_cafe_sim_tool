@@ -57,7 +57,7 @@ namespace CatCafePreview.Editor
                         Canvas.ForceUpdateCanvases();
                         if(title.conditions.preferredHeight>title.conditions.rectTransform.rect.height)throw new Exception("Conditions text clipped: "+objective);
                         if(Camera.main==null || !Camera.main.isActiveAndEnabled)throw new Exception("Title camera missing");
-                        title.startGame.onClick.Invoke();SessionState.SetInt(Key,22);
+                        title.startGame.onClick.Invoke();title.startGame.onClick.Invoke();SessionState.SetInt(Key,22);
                     }
                     else if(stage==22 && client!=null && client.CanManageSaves)
                     {
@@ -131,7 +131,7 @@ namespace CatCafePreview.Editor
                 if(stage==1 && title!=null && title.newGame.interactable)
                 {
                     if(!title.home.activeSelf)throw new Exception("Title entry failed");
-                    title.newGame.onClick.Invoke();title.objectives.value=3;title.SelectObjective(3);title.startGame.onClick.Invoke();
+                    title.newGame.onClick.Invoke();title.objectives.value=3;title.SelectObjective(3);title.startGame.onClick.Invoke();title.startGame.onClick.Invoke();
                     if(title.startGame.interactable)throw new Exception("Pending start guard failed");SessionState.SetInt(Key,2);
                 }
                 else if(stage==2 && client!=null && client.CanManageSaves)

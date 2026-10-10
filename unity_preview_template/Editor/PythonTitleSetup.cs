@@ -108,7 +108,7 @@ namespace CatCafePreview.Editor
             panel.resume=MakeButton(panel.savesPanel.transform,"Resume","このゲームを再開",40,340);UnityEventTools.AddPersistentListener(panel.resume.onClick,panel.Resume);
             back=MakeButton(panel.savesPanel.transform,"Back","戻る",440,340);UnityEventTools.AddPersistentListener(back.onClick,panel.ShowHome);
             panel.notice=Label(background.transform,"Connection Notice",220,710,840,70,18);
-            panel.ShowHome();EditorSceneManager.SaveScene(scene,TitlePath);
+            PythonStartFlowLayout.RefreshTitle(panel);panel.ShowHome();EditorSceneManager.SaveScene(scene,TitlePath);
             var business=EditorSceneManager.OpenScene(BusinessPath);var preview=UnityEngine.Object.FindObjectOfType<ContentPreview>();var bg=preview.transform.Find("Content Canvas/Background");
             foreach(string name in new[]{"New Game","New Game Entry","Return To Title","Title Save Hint"}){var old=bg.Find(name);if(old!=null)UnityEngine.Object.DestroyImmediate(old.gameObject);}
             var legacy=preview.GetComponent<PythonNewGamePanel>();if(legacy!=null)UnityEngine.Object.DestroyImmediate(legacy);

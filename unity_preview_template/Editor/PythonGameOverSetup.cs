@@ -44,7 +44,7 @@ namespace CatCafePreview.Editor
             panel.notice=Label(card.transform,"Notice",24,500,892,44,16);panel.notice.text="結果を残す場合は、タイトルへ戻る前に保存してください。";
             panel.save=Button(card.transform,"Save","結果を保存",24,550,432);UnityEventTools.AddPersistentListener(panel.save.onClick,panel.Save);
             panel.title=Button(card.transform,"Return","タイトルへ",480,550,436);UnityEventTools.AddPersistentListener(panel.title.onClick,panel.Return);
-            overlay.SetActive(false);EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);Debug.Log("CAT_CAFE_GAME_OVER_UI_OK");
+            PythonStartFlowLayout.RefreshResult(panel);overlay.SetActive(false);EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);Debug.Log("CAT_CAFE_GAME_OVER_UI_OK");
         }
         public static void BuildAndVerify()
         {
