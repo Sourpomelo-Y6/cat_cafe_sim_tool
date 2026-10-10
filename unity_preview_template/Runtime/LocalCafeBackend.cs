@@ -94,6 +94,8 @@ namespace CatCafePreview
                 version = 1, instance_id = s.instance_id, revision = s.revision, objective = "free", phase = s.phase, day = s.day, tick = s.tick,
                 can_set_shifts = s.phase == "preparation", closed = s.phase == "closed", opening_ticks = rules.opening_ticks,
                 funds = (float)s.funds, revenue = (float)s.revenue, waiting_count = s.queue.Count, completed_interactions = s.completed,
+                popularity = (float)s.popularity, popularity_gain = (float)s.popularity_gain,
+                customer_satisfaction = new PythonSatisfactionCounts { satisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "satisfied"), normal = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "normal"), dissatisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "dissatisfied") },
                 required_action = "", rest_proposal = new string[0], missing_cats = new PythonMissingCat[0], growth_choices = new PythonGrowthChoice[0],
                 new_game_options = new[] { new PythonNewGameOption { choice = "free", label = "自由営業（単独版・第1段階）", detail = "新規開始・出勤・自動接客・閉店・翌日・保存再開", conditions = "初期猫5匹 / 2席 / 資金1000。目標・設備・用品・加入・派遣・高度な顧客イベントは後続移植。" } },
                 cats = s.cats.Select(c => new PythonCatState { cat_id = c.id, content_cat_id = c.id, name = rules.cats.First(d => d.id == c.id).name, stamina = (float)c.stamina, max_stamina = (float)rules.max_stamina, fatigue = (float)c.fatigue, stress = (float)c.stress, working = c.working, health_status = c.health, health_label = c.health == "healthy" ? "健康" : "療養中", activity = c.activity, activity_label = c.activity == "cafe" ? "在店" : "家出中", records = new PythonCatRecords() }).ToArray(),

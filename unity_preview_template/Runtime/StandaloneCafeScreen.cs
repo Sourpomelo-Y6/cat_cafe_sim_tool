@@ -57,6 +57,7 @@ namespace CatCafePreview
             {
                 GUILayout.Label(state.day + "日目 / " + (state.closed ? "閉店" : state.can_set_shifts ? "営業準備" : "営業中") + " / 時刻 " + state.tick + "/" + state.opening_ticks);
                 GUILayout.Label("資金 " + state.funds + " / 売上 " + state.revenue + " / 支出 " + state.finance.total_expenses + " / 完了接客 " + state.completed_interactions + " / 待機 " + state.waiting_count);
+                GUILayout.Label("人気 " + state.popularity + " / 本日の人気上昇 " + state.popularity_gain + " / 満足 " + state.customer_satisfaction.satisfied + " / 普通 " + state.customer_satisfaction.normal + " / 不満 " + state.customer_satisfaction.dissatisfied);
                 if (state.game_over != null) GUILayout.Label("経営終了：" + state.game_over.reason);
                 foreach (var cat in state.cats)
                 {

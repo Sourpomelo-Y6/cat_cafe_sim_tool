@@ -24,8 +24,28 @@ static class Program
     {
         var rules = Decode<CafeRules>(File.ReadAllText(args[0]));
         using var data = JsonDocument.Parse(File.ReadAllText(args[1]));
+        foreach (var row in data.RootElement.GetProperty("satisfaction").EnumerateArray())
+        {
+            var result = CafeSatisfactionEvaluator.Evaluate(rules.satisfaction, Decode<CafeExchange>(row.GetProperty("initial").GetRawText()), row.GetProperty("matched").GetBoolean());
+            using var actual = JsonDocument.Parse(Encode(result)); Equal(row.GetProperty("expected"), actual.RootElement, "satisfaction boundary");
+        }
         foreach (var draw in data.RootElement.GetProperty("draws").EnumerateArray()) Assert(PythonRandom.Draw(draw.GetProperty("key").GetString()) == draw.GetProperty("value").GetDouble(), "CPython RNG mismatch");
         int ticks = 0, scenarios = 0;
+        if (args.Length > 2)
+        {
+            using var comparison = JsonDocument.Parse(File.ReadAllText(args[2]));
+            foreach (var row in comparison.RootElement.GetProperty("rows").EnumerateArray())
+            {
+                var day = new CafeSimulation(rules, row.GetProperty("seed").GetInt32());
+                day.Execute("start_business"); while (day.State.phase != "closed") day.Execute("advance_business");
+                var expected = row.GetProperty("full_without_store_events");
+                Assert(day.State.funds == expected.GetProperty("funds").GetDouble() && day.State.revenue == expected.GetProperty("revenue").GetDouble()
+                    && day.State.expenses == expected.GetProperty("operating_cost").GetDouble() && day.State.popularity == expected.GetProperty("popularity").GetDouble()
+                    && day.State.completed == expected.GetProperty("completed_interactions").GetInt32(), "Full Python first day finance mismatch");
+                foreach (var cat in day.State.cats) Assert(cat.stamina == expected.GetProperty("cat_stamina").GetProperty(cat.id).GetDouble(), "Full Python first day stamina mismatch");
+                foreach (string level in new[] { "satisfied", "normal", "dissatisfied" }) Assert(day.State.visits.Count(v => v.satisfaction != null && v.satisfaction.level == level) == expected.GetProperty("customer_satisfaction").GetProperty(level).GetInt32(), "Full Python first day satisfaction mismatch");
+            }
+        }
         foreach (var scenario in data.RootElement.GetProperty("scenarios").EnumerateArray())
         {
             var sim = new CafeSimulation(rules, scenario.GetProperty("seed").GetInt32()); scenarios++;
@@ -53,6 +73,11 @@ static class Program
             }
         }
         var check = new CafeSimulation(rules);
+        var capped = new CafeSimulation(rules); capped.State.popularity = rules.popularity.cap - 1;
+        capped.Execute("start_business"); while (capped.State.phase != "closed") capped.Execute("advance_business");
+        Assert(capped.State.popularity == rules.popularity.cap && capped.State.popularity_gain == 1, "Popularity cap mismatch");
+        var holiday = new CafeSimulation(rules); holiday.Execute("day_off");
+        Assert(holiday.State.popularity == rules.starting_popularity && holiday.State.history[0].popularity_gain == 0, "Holiday gained popularity");
         string before = Encode(check.State);
         try { check.Execute("advance_business"); throw new Exception("Invalid phase accepted"); } catch (InvalidOperationException) { }
         Assert(before == Encode(check.State), "Rejected command mutated state");

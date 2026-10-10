@@ -17,6 +17,7 @@ namespace CatCafePreview
         public string player_reason;
         public bool working;
     }
+    [Serializable] public class PythonSatisfactionCounts { public int satisfied, normal, dissatisfied; }
     [Serializable] public class PythonCafeState
     {
         public int version, day, tick;
@@ -29,6 +30,8 @@ namespace CatCafePreview
         public PythonNewGameOption[] new_game_options;
         public int opening_ticks, waiting_count, completed_interactions;
         public float revenue;
+        public float popularity, popularity_gain;
+        public PythonSatisfactionCounts customer_satisfaction;
         public PythonSeatState[] seats;
         public PythonCustomerState[] customers;
         public PythonFinanceState finance;

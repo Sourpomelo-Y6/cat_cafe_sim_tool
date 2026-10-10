@@ -11,6 +11,7 @@ sys.path[:0] = [str(ROOT / 'cat_cafe_sim'), str(ROOT / 'cat_cafe_sim_tool')]
 from cat_cafe_sim.cafe_new_game import starting_conditions
 from cat_cafe_sim.cafe_interaction import CafeInteractionSession
 from cat_cafe_sim.core.config import Config
+from cat_cafe_sim.core.cafe_customer_satisfaction import evaluate as evaluate_satisfaction
 from cat_cafe_sim.core.human_cat_relationship import RelationshipConfig, RelationshipInteraction
 from cat_cafe_sim.storage.relationships import RelationshipStore
 from export_standalone_rules import exported_rules
@@ -40,7 +41,8 @@ def snapshot(session):
                            kitten=next((e['kitten'] for e in reversed(list(c.management['events'].values())) if e['cat_id']==cat.id),False)) for cat in c.cats.values()],
                 visits=[dict(id=v.id, cat_id=next((e.cat_id for e in c.interactions.values() if e.customer_id == v.id),
                                               next((r['cat_id'] for r in results if r['customer_id'] == v.id), None)),
-                             arrival=v.arrival_tick, seated_at=v.seated_at if v.seated_at is not None else -1, seated_ticks=v.seated_ticks, departure=v.departure_reason, bill=v.bill) for v in c.visits.values()],
+                             arrival=v.arrival_tick, seated_at=v.seated_at if v.seated_at is not None else -1, seated_ticks=v.seated_ticks, departure=v.departure_reason, bill=v.bill,
+                             satisfaction=next((evaluate_satisfaction(c, r) for r in results if r['customer_id']==v.id), None)) for v in c.visits.values()],
                 queue=list(c.queue), exchanges=[exchange(e, int(key.split('-')[-1])-1) for key, e in sorted(c.interactions.items())])
 
 
@@ -59,6 +61,8 @@ def generate():
             core.initialize_weekdays(selected['weekdays']); core.initialize_traits(selected['traits'])
             core.initialize_preferences(selected['features'], selected['preferences'])
             session.enable_management(selected['management']); core.initialize_operating_cost(selected['operating_cost'])
+            core.initialize_customer_satisfaction(selected['customer_satisfaction'])
+            goal = dict(selected['goal']); goal.pop('stages', None); core.enable_goal(goal, tracking_only=True)
             # Only modules implemented in this first slice are enabled on BOTH sides.
             scenario = dict(seed=seed, operations=[]); data['scenarios'].append(scenario)
             def record(kind, working=None, cat_id=None):
@@ -101,6 +105,18 @@ def generate():
                 if action == 'switch' and target == e.state['mode']: target = 'voice'
                 e.step(action, target)
                 case['steps'].append(dict(action=action, target=target, expected=exchange(e)))
+    from cat_cafe_sim.core.cafe_preferences import preference_for
+    data['satisfaction'] = []
+    cat_id = next(iter(core.cats))
+    preferred = preference_for(core.seed, 'guest-test', core.customer_preferences['rules']['pool'])
+    for bits in range(64):
+        matched = bool(bits & 8)
+        core.cat_features[cat_id] = [preferred] if matched else []
+        start = 100 if bits & 32 else 0
+        pending = 1 if bits & 1 else 0
+        initial = dict(affinity_start=start, affinity_pending=pending, connect_count=int(bool(bits & 2)), open_up_count=0, tension=50 if bits & 4 else 49.999, engagement=50, end_reason='exhausted' if bits & 16 else 'time_limit')
+        result = dict(initial, customer_id='guest-test', cat_id=cat_id, affinity_delta=min(100,start+pending)-start)
+        data['satisfaction'].append(dict(initial=initial, matched=matched, expected=evaluate_satisfaction(core,result)))
     return data
 
 

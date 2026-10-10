@@ -30,7 +30,7 @@ namespace CatCafePreview
             checks = 0;
             string directory = Path.Combine(Path.GetDirectoryName(Path.GetFullPath(reportPath)), "player-smoke-saves");
             var b = new LocalCafeBackend(directory);
-            bool restarted = b.ListSaves().saves.Length > 0;
+            bool restarted = File.Exists(Path.Combine(directory, "slot-3.json"));
             if (restarted) { Send(b, "load_game", 3); Check(b.Simulation.State.day == 2 && b.Simulation.State.phase == "preparation", "Cross-process restart"); }
             Send(b, "new_game");
             var command = Command(b, "start_business"); string payload = JsonUtility.ToJson(command);
@@ -45,11 +45,16 @@ namespace CatCafePreview
             Check(b.Simulation.State.exchanges.Count > 0, "No active service at checkpoint"); Send(b, "save_game", 2);
             while (b.Simulation.State.phase != "closed") Send(b, "advance_business");
             funds = b.Simulation.State.funds; double revenue = b.Simulation.State.revenue; int completed = b.Simulation.State.completed;
+            double popularity = b.Simulation.State.popularity, popularityGain = b.Simulation.State.popularity_gain;
+            var projected = JsonUtility.FromJson<PythonCafeState>(Request(b, "/state").text);
+            Check(projected.popularity == popularity && projected.popularity_gain == popularityGain, "Popularity projection mismatch");
+            Check(projected.customer_satisfaction.satisfied + projected.customer_satisfaction.normal + projected.customer_satisfaction.dissatisfied == completed, "Satisfaction projection mismatch");
             Send(b, "load_game", 2);
             while (b.Simulation.State.phase != "closed") Send(b, "advance_business");
             Check(b.Simulation.State.funds == funds && b.Simulation.State.revenue == revenue && b.Simulation.State.completed == completed, "Resume changed settlement");
             Send(b, "save_game", 2); Send(b, "load_game", 2);
             Check(b.Simulation.State.funds == funds, "Closed save charged expenses again");
+            Check(b.Simulation.State.popularity == popularity && b.Simulation.State.popularity_gain == popularityGain, "Resume changed popularity settlement");
             Send(b, "next_day"); Send(b, "save_game", 3);
             Check(Request(b, "/python-save?path=unused").result == UnityWebRequest.Result.ProtocolError, "Unsupported legacy route accepted");
             var bad = Command(b, "load_game"); bad.save_id = "../anything";

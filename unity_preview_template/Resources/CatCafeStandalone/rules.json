@@ -344,5 +344,16 @@
       "rest_fatigue": 1
     }
   ],
-  "rules_id": "9c0f32cabe076c3c46bb6de2b063c4c28ddeb0d76da539ac1511e7c5ec4ec5b2"
+  "satisfaction": {
+    "satisfied_score": 2,
+    "dissatisfied_score": 0,
+    "gauge_target": 50,
+    "satisfied_bonus": 20,
+    "dissatisfied_discontent_gain": 25
+  },
+  "popularity": {
+    "cap": 650,
+    "gain_per_success": 5
+  },
+  "rules_id": "209ba4b91a96b0d07f8336c1b5fe68d1af3b633c0e506cc5f21ca42b7a0770de"
 }

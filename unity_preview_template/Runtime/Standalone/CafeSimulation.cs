@@ -32,7 +32,7 @@ namespace CatCafePreview.Standalone
                 || !Finite(s.funds) || !Finite(s.opening_funds) || !Finite(s.revenue) || !Finite(s.expenses)
                 || s.revenue < 0 || s.expenses < 0 || Math.Abs(s.funds - (s.opening_funds + s.revenue - s.expenses)) > 1e-7
                 || s.history.Count != s.day - 1 || s.completed < 0
-                || !Range(s.popularity, 0, double.MaxValue)) throw new ArgumentException("Invalid standalone save");
+                || !Range(s.popularity, 0, Rules.popularity.cap)) throw new ArgumentException("Invalid standalone save");
             foreach (var c in s.cats)
                 if (!Rules.cats.Any(d => d.id == c.id) || !Range(c.stamina, 0, Rules.max_stamina) || !Range(c.fatigue, 0, Rules.max_fatigue)
                     || !Range(c.stress, 0, 100) || !new[] { "healthy", "sick" }.Contains(c.health) || !new[] { "cafe", "missing" }.Contains(c.activity)
@@ -47,6 +47,15 @@ namespace CatCafePreview.Standalone
                 || s.relationships.Select(r => r.cat_id + "/" + r.customer_id).Distinct().Count() != s.relationships.Count) throw new ArgumentException("Invalid saved phase or IDs");
             foreach (var id in s.queue) if (!s.visits.Any(v => v.id == id && v.departure == null && v.seated_at == -1)) throw new ArgumentException("Invalid saved queue");
             foreach (var v in s.visits) if (!Finite(v.bill) || v.seated_ticks < 0 || v.arrival < 0 || v.arrival >= s.tick) throw new ArgumentException("Invalid saved visit");
+            if (!Range(s.popularity_gain, 0, Rules.popularity.cap) || s.phase != "closed" && s.popularity_gain != 0
+                || s.visits.Count(v => v.satisfaction != null) != s.completed) throw new ArgumentException("Invalid satisfaction settlement");
+            foreach (var v in s.visits.Where(v => v.satisfaction != null))
+            {
+                var a = v.satisfaction;
+                string expected = a.score >= Rules.satisfaction.satisfied_score ? "satisfied" : a.score <= Rules.satisfaction.dissatisfied_score ? "dissatisfied" : "normal";
+                if (v.departure == null || v.cat_id == null || a.level != expected || a.score < -2 || a.score > 4 || a.reasons == null
+                    || a.bonus != (expected == "satisfied" ? Rules.satisfaction.satisfied_bonus : 0)) throw new ArgumentException("Invalid saved satisfaction");
+            }
             foreach (var e in s.exchanges)
                 if (s.phase != "open" || e.seat < 0 || e.seat > 1 || !s.cats.Any(c => c.id == e.cat_id)
                     || !s.visits.Any(v => v.id == e.customer_id && v.cat_id == e.cat_id && v.departure == null && v.seated_at >= 0)
@@ -84,9 +93,10 @@ namespace CatCafePreview.Standalone
                 case "advance_business": Require("open"); Advance(); break;
                 case "next_day":
                     Require("closed");
-                    s.history.Add(new CafeDayResult { day = s.day, arrivals = s.visits.Count, completed = s.completed, opening_funds = s.opening_funds, revenue = s.revenue, expenses = s.expenses, closing_funds = s.funds });
+                    s.history.Add(new CafeDayResult { day = s.day, arrivals = s.visits.Count, completed = s.completed, opening_funds = s.opening_funds, revenue = s.revenue, expenses = s.expenses, closing_funds = s.funds, popularity_gain = s.popularity_gain, satisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "satisfied"), normal = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "normal"), dissatisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "dissatisfied") });
                     s.day++; s.tick = 0; s.phase = "preparation"; s.opening_funds = s.funds; s.revenue = s.expenses = 0; s.completed = 0;
                     s.visits.Clear(); s.queue.Clear(); s.exchanges.Clear();
+                    s.popularity_gain = 0;
                     foreach (var c in s.cats) { c.service_ticks = 0; if (c.activity == "cafe") { c.stamina = Rules.max_stamina; c.cannot_continue = c.health != "healthy"; } c.working &= c.health == "healthy" && c.activity == "cafe"; }
                     break;
                 case "day_off":
@@ -140,7 +150,9 @@ namespace CatCafePreview.Standalone
                 if (e.end_reason != null)
                 {
                     Depart(visit, e.end_reason == "exhausted" ? "interaction_exhausted" : s.tick + 1 >= Rules.opening_ticks ? "closing" : "interaction_time_limit");
-                    visit.bill += e.bonus; s.funds += e.bonus; s.revenue += e.bonus;
+                    visit.satisfaction = CafeSatisfactionEvaluator.Evaluate(Rules.satisfaction, e, Matched(cat, e.customer_id));
+                    double bonus = e.bonus + visit.satisfaction.bonus;
+                    visit.bill += bonus; s.funds += bonus; s.revenue += bonus;
                     var relationship = s.relationships.Find(r => r.cat_id == e.cat_id && r.customer_id == e.customer_id);
                     if (relationship == null) { relationship = new CafeRelationship { cat_id = e.cat_id, customer_id = e.customer_id }; s.relationships.Add(relationship); }
                     relationship.affinity = Clamp(e.affinity_start + e.affinity_pending, 100);
@@ -214,6 +226,8 @@ namespace CatCafePreview.Standalone
         private void Close()
         {
             var s = State;
+            double after = Math.Min(Rules.popularity.cap, s.popularity + s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "satisfied") * Rules.popularity.gain_per_success);
+            s.popularity_gain = after - s.popularity; s.popularity = after;
             foreach (var cat in s.cats.Where(cat => cat.activity == "missing")) if (cat.missing_remaining > 0) cat.missing_remaining--;
             foreach (var cat in s.cats.Where(cat => cat.activity == "cafe"))
             {

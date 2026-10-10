@@ -19,10 +19,22 @@ namespace CatCafePreview.Standalone
         public WeekPattern[] patterns;
         public CatDefinition[] cats;
         public ExchangeRules exchange;
+        public SatisfactionRules satisfaction;
+        public PopularityRules popularity;
         public ExchangeType[] types;
         public string rules_id;
     }
     [Serializable] public class WeekPattern { public int[] days; }
+    [Serializable] public class SatisfactionRules { public double satisfied_score, dissatisfied_score, gauge_target, satisfied_bonus, dissatisfied_discontent_gain; }
+    [Serializable] public class PopularityRules { public double cap, gain_per_success; }
+    [Serializable] public class CafeSatisfaction
+    {
+        public string level, label;
+        public int score;
+        public string[] reasons;
+        public bool matched, special, gauges;
+        public double bonus;
+    }
     [Serializable] public class CatDefinition
     {
         public string id, name;
@@ -55,6 +67,7 @@ namespace CatCafePreview.Standalone
         public string id, cat_id, departure;
         public int arrival, seated_at = -1, seated_ticks;
         public double bill;
+        public CafeSatisfaction satisfaction;
     }
     [Serializable] public class CafeExchange
     {
@@ -68,6 +81,8 @@ namespace CatCafePreview.Standalone
     {
         public int day, arrivals, completed;
         public double opening_funds, revenue, expenses, closing_funds;
+        public double popularity_gain;
+        public int satisfied, normal, dissatisfied;
     }
     [Serializable] public class CafeSnapshot
     {
@@ -75,6 +90,7 @@ namespace CatCafePreview.Standalone
         public string rules_id, instance_id, phase = "preparation", game_over;
         public double funds, opening_funds, popularity, revenue, expenses;
         public int completed;
+        public double popularity_gain;
         public List<CafeCat> cats = new List<CafeCat>();
         public List<CafeVisit> visits = new List<CafeVisit>();
         public List<string> queue = new List<string>();
@@ -85,7 +101,7 @@ namespace CatCafePreview.Standalone
         public void NormalizeJsonStrings()
         {
             if (game_over == "") game_over = null;
-            if (visits != null) foreach (var v in visits) { if (v.departure == "") v.departure = null; if (v.cat_id == "") v.cat_id = null; }
+            if (visits != null) foreach (var v in visits) { if (v.departure == "") v.departure = null; if (v.cat_id == "") v.cat_id = null; if (v.satisfaction != null && string.IsNullOrEmpty(v.satisfaction.level)) v.satisfaction = null; }
             if (exchanges != null) foreach (var e in exchanges)
             {
                 if (e.end_reason == "") e.end_reason = null;
