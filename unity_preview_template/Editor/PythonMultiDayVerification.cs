@@ -22,7 +22,7 @@ namespace CatCafePreview.Editor
         public static void RunEvents()
         {
             EditorSceneManager.OpenScene("Assets/Scenes/CatCafeTitle.unity");UnityEngine.Object.FindObjectOfType<PythonTitleScreen>().port=TestPort;EditorSceneManager.SaveScene(SceneManager.GetActiveScene());
-            EditorSceneManager.OpenScene("Assets/Scenes/CatCafePythonState.unity");var serialized=new SerializedObject(UnityEngine.Object.FindObjectOfType<PythonStateClient>());serialized.FindProperty("port").intValue=TestPort;serialized.ApplyModifiedPropertiesWithoutUndo();
+            EditorSceneManager.OpenScene("Assets/Scenes/CatCafePythonState.unity");var serialized=new SerializedObject(UnityEngine.Object.FindObjectOfType<PythonStateClient>());serialized.FindProperty("port").intValue=TestPort;serialized.ApplyModifiedPropertiesWithoutUndo();EditorSceneManager.SaveScene(SceneManager.GetActiveScene());
             SessionState.SetBool(Key+"events",true);SessionState.SetInt(Key,12);SessionState.SetInt(Key+"mode",3);SessionState.SetInt(Key+"days",2);SessionState.SetFloat(Key+"deadline",(float)EditorApplication.timeSinceStartup+180);EditorApplication.EnterPlaymode();
         }
         public static void VerifyOptionalEvents()
@@ -86,6 +86,8 @@ namespace CatCafePreview.Editor
             Canvas.ForceUpdateCanvases();typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{client.GetComponent<ContentPreview>(),"Logs/AuditEvent-"+route+".png"});
             if(!ButtonClick(panel,button))throw new Exception("Response could not be clicked");if(route==1){var intake=client.GetComponent<PythonIntakePanel>();if(!ButtonClick(intake.confirmation,intake.confirm))throw new Exception("Intake confirmation could not be clicked");}if(button.interactable)throw new Exception("Duplicate response remained enabled");return true;
         }
+        static bool SaveSlot(PythonStateClient client){client.GetComponent<PythonSaveBrowser>().OpenSave();return ConfirmSlot(client);}
+        static bool ConfirmSlot(PythonStateClient client){var browser=client.GetComponent<PythonSaveBrowser>();browser.cards[0].onClick.Invoke();if(!browser.action.interactable)return false;browser.Choose();browser.Confirm();return true;}
         static bool ButtonClick(GameObject panel,UnityEngine.UI.Button button)
         {
             if(!panel.activeSelf || !button.gameObject.activeInHierarchy || !button.interactable)return false;
@@ -101,25 +103,24 @@ namespace CatCafePreview.Editor
                 if(EditorApplication.timeSinceStartup>SessionState.GetFloat(Key+"deadline",0))throw new Exception("Multi-day timeout stage "+stage);
                 if(!EditorApplication.isPlaying)return;var title=UnityEngine.Object.FindObjectOfType<PythonTitleScreen>();var client=UnityEngine.Object.FindObjectOfType<PythonStateClient>();
                 if(stage==1 && title!=null && title.newGame.interactable)
-                {title.newGame.onClick.Invoke();int mode=SessionState.GetInt(Key+"mode",0);title.objectives.value=mode;title.SelectObjective(mode);title.startGame.onClick.Invoke();SessionState.SetInt(Key,2);return;}
+                {title.newGame.onClick.Invoke();int mode=SessionState.GetInt(Key+"mode",0);title.objectives.value=mode;title.SelectObjective(mode);title.startGame.onClick.Invoke();title.startGame.onClick.Invoke();SessionState.SetInt(Key,2);return;}
                 if(stage==9 && title!=null && title.continueGame.interactable)
                 {
                     title.continueGame.onClick.Invoke();
                     // State and save-list requests complete separately on a new title
                     // scene. Do not advance the test until the real Resume button works.
-                    if(!title.resume.interactable)return;
-                    title.saves.value=0;title.resume.onClick.Invoke();SessionState.SetInt(Key,10);return;
+                    var browser=title.GetComponent<PythonSaveBrowser>();browser.cards[0].onClick.Invoke();if(!browser.action.interactable)return;browser.Choose();browser.Confirm();SessionState.SetInt(Key,10);return;
                 }
                 if(client==null || !client.CanManageSaves)return;var state=client.CurrentState;var preview=client.GetComponent<ContentPreview>();var closing=client.GetComponent<PythonClosingPanel>();
                 if(state.game_over!=null)throw new Exception("Unexpected game over");
                 if(stage==12)
                 {
                     if(state.intake_request?.status!="waiting" || !(state.growth_choices?.Length>0) || state.store_event==null || client.CanProgressBusiness)throw new Exception("Expected overlapping events missing");
-                    SessionState.SetString(Key+"pendingEvents",EventSnapshot(state));SessionState.SetInt(Key+"count",client.GetComponent<PythonSavePanel>().Count);
-                    var list=client.GetComponent<PythonEventListPanel>();list.open.onClick.Invoke();Canvas.ForceUpdateCanvases();typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{preview,"Logs/AuditEventList.png"});list.Close();preview.GetSceneButton(3).onClick.Invoke();SessionState.SetInt(Key,13);
+                    SessionState.SetString(Key+"pendingEvents",EventSnapshot(state));SessionState.SetInt(Key+"revision",state.revision);
+                    var list=client.GetComponent<PythonEventListPanel>();list.open.onClick.Invoke();Canvas.ForceUpdateCanvases();typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{preview,"Logs/AuditEventList.png"});list.Close();if(!SaveSlot(client))return;SessionState.SetInt(Key,13);
                 }
-                else if(stage==13 && client.GetComponent<PythonSavePanel>().Count>SessionState.GetInt(Key+"count",0))
-                {var saves=client.GetComponent<PythonSavePanel>();saves.saves.value=0;saves.ResumeSelected();SessionState.SetInt(Key,14);}
+                else if(stage==13 && state.revision>SessionState.GetInt(Key+"revision",0))
+                {var browser=client.GetComponent<PythonSaveBrowser>();browser.OpenLoad();browser.cards[0].onClick.Invoke();browser.Choose();browser.Confirm();SessionState.SetInt(Key,14);}
                 else if(stage==14)
                 {if(EventSnapshot(state)!=SessionState.GetString(Key+"pendingEvents",""))throw new Exception("Pending-event save restore mismatch");Debug.Log("CAT_CAFE_OVERLAPPING_EVENT_SAVE_OK");SessionState.SetInt(Key,5);}
                 else if(stage==2)
@@ -140,13 +141,13 @@ namespace CatCafePreview.Editor
                     {
                         if(state.finance==null || Mathf.Abs(state.finance.opening_funds+state.finance.net_cash_flow-state.finance.closing_funds)>.01f)throw new Exception("Daily finance mismatch");
                         closing.Open();if(!closing.panel.activeSelf || !closing.next.interactable)throw new Exception("Closing review unavailable");
-                        SessionState.SetInt(Key+"day",state.day);SessionState.SetFloat(Key+"funds",state.funds);SessionState.SetString(Key+"cats",JsonUtility.ToJson(new PythonCafeState{cats=state.cats}));SessionState.SetString(Key+"progress",JsonUtility.ToJson(state.objective_progress));SessionState.SetInt(Key+"count",client.GetComponent<PythonSavePanel>().Count);
-                        closing.save.onClick.Invoke();SessionState.SetInt(Key,8);
+                        SessionState.SetInt(Key+"day",state.day);SessionState.SetFloat(Key+"funds",state.funds);SessionState.SetString(Key+"cats",JsonUtility.ToJson(new PythonCafeState{cats=state.cats}));SessionState.SetString(Key+"progress",JsonUtility.ToJson(state.objective_progress));SessionState.SetInt(Key+"revision",state.revision);
+                        closing.save.onClick.Invoke();if(!ConfirmSlot(client))return;SessionState.SetInt(Key,8);
                     }
                     else if(!client.Automatic){if(!client.Fast)client.GetComponent<PythonAutoPanel>().speed.onClick.Invoke();client.GetComponent<PythonAutoPanel>().toggle.onClick.Invoke();if(!client.Automatic)throw new Exception("Cannot start automatic service");}
                 }
-                else if(stage==8 && client.GetComponent<PythonSavePanel>().Count>SessionState.GetInt(Key+"count",0))
-                {client.GetComponent<PythonReturnToTitle>().Return();SessionState.SetInt(Key,9);}
+                else if(stage==8 && state.revision>SessionState.GetInt(Key+"revision",0))
+                {client.GetComponent<PythonSaveBrowser>().Close();client.GetComponent<PythonReturnToTitle>().Return();SessionState.SetInt(Key,9);}
                 else if(stage==10)
                 {
                     if(!state.closed || !closing.panel.activeSelf || state.day!=SessionState.GetInt(Key+"day",0) || state.funds!=SessionState.GetFloat(Key+"funds",0) || JsonUtility.ToJson(new PythonCafeState{cats=state.cats})!=SessionState.GetString(Key+"cats","") || JsonUtility.ToJson(state.objective_progress)!=SessionState.GetString(Key+"progress","") || client.Automatic)throw new Exception("Restored state mismatch");

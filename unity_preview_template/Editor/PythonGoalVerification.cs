@@ -9,13 +9,14 @@ namespace CatCafePreview.Editor
     public static class PythonGoalVerification
     {
         const string Key="CatCafeGoalTest";
+        static int TestPort{get{var value=Environment.GetEnvironmentVariable("CAT_CAFE_FLOW_TEST_PORT");int port=string.IsNullOrEmpty(value)?8191:int.Parse(value);if(port<=0 || port>65535 || port==8190)throw new Exception("Use an isolated test server");return port;}}
         static PythonGoalVerification() { EditorApplication.update+=Update; }
         public static void Run()
         {
             EditorSceneManager.OpenScene("Assets/Scenes/CatCafePythonState.unity");
             var client=UnityEngine.Object.FindObjectOfType<PythonStateClient>(); var serialized=new SerializedObject(client);
-            serialized.FindProperty("port").intValue=8191; serialized.ApplyModifiedPropertiesWithoutUndo();
-            SessionState.SetInt(Key,1); SessionState.SetFloat(Key+"deadline",(float)EditorApplication.timeSinceStartup+120); EditorApplication.EnterPlaymode();
+            serialized.FindProperty("port").intValue=TestPort; serialized.ApplyModifiedPropertiesWithoutUndo();
+            SessionState.SetInt(Key+"saveSlot",0);SessionState.SetInt(Key,1); SessionState.SetFloat(Key+"deadline",(float)EditorApplication.timeSinceStartup+120); EditorApplication.EnterPlaymode();
         }
         public static void RunStages()
         {
@@ -36,14 +37,14 @@ namespace CatCafePreview.Editor
                 if(stage==1)
                 {
                     if(state.goal_result==null || !panel.panel.activeSelf || !panel.resume.interactable || client.CanProgressBusiness)throw new Exception("Pending result mismatch");
-                    SessionState.SetString(Key+"pending",JsonUtility.ToJson(state)); preview.GetSceneButton(3).onClick.Invoke(); SessionState.SetInt(Key,2);
+                    SessionState.SetString(Key+"pending",JsonUtility.ToJson(state)); if(!SaveSlot(preview))return; SessionState.SetInt(Key,2);
                 }
                 else if(stage==2 && saves.Count==1)
                 { panel.resume.onClick.Invoke(); if(panel.resume.interactable)throw new Exception("Goal busy guard failed"); SessionState.SetInt(Key,3); }
                 else if(stage==3 && state.goal_result==null)
                 {
                     if(panel.panel.activeSelf || !client.CanProgressBusiness)throw new Exception("Goal continuation did not unblock next day");
-                    SessionState.SetString(Key+"confirmed",JsonUtility.ToJson(state)); preview.GetSceneButton(3).onClick.Invoke(); SessionState.SetInt(Key,4);
+                    SessionState.SetString(Key+"confirmed",JsonUtility.ToJson(state)); if(!SaveSlot(preview))return; SessionState.SetInt(Key,4);
                 }
                 else if(stage==4 && saves.Count==2) { preview.GetSceneButton(2).onClick.Invoke(); SessionState.SetInt(Key,5); }
                 else if(stage==5 && state.day==2)
@@ -61,6 +62,8 @@ namespace CatCafePreview.Editor
             }
             catch(Exception ex) { SessionState.SetInt(Key,0); Debug.LogException(ex); EditorApplication.Exit(1); }
         }
+        static bool SaveSlot(ContentPreview preview){var browser=preview.GetComponent<PythonSaveBrowser>();int slot=SessionState.GetInt(Key+"saveSlot",0)+1;browser.OpenSave();browser.cards[slot-1].onClick.Invoke();if(!browser.action.interactable)return false;browser.Choose();browser.Confirm();SessionState.SetInt(Key+"saveSlot",slot);return true;}
+        static void LoadSlot(PythonSavePanel saves,int slot){var browser=saves.GetComponent<PythonSaveBrowser>();browser.OpenLoad();browser.cards[slot-1].onClick.Invoke();if(!browser.action.interactable)throw new Exception("Saved goal slot unavailable");browser.Choose();browser.Confirm();}
         static void CheckRestored(string name,PythonCafeState state)
         {
             var expected=JsonUtility.FromJson<PythonCafeState>(SessionState.GetString(Key+name,"")); expected.revision=state.revision;
@@ -75,7 +78,7 @@ namespace CatCafePreview.Editor
             if(stage==100)
             {
                 if(state.goal_result==null || state.goal_result.stage!=1 || state.next_goal==null || state.next_goal.stage!=2 || !panel.advance.interactable)throw new Exception("Initial stage result missing");
-                preview.GetSceneButton(3).onClick.Invoke();move(101);
+                if(!SaveSlot(preview))return;move(101);
             }
             else if(stage==101 && saves.Count==1)
             {
@@ -84,15 +87,15 @@ namespace CatCafePreview.Editor
             else if(stage==102 && state.goal_result==null)
             {
                 if(panel.panel.activeSelf || state.next_goal!=null || !state.objective_progress.summary.Contains("第2段階"))throw new Exception("Second stage did not start");
-                SessionState.SetString(Key+"active",JsonUtility.ToJson(state));preview.GetSceneButton(3).onClick.Invoke();move(103);
+                SessionState.SetString(Key+"active",JsonUtility.ToJson(state));if(!SaveSlot(preview))return;move(103);
             }
-            else if(stage==103 && saves.Count==2) { saves.saves.SetValueWithoutNotify(1);saves.resume.onClick.Invoke();move(104); }
+            else if(stage==103 && saves.Count==2) { LoadSlot(saves,1);move(104); }
             else if(stage==104 && state.goal_result!=null)
             {
                 if(state.goal_result.stage!=1 || !panel.advance.interactable)throw new Exception("Pending result restore failed");
                 panel.advance.onClick.Invoke();move(105);
             }
-            else if(stage==105 && state.goal_result==null) { saves.saves.SetValueWithoutNotify(0);saves.resume.onClick.Invoke();move(106); }
+            else if(stage==105 && state.goal_result==null) { LoadSlot(saves,SessionState.GetInt(Key+"saveSlot",0));move(106); }
             else if(stage==106 && state.goal_result==null)
             { CheckRestored("active",state);preview.GetSceneButton(2).onClick.Invoke();move(107); }
             else if(stage==107 && state.day==2 && state.can_set_shifts) { preview.GetSceneButton(2).onClick.Invoke();move(108); }
@@ -116,10 +119,10 @@ namespace CatCafePreview.Editor
                 if(!state.closed) { preview.GetSceneButton(2).onClick.Invoke();return; }
                 if(state.goal_result==null || state.goal_result.stage!=3 || state.next_goal!=null || panel.advance.gameObject.activeSelf || !panel.details.text.Contains("クリア時の成果"))throw new Exception("Final stage result mismatch");
                 Canvas.ForceUpdateCanvases();typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{preview,"Logs/FinalGoalResult.png"});
-                preview.GetSceneButton(3).onClick.Invoke();move(113);
+                if(!SaveSlot(preview))return;move(113);
             }
             else if(stage==113 && saves.Count==3) { panel.resume.onClick.Invoke();move(114); }
-            else if(stage==114 && state.goal_result==null) { saves.saves.SetValueWithoutNotify(0);saves.resume.onClick.Invoke();move(115); }
+            else if(stage==114 && state.goal_result==null) { LoadSlot(saves,SessionState.GetInt(Key+"saveSlot",0));move(115); }
             else if(stage==115 && state.goal_result!=null)
             {
                 if(state.goal_result.stage!=3 || state.next_goal!=null || !panel.details.text.Contains("クリア時の成果"))throw new Exception("Final clear restore failed");
