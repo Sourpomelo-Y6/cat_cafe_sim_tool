@@ -39,13 +39,16 @@ namespace CatCafePreview
             seatsTab.interactable = catsTab.interactable = true;
             seatsTab.gameObject.SetActive(phase == "open"); catsTab.gameObject.SetActive(phase == "open");
             rosterPanel.SetActive(!showSeats); seatPanel.SetActive(showSeats);
-            if(serviceStatus!=null)serviceStatus.SetActive(showSeats);
+            if(serviceStatus!=null)serviceStatus.SetActive(phase == "open");
             if(detailPanel != null)
             {
-                detailPanel.anchoredPosition = new Vector2(showSeats ? 992 : 804,showSeats ? -262 : -188);
-                detailPanel.sizeDelta = new Vector2(showSeats ? 264 : 452,showSeats ? 514 : 550);
-                detailText.fontSize = showSeats ? 16 : 22;
+                detailPanel.anchoredPosition = new Vector2(showSeats ? 992 : 804,phase == "open" ? -262 : -188);
+                detailPanel.sizeDelta = new Vector2(showSeats ? 264 : 452,phase == "open" ? 514 : 550);
+                detailText.fontSize = showSeats ? 16 : phase == "open" ? 18 : 22;
             }
+            var rosterScroll=rosterPanel.GetComponent<ScrollRect>();
+            if(rosterScroll!=null){rosterPanel.GetComponent<RectTransform>().anchoredPosition=new Vector2(24,phase=="open" ? -262 : -220);rosterPanel.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,phase=="open" ? 476 : 518);rosterScroll.viewport.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,phase=="open" ? 476 : 518);}
+            var visibility=GetComponent<PythonCatVisibility>();if(visibility?.rosterToggle!=null)visibility.rosterToggle.GetComponent<RectTransform>().anchoredPosition=new Vector2(24,phase=="open" ? -94 : -184);
             heading.text = phase == "closed" ? "閉店結果・猫の状態" : showSeats ? "席一覧　　人物アイコン：接客中のお客さん" : "猫一覧";
             if(state.objective_progress != null)
             {
@@ -57,7 +60,7 @@ namespace CatCafePreview
 
             if(!showSeats)
             {
-                if(phase == "open") GetComponent<ContentPreview>().SetServiceDescription("猫の状態\n\nカードで全員の体力と活動を確認できます。\n「席一覧」で接客状況へ戻れます。");
+                if(phase == "open") GetComponent<ContentPreview>().SetServiceDescription("猫の状態\n\nカードで体力・疲労・活動を確認できます。\n「席一覧」で接客状況に戻れます。");
                 return;
             }
             if(cards.Count == 0) cards.AddRange(seatContent.GetComponentsInChildren<PythonCatCard>(true));
@@ -101,7 +104,7 @@ namespace CatCafePreview
             foreach(var card in cards)if(card.details!=null)card.details.interactable=state!=null && card.state!=null && client.CanManageSaves;
             if(state==null || serviceSummary==null)return;
             var seats=state.seats ?? new PythonSeatState[0];int occupied=Array.FindAll(seats,seat=>!string.IsNullOrEmpty(seat.customer_id)).Length;
-            serviceSummary.text="営業時間 "+state.tick+" / "+state.opening_ticks+"刻　接客中 "+occupied+" / "+seats.Length+"席　待ち "+state.waiting_count+"人"
+            serviceSummary.text="営業時間 "+state.tick+" / "+state.opening_ticks+"刻　来店 "+(state.customers?.Length ?? 0)+"人　接客中 "+occupied+" / "+seats.Length+"席　待ち "+state.waiting_count+"人　接客完了 "+state.completed_interactions+"件"
                 +"\n自動割り当て："+(state.service_assignment?.auto_assign==false ? "OFF" : "ON")+(state.service_assignment?.waiting==true ? "（客・猫・席の配置待ち）" : "")+"　自動進行："+(client.Automatic ? "進行中" : "停止中")+"　速度："+(client.Fast ? "高速（0.25秒 / 刻）" : "通常（1秒 / 刻）");
             if(dayProgress!=null){dayProgress.maxValue=Math.Max(1,state.opening_ticks);dayProgress.value=state.tick;}
         }
