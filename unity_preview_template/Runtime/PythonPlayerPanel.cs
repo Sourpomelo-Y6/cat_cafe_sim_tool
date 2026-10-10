@@ -8,6 +8,8 @@ namespace CatCafePreview
     {
         public GameObject panel;
         public Text title, summary, history, notice, choiceLabel;
+        public Text[] actionHints;
+        public Text resultGuide;
         public RawImage picture;
         public Text imageNotice;
         public Dropdown targets;
@@ -16,7 +18,7 @@ namespace CatCafePreview
         public ScrollRect historyScroll;
         private PythonPlayerInteraction current;
         private string sessionId, instanceId;
-        private bool showing,wasAutomatic;
+        private bool showing,wasAutomatic,disconnected;
         private string renderedMode, renderedSession, renderedInstance;
         public void TargetChanged(int value) { RefreshControls(); }
         public void Open()
@@ -38,7 +40,7 @@ namespace CatCafePreview
         public void Finish() { GetComponent<PythonStateClient>().FinishPlayer(); }
         public void SelectAction(int index)
         {
-            if(current==null || current.actions==null || index<0 || index>=current.actions.Length)return;
+            if(current==null || current.actions==null || index<0 || index>=current.actions.Length || !GetComponent<PythonStateClient>().CanPlayerAction(current.actions[index].choice))return;
             int targetIndex=targets.value-1;
             if(current.actions[index].choice=="switch" && targetIndex<0)return;
             string target=current.targets!=null && targetIndex>=0 && targetIndex<current.targets.Length ? current.targets[targetIndex].choice : "";
@@ -46,7 +48,7 @@ namespace CatCafePreview
         }
         public void Apply(PythonCafeState state)
         {
-            current=state.player_interaction;
+            disconnected=false;current=state.player_interaction;
             if(current==null) { showing=false;sessionId=null;panel.SetActive(false);return; }
             bool automatic=state.autoplay?.running==true;
             if(sessionId!=current.session_id || instanceId!=state.instance_id || (wasAutomatic && !automatic))
@@ -60,7 +62,7 @@ namespace CatCafePreview
         {
             panel.SetActive(showing);if(showing)panel.transform.SetAsLastSibling();
             title.text=current.name+(current.active ? "と交流中" : "との交流結果");
-            summary.text="現在の交流："+current.mode+"\n残り "+current.remaining_ticks+"ターン / 本日あと "+current.remaining_sets+"セット"
+            summary.text="現在の動作："+current.mode+"\n残り "+current.remaining_ticks+"ターン / 本日あと "+current.remaining_sets+"セット"
                 +"\n好感度 "+current.affinity_before.ToString("0.#")+" → "+current.affinity_after.ToString("0.#")+"（"+current.affinity_delta.ToString("+0.#;-0.#;0")+"・"+(current.active ? "見込み" : "確定")+"）"
                 +"\n体力 "+current.stamina_before.ToString("0.#")+" → "+current.stamina.ToString("0.#")
                 +"\n関心 "+current.engagement.ToString("0.#")+" / テンション "+current.tension.ToString("0.#");
@@ -87,6 +89,7 @@ namespace CatCafePreview
                 actions[i].gameObject.SetActive(exists && current.active);
                 if(exists)actions[i].GetComponentInChildren<Text>().text=current.actions[i].label;
             }
+            if(resultGuide!=null){resultGuide.gameObject.SetActive(!current.active);resultGuide.text="交流が終了しました\n\n好感度の変化は確定しています。\n終了理由："+(string.IsNullOrEmpty(current.reason) ? "記録なし" : current.reason)+"\n\n右側で行動と猫の反応を振り返れます。\n猫の詳細から次の交流や営業準備へ戻れます。";}
             if(choiceLabel!=null)choiceLabel.gameObject.SetActive(current.active);
             targets.gameObject.SetActive(current.active);
             finish.gameObject.SetActive(current.active);
@@ -96,12 +99,29 @@ namespace CatCafePreview
         public void RefreshControls()
         {
             var client=GetComponent<PythonStateClient>();
-            for(int i=0;i<actions.Length;i++)actions[i].interactable=current!=null && current.actions!=null && i<current.actions.Length && client.CanPlayerAction(current.actions[i].choice) && (current.actions[i].choice!="switch" || targets.value>0);
-            if(back!=null)back.interactable=current!=null && client.CanManageSaves;
-            targets.interactable=client.CanPlayerAction("switch");finish.interactable=client.CanFinishPlayer;
+            for(int i=0;i<actions.Length;i++)
+            {
+                bool exists=current!=null && current.actions!=null && i<current.actions.Length;
+                var row=exists ? current.actions[i] : null;
+                bool switching=exists && row.choice=="switch";
+                actions[i].interactable=!disconnected && exists && client.CanPlayerAction(row.choice) && (!switching || targets.value>0);
+                if(actionHints!=null && i<actionHints.Length && actionHints[i]!=null)
+                {
+                    var hint=actionHints[i];hint.gameObject.SetActive(exists && current.active);
+                    hint.text=!exists ? "" : !row.can_select ? (string.IsNullOrEmpty(row.reason) ? "現在の動作・猫の状態では選べません" : row.reason)
+                        : switching ? (targets.value>0 ? "選んだ動作へ変更（1ターン使用）" : "先に切り替え先を選んでください") : "";
+                    hint.color=exists && !row.can_select ? new Color(.55f,.29f,.12f) : new Color(.28f,.36f,.30f);
+                }
+            }
+            if(current!=null && notice!=null)
+                notice.text=disconnected ? "Python未接続です。再接続後に交流を再開できます。" : !client.CanManageSaves ? (client.HasPendingResults ? "未保存の接客結果を先に確定してください。" : client.AutoPlayRunning ? "おまかせ実行中です。" : "通信を確認中です。操作の完了をお待ちください。")
+                    : current.active ? (string.IsNullOrEmpty(current.reason) ? "好感度は終了時に確定。戻っても交流は続きます。" : current.reason) : "好感度は確定済みです。猫の詳細へ戻れます。";
+            if(back!=null)back.interactable=!disconnected && current!=null && client.CanManageSaves;
+            targets.interactable=!disconnected && client.CanPlayerAction("switch");finish.interactable=!disconnected && client.CanFinishPlayer;
         }
         public void Disconnect()
         {
+            disconnected=true;
             if(back!=null)back.interactable=false;
             foreach(var button in actions)button.interactable=false;
             targets.interactable=finish.interactable=false;

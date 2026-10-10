@@ -43,16 +43,29 @@ namespace CatCafePreview.Editor
             var card=panel.panel.transform.Find("Interaction Card");
             Place(card.GetComponent<RectTransform>(),170,8,940,600);
             Place(panel.title.rectTransform,24,18,892,44);
-            Place(panel.summary.rectTransform,24,72,432,160);panel.summary.fontSize=18;
-            Place(card.Find("Switch Label").GetComponent<RectTransform>(),24,238,432,26);
+            Place(panel.summary.rectTransform,24,64,432,148);panel.summary.fontSize=18;
+            Place(card.Find("Switch Label").GetComponent<RectTransform>(),24,212,432,26);
             panel.choiceLabel=card.Find("Switch Label").GetComponent<Text>();panel.choiceLabel.text="交流を変える：選択後に「切り替える」";
-            Place(panel.targets.GetComponent<RectTransform>(),24,270,432,40);
+            Place(panel.targets.GetComponent<RectTransform>(),24,240,432,34);
+            panel.targets.captionText.font=ContentPreviewLayout.LoadFont();panel.targets.captionText.fontSize=16;
+            panel.targets.captionText.rectTransform.offsetMin=new Vector2(10,0);panel.targets.captionText.rectTransform.offsetMax=new Vector2(-28,0);
+            panel.targets.captionText.alignment=TextAnchor.MiddleLeft;
             panel.targets.onValueChanged=new Dropdown.DropdownEvent();
             UnityEventTools.AddPersistentListener(panel.targets.onValueChanged,panel.TargetChanged);
-            panel.choiceLabel.text="現在の動作／切り替え先（選択後に切り替える）";
+            panel.choiceLabel.text="動作を変える：選択 → 動作を切り替える";panel.choiceLabel.fontSize=16;
             panel.targets.template.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 310);
-            for(int i=0;i<panel.actions.Length;i++)Place(panel.actions[i].GetComponent<RectTransform>(),24+(i%2)*222,324+(i/2)*44,210,38);
-            Place(panel.notice.rectTransform,24,506,432,40);panel.notice.fontSize=14;
+            panel.actionHints=new Text[panel.actions.Length];
+            for(int i=0;i<panel.actions.Length;i++)
+            {
+                Place(panel.actions[i].GetComponent<RectTransform>(),24+(i%2)*222,280+(i/2)*60,210,34);
+                panel.actions[i].GetComponentInChildren<Text>().fontSize=16;
+                var oldHint=card.Find("Action Hint "+i);if(oldHint!=null)UnityEngine.Object.DestroyImmediate(oldHint.gameObject);
+                panel.actionHints[i]=Label(card,"Action Hint "+i,24+(i%2)*222,314+(i/2)*60,210,26,12);
+                panel.actionHints[i].resizeTextForBestFit=true;panel.actionHints[i].resizeTextMinSize=11;panel.actionHints[i].resizeTextMaxSize=12;
+            }
+            var oldResult=card.Find("Result Guide");if(oldResult!=null)UnityEngine.Object.DestroyImmediate(oldResult.gameObject);
+            panel.resultGuide=Label(card,"Result Guide",24,238,432,272,18);panel.resultGuide.gameObject.SetActive(false);
+            Place(panel.notice.rectTransform,24,522,432,24);panel.notice.fontSize=13;
             Place(panel.finish.GetComponent<RectTransform>(),24,550,432,40);
             var old=card.Find("History Scroll");if(old!=null)UnityEngine.Object.DestroyImmediate(old.gameObject);
             var heading=card.Find("History Heading");if(heading!=null)UnityEngine.Object.DestroyImmediate(heading.gameObject);
@@ -67,7 +80,7 @@ namespace CatCafePreview.Editor
             panel.imageNotice=Label(card,"Image Notice",480,150,436,40,18);panel.imageNotice.alignment=TextAnchor.MiddleCenter;
             panel.back=card.Find("Close").GetComponent<Button>();panel.back.onClick=new Button.ButtonClickedEvent();
             UnityEventTools.AddPersistentListener(panel.back.onClick,panel.ReturnToDetails);
-            panel.back.GetComponentInChildren<Text>().text="猫の詳細へ戻る";
+            panel.back.GetComponentInChildren<Text>().text="猫の詳細へ戻る";panel.back.GetComponentInChildren<Text>().fontSize=16;
             panel.panel.SetActive(false);EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);
             Debug.Log("CAT_CAFE_PLAYER_LAYOUT_OK");
         }
@@ -76,7 +89,8 @@ namespace CatCafePreview.Editor
             Build();var preview=UnityEngine.Object.FindObjectOfType<ContentPreview>();preview.Initialize();
             var client=preview.GetComponent<PythonStateClient>();var flags=System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic;
             typeof(PythonStateClient).GetField("preview",flags).SetValue(client,preview);
-            var state=PythonServiceSetup.Sample();state.cats[0].can_player_start=true;
+            var content=(ContentBundle)typeof(ContentPreview).GetField("bundle",flags).GetValue(preview);
+            var state=PythonServiceSetup.Sample();state.cats[0].content_cat_id=content.cats[0].cat_id;state.cats[0].can_player_start=true;
             state.player_interaction=new PythonPlayerInteraction{session_id="layout",cat_id=state.cats[0].cat_id,content_cat_id=state.cats[0].content_cat_id,scene_key="teaser",name="ミケ",active=true,remaining_ticks=8,remaining_sets=2,mode="ねこじゃらし",stamina_before=100,stamina=92,affinity_after=1.5f,affinity_delta=1.5f,can_finish=true,
                 actions=new[]{new PythonEventChoice{choice="direct",label="素直に動かす",can_select=true}},targets=new[]{new PythonEventChoice{choice="voice",label="声をかける"}},history="1：素直に動かす / 好意的に応じる\n体力 92 / 好感度 +1.5"};
             var keys=new[]{"ball","plush","tunnel","pet","brush","voice","presence"};
@@ -86,18 +100,18 @@ namespace CatCafePreview.Editor
             Action apply=()=>typeof(PythonStateClient).GetMethod("Accept",flags).Invoke(client,new object[]{state});apply();
             var player=preview.GetComponent<PythonPlayerPanel>();
             if(!player.summary.text.Contains("100 → 92") || !player.back.interactable)throw new Exception("Interaction summary or return missing");
-            if(player.picture.texture==null || player.picture.texture!=preview.PlayerTexture(state.cats[0].content_cat_id,"play"))throw new Exception("Play image fallback missing");
+            if(player.picture.texture==null || player.picture.texture!=preview.PlayerTexture(state.cats[0].content_cat_id,"teaser"))throw new Exception("Play image fallback missing");
             if(!ContentValidation.ValidSceneKey("ball__feint") || ContentValidation.ValidSceneKey("brush__intense") || ContentValidation.ValidSceneKey("ball__missing"))throw new Exception("Combination keys invalid");
-            var content=(ContentBundle)typeof(ContentPreview).GetField("bundle",flags).GetValue(preview);
             var contentCat=Array.Find(content.cats,cat=>cat.cat_id==state.cats[0].content_cat_id);
-            var originalScenes=contentCat.scenes;
+            var allScenes=contentCat.scenes;
+            var originalScenes=Array.FindAll(allScenes,row=>!row.key.Contains("__"));contentCat.scenes=originalScenes;
             var petScene=Array.Find(originalScenes,scene=>scene.key=="pet");
             var expanded=new System.Collections.Generic.List<SceneContent>(originalScenes);
             expanded.Add(new SceneContent{key="teaser__direct",label="test",text="test",image=petScene.image});contentCat.scenes=expanded.ToArray();ContentValidation.Validate(content);
             state.player_interaction.image_key="teaser__direct";apply();
             if(player.picture.texture!=preview.PlayerTexture(state.cats[0].content_cat_id,"pet"))throw new Exception("Combination image priority incorrect");
             state.player_interaction.image_key="teaser__feint";apply();
-            if(player.picture.texture!=preview.PlayerTexture(state.cats[0].content_cat_id,"play"))throw new Exception("Combination image fallback incorrect");
+            if(player.picture.texture!=preview.PlayerTexture(state.cats[0].content_cat_id,"teaser"))throw new Exception("Combination image fallback incorrect");
             expanded.Add(new SceneContent{key="teaser__open_up",label="test",text="test",image=Array.Find(originalScenes,scene=>scene.key=="normal").image});
             expanded.Add(new SceneContent{key="teaser__simultaneous",label="test",text="test",image=petScene.image});
             contentCat.scenes=expanded.ToArray();ContentValidation.Validate(content);
@@ -106,13 +120,13 @@ namespace CatCafePreview.Editor
             state.player_interaction.event_image_key="teaser__simultaneous";apply();
             if(player.picture.texture!=preview.PlayerTexture(state.cats[0].content_cat_id,"pet"))throw new Exception("Simultaneous image incorrect");
             contentCat.scenes=originalScenes;apply();
-            if(player.picture.texture!=preview.PlayerTexture(state.cats[0].content_cat_id,"play"))throw new Exception("Missing special image fallback incorrect");
+            if(player.picture.texture!=preview.PlayerTexture(state.cats[0].content_cat_id,"teaser"))throw new Exception("Missing special image fallback incorrect");
             state.player_interaction.event_image_key=null;
             contentCat.scenes=originalScenes;state.player_interaction.image_key=null;
             state.player_interaction.scene_key="brush";apply();
-            if(player.picture.texture!=preview.PlayerTexture(state.cats[0].content_cat_id,"pet"))throw new Exception("Brush fallback incorrect");
+            if(player.picture.texture!=preview.PlayerTexture(state.cats[0].content_cat_id,"brush"))throw new Exception("Brush fallback incorrect");
             state.player_interaction.content_cat_id="missing-cat";apply();
-            if(player.picture.texture!=null || string.IsNullOrEmpty(player.imageNotice.text))throw new Exception("Missing image did not clear");
+            if(player.picture.texture!=ContentPreview.CatPlaceholderTexture())throw new Exception("Missing image did not clear");
             state.player_interaction.content_cat_id=state.cats[0].content_cat_id;state.player_interaction.scene_key="teaser";apply();
             Canvas.ForceUpdateCanvases();typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{preview,"Logs/PlayerLayout.png"});
             if(player.targets.options.Count!=8)throw new Exception("Switch targets were truncated");
@@ -126,15 +140,27 @@ namespace CatCafePreview.Editor
             if(player.targets.options[player.targets.value].text!="声をかける")throw new Exception("Reopen lost current mode");
             state.player_interaction.mode="ねこじゃらし";state.player_interaction.scene_key="teaser";
             state.player_interaction.targets=Array.ConvertAll(keys,key=>new PythonEventChoice{choice=key,label=labels[Array.IndexOf(keys,key)]});apply();
-            typeof(Dropdown).GetMethod("Start",flags).Invoke(player.targets,null);
-            player.targets.alphaFadeSpeed=0;player.targets.Show();Canvas.ForceUpdateCanvases();
-            typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{preview,"Logs/PlayerTargets.png"});
-            player.targets.Hide();
+            if(player.targets.template.rect.height<300 || player.targets.captionText.text!="ねこじゃらし")throw new Exception("Switch caption or list height missing");
             player.ReturnToDetails();if(player.panel.activeSelf || !preview.GetComponent<PythonCatDetailsPanel>().panel.activeSelf)throw new Exception("Return to details failed");
-            player.Open();state.player_interaction.active=false;state.player_interaction.can_finish=false;apply();
+            player.Open();state.player_interaction.active=false;state.player_interaction.can_finish=false;state.player_interaction.reason="自分で切り上げました";apply();
             if(player.finish.gameObject.activeSelf || player.actions[0].gameObject.activeSelf || !player.summary.text.Contains("確定"))throw new Exception("Result actions remained visible");
-            player.Disconnect();if(player.back.interactable)throw new Exception("Offline return enabled");
-            Debug.Log("CAT_CAFE_PLAYER_LAYOUT_DISPLAY_OK: summary / return / result / offline");
+            if(player.resultGuide==null || !player.resultGuide.gameObject.activeSelf || !player.resultGuide.text.Contains("確定"))throw new Exception("Result guide missing");
+            Canvas.ForceUpdateCanvases();typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{preview,"Logs/PlayerReviewResult.png"});
+            state.player_interaction.active=true;state.player_interaction.can_finish=true;state.player_interaction.reason="";
+            state.player_interaction.actions=new[]{new PythonEventChoice{choice="direct",label="素直に動かす",can_select=true},new PythonEventChoice{choice="gentle",label="弱く働きかける",can_select=true},new PythonEventChoice{choice="intense",label="強く働きかける",can_select=false},new PythonEventChoice{choice="feint",label="フェイント",can_select=false,reason="この動作では選べません。"},new PythonEventChoice{choice="pause",label="動きを止めて待つ",can_select=true},new PythonEventChoice{choice="switch",label="動作を切り替える",can_select=true},new PythonEventChoice{choice="special",label="特別な働きかけ",can_select=false}};apply();
+            if(player.actions[2].interactable || !player.actionHints[2].text.Contains("選べません") || !player.actionHints[3].text.Contains("この動作"))throw new Exception("Disabled reasons missing");
+            var pending=typeof(PythonStateClient).GetField("pending",flags);player.SelectAction(2);if(pending.GetValue(client)!=null)throw new Exception("Blocked action sent");
+            if(!player.actionHints[5].text.Contains("先に"))throw new Exception("Switch guidance missing");player.targets.value=1;player.TargetChanged(1);
+            if(!player.actions[5].interactable || !player.actionHints[5].text.Contains("1ターン"))throw new Exception("Selected switch guidance missing");
+            Canvas.ForceUpdateCanvases();typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{preview,"Logs/PlayerReviewLive.png"});
+            player.SelectAction(5);var command=(PythonShiftCommand)pending.GetValue(client);if(command==null || command.choice!="switch" || command.target_type!=state.player_interaction.targets[0].choice || player.actions[0].interactable || !player.notice.text.Contains("待ち"))throw new Exception("Switch payload or busy guard failed");
+            string request=command.request_id;player.SelectAction(0);player.Finish();if(((PythonShiftCommand)pending.GetValue(client)).request_id!=request)throw new Exception("Duplicate action sent");pending.SetValue(client,null);apply();
+            string unchanged=JsonUtility.ToJson(state);player.ReturnToDetails();player.Open();if(JsonUtility.ToJson(state)!=unchanged || pending.GetValue(client)!=null)throw new Exception("Return or resume changed interaction");
+            player.Disconnect();player.RefreshControls();if(player.back.interactable || !player.notice.text.Contains("未接続"))throw new Exception("Offline return enabled");
+            state.instance_id="another-game";state.player_interaction=null;apply();if(player.panel.activeSelf)throw new Exception("Loaded game retained interaction");
+
+            contentCat.scenes=allScenes;
+            Debug.Log("CAT_CAFE_PLAYER_LAYOUT_DISPLAY_OK: summary / image variants / disabled reasons / switch / busy / duplicate guard / return and resume / result / offline / loaded game");
         }
     }
 }
