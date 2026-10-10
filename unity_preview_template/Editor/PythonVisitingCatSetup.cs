@@ -41,7 +41,7 @@ namespace CatCafePreview.Editor
             var preparation=preview.GetComponent<PythonPreparationPanel>();var parent=preparation.close.transform.parent;var entry=parent.Find("Visiting Cat Entry");if(entry!=null)UnityEngine.Object.DestroyImmediate(entry.gameObject);
             Place(preparation.close.GetComponent<RectTransform>(),480,550,436,40);preparation.close.GetComponentInChildren<Text>().fontSize=17;
             panel.confirmation.SetActive(false);panel.panel.SetActive(false);
-            EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);Debug.Log("CAT_CAFE_VISITING_UI_OK");
+            EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);PythonCatAcquisitionLayout.RefreshIfReady();Debug.Log("CAT_CAFE_VISITING_UI_OK");
         }
         public static void BuildAndVerify()
         {

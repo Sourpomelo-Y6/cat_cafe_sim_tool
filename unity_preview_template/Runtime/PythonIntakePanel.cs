@@ -10,12 +10,26 @@ namespace CatCafePreview
         public Button accept, decline;
         public RawImage picture;
         public Text[] choiceDetails;
-        private string key, prompt;
-        public void Accept() { GetComponent<PythonStateClient>().RespondIntake(true); }
-        public void Decline() { GetComponent<PythonStateClient>().RespondIntake(false); }
+        public GameObject confirmation;
+        public Text confirmationText;
+        public Button confirm,cancel,housing;
+        private string key, prompt,identity;
+        private bool? selection;
+        public void Accept() { Choose(true); }
+        public void Decline() { Choose(false); }
+        void Choose(bool answer)
+        {
+            var client=GetComponent<PythonStateClient>();if(!client.CanRespondIntake(answer) || confirmation==null)return;
+            var q=client.CurrentState.intake_request;selection=answer;confirmationText.text=answer?q.name+"を迎えますか？\n初期費用："+q.cost+" / 資金："+client.CurrentState.funds+" → "+(client.CurrentState.funds-q.cost)+"\n飼育スペース："+q.housing+"\n健康・体力全回復・休養予定で加入します。":q.name+"の依頼を見送りますか？\n費用や人気への影響はありません。この依頼は再発生しません。";
+            confirmation.SetActive(true);confirmation.transform.SetAsLastSibling();RefreshControls();
+        }
+        public void Cancel(){selection=null;if(confirmation!=null)confirmation.SetActive(false);RefreshControls();}
+        public void Confirm(){var client=GetComponent<PythonStateClient>();if(!selection.HasValue || !client.CanRespondIntake(selection.Value))return;bool answer=selection.Value;if(answer)GetComponent<PythonCatAcquisitionNavigation>()?.Watch(client.CurrentState.intake_request.cat_id);Cancel();client.RespondIntake(answer);}
+        public void Housing(){Cancel();GetComponent<PythonCatAcquisitionNavigation>().OpenHousing(panel);}
         public void Apply(PythonCafeState state)
         {
             var intake = state.intake_request;
+            string revision=state.instance_id+"/"+state.revision;if(identity!=revision){identity=revision;selection=null;if(confirmation!=null)confirmation.SetActive(false);}
             panel.SetActive(intake != null && intake.status == "waiting");
             if (!panel.activeSelf) return;
             if (picture != null)
@@ -42,12 +56,15 @@ namespace CatCafePreview
         public void RefreshControls()
         {
             var client = GetComponent<PythonStateClient>();
-            accept.interactable = client.CanRespondIntake(true);
-            decline.interactable = client.CanRespondIntake(false);
+            accept.interactable = !selection.HasValue && client.CanRespondIntake(true);
+            decline.interactable = !selection.HasValue && client.CanRespondIntake(false);
+            if(confirm!=null)confirm.interactable=selection.HasValue && client.CanRespondIntake(selection.Value);
+            if(housing!=null)housing.interactable=!selection.HasValue && client.CanManageSaves && client.CurrentState?.housing!=null;
             if(panel.activeSelf)notice.text=PythonEventPresentation.Notice(client,prompt);
         }
         public void Disconnect()
         {
+            selection=null;if(confirmation!=null)confirmation.SetActive(false);if(confirm!=null)confirm.interactable=false;if(housing!=null)housing.interactable=false;
             accept.interactable = decline.interactable = false;
             if(panel.activeSelf) notice.text = "Python未接続です。再接続後に回答できます。";
         }

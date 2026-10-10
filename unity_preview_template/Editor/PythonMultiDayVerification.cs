@@ -84,7 +84,7 @@ namespace CatCafePreview.Editor
             list.open.onClick.Invoke();if(!list.panel.activeSelf || !list.entries[route].interactable)throw new Exception("Required event entry unavailable: "+route);
             list.entries[route].onClick.Invoke();client.GetComponent<ContentPreview>().RefreshPythonControls();if(list.panel.activeSelf || !panel.activeSelf || !button.interactable)throw new Exception("Event list did not open selected response: "+route);
             Canvas.ForceUpdateCanvases();typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{client.GetComponent<ContentPreview>(),"Logs/AuditEvent-"+route+".png"});
-            if(!ButtonClick(panel,button))throw new Exception("Response could not be clicked");if(button.interactable)throw new Exception("Duplicate response remained enabled");return true;
+            if(!ButtonClick(panel,button))throw new Exception("Response could not be clicked");if(route==1){var intake=client.GetComponent<PythonIntakePanel>();if(!ButtonClick(intake.confirmation,intake.confirm))throw new Exception("Intake confirmation could not be clicked");}if(button.interactable)throw new Exception("Duplicate response remained enabled");return true;
         }
         static bool ButtonClick(GameObject panel,UnityEngine.UI.Button button)
         {

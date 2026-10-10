@@ -27,7 +27,7 @@ namespace CatCafePreview
         }
         public void Close(){Clear();panel.SetActive(false);}
         public void Accept(){Choose("accept");} public void Decline(){Choose("decline");}
-        public void Housing(){Clear();GetComponent<PythonHousingPanel>().Open();}
+        public void Housing(){Clear();GetComponent<PythonCatAcquisitionNavigation>().OpenHousing(panel);}
         private void Choose(string choice)
         {
             if(!online || !GetComponent<PythonStateClient>().CanRespondRegular(choice))return;
@@ -36,7 +36,7 @@ namespace CatCafePreview
                 : row.name+"の受け入れを見送りますか？\n費用・人気・常連度は変わりません。\nこの紹介は再発生しません。";
             RefreshControls();
         }
-        public void Confirm(){if(!online || selection==null || !GetComponent<PythonStateClient>().CanRespondRegular(selection))return;var choice=selection;Clear();GetComponent<PythonStateClient>().RespondRegular(choice);}
+        public void Confirm(){if(!online || selection==null || !GetComponent<PythonStateClient>().CanRespondRegular(selection))return;var choice=selection;if(choice=="accept")GetComponent<PythonCatAcquisitionNavigation>()?.Watch(current.regular_introduction.cat_id);Clear();GetComponent<PythonStateClient>().RespondRegular(choice);}
         public void Cancel(){Clear();RefreshControls();}
         private void Clear(){selection=null;confirmation.SetActive(false);}
         public void Apply(PythonCafeState state)

@@ -17,6 +17,7 @@ namespace CatCafePreview
         private readonly HashSet<Button> bound=new HashSet<Button>();
         private PythonEventListPanel List=>GetComponent<PythonEventListPanel>();
         public void Open(){ClearReturnContext();CloseDetails();List.Close();panel.SetActive(true);panel.transform.SetAsLastSibling();RefreshControls();}
+        public void PreserveReturn(Action action){var source=returnPanel;var button=returnButton;int selectedGroup=group;action();group=selectedGroup;if(source!=null && source.activeSelf && button!=null)Track(source,button);}
         public void Close(){ClearReturnContext();panel.SetActive(false);}
         public void CloseDetails()
         {

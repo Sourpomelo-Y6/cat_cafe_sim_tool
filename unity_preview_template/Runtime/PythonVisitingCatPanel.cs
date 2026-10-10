@@ -29,7 +29,7 @@ namespace CatCafePreview
         public void Interact() { Choose("interact"); }
         public void Skip() { Choose("skip"); }
         public void Accept() { Choose("accept"); }
-        public void Housing() { ClearConfirmation();GetComponent<PythonHousingPanel>().Open(); }
+        public void Housing() { ClearConfirmation();GetComponent<PythonCatAcquisitionNavigation>().OpenHousing(panel); }
         private void Choose(string choice)
         {
             if(!online || !GetComponent<PythonStateClient>().CanRespondVisiting(choice))return;
@@ -43,7 +43,7 @@ namespace CatCafePreview
         public void Confirm()
         {
             if(!online || selection==null || !GetComponent<PythonStateClient>().CanRespondVisiting(selection))return;
-            var choice=selection;ClearConfirmation();GetComponent<PythonStateClient>().RespondVisiting(choice);
+            var choice=selection;if(choice=="accept")GetComponent<PythonCatAcquisitionNavigation>()?.Watch(current.visiting_cat.cat_id);ClearConfirmation();GetComponent<PythonStateClient>().RespondVisiting(choice);
         }
         public void Cancel() { ClearConfirmation();RefreshControls(); }
         private void ClearConfirmation() { selection=null;confirmation.SetActive(false); }

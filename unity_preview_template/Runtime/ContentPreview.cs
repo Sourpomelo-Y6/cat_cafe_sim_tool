@@ -206,7 +206,7 @@ namespace CatCafePreview
             GetComponent<PythonMenuPanel>()?.Apply(state);
             GetComponent<PythonBusinessLogPanel>()?.Apply(state);
             GetComponent<PythonClearResultsPanel>()?.Apply(state);
-            GetComponent<PythonPersistPanel>()?.Apply(state);
+            GetComponent<PythonPersistPanel>()?.Apply(state);GetComponent<PythonCatAcquisitionNavigation>()?.Refresh();
         }
         private void AppendObjectiveProgress()
         {
@@ -281,6 +281,7 @@ namespace CatCafePreview
 
         public void RefreshPythonControls()
         {
+            GetComponent<PythonCatAcquisitionNavigation>()?.Refresh();
             var service=GetComponent<PythonServiceScreen>();if(service!=null)service.RefreshControls();
             var navigation=GetComponent<PythonReturnToTitle>();if(navigation!=null)navigation.RefreshControls();
             var closing=GetComponent<PythonClosingPanel>();if(closing!=null)closing.RefreshControls();
@@ -550,6 +551,7 @@ namespace CatCafePreview
             cats.interactable = false;
             foreach (var button in sceneButtons) button.interactable = false;
             var header=GetComponent<PythonBusinessHeader>();if(header!=null){header.Connected=false;header.RefreshControls();}
+            GetComponent<PythonCatAcquisitionNavigation>()?.Refresh();
             status.text = "Python未接続：" + message;
             description.text = "Python状態サーバーを起動してください。接続は自動で再試行します。";
             picture.texture = null; picture.enabled = false; emptyImage.enabled = true;

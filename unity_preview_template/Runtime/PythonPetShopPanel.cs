@@ -15,20 +15,20 @@ namespace CatCafePreview
         private string instance,identity,selected,selection;
         private bool online;
         private PythonShopCat[] Rows => current?.pet_shop?.rows ?? new PythonShopCat[0];
-        private PythonShopCat Row => Array.Find(Rows,r=>r.cat_id==selected);
+        public PythonShopCat Row => Array.Find(Rows,r=>r.cat_id==selected);
         public void Open(){if(current?.pet_shop==null || !GetComponent<PythonStateClient>().CanManageSaves)return;Clear();panel.SetActive(true);panel.transform.SetAsLastSibling();Render();ResetScroll();}
         public void Close(){Clear();panel.SetActive(false);}
         private void Clear(){selection=null;confirmation.SetActive(false);}
         private void ResetScroll(){Canvas.ForceUpdateCanvases();details.GetComponentInParent<ScrollRect>().verticalNormalizedPosition=1;}
         public void Previous(){Move(-1);}public void Next(){Move(1);}
         private void Move(int delta){if(!online || selection!=null || !GetComponent<PythonStateClient>().CanManageSaves)return;int i=Array.FindIndex(Rows,r=>r.cat_id==selected)+delta;if(i<0 || i>=Rows.Length)return;selected=Rows[i].cat_id;Clear();Render();ResetScroll();}
-        public void Housing(){if(!online || !GetComponent<PythonStateClient>().CanManageSaves)return;Clear();GetComponent<PythonHousingPanel>().Open();}
+        public void Housing(){if(!online || !GetComponent<PythonStateClient>().CanManageSaves)return;Clear();GetComponent<PythonCatAcquisitionNavigation>().OpenHousing(panel);}
         public void Purchase()
         {
             if(!online || Row==null || !GetComponent<PythonStateClient>().CanPurchaseCat(selected))return;
             selection=selected;confirmation.SetActive(true);confirmationText.text=Row.name+"を購入して迎えますか？\n価格："+Row.cost.ToString("0.#")+" / 購入後の資金："+Row.funds_after.ToString("0.#")+"\n飼育スペース："+current.pet_shop.housing+"\n健康・体力全回復・休養予定で加入します。";RefreshControls();
         }
-        public void Confirm(){if(!online || selection==null || !GetComponent<PythonStateClient>().CanPurchaseCat(selection))return;var key=selection;Clear();GetComponent<PythonStateClient>().PurchaseCat(key);}
+        public void Confirm(){if(!online || selection==null || !GetComponent<PythonStateClient>().CanPurchaseCat(selection))return;var key=selection;Clear();GetComponent<PythonCatAcquisitionNavigation>()?.Watch(key);GetComponent<PythonStateClient>().PurchaseCat(key);}
         public void Cancel(){Clear();RefreshControls();}
         public void Apply(PythonCafeState state)
         {
@@ -44,7 +44,7 @@ namespace CatCafePreview
             title.text="ペットショップ"+(row==null ? "" : " · "+(i+1)+"/"+Rows.Length+" · "+row.name+(row.accepted ? "（購入済み）" : ""));
             picture.texture=row==null ? null : GetComponent<ContentPreview>().CandidateCatTexture(row.content_cat_id);picture.enabled=picture.texture!=null;
             if(picture.texture!=null)picture.GetComponent<AspectRatioFitter>().aspectRatio=(float)picture.texture.width/picture.texture.height;
-            details.text=row?.details ?? "購入候補の記録はありません。";RefreshControls();
+            details.text=row?.details ?? "購入候補の記録はありません。";RefreshControls();GetComponent<PythonCatAcquisitionNavigation>()?.Refresh();
         }
         public void RefreshControls()
         {

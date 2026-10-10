@@ -22,8 +22,8 @@ namespace CatCafePreview
         private string identity, selection, lastWaiting, instance;
         private bool online;
         private PythonDispatchIntroduction[] events=new PythonDispatchIntroduction[0];
-        private PythonDispatchIntroduction Row { get { return records.value<events.Length ? events[records.value] : null; } }
-        public void Select(int _){Clear();Render();RefreshControls();Canvas.ForceUpdateCanvases();details.GetComponentInParent<ScrollRect>().verticalNormalizedPosition=1;}
+        public PythonDispatchIntroduction Row { get { return records.value<events.Length ? events[records.value] : null; } }
+        public void Select(int _){Clear();Render();RefreshControls();GetComponent<PythonCatAcquisitionNavigation>()?.Refresh();Canvas.ForceUpdateCanvases();details.GetComponentInParent<ScrollRect>().verticalNormalizedPosition=1;}
         public void Open()
         {
             if(Row==null || !GetComponent<PythonStateClient>().CanManageSaves)return;
@@ -32,7 +32,7 @@ namespace CatCafePreview
         }
         public void Close(){Clear();panel.SetActive(false);}
         public void Accept(){Choose("accept");} public void Decline(){Choose("decline");}
-        public void Housing(){Clear();GetComponent<PythonHousingPanel>().Open();}
+        public void Housing(){Clear();GetComponent<PythonCatAcquisitionNavigation>().OpenHousing(panel);}
         private void Choose(string choice)
         {
             if(!online || !GetComponent<PythonStateClient>().CanRespondDispatchIntroduction(Row?.event_id,choice))return;
@@ -41,7 +41,7 @@ namespace CatCafePreview
                 : row.name+"の受け入れを見送りますか？\n費用・人気・派遣報酬は変わりません。\nこの候補への回答は変更できません。";
             RefreshControls();
         }
-        public void Confirm(){if(!online || selection==null || !GetComponent<PythonStateClient>().CanRespondDispatchIntroduction(Row?.event_id,selection))return;string choice=selection,eventId=Row.event_id;Clear();GetComponent<PythonStateClient>().RespondDispatchIntroduction(eventId,choice);}
+        public void Confirm(){if(!online || selection==null || !GetComponent<PythonStateClient>().CanRespondDispatchIntroduction(Row?.event_id,selection))return;string choice=selection,eventId=Row.event_id;if(choice=="accept")GetComponent<PythonCatAcquisitionNavigation>()?.Watch(Row.cat_id);Clear();GetComponent<PythonStateClient>().RespondDispatchIntroduction(eventId,choice);}
         public void Cancel(){Clear();RefreshControls();}
         private void Clear(){selection=null;confirmation.SetActive(false);}
         public void Apply(PythonCafeState state)

@@ -28,20 +28,20 @@ namespace CatCafePreview
         public void FilterAccepted(bool value){FilterChanged();}
         public void FilterChanged(){if(updating || current==null)return;updating=true;try{Clear();if(Row==null)selected=Rows.FirstOrDefault()?.cat_id;Render();ResetScroll();}finally{updating=false;}}
         public void ResetFilters(){updating=true;trait.SetValueWithoutNotify(0);coat.SetValueWithoutNotify(0);hair.SetValueWithoutNotify(0);accepted.SetIsOnWithoutNotify(false);updating=false;FilterChanged();}
-        private PythonRecruitmentCat Row => Array.Find(Rows,r=>r.cat_id==selected);
+        public PythonRecruitmentCat Row => Array.Find(Rows,r=>r.cat_id==selected);
         public void Open(){if(current?.recruitment==null || !GetComponent<PythonStateClient>().CanManageSaves)return;Clear();panel.SetActive(true);panel.transform.SetAsLastSibling();Render();ResetScroll();if(current.recruitment.can_refresh)GetComponent<PythonStateClient>().OpenRecruitment();}
         public void Close(){Clear();panel.SetActive(false);}
         private void Clear(){selection=null;confirmation.SetActive(false);}
         private void ResetScroll(){details.GetComponentInParent<ScrollRect>(true).verticalNormalizedPosition=1;}
         public void Previous(){Move(-1);}public void Next(){Move(1);}
         private void Move(int delta){if(!online || selection!=null || !GetComponent<PythonStateClient>().CanManageSaves)return;int i=Array.FindIndex(Rows,r=>r.cat_id==selected)+delta;if(i<0 || i>=Rows.Length)return;selected=Rows[i].cat_id;Clear();Render();ResetScroll();}
-        public void Housing(){if(!online || !GetComponent<PythonStateClient>().CanManageSaves)return;Clear();GetComponent<PythonHousingPanel>().Open();}
+        public void Housing(){if(!online || !GetComponent<PythonStateClient>().CanManageSaves)return;Clear();GetComponent<PythonCatAcquisitionNavigation>().OpenHousing(panel);}
         public void Purchase()
         {
             if(!online || Row==null || !GetComponent<PythonStateClient>().CanRecruitCat(selected))return;
             selection=selected;confirmation.SetActive(true);confirmationText.text=Row.name+"を受け入れして迎えますか？\n価格："+Row.cost.ToString("0.#")+" / 受け入れ後の資金："+Row.funds_after.ToString("0.#")+"\n飼育スペース："+current.recruitment.housing+"\n健康・体力全回復・休養予定で加入します。";RefreshControls();
         }
-        public void Confirm(){if(!online || selection==null || !GetComponent<PythonStateClient>().CanRecruitCat(selection))return;var key=selection;Clear();GetComponent<PythonStateClient>().RecruitCat(key);}
+        public void Confirm(){if(!online || selection==null || !GetComponent<PythonStateClient>().CanRecruitCat(selection))return;var key=selection;Clear();GetComponent<PythonCatAcquisitionNavigation>()?.Watch(key);GetComponent<PythonStateClient>().RecruitCat(key);}
         public void Cancel(){Clear();RefreshControls();}
         public void Apply(PythonCafeState state)
         {
@@ -59,7 +59,7 @@ namespace CatCafePreview
             title.text="保護猫の紹介巡回"+(row==null ? "" : " · "+(i+1)+"/"+Rows.Length+" · "+row.name+(row.accepted ? "（受け入れ済み）" : ""));
             picture.texture=row==null ? null : GetComponent<ContentPreview>().CandidateCatTexture(row.content_cat_id);picture.enabled=picture.texture!=null;
             if(picture.texture!=null)picture.GetComponent<AspectRatioFitter>().aspectRatio=(float)picture.texture.width/picture.texture.height;
-            details.text=row?.details ?? "条件に一致する紹介候補はありません。";RefreshControls();
+            details.text=row?.details ?? "条件に一致する紹介候補はありません。";RefreshControls();GetComponent<PythonCatAcquisitionNavigation>()?.Refresh();
         }
         public void RefreshControls()
         {
