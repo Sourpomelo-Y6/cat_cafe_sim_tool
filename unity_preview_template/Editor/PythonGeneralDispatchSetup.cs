@@ -22,6 +22,7 @@ namespace CatCafePreview.Editor
             p.panel=UnityEngine.Object.Instantiate(source.panel,root);p.panel.name="General Dispatch";var s=source.panel.transform;var t=p.panel.transform;
             p.title=Copy(source.title,s,t);p.details=Copy(source.details,s,t);p.progress=Copy(source.progress,s,t);p.notice=Copy(source.notice,s,t);
             p.destinations=Copy(source.destinations,s,t);p.returns=Copy(source.returns,s,t);p.send=Copy(source.send,s,t);p.receive=Copy(source.receive,s,t);p.close=Copy(source.close,s,t);
+            p.cats=source.cats==null?null:Copy(source.cats,s,t);p.compare=source.compare==null?null:Copy(source.compare,s,t);p.summary=source.summary==null?null:Copy(source.summary,s,t);
             p.destinations.onValueChanged=new Dropdown.DropdownEvent();UnityEventTools.AddPersistentListener(p.destinations.onValueChanged,p.Select);
             p.returns.onValueChanged=new Dropdown.DropdownEvent();UnityEventTools.AddPersistentListener(p.returns.onValueChanged,p.Select);
             Bind(p.send,p.Send);Bind(p.receive,p.Receive);Bind(p.close,p.Close);p.send.GetComponentInChildren<Text>().text="選んだ猫をこの派遣先へ送る";

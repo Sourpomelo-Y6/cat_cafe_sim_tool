@@ -57,7 +57,7 @@ namespace CatCafePreview.Editor
             var entry=detailCard.Find("Patron Dispatch Entry");if(entry!=null)UnityEngine.Object.DestroyImmediate(entry.gameObject);
             Place(detail.interact.GetComponent<RectTransform>(),24,550,250,40);Place(detail.previousInteraction.GetComponent<RectTransform>(),294,550,250,40);
             detail.dispatch=Button(detailCard,"Patron Dispatch Entry","有力者へ派遣",564,550,272);UnityEventTools.AddPersistentListener(detail.dispatch.onClick,detail.Dispatch);
-            detail.dispatch.interactable=false;overlay.SetActive(false);EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);Debug.Log("CAT_CAFE_DISPATCH_UI_OK");
+            detail.dispatch.interactable=false;overlay.SetActive(false);EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);PythonDispatchLayout.RefreshIfReady();Debug.Log("CAT_CAFE_DISPATCH_UI_OK");
         }
         public static void BuildAndVerify()
         {

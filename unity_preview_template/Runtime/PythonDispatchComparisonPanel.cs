@@ -12,7 +12,7 @@ namespace CatCafePreview
     {
         public GameObject panel;
         public Dropdown cats,destinations;
-        public Text title,details,notice;
+        public Text title,details,notice,summary;
         public Button proceed,close;
         private PythonCafeState current;
         private string instance,catId,destinationKey;
@@ -21,6 +21,9 @@ namespace CatCafePreview
         private PythonDispatchComparisonRow Row => Array.Find(Cat?.rows ?? new PythonDispatchComparisonRow[0],r=>Key(r)==destinationKey);
         private static string Key(PythonDispatchComparisonRow row)=>row.kind+"/"+row.choice;
         public void Open(){if(!online || current?.dispatch_comparison==null || !GetComponent<PythonStateClient>().CanManageSaves)return;panel.SetActive(true);panel.transform.SetAsLastSibling();Render();ScrollToSelection();}
+        public void OpenOption(string id,string kind,string choice){if(!online || current?.dispatch_comparison==null || !GetComponent<PythonStateClient>().CanManageSaves)return;catId=id;if(!string.IsNullOrEmpty(choice))destinationKey=kind+"/"+choice;Open();}
+        public string SelectedCatId=>catId;
+        public string SelectedDestination=>Row?.choice;
         public void Close(){panel.SetActive(false);}
         public void ResetSelection(){catId=destinationKey=null;Close();}
         public void SelectCat(int index){var rows=current?.dispatch_comparison?.cats;if(!online || !GetComponent<PythonStateClient>().CanManageSaves || rows==null || index<0 || index>=rows.Length)return;catId=rows[index].cat_id;Render();ScrollToSelection();}
@@ -38,11 +41,11 @@ namespace CatCafePreview
         {
             var list=current?.dispatch_comparison?.cats ?? new PythonDispatchComparisonCat[0];if(!Array.Exists(list,r=>r.cat_id==catId))catId=list.FirstOrDefault()?.cat_id;
             Fill(cats,list.Select(r=>r.name+"（"+r.status+"）").ToArray(),Array.FindIndex(list,r=>r.cat_id==catId));var rows=Cat?.rows ?? new PythonDispatchComparisonRow[0];if(!Array.Exists(rows,r=>Key(r)==destinationKey))destinationKey=rows.FirstOrDefault()==null ? null : Key(rows[0]);
-            Fill(destinations,rows.Select(r=>r.label+"（"+(r.can_select ? "派遣可能" : "条件を確認")+"）").ToArray(),Array.FindIndex(rows,r=>Key(r)==destinationKey));title.text=(Cat?.name ?? "猫")+"の派遣先比較";
-            details.text=rows.Length==0 ? "この営業には比較できる派遣先がありません。" : string.Join("\n\n",rows.Select(r=>(Key(r)==destinationKey ? "▶ 選択中：" : "")+r.details));RefreshControls();
+            Fill(destinations,rows.Select(r=>r.label+"（"+(r.can_select ? "派遣可能" : "条件を確認")+"）").ToArray(),Array.FindIndex(rows,r=>Key(r)==destinationKey));title.text=(Cat?.name ?? "猫")+"の派遣先比較";if(summary!=null)summary.text=Row==null?"比較できる派遣先はありません。":"選択："+Row.label+" / 費用："+PythonDispatchDisplay.N(Row.cost)+" / 帰還まで："+Row.days+"回の閉店\n報酬："+PythonDispatchDisplay.N(Row.reward)+" / "+(Row.can_select?"派遣可能":"参加条件を確認してください。");
+            details.text=rows.Length==0 ? "この営業には比較できる派遣先がありません。" : string.Join("\n\n",rows.Select(r=>(Key(r)==destinationKey ? "▶ 選択中：" : "")+r.details))+"\n\n注意\n"+(current?.dispatch_comparison?.notes ?? "");RefreshControls();
         }
         private void ScrollToSelection(){Canvas.ForceUpdateCanvases();var scroll=details.GetComponentInParent<ScrollRect>(true);int start=details.text.IndexOf("▶ 選択中：",StringComparison.Ordinal);float hidden=scroll.content.rect.height-scroll.viewport.rect.height;float offset=start<=0 ? 0 : details.cachedTextGeneratorForLayout.GetPreferredHeight(details.text.Substring(0,start),details.GetGenerationSettings(new Vector2(details.rectTransform.rect.width,0)))/details.pixelsPerUnit;scroll.verticalNormalizedPosition=hidden>0 ? 1-Mathf.Clamp01(offset/hidden) : 1;}
-        public void RefreshControls(){bool ready=online && GetComponent<PythonStateClient>().CanManageSaves;cats.interactable=ready && (current?.dispatch_comparison?.cats?.Length ?? 0)>0;destinations.interactable=proceed.interactable=ready && Row!=null;close.interactable=true;notice.text=!online ? "未接続です。再接続後に派遣先の画面へ進めます。" : !ready ? "操作を送信しています。" : (Row==null ? "" : "選択："+Row.label+" / "+(Row.can_select ? "派遣可能" : Row.reason))+"\n"+(current?.dispatch_comparison?.notes ?? "");}
+        public void RefreshControls(){bool ready=online && GetComponent<PythonStateClient>().CanManageSaves;cats.interactable=ready && (current?.dispatch_comparison?.cats?.Length ?? 0)>0;destinations.interactable=proceed.interactable=ready && Row!=null;close.interactable=true;notice.text=!online ? "未接続です。再接続後に派遣先の画面へ進めます。" : !ready ? "操作を送信しています。" : (Row==null ? "" : "選択："+Row.label+" / "+(Row.can_select ? "派遣可能" : Row.reason))+"\n"+"費用・報酬・歓迎条件は詳細欄で比較できます。";proceed.GetComponentInChildren<Text>().text=Row?.can_select==true?"選んだ派遣先の画面へ":"選んだ派遣先の条件を確認";}
         public void Disconnect(){online=false;RefreshControls();}
     }
 }
