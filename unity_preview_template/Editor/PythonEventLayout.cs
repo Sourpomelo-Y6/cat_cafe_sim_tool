@@ -64,7 +64,7 @@ namespace CatCafePreview.Editor
             Place(intakeScroll.GetComponent<RectTransform>(),24,266,304,216);
             Place(intakeScroll.viewport,8,6,272,204);
             Place(intakeScroll.verticalScrollbar.GetComponent<RectTransform>(),286,6,12,204);
-            EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);PythonCatAcquisitionLayout.RefreshIfReady();Debug.Log("CAT_CAFE_EVENT_LAYOUT_OK");
+            EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);PythonCatAcquisitionLayout.RefreshIfReady();PythonEventReviewLayout.RefreshIfReady();Debug.Log("CAT_CAFE_EVENT_LAYOUT_OK");
         }
         public static void BuildAndVerify()
         {

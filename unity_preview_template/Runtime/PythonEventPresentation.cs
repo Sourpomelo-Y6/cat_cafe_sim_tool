@@ -29,7 +29,7 @@ namespace CatCafePreview
         }
         public static string GrowthKey(PythonGrowthChoice row) { return row.cat_id+"/"+row.kind+"/"+row.title+"/"+row.learned+"/"+row.group; }
         public static string Notice(PythonStateClient client,string prompt)
-        { return !client.CanLeaveResult ? "回答を送信しています。完了までお待ちください。" : !client.CanManageSaves ? "Python未接続です。再接続後に回答できます。" : prompt; }
+        { return client.HasPendingResults ? "接客結果が未保存です。保存待ちを確認して再試行してください。" : client.AutoPlayRunning ? "おまかせ実行中です。停止してから回答できます。" : !client.CanLeaveResult ? "回答を送信しています。完了までお待ちください。" : !client.CanManageSaves ? "Python未接続です。再接続後に回答できます。" : prompt; }
         public static bool HasDescriptions(Text[] texts) { return texts!=null && Array.Exists(texts,text=>text!=null); }
         public static void Choices(Text[] descriptions,PythonEventChoice[] rows)
         {
@@ -39,7 +39,7 @@ namespace CatCafePreview
                 if(descriptions[i]==null)continue;bool exists=rows!=null && i<rows.Length;
                 var scroll=descriptions[i].GetComponentInParent<ScrollRect>();if(scroll!=null)scroll.gameObject.SetActive(exists);else descriptions[i].gameObject.SetActive(exists);
                 if(!exists)continue;var row=rows[i];
-                descriptions[i].text=(row.can_select ? "" : "選べません："+(string.IsNullOrEmpty(row.reason) ? "現在は選択できません。" : row.reason)+"\n")+row.detail;
+                descriptions[i].text=(row.can_select ? "" : "選べない理由\n"+(string.IsNullOrEmpty(row.reason) ? "現在は選択できません。" : row.reason)+"\n\n")+"効果・費用\n"+(string.IsNullOrEmpty(row.detail) ? "説明はありません。" : row.detail)+(row.can_select ? "\n選択可能" : "");
                 descriptions[i].color=row.can_select ? new Color(.16f,.25f,.21f) : new Color(.55f,.27f,.13f);
             }
         }

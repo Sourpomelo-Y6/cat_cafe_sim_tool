@@ -53,6 +53,7 @@ $previewFiles += @('Runtime/PythonCatAcquisitionNavigation.cs', 'Editor/PythonCa
 $previewFiles += @('Runtime/PythonSaveBrowser.cs', 'Editor/PythonSaveBrowserLayout.cs', 'Editor/PythonSaveBrowserVerification.cs')
 $previewFiles += @('Editor/PythonFacilityLayout.cs', 'Editor/PythonFacilityVerification.cs')
 $previewFiles += @('Editor/PythonCatDetailsLayout.cs', 'Editor/PythonCatRosterLayout.cs', 'Editor/PythonCatRosterVerification.cs')
+$previewFiles += @('Runtime/PythonEventRecordPanel.cs', 'Editor/PythonEventReviewLayout.cs', 'Editor/PythonEventReviewVerification.cs')
 $previewFiles += @('Runtime/PythonEventPresentation.cs', 'Editor/PythonEventLayout.cs', 'Editor/PythonEventLayoutVerification.cs')
 $previewFiles += @('Editor/PythonSaveLayout.cs')
 $previewFiles += @('Runtime/PythonFinanceHistoryPanel.cs', 'Editor/PythonFinanceHistorySetup.cs')

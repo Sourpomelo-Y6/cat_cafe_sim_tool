@@ -281,6 +281,7 @@ namespace CatCafePreview
 
         public void RefreshPythonControls()
         {
+            GetComponent<PythonEventRecordPanel>()?.Refresh();
             GetComponent<PythonSaveBrowser>()?.Refresh();
             GetComponent<PythonCatAcquisitionNavigation>()?.Refresh();
             var service=GetComponent<PythonServiceScreen>();if(service!=null)service.RefreshControls();
@@ -551,7 +552,7 @@ namespace CatCafePreview
             if (auto != null) auto.RefreshControls();
             cats.interactable = false;
             foreach (var button in sceneButtons) button.interactable = false;
-            var header=GetComponent<PythonBusinessHeader>();if(header!=null){header.Connected=false;header.RefreshControls();}
+            var header=GetComponent<PythonBusinessHeader>();if(header!=null){header.Connected=false;header.RefreshControls();}GetComponent<PythonEventRecordPanel>()?.Refresh();
             GetComponent<PythonCatAcquisitionNavigation>()?.Refresh();
             GetComponent<PythonSaveBrowser>()?.Refresh();
             status.text = "Python未接続：" + message;

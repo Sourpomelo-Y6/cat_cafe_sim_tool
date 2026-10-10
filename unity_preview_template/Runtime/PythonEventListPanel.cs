@@ -18,7 +18,7 @@ namespace CatCafePreview
         public Text notice;
         private PythonCafeState current;
         private bool online;
-        private string instance;
+        private string instance,resolution;private int lastPending,lastDay;
         public void Open(){OpenList(true);}
         private void OpenList(bool prioritize)
         {
@@ -27,7 +27,7 @@ namespace CatCafePreview
         }
         private void CloseDetails()
         {
-            GetComponent<PythonRecruitmentPanel>()?.Close();GetComponent<PythonBusinessLogPanel>()?.Close();GetComponent<PythonClearResultsPanel>()?.Close();GetComponent<PythonFinanceHistoryPanel>()?.Close();
+            GetComponent<PythonEventRecordPanel>()?.Close();GetComponent<PythonRecruitmentPanel>()?.Close();GetComponent<PythonBusinessLogPanel>()?.Close();GetComponent<PythonClearResultsPanel>()?.Close();GetComponent<PythonFinanceHistoryPanel>()?.Close();
             GetComponent<PythonVisitingCatPanel>()?.Close();GetComponent<PythonMissingPanel>()?.Close();GetComponent<PythonAdoptionPanel>()?.Close();GetComponent<PythonDispatchPanel>()?.Close();
             GetComponent<PythonRegularIntroductionPanel>()?.Close();GetComponent<PythonReservationPanel>()?.Close();GetComponent<PythonCustomerTrustPanel>()?.Close();GetComponent<PythonGeneralDispatchPanel>()?.Close();
             GetComponent<PythonDispatchChoicePanel>()?.Close();GetComponent<PythonDispatchTroublePanel>()?.Close();GetComponent<PythonDispatchIntroductionPanel>()?.Close();
@@ -35,6 +35,7 @@ namespace CatCafePreview
         }
         public void ResetNavigation(){Close();instance=null;group=1;}
         public void Close(){ClearReturnContext();panel.SetActive(false);}
+        public void ReturnToBusiness(){Close();CloseDetails();GetComponent<PythonPreparationPanel>()?.Close();GetComponent<PythonClosingPanel>()?.Close();}
         private void ClearReturnContext(){if(returnButton!=null){if(IsAddedReturn(returnButton))returnButton.gameObject.SetActive(false);else returnButton.GetComponentInChildren<Text>().text=returnCaption;}returnPanel=null;returnButton=null;returnCaption=null;}
         private static bool IsAddedReturn(Button button)=>button.name=="Event List Return";
         private void Track(int index,GameObject target){if(detailClose==null || index>=detailClose.Length || detailClose[index]==null)return;returnPanel=target;returnButton=detailClose[index];returnCaption=returnButton.GetComponentInChildren<Text>().text;returnButton.GetComponentInChildren<Text>().text="イベント一覧へ戻る";if(IsAddedReturn(returnButton))returnButton.gameObject.SetActive(true);}
@@ -99,7 +100,7 @@ namespace CatCafePreview
             if(current==null)return false;
             switch(i){
                 case 0:return current.visiting_cat!=null && current.can_set_shifts && !current.closed && current.game_over==null;
-                case 1:return current.intake_request?.status=="waiting";
+                case 1:return current.intake_request!=null && (current.intake_request.status=="waiting" || current.intake_request.status=="accepted" || current.intake_request.status=="declined");
                 case 2:return current.store_event!=null;
                 case 3:return current.growth_choices!=null && current.growth_choices.Length>0;
                 case 4:return current.missing_cats!=null && current.missing_cats.Length>0;
@@ -131,6 +132,7 @@ namespace CatCafePreview
         private void Show(int i,bool fromList=true)
         {
             if(!MenuAvailable(i))return;
+            if(i==1 && current.intake_request.status!="waiting"){Close();GetComponent<PythonEventRecordPanel>().Open();return;}
             GameObject target=null;
             switch(i){
                 case 20:var shop=GetComponent<PythonPetShopPanel>();shop.Open();target=shop.panel;break;
@@ -163,7 +165,7 @@ namespace CatCafePreview
         }
         public void Apply(PythonCafeState s)
         {
-            bool changed=instance!=s.instance_id;if(changed){instance=s.instance_id;Close();}current=s;online=true;if(changed)group=PendingCount>0?0:1;
+            bool changed=instance!=s.instance_id;if(changed){instance=s.instance_id;Close();}current=s;online=true;if(changed || lastDay!=s.day)resolution=null;else if(PendingCount<lastPending)resolution="回答待ちが更新されました。残り "+PendingCount+"件です。";lastPending=PendingCount;lastDay=s.day;if(changed)group=PendingCount>0?0:1;
             if(detailClose!=null)for(int i=0;i<detailClose.Length;i++){var button=detailClose[i];var target=detailPanels[i];if(button!=null && bound.Add(button))button.onClick.AddListener(()=>ReturnFromDetail(target));}
             if(returnPanel!=null && !returnPanel.activeSelf)OpenList(false);RefreshControls();
         }
@@ -183,7 +185,7 @@ namespace CatCafePreview
             for(int i=0;i<entries.Length;i++){entries[i].GetComponentInChildren<Text>().text=i<captions.Length ? captions[i] : i==24 ? "おまかせ：方針・複数日進行・実行結果" : i==23 ? "接客の手動割り当て・自動割り当て設定" : i==22 ? "猫ごとの派遣先比較" : i==21 ? "経営ルール・目標の開始・進捗："+(current.objective_start?.rows ?? new PythonStartObjective[0]).Count(r=>r.can_start)+"件の開始候補" : i==20 ? "ペットショップ：候補 "+(current.pet_shop?.rows?.Length ?? 0)+"匹 / 購入済み "+(current.pet_shop?.rows ?? new PythonShopCat[0]).Count(r=>r.accepted)+"匹" : i==19 ? "お客さんの名簿・来店予定："+(current.customer_directory?.rows?.Length ?? 0)+"名" : i==18 ? "待合スペース："+(current.waiting_area?.status ?? "この営業では利用できません") : i==17 ? "休養スペース："+(current.rest_space?.status ?? "情報なし") : i==16 ? "席の接客設備：所持 "+(current.seat_equipment?.owned?.Length ?? 0)+"個 / "+(current.seat_equipment?.can_manage==true ? "購入・配置" : "条件を確認") : i==15 ? "席数の増設："+(current.expansion?.seats ?? 0)+"席 / "+(current.expansion?.can_expand==true ? "増設可能" : current.expansion?.has_next==true ? "条件を確認" : "追加できる席なし") : i==14 ? "用品・猫のケア：所持 "+(current.items?.count ?? 0)+"個" : i==13 ? "派遣先からの猫紹介："+(current.dispatch_introductions ?? new PythonDispatchIntroduction[0]).Count(e=>e.status=="waiting")+"件の回答待ち / 記録 "+(current.dispatch_introductions?.Length ?? 0)+"件" : i==12 ? "山あいの宿のトラブル："+(current.dispatch_troubles ?? new PythonDispatchTrouble[0]).Count(e=>e.status=="waiting")+"件の回答待ち / 記録 "+(current.dispatch_troubles?.Length ?? 0)+"件" : i==11 ? "派遣中の選択イベント："+(current.dispatch_choices ?? new PythonDispatchEncounter[0]).Count(e=>e.status=="waiting")+"件の回答待ち / 記録 "+(current.dispatch_choices?.Length ?? 0)+"件" : i==10 ? "一般派遣の帰還："+(current.general_dispatch?.events ?? new PythonDispatchEvent[0]).Count(e=>e.status=="waiting")+"件の帰還待ち / 派遣中 "+(current.general_dispatch?.events ?? new PythonDispatchEvent[0]).Count(e=>e.status=="travelling")+"匹" : i==9 ? "顧客の信頼回復："+(current.customer_trust==null ? "対象なし" : (current.customer_trust.events ?? new PythonTrustEvent[0]).Count(e=>e.status=="waiting")+"件の回答待ち / 記録 "+(current.customer_trust.events?.Length ?? 0)+"件") : "特別予約："+(current.reservation==null ? "対象なし" : current.reservation.status=="untriggered" ? "解放前" : current.reservation.visit_day+"日目 / "+(current.reservation.status=="waiting" ? "確認待ち" : current.reservation.status=="declined" ? "辞退済み" : "引き受け済み"));entries[i].interactable=MenuAvailable(i) && (i==6 ? dispatch.Length>0 : i==10 ? current.general_dispatch?.events?.Length>0 : true);}
             RefreshGroups();
             if(returnButton!=null && returnPanel!=null && returnPanel.activeSelf)returnButton.GetComponentInChildren<Text>().text="イベント一覧へ戻る";
-            notice.text=!online ? "Python未接続です。再接続後にイベントを開けます。" : !client.CanManageSaves ? "操作を送信しています。完了するまでお待ちください。" : group==0 && PendingCount==0 ? "回答待ちはありません。出会い・交流や記録は別の分類で確認できます。" : "回答待ち "+PendingCount+"件。店先の猫との交流は任意です。回答待ちに対応すると営業を再開できます。";
+            notice.text=!online ? "Python未接続です。再接続後にイベントを開けます。" : client.HasPendingResults ? "接客結果が未保存です。保存待ちの内容を確認してください。" : client.AutoPlayRunning ? "おまかせ実行中です。停止後に回答できます。" : !client.CanManageSaves ? "操作を送信しています。完了するまでお待ちください。" : group==0 && PendingCount==0 ? "回答待ちはありません。出会い・交流や記録は別の分類で確認できます。" : "回答待ち "+PendingCount+"件。店先の猫との交流は任意です。回答待ちに対応すると営業を再開できます。";if(online && client.CanManageSaves && !string.IsNullOrEmpty(resolution))notice.text=resolution+"\n"+notice.text;
         }
         private void RefreshGroups()
         {
@@ -192,9 +194,9 @@ namespace CatCafePreview
             int rows=0;for(int i=0;i<entries.Length;i++)
             {
                 bool visible=i<14 && GroupFor(i)==group;entries[i].gameObject.SetActive(visible);
-                if(visible){entries[i].GetComponent<RectTransform>().anchoredPosition=new Vector2(4,-rows*46);rows++;entries[i].GetComponent<Image>().color=PendingFor(i)>0?new Color(1f,.94f,.77f):Color.white;}
+                if(visible){entries[i].GetComponent<RectTransform>().anchoredPosition=new Vector2(4,-rows*72);entries[i].GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,64);rows++;int pending=PendingFor(i);var label=entries[i].GetComponentInChildren<Text>();label.text=(pending>0 ? "【回答待ち "+pending+"件】" : group==3 ? Available(i) ? "【記録・閲覧】" : "【現在の記録なし】" : group==2 ? "【派遣・帰還】" : "【任意の交流・候補】")+"\n"+label.text;label.fontSize=16;label.resizeTextForBestFit=true;label.resizeTextMinSize=13;label.resizeTextMaxSize=16;entries[i].GetComponent<Image>().color=pending>0?new Color(1f,.94f,.77f):group==3?new Color(.91f,.94f,.98f):Color.white;}
             }
-            content.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,Mathf.Max(342,rows*46));
+            content.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,Mathf.Max(342,rows*72));
             title.text="イベント一覧 / "+GroupNames[group];
             for(int i=0;i<4;i++){int count=i==0?total:Enumerable.Range(0,14).Count(r=>GroupFor(r)==i);tabs[i].GetComponentInChildren<Text>().text=GroupNames[i]+"（"+count+(i==0?"件":"項目")+"）";tabs[i].GetComponentInChildren<Text>().fontSize=16;tabs[i].GetComponent<Image>().color=i==group?new Color(.78f,.88f,.74f):Color.white;tabs[i].interactable=current!=null;}
             if(panel.activeSelf)panel.transform.SetAsLastSibling();
