@@ -26,10 +26,15 @@ namespace CatCafePreview.Editor
                     if(!state.closed || !panel.panel.activeSelf || !panel.next.interactable || state.finance==null || !panel.financeDetails.text.Contains(state.finance.closing_funds.ToString("0.#")) || !panel.goalDetails.text.Contains(state.objective_progress.label))throw new Exception("Live closing result missing");
                     SessionState.SetInt(Key+"day",state.day);SessionState.SetFloat(Key+"funds",state.funds);SessionState.SetInt(Key+"count",client.GetComponent<PythonSavePanel>().Count);
                     panel.close.onClick.Invoke();if(panel.panel.activeSelf)throw new Exception("Closing close failed");panel.open.onClick.Invoke();if(!panel.panel.activeSelf)throw new Exception("Closing reopen failed");panel.save.onClick.Invoke();
-                    if(panel.next.interactable || panel.save.interactable)throw new Exception("Pending save guards failed");SessionState.SetInt(Key,2);
+                    if(!client.GetComponent<PythonSaveBrowser>().panel.activeSelf)throw new Exception("Closing save browser missing");SessionState.SetInt(Key,5);
                 }
-                else if(stage==2 && client.GetComponent<PythonSavePanel>().Count>SessionState.GetInt(Key+"count",0))
+                else if(stage==5 && client.GetComponent<PythonSaveBrowser>().action.interactable)
                 {
+                    var browser=client.GetComponent<PythonSaveBrowser>();browser.Select(0);browser.Choose();browser.Confirm();if(panel.next.interactable || panel.save.interactable)throw new Exception("Pending save guards failed");SessionState.SetInt(Key,2);
+                }
+                else if(stage==2 && client.GetComponent<PythonSavePanel>().Count>0 && panel.notice.text.Contains("保存しました。"))
+                {
+                    client.GetComponent<PythonSaveBrowser>().Close();
                     if(!panel.notice.text.Contains("保存") || !panel.details.text.Contains(state.cats[0].name))throw new Exception("Saved notice missing");Canvas.ForceUpdateCanvases();typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{client.GetComponent<ContentPreview>(),"Logs/ClosingLive.png"});
                     panel.next.onClick.Invoke();if(panel.next.interactable)throw new Exception("Pending next day guard failed");SessionState.SetInt(Key,3);
                 }

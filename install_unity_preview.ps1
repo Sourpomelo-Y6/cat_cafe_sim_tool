@@ -44,6 +44,7 @@ $previewFiles += @('Runtime/PythonAutoPanel.cs', 'Editor/PythonAutoSetup.cs', 'E
 $previewFiles += @('Runtime/PythonPreparationPanel.cs', 'Editor/PythonPreparationSetup.cs', 'Editor/PythonPreparationVerification.cs')
 $previewFiles += @('Runtime/PythonBusinessHeader.cs', 'Editor/PythonBusinessHeaderSetup.cs', 'Editor/PythonBusinessHeaderVerification.cs', 'Editor/PythonBusinessDashboardLayout.cs', 'Editor/PythonBusinessDashboardVerification.cs')
 $previewFiles += @('Runtime/PythonPreparationRoster.cs', 'Editor/PythonPreparationLayout.cs', 'Editor/PythonPreparationRosterVerification.cs')
+$previewFiles += @('Runtime/PythonClosingReview.cs', 'Editor/PythonClosingReviewLayout.cs', 'Editor/PythonClosingReviewVerification.cs')
 $previewFiles += @('Runtime/PythonClosingPanel.cs', 'Editor/PythonClosingSetup.cs', 'Editor/PythonClosingVerification.cs')
 $previewFiles += @('Editor/PythonMultiDayVerification.cs')
 $previewFiles += @('Runtime/PythonPresentation.cs', 'Editor/PythonPresentationSetup.cs')

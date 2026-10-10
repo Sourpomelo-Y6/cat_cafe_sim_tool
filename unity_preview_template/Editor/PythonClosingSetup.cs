@@ -60,7 +60,7 @@ namespace CatCafePreview.Editor
             var entry=root.Find("Closing Entry");
             if(entry!=null)panel.open=entry.GetComponent<Button>();
             else {panel.open=Button(root,"Closing Entry","1日の振り返り",384,128,240);UnityEventTools.AddPersistentListener(panel.open.onClick,panel.Open);}
-            panel.open.gameObject.SetActive(false);overlay.SetActive(false);EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);Debug.Log("CAT_CAFE_CLOSING_UI_OK");
+            panel.open.gameObject.SetActive(false);overlay.SetActive(false);EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);PythonClosingReviewLayout.RefreshIfReady();Debug.Log("CAT_CAFE_CLOSING_UI_OK");
         }
         public static void BuildAndVerify()
         {

@@ -27,9 +27,9 @@ namespace CatCafePreview
             open.gameObject.SetActive(closed);
             Render();RefreshControls();
         }
-        public void Open() { if(current==null || !current.closed || current.game_over!=null)return;panel.SetActive(true);panel.transform.SetAsLastSibling();Render();ResetScroll();RefreshControls(); }
+        public void Open() { if(current==null || !current.closed || current.game_over!=null || GetComponent<PythonStateClient>().AutoPlayRunning)return;panel.SetActive(true);panel.transform.SetAsLastSibling();Render();ResetScroll();RefreshControls(); }
         public void Close() { panel.SetActive(false); }
-        public void Save() { GetComponent<PythonStateClient>().SaveGame(); }
+        public void Save() { if(save.interactable)GetComponent<PythonSaveBrowser>().OpenSave(); }
         public void Next() { if(current!=null && current.closed && next.interactable)GetComponent<PythonStateClient>().ProgressBusiness(); }
         public void Notify(string value) { message=value;RefreshControls(); }
         private void Render()
@@ -44,7 +44,7 @@ namespace CatCafePreview
             string goal=(current.objective_progress?.label ?? "経営目標")+"\n\n"+(current.objective_progress?.details ?? "目標情報を取得していません。");
             var cats=new StringBuilder("翌日の準備で、疲れた猫の休養と出勤する猫を確認しましょう。\n\n");
             foreach(var cat in current.cats ?? new PythonCatState[0])
-                cats.Append(cat.name+" / "+cat.health_label+" / "+cat.activity_label+"\n体力："+cat.stamina.ToString("0.#")+"/"+cat.max_stamina.ToString("0.#")+" / 疲労："+cat.fatigue.ToString("0.#")+" / ストレス："+cat.stress.ToString("0.#")+"\n\n");
+                cats.Append(cat.name+" / "+PythonCatCard.Health(cat)+" / "+PythonCatCard.Activity(cat,false)+"\n体力："+cat.stamina.ToString("0.#")+"/"+cat.max_stamina.ToString("0.#")+" / 疲労："+cat.fatigue.ToString("0.#")+" / ストレス："+cat.stress.ToString("0.#")+"\n\n");
             if(financeDetails!=null && goalDetails!=null){financeDetails.text=financial;goalDetails.text=goal;details.text=cats.ToString();}
             else details.text=financial+"\n\n目標の進捗\n"+goal+"\n\n猫たちの状態\n"+cats;
 
@@ -61,12 +61,17 @@ namespace CatCafePreview
             if(history!=null)history.interactable=client.CanManageSaves && current!=null;
             save.interactable=client.CanManageSaves && current!=null && current.closed && current.game_over==null;
             next.interactable=client.CanProgressBusiness && current!=null && current.closed && current.game_over==null;
-            close.interactable=true;open.interactable=current!=null;
+            close.interactable=true;open.interactable=current!=null && !client.AutoPlayRunning;
             if(!online)notice.text="Python未接続です。再接続後に保存・翌日への移動ができます。";
+            else if(client.HasPendingResults)notice.text="接客結果が未保存です。保存待ちの内容を確認して再試行してください。";
+            else if(client.AutoPlayRunning || client.BatchAutomatic || client.BatchStopping)notice.text="おまかせ実行中です。停止してから振り返りを確認できます。";
             else if(!client.CanLeaveResult)notice.text="操作を送信しています。完了するまでお待ちください。";
             else if(current!=null && !string.IsNullOrEmpty(current.required_action))notice.text="翌日へ進む前に確認してください："+current.required_action;
             else notice.text=(string.IsNullOrEmpty(message) ? "" : message+"\n")+"保存は任意です。「翌日の準備へ」で出勤・休養を選び直せます。";
+            GetComponent<PythonClosingReview>()?.Refresh();
         }
+        public PythonCafeState CurrentState=>current;
+        public bool Online=>online;
         public void Disconnect() { online=false;RefreshControls(); }
     }
 }
