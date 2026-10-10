@@ -16,22 +16,23 @@ namespace CatCafePreview
         private PythonDispatchEvent[] events=new PythonDispatchEvent[0];
         private PythonCatState[] catRows=new PythonCatState[0];
         private string catId,instanceId,lastWaiting;
-        private bool showing,focusWaiting,online;
+        private bool showing,focusWaiting,online,confirming;
+        private int confirmedRevision;
         public string SelectedCatId=>catId;
         public string SelectedDestination=>destinations.value>=0 && destinations.value<options.Length?options[destinations.value].choice:null;
-        public void Open(string id){if(!GetComponent<PythonStateClient>().CanManageSaves)return;if(!string.IsNullOrEmpty(id))catId=id;showing=true;GetComponent<PythonCatDetailsPanel>().Close();Render();panel.transform.SetAsLastSibling();}
+        public void Open(string id){if(!GetComponent<PythonStateClient>().CanManageSaves)return;confirming=false;if(!string.IsNullOrEmpty(id))catId=id;showing=true;GetComponent<PythonCatDetailsPanel>().Close();Render();panel.transform.SetAsLastSibling();}
         public void OpenReturn(string eventId){var ev=Array.Find(state?.general_dispatch?.events ?? new PythonDispatchEvent[0],r=>r.choice==eventId);Open(ev?.cat_id);int index=Array.FindIndex(events,r=>r.choice==eventId);if(index>=0){returns.SetValueWithoutNotify(index);RenderDetails();}}
         public void OpenOption(string id,string destination){Open(id);int index=Array.FindIndex(options,r=>r.cat_id==id && r.choice==destination);if(index>=0){destinations.SetValueWithoutNotify(index);RenderDetails();}}
-        public void Close(){showing=false;panel.SetActive(false);}
+        public void Close(){confirming=false;showing=false;panel.SetActive(false);}
         public void ResetSelection(){Close();catId=null;options=new PythonDispatchOption[0];events=new PythonDispatchEvent[0];lastWaiting=null;focusWaiting=false;}
-        public void SelectCat(int index){if(!online || !GetComponent<PythonStateClient>().CanManageSaves || index<0 || index>=catRows.Length)return;catId=catRows[index].cat_id;Render();ResetScroll();}
-        public void Select(int _){RenderDetails();ResetScroll();}
-        public void Compare(){if(!online || !GetComponent<PythonStateClient>().CanManageSaves || catId==null)return;var comparison=GetComponent<PythonDispatchComparisonPanel>();comparison.OpenOption(catId,"general",SelectedDestination);if(!comparison.panel.activeSelf)return;Close();GetComponent<PythonMenuPanel>()?.TransferReturn(panel,comparison.panel);}
-        public void Send(){if(online && destinations.value>=0 && destinations.value<options.Length)GetComponent<PythonStateClient>().DispatchGeneral(options[destinations.value].cat_id,options[destinations.value].choice);}
+        public void SelectCat(int index){if(!online || !GetComponent<PythonStateClient>().CanManageSaves || index<0 || index>=catRows.Length)return;confirming=false;catId=catRows[index].cat_id;Render();ResetScroll();}
+        public void Select(int _){confirming=false;RenderDetails();ResetScroll();}
+        public void Compare(){if(confirming){confirming=false;RefreshControls();return;}if(!online || !GetComponent<PythonStateClient>().CanManageSaves || catId==null)return;var comparison=GetComponent<PythonDispatchComparisonPanel>();comparison.OpenOption(catId,"general",SelectedDestination);if(!comparison.panel.activeSelf)return;Close();GetComponent<PythonMenuPanel>()?.TransferReturn(panel,comparison.panel);}
+        public void Send(){if(!online || !GetComponent<PythonStateClient>().CanManageSaves || destinations.value<0 || destinations.value>=options.Length || !options[destinations.value].can_select)return;if(!confirming){confirming=true;confirmedRevision=state.revision;RefreshControls();return;}confirming=false;GetComponent<PythonStateClient>().DispatchGeneral(options[destinations.value].cat_id,options[destinations.value].choice);RefreshControls();}
         public void Receive(){if(online && returns.value>=0 && returns.value<events.Length)GetComponent<PythonStateClient>().ReceiveGeneral(events[returns.value].choice);}
         public void Apply(PythonCafeState value)
         {
-            state=value;online=true;if(instanceId!=state.instance_id){instanceId=state.instance_id;ResetSelection();}
+            if(state==null || state.instance_id!=value.instance_id || (confirming && confirmedRevision!=value.revision))confirming=false;state=value;online=true;if(instanceId!=state.instance_id){instanceId=state.instance_id;ResetSelection();}
             var waiting=(state.general_dispatch?.events ?? new PythonDispatchEvent[0]).FirstOrDefault(r=>r.needs_response || r.status=="waiting" || r.status=="missing");
             if(waiting!=null && waiting.choice!=lastWaiting){lastWaiting=waiting.choice;catId=waiting.cat_id;showing=true;focusWaiting=true;GetComponent<PythonCatDetailsPanel>().Close();}if(waiting==null)lastWaiting=null;Render();
         }
@@ -54,6 +55,7 @@ namespace CatCafePreview
             var ev=returns.value>=0 && returns.value<events.Length?events[returns.value]:null;
             progress.text=ev==null?"この猫の派遣記録はありません。":"状態："+PythonDispatchDisplay.Status(ev)+"\n"+(ev.status=="travelling"?"あと "+ev.remaining+"回の閉店で帰還":ev.status=="waiting"?"帰還しました。報酬を受け取ってください。":ev.status=="resolved"?"帰還・報酬の受け取り済み":"イベントへの対応待ち")+"\n報酬："+PythonDispatchDisplay.N(ev.reward)+"\n"+ev.detail+(string.IsNullOrEmpty(ev.reason)?"":"\n操作できない理由："+ev.reason);
 
+            if(ev?.needs_response==true)progress.text+="\n\nイベント一覧の「派遣中の選択」から回答してください。";else if(ev?.status=="missing")progress.text+="\n\nイベント一覧の「宿のトラブル」から対応してください。";
             PythonDispatchDisplay.Size(details);PythonDispatchDisplay.Size(progress);RefreshControls();
         }
         private void ResetScroll(){foreach(var text in new[]{details,progress}){var scroll=text.GetComponentInParent<ScrollRect>(true);if(scroll!=null)scroll.verticalNormalizedPosition=1;}}
@@ -61,8 +63,9 @@ namespace CatCafePreview
         {
             bool ready=online && GetComponent<PythonStateClient>().CanManageSaves;destinations.interactable=ready && options.Length>0;returns.interactable=ready && events.Length>0;if(cats!=null)cats.interactable=ready && catRows.Length>0;if(compare!=null)compare.interactable=ready && GetComponent<PythonDispatchComparisonPanel>()!=null && state?.dispatch_comparison!=null && catId!=null;
             send.interactable=ready && destinations.value>=0 && destinations.value<options.Length && options[destinations.value].can_select;receive.interactable=ready && returns.value>=0 && returns.value<events.Length && events[returns.value].can_select;close.interactable=true;
-            notice.text=!online?"Python未接続です。再接続後に派遣・帰還を確認できます。":!ready?"操作を送信しています。完了するまでお待ちください。":"左で出発条件、右で派遣中・帰還待ちの記録を確認できます。\n条件と報酬は出発時に固定します。帰還後は出勤設定を確認してください。";
+            send.GetComponentInChildren<Text>().text=confirming?"この内容で出発する":"出発内容を確認";if(compare!=null)compare.GetComponentInChildren<Text>().text=confirming?"出発確認を取り消す":"派遣先を比較する";
+            notice.text=!online?"Python未接続です。再接続後に派遣・帰還を確認できます。":!ready?"操作を送信しています。完了するまでお待ちください。":confirming?"出発の確認："+options[destinations.value].label+"\n"+PythonDispatchDisplay.Summary(state,catId,"general",options[destinations.value]).Split('\n')[1]:"左で出発条件、右で派遣中・帰還待ちの記録を確認できます。\n条件と報酬は出発時に固定します。帰還後は出勤設定を確認してください。";
         }
-        public void Disconnect(){online=false;RefreshControls();}
+        public void Disconnect(){confirming=false;online=false;RefreshControls();}
     }
 }
