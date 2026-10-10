@@ -20,7 +20,7 @@ namespace CatCafePreview.Editor
             var drop=UnityEngine.Object.Instantiate(preview.GetComponent<PythonPreparationPanel>().cats,card);drop.name="Completed Goals";Place(drop.GetComponent<RectTransform>(),24,78,892,40);p.goals=drop;drop.onValueChanged=new Dropdown.DropdownEvent();UnityEventTools.AddPersistentListener(drop.onValueChanged,p.Select);drop.onValueChanged.SetPersistentListenerState(0,UnityEngine.Events.UnityEventCallState.EditorAndRuntime);
             var arrow=drop.transform.Find("Dropdown Arrow");if(arrow!=null)Place(arrow.GetComponent<RectTransform>(),858,7,26,26);
             Bind(p.close,p.Close);p.close.GetComponentInChildren<Text>().text="営業画面へ";p.panel.SetActive(false);
-            EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);PythonEventListSetup.Build();Debug.Log("CAT_CAFE_CLEAR_RESULTS_UI_OK");
+            PythonObjectiveReviewLayout.RefreshIfReady(preview);EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);PythonEventListSetup.Build();Debug.Log("CAT_CAFE_CLEAR_RESULTS_UI_OK");
         }
         public static void BuildAndVerify()
         {

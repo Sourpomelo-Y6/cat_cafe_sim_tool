@@ -46,7 +46,7 @@ namespace CatCafePreview.Editor
             UnityEventTools.AddPersistentListener(panel.openNext.onClick,panel.OpenNext);
             panel.openNext.gameObject.SetActive(false);panel.advance.gameObject.SetActive(false);panel.close.gameObject.SetActive(false);
             panel.title.text="目標の結果"; panel.details.text="確定した目標結果を表示します。"; panel.resume.interactable=false; overlay.SetActive(false);
-            EditorSceneManager.MarkSceneDirty(scene); EditorSceneManager.SaveScene(scene);
+            PythonObjectiveReviewLayout.RefreshIfReady(preview);EditorSceneManager.MarkSceneDirty(scene); EditorSceneManager.SaveScene(scene);
             Debug.Log("CAT_CAFE_GOAL_UI_OK: serialized result panel / explicit continue button");
         }
         static void Place(RectTransform rect,float x,float y,float width,float height)

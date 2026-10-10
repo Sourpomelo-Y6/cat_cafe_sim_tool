@@ -91,7 +91,7 @@ namespace CatCafePreview
     { public int stage, started_day, deadline, days; public float target; public bool can_advance; public string reason; }
     [Serializable] public class PythonGoalResult
     {
-        public string status, reason, kind, title, details;
+        public string status, reason, kind, title, details, summary;
         public int stage, started_day, deadline, resolved_day;
         public float target, popularity, funds;
         public bool can_continue;
