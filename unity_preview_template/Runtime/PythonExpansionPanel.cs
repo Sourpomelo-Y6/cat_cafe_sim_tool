@@ -44,6 +44,7 @@ namespace CatCafePreview
         }
         public void RefreshControls()
         {
+            proceed.GetComponentInChildren<Text>().text=current?.expansion?.has_next==true?current.expansion.next_seats+"席へ増設 / 費用 "+current.expansion.cost.ToString("0.#")+"（確認）":"増設できる席はありません";
             var client=GetComponent<PythonStateClient>();proceed.interactable=online && !choosing && client.CanExpandSeats;confirm.interactable=online && choosing && client.CanExpandSeats;close.interactable=cancel.interactable=true;
             notice.text=!online ? "Python未接続です。再接続後に増設できます。" : !client.CanManageSaves ? "操作を送信しています。完了するまでお待ちください。" : current?.expansion?.reason ?? "";
             if(online && client.CanManageSaves && string.IsNullOrEmpty(notice.text))notice.text="費用・日次運営費・条件を確認し、確認画面で増設を確定してください。";

@@ -65,6 +65,7 @@ namespace CatCafePreview
         }
         public void RefreshControls()
         {
+            purchase.GetComponentInChildren<Text>().text="購入"+(Kind==null?"":" "+Kind.cost.ToString("0.#"));equip.GetComponentInChildren<Text>().text="設置・移動 無料";remove.GetComponentInChildren<Text>().text="取り外し 無料";
             bool idle=online && Client.CanManageSaves && chosenKind==null;
             seatSelector.interactable=idle && Data?.seats?.Length>1;kindSelector.interactable=idle && Data?.catalog?.Length>1;itemSelector.interactable=idle && Data?.owned?.Length>1;
             purchase.interactable=idle && Kind!=null && Client.CanSeatEquipment("purchase_seat_equipment",seatId,kindId);

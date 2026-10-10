@@ -69,6 +69,12 @@ namespace CatCafePreview
                 int route=Routes[i];bool visible=Groups[i]==group;entries[i].gameObject.SetActive(visible);
                 if(visible){var rect=entries[i].GetComponent<RectTransform>();rect.anchoredPosition=new Vector2(24,-(148+row*52));row++;}
                 entries[i].GetComponentInChildren<Text>().text=route==28 ? "保護猫紹介：候補巡回・絞り込み・受け入れ" : route==27 ? "営業成果・日次比較：人気・評価・離店" : route==26 ? "クリア記録：達成時の成果を見返す" : route==25 ? "営業ログ・詳細リプレイ・ファイル出力" : route==6 ? "有力者への派遣：猫・行き先を選ぶ" : route==10 ? "一般派遣：猫・行き先を選ぶ" : List.entries[route].GetComponentInChildren<Text>().text;
+                var state=client.CurrentState;
+                if(route==15 && state?.expansion!=null)entries[i].GetComponentInChildren<Text>().text="席数の増設：現在 "+state.expansion.seats+"席 / 上限 "+state.expansion.max_seats+"席";
+                if(route==16 && state?.seat_equipment!=null)entries[i].GetComponentInChildren<Text>().text="接客設備：所持 "+(state.seat_equipment.owned?.Length ?? 0)+"個 / 席への設置・交換";
+                if(route==17 && state?.rest_space!=null)entries[i].GetComponentInChildren<Text>().text="休養スペース："+state.rest_space.status+" / 疲労回復 ＋"+state.rest_space.recovery_bonus.ToString("0.#");
+                if(route==18 && state?.waiting_area!=null)entries[i].GetComponentInChildren<Text>().text="待合スペース："+state.waiting_area.status+" / 待機上限 "+state.waiting_area.capacity+"人";
+                if(route==14 && state?.items!=null)entries[i].GetComponentInChildren<Text>().text="用品・猫のケア：所持 "+state.items.count+"個 / 購入・使用・売却・履歴";
                 entries[i].interactable=route==28 ? client.CanManageSaves && client.CurrentState.recruitment!=null && GetComponent<PythonRecruitmentPanel>()!=null : route==27 ? client.CanManageSaves && GetComponent<PythonFinanceHistoryPanel>()!=null : route==26 ? client.CanManageSaves && GetComponent<PythonClearResultsPanel>()!=null : route==25 ? client.CanManageSaves && GetComponent<PythonBusinessLogPanel>()!=null : List.MenuAvailable(route);
             }
             if(housingEntry!=null){housingEntry.gameObject.SetActive(group==2);housingEntry.interactable=client.CanManageSaves && client.CurrentState?.housing!=null;housingEntry.GetComponent<RectTransform>().anchoredPosition=new Vector2(24,-(148+row*52));housingEntry.GetComponentInChildren<Text>().text="飼育スペース：在籍 "+(client.CurrentState?.housing?.count ?? 0)+"匹 / 上限 "+(client.CurrentState?.housing?.configured==true?client.CurrentState.housing.capacity.ToString():"なし");}

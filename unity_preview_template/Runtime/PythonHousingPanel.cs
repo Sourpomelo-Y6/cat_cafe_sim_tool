@@ -40,7 +40,7 @@ namespace CatCafePreview
             }
             details.text+="\n\n拡張条件\n"+(h.can_expand?"拡張できます。各段階は1回ずつ利用できます。":"拡張できない理由："+h.reason)+"\n\n維持費は拡張当日から、休業日も精算します。\n派遣中・家出中の猫も在籍に含み、譲渡済みは除きます。\n接客席数は変わりません。";
             details.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,Math.Max(300,details.preferredHeight+12));
-            expand.GetComponentInChildren<Text>().text=h.stage==0?"初回拡張（確認へ）":"2段階目へ拡張（確認へ）";RefreshControls();
+            expand.GetComponentInChildren<Text>().text=string.IsNullOrEmpty(h.kind)?"追加の拡張はありません":h.next_capacity+"匹へ拡張 / 費用 "+N(h.cost)+"（確認）";RefreshControls();
         }
         public void RefreshControls(){open.interactable=Client.CanManageSaves;expand.interactable=online && !choosing && Client.CanExpandHousing;if(confirm!=null)confirm.interactable=online && choosing && Client.CanExpandHousing;close.interactable=true;if(cancel!=null)cancel.interactable=true;notice.text=!online?"Python未接続です。再接続後に拡張できます。":!Client.CanManageSaves?"操作を送信しています。完了するまでお待ちください。":"費用・維持費・条件を確認し、確認画面で確定してください。";}
         public void Disconnect(){online=false;Clear();RefreshControls();open.interactable=false;}
