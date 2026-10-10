@@ -35,7 +35,7 @@ namespace CatCafePreview
             newGame.interactable=startGame.interactable=objectives.interactable=ready && state.new_game_options!=null && state.new_game_options.Length>0;
             continueGame.interactable=ready;
             saves.interactable=resume.interactable=ready && savesAvailable && entries.Length>0;
-            GetComponent<PythonLegacySavePanel>()?.RefreshControls();
+            GetComponent<PythonLegacySavePanel>()?.RefreshControls();GetComponent<PythonSaveBrowser>()?.Refresh();
         }
         public void Apply(PythonCafeState latest)
         {
@@ -52,9 +52,9 @@ namespace CatCafePreview
             entries=list.saves;savesAvailable=true;saves.options.Clear();
             foreach(var row in entries)saves.options.Add(new Dropdown.OptionData(row.label));
             if(entries.Length==0)saves.options.Add(new Dropdown.OptionData("保存したゲームはありません"));
-            saves.SetValueWithoutNotify(Math.Max(0,Array.FindIndex(entries,row=>row.save_id==previous)));saves.RefreshShownValue();SelectSave(saves.value);RefreshControls();
+            saves.SetValueWithoutNotify(Math.Max(0,Array.FindIndex(entries,row=>row.save_id==previous)));saves.RefreshShownValue();SelectSave(saves.value);RefreshControls();GetComponent<PythonSaveBrowser>()?.Apply(list);
         }
-        public void Disconnect(string message) {online=false;GetComponent<PythonLegacySavePanel>()?.Disconnect();notice.text=message;RefreshControls();}
+        public void Disconnect(string message) {online=false;GetComponent<PythonLegacySavePanel>()?.Disconnect();notice.text=message;GetComponent<PythonSaveBrowser>()?.Notify(message);RefreshControls();}
         private IEnumerator Start()
         {
             ShowHome();notice.text="接続しています。";RefreshControls();
@@ -73,7 +73,7 @@ namespace CatCafePreview
                     {
                         request.timeout=3;yield return request.SendWebRequest();if(busy)continue;
                         try {if(request.result!=UnityWebRequest.Result.Success)throw new Exception("保存一覧を取得できません。");ApplySaves(JsonUtility.FromJson<PythonSaveList>(request.downloadHandler.text));}
-                        catch(Exception ex){savesAvailable=false;if(saveDetails!=null)saveDetails.text="保存一覧を取得できません。接続を確認してください。";notice.text=ex.Message;RefreshControls();}
+                        catch(Exception ex){savesAvailable=false;GetComponent<PythonSaveBrowser>()?.Unavailable();if(saveDetails!=null)saveDetails.text="保存一覧を取得できません。接続を確認してください。";notice.text=ex.Message;RefreshControls();}
                     }
                 }
                 yield return new WaitForSecondsRealtime(2);
@@ -81,6 +81,7 @@ namespace CatCafePreview
         }
         public void StartNewGame() {if(startGame.interactable)StartCoroutine(Send("new_game",state.new_game_options[objectives.value].choice,""));}
         public void Resume() {if(resume.interactable)StartCoroutine(Send("load_game","",entries[saves.value].save_id));}
+        public void ResumeSaved(string id){if(CanManageSaves)StartCoroutine(Send("load_game","",id));}
         private IEnumerator Send(string kind,string choice,string saveId)
         {
             busy=true;commandFailed=false;RefreshControls();notice.text=kind=="load_game" || kind=="load_python_game" ? "保存したゲームを読み込んでいます。" : "新しいゲームを準備しています。";
@@ -100,7 +101,7 @@ namespace CatCafePreview
                         if(request.result!=UnityWebRequest.Result.Success)throw new Exception(reply!=null && !string.IsNullOrEmpty(reply.error) ? reply.error : "通信に失敗しました。接続後に再試行してください。");
                         PythonStateClient.Validate(reply.state);accepted=true;
                     }
-                    catch(Exception ex){notice.text=ex.Message;GetComponent<PythonLegacySavePanel>()?.Notify(ex.Message);commandFailed=true;online=false;}
+                    catch(Exception ex){notice.text=ex.Message;GetComponent<PythonSaveBrowser>()?.Notify(ex.Message);GetComponent<PythonLegacySavePanel>()?.Notify(ex.Message);commandFailed=true;online=false;}
                     if(accepted){SceneManager.LoadScene("CatCafePythonState");yield break;}
                     break;
                 }

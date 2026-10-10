@@ -60,7 +60,7 @@ namespace CatCafePreview.Editor
             for(int i=panel.saves.onValueChanged.GetPersistentEventCount()-1;i>=0;i--)if(panel.saves.onValueChanged.GetPersistentMethodName(i)=="SelectSave")UnityEventTools.RemovePersistentListener(panel.saves.onValueChanged,i);
             UnityEventTools.AddPersistentListener(panel.saves.onValueChanged,panel.SelectSave);
             panel.Close();EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);
-            Debug.Log("CAT_CAFE_SAVE_LAYOUT_OK");
+            PythonSaveBrowserLayout.RefreshIfReady();Debug.Log("CAT_CAFE_SAVE_LAYOUT_OK");
         }
         public static void Verify()
         {

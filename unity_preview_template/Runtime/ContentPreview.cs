@@ -270,7 +270,7 @@ namespace CatCafePreview
             for (int i = 0; i < sceneButtons.Length; i++)
             {
                 sceneButtons[i].onClick = new Button.ButtonClickedEvent();
-                sceneButtons[i].GetComponentInChildren<Text>().text = new[] { "出勤にする", "休養にする", "営業開始", "保存" }[i];
+                sceneButtons[i].GetComponentInChildren<Text>().text = new[] { "出勤にする", "休養にする", "営業開始", "セーブ" }[i];
                 sceneButtons[i].interactable = false;
             }
             sceneButtons[0].onClick.AddListener(client.WorkSelected);
@@ -281,6 +281,7 @@ namespace CatCafePreview
 
         public void RefreshPythonControls()
         {
+            GetComponent<PythonSaveBrowser>()?.Refresh();
             GetComponent<PythonCatAcquisitionNavigation>()?.Refresh();
             var service=GetComponent<PythonServiceScreen>();if(service!=null)service.RefreshControls();
             var navigation=GetComponent<PythonReturnToTitle>();if(navigation!=null)navigation.RefreshControls();
@@ -552,6 +553,7 @@ namespace CatCafePreview
             foreach (var button in sceneButtons) button.interactable = false;
             var header=GetComponent<PythonBusinessHeader>();if(header!=null){header.Connected=false;header.RefreshControls();}
             GetComponent<PythonCatAcquisitionNavigation>()?.Refresh();
+            GetComponent<PythonSaveBrowser>()?.Refresh();
             status.text = "Python未接続：" + message;
             description.text = "Python状態サーバーを起動してください。接続は自動で再試行します。";
             picture.texture = null; picture.enabled = false; emptyImage.enabled = true;

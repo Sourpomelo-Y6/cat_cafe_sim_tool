@@ -119,7 +119,7 @@ namespace CatCafePreview
     [Serializable] public class PythonShiftCommand
     {
         public string request_id, instance_id, kind = "set_shifts";
-        public int expected_revision;
+        public int expected_revision,save_slot;
         public string[] working_cats;
         public string save_id = "";
         public string choice = "";
@@ -134,7 +134,7 @@ namespace CatCafePreview
         public string error;
         public PythonCafeState state;
     }
-    [Serializable] public class PythonSavedGame { public string save_id, label, created_at, objective_label, phase;
+    [Serializable] public class PythonSavedGame { public int slot; public string save_id, label, created_at, objective_label, phase;
         public string Details()
         {
             DateTimeOffset date;
@@ -196,6 +196,7 @@ namespace CatCafePreview
             preview.RefreshPythonControls();
         }
         public void SaveGame() { QueueSave("save_game", ""); }
+        public void SaveToSlot(int slot){if(slot<1 || slot>10 || !CanManageSaves)return;QueueSave("save_game", "");pending.save_slot=slot;}
         public void LoadSaved(string id) { QueueSave("load_game", id); }
         public void LoadPythonSaved(string id) { QueueSave("load_python_game", id); }
         public int ServerPort => port;
@@ -531,7 +532,7 @@ namespace CatCafePreview
                                     var reply = JsonUtility.FromJson<PythonCommandReply>(request.downloadHandler.text);
                                     if(command.kind=="load_game" || command.kind=="load_python_game" || command.kind=="new_game"){GetComponent<PythonEventPresentation>()?.Clear();GetComponent<PythonEventListPanel>()?.ResetNavigation();GetComponent<PythonCatDetailsPanel>()?.ResetSelection();GetComponent<PythonMenuPanel>()?.ResetFacilities();GetComponent<PythonCatAcquisitionNavigation>()?.ResetNavigation();}
                                     Accept(reply.state);
-                                    if(command.kind=="load_python_game")GetComponent<PythonLegacySavePanel>()?.Close();
+                                    if(command.kind=="load_python_game")GetComponent<PythonLegacySavePanel>()?.Close();if(command.kind=="load_game" || command.kind=="load_python_game")GetComponent<PythonSaveBrowser>()?.Close();
                                     if(command.kind=="load_game" || command.kind=="load_python_game" || command.kind=="new_game"){GetComponent<PythonDispatchComparisonPanel>()?.ResetSelection();GetComponent<PythonDispatchPanel>()?.ResetSelection();GetComponent<PythonGeneralDispatchPanel>()?.ResetSelection();GetComponent<PythonServiceAssignmentPanel>()?.ResetSelection();GetComponent<PythonAutoPlayPanel>()?.ResetSelection();}
                                     if(command.kind=="load_game" || command.kind=="load_python_game")
                                     { var player=GetComponent<PythonPlayerPanel>();if(player!=null)player.Restore(); }
