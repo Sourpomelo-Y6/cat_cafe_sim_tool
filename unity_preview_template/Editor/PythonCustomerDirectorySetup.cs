@@ -25,7 +25,7 @@ namespace CatCafePreview.Editor
             var area=Box(card,"Customers Scroll",24,130,332,352);var scroll=area.AddComponent<ScrollRect>();scroll.horizontal=false;scroll.movementType=ScrollRect.MovementType.Clamped;var viewport=Box(area.transform,"Viewport",0,0,312,352);viewport.AddComponent<Mask>().showMaskGraphic=false;scroll.viewport=viewport.GetComponent<RectTransform>();var content=new GameObject("Content",typeof(RectTransform));content.transform.SetParent(viewport.transform,false);Place(content.GetComponent<RectTransform>(),0,0,312,352);p.listContent=scroll.content=content.GetComponent<RectTransform>();
             var bar=DefaultControls.CreateScrollbar(new DefaultControls.Resources());bar.transform.SetParent(area.transform,false);Place(bar.GetComponent<RectTransform>(),318,0,12,352);scroll.verticalScrollbar=bar.GetComponent<Scrollbar>();scroll.verticalScrollbar.direction=Scrollbar.Direction.BottomToTop;
             p.entryPrefab=Button(card,"Customer Entry Template",0,0,304,88);p.entryPrefab.GetComponentInChildren<Text>().fontSize=16;p.entryPrefab.GetComponentInChildren<Text>().alignment=TextAnchor.MiddleLeft;p.entryPrefab.gameObject.SetActive(false);
-            p.panel.SetActive(false);EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);PythonEventListSetup.Build();Debug.Log("CAT_CAFE_CUSTOMER_DIRECTORY_UI_OK");
+            PythonCustomerDirectoryLayout.RefreshIfReady(preview);p.panel.SetActive(false);EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);PythonEventListSetup.Build();Debug.Log("CAT_CAFE_CUSTOMER_DIRECTORY_UI_OK");
         }
         public static void BuildAndVerify()
         {
