@@ -21,7 +21,7 @@ namespace CatCafePreview.Editor
             UnityEngine.Object.DestroyImmediate(t.Find(AnimationUtility.CalculateTransformPath(source.confirmation.transform,s)).gameObject);UnityEngine.Object.DestroyImmediate(Copy(source.proceed,s,t).gameObject);
             p.previous=Button(card,"Previous",24,78,432);p.next=Button(card,"Next",484,78,432);Bind(p.previous,p.Previous);Bind(p.next,p.Next);Bind(p.close,p.Close);Place(p.close.GetComponent<RectTransform>(),24,550,892,40);
             var scroll=p.details.transform.parent.parent.GetComponent<ScrollRect>();Place(scroll.GetComponent<RectTransform>(),24,130,892,352);Place(scroll.viewport,6,6,862,340);scroll.verticalScrollbar.GetComponent<RectTransform>().sizeDelta=new Vector2(12,340);p.details.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,862);p.details.fontSize=18;
-            p.panel.SetActive(false);EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);PythonClosingSetup.Build();Debug.Log("CAT_CAFE_FINANCE_HISTORY_UI_OK");
+            PythonFinanceHistoryLayout.RefreshIfReady(preview);p.panel.SetActive(false);EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);PythonClosingSetup.Build();Debug.Log("CAT_CAFE_FINANCE_HISTORY_UI_OK");
         }
         public static void BuildAndVerify()
         {

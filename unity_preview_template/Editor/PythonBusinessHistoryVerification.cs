@@ -27,7 +27,7 @@ namespace CatCafePreview.Editor
                     SessionState.SetInt(Key+"revision",state.revision);menu.open.onClick.Invoke();menu.entries[15].onClick.Invoke();
                     if(menu.panel.activeSelf || !p.panel.activeSelf || !p.title.text.Contains("営業成果") || !p.details.text.Contains("休業日"))throw new Exception("Live history route failed");
                     p.previous.onClick.Invoke();if(!p.details.text.Contains("営業日") || !p.details.text.Contains("接客評価") || !p.details.text.Contains("満員"))throw new Exception("Live daily metrics missing");
-                    p.next.onClick.Invoke();if(!p.details.text.Contains("前日との差") || state.revision!=SessionState.GetInt(Key+"revision",0))throw new Exception("History browsing mutated game");
+                    p.next.onClick.Invoke();p.SelectSection(1);if(!p.details.text.Contains("前日との差") || state.revision!=SessionState.GetInt(Key+"revision",0))throw new Exception("History browsing mutated game");
                     SessionState.SetString(Key+"details",p.details.text);p.close.onClick.Invoke();saves.save.onClick.Invoke();SessionState.SetInt(Key,2);
                 }
                 else if(stage==2)
@@ -36,7 +36,7 @@ namespace CatCafePreview.Editor
                 }
                 else if(stage==3)
                 {
-                    menu.open.onClick.Invoke();menu.entries[15].onClick.Invoke();if(p.details.text!=SessionState.GetString(Key+"details",""))throw new Exception("History save resume mismatch");
+                    menu.open.onClick.Invoke();menu.entries[15].onClick.Invoke();p.SelectSection(1);if(p.details.text!=SessionState.GetString(Key+"details",""))throw new Exception("History save resume mismatch");
                     Canvas.ForceUpdateCanvases();typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{preview,"Logs/BusinessHistoryLive.png"});
                     Debug.Log("CAT_CAFE_BUSINESS_HISTORY_PLAY_OK: menu / daily metrics / previous and next / read only / save and HTTP resume");
                     SessionState.SetInt(Key,0);EditorApplication.Exit(0);
