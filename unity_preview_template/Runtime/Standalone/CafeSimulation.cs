@@ -36,6 +36,7 @@ namespace CatCafePreview.Standalone
                 || s.history.Count != s.day - 1 || s.completed < 0
                 || !Range(s.popularity, 0, Rules.popularity.cap)) throw new ArgumentException("Invalid standalone save");
             ValidateStoreEvents(s);
+            ValidateCustomers(s);
             foreach (var c in s.cats)
                 if (!Rules.cats.Any(d => d.id == c.id) || !Range(c.stamina, 0, Rules.max_stamina) || !Range(c.fatigue, 0, Rules.max_fatigue)
                     || !Range(c.stress, 0, 100) || !new[] { "healthy", "sick" }.Contains(c.health) || !new[] { "cafe", "missing" }.Contains(c.activity)
@@ -125,6 +126,7 @@ namespace CatCafePreview.Standalone
         {
             var s = State;
             s.history.Add(new CafeDayResult { day = s.day, arrivals = s.visits.Count, completed = s.completed, opening_funds = s.opening_funds, revenue = s.revenue, expenses = s.expenses, closing_funds = s.funds, popularity_gain = s.popularity_gain, satisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "satisfied"), normal = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "normal"), dissatisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "dissatisfied") });
+            s.history[s.history.Count - 1].customer_records = s.visits.Select(v => new CafeCustomerRecord { customer_id = v.id, departure = v.departure, satisfaction = v.satisfaction?.level }).ToList();
             s.day++; s.tick = 0; s.phase = "preparation"; s.opening_funds = s.funds; s.revenue = s.expenses = 0; s.completed = 0;
             s.visits.Clear(); s.queue.Clear(); s.exchanges.Clear(); s.popularity_gain = 0;
             foreach (var c in s.cats) { c.service_ticks = 0; if (c.activity == "cafe") { c.stamina = Rules.max_stamina; c.cannot_continue = c.health != "healthy"; } c.working &= c.health == "healthy" && c.activity == "cafe"; }
@@ -148,15 +150,7 @@ namespace CatCafePreview.Standalone
                 s.exchanges.Add(new CafeExchange { seat = seat, customer_id = customer, cat_id = cat.id, stamina = cat.stamina, remaining = Math.Min(Rules.exchange.ticks, Rules.opening_ticks - s.tick), affinity_start = relationship?.affinity ?? 0, tension_multiplier = Matched(cat, customer) ? Rules.tension_multiplier : 1 });
             }
             s.exchanges.Sort((a, b) => a.seat.CompareTo(b.seat));
-            int weekday = (Rules.start_weekday + s.day - 1) % 7;
-            int lastNormal = Enumerable.Range(0, Rules.arrival_ticks.Length).Where(i => Rules.patterns[i % Rules.patterns.Length].days.Contains(weekday)).DefaultIfEmpty(-1).Max();
-            for (int i = 0; i < Rules.arrival_ticks.Length; i++)
-            {
-                if (Rules.arrival_ticks[i] != s.tick || !Rules.patterns[i % Rules.patterns.Length].days.Contains(weekday)) continue;
-                if (CurrentStoreEvent.type == "rain" && i == lastNormal) continue;
-                Arrive("guest-" + (i + 1));
-            }
-            if (CurrentStoreEvent.type == "festival" && s.tick == Rules.store_events.festival_customer_tick) Arrive("event-guest-" + s.day);
+            foreach (var arrival in CustomerSchedule(s.day).Where(a => a.tick == s.tick)) Arrive(arrival.customer_id);
             foreach (var e in s.exchanges.OrderBy(e => e.seat).ToArray())
             {
                 var cat = s.cats.Find(c => c.id == e.cat_id); var definition = Rules.cats.First(d => d.id == cat.id);
@@ -166,6 +160,7 @@ namespace CatCafePreview.Standalone
                 {
                     Depart(visit, e.end_reason == "exhausted" ? "interaction_exhausted" : s.tick + 1 >= Rules.opening_ticks ? "closing" : "interaction_time_limit");
                     visit.satisfaction = CafeSatisfactionEvaluator.Evaluate(Rules.satisfaction, e, Matched(cat, e.customer_id));
+                    ApplyCustomerService(State.loyalty, State.discontent, s.day, visit.id, visit.satisfaction.level);
                     double bonus = e.bonus + visit.satisfaction.bonus;
                     visit.bill += bonus; s.funds += bonus; s.revenue += bonus;
                     var relationship = s.relationships.Find(r => r.cat_id == e.cat_id && r.customer_id == e.customer_id);
@@ -183,6 +178,7 @@ namespace CatCafePreview.Standalone
             if (visit.departure != null) return;
             visit.departure = reason; visit.bill = visit.seated_ticks * Rules.time_price;
             State.funds += visit.bill; State.revenue += visit.bill; State.queue.Remove(visit.id);
+            if (reason == "queue_full" || reason == "wait_timeout") ChangeDiscontent(State.discontent, State.day, visit.id, Rules.discontent.waiting_gain);
         }
         private void Arrive(string id)
         {

@@ -23,6 +23,10 @@ def exported_rules():
     result['satisfaction'] = read('cafe_customer_satisfaction')
     result['popularity'] = {key: read('cafe_goal')[key] for key in ('cap', 'gain_per_success')}
     result['store_events'] = read('cafe_store_events')
+    result['loyalty'] = read('cafe_customer_loyalty')
+    result['discontent'] = read('cafe_customer_discontent')
+    result['popular_customer_count'] = new.get('popular_customer_count', weekdays.get('popular_customer_count', 0))
+    result['second_popular_customer_count'] = new.get('second_popular_customer_count', weekdays.get('second_popular_customer_count', 0))
     for row in new['cats']:
         p = presets[row['preset']]
         trait = traits.get(row.get('trait'), {})

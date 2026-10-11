@@ -7,6 +7,7 @@ namespace CatCafePreview.Standalone
     [Serializable] public class CafeRules
     {
         public int version = 1, opening_ticks, queue_capacity, max_wait_ticks, start_weekday;
+        public int popular_customer_count, second_popular_customer_count;
         public double max_stamina, time_price, starting_funds, starting_popularity;
         public double base_cost, per_seat_cost, max_fatigue, fatigue_per_service_tick, rest_day_recovery;
         public double safe_fatigue, probability_per_fatigue, max_probability;
@@ -22,6 +23,8 @@ namespace CatCafePreview.Standalone
         public SatisfactionRules satisfaction;
         public PopularityRules popularity;
         public StoreEventRules store_events;
+        public LoyaltyRules loyalty;
+        public DiscontentRules discontent;
         public ExchangeType[] types;
         public string rules_id;
     }
@@ -32,6 +35,13 @@ namespace CatCafePreview.Standalone
     [Serializable] public class StoreEventRules { public double probability, trouble_cost, support_full_cost, support_full_popularity, support_small_cost, support_small_popularity; public int festival_customer_tick, trouble_seat_loss; public CafeSupply supply; }
     [Serializable] public class CafeStoreEvent { public int day; public string type, status, choice; public double draw, cost, popularity; }
     [Serializable] public class CafeSupplyUse { public string source, cat_id; public int day; public double before, after; }
+    [Serializable] public class LoyaltyRules { public double gain, threshold; }
+    [Serializable] public class DiscontentRules { public double waiting_gain, advanced_failure_gain, good_service_recovery, threshold, return_score; public int suspension_days; }
+    [Serializable] public class CafeLoyalty { public string customer_id; public double score; public int regular_day; }
+    [Serializable] public class CafeSuspension { public int day, until; }
+    [Serializable] public class CafeDiscontent { public string customer_id; public double score; public int score_day; public List<CafeSuspension> suspensions = new List<CafeSuspension>(); }
+    [Serializable] public class CafeArrival { public string customer_id; public int tick; }
+    [Serializable] public class CafeCustomerRecord { public string customer_id, departure, satisfaction; }
     [Serializable] public class CafeSatisfaction
     {
         public string level, label;
@@ -88,6 +98,7 @@ namespace CatCafePreview.Standalone
         public double opening_funds, revenue, expenses, closing_funds;
         public double popularity_gain;
         public int satisfied, normal, dissatisfied;
+        public List<CafeCustomerRecord> customer_records = new List<CafeCustomerRecord>();
     }
     [Serializable] public class CafeSnapshot
     {
@@ -104,11 +115,14 @@ namespace CatCafePreview.Standalone
         public List<CafeDayResult> history = new List<CafeDayResult>();
         public List<CafeStoreEvent> store_events = new List<CafeStoreEvent>();
         public List<CafeSupplyUse> item_uses = new List<CafeSupplyUse>();
+        public List<CafeLoyalty> loyalty = new List<CafeLoyalty>();
+        public List<CafeDiscontent> discontent = new List<CafeDiscontent>();
         // Unity JsonUtility materializes JSON null strings as empty strings.
         public void NormalizeJsonStrings()
         {
             if (game_over == "") game_over = null;
             if (store_events != null) foreach (var e in store_events) { if (e.type == "") e.type = null; if (e.status == "") e.status = null; if (e.choice == "") e.choice = null; }
+            if (history != null) foreach (var h in history) if (h.customer_records != null) foreach (var r in h.customer_records) if (r.satisfaction == "") r.satisfaction = null;
             if (visits != null) foreach (var v in visits) { if (v.departure == "") v.departure = null; if (v.cat_id == "") v.cat_id = null; if (v.satisfaction != null && string.IsNullOrEmpty(v.satisfaction.level)) v.satisfaction = null; }
             if (exchanges != null) foreach (var e in exchanges)
             {

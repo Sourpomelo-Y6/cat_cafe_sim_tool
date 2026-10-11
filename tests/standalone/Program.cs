@@ -23,6 +23,27 @@ static class Program
     static void Main(string[] args)
     {
         var rules = Decode<CafeRules>(File.ReadAllText(args[0]));
+        if (args.Length > 4)
+        {
+            using var boundary = JsonDocument.Parse(File.ReadAllText(args[4])); var customers = new CafeSimulation(rules);
+            foreach (var row in boundary.RootElement.GetProperty("weekdays").EnumerateArray()) Assert(customers.ExtraWeekday(row.GetProperty("customer_id").GetString()) == row.GetProperty("weekday").GetInt32(), "Extra weekday mismatch");
+            foreach (var row in boundary.RootElement.GetProperty("steps").EnumerateArray())
+            {
+                int day = row.GetProperty("day").GetInt32(); string kind = row.GetProperty("kind").GetString(), id = row.GetProperty("customer_id").GetString(), value = row.GetProperty("value").GetString(); customers.State.day = day;
+                if (kind == "service") customers.ApplyCustomerService(customers.State.loyalty, customers.State.discontent, day, id, value);
+                else if (kind == "departure") customers.ChangeDiscontent(customers.State.discontent, day, id, rules.discontent.waiting_gain);
+                using var loyal = JsonDocument.Parse(Encode(customers.State.loyalty)); Equal(row.GetProperty("loyalty"), loyal.RootElement, "loyalty boundary");
+                using var unhappy = JsonDocument.Parse(Encode(customers.State.discontent)); Equal(row.GetProperty("discontent"), unhappy.RootElement, "discontent boundary");
+                foreach (var query in row.GetProperty("queries").EnumerateArray())
+                {
+                    string customer = query.GetProperty("customer_id").GetString(); int at = query.GetProperty("day").GetInt32();
+                    Assert(customers.DiscontentScore(customer, at) == query.GetProperty("score").GetDouble() && customers.CustomerAvailable(customer, at) == query.GetProperty("available").GetBoolean(), "Suspension boundary mismatch");
+                }
+                var extras = customers.State.loyalty.Where(r => r.regular_day > 0 && day > r.regular_day && customers.ExtraWeekday(r.customer_id) == (rules.start_weekday + day - 1) % 7).Select(r => new CafeArrival { customer_id = r.customer_id, tick = 0 }).ToArray();
+                using var extra = JsonDocument.Parse(Encode(extras)); Equal(row.GetProperty("extra_schedule"), extra.RootElement, "regular arrival boundary");
+                customers.State.loyalty = Decode<List<CafeLoyalty>>(Encode(customers.State.loyalty)); customers.State.discontent = Decode<List<CafeDiscontent>>(Encode(customers.State.discontent));
+            }
+        }
         using var data = JsonDocument.Parse(File.ReadAllText(args[1]));
         foreach (var row in data.RootElement.GetProperty("satisfaction").EnumerateArray())
         {
@@ -79,6 +100,10 @@ static class Program
             }
         }
         var check = new CafeSimulation(rules);
+        var customerSave = new CafeSimulation(rules); customerSave.Execute("start_business"); while (customerSave.State.phase != "closed") customerSave.Execute("advance_business");
+        string validCustomerSave = Encode(customerSave.State); var badCustomer = Decode<CafeSnapshot>(validCustomerSave); badCustomer.loyalty[0].score += 1;
+        try { customerSave.Restore(badCustomer); throw new Exception("Forged loyalty accepted"); } catch (ArgumentException) { }
+        Assert(Encode(customerSave.State) == validCustomerSave, "Rejected customer load changed state");
         int troubleSeed = Enumerable.Range(0, 1000).First(seed => new CafeSimulation(rules, seed).CurrentStoreEvent.type == "trouble");
         var pending = new CafeSimulation(rules, troubleSeed); string pendingBefore = Encode(pending.State);
         try { pending.Execute("start_business"); throw new Exception("Unanswered event started business"); } catch (InvalidOperationException) { }

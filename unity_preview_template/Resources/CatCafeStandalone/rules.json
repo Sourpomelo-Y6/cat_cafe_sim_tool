@@ -370,5 +370,19 @@
       "stress_relief": 20
     }
   },
-  "rules_id": "cfb57fd307a613952b5b9f86510f8201982fc1b43a8499b948adc790a7cb53e5"
+  "loyalty": {
+    "gain": 25,
+    "threshold": 100
+  },
+  "discontent": {
+    "waiting_gain": 25,
+    "advanced_failure_gain": 10,
+    "good_service_recovery": 25,
+    "threshold": 100,
+    "suspension_days": 7,
+    "return_score": 50
+  },
+  "popular_customer_count": 4,
+  "second_popular_customer_count": 2,
+  "rules_id": "1e67ace29faa05d1964cff057f5591bdfedfea967663103967f057c178ecb82e"
 }

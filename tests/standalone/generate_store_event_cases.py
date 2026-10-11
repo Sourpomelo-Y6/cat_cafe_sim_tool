@@ -31,6 +31,7 @@ def generate():
                 c.initialize_preferences(selected['features'], selected['preferences']); session.enable_management(selected['management'])
                 c.initialize_operating_cost(selected['operating_cost']); c.initialize_customer_satisfaction(selected['customer_satisfaction'])
                 goal = dict(selected['goal']); goal.pop('stages', None); c.enable_goal(goal, tracking_only=True)
+                c.initialize_customer_loyalty(selected['customer_loyalty']); c.initialize_customer_discontent(selected['customer_discontent'])
                 c.initialize_store_events(rules)
                 case = dict(seed=seed, event=kind, answer=choice, initial=snapshot(session), operations=[]); cases.append(case)
 

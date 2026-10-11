@@ -11,6 +11,7 @@ namespace CatCafePreview
         private LocalCafeBackend backend;
         private PythonCafeState state;
         private bool title = true, busy;
+        private bool showCustomers;
         private string notice = "Pythonサーバー不要の第1段階です。自由営業の基本ルールを確認できます。";
         private Vector2 scroll;
         private Font font;
@@ -60,6 +61,10 @@ namespace CatCafePreview
                 GUILayout.Label("人気 " + state.popularity + " / 本日の人気上昇 " + state.popularity_gain + " / 満足 " + state.customer_satisfaction.satisfied + " / 普通 " + state.customer_satisfaction.normal + " / 不満 " + state.customer_satisfaction.dissatisfied);
                 if (state.game_over != null) GUILayout.Label("経営終了：" + state.game_over.reason);
                 GUILayout.Label("店舗イベント：" + state.store_event_label);
+                GUILayout.Label("本日の来店予定：" + string.Join(" / ", state.customer_schedule.Select(a => a.customer_id + " @" + a.tick)));
+                showCustomers = GUILayout.Toggle(showCustomers, "顧客の常連度・不満を表示");
+                if (showCustomers) foreach (var customer in state.customer_progress)
+                    GUILayout.Label(customer.customer_id + " / 常連度 " + customer.loyalty + (customer.regular_day > 0 ? "（" + customer.regular_day + "日目に常連化・追加来店 " + new[] { "月", "火", "水", "木", "金", "土", "日" }[customer.extra_weekday] + "）" : "") + " / 不満 " + customer.discontent + (customer.suspended_until > 0 ? " / 来店停止期限 " + customer.suspended_until + "日目" : ""));
                 if (state.store_event != null)
                 {
                     foreach (var option in state.store_event.choices)

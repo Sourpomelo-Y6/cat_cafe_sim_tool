@@ -18,6 +18,7 @@ namespace CatCafePreview
         public bool working;
     }
     [Serializable] public class PythonSatisfactionCounts { public int satisfied, normal, dissatisfied; }
+    [Serializable] public class PythonCustomerProgress { public string customer_id; public float loyalty, discontent; public int regular_day, extra_weekday, suspended_until; public bool can_visit; }
     [Serializable] public class PythonCafeState
     {
         public int version, day, tick;
@@ -33,6 +34,8 @@ namespace CatCafePreview
         public float popularity, popularity_gain;
         public PythonSatisfactionCounts customer_satisfaction;
         public string store_event_label;
+        public PythonCustomerProgress[] customer_progress;
+        public CatCafePreview.Standalone.CafeArrival[] customer_schedule;
         public PythonSeatState[] seats;
         public PythonCustomerState[] customers;
         public PythonFinanceState finance;

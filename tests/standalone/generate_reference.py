@@ -44,6 +44,8 @@ def snapshot(session):
                                               next((r['cat_id'] for r in results if r['customer_id'] == v.id), None)),
                              arrival=v.arrival_tick, seated_at=v.seated_at if v.seated_at is not None else -1, seated_ticks=v.seated_ticks, departure=v.departure_reason, bill=v.bill,
                              satisfaction=next((evaluate_satisfaction(c, r) for r in results if r['customer_id']==v.id), None)) for v in c.visits.values()],
+                loyalty=[dict(customer_id=key, score=row['score'], regular_day=row['regular_day'] or 0) for key,row in c.customer_loyalty['customers'].items()],
+                discontent=[dict(customer_id=key, **copy.deepcopy(row)) for key,row in c.customer_discontent['customers'].items()],
                 store_events=copy.deepcopy(c.store_events['days']), item_uses=copy.deepcopy(c.item_uses),
                 popularity_gain=next((r['gain'] for r in c.goal['days'] if r['day']==c.day), 0),
                 queue=list(c.queue), exchanges=[exchange(e, int(key.split('-')[-1])-1) for key, e in sorted(c.interactions.items())])
@@ -66,6 +68,7 @@ def generate():
             session.enable_management(selected['management']); core.initialize_operating_cost(selected['operating_cost'])
             core.initialize_customer_satisfaction(selected['customer_satisfaction'])
             goal = dict(selected['goal']); goal.pop('stages', None); core.enable_goal(goal, tracking_only=True)
+            core.initialize_customer_loyalty(selected['customer_loyalty']); core.initialize_customer_discontent(selected['customer_discontent'])
             core.initialize_store_events(selected['store_events'])
             # Only modules implemented in this first slice are enabled on BOTH sides.
             scenario = dict(seed=seed, operations=[]); data['scenarios'].append(scenario)
