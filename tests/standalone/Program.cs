@@ -23,6 +23,13 @@ static class Program
     static void DispatchCases(string path,ref int scenarios,ref int ticks)
     {
             using var cases=JsonDocument.Parse(File.ReadAllText(path));
+            if(cases.RootElement.TryGetProperty("patron_matrix",out var patronMatrix))foreach(var row in patronMatrix.EnumerateArray())
+            {
+                var rules=Decode<CafeRules>(cases.RootElement.GetProperty("patron_matrix_rules").GetRawText());rules.cats.Single(c=>c.id=="cat-sora").features=Decode<string[]>(row.GetProperty("features").GetRawText());var probe=new CafeSimulation(rules,objective:"patron");probe.State.growth.Single(g=>g.cat_id=="cat-sora").specialization=row.GetProperty("specialization").GetString();
+                for(int i=0;i<row.GetProperty("index").GetInt32();i++)probe.State.dispatches.Add(new CafeDispatch {destination="patron_moody_visit",status="resolved"});
+                using var matches=JsonDocument.Parse(Encode(rules.patron.members.Select(m=>probe.PatronTerms(probe.State,"cat-sora",m.id)).ToArray()));Equal(row.GetProperty("matches"),matches.RootElement,"patron feature/specialization matrix");
+                Assert(probe.DispatchReward("cat-sora","patron_visit")==row.GetProperty("reward").GetDouble(),"Patron reward matrix differs");Assert(probe.PatronGain("cat-sora","patron_visit")==row.GetProperty("gain").GetDouble(),"Patron gain matrix differs");
+            }
             if(cases.RootElement.TryGetProperty("probabilities",out var probabilities))
             {
                 var probe=new CafeSimulation(Decode<CafeRules>(cases.RootElement.GetProperty("probability_rules").GetRawText()));

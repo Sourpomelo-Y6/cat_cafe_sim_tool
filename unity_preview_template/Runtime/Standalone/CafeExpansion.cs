@@ -58,7 +58,7 @@ namespace CatCafePreview.Standalone
         }
         private void ValidateGoal(CafeSnapshot s)
         {
-            if(Rules.goal_stages==null || s.goal==null || !new[]{"free","popularity"}.Contains(s.objective) || (s.objective=="free"?s.goal.Count!=0:s.goal.Count<1 || s.goal.Count>Rules.goal_stages.Length))throw new ArgumentException("Invalid goal mode");
+            if(Rules.goal_stages==null || s.goal==null || !new[]{"free","popularity","patron"}.Contains(s.objective) || (s.objective!="popularity"?s.goal.Count!=0:s.goal.Count<1 || s.goal.Count>Rules.goal_stages.Length))throw new ArgumentException("Invalid goal mode");
             if (!Range(s.goal_popularity,0,Rules.popularity.cap) || s.phase!="closed" && s.goal_popularity!=0 || s.history.Any(h=>!Range(h.goal_popularity,0,Rules.popularity.cap))) throw new ArgumentException("Invalid closing popularity");
             for(int i=0;i<s.goal.Count;i++)
             {

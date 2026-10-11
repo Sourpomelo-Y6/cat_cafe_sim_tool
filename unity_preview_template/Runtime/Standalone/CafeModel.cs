@@ -31,6 +31,7 @@ namespace CatCafePreview.Standalone
         public ItemShopRule[] item_shop;public ItemSaleRule[] item_sale_prices;
         public SpecialistRules advanced_customer, reservation, vip_customer; public LonghairRules longhair_customer;
         public ServiceCustomerRules quiet_customer,play_customer,contact_customer; public EquipmentRule[] equipment;
+        public PatronRules patron;
         public double[] expansion_costs; public GoalStageRule[] goal_stages;
         public ExchangeType[] types;
         public IntakeRules intake, regular_introduction;
@@ -150,6 +151,7 @@ namespace CatCafePreview.Standalone
         public List<string> resting_cats = new List<string>();
         public List<CafeTrustCustomer> trust_customers = new List<CafeTrustCustomer>();
         public List<CafeTrustEvent> trust_events = new List<CafeTrustEvent>();
+        public CafePatron patron;
         public string objective = "free";
         public List<CafeDispatchUnlock> dispatch_unlocks=new List<CafeDispatchUnlock>();
         public List<CafeDispatch> dispatches=new List<CafeDispatch>();
@@ -171,6 +173,8 @@ namespace CatCafePreview.Standalone
             if(dispatches!=null)foreach(var e in dispatches)if(e.introduction!=null && string.IsNullOrEmpty(e.introduction.cat_id) && string.IsNullOrEmpty(e.introduction.name) && (string.IsNullOrEmpty(e.introduction.status) || e.introduction.status=="scheduled") && e.introduction.cost==0 && e.introduction.presented_day==0 && e.introduction.resolved_day==0)e.introduction=null;
             if(dispatches!=null)foreach(var e in dispatches)if(e.trouble!=null && string.IsNullOrEmpty(e.trouble.destination) && string.IsNullOrEmpty(e.trouble.choice) && (string.IsNullOrEmpty(e.trouble.status) || e.trouble.status=="scheduled") && e.trouble.stress==0 && e.trouble.probability==0 && e.trouble.draw==0 && e.trouble.cost==0 && e.trouble.missing_day==0 && e.trouble.choice_day==0)e.trouble=null;
             if(dispatches!=null)foreach(var e in dispatches)if(e.trouble!=null && e.trouble.choice=="")e.trouble.choice=null;
+            if(patron!=null && string.IsNullOrEmpty(patron.id) && patron.satisfaction==0 && (patron.members==null || patron.members.Count==0) && patron.resolved_day==0 && !patron.continued)patron=null;
+            if(dispatches!=null)foreach(var e in dispatches){if(e.patron_match!=null && string.IsNullOrEmpty(e.patron_match.member_id))e.patron_match=null;if(e.patron_match?.condition!=null){if(e.patron_match.condition.feature=="")e.patron_match.condition.feature=null;if(e.patron_match.condition.specialization=="")e.patron_match.condition.specialization=null;}}
             if(dispatches!=null)foreach(var e in dispatches)if(e.choice=="")e.choice=null;
             if (regular_introduction != null && regular_introduction.customer_id == "") regular_introduction.customer_id = null;
             if (growth != null) foreach (var row in growth) row.Normalize();

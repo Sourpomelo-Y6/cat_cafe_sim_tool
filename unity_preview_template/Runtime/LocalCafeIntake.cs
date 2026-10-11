@@ -5,7 +5,7 @@ namespace CatCafePreview
         private PythonIntakeState IntakeView()
         {
             var r = Simulation.Rules.intake; var s = Simulation.State;
-            bool ready = !Simulation.DispatchTroubleWaiting && !Simulation.DispatchWaiting && !Simulation.DispatchChoiceWaiting && !Simulation.ReservationWaiting && !Simulation.GoalWaiting && CanPrepare && !Simulation.GrowthWaiting && !Simulation.CustomerTrustWaiting && !Simulation.StoreEventWaiting && Simulation.IntakeWaiting;
+            bool ready = !Simulation.DispatchTroubleWaiting && !Simulation.DispatchWaiting && !Simulation.DispatchChoiceWaiting && !Simulation.ReservationWaiting && !Simulation.GoalWaiting && !Simulation.PatronWaiting && CanPrepare && !Simulation.GrowthWaiting && !Simulation.CustomerTrustWaiting && !Simulation.StoreEventWaiting && Simulation.IntakeWaiting;
             return new PythonIntakeState { cat_id = r.cat.id, name = r.cat.name, status = s.intake_request.status, day = r.day, cost = (float)r.cost,
                 personality = r.personality, features = r.features_label, trait = r.trait,
                 housing = "在籍 " + s.cats.Count + " / 上限 " + Simulation.HousingCapacity(s,s.day),

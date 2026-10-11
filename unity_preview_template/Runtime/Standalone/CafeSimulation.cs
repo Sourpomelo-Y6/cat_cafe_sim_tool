@@ -16,7 +16,7 @@ namespace CatCafePreview.Standalone
             State = new CafeSnapshot { seed = seed, rules_id = rules.rules_id, instance_id = Guid.NewGuid().ToString("N"), funds = rules.starting_funds, opening_funds = rules.starting_funds, popularity = rules.starting_popularity };
             foreach (var cat in rules.cats.OrderBy(c => c.id, StringComparer.Ordinal)) State.cats.Add(new CafeCat { id = cat.id, stamina = rules.max_stamina });
             foreach (var cat in State.cats) EnsureGrowthCat(cat.id);
-            State.objective = objective; if (objective == "popularity") State.goal.Add(new CafeGoalStage { started_day = 1 }); else if (objective != "free") throw new ArgumentException("Invalid objective");
+            State.objective = objective; if (objective == "popularity") State.goal.Add(new CafeGoalStage { started_day = 1 }); else if(objective=="patron")State.patron=new CafePatron {id="patron",members=rules.patron.members.Select(r=>new CafePatronScore {id=r.id}).ToList()}; else if (objective != "free") throw new ArgumentException("Invalid objective");
             PresentStoreEvent();
             PresentIntake();
             PresentRegularIntroduction();
@@ -45,6 +45,7 @@ namespace CatCafePreview.Standalone
             ValidateSpecialists(s);
             ValidateExpansion(s);
             ValidateGoal(s);
+            ValidatePatron(s);
             ValidateClearResults(s);
             ValidateItems(s);
             ValidateHousing(s);
@@ -108,12 +109,14 @@ namespace CatCafePreview.Standalone
             if (kind == "resolve_reservation") { ResolveReservation(choice); return; }
             if (ReservationWaiting && !kind.StartsWith("resolve_growth", StringComparison.Ordinal) && kind != "resolve_missing" && kind != "resolve_customer_trust" && !(kind == "resolve_store_event" && choice != "close")) throw new InvalidOperationException("特別予約に回答してください。");
             if((DispatchWaiting || DispatchChoiceWaiting || DispatchTroubleWaiting) && !kind.StartsWith("resolve_growth",StringComparison.Ordinal) && kind!="resolve_missing" && kind!="resolve_customer_trust")throw new InvalidOperationException("派遣の帰還結果を確認してください。");
+            if(kind=="continue_patron"){ContinuePatron();return;}
             if (kind == "continue_goal" || kind == "advance_goal") { RespondGoal(kind); return; }
             if (kind == "purchase_housing" || kind == "upgrade_housing") { ExpandHousing(kind); return; }
             if (kind.StartsWith("resolve_growth", StringComparison.Ordinal)) { ResolveGrowth(kind, catId, choice); return; }
             if (kind == "resolve_customer_trust") { ResolveCustomerTrust(source, choice); return; }
             if (kind == "resolve_regular_introduction") { ResolveRegularIntroduction(choice); return; }
             if (kind == "resolve_intake" || kind == "resolve_intake_request") { ResolveIntake(choice); return; }
+            if (PatronWaiting && kind != "resolve_missing" && !(kind == "resolve_store_event" && choice != "close"))throw new InvalidOperationException("有力者目標の結果を確認してください。");
             if (GoalWaiting && kind != "resolve_missing" && !(kind == "resolve_store_event" && choice != "close")) throw new InvalidOperationException("人気目標の結果を確認してください。");
             if (CustomerTrustWaiting && kind != "resolve_missing" && !(kind == "resolve_store_event" && choice != "close")) throw new InvalidOperationException("顧客の信頼回復イベントに回答してください。");
             if (kind != "resolve_missing" && s.cats.Any(c => c.activity == "missing" && c.missing_remaining == 0 && !DispatchMissing(State,c.id))) throw new InvalidOperationException("帰還結果を確認してください。");
@@ -126,6 +129,7 @@ namespace CatCafePreview.Standalone
             {
                 case "begin_second_group_type_practice": case "begin_second_group_second_type_practice": case "begin_third_group_practice": case "begin_third_group_type_practice": case "begin_third_group_second_type_practice": BeginGrowthPractice(kind, catId); break;
                 case "resolve_store_event": ResolveStoreEvent(choice); return;
+                case "dispatch_patron":if(!IsPatronDestination(choice))throw new ArgumentException("有力者の派遣先を選んでください。");Dispatch(catId,choice);break;
                 case "dispatch":case "dispatch_general":Dispatch(catId,choice);break;
                 case "expand_seats": ExpandSeats(); break;
                 case "purchase_seat_equipment": PurchaseEquipment(seatId,choice); break;

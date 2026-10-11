@@ -46,6 +46,8 @@ def exported_rules():
         destination['unsupported_reason']=''
         result['dispatch_destinations'].append(destination)
     result['dispatch_unlocks']=[dict(id=key,popularity=row.get('popularity',0),returns=row.get('returns',0),stage=row.get('stage',0)) for key,row in unlocks.items()]
+    result['patron']=read('cafe_patron')
+    result['patron']['members']=read('cafe_patron_members')
     result['dispatch_trouble']=read('cafe_dispatch_trouble')
     result['dispatch_encounters']=read('cafe_dispatch_encounters')
     result['item_shop'] = [dict(**row, sale_price=read('cafe_item_sales')[row['item']['id']]) for row in (read('cafe_item_shop'), read('cafe_nutrition_snack'), read('cafe_special_care_set'))]

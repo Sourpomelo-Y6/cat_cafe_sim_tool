@@ -9,7 +9,7 @@ namespace CatCafePreview.Standalone
         public string id,cat_id,destination,status="travelling",choice;
         public int started_day,remaining,occurred_day,resolved_day,growth_boundary;
         public bool feature_matched,specialization_matched;
-        public double growth_multiplier,reward_bonus,reward,return_stress;public CafeDispatchEncounter encounter;public CafeDispatchIntroduction introduction;public CafeDispatchTrouble trouble;
+        public double growth_multiplier,reward_bonus,reward,return_stress;public CafeDispatchEncounter encounter;public CafeDispatchIntroduction introduction;public CafeDispatchTrouble trouble;public CafePatronMatch patron_match;
     }
     public sealed partial class CafeSimulation
     {
@@ -22,8 +22,9 @@ namespace CatCafePreview.Standalone
             double multiplier=specialized?Rules.growth.dispatch_reward_multiplier:1,bonus=((feature?1:0)+(welcome?1:0))*(r.welcome?.reward_bonus??0);
             return new CafeDispatch {id="dispatch-"+day+"-"+id,cat_id=id,destination=r.id,growth_boundary=boundary<0?s.growth_operations.Count:boundary,started_day=day,remaining=r.days,feature_matched=feature,specialization_matched=welcome,growth_multiplier=multiplier,reward_bonus=bonus,reward=r.reward*definition.dispatch_reward*multiplier+bonus,return_stress=definition.return_stress};
         }
-        public DispatchRules[] DispatchDestinations()=>Rules.dispatch_destinations??new[]{Rules.dispatch};
-        public DispatchRules DispatchDestination(string id)=>DispatchDestinations().SingleOrDefault(r=>r.id==id);
+        public DispatchRules[] DispatchDestinations()=>(Rules.dispatch_destinations??new[]{Rules.dispatch}).Concat(State.patron==null?new DispatchRules[0]:PatronDestinations()).ToArray();
+        public DispatchRules[] PatronDestinations()=>new[]{Rules.patron.destination}.Concat(Rules.patron.members.Select(r=>new DispatchRules {id=r.id,name=r.name+"への訪問",days=Rules.patron.destination.days,reward=Rules.patron.destination.reward,max_fatigue=Rules.patron.destination.max_fatigue})).ToArray();
+        public DispatchRules DispatchDestination(string id)=>(Rules.dispatch_destinations??new[]{Rules.dispatch}).Concat(Rules.patron==null?new DispatchRules[0]:PatronDestinations()).SingleOrDefault(r=>r.id==id);
         public double DispatchReward(string id,string destination=null)=>DispatchTerms(State,id,State.day,destination:destination).reward;
         public string DispatchReason(string id,string destination)
         {
@@ -31,6 +32,8 @@ namespace CatCafePreview.Standalone
             var r=DispatchDestination(destination);if(r==null)return "対応する派遣先を選んでください。";
             if(!string.IsNullOrEmpty(r.unsupported_reason))return r.unsupported_reason;
             string locked=DispatchUnlockReason(destination);if(locked!="")return locked;
+            if(IsPatronDestination(destination) && State.patron==null)return "先に有力者目標を開始してください。";
+            if(IsPatronMember(destination) && State.dispatches.Any(e=>e.destination==destination && (e.status!="resolved" || e.started_day==State.day)))return "同じ有力者への訪問は同時1件・同日出発1件までです。";
             var c=State.cats.SingleOrDefault(c=>c.id==id);
             if(c==null)return "参加している猫を選んでください。";
             if(c.activity!="cafe")return "在店していません。";
@@ -47,7 +50,7 @@ namespace CatCafePreview.Standalone
             string reason=DispatchReason(id,destination);if(reason!="")throw new InvalidOperationException(reason);
             var e=DispatchTerms(State,id,State.day,destination:destination);if(!Finite(e.reward))throw new ArgumentException("派遣報酬が大きすぎます。");
             var encounter=DispatchEncounterDefinition(destination,State.day);if(encounter!=null)e.encounter=new CafeDispatchEncounter {id=encounter.id};
-            AttachDispatchTrouble(e);AttachDispatchIntroduction(e);State.dispatches.Add(e);var c=State.cats.Single(c=>c.id==id);c.activity="dispatched";c.working=false;
+            e.patron_match=PatronTerms(State,id,destination,State.day);AttachDispatchTrouble(e);AttachDispatchIntroduction(e);State.dispatches.Add(e);var c=State.cats.Single(c=>c.id==id);c.activity="dispatched";c.working=false;
         }
         private void DispatchCloseDay()
         {foreach(var e in State.dispatches.Where(e=>e.status=="travelling" || e.status=="missing")){if(DispatchTroubleClose(e))continue;e.remaining--;if(e.encounter!=null && e.encounter.status=="scheduled"){e.encounter.status="waiting";e.encounter.occurred_day=State.day;}if(e.remaining==0){e.status="waiting";e.occurred_day=State.day;}}}
@@ -62,6 +65,7 @@ namespace CatCafePreview.Standalone
             string reason=DispatchReceiveReason(id);if(reason!="")throw new InvalidOperationException(reason);var e=State.dispatches.Single(e=>e.id==id);if(e.status=="resolved")return;
             e.status="resolved";e.choice=choice;e.resolved_day=State.day;var c=State.cats.Single(c=>c.id==e.cat_id);c.activity="cafe";if(DispatchInterrupted(e)){c.stress=Rules.dispatch_trouble.return_stress;c.stamina=Rules.max_stamina;c.cannot_continue=c.health!="healthy";}else c.stress=Math.Min(100,c.stress+e.return_stress);
             State.funds+=DispatchReceivedReward(e);State.dispatch_income+=DispatchReceivedReward(e);
+            ReceivePatron(e);
             if(!DispatchInterrupted(e))RecordGrowth(new CafeGrowthOperation {kind="dispatch",cat_id=c.id,customer_id=e.id,day=State.day,tick=State.tick});PresentDispatchIntroductions();State.revision++;
         }
         private void ValidateDispatch(CafeSnapshot s)

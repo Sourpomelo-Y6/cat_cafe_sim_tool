@@ -39,7 +39,7 @@ namespace CatCafePreview.Standalone
             if (CustomerTrustWaiting) throw new InvalidOperationException("顧客の信頼回復イベントに回答してください。");
             if (GrowthWaiting) throw new InvalidOperationException("猫の成長・習熟を選択してください。");
             if (StoreEventWaiting) throw new InvalidOperationException("店舗イベントに回答してください。");
-            if (GoalWaiting) throw new InvalidOperationException("人気目標の結果を確認してください。");
+            if (GoalWaiting || PatronWaiting) throw new InvalidOperationException("目標の結果を確認してください。");
             Require("preparation");
             if (!IntakeWaiting) throw new InvalidOperationException("回答待ちの依頼はありません。");
             if (choice == "accept")

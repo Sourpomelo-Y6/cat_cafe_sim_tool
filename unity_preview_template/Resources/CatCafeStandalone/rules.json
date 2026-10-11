@@ -728,6 +728,57 @@
       "stage": 2
     }
   ],
+  "patron": {
+    "name": "地域の有力者",
+    "target": 100,
+    "gain": 25,
+    "destination": {
+      "id": "patron_visit",
+      "name": "地域の有力者への訪問",
+      "days": 2,
+      "reward": 200,
+      "max_fatigue": 40,
+      "welcome": {
+        "feature": "white",
+        "specialization": "service",
+        "reward_bonus": 20,
+        "satisfaction_bonus": 5
+      }
+    },
+    "members": [
+      {
+        "id": "patron_moody_visit",
+        "name": "気分が変わる有力者",
+        "target": 100,
+        "gain": 20,
+        "unmatched_gain": 2,
+        "conditions": [
+          {
+            "feature": "white"
+          },
+          {
+            "feature": "black"
+          },
+          {
+            "feature": "long_hair"
+          }
+        ]
+      },
+      {
+        "id": "patron_strict_visit",
+        "name": "条件に厳格な有力者",
+        "target": 100,
+        "gain": 25,
+        "unmatched_gain": 0,
+        "conditions": [
+          {
+            "feature": "white",
+            "specialization": "service"
+          }
+        ]
+      }
+    ]
+  },
   "dispatch_trouble": {
     "destination": {
       "id": "mountain_lodge_visit",
@@ -1133,5 +1184,5 @@
       }
     }
   ],
-  "rules_id": "bb44c4ee0221c9871f3270ce52b277c1b2c49c633871adb5a68aa5e4a69020bb"
+  "rules_id": "45a06a67ad03712b219823d53b159cd28ac1d872a95019aa1609f24a80f747cc"
 }
