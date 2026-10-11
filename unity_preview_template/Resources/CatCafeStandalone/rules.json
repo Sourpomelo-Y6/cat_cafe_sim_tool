@@ -728,6 +728,17 @@
       "stage": 2
     }
   ],
+  "player": {
+    "daily_turns": 3,
+    "set_ticks": 10,
+    "max_affinity": 100,
+    "relief": 5,
+    "stress": 5
+  },
+  "bond": {
+    "target": 6,
+    "affinity": 80
+  },
   "patron": {
     "name": "地域の有力者",
     "target": 100,
@@ -1184,5 +1195,5 @@
       }
     }
   ],
-  "rules_id": "45a06a67ad03712b219823d53b159cd28ac1d872a95019aa1609f24a80f747cc"
+  "rules_id": "7f617b9ee97c95b254ce1d3598e915b26627364b37b7d46abe8f7a3d0b95e537"
 }

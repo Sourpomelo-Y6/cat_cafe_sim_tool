@@ -51,7 +51,7 @@ namespace CatCafePreview.Standalone
         public static readonly string[] GrowthGroups = { "play", "contact", "quiet" };
         public static string GrowthGroup(string type) { int i = Array.IndexOf(GrowthTypes, type); return i < 0 ? null : GrowthGroups[i < 4 ? 0 : i < 6 ? 1 : 2]; }
         public CafeGrowth GrowthCat(string id) => State.growth.Single(r => r.cat_id == id);
-        private void EnsureGrowthCat(string id) { if (!State.growth.Any(r => r.cat_id == id)) State.growth.Add(new CafeGrowth { cat_id = id }); }
+        private void EnsureGrowthCat(string id) { EnsurePlayerCat(id);if (!State.growth.Any(r => r.cat_id == id)) State.growth.Add(new CafeGrowth { cat_id = id }); }
         public static string[] LearnedGroups(CafeGrowth r) => new[] { r.mastery, r.second_mastery, r.third_group_practice?.mastery }.Where(v => v != null).ToArray();
         public static string[] LearnedTypes(CafeGrowth r) => new[] { r.type_mastery, r.second_type_mastery, r.second_group_type_practice?.type_mastery, r.second_group_type_practice?.second?.type_mastery, r.third_group_practice?.individual?.type_mastery, r.third_group_practice?.individual?.second?.type_mastery }.Where(v => v != null).ToArray();
         public bool GrowthWaiting => State.growth.Any(r => GrowthPendingKind(r) != null);

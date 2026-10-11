@@ -61,6 +61,7 @@ namespace CatCafePreview
         public PythonEnding ending;
         public PythonNextGoal next_goal;
         public PythonPlayerInteraction player_interaction;
+        public PythonBondGoal bond_goal;
         public PythonPatronGoal patron_goal;
         public PythonPatronDispatch patron_dispatch, general_dispatch;
         public PythonDispatchEncounter[] dispatch_choices;

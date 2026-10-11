@@ -12,14 +12,14 @@ namespace CatCafePreview
             return label + (e.choice == null ? "" : "（" + ChoiceLabel(e.choice) + "）");
         }
         private static string ChoiceLabel(string choice) => choice == "repair" ? "修理" : choice == "patch" ? "応急処置" : choice == "close" ? "休業" : choice == "full" ? "支援" : choice == "small" ? "少額支援" : "見送り";
-        private bool CanPrepare => Simulation.State.phase == "preparation" && Simulation.State.game_over == null && !Simulation.State.cats.Any(c => c.activity == "missing" && c.missing_remaining == 0 && !Simulation.DispatchMissing(Simulation.State,c.id));
+        private bool CanPrepare => !Simulation.PlayerActive && Simulation.State.phase == "preparation" && Simulation.State.game_over == null && !Simulation.State.cats.Any(c => c.activity == "missing" && c.missing_remaining == 0 && !Simulation.DispatchMissing(Simulation.State,c.id));
         private PythonStoreEvent StoreEventView()
         {
             if (!Simulation.StoreEventWaiting) return null;
             var e = Simulation.CurrentStoreEvent; var r = Simulation.Rules.store_events;
             string[] choices = e.type == "trouble" ? new[] { "repair", "patch", "close" } : new[] { "full", "small", "decline" };
             return new PythonStoreEvent { kind = e.type, title = StoreEventLabel(), day = e.day, funds = (float)Simulation.State.funds,
-                choices = choices.Select(c => new PythonEventChoice { choice = c, label = ChoiceLabel(c), can_select = CanPrepare && !(c == "close" && (Simulation.DispatchIntroductionWaiting || Simulation.DispatchTroubleWaiting || Simulation.DispatchWaiting || Simulation.DispatchChoiceWaiting || Simulation.IntakeWaiting || Simulation.RegularIntroductionWaiting || Simulation.CustomerTrustWaiting || Simulation.GrowthWaiting || Simulation.GoalWaiting || Simulation.PatronWaiting || Simulation.ReservationWaiting || Simulation.ReservationVisitToday)),
+                choices = choices.Select(c => new PythonEventChoice { choice = c, label = ChoiceLabel(c), can_select = CanPrepare && !(c == "close" && (Simulation.DispatchIntroductionWaiting || Simulation.DispatchTroubleWaiting || Simulation.DispatchWaiting || Simulation.DispatchChoiceWaiting || Simulation.IntakeWaiting || Simulation.RegularIntroductionWaiting || Simulation.CustomerTrustWaiting || Simulation.GrowthWaiting || Simulation.GoalWaiting || Simulation.PatronWaiting || Simulation.BondWaiting || Simulation.PlayerActive || Simulation.ReservationWaiting || Simulation.ReservationVisitToday)),
                     detail = c == "repair" ? "閉店時に修理費 " + r.trouble_cost : c == "patch" ? "本日は " + Math.Min(Simulation.State.seat_count, r.trouble_seat_loss) + "席を停止" : c == "close" ? "営業せず運営費を精算し翌日へ" : c == "full" ? "今 " + r.support_full_cost + "支出 / 閉店時の人気 +" + r.support_full_popularity : c == "small" ? "今 " + r.support_small_cost + "支出 / 閉店時の人気 +" + r.support_small_popularity : "費用・人気変化なし" }).ToArray() };
         }
         private static string ItemEffect(Standalone.CafeSupply item) => (item.fatigue_relief>0 ? "疲労 −"+item.fatigue_relief : "") + (item.fatigue_relief>0 && item.stress_relief>0 ? " / " : "") + (item.stress_relief>0 ? "ストレス −"+item.stress_relief : "");

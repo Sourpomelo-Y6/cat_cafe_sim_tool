@@ -46,6 +46,10 @@ def exported_rules():
         destination['unsupported_reason']=''
         result['dispatch_destinations'].append(destination)
     result['dispatch_unlocks']=[dict(id=key,popularity=row.get('popularity',0),returns=row.get('returns',0),stage=row.get('stage',0)) for key,row in unlocks.items()]
+    player_module=ast.parse((ROOT/'cat_cafe_sim/cat_cafe_sim/core/cafe_player.py').read_text(encoding='utf-8'))
+    player_constants={node.targets[0].id:ast.literal_eval(node.value) for node in player_module.body if isinstance(node,ast.Assign) and isinstance(node.value,ast.Constant)}
+    result['player']=dict(daily_turns=player_constants['DAILY_TURNS'],set_ticks=player_constants['SET_TICKS'],max_affinity=player_constants['MAX_AFFINITY'],relief=management['player_relief'],stress=management['player_stress'])
+    result['bond']=read('cafe_bond_goal')
     result['patron']=read('cafe_patron')
     result['patron']['members']=read('cafe_patron_members')
     result['dispatch_trouble']=read('cafe_dispatch_trouble')

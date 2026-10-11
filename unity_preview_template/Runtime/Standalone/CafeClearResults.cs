@@ -19,11 +19,16 @@ namespace CatCafePreview.Standalone
         {
             string reason=s.funds<=0?"funds":s.popularity<=0?"popularity":null;
             if(s.game_over!=reason)throw new ArgumentException("Invalid ending reason");
+            bool bondCompleted=s.bond_goal?.status=="cleared";
             bool patronCompleted=s.patron?.status=="cleared";
             bool completed=s.objective=="popularity" && s.goal.Count==Rules.goal_stages.Length && s.goal.Last().status=="cleared";
-            if(s.clear_results==null || s.clear_results.Count!=(completed || patronCompleted?1:0))throw new ArgumentException("Clear records differ from completed goals");
+            if(s.clear_results==null || s.clear_results.Count!=(completed || patronCompleted || bondCompleted?1:0))throw new ArgumentException("Clear records differ from completed goals");
             foreach(var row in s.clear_results)
             {
+                if(row?.mode=="bond")
+                {
+                    if(!bondCompleted || row.day!=s.bond_goal.resolved_day || row.target!=Rules.bond.target || row.value!=s.bond_goal.achieved_cats.Count || !Finite(row.funds) || row.funds<=0 || !Range(row.popularity,double.Epsilon,Rules.popularity.cap) || row.cats<row.value || row.cats>s.cats.Count || !Range(row.revenue,0,double.MaxValue))throw new ArgumentException("Invalid bond clear record");continue;
+                }
                 if(row?.mode=="patron")
                 {
                     double target=Rules.patron.target+Rules.patron.members.Sum(r=>r.target);
