@@ -57,9 +57,10 @@ namespace CatCafePreview
                     if (b.Simulation.StoreEventWaiting)
                     {
                         string[] options = b.Simulation.CurrentStoreEvent.type == "trouble" ? new[] { "repair", "patch", "close" } : new[] { "full", "small", "decline" };
-                        string choice = options[(seed + day) % 3]; Send(b, "resolve_store_event", choice: choice);
+                        string choice = options[(seed + day) % 3]; if (choice == "close" && b.Simulation.IntakeWaiting) choice = "patch"; Send(b, "resolve_store_event", choice: choice);
                         if (choice == "close") continue;
                     }
+                    if (b.Simulation.IntakeWaiting) Send(b, "resolve_intake", choice: seed == 1 ? "decline" : "accept");
                     s = b.Simulation.State;
                     string supply = b.Simulation.AvailableSupplies.FirstOrDefault(); var stressed = s.cats.FirstOrDefault(c => c.activity == "cafe" && c.stress > 0);
                     if (supply != null && stressed != null) Send(b, "use_item", choice: supply, cat: stressed.id);

@@ -32,7 +32,9 @@ def snapshot(session):
     from cat_cafe_sim.core.cafe_checkpoint import outcome_result
     results = [outcome_result(r) for r in list(c.outcomes.values())[c.day_outcome_offset:]]
     summary = c.summary()
-    return dict(seed=c.seed, day=c.day, tick=c.tick, phase='closed' if c.closed else 'preparation' if c.can_set_shifts else 'open',
+    intake = c.intake_request
+    extra = dict(intake_request=dict(status=intake['status'], presented_day=intake['presented_day'] or 0, resolved_day=intake['resolved_day'] or 0), recruitment_expenses=summary.get('recruitment_expenses', 0)) if intake else {}
+    return dict(**extra, seed=c.seed, day=c.day, tick=c.tick, phase='closed' if c.closed else 'preparation' if c.can_set_shifts else 'open',
                 funds=c.funds, opening_funds=summary['opening_funds'], revenue=summary['revenue'], expenses=summary['total_expenses'],
                 popularity=c.management['popularity'], completed=summary['completed_interactions'], game_over=(c.management['game_over'] or {}).get('reason'),
                 cats=[dict(id=cat.id, stamina=cat.stamina, fatigue=cat.fatigue, stress=c.management['stress'][cat.id], working=cat.id in c.working_cats,
@@ -54,6 +56,7 @@ def snapshot(session):
 def generate():
     data = dict(draws=[], scenarios=[], exchanges=[])
     for seed in (0, 1, 42):
+        print(f"Generating seed {seed}", flush=True)
         for day in (1, 3, 28, 200):
             for cat in ('cat-mike', 'cat-tama', 'cat-kohaku'):
                 key = json.dumps(['cafe-health-v1', seed, day, cat], ensure_ascii=True)
@@ -69,30 +72,37 @@ def generate():
             core.initialize_customer_satisfaction(selected['customer_satisfaction'])
             goal = dict(selected['goal']); goal.pop('stages', None); core.enable_goal(goal, tracking_only=True)
             core.initialize_customer_loyalty(selected['customer_loyalty']); core.initialize_customer_discontent(selected['customer_discontent'])
+            core.initialize_intake_request(selected['intake_request'])
             core.initialize_store_events(selected['store_events'])
             # Only modules implemented in this first slice are enabled on BOTH sides.
             scenario = dict(seed=seed, operations=[]); data['scenarios'].append(scenario)
             def record(kind, working=None, cat_id=None, choice=None, source=None):
+                nonlocal core
                 if kind == 'resolve_store_event':
                     if choice == 'close': session.day_off()
                     else: session.resolve_store_event(choice)
+                elif kind == 'resolve_intake': session.resolve_intake_request(choice)
                 elif kind == 'use_item': core.use_item(source, cat_id)
                 elif kind == 'set_shifts': session.set_shifts(working)
                 elif kind == 'next_day': session.next_day()
                 elif kind == 'day_off': session.day_off()
                 elif kind == 'resolve_missing': session.resolve_missing(next(e['id'] for e in core.management['events'].values() if e['cat_id']==cat_id and e['status']=='waiting'))
                 else: session.automatic_step()
+                core = session.core  # Joining replaces the Python core atomically.
                 scenario['operations'].append(dict(kind=kind, **({'working': working} if working is not None else {}), **({'cat_id': cat_id} if cat_id else {}), **({'choice': choice} if choice else {}), **({'source': source} if source else {}), expected=snapshot(session)))
             for day in range(1, 29):
+                if day % 7 == 0: print(f"seed={seed} day={day}", flush=True)
                 for missing in list(core.management['events'].values()):
                     if missing['status']=='waiting': record('resolve_missing', cat_id=missing['cat_id'])
                 event = core.store_events['days'][-1]
                 if event.get('status') == 'waiting':
                     options = ('repair','patch','close') if event['type']=='trouble' else ('full','small','decline')
                     choice = options[(seed+day) % 3]
+                    if choice == 'close' and core.intake_request['status'] == 'waiting': choice = 'patch'
                     record('resolve_store_event', choice=choice)
                     if core.management['game_over']: break
                     if choice == 'close': continue
+                if core.intake_request['status'] == 'waiting': record('resolve_intake', choice='decline' if seed == 1 else 'accept')
                 from cat_cafe_sim.core.cafe_items import inventory
                 supplies = inventory(core)
                 stressed = next((key for key in core.cats if core.activity(key)=='cafe' and core.management['stress'][key]>0), None)

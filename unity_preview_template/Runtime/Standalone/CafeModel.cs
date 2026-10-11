@@ -26,8 +26,11 @@ namespace CatCafePreview.Standalone
         public LoyaltyRules loyalty;
         public DiscontentRules discontent;
         public ExchangeType[] types;
+        public IntakeRules intake;
         public string rules_id;
     }
+    [Serializable] public class IntakeRules { public int day, capacity; public double cost; public string personality, trait, features_label; public CatDefinition cat; }
+    [Serializable] public class CafeIntake { public string status = "scheduled"; public int presented_day, resolved_day; }
     [Serializable] public class WeekPattern { public int[] days; }
     [Serializable] public class SatisfactionRules { public double satisfied_score, dissatisfied_score, gauge_target, satisfied_bonus, dissatisfied_discontent_gain; }
     [Serializable] public class PopularityRules { public double cap, gain_per_success; }
@@ -96,6 +99,7 @@ namespace CatCafePreview.Standalone
     {
         public int day, arrivals, completed;
         public double opening_funds, revenue, expenses, closing_funds;
+        public double recruitment_expenses;
         public double popularity_gain;
         public int satisfied, normal, dissatisfied;
         public List<CafeCustomerRecord> customer_records = new List<CafeCustomerRecord>();
@@ -106,6 +110,7 @@ namespace CatCafePreview.Standalone
         public string rules_id, instance_id, phase = "preparation", game_over;
         public double funds, opening_funds, popularity, revenue, expenses;
         public int completed;
+        public double recruitment_expenses;
         public double popularity_gain;
         public List<CafeCat> cats = new List<CafeCat>();
         public List<CafeVisit> visits = new List<CafeVisit>();
@@ -117,6 +122,7 @@ namespace CatCafePreview.Standalone
         public List<CafeSupplyUse> item_uses = new List<CafeSupplyUse>();
         public List<CafeLoyalty> loyalty = new List<CafeLoyalty>();
         public List<CafeDiscontent> discontent = new List<CafeDiscontent>();
+        public CafeIntake intake_request = new CafeIntake();
         // Unity JsonUtility materializes JSON null strings as empty strings.
         public void NormalizeJsonStrings()
         {

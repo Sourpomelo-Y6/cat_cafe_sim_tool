@@ -141,6 +141,7 @@ static class Program
         Assert(before == Encode(check.State), "Rejected load mutated state");
         File.WriteAllText(Path.Combine(temp, "slot-1.json"), "{broken");
         try { store.Load(1); throw new Exception("Corrupt save accepted"); } catch (JsonException) { }
+        IntakeChecks.Run(rules, Assert, Path.Combine(temp, "intake"));
         Console.WriteLine($"PASS: {scenarios} Python/C# scenarios, {ticks} operation boundaries, {assertions} assertions, all-boundary save/resume and disk persistence.");
     }
 }

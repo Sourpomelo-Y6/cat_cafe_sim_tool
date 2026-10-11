@@ -46,7 +46,7 @@ namespace CatCafePreview
             GUILayout.Label(notice); GUI.enabled = !busy;
             if (title)
             {
-                GUILayout.Label("自由営業 / 初期猫5匹 / 2席。目標・設備・用品・加入・派遣・顧客イベントは後続移植。\n新規開始は単独版スロット1へ初期状態を保存します。");
+                GUILayout.Label("自由営業 / 初期猫5匹 / 2席。目標・設備・用品購入・派遣・顧客イベントは後続移植。\n新規開始は単独版スロット1へ初期状態を保存します。");
                 if (GUILayout.Button("新規開始")) StartCoroutine(Send("new_game"));
                 foreach (var save in backend.ListSaves().saves)
                 {
@@ -73,6 +73,17 @@ namespace CatCafePreview
                         if (GUILayout.Button(option.label + "：" + option.detail)) StartCoroutine(Send("resolve_store_event", choice: option.choice));
                     }
                 }
+                var intake = state.intake_request;
+                GUILayout.Label("受け入れ依頼：" + intake.name + " / " + (intake.status == "scheduled" ? "未発生" : intake.status == "waiting" ? "回答待ち" : intake.status == "accepted" ? "受け入れ済み" : "見送り済み") + " / 発生日 " + intake.day + " / 費用 " + intake.cost + " / 本日の受け入れ費用 " + state.finance.recruitment_expenses);
+                if (intake.status == "waiting")
+                {
+                    GUILayout.Label(intake.personality + " / " + intake.features + " / " + intake.trait + " / " + intake.housing + " / 支払い後 " + (state.funds - intake.cost));
+                    GUILayout.Label(intake.response_reason + intake.accept_reason);
+                    GUI.enabled = !busy && intake.can_accept;
+                    if (GUILayout.Button("迎える")) StartCoroutine(Send("resolve_intake", choice: "accept"));
+                    GUI.enabled = !busy && intake.can_decline;
+                    if (GUILayout.Button("見送る")) StartCoroutine(Send("resolve_intake", choice: "decline"));
+                }
                 foreach (var item in state.items.owned)
                 {
                     GUILayout.Label(item.name + " / " + item.effect);
@@ -85,15 +96,16 @@ namespace CatCafePreview
                 foreach (var cat in state.cats)
                 {
                     GUILayout.BeginHorizontal(); GUILayout.Label(cat.name + " / 体力 " + cat.stamina.ToString("0.0") + " / 疲労 " + cat.fatigue.ToString("0.0") + " / ストレス " + cat.stress.ToString("0.0") + " / " + cat.health_label + " / " + cat.activity_label);
-                    GUI.enabled = !busy && state.store_event == null && state.can_set_shifts && state.game_over == null && cat.health_status == "healthy" && cat.activity == "cafe";
+                    GUI.enabled = !busy && state.store_event == null && state.intake_request.status != "waiting" && state.can_set_shifts && state.game_over == null && cat.health_status == "healthy" && cat.activity == "cafe";
                     bool work = GUILayout.Toggle(cat.working, "出勤");
                     if (work != cat.working) StartCoroutine(Send("set_shifts", state.cats.Where(c => c.cat_id == cat.cat_id ? work : c.working).Select(c => c.cat_id).ToArray()));
                     GUILayout.EndHorizontal();
                 }
-                GUI.enabled = !busy && state.game_over == null && state.store_event == null;
+                GUI.enabled = !busy && state.game_over == null && state.store_event == null && state.intake_request.status != "waiting";
                 if (!state.can_set_shifts || state.cats.Any(c => c.working))
                     if (GUILayout.Button(state.closed ? "翌日へ" : state.can_set_shifts ? "営業開始" : "営業を1tick進める")) StartCoroutine(Send(state.closed ? "next_day" : state.can_set_shifts ? "start_business" : "advance_business"));
                 if (state.can_set_shifts && GUILayout.Button("休業して翌日へ")) StartCoroutine(Send("day_off"));
+                GUI.enabled = !busy && state.game_over == null;
                 foreach (var cat in backend.Simulation.State.cats.Where(c => c.activity == "missing" && c.missing_remaining == 0))
                     if (GUILayout.Button("帰還確認：" + cat.id + (cat.kitten ? "（引き渡し費用あり）" : ""))) StartCoroutine(Send("resolve_missing", catId: cat.id));
                 foreach (var seat in state.seats) GUILayout.Label(seat.seat_id + "：" + (seat.disabled ? "応急処置により停止" : seat.customer_id == null ? "空席" : seat.customer_id + " / " + seat.cat_id));

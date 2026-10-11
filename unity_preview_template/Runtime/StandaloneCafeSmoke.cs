@@ -61,6 +61,7 @@ namespace CatCafePreview
             Check(Request(b, "/commands", JsonUtility.ToJson(bad)).result == UnityWebRequest.Result.ProtocolError, "Path used as save ID");
             checks += StandaloneStoreEventSmoke.Run(Path.Combine(Path.GetDirectoryName(Path.GetFullPath(reportPath)), "store-event-smoke-saves"));
             checks += StandaloneCustomerSmoke.Run(Path.Combine(Path.GetDirectoryName(Path.GetFullPath(reportPath)), "customer-smoke-saves"));
+            checks += StandaloneIntakeSmoke.Run(Path.Combine(Path.GetDirectoryName(Path.GetFullPath(reportPath)), "intake-smoke-saves"));
             Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(reportPath)));
             File.WriteAllText(reportPath, "{\"passed\":true,\"checks\":" + checks + ",\"cross_process_restart\":" + restarted.ToString().ToLowerInvariant() + ",\"day\":" + b.Simulation.State.day + ",\"funds\":" + funds.ToString(System.Globalization.CultureInfo.InvariantCulture) + "}");
         }

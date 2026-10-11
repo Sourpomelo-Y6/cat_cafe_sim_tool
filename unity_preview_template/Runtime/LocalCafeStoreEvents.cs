@@ -19,7 +19,7 @@ namespace CatCafePreview
             var e = Simulation.CurrentStoreEvent; var r = Simulation.Rules.store_events;
             string[] choices = e.type == "trouble" ? new[] { "repair", "patch", "close" } : new[] { "full", "small", "decline" };
             return new PythonStoreEvent { kind = e.type, title = StoreEventLabel(), day = e.day, funds = (float)Simulation.State.funds,
-                choices = choices.Select(c => new PythonEventChoice { choice = c, label = ChoiceLabel(c), can_select = CanPrepare,
+                choices = choices.Select(c => new PythonEventChoice { choice = c, label = ChoiceLabel(c), can_select = CanPrepare && !(c == "close" && Simulation.IntakeWaiting),
                     detail = c == "repair" ? "閉店時に修理費 " + r.trouble_cost : c == "patch" ? "本日は " + Math.Min(2, r.trouble_seat_loss) + "席を停止" : c == "close" ? "営業せず運営費を精算し翌日へ" : c == "full" ? "今 " + r.support_full_cost + "支出 / 閉店時の人気 +" + r.support_full_popularity : c == "small" ? "今 " + r.support_small_cost + "支出 / 閉店時の人気 +" + r.support_small_popularity : "費用・人気変化なし" }).ToArray() };
         }
         private PythonItems SupplyView()
@@ -27,8 +27,8 @@ namespace CatCafePreview
             var r = Simulation.Rules.store_events.supply;
             return new PythonItems { shop = new PythonItemShop[0], count = Simulation.AvailableSupplies.Length,
                 owned = Simulation.AvailableSupplies.Select(source => new PythonOwnedItem { choice = source, item_id = r.id, name = r.name, count = 1, effect = "ストレス −" + r.stress_relief,
-                    targets = Simulation.State.cats.Select(cat => new PythonItemTarget { cat_id = cat.id, name = Simulation.Rules.cats.First(c => c.id == cat.id).name,
-                        can_select = CanPrepare && !Simulation.StoreEventWaiting && cat.activity == "cafe" && cat.stress > 0,
+                    targets = Simulation.State.cats.Select(cat => new PythonItemTarget { cat_id = cat.id, name = Simulation.Definition(cat.id).name,
+                        can_select = CanPrepare && !Simulation.IntakeWaiting && !Simulation.StoreEventWaiting && cat.activity == "cafe" && cat.stress > 0,
                         changes = cat.stress + " → " + Math.Max(0, cat.stress - r.stress_relief) }).ToArray() }).ToArray() };
         }
     }

@@ -384,5 +384,41 @@
   },
   "popular_customer_count": 4,
   "second_popular_customer_count": 2,
-  "rules_id": "1e67ace29faa05d1964cff057f5591bdfedfea967663103967f057c178ecb82e"
+  "intake": {
+    "day": 4,
+    "cost": 200,
+    "capacity": 6,
+    "personality": "穏やかな甘えん坊",
+    "trait": "のんびり屋",
+    "cat": {
+      "id": "request-cat-1",
+      "name": "ナナ",
+      "features": [
+        "black_white",
+        "long_hair"
+      ],
+      "type_preferences": [
+        0.8,
+        0.6,
+        1.2,
+        0.5,
+        1.8,
+        1.5,
+        1.2,
+        1.3
+      ],
+      "intensity_preferences": [
+        1.3,
+        1,
+        0.4
+      ],
+      "boredom_decay": 0.08,
+      "switch_affinity": -0.2,
+      "service_stress": 1,
+      "service_fatigue": 1.25,
+      "rest_fatigue": 1.5
+    },
+    "features_label": "白黒・長毛"
+  },
+  "rules_id": "23a0798e0edd09597817a2b554f0d83abab6a6f960cb6e5fcf2ab07f140590b6"
 }

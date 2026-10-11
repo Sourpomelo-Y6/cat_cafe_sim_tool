@@ -121,7 +121,7 @@ namespace CatCafePreview
     [Serializable] public class PythonCustomerState { public string customer_id, name, status, seat_id; }
     [Serializable] public class PythonFinanceState
     {
-        public float opening_funds, total_income, total_expenses, net_cash_flow, closing_funds;
+        public float opening_funds, total_income, total_expenses, net_cash_flow, closing_funds, recruitment_expenses;
     }
     [Serializable] public class PythonShiftCommand
     {
