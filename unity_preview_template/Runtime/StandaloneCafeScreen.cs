@@ -79,7 +79,7 @@ namespace CatCafePreview
                     if(state.clear_results.rows.Length==0)GUILayout.Label("クリア記録はまだありません。");
                     foreach(var record in state.clear_results.rows)GUILayout.Label(record.label+" クリア！\n"+record.details+"\n"+record.notes);
                 }
-                if(state.objective_start?.rows!=null)foreach(var row in state.objective_start.rows){GUILayout.Label(row.label+"："+row.summary+"\n"+row.details+"\n"+row.reason);GUI.enabled=!busy && row.can_start;if(GUILayout.Button("現在の営業から人気挑戦を開始"))StartCoroutine(Send("start_objective",choice:row.choice));}
+                if(state.objective_start?.rows!=null)foreach(var row in state.objective_start.rows){GUILayout.Label(row.label+"："+row.summary+"\n"+row.details+"\n"+row.reason);GUI.enabled=!busy && row.can_start;if(GUILayout.Button("現在の営業から"+row.label+"を開始"))StartCoroutine(Send("start_objective",choice:row.choice));}
                 if(state.bond_goal!=null){GUILayout.Label(state.bond_goal.details);GUI.enabled=!busy && state.bond_goal.can_continue;if(GUILayout.Button("好感度目標の結果を確認して継続"))StartCoroutine(Send("continue_bond_goal"));}
                 var player=state.player_interaction;
                 if(player!=null)

@@ -189,3 +189,5 @@ Unity単独版に[有力者派遣と満足度目標](../Docs/UnityStandalonePatr
 Unity単独版に[猫の個別交流と好感度目標](../Docs/UnityStandaloneBond.md)を追加しました。各操作と対象切替、日次共有回数、6匹達成・固定記録・継続営業と途中保存再開に対応し、4目標の新規開始が可能です。
 
 Unity単独版に[営業途中から人気挑戦を開始](../Docs/UnityStandalonePopularityChallenge.md)する機能を追加しました。自由営業・好感度・有力者の進捗を維持し、段階目標・追加客・固定結果・保存再開を共用します。
+
+Unity単独版に[営業途中から好感度・有力者目標を開始](../Docs/UnityStandaloneObjectiveStart.md)する機能を追加しました。既存好感度・通常派遣履歴を維持し、人気挑戦との共存、3目標の独立した固定結果と保存再開に対応します。

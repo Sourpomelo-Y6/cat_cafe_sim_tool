@@ -104,6 +104,7 @@ namespace CatCafePreview.Standalone
             var s = State;
             if (s.game_over != null) throw new InvalidOperationException("経営終了後は保存・閲覧のみ利用できます。");
             if(kind=="start_popularity_challenge" || kind=="start_objective" && choice=="popularity"){StartPopularityChallenge();return;}
+            if(kind=="enable_bond_goal" || kind=="enable_patron" || kind=="start_objective" && (choice=="bond" || choice=="patron")){StartIndependentObjective(kind=="enable_bond_goal"?"bond":kind=="enable_patron"?"patron":choice);return;}
             if(kind=="player_step" || kind=="player_finish"){AdvancePlayer(choice,source,kind=="player_finish");return;}
             if(PlayerActive)throw new InvalidOperationException("進行中のプレイヤー交流を再開または終了してください。");
             if(kind=="player_begin"){BeginPlayer(catId);return;}

@@ -103,8 +103,8 @@ namespace CatCafePreview.Standalone
                 }
             }
             if(active>1 || s.player_cats.Any(c=>c.affinity!=scores[c.cat_id] || c.total!=totals[c.cat_id] || c.today!=today[c.cat_id]))throw new ArgumentException("Player affinity differs from history");
-            var goal=s.bond_goal;if((s.objective=="bond")!=(goal!=null))throw new ArgumentException("Invalid bond mode");if(goal==null)return;
-            if(goal.id!="bond" || goal.started_day!=1 || goal.achieved_cats==null || goal.achieved_cats.Distinct().Count()!=goal.achieved_cats.Count || goal.achieved_cats.Any(id=>!scores.ContainsKey(id)))throw new ArgumentException("Invalid bond goal");
+            var goal=s.bond_goal;if(s.objective=="bond" && goal==null)throw new ArgumentException("Invalid bond mode");if(goal==null)return;
+            if(goal.id!="bond" || goal.started_day<1 || goal.started_day>s.day || s.objective=="bond" && goal.started_day!=1 || goal.achieved_cats==null || goal.achieved_cats.Distinct().Count()!=goal.achieved_cats.Count || goal.achieved_cats.Any(id=>!scores.ContainsKey(id)))throw new ArgumentException("Invalid bond goal");
             if(goal.status=="active")
             {if(goal.resolved_day!=0 || goal.continued || goal.achieved_cats.Count!=0 || s.game_over==null && BondQualifying(s).Length>=Rules.bond.target)throw new ArgumentException("Invalid active bond goal");}
             else if(goal.status!="cleared" || goal.resolved_day<goal.started_day || goal.resolved_day>s.day || goal.achieved_cats.Count<Rules.bond.target || !goal.continued && s.game_over==null && (s.day!=goal.resolved_day || s.phase!="preparation" || !goal.achieved_cats.All(id=>scores[id]>=Rules.bond.affinity)))throw new ArgumentException("Invalid completed bond goal");

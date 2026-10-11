@@ -45,7 +45,7 @@ namespace CatCafePreview.Standalone
         private void ContinuePatron(){string reason=PatronContinueReason();if(reason!="")throw new InvalidOperationException(reason);State.patron.continued=true;State.revision++;}
         private void ValidatePatron(CafeSnapshot s)
         {
-            var p=s.patron;if((s.objective=="patron")!=(p!=null))throw new ArgumentException("Invalid patron objective");
+            var p=s.patron;if(s.objective=="patron" && p==null)throw new ArgumentException("Invalid patron objective");
             foreach(var e in s.dispatches)
             {
                 if(!IsPatronDestination(e.destination)){if(e.patron_match!=null)throw new ArgumentException("Unexpected patron match");continue;}
@@ -56,7 +56,7 @@ namespace CatCafePreview.Standalone
                 if(s.dispatches.Any(other=>other.id!=e.id && other.destination==e.destination && (other.started_day==e.started_day || other.started_day<e.started_day && (other.status!="resolved" || other.resolved_day>e.started_day))))throw new ArgumentException("Overlapping patron visits");
             }
             if(p==null)return;
-            if(p.id!="patron" || p.started_day!=1 || p.members==null || p.members.Count!=Rules.patron.members.Length || p.members.Select(r=>r?.id).Distinct().Count()!=p.members.Count || p.members.Any(r=>r==null || !Rules.patron.members.Any(rule=>rule.id==r.id)))throw new ArgumentException("Invalid patron members");
+            if(p.id!="patron" || p.started_day<1 || p.started_day>s.day || s.objective=="patron" && p.started_day!=1 || p.members==null || p.members.Count!=Rules.patron.members.Length || p.members.Select(r=>r?.id).Distinct().Count()!=p.members.Count || p.members.Any(r=>r==null || !Rules.patron.members.Any(rule=>rule.id==r.id)))throw new ArgumentException("Invalid patron members");
             double satisfaction=0;var scores=Rules.patron.members.ToDictionary(r=>r.id,r=>0.0);int resolved=0;
             foreach(var e in s.dispatches.Where(e=>e.status=="resolved" && IsPatronDestination(e.destination)).OrderBy(e=>e.resolved_day))
             {

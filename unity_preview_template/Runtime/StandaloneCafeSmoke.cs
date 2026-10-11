@@ -75,6 +75,7 @@ namespace CatCafePreview
             foreach(bool trigger in new[]{false,true})foreach(string choice in new[]{"search","wait"})foreach(bool closed in new[]{false,true})checks+=StandaloneDispatchTroubleSmoke.Run(Path.Combine(directory,"lodging-"+trigger+"-"+choice+"-"+closed),trigger,choice,closed);
             foreach(bool closed in new[]{false,true})checks+=StandalonePatronSmoke.Run(Path.Combine(directory,"patron-"+closed),closed);
             checks+=StandalonePatronSmoke.Run(Path.Combine(directory,"patron-dispatch-specialist"),specialization:"dispatch");
+            checks+=StandaloneObjectiveStartSmoke.Run(Path.Combine(directory,"independent-objectives"));
             checks+=StandaloneChallengeSmoke.Run(Path.Combine(directory,"popularity-challenge"));
             foreach(bool goal in new[]{false,true})checks+=StandalonePlayerSmoke.Run(Path.Combine(directory,"player-bond-"+goal),goal);
             checks += StandaloneDispatchSmoke.Run(Path.Combine(directory,"dispatch-smoke-saves"));
