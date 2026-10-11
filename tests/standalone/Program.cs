@@ -33,7 +33,7 @@ static class Program
                 foreach(var op in fixture.GetProperty("operations").EnumerateArray())
                 {
                     string beforeSeats=Encode(seats.State);bool rejected=false;
-                    try{seats.Execute(op.GetProperty("kind").GetString(),working:Decode<string[]>(op.GetProperty("working").GetRawText()),choice:op.GetProperty("choice").GetString(),source:op.GetProperty("source").GetString(),catId:op.GetProperty("cat_id").GetString());}catch(InvalidOperationException){rejected=true;}catch(ArgumentException){rejected=true;}
+                    try{seats.Execute(op.GetProperty("kind").GetString(),working:Decode<string[]>(op.GetProperty("working").GetRawText()),choice:op.GetProperty("choice").GetString(),source:op.GetProperty("source").GetString(),catId:op.GetProperty("cat_id").GetString(),seatId:op.TryGetProperty("seat_id",out var seatId)?seatId.GetString():null);}catch(InvalidOperationException){rejected=true;}catch(ArgumentException){rejected=true;}
                     Assert(rejected==op.GetProperty("rejected").GetBoolean(),"Python expansion rejection mismatch: "+op.GetProperty("kind")+" day "+seats.State.day);
                     if(rejected)Assert(beforeSeats==Encode(seats.State),"Rejected seat operation changed state");
                     using var current=JsonDocument.Parse(Encode(seats.State));Equal(op.GetProperty("expected"),current.RootElement,"expansion boundary");seats.Restore(Decode<CafeSnapshot>(Encode(seats.State)));ticks++;
@@ -49,7 +49,7 @@ static class Program
                 foreach(var op in fixture.GetProperty("operations").EnumerateArray())
                 {
                     string itemBefore=Encode(items.State);bool rejected=false;
-                    try{items.Execute(op.GetProperty("kind").GetString(),choice:op.GetProperty("choice").GetString(),source:op.GetProperty("source").GetString(),catId:op.GetProperty("cat_id").GetString());}catch(InvalidOperationException){rejected=true;}catch(ArgumentException){rejected=true;}
+                    try{items.Execute(op.GetProperty("kind").GetString(),choice:op.GetProperty("choice").GetString(),source:op.GetProperty("source").GetString(),catId:op.GetProperty("cat_id").GetString(),seatId:op.TryGetProperty("seat_id",out var seatId)?seatId.GetString():null);}catch(InvalidOperationException){rejected=true;}catch(ArgumentException){rejected=true;}
                     Assert(rejected==op.GetProperty("rejected").GetBoolean(),"Python item rejection mismatch: "+op.GetProperty("kind"));if(rejected)Assert(itemBefore==Encode(items.State),"Rejected item changed state");
                     using var current=JsonDocument.Parse(Encode(items.State));Equal(op.GetProperty("expected"),current.RootElement,"item boundary");items.Restore(Decode<CafeSnapshot>(Encode(items.State)));ticks++;
                 }
@@ -242,6 +242,15 @@ static class Program
         Assert(before == Encode(check.State), "Rejected load mutated state");
         File.WriteAllText(Path.Combine(temp, "slot-1.json"), "{broken");
         try { store.Load(1); throw new Exception("Corrupt save accepted"); } catch (JsonException) { }
+        string retryTarget=Path.Combine(temp,"retry.json"),retryTemp=retryTarget+".tmp";
+        File.WriteAllText(retryTarget,"previous");File.WriteAllText(retryTemp,"new");int attempts=0,waits=0;
+        CafeSaveStore.ReplaceWithRetry(retryTemp,retryTarget,(a,b,c)=>{if(++attempts<3)throw new IOException("temporary conflict");File.Replace(a,b,c);},delay=>waits++);
+        Assert(attempts==3 && waits==2 && File.ReadAllText(retryTarget)=="new" && File.ReadAllText(retryTarget+".bak")=="previous","Transient replacement did not preserve backup");
+        File.WriteAllText(retryTemp,"uncommitted");attempts=0;bool retryFailed=false;
+        try{CafeSaveStore.ReplaceWithRetry(retryTemp,retryTarget,(a,b,c)=>{attempts++;throw new IOException("persistent conflict");},delay=>{});}catch(IOException){retryFailed=true;}
+        Assert(retryFailed && attempts==4 && File.ReadAllText(retryTarget)=="new" && File.ReadAllText(retryTemp)=="uncommitted","Persistent replacement lost save or retried forever");
+        attempts=0;retryFailed=false;try{CafeSaveStore.ReplaceWithRetry(retryTemp,retryTarget,(a,b,c)=>{attempts++;throw new UnauthorizedAccessException();},delay=>{});}catch(UnauthorizedAccessException){retryFailed=true;}
+        Assert(retryFailed && attempts==1 && File.ReadAllText(retryTarget)=="new","Non-IO permission error was retried");
         HousingChecks.Run(rules, Assert, Path.Combine(temp, "housing"));
         IntakeChecks.Run(rules, Assert, Path.Combine(temp, "intake"));
         RegularIntroductionChecks.Run(rules, Assert, Path.Combine(temp, "regular"));

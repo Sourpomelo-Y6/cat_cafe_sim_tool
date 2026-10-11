@@ -55,7 +55,7 @@ def growth_answers(core, record, specialization='service', practice=False):
 
 
 def exchange(s, seat=0):
-    return dict(type_actions=[s.summary()['type_actions'][k] for k in GROWTH_TYPES], stamina_spent=s.summary()['stamina_spent'], growth_groups=[v for v in (s.config.mastery_group,s.config.second_mastery_group,s.config.third_mastery_group) if v], growth_types=[v for v in (s.config.type_mastery,s.config.second_type_mastery,s.config.second_group_type_mastery,s.config.second_group_second_type_mastery,s.config.third_group_type_mastery,s.config.third_group_second_type_mastery) if v], customer_id=s.customer_id, cat_id=s.cat_id, seat=seat, mode=s.state['mode'],
+    return dict(service_group="contact" if s.config.contact_service else "play" if s.config.play_service else "quiet" if s.config.quiet_service else "",equipment_group=s.config.equipment_group,equipment_engagement=s.config.equipment_engagement_multiplier,equipment_tension=s.config.equipment_tension_multiplier,type_actions=[s.summary()['type_actions'][k] for k in GROWTH_TYPES], stamina_spent=s.summary()['stamina_spent'], growth_groups=[v for v in (s.config.mastery_group,s.config.second_mastery_group,s.config.third_mastery_group) if v], growth_types=[v for v in (s.config.type_mastery,s.config.second_type_mastery,s.config.second_group_type_mastery,s.config.second_group_second_type_mastery,s.config.third_group_type_mastery,s.config.third_group_second_type_mastery) if v], customer_id=s.customer_id, cat_id=s.cat_id, seat=seat, mode=s.state['mode'],
                 last_group=s.state['last_interaction_group'], previous_action=s.state['previous_action'],
                 previous_reaction=s.state['previous_reaction'], end_reason=s.state['end_reason'],
                 remaining=s.state['remaining_ticks'], streak=s.state['interaction_streak'],
@@ -66,8 +66,11 @@ def exchange(s, seat=0):
 def specialist_snapshot(core, result):
     from cat_cafe_sim.core.cafe_advanced_customers import evaluate as advanced
     from cat_cafe_sim.core.cafe_reservation import evaluate as reservation
-    value=(advanced(core,result) or reservation(core,result)) if result else None
-    return dict(specialist_result=('success' if value['success'] else 'failure') if value else None,specialist_bonus=value['bonus'] if value else 0)
+    from cat_cafe_sim.core.cafe_quiet_customer import evaluate as quiet
+    from cat_cafe_sim.core.cafe_play_customer import evaluate as play
+    from cat_cafe_sim.core.cafe_contact_customer import evaluate as contact
+    value=(advanced(core,result) or reservation(core,result) or quiet(core,result) or play(core,result) or contact(core,result)) if result else None
+    return dict(specialist_result=('success' if value['success'] else 'failure') if value else None,specialist_bonus=value['bonus'] if value else 0,service_equipment=bool(result and any(result.get(k,False) for k in ('quiet_equipment','play_equipment','contact_equipment'))),service_count=next((value[k] for k in ('quiet_count','play_count','contact_count') if value and k in value),0))
 
 
 def snapshot(session):
@@ -95,13 +98,16 @@ def snapshot(session):
         extra['item_uses']=[item_use(u) for u in c.item_uses]
     if c.reservation:
         r=c.reservation['request'];extra['reservation']={key:(r[key] or 0) if key.endswith('day') else r[key] for key in ('status','choice','result','offered_day','visit_day','resolved_day')} if r else dict(status='untriggered',choice=None,result=None,offered_day=0,visit_day=0,resolved_day=0)
+    extra['equipment_purchases']=[dict(id=p['id'],kind=p['rules']['id'],day=p['day']) for p in (c.equipment_store or {}).get('purchases',[])]
+    extra['equipment_placements']=[dict(seat=int(k.split('-')[-1])-1,item=v.equipment) for k,v in c.seats.items() if v.equipment]
+    extra['equipment_expenses']=summary.get('seat_equipment_expenses',0)
     extra['seat_count']=len(c.seats);extra['expansion_expenses']=summary.get('expansion_expenses',0)
     if c.expansion: extra['expansion']=copy.deepcopy(c.expansion['purchases'])
     extra['item_expenses']=summary.get('item_expenses',0);extra['item_sales_income']=summary.get('item_sales_income',0)
     if c.housing:
         extra['housing'] = dict(purchased_day=(c.housing['purchase'] or {}).get('day',0), upgraded_day=c.housing.get('upgrade',{}).get('day',0))
         extra['housing_expenses'] = summary.get('housing_expenses',0)
-        extra['history'] = [dict(day=row['day'],seat_count=row['summary'].get('seat_count',2),expansion_expenses=row['summary'].get('expansion_expenses',0), housing_expenses=row['summary'].get('housing_expenses',0), item_expenses=row['summary'].get('item_expenses',0),item_sales_income=row['summary'].get('item_sales_income',0),housing_cost=next(charge['housing_cost'] for charge in c.operating_cost['charges'] if charge['day']==row['day'])) for row in c.day_results]
+        extra['history'] = [dict(day=row['day'],equipment_expenses=row['summary'].get('seat_equipment_expenses',0),seat_count=row['summary'].get('seat_count',2),expansion_expenses=row['summary'].get('expansion_expenses',0), housing_expenses=row['summary'].get('housing_expenses',0), item_expenses=row['summary'].get('item_expenses',0),item_sales_income=row['summary'].get('item_sales_income',0),housing_cost=next(charge['housing_cost'] for charge in c.operating_cost['charges'] if charge['day']==row['day'])) for row in c.day_results]
         from cat_cafe_sim.core.cafe_housing import daily_cost
         extra['housing_cost'] = daily_cost(c) if c.closed else 0
     if c.growth: extra['growth']=[dict(cat_id=id,**growth_row(row)) for id,row in c.growth['cats'].items()]
@@ -116,7 +122,7 @@ def snapshot(session):
                 visits=[dict(id=v.id, cat_id=next((e.cat_id for e in c.interactions.values() if e.customer_id == v.id),
                                               next((r['cat_id'] for r in results if r['customer_id'] == v.id), None)),
                              **specialist_snapshot(c,next((r for r in results if r["customer_id"]==v.id),None)), arrival=v.arrival_tick, seated_at=v.seated_at if v.seated_at is not None else -1, seated_ticks=v.seated_ticks, departure=v.departure_reason, bill=v.bill,
-                             connect_count=next((r["connect_count"] for r in results if r["customer_id"]==v.id),0),open_up_count=next((r["open_up_count"] for r in results if r["customer_id"]==v.id),0),
+                             type_actions=next(([r['type_actions'][k] for k in GROWTH_TYPES] for r in results if r['customer_id']==v.id),[0]*8),connect_count=next((r["connect_count"] for r in results if r["customer_id"]==v.id),0),open_up_count=next((r["open_up_count"] for r in results if r["customer_id"]==v.id),0),
                              satisfaction=next((evaluate_satisfaction(c, r, evaluate_advanced(c,r)) for r in results if r['customer_id']==v.id), None)) for v in c.visits.values()],
                 loyalty=[dict(customer_id=key, score=row['score'], regular_day=row['regular_day'] or 0) for key,row in c.customer_loyalty['customers'].items()],
                 discontent=[dict(customer_id=key, **copy.deepcopy(row)) for key,row in c.customer_discontent['customers'].items()],

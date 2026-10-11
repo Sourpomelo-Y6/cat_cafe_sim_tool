@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Text;
+using System.Threading;
 
 namespace CatCafePreview.Standalone
 {
@@ -43,7 +44,23 @@ namespace CatCafePreview.Standalone
             var readback = decode(File.ReadAllText(temp, Encoding.UTF8));
             if (readback == null || readback.version != 1 || readback.slot != slot) throw new IOException("Save verification failed");
             validate(readback.state);
-            if (File.Exists(path)) File.Replace(temp, path, path + ".bak"); else File.Move(temp, path);
+            if (File.Exists(path)) ReplaceWithRetry(temp, path); else File.Move(temp, path);
+        }
+        // Keep the atomic replacement and backup. A short IO conflict may clear;
+        // permanent errors still fail without a delete/move fallback.
+        internal static void ReplaceWithRetry(string temp, string path, Action<string,string,string> replace = null, Action<int> wait = null)
+        {
+            replace = replace ?? ((source,target,backup) => File.Replace(source,target,backup));
+            wait = wait ?? (delay => Thread.Sleep(delay));
+            for (int attempt=0;;attempt++)
+            {
+                try { replace(temp,path,path+".bak"); return; }
+                catch (IOException)
+                {
+                    if (attempt>=3 || !File.Exists(temp) || !File.Exists(path)) throw;
+                    wait(20*(1<<attempt));
+                }
+            }
         }
     }
 }

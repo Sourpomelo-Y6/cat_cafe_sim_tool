@@ -31,6 +31,8 @@ def exported_rules():
     result['goal_stages'] = [dict(days=read('cafe_goal')['days'], target=read('cafe_goal')['target'])] + read('cafe_goal_stages')
     result['advanced_customer'] = read('cafe_advanced_customers')
     result['reservation'] = read('cafe_reservation')
+    for key in ('quiet_customer','play_customer','contact_customer'): result[key]=read('cafe_'+key)
+    result['equipment']=read('cafe_seat_equipment')
     result['growth'] = read('cafe_growth')
     result['item_shop'] = [dict(**row, sale_price=read('cafe_item_sales')[row['item']['id']]) for row in (read('cafe_item_shop'), read('cafe_nutrition_snack'), read('cafe_special_care_set'))]
     result['housing'] = read('cafe_housing')

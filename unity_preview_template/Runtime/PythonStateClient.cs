@@ -81,7 +81,7 @@ namespace CatCafePreview
         public float funds;
         public PythonCatState[] cats;
     }
-    [Serializable] public class PythonSpecialistResult { public string customer_id,cat_id,result; public int connect_count,open_up_count; public float bonus; }
+    [Serializable] public class PythonSpecialistResult { public string customer_id,cat_id,result; public int connect_count,open_up_count,service_count; public bool service_equipment; public float bonus; }
     [Serializable] public class PythonNewGameOption { public string choice, label, detail, conditions; }
     [Serializable] public class PythonGrowthChoice
     { public string cat_id, name, kind, title, learned, group, effect; public float experience, threshold, service, rest, dispatch, play, contact, quiet; public PythonEventChoice[] choices; }
@@ -126,7 +126,7 @@ namespace CatCafePreview
     [Serializable] public class PythonCustomerState { public string customer_id, name, status, seat_id; }
     [Serializable] public class PythonFinanceState
     {
-        public float opening_funds, total_income, total_expenses, net_cash_flow, closing_funds, recruitment_expenses, housing_expenses, housing_cost, item_expenses, item_sales_income;
+        public float opening_funds, total_income, total_expenses, net_cash_flow, closing_funds, recruitment_expenses, housing_expenses, housing_cost, item_expenses, item_sales_income, seat_equipment_expenses;
     }
     [Serializable] public class PythonShiftCommand
     {

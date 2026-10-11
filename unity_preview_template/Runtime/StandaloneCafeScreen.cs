@@ -23,11 +23,11 @@ namespace CatCafePreview
             try { StandaloneCafeSmoke.Run(args[index + 1]); Application.Quit(0); }
             catch (Exception ex) { Debug.LogException(ex); Application.Quit(1); }
         }
-        private IEnumerator Send(string kind, string[] working = null, int slot = 1, string catId = "", string choice = "free", string eventId = "")
+        private IEnumerator Send(string kind, string[] working = null, int slot = 1, string catId = "", string choice = "free", string eventId = "", string seatId = "")
         {
             if (busy) yield break;
             busy = true;
-            var cmd = new PythonShiftCommand { request_id = Guid.NewGuid().ToString("N"), instance_id = state.instance_id, expected_revision = state.revision, kind = kind, choice = choice, working_cats = working ?? new string[0], save_id = slot.ToString(), save_slot = slot, cat_id = catId, event_id = eventId };
+            var cmd = new PythonShiftCommand { request_id = Guid.NewGuid().ToString("N"), instance_id = state.instance_id, expected_revision = state.revision, kind = kind, choice = choice, working_cats = working ?? new string[0], save_id = slot.ToString(), save_slot = slot, cat_id = catId, event_id = eventId, seat_id=seatId };
             yield return backend.Request("/commands", JsonUtility.ToJson(cmd), reply =>
             {
                 var result = JsonUtility.FromJson<PythonCommandReply>(reply.text);
@@ -46,7 +46,7 @@ namespace CatCafePreview
             GUILayout.Label(notice); GUI.enabled = !busy;
             if (title)
             {
-                GUILayout.Label("自由営業・段階人気目標 / 初期猫5匹 / 2席。白猫のこだわり客・特別予約に対応。静かな交流客・VIP・設備・派遣は後続移植。\n新規開始は単独版スロット1へ初期状態を保存します。");
+                GUILayout.Label("自由営業・段階人気目標 / 初期猫5匹 / 2席。白猫のこだわり客・特別予約に対応。静かな交流・遊び・触れ合い客と接客設備に対応。長毛専門客・VIP・派遣は後続移植。\n新規開始は単独版スロット1へ初期状態を保存します。");
                 if (GUILayout.Button("人気目標で新規開始（移植範囲）")) StartCoroutine(Send("new_game",choice:"popularity"));
                 if (GUILayout.Button("新規開始")) StartCoroutine(Send("new_game"));
                 foreach (var save in backend.ListSaves().saves)
@@ -100,13 +100,27 @@ namespace CatCafePreview
                     if (GUILayout.Button(practice.label)) StartCoroutine(Send(practice.kind, catId: practice.cat_id));
                 }
                 if(state.objective=="popularity")GUILayout.Label(state.specialist_description);
-                foreach(var result in state.specialist_results)GUILayout.Label(result.customer_id+" / 担当 "+result.cat_id+" / "+(result.result=="success"?"条件達成":"条件未達")+" / 心をつかむ "+result.connect_count+" / 心を開く "+result.open_up_count+" / 追加料金 "+result.bonus);
+                foreach(var result in state.specialist_results)GUILayout.Label(result.customer_id+" / 担当 "+result.cat_id+" / "+(result.result=="success"?"条件達成":"条件未達")+" / 分類交流 "+result.service_count+" / 専用設備 "+(result.service_equipment?"あり":"なし")+" / 心をつかむ "+result.connect_count+" / 心を開く "+result.open_up_count+" / 追加料金 "+result.bonus);
                 var reservation=state.reservation;
                 if(reservation!=null)
                 {
                     GUILayout.Label("特別予約 / "+reservation.status+" / "+reservation.description+" / 来店日 "+reservation.visit_day+" / 結果 "+reservation.result+" / 追加料金 "+reservation.bonus+" / 人気 "+reservation.popularity_bonus);
                     GUI.enabled=!busy && reservation.can_accept;if(GUILayout.Button("予約を引き受ける"))StartCoroutine(Send("resolve_reservation",choice:"accept"));
                     GUI.enabled=!busy && reservation.can_decline;if(GUILayout.Button("予約を辞退する"))StartCoroutine(Send("resolve_reservation",choice:"decline"));
+                }
+                var equipment=state.seat_equipment;
+                GUILayout.Label("接客設備 / "+equipment.reason+" / "+equipment.details);
+                foreach(var seat in equipment.seats)
+                {
+                    GUILayout.Label(seat.seat_id+"："+seat.description);
+                    foreach(var item in equipment.catalog)
+                    {
+                        GUI.enabled=!busy && item.can_purchase;
+                        if(GUILayout.Button(seat.seat_id+"へ購入："+item.name+" / "+item.cost+" / "+item.effect))StartCoroutine(Send("purchase_seat_equipment",choice:item.kind_id,seatId:seat.seat_id));
+                    }
+                    GUI.enabled=!busy && equipment.can_manage;
+                    if(GUILayout.Button(seat.seat_id+"の設備を取り外す"))StartCoroutine(Send("equip_seat",choice:"",seatId:seat.seat_id));
+                    foreach(var item in equipment.owned)if(GUILayout.Button(seat.seat_id+"へ設置："+item.item_id+" "+item.name+"（現在 "+item.seat_id+"）"))StartCoroutine(Send("equip_seat",choice:item.item_id,seatId:seat.seat_id));
                 }
                 var expansion=state.expansion;
                 GUILayout.Label("席数 "+expansion.seats+" / 次 "+expansion.next_seats+" / 費用 "+expansion.cost+" / 通常運営費 "+expansion.operating_cost+" → "+expansion.next_operating_cost+" / "+expansion.reason);

@@ -12,7 +12,7 @@ def compare(data, exclude_unported=False):
         selected=starting_conditions('popularity');selected['store_events']['probability']=0
         full=create_game(Path(temp),selected,seed=0)
         if exclude_unported:
-            for name in ("quiet_customer","play_customer","contact_customer","longhair_customer","vip_customer"):setattr(full.core,name,None)
+            for name in ("longhair_customer","vip_customer"):setattr(full.core,name,None)
         report=dict(exclude_unported=exclude_unported,conditions='Normal costs/goal targets, seed 0, store event probability 0 on both sides; full popularity enables specialised customers.',equal_operations=0,first_difference=None)
         for op in rows:
             kind=op['kind'];failed=False

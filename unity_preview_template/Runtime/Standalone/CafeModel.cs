@@ -30,6 +30,7 @@ namespace CatCafePreview.Standalone
         public HousingRules housing, housing_upgrade;
         public ItemShopRule[] item_shop;
         public SpecialistRules advanced_customer, reservation;
+        public ServiceCustomerRules quiet_customer,play_customer,contact_customer; public EquipmentRule[] equipment;
         public double[] expansion_costs; public GoalStageRule[] goal_stages;
         public ExchangeType[] types;
         public IntakeRules intake, regular_introduction;
@@ -54,7 +55,7 @@ namespace CatCafePreview.Standalone
     [Serializable] public class CafeTrustCustomer { public string customer_id, status, event_id, reason; public int departed_day; }
     [Serializable] public class CafeTrustEvent { public string id, customer_id, status, choice, outcome; public int day, suspensions, resolved_day; }
     [Serializable] public class CafeArrival { public string customer_id; public int tick; }
-    [Serializable] public class CafeCustomerRecord { public string customer_id, cat_id, departure, satisfaction; public int[] type_actions = new int[8]; public int connect_count, open_up_count; public string specialist_result; public double specialist_bonus;
+    [Serializable] public class CafeCustomerRecord { public string customer_id, cat_id, departure, satisfaction; public int[] type_actions = new int[8]; public int connect_count, open_up_count; public string specialist_result; public double specialist_bonus; public bool service_equipment; public int service_count; public int service_seat=-1;
         public double affinity_delta, stamina_spent; }
     [Serializable] public class CafeSatisfaction
     {
@@ -96,13 +97,14 @@ namespace CatCafePreview.Standalone
         public string id, cat_id, departure;
         public int arrival, seated_at = -1, seated_ticks;
         public double bill;
-        public int[] type_actions = new int[8]; public int connect_count, open_up_count; public string specialist_result; public double specialist_bonus;
+        public int[] type_actions = new int[8]; public int connect_count, open_up_count; public string specialist_result; public double specialist_bonus; public bool service_equipment; public int service_count; public int service_seat=-1;
         public double affinity_delta, stamina_spent;
         public CafeSatisfaction satisfaction;
     }
     [Serializable] public class CafeExchange
     {
         public string customer_id, cat_id, mode = "teaser", last_group, previous_action, previous_reaction, end_reason;
+        public string service_group="",equipment_group=""; public double equipment_engagement=1,equipment_tension=1;
         public int seat, remaining, streak, connect_count, open_up_count, simultaneous_count;
         public double stamina, engagement, tension, bonus, affinity_start, affinity_pending, tension_multiplier = 1;
         public int[] type_actions = new int[8]; public string[] growth_groups = new string[0], growth_types = new string[0]; public double stamina_spent;
@@ -114,7 +116,7 @@ namespace CatCafePreview.Standalone
         public int day, arrivals, completed;
         public int seat_count = 2;
         public double opening_funds, revenue, expenses, closing_funds;
-        public double recruitment_expenses, housing_expenses, housing_cost, item_expenses, item_sales_income, expansion_expenses, goal_popularity;
+        public double recruitment_expenses, housing_expenses, housing_cost, item_expenses, item_sales_income, expansion_expenses, goal_popularity, equipment_expenses;
         public double popularity_gain;
         public int satisfied, normal, dissatisfied;
         public List<string> resting_cats = new List<string>();
@@ -127,7 +129,7 @@ namespace CatCafePreview.Standalone
         public double funds, opening_funds, popularity, revenue, expenses;
         public int completed;
         public int seat_count = 2;
-        public double recruitment_expenses, housing_expenses, housing_cost, item_expenses, item_sales_income, expansion_expenses, goal_popularity;
+        public double recruitment_expenses, housing_expenses, housing_cost, item_expenses, item_sales_income, expansion_expenses, goal_popularity, equipment_expenses;
         public double popularity_gain;
         public List<CafeCat> cats = new List<CafeCat>();
         public List<CafeVisit> visits = new List<CafeVisit>();
@@ -148,6 +150,9 @@ namespace CatCafePreview.Standalone
         public List<CafeTrustEvent> trust_events = new List<CafeTrustEvent>();
         public string objective = "free";
         public List<CafeGoalStage> goal = new List<CafeGoalStage>();
+        public List<CafeEquipmentPurchase> equipment_purchases=new List<CafeEquipmentPurchase>();
+        public List<CafeEquipmentMove> equipment_moves=new List<CafeEquipmentMove>();
+        public List<CafeEquipmentPlacement> equipment_placements=new List<CafeEquipmentPlacement>();
         public CafeReservation reservation = new CafeReservation();
         public List<CafeSeatPurchase> expansion = new List<CafeSeatPurchase>();
         public CafeHousing housing = new CafeHousing();

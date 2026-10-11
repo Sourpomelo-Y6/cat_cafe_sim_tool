@@ -56,6 +56,12 @@ namespace CatCafePreview.Standalone
                 }
             }
             if(State.objective=="popularity" && State.reservation.status=="accepted" && State.reservation.visit_day==day)schedule.Add(new CafeArrival {customer_id="reservation-longhair",tick=Rules.reservation.arrival_tick});
+            if(State.objective=="popularity" && ClearedGoalDay(1)>0 && day>ClearedGoalDay(1))
+            {
+                if(Rules.play_customer.quiet_weekdays.Contains(weekday))schedule.Add(new CafeArrival {customer_id="advanced-quiet",tick=0});
+                if(Rules.play_customer.weekdays.Contains(weekday))schedule.Add(new CafeArrival {customer_id="advanced-play",tick=0});
+                if(Rules.contact_customer.weekdays.Contains(weekday))schedule.Add(new CafeArrival {customer_id="advanced-contact",tick=0});
+            }
             var e = State.store_events.Find(r => r.day == day);
             if (e?.type == "rain")
             {
