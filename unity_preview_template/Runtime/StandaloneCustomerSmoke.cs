@@ -13,6 +13,7 @@ namespace CatCafePreview
         {
             public CafeLoyalty[] loyalty; public CafeDiscontent[] discontent;
             public CafeArrival[] schedule; public PythonCustomerProgress[] progress;
+            public CafeRegularIntroduction introduction; public CafeCat[] cats; public double recruitment_expenses;
         }
         private static int checks;
         private static void Check(bool condition, string message) { checks++; if (!condition) throw new Exception(message); }
@@ -24,7 +25,7 @@ namespace CatCafePreview
             while (request.MoveNext()) { } Check(response.result == UnityWebRequest.Result.Success, "Customer smoke " + kind + ": " + response.error);
         }
         private static string Capture(LocalCafeBackend b)
-            => JsonUtility.ToJson(new Checkpoint { loyalty = b.Simulation.State.loyalty.ToArray(), discontent = b.Simulation.State.discontent.ToArray(), schedule = b.Simulation.CustomerSchedule(b.Simulation.State.day), progress = b.View().customer_progress });
+            => JsonUtility.ToJson(new Checkpoint { loyalty = b.Simulation.State.loyalty.ToArray(), discontent = b.Simulation.State.discontent.ToArray(), schedule = b.Simulation.CustomerSchedule(b.Simulation.State.day), progress = b.View().customer_progress, introduction = b.Simulation.State.regular_introduction, cats = b.Simulation.State.cats.ToArray(), recruitment_expenses = b.Simulation.State.recruitment_expenses });
         private static void Resume(LocalCafeBackend b)
         {
             string before = Capture(b); Send(b, "save_game"); Send(b, "load_game");
@@ -57,10 +58,11 @@ namespace CatCafePreview
                     if (b.Simulation.StoreEventWaiting)
                     {
                         string[] options = b.Simulation.CurrentStoreEvent.type == "trouble" ? new[] { "repair", "patch", "close" } : new[] { "full", "small", "decline" };
-                        string choice = options[(seed + day) % 3]; if (choice == "close" && b.Simulation.IntakeWaiting) choice = "patch"; Send(b, "resolve_store_event", choice: choice);
+                        string choice = options[(seed + day) % 3]; if (choice == "close" && (b.Simulation.IntakeWaiting || b.Simulation.RegularIntroductionWaiting)) choice = "patch"; Send(b, "resolve_store_event", choice: choice);
                         if (choice == "close") continue;
                     }
                     if (b.Simulation.IntakeWaiting) Send(b, "resolve_intake", choice: seed == 1 ? "decline" : "accept");
+                    if (b.Simulation.RegularIntroductionWaiting) Send(b, "resolve_regular_introduction", choice: seed == 1 ? "accept" : "decline", cat: b.Simulation.Rules.regular_introduction.cat.id);
                     s = b.Simulation.State;
                     string supply = b.Simulation.AvailableSupplies.FirstOrDefault(); var stressed = s.cats.FirstOrDefault(c => c.activity == "cafe" && c.stress > 0);
                     if (supply != null && stressed != null) Send(b, "use_item", choice: supply, cat: stressed.id);

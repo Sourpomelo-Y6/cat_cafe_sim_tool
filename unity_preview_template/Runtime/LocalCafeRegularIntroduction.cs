@@ -1,0 +1,17 @@
+namespace CatCafePreview
+{
+    public sealed partial class LocalCafeBackend
+    {
+        private PythonRegularIntroduction RegularIntroductionView()
+        {
+            var r = Simulation.Rules.regular_introduction; var s = Simulation.State; var data = s.regular_introduction;
+            bool ready = CanPrepare && !Simulation.StoreEventWaiting && Simulation.RegularIntroductionWaiting;
+            return new PythonRegularIntroduction { cat_id = r.cat.id, content_cat_id = r.cat.id, name = r.cat.name, status = data.status,
+                customer_id = data.customer_id, customer_name = data.customer_id, presented_day = data.presented_day, resolved_day = data.resolved_day,
+                cost = (float)r.cost, funds_after = (float)(s.funds - r.cost), threshold = (float)Simulation.Rules.loyalty.threshold,
+                personality = r.personality, features = r.features_label, trait = r.trait, housing = "在籍 " + s.cats.Count + " / 上限 " + Simulation.Rules.intake.capacity,
+                response_reason = ready ? "" : "営業準備中に、帰還・店舗イベントの確認待ちを解決してください。",
+                accept_reason = Simulation.RegularIntroductionAcceptReason, can_decline = ready, can_accept = ready && Simulation.RegularIntroductionAcceptReason == "" };
+        }
+    }
+}

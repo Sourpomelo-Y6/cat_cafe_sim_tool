@@ -84,6 +84,18 @@ namespace CatCafePreview
                     GUI.enabled = !busy && intake.can_decline;
                     if (GUILayout.Button("見送る")) StartCoroutine(Send("resolve_intake", choice: "decline"));
                 }
+                var introduction = state.regular_introduction;
+                GUILayout.Label("常連からの猫紹介：" + introduction.name + " / " + (introduction.status == "untriggered" ? "未発生" : introduction.status == "waiting" ? "回答待ち" : introduction.status == "accepted" ? "受け入れ済み" : "見送り済み"));
+                if (introduction.status != "untriggered") GUILayout.Label("紹介者 " + introduction.customer_name + " / 提示日 " + introduction.presented_day + " / 回答日 " + introduction.resolved_day);
+                if (introduction.status == "waiting")
+                {
+                    GUILayout.Label(introduction.personality + " / " + introduction.features + " / " + introduction.trait + " / " + introduction.housing + " / 費用 " + introduction.cost + " / 支払い後 " + introduction.funds_after);
+                    GUILayout.Label(introduction.response_reason + introduction.accept_reason);
+                    GUI.enabled = !busy && introduction.can_accept;
+                    if (GUILayout.Button("紹介猫を迎える")) StartCoroutine(Send("resolve_regular_introduction", catId: introduction.cat_id, choice: "accept"));
+                    GUI.enabled = !busy && introduction.can_decline;
+                    if (GUILayout.Button("紹介を見送る")) StartCoroutine(Send("resolve_regular_introduction", catId: introduction.cat_id, choice: "decline"));
+                }
                 foreach (var item in state.items.owned)
                 {
                     GUILayout.Label(item.name + " / " + item.effect);
@@ -96,12 +108,12 @@ namespace CatCafePreview
                 foreach (var cat in state.cats)
                 {
                     GUILayout.BeginHorizontal(); GUILayout.Label(cat.name + " / 体力 " + cat.stamina.ToString("0.0") + " / 疲労 " + cat.fatigue.ToString("0.0") + " / ストレス " + cat.stress.ToString("0.0") + " / " + cat.health_label + " / " + cat.activity_label);
-                    GUI.enabled = !busy && state.store_event == null && state.intake_request.status != "waiting" && state.can_set_shifts && state.game_over == null && cat.health_status == "healthy" && cat.activity == "cafe";
+                    GUI.enabled = !busy && state.store_event == null && state.intake_request.status != "waiting" && state.regular_introduction.status != "waiting" && state.can_set_shifts && state.game_over == null && cat.health_status == "healthy" && cat.activity == "cafe";
                     bool work = GUILayout.Toggle(cat.working, "出勤");
                     if (work != cat.working) StartCoroutine(Send("set_shifts", state.cats.Where(c => c.cat_id == cat.cat_id ? work : c.working).Select(c => c.cat_id).ToArray()));
                     GUILayout.EndHorizontal();
                 }
-                GUI.enabled = !busy && state.game_over == null && state.store_event == null && state.intake_request.status != "waiting";
+                GUI.enabled = !busy && state.game_over == null && state.store_event == null && state.intake_request.status != "waiting" && state.regular_introduction.status != "waiting";
                 if (!state.can_set_shifts || state.cats.Any(c => c.working))
                     if (GUILayout.Button(state.closed ? "翌日へ" : state.can_set_shifts ? "営業開始" : "営業を1tick進める")) StartCoroutine(Send(state.closed ? "next_day" : state.can_set_shifts ? "start_business" : "advance_business"));
                 if (state.can_set_shifts && GUILayout.Button("休業して翌日へ")) StartCoroutine(Send("day_off"));

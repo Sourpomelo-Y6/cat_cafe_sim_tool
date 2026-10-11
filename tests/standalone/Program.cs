@@ -44,6 +44,18 @@ static class Program
                 customers.State.loyalty = Decode<List<CafeLoyalty>>(Encode(customers.State.loyalty)); customers.State.discontent = Decode<List<CafeDiscontent>>(Encode(customers.State.discontent));
             }
         }
+        if (args.Length > 5)
+        {
+            using var boundaries = JsonDocument.Parse(File.ReadAllText(args[5]));
+            foreach (var row in boundaries.RootElement.GetProperty("cases").EnumerateArray())
+            {
+                var sim = new CafeSimulation(rules); sim.State.day = row.GetProperty("day").GetInt32();
+                sim.State.phase = row.GetProperty("preparation").GetBoolean() ? "preparation" : "open";
+                sim.State.game_over = row.GetProperty("game_over").GetBoolean() ? "funds" : null;
+                sim.State.loyalty = Decode<List<CafeLoyalty>>(row.GetProperty("loyalty").GetRawText()); sim.PresentRegularIntroduction();
+                using var actual = JsonDocument.Parse(Encode(sim.State.regular_introduction)); Equal(row.GetProperty("expected"), actual.RootElement, "Regular presentation boundary");
+            }
+        }
         using var data = JsonDocument.Parse(File.ReadAllText(args[1]));
         foreach (var row in data.RootElement.GetProperty("satisfaction").EnumerateArray())
         {
@@ -142,6 +154,7 @@ static class Program
         File.WriteAllText(Path.Combine(temp, "slot-1.json"), "{broken");
         try { store.Load(1); throw new Exception("Corrupt save accepted"); } catch (JsonException) { }
         IntakeChecks.Run(rules, Assert, Path.Combine(temp, "intake"));
+        RegularIntroductionChecks.Run(rules, Assert, Path.Combine(temp, "regular"));
         Console.WriteLine($"PASS: {scenarios} Python/C# scenarios, {ticks} operation boundaries, {assertions} assertions, all-boundary save/resume and disk persistence.");
     }
 }

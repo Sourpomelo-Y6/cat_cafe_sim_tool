@@ -26,11 +26,12 @@ namespace CatCafePreview.Standalone
         public LoyaltyRules loyalty;
         public DiscontentRules discontent;
         public ExchangeType[] types;
-        public IntakeRules intake;
+        public IntakeRules intake, regular_introduction;
         public string rules_id;
     }
     [Serializable] public class IntakeRules { public int day, capacity; public double cost; public string personality, trait, features_label; public CatDefinition cat; }
     [Serializable] public class CafeIntake { public string status = "scheduled"; public int presented_day, resolved_day; }
+    [Serializable] public class CafeRegularIntroduction { public string status = "untriggered", customer_id; public int regular_day, presented_day, resolved_day; }
     [Serializable] public class WeekPattern { public int[] days; }
     [Serializable] public class SatisfactionRules { public double satisfied_score, dissatisfied_score, gauge_target, satisfied_bonus, dissatisfied_discontent_gain; }
     [Serializable] public class PopularityRules { public double cap, gain_per_success; }
@@ -123,9 +124,11 @@ namespace CatCafePreview.Standalone
         public List<CafeLoyalty> loyalty = new List<CafeLoyalty>();
         public List<CafeDiscontent> discontent = new List<CafeDiscontent>();
         public CafeIntake intake_request = new CafeIntake();
+        public CafeRegularIntroduction regular_introduction = new CafeRegularIntroduction();
         // Unity JsonUtility materializes JSON null strings as empty strings.
         public void NormalizeJsonStrings()
         {
+            if (regular_introduction != null && regular_introduction.customer_id == "") regular_introduction.customer_id = null;
             if (game_over == "") game_over = null;
             if (store_events != null) foreach (var e in store_events) { if (e.type == "") e.type = null; if (e.status == "") e.status = null; if (e.choice == "") e.choice = null; }
             if (history != null) foreach (var h in history) if (h.customer_records != null) foreach (var r in h.customer_records) if (r.satisfaction == "") r.satisfaction = null;

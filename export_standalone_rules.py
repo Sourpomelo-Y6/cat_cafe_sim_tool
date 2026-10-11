@@ -54,6 +54,17 @@ def exported_rules():
                                         isinstance(target, ast.Name) and target.id == 'FEATURES'
                                         for target in node.targets)))
     result['intake']['features_label'] = '・'.join(features[key][0] for key in intake['features'])
+    regular = read('cafe_regular_introduction')
+    p = presets[regular['preset']]
+    trait = traits[regular['trait']]
+    result['regular_introduction'] = dict(
+        cost=regular['cost'], personality=regular['preset'], trait=trait['name'],
+        features_label='・'.join(features[key][0] for key in regular['features']),
+        cat=dict(id=regular['cat_id'], name=regular['name'], features=regular['features'],
+                 type_preferences=[p['type_preferences'][t['id']] for t in relationship['types']],
+                 intensity_preferences=[p['intensity_preferences'][k] for k in ('gentle', 'standard', 'active')],
+                 boredom_decay=p['boredom_decay'], switch_affinity=p['switch_affinity'],
+                 **{k: trait.get(k, 1) for k in ('service_stress', 'service_fatigue', 'rest_fatigue')}))
     result['rules_id'] = hashlib.sha256(json.dumps(result, sort_keys=True, ensure_ascii=True).encode()).hexdigest()
     return result
 

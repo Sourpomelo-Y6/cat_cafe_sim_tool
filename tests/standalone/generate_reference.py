@@ -34,6 +34,8 @@ def snapshot(session):
     summary = c.summary()
     intake = c.intake_request
     extra = dict(intake_request=dict(status=intake['status'], presented_day=intake['presented_day'] or 0, resolved_day=intake['resolved_day'] or 0), recruitment_expenses=summary.get('recruitment_expenses', 0)) if intake else {}
+    regular = c.regular_introduction
+    if regular: extra['regular_introduction'] = dict(status=regular['status'], customer_id=regular['customer_id'], **{key:regular[key] or 0 for key in ('regular_day','presented_day','resolved_day')})
     return dict(**extra, seed=c.seed, day=c.day, tick=c.tick, phase='closed' if c.closed else 'preparation' if c.can_set_shifts else 'open',
                 funds=c.funds, opening_funds=summary['opening_funds'], revenue=summary['revenue'], expenses=summary['total_expenses'],
                 popularity=c.management['popularity'], completed=summary['completed_interactions'], game_over=(c.management['game_over'] or {}).get('reason'),
@@ -73,6 +75,7 @@ def generate():
             goal = dict(selected['goal']); goal.pop('stages', None); core.enable_goal(goal, tracking_only=True)
             core.initialize_customer_loyalty(selected['customer_loyalty']); core.initialize_customer_discontent(selected['customer_discontent'])
             core.initialize_intake_request(selected['intake_request'])
+            core.initialize_regular_introduction(selected['regular_introduction'])
             core.initialize_store_events(selected['store_events'])
             # Only modules implemented in this first slice are enabled on BOTH sides.
             scenario = dict(seed=seed, operations=[]); data['scenarios'].append(scenario)
@@ -81,6 +84,7 @@ def generate():
                 if kind == 'resolve_store_event':
                     if choice == 'close': session.day_off()
                     else: session.resolve_store_event(choice)
+                elif kind == 'resolve_regular_introduction': session.resolve_regular_introduction(choice)
                 elif kind == 'resolve_intake': session.resolve_intake_request(choice)
                 elif kind == 'use_item': core.use_item(source, cat_id)
                 elif kind == 'set_shifts': session.set_shifts(working)
@@ -98,11 +102,12 @@ def generate():
                 if event.get('status') == 'waiting':
                     options = ('repair','patch','close') if event['type']=='trouble' else ('full','small','decline')
                     choice = options[(seed+day) % 3]
-                    if choice == 'close' and core.intake_request['status'] == 'waiting': choice = 'patch'
+                    if choice == 'close' and (core.intake_request['status'] == 'waiting' or core.regular_introduction['status'] == 'waiting'): choice = 'patch'
                     record('resolve_store_event', choice=choice)
                     if core.management['game_over']: break
                     if choice == 'close': continue
                 if core.intake_request['status'] == 'waiting': record('resolve_intake', choice='decline' if seed == 1 else 'accept')
+                if core.regular_introduction['status'] == 'waiting': record('resolve_regular_introduction', choice='accept' if seed == 1 else 'decline')
                 from cat_cafe_sim.core.cafe_items import inventory
                 supplies = inventory(core)
                 stressed = next((key for key in core.cats if core.activity(key)=='cafe' and core.management['stress'][key]>0), None)

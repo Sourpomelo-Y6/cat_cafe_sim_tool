@@ -3,6 +3,7 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="IntakeChecks.cs" />
+    <Compile Include="RegularIntroductionChecks.cs" />
     <Compile Include="../../unity_preview_template/Runtime/Standalone/*.cs" />
   </ItemGroup>
 </Project>

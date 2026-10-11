@@ -420,5 +420,39 @@
     },
     "features_label": "白黒・長毛"
   },
-  "rules_id": "23a0798e0edd09597817a2b554f0d83abab6a6f960cb6e5fcf2ab07f140590b6"
+  "regular_introduction": {
+    "cost": 200,
+    "personality": "穏やかな甘えん坊",
+    "trait": "のんびり屋",
+    "features_label": "茶トラ・短毛",
+    "cat": {
+      "id": "regular-rescue-1",
+      "name": "マロン",
+      "features": [
+        "orange_tabby",
+        "short_hair"
+      ],
+      "type_preferences": [
+        0.8,
+        0.6,
+        1.2,
+        0.5,
+        1.8,
+        1.5,
+        1.2,
+        1.3
+      ],
+      "intensity_preferences": [
+        1.3,
+        1,
+        0.4
+      ],
+      "boredom_decay": 0.08,
+      "switch_affinity": -0.2,
+      "service_stress": 1,
+      "service_fatigue": 1.25,
+      "rest_fatigue": 1.5
+    }
+  },
+  "rules_id": "76a5860014cddc937eec47cd8c56ee26e69620146c4c3519d0ed1bedaa2ef310"
 }

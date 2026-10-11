@@ -6,7 +6,21 @@ namespace CatCafePreview.Standalone
     public sealed partial class CafeSimulation
     {
         public bool IntakeWaiting => State.intake_request.status == "waiting";
-        private IEnumerable<CatDefinition> Definitions(CafeSnapshot s) => s.intake_request != null && s.intake_request.status == "accepted" ? Rules.cats.Concat(new[] { Rules.intake.cat }) : Rules.cats;
+        private IEnumerable<CatDefinition> Definitions(CafeSnapshot s)
+        {
+            var cats = (IEnumerable<CatDefinition>)Rules.cats;
+            if (s.intake_request != null && s.intake_request.status == "accepted") cats = cats.Concat(new[] { Rules.intake.cat });
+            if (s.regular_introduction != null && s.regular_introduction.status == "accepted") cats = cats.Concat(new[] { Rules.regular_introduction.cat });
+            return cats;
+        }
+        private void JoinCat(IntakeRules rule)
+        {
+            if (State.cats.Any(c => c.id == rule.cat.id)) throw new InvalidOperationException("この猫はすでに加入しています。");
+            if (State.funds <= rule.cost) throw new InvalidOperationException("受け入れ後に資金が残る必要があります。");
+            if (State.cats.Count >= Rules.intake.capacity) throw new InvalidOperationException("飼育スペースが満員です。");
+            State.cats.Add(new CafeCat { id = rule.cat.id, stamina = Rules.max_stamina, working = false });
+            State.funds -= rule.cost; State.expenses += rule.cost; State.recruitment_expenses += rule.cost;
+        }
         public CatDefinition Definition(string id) => Definitions(State).First(c => c.id == id);
         private void PresentIntake()
         {
@@ -27,8 +41,7 @@ namespace CatCafePreview.Standalone
             if (choice == "accept")
             {
                 if (IntakeAcceptReason != "") throw new InvalidOperationException(IntakeAcceptReason);
-                State.cats.Add(new CafeCat { id = Rules.intake.cat.id, stamina = Rules.max_stamina, working = false });
-                State.funds -= Rules.intake.cost; State.expenses += Rules.intake.cost; State.recruitment_expenses += Rules.intake.cost;
+                JoinCat(Rules.intake);
             }
             r.status = status; r.resolved_day = State.day; State.revision++;
         }
@@ -44,6 +57,7 @@ namespace CatCafePreview.Standalone
             for (int day = 1; day <= s.day; day++)
             {
                 double expected = r.status == "accepted" && r.resolved_day == day ? rule.cost : 0;
+                if (s.regular_introduction != null && s.regular_introduction.status == "accepted" && s.regular_introduction.resolved_day == day) expected += Rules.regular_introduction.cost;
                 double cost = day == s.day ? s.recruitment_expenses : s.history[day - 1].recruitment_expenses;
                 double total = day == s.day ? s.expenses : s.history[day - 1].expenses;
                 if (cost != expected || total < cost) throw new ArgumentException("Invalid intake expense history");
