@@ -79,6 +79,7 @@ namespace CatCafePreview
                     if(state.clear_results.rows.Length==0)GUILayout.Label("クリア記録はまだありません。");
                     foreach(var record in state.clear_results.rows)GUILayout.Label(record.label+" クリア！\n"+record.details+"\n"+record.notes);
                 }
+                if(state.objective_start?.rows!=null)foreach(var row in state.objective_start.rows){GUILayout.Label(row.label+"："+row.summary+"\n"+row.details+"\n"+row.reason);GUI.enabled=!busy && row.can_start;if(GUILayout.Button("現在の営業から人気挑戦を開始"))StartCoroutine(Send("start_objective",choice:row.choice));}
                 if(state.bond_goal!=null){GUILayout.Label(state.bond_goal.details);GUI.enabled=!busy && state.bond_goal.can_continue;if(GUILayout.Button("好感度目標の結果を確認して継続"))StartCoroutine(Send("continue_bond_goal"));}
                 var player=state.player_interaction;
                 if(player!=null)
@@ -145,7 +146,7 @@ namespace CatCafePreview
                     GUI.enabled = !busy && practice.can_select;
                     if (GUILayout.Button(practice.label)) StartCoroutine(Send(practice.kind, catId: practice.cat_id));
                 }
-                if(state.objective=="popularity")GUILayout.Label(state.specialist_description);
+                if(state.goal_result!=null)GUILayout.Label(state.specialist_description);
                 foreach(var result in state.specialist_results)GUILayout.Label(result.customer_id+" / 担当 "+result.cat_id+" / "+(result.result=="success"?"条件達成":"条件未達")+" / 分類交流 "+result.service_count+" / 専用設備 "+(result.customer_id=="advanced-longhair" || result.customer_id=="vip-calico"?"不要":result.service_equipment?"あり":"なし")+" / 心をつかむ "+result.connect_count+" / 心を開く "+result.open_up_count+" / 同時発動 "+result.simultaneous_count+" / 追加料金 "+result.bonus);
                 var reservation=state.reservation;
                 if(reservation!=null)

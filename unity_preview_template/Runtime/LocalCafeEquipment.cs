@@ -14,7 +14,7 @@ namespace CatCafePreview
         }
         private string SpecialistDescription()
         {
-            if(Simulation.State.objective!="popularity")return "";
+            if(Simulation.State.goal.Count==0)return "";
             var r=Simulation.Rules;string[] days={"月","火","水","木","金","土","日"};
             return "人気第1段階達成翌日から解放。白猫客：白猫で心をつかむ "+r.advanced_customer.connect_count+"回 / 追加料金 "+r.advanced_customer.bonus+"\n"+
                 "静かな交流客（"+string.Join("・",r.play_customer.quiet_weekdays.Select(i=>days[i]))+"）：静かな交流スペース＋声かけ・そばにいる計 "+r.quiet_customer.quiet_count+"回 / 追加料金 "+r.quiet_customer.bonus+" / 人気 "+r.quiet_customer.popularity_bonus+"\n"+

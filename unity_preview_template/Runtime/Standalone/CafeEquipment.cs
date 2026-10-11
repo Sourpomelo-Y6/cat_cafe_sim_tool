@@ -73,7 +73,7 @@ namespace CatCafePreview.Standalone
             foreach(var e in s.exchanges)
             {
                 var r=Installed(s,e.seat);
-                if(e.equipment_group!=(r?.group??"") || e.equipment_engagement!=(r?.engagement??1) || e.equipment_tension!=(r?.tension??1) || e.service_group!=(s.objective=="popularity"?ServiceGroup(e.customer_id):""))throw new ArgumentException("Exchange equipment differs");
+                if(e.equipment_group!=(r?.group??"") || e.equipment_engagement!=(r?.engagement??1) || e.equipment_tension!=(r?.tension??1) || e.service_group!=(s.goal.Count>0?ServiceGroup(e.customer_id):""))throw new ArgumentException("Exchange equipment differs");
             }
         }
         private bool ServiceEquipmentAt(CafeSnapshot s,int day,int seat,string group)
@@ -87,7 +87,7 @@ namespace CatCafePreview.Standalone
         private string ServiceGroup(string id) => id=="advanced-quiet"?"quiet":id=="advanced-play"?"play":(id=="advanced-contact" || id=="advanced-longhair")?"contact":"";
         private int PreferredSeat(string customer,int[] free)
         {
-            string group=State.objective=="popularity" && customer!="advanced-longhair"?ServiceGroup(customer):"";
+            string group=State.goal.Count>0 && customer!="advanced-longhair"?ServiceGroup(customer):"";
             foreach(int i in free)if(group!="" && Installed(i)?.group==group)return i;return free[0];
         }
     }

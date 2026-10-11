@@ -155,6 +155,7 @@ namespace CatCafePreview.Standalone
         public List<CafePlayerCat> player_cats=new List<CafePlayerCat>();
         public List<CafePlayerSession> player_sessions=new List<CafePlayerSession>();public CafeBondGoal bond_goal;
         public CafePatron patron;
+        public int challenge_started_day;
         public string objective = "free";
         public List<CafeDispatchUnlock> dispatch_unlocks=new List<CafeDispatchUnlock>();
         public List<CafeDispatch> dispatches=new List<CafeDispatch>();

@@ -16,6 +16,7 @@ namespace CatCafePreview.Standalone
         }
         public string GoalResponseReason(string kind)
         {
+            if(PlayerActive || kind=="advance_goal" && (PatronWaiting || BondWaiting))return "交流・他の目標結果を確認してください。";
             if(DispatchWaiting || DispatchChoiceWaiting || DispatchTroubleWaiting)return "派遣の帰還結果を確認してください。";
             if(State.game_over!=null)return "経営終了後は目標を変更できません。";
             if(State.goal.Count==0)return "この営業は人気集計のみです。";
@@ -58,12 +59,12 @@ namespace CatCafePreview.Standalone
         }
         private void ValidateGoal(CafeSnapshot s)
         {
-            if(Rules.goal_stages==null || s.goal==null || !new[]{"free","popularity","patron","bond"}.Contains(s.objective) || (s.objective!="popularity"?s.goal.Count!=0:s.goal.Count<1 || s.goal.Count>Rules.goal_stages.Length))throw new ArgumentException("Invalid goal mode");
+            if(Rules.goal_stages==null || s.goal==null || !new[]{"free","popularity","patron","bond"}.Contains(s.objective) || s.goal.Count>Rules.goal_stages.Length || (s.objective=="popularity" ? s.goal.Count<1 || s.challenge_started_day!=0 : (s.goal.Count==0 ? s.challenge_started_day!=0 : s.challenge_started_day<1 || s.challenge_started_day>s.day)))throw new ArgumentException("Invalid goal mode");
             if (!Range(s.goal_popularity,0,Rules.popularity.cap) || s.phase!="closed" && s.goal_popularity!=0 || s.history.Any(h=>!Range(h.goal_popularity,0,Rules.popularity.cap))) throw new ArgumentException("Invalid closing popularity");
             for(int i=0;i<s.goal.Count;i++)
             {
                 var g=s.goal[i];var rule=Rules.goal_stages[i];int end=s.phase=="closed"?s.day:s.day-1;string status="active";int resolved=0;
-                if(g==null || g.started_day<1 || g.started_day>s.day+(s.phase=="closed"?1:0) || i==0 && g.started_day!=1 || i>0 && (s.goal[i-1].status!="cleared" || g.started_day<=s.goal[i-1].resolved_day || !s.goal[i-1].continued && g.started_day!=s.goal[i-1].resolved_day+1))throw new ArgumentException("Invalid goal start");
+                if(g==null || g.started_day<1 || g.started_day>s.day+(s.phase=="closed"?1:0) || i==0 && g.started_day!=(s.objective=="popularity"?1:s.challenge_started_day) || i>0 && (s.goal[i-1].status!="cleared" || g.started_day<=s.goal[i-1].resolved_day || !s.goal[i-1].continued && g.started_day!=s.goal[i-1].resolved_day+1))throw new ArgumentException("Invalid goal start");
                 for(int day=g.started_day;day<=end;day++)
                 {
                     if(day==s.day && s.game_over!=null)break;

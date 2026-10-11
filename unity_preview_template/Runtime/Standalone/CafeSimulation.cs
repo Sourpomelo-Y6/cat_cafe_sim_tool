@@ -103,6 +103,7 @@ namespace CatCafePreview.Standalone
         {
             var s = State;
             if (s.game_over != null) throw new InvalidOperationException("経営終了後は保存・閲覧のみ利用できます。");
+            if(kind=="start_popularity_challenge" || kind=="start_objective" && choice=="popularity"){StartPopularityChallenge();return;}
             if(kind=="player_step" || kind=="player_finish"){AdvancePlayer(choice,source,kind=="player_finish");return;}
             if(PlayerActive)throw new InvalidOperationException("進行中のプレイヤー交流を再開または終了してください。");
             if(kind=="player_begin"){BeginPlayer(catId);return;}
@@ -196,7 +197,7 @@ namespace CatCafePreview.Standalone
             PresentCustomerTrust();
             PresentReservation();
         }
-        private string Preference(string customer) => State.objective=="popularity" && customer=="advanced-longhair"?"long_hair":State.objective=="popularity" && customer=="vip-calico"?Rules.vip_customer.feature:State.objective=="popularity" && customer=="advanced-white" ? Rules.advanced_customer.feature : State.objective=="popularity" && customer=="reservation-longhair" ? Rules.reservation.feature : Rules.preference_pool[(int)(PythonRandom.Hash64(State.seed + ":" + customer) % (ulong)Rules.preference_pool.Length)];
+        private string Preference(string customer) => State.goal.Count>0 && customer=="advanced-longhair"?"long_hair":State.goal.Count>0 && customer=="vip-calico"?Rules.vip_customer.feature:State.goal.Count>0 && customer=="advanced-white" ? Rules.advanced_customer.feature : State.goal.Count>0 && customer=="reservation-longhair" ? Rules.reservation.feature : Rules.preference_pool[(int)(PythonRandom.Hash64(State.seed + ":" + customer) % (ulong)Rules.preference_pool.Length)];
         private bool Matched(CafeCat c, string customer) => Array.IndexOf(Definition(c.id).features, Preference(customer)) >= 0;
         private void Advance()
         {
@@ -213,7 +214,7 @@ namespace CatCafePreview.Standalone
                 s.queue.RemoveAt(0); var visit = s.visits.Find(v => v.id == customer); visit.cat_id = cat.id; visit.seated_at = s.tick;
                 var relationship = s.relationships.Find(r => r.cat_id == cat.id && r.customer_id == customer);
                 var equipment=Installed(seat);
-                s.exchanges.Add(new CafeExchange { service_group=s.objective=="popularity"?ServiceGroup(customer):"", equipment_group=equipment?.group??"",equipment_engagement=equipment?.engagement??1,equipment_tension=equipment?.tension??1, seat = seat, customer_id = customer, cat_id = cat.id, stamina = cat.stamina, remaining = Math.Min(Rules.exchange.ticks, Rules.opening_ticks - s.tick), affinity_start = relationship?.affinity ?? 0, growth_groups = LearnedGroups(GrowthCat(cat.id)), growth_types = LearnedTypes(GrowthCat(cat.id)), tension_multiplier = Matched(cat, customer) ? Rules.tension_multiplier : 1 });
+                s.exchanges.Add(new CafeExchange { service_group=s.goal.Count>0?ServiceGroup(customer):"", equipment_group=equipment?.group??"",equipment_engagement=equipment?.engagement??1,equipment_tension=equipment?.tension??1, seat = seat, customer_id = customer, cat_id = cat.id, stamina = cat.stamina, remaining = Math.Min(Rules.exchange.ticks, Rules.opening_ticks - s.tick), affinity_start = relationship?.affinity ?? 0, growth_groups = LearnedGroups(GrowthCat(cat.id)), growth_types = LearnedTypes(GrowthCat(cat.id)), tension_multiplier = Matched(cat, customer) ? Rules.tension_multiplier : 1 });
                 RecordGrowth(new CafeGrowthOperation { kind = "start", cat_id = cat.id, customer_id = customer, day = s.day, tick = s.tick });
                 foreach (string kind in GrowthPracticeChoices(GrowthCat(cat.id))) RecordGrowth(new CafeGrowthOperation { kind = kind, cat_id = cat.id, day = s.day, tick = s.tick });
             }

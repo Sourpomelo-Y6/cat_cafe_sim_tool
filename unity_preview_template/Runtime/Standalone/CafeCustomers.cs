@@ -36,7 +36,7 @@ namespace CatCafePreview.Standalone
             var schedule = new List<CafeArrival>();
             for (int i = 0; i < Rules.arrival_ticks.Length; i++)
                 if (Rules.patterns[i % Rules.patterns.Length].days.Contains(weekday)) schedule.Add(new CafeArrival { customer_id = "guest-" + (i + 1), tick = Rules.arrival_ticks[i] });
-            if(State.objective=="popularity" && ClearedGoalDay(1)>0 && day>ClearedGoalDay(1))schedule.Add(new CafeArrival {customer_id="advanced-white",tick=0});
+            if(State.goal.Count>0 && ClearedGoalDay(1)>0 && day>ClearedGoalDay(1))schedule.Add(new CafeArrival {customer_id="advanced-white",tick=0});
             foreach(var purchase in State.expansion.Where(p=>p.seats>=4 && day>p.day))schedule.Add(new CafeArrival {customer_id=purchase.seats==4?"expanded-guest":"expanded-guest-"+(purchase.seats-3),tick=(purchase.seats-4)*6});
             foreach (var r in State.loyalty.Where(r => r.regular_day > 0 && day > r.regular_day && ExtraWeekday(r.customer_id) == weekday))
             {
@@ -55,9 +55,9 @@ namespace CatCafePreview.Standalone
                     if(existing==null)schedule.Add(new CafeArrival {customer_id=id,tick=tick});else existing.tick=tick;
                 }
             }
-            if(State.objective=="popularity" && State.reservation.status=="accepted" && State.reservation.visit_day==day)schedule.Add(new CafeArrival {customer_id="reservation-longhair",tick=Rules.reservation.arrival_tick});
-            if(State.objective=="popularity" && State.goal.Count==3 && ClearedGoalDay(3)>0 && day>ClearedGoalDay(3))MergeArrival(schedule,"vip-calico",0);
-            if(State.objective=="popularity" && ClearedGoalDay(1)>0 && day>ClearedGoalDay(1))
+            if(State.goal.Count>0 && State.reservation.status=="accepted" && State.reservation.visit_day==day)schedule.Add(new CafeArrival {customer_id="reservation-longhair",tick=Rules.reservation.arrival_tick});
+            if(State.goal.Count>0 && State.goal.Count==3 && ClearedGoalDay(3)>0 && day>ClearedGoalDay(3))MergeArrival(schedule,"vip-calico",0);
+            if(State.goal.Count>0 && ClearedGoalDay(1)>0 && day>ClearedGoalDay(1))
             {
                 if(Rules.play_customer.quiet_weekdays.Contains(weekday))MergeArrival(schedule,"advanced-quiet",0);
                 if(Rules.play_customer.weekdays.Contains(weekday))MergeArrival(schedule,"advanced-play",0);
