@@ -124,7 +124,7 @@ namespace CatCafePreview.Standalone
     }
     [Serializable] public class CafeSnapshot
     {
-        public int version = 1, seed, day = 1, tick, revision;
+        public int version = 2, seed, day = 1, tick, revision;
         public string rules_id, instance_id, phase = "preparation", game_over;
         public double funds, opening_funds, popularity, revenue, expenses;
         public int completed;
@@ -150,6 +150,7 @@ namespace CatCafePreview.Standalone
         public List<CafeTrustEvent> trust_events = new List<CafeTrustEvent>();
         public string objective = "free";
         public List<CafeGoalStage> goal = new List<CafeGoalStage>();
+        public List<CafeClearRecord> clear_results = new List<CafeClearRecord>();
         public List<CafeEquipmentPurchase> equipment_purchases=new List<CafeEquipmentPurchase>();
         public List<CafeEquipmentMove> equipment_moves=new List<CafeEquipmentMove>();
         public List<CafeEquipmentPlacement> equipment_placements=new List<CafeEquipmentPlacement>();

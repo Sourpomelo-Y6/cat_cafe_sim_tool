@@ -61,7 +61,7 @@ static class Program
             using var cases=JsonDocument.Parse(File.ReadAllText(args[10]));
             foreach(var fixture in cases.RootElement.GetProperty("cases").EnumerateArray())
             {
-                var seats=new CafeSimulation(Decode<CafeRules>(fixture.GetProperty("rules").GetRawText()),objective:fixture.GetProperty("objective").GetString());scenarios++;
+                bool testedClear=false;var seats=new CafeSimulation(Decode<CafeRules>(fixture.GetProperty("rules").GetRawText()),objective:fixture.GetProperty("objective").GetString());scenarios++;
                 foreach(var op in fixture.GetProperty("operations").EnumerateArray())
                 {
                     string beforeSeats=Encode(seats.State);bool rejected=false;
@@ -69,6 +69,17 @@ static class Program
                     Assert(rejected==op.GetProperty("rejected").GetBoolean(),"Python expansion rejection mismatch: "+op.GetProperty("kind")+" day "+seats.State.day);
                     if(rejected)Assert(beforeSeats==Encode(seats.State),"Rejected seat operation changed state");
                     using var current=JsonDocument.Parse(Encode(seats.State));Equal(op.GetProperty("expected"),current.RootElement,"expansion boundary");seats.Restore(Decode<CafeSnapshot>(Encode(seats.State)));ticks++;
+                    if(!testedClear && seats.State.clear_results.Count>0)
+                    {
+                        testedClear=true;
+                        for(int field=0;field<9;field++)
+                        {
+                            var bad=Decode<CafeSnapshot>(Encode(seats.State));var row=bad.clear_results[0];
+                            if(field==0)bad.clear_results.Clear();else if(field==1)bad.clear_results.Add(row);else if(field==2)row.day++;else if(field==3)row.target++;else if(field==4)row.value++;else if(field==5)row.cats++;else if(field==6)row.revenue++;else if(field==7)row.funds=0;else row.mode="bond";
+                            string clearBefore=Encode(seats.State);bool failed=false;try{seats.Restore(bad);}catch(ArgumentException){failed=true;}Assert(failed && clearBefore==Encode(seats.State),"Forged fixed clear record accepted");
+                        }
+                        var legacy=Decode<CafeSnapshot>(Encode(seats.State));legacy.version=1;bool legacyFailed=false;try{seats.Restore(legacy);}catch(ArgumentException){legacyFailed=true;}Assert(legacyFailed,"Old save without fixed record migration accepted");
+                    }
                 }
             }
         }

@@ -17,7 +17,7 @@ namespace CatCafePreview
         private PythonGoalResult GoalResultView()
         {
             var s=Simulation.State;if(s.goal.Count==0)return null;var g=s.goal.Last();var r=Simulation.Rules.goal_stages[s.goal.Count-1];
-            return new PythonGoalResult {pending=Simulation.GoalWaiting,stage=s.goal.Count,started_day=g.started_day,deadline=g.started_day+r.days-1,resolved_day=g.resolved_day,status=g.status,target=(float)r.target,popularity=(float)s.popularity,funds=(float)s.funds,can_continue=Simulation.GoalResponseReason("continue_goal")=="",details="人気目標の達成で席数と一般客を段階解放。白猫のこだわり客・特別予約に対応。静かな交流客・VIP等は未移植。"};
+            return new PythonGoalResult {pending=Simulation.GoalWaiting,stage=s.goal.Count,started_day=g.started_day,deadline=g.started_day+r.days-1,resolved_day=g.resolved_day,status=g.status,target=(float)r.target,popularity=(float)s.popularity,funds=(float)s.funds,can_continue=Simulation.GoalResponseReason("continue_goal")=="",kind="continue_goal",title=EndingView()?.title??"人気目標の進捗",summary="人気 "+Number(s.popularity)+" / "+Number(r.target),details="結果："+g.status+" / 確定日："+g.resolved_day+"日目。"+(s.clear_results.Count>0?"\nクリア時の成果\n"+ClearResultsView().rows[0].details:"")};
         }
     }
 }

@@ -12,7 +12,7 @@ namespace CatCafePreview.Standalone
         private void SettleGoal()
         {
             if(State.goal.Count==0 || State.game_over!=null)return;var g=State.goal.Last();var r=Rules.goal_stages[State.goal.Count-1];if(g.status!="active" || State.day<g.started_day)return;
-            g.status=State.popularity>=r.target?"cleared":State.day>=g.started_day+r.days-1?"expired":"active";if(g.status!="active")g.resolved_day=State.day;
+            g.status=State.popularity>=r.target?"cleared":State.day>=g.started_day+r.days-1?"expired":"active";if(g.status!="active"){g.resolved_day=State.day;CaptureClearResult();}
         }
         public string GoalResponseReason(string kind)
         {

@@ -31,7 +31,7 @@ namespace CatCafePreview.Standalone
         }
         public void Validate(CafeSnapshot s)
         {
-            if (s == null || s.version != 1 || s.rules_id != Rules.rules_id || s.seed < 0 || s.day < 1 || s.tick < 0 || s.tick > Rules.opening_ticks
+            if (s == null || s.version != 2 || s.rules_id != Rules.rules_id || s.seed < 0 || s.day < 1 || s.tick < 0 || s.tick > Rules.opening_ticks
                 || !new[] { "preparation", "open", "closed" }.Contains(s.phase)
                 || s.cats == null || s.cats.Count != Rules.cats.Length + (s.intake_request != null && s.intake_request.status == "accepted" ? 1 : 0) + (s.regular_introduction != null && s.regular_introduction.status == "accepted" ? 1 : 0) || s.visits == null || s.exchanges == null || s.queue == null || s.relationships == null || s.history == null
                 || s.cats.Select(c => c.id).Distinct().Count() != s.cats.Count || s.revision < 0
@@ -43,6 +43,7 @@ namespace CatCafePreview.Standalone
             ValidateSpecialists(s);
             ValidateExpansion(s);
             ValidateGoal(s);
+            ValidateClearResults(s);
             ValidateItems(s);
             ValidateHousing(s);
             ValidateIntake(s);

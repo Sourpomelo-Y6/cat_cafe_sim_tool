@@ -58,6 +58,7 @@ namespace CatCafePreview
         public PythonHousingState housing;
         public PythonGoalResult goal_result;
         public PythonClearResults clear_results;
+        public PythonEnding ending;
         public PythonNextGoal next_goal;
         public PythonPlayerInteraction player_interaction;
         public PythonPatronDispatch patron_dispatch, general_dispatch;

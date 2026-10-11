@@ -11,7 +11,7 @@ namespace CatCafePreview
         private LocalCafeBackend backend;
         private PythonCafeState state;
         private bool title = true, busy;
-        private bool showCustomers;
+        private bool showCustomers,showClearResults;
         private string notice = "Pythonサーバー不要の第1段階です。自由営業の基本ルールを確認できます。";
         private Vector2 scroll;
         private Font font;
@@ -32,7 +32,7 @@ namespace CatCafePreview
             {
                 var result = JsonUtility.FromJson<PythonCommandReply>(reply.text);
                 state = backend.View(); notice = string.IsNullOrEmpty(result.error) ? "操作を反映しました。" : result.error;
-                if (string.IsNullOrEmpty(result.error) && (kind == "new_game" || kind == "load_game")) title = false;
+                if (string.IsNullOrEmpty(result.error) && (kind == "new_game" || kind == "load_game")) {title = false;showClearResults=false;scroll=Vector2.zero;}
             });
             busy = false;
         }
@@ -46,7 +46,7 @@ namespace CatCafePreview
             GUILayout.Label(notice); GUI.enabled = !busy;
             if (title)
             {
-                GUILayout.Label("自由営業・段階人気目標 / 初期猫5匹 / 2席。白猫のこだわり客・特別予約に対応。静かな交流・遊び・触れ合い客と接客設備に対応。長毛専門客・VIPにも対応。クリア記録・派遣・終了演出は後続移植。\n新規開始は単独版スロット1へ初期状態を保存します。");
+                GUILayout.Label("自由営業・段階人気目標 / 初期猫5匹 / 2席。白猫のこだわり客・特別予約に対応。静かな交流・遊び・触れ合い客と接客設備に対応。長毛専門客・VIPにも対応。人気のクリア記録・結果表示・継続営業に対応。派遣と他の目標は後続移植。\n新規開始は単独版スロット1へ初期状態を保存します。");
                 if (GUILayout.Button("人気目標で新規開始（移植範囲）")) StartCoroutine(Send("new_game",choice:"popularity"));
                 if (GUILayout.Button("新規開始")) StartCoroutine(Send("new_game"));
                 foreach (var save in backend.ListSaves().saves)
@@ -61,6 +61,22 @@ namespace CatCafePreview
                 GUILayout.Label("資金 " + state.funds + " / 売上 " + state.revenue + " / 支出 " + state.finance.total_expenses + " / 完了接客 " + state.completed_interactions + " / 待機 " + state.waiting_count);
                 GUILayout.Label("人気 " + state.popularity + " / 本日の人気上昇 " + state.popularity_gain + " / 満足 " + state.customer_satisfaction.satisfied + " / 普通 " + state.customer_satisfaction.normal + " / 不満 " + state.customer_satisfaction.dissatisfied);
                 if (state.game_over != null) GUILayout.Label("経営終了：" + state.game_over.reason);
+                var ending=state.ending;
+                if(ending!=null)
+                {
+                    GUILayout.Label(ending.title+"\n"+ending.details+"\n"+ending.reason);
+                    GUI.enabled=!busy && ending.can_continue;
+                    if(GUILayout.Button("継続営業（結果を確認）"))StartCoroutine(Send("continue_goal"));
+                    GUI.enabled=!busy;
+                    if(GUILayout.Button("タイトルへ戻る"))title=true;
+                }
+                GUI.enabled=!busy;
+                showClearResults=GUILayout.Toggle(showClearResults,"クリア記録を見返す");
+                if(showClearResults)
+                {
+                    if(state.clear_results.rows.Length==0)GUILayout.Label("クリア記録はまだありません。");
+                    foreach(var record in state.clear_results.rows)GUILayout.Label(record.label+" クリア！\n"+record.details+"\n"+record.notes);
+                }
                 GUILayout.Label("店舗イベント：" + state.store_event_label);
                 GUILayout.Label("本日の来店予定：" + string.Join(" / ", state.customer_schedule.Select(a => a.customer_id + " @" + a.tick)));
                 showCustomers = GUILayout.Toggle(showCustomers, "顧客の常連度・不満を表示");

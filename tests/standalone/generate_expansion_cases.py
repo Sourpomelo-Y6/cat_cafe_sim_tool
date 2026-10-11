@@ -10,6 +10,7 @@ from cat_cafe_sim.core import cafe_goal
 
 def expected(session):
     s=snapshot(session);c=session.core
+    s['clear_results']=[dict(mode=mode,**row) for mode,row in (c.clear_results or {}).items()]
     if not c.goal.get('tracking_only'):
         s['goal']=[dict(started_day=g['started_day'],status=g['status'],resolved_day=g['resolved_day'] or 0,continued=g['continued']) for g in c.goal.get('history',[])]
         s['goal'].append(dict(started_day=cafe_goal.current_start(c.goal),status=c.goal['status'],resolved_day=c.goal['resolved_day'] or 0,continued=c.goal['continued']))
@@ -55,6 +56,7 @@ def generate():
             core.initialize_regular_introduction(selected['regular_introduction'])
             core.initialize_housing(selected['housing'])
             core.initialize_store_events(selected['store_events'])
+            core.initialize_clear_results()
             rule=copy.deepcopy(exported_rules());rule['starting_funds']=funds;rule['store_events']['probability']=0
             if accelerated: rule['goal_stages']=[dict(days=20,target=110),dict(days=20,target=120),dict(days=25,target=130)]
             if expired: rule['goal_stages']=[dict(days=1,target=650)]
