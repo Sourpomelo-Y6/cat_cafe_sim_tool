@@ -98,6 +98,14 @@ namespace CatCafePreview
                     GUI.enabled = !busy && practice.can_select;
                     if (GUILayout.Button(practice.label)) StartCoroutine(Send(practice.kind, catId: practice.cat_id));
                 }
+                var housing = state.housing;
+                GUILayout.Label("飼育スペース：在籍 " + housing.count + " / 上限 " + housing.capacity + " / 空き " + housing.free + " / 拡張 " + housing.stage + "段階 / 維持費 " + housing.daily_cost + " / 通常運営費 " + housing.operating_cost);
+                if (housing.stage < 2)
+                {
+                    GUILayout.Label("次の上限 " + housing.next_capacity + " / 費用 " + housing.cost + " / 購入後資金 " + housing.funds_after + " / 維持費 " + housing.next_daily_cost + " / " + housing.reason);
+                    GUI.enabled = !busy && housing.can_expand;
+                    if (GUILayout.Button(housing.stage == 0 ? "飼育スペースを拡張" : "飼育スペースを追加拡張")) StartCoroutine(Send(housing.kind));
+                }
                 var intake = state.intake_request;
                 GUILayout.Label("受け入れ依頼：" + intake.name + " / " + (intake.status == "scheduled" ? "未発生" : intake.status == "waiting" ? "回答待ち" : intake.status == "accepted" ? "受け入れ済み" : "見送り済み") + " / 発生日 " + intake.day + " / 費用 " + intake.cost + " / 本日の受け入れ費用 " + state.finance.recruitment_expenses);
                 if (intake.status == "waiting")

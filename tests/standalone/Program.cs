@@ -24,6 +24,24 @@ static class Program
     {
         int ticks = 0, scenarios = 0;
         var rules = Decode<CafeRules>(File.ReadAllText(args[0]));
+        if (args.Length > 8)
+        {
+            using var housingCases=JsonDocument.Parse(File.ReadAllText(args[8]));
+            foreach(var fixture in housingCases.RootElement.GetProperty("cases").EnumerateArray())
+            {
+                var configured=Decode<CafeRules>(Encode(rules));configured.starting_funds=fixture.GetProperty("funds").GetDouble();var housing=new CafeSimulation(configured);
+                foreach(var operation in fixture.GetProperty("operations").EnumerateArray())
+                {
+                    string housingBefore=Encode(housing.State);bool rejected=false;
+                    try{housing.Execute(operation.GetProperty("kind").GetString());}catch(InvalidOperationException){rejected=true;}catch(ArgumentException){rejected=true;}
+                    Assert(rejected==operation.GetProperty("rejected").GetBoolean(),"Python housing rejection mismatch");
+                    if(rejected)Assert(housingBefore==Encode(housing.State),"Rejected housing changed state");
+                    using var current=JsonDocument.Parse(Encode(housing.State));Equal(operation.GetProperty("expected"),current.RootElement,"housing boundary");
+                    housing.Restore(Decode<CafeSnapshot>(Encode(housing.State)));ticks++;
+                }
+                scenarios++;
+            }
+        }
         if (args.Length > 4)
         {
             using var boundary = JsonDocument.Parse(File.ReadAllText(args[4])); var customers = new CafeSimulation(rules);
@@ -193,6 +211,7 @@ static class Program
         Assert(before == Encode(check.State), "Rejected load mutated state");
         File.WriteAllText(Path.Combine(temp, "slot-1.json"), "{broken");
         try { store.Load(1); throw new Exception("Corrupt save accepted"); } catch (JsonException) { }
+        HousingChecks.Run(rules, Assert, Path.Combine(temp, "housing"));
         IntakeChecks.Run(rules, Assert, Path.Combine(temp, "intake"));
         RegularIntroductionChecks.Run(rules, Assert, Path.Combine(temp, "regular"));
         var precision = Decode<CafeSnapshot>(Encode(check.State)); precision.cats[0].stamina = 21.599999999999998;

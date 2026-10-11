@@ -12,7 +12,7 @@ static class TrustChecks
         var e = sim.State.trust_events.Last(r => r.customer_id == row.customer_id);
         if (sim.CustomerTrustWaiting)
         {
-            foreach (string kind in new[] { "start_business", "set_shifts", "day_off", "next_day", "resolve_intake", "resolve_regular_introduction", "use_item" })
+            foreach (string kind in new[] { "start_business", "set_shifts", "day_off", "next_day", "resolve_intake", "resolve_regular_introduction", "use_item", "purchase_housing", "upgrade_housing" })
             {
                 string before = Encode(sim.State); bool failed = false;
                 try { sim.Execute(kind, choice: "decline"); } catch (InvalidOperationException) { failed = true; } catch (ArgumentException) { failed = true; }

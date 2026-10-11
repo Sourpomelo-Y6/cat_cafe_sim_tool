@@ -28,6 +28,8 @@ def exported_rules():
     result['discontent'] = read('cafe_customer_discontent')
     result['trust'] = read('cafe_customer_trust')
     result['growth'] = read('cafe_growth')
+    result['housing'] = read('cafe_housing')
+    result['housing_upgrade'] = read('cafe_housing_upgrade')
     result['popular_customer_count'] = new.get('popular_customer_count', weekdays.get('popular_customer_count', 0))
     result['second_popular_customer_count'] = new.get('second_popular_customer_count', weekdays.get('second_popular_customer_count', 0))
     for row in new['cats']:

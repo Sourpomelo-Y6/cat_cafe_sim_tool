@@ -27,6 +27,7 @@ namespace CatCafePreview.Standalone
         public DiscontentRules discontent;
         public TrustRules trust;
         public GrowthRules growth;
+        public HousingRules housing, housing_upgrade;
         public ExchangeType[] types;
         public IntakeRules intake, regular_introduction;
         public string rules_id;
@@ -107,7 +108,7 @@ namespace CatCafePreview.Standalone
     {
         public int day, arrivals, completed;
         public double opening_funds, revenue, expenses, closing_funds;
-        public double recruitment_expenses;
+        public double recruitment_expenses, housing_expenses, housing_cost;
         public double popularity_gain;
         public int satisfied, normal, dissatisfied;
         public List<string> resting_cats = new List<string>();
@@ -119,7 +120,7 @@ namespace CatCafePreview.Standalone
         public string rules_id, instance_id, phase = "preparation", game_over;
         public double funds, opening_funds, popularity, revenue, expenses;
         public int completed;
-        public double recruitment_expenses;
+        public double recruitment_expenses, housing_expenses, housing_cost;
         public double popularity_gain;
         public List<CafeCat> cats = new List<CafeCat>();
         public List<CafeVisit> visits = new List<CafeVisit>();
@@ -136,6 +137,7 @@ namespace CatCafePreview.Standalone
         public List<string> resting_cats = new List<string>();
         public List<CafeTrustCustomer> trust_customers = new List<CafeTrustCustomer>();
         public List<CafeTrustEvent> trust_events = new List<CafeTrustEvent>();
+        public CafeHousing housing = new CafeHousing();
         public CafeIntake intake_request = new CafeIntake();
         public CafeRegularIntroduction regular_introduction = new CafeRegularIntroduction();
         // Unity JsonUtility materializes JSON null strings as empty strings.

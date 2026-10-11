@@ -402,6 +402,17 @@
     "second_type_mastery_threshold": 30,
     "second_mastery_threshold": 30
   },
+  "housing": {
+    "initial_capacity": 6,
+    "capacity_bonus": 3,
+    "cost": 500,
+    "daily_cost": 20
+  },
+  "housing_upgrade": {
+    "capacity_bonus": 3,
+    "cost": 1000,
+    "daily_cost": 40
+  },
   "popular_customer_count": 4,
   "second_popular_customer_count": 2,
   "intake": {
@@ -474,5 +485,5 @@
       "rest_fatigue": 1.5
     }
   },
-  "rules_id": "5e59f480425356217944ffc3fd0054105aec6af1dcacf189f17703ff5ce6a6f2"
+  "rules_id": "fbc2ba5dbb344a9ed3845804284f1825c009a159c0bf98e0da2a7c350fafa8d3"
 }

@@ -17,7 +17,7 @@ namespace CatCafePreview.Standalone
         {
             if (State.cats.Any(c => c.id == rule.cat.id)) throw new InvalidOperationException("この猫はすでに加入しています。");
             if (State.funds <= rule.cost) throw new InvalidOperationException("受け入れ後に資金が残る必要があります。");
-            if (State.cats.Count >= Rules.intake.capacity) throw new InvalidOperationException("飼育スペースが満員です。");
+            if (State.cats.Count >= HousingCapacity(State, State.day)) throw new InvalidOperationException("飼育スペースが満員です。");
             State.cats.Add(new CafeCat { id = rule.cat.id, stamina = Rules.max_stamina, working = false });
             EnsureGrowthCat(rule.cat.id);
             State.funds -= rule.cost; State.expenses += rule.cost; State.recruitment_expenses += rule.cost;
@@ -28,7 +28,7 @@ namespace CatCafePreview.Standalone
             if (State.intake_request.status == "scheduled" && State.day == Rules.intake.day && State.game_over == null)
             { State.intake_request.status = "waiting"; State.intake_request.presented_day = State.day; }
         }
-        public string IntakeAcceptReason => State.funds <= Rules.intake.cost ? "受け入れ後に資金が残る必要があります。" : State.cats.Count >= Rules.intake.capacity ? "飼育スペースが満員です。" : "";
+        public string IntakeAcceptReason => State.funds <= Rules.intake.cost ? "受け入れ後に資金が残る必要があります。" : State.cats.Count >= HousingCapacity(State, State.day) ? "飼育スペースが満員です。" : "";
         private void ResolveIntake(string choice)
         {
             if (choice != "accept" && choice != "decline") throw new ArgumentException("迎えるか見送るかを選んでください。");
@@ -52,7 +52,7 @@ namespace CatCafePreview.Standalone
         {
             var r = s.intake_request; var rule = Rules.intake;
             if (r == null || rule == null || rule.cat == null || Rules.cats.Any(c => c.id == rule.cat.id)
-                || s.cats.Count > rule.capacity || !new[] { "scheduled", "waiting", "accepted", "declined" }.Contains(r.status)) throw new ArgumentException("Invalid intake state");
+                || s.cats.Count > HousingCapacity(s, s.day) || !new[] { "scheduled", "waiting", "accepted", "declined" }.Contains(r.status)) throw new ArgumentException("Invalid intake state");
             bool answered = r.status == "accepted" || r.status == "declined";
             if (r.status == "scheduled" ? s.day >= rule.day || r.presented_day != 0 || r.resolved_day != 0
                 : s.day < rule.day || r.presented_day != rule.day || (answered ? r.resolved_day != rule.day : r.resolved_day != 0 || s.day != rule.day || s.phase != "preparation")) throw new ArgumentException("Invalid intake dates");

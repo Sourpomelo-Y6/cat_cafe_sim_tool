@@ -75,6 +75,12 @@ def snapshot(session):
     if c.customer_trust:
         extra['trust_customers'] = [dict(customer_id=key, **{k:(value or 0) if k=='departed_day' else value for k,value in row.items()}) for key,row in c.customer_trust['customers'].items()]
         extra['trust_events'] = [dict(row, resolved_day=row['resolved_day'] or 0) for row in c.customer_trust['events'].values()]
+    if c.housing:
+        extra['housing'] = dict(purchased_day=(c.housing['purchase'] or {}).get('day',0), upgraded_day=c.housing.get('upgrade',{}).get('day',0))
+        extra['housing_expenses'] = summary.get('housing_expenses',0)
+        extra['history'] = [dict(day=row['day'], housing_expenses=row['summary'].get('housing_expenses',0), housing_cost=next(charge['housing_cost'] for charge in c.operating_cost['charges'] if charge['day']==row['day'])) for row in c.day_results]
+        from cat_cafe_sim.core.cafe_housing import daily_cost
+        extra['housing_cost'] = daily_cost(c) if c.closed else 0
     if c.growth: extra['growth']=[dict(cat_id=id,**growth_row(row)) for id,row in c.growth['cats'].items()]
     return dict(**extra, seed=c.seed, day=c.day, tick=c.tick, phase='closed' if c.closed else 'preparation' if c.can_set_shifts else 'open',
                 funds=c.funds, opening_funds=summary['opening_funds'], revenue=summary['revenue'], expenses=summary['total_expenses'],
@@ -118,6 +124,7 @@ def generate():
             core.initialize_customer_trust(selected['customer_trust'])
             core.initialize_intake_request(selected['intake_request'])
             core.initialize_regular_introduction(selected['regular_introduction'])
+            core.initialize_housing(selected['housing'])
             core.initialize_store_events(selected['store_events'])
             # Only modules implemented in this first slice are enabled on BOTH sides.
             scenario = dict(seed=seed, operations=[]); data['scenarios'].append(scenario)
@@ -131,6 +138,7 @@ def generate():
                 elif kind == 'resolve_regular_introduction': session.resolve_regular_introduction(choice)
                 elif kind == 'resolve_intake': session.resolve_intake_request(choice)
                 elif kind == 'use_item': core.use_item(source, cat_id)
+                elif kind in ('purchase_housing','upgrade_housing'): getattr(core,kind)()
                 elif kind == 'set_shifts': session.set_shifts(working)
                 elif kind == 'next_day': session.next_day()
                 elif kind == 'day_off': session.day_off()
@@ -153,8 +161,10 @@ def generate():
                     record('resolve_store_event', choice=choice)
                     if core.management['game_over']: break
                     if choice == 'close': continue
+                if day >= 2 and not core.housing['purchase'] and core.funds > core.housing['rules']['cost']: record('purchase_housing')
+                if day >= 10 and core.housing['purchase'] and 'upgrade' not in core.housing and core.funds > 1000: record('upgrade_housing')
                 if core.intake_request['status'] == 'waiting': record('resolve_intake', choice='decline' if seed == 1 else 'accept')
-                if core.regular_introduction['status'] == 'waiting': record('resolve_regular_introduction', choice='accept' if seed == 1 else 'decline')
+                if core.regular_introduction['status'] == 'waiting': record('resolve_regular_introduction', choice='accept')
                 from cat_cafe_sim.core.cafe_items import inventory
                 supplies = inventory(core)
                 stressed = next((key for key in core.cats if core.activity(key)=='cafe' and core.management['stress'][key]>0), None)

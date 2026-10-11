@@ -25,10 +25,11 @@ def compare(reference):
             report = dict(seed=seed, equal_operations=0, checked_through_day=1, first_difference=None)
             for operation in scenario['operations']:
                 expected = operation['expected']
-                if expected['day'] > 14: break
+                if expected['day'] > 28: break
                 kind = operation['kind']
                 try:
                     if kind == 'set_shifts': full.set_shifts(operation['working'])
+                    elif kind in ('purchase_housing','upgrade_housing'): getattr(full.core,kind)()
                     elif kind == 'next_day': full.next_day()
                     elif kind == 'day_off' or kind == 'resolve_store_event' and operation['choice']=='close': full.day_off()
                     elif kind == 'resolve_store_event': full.resolve_store_event(operation['choice'])
@@ -48,7 +49,7 @@ def compare(reference):
                     break
                 report['equal_operations'] += 1; report['checked_through_day'] = full.core.day
             rows.append(report)
-    return dict(note='Compare identical commands through day 14 or the first difference. Fixed intake requests and regular introductions are included. Customer trust is included. Growth is included. Other acquisition events remain outside the migration.', rows=rows)
+    return dict(note='Compare identical commands through day 28 or the first difference. Fixed intake requests and regular introductions are included. Customer trust is included. Growth and housing are included. Other acquisition events remain outside the migration.', rows=rows)
 
 
 if __name__ == '__main__':
