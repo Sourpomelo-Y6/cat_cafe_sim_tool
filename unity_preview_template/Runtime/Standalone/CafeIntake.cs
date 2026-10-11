@@ -12,16 +12,17 @@ namespace CatCafePreview.Standalone
             if (s.intake_request != null && s.intake_request.status == "accepted") cats = cats.Concat(new[] { Rules.intake.cat });
             if (s.regular_introduction != null && s.regular_introduction.status == "accepted") cats = cats.Concat(new[] { Rules.regular_introduction.cat });
             if (s.visiting_cat != null && s.visiting_cat.status == "accepted") cats = cats.Concat(new[] { Rules.visiting_cat.cat });
+            cats = cats.Concat(ShopDefinitions(s));
             return cats.Concat(DispatchIntroductions(s).Where(e=>e.introduction.status=="accepted").Select(e=>DispatchCandidate(e)));
         }
-        private void JoinCat(IntakeRules rule)
+        private void JoinCat(IntakeRules rule, bool shop = false)
         {
             if (State.cats.Any(c => c.id == rule.cat.id)) throw new InvalidOperationException("この猫はすでに加入しています。");
             if (State.funds <= rule.cost) throw new InvalidOperationException("受け入れ後に資金が残る必要があります。");
             if (State.cats.Count >= HousingCapacity(State, State.day)) throw new InvalidOperationException("飼育スペースが満員です。");
             State.cats.Add(new CafeCat { id = rule.cat.id, stamina = Rules.max_stamina, working = false });
             EnsureGrowthCat(rule.cat.id);
-            State.funds -= rule.cost; State.expenses += rule.cost; State.recruitment_expenses += rule.cost;
+            State.funds -= rule.cost; State.expenses += rule.cost; if(shop) State.pet_shop_expenses += rule.cost; else State.recruitment_expenses += rule.cost;
         }
         public CatDefinition Definition(string id) => Definitions(State).First(c => c.id == id);
         private void PresentIntake()

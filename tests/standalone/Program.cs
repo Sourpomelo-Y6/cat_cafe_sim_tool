@@ -62,6 +62,25 @@ static class Program
                     }
                     using var current=JsonDocument.Parse(Encode(dispatch.State));Equal(op.GetProperty("expected"),current.RootElement,"dispatch boundary");dispatch.Restore(Decode<CafeSnapshot>(Encode(dispatch.State)));ticks++;
                 }
+                if(fixture.GetProperty("operations").EnumerateArray().Any(o=>o.GetProperty("expected").TryGetProperty("shop_purchases",out var purchases)))
+                {
+                    string before=Encode(dispatch.State);
+                    for(int variant=0;variant<8;variant++)
+                    {
+                        var bad=Decode<CafeSnapshot>(before);
+                        if(variant==0)bad.shop_purchases=null;
+                        else if(variant==1)bad.shop_purchases.Add(null);
+                        else if(variant==2)bad.shop_purchases.Add(new CafeShopPurchase {cat_id="unknown",day=bad.day});
+                        else if(variant==3)bad.shop_purchases.Add(new CafeShopPurchase {cat_id="shop-1",day=bad.day+1});
+                        else if(variant==4)bad.pet_shop_expenses++;
+                        else if(variant==5)bad.shop_purchases.Add(new CafeShopPurchase {cat_id="shop-1",day=0});
+                        else if(variant==6 && bad.shop_purchases.Count>0)bad.shop_purchases.Add(new CafeShopPurchase {cat_id=bad.shop_purchases[0].cat_id,day=bad.shop_purchases[0].day});
+                        else if(variant==7 && bad.shop_purchases.Count>0)bad.shop_purchases.Clear();
+                        else bad.shop_purchases.Add(new CafeShopPurchase {cat_id="shop-2",day=bad.day});
+                        bool rejected=false;try{dispatch.Restore(bad);}catch(ArgumentException){rejected=true;}
+                        Assert(rejected && before==Encode(dispatch.State),"Corrupt shop save accepted or changed state");
+                    }
+                }
                 if(fixture.GetProperty("operations").EnumerateArray().Any(o=>o.GetProperty("expected").TryGetProperty("visiting_cat",out var visiting)))
                 {
                     string before=Encode(dispatch.State);
@@ -75,7 +94,7 @@ static class Program
                         else if(variant==4)v.actions.Add(new CafeVisitingAction {day=bad.day+1,choice="interact"});
                         else if(variant==5)v.actions.Add(new CafeVisitingAction {day=bad.day,choice="accept"});
                         else if(variant==6)bad.visiting_cat=null;
-                        else v.status="untriggered";
+                        else v.status=v.status=="untriggered"?"ready":"untriggered";
                         bool rejected=false;try{dispatch.Restore(bad);}catch(ArgumentException){rejected=true;}
                         Assert(rejected && before==Encode(dispatch.State),"Corrupt visiting save accepted or changed state");
                     }

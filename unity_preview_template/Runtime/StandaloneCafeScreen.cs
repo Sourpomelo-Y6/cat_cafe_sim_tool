@@ -60,7 +60,7 @@ namespace CatCafePreview
             else
             {
                 GUILayout.Label(state.day + "日目 / " + (state.closed ? "閉店" : state.can_set_shifts ? "営業準備" : "営業中") + " / 時刻 " + state.tick + "/" + state.opening_ticks);
-                GUILayout.Label("資金 " + state.funds + " / 売上 " + state.revenue + " / 支出 " + state.finance.total_expenses + " / 完了接客 " + state.completed_interactions + " / 待機 " + state.waiting_count);
+                GUILayout.Label("資金 " + state.funds + " / 売上 " + state.revenue + " / 支出 " + state.finance.total_expenses + " / 猫購入費 " + state.finance.pet_shop_expenses + " / 完了接客 " + state.completed_interactions + " / 待機 " + state.waiting_count);
                 GUILayout.Label("人気 " + state.popularity + " / 本日の人気上昇 " + state.popularity_gain + " / 満足 " + state.customer_satisfaction.satisfied + " / 普通 " + state.customer_satisfaction.normal + " / 不満 " + state.customer_satisfaction.dissatisfied);
                 if (state.game_over != null) GUILayout.Label("経営終了：" + state.game_over.reason);
                 var ending=state.ending;
@@ -263,6 +263,16 @@ namespace CatCafePreview
                         GUI.enabled=!busy && option.can_select;
                         if(GUILayout.Button(option.label+" / 帰還報酬 "+option.return_reward+" / 疲労 "+option.fatigue+" / ストレス "+option.stress))StartCoroutine(Send("resolve_dispatch_choice",eventId:encounter.event_id,choice:option.choice));
                     }
+                }
+                if(state.pet_shop!=null)
+                {
+                    GUILayout.Label("ペットショップ / "+state.pet_shop.housing+"\n"+state.pet_shop.notes);
+                    foreach(var row in state.pet_shop.rows)
+                    {
+                        GUILayout.Label(row.details+"\n"+row.reason);GUI.enabled=!busy && row.can_purchase;
+                        if(GUILayout.Button(row.accepted?row.name+"（購入済み）":row.name+"を購入する（"+row.cost+"）"))StartCoroutine(Send("purchase_cat",catId:row.cat_id));
+                    }
+                    GUI.enabled=!busy;
                 }
                 var visiting=state.visiting_cat;
                 if(visiting!=null)

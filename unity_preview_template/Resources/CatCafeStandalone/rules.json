@@ -1151,6 +1151,119 @@
       "return_stress": 0
     }
   },
+  "pet_shop": [
+    {
+      "cost": 400,
+      "personality": "中立",
+      "trait": "のんびり屋",
+      "features_label": "白猫・長毛",
+      "cat": {
+        "trait_id": "relaxed",
+        "id": "shop-1",
+        "name": "チロ",
+        "features": [
+          "white",
+          "long_hair"
+        ],
+        "type_preferences": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "intensity_preferences": [
+          1,
+          1,
+          1
+        ],
+        "boredom_decay": 0.15,
+        "switch_affinity": 0,
+        "service_stress": 1,
+        "service_fatigue": 1.25,
+        "rest_fatigue": 1.5,
+        "dispatch_reward": 1,
+        "return_stress": 0
+      }
+    },
+    {
+      "cost": 450,
+      "personality": "穏やかな甘えん坊",
+      "trait": "外出好き",
+      "features_label": "茶トラ・短毛",
+      "cat": {
+        "trait_id": "outgoing",
+        "id": "shop-2",
+        "name": "レオ",
+        "features": [
+          "orange_tabby",
+          "short_hair"
+        ],
+        "type_preferences": [
+          0.8,
+          0.6,
+          1.2,
+          0.5,
+          1.8,
+          1.5,
+          1.2,
+          1.3
+        ],
+        "intensity_preferences": [
+          1.3,
+          1,
+          0.4
+        ],
+        "boredom_decay": 0.08,
+        "switch_affinity": -0.2,
+        "service_stress": 1,
+        "service_fatigue": 1,
+        "rest_fatigue": 1,
+        "dispatch_reward": 1.25,
+        "return_stress": 10
+      }
+    },
+    {
+      "cost": 500,
+      "personality": "遊び好きで繊細な猫",
+      "trait": "接客好き",
+      "features_label": "白黒・短毛",
+      "cat": {
+        "trait_id": "hospitality",
+        "id": "shop-3",
+        "name": "ナナ",
+        "features": [
+          "black_white",
+          "short_hair"
+        ],
+        "type_preferences": [
+          1.8,
+          1.6,
+          1.4,
+          1.2,
+          0.9,
+          0.8,
+          1,
+          0.8
+        ],
+        "intensity_preferences": [
+          1.3,
+          1,
+          0.2
+        ],
+        "boredom_decay": 0.15,
+        "switch_affinity": 0,
+        "service_stress": 0.5,
+        "service_fatigue": 1.25,
+        "rest_fatigue": 1,
+        "dispatch_reward": 1,
+        "return_stress": 0
+      }
+    }
+  ],
   "dispatch_introductions": [
     {
       "destination": "shopping_street_event",
@@ -1233,5 +1346,5 @@
       }
     }
   ],
-  "rules_id": "b9f0c5c961a7fe5131f8093821a262c7891d5d61e0a14f39408608de0ad5a723"
+  "rules_id": "e5869d0e24bb175e65a5261c31bf0c4c74f440fbae0626fa95a8f52aff74f36a"
 }

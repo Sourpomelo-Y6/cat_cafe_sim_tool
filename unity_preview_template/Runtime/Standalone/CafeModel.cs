@@ -35,7 +35,7 @@ namespace CatCafePreview.Standalone
         public PatronRules patron;
         public double[] expansion_costs; public GoalStageRule[] goal_stages;
         public ExchangeType[] types;
-        public IntakeRules intake, regular_introduction; public VisitingCatRules visiting_cat;
+        public IntakeRules intake, regular_introduction; public VisitingCatRules visiting_cat; public IntakeRules[] pet_shop;
         public DispatchRules dispatch;public DispatchTroubleRules dispatch_trouble; public DispatchIntroductionRule[] dispatch_introductions;
         public DispatchRules[] dispatch_destinations;public DispatchUnlockRule[] dispatch_unlocks;public DispatchEncounterRule[] dispatch_encounters;
         public string rules_id;
@@ -123,7 +123,7 @@ namespace CatCafePreview.Standalone
         public int day, arrivals, completed;
         public int seat_count = 2;
         public double opening_funds, revenue, expenses, closing_funds;
-        public double recruitment_expenses, housing_expenses, housing_cost, item_expenses, item_sales_income, expansion_expenses, goal_popularity, equipment_expenses;
+        public double pet_shop_expenses, recruitment_expenses, housing_expenses, housing_cost, item_expenses, item_sales_income, expansion_expenses, goal_popularity, equipment_expenses;
         public double popularity_gain,dispatch_income,dispatch_trouble_expenses;
         public int satisfied, normal, dissatisfied;
         public List<string> resting_cats = new List<string>();
@@ -136,7 +136,7 @@ namespace CatCafePreview.Standalone
         public double funds, opening_funds, popularity, revenue, expenses;
         public int completed;
         public int seat_count = 2;
-        public double recruitment_expenses, housing_expenses, housing_cost, item_expenses, item_sales_income, expansion_expenses, goal_popularity, equipment_expenses;
+        public double pet_shop_expenses, recruitment_expenses, housing_expenses, housing_cost, item_expenses, item_sales_income, expansion_expenses, goal_popularity, equipment_expenses;
         public double popularity_gain,dispatch_income,dispatch_trouble_expenses;
         public List<CafeCat> cats = new List<CafeCat>();
         public List<CafeVisit> visits = new List<CafeVisit>();
@@ -173,6 +173,7 @@ namespace CatCafePreview.Standalone
         public CafeIntake intake_request = new CafeIntake();
         public CafeRegularIntroduction regular_introduction = new CafeRegularIntroduction();
         public CafeVisitingCat visiting_cat = new CafeVisitingCat();
+        public List<CafeShopPurchase> shop_purchases = new List<CafeShopPurchase>();
         // Unity JsonUtility materializes JSON null strings as empty strings.
         public void NormalizeJsonStrings()
         {

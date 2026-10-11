@@ -12,7 +12,7 @@ namespace CatCafePreview.Standalone
         public bool DispatchIntroductionWaiting=>DispatchIntroductions(State).Any(e=>e.introduction.status=="waiting");
         public DispatchIntroductionRule DispatchIntroductionRule(string destination)=>Rules.dispatch_introductions?.SingleOrDefault(r=>r.destination==destination);
         private int DispatchJoinedCount(CafeSnapshot s,int day)=>DispatchIntroductions(s).Count(e=>e.introduction.status=="accepted" && e.introduction.resolved_day<=day);
-        private int JoinedDay(CafeSnapshot s,string id)=>Rules.cats.Any(c=>c.id==id)?1:id==Rules.intake.cat.id?s.intake_request.resolved_day:id==Rules.regular_introduction.cat.id?s.regular_introduction.resolved_day:id==Rules.visiting_cat?.cat.id?s.visiting_cat.accepted_day:DispatchIntroductions(s).Single(e=>e.introduction.cat_id==id && e.introduction.status=="accepted").introduction.resolved_day;
+        private int JoinedDay(CafeSnapshot s,string id)=>Rules.cats.Any(c=>c.id==id)?1:id==Rules.intake.cat.id?s.intake_request.resolved_day:id==Rules.regular_introduction.cat.id?s.regular_introduction.resolved_day:id==Rules.visiting_cat?.cat.id?s.visiting_cat.accepted_day:ShopRules.Any(r=>r.cat.id==id)?s.shop_purchases.Single(p=>p.cat_id==id).day:DispatchIntroductions(s).Single(e=>e.introduction.cat_id==id && e.introduction.status=="accepted").introduction.resolved_day;
         private CatDefinition DispatchCandidate(CafeDispatch e)
         {
             var c=DispatchIntroductionRule(e.destination).candidate.cat;var v=e.introduction;
@@ -21,7 +21,7 @@ namespace CatCafePreview.Standalone
         private void AttachDispatchIntroduction(CafeDispatch e)
         {
             var rule=DispatchIntroductionRule(e.destination);if(rule==null || e.destination=="cat_photo_studio" && DispatchIntroductions(State).Any(x=>x.destination==e.destination))return;
-            var used=new HashSet<string>(State.cats.Select(c=>c.id).Concat(DispatchIntroductions(State).Select(x=>x.introduction.cat_id)).Concat(new[]{Rules.intake.cat.id,Rules.regular_introduction.cat.id,Rules.visiting_cat?.cat.id}));int index=1;while(used.Contains("dispatch-rescue-"+index))index++;
+            var used=new HashSet<string>(State.cats.Select(c=>c.id).Concat(DispatchIntroductions(State).Select(x=>x.introduction.cat_id)).Concat(new[]{Rules.intake.cat.id,Rules.regular_introduction.cat.id,Rules.visiting_cat?.cat.id}).Concat(ShopRules.Select(r=>r.cat.id)));int index=1;while(used.Contains("dispatch-rescue-"+index))index++;
             e.introduction=new CafeDispatchIntroduction {cat_id="dispatch-rescue-"+index,name=rule.candidate.cat.name+"（派遣紹介"+(DispatchIntroductions(State).Count()+1)+"）",cost=rule.candidate.cost};
         }
         private void PresentDispatchIntroductions()
@@ -58,7 +58,7 @@ namespace CatCafePreview.Standalone
         private void ValidateDispatchIntroductions(CafeSnapshot s)
         {
             if(s.dispatches==null)throw new ArgumentException("Invalid dispatch introductions");
-            var used=new HashSet<string>(Rules.cats.Select(c=>c.id).Concat(new[]{Rules.intake.cat.id,Rules.regular_introduction.cat.id,Rules.visiting_cat?.cat.id}));int ordinal=0;bool photoSeen=false;
+            var used=new HashSet<string>(Rules.cats.Select(c=>c.id).Concat(new[]{Rules.intake.cat.id,Rules.regular_introduction.cat.id,Rules.visiting_cat?.cat.id}).Concat(ShopRules.Select(r=>r.cat.id)));int ordinal=0;bool photoSeen=false;
             foreach(var e in s.dispatches)
             {
                 if(e==null)throw new ArgumentException("Invalid dispatch event");

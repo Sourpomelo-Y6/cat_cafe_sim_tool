@@ -130,7 +130,7 @@ namespace CatCafePreview
     [Serializable] public class PythonFinanceState
     {
         public float dispatch_trouble_expenses;
-        public float opening_funds, total_income, total_expenses, net_cash_flow, closing_funds, recruitment_expenses, housing_expenses, housing_cost, item_expenses, item_sales_income, seat_equipment_expenses,dispatch_income;
+        public float opening_funds, total_income, total_expenses, net_cash_flow, closing_funds, pet_shop_expenses, recruitment_expenses, housing_expenses, housing_cost, item_expenses, item_sales_income, seat_equipment_expenses,dispatch_income;
     }
     [Serializable] public class PythonShiftCommand
     {

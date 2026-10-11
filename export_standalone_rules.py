@@ -110,6 +110,19 @@ def exported_rules():
                  boredom_decay=p['boredom_decay'], switch_affinity=p['switch_affinity'],
                  **{k: trait.get(k, 1) for k in ('service_stress', 'service_fatigue', 'rest_fatigue')},
                  dispatch_reward=trait.get('dispatch_reward',1), return_stress=trait.get('return_stress',0)))
+    result['pet_shop'] = []
+    for index, row in enumerate(read('cafe_pet_shop'), 1):
+        p = presets[row['preset']]
+        trait = traits[row['trait']]
+        result['pet_shop'].append(dict(
+            cost=row['cost'], personality=row['preset'], trait=trait['name'],
+            features_label='・'.join(features[key][0] for key in row['features']),
+            cat=dict(trait_id=row['trait'], id=f'shop-{index}', name=row['name'], features=row['features'],
+                     type_preferences=[p['type_preferences'][t['id']] for t in relationship['types']],
+                     intensity_preferences=[p['intensity_preferences'][k] for k in ('gentle', 'standard', 'active')],
+                     boredom_decay=p['boredom_decay'], switch_affinity=p['switch_affinity'],
+                     **{k: trait.get(k, 1) for k in ('service_stress', 'service_fatigue', 'rest_fatigue')},
+                     dispatch_reward=trait.get('dispatch_reward',1), return_stress=trait.get('return_stress',0))))
     result['dispatch_introductions'] = []
     for filename in ('cafe_dispatch_introduction', 'cafe_photo_introduction'):
         row = read(filename); p = presets[row['preset']]; trait = traits[row['trait']]
