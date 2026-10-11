@@ -179,3 +179,5 @@ Unity単独版に[最初の通常派遣往復](../Docs/UnityStandaloneDispatch.m
 
 
 Unity単独版の[通常派遣を複数の派遣先へ拡張](../Docs/UnityStandaloneDispatchDestinations.md)しました。派遣先ごとの特性・日数・解放条件、二択イベント、用品と保存再開に対応します。猫紹介・家出を伴う派遣先は未対応理由を表示して出発を止めます。
+
+Unity単独版に[派遣帰還後の猫紹介](../Docs/UnityStandaloneDispatchIntroductions.md)を追加しました。商店街・撮影スタジオの紹介から加入／見送り、費用・飼育枠、保存再開に対応します。商店街は派遣ごと、撮影スタジオは初回だけ紹介し、元の条件・候補・バランスを維持しています。山あいの宿と有力者派遣は後続です。

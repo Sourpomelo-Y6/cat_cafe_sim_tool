@@ -42,7 +42,7 @@ namespace CatCafePreview
                 {Good(b,"load_game",slot:slot);var e=b.Simulation.State.dispatches.Last();Check(e.destination==destination && (slot==2?e.encounter.status=="scheduled":slot==3?e.encounter.status=="waiting":slot==4?e.encounter.status=="resolved" && e.status=="travelling":slot==5?e.status=="waiting":e.status=="resolved"),"Cross-process checkpoint differs");}
             }
             Good(b,"new_game",destination=="small_art_museum"?"popularity":"free");Reject(b,"dispatch_general",destination,cat);
-            foreach(string unsupported in new[]{"shopping_street_event","cat_photo_studio","mountain_lodge_visit"})Reject(b,"dispatch_general",unsupported,cat);
+            foreach(string unsupported in new[]{"mountain_lodge_visit"})Reject(b,"dispatch_general",unsupported,cat);
             for(int day=0;day<3;day++){string id="dispatch-"+b.Simulation.State.day+"-cat-sora";Good(b,"dispatch_general","neighborhood_visit","cat-sora");Good(b,"day_off");Good(b,"receive_general",id,"cat-sora");Events(b);}
             if(destination=="small_art_museum")for(int stage=0;stage<2;stage++){Good(b,"set_shifts");Good(b,"start_business");while(b.Simulation.State.phase!="closed"){Events(b);Good(b,"advance_business");}Events(b);Good(b,"advance_goal");Good(b,"next_day");Events(b);}
             Reject(b,"dispatch_general",destination,"cat-sora");double max=r.max_fatigue;var catState=b.Simulation.State.cats.Single(c=>c.id==cat);double beforeFatigue=catState.fatigue;catState.fatigue=max;Check(b.Simulation.DispatchReason(cat,destination)=="","Fatigue equality rejected");catState.fatigue=max+.001;Check(b.Simulation.DispatchReason(cat,destination)!="","Excess fatigue allowed");catState.fatigue=beforeFatigue;

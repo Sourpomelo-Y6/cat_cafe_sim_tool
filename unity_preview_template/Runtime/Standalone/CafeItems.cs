@@ -24,7 +24,7 @@ namespace CatCafePreview.Standalone
             if(CustomerTrustWaiting)return "顧客の信頼回復イベントに回答してください。";
             if(GrowthWaiting)return "猫の成長・習熟を選択してください。";
             if(StoreEventWaiting)return "店舗イベントに回答してください。";
-            if(IntakeWaiting || RegularIntroductionWaiting)return "加入イベントに回答してください。";
+            if(IntakeWaiting || RegularIntroductionWaiting || DispatchIntroductionWaiting)return "加入イベントに回答してください。";
             return State.phase=="preparation" ? "" : "用品は営業準備中に操作してください。";
         }
         public string ItemPurchaseReason(string id)
@@ -63,7 +63,7 @@ namespace CatCafePreview.Standalone
             foreach(var u in s.item_uses)
             {
                 var r=u==null?null:rewards.SingleOrDefault(r=>r.source==u.source);var cat=u==null?null:s.cats.SingleOrDefault(c=>c.id==u.cat_id);
-                int joined=cat==null?int.MaxValue:Rules.cats.Any(c=>c.id==cat.id)?1:cat.id==Rules.intake.cat.id?s.intake_request.resolved_day:s.regular_introduction.resolved_day;
+                int joined=cat==null?int.MaxValue:JoinedDay(s,cat.id);
                 if(r==null || cat==null || !consumed.Add(u.source) || u.day<Math.Max(previous,Math.Max(r.day,joined)) || u.day>s.day || !Range(u.before,0,100) || !Range(u.before_fatigue,0,Rules.max_fatigue)
                     || u.before==0 && u.before_fatigue==0 || r.item.stress_relief==0 && u.before!=0 || r.item.fatigue_relief==0 && u.before_fatigue!=0
                     || u.after!=Math.Max(0,u.before-r.item.stress_relief) || u.after_fatigue!=Math.Max(0,u.before_fatigue-r.item.fatigue_relief))throw new ArgumentException("Invalid item use");previous=u.day;

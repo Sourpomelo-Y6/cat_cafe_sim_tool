@@ -24,7 +24,7 @@ namespace CatCafePreview.Standalone
             var g=State.goal.Last();
             if(kind=="continue_goal")return GoalWaiting?"":"確認待ちの目標結果はありません。";
             if(g.status!="cleared" || State.goal.Count>=Rules.goal_stages.Length)return "次に挑戦できる人気目標はありません。";
-            if(RegularIntroductionWaiting || State.phase=="open")return "次の目標は他の結果を確認し、準備中または閉店後に選んでください。";
+            if(RegularIntroductionWaiting || DispatchIntroductionWaiting || State.phase=="open")return "次の目標は他の結果を確認し、準備中または閉店後に選んでください。";
             return "";
         }
         private void RespondGoal(string kind)

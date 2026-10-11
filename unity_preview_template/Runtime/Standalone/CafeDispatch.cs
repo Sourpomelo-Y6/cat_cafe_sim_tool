@@ -9,7 +9,7 @@ namespace CatCafePreview.Standalone
         public string id,cat_id,destination,status="travelling",choice;
         public int started_day,remaining,occurred_day,resolved_day,growth_boundary;
         public bool feature_matched,specialization_matched;
-        public double growth_multiplier,reward_bonus,reward,return_stress;public CafeDispatchEncounter encounter;
+        public double growth_multiplier,reward_bonus,reward,return_stress;public CafeDispatchEncounter encounter;public CafeDispatchIntroduction introduction;
     }
     public sealed partial class CafeSimulation
     {
@@ -47,7 +47,7 @@ namespace CatCafePreview.Standalone
             string reason=DispatchReason(id,destination);if(reason!="")throw new InvalidOperationException(reason);
             var e=DispatchTerms(State,id,State.day,destination:destination);if(!Finite(e.reward))throw new ArgumentException("派遣報酬が大きすぎます。");
             var encounter=DispatchEncounterDefinition(destination,State.day);if(encounter!=null)e.encounter=new CafeDispatchEncounter {id=encounter.id};
-            State.dispatches.Add(e);var c=State.cats.Single(c=>c.id==id);c.activity="dispatched";c.working=false;
+            AttachDispatchIntroduction(e);State.dispatches.Add(e);var c=State.cats.Single(c=>c.id==id);c.activity="dispatched";c.working=false;
         }
         private void DispatchCloseDay()
         {foreach(var e in State.dispatches.Where(e=>e.status=="travelling")){e.remaining--;if(e.encounter!=null && e.encounter.status=="scheduled"){e.encounter.status="waiting";e.encounter.occurred_day=State.day;}if(e.remaining==0){e.status="waiting";e.occurred_day=State.day;}}}
@@ -62,7 +62,7 @@ namespace CatCafePreview.Standalone
             string reason=DispatchReceiveReason(id);if(reason!="")throw new InvalidOperationException(reason);var e=State.dispatches.Single(e=>e.id==id);if(e.status=="resolved")return;
             e.status="resolved";e.choice=choice;e.resolved_day=State.day;var c=State.cats.Single(c=>c.id==e.cat_id);c.activity="cafe";c.stress=Math.Min(100,c.stress+e.return_stress);
             State.funds+=DispatchReceivedReward(e);State.dispatch_income+=DispatchReceivedReward(e);
-            RecordGrowth(new CafeGrowthOperation {kind="dispatch",cat_id=c.id,customer_id=e.id,day=State.day,tick=State.tick});State.revision++;
+            RecordGrowth(new CafeGrowthOperation {kind="dispatch",cat_id=c.id,customer_id=e.id,day=State.day,tick=State.tick});PresentDispatchIntroductions();State.revision++;
         }
         private void ValidateDispatch(CafeSnapshot s)
         {
@@ -71,7 +71,7 @@ namespace CatCafePreview.Standalone
             foreach(var e in s.dispatches)
             {
                 var c=e==null?null:s.cats.SingleOrDefault(c=>c.id==e.cat_id);
-                if(c==null || e.started_day<1 || e.started_day>s.day || DispatchDestination(e.destination)==null || !string.IsNullOrEmpty(DispatchDestination(e.destination).unsupported_reason) || e.growth_boundary<0 || e.growth_boundary>s.growth_operations.Count || s.growth_operations.Take(e.growth_boundary).Any(o=>o.day>e.started_day))throw new ArgumentException("Invalid dispatch destination or cat");
+                if(c==null || e.started_day<JoinedDay(s,c.id) || e.started_day>s.day || DispatchDestination(e.destination)==null || !string.IsNullOrEmpty(DispatchDestination(e.destination).unsupported_reason) || e.growth_boundary<0 || e.growth_boundary>s.growth_operations.Count || s.growth_operations.Take(e.growth_boundary).Any(o=>o.day>e.started_day))throw new ArgumentException("Invalid dispatch destination or cat");
                 var terms=DispatchTerms(s,c.id,e.started_day,e.growth_boundary,e.destination);var r=DispatchDestination(e.destination);ValidateDispatchEncounter(s,e);int elapsed=s.day-e.started_day+(s.phase=="closed"?1:0);
                 if(e.id!=terms.id || e.remaining!=Math.Max(0,r.days-elapsed) || e.reward!=terms.reward || e.reward_bonus!=terms.reward_bonus || e.return_stress!=terms.return_stress || e.growth_multiplier!=terms.growth_multiplier || e.feature_matched!=terms.feature_matched || e.specialization_matched!=terms.specialization_matched)throw new ArgumentException("Dispatch terms differ from departure");
                 if(e.status=="travelling"?(e.remaining<=0 || e.occurred_day!=0 || e.resolved_day!=0 || e.choice!=null):e.status=="waiting"?(e.remaining!=0 || e.occurred_day!=e.started_day+r.days-1 || e.resolved_day!=0 || e.choice!=null):e.status=="resolved"?(e.remaining!=0 || e.occurred_day!=e.started_day+r.days-1 || e.resolved_day<e.occurred_day || e.resolved_day>s.day || e.choice!="receive"):true)throw new ArgumentException("Invalid dispatch phase");

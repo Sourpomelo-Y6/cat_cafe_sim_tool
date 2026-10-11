@@ -43,7 +43,7 @@ def exported_rules():
     result['dispatch_destinations']=[]
     for destination in destinations:
         destination['item_reward']=read('cafe_item_rewards').get(destination['id'])
-        destination['unsupported_reason']={'shopping_street_event':'帰還後の猫紹介が未対応です。','mountain_lodge_visit':'家出トラブルが未対応です。','cat_photo_studio':'帰還後の猫紹介が未対応です。'}.get(destination['id'],'')
+        destination['unsupported_reason']={'mountain_lodge_visit':'家出トラブルが未対応です。'}.get(destination['id'],'')
         result['dispatch_destinations'].append(destination)
     result['dispatch_unlocks']=[dict(id=key,popularity=row.get('popularity',0),returns=row.get('returns',0),stage=row.get('stage',0)) for key,row in unlocks.items()]
     result['dispatch_encounters']=read('cafe_dispatch_encounters')
@@ -90,6 +90,18 @@ def exported_rules():
                  intensity_preferences=[p['intensity_preferences'][k] for k in ('gentle', 'standard', 'active')],
                  boredom_decay=p['boredom_decay'], switch_affinity=p['switch_affinity'],
                  **{k: trait.get(k, 1) for k in ('service_stress', 'service_fatigue', 'rest_fatigue')},dispatch_reward=trait.get('dispatch_reward',1),return_stress=trait.get('return_stress',0)))
+    result['dispatch_introductions'] = []
+    for filename in ('cafe_dispatch_introduction', 'cafe_photo_introduction'):
+        row = read(filename); p = presets[row['preset']]; trait = traits[row['trait']]
+        result['dispatch_introductions'].append(dict(destination=row['destination'], candidate=dict(
+            cost=row['cost'], personality=row['preset'], trait=trait['name'],
+            features_label='・'.join(features[key][0] for key in row['features']),
+            cat=dict(id='', name=row['name'], trait_id=row['trait'], features=row['features'],
+                     type_preferences=[p['type_preferences'][t['id']] for t in relationship['types']],
+                     intensity_preferences=[p['intensity_preferences'][k] for k in ('gentle','standard','active')],
+                     boredom_decay=p['boredom_decay'], switch_affinity=p['switch_affinity'],
+                     **{k:trait.get(k,1) for k in ('service_stress','service_fatigue','rest_fatigue','dispatch_reward')},
+                     return_stress=trait.get('return_stress',0)))))
     result['rules_id'] = hashlib.sha256(json.dumps(result, sort_keys=True, ensure_ascii=True).encode()).hexdigest()
     return result
 

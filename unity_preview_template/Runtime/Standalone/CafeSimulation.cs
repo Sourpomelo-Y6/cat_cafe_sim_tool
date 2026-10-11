@@ -33,12 +33,13 @@ namespace CatCafePreview.Standalone
         {
             if (s == null || s.version != 2 || s.rules_id != Rules.rules_id || s.seed < 0 || s.day < 1 || s.tick < 0 || s.tick > Rules.opening_ticks
                 || !new[] { "preparation", "open", "closed" }.Contains(s.phase)
-                || s.cats == null || s.cats.Count != Rules.cats.Length + (s.intake_request != null && s.intake_request.status == "accepted" ? 1 : 0) + (s.regular_introduction != null && s.regular_introduction.status == "accepted" ? 1 : 0) || s.visits == null || s.exchanges == null || s.queue == null || s.relationships == null || s.history == null
+                || s.cats == null || s.cats.Count != Rules.cats.Length + (s.intake_request != null && s.intake_request.status == "accepted" ? 1 : 0) + (s.regular_introduction != null && s.regular_introduction.status == "accepted" ? 1 : 0) + DispatchJoinedCount(s,s.day) || s.visits == null || s.exchanges == null || s.queue == null || s.relationships == null || s.history == null
                 || s.cats.Select(c => c.id).Distinct().Count() != s.cats.Count || s.revision < 0
                 || !Finite(s.funds) || !Finite(s.opening_funds) || !Finite(s.revenue) || !Finite(s.expenses)
                 || s.revenue < 0 || s.expenses < 0 || Math.Abs(s.funds - (s.opening_funds + s.revenue + s.item_sales_income + s.dispatch_income - s.expenses)) > 1e-7
                 || s.history.Count != s.day - 1 || s.completed < 0
                 || !Range(s.popularity, 0, Rules.popularity.cap)) throw new ArgumentException("Invalid standalone save");
+            ValidateDispatchIntroductions(s);
             ValidateDispatch(s);
             ValidateEquipment(s);
             ValidateSpecialists(s);
@@ -101,6 +102,7 @@ namespace CatCafePreview.Standalone
             var s = State;
             if (s.game_over != null) throw new InvalidOperationException("経営終了後は保存・閲覧のみ利用できます。");
             if(kind=="resolve_dispatch_choice"){ResolveDispatchChoice(source,choice);return;}
+            if (kind == "resolve_dispatch_introduction") { ResolveDispatchIntroduction(source,choice); return; }
             if(kind=="resolve_activity"){ReceiveDispatch(source,choice);return;}
             if (kind == "resolve_reservation") { ResolveReservation(choice); return; }
             if (ReservationWaiting && !kind.StartsWith("resolve_growth", StringComparison.Ordinal) && kind != "resolve_missing" && kind != "resolve_customer_trust" && !(kind == "resolve_store_event" && choice != "close")) throw new InvalidOperationException("特別予約に回答してください。");
@@ -116,6 +118,7 @@ namespace CatCafePreview.Standalone
             if (kind != "resolve_missing" && s.cats.Any(c => c.activity == "missing" && c.missing_remaining == 0)) throw new InvalidOperationException("帰還結果を確認してください。");
             if (IntakeWaiting && kind != "resolve_missing" && kind != "resolve_store_event") throw new InvalidOperationException("保護猫の受け入れ依頼に回答してください。");
             if (RegularIntroductionWaiting && kind != "resolve_missing" && kind != "resolve_store_event") throw new InvalidOperationException("常連からの猫紹介で迎えるか見送るかを選んでください。");
+            if (DispatchIntroductionWaiting && kind != "resolve_missing" && kind != "resolve_store_event") throw new InvalidOperationException("派遣先の猫紹介に回答してください。");
             if (GrowthWaiting && kind != "resolve_missing" && kind != "resolve_store_event") throw new InvalidOperationException("猫の成長・習熟を選択してください。");
             if (StoreEventWaiting && kind != "resolve_store_event" && kind != "resolve_missing" && !(kind == "day_off" && CurrentStoreEvent.type == "trouble")) throw new InvalidOperationException("店舗イベントに回答してください。");
             switch (kind)
@@ -177,6 +180,7 @@ namespace CatCafePreview.Standalone
             PresentStoreEvent();
             PresentIntake();
             PresentRegularIntroduction();
+            PresentDispatchIntroductions();
             PresentCustomerTrust();
             PresentReservation();
         }

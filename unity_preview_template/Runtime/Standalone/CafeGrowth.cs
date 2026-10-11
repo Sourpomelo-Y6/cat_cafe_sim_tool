@@ -202,7 +202,7 @@ namespace CatCafePreview.Standalone
                 var row = op == null ? null : replay.Find(r => r.cat_id == op.cat_id);
                 if (row == null || op.day < 1 || op.day > s.day || op.tick < 0 || op.tick > Rules.opening_ticks || (op.day - 1) * (Rules.opening_ticks + 1) + op.tick < previous
                     || op.actions == null || op.actions.Length != 8 || op.actions.Any(v => v < 0) || !Range(op.affinity_delta, -100, 100) || !Range(op.stamina_spent, 0, double.MaxValue)) throw new ArgumentException("Invalid growth operation");
-                int joined = Rules.cats.Any(c => c.id == op.cat_id) ? 1 : op.cat_id == Rules.intake.cat.id ? s.intake_request.resolved_day : s.regular_introduction.resolved_day;
+                int joined = JoinedDay(s,op.cat_id);
                 if (op.day < joined) throw new ArgumentException("Growth predates cat admission");
                 previous = (op.day - 1) * (Rules.opening_ticks + 1) + op.tick;
                 if (op.kind == "start")

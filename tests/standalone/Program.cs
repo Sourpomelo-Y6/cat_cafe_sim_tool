@@ -41,6 +41,12 @@ static class Program
                     try{dispatch.Execute(op.GetProperty("kind").GetString(),working:Decode<string[]>(op.GetProperty("working").GetRawText()),choice:op.GetProperty("choice").GetString(),source:op.GetProperty("source").GetString(),catId:op.GetProperty("cat_id").GetString(),seatId:op.TryGetProperty("seat_id",out var seatId)?seatId.GetString():null);}catch(InvalidOperationException ex){rejected=true;error=ex.Message;}catch(ArgumentException ex){rejected=true;error=ex.Message;}
                     Assert(rejected==op.GetProperty("rejected").GetBoolean(),"Python dispatch rejection mismatch ("+fixture.GetProperty("variant")+"): "+op.GetProperty("kind")+" day "+dispatch.State.day+" / "+error);
                     if(rejected)Assert(beforeSeats==Encode(dispatch.State),"Rejected dispatch operation changed state");
+                    if(op.TryGetProperty("admission_boundaries",out var admissions))
+                    {
+                        double funds=dispatch.State.funds;
+                        foreach(var row in admissions.EnumerateArray()){dispatch.State.funds=row.GetProperty("funds").GetDouble();Assert((dispatch.DispatchIntroductionAcceptReason(op.GetProperty("source").GetString())=="")==row.GetProperty("can_accept").GetBoolean(),"Python dispatch admission funds boundary differs");}
+                        dispatch.State.funds=funds;
+                    }
                     using var current=JsonDocument.Parse(Encode(dispatch.State));Equal(op.GetProperty("expected"),current.RootElement,"dispatch boundary");dispatch.Restore(Decode<CafeSnapshot>(Encode(dispatch.State)));ticks++;
                 }
             }

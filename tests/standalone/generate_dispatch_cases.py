@@ -14,6 +14,8 @@ def expected(session):
   w=e.get('welcome_match',{})
   s['dispatches'].append(dict(id=e['id'],cat_id=e['cat_id'],destination=e['destination']['id'],started_day=e['started_day'],remaining=e['remaining'],status=e['status'],occurred_day=e['occurred_day'] or 0,resolved_day=e['resolved_day'] or 0,choice=e['choice'],feature_matched=w.get('feature_matched',False),specialization_matched=w.get('specialization_matched',False),growth_multiplier=e.get('growth_multiplier',1),reward_bonus=w.get('reward_bonus',0),reward=reward(c,{k:v for k,v in e.items() if k!='encounter'}),return_stress=(c.traits or {}).get(e['cat_id'],{}).get('return_stress',0)))
  for row,e in zip(s['dispatches'],(c.activities or {}).get('events',{}).values()):
+  intro=e.get('introduction')
+  if intro:row['introduction']=dict(cat_id=intro['cat_id'],name=intro['candidate']['name'],cost=intro['candidate']['cost'],status=intro['status'],presented_day=intro['presented_day'] or 0,resolved_day=intro['resolved_day'] or 0)
   v=e.get('encounter')
   if v:
    changes=v.get('changes') or {}

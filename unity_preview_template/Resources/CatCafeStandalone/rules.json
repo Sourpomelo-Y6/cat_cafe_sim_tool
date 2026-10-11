@@ -583,7 +583,7 @@
       "required_trait": "hospitality",
       "required_trait_name": "接客好き",
       "item_reward": null,
-      "unsupported_reason": "帰還後の猫紹介が未対応です。"
+      "unsupported_reason": ""
     },
     {
       "id": "out_of_town_visit",
@@ -633,7 +633,7 @@
         "satisfaction_bonus": 0
       },
       "item_reward": null,
-      "unsupported_reason": "帰還後の猫紹介が未対応です。"
+      "unsupported_reason": ""
     },
     {
       "id": "cat_product_trial",
@@ -1035,5 +1035,87 @@
       "return_stress": 0
     }
   },
-  "rules_id": "4cf94188184c88e17798c68b7181f69a2be51dd0d7bc184d17cbf08a576ef019"
+  "dispatch_introductions": [
+    {
+      "destination": "shopping_street_event",
+      "candidate": {
+        "cost": 200,
+        "personality": "遊び好きで繊細な猫",
+        "trait": "接客好き",
+        "features_label": "白猫・長毛",
+        "cat": {
+          "id": "",
+          "name": "セナ",
+          "trait_id": "hospitality",
+          "features": [
+            "white",
+            "long_hair"
+          ],
+          "type_preferences": [
+            1.8,
+            1.6,
+            1.4,
+            1.2,
+            0.9,
+            0.8,
+            1,
+            0.8
+          ],
+          "intensity_preferences": [
+            1.3,
+            1,
+            0.2
+          ],
+          "boredom_decay": 0.15,
+          "switch_affinity": 0,
+          "service_stress": 0.5,
+          "service_fatigue": 1.25,
+          "rest_fatigue": 1,
+          "dispatch_reward": 1,
+          "return_stress": 0
+        }
+      }
+    },
+    {
+      "destination": "cat_photo_studio",
+      "candidate": {
+        "cost": 250,
+        "personality": "穏やかな甘えん坊",
+        "trait": "接客好き",
+        "features_label": "白猫・短毛",
+        "cat": {
+          "id": "",
+          "name": "ルカ",
+          "trait_id": "hospitality",
+          "features": [
+            "white",
+            "short_hair"
+          ],
+          "type_preferences": [
+            0.8,
+            0.6,
+            1.2,
+            0.5,
+            1.8,
+            1.5,
+            1.2,
+            1.3
+          ],
+          "intensity_preferences": [
+            1.3,
+            1,
+            0.4
+          ],
+          "boredom_decay": 0.08,
+          "switch_affinity": -0.2,
+          "service_stress": 0.5,
+          "service_fatigue": 1.25,
+          "rest_fatigue": 1,
+          "dispatch_reward": 1,
+          "return_stress": 0
+        }
+      }
+    }
+  ],
+  "rules_id": "0886d511eeee73a69182102ef8f55065b6fce8f555b43875c0da682312cc6b01"
 }

@@ -34,7 +34,7 @@ namespace CatCafePreview.Standalone
         public double[] expansion_costs; public GoalStageRule[] goal_stages;
         public ExchangeType[] types;
         public IntakeRules intake, regular_introduction;
-        public DispatchRules dispatch;
+        public DispatchRules dispatch; public DispatchIntroductionRule[] dispatch_introductions;
         public DispatchRules[] dispatch_destinations;public DispatchUnlockRule[] dispatch_unlocks;public DispatchEncounterRule[] dispatch_encounters;
         public string rules_id;
     }
@@ -168,6 +168,7 @@ namespace CatCafePreview.Standalone
         {
             if(dispatches!=null)foreach(var e in dispatches)if(e.encounter!=null && string.IsNullOrEmpty(e.encounter.id) && string.IsNullOrEmpty(e.encounter.choice) && (string.IsNullOrEmpty(e.encounter.status) || e.encounter.status=="scheduled") && e.encounter.occurred_day==0 && e.encounter.resolved_day==0 && e.encounter.fatigue_before==0 && e.encounter.fatigue_after==0 && e.encounter.stress_before==0 && e.encounter.stress_after==0)e.encounter=null;
             if(dispatches!=null)foreach(var e in dispatches)if(e.encounter!=null && e.encounter.choice=="")e.encounter.choice=null;
+            if(dispatches!=null)foreach(var e in dispatches)if(e.introduction!=null && string.IsNullOrEmpty(e.introduction.cat_id) && string.IsNullOrEmpty(e.introduction.name) && (string.IsNullOrEmpty(e.introduction.status) || e.introduction.status=="scheduled") && e.introduction.cost==0 && e.introduction.presented_day==0 && e.introduction.resolved_day==0)e.introduction=null;
             if(dispatches!=null)foreach(var e in dispatches)if(e.choice=="")e.choice=null;
             if (regular_introduction != null && regular_introduction.customer_id == "") regular_introduction.customer_id = null;
             if (growth != null) foreach (var row in growth) row.Normalize();
