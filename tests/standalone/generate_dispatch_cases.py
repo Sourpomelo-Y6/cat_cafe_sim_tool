@@ -8,12 +8,15 @@ from cat_cafe_sim.core.cafe_activities import reward
 
 def expected(session):
  s=snapshot(session);c=session.core
+ s['dispatch_trouble_expenses']=c.summary().get('dispatch_trouble_expenses',0)
  s['dispatch_income']=c.summary().get('dispatch_income',0)
  s['dispatches']=[]
  for e in (c.activities or {}).get('events',{}).values():
   w=e.get('welcome_match',{})
-  s['dispatches'].append(dict(id=e['id'],cat_id=e['cat_id'],destination=e['destination']['id'],started_day=e['started_day'],remaining=e['remaining'],status=e['status'],occurred_day=e['occurred_day'] or 0,resolved_day=e['resolved_day'] or 0,choice=e['choice'],feature_matched=w.get('feature_matched',False),specialization_matched=w.get('specialization_matched',False),growth_multiplier=e.get('growth_multiplier',1),reward_bonus=w.get('reward_bonus',0),reward=reward(c,{k:v for k,v in e.items() if k!='encounter'}),return_stress=(c.traits or {}).get(e['cat_id'],{}).get('return_stress',0)))
+  s['dispatches'].append(dict(id=e['id'],cat_id=e['cat_id'],destination=e['destination']['id'],started_day=e['started_day'],remaining=e['remaining'],status=e['status'],occurred_day=e['occurred_day'] or 0,resolved_day=e['resolved_day'] or 0,choice=e['choice'],feature_matched=w.get('feature_matched',False),specialization_matched=w.get('specialization_matched',False),growth_multiplier=e.get('growth_multiplier',1),reward_bonus=w.get('reward_bonus',0),reward=reward(c,{k:v for k,v in e.items() if k not in ('encounter','trouble')}),return_stress=(c.traits or {}).get(e['cat_id'],{}).get('return_stress',0)))
  for row,e in zip(s['dispatches'],(c.activities or {}).get('events',{}).values()):
+  trouble=e.get('trouble')
+  if trouble:row['trouble']=dict(destination=e['destination']['id'],stress=trouble['stress'],probability=trouble['probability'],draw=trouble['draw'],status=trouble['status'],missing_day=trouble['missing_day'] or 0,choice=trouble['choice'],choice_day=trouble['choice_day'] or 0,cost=trouble['cost'])
   intro=e.get('introduction')
   if intro:row['introduction']=dict(cat_id=intro['cat_id'],name=intro['candidate']['name'],cost=intro['candidate']['cost'],status=intro['status'],presented_day=intro['presented_day'] or 0,resolved_day=intro['resolved_day'] or 0)
   v=e.get('encounter')
@@ -22,7 +25,7 @@ def expected(session):
    row['encounter']=dict(id=v['rules']['id'],status=v['status'],choice=v['choice'],occurred_day=v['occurred_day'] or 0,resolved_day=v['resolved_day'] or 0,**{key:changes.get(key,0) for key in ('fatigue_before','fatigue_after','stress_before','stress_after')})
  s['dispatch_unlocks']=[dict(id=key,**value) for key,value in (c.dispatch_unlocks or {}).get('unlocked',{}).items()]
  if 'history' in s:
-  for row,orig in zip(s['history'],c.day_results):row['dispatch_income']=orig['summary'].get('dispatch_income',0)
+  for row,orig in zip(s['history'],c.day_results):row['dispatch_income']=orig['summary'].get('dispatch_income',0);row['dispatch_trouble_expenses']=orig['summary'].get('dispatch_trouble_expenses',0)
  return s
 
 def generate():

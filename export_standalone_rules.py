@@ -43,9 +43,10 @@ def exported_rules():
     result['dispatch_destinations']=[]
     for destination in destinations:
         destination['item_reward']=read('cafe_item_rewards').get(destination['id'])
-        destination['unsupported_reason']={'mountain_lodge_visit':'家出トラブルが未対応です。'}.get(destination['id'],'')
+        destination['unsupported_reason']=''
         result['dispatch_destinations'].append(destination)
     result['dispatch_unlocks']=[dict(id=key,popularity=row.get('popularity',0),returns=row.get('returns',0),stage=row.get('stage',0)) for key,row in unlocks.items()]
+    result['dispatch_trouble']=read('cafe_dispatch_trouble')
     result['dispatch_encounters']=read('cafe_dispatch_encounters')
     result['item_shop'] = [dict(**row, sale_price=read('cafe_item_sales')[row['item']['id']]) for row in (read('cafe_item_shop'), read('cafe_nutrition_snack'), read('cafe_special_care_set'))]
     result['item_sale_prices']=[dict(id=key,price=value) for key,value in read('cafe_item_sales').items()]

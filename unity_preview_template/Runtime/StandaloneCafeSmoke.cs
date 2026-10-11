@@ -72,6 +72,7 @@ namespace CatCafePreview
             foreach(string variant in new[]{"cleared","expired","funds","popularity"})checks+=StandaloneClearResultsSmoke.Run(Path.Combine(directory,"clear-"+variant),variant);
             foreach(string destination in new[]{"out_of_town_visit","quiet_reading_salon","cat_exercise_class","cat_product_trial","small_art_museum"})foreach(bool second in new[]{false,true})checks+=StandaloneDispatchDestinationsSmoke.Run(Path.Combine(directory,"destination-"+destination+"-"+second),destination,second);
             foreach(string destination in new[]{"shopping_street_event","cat_photo_studio"})foreach(bool accept in new[]{false,true})foreach(bool closed in new[]{false,true})checks+=StandaloneDispatchIntroductionSmoke.Run(Path.Combine(directory,"introduction-"+destination+"-"+accept+"-"+closed),destination,accept,closed);
+            foreach(bool trigger in new[]{false,true})foreach(string choice in new[]{"search","wait"})foreach(bool closed in new[]{false,true})checks+=StandaloneDispatchTroubleSmoke.Run(Path.Combine(directory,"lodging-"+trigger+"-"+choice+"-"+closed),trigger,choice,closed);
             checks += StandaloneDispatchSmoke.Run(Path.Combine(directory,"dispatch-smoke-saves"));
             checks += StandaloneItemsSmoke.Run(Path.Combine(directory,"items-smoke-saves"));
             checks += StandaloneHousingSmoke.Run(Path.Combine(directory, "housing-smoke-saves"));

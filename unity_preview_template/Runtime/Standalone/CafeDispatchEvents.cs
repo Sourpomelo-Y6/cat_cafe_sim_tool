@@ -17,18 +17,18 @@ namespace CatCafePreview.Standalone
         public DispatchEncounterRule DispatchEncounterDefinition(string destination,int day)
         {var matches=(Rules.dispatch_encounters??new DispatchEncounterRule[0]).Where(r=>r.destination==destination).ToArray();return matches.Length==0?null:matches.Length==1?matches[0]:matches[day%matches.Length];}
         public double DispatchReceivedReward(CafeDispatch e)
-        {var rule=DispatchEncounterDefinition(e.destination,e.started_day);return Math.Max(0,e.reward+(e.encounter?.status=="resolved"?rule.choices.Single(c=>c.id==e.encounter.choice).reward:0));}
-        private bool DispatchEligible(CafeSnapshot s,DispatchUnlockRule r)=>r.stage>0?s.goal.Count>=r.stage && s.goal[r.stage-1].status=="cleared":s.popularity>=r.popularity && s.dispatches.Count(e=>e.status=="resolved")>=r.returns;
+        {var rule=DispatchEncounterDefinition(e.destination,e.started_day);return DispatchInterrupted(e)?0:Math.Max(0,e.reward+(e.encounter?.status=="resolved"?rule.choices.Single(c=>c.id==e.encounter.choice).reward:0));}
+        private bool DispatchEligible(CafeSnapshot s,DispatchUnlockRule r)=>r.stage>0?s.goal.Count>=r.stage && s.goal[r.stage-1].status=="cleared":s.popularity>=r.popularity && s.dispatches.Count(e=>e.status=="resolved" && !DispatchInterrupted(e))>=r.returns;
         private void UpdateDispatchUnlocks()
         {
             if(State.game_over!=null)return;
-            foreach(var r in Rules.dispatch_unlocks??new DispatchUnlockRule[0])if(!State.dispatch_unlocks.Any(u=>u.id==r.id) && DispatchEligible(State,r))State.dispatch_unlocks.Add(new CafeDispatchUnlock {id=r.id,day=State.day,popularity=State.popularity,returns=State.dispatches.Count(e=>e.status=="resolved")});
+            foreach(var r in Rules.dispatch_unlocks??new DispatchUnlockRule[0])if(!State.dispatch_unlocks.Any(u=>u.id==r.id) && DispatchEligible(State,r))State.dispatch_unlocks.Add(new CafeDispatchUnlock {id=r.id,day=State.day,popularity=State.popularity,returns=State.dispatches.Count(e=>e.status=="resolved" && !DispatchInterrupted(e))});
         }
         public string DispatchUnlockReason(string destination)
         {
             var r=(Rules.dispatch_unlocks??new DispatchUnlockRule[0]).SingleOrDefault(r=>r.id==destination);
             if(r==null || State.dispatch_unlocks.Any(u=>u.id==destination))return "";
-            return r.stage>0?"未解放：人気第"+r.stage+"段階の達成が必要です。":"未解放：人気 "+State.popularity+" / "+r.popularity+"・派遣報酬受取 "+State.dispatches.Count(e=>e.status=="resolved")+" / "+r.returns+"回";
+            return r.stage>0?"未解放：人気第"+r.stage+"段階の達成が必要です。":"未解放：人気 "+State.popularity+" / "+r.popularity+"・派遣報酬受取 "+State.dispatches.Count(e=>e.status=="resolved" && !DispatchInterrupted(e))+" / "+r.returns+"回";
         }
         private void ValidateDispatchUnlocks(CafeSnapshot s)
         {
@@ -37,7 +37,7 @@ namespace CatCafePreview.Standalone
             foreach(var u in s.dispatch_unlocks)
             {
                 var r=u==null?null:rules.SingleOrDefault(r=>r.id==u.id);
-                if(r==null || u.day<1 || u.day>s.day || !Range(u.popularity,r.popularity,Rules.popularity.cap) || u.returns<r.returns || u.returns>s.dispatches.Count(e=>e.status=="resolved" && e.resolved_day<=u.day) || r.stage>0 && (s.goal.Count<r.stage || s.goal[r.stage-1].status!="cleared" || u.day<s.goal[r.stage-1].resolved_day))throw new ArgumentException("Invalid unlock achievement");
+                if(r==null || u.day<1 || u.day>s.day || !Range(u.popularity,r.popularity,Rules.popularity.cap) || u.returns<r.returns || u.returns>s.dispatches.Count(e=>e.status=="resolved" && !DispatchInterrupted(e) && e.resolved_day<=u.day) || r.stage>0 && (s.goal.Count<r.stage || s.goal[r.stage-1].status!="cleared" || u.day<s.goal[r.stage-1].resolved_day))throw new ArgumentException("Invalid unlock achievement");
             }
             if(s.game_over==null && rules.Any(r=>DispatchEligible(s,r) && !s.dispatch_unlocks.Any(u=>u.id==r.id)))throw new ArgumentException("Missing earned dispatch unlock");
             foreach(var e in s.dispatches)if(rules.Any(r=>r.id==e.destination) && !s.dispatch_unlocks.Any(u=>u.id==e.destination && u.day<=e.started_day))throw new ArgumentException("Departure before destination unlock");

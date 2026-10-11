@@ -23,6 +23,12 @@ static class Program
     static void DispatchCases(string path,ref int scenarios,ref int ticks)
     {
             using var cases=JsonDocument.Parse(File.ReadAllText(path));
+            if(cases.RootElement.TryGetProperty("probabilities",out var probabilities))
+            {
+                var probe=new CafeSimulation(Decode<CafeRules>(cases.RootElement.GetProperty("probability_rules").GetRawText()));
+                foreach(var row in probabilities.EnumerateArray()){probe.State.cats.Single(c=>c.id=="cat-tama").stress=row.GetProperty("stress").GetDouble();Assert(probe.DispatchTroubleProbability("cat-tama")==row.GetProperty("value").GetDouble(),"Python stress probability differs");}
+            }
+            if(cases.RootElement.TryGetProperty("draws",out var troubleDraws))foreach(var row in troubleDraws.EnumerateArray())Assert(CafeSimulation.DispatchTroubleDraw(row.GetProperty("seed").GetInt32(),row.GetProperty("id").GetString())==row.GetProperty("value").GetDouble(),"Python dispatch trouble draw differs");
             if(cases.RootElement.TryGetProperty("unlock_boundaries",out var boundaries))foreach(var row in boundaries.EnumerateArray())
             {
                 var probe=new CafeSimulation(Decode<CafeRules>(cases.RootElement.GetProperty("unlock_rules").GetRawText()));probe.State.day=3;probe.State.popularity=row.GetProperty("popularity").GetDouble();
@@ -34,7 +40,7 @@ static class Program
             }
             foreach(var fixture in cases.RootElement.GetProperty("cases").EnumerateArray())
             {
-                var dispatch=new CafeSimulation(Decode<CafeRules>(fixture.GetProperty("rules").GetRawText()),objective:fixture.GetProperty("objective").GetString());scenarios++;
+                var dispatch=new CafeSimulation(Decode<CafeRules>(fixture.GetProperty("rules").GetRawText()),seed:fixture.TryGetProperty("seed",out var dispatchSeed)?dispatchSeed.GetInt32():0,objective:fixture.GetProperty("objective").GetString());scenarios++;
                 foreach(var op in fixture.GetProperty("operations").EnumerateArray())
                 {
                     string beforeSeats=Encode(dispatch.State);bool rejected=false;string error=null;
@@ -93,7 +99,7 @@ static class Program
             using var cases=JsonDocument.Parse(File.ReadAllText(args[10]));
             foreach(var fixture in cases.RootElement.GetProperty("cases").EnumerateArray())
             {
-                bool testedClear=false;var seats=new CafeSimulation(Decode<CafeRules>(fixture.GetProperty("rules").GetRawText()),objective:fixture.GetProperty("objective").GetString());scenarios++;
+                bool testedClear=false;var seats=new CafeSimulation(Decode<CafeRules>(fixture.GetProperty("rules").GetRawText()),seed:fixture.TryGetProperty("seed",out var dispatchSeed)?dispatchSeed.GetInt32():0,objective:fixture.GetProperty("objective").GetString());scenarios++;
                 foreach(var op in fixture.GetProperty("operations").EnumerateArray())
                 {
                     string beforeSeats=Encode(seats.State);bool rejected=false;

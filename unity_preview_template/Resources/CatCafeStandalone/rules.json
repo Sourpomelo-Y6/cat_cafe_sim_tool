@@ -681,7 +681,7 @@
       "required_trait": "outgoing",
       "required_trait_name": "外出好き",
       "item_reward": null,
-      "unsupported_reason": "家出トラブルが未対応です。"
+      "unsupported_reason": ""
     }
   ],
   "dispatch_unlocks": [
@@ -728,6 +728,22 @@
       "stage": 2
     }
   ],
+  "dispatch_trouble": {
+    "destination": {
+      "id": "mountain_lodge_visit",
+      "name": "山あいの宿への訪問",
+      "days": 3,
+      "reward": 650,
+      "max_fatigue": 20,
+      "required_trait": "outgoing",
+      "required_trait_name": "外出好き"
+    },
+    "base_probability": 0.15,
+    "stress_probability": 0.35,
+    "missing_days": 2,
+    "search_cost": 100,
+    "return_stress": 30
+  },
   "dispatch_encounters": [
     {
       "id": "extra_work",
@@ -1117,5 +1133,5 @@
       }
     }
   ],
-  "rules_id": "0886d511eeee73a69182102ef8f55065b6fce8f555b43875c0da682312cc6b01"
+  "rules_id": "bb44c4ee0221c9871f3270ce52b277c1b2c49c633871adb5a68aa5e4a69020bb"
 }

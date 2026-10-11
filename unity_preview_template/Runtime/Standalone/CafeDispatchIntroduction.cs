@@ -32,8 +32,8 @@ namespace CatCafePreview.Standalone
         public string DispatchIntroductionResponseReason(string id)
         {
             if(State.game_over!=null)return "経営終了後は回答できません。";
-            if(DispatchWaiting || DispatchChoiceWaiting)return "派遣の帰還結果を確認してください。";
-            if(State.cats.Any(c=>c.activity=="missing" && c.missing_remaining==0))return "帰還結果を確認してください。";
+            if(DispatchWaiting || DispatchChoiceWaiting || DispatchTroubleWaiting)return "派遣の帰還結果を確認してください。";
+            if(State.cats.Any(c=>c.activity=="missing" && c.missing_remaining==0 && !DispatchMissing(State,c.id)))return "帰還結果を確認してください。";
             if(GoalWaiting)return "人気目標の結果を確認してください。";
             if(ReservationWaiting)return "特別予約に回答してください。";
             if(CustomerTrustWaiting)return "顧客の信頼回復イベントに回答してください。";

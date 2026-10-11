@@ -34,7 +34,7 @@ namespace CatCafePreview.Standalone
         public double[] expansion_costs; public GoalStageRule[] goal_stages;
         public ExchangeType[] types;
         public IntakeRules intake, regular_introduction;
-        public DispatchRules dispatch; public DispatchIntroductionRule[] dispatch_introductions;
+        public DispatchRules dispatch;public DispatchTroubleRules dispatch_trouble; public DispatchIntroductionRule[] dispatch_introductions;
         public DispatchRules[] dispatch_destinations;public DispatchUnlockRule[] dispatch_unlocks;public DispatchEncounterRule[] dispatch_encounters;
         public string rules_id;
     }
@@ -119,7 +119,7 @@ namespace CatCafePreview.Standalone
         public int seat_count = 2;
         public double opening_funds, revenue, expenses, closing_funds;
         public double recruitment_expenses, housing_expenses, housing_cost, item_expenses, item_sales_income, expansion_expenses, goal_popularity, equipment_expenses;
-        public double popularity_gain,dispatch_income;
+        public double popularity_gain,dispatch_income,dispatch_trouble_expenses;
         public int satisfied, normal, dissatisfied;
         public List<string> resting_cats = new List<string>();
         public List<CafeCustomerRecord> customer_records = new List<CafeCustomerRecord>();
@@ -132,7 +132,7 @@ namespace CatCafePreview.Standalone
         public int completed;
         public int seat_count = 2;
         public double recruitment_expenses, housing_expenses, housing_cost, item_expenses, item_sales_income, expansion_expenses, goal_popularity, equipment_expenses;
-        public double popularity_gain,dispatch_income;
+        public double popularity_gain,dispatch_income,dispatch_trouble_expenses;
         public List<CafeCat> cats = new List<CafeCat>();
         public List<CafeVisit> visits = new List<CafeVisit>();
         public List<string> queue = new List<string>();
@@ -169,6 +169,8 @@ namespace CatCafePreview.Standalone
             if(dispatches!=null)foreach(var e in dispatches)if(e.encounter!=null && string.IsNullOrEmpty(e.encounter.id) && string.IsNullOrEmpty(e.encounter.choice) && (string.IsNullOrEmpty(e.encounter.status) || e.encounter.status=="scheduled") && e.encounter.occurred_day==0 && e.encounter.resolved_day==0 && e.encounter.fatigue_before==0 && e.encounter.fatigue_after==0 && e.encounter.stress_before==0 && e.encounter.stress_after==0)e.encounter=null;
             if(dispatches!=null)foreach(var e in dispatches)if(e.encounter!=null && e.encounter.choice=="")e.encounter.choice=null;
             if(dispatches!=null)foreach(var e in dispatches)if(e.introduction!=null && string.IsNullOrEmpty(e.introduction.cat_id) && string.IsNullOrEmpty(e.introduction.name) && (string.IsNullOrEmpty(e.introduction.status) || e.introduction.status=="scheduled") && e.introduction.cost==0 && e.introduction.presented_day==0 && e.introduction.resolved_day==0)e.introduction=null;
+            if(dispatches!=null)foreach(var e in dispatches)if(e.trouble!=null && string.IsNullOrEmpty(e.trouble.destination) && string.IsNullOrEmpty(e.trouble.choice) && (string.IsNullOrEmpty(e.trouble.status) || e.trouble.status=="scheduled") && e.trouble.stress==0 && e.trouble.probability==0 && e.trouble.draw==0 && e.trouble.cost==0 && e.trouble.missing_day==0 && e.trouble.choice_day==0)e.trouble=null;
+            if(dispatches!=null)foreach(var e in dispatches)if(e.trouble!=null && e.trouble.choice=="")e.trouble.choice=null;
             if(dispatches!=null)foreach(var e in dispatches)if(e.choice=="")e.choice=null;
             if (regular_introduction != null && regular_introduction.customer_id == "") regular_introduction.customer_id = null;
             if (growth != null) foreach (var row in growth) row.Normalize();

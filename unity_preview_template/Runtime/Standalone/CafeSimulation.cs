@@ -101,12 +101,13 @@ namespace CatCafePreview.Standalone
         {
             var s = State;
             if (s.game_over != null) throw new InvalidOperationException("経営終了後は保存・閲覧のみ利用できます。");
+            if(kind=="resolve_dispatch_trouble"){ResolveDispatchTrouble(source,choice);return;}
             if(kind=="resolve_dispatch_choice"){ResolveDispatchChoice(source,choice);return;}
             if (kind == "resolve_dispatch_introduction") { ResolveDispatchIntroduction(source,choice); return; }
             if(kind=="resolve_activity"){ReceiveDispatch(source,choice);return;}
             if (kind == "resolve_reservation") { ResolveReservation(choice); return; }
             if (ReservationWaiting && !kind.StartsWith("resolve_growth", StringComparison.Ordinal) && kind != "resolve_missing" && kind != "resolve_customer_trust" && !(kind == "resolve_store_event" && choice != "close")) throw new InvalidOperationException("特別予約に回答してください。");
-            if((DispatchWaiting || DispatchChoiceWaiting) && !kind.StartsWith("resolve_growth",StringComparison.Ordinal) && kind!="resolve_missing" && kind!="resolve_customer_trust")throw new InvalidOperationException("派遣の帰還結果を確認してください。");
+            if((DispatchWaiting || DispatchChoiceWaiting || DispatchTroubleWaiting) && !kind.StartsWith("resolve_growth",StringComparison.Ordinal) && kind!="resolve_missing" && kind!="resolve_customer_trust")throw new InvalidOperationException("派遣の帰還結果を確認してください。");
             if (kind == "continue_goal" || kind == "advance_goal") { RespondGoal(kind); return; }
             if (kind == "purchase_housing" || kind == "upgrade_housing") { ExpandHousing(kind); return; }
             if (kind.StartsWith("resolve_growth", StringComparison.Ordinal)) { ResolveGrowth(kind, catId, choice); return; }
@@ -115,7 +116,7 @@ namespace CatCafePreview.Standalone
             if (kind == "resolve_intake" || kind == "resolve_intake_request") { ResolveIntake(choice); return; }
             if (GoalWaiting && kind != "resolve_missing" && !(kind == "resolve_store_event" && choice != "close")) throw new InvalidOperationException("人気目標の結果を確認してください。");
             if (CustomerTrustWaiting && kind != "resolve_missing" && !(kind == "resolve_store_event" && choice != "close")) throw new InvalidOperationException("顧客の信頼回復イベントに回答してください。");
-            if (kind != "resolve_missing" && s.cats.Any(c => c.activity == "missing" && c.missing_remaining == 0)) throw new InvalidOperationException("帰還結果を確認してください。");
+            if (kind != "resolve_missing" && s.cats.Any(c => c.activity == "missing" && c.missing_remaining == 0 && !DispatchMissing(State,c.id))) throw new InvalidOperationException("帰還結果を確認してください。");
             if (IntakeWaiting && kind != "resolve_missing" && kind != "resolve_store_event") throw new InvalidOperationException("保護猫の受け入れ依頼に回答してください。");
             if (RegularIntroductionWaiting && kind != "resolve_missing" && kind != "resolve_store_event") throw new InvalidOperationException("常連からの猫紹介で迎えるか見送るかを選んでください。");
             if (DispatchIntroductionWaiting && kind != "resolve_missing" && kind != "resolve_store_event") throw new InvalidOperationException("派遣先の猫紹介に回答してください。");
@@ -158,7 +159,7 @@ namespace CatCafePreview.Standalone
                     s.revision++;
                     return;
                 case "resolve_missing":
-                    var cat = s.cats.Find(c => c.id == catId && c.activity == "missing" && c.missing_remaining == 0);
+                    var cat = s.cats.Find(c => c.id == catId && c.activity == "missing" && c.missing_remaining == 0 && !DispatchMissing(State,c.id));
                     if (cat == null) throw new ArgumentException("帰還待ちの猫を選んでください。");
                     cat.activity = "cafe"; cat.stamina = Rules.max_stamina; cat.cannot_continue = cat.health != "healthy"; cat.stress = Rules.return_stress;
                     double cost = cat.kitten ? Rules.kitten_cost : 0; s.funds -= cost; s.expenses += cost; CheckEnd(); break;
@@ -170,11 +171,11 @@ namespace CatCafePreview.Standalone
         private void AdvanceToNextDay()
         {
             var s = State;
-            s.history.Add(new CafeDayResult { day = s.day, dispatch_income=s.dispatch_income, equipment_expenses=s.equipment_expenses, seat_count = s.seat_count, expansion_expenses = s.expansion_expenses, goal_popularity = s.goal_popularity, arrivals = s.visits.Count, completed = s.completed, opening_funds = s.opening_funds, revenue = s.revenue, expenses = s.expenses, closing_funds = s.funds, popularity_gain = s.popularity_gain, recruitment_expenses = s.recruitment_expenses, housing_expenses = s.housing_expenses, housing_cost = s.housing_cost, item_expenses = s.item_expenses, item_sales_income = s.item_sales_income, satisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "satisfied"), normal = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "normal"), dissatisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "dissatisfied") });
+            s.history.Add(new CafeDayResult { day = s.day, dispatch_trouble_expenses=s.dispatch_trouble_expenses, dispatch_income=s.dispatch_income, equipment_expenses=s.equipment_expenses, seat_count = s.seat_count, expansion_expenses = s.expansion_expenses, goal_popularity = s.goal_popularity, arrivals = s.visits.Count, completed = s.completed, opening_funds = s.opening_funds, revenue = s.revenue, expenses = s.expenses, closing_funds = s.funds, popularity_gain = s.popularity_gain, recruitment_expenses = s.recruitment_expenses, housing_expenses = s.housing_expenses, housing_cost = s.housing_cost, item_expenses = s.item_expenses, item_sales_income = s.item_sales_income, satisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "satisfied"), normal = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "normal"), dissatisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "dissatisfied") });
             s.history[s.history.Count - 1].customer_records = s.visits.Select(v => new CafeCustomerRecord { customer_id = v.id, cat_id = v.cat_id, departure = v.departure, satisfaction = v.satisfaction?.level, connect_count=v.connect_count, open_up_count=v.open_up_count, simultaneous_count=v.simultaneous_count, specialist_result=v.specialist_result, specialist_bonus=v.specialist_bonus, service_count=v.service_count, service_seat=v.service_seat, service_equipment=v.service_equipment, type_actions = (int[])v.type_actions.Clone(), affinity_delta = v.affinity_delta, stamina_spent = v.stamina_spent }).ToList();
             s.history[s.history.Count - 1].resting_cats = s.resting_cats.ToList(); s.resting_cats.Clear();
             s.day++; s.tick = 0; s.phase = "preparation"; s.opening_funds = s.funds; s.revenue = s.expenses = 0; s.completed = 0; s.recruitment_expenses = 0; s.equipment_expenses=0; s.housing_expenses = s.housing_cost = s.item_expenses = s.item_sales_income = s.expansion_expenses = s.goal_popularity = 0;
-            s.visits.Clear(); s.queue.Clear(); s.exchanges.Clear(); s.popularity_gain = 0;s.dispatch_income=0;
+            s.visits.Clear(); s.queue.Clear(); s.exchanges.Clear(); s.popularity_gain = 0;s.dispatch_income=s.dispatch_trouble_expenses=0;
             foreach (var c in s.cats) { c.service_ticks = 0; if (c.activity == "cafe") { c.stamina = Rules.max_stamina; c.cannot_continue = c.health != "healthy"; } c.working &= c.health == "healthy" && c.activity == "cafe"; }
             foreach (var cat in State.cats) EnsureGrowthCat(cat.id);
             PresentStoreEvent();
@@ -327,7 +328,7 @@ namespace CatCafePreview.Standalone
             GrowthRestDay();
             double after = Math.Min(Rules.popularity.cap, s.popularity + s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "satisfied") * Rules.popularity.gain_per_success + CurrentStoreEvent.popularity + s.visits.Sum(v=>SpecialistPopularity(v.id,v.specialist_result)));
             s.popularity_gain = after - s.popularity; s.popularity = after;
-            foreach (var cat in s.cats.Where(cat => cat.activity == "missing")) if (cat.missing_remaining > 0) cat.missing_remaining--;
+            foreach (var cat in s.cats.Where(cat => cat.activity == "missing" && !DispatchMissing(s,cat.id))) if (cat.missing_remaining > 0) cat.missing_remaining--;
             foreach (var cat in s.cats.Where(cat => cat.activity == "cafe"))
             {
                 var p = Definition(cat.id);
