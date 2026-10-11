@@ -39,6 +39,7 @@ def generate():
             c.initialize_customer_satisfaction(rules['satisfaction'])
             goal=dict(selected['goal']); goal.pop('stages', None); c.enable_goal(goal, tracking_only=True)
             c.initialize_customer_loyalty(selected['customer_loyalty']); c.initialize_customer_discontent(rules['discontent'])
+            c.initialize_growth(selected['growth'])
             c.initialize_customer_trust(selected['customer_trust'])
             c.initialize_intake_request(selected['intake_request']); c.initialize_regular_introduction(selected['regular_introduction'])
             c.initialize_store_events(rules['store_events'])

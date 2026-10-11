@@ -72,6 +72,19 @@ static class Program
                 TrustChecks.CheckFinal(sim, Assert);
             }
         }
+        if (args.Length > 7)
+        {
+            using var growth = JsonDocument.Parse(File.ReadAllText(args[7]));
+            foreach (var fixture in growth.RootElement.GetProperty("cases").EnumerateArray())
+            {
+                var sim = new CafeSimulation(rules);
+                foreach (var row in fixture.GetProperty("operations").EnumerateArray())
+                {
+                    sim.ApplyGrowthBoundary(Decode<CafeGrowthOperation>(row.GetProperty("operation").GetRawText()));
+                    using var actual = JsonDocument.Parse(Encode(sim.GrowthCat("cat-kohaku"))); Equal(row.GetProperty("expected"), actual.RootElement, "growth function boundary");
+                }
+            }
+        }
         using var data = JsonDocument.Parse(File.ReadAllText(args[1]));
         foreach (var row in data.RootElement.GetProperty("satisfaction").EnumerateArray())
         {
@@ -112,6 +125,18 @@ static class Program
                 sim.Validate(sim.State);
                 // Resume at EVERY operation boundary; compare the continuation next tick.
                 sim.Restore(Decode<CafeSnapshot>(Encode(sim.State)));
+            }
+            if (sim.State.growth_operations.Any(o => o.kind == "service"))
+            {
+            foreach (Action<CafeSnapshot> forge in new Action<CafeSnapshot>[] {
+                s => s.growth[0].service++, s => s.growth[0].selected_day = s.day + 1,
+                s => s.growth[0].type_actions[0]++, s => s.growth_operations.Clear(),
+                s => s.growth_operations.First(o => o.kind == "service").actions[0]++ })
+            {
+                string growthBefore = Encode(sim.State); var bad = Decode<CafeSnapshot>(growthBefore); forge(bad); bool failed = false;
+                try { sim.Restore(bad); } catch (ArgumentException) { failed = true; }
+                Assert(failed && Encode(sim.State) == growthBefore, "Forged growth restore mutated state");
+            }
             }
         }
         foreach (var test in data.RootElement.GetProperty("exchanges").EnumerateArray())
@@ -170,6 +195,14 @@ static class Program
         try { store.Load(1); throw new Exception("Corrupt save accepted"); } catch (JsonException) { }
         IntakeChecks.Run(rules, Assert, Path.Combine(temp, "intake"));
         RegularIntroductionChecks.Run(rules, Assert, Path.Combine(temp, "regular"));
+        var precision = Decode<CafeSnapshot>(Encode(check.State)); precision.cats[0].stamina = 21.599999999999998;
+        var preciseBits = CafeDoublePrecision.Capture(precision); precision.cats[0].stamina = 21.6;
+        CafeDoublePrecision.Restore(precision, preciseBits);
+        Assert(BitConverter.DoubleToInt64Bits(precision.cats[0].stamina) == BitConverter.DoubleToInt64Bits(21.599999999999998), "Rounded JSON double was not restored exactly");
+        bool precisionFailed = false; try { CafeDoublePrecision.Restore(precision, preciseBits.Skip(1).ToArray()); } catch (ArgumentException) { precisionFailed = true; }
+        Assert(precisionFailed, "Truncated numeric restore accepted");
+        precision.cats[0].stamina = 1; precisionFailed = false; try { CafeDoublePrecision.Restore(precision, preciseBits); } catch (ArgumentException) { precisionFailed = true; }
+        Assert(precisionFailed, "Numeric restore disagreed with JSON");
         Console.WriteLine($"PASS: {scenarios} Python/C# scenarios, {ticks} operation boundaries, {assertions} assertions, all-boundary save/resume and disk persistence.");
     }
 }

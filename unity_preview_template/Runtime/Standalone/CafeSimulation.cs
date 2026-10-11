@@ -15,6 +15,7 @@ namespace CatCafePreview.Standalone
             if (rules.version != 1 || rules.cats == null || rules.cats.Length == 0 || seed < 0) throw new ArgumentException("Invalid initial configuration");
             State = new CafeSnapshot { seed = seed, rules_id = rules.rules_id, instance_id = Guid.NewGuid().ToString("N"), funds = rules.starting_funds, opening_funds = rules.starting_funds, popularity = rules.starting_popularity };
             foreach (var cat in rules.cats.OrderBy(c => c.id, StringComparer.Ordinal)) State.cats.Add(new CafeCat { id = cat.id, stamina = rules.max_stamina });
+            foreach (var cat in State.cats) EnsureGrowthCat(cat.id);
             PresentStoreEvent();
             PresentIntake();
             PresentRegularIntroduction();
@@ -39,6 +40,7 @@ namespace CatCafePreview.Standalone
                 || !Range(s.popularity, 0, Rules.popularity.cap)) throw new ArgumentException("Invalid standalone save");
             ValidateIntake(s);
             ValidateStoreEvents(s);
+            ValidateGrowth(s);
             ValidateTrust(s);
             ValidateCustomers(s);
             ValidateRegularIntroduction(s);
@@ -87,6 +89,7 @@ namespace CatCafePreview.Standalone
         {
             var s = State;
             if (s.game_over != null) throw new InvalidOperationException("経営終了後は保存・閲覧のみ利用できます。");
+            if (kind.StartsWith("resolve_growth", StringComparison.Ordinal)) { ResolveGrowth(kind, catId, choice); return; }
             if (kind == "resolve_customer_trust") { ResolveCustomerTrust(source, choice); return; }
             if (kind == "resolve_regular_introduction") { ResolveRegularIntroduction(choice); return; }
             if (kind == "resolve_intake" || kind == "resolve_intake_request") { ResolveIntake(choice); return; }
@@ -94,9 +97,11 @@ namespace CatCafePreview.Standalone
             if (kind != "resolve_missing" && s.cats.Any(c => c.activity == "missing" && c.missing_remaining == 0)) throw new InvalidOperationException("帰還結果を確認してください。");
             if (IntakeWaiting && kind != "resolve_missing" && kind != "resolve_store_event") throw new InvalidOperationException("保護猫の受け入れ依頼に回答してください。");
             if (RegularIntroductionWaiting && kind != "resolve_missing" && kind != "resolve_store_event") throw new InvalidOperationException("常連からの猫紹介で迎えるか見送るかを選んでください。");
+            if (GrowthWaiting && kind != "resolve_missing" && kind != "resolve_store_event") throw new InvalidOperationException("猫の成長・習熟を選択してください。");
             if (StoreEventWaiting && kind != "resolve_store_event" && kind != "resolve_missing" && !(kind == "day_off" && CurrentStoreEvent.type == "trouble")) throw new InvalidOperationException("店舗イベントに回答してください。");
             switch (kind)
             {
+                case "begin_second_group_type_practice": case "begin_second_group_second_type_practice": case "begin_third_group_practice": case "begin_third_group_type_practice": case "begin_third_group_second_type_practice": BeginGrowthPractice(kind, catId); break;
                 case "resolve_store_event": ResolveStoreEvent(choice); return;
                 case "use_item": UseSupply(source, catId); break;
                 case "set_shifts":
@@ -137,10 +142,12 @@ namespace CatCafePreview.Standalone
         {
             var s = State;
             s.history.Add(new CafeDayResult { day = s.day, arrivals = s.visits.Count, completed = s.completed, opening_funds = s.opening_funds, revenue = s.revenue, expenses = s.expenses, closing_funds = s.funds, popularity_gain = s.popularity_gain, recruitment_expenses = s.recruitment_expenses, satisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "satisfied"), normal = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "normal"), dissatisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "dissatisfied") });
-            s.history[s.history.Count - 1].customer_records = s.visits.Select(v => new CafeCustomerRecord { customer_id = v.id, departure = v.departure, satisfaction = v.satisfaction?.level }).ToList();
+            s.history[s.history.Count - 1].customer_records = s.visits.Select(v => new CafeCustomerRecord { customer_id = v.id, cat_id = v.cat_id, departure = v.departure, satisfaction = v.satisfaction?.level, type_actions = (int[])v.type_actions.Clone(), affinity_delta = v.affinity_delta, stamina_spent = v.stamina_spent }).ToList();
+            s.history[s.history.Count - 1].resting_cats = s.resting_cats.ToList(); s.resting_cats.Clear();
             s.day++; s.tick = 0; s.phase = "preparation"; s.opening_funds = s.funds; s.revenue = s.expenses = 0; s.completed = 0; s.recruitment_expenses = 0;
             s.visits.Clear(); s.queue.Clear(); s.exchanges.Clear(); s.popularity_gain = 0;
             foreach (var c in s.cats) { c.service_ticks = 0; if (c.activity == "cafe") { c.stamina = Rules.max_stamina; c.cannot_continue = c.health != "healthy"; } c.working &= c.health == "healthy" && c.activity == "cafe"; }
+            foreach (var cat in State.cats) EnsureGrowthCat(cat.id);
             PresentStoreEvent();
             PresentIntake();
             PresentRegularIntroduction();
@@ -161,7 +168,9 @@ namespace CatCafePreview.Standalone
                 if (cat == null) break;
                 s.queue.RemoveAt(0); var visit = s.visits.Find(v => v.id == customer); visit.cat_id = cat.id; visit.seated_at = s.tick;
                 var relationship = s.relationships.Find(r => r.cat_id == cat.id && r.customer_id == customer);
-                s.exchanges.Add(new CafeExchange { seat = seat, customer_id = customer, cat_id = cat.id, stamina = cat.stamina, remaining = Math.Min(Rules.exchange.ticks, Rules.opening_ticks - s.tick), affinity_start = relationship?.affinity ?? 0, tension_multiplier = Matched(cat, customer) ? Rules.tension_multiplier : 1 });
+                s.exchanges.Add(new CafeExchange { seat = seat, customer_id = customer, cat_id = cat.id, stamina = cat.stamina, remaining = Math.Min(Rules.exchange.ticks, Rules.opening_ticks - s.tick), affinity_start = relationship?.affinity ?? 0, growth_groups = LearnedGroups(GrowthCat(cat.id)), growth_types = LearnedTypes(GrowthCat(cat.id)), tension_multiplier = Matched(cat, customer) ? Rules.tension_multiplier : 1 });
+                RecordGrowth(new CafeGrowthOperation { kind = "start", cat_id = cat.id, customer_id = customer, day = s.day, tick = s.tick });
+                foreach (string kind in GrowthPracticeChoices(GrowthCat(cat.id))) RecordGrowth(new CafeGrowthOperation { kind = kind, cat_id = cat.id, day = s.day, tick = s.tick });
             }
             s.exchanges.Sort((a, b) => a.seat.CompareTo(b.seat));
             foreach (var arrival in CustomerSchedule(s.day).Where(a => a.tick == s.tick)) Arrive(arrival.customer_id);
@@ -181,6 +190,8 @@ namespace CatCafePreview.Standalone
                     var relationship = s.relationships.Find(r => r.cat_id == e.cat_id && r.customer_id == e.customer_id);
                     if (relationship == null) { relationship = new CafeRelationship { cat_id = e.cat_id, customer_id = e.customer_id }; s.relationships.Add(relationship); }
                     relationship.affinity = Clamp(e.affinity_start + e.affinity_pending, 100);
+                    visit.type_actions = (int[])e.type_actions.Clone(); visit.affinity_delta = relationship.affinity - e.affinity_start; visit.stamina_spent = e.stamina_spent;
+                    GrowthService(cat.id, visit);
                     s.completed++; s.exchanges.Remove(e); if (cat.stamina == 0) cat.cannot_continue = true;
                 }
             }
@@ -200,13 +211,31 @@ namespace CatCafePreview.Standalone
             var visit = new CafeVisit { id = id, arrival = State.tick }; State.visits.Add(visit);
             if (State.queue.Count >= Rules.queue_capacity) Depart(visit, "queue_full"); else State.queue.Add(id);
         }
+        private string BestGrowthType(CafeExchange e, string group, string current, string exclude = null)
+        {
+            var p = Definition(e.cat_id);
+            bool multiple = e.growth_types.GroupBy(GrowthGroup).Any(g => g.Count() > 1);
+            string second = e.growth_groups.Length > 1 ? e.growth_groups[1] : null, third = e.growth_groups.Length > 2 ? e.growth_groups[2] : null;
+            return Rules.types.Select((t,i) => new { t, i }).Where(x => x.t.id != current && x.t.group != exclude && (group == null || x.t.group == group))
+                .OrderByDescending(x => multiple ? group != null && (group == second || group == third) && e.growth_types.Contains(x.t.id) : e.growth_types.Contains(x.t.id))
+                .ThenByDescending(x => x.t.gain * p.type_preferences[x.i] * (multiple && e.growth_types.Contains(x.t.id) ? Rules.growth.type_mastery_engagement_multiplier : 1))
+                .ThenBy(x => x.i).Select(x => x.t.id).FirstOrDefault();
+        }
         public void Choose(CafeExchange e, out string action, out string target)
         {
-            target = null;
-            if (e.connect_pending || e.tension >= Rules.exchange.optional_threshold) action = "connect";
-            else if (e.stamina <= 20) action = "pause";
-            else if (e.previous_reaction == "turn_away" || e.previous_reaction == "confused") { action = "switch"; target = Rules.types[(Array.FindIndex(Rules.types, t => t.id == e.mode) + 1) % Rules.types.Length].id; }
-            else action = "direct";
+            target = null; action = "direct";
+            if (e.connect_pending || e.tension >= Rules.exchange.optional_threshold) { action = "connect"; return; }
+            if (e.stamina <= 20) { action = "pause"; return; }
+            string mastery = e.growth_groups.FirstOrDefault(), currentGroup = GrowthGroup(e.mode);
+            string[] primaryTypes = e.growth_types.Where(t => GrowthGroup(t) == mastery).ToArray();
+            string individual = primaryTypes.Length > 1 ? BestGrowthType(e, mastery, "") : primaryTypes.FirstOrDefault();
+            if (e.last_group == null && individual != null && e.mode != individual) target = individual;
+            else if (e.last_group == null && mastery != null && currentGroup != mastery) target = BestGrowthType(e, mastery, e.mode);
+            else if (e.previous_reaction == "turn_away" || e.previous_reaction == "confused")
+                target = mastery == null ? Rules.types[(Array.FindIndex(Rules.types, t => t.id == e.mode) + 1) % Rules.types.Length].id : BestGrowthType(e, currentGroup == mastery ? null : mastery, e.mode, currentGroup == mastery ? currentGroup : null);
+            else if (mastery != null && e.streak >= 2 && e.previous_action != "switch")
+                target = BestGrowthType(e, currentGroup == mastery ? null : mastery, e.mode, currentGroup == mastery ? currentGroup : null);
+            if (target != null) action = "switch";
         }
         public void StepExchange(CafeExchange e, CatDefinition p, string action, string target = null)
         {
@@ -234,6 +263,8 @@ namespace CatCafePreview.Standalone
                     cost *= t.cost;
                     reaction = preference == 0 || intensity == 0 ? "turn_away" : e.stamina <= c.low_stamina ? "listless" : score < c.confused_threshold ? "confused" : score >= c.enthusiastic_threshold ? "enthusiastic" : score >= c.favorable_threshold ? "favorable" : "neutral";
                 }
+                if (exchange) { e.type_actions[Array.IndexOf(GrowthTypes, e.mode)]++; if (score > 0 && e.growth_groups.Contains(t.group)) score *= Rules.growth.mastery_engagement_multiplier; if (score > 0 && e.growth_types.Contains(e.mode)) score *= Rules.growth.type_mastery_engagement_multiplier; }
+                e.stamina_spent += Math.Min(e.stamina, cost);
                 e.engagement = Math.Min(c.target, e.engagement + score * (reaction == "turn_away" || reaction == "listless" ? 0 : reaction == "confused" ? c.confused_multiplier : 1));
                 e.stamina = Math.Max(0, e.stamina - cost);
                 if (action == "pause") e.stamina = Math.Min(c.max_stamina, e.stamina + c.pause_recovery);
@@ -257,13 +288,14 @@ namespace CatCafePreview.Standalone
         private void Close()
         {
             var s = State;
+            GrowthRestDay();
             double after = Math.Min(Rules.popularity.cap, s.popularity + s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "satisfied") * Rules.popularity.gain_per_success + CurrentStoreEvent.popularity);
             s.popularity_gain = after - s.popularity; s.popularity = after;
             foreach (var cat in s.cats.Where(cat => cat.activity == "missing")) if (cat.missing_remaining > 0) cat.missing_remaining--;
             foreach (var cat in s.cats.Where(cat => cat.activity == "cafe"))
             {
                 var p = Definition(cat.id);
-                cat.fatigue = Clamp(cat.fatigue + (cat.working ? cat.service_ticks * Rules.fatigue_per_service_tick * p.service_fatigue : -Rules.rest_day_recovery * p.rest_fatigue), Rules.max_fatigue);
+                cat.fatigue = Clamp(cat.fatigue + (cat.working ? cat.service_ticks * Rules.fatigue_per_service_tick * p.service_fatigue : -Rules.rest_day_recovery * p.rest_fatigue - (GrowthCat(cat.id).specialization == "rest" ? Rules.growth.rest_recovery_bonus : 0)), Rules.max_fatigue);
                 if (cat.health == "sick") { cat.recovery_remaining = Math.Max(0, cat.recovery_remaining - 1); if (cat.recovery_remaining == 0) cat.health = "healthy"; }
                 else
                 {

@@ -27,6 +27,7 @@ def exported_rules():
     result['loyalty'] = read('cafe_customer_loyalty')
     result['discontent'] = read('cafe_customer_discontent')
     result['trust'] = read('cafe_customer_trust')
+    result['growth'] = read('cafe_growth')
     result['popular_customer_count'] = new.get('popular_customer_count', weekdays.get('popular_customer_count', 0))
     result['second_popular_customer_count'] = new.get('second_popular_customer_count', weekdays.get('second_popular_customer_count', 0))
     for row in new['cats']:

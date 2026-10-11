@@ -387,6 +387,21 @@
     "recovery_score": 25,
     "popularity_loss": 10
   },
+  "growth": {
+    "threshold": 20,
+    "service_xp": 1,
+    "rest_xp": 1,
+    "dispatch_xp": 1,
+    "service_stamina_refund": 0.1,
+    "rest_recovery_bonus": 5,
+    "dispatch_reward_multiplier": 1.1,
+    "mastery_threshold": 15,
+    "mastery_engagement_multiplier": 1.1,
+    "type_mastery_threshold": 30,
+    "type_mastery_engagement_multiplier": 1.05,
+    "second_type_mastery_threshold": 30,
+    "second_mastery_threshold": 30
+  },
   "popular_customer_count": 4,
   "second_popular_customer_count": 2,
   "intake": {
@@ -459,5 +474,5 @@
       "rest_fatigue": 1.5
     }
   },
-  "rules_id": "86b8e0e5e1bc04ae1b092783023fcbf570ac3be9940ba582e48b6679d23637cd"
+  "rules_id": "5e59f480425356217944ffc3fd0054105aec6af1dcacf189f17703ff5ce6a6f2"
 }

@@ -11,7 +11,7 @@ namespace CatCafePreview
     {
         [Serializable] private class Checkpoint
         {
-            public CafeTrustCustomer[] trust_customers; public CafeTrustEvent[] trust_events;
+            public CafeGrowth[] growth; public CafeGrowthOperation[] growth_operations; public CafeTrustCustomer[] trust_customers; public CafeTrustEvent[] trust_events;
             public CafeLoyalty[] loyalty; public CafeDiscontent[] discontent;
             public CafeArrival[] schedule; public PythonCustomerProgress[] progress;
             public CafeRegularIntroduction introduction; public CafeCat[] cats; public double recruitment_expenses;
@@ -26,11 +26,13 @@ namespace CatCafePreview
             while (request.MoveNext()) { } Check(response.result == UnityWebRequest.Result.Success, "Customer smoke " + kind + ": " + response.error);
         }
         private static string Capture(LocalCafeBackend b)
-            => JsonUtility.ToJson(new Checkpoint { trust_customers = b.Simulation.State.trust_customers.ToArray(), trust_events = b.Simulation.State.trust_events.ToArray(), loyalty = b.Simulation.State.loyalty.ToArray(), discontent = b.Simulation.State.discontent.ToArray(), schedule = b.Simulation.CustomerSchedule(b.Simulation.State.day), progress = b.View().customer_progress, introduction = b.Simulation.State.regular_introduction, cats = b.Simulation.State.cats.ToArray(), recruitment_expenses = b.Simulation.State.recruitment_expenses });
+            => JsonUtility.ToJson(new Checkpoint { growth = b.Simulation.State.growth.ToArray(), growth_operations = b.Simulation.State.growth_operations.ToArray(), trust_customers = b.Simulation.State.trust_customers.ToArray(), trust_events = b.Simulation.State.trust_events.ToArray(), loyalty = b.Simulation.State.loyalty.ToArray(), discontent = b.Simulation.State.discontent.ToArray(), schedule = b.Simulation.CustomerSchedule(b.Simulation.State.day), progress = b.View().customer_progress, introduction = b.Simulation.State.regular_introduction, cats = b.Simulation.State.cats.ToArray(), recruitment_expenses = b.Simulation.State.recruitment_expenses });
         private static void Resume(LocalCafeBackend b)
         {
             string before = Capture(b); Send(b, "save_game"); Send(b, "load_game");
-            Check(Capture(b) == before, "Customer state, suspension or schedule changed on resume");
+            string after = Capture(b);
+            if (after != before) { System.IO.File.WriteAllText("GrowthResumeBefore.json", before); System.IO.File.WriteAllText("GrowthResumeAfter.json", after); }
+            Check(after == before, "Customer state, suspension or schedule changed on resume");
         }
         public static int Run(string directory)
         {
@@ -57,6 +59,7 @@ namespace CatCafePreview
                     }
                     extra |= s.loyalty.Any(r => r.regular_day > 0 && s.day > r.regular_day && b.Simulation.ExtraWeekday(r.customer_id) == (rules.start_weekday + s.day - 1) % 7 && b.Simulation.CustomerSchedule(s.day).Any(a => a.customer_id == r.customer_id && a.tick == 0));
                     foreach (var trust in s.trust_events.Where(e => e.status == "waiting").ToArray()) Send(b, "resolve_customer_trust", choice: seed == 1 ? "ignore" : "recover", eventId: trust.id);
+                    StandaloneGrowthSmoke.ResolvePending(b, seed == 1 ? "rest" : "service");
                     if (b.Simulation.StoreEventWaiting)
                     {
                         string[] options = b.Simulation.CurrentStoreEvent.type == "trouble" ? new[] { "repair", "patch", "close" } : new[] { "full", "small", "decline" };
@@ -75,8 +78,10 @@ namespace CatCafePreview
                     while (b.Simulation.State.phase != "closed")
                     {
                         if (b.Simulation.State.tick == 11 || b.Simulation.State.tick == 25) Resume(b);
+                        StandaloneGrowthSmoke.ResolvePending(b, seed == 1 ? "rest" : "service");
                         Send(b, "advance_business");
                     }
+                    StandaloneGrowthSmoke.ResolvePending(b, seed == 1 ? "rest" : "service");
                     Resume(b); s = b.Simulation.State;
                     Check(s.game_over == null, "Unexpected customer-smoke game over");
                     foreach (var missing in s.cats.Where(c => c.activity == "missing" && c.missing_remaining == 0).ToArray()) Send(b, "resolve_missing", cat: missing.id);

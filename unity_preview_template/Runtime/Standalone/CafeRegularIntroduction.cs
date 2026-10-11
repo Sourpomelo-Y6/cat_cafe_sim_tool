@@ -24,6 +24,7 @@ namespace CatCafePreview.Standalone
             { if (r.status != status) throw new InvalidOperationException("回答済みの猫紹介は変更できません。"); return; }
             if (State.cats.Any(c => c.activity == "missing" && c.missing_remaining == 0)) throw new InvalidOperationException("帰還結果を確認してください。");
             if (CustomerTrustWaiting) throw new InvalidOperationException("顧客の信頼回復イベントに回答してください。");
+            if (GrowthWaiting) throw new InvalidOperationException("猫の成長・習熟を選択してください。");
             if (StoreEventWaiting) throw new InvalidOperationException("店舗イベントに回答してください。");
             Require("preparation");
             if (!RegularIntroductionWaiting) throw new InvalidOperationException("常連からの猫紹介への回答は営業準備中に行ってください。");

@@ -26,6 +26,7 @@ namespace CatCafePreview.Standalone
         public LoyaltyRules loyalty;
         public DiscontentRules discontent;
         public TrustRules trust;
+        public GrowthRules growth;
         public ExchangeType[] types;
         public IntakeRules intake, regular_introduction;
         public string rules_id;
@@ -49,7 +50,7 @@ namespace CatCafePreview.Standalone
     [Serializable] public class CafeTrustCustomer { public string customer_id, status, event_id, reason; public int departed_day; }
     [Serializable] public class CafeTrustEvent { public string id, customer_id, status, choice, outcome; public int day, suspensions, resolved_day; }
     [Serializable] public class CafeArrival { public string customer_id; public int tick; }
-    [Serializable] public class CafeCustomerRecord { public string customer_id, departure, satisfaction; }
+    [Serializable] public class CafeCustomerRecord { public string customer_id, cat_id, departure, satisfaction; public int[] type_actions = new int[8]; public double affinity_delta, stamina_spent; }
     [Serializable] public class CafeSatisfaction
     {
         public string level, label;
@@ -90,6 +91,7 @@ namespace CatCafePreview.Standalone
         public string id, cat_id, departure;
         public int arrival, seated_at = -1, seated_ticks;
         public double bill;
+        public int[] type_actions = new int[8]; public double affinity_delta, stamina_spent;
         public CafeSatisfaction satisfaction;
     }
     [Serializable] public class CafeExchange
@@ -97,6 +99,7 @@ namespace CatCafePreview.Standalone
         public string customer_id, cat_id, mode = "teaser", last_group, previous_action, previous_reaction, end_reason;
         public int seat, remaining, streak, connect_count, open_up_count, simultaneous_count;
         public double stamina, engagement, tension, bonus, affinity_start, affinity_pending, tension_multiplier = 1;
+        public int[] type_actions = new int[8]; public string[] growth_groups = new string[0], growth_types = new string[0]; public double stamina_spent;
         public bool pause_after_interaction, connect_pending, open_up_pending;
     }
     [Serializable] public class CafeRelationship { public string cat_id, customer_id; public double affinity; }
@@ -107,6 +110,7 @@ namespace CatCafePreview.Standalone
         public double recruitment_expenses;
         public double popularity_gain;
         public int satisfied, normal, dissatisfied;
+        public List<string> resting_cats = new List<string>();
         public List<CafeCustomerRecord> customer_records = new List<CafeCustomerRecord>();
     }
     [Serializable] public class CafeSnapshot
@@ -127,6 +131,9 @@ namespace CatCafePreview.Standalone
         public List<CafeSupplyUse> item_uses = new List<CafeSupplyUse>();
         public List<CafeLoyalty> loyalty = new List<CafeLoyalty>();
         public List<CafeDiscontent> discontent = new List<CafeDiscontent>();
+        public List<CafeGrowth> growth = new List<CafeGrowth>();
+        public List<CafeGrowthOperation> growth_operations = new List<CafeGrowthOperation>();
+        public List<string> resting_cats = new List<string>();
         public List<CafeTrustCustomer> trust_customers = new List<CafeTrustCustomer>();
         public List<CafeTrustEvent> trust_events = new List<CafeTrustEvent>();
         public CafeIntake intake_request = new CafeIntake();
@@ -135,11 +142,12 @@ namespace CatCafePreview.Standalone
         public void NormalizeJsonStrings()
         {
             if (regular_introduction != null && regular_introduction.customer_id == "") regular_introduction.customer_id = null;
+            if (growth != null) foreach (var row in growth) row.Normalize();
             if (game_over == "") game_over = null;
             if (trust_customers != null) foreach (var r in trust_customers) { if (r.event_id == "") r.event_id = null; if (r.reason == "") r.reason = null; }
             if (trust_events != null) foreach (var e in trust_events) { if (e.choice == "") e.choice = null; if (e.outcome == "") e.outcome = null; }
             if (store_events != null) foreach (var e in store_events) { if (e.type == "") e.type = null; if (e.status == "") e.status = null; if (e.choice == "") e.choice = null; }
-            if (history != null) foreach (var h in history) if (h.customer_records != null) foreach (var r in h.customer_records) if (r.satisfaction == "") r.satisfaction = null;
+            if (history != null) foreach (var h in history) if (h.customer_records != null) foreach (var r in h.customer_records) { if (r.satisfaction == "") r.satisfaction = null; if (r.cat_id == "") r.cat_id = null; }
             if (visits != null) foreach (var v in visits) { if (v.departure == "") v.departure = null; if (v.cat_id == "") v.cat_id = null; if (v.satisfaction != null && string.IsNullOrEmpty(v.satisfaction.level)) v.satisfaction = null; }
             if (exchanges != null) foreach (var e in exchanges)
             {

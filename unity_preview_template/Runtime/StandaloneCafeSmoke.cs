@@ -62,6 +62,7 @@ namespace CatCafePreview
             checks += StandaloneStoreEventSmoke.Run(Path.Combine(Path.GetDirectoryName(Path.GetFullPath(reportPath)), "store-event-smoke-saves"));
             checks += StandaloneCustomerSmoke.Run(Path.Combine(Path.GetDirectoryName(Path.GetFullPath(reportPath)), "customer-smoke-saves"));
             checks += StandaloneIntakeSmoke.Run(Path.Combine(Path.GetDirectoryName(Path.GetFullPath(reportPath)), "intake-smoke-saves"));
+            checks += StandaloneGrowthSmoke.Run(Path.Combine(Path.GetDirectoryName(Path.GetFullPath(reportPath)), "growth-smoke-saves"));
             checks += StandaloneCustomerTrustSmoke.Run(Path.Combine(Path.GetDirectoryName(Path.GetFullPath(reportPath)), "customer-trust-smoke-saves"));
             checks += StandaloneRegularIntroductionSmoke.Run(Path.Combine(Path.GetDirectoryName(Path.GetFullPath(reportPath)), "regular-introduction-smoke-saves"));
             Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(reportPath)));

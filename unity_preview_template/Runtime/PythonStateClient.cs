@@ -52,6 +52,7 @@ namespace CatCafePreview
         public PythonRegularIntroduction regular_introduction;
         public PythonReservation reservation;
         public PythonCustomerTrust customer_trust;
+        public PythonGrowthPracticeChoice[] growth_practice_choices;
         public PythonHousingState housing;
         public PythonGoalResult goal_result;
         public PythonClearResults clear_results;
@@ -81,6 +82,7 @@ namespace CatCafePreview
     [Serializable] public class PythonNewGameOption { public string choice, label, detail, conditions; }
     [Serializable] public class PythonGrowthChoice
     { public string cat_id, name, kind, title, learned, group, effect; public float experience, threshold, service, rest, dispatch, play, contact, quiet; public PythonEventChoice[] choices; }
+    [Serializable] public class PythonGrowthPracticeChoice { public string cat_id, kind, label; public bool can_select; }
     [Serializable] public class PythonStoreEvent
     { public string kind, title; public int day; public float funds; public PythonEventChoice[] choices; }
     [Serializable] public class PythonEventChoice

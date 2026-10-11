@@ -24,9 +24,10 @@ namespace CatCafePreview
                 rules = JsonUtility.FromJson<CafeRules>(asset.text);
             }
             Simulation = new CafeSimulation(rules);
-            saves = new CafeSaveStore(saveDirectory ?? Path.Combine(Application.persistentDataPath, "standalone-v1"), e => JsonUtility.ToJson(e, true), DecodeSave, Simulation.Validate);
+            saves = new CafeSaveStore(saveDirectory ?? Path.Combine(Application.persistentDataPath, "standalone-v1"), EncodeSave, DecodeSave, Simulation.Validate);
         }
-        private static CafeSaveEnvelope DecodeSave(string text) { var save = JsonUtility.FromJson<CafeSaveEnvelope>(text); save?.state?.NormalizeJsonStrings(); return save; }
+        private static string EncodeSave(CafeSaveEnvelope save) { save.double_bits = CafeDoublePrecision.Capture(save.state); return JsonUtility.ToJson(save, true); }
+        private static CafeSaveEnvelope DecodeSave(string text) { var save = JsonUtility.FromJson<CafeSaveEnvelope>(text); save?.state?.NormalizeJsonStrings(); if (save?.state != null) CafeDoublePrecision.Restore(save.state, save.double_bits); return save; }
         public IEnumerator Request(string route, string commandJson, Action<CafeResponse> completed, int timeout = 3)
         {
             CafeResponse response;
@@ -106,9 +107,9 @@ namespace CatCafePreview
                 customer_satisfaction = new PythonSatisfactionCounts { satisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "satisfied"), normal = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "normal"), dissatisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "dissatisfied") },
                 store_event_label = StoreEventLabel(), store_event = StoreEventView(), items = SupplyView(),
                 customer_trust = CustomerTrustView(), customer_progress = CustomerProgress(), customer_schedule = Simulation.CustomerSchedule(s.day),
-                regular_introduction = RegularIntroductionView(), intake_request = IntakeView(), required_action = Simulation.IntakeWaiting ? "intake_request" : Simulation.RegularIntroductionWaiting ? "regular_introduction" : Simulation.CustomerTrustWaiting ? "customer_trust" : Simulation.StoreEventWaiting ? "store_event" : "", rest_proposal = new string[0], missing_cats = new PythonMissingCat[0], growth_choices = new PythonGrowthChoice[0],
+                regular_introduction = RegularIntroductionView(), intake_request = IntakeView(), required_action = Simulation.IntakeWaiting ? "intake_request" : Simulation.RegularIntroductionWaiting ? "regular_introduction" : Simulation.CustomerTrustWaiting ? "customer_trust" : Simulation.StoreEventWaiting ? "store_event" : Simulation.GrowthWaiting ? "growth" : "", rest_proposal = new string[0], missing_cats = new PythonMissingCat[0], growth_choices = GrowthChoices(), growth_practice_choices = GrowthPracticeView(),
                 new_game_options = new[] { new PythonNewGameOption { choice = "free", label = "自由営業（単独版・第1段階）", detail = "新規開始・出勤・自動接客・閉店・翌日・保存再開", conditions = "初期猫5匹 / 2席 / 資金1000。目標・設備・用品購入・派遣・高度な顧客イベントは後続移植。" } },
-                cats = s.cats.Select(c => new PythonCatState { cat_id = c.id, content_cat_id = c.id, name = Simulation.Definition(c.id).name, stamina = (float)c.stamina, max_stamina = (float)rules.max_stamina, fatigue = (float)c.fatigue, stress = (float)c.stress, working = c.working, health_status = c.health, health_label = c.health == "healthy" ? "健康" : "療養中", activity = c.activity, activity_label = c.activity == "cafe" ? "在店" : "家出中", records = new PythonCatRecords() }).ToArray(),
+                cats = s.cats.Select(c => new PythonCatState { cat_id = c.id, content_cat_id = c.id, name = Simulation.Definition(c.id).name, stamina = (float)c.stamina, max_stamina = (float)rules.max_stamina, fatigue = (float)c.fatigue, stress = (float)c.stress, working = c.working, growth_details = GrowthDetails(c.id), health_status = c.health, health_label = c.health == "healthy" ? "健康" : "療養中", activity = c.activity, activity_label = c.activity == "cafe" ? "在店" : "家出中", records = new PythonCatRecords() }).ToArray(),
                 seats = Enumerable.Range(0, 2).Select(i => { var e = s.exchanges.Find(x => x.seat == i); return new PythonSeatState { seat_id = "seat-" + (i + 1), customer_id = e?.customer_id, customer_name = e?.customer_id, cat_id = e?.cat_id, disabled = Simulation.DisabledSeat(i) }; }).ToArray(),
                 customers = s.visits.Where(v => v.departure == null).Select(v => new PythonCustomerState { customer_id = v.id, name = v.id, status = s.queue.Contains(v.id) ? "waiting" : "seated" }).ToArray(),
                 finance = new PythonFinanceState { opening_funds = (float)s.opening_funds, total_income = (float)s.revenue, total_expenses = (float)s.expenses, recruitment_expenses = (float)s.recruitment_expenses, net_cash_flow = (float)(s.revenue - s.expenses), closing_funds = (float)s.funds },

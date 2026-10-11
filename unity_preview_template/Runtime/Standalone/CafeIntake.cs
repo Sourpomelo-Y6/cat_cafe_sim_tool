@@ -19,6 +19,7 @@ namespace CatCafePreview.Standalone
             if (State.funds <= rule.cost) throw new InvalidOperationException("受け入れ後に資金が残る必要があります。");
             if (State.cats.Count >= Rules.intake.capacity) throw new InvalidOperationException("飼育スペースが満員です。");
             State.cats.Add(new CafeCat { id = rule.cat.id, stamina = Rules.max_stamina, working = false });
+            EnsureGrowthCat(rule.cat.id);
             State.funds -= rule.cost; State.expenses += rule.cost; State.recruitment_expenses += rule.cost;
         }
         public CatDefinition Definition(string id) => Definitions(State).First(c => c.id == id);
@@ -36,6 +37,7 @@ namespace CatCafePreview.Standalone
             { if (r.status != status) throw new InvalidOperationException("回答済みの依頼は変更できません。"); return; }
             if (State.cats.Any(c => c.activity == "missing" && c.missing_remaining == 0)) throw new InvalidOperationException("帰還結果を確認してください。");
             if (CustomerTrustWaiting) throw new InvalidOperationException("顧客の信頼回復イベントに回答してください。");
+            if (GrowthWaiting) throw new InvalidOperationException("猫の成長・習熟を選択してください。");
             if (StoreEventWaiting) throw new InvalidOperationException("店舗イベントに回答してください。");
             Require("preparation");
             if (!IntakeWaiting) throw new InvalidOperationException("回答待ちの依頼はありません。");

@@ -9,6 +9,7 @@ namespace CatCafePreview.Standalone
         public int version = 1, slot;
         public string created_at;
         public CafeSnapshot state;
+        public string[] double_bits;
     }
     public sealed class CafeSaveStore
     {

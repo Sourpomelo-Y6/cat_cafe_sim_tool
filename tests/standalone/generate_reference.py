@@ -18,8 +18,44 @@ from cat_cafe_sim.storage.relationships import RelationshipStore
 from export_standalone_rules import exported_rules
 
 
+
+GROWTH_TYPES=('teaser','ball','plush','tunnel','pet','brush','voice','presence')
+GROWTH_GROUPS=('play','contact','quiet')
+def growth_row(row):
+    result={}
+    for key,value in row.items():
+        if isinstance(value,dict):
+            if key.endswith('actions') or key=='type_actions': result[key]=[value[k] for k in GROWTH_TYPES]
+            elif key.endswith('groups') or key=='groups': result[key]=[value[k] for k in GROWTH_GROUPS]
+            else: result[key]=growth_row(value)
+        else: result[key]=(value or 0) if key.endswith('day') else value
+    return result
+
+def growth_answers(core, record, specialization='service', practice=False):
+    from cat_cafe_sim.core import cafe_growth as g
+    while True:
+        pending=g.pending(core)
+        if pending: record('resolve_growth',cat_id=pending[0],choice=specialization); continue
+        pending=g.mastery_pending(core)
+        if pending: record('resolve_growth_mastery',cat_id=pending[0],choice=g.mastery_choices(core,pending[0])[0]); continue
+        pending=g.type_mastery_pending(core)
+        if pending: record('resolve_growth_type_mastery',cat_id=pending[0],choice=g.type_mastery_choices(core,pending[0])[0]); continue
+        break
+    if not practice: return
+    try: core.require_events_resolved()
+    except ValueError: return
+    for id,row in core.growth['cats'].items():
+        kinds=[]
+        if row.get('second_mastery') and 'second_group_type_practice' not in row: kinds.append('begin_second_group_type_practice')
+        if row.get('second_group_type_practice',{}).get('type_mastery') and 'second' not in row['second_group_type_practice']: kinds.append('begin_second_group_second_type_practice')
+        if row.get('second_mastery') and 'third_group_practice' not in row: kinds.append('begin_third_group_practice')
+        if row.get('third_group_practice',{}).get('mastery') and 'individual' not in row['third_group_practice']: kinds.append('begin_third_group_type_practice')
+        if row.get('third_group_practice',{}).get('individual',{}).get('type_mastery') and 'second' not in row['third_group_practice']['individual']: kinds.append('begin_third_group_second_type_practice')
+        for kind in kinds: record(kind,cat_id=id)
+
+
 def exchange(s, seat=0):
-    return dict(customer_id=s.customer_id, cat_id=s.cat_id, seat=seat, mode=s.state['mode'],
+    return dict(type_actions=[s.summary()['type_actions'][k] for k in GROWTH_TYPES], stamina_spent=s.summary()['stamina_spent'], growth_groups=[v for v in (s.config.mastery_group,s.config.second_mastery_group,s.config.third_mastery_group) if v], growth_types=[v for v in (s.config.type_mastery,s.config.second_type_mastery,s.config.second_group_type_mastery,s.config.second_group_second_type_mastery,s.config.third_group_type_mastery,s.config.third_group_second_type_mastery) if v], customer_id=s.customer_id, cat_id=s.cat_id, seat=seat, mode=s.state['mode'],
                 last_group=s.state['last_interaction_group'], previous_action=s.state['previous_action'],
                 previous_reaction=s.state['previous_reaction'], end_reason=s.state['end_reason'],
                 remaining=s.state['remaining_ticks'], streak=s.state['interaction_streak'],
@@ -39,6 +75,7 @@ def snapshot(session):
     if c.customer_trust:
         extra['trust_customers'] = [dict(customer_id=key, **{k:(value or 0) if k=='departed_day' else value for k,value in row.items()}) for key,row in c.customer_trust['customers'].items()]
         extra['trust_events'] = [dict(row, resolved_day=row['resolved_day'] or 0) for row in c.customer_trust['events'].values()]
+    if c.growth: extra['growth']=[dict(cat_id=id,**growth_row(row)) for id,row in c.growth['cats'].items()]
     return dict(**extra, seed=c.seed, day=c.day, tick=c.tick, phase='closed' if c.closed else 'preparation' if c.can_set_shifts else 'open',
                 funds=c.funds, opening_funds=summary['opening_funds'], revenue=summary['revenue'], expenses=summary['total_expenses'],
                 popularity=c.management['popularity'], completed=summary['completed_interactions'], game_over=(c.management['game_over'] or {}).get('reason'),
@@ -77,6 +114,7 @@ def generate():
             core.initialize_customer_satisfaction(selected['customer_satisfaction'])
             goal = dict(selected['goal']); goal.pop('stages', None); core.enable_goal(goal, tracking_only=True)
             core.initialize_customer_loyalty(selected['customer_loyalty']); core.initialize_customer_discontent(selected['customer_discontent'])
+            core.initialize_growth(selected['growth'])
             core.initialize_customer_trust(selected['customer_trust'])
             core.initialize_intake_request(selected['intake_request'])
             core.initialize_regular_introduction(selected['regular_introduction'])
@@ -89,6 +127,7 @@ def generate():
                     if choice == 'close': session.day_off()
                     else: session.resolve_store_event(choice)
                 elif kind == 'resolve_customer_trust': core.resolve_customer_trust(source, choice)
+                elif kind.startswith('resolve_growth') or kind.startswith('begin_'): getattr(core,kind)(cat_id,choice) if kind.startswith('resolve_') else getattr(core,kind)(cat_id)
                 elif kind == 'resolve_regular_introduction': session.resolve_regular_introduction(choice)
                 elif kind == 'resolve_intake': session.resolve_intake_request(choice)
                 elif kind == 'use_item': core.use_item(source, cat_id)
@@ -105,6 +144,7 @@ def generate():
                     if missing['status']=='waiting': record('resolve_missing', cat_id=missing['cat_id'])
                 for trust in list(core.customer_trust['events'].values()):
                     if trust['status']=='waiting': record('resolve_customer_trust', choice='ignore' if seed==1 else 'recover', source=trust['id'])
+                growth_answers(core,record,'rest' if seed==1 else 'service')
                 event = core.store_events['days'][-1]
                 if event.get('status') == 'waiting':
                     options = ('repair','patch','close') if event['type']=='trouble' else ('full','small','decline')
@@ -121,10 +161,14 @@ def generate():
                 if supplies and stressed: record('use_item', cat_id=stressed, source=next(iter(supplies)))
                 # Alternating work/rest preserves the existing fatigue/health rules.
                 working = [key for i, key in enumerate(core.cats) if core.cats[key].health_status == 'healthy' and core.activity(key)=='cafe' and (i + day) % 3 != 0]
+                growth_answers(core,record,'rest' if seed==1 else 'service',practice=True)
                 record('set_shifts', working)
                 if not working: record('day_off'); continue
                 record('start_business')
-                while not core.closed: record('advance_business')
+                while not core.closed:
+                    growth_answers(core,record,'rest' if seed==1 else 'service',practice=True)
+                    record('advance_business')
+                growth_answers(core,record,'rest' if seed==1 else 'service')
                 if core.management['game_over']: break
                 for event in list(core.management['events'].values()):
                     if event['status']=='waiting': record('resolve_missing', cat_id=event['cat_id'])
