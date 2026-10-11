@@ -31,3 +31,8 @@ UIはシーンと `Assets/CatCafePreview/Prefabs/ContentPreview.prefab` に保�
 猫の詳細画面は、営業画面と猫一覧を準備した後、`Cat Cafe > 開発用 > UI再生成 > 猫の詳細`で配置します。Play中は猫一覧の名前または「詳細」を押し、体調と成長・習得進捗を閲覧できます。
 
 タイトル画面は`Cat Cafe > 開発用 > UI再生成 > タイトル画面`で配置し、`Cat Cafe > プレビュー > タイトル画面を開く`からPlayできます。「はじめから」で目標を選び、「つづきから」で保存を再開して営業シーンへ進みます。Python状態サーバーは先に起動してください。
+
+
+## Unity単独の営業確認
+
+`Cat Cafe > Standalone > Create first-stage scene`で単独用シーンを生成し、Playします。Pythonサーバーなしで新規開始・準備・営業・閉店・翌日・保存再開を実行できます。自由営業・段階人気、席拡張、加入、成長、用品、設備と全7種類の専門客を接続済みです。詳細と検証範囲は[長毛好き客・VIPの移植](../../Docs/UnityStandaloneLateCustomers.md)を参照してください。クリア記録・エンディング・他目標と既存Python画面全体の切り替えは後続です。

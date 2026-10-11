@@ -19,7 +19,9 @@ namespace CatCafePreview
             return "人気第1段階達成翌日から解放。白猫客：白猫で心をつかむ "+r.advanced_customer.connect_count+"回 / 追加料金 "+r.advanced_customer.bonus+"\n"+
                 "静かな交流客（"+string.Join("・",r.play_customer.quiet_weekdays.Select(i=>days[i]))+"）：静かな交流スペース＋声かけ・そばにいる計 "+r.quiet_customer.quiet_count+"回 / 追加料金 "+r.quiet_customer.bonus+" / 人気 "+r.quiet_customer.popularity_bonus+"\n"+
                 "遊び客（"+string.Join("・",r.play_customer.weekdays.Select(i=>days[i]))+"）：キャットタワー＋遊び計 "+r.play_customer.play_count+"回 / 追加料金 "+r.play_customer.bonus+" / 人気 "+r.play_customer.popularity_bonus+"\n"+
-                "触れ合い客（日）：お手入れブラシ＋なでる・ブラッシング計 "+r.contact_customer.contact_count+"回 / 追加料金 "+r.contact_customer.bonus+" / 人気 "+r.contact_customer.popularity_bonus;
+                "触れ合い客（日）：お手入れブラシ＋なでる・ブラッシング計 "+r.contact_customer.contact_count+"回 / 追加料金 "+r.contact_customer.bonus+" / 人気 "+r.contact_customer.popularity_bonus+"\n"+
+                "長毛専門客：人気第2段階達成翌日から営業日に "+(r.longhair_customer.probability*100)+"％。長毛猫との通常の触れ合い "+r.longhair_customer.contact_count+"回（設備不要） / 追加料金 "+r.longhair_customer.bonus+" / 人気 "+r.longhair_customer.popularity_bonus+"\n"+
+                "VIP：人気最終段階達成翌日から1名。三毛猫で心をつかむ "+r.vip_customer.connect_count+"回・心を開く "+r.vip_customer.open_up_count+"回・同時発動 "+r.vip_customer.simultaneous_count+"回 / 追加料金 "+r.vip_customer.bonus+" / 人気 "+r.vip_customer.popularity_bonus;
         }
     }
 }

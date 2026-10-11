@@ -46,7 +46,7 @@ namespace CatCafePreview
             GUILayout.Label(notice); GUI.enabled = !busy;
             if (title)
             {
-                GUILayout.Label("自由営業・段階人気目標 / 初期猫5匹 / 2席。白猫のこだわり客・特別予約に対応。静かな交流・遊び・触れ合い客と接客設備に対応。長毛専門客・VIP・派遣は後続移植。\n新規開始は単独版スロット1へ初期状態を保存します。");
+                GUILayout.Label("自由営業・段階人気目標 / 初期猫5匹 / 2席。白猫のこだわり客・特別予約に対応。静かな交流・遊び・触れ合い客と接客設備に対応。長毛専門客・VIPにも対応。クリア記録・派遣・終了演出は後続移植。\n新規開始は単独版スロット1へ初期状態を保存します。");
                 if (GUILayout.Button("人気目標で新規開始（移植範囲）")) StartCoroutine(Send("new_game",choice:"popularity"));
                 if (GUILayout.Button("新規開始")) StartCoroutine(Send("new_game"));
                 foreach (var save in backend.ListSaves().saves)
@@ -100,7 +100,7 @@ namespace CatCafePreview
                     if (GUILayout.Button(practice.label)) StartCoroutine(Send(practice.kind, catId: practice.cat_id));
                 }
                 if(state.objective=="popularity")GUILayout.Label(state.specialist_description);
-                foreach(var result in state.specialist_results)GUILayout.Label(result.customer_id+" / 担当 "+result.cat_id+" / "+(result.result=="success"?"条件達成":"条件未達")+" / 分類交流 "+result.service_count+" / 専用設備 "+(result.service_equipment?"あり":"なし")+" / 心をつかむ "+result.connect_count+" / 心を開く "+result.open_up_count+" / 追加料金 "+result.bonus);
+                foreach(var result in state.specialist_results)GUILayout.Label(result.customer_id+" / 担当 "+result.cat_id+" / "+(result.result=="success"?"条件達成":"条件未達")+" / 分類交流 "+result.service_count+" / 専用設備 "+(result.customer_id=="advanced-longhair" || result.customer_id=="vip-calico"?"不要":result.service_equipment?"あり":"なし")+" / 心をつかむ "+result.connect_count+" / 心を開く "+result.open_up_count+" / 同時発動 "+result.simultaneous_count+" / 追加料金 "+result.bonus);
                 var reservation=state.reservation;
                 if(reservation!=null)
                 {

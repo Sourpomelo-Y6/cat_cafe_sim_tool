@@ -421,6 +421,20 @@
     "bonus": 200,
     "popularity_bonus": 5
   },
+  "longhair_customer": {
+    "probability": 0.3,
+    "contact_count": 3,
+    "bonus": 120,
+    "popularity_bonus": 2
+  },
+  "vip_customer": {
+    "feature": "calico",
+    "connect_count": 1,
+    "open_up_count": 1,
+    "simultaneous_count": 1,
+    "bonus": 400,
+    "popularity_bonus": 10
+  },
   "quiet_customer": {
     "equipment": "quiet_space",
     "quiet_count": 3,
@@ -620,5 +634,5 @@
       "rest_fatigue": 1.5
     }
   },
-  "rules_id": "1668183f4ee459f0685a2fb61d8994c67ea2219de9f207bb89b2f6e59ed3b89b"
+  "rules_id": "1f8a134613e83534ed163231da8c643093598189e65d6593e75da33053acf36c"
 }

@@ -6,14 +6,12 @@ from generate_expansion_cases import expected
 from compare_full_customer_progress import differences
 from cat_cafe_sim.cafe_new_game import create_game,starting_conditions
 
-def compare(data, exclude_unported=False):
+def compare(data):
     fixture=next(c for c in data['cases'] if c['objective']=='popularity' and c['rules']['starting_funds']==1000);rows=fixture['operations']
     with tempfile.TemporaryDirectory(dir=ROOT/'Logs/Standalone') as temp:
         selected=starting_conditions('popularity');selected['store_events']['probability']=0
         full=create_game(Path(temp),selected,seed=0)
-        if exclude_unported:
-            for name in ("longhair_customer","vip_customer"):setattr(full.core,name,None)
-        report=dict(exclude_unported=exclude_unported,conditions='Normal costs/goal targets, seed 0, store event probability 0 on both sides; full popularity enables specialised customers.',equal_operations=0,first_difference=None)
+        report=dict(conditions='Normal costs/goal targets, seed 0, store event probability 0 on both sides; full popularity enables specialised customers.',equal_operations=0,first_difference=None)
         for op in rows:
             kind=op['kind'];failed=False
             try:
@@ -35,4 +33,5 @@ def compare(data, exclude_unported=False):
             report['equal_operations']+=1
         return report
 if __name__=='__main__':
-    result=compare(json.loads(Path(sys.argv[1]).read_text(encoding='utf-8')),exclude_unported=len(sys.argv)>3);Path(sys.argv[2]).write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8');print(sys.argv[2])
+    if len(sys.argv)!=3:raise SystemExit('Usage: compare_full_popularity.py <cases.json> <report.json>; all specialist customers are enabled')
+    result=compare(json.loads(Path(sys.argv[1]).read_text(encoding='utf-8')));Path(sys.argv[2]).write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8');print(sys.argv[2])

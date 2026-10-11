@@ -69,7 +69,9 @@ def specialist_snapshot(core, result):
     from cat_cafe_sim.core.cafe_quiet_customer import evaluate as quiet
     from cat_cafe_sim.core.cafe_play_customer import evaluate as play
     from cat_cafe_sim.core.cafe_contact_customer import evaluate as contact
-    value=(advanced(core,result) or reservation(core,result) or quiet(core,result) or play(core,result) or contact(core,result)) if result else None
+    from cat_cafe_sim.core.cafe_longhair_customer import evaluate as longhair
+    from cat_cafe_sim.core.cafe_vip_customer import evaluate as vip
+    value=(advanced(core,result) or reservation(core,result) or quiet(core,result) or play(core,result) or contact(core,result) or longhair(core,result) or vip(core,result)) if result else None
     return dict(specialist_result=('success' if value['success'] else 'failure') if value else None,specialist_bonus=value['bonus'] if value else 0,service_equipment=bool(result and any(result.get(k,False) for k in ('quiet_equipment','play_equipment','contact_equipment'))),service_count=next((value[k] for k in ('quiet_count','play_count','contact_count') if value and k in value),0))
 
 
@@ -122,7 +124,7 @@ def snapshot(session):
                 visits=[dict(id=v.id, cat_id=next((e.cat_id for e in c.interactions.values() if e.customer_id == v.id),
                                               next((r['cat_id'] for r in results if r['customer_id'] == v.id), None)),
                              **specialist_snapshot(c,next((r for r in results if r["customer_id"]==v.id),None)), arrival=v.arrival_tick, seated_at=v.seated_at if v.seated_at is not None else -1, seated_ticks=v.seated_ticks, departure=v.departure_reason, bill=v.bill,
-                             type_actions=next(([r['type_actions'][k] for k in GROWTH_TYPES] for r in results if r['customer_id']==v.id),[0]*8),connect_count=next((r["connect_count"] for r in results if r["customer_id"]==v.id),0),open_up_count=next((r["open_up_count"] for r in results if r["customer_id"]==v.id),0),
+                             type_actions=next(([r['type_actions'][k] for k in GROWTH_TYPES] for r in results if r['customer_id']==v.id),[0]*8),connect_count=next((r["connect_count"] for r in results if r["customer_id"]==v.id),0),open_up_count=next((r["open_up_count"] for r in results if r["customer_id"]==v.id),0),simultaneous_count=next((r["simultaneous_count"] for r in results if r["customer_id"]==v.id),0),
                              satisfaction=next((evaluate_satisfaction(c, r, evaluate_advanced(c,r)) for r in results if r['customer_id']==v.id), None)) for v in c.visits.values()],
                 loyalty=[dict(customer_id=key, score=row['score'], regular_day=row['regular_day'] or 0) for key,row in c.customer_loyalty['customers'].items()],
                 discontent=[dict(customer_id=key, **copy.deepcopy(row)) for key,row in c.customer_discontent['customers'].items()],
@@ -132,7 +134,8 @@ def snapshot(session):
 
 
 def generate():
-    data = dict(draws=[], scenarios=[], exchanges=[])
+    from cat_cafe_sim.core.cafe_longhair_customer import draw as longhair_draw
+    data = dict(longhair_draws=[dict(seed=seed,day=day,value=longhair_draw(seed,day)) for seed in (0,1,42,2147483647) for day in range(1,101)],draws=[], scenarios=[], exchanges=[])
     for seed in (0, 1, 42):
         print(f"Generating seed {seed}", flush=True)
         for day in (1, 3, 28, 200):

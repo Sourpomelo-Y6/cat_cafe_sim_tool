@@ -84,10 +84,10 @@ namespace CatCafePreview.Standalone
             var purchase=s.equipment_purchases.Find(p=>p.id==item);
             return purchase!=null && Rules.equipment.Single(r=>r.id==purchase.kind).group==group;
         }
-        private string ServiceGroup(string id) => id=="advanced-quiet"?"quiet":id=="advanced-play"?"play":id=="advanced-contact"?"contact":"";
+        private string ServiceGroup(string id) => id=="advanced-quiet"?"quiet":id=="advanced-play"?"play":(id=="advanced-contact" || id=="advanced-longhair")?"contact":"";
         private int PreferredSeat(string customer,int[] free)
         {
-            string group=State.objective=="popularity"?ServiceGroup(customer):"";
+            string group=State.objective=="popularity" && customer!="advanced-longhair"?ServiceGroup(customer):"";
             foreach(int i in free)if(group!="" && Installed(i)?.group==group)return i;return free[0];
         }
     }

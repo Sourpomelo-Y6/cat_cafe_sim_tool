@@ -160,7 +160,7 @@ namespace CatCafePreview.Standalone
         {
             var s = State;
             s.history.Add(new CafeDayResult { day = s.day, equipment_expenses=s.equipment_expenses, seat_count = s.seat_count, expansion_expenses = s.expansion_expenses, goal_popularity = s.goal_popularity, arrivals = s.visits.Count, completed = s.completed, opening_funds = s.opening_funds, revenue = s.revenue, expenses = s.expenses, closing_funds = s.funds, popularity_gain = s.popularity_gain, recruitment_expenses = s.recruitment_expenses, housing_expenses = s.housing_expenses, housing_cost = s.housing_cost, item_expenses = s.item_expenses, item_sales_income = s.item_sales_income, satisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "satisfied"), normal = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "normal"), dissatisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "dissatisfied") });
-            s.history[s.history.Count - 1].customer_records = s.visits.Select(v => new CafeCustomerRecord { customer_id = v.id, cat_id = v.cat_id, departure = v.departure, satisfaction = v.satisfaction?.level, connect_count=v.connect_count, open_up_count=v.open_up_count, specialist_result=v.specialist_result, specialist_bonus=v.specialist_bonus, service_count=v.service_count, service_seat=v.service_seat, service_equipment=v.service_equipment, type_actions = (int[])v.type_actions.Clone(), affinity_delta = v.affinity_delta, stamina_spent = v.stamina_spent }).ToList();
+            s.history[s.history.Count - 1].customer_records = s.visits.Select(v => new CafeCustomerRecord { customer_id = v.id, cat_id = v.cat_id, departure = v.departure, satisfaction = v.satisfaction?.level, connect_count=v.connect_count, open_up_count=v.open_up_count, simultaneous_count=v.simultaneous_count, specialist_result=v.specialist_result, specialist_bonus=v.specialist_bonus, service_count=v.service_count, service_seat=v.service_seat, service_equipment=v.service_equipment, type_actions = (int[])v.type_actions.Clone(), affinity_delta = v.affinity_delta, stamina_spent = v.stamina_spent }).ToList();
             s.history[s.history.Count - 1].resting_cats = s.resting_cats.ToList(); s.resting_cats.Clear();
             s.day++; s.tick = 0; s.phase = "preparation"; s.opening_funds = s.funds; s.revenue = s.expenses = 0; s.completed = 0; s.recruitment_expenses = 0; s.equipment_expenses=0; s.housing_expenses = s.housing_cost = s.item_expenses = s.item_sales_income = s.expansion_expenses = s.goal_popularity = 0;
             s.visits.Clear(); s.queue.Clear(); s.exchanges.Clear(); s.popularity_gain = 0;
@@ -172,7 +172,7 @@ namespace CatCafePreview.Standalone
             PresentCustomerTrust();
             PresentReservation();
         }
-        private string Preference(string customer) => State.objective=="popularity" && customer=="advanced-white" ? Rules.advanced_customer.feature : State.objective=="popularity" && customer=="reservation-longhair" ? Rules.reservation.feature : Rules.preference_pool[(int)(PythonRandom.Hash64(State.seed + ":" + customer) % (ulong)Rules.preference_pool.Length)];
+        private string Preference(string customer) => State.objective=="popularity" && customer=="advanced-longhair"?"long_hair":State.objective=="popularity" && customer=="vip-calico"?Rules.vip_customer.feature:State.objective=="popularity" && customer=="advanced-white" ? Rules.advanced_customer.feature : State.objective=="popularity" && customer=="reservation-longhair" ? Rules.reservation.feature : Rules.preference_pool[(int)(PythonRandom.Hash64(State.seed + ":" + customer) % (ulong)Rules.preference_pool.Length)];
         private bool Matched(CafeCat c, string customer) => Array.IndexOf(Definition(c.id).features, Preference(customer)) >= 0;
         private void Advance()
         {
@@ -204,7 +204,7 @@ namespace CatCafePreview.Standalone
                 {
                     Depart(visit, e.end_reason == "exhausted" ? "interaction_exhausted" : s.tick + 1 >= Rules.opening_ticks ? "closing" : "interaction_time_limit");
                     visit.type_actions=(int[])e.type_actions.Clone(); visit.service_seat=e.service_group!=""?e.seat:-1; visit.service_equipment=e.service_group!="" && e.service_group==e.equipment_group; visit.service_count=e.service_group==""?0:Rules.types.Select((t,i)=>t.group==e.service_group?e.type_actions[i]:0).Sum();
-                    visit.connect_count=e.connect_count; visit.open_up_count=e.open_up_count; SetSpecialistResult(visit);
+                    visit.connect_count=e.connect_count; visit.open_up_count=e.open_up_count; visit.simultaneous_count=e.simultaneous_count; SetSpecialistResult(visit);
                     visit.satisfaction = CafeSatisfactionEvaluator.Evaluate(Rules.satisfaction, e, Matched(cat, e.customer_id),visit.specialist_result,SpecialistLabel(e.customer_id));
                     ApplyCustomerService(State.loyalty, State.discontent, s.day, visit.id, visit.satisfaction.level, visit.specialist_result);
                     ApplyTrustService(visit.id, visit.satisfaction.level);

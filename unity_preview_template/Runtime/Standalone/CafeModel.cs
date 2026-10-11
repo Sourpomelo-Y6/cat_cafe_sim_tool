@@ -29,7 +29,7 @@ namespace CatCafePreview.Standalone
         public GrowthRules growth;
         public HousingRules housing, housing_upgrade;
         public ItemShopRule[] item_shop;
-        public SpecialistRules advanced_customer, reservation;
+        public SpecialistRules advanced_customer, reservation, vip_customer; public LonghairRules longhair_customer;
         public ServiceCustomerRules quiet_customer,play_customer,contact_customer; public EquipmentRule[] equipment;
         public double[] expansion_costs; public GoalStageRule[] goal_stages;
         public ExchangeType[] types;
@@ -55,7 +55,7 @@ namespace CatCafePreview.Standalone
     [Serializable] public class CafeTrustCustomer { public string customer_id, status, event_id, reason; public int departed_day; }
     [Serializable] public class CafeTrustEvent { public string id, customer_id, status, choice, outcome; public int day, suspensions, resolved_day; }
     [Serializable] public class CafeArrival { public string customer_id; public int tick; }
-    [Serializable] public class CafeCustomerRecord { public string customer_id, cat_id, departure, satisfaction; public int[] type_actions = new int[8]; public int connect_count, open_up_count; public string specialist_result; public double specialist_bonus; public bool service_equipment; public int service_count; public int service_seat=-1;
+    [Serializable] public class CafeCustomerRecord { public string customer_id, cat_id, departure, satisfaction; public int[] type_actions = new int[8]; public int connect_count, open_up_count, simultaneous_count; public string specialist_result; public double specialist_bonus; public bool service_equipment; public int service_count; public int service_seat=-1;
         public double affinity_delta, stamina_spent; }
     [Serializable] public class CafeSatisfaction
     {
@@ -97,7 +97,7 @@ namespace CatCafePreview.Standalone
         public string id, cat_id, departure;
         public int arrival, seated_at = -1, seated_ticks;
         public double bill;
-        public int[] type_actions = new int[8]; public int connect_count, open_up_count; public string specialist_result; public double specialist_bonus; public bool service_equipment; public int service_count; public int service_seat=-1;
+        public int[] type_actions = new int[8]; public int connect_count, open_up_count, simultaneous_count; public string specialist_result; public double specialist_bonus; public bool service_equipment; public int service_count; public int service_seat=-1;
         public double affinity_delta, stamina_spent;
         public CafeSatisfaction satisfaction;
     }

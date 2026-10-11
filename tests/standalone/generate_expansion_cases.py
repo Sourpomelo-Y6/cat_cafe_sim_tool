@@ -46,7 +46,7 @@ def generate():
             if objective=="popularity":
                 core.initialize_advanced_customers()
                 if not expired:
-                    core.initialize_reservation();core.initialize_quiet_customer();core.initialize_play_customer();core.initialize_contact_customer()
+                    core.initialize_reservation();core.initialize_quiet_customer();core.initialize_play_customer();core.initialize_contact_customer();core.initialize_longhair_customer();core.initialize_vip_customer()
             if case_index==7:core.reservation["rules"]["open_up_count"]=999
             core.initialize_customer_loyalty(selected['customer_loyalty']); core.initialize_customer_discontent(selected['customer_discontent'])
             core.initialize_growth(selected['growth'])

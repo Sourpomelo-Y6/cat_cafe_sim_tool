@@ -24,6 +24,38 @@ static class Program
     {
         int ticks = 0, scenarios = 0;
         var rules = Decode<CafeRules>(File.ReadAllText(args[0]));
+        using(var reference=JsonDocument.Parse(File.ReadAllText(args[1])))
+        if(reference.RootElement.TryGetProperty("longhair_draws",out var draws))foreach(var row in draws.EnumerateArray())
+        {
+            int seed=row.GetProperty("seed").GetInt32(),day=row.GetProperty("day").GetInt32();double expected=row.GetProperty("value").GetDouble();
+            Assert(CafeSimulation.LonghairDraw(seed,day)==expected,"Longhair SHA256 draw differs from Python");
+            if(day<=2)continue;
+            var config=Decode<CafeRules>(Encode(rules));config.longhair_customer.probability=expected;var probe=new CafeSimulation(config,seed,"popularity");
+            probe.State.goal[0].status="cleared";probe.State.goal[0].resolved_day=1;probe.State.goal.Add(new CafeGoalStage {status="cleared",started_day=2,resolved_day=2});
+            Assert(!probe.CustomerSchedule(day).Any(a=>a.customer_id=="advanced-longhair"),"Draw equality must reject arrival");
+            config.longhair_customer.probability=Math.BitIncrement(expected);Assert(probe.CustomerSchedule(day).Count(a=>a.customer_id=="advanced-longhair")==1,"Probability just above draw must admit arrival");
+            config.longhair_customer.probability=0;probe.State.loyalty.Add(new CafeLoyalty {customer_id="advanced-longhair",regular_day=1,score=rules.loyalty.threshold});
+            int regularDay=Enumerable.Range(3,7).First(d=>(rules.start_weekday+d-1)%7==probe.ExtraWeekday("advanced-longhair"));
+            Assert(probe.CustomerSchedule(regularDay).Count(a=>a.customer_id=="advanced-longhair")==1,"Loyalty arrival must survive failed normal draw");
+            config.longhair_customer.probability=1;Assert(probe.CustomerSchedule(regularDay).Count(a=>a.customer_id=="advanced-longhair")==1,"Normal and loyalty arrivals duplicated customer");
+            Assert(!probe.CustomerSchedule(regularDay).Any(a=>a.customer_id=="vip-calico"),"VIP unlocked before final stage");
+            probe.State.goal.Add(new CafeGoalStage {status="cleared",started_day=3,resolved_day=regularDay});
+            Assert(!probe.CustomerSchedule(regularDay).Any(a=>a.customer_id=="vip-calico") && probe.CustomerSchedule(regularDay+1).Count(a=>a.customer_id=="vip-calico")==1,"VIP unlock day boundary differs");
+        }
+        if(args.Length>11)
+        {
+            using var matrix=JsonDocument.Parse(File.ReadAllText(args[11]));
+            var flags=System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic;
+            foreach(var row in matrix.RootElement.GetProperty("cases").EnumerateArray())
+            {
+                var config=Decode<CafeRules>(Encode(rules));string cat=row.GetProperty("cat").GetString(),id=row.GetProperty("id").GetString();
+                config.cats.Single(c=>c.id==cat).features=row.GetProperty("features").EnumerateArray().Select(f=>f.GetString()).ToArray();
+                var sim=new CafeSimulation(config,objective:"popularity");
+                var result=(string)typeof(CafeSimulation).GetMethod("SpecialistResult",flags).Invoke(sim,new object[]{sim.State,id,cat,row.GetProperty("connect").GetInt32(),row.GetProperty("open").GetInt32(),row.GetProperty("equipment").GetBoolean(),row.GetProperty("count").GetInt32(),row.GetProperty("simultaneous").GetInt32()});
+                Assert(result==row.GetProperty("result").GetString(),"Python specialist condition mismatch");
+                foreach(string field in new[]{"bonus","popularity"})Assert((double)typeof(CafeSimulation).GetMethod(field=="bonus"?"SpecialistBonus":"SpecialistPopularity",flags).Invoke(sim,new object[]{id,result})==row.GetProperty(field).GetDouble(),"Python specialist reward mismatch");
+            }
+        }
         if(args.Length>10)
         {
             using var cases=JsonDocument.Parse(File.ReadAllText(args[10]));
