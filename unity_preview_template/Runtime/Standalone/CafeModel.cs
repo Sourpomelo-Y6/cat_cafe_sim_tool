@@ -29,6 +29,7 @@ namespace CatCafePreview.Standalone
         public GrowthRules growth;
         public HousingRules housing, housing_upgrade;
         public ItemShopRule[] item_shop;
+        public double[] expansion_costs; public GoalStageRule[] goal_stages;
         public ExchangeType[] types;
         public IntakeRules intake, regular_introduction;
         public string rules_id;
@@ -108,8 +109,9 @@ namespace CatCafePreview.Standalone
     [Serializable] public class CafeDayResult
     {
         public int day, arrivals, completed;
+        public int seat_count = 2;
         public double opening_funds, revenue, expenses, closing_funds;
-        public double recruitment_expenses, housing_expenses, housing_cost, item_expenses, item_sales_income;
+        public double recruitment_expenses, housing_expenses, housing_cost, item_expenses, item_sales_income, expansion_expenses, goal_popularity;
         public double popularity_gain;
         public int satisfied, normal, dissatisfied;
         public List<string> resting_cats = new List<string>();
@@ -121,7 +123,8 @@ namespace CatCafePreview.Standalone
         public string rules_id, instance_id, phase = "preparation", game_over;
         public double funds, opening_funds, popularity, revenue, expenses;
         public int completed;
-        public double recruitment_expenses, housing_expenses, housing_cost, item_expenses, item_sales_income;
+        public int seat_count = 2;
+        public double recruitment_expenses, housing_expenses, housing_cost, item_expenses, item_sales_income, expansion_expenses, goal_popularity;
         public double popularity_gain;
         public List<CafeCat> cats = new List<CafeCat>();
         public List<CafeVisit> visits = new List<CafeVisit>();
@@ -140,6 +143,9 @@ namespace CatCafePreview.Standalone
         public List<string> resting_cats = new List<string>();
         public List<CafeTrustCustomer> trust_customers = new List<CafeTrustCustomer>();
         public List<CafeTrustEvent> trust_events = new List<CafeTrustEvent>();
+        public string objective = "free";
+        public List<CafeGoalStage> goal = new List<CafeGoalStage>();
+        public List<CafeSeatPurchase> expansion = new List<CafeSeatPurchase>();
         public CafeHousing housing = new CafeHousing();
         public CafeIntake intake_request = new CafeIntake();
         public CafeRegularIntroduction regular_introduction = new CafeRegularIntroduction();

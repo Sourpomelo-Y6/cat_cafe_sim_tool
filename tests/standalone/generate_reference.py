@@ -85,11 +85,13 @@ def snapshot(session):
             return dict(source=u['source'],cat_id=u['cat_id'],day=u['day'],before=before.get('stress',0) if mode=='both' else before if mode=='stress' else 0,after=after.get('stress',0) if mode=='both' else after if mode=='stress' else 0,
                         before_fatigue=before.get('fatigue',0) if mode=='both' else before if mode=='fatigue' else 0,after_fatigue=after.get('fatigue',0) if mode=='both' else after if mode=='fatigue' else 0)
         extra['item_uses']=[item_use(u) for u in c.item_uses]
+    extra['seat_count']=len(c.seats);extra['expansion_expenses']=summary.get('expansion_expenses',0)
+    if c.expansion: extra['expansion']=copy.deepcopy(c.expansion['purchases'])
     extra['item_expenses']=summary.get('item_expenses',0);extra['item_sales_income']=summary.get('item_sales_income',0)
     if c.housing:
         extra['housing'] = dict(purchased_day=(c.housing['purchase'] or {}).get('day',0), upgraded_day=c.housing.get('upgrade',{}).get('day',0))
         extra['housing_expenses'] = summary.get('housing_expenses',0)
-        extra['history'] = [dict(day=row['day'], housing_expenses=row['summary'].get('housing_expenses',0), item_expenses=row['summary'].get('item_expenses',0),item_sales_income=row['summary'].get('item_sales_income',0),housing_cost=next(charge['housing_cost'] for charge in c.operating_cost['charges'] if charge['day']==row['day'])) for row in c.day_results]
+        extra['history'] = [dict(day=row['day'],seat_count=row['summary'].get('seat_count',2),expansion_expenses=row['summary'].get('expansion_expenses',0), housing_expenses=row['summary'].get('housing_expenses',0), item_expenses=row['summary'].get('item_expenses',0),item_sales_income=row['summary'].get('item_sales_income',0),housing_cost=next(charge['housing_cost'] for charge in c.operating_cost['charges'] if charge['day']==row['day'])) for row in c.day_results]
         from cat_cafe_sim.core.cafe_housing import daily_cost
         extra['housing_cost'] = daily_cost(c) if c.closed else 0
     if c.growth: extra['growth']=[dict(cat_id=id,**growth_row(row)) for id,row in c.growth['cats'].items()]
@@ -153,7 +155,7 @@ def generate():
                     from cat_cafe_sim.core.cafe_item_shop import catalog
                     session.purchase_item(next(r for r in catalog() if r['item']['id']==choice))
                 elif kind == 'sell_item': session.sell_item(source)
-                elif kind in ('purchase_housing','upgrade_housing'): getattr(core,kind)()
+                elif kind in ('purchase_housing','upgrade_housing','expand_seats'): getattr(core,kind)()
                 elif kind == 'set_shifts': session.set_shifts(working)
                 elif kind == 'next_day': session.next_day()
                 elif kind == 'day_off': session.day_off()
@@ -176,6 +178,7 @@ def generate():
                     record('resolve_store_event', choice=choice)
                     if core.management['game_over']: break
                     if choice == 'close': continue
+                if day >= 2 and len(core.seats)==2 and core.funds>500: record('expand_seats')
                 if day >= 2 and not core.housing['purchase'] and core.funds > core.housing['rules']['cost']: record('purchase_housing')
                 if day >= 10 and core.housing['purchase'] and 'upgrade' not in core.housing and core.funds > 1000: record('upgrade_housing')
                 if core.intake_request['status'] == 'waiting': record('resolve_intake', choice='decline' if seed == 1 else 'accept')

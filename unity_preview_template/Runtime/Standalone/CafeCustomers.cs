@@ -36,11 +36,23 @@ namespace CatCafePreview.Standalone
             var schedule = new List<CafeArrival>();
             for (int i = 0; i < Rules.arrival_ticks.Length; i++)
                 if (Rules.patterns[i % Rules.patterns.Length].days.Contains(weekday)) schedule.Add(new CafeArrival { customer_id = "guest-" + (i + 1), tick = Rules.arrival_ticks[i] });
+            foreach(var purchase in State.expansion.Where(p=>p.seats>=4 && day>p.day))schedule.Add(new CafeArrival {customer_id=purchase.seats==4?"expanded-guest":"expanded-guest-"+(purchase.seats-3),tick=(purchase.seats-4)*6});
             foreach (var r in State.loyalty.Where(r => r.regular_day > 0 && day > r.regular_day && ExtraWeekday(r.customer_id) == weekday))
             {
                 var existing = schedule.Find(a => a.customer_id == r.customer_id);
                 if (existing != null) existing.tick = 0;
                 else schedule.Add(new CafeArrival { customer_id = r.customer_id, tick = 0 });
+            }
+            for(int stage=1;stage<=2;stage++)
+            {
+                int cleared=ClearedGoalDay(stage), count=stage==1?Rules.popular_customer_count:Rules.second_popular_customer_count;
+                if(cleared==0 || day<=cleared)continue;
+                for(int i=0;i<count;i++)
+                {
+                    string id="guest-"+(Rules.arrival_ticks.Length+(stage==1?0:Rules.popular_customer_count)+i+1);
+                    int tick=(2*i+1)*Rules.opening_ticks/(stage==1?2*(count+1):2*count);var existing=schedule.Find(r=>r.customer_id==id);
+                    if(existing==null)schedule.Add(new CafeArrival {customer_id=id,tick=tick});else existing.tick=tick;
+                }
             }
             var e = State.store_events.Find(r => r.day == day);
             if (e?.type == "rain")

@@ -16,6 +16,7 @@ namespace CatCafePreview.Standalone
         {
             if(State.game_over!=null)return "経営終了後は用品を操作できません。";
             if(State.cats.Any(c=>c.activity=="missing" && c.missing_remaining==0))return "帰還結果を確認してください。";
+            if(GoalWaiting)return "人気目標の結果を確認してください。";
             if(CustomerTrustWaiting)return "顧客の信頼回復イベントに回答してください。";
             if(GrowthWaiting)return "猫の成長・習熟を選択してください。";
             if(StoreEventWaiting)return "店舗イベントに回答してください。";

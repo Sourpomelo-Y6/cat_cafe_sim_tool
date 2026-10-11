@@ -16,7 +16,7 @@ namespace CatCafePreview.Standalone
             return new CafeStoreEvent { day = day, draw = draw, type = type, status = type == "trouble" || type == "support" ? "waiting" : null };
         }
         private void PresentStoreEvent() => State.store_events.Add(DrawStoreEvent(State.seed, State.day));
-        public bool DisabledSeat(int seat) => CurrentStoreEvent.choice == "patch" && seat >= Math.Max(0, 2 - Rules.store_events.trouble_seat_loss);
+        public bool DisabledSeat(int seat) => CurrentStoreEvent.choice == "patch" && seat >= Math.Max(0, State.seat_count - Rules.store_events.trouble_seat_loss);
         public string[] AvailableSupplies => ItemInventory().Select(r => r.source).ToArray();
         private void ResolveStoreEvent(string choice)
         {

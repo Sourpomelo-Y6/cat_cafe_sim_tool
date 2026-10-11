@@ -103,7 +103,7 @@ namespace CatCafePreview
         public string status, reason, kind, title, details, summary;
         public int stage, started_day, deadline, resolved_day;
         public float target, popularity, funds;
-        public bool can_continue;
+        public bool can_continue, pending;
     }
     [Serializable] public class PythonHousingState
     {

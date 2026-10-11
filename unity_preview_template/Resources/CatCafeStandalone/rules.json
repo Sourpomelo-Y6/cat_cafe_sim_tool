@@ -387,6 +387,28 @@
     "recovery_score": 25,
     "popularity_loss": 10
   },
+  "expansion_costs": [
+    500,
+    1000,
+    1000,
+    1500,
+    2000,
+    2500
+  ],
+  "goal_stages": [
+    {
+      "days": 20,
+      "target": 250
+    },
+    {
+      "days": 20,
+      "target": 450
+    },
+    {
+      "days": 25,
+      "target": 650
+    }
+  ],
   "growth": {
     "threshold": 20,
     "service_xp": 1,
@@ -515,5 +537,5 @@
       "rest_fatigue": 1.5
     }
   },
-  "rules_id": "f1a0f2eb50274c88ac6500c381e9543c1bd31490717d7e72ed050a7b70809ba3"
+  "rules_id": "f2b7b82f354aa23df31cef7dbaa20bb5f138b7bf53881923f7449e8ff29e9bf2"
 }

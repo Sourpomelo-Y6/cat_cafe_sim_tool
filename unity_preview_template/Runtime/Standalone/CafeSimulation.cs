@@ -9,13 +9,14 @@ namespace CatCafePreview.Standalone
     {
         public readonly CafeRules Rules;
         public CafeSnapshot State { get; private set; }
-        public CafeSimulation(CafeRules rules, int seed = 0)
+        public CafeSimulation(CafeRules rules, int seed = 0, string objective = "free")
         {
             Rules = rules ?? throw new ArgumentNullException(nameof(rules));
             if (rules.version != 1 || rules.cats == null || rules.cats.Length == 0 || seed < 0) throw new ArgumentException("Invalid initial configuration");
             State = new CafeSnapshot { seed = seed, rules_id = rules.rules_id, instance_id = Guid.NewGuid().ToString("N"), funds = rules.starting_funds, opening_funds = rules.starting_funds, popularity = rules.starting_popularity };
             foreach (var cat in rules.cats.OrderBy(c => c.id, StringComparer.Ordinal)) State.cats.Add(new CafeCat { id = cat.id, stamina = rules.max_stamina });
             foreach (var cat in State.cats) EnsureGrowthCat(cat.id);
+            State.objective = objective; if (objective == "popularity") State.goal.Add(new CafeGoalStage { started_day = 1 }); else if (objective != "free") throw new ArgumentException("Invalid objective");
             PresentStoreEvent();
             PresentIntake();
             PresentRegularIntroduction();
@@ -38,6 +39,8 @@ namespace CatCafePreview.Standalone
                 || s.revenue < 0 || s.expenses < 0 || Math.Abs(s.funds - (s.opening_funds + s.revenue + s.item_sales_income - s.expenses)) > 1e-7
                 || s.history.Count != s.day - 1 || s.completed < 0
                 || !Range(s.popularity, 0, Rules.popularity.cap)) throw new ArgumentException("Invalid standalone save");
+            ValidateExpansion(s);
+            ValidateGoal(s);
             ValidateItems(s);
             ValidateHousing(s);
             ValidateIntake(s);
@@ -70,7 +73,7 @@ namespace CatCafePreview.Standalone
                     || a.bonus != (expected == "satisfied" ? Rules.satisfaction.satisfied_bonus : 0)) throw new ArgumentException("Invalid saved satisfaction");
             }
             foreach (var e in s.exchanges)
-                if (s.phase != "open" || e.seat < 0 || e.seat > 1 || !s.cats.Any(c => c.id == e.cat_id)
+                if (s.phase != "open" || e.seat < 0 || e.seat >= s.seat_count || !s.cats.Any(c => c.id == e.cat_id)
                     || !s.visits.Any(v => v.id == e.customer_id && v.cat_id == e.cat_id && v.departure == null && v.seated_at >= 0)
                     || !Rules.types.Any(t => t.id == e.mode) || e.remaining < 1 || e.end_reason != null
                     || !Range(e.stamina, 0, Rules.max_stamina) || !Range(e.tension, 0, Rules.exchange.target) || !Range(e.engagement, 0, Rules.exchange.target)
@@ -91,11 +94,13 @@ namespace CatCafePreview.Standalone
         {
             var s = State;
             if (s.game_over != null) throw new InvalidOperationException("経営終了後は保存・閲覧のみ利用できます。");
+            if (kind == "continue_goal" || kind == "advance_goal") { RespondGoal(kind); return; }
             if (kind == "purchase_housing" || kind == "upgrade_housing") { ExpandHousing(kind); return; }
             if (kind.StartsWith("resolve_growth", StringComparison.Ordinal)) { ResolveGrowth(kind, catId, choice); return; }
             if (kind == "resolve_customer_trust") { ResolveCustomerTrust(source, choice); return; }
             if (kind == "resolve_regular_introduction") { ResolveRegularIntroduction(choice); return; }
             if (kind == "resolve_intake" || kind == "resolve_intake_request") { ResolveIntake(choice); return; }
+            if (GoalWaiting && kind != "resolve_missing" && !(kind == "resolve_store_event" && choice != "close")) throw new InvalidOperationException("人気目標の結果を確認してください。");
             if (CustomerTrustWaiting && kind != "resolve_missing" && !(kind == "resolve_store_event" && choice != "close")) throw new InvalidOperationException("顧客の信頼回復イベントに回答してください。");
             if (kind != "resolve_missing" && s.cats.Any(c => c.activity == "missing" && c.missing_remaining == 0)) throw new InvalidOperationException("帰還結果を確認してください。");
             if (IntakeWaiting && kind != "resolve_missing" && kind != "resolve_store_event") throw new InvalidOperationException("保護猫の受け入れ依頼に回答してください。");
@@ -106,6 +111,7 @@ namespace CatCafePreview.Standalone
             {
                 case "begin_second_group_type_practice": case "begin_second_group_second_type_practice": case "begin_third_group_practice": case "begin_third_group_type_practice": case "begin_third_group_second_type_practice": BeginGrowthPractice(kind, catId); break;
                 case "resolve_store_event": ResolveStoreEvent(choice); return;
+                case "expand_seats": ExpandSeats(); break;
                 case "purchase_item": PurchaseItem(choice); break;
                 case "sell_item": SellItem(source); break;
                 case "use_item": UseItem(source, catId); break;
@@ -130,7 +136,7 @@ namespace CatCafePreview.Standalone
                     foreach (var c in s.cats) c.working = false;
                     Close(); s.tick = Rules.opening_ticks;
                     foreach (var c in s.cats) c.working = planned.Contains(c.id) && c.health == "healthy" && c.activity == "cafe";
-                    if (s.game_over == null) AdvanceToNextDay();
+                    if (s.game_over == null && !GoalWaiting) AdvanceToNextDay();
                     s.revision++;
                     return;
                 case "resolve_missing":
@@ -146,10 +152,10 @@ namespace CatCafePreview.Standalone
         private void AdvanceToNextDay()
         {
             var s = State;
-            s.history.Add(new CafeDayResult { day = s.day, arrivals = s.visits.Count, completed = s.completed, opening_funds = s.opening_funds, revenue = s.revenue, expenses = s.expenses, closing_funds = s.funds, popularity_gain = s.popularity_gain, recruitment_expenses = s.recruitment_expenses, housing_expenses = s.housing_expenses, housing_cost = s.housing_cost, item_expenses = s.item_expenses, item_sales_income = s.item_sales_income, satisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "satisfied"), normal = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "normal"), dissatisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "dissatisfied") });
+            s.history.Add(new CafeDayResult { day = s.day, seat_count = s.seat_count, expansion_expenses = s.expansion_expenses, goal_popularity = s.goal_popularity, arrivals = s.visits.Count, completed = s.completed, opening_funds = s.opening_funds, revenue = s.revenue, expenses = s.expenses, closing_funds = s.funds, popularity_gain = s.popularity_gain, recruitment_expenses = s.recruitment_expenses, housing_expenses = s.housing_expenses, housing_cost = s.housing_cost, item_expenses = s.item_expenses, item_sales_income = s.item_sales_income, satisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "satisfied"), normal = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "normal"), dissatisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "dissatisfied") });
             s.history[s.history.Count - 1].customer_records = s.visits.Select(v => new CafeCustomerRecord { customer_id = v.id, cat_id = v.cat_id, departure = v.departure, satisfaction = v.satisfaction?.level, type_actions = (int[])v.type_actions.Clone(), affinity_delta = v.affinity_delta, stamina_spent = v.stamina_spent }).ToList();
             s.history[s.history.Count - 1].resting_cats = s.resting_cats.ToList(); s.resting_cats.Clear();
-            s.day++; s.tick = 0; s.phase = "preparation"; s.opening_funds = s.funds; s.revenue = s.expenses = 0; s.completed = 0; s.recruitment_expenses = 0; s.housing_expenses = s.housing_cost = s.item_expenses = s.item_sales_income = 0;
+            s.day++; s.tick = 0; s.phase = "preparation"; s.opening_funds = s.funds; s.revenue = s.expenses = 0; s.completed = 0; s.recruitment_expenses = 0; s.housing_expenses = s.housing_cost = s.item_expenses = s.item_sales_income = s.expansion_expenses = s.goal_popularity = 0;
             s.visits.Clear(); s.queue.Clear(); s.exchanges.Clear(); s.popularity_gain = 0;
             foreach (var c in s.cats) { c.service_ticks = 0; if (c.activity == "cafe") { c.stamina = Rules.max_stamina; c.cannot_continue = c.health != "healthy"; } c.working &= c.health == "healthy" && c.activity == "cafe"; }
             foreach (var cat in State.cats) EnsureGrowthCat(cat.id);
@@ -164,7 +170,7 @@ namespace CatCafePreview.Standalone
         {
             var s = State;
             // Assignment precedes arrival, matching CafeInteractionSession.automatic_step.
-            for (int seat = 0; seat < 2 && s.queue.Count > 0; seat++)
+            for (int seat = 0; seat < s.seat_count && s.queue.Count > 0; seat++)
             {
                 if (DisabledSeat(seat) || s.exchanges.Any(e => e.seat == seat)) continue;
                 string customer = s.queue[0];
@@ -318,8 +324,8 @@ namespace CatCafePreview.Standalone
                 }
             }
             s.housing_cost = HousingDailyCost(s, s.day);
-            double expenses = s.housing_cost + Rules.base_cost + Rules.per_seat_cost * 2 + (CurrentStoreEvent.choice == "repair" ? Rules.store_events.trouble_cost : 0);
-            s.expenses += expenses; s.funds -= expenses; s.phase = "closed"; CheckEnd();
+            double expenses = s.housing_cost + Rules.base_cost + Rules.per_seat_cost * s.seat_count + (CurrentStoreEvent.choice == "repair" ? Rules.store_events.trouble_cost : 0);
+            s.expenses += expenses; s.funds -= expenses; s.phase = "closed"; CheckEnd(); s.goal_popularity = s.popularity; SettleGoal();
         }
         private void CheckEnd() { if (State.game_over == null) State.game_over = State.funds <= 0 ? "funds" : State.popularity <= 0 ? "popularity" : null; }
     }

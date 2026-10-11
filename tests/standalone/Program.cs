@@ -24,6 +24,22 @@ static class Program
     {
         int ticks = 0, scenarios = 0;
         var rules = Decode<CafeRules>(File.ReadAllText(args[0]));
+        if(args.Length>10)
+        {
+            using var cases=JsonDocument.Parse(File.ReadAllText(args[10]));
+            foreach(var fixture in cases.RootElement.GetProperty("cases").EnumerateArray())
+            {
+                var seats=new CafeSimulation(Decode<CafeRules>(fixture.GetProperty("rules").GetRawText()),objective:fixture.GetProperty("objective").GetString());scenarios++;
+                foreach(var op in fixture.GetProperty("operations").EnumerateArray())
+                {
+                    string beforeSeats=Encode(seats.State);bool rejected=false;
+                    try{seats.Execute(op.GetProperty("kind").GetString(),working:Decode<string[]>(op.GetProperty("working").GetRawText()),choice:op.GetProperty("choice").GetString(),source:op.GetProperty("source").GetString(),catId:op.GetProperty("cat_id").GetString());}catch(InvalidOperationException){rejected=true;}catch(ArgumentException){rejected=true;}
+                    Assert(rejected==op.GetProperty("rejected").GetBoolean(),"Python expansion rejection mismatch: "+op.GetProperty("kind")+" day "+seats.State.day);
+                    if(rejected)Assert(beforeSeats==Encode(seats.State),"Rejected seat operation changed state");
+                    using var current=JsonDocument.Parse(Encode(seats.State));Equal(op.GetProperty("expected"),current.RootElement,"expansion boundary");seats.Restore(Decode<CafeSnapshot>(Encode(seats.State)));ticks++;
+                }
+            }
+        }
         if(args.Length>9)
         {
             using var cases=JsonDocument.Parse(File.ReadAllText(args[9]));

@@ -57,8 +57,8 @@ namespace CatCafePreview
                 switch (cmd.kind)
                 {
                     case "new_game":
-                        if (cmd.choice != "free") throw new NotSupportedException("第1段階は自由営業のみ対応しています。");
-                        var initial = new CafeSimulation(Simulation.Rules, s.seed).State;
+                        if (cmd.choice != "free" && cmd.choice != "popularity") throw new NotSupportedException("単独版は自由営業と移植範囲の人気目標に対応しています。");
+                        var initial = new CafeSimulation(Simulation.Rules, s.seed, cmd.choice).State;
                         saves.Save(1, initial); Simulation.Restore(initial); break;
                     case "save_game": saves.Save(cmd.save_slot == 0 ? 1 : cmd.save_slot, s); s.revision++; break;
                     case "load_game":
@@ -100,17 +100,17 @@ namespace CatCafePreview
             var s = Simulation.State; var rules = Simulation.Rules;
             return new PythonCafeState
             {
-                version = 1, instance_id = s.instance_id, revision = s.revision, objective = "free", phase = s.phase, day = s.day, tick = s.tick,
+                version = 1, instance_id = s.instance_id, revision = s.revision, objective = s.objective, phase = s.phase, day = s.day, tick = s.tick,
                 can_set_shifts = s.phase == "preparation", closed = s.phase == "closed", opening_ticks = rules.opening_ticks,
                 funds = (float)s.funds, revenue = (float)s.revenue, waiting_count = s.queue.Count, completed_interactions = s.completed,
                 popularity = (float)s.popularity, popularity_gain = (float)s.popularity_gain,
                 customer_satisfaction = new PythonSatisfactionCounts { satisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "satisfied"), normal = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "normal"), dissatisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "dissatisfied") },
                 store_event_label = StoreEventLabel(), store_event = StoreEventView(), items = SupplyView(),
                 customer_trust = CustomerTrustView(), customer_progress = CustomerProgress(), customer_schedule = Simulation.CustomerSchedule(s.day),
-                housing = HousingView(), regular_introduction = RegularIntroductionView(), intake_request = IntakeView(), required_action = Simulation.IntakeWaiting ? "intake_request" : Simulation.RegularIntroductionWaiting ? "regular_introduction" : Simulation.CustomerTrustWaiting ? "customer_trust" : Simulation.StoreEventWaiting ? "store_event" : Simulation.GrowthWaiting ? "growth" : "", rest_proposal = new string[0], missing_cats = new PythonMissingCat[0], growth_choices = GrowthChoices(), growth_practice_choices = GrowthPracticeView(),
-                new_game_options = new[] { new PythonNewGameOption { choice = "free", label = "自由営業（単独版・第1段階）", detail = "新規開始・出勤・自動接客・閉店・翌日・保存再開", conditions = "初期猫5匹 / 2席 / 資金1000。目標・設備・派遣・高度な顧客イベントは後続移植。" } },
+                expansion = ExpansionView(), next_goal = NextGoalView(), goal_result = GoalResultView(), housing = HousingView(), regular_introduction = RegularIntroductionView(), intake_request = IntakeView(), required_action = Simulation.GoalWaiting ? "goal_result" : Simulation.IntakeWaiting ? "intake_request" : Simulation.RegularIntroductionWaiting ? "regular_introduction" : Simulation.CustomerTrustWaiting ? "customer_trust" : Simulation.StoreEventWaiting ? "store_event" : Simulation.GrowthWaiting ? "growth" : "", rest_proposal = new string[0], missing_cats = new PythonMissingCat[0], growth_choices = GrowthChoices(), growth_practice_choices = GrowthPracticeView(),
+                new_game_options = new[] { new PythonNewGameOption {choice="popularity",label="人気目標（単独版の移植範囲）",detail="段階目標・席数拡張・追加来客",conditions="VIP・高度な接客は未移植。通常Python版の人気モード全体とは差が残ります。"}, new PythonNewGameOption { choice = "free", label = "自由営業（単独版・第1段階）", detail = "新規開始・出勤・自動接客・閉店・翌日・保存再開", conditions = "初期猫5匹 / 2席 / 資金1000。自由営業は3席まで。4席以降は段階人気目標の達成が必要。" } },
                 cats = s.cats.Select(c => new PythonCatState { cat_id = c.id, content_cat_id = c.id, name = Simulation.Definition(c.id).name, stamina = (float)c.stamina, max_stamina = (float)rules.max_stamina, fatigue = (float)c.fatigue, stress = (float)c.stress, working = c.working, growth_details = GrowthDetails(c.id), health_status = c.health, health_label = c.health == "healthy" ? "健康" : "療養中", activity = c.activity, activity_label = c.activity == "cafe" ? "在店" : "家出中", records = new PythonCatRecords() }).ToArray(),
-                seats = Enumerable.Range(0, 2).Select(i => { var e = s.exchanges.Find(x => x.seat == i); return new PythonSeatState { seat_id = "seat-" + (i + 1), customer_id = e?.customer_id, customer_name = e?.customer_id, cat_id = e?.cat_id, disabled = Simulation.DisabledSeat(i) }; }).ToArray(),
+                seats = Enumerable.Range(0, s.seat_count).Select(i => { var e = s.exchanges.Find(x => x.seat == i); return new PythonSeatState { seat_id = "seat-" + (i + 1), customer_id = e?.customer_id, customer_name = e?.customer_id, cat_id = e?.cat_id, disabled = Simulation.DisabledSeat(i) }; }).ToArray(),
                 customers = s.visits.Where(v => v.departure == null).Select(v => new PythonCustomerState { customer_id = v.id, name = v.id, status = s.queue.Contains(v.id) ? "waiting" : "seated" }).ToArray(),
                 finance = new PythonFinanceState { opening_funds = (float)s.opening_funds, total_income = (float)(s.revenue+s.item_sales_income), total_expenses = (float)s.expenses, item_expenses = (float)s.item_expenses, item_sales_income = (float)s.item_sales_income, housing_expenses = (float)s.housing_expenses, housing_cost = (float)s.housing_cost, recruitment_expenses = (float)s.recruitment_expenses, net_cash_flow = (float)(s.revenue+s.item_sales_income - s.expenses), closing_funds = (float)s.funds },
                 game_over = s.game_over == null ? null : new PythonGameOver { reason = s.game_over, day = s.day, popularity = (float)s.popularity }

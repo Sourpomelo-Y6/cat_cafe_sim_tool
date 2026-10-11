@@ -27,6 +27,8 @@ def exported_rules():
     result['loyalty'] = read('cafe_customer_loyalty')
     result['discontent'] = read('cafe_customer_discontent')
     result['trust'] = read('cafe_customer_trust')
+    result['expansion_costs'] = [read('cafe_expansion')[key] for key in ('cost','four_seat_cost','five_seat_cost','six_seat_cost','seven_seat_cost','eight_seat_cost')]
+    result['goal_stages'] = [dict(days=read('cafe_goal')['days'], target=read('cafe_goal')['target'])] + read('cafe_goal_stages')
     result['growth'] = read('cafe_growth')
     result['item_shop'] = [dict(**row, sale_price=read('cafe_item_sales')[row['item']['id']]) for row in (read('cafe_item_shop'), read('cafe_nutrition_snack'), read('cafe_special_care_set'))]
     result['housing'] = read('cafe_housing')
