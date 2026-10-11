@@ -28,6 +28,7 @@ def exported_rules():
     result['discontent'] = read('cafe_customer_discontent')
     result['trust'] = read('cafe_customer_trust')
     result['growth'] = read('cafe_growth')
+    result['item_shop'] = [dict(**row, sale_price=read('cafe_item_sales')[row['item']['id']]) for row in (read('cafe_item_shop'), read('cafe_nutrition_snack'), read('cafe_special_care_set'))]
     result['housing'] = read('cafe_housing')
     result['housing_upgrade'] = read('cafe_housing_upgrade')
     result['popular_customer_count'] = new.get('popular_customer_count', weekdays.get('popular_customer_count', 0))

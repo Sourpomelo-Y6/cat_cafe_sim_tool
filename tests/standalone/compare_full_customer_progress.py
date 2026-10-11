@@ -37,6 +37,10 @@ def compare(reference):
                     elif kind.startswith('resolve_growth') or kind.startswith('begin_'): getattr(full.core,kind)(operation['cat_id'],operation['choice']) if kind.startswith('resolve_') else getattr(full.core,kind)(operation['cat_id'])
                     elif kind == 'resolve_regular_introduction': full.resolve_regular_introduction(operation['choice'])
                     elif kind == 'resolve_intake': full.resolve_intake_request(operation['choice'])
+                    elif kind == 'purchase_item':
+                        from cat_cafe_sim.core.cafe_item_shop import catalog
+                        full.purchase_item(next(r for r in catalog() if r['item']['id']==operation['choice']))
+                    elif kind == 'sell_item': full.sell_item(operation['source'])
                     elif kind == 'use_item': full.use_item(operation['source'], operation['cat_id'])
                     elif kind == 'resolve_missing': full.resolve_missing(next(e['id'] for e in full.core.management['events'].values() if e['cat_id']==operation['cat_id'] and e['status']=='waiting'))
                     else: full.automatic_step()
@@ -49,7 +53,7 @@ def compare(reference):
                     break
                 report['equal_operations'] += 1; report['checked_through_day'] = full.core.day
             rows.append(report)
-    return dict(note='Compare identical commands through day 28 or the first difference. Fixed intake requests and regular introductions are included. Customer trust is included. Growth and housing are included. Other acquisition events remain outside the migration.', rows=rows)
+    return dict(note='Compare identical commands through day 28 or the first difference. Fixed intake requests and regular introductions are included. Customer trust is included. Growth, housing and item transactions are included. Other acquisition events remain outside the migration.', rows=rows)
 
 
 if __name__ == '__main__':

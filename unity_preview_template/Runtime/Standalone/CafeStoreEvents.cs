@@ -17,7 +17,7 @@ namespace CatCafePreview.Standalone
         }
         private void PresentStoreEvent() => State.store_events.Add(DrawStoreEvent(State.seed, State.day));
         public bool DisabledSeat(int seat) => CurrentStoreEvent.choice == "patch" && seat >= Math.Max(0, 2 - Rules.store_events.trouble_seat_loss);
-        public string[] AvailableSupplies => State.store_events.Where(e => e.type == "supplies").Select(e => "store-event-" + e.day).Where(source => !State.item_uses.Any(u => u.source == source)).ToArray();
+        public string[] AvailableSupplies => ItemInventory().Select(r => r.source).ToArray();
         private void ResolveStoreEvent(string choice)
         {
             Require("preparation"); var e = CurrentStoreEvent; var rules = Rules.store_events;
@@ -31,14 +31,6 @@ namespace CatCafePreview.Standalone
                 State.expenses += e.cost; State.funds -= e.cost; CheckEnd();
             }
             State.revision++;
-        }
-        private void UseSupply(string source, string catId)
-        {
-            Require("preparation");
-            var cat = State.cats.Find(c => c.id == catId && c.activity == "cafe");
-            if (!AvailableSupplies.Contains(source) || cat == null || cat.stress <= 0) throw new ArgumentException("所持している用品とストレスのある在店猫を選んでください。");
-            double before = cat.stress; cat.stress = Math.Max(0, before - Rules.store_events.supply.stress_relief);
-            State.item_uses.Add(new CafeSupplyUse { source = source, cat_id = cat.id, day = State.day, before = before, after = cat.stress });
         }
         private void ValidateStoreEvents(CafeSnapshot s)
         {
@@ -61,15 +53,6 @@ namespace CatCafePreview.Standalone
                 if (e.status != "waiting" && e.status != "resolved" || waiting != (e.choice == null) || !waiting && !allowed.Contains(e.choice)
                     || waiting && (e.day != s.day || s.phase != "preparation") || e.cost != cost || e.popularity != popularity
                     || e.choice == "close" && e.day == s.day && s.phase != "closed") throw new ArgumentException("Invalid store event answer");
-            }
-            if (s.item_uses.Select(u => u.source).Distinct().Count() != s.item_uses.Count) throw new ArgumentException("Duplicate supply consumption");
-            int lastDay = 0;
-            foreach (var u in s.item_uses)
-            {
-                var reward = s.store_events.Find(e => "store-event-" + e.day == u.source && e.type == "supplies");
-                if (reward == null || u.day < Math.Max(lastDay, reward.day) || u.day > s.day || !s.cats.Any(c => c.id == u.cat_id)
-                    || !Range(u.before, double.Epsilon, 100) || u.after != Math.Max(0, u.before - Rules.store_events.supply.stress_relief)) throw new ArgumentException("Invalid supply use");
-                lastDay = u.day;
             }
         }
     }

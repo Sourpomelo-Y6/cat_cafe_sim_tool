@@ -75,10 +75,21 @@ def snapshot(session):
     if c.customer_trust:
         extra['trust_customers'] = [dict(customer_id=key, **{k:(value or 0) if k=='departed_day' else value for k,value in row.items()}) for key,row in c.customer_trust['customers'].items()]
         extra['trust_events'] = [dict(row, resolved_day=row['resolved_day'] or 0) for row in c.customer_trust['events'].values()]
+    if c.item_purchases or c.item_sales or c.item_uses:
+        extra['item_purchases']=[dict(source=p['source'],day=p['day'],cost=p['cost'],item_id=p['item']['id']) for p in c.item_purchases]
+        extra['item_sales']=copy.deepcopy(c.item_sales)
+        from cat_cafe_sim.core.cafe_items import reward_for_source,stat
+        def item_use(u):
+            item=reward_for_source(c,u['source'])['item'];mode=stat(item)
+            before=u['before'];after=u['after']
+            return dict(source=u['source'],cat_id=u['cat_id'],day=u['day'],before=before.get('stress',0) if mode=='both' else before if mode=='stress' else 0,after=after.get('stress',0) if mode=='both' else after if mode=='stress' else 0,
+                        before_fatigue=before.get('fatigue',0) if mode=='both' else before if mode=='fatigue' else 0,after_fatigue=after.get('fatigue',0) if mode=='both' else after if mode=='fatigue' else 0)
+        extra['item_uses']=[item_use(u) for u in c.item_uses]
+    extra['item_expenses']=summary.get('item_expenses',0);extra['item_sales_income']=summary.get('item_sales_income',0)
     if c.housing:
         extra['housing'] = dict(purchased_day=(c.housing['purchase'] or {}).get('day',0), upgraded_day=c.housing.get('upgrade',{}).get('day',0))
         extra['housing_expenses'] = summary.get('housing_expenses',0)
-        extra['history'] = [dict(day=row['day'], housing_expenses=row['summary'].get('housing_expenses',0), housing_cost=next(charge['housing_cost'] for charge in c.operating_cost['charges'] if charge['day']==row['day'])) for row in c.day_results]
+        extra['history'] = [dict(day=row['day'], housing_expenses=row['summary'].get('housing_expenses',0), item_expenses=row['summary'].get('item_expenses',0),item_sales_income=row['summary'].get('item_sales_income',0),housing_cost=next(charge['housing_cost'] for charge in c.operating_cost['charges'] if charge['day']==row['day'])) for row in c.day_results]
         from cat_cafe_sim.core.cafe_housing import daily_cost
         extra['housing_cost'] = daily_cost(c) if c.closed else 0
     if c.growth: extra['growth']=[dict(cat_id=id,**growth_row(row)) for id,row in c.growth['cats'].items()]
@@ -96,7 +107,7 @@ def snapshot(session):
                              satisfaction=next((evaluate_satisfaction(c, r) for r in results if r['customer_id']==v.id), None)) for v in c.visits.values()],
                 loyalty=[dict(customer_id=key, score=row['score'], regular_day=row['regular_day'] or 0) for key,row in c.customer_loyalty['customers'].items()],
                 discontent=[dict(customer_id=key, **copy.deepcopy(row)) for key,row in c.customer_discontent['customers'].items()],
-                store_events=copy.deepcopy(c.store_events['days']), item_uses=copy.deepcopy(c.item_uses),
+                store_events=copy.deepcopy(c.store_events['days']),
                 popularity_gain=next((r['gain'] for r in c.goal['days'] if r['day']==c.day), 0),
                 queue=list(c.queue), exchanges=[exchange(e, int(key.split('-')[-1])-1) for key, e in sorted(c.interactions.items())])
 
@@ -138,6 +149,10 @@ def generate():
                 elif kind == 'resolve_regular_introduction': session.resolve_regular_introduction(choice)
                 elif kind == 'resolve_intake': session.resolve_intake_request(choice)
                 elif kind == 'use_item': core.use_item(source, cat_id)
+                elif kind == 'purchase_item':
+                    from cat_cafe_sim.core.cafe_item_shop import catalog
+                    session.purchase_item(next(r for r in catalog() if r['item']['id']==choice))
+                elif kind == 'sell_item': session.sell_item(source)
                 elif kind in ('purchase_housing','upgrade_housing'): getattr(core,kind)()
                 elif kind == 'set_shifts': session.set_shifts(working)
                 elif kind == 'next_day': session.next_day()
@@ -165,10 +180,16 @@ def generate():
                 if day >= 10 and core.housing['purchase'] and 'upgrade' not in core.housing and core.funds > 1000: record('upgrade_housing')
                 if core.intake_request['status'] == 'waiting': record('resolve_intake', choice='decline' if seed == 1 else 'accept')
                 if core.regular_introduction['status'] == 'waiting': record('resolve_regular_introduction', choice='accept')
-                from cat_cafe_sim.core.cafe_items import inventory
-                supplies = inventory(core)
-                stressed = next((key for key in core.cats if core.activity(key)=='cafe' and core.management['stress'][key]>0), None)
-                if supplies and stressed: record('use_item', cat_id=stressed, source=next(iter(supplies)))
+                from cat_cafe_sim.core.cafe_items import inventory,unavailable_reason
+                from cat_cafe_sim.core.cafe_item_shop import catalog
+                if day%4==2:
+                    offer=catalog()[((day-2)//4)%3]
+                    if core.funds>offer['cost']: record('purchase_item',choice=offer['item']['id'])
+                supplies=inventory(core)
+                if supplies and day%3==0: record('sell_item',source=next(iter(supplies)))
+                for source in list(inventory(core)):
+                    target=next((key for key in core.cats if not unavailable_reason(core,source,key)),None)
+                    if target: record('use_item',cat_id=target,source=source)
                 # Alternating work/rest preserves the existing fatigue/health rules.
                 working = [key for i, key in enumerate(core.cats) if core.cats[key].health_status == 'healthy' and core.activity(key)=='cafe' and (i + day) % 3 != 0]
                 growth_answers(core,record,'rest' if seed==1 else 'service',practice=True)

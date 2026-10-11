@@ -24,6 +24,21 @@ static class Program
     {
         int ticks = 0, scenarios = 0;
         var rules = Decode<CafeRules>(File.ReadAllText(args[0]));
+        if(args.Length>9)
+        {
+            using var cases=JsonDocument.Parse(File.ReadAllText(args[9]));
+            foreach(var fixture in cases.RootElement.GetProperty("cases").EnumerateArray())
+            {
+                var items=new CafeSimulation(Decode<CafeRules>(fixture.GetProperty("rules").GetRawText()));scenarios++;
+                foreach(var op in fixture.GetProperty("operations").EnumerateArray())
+                {
+                    string itemBefore=Encode(items.State);bool rejected=false;
+                    try{items.Execute(op.GetProperty("kind").GetString(),choice:op.GetProperty("choice").GetString(),source:op.GetProperty("source").GetString(),catId:op.GetProperty("cat_id").GetString());}catch(InvalidOperationException){rejected=true;}catch(ArgumentException){rejected=true;}
+                    Assert(rejected==op.GetProperty("rejected").GetBoolean(),"Python item rejection mismatch: "+op.GetProperty("kind"));if(rejected)Assert(itemBefore==Encode(items.State),"Rejected item changed state");
+                    using var current=JsonDocument.Parse(Encode(items.State));Equal(op.GetProperty("expected"),current.RootElement,"item boundary");items.Restore(Decode<CafeSnapshot>(Encode(items.State)));ticks++;
+                }
+            }
+        }
         if (args.Length > 8)
         {
             using var housingCases=JsonDocument.Parse(File.ReadAllText(args[8]));

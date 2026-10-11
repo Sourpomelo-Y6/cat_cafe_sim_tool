@@ -46,7 +46,7 @@ namespace CatCafePreview
             GUILayout.Label(notice); GUI.enabled = !busy;
             if (title)
             {
-                GUILayout.Label("自由営業 / 初期猫5匹 / 2席。目標・設備・用品購入・派遣・顧客イベントは後続移植。\n新規開始は単独版スロット1へ初期状態を保存します。");
+                GUILayout.Label("自由営業 / 初期猫5匹 / 2席。目標・設備・派遣・顧客イベントは後続移植。\n新規開始は単独版スロット1へ初期状態を保存します。");
                 if (GUILayout.Button("新規開始")) StartCoroutine(Send("new_game"));
                 foreach (var save in backend.ListSaves().saves)
                 {
@@ -129,15 +129,25 @@ namespace CatCafePreview
                     GUI.enabled = !busy && introduction.can_decline;
                     if (GUILayout.Button("紹介を見送る")) StartCoroutine(Send("resolve_regular_introduction", catId: introduction.cat_id, choice: "decline"));
                 }
+                GUILayout.Label("用品：所持 " + state.items.count + " / 本日購入費 " + state.finance.item_expenses + " / 売却収入 " + state.finance.item_sales_income);
+                foreach(var shop in state.items.shop)
+                {
+                    GUILayout.Label(shop.name+" / "+shop.effect+" / 費用 "+shop.cost+" / 購入後 "+shop.funds_after+" / 所持 "+shop.count+" / "+shop.reason);
+                    GUI.enabled=!busy && shop.can_select;
+                    if(GUILayout.Button(shop.name+"を購入"+(shop.ends_game?"（資金0で経営終了）":"")))StartCoroutine(Send("purchase_item",choice:shop.choice));
+                }
                 foreach (var item in state.items.owned)
                 {
-                    GUILayout.Label(item.name + " / " + item.effect);
+                    GUILayout.Label(item.name + " / " + item.effect + " / 売却価格 " + item.price + " / " + item.reason);
+                    GUI.enabled = !busy && item.can_sell;
+                    if (GUILayout.Button(item.name+"を売却")) StartCoroutine(Send("sell_item",choice:item.choice));
                     foreach (var target in item.targets)
                     {
                         GUI.enabled = !busy && target.can_select;
                         if (GUILayout.Button(target.name + "に使用：" + target.changes)) StartCoroutine(Send("use_item", catId: target.cat_id, choice: item.choice));
                     }
                 }
+                GUILayout.Label(state.items.history);
                 foreach (var cat in state.cats)
                 {
                     GUILayout.BeginHorizontal(); GUILayout.Label(cat.name + " / 体力 " + cat.stamina.ToString("0.0") + " / 疲労 " + cat.fatigue.ToString("0.0") + " / ストレス " + cat.stress.ToString("0.0") + " / " + cat.health_label + " / " + cat.activity_label);

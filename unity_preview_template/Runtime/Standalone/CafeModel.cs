@@ -28,6 +28,7 @@ namespace CatCafePreview.Standalone
         public TrustRules trust;
         public GrowthRules growth;
         public HousingRules housing, housing_upgrade;
+        public ItemShopRule[] item_shop;
         public ExchangeType[] types;
         public IntakeRules intake, regular_introduction;
         public string rules_id;
@@ -38,10 +39,10 @@ namespace CatCafePreview.Standalone
     [Serializable] public class WeekPattern { public int[] days; }
     [Serializable] public class SatisfactionRules { public double satisfied_score, dissatisfied_score, gauge_target, satisfied_bonus, dissatisfied_discontent_gain; }
     [Serializable] public class PopularityRules { public double cap, gain_per_success; }
-    [Serializable] public class CafeSupply { public string id, name; public double stress_relief; }
+    [Serializable] public class CafeSupply { public string id, name; public double stress_relief, fatigue_relief; }
     [Serializable] public class StoreEventRules { public double probability, trouble_cost, support_full_cost, support_full_popularity, support_small_cost, support_small_popularity; public int festival_customer_tick, trouble_seat_loss; public CafeSupply supply; }
     [Serializable] public class CafeStoreEvent { public int day; public string type, status, choice; public double draw, cost, popularity; }
-    [Serializable] public class CafeSupplyUse { public string source, cat_id; public int day; public double before, after; }
+    [Serializable] public class CafeSupplyUse { public string source, cat_id; public int day; public double before, after, before_fatigue, after_fatigue; }
     [Serializable] public class LoyaltyRules { public double gain, threshold; }
     [Serializable] public class DiscontentRules { public double waiting_gain, advanced_failure_gain, good_service_recovery, threshold, return_score; public int suspension_days; }
     [Serializable] public class CafeLoyalty { public string customer_id; public double score; public int regular_day; }
@@ -108,7 +109,7 @@ namespace CatCafePreview.Standalone
     {
         public int day, arrivals, completed;
         public double opening_funds, revenue, expenses, closing_funds;
-        public double recruitment_expenses, housing_expenses, housing_cost;
+        public double recruitment_expenses, housing_expenses, housing_cost, item_expenses, item_sales_income;
         public double popularity_gain;
         public int satisfied, normal, dissatisfied;
         public List<string> resting_cats = new List<string>();
@@ -120,7 +121,7 @@ namespace CatCafePreview.Standalone
         public string rules_id, instance_id, phase = "preparation", game_over;
         public double funds, opening_funds, popularity, revenue, expenses;
         public int completed;
-        public double recruitment_expenses, housing_expenses, housing_cost;
+        public double recruitment_expenses, housing_expenses, housing_cost, item_expenses, item_sales_income;
         public double popularity_gain;
         public List<CafeCat> cats = new List<CafeCat>();
         public List<CafeVisit> visits = new List<CafeVisit>();
@@ -129,6 +130,8 @@ namespace CatCafePreview.Standalone
         public List<CafeRelationship> relationships = new List<CafeRelationship>();
         public List<CafeDayResult> history = new List<CafeDayResult>();
         public List<CafeStoreEvent> store_events = new List<CafeStoreEvent>();
+        public List<CafeItemPurchase> item_purchases = new List<CafeItemPurchase>();
+        public List<CafeItemSale> item_sales = new List<CafeItemSale>();
         public List<CafeSupplyUse> item_uses = new List<CafeSupplyUse>();
         public List<CafeLoyalty> loyalty = new List<CafeLoyalty>();
         public List<CafeDiscontent> discontent = new List<CafeDiscontent>();

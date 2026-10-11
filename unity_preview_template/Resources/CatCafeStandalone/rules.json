@@ -402,6 +402,36 @@
     "second_type_mastery_threshold": 30,
     "second_mastery_threshold": 30
   },
+  "item_shop": [
+    {
+      "cost": 100,
+      "item": {
+        "id": "care_supplies",
+        "name": "ケア用品",
+        "stress_relief": 10
+      },
+      "sale_price": 50
+    },
+    {
+      "cost": 150,
+      "item": {
+        "id": "nutrition_snack",
+        "name": "栄養おやつ",
+        "fatigue_relief": 15
+      },
+      "sale_price": 75
+    },
+    {
+      "cost": 200,
+      "item": {
+        "id": "special_care_set",
+        "name": "特製ケアセット",
+        "fatigue_relief": 10,
+        "stress_relief": 10
+      },
+      "sale_price": 100
+    }
+  ],
   "housing": {
     "initial_capacity": 6,
     "capacity_bonus": 3,
@@ -485,5 +515,5 @@
       "rest_fatigue": 1.5
     }
   },
-  "rules_id": "fbc2ba5dbb344a9ed3845804284f1825c009a159c0bf98e0da2a7c350fafa8d3"
+  "rules_id": "f1a0f2eb50274c88ac6500c381e9543c1bd31490717d7e72ed050a7b70809ba3"
 }
