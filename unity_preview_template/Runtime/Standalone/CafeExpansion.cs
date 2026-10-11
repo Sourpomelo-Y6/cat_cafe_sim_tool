@@ -18,6 +18,7 @@ namespace CatCafePreview.Standalone
         {
             if(State.game_over!=null)return "経営終了後は目標を変更できません。";
             if(State.goal.Count==0)return "この営業は人気集計のみです。";
+            if (ReservationWaiting) return "特別予約に回答してください。";
             if(CustomerTrustWaiting || State.cats.Any(c=>c.activity=="missing" && c.missing_remaining==0))return "帰還・信頼イベントを確認してください。";
             var g=State.goal.Last();
             if(kind=="continue_goal")return GoalWaiting?"":"確認待ちの目標結果はありません。";

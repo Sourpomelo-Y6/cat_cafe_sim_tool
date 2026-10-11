@@ -17,7 +17,7 @@ def expected(session):
 
 def generate():
     cases=[]
-    for funds,objective,accelerated,expired in ((500,'free',False,False),(501,'free',False,False),(20000,'free',False,False),(20000,'popularity',True,False),(20000,'popularity',False,True),(1000,'popularity',False,False)):
+    for case_index,(funds,objective,accelerated,expired) in enumerate(((500,'free',False,False),(501,'free',False,False),(20000,'free',False,False),(20000,'popularity',True,False),(20000,'popularity',False,True),(1000,'popularity',False,False),(20000,'popularity',True,False),(20000,'popularity',True,False),(20000,'popularity',True,False))):
         seed=0
         with tempfile.TemporaryDirectory(dir=ROOT/'Logs/Standalone') as temp:
             selected = starting_conditions('free')
@@ -38,6 +38,10 @@ def generate():
                 if accelerated: goal.update(target=110,stages=[dict(days=20,target=120),dict(days=25,target=130)])
                 if expired: goal.update(days=1,target=650);goal.pop('stages',None)
                 core.enable_goal(goal)
+            if objective=="popularity":
+                core.initialize_advanced_customers()
+                if not expired: core.initialize_reservation()
+            if case_index==7:core.reservation["rules"]["open_up_count"]=999
             core.initialize_customer_loyalty(selected['customer_loyalty']); core.initialize_customer_discontent(selected['customer_discontent'])
             core.initialize_growth(selected['growth'])
             core.initialize_customer_trust(selected['customer_trust'])
@@ -48,6 +52,7 @@ def generate():
             rule=copy.deepcopy(exported_rules());rule['starting_funds']=funds;rule['store_events']['probability']=0
             if accelerated: rule['goal_stages']=[dict(days=20,target=110),dict(days=20,target=120),dict(days=25,target=130)]
             if expired: rule['goal_stages']=[dict(days=1,target=650)]
+            if case_index==7:rule["reservation"]["open_up_count"]=999
             case=dict(rules=rule,objective=objective,operations=[]);cases.append(case)
             def record(kind,working=None,cat_id=None,choice=None,source=None):
                 nonlocal core
@@ -59,6 +64,7 @@ def generate():
                     elif kind.startswith('resolve_growth'):getattr(core,kind)(cat_id,choice)
                     elif kind=='resolve_intake':session.resolve_intake_request(choice)
                     elif kind=='resolve_regular_introduction':session.resolve_regular_introduction(choice)
+                    elif kind=='resolve_reservation':session.resolve_reservation(choice)
                     elif kind in ('expand_seats','continue_goal','advance_goal','purchase_housing'):getattr(core,kind)()
                     elif kind=='next_day':session.next_day()
                     elif kind=='day_off':session.day_off()
@@ -74,6 +80,9 @@ def generate():
                 for e in list(core.customer_trust['events'].values()):
                     if e['status']=='waiting':record('resolve_customer_trust',source=e['id'],choice='recover')
                 growth_answers(core,record)
+                if core.reservation and core.reservation['request'] and core.reservation['request']['status']=='waiting':
+                    record('start_business');record('day_off');record('expand_seats');record('resolve_reservation',choice='invalid')
+                    record('resolve_reservation',choice='decline' if case_index==6 else 'accept');record('resolve_reservation',choice='accept')
                 if cafe_goal.pending(core):
                     record('expand_seats');record('next_day');record('day_off');record('set_shifts',working=[])
                     record('continue_goal')
@@ -87,8 +96,10 @@ def generate():
                 events()
                 while len(core.seats)<8 and record('expand_seats'):pass
                 working=[id for i,id in enumerate(core.cats) if core.cats[id].health_status=='healthy' and core.activity(id)=='cafe' and (i+day)%3!=0]
+                if case_index==8 and core.reservation and core.reservation['request'] and core.reservation['request']['visit_day']==day:working=[]
+                if core.reservation and core.reservation['request'] and core.reservation['request']['status']=='accepted' and core.reservation['request']['visit_day']==day:record('day_off')
                 record('set_shifts',working=working)
-                if not working:record('day_off');continue
+                if not working and not (core.reservation and core.reservation['request'] and core.reservation['request']['status']=='accepted' and core.reservation['request']['visit_day']==core.day):record('day_off');continue
                 record('start_business');record('expand_seats')
                 while not core.closed:
                     growth_answers(core,record);record('advance_business')

@@ -50,6 +50,8 @@ namespace CatCafePreview
         public PythonIntakeState intake_request;
         public PythonVisitingCat visiting_cat;
         public PythonRegularIntroduction regular_introduction;
+        public string specialist_description;
+        public PythonSpecialistResult[] specialist_results;
         public PythonReservation reservation;
         public PythonCustomerTrust customer_trust;
         public PythonGrowthPracticeChoice[] growth_practice_choices;
@@ -79,6 +81,7 @@ namespace CatCafePreview
         public float funds;
         public PythonCatState[] cats;
     }
+    [Serializable] public class PythonSpecialistResult { public string customer_id,cat_id,result; public int connect_count,open_up_count; public float bonus; }
     [Serializable] public class PythonNewGameOption { public string choice, label, detail, conditions; }
     [Serializable] public class PythonGrowthChoice
     { public string cat_id, name, kind, title, learned, group, effect; public float experience, threshold, service, rest, dispatch, play, contact, quiet; public PythonEventChoice[] choices; }

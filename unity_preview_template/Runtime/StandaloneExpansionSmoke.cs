@@ -8,10 +8,10 @@ namespace CatCafePreview
 {
     public static class StandaloneExpansionSmoke
     {
-        private static int checks;
+        private static int checks; private static string reservationChoice; private static bool skipReservationService;
         private static void Check(bool v,string m){checks++;if(!v)throw new Exception("Expansion: "+m);}
         private static CafeResponse Request(LocalCafeBackend b,string json){CafeResponse result=null;var request=b.Request("/commands",json,r=>result=r);while(request.MoveNext()){}return result;}
-        private static string Command(LocalCafeBackend b,string kind,string choice=null,string cat=null,int slot=1)=>JsonUtility.ToJson(new PythonShiftCommand {request_id=Guid.NewGuid().ToString("N"),instance_id=b.Simulation.State.instance_id,expected_revision=b.Simulation.State.revision,kind=kind,choice=choice,cat_id=cat,working_cats=b.Simulation.State.cats.Where((c,i)=>c.health=="healthy" && c.activity=="cafe" && (i+b.Simulation.State.day)%3!=0).Select(c=>c.id).ToArray(),save_id=slot.ToString(),save_slot=slot});
+        private static string Command(LocalCafeBackend b,string kind,string choice=null,string cat=null,int slot=1)=>JsonUtility.ToJson(new PythonShiftCommand {request_id=Guid.NewGuid().ToString("N"),instance_id=b.Simulation.State.instance_id,expected_revision=b.Simulation.State.revision,kind=kind,choice=choice,cat_id=cat,working_cats=skipReservationService && b.Simulation.ReservationVisitToday?new string[0]:b.Simulation.State.cats.Where((c,i)=>c.health=="healthy" && c.activity=="cafe" && (i+b.Simulation.State.day)%3!=0).Select(c=>c.id).ToArray(),save_id=slot.ToString(),save_slot=slot});
         private static void Good(LocalCafeBackend b,string kind,string choice=null,string cat=null,int slot=1){var r=Request(b,Command(b,kind,choice,cat,slot));Check(r.result==UnityWebRequest.Result.Success,kind+": "+r.error);}
         private static string Capture(LocalCafeBackend b){var s=JsonUtility.FromJson<CafeSnapshot>(JsonUtility.ToJson(b.Simulation.State));s.NormalizeJsonStrings();s.instance_id="";s.revision=0;return JsonUtility.ToJson(s);}
         private static void Reject(LocalCafeBackend b,string kind){string before=Capture(b);Check(Request(b,Command(b,kind)).result==UnityWebRequest.Result.ProtocolError,"Accepted invalid "+kind);Check(before==Capture(b),"Rejected operation changed state");}
@@ -26,16 +26,24 @@ namespace CatCafePreview
                 Check(Request(b,JsonUtility.ToJson(command)).result==UnityWebRequest.Result.Success,"Trust recovery failed");
             }
             while(View(b).growth_choices.Length>0){var row=View(b).growth_choices[0];Good(b,row.kind,choice:row.kind=="resolve_growth"?"service":row.choices[0].choice,cat:row.cat_id);}
+            if(b.Simulation.ReservationWaiting)
+            {
+                Check(View(b).reservation.can_accept && View(b).reservation.can_decline,"Reservation controls missing");Resume(b,6);Reject(b,"start_business");Reject(b,"day_off");Reject(b,"expand_seats");
+                double before=b.Simulation.State.funds;string command=Command(b,"resolve_reservation",choice:reservationChoice);
+                Check(Request(b,command).result==UnityWebRequest.Result.Success,"Reservation response failed");string resolved=Capture(b);
+                Check(Request(b,command).result==UnityWebRequest.Result.Success && resolved==Capture(b),"Duplicate reservation changed state");Check(before==b.Simulation.State.funds,"Reservation answer charged money");Reject(b,"resolve_reservation");Resume(b,5);
+            }
             if(b.Simulation.GoalWaiting){Check(View(b).goal_result.pending,"Pending result missing");Resume(b,2);Reject(b,"expand_seats");Reject(b,"next_day");Good(b,"continue_goal");}
             if(b.Simulation.IntakeWaiting)Good(b,"resolve_intake",choice:"decline");
             if(b.Simulation.RegularIntroductionWaiting)Good(b,"resolve_regular_introduction",choice:"decline",cat:b.Simulation.Rules.regular_introduction.cat.id);
             if(b.Simulation.GoalResponseReason("advance_goal")=="")Good(b,"advance_goal");
         }
-        public static int Run(string path)
+        public static int Run(string path,string answer="accept",int requiredOpen=1,bool unserved=false)
         {
-            checks=0;var rules=JsonUtility.FromJson<CafeRules>(Resources.Load<TextAsset>("CatCafeStandalone/rules").text);rules.starting_funds=20000;rules.store_events.probability=0;rules.goal_stages[0].target=110;rules.goal_stages[1].target=120;rules.goal_stages[2].target=130;rules.rules_id+="-expansion-fixture";
+            checks=0;reservationChoice=answer;skipReservationService=unserved;var rules=JsonUtility.FromJson<CafeRules>(Resources.Load<TextAsset>("CatCafeStandalone/rules").text);rules.starting_funds=20000;rules.store_events.probability=0;rules.goal_stages[0].target=110;rules.goal_stages[1].target=120;rules.goal_stages[2].target=130;rules.reservation.open_up_count=requiredOpen;rules.rules_id+="-expansion-fixture-"+answer+"-"+requiredOpen+"-"+unserved;
             var b=new LocalCafeBackend(path,rules);
             if(File.Exists(Path.Combine(path,"slot-4.json"))){Good(b,"load_game",slot:4);Check(b.Simulation.State.seat_count==8 && b.Simulation.State.goal.Count==3,"Cross-process restart lost expansion");}
+            if(File.Exists(Path.Combine(path,"slot-6.json"))){Good(b,"load_game",slot:6);Check(b.Simulation.ReservationWaiting && View(b).reservation.status=="waiting","Restart lost pending reservation");}
             Good(b,"new_game",choice:"free");Good(b,"expand_seats");Reject(b,"expand_seats");Resume(b,3);
             Good(b,"new_game",choice:"popularity");Reject(b,"advance_goal");Good(b,"expand_seats");Reject(b,"expand_seats");
             bool[] arrivals=new bool[5];
@@ -43,15 +51,17 @@ namespace CatCafePreview
             {
                 Events(b);while(b.Simulation.ExpansionReason()=="")Good(b,"expand_seats");Resume(b,3);
                 Check(View(b).seats.Length==b.Simulation.State.seat_count,"Seat projection is fixed");Good(b,"set_shifts");
-                if(!b.Simulation.State.cats.Any(c=>c.working)){Good(b,"day_off");if(b.Simulation.State.phase=="closed"){Events(b);Good(b,"next_day");}continue;}
+                if(!b.Simulation.State.cats.Any(c=>c.working) && !b.Simulation.ReservationVisitToday){Good(b,"day_off");if(b.Simulation.State.phase=="closed"){Events(b);Good(b,"next_day");}continue;}
+                if(b.Simulation.ReservationVisitToday)Reject(b,"day_off");
                 Good(b,"start_business");Reject(b,"expand_seats");Resume(b,1);
                 while(b.Simulation.State.phase!="closed"){Events(b);Good(b,"advance_business");}
                 for(int i=0;i<5;i++)arrivals[i]|=b.Simulation.State.visits.Any(v=>v.id==(i==0?"expanded-guest":"expanded-guest-"+(i+1)));
                 Check(View(b).expansion.operating_cost==rules.base_cost+rules.per_seat_cost*b.Simulation.State.seat_count,"Seat operating cost differs");Resume(b,1);Events(b);Good(b,"next_day");
             }
             Check(b.Simulation.State.seat_count==8 && arrivals.All(v=>v),"Eight seats or additional arrivals missing");Reject(b,"expand_seats");Resume(b,4);
+            Check(b.Simulation.State.reservation.status==(answer=="accept"?"accepted":"declined") && b.Simulation.State.reservation.result==(answer=="decline"?null:unserved?"unserved":requiredOpen>1?"failure":"success"),"Reservation outcome differs");
             string final=Capture(b);var fresh=new LocalCafeBackend(path,rules);Good(fresh,"load_game",slot:4);Check(final==Capture(fresh),"Fresh backend lost seat history");
-            for(int kind=0;kind<5;kind++){var bad=JsonUtility.FromJson<CafeSnapshot>(JsonUtility.ToJson(b.Simulation.State));bad.NormalizeJsonStrings();if(kind==0)bad.seat_count--;else if(kind==1)bad.expansion[0].cost++;else if(kind==2)bad.expansion[1].day=1;else if(kind==3)bad.goal[0].resolved_day++;else bad.history[0].seat_count++;bool failed=false;try{b.Simulation.Restore(bad);}catch(ArgumentException){failed=true;}Check(failed && final==Capture(b),"Forged expansion accepted");}
+            for(int kind=0;kind<7;kind++){var bad=JsonUtility.FromJson<CafeSnapshot>(JsonUtility.ToJson(b.Simulation.State));bad.NormalizeJsonStrings();if(kind==0)bad.seat_count--;else if(kind==1)bad.expansion[0].cost++;else if(kind==2)bad.expansion[1].day=1;else if(kind==3)bad.goal[0].resolved_day++;else if(kind==4)bad.history[0].seat_count++;else if(kind==5)bad.reservation.visit_day++;else bad.reservation.result=bad.reservation.result=="success"?"failure":"success";bool failed=false;try{b.Simulation.Restore(bad);}catch(ArgumentException){failed=true;}Check(failed && final==Capture(b),"Forged expansion accepted");}
             return checks;
         }
     }

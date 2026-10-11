@@ -63,8 +63,16 @@ def exchange(s, seat=0):
                 bonus=s.state['bonus_funds'], tension_multiplier=s.config.customer_tension_multiplier)
 
 
+def specialist_snapshot(core, result):
+    from cat_cafe_sim.core.cafe_advanced_customers import evaluate as advanced
+    from cat_cafe_sim.core.cafe_reservation import evaluate as reservation
+    value=(advanced(core,result) or reservation(core,result)) if result else None
+    return dict(specialist_result=('success' if value['success'] else 'failure') if value else None,specialist_bonus=value['bonus'] if value else 0)
+
+
 def snapshot(session):
     c = session.core
+    from cat_cafe_sim.core.cafe_advanced_customers import evaluate as evaluate_advanced
     from cat_cafe_sim.core.cafe_checkpoint import outcome_result
     results = [outcome_result(r) for r in list(c.outcomes.values())[c.day_outcome_offset:]]
     summary = c.summary()
@@ -85,6 +93,8 @@ def snapshot(session):
             return dict(source=u['source'],cat_id=u['cat_id'],day=u['day'],before=before.get('stress',0) if mode=='both' else before if mode=='stress' else 0,after=after.get('stress',0) if mode=='both' else after if mode=='stress' else 0,
                         before_fatigue=before.get('fatigue',0) if mode=='both' else before if mode=='fatigue' else 0,after_fatigue=after.get('fatigue',0) if mode=='both' else after if mode=='fatigue' else 0)
         extra['item_uses']=[item_use(u) for u in c.item_uses]
+    if c.reservation:
+        r=c.reservation['request'];extra['reservation']={key:(r[key] or 0) if key.endswith('day') else r[key] for key in ('status','choice','result','offered_day','visit_day','resolved_day')} if r else dict(status='untriggered',choice=None,result=None,offered_day=0,visit_day=0,resolved_day=0)
     extra['seat_count']=len(c.seats);extra['expansion_expenses']=summary.get('expansion_expenses',0)
     if c.expansion: extra['expansion']=copy.deepcopy(c.expansion['purchases'])
     extra['item_expenses']=summary.get('item_expenses',0);extra['item_sales_income']=summary.get('item_sales_income',0)
@@ -105,8 +115,9 @@ def snapshot(session):
                            kitten=next((e['kitten'] for e in reversed(list(c.management['events'].values())) if e['cat_id']==cat.id),False)) for cat in c.cats.values()],
                 visits=[dict(id=v.id, cat_id=next((e.cat_id for e in c.interactions.values() if e.customer_id == v.id),
                                               next((r['cat_id'] for r in results if r['customer_id'] == v.id), None)),
-                             arrival=v.arrival_tick, seated_at=v.seated_at if v.seated_at is not None else -1, seated_ticks=v.seated_ticks, departure=v.departure_reason, bill=v.bill,
-                             satisfaction=next((evaluate_satisfaction(c, r) for r in results if r['customer_id']==v.id), None)) for v in c.visits.values()],
+                             **specialist_snapshot(c,next((r for r in results if r["customer_id"]==v.id),None)), arrival=v.arrival_tick, seated_at=v.seated_at if v.seated_at is not None else -1, seated_ticks=v.seated_ticks, departure=v.departure_reason, bill=v.bill,
+                             connect_count=next((r["connect_count"] for r in results if r["customer_id"]==v.id),0),open_up_count=next((r["open_up_count"] for r in results if r["customer_id"]==v.id),0),
+                             satisfaction=next((evaluate_satisfaction(c, r, evaluate_advanced(c,r)) for r in results if r['customer_id']==v.id), None)) for v in c.visits.values()],
                 loyalty=[dict(customer_id=key, score=row['score'], regular_day=row['regular_day'] or 0) for key,row in c.customer_loyalty['customers'].items()],
                 discontent=[dict(customer_id=key, **copy.deepcopy(row)) for key,row in c.customer_discontent['customers'].items()],
                 store_events=copy.deepcopy(c.store_events['days']),

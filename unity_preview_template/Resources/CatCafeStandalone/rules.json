@@ -409,6 +409,18 @@
       "target": 650
     }
   ],
+  "advanced_customer": {
+    "feature": "white",
+    "connect_count": 1,
+    "bonus": 100
+  },
+  "reservation": {
+    "feature": "long_hair",
+    "open_up_count": 1,
+    "arrival_tick": 0,
+    "bonus": 200,
+    "popularity_bonus": 5
+  },
   "growth": {
     "threshold": 20,
     "service_xp": 1,
@@ -537,5 +549,5 @@
       "rest_fatigue": 1.5
     }
   },
-  "rules_id": "f2b7b82f354aa23df31cef7dbaa20bb5f138b7bf53881923f7449e8ff29e9bf2"
+  "rules_id": "1ce53e436f35c043686286e2717594d332fc88e7a234748860515e4084acee77"
 }

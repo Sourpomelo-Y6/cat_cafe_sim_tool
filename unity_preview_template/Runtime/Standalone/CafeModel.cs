@@ -29,6 +29,7 @@ namespace CatCafePreview.Standalone
         public GrowthRules growth;
         public HousingRules housing, housing_upgrade;
         public ItemShopRule[] item_shop;
+        public SpecialistRules advanced_customer, reservation;
         public double[] expansion_costs; public GoalStageRule[] goal_stages;
         public ExchangeType[] types;
         public IntakeRules intake, regular_introduction;
@@ -53,7 +54,8 @@ namespace CatCafePreview.Standalone
     [Serializable] public class CafeTrustCustomer { public string customer_id, status, event_id, reason; public int departed_day; }
     [Serializable] public class CafeTrustEvent { public string id, customer_id, status, choice, outcome; public int day, suspensions, resolved_day; }
     [Serializable] public class CafeArrival { public string customer_id; public int tick; }
-    [Serializable] public class CafeCustomerRecord { public string customer_id, cat_id, departure, satisfaction; public int[] type_actions = new int[8]; public double affinity_delta, stamina_spent; }
+    [Serializable] public class CafeCustomerRecord { public string customer_id, cat_id, departure, satisfaction; public int[] type_actions = new int[8]; public int connect_count, open_up_count; public string specialist_result; public double specialist_bonus;
+        public double affinity_delta, stamina_spent; }
     [Serializable] public class CafeSatisfaction
     {
         public string level, label;
@@ -94,7 +96,8 @@ namespace CatCafePreview.Standalone
         public string id, cat_id, departure;
         public int arrival, seated_at = -1, seated_ticks;
         public double bill;
-        public int[] type_actions = new int[8]; public double affinity_delta, stamina_spent;
+        public int[] type_actions = new int[8]; public int connect_count, open_up_count; public string specialist_result; public double specialist_bonus;
+        public double affinity_delta, stamina_spent;
         public CafeSatisfaction satisfaction;
     }
     [Serializable] public class CafeExchange
@@ -145,6 +148,7 @@ namespace CatCafePreview.Standalone
         public List<CafeTrustEvent> trust_events = new List<CafeTrustEvent>();
         public string objective = "free";
         public List<CafeGoalStage> goal = new List<CafeGoalStage>();
+        public CafeReservation reservation = new CafeReservation();
         public List<CafeSeatPurchase> expansion = new List<CafeSeatPurchase>();
         public CafeHousing housing = new CafeHousing();
         public CafeIntake intake_request = new CafeIntake();
@@ -154,12 +158,13 @@ namespace CatCafePreview.Standalone
         {
             if (regular_introduction != null && regular_introduction.customer_id == "") regular_introduction.customer_id = null;
             if (growth != null) foreach (var row in growth) row.Normalize();
+            if (reservation != null) { if (reservation.result == "") reservation.result = null; if (reservation.choice == "") reservation.choice = null; }
             if (game_over == "") game_over = null;
             if (trust_customers != null) foreach (var r in trust_customers) { if (r.event_id == "") r.event_id = null; if (r.reason == "") r.reason = null; }
             if (trust_events != null) foreach (var e in trust_events) { if (e.choice == "") e.choice = null; if (e.outcome == "") e.outcome = null; }
             if (store_events != null) foreach (var e in store_events) { if (e.type == "") e.type = null; if (e.status == "") e.status = null; if (e.choice == "") e.choice = null; }
-            if (history != null) foreach (var h in history) if (h.customer_records != null) foreach (var r in h.customer_records) { if (r.satisfaction == "") r.satisfaction = null; if (r.cat_id == "") r.cat_id = null; }
-            if (visits != null) foreach (var v in visits) { if (v.departure == "") v.departure = null; if (v.cat_id == "") v.cat_id = null; if (v.satisfaction != null && string.IsNullOrEmpty(v.satisfaction.level)) v.satisfaction = null; }
+            if (history != null) foreach (var h in history) if (h.customer_records != null) foreach (var r in h.customer_records) { if (r.specialist_result == "") r.specialist_result = null; if (r.satisfaction == "") r.satisfaction = null; if (r.cat_id == "") r.cat_id = null; }
+            if (visits != null) foreach (var v in visits) { if (v.specialist_result == "") v.specialist_result = null; if (v.departure == "") v.departure = null; if (v.cat_id == "") v.cat_id = null; if (v.satisfaction != null && string.IsNullOrEmpty(v.satisfaction.level)) v.satisfaction = null; }
             if (exchanges != null) foreach (var e in exchanges)
             {
                 if (e.end_reason == "") e.end_reason = null;

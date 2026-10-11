@@ -36,6 +36,7 @@ namespace CatCafePreview.Standalone
             var schedule = new List<CafeArrival>();
             for (int i = 0; i < Rules.arrival_ticks.Length; i++)
                 if (Rules.patterns[i % Rules.patterns.Length].days.Contains(weekday)) schedule.Add(new CafeArrival { customer_id = "guest-" + (i + 1), tick = Rules.arrival_ticks[i] });
+            if(State.objective=="popularity" && ClearedGoalDay(1)>0 && day>ClearedGoalDay(1))schedule.Add(new CafeArrival {customer_id="advanced-white",tick=0});
             foreach(var purchase in State.expansion.Where(p=>p.seats>=4 && day>p.day))schedule.Add(new CafeArrival {customer_id=purchase.seats==4?"expanded-guest":"expanded-guest-"+(purchase.seats-3),tick=(purchase.seats-4)*6});
             foreach (var r in State.loyalty.Where(r => r.regular_day > 0 && day > r.regular_day && ExtraWeekday(r.customer_id) == weekday))
             {
@@ -54,6 +55,7 @@ namespace CatCafePreview.Standalone
                     if(existing==null)schedule.Add(new CafeArrival {customer_id=id,tick=tick});else existing.tick=tick;
                 }
             }
+            if(State.objective=="popularity" && State.reservation.status=="accepted" && State.reservation.visit_day==day)schedule.Add(new CafeArrival {customer_id="reservation-longhair",tick=Rules.reservation.arrival_tick});
             var e = State.store_events.Find(r => r.day == day);
             if (e?.type == "rain")
             {
@@ -73,7 +75,7 @@ namespace CatCafePreview.Standalone
             row.score = after; row.score_day = day;
             if (before < Rules.discontent.threshold && after >= Rules.discontent.threshold) row.suspensions.Add(new CafeSuspension { day = day, until = day + Rules.discontent.suspension_days });
         }
-        internal void ApplyCustomerService(List<CafeLoyalty> loyalty, List<CafeDiscontent> discontent, int day, string customer, string satisfaction)
+        internal void ApplyCustomerService(List<CafeLoyalty> loyalty, List<CafeDiscontent> discontent, int day, string customer, string satisfaction, string specialistResult = null)
         {
             if (satisfaction == "satisfied")
             {
@@ -82,7 +84,7 @@ namespace CatCafePreview.Standalone
                 row.score = Math.Min(Rules.loyalty.threshold, row.score + Rules.loyalty.gain);
                 if (row.regular_day == 0 && row.score >= Rules.loyalty.threshold) row.regular_day = day;
             }
-            ChangeDiscontent(discontent, day, customer, satisfaction == "satisfied" ? -Rules.discontent.good_service_recovery : satisfaction == "dissatisfied" ? Rules.satisfaction.dissatisfied_discontent_gain : 0);
+            ChangeDiscontent(discontent, day, customer, (customer=="advanced-white" && specialistResult=="failure"?Rules.discontent.advanced_failure_gain:0) + (satisfaction == "satisfied" ? -Rules.discontent.good_service_recovery : satisfaction == "dissatisfied" ? Rules.satisfaction.dissatisfied_discontent_gain : 0));
         }
         private void ValidateCustomers(CafeSnapshot s)
         {
@@ -106,11 +108,11 @@ namespace CatCafePreview.Standalone
                 foreach (var r in h.customer_records)
                 {
                     if (string.IsNullOrEmpty(r.customer_id) || !new[] { "queue_full", "wait_timeout", "closing", "interaction_exhausted", "interaction_time_limit" }.Contains(r.departure) || r.satisfaction != null && !new[] { "satisfied", "normal", "dissatisfied" }.Contains(r.satisfaction)) throw new ArgumentException("Invalid customer outcome");
-                    ReplayCustomer(expectedLoyalty, expectedDiscontent, h.day, r.customer_id, r.departure, r.satisfaction);
+                    ReplayCustomer(expectedLoyalty, expectedDiscontent, h.day, r.customer_id, r.departure, r.satisfaction, r.specialist_result);
                     ReplayTrustRecovery(s, expectedDiscontent, h.day, r.customer_id, r.satisfaction);
                 }
             }
-            foreach (var v in s.visits) { ReplayCustomer(expectedLoyalty, expectedDiscontent, s.day, v.id, v.departure, v.satisfaction?.level); ReplayTrustRecovery(s, expectedDiscontent, s.day, v.id, v.satisfaction?.level); }
+            foreach (var v in s.visits) { ReplayCustomer(expectedLoyalty, expectedDiscontent, s.day, v.id, v.departure, v.satisfaction?.level, v.specialist_result); ReplayTrustRecovery(s, expectedDiscontent, s.day, v.id, v.satisfaction?.level); }
             if (expectedLoyalty.Count != s.loyalty.Count || expectedDiscontent.Count != s.discontent.Count) throw new ArgumentException("Customer totals disagree with history");
             foreach (var r in expectedLoyalty) if (!s.loyalty.Any(a => a.customer_id == r.customer_id && a.score == r.score && a.regular_day == r.regular_day)) throw new ArgumentException("Loyalty disagrees with history");
             foreach (var r in expectedDiscontent)
@@ -119,10 +121,10 @@ namespace CatCafePreview.Standalone
                 if (actual == null || actual.score != r.score || actual.score_day != r.score_day || actual.suspensions.Count != r.suspensions.Count || actual.suspensions.Where((p, i) => p.day != r.suspensions[i].day || p.until != r.suspensions[i].until).Any()) throw new ArgumentException("Discontent disagrees with history");
             }
         }
-        private void ReplayCustomer(List<CafeLoyalty> loyalty, List<CafeDiscontent> discontent, int day, string id, string departure, string satisfaction)
+        private void ReplayCustomer(List<CafeLoyalty> loyalty, List<CafeDiscontent> discontent, int day, string id, string departure, string satisfaction, string specialistResult)
         {
             if (departure == "queue_full" || departure == "wait_timeout") ChangeDiscontent(discontent, day, id, Rules.discontent.waiting_gain);
-            if (satisfaction != null) ApplyCustomerService(loyalty, discontent, day, id, satisfaction);
+            if (satisfaction != null) ApplyCustomerService(loyalty, discontent, day, id, satisfaction, specialistResult);
         }
     }
 }
