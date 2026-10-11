@@ -21,12 +21,17 @@ namespace CatCafePreview.Standalone
         public ExchangeRules exchange;
         public SatisfactionRules satisfaction;
         public PopularityRules popularity;
+        public StoreEventRules store_events;
         public ExchangeType[] types;
         public string rules_id;
     }
     [Serializable] public class WeekPattern { public int[] days; }
     [Serializable] public class SatisfactionRules { public double satisfied_score, dissatisfied_score, gauge_target, satisfied_bonus, dissatisfied_discontent_gain; }
     [Serializable] public class PopularityRules { public double cap, gain_per_success; }
+    [Serializable] public class CafeSupply { public string id, name; public double stress_relief; }
+    [Serializable] public class StoreEventRules { public double probability, trouble_cost, support_full_cost, support_full_popularity, support_small_cost, support_small_popularity; public int festival_customer_tick, trouble_seat_loss; public CafeSupply supply; }
+    [Serializable] public class CafeStoreEvent { public int day; public string type, status, choice; public double draw, cost, popularity; }
+    [Serializable] public class CafeSupplyUse { public string source, cat_id; public int day; public double before, after; }
     [Serializable] public class CafeSatisfaction
     {
         public string level, label;
@@ -97,10 +102,13 @@ namespace CatCafePreview.Standalone
         public List<CafeExchange> exchanges = new List<CafeExchange>();
         public List<CafeRelationship> relationships = new List<CafeRelationship>();
         public List<CafeDayResult> history = new List<CafeDayResult>();
+        public List<CafeStoreEvent> store_events = new List<CafeStoreEvent>();
+        public List<CafeSupplyUse> item_uses = new List<CafeSupplyUse>();
         // Unity JsonUtility materializes JSON null strings as empty strings.
         public void NormalizeJsonStrings()
         {
             if (game_over == "") game_over = null;
+            if (store_events != null) foreach (var e in store_events) { if (e.type == "") e.type = null; if (e.status == "") e.status = null; if (e.choice == "") e.choice = null; }
             if (visits != null) foreach (var v in visits) { if (v.departure == "") v.departure = null; if (v.cat_id == "") v.cat_id = null; if (v.satisfaction != null && string.IsNullOrEmpty(v.satisfaction.level)) v.satisfaction = null; }
             if (exchanges != null) foreach (var e in exchanges)
             {

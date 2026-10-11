@@ -5,7 +5,7 @@ namespace CatCafePreview.Standalone
 {
     // First migration slice: base multi-seat service, shifts, health, management.
     // No UI, filesystem, clock, Unity or HTTP dependency.
-    public sealed class CafeSimulation
+    public sealed partial class CafeSimulation
     {
         public readonly CafeRules Rules;
         public CafeSnapshot State { get; private set; }
@@ -15,10 +15,12 @@ namespace CatCafePreview.Standalone
             if (rules.version != 1 || rules.cats == null || rules.cats.Length == 0 || seed < 0) throw new ArgumentException("Invalid initial configuration");
             State = new CafeSnapshot { seed = seed, rules_id = rules.rules_id, instance_id = Guid.NewGuid().ToString("N"), funds = rules.starting_funds, opening_funds = rules.starting_funds, popularity = rules.starting_popularity };
             foreach (var cat in rules.cats.OrderBy(c => c.id, StringComparer.Ordinal)) State.cats.Add(new CafeCat { id = cat.id, stamina = rules.max_stamina });
+            PresentStoreEvent();
         }
         public void Restore(CafeSnapshot value)
         {
             Validate(value);
+            foreach (var e in value.store_events) e.draw = StoreDraw(value.seed, e.day, "occur");
             State = value;
             // A load starts a new command epoch. Old queued buttons cannot mutate it.
             State.instance_id = Guid.NewGuid().ToString("N"); State.revision = 0;
@@ -33,6 +35,7 @@ namespace CatCafePreview.Standalone
                 || s.revenue < 0 || s.expenses < 0 || Math.Abs(s.funds - (s.opening_funds + s.revenue - s.expenses)) > 1e-7
                 || s.history.Count != s.day - 1 || s.completed < 0
                 || !Range(s.popularity, 0, Rules.popularity.cap)) throw new ArgumentException("Invalid standalone save");
+            ValidateStoreEvents(s);
             foreach (var c in s.cats)
                 if (!Rules.cats.Any(d => d.id == c.id) || !Range(c.stamina, 0, Rules.max_stamina) || !Range(c.fatigue, 0, Rules.max_fatigue)
                     || !Range(c.stress, 0, 100) || !new[] { "healthy", "sick" }.Contains(c.health) || !new[] { "cafe", "missing" }.Contains(c.activity)
@@ -74,13 +77,16 @@ namespace CatCafePreview.Standalone
         private static bool Finite(double v) => !double.IsNaN(v) && !double.IsInfinity(v);
         private static bool Range(double v, double min, double max) => Finite(v) && v >= min && v <= max;
         private static double Clamp(double v, double max) => Math.Max(0, Math.Min(max, v));
-        public void Execute(string kind, string[] working = null, string catId = null)
+        public void Execute(string kind, string[] working = null, string catId = null, string choice = null, string source = null)
         {
             var s = State;
             if (s.game_over != null) throw new InvalidOperationException("経営終了後は保存・閲覧のみ利用できます。");
             if (kind != "resolve_missing" && s.cats.Any(c => c.activity == "missing" && c.missing_remaining == 0)) throw new InvalidOperationException("帰還結果を確認してください。");
+            if (StoreEventWaiting && kind != "resolve_store_event" && kind != "resolve_missing" && !(kind == "day_off" && CurrentStoreEvent.type == "trouble")) throw new InvalidOperationException("店舗イベントに回答してください。");
             switch (kind)
             {
+                case "resolve_store_event": ResolveStoreEvent(choice); return;
+                case "use_item": UseSupply(source, catId); break;
                 case "set_shifts":
                     if (s.phase != "preparation" || working == null || working.Distinct().Count() != working.Length
                         || working.Any(id => !s.cats.Any(c => c.id == id && c.health == "healthy" && c.activity == "cafe"))) throw new ArgumentException("営業準備中に健康な猫の出勤を設定してください。");
@@ -93,19 +99,17 @@ namespace CatCafePreview.Standalone
                 case "advance_business": Require("open"); Advance(); break;
                 case "next_day":
                     Require("closed");
-                    s.history.Add(new CafeDayResult { day = s.day, arrivals = s.visits.Count, completed = s.completed, opening_funds = s.opening_funds, revenue = s.revenue, expenses = s.expenses, closing_funds = s.funds, popularity_gain = s.popularity_gain, satisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "satisfied"), normal = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "normal"), dissatisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "dissatisfied") });
-                    s.day++; s.tick = 0; s.phase = "preparation"; s.opening_funds = s.funds; s.revenue = s.expenses = 0; s.completed = 0;
-                    s.visits.Clear(); s.queue.Clear(); s.exchanges.Clear();
-                    s.popularity_gain = 0;
-                    foreach (var c in s.cats) { c.service_ticks = 0; if (c.activity == "cafe") { c.stamina = Rules.max_stamina; c.cannot_continue = c.health != "healthy"; } c.working &= c.health == "healthy" && c.activity == "cafe"; }
+                    AdvanceToNextDay();
                     break;
                 case "day_off":
                     Require("preparation");
+                    if (StoreEventWaiting) { CurrentStoreEvent.status = "resolved"; CurrentStoreEvent.choice = "close"; }
                     var planned = s.cats.Where(c => c.working).Select(c => c.id).ToArray();
                     foreach (var c in s.cats) c.working = false;
                     Close(); s.tick = Rules.opening_ticks;
                     foreach (var c in s.cats) c.working = planned.Contains(c.id) && c.health == "healthy" && c.activity == "cafe";
-                    if (s.game_over == null) Execute("next_day");
+                    if (s.game_over == null) AdvanceToNextDay();
+                    s.revision++;
                     return;
                 case "resolve_missing":
                     var cat = s.cats.Find(c => c.id == catId && c.activity == "missing" && c.missing_remaining == 0);
@@ -117,6 +121,15 @@ namespace CatCafePreview.Standalone
             s.revision++;
         }
         private void Require(string phase) { if (State.phase != phase) throw new InvalidOperationException("現在の営業段階では実行できません。"); }
+        private void AdvanceToNextDay()
+        {
+            var s = State;
+            s.history.Add(new CafeDayResult { day = s.day, arrivals = s.visits.Count, completed = s.completed, opening_funds = s.opening_funds, revenue = s.revenue, expenses = s.expenses, closing_funds = s.funds, popularity_gain = s.popularity_gain, satisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "satisfied"), normal = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "normal"), dissatisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "dissatisfied") });
+            s.day++; s.tick = 0; s.phase = "preparation"; s.opening_funds = s.funds; s.revenue = s.expenses = 0; s.completed = 0;
+            s.visits.Clear(); s.queue.Clear(); s.exchanges.Clear(); s.popularity_gain = 0;
+            foreach (var c in s.cats) { c.service_ticks = 0; if (c.activity == "cafe") { c.stamina = Rules.max_stamina; c.cannot_continue = c.health != "healthy"; } c.working &= c.health == "healthy" && c.activity == "cafe"; }
+            PresentStoreEvent();
+        }
         private string Preference(string customer) => Rules.preference_pool[(int)(PythonRandom.Hash64(State.seed + ":" + customer) % (ulong)Rules.preference_pool.Length)];
         private bool Matched(CafeCat c, string customer) => Array.IndexOf(Rules.cats.First(d => d.id == c.id).features, Preference(customer)) >= 0;
         private void Advance()
@@ -125,7 +138,7 @@ namespace CatCafePreview.Standalone
             // Assignment precedes arrival, matching CafeInteractionSession.automatic_step.
             for (int seat = 0; seat < 2 && s.queue.Count > 0; seat++)
             {
-                if (s.exchanges.Any(e => e.seat == seat)) continue;
+                if (DisabledSeat(seat) || s.exchanges.Any(e => e.seat == seat)) continue;
                 string customer = s.queue[0];
                 var cat = s.cats.Where(c => c.working && c.health == "healthy" && c.activity == "cafe" && !c.cannot_continue && c.stamina > 0 && !s.exchanges.Any(e => e.cat_id == c.id))
                     .OrderByDescending(c => Matched(c, customer)).ThenByDescending(c => c.stamina).ThenBy(c => c.id, StringComparer.Ordinal).FirstOrDefault();
@@ -136,12 +149,14 @@ namespace CatCafePreview.Standalone
             }
             s.exchanges.Sort((a, b) => a.seat.CompareTo(b.seat));
             int weekday = (Rules.start_weekday + s.day - 1) % 7;
+            int lastNormal = Enumerable.Range(0, Rules.arrival_ticks.Length).Where(i => Rules.patterns[i % Rules.patterns.Length].days.Contains(weekday)).DefaultIfEmpty(-1).Max();
             for (int i = 0; i < Rules.arrival_ticks.Length; i++)
             {
                 if (Rules.arrival_ticks[i] != s.tick || !Rules.patterns[i % Rules.patterns.Length].days.Contains(weekday)) continue;
-                var visit = new CafeVisit { id = "guest-" + (i + 1), arrival = s.tick }; s.visits.Add(visit);
-                if (s.queue.Count >= Rules.queue_capacity) Depart(visit, "queue_full"); else s.queue.Add(visit.id);
+                if (CurrentStoreEvent.type == "rain" && i == lastNormal) continue;
+                Arrive("guest-" + (i + 1));
             }
+            if (CurrentStoreEvent.type == "festival" && s.tick == Rules.store_events.festival_customer_tick) Arrive("event-guest-" + s.day);
             foreach (var e in s.exchanges.OrderBy(e => e.seat).ToArray())
             {
                 var cat = s.cats.Find(c => c.id == e.cat_id); var definition = Rules.cats.First(d => d.id == cat.id);
@@ -168,6 +183,11 @@ namespace CatCafePreview.Standalone
             if (visit.departure != null) return;
             visit.departure = reason; visit.bill = visit.seated_ticks * Rules.time_price;
             State.funds += visit.bill; State.revenue += visit.bill; State.queue.Remove(visit.id);
+        }
+        private void Arrive(string id)
+        {
+            var visit = new CafeVisit { id = id, arrival = State.tick }; State.visits.Add(visit);
+            if (State.queue.Count >= Rules.queue_capacity) Depart(visit, "queue_full"); else State.queue.Add(id);
         }
         public void Choose(CafeExchange e, out string action, out string target)
         {
@@ -226,7 +246,7 @@ namespace CatCafePreview.Standalone
         private void Close()
         {
             var s = State;
-            double after = Math.Min(Rules.popularity.cap, s.popularity + s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "satisfied") * Rules.popularity.gain_per_success);
+            double after = Math.Min(Rules.popularity.cap, s.popularity + s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "satisfied") * Rules.popularity.gain_per_success + CurrentStoreEvent.popularity);
             s.popularity_gain = after - s.popularity; s.popularity = after;
             foreach (var cat in s.cats.Where(cat => cat.activity == "missing")) if (cat.missing_remaining > 0) cat.missing_remaining--;
             foreach (var cat in s.cats.Where(cat => cat.activity == "cafe"))
@@ -249,7 +269,7 @@ namespace CatCafePreview.Standalone
                     s.popularity = Math.Max(0, s.popularity - Rules.popularity_loss);
                 }
             }
-            double expenses = Rules.base_cost + Rules.per_seat_cost * 2;
+            double expenses = Rules.base_cost + Rules.per_seat_cost * 2 + (CurrentStoreEvent.choice == "repair" ? Rules.store_events.trouble_cost : 0);
             s.expenses += expenses; s.funds -= expenses; s.phase = "closed"; CheckEnd();
         }
         private void CheckEnd() { if (State.game_over == null) State.game_over = State.funds <= 0 ? "funds" : State.popularity <= 0 ? "popularity" : null; }

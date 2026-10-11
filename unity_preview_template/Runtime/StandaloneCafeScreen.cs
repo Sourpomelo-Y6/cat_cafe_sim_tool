@@ -22,11 +22,11 @@ namespace CatCafePreview
             try { StandaloneCafeSmoke.Run(args[index + 1]); Application.Quit(0); }
             catch (Exception ex) { Debug.LogException(ex); Application.Quit(1); }
         }
-        private IEnumerator Send(string kind, string[] working = null, int slot = 1, string catId = "")
+        private IEnumerator Send(string kind, string[] working = null, int slot = 1, string catId = "", string choice = "free")
         {
             if (busy) yield break;
             busy = true;
-            var cmd = new PythonShiftCommand { request_id = Guid.NewGuid().ToString("N"), instance_id = state.instance_id, expected_revision = state.revision, kind = kind, choice = "free", working_cats = working ?? new string[0], save_id = slot.ToString(), save_slot = slot, cat_id = catId };
+            var cmd = new PythonShiftCommand { request_id = Guid.NewGuid().ToString("N"), instance_id = state.instance_id, expected_revision = state.revision, kind = kind, choice = choice, working_cats = working ?? new string[0], save_id = slot.ToString(), save_slot = slot, cat_id = catId };
             yield return backend.Request("/commands", JsonUtility.ToJson(cmd), reply =>
             {
                 var result = JsonUtility.FromJson<PythonCommandReply>(reply.text);
@@ -59,21 +59,39 @@ namespace CatCafePreview
                 GUILayout.Label("資金 " + state.funds + " / 売上 " + state.revenue + " / 支出 " + state.finance.total_expenses + " / 完了接客 " + state.completed_interactions + " / 待機 " + state.waiting_count);
                 GUILayout.Label("人気 " + state.popularity + " / 本日の人気上昇 " + state.popularity_gain + " / 満足 " + state.customer_satisfaction.satisfied + " / 普通 " + state.customer_satisfaction.normal + " / 不満 " + state.customer_satisfaction.dissatisfied);
                 if (state.game_over != null) GUILayout.Label("経営終了：" + state.game_over.reason);
+                GUILayout.Label("店舗イベント：" + state.store_event_label);
+                if (state.store_event != null)
+                {
+                    foreach (var option in state.store_event.choices)
+                    {
+                        GUI.enabled = !busy && option.can_select;
+                        if (GUILayout.Button(option.label + "：" + option.detail)) StartCoroutine(Send("resolve_store_event", choice: option.choice));
+                    }
+                }
+                foreach (var item in state.items.owned)
+                {
+                    GUILayout.Label(item.name + " / " + item.effect);
+                    foreach (var target in item.targets)
+                    {
+                        GUI.enabled = !busy && target.can_select;
+                        if (GUILayout.Button(target.name + "に使用：" + target.changes)) StartCoroutine(Send("use_item", catId: target.cat_id, choice: item.choice));
+                    }
+                }
                 foreach (var cat in state.cats)
                 {
                     GUILayout.BeginHorizontal(); GUILayout.Label(cat.name + " / 体力 " + cat.stamina.ToString("0.0") + " / 疲労 " + cat.fatigue.ToString("0.0") + " / ストレス " + cat.stress.ToString("0.0") + " / " + cat.health_label + " / " + cat.activity_label);
-                    GUI.enabled = !busy && state.can_set_shifts && state.game_over == null && cat.health_status == "healthy" && cat.activity == "cafe";
+                    GUI.enabled = !busy && state.store_event == null && state.can_set_shifts && state.game_over == null && cat.health_status == "healthy" && cat.activity == "cafe";
                     bool work = GUILayout.Toggle(cat.working, "出勤");
                     if (work != cat.working) StartCoroutine(Send("set_shifts", state.cats.Where(c => c.cat_id == cat.cat_id ? work : c.working).Select(c => c.cat_id).ToArray()));
                     GUILayout.EndHorizontal();
                 }
-                GUI.enabled = !busy && state.game_over == null;
+                GUI.enabled = !busy && state.game_over == null && state.store_event == null;
                 if (!state.can_set_shifts || state.cats.Any(c => c.working))
                     if (GUILayout.Button(state.closed ? "翌日へ" : state.can_set_shifts ? "営業開始" : "営業を1tick進める")) StartCoroutine(Send(state.closed ? "next_day" : state.can_set_shifts ? "start_business" : "advance_business"));
                 if (state.can_set_shifts && GUILayout.Button("休業して翌日へ")) StartCoroutine(Send("day_off"));
                 foreach (var cat in backend.Simulation.State.cats.Where(c => c.activity == "missing" && c.missing_remaining == 0))
                     if (GUILayout.Button("帰還確認：" + cat.id + (cat.kitten ? "（引き渡し費用あり）" : ""))) StartCoroutine(Send("resolve_missing", catId: cat.id));
-                foreach (var seat in state.seats) GUILayout.Label(seat.seat_id + "：" + (seat.customer_id == null ? "空席" : seat.customer_id + " / " + seat.cat_id));
+                foreach (var seat in state.seats) GUILayout.Label(seat.seat_id + "：" + (seat.disabled ? "応急処置により停止" : seat.customer_id == null ? "空席" : seat.customer_id + " / " + seat.cat_id));
                 GUI.enabled = !busy;
                 GUILayout.BeginHorizontal();
                 for (int i = 1; i <= 3; i++) if (GUILayout.Button("保存 " + i)) StartCoroutine(Send("save_game", slot: i));

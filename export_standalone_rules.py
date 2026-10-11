@@ -22,6 +22,7 @@ def exported_rules():
                   tension_multiplier=preferences['tension_multiplier'], exchange=relationship['rules'], types=relationship['types'], cats=[])
     result['satisfaction'] = read('cafe_customer_satisfaction')
     result['popularity'] = {key: read('cafe_goal')[key] for key in ('cap', 'gain_per_success')}
+    result['store_events'] = read('cafe_store_events')
     for row in new['cats']:
         p = presets[row['preset']]
         trait = traits.get(row.get('trait'), {})

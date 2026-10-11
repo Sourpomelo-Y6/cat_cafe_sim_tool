@@ -23,17 +23,15 @@ def compare():
             c.initialize_operating_cost(selected['operating_cost'])
             c.initialize_customer_satisfaction(selected['customer_satisfaction'])
             goal = dict(selected['goal']); goal.pop('stages', None); c.enable_goal(goal, tracking_only=True)
+            c.initialize_store_events(selected['store_events'])
             for session in (full, subset):
                 while not session.core.closed: session.automatic_step()
             def summary(session):
                 s = session.core.summary()
                 return {key: s[key] for key in ('funds', 'revenue', 'operating_cost', 'completed_interactions', 'cat_stamina', 'popularity', 'customer_satisfaction')}
-            without_events = dict(selected); without_events.pop('store_events', None)
-            control = create_game(Path(temp) / 'without-events', without_events, seed=seed)
-            while not control.core.closed: control.automatic_step()
-            assert summary(control) == summary(subset), 'Additional unexplained first-day difference'
-            rows.append(dict(seed=seed, store_event=full.core.store_events['days'][0], full_python=summary(full), migrated_subset=summary(subset), full_without_store_events=summary(control)))
-    return dict(note='The subset includes basic satisfaction and popularity tracking; loyalty/discontent/trust, growth and store events remain omitted. Equal subset traces do not establish complete free-mode parity.', days=1, rows=rows)
+            assert summary(full) == summary(subset), 'Unexplained first-day difference'
+            rows.append(dict(seed=seed, store_event=full.core.store_events['days'][0], full_python=summary(full), migrated_subset=summary(subset)))
+    return dict(note='The subset includes basic satisfaction and popularity tracking; store events; loyalty/discontent/trust and growth remain omitted. Equal subset traces do not establish complete free-mode parity.', days=1, rows=rows)
 
 
 if __name__ == '__main__':

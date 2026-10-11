@@ -38,7 +38,7 @@ static class Program
             {
                 var day = new CafeSimulation(rules, row.GetProperty("seed").GetInt32());
                 day.Execute("start_business"); while (day.State.phase != "closed") day.Execute("advance_business");
-                var expected = row.GetProperty("full_without_store_events");
+                var expected = row.GetProperty("full_python");
                 Assert(day.State.funds == expected.GetProperty("funds").GetDouble() && day.State.revenue == expected.GetProperty("revenue").GetDouble()
                     && day.State.expenses == expected.GetProperty("operating_cost").GetDouble() && day.State.popularity == expected.GetProperty("popularity").GetDouble()
                     && day.State.completed == expected.GetProperty("completed_interactions").GetInt32(), "Full Python first day finance mismatch");
@@ -46,14 +46,20 @@ static class Program
                 foreach (string level in new[] { "satisfied", "normal", "dissatisfied" }) Assert(day.State.visits.Count(v => v.satisfaction != null && v.satisfaction.level == level) == expected.GetProperty("customer_satisfaction").GetProperty(level).GetInt32(), "Full Python first day satisfaction mismatch");
             }
         }
-        foreach (var scenario in data.RootElement.GetProperty("scenarios").EnumerateArray())
+        using var eventCases = args.Length > 3 ? JsonDocument.Parse(File.ReadAllText(args[3])) : JsonDocument.Parse("{\"scenarios\":[]}");
+        foreach (var scenario in data.RootElement.GetProperty("scenarios").EnumerateArray().Concat(eventCases.RootElement.GetProperty("scenarios").EnumerateArray()))
         {
             var sim = new CafeSimulation(rules, scenario.GetProperty("seed").GetInt32()); scenarios++;
+            if (scenario.TryGetProperty("initial", out var initialState))
+            {
+                using var actual = JsonDocument.Parse(Encode(sim.State)); Equal(initialState, actual.RootElement, "Initial event");
+                sim.Restore(Decode<CafeSnapshot>(Encode(sim.State)));
+            }
             foreach (var row in scenario.GetProperty("operations").EnumerateArray())
             {
                 string kind = row.GetProperty("kind").GetString();
                 var working = row.TryGetProperty("working", out var w) ? w.EnumerateArray().Select(v => v.GetString()).ToArray() : null;
-                sim.Execute(kind, working, row.TryGetProperty("cat_id", out var catId) ? catId.GetString() : null); ticks++;
+                sim.Execute(kind, working, row.TryGetProperty("cat_id", out var catId) ? catId.GetString() : null, row.TryGetProperty("choice", out var choice) ? choice.GetString() : null, row.TryGetProperty("source", out var source) ? source.GetString() : null); ticks++;
                 using var state = JsonDocument.Parse(Encode(sim.State)); Equal(row.GetProperty("expected"), state.RootElement, "seed=" + sim.State.seed + "/day=" + sim.State.day + "/tick=" + sim.State.tick);
                 sim.Validate(sim.State);
                 // Resume at EVERY operation boundary; compare the continuation next tick.
@@ -73,6 +79,21 @@ static class Program
             }
         }
         var check = new CafeSimulation(rules);
+        int troubleSeed = Enumerable.Range(0, 1000).First(seed => new CafeSimulation(rules, seed).CurrentStoreEvent.type == "trouble");
+        var pending = new CafeSimulation(rules, troubleSeed); string pendingBefore = Encode(pending.State);
+        try { pending.Execute("start_business"); throw new Exception("Unanswered event started business"); } catch (InvalidOperationException) { }
+        Assert(Encode(pending.State) == pendingBefore, "Pending rejection mutated state");
+        var forged = Decode<CafeSnapshot>(pendingBefore); forged.store_events[0].draw += .001;
+        try { pending.Restore(forged); throw new Exception("Forged event draw accepted"); } catch (ArgumentException) { }
+        Assert(Encode(pending.State) == pendingBefore, "Rejected event load mutated state");
+        int supplySeed = Enumerable.Range(0, 1000).First(seed => new CafeSimulation(rules, seed).CurrentStoreEvent.type == "supplies");
+        var supplies = new CafeSimulation(rules, supplySeed); string unused = Encode(supplies.State);
+        try { supplies.Execute("use_item", catId: supplies.State.cats[0].id, source: supplies.AvailableSupplies[0]); throw new Exception("Zero-stress supply consumed"); } catch (ArgumentException) { }
+        Assert(Encode(supplies.State) == unused, "Rejected supply consumption mutated state");
+        int supportSeed = Enumerable.Range(0, 1000).First(seed => new CafeSimulation(rules, seed).CurrentStoreEvent.type == "support");
+        var insolvent = new CafeSimulation(rules, supportSeed); insolvent.State.opening_funds = insolvent.State.funds = rules.store_events.support_full_cost;
+        insolvent.Execute("resolve_store_event", choice: "full");
+        Assert(insolvent.State.game_over == "funds" && insolvent.CurrentStoreEvent.status == "resolved" && insolvent.State.popularity == rules.starting_popularity, "Support expense timing or game-over mismatch");
         var capped = new CafeSimulation(rules); capped.State.popularity = rules.popularity.cap - 1;
         capped.Execute("start_business"); while (capped.State.phase != "closed") capped.Execute("advance_business");
         Assert(capped.State.popularity == rules.popularity.cap && capped.State.popularity_gain == 1, "Popularity cap mismatch");

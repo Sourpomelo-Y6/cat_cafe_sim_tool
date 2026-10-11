@@ -355,5 +355,20 @@
     "cap": 650,
     "gain_per_success": 5
   },
-  "rules_id": "209ba4b91a96b0d07f8336c1b5fe68d1af3b633c0e506cc5f21ca42b7a0770de"
+  "store_events": {
+    "probability": 0.4,
+    "festival_customer_tick": 3,
+    "trouble_cost": 50,
+    "trouble_seat_loss": 1,
+    "support_full_cost": 100,
+    "support_full_popularity": 5,
+    "support_small_cost": 50,
+    "support_small_popularity": 2,
+    "supply": {
+      "id": "care_supplies",
+      "name": "ケア用品",
+      "stress_relief": 20
+    }
+  },
+  "rules_id": "cfb57fd307a613952b5b9f86510f8201982fc1b43a8499b948adc790a7cb53e5"
 }

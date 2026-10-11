@@ -1,5 +1,6 @@
 """Generate comparison traces by executing original Python cores (no HTTP)."""
 import json
+import copy
 import random
 import sys
 import tempfile
@@ -43,6 +44,8 @@ def snapshot(session):
                                               next((r['cat_id'] for r in results if r['customer_id'] == v.id), None)),
                              arrival=v.arrival_tick, seated_at=v.seated_at if v.seated_at is not None else -1, seated_ticks=v.seated_ticks, departure=v.departure_reason, bill=v.bill,
                              satisfaction=next((evaluate_satisfaction(c, r) for r in results if r['customer_id']==v.id), None)) for v in c.visits.values()],
+                store_events=copy.deepcopy(c.store_events['days']), item_uses=copy.deepcopy(c.item_uses),
+                popularity_gain=next((r['gain'] for r in c.goal['days'] if r['day']==c.day), 0),
                 queue=list(c.queue), exchanges=[exchange(e, int(key.split('-')[-1])-1) for key, e in sorted(c.interactions.items())])
 
 
@@ -63,16 +66,34 @@ def generate():
             session.enable_management(selected['management']); core.initialize_operating_cost(selected['operating_cost'])
             core.initialize_customer_satisfaction(selected['customer_satisfaction'])
             goal = dict(selected['goal']); goal.pop('stages', None); core.enable_goal(goal, tracking_only=True)
+            core.initialize_store_events(selected['store_events'])
             # Only modules implemented in this first slice are enabled on BOTH sides.
             scenario = dict(seed=seed, operations=[]); data['scenarios'].append(scenario)
-            def record(kind, working=None, cat_id=None):
-                if kind == 'set_shifts': session.set_shifts(working)
+            def record(kind, working=None, cat_id=None, choice=None, source=None):
+                if kind == 'resolve_store_event':
+                    if choice == 'close': session.day_off()
+                    else: session.resolve_store_event(choice)
+                elif kind == 'use_item': core.use_item(source, cat_id)
+                elif kind == 'set_shifts': session.set_shifts(working)
                 elif kind == 'next_day': session.next_day()
                 elif kind == 'day_off': session.day_off()
                 elif kind == 'resolve_missing': session.resolve_missing(next(e['id'] for e in core.management['events'].values() if e['cat_id']==cat_id and e['status']=='waiting'))
                 else: session.automatic_step()
-                scenario['operations'].append(dict(kind=kind, **({'working': working} if working is not None else {}), **({'cat_id': cat_id} if cat_id else {}), expected=snapshot(session)))
+                scenario['operations'].append(dict(kind=kind, **({'working': working} if working is not None else {}), **({'cat_id': cat_id} if cat_id else {}), **({'choice': choice} if choice else {}), **({'source': source} if source else {}), expected=snapshot(session)))
             for day in range(1, 29):
+                for missing in list(core.management['events'].values()):
+                    if missing['status']=='waiting': record('resolve_missing', cat_id=missing['cat_id'])
+                event = core.store_events['days'][-1]
+                if event.get('status') == 'waiting':
+                    options = ('repair','patch','close') if event['type']=='trouble' else ('full','small','decline')
+                    choice = options[(seed+day) % 3]
+                    record('resolve_store_event', choice=choice)
+                    if core.management['game_over']: break
+                    if choice == 'close': continue
+                from cat_cafe_sim.core.cafe_items import inventory
+                supplies = inventory(core)
+                stressed = next((key for key in core.cats if core.activity(key)=='cafe' and core.management['stress'][key]>0), None)
+                if supplies and stressed: record('use_item', cat_id=stressed, source=next(iter(supplies)))
                 # Alternating work/rest preserves the existing fatigue/health rules.
                 working = [key for i, key in enumerate(core.cats) if core.cats[key].health_status == 'healthy' and core.activity(key)=='cafe' and (i + day) % 3 != 0]
                 record('set_shifts', working)
