@@ -94,14 +94,17 @@ namespace CatCafePreview.Standalone
         private static bool Finite(double v) => !double.IsNaN(v) && !double.IsInfinity(v);
         private static bool Range(double v, double min, double max) => Finite(v) && v >= min && v <= max;
         private static double Clamp(double v, double max) => Math.Max(0, Math.Min(max, v));
-        public void Execute(string kind, string[] working = null, string catId = null, string choice = null, string source = null, string seatId = null)
+        public void Execute(string kind,string[] working=null,string catId=null,string choice=null,string source=null,string seatId=null)
+        {ExecuteCore(kind,working,catId,choice,source,seatId);UpdateDispatchUnlocks();}
+        private void ExecuteCore(string kind, string[] working = null, string catId = null, string choice = null, string source = null, string seatId = null)
         {
             var s = State;
             if (s.game_over != null) throw new InvalidOperationException("経営終了後は保存・閲覧のみ利用できます。");
+            if(kind=="resolve_dispatch_choice"){ResolveDispatchChoice(source,choice);return;}
             if(kind=="resolve_activity"){ReceiveDispatch(source,choice);return;}
             if (kind == "resolve_reservation") { ResolveReservation(choice); return; }
             if (ReservationWaiting && !kind.StartsWith("resolve_growth", StringComparison.Ordinal) && kind != "resolve_missing" && kind != "resolve_customer_trust" && !(kind == "resolve_store_event" && choice != "close")) throw new InvalidOperationException("特別予約に回答してください。");
-            if(DispatchWaiting && !kind.StartsWith("resolve_growth",StringComparison.Ordinal) && kind!="resolve_missing" && kind!="resolve_customer_trust")throw new InvalidOperationException("派遣の帰還結果を確認してください。");
+            if((DispatchWaiting || DispatchChoiceWaiting) && !kind.StartsWith("resolve_growth",StringComparison.Ordinal) && kind!="resolve_missing" && kind!="resolve_customer_trust")throw new InvalidOperationException("派遣の帰還結果を確認してください。");
             if (kind == "continue_goal" || kind == "advance_goal") { RespondGoal(kind); return; }
             if (kind == "purchase_housing" || kind == "upgrade_housing") { ExpandHousing(kind); return; }
             if (kind.StartsWith("resolve_growth", StringComparison.Ordinal)) { ResolveGrowth(kind, catId, choice); return; }

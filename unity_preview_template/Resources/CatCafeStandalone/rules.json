@@ -204,6 +204,7 @@
   ],
   "cats": [
     {
+      "trait_id": "hospitality",
       "id": "cat-mike",
       "name": "ミケ",
       "features": [
@@ -234,6 +235,7 @@
       "return_stress": 0
     },
     {
+      "trait_id": "outgoing",
       "id": "cat-tama",
       "name": "タマ",
       "features": [
@@ -264,6 +266,7 @@
       "return_stress": 10
     },
     {
+      "trait_id": "",
       "id": "cat-sora",
       "name": "ソラ",
       "features": [
@@ -294,6 +297,7 @@
       "return_stress": 0
     },
     {
+      "trait_id": "relaxed",
       "id": "cat-kohaku",
       "name": "コハク",
       "features": [
@@ -324,6 +328,7 @@
       "return_stress": 0
     },
     {
+      "trait_id": "",
       "id": "cat-mugi",
       "name": "ムギ",
       "features": [
@@ -549,6 +554,350 @@
       "stress_relief": 10
     }
   },
+  "dispatch_destinations": [
+    {
+      "id": "neighborhood_visit",
+      "name": "近所のお店への訪問",
+      "days": 1,
+      "reward": 100,
+      "max_fatigue": 60,
+      "welcome": {
+        "feature": "long_hair",
+        "specialization": "dispatch",
+        "reward_bonus": 20,
+        "satisfaction_bonus": 0
+      },
+      "item_reward": {
+        "id": "care_supplies",
+        "name": "ケア用品",
+        "stress_relief": 10
+      },
+      "unsupported_reason": ""
+    },
+    {
+      "id": "shopping_street_event",
+      "name": "商店街の交流会",
+      "days": 2,
+      "reward": 260,
+      "max_fatigue": 40,
+      "required_trait": "hospitality",
+      "required_trait_name": "接客好き",
+      "item_reward": null,
+      "unsupported_reason": "帰還後の猫紹介が未対応です。"
+    },
+    {
+      "id": "out_of_town_visit",
+      "name": "郊外への出張訪問",
+      "days": 3,
+      "reward": 450,
+      "max_fatigue": 30,
+      "required_trait": "outgoing",
+      "required_trait_name": "外出好き",
+      "item_reward": null,
+      "unsupported_reason": ""
+    },
+    {
+      "id": "cat_exercise_class",
+      "name": "猫の運動教室",
+      "days": 2,
+      "reward": 300,
+      "max_fatigue": 40,
+      "required_trait": "hardy",
+      "required_trait_name": "体力自慢",
+      "item_reward": null,
+      "unsupported_reason": ""
+    },
+    {
+      "id": "quiet_reading_salon",
+      "name": "静かな読書サロン",
+      "days": 2,
+      "reward": 300,
+      "max_fatigue": 40,
+      "required_trait": "relaxed",
+      "required_trait_name": "のんびり屋",
+      "item_reward": null,
+      "unsupported_reason": ""
+    },
+    {
+      "id": "cat_photo_studio",
+      "name": "猫の撮影スタジオ",
+      "days": 2,
+      "reward": 350,
+      "max_fatigue": 40,
+      "required_trait": "hospitality",
+      "required_trait_name": "接客好き",
+      "welcome": {
+        "feature": "white",
+        "specialization": "service",
+        "reward_bonus": 20,
+        "satisfaction_bonus": 0
+      },
+      "item_reward": null,
+      "unsupported_reason": "帰還後の猫紹介が未対応です。"
+    },
+    {
+      "id": "cat_product_trial",
+      "name": "猫用品の体験会",
+      "days": 2,
+      "reward": 300,
+      "max_fatigue": 40,
+      "required_trait": "hardworking",
+      "required_trait_name": "働き者",
+      "item_reward": {
+        "id": "special_care_set",
+        "name": "特製ケアセット",
+        "fatigue_relief": 10,
+        "stress_relief": 10
+      },
+      "unsupported_reason": ""
+    },
+    {
+      "id": "small_art_museum",
+      "name": "小さな美術館",
+      "days": 2,
+      "reward": 350,
+      "max_fatigue": 40,
+      "required_trait": "easygoing",
+      "required_trait_name": "マイペース",
+      "welcome": {
+        "feature": "long_hair",
+        "specialization": "dispatch",
+        "reward_bonus": 20,
+        "satisfaction_bonus": 0
+      },
+      "item_reward": {
+        "id": "brushing_set",
+        "name": "ブラッシングセット",
+        "stress_relief": 20
+      },
+      "unsupported_reason": ""
+    },
+    {
+      "id": "mountain_lodge_visit",
+      "name": "山あいの宿への訪問",
+      "days": 3,
+      "reward": 650,
+      "max_fatigue": 20,
+      "required_trait": "outgoing",
+      "required_trait_name": "外出好き",
+      "item_reward": null,
+      "unsupported_reason": "家出トラブルが未対応です。"
+    }
+  ],
+  "dispatch_unlocks": [
+    {
+      "id": "shopping_street_event",
+      "popularity": 120,
+      "returns": 1,
+      "stage": 0
+    },
+    {
+      "id": "out_of_town_visit",
+      "popularity": 150,
+      "returns": 3,
+      "stage": 0
+    },
+    {
+      "id": "cat_exercise_class",
+      "popularity": 120,
+      "returns": 1,
+      "stage": 0
+    },
+    {
+      "id": "quiet_reading_salon",
+      "popularity": 120,
+      "returns": 1,
+      "stage": 0
+    },
+    {
+      "id": "cat_photo_studio",
+      "popularity": 120,
+      "returns": 1,
+      "stage": 0
+    },
+    {
+      "id": "cat_product_trial",
+      "popularity": 120,
+      "returns": 1,
+      "stage": 0
+    },
+    {
+      "id": "small_art_museum",
+      "popularity": 0,
+      "returns": 0,
+      "stage": 2
+    }
+  ],
+  "dispatch_encounters": [
+    {
+      "id": "extra_work",
+      "destination": "shopping_street_event",
+      "title": "追加の交流をお願いされました",
+      "choices": [
+        {
+          "id": "accept",
+          "label": "追加の仕事を引き受ける",
+          "reward": 100,
+          "fatigue": 10,
+          "stress": 5
+        },
+        {
+          "id": "decline",
+          "label": "予定どおりの仕事を終える",
+          "reward": 0,
+          "fatigue": 0,
+          "stress": 0
+        }
+      ]
+    },
+    {
+      "id": "rest_stop",
+      "destination": "out_of_town_visit",
+      "title": "移動の途中で休憩できます",
+      "choices": [
+        {
+          "id": "rest",
+          "label": "報酬の一部を使って休憩する",
+          "reward": -50,
+          "fatigue": -10,
+          "stress": -10
+        },
+        {
+          "id": "continue",
+          "label": "予定どおり進む",
+          "reward": 0,
+          "fatigue": 0,
+          "stress": 0
+        }
+      ]
+    },
+    {
+      "id": "exercise_program",
+      "destination": "cat_exercise_class",
+      "title": "追加の運動プログラムに参加できます",
+      "choices": [
+        {
+          "id": "accept",
+          "label": "追加の運動プログラムに参加する",
+          "reward": 80,
+          "fatigue": 10,
+          "stress": 0
+        },
+        {
+          "id": "decline",
+          "label": "予定どおり終える",
+          "reward": 0,
+          "fatigue": 0,
+          "stress": 0
+        }
+      ]
+    },
+    {
+      "id": "reading_extension",
+      "destination": "quiet_reading_salon",
+      "title": "延長の触れ合いをお願いされました",
+      "choices": [
+        {
+          "id": "accept",
+          "label": "延長の触れ合いに参加する",
+          "reward": 80,
+          "fatigue": 0,
+          "stress": 10
+        },
+        {
+          "id": "decline",
+          "label": "予定どおり終える",
+          "reward": 0,
+          "fatigue": 0,
+          "stress": 0
+        }
+      ]
+    },
+    {
+      "id": "extra_photo_session",
+      "destination": "cat_photo_studio",
+      "title": "追加の撮影をお願いされました",
+      "choices": [
+        {
+          "id": "accept",
+          "label": "追加撮影を続ける",
+          "reward": 100,
+          "fatigue": 15,
+          "stress": 15
+        },
+        {
+          "id": "decline",
+          "label": "追加撮影を断って切り上げる",
+          "reward": 0,
+          "fatigue": 5,
+          "stress": 5
+        }
+      ]
+    },
+    {
+      "id": "extra_product_trial",
+      "destination": "cat_product_trial",
+      "title": "追加の用品体験をお願いされました",
+      "choices": [
+        {
+          "id": "accept",
+          "label": "追加体験に参加する",
+          "reward": 100,
+          "fatigue": 10,
+          "stress": 10
+        },
+        {
+          "id": "decline",
+          "label": "予定どおり終える",
+          "reward": 0,
+          "fatigue": 0,
+          "stress": 0
+        }
+      ]
+    },
+    {
+      "id": "product_model_request",
+      "destination": "cat_product_trial",
+      "title": "用品の撮影モデルをお願いされました",
+      "choices": [
+        {
+          "id": "accept",
+          "label": "撮影モデルを引き受ける",
+          "reward": 150,
+          "fatigue": 15,
+          "stress": 15
+        },
+        {
+          "id": "decline",
+          "label": "撮影を見送って予定どおり終える",
+          "reward": 0,
+          "fatigue": 0,
+          "stress": 0
+        }
+      ]
+    },
+    {
+      "id": "museum_visitor_request",
+      "destination": "small_art_museum",
+      "title": "来館者との交流をお願いされました",
+      "choices": [
+        {
+          "id": "accept",
+          "label": "来館者との交流を引き受ける",
+          "reward": 100,
+          "fatigue": 10,
+          "stress": 10
+        },
+        {
+          "id": "decline",
+          "label": "交流を見送って予定どおり終える",
+          "reward": 0,
+          "fatigue": 0,
+          "stress": 0
+        }
+      ]
+    }
+  ],
   "item_shop": [
     {
       "cost": 100,
@@ -579,6 +928,24 @@
       "sale_price": 100
     }
   ],
+  "item_sale_prices": [
+    {
+      "id": "care_supplies",
+      "price": 50
+    },
+    {
+      "id": "nutrition_snack",
+      "price": 75
+    },
+    {
+      "id": "special_care_set",
+      "price": 100
+    },
+    {
+      "id": "brushing_set",
+      "price": 100
+    }
+  ],
   "housing": {
     "initial_capacity": 6,
     "capacity_bonus": 3,
@@ -599,6 +966,7 @@
     "personality": "穏やかな甘えん坊",
     "trait": "のんびり屋",
     "cat": {
+      "trait_id": "relaxed",
       "id": "request-cat-1",
       "name": "ナナ",
       "features": [
@@ -636,6 +1004,7 @@
     "trait": "のんびり屋",
     "features_label": "茶トラ・短毛",
     "cat": {
+      "trait_id": "relaxed",
       "id": "regular-rescue-1",
       "name": "マロン",
       "features": [
@@ -666,5 +1035,5 @@
       "return_stress": 0
     }
   },
-  "rules_id": "ea1fc6b3129b802125e1f96ae74dc60089c6da6627cda1e3638183283b481370"
+  "rules_id": "4cf94188184c88e17798c68b7181f69a2be51dd0d7bc184d17cbf08a576ef019"
 }

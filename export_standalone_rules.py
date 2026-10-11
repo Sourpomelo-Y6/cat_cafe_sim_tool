@@ -38,7 +38,17 @@ def exported_rules():
     result['growth'] = read('cafe_growth')
     result['dispatch']=read('cafe_dispatch')
     result['dispatch']['item_reward']=read('cafe_item_rewards')[result['dispatch']['id']]
+    unlocks=read('cafe_dispatch_unlocks')
+    destinations=[read('cafe_dispatch')]+read('cafe_dispatch_destinations')+[row['destination'] for row in unlocks.values() if 'destination' in row]+[read('cafe_dispatch_trouble')['destination']]
+    result['dispatch_destinations']=[]
+    for destination in destinations:
+        destination['item_reward']=read('cafe_item_rewards').get(destination['id'])
+        destination['unsupported_reason']={'shopping_street_event':'帰還後の猫紹介が未対応です。','mountain_lodge_visit':'家出トラブルが未対応です。','cat_photo_studio':'帰還後の猫紹介が未対応です。'}.get(destination['id'],'')
+        result['dispatch_destinations'].append(destination)
+    result['dispatch_unlocks']=[dict(id=key,popularity=row.get('popularity',0),returns=row.get('returns',0),stage=row.get('stage',0)) for key,row in unlocks.items()]
+    result['dispatch_encounters']=read('cafe_dispatch_encounters')
     result['item_shop'] = [dict(**row, sale_price=read('cafe_item_sales')[row['item']['id']]) for row in (read('cafe_item_shop'), read('cafe_nutrition_snack'), read('cafe_special_care_set'))]
+    result['item_sale_prices']=[dict(id=key,price=value) for key,value in read('cafe_item_sales').items()]
     result['housing'] = read('cafe_housing')
     result['housing_upgrade'] = read('cafe_housing_upgrade')
     result['popular_customer_count'] = new.get('popular_customer_count', weekdays.get('popular_customer_count', 0))
@@ -46,7 +56,7 @@ def exported_rules():
     for row in new['cats']:
         p = presets[row['preset']]
         trait = traits.get(row.get('trait'), {})
-        result['cats'].append(dict(id=row['cat_id'], name=row['name'], features=row.get('features', []),
+        result['cats'].append(dict(trait_id=row.get('trait',''), id=row['cat_id'], name=row['name'], features=row.get('features', []),
                                    type_preferences=[p['type_preferences'][t['id']] for t in relationship['types']],
                                    intensity_preferences=[p['intensity_preferences'][key] for key in ('gentle', 'standard', 'active')],
                                    boredom_decay=p['boredom_decay'], switch_affinity=p['switch_affinity'],
@@ -57,7 +67,7 @@ def exported_rules():
     result['intake'] = dict(
         day=intake['day'], cost=intake['cost'], capacity=read('cafe_housing')['initial_capacity'],
         personality=intake['preset'], trait=trait['name'],
-        cat=dict(id=intake['cat_id'], name=intake['name'], features=intake['features'],
+        cat=dict(trait_id=intake['trait'], id=intake['cat_id'], name=intake['name'], features=intake['features'],
                  type_preferences=[p['type_preferences'][t['id']] for t in relationship['types']],
                  intensity_preferences=[p['intensity_preferences'][k] for k in ('gentle', 'standard', 'active')],
                  boredom_decay=p['boredom_decay'], switch_affinity=p['switch_affinity'],
@@ -75,7 +85,7 @@ def exported_rules():
     result['regular_introduction'] = dict(
         cost=regular['cost'], personality=regular['preset'], trait=trait['name'],
         features_label='・'.join(features[key][0] for key in regular['features']),
-        cat=dict(id=regular['cat_id'], name=regular['name'], features=regular['features'],
+        cat=dict(trait_id=regular['trait'], id=regular['cat_id'], name=regular['name'], features=regular['features'],
                  type_preferences=[p['type_preferences'][t['id']] for t in relationship['types']],
                  intensity_preferences=[p['intensity_preferences'][k] for k in ('gentle', 'standard', 'active')],
                  boredom_decay=p['boredom_decay'], switch_affinity=p['switch_affinity'],

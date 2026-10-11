@@ -28,13 +28,14 @@ namespace CatCafePreview.Standalone
         public TrustRules trust;
         public GrowthRules growth;
         public HousingRules housing, housing_upgrade;
-        public ItemShopRule[] item_shop;
+        public ItemShopRule[] item_shop;public ItemSaleRule[] item_sale_prices;
         public SpecialistRules advanced_customer, reservation, vip_customer; public LonghairRules longhair_customer;
         public ServiceCustomerRules quiet_customer,play_customer,contact_customer; public EquipmentRule[] equipment;
         public double[] expansion_costs; public GoalStageRule[] goal_stages;
         public ExchangeType[] types;
         public IntakeRules intake, regular_introduction;
         public DispatchRules dispatch;
+        public DispatchRules[] dispatch_destinations;public DispatchUnlockRule[] dispatch_unlocks;public DispatchEncounterRule[] dispatch_encounters;
         public string rules_id;
     }
     [Serializable] public class IntakeRules { public int day, capacity; public double cost; public string personality, trait, features_label; public CatDefinition cat; }
@@ -68,7 +69,7 @@ namespace CatCafePreview.Standalone
     }
     [Serializable] public class CatDefinition
     {
-        public string id, name;
+        public string id, name;public string trait_id;
         public string[] features;
         public double[] type_preferences, intensity_preferences;
         public double boredom_decay, switch_affinity, service_stress = 1, service_fatigue = 1, rest_fatigue = 1, dispatch_reward = 1, return_stress;
@@ -150,6 +151,7 @@ namespace CatCafePreview.Standalone
         public List<CafeTrustCustomer> trust_customers = new List<CafeTrustCustomer>();
         public List<CafeTrustEvent> trust_events = new List<CafeTrustEvent>();
         public string objective = "free";
+        public List<CafeDispatchUnlock> dispatch_unlocks=new List<CafeDispatchUnlock>();
         public List<CafeDispatch> dispatches=new List<CafeDispatch>();
         public List<CafeGoalStage> goal = new List<CafeGoalStage>();
         public List<CafeClearRecord> clear_results = new List<CafeClearRecord>();
@@ -164,6 +166,8 @@ namespace CatCafePreview.Standalone
         // Unity JsonUtility materializes JSON null strings as empty strings.
         public void NormalizeJsonStrings()
         {
+            if(dispatches!=null)foreach(var e in dispatches)if(e.encounter!=null && string.IsNullOrEmpty(e.encounter.id) && string.IsNullOrEmpty(e.encounter.choice) && (string.IsNullOrEmpty(e.encounter.status) || e.encounter.status=="scheduled") && e.encounter.occurred_day==0 && e.encounter.resolved_day==0 && e.encounter.fatigue_before==0 && e.encounter.fatigue_after==0 && e.encounter.stress_before==0 && e.encounter.stress_after==0)e.encounter=null;
+            if(dispatches!=null)foreach(var e in dispatches)if(e.encounter!=null && e.encounter.choice=="")e.encounter.choice=null;
             if(dispatches!=null)foreach(var e in dispatches)if(e.choice=="")e.choice=null;
             if (regular_introduction != null && regular_introduction.customer_id == "") regular_introduction.customer_id = null;
             if (growth != null) foreach (var row in growth) row.Normalize();

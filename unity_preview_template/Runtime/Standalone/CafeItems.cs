@@ -3,19 +3,20 @@ using System.Linq;
 using System.Collections.Generic;
 namespace CatCafePreview.Standalone
 {
+    [Serializable] public class ItemSaleRule {public string id;public double price;}
     [Serializable] public class ItemShopRule { public double cost, sale_price; public CafeSupply item; }
     [Serializable] public class CafeItemPurchase { public string source, item_id; public int day; public double cost; }
     [Serializable] public class CafeItemSale { public string source; public int day; public double price; }
     public class CafeOwnedSupply { public string source; public int day; public CafeSupply item; }
     public sealed partial class CafeSimulation
     {
-        private IEnumerable<CafeOwnedSupply> ItemRewards(CafeSnapshot s) => s.dispatches.Where(e=>e.status=="resolved").Select(e=>new CafeOwnedSupply {source=e.id,day=e.resolved_day,item=Rules.dispatch.item_reward})
+        private IEnumerable<CafeOwnedSupply> ItemRewards(CafeSnapshot s) => s.dispatches.Where(e=>e.status=="resolved" && DispatchDestination(e.destination).item_reward!=null && !string.IsNullOrEmpty(DispatchDestination(e.destination).item_reward.id)).Select(e=>new CafeOwnedSupply {source=e.id,day=e.resolved_day,item=DispatchDestination(e.destination).item_reward})
             .Concat(s.store_events.Where(e=>e.type=="supplies").Select(e=>new CafeOwnedSupply {source="store-event-"+e.day,day=e.day,item=Rules.store_events.supply}))
             .Concat(s.item_purchases.Select(p=>new CafeOwnedSupply {source=p.source,day=p.day,item=Rules.item_shop.Single(r=>r.item.id==p.item_id).item}));
         public CafeOwnedSupply[] ItemInventory() => ItemRewards(State).Where(r=>!State.item_uses.Any(u=>u.source==r.source) && !State.item_sales.Any(u=>u.source==r.source)).ToArray();
         public string ItemsReason()
         {
-            if(DispatchWaiting)return "派遣の帰還結果を確認してください。";
+            if(DispatchWaiting || DispatchChoiceWaiting)return "派遣の帰還結果を確認してください。";
             if(State.game_over!=null)return "経営終了後は用品を操作できません。";
             if(State.cats.Any(c=>c.activity=="missing" && c.missing_remaining==0))return "帰還結果を確認してください。";
             if(GoalWaiting)return "人気目標の結果を確認してください。";
@@ -30,7 +31,7 @@ namespace CatCafePreview.Standalone
         {string reason=ItemsReason();if(reason!="")return reason;var r=Rules.item_shop.SingleOrDefault(r=>r.item.id==id);return r==null?"購入する用品を選んでください。":State.funds<r.cost?"購入する資金が足りません。":"";}
         public string ItemSaleReason(string source)
         {string reason=ItemsReason();if(reason!="")return reason;var item=ItemInventory().SingleOrDefault(r=>r.source==source);if(item==null)return "未使用の所持品を選んでください。";return Finite(State.funds+ItemSalePrice(item.item.id))?"":"売却後の資金が大きすぎます。";}
-        public double ItemSalePrice(string id) => Rules.item_shop.Single(r=>r.item.id==id).sale_price;
+        public double ItemSalePrice(string id) => Rules.item_sale_prices==null?Rules.item_shop.Single(r=>r.item.id==id).sale_price:Rules.item_sale_prices.Single(r=>r.id==id).price;
         public string ItemUseReason(string source,string id)
         {
             string reason=ItemsReason();if(reason!="")return reason;var reward=ItemInventory().SingleOrDefault(r=>r.source==source);if(reward==null)return "所持している用品を選んでください。";

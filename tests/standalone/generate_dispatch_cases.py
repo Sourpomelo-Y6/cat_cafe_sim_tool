@@ -12,7 +12,13 @@ def expected(session):
  s['dispatches']=[]
  for e in (c.activities or {}).get('events',{}).values():
   w=e.get('welcome_match',{})
-  s['dispatches'].append(dict(id=e['id'],cat_id=e['cat_id'],destination=e['destination']['id'],started_day=e['started_day'],remaining=e['remaining'],status=e['status'],occurred_day=e['occurred_day'] or 0,resolved_day=e['resolved_day'] or 0,choice=e['choice'],feature_matched=w.get('feature_matched',False),specialization_matched=w.get('specialization_matched',False),growth_multiplier=e.get('growth_multiplier',1),reward_bonus=w.get('reward_bonus',0),reward=reward(c,e),return_stress=(c.traits or {}).get(e['cat_id'],{}).get('return_stress',0)))
+  s['dispatches'].append(dict(id=e['id'],cat_id=e['cat_id'],destination=e['destination']['id'],started_day=e['started_day'],remaining=e['remaining'],status=e['status'],occurred_day=e['occurred_day'] or 0,resolved_day=e['resolved_day'] or 0,choice=e['choice'],feature_matched=w.get('feature_matched',False),specialization_matched=w.get('specialization_matched',False),growth_multiplier=e.get('growth_multiplier',1),reward_bonus=w.get('reward_bonus',0),reward=reward(c,{k:v for k,v in e.items() if k!='encounter'}),return_stress=(c.traits or {}).get(e['cat_id'],{}).get('return_stress',0)))
+ for row,e in zip(s['dispatches'],(c.activities or {}).get('events',{}).values()):
+  v=e.get('encounter')
+  if v:
+   changes=v.get('changes') or {}
+   row['encounter']=dict(id=v['rules']['id'],status=v['status'],choice=v['choice'],occurred_day=v['occurred_day'] or 0,resolved_day=v['resolved_day'] or 0,**{key:changes.get(key,0) for key in ('fatigue_before','fatigue_after','stress_before','stress_after')})
+ s['dispatch_unlocks']=[dict(id=key,**value) for key,value in (c.dispatch_unlocks or {}).get('unlocked',{}).items()]
  if 'history' in s:
   for row,orig in zip(s['history'],c.day_results):row['dispatch_income']=orig['summary'].get('dispatch_income',0)
  return s
@@ -27,7 +33,9 @@ def generate():
    rule=exported_rules();rule['store_events']['probability']=0;rule['starting_funds']=selected['management']['starting_funds']
    if variant=='goal-return':selected['goal']['days']=1;rule['goal_stages'][0]['days']=1
    if variant=='dispatch-growth':selected['growth']['threshold']=1;rule['growth']['threshold']=1
-   if variant=='multi-day':rule['dispatch']['days']=2
+   if variant=='multi-day':
+    rule['dispatch']['days']=2
+    rule['dispatch_destinations'][0]['days']=2
    session=create_game(Path(temp),selected,seed=0);case=dict(variant=variant,rules=copy.deepcopy(rule),objective=mode,operations=[]);cases.append(case)
    destination=copy.deepcopy(rule['dispatch']);destination.pop('item_reward')
    def record(kind,cat_id=None,choice=None,source=None,working=None):
