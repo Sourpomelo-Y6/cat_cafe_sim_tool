@@ -16,10 +16,12 @@ namespace CatCafePreview.Standalone
             State = new CafeSnapshot { seed = seed, rules_id = rules.rules_id, instance_id = Guid.NewGuid().ToString("N"), funds = rules.starting_funds, opening_funds = rules.starting_funds, popularity = rules.starting_popularity };
             foreach (var cat in rules.cats.OrderBy(c => c.id, StringComparer.Ordinal)) State.cats.Add(new CafeCat { id = cat.id, stamina = rules.max_stamina });
             foreach (var cat in State.cats) EnsureGrowthCat(cat.id);
+            if(rules.visiting_cat==null)State.visiting_cat=null;
             State.objective = objective; if (objective == "popularity") State.goal.Add(new CafeGoalStage { started_day = 1 }); else if(objective=="patron")State.patron=new CafePatron {id="patron",members=rules.patron.members.Select(r=>new CafePatronScore {id=r.id}).ToList()}; else if(objective=="bond")State.bond_goal=new CafeBondGoal {id="bond"}; else if (objective != "free") throw new ArgumentException("Invalid objective");
             PresentStoreEvent();
             PresentIntake();
             PresentRegularIntroduction();
+            PresentVisitingCat();
         }
         public void Restore(CafeSnapshot value)
         {
@@ -33,7 +35,7 @@ namespace CatCafePreview.Standalone
         {
             if (s == null || s.version != 2 || s.rules_id != Rules.rules_id || s.seed < 0 || s.day < 1 || s.tick < 0 || s.tick > Rules.opening_ticks
                 || !new[] { "preparation", "open", "closed" }.Contains(s.phase)
-                || s.cats == null || s.cats.Count != Rules.cats.Length + (s.intake_request != null && s.intake_request.status == "accepted" ? 1 : 0) + (s.regular_introduction != null && s.regular_introduction.status == "accepted" ? 1 : 0) + DispatchJoinedCount(s,s.day) || s.visits == null || s.exchanges == null || s.queue == null || s.relationships == null || s.history == null
+                || s.cats == null || s.cats.Count != Rules.cats.Length + (s.intake_request != null && s.intake_request.status == "accepted" ? 1 : 0) + (s.regular_introduction != null && s.regular_introduction.status == "accepted" ? 1 : 0) + DispatchJoinedCount(s,s.day) + VisitingJoinedCount(s,s.day) || s.visits == null || s.exchanges == null || s.queue == null || s.relationships == null || s.history == null
                 || s.cats.Select(c => c.id).Distinct().Count() != s.cats.Count || s.revision < 0
                 || !Finite(s.funds) || !Finite(s.opening_funds) || !Finite(s.revenue) || !Finite(s.expenses)
                 || s.revenue < 0 || s.expenses < 0 || Math.Abs(s.funds - (s.opening_funds + s.revenue + s.item_sales_income + s.dispatch_income - s.expenses)) > 1e-7
@@ -51,6 +53,7 @@ namespace CatCafePreview.Standalone
             ValidateItems(s);
             ValidateHousing(s);
             ValidateIntake(s);
+            ValidateVisitingCat(s);
             ValidateStoreEvents(s);
             ValidateGrowth(s);
             ValidateTrust(s);
@@ -121,6 +124,7 @@ namespace CatCafePreview.Standalone
             if (kind == "purchase_housing" || kind == "upgrade_housing") { ExpandHousing(kind); return; }
             if (kind.StartsWith("resolve_growth", StringComparison.Ordinal)) { ResolveGrowth(kind, catId, choice); return; }
             if (kind == "resolve_customer_trust") { ResolveCustomerTrust(source, choice); return; }
+            if (kind == "resolve_visiting_cat") { ResolveVisitingCat(choice); return; }
             if (kind == "resolve_regular_introduction") { ResolveRegularIntroduction(choice); return; }
             if (kind == "resolve_intake" || kind == "resolve_intake_request") { ResolveIntake(choice); return; }
             if (BondWaiting && kind != "resolve_missing" && !(kind == "resolve_store_event" && choice != "close"))throw new InvalidOperationException("好感度目標の結果を確認してください。");
@@ -194,6 +198,7 @@ namespace CatCafePreview.Standalone
             PresentStoreEvent();
             PresentIntake();
             PresentRegularIntroduction();
+            PresentVisitingCat();
             PresentDispatchIntroductions();
             PresentCustomerTrust();
             PresentReservation();

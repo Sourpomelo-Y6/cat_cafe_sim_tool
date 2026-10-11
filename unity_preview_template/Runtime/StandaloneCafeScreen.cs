@@ -264,6 +264,23 @@ namespace CatCafePreview
                         if(GUILayout.Button(option.label+" / 帰還報酬 "+option.return_reward+" / 疲労 "+option.fatigue+" / ストレス "+option.stress))StartCoroutine(Send("resolve_dispatch_choice",eventId:encounter.event_id,choice:option.choice));
                     }
                 }
+                var visiting=state.visiting_cat;
+                if(visiting!=null)
+                {
+                    GUILayout.Label("店先の猫："+visiting.name+" / "+visiting.progress+"/"+visiting.required+"回 / "+visiting.status);
+                    if(visiting.status=="untriggered")GUILayout.Label("人気第1段階を達成した翌日の準備から現れます。");
+                    else if(visiting.status=="accepted")GUILayout.Label(visiting.accepted_day+"日目に迎えました。出勤・個別交流・成長を猫一覧から選べます。");
+                    else
+                    {
+                        GUILayout.Label(visiting.personality+" / "+visiting.features+" / "+visiting.trait+"\n"+visiting.housing+" / 費用 "+visiting.cost+" / 加入後の資金 "+visiting.funds_after+"\n"+visiting.history);
+                        GUILayout.Label("交流は1日1回、無料です。見送りもその日の交流枠を使います。営業へ進んでも進捗は残ります。\n迎えると健康・体力全回復・休養予定、疲労・ストレス・プレイヤー好感度0で加入します。");
+                        GUILayout.Label(visiting.reason+" / "+visiting.daily_reason+" / "+visiting.accept_reason);
+                        GUI.enabled=!busy && visiting.can_interact;if(GUILayout.Button(visiting.name+"と店先で交流する"))StartCoroutine(Send("resolve_visiting_cat",catId:visiting.cat_id,choice:"interact"));
+                        GUI.enabled=!busy && visiting.can_skip;if(GUILayout.Button("今日は店先の交流を見送る"))StartCoroutine(Send("resolve_visiting_cat",catId:visiting.cat_id,choice:"skip"));
+                        GUI.enabled=!busy && visiting.can_accept;if(GUILayout.Button(visiting.name+"を迎える（費用 "+visiting.cost+"）"))StartCoroutine(Send("resolve_visiting_cat",catId:visiting.cat_id,choice:"accept"));
+                    }
+                    GUI.enabled=!busy;
+                }
                 foreach (var cat in state.cats)
                 {
                     GUILayout.BeginHorizontal(); GUILayout.Label(cat.name + " / 体力 " + cat.stamina.ToString("0.0") + " / 疲労 " + cat.fatigue.ToString("0.0") + " / ストレス " + cat.stress.ToString("0.0") + " / " + cat.health_label + " / " + cat.activity_label);

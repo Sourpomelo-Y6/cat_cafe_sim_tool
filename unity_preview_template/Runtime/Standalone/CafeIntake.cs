@@ -11,6 +11,7 @@ namespace CatCafePreview.Standalone
             var cats = (IEnumerable<CatDefinition>)Rules.cats;
             if (s.intake_request != null && s.intake_request.status == "accepted") cats = cats.Concat(new[] { Rules.intake.cat });
             if (s.regular_introduction != null && s.regular_introduction.status == "accepted") cats = cats.Concat(new[] { Rules.regular_introduction.cat });
+            if (s.visiting_cat != null && s.visiting_cat.status == "accepted") cats = cats.Concat(new[] { Rules.visiting_cat.cat });
             return cats.Concat(DispatchIntroductions(s).Where(e=>e.introduction.status=="accepted").Select(e=>DispatchCandidate(e)));
         }
         private void JoinCat(IntakeRules rule)
@@ -63,6 +64,7 @@ namespace CatCafePreview.Standalone
                 double expected = r.status == "accepted" && r.resolved_day == day ? rule.cost : 0;
                 if (s.regular_introduction != null && s.regular_introduction.status == "accepted" && s.regular_introduction.resolved_day == day) expected += Rules.regular_introduction.cost;
                 expected += DispatchIntroductions(s).Where(e=>e.introduction.status=="accepted" && e.introduction.resolved_day==day).Sum(e=>e.introduction.cost);
+                expected += VisitingJoinedCount(s,day)>0 && s.visiting_cat.accepted_day==day ? Rules.visiting_cat.cost : 0;
                 double cost = day == s.day ? s.recruitment_expenses : s.history[day - 1].recruitment_expenses;
                 double total = day == s.day ? s.expenses : s.history[day - 1].expenses;
                 if (cost != expected || total < cost) throw new ArgumentException("Invalid intake expense history");

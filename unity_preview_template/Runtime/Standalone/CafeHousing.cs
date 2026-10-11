@@ -56,7 +56,7 @@ namespace CatCafePreview.Standalone
             foreach (var row in s.history)
             {
                 int count = Rules.cats.Length + (s.intake_request.status == "accepted" && s.intake_request.resolved_day <= row.day ? 1 : 0)
-                    + (s.regular_introduction.status == "accepted" && s.regular_introduction.resolved_day <= row.day ? 1 : 0)+DispatchJoinedCount(s,row.day);
+                    + (s.regular_introduction.status == "accepted" && s.regular_introduction.resolved_day <= row.day ? 1 : 0)+DispatchJoinedCount(s,row.day)+VisitingJoinedCount(s,row.day);
                 if (count > HousingCapacity(s,row.day) || row.housing_expenses != HousingExpenses(s,row.day) || row.housing_cost != HousingDailyCost(s,row.day)
                     || row.expenses < row.housing_expenses + row.housing_cost) throw new ArgumentException("Housing disagrees with daily history");
             }

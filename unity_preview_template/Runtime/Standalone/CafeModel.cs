@@ -35,12 +35,15 @@ namespace CatCafePreview.Standalone
         public PatronRules patron;
         public double[] expansion_costs; public GoalStageRule[] goal_stages;
         public ExchangeType[] types;
-        public IntakeRules intake, regular_introduction;
+        public IntakeRules intake, regular_introduction; public VisitingCatRules visiting_cat;
         public DispatchRules dispatch;public DispatchTroubleRules dispatch_trouble; public DispatchIntroductionRule[] dispatch_introductions;
         public DispatchRules[] dispatch_destinations;public DispatchUnlockRule[] dispatch_unlocks;public DispatchEncounterRule[] dispatch_encounters;
         public string rules_id;
     }
     [Serializable] public class IntakeRules { public int day, capacity; public double cost; public string personality, trait, features_label; public CatDefinition cat; }
+    [Serializable] public class VisitingCatRules : IntakeRules { public int interactions_required; }
+    [Serializable] public class CafeVisitingAction { public int day; public string choice; }
+    [Serializable] public class CafeVisitingCat { public string status="untriggered"; public int presented_day, accepted_day; public List<CafeVisitingAction> actions=new List<CafeVisitingAction>(); }
     [Serializable] public class CafeIntake { public string status = "scheduled"; public int presented_day, resolved_day; }
     [Serializable] public class CafeRegularIntroduction { public string status = "untriggered", customer_id; public int regular_day, presented_day, resolved_day; }
     [Serializable] public class WeekPattern { public int[] days; }
@@ -169,6 +172,7 @@ namespace CatCafePreview.Standalone
         public CafeHousing housing = new CafeHousing();
         public CafeIntake intake_request = new CafeIntake();
         public CafeRegularIntroduction regular_introduction = new CafeRegularIntroduction();
+        public CafeVisitingCat visiting_cat = new CafeVisitingCat();
         // Unity JsonUtility materializes JSON null strings as empty strings.
         public void NormalizeJsonStrings()
         {

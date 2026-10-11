@@ -191,3 +191,5 @@ Unity単独版に[猫の個別交流と好感度目標](../Docs/UnityStandaloneB
 Unity単独版に[営業途中から人気挑戦を開始](../Docs/UnityStandalonePopularityChallenge.md)する機能を追加しました。自由営業・好感度・有力者の進捗を維持し、段階目標・追加客・固定結果・保存再開を共用します。
 
 Unity単独版に[営業途中から好感度・有力者目標を開始](../Docs/UnityStandaloneObjectiveStart.md)する機能を追加しました。既存好感度・通常派遣履歴を維持し、人気挑戦との共存、3目標の独立した固定結果と保存再開に対応します。
+
+Unity単独版に[来訪猫ココの交流・受け入れ](../Docs/UnityStandaloneVisitingCat.md)を追加しました。人気達成翌日の出現、1日1回・3回の交流、費用200・飼育枠、加入後の成長・個別交流・派遣と保存再開に対応します。

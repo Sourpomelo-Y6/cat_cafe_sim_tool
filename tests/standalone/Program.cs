@@ -62,6 +62,24 @@ static class Program
                     }
                     using var current=JsonDocument.Parse(Encode(dispatch.State));Equal(op.GetProperty("expected"),current.RootElement,"dispatch boundary");dispatch.Restore(Decode<CafeSnapshot>(Encode(dispatch.State)));ticks++;
                 }
+                if(fixture.GetProperty("operations").EnumerateArray().Any(o=>o.GetProperty("expected").TryGetProperty("visiting_cat",out var visiting)))
+                {
+                    string before=Encode(dispatch.State);
+                    for(int variant=0;variant<8;variant++)
+                    {
+                        var bad=Decode<CafeSnapshot>(before);var v=bad.visiting_cat;
+                        if(variant==0)v.status="invalid";
+                        else if(variant==1)v.presented_day++;
+                        else if(variant==2)v.accepted_day=bad.day+1;
+                        else if(variant==3)v.actions=null;
+                        else if(variant==4)v.actions.Add(new CafeVisitingAction {day=bad.day+1,choice="interact"});
+                        else if(variant==5)v.actions.Add(new CafeVisitingAction {day=bad.day,choice="accept"});
+                        else if(variant==6)bad.visiting_cat=null;
+                        else v.status="untriggered";
+                        bool rejected=false;try{dispatch.Restore(bad);}catch(ArgumentException){rejected=true;}
+                        Assert(rejected && before==Encode(dispatch.State),"Corrupt visiting save accepted or changed state");
+                    }
+                }
             }
     }
     static void Main(string[] args)
