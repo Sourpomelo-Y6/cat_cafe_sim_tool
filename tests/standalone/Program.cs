@@ -22,6 +22,7 @@ static class Program
     }
     static void Main(string[] args)
     {
+        int ticks = 0, scenarios = 0;
         var rules = Decode<CafeRules>(File.ReadAllText(args[0]));
         if (args.Length > 4)
         {
@@ -56,6 +57,21 @@ static class Program
                 using var actual = JsonDocument.Parse(Encode(sim.State.regular_introduction)); Equal(row.GetProperty("expected"), actual.RootElement, "Regular presentation boundary");
             }
         }
+        if (args.Length > 6)
+        {
+            using var trust = JsonDocument.Parse(File.ReadAllText(args[6]));
+            foreach (var scenario in trust.RootElement.GetProperty("scenarios").EnumerateArray())
+            {
+                var sim = new CafeSimulation(Decode<CafeRules>(scenario.GetProperty("rules").GetRawText())); scenarios++;
+                foreach (var row in scenario.GetProperty("operations").EnumerateArray())
+                {
+                    sim.Execute(row.GetProperty("kind").GetString(), catId: row.TryGetProperty("cat_id", out var catId) ? catId.GetString() : null, working: row.TryGetProperty("working", out var working) ? working.EnumerateArray().Select(v => v.GetString()).ToArray() : null, choice: row.TryGetProperty("choice", out var choice) ? choice.GetString() : null, source: row.TryGetProperty("source", out var source) ? source.GetString() : null);
+                    ticks++; using var state = JsonDocument.Parse(Encode(sim.State)); Equal(row.GetProperty("expected"), state.RootElement, "trust " + scenario.GetProperty("name").GetString());
+                    sim.Validate(sim.State); sim.Restore(Decode<CafeSnapshot>(Encode(sim.State)));
+                }
+                TrustChecks.CheckFinal(sim, Assert);
+            }
+        }
         using var data = JsonDocument.Parse(File.ReadAllText(args[1]));
         foreach (var row in data.RootElement.GetProperty("satisfaction").EnumerateArray())
         {
@@ -63,7 +79,6 @@ static class Program
             using var actual = JsonDocument.Parse(Encode(result)); Equal(row.GetProperty("expected"), actual.RootElement, "satisfaction boundary");
         }
         foreach (var draw in data.RootElement.GetProperty("draws").EnumerateArray()) Assert(PythonRandom.Draw(draw.GetProperty("key").GetString()) == draw.GetProperty("value").GetDouble(), "CPython RNG mismatch");
-        int ticks = 0, scenarios = 0;
         if (args.Length > 2)
         {
             using var comparison = JsonDocument.Parse(File.ReadAllText(args[2]));

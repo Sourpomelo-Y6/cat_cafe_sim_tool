@@ -39,6 +39,7 @@ namespace CatCafePreview.Standalone
                 || !Range(s.popularity, 0, Rules.popularity.cap)) throw new ArgumentException("Invalid standalone save");
             ValidateIntake(s);
             ValidateStoreEvents(s);
+            ValidateTrust(s);
             ValidateCustomers(s);
             ValidateRegularIntroduction(s);
             foreach (var c in s.cats)
@@ -86,8 +87,10 @@ namespace CatCafePreview.Standalone
         {
             var s = State;
             if (s.game_over != null) throw new InvalidOperationException("経営終了後は保存・閲覧のみ利用できます。");
+            if (kind == "resolve_customer_trust") { ResolveCustomerTrust(source, choice); return; }
             if (kind == "resolve_regular_introduction") { ResolveRegularIntroduction(choice); return; }
             if (kind == "resolve_intake" || kind == "resolve_intake_request") { ResolveIntake(choice); return; }
+            if (CustomerTrustWaiting && kind != "resolve_missing" && !(kind == "resolve_store_event" && choice != "close")) throw new InvalidOperationException("顧客の信頼回復イベントに回答してください。");
             if (kind != "resolve_missing" && s.cats.Any(c => c.activity == "missing" && c.missing_remaining == 0)) throw new InvalidOperationException("帰還結果を確認してください。");
             if (IntakeWaiting && kind != "resolve_missing" && kind != "resolve_store_event") throw new InvalidOperationException("保護猫の受け入れ依頼に回答してください。");
             if (RegularIntroductionWaiting && kind != "resolve_missing" && kind != "resolve_store_event") throw new InvalidOperationException("常連からの猫紹介で迎えるか見送るかを選んでください。");
@@ -141,6 +144,7 @@ namespace CatCafePreview.Standalone
             PresentStoreEvent();
             PresentIntake();
             PresentRegularIntroduction();
+            PresentCustomerTrust();
         }
         private string Preference(string customer) => Rules.preference_pool[(int)(PythonRandom.Hash64(State.seed + ":" + customer) % (ulong)Rules.preference_pool.Length)];
         private bool Matched(CafeCat c, string customer) => Array.IndexOf(Definition(c.id).features, Preference(customer)) >= 0;
@@ -171,6 +175,7 @@ namespace CatCafePreview.Standalone
                     Depart(visit, e.end_reason == "exhausted" ? "interaction_exhausted" : s.tick + 1 >= Rules.opening_ticks ? "closing" : "interaction_time_limit");
                     visit.satisfaction = CafeSatisfactionEvaluator.Evaluate(Rules.satisfaction, e, Matched(cat, e.customer_id));
                     ApplyCustomerService(State.loyalty, State.discontent, s.day, visit.id, visit.satisfaction.level);
+                    ApplyTrustService(visit.id, visit.satisfaction.level);
                     double bonus = e.bonus + visit.satisfaction.bonus;
                     visit.bill += bonus; s.funds += bonus; s.revenue += bonus;
                     var relationship = s.relationships.Find(r => r.cat_id == e.cat_id && r.customer_id == e.customer_id);

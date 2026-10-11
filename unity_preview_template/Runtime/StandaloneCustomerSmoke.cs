@@ -11,21 +11,22 @@ namespace CatCafePreview
     {
         [Serializable] private class Checkpoint
         {
+            public CafeTrustCustomer[] trust_customers; public CafeTrustEvent[] trust_events;
             public CafeLoyalty[] loyalty; public CafeDiscontent[] discontent;
             public CafeArrival[] schedule; public PythonCustomerProgress[] progress;
             public CafeRegularIntroduction introduction; public CafeCat[] cats; public double recruitment_expenses;
         }
         private static int checks;
         private static void Check(bool condition, string message) { checks++; if (!condition) throw new Exception(message); }
-        private static void Send(LocalCafeBackend b, string kind, string[] working = null, string choice = null, string cat = null)
+        private static void Send(LocalCafeBackend b, string kind, string[] working = null, string choice = null, string cat = null, string eventId = null)
         {
             var cmd = new PythonShiftCommand { request_id = Guid.NewGuid().ToString("N"), instance_id = b.Simulation.State.instance_id, expected_revision = b.Simulation.State.revision,
-                kind = kind, working_cats = working ?? new string[0], choice = choice, cat_id = cat, save_slot = 1, save_id = "1" };
+                kind = kind, working_cats = working ?? new string[0], choice = choice, cat_id = cat, event_id = eventId, save_slot = 1, save_id = "1" };
             CafeResponse response = null; var request = b.Request("/commands", JsonUtility.ToJson(cmd), r => response = r);
             while (request.MoveNext()) { } Check(response.result == UnityWebRequest.Result.Success, "Customer smoke " + kind + ": " + response.error);
         }
         private static string Capture(LocalCafeBackend b)
-            => JsonUtility.ToJson(new Checkpoint { loyalty = b.Simulation.State.loyalty.ToArray(), discontent = b.Simulation.State.discontent.ToArray(), schedule = b.Simulation.CustomerSchedule(b.Simulation.State.day), progress = b.View().customer_progress, introduction = b.Simulation.State.regular_introduction, cats = b.Simulation.State.cats.ToArray(), recruitment_expenses = b.Simulation.State.recruitment_expenses });
+            => JsonUtility.ToJson(new Checkpoint { trust_customers = b.Simulation.State.trust_customers.ToArray(), trust_events = b.Simulation.State.trust_events.ToArray(), loyalty = b.Simulation.State.loyalty.ToArray(), discontent = b.Simulation.State.discontent.ToArray(), schedule = b.Simulation.CustomerSchedule(b.Simulation.State.day), progress = b.View().customer_progress, introduction = b.Simulation.State.regular_introduction, cats = b.Simulation.State.cats.ToArray(), recruitment_expenses = b.Simulation.State.recruitment_expenses });
         private static void Resume(LocalCafeBackend b)
         {
             string before = Capture(b); Send(b, "save_game"); Send(b, "load_game");
@@ -55,6 +56,7 @@ namespace CatCafePreview
                         }
                     }
                     extra |= s.loyalty.Any(r => r.regular_day > 0 && s.day > r.regular_day && b.Simulation.ExtraWeekday(r.customer_id) == (rules.start_weekday + s.day - 1) % 7 && b.Simulation.CustomerSchedule(s.day).Any(a => a.customer_id == r.customer_id && a.tick == 0));
+                    foreach (var trust in s.trust_events.Where(e => e.status == "waiting").ToArray()) Send(b, "resolve_customer_trust", choice: seed == 1 ? "ignore" : "recover", eventId: trust.id);
                     if (b.Simulation.StoreEventWaiting)
                     {
                         string[] options = b.Simulation.CurrentStoreEvent.type == "trouble" ? new[] { "repair", "patch", "close" } : new[] { "full", "small", "decline" };

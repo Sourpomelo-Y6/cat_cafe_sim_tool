@@ -29,7 +29,7 @@ namespace CatCafePreview.Standalone
             return last != null && row.score_day <= last.until && last.until < day ? Rules.discontent.return_score : row.score;
         }
         public bool CustomerAvailable(string customer, int day)
-            => !State.discontent.Any(r => r.customer_id == customer && r.suspensions.Any(p => p.day < day && day <= p.until));
+            => TrustAvailable(customer, day) && !State.discontent.Any(r => r.customer_id == customer && r.suspensions.Any(p => p.day < day && day <= p.until));
         public CafeArrival[] CustomerSchedule(int day)
         {
             int weekday = (Rules.start_weekday + day - 1) % 7;
@@ -95,9 +95,10 @@ namespace CatCafePreview.Standalone
                 {
                     if (string.IsNullOrEmpty(r.customer_id) || !new[] { "queue_full", "wait_timeout", "closing", "interaction_exhausted", "interaction_time_limit" }.Contains(r.departure) || r.satisfaction != null && !new[] { "satisfied", "normal", "dissatisfied" }.Contains(r.satisfaction)) throw new ArgumentException("Invalid customer outcome");
                     ReplayCustomer(expectedLoyalty, expectedDiscontent, h.day, r.customer_id, r.departure, r.satisfaction);
+                    ReplayTrustRecovery(s, expectedDiscontent, h.day, r.customer_id, r.satisfaction);
                 }
             }
-            foreach (var v in s.visits) ReplayCustomer(expectedLoyalty, expectedDiscontent, s.day, v.id, v.departure, v.satisfaction?.level);
+            foreach (var v in s.visits) { ReplayCustomer(expectedLoyalty, expectedDiscontent, s.day, v.id, v.departure, v.satisfaction?.level); ReplayTrustRecovery(s, expectedDiscontent, s.day, v.id, v.satisfaction?.level); }
             if (expectedLoyalty.Count != s.loyalty.Count || expectedDiscontent.Count != s.discontent.Count) throw new ArgumentException("Customer totals disagree with history");
             foreach (var r in expectedLoyalty) if (!s.loyalty.Any(a => a.customer_id == r.customer_id && a.score == r.score && a.regular_day == r.regular_day)) throw new ArgumentException("Loyalty disagrees with history");
             foreach (var r in expectedDiscontent)

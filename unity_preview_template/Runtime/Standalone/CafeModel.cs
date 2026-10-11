@@ -25,6 +25,7 @@ namespace CatCafePreview.Standalone
         public StoreEventRules store_events;
         public LoyaltyRules loyalty;
         public DiscontentRules discontent;
+        public TrustRules trust;
         public ExchangeType[] types;
         public IntakeRules intake, regular_introduction;
         public string rules_id;
@@ -44,6 +45,9 @@ namespace CatCafePreview.Standalone
     [Serializable] public class CafeLoyalty { public string customer_id; public double score; public int regular_day; }
     [Serializable] public class CafeSuspension { public int day, until; }
     [Serializable] public class CafeDiscontent { public string customer_id; public double score; public int score_day; public List<CafeSuspension> suspensions = new List<CafeSuspension>(); }
+    [Serializable] public class TrustRules { public int warning_suspensions; public double recovery_score, popularity_loss; }
+    [Serializable] public class CafeTrustCustomer { public string customer_id, status, event_id, reason; public int departed_day; }
+    [Serializable] public class CafeTrustEvent { public string id, customer_id, status, choice, outcome; public int day, suspensions, resolved_day; }
     [Serializable] public class CafeArrival { public string customer_id; public int tick; }
     [Serializable] public class CafeCustomerRecord { public string customer_id, departure, satisfaction; }
     [Serializable] public class CafeSatisfaction
@@ -123,6 +127,8 @@ namespace CatCafePreview.Standalone
         public List<CafeSupplyUse> item_uses = new List<CafeSupplyUse>();
         public List<CafeLoyalty> loyalty = new List<CafeLoyalty>();
         public List<CafeDiscontent> discontent = new List<CafeDiscontent>();
+        public List<CafeTrustCustomer> trust_customers = new List<CafeTrustCustomer>();
+        public List<CafeTrustEvent> trust_events = new List<CafeTrustEvent>();
         public CafeIntake intake_request = new CafeIntake();
         public CafeRegularIntroduction regular_introduction = new CafeRegularIntroduction();
         // Unity JsonUtility materializes JSON null strings as empty strings.
@@ -130,6 +136,8 @@ namespace CatCafePreview.Standalone
         {
             if (regular_introduction != null && regular_introduction.customer_id == "") regular_introduction.customer_id = null;
             if (game_over == "") game_over = null;
+            if (trust_customers != null) foreach (var r in trust_customers) { if (r.event_id == "") r.event_id = null; if (r.reason == "") r.reason = null; }
+            if (trust_events != null) foreach (var e in trust_events) { if (e.choice == "") e.choice = null; if (e.outcome == "") e.outcome = null; }
             if (store_events != null) foreach (var e in store_events) { if (e.type == "") e.type = null; if (e.status == "") e.status = null; if (e.choice == "") e.choice = null; }
             if (history != null) foreach (var h in history) if (h.customer_records != null) foreach (var r in h.customer_records) if (r.satisfaction == "") r.satisfaction = null;
             if (visits != null) foreach (var v in visits) { if (v.departure == "") v.departure = null; if (v.cat_id == "") v.cat_id = null; if (v.satisfaction != null && string.IsNullOrEmpty(v.satisfaction.level)) v.satisfaction = null; }

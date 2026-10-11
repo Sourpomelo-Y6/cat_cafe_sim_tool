@@ -36,6 +36,9 @@ def snapshot(session):
     extra = dict(intake_request=dict(status=intake['status'], presented_day=intake['presented_day'] or 0, resolved_day=intake['resolved_day'] or 0), recruitment_expenses=summary.get('recruitment_expenses', 0)) if intake else {}
     regular = c.regular_introduction
     if regular: extra['regular_introduction'] = dict(status=regular['status'], customer_id=regular['customer_id'], **{key:regular[key] or 0 for key in ('regular_day','presented_day','resolved_day')})
+    if c.customer_trust:
+        extra['trust_customers'] = [dict(customer_id=key, **{k:(value or 0) if k=='departed_day' else value for k,value in row.items()}) for key,row in c.customer_trust['customers'].items()]
+        extra['trust_events'] = [dict(row, resolved_day=row['resolved_day'] or 0) for row in c.customer_trust['events'].values()]
     return dict(**extra, seed=c.seed, day=c.day, tick=c.tick, phase='closed' if c.closed else 'preparation' if c.can_set_shifts else 'open',
                 funds=c.funds, opening_funds=summary['opening_funds'], revenue=summary['revenue'], expenses=summary['total_expenses'],
                 popularity=c.management['popularity'], completed=summary['completed_interactions'], game_over=(c.management['game_over'] or {}).get('reason'),
@@ -74,6 +77,7 @@ def generate():
             core.initialize_customer_satisfaction(selected['customer_satisfaction'])
             goal = dict(selected['goal']); goal.pop('stages', None); core.enable_goal(goal, tracking_only=True)
             core.initialize_customer_loyalty(selected['customer_loyalty']); core.initialize_customer_discontent(selected['customer_discontent'])
+            core.initialize_customer_trust(selected['customer_trust'])
             core.initialize_intake_request(selected['intake_request'])
             core.initialize_regular_introduction(selected['regular_introduction'])
             core.initialize_store_events(selected['store_events'])
@@ -84,6 +88,7 @@ def generate():
                 if kind == 'resolve_store_event':
                     if choice == 'close': session.day_off()
                     else: session.resolve_store_event(choice)
+                elif kind == 'resolve_customer_trust': core.resolve_customer_trust(source, choice)
                 elif kind == 'resolve_regular_introduction': session.resolve_regular_introduction(choice)
                 elif kind == 'resolve_intake': session.resolve_intake_request(choice)
                 elif kind == 'use_item': core.use_item(source, cat_id)
@@ -98,6 +103,8 @@ def generate():
                 if day % 7 == 0: print(f"seed={seed} day={day}", flush=True)
                 for missing in list(core.management['events'].values()):
                     if missing['status']=='waiting': record('resolve_missing', cat_id=missing['cat_id'])
+                for trust in list(core.customer_trust['events'].values()):
+                    if trust['status']=='waiting': record('resolve_customer_trust', choice='ignore' if seed==1 else 'recover', source=trust['id'])
                 event = core.store_events['days'][-1]
                 if event.get('status') == 'waiting':
                     options = ('repair','patch','close') if event['type']=='trouble' else ('full','small','decline')

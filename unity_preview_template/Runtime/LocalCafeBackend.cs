@@ -15,11 +15,15 @@ namespace CatCafePreview
         private readonly CafeSaveStore saves;
         // Cache the response AND payload: one ID must never name different commands.
         private readonly Dictionary<string, KeyValuePair<string, CafeResponse>> replies = new Dictionary<string, KeyValuePair<string, CafeResponse>>();
-        public LocalCafeBackend(string saveDirectory = null)
+        public LocalCafeBackend(string saveDirectory = null, CafeRules rules = null)
         {
-            var asset = Resources.Load<TextAsset>("CatCafeStandalone/rules");
-            if (asset == null) throw new InvalidOperationException("単独版の初期設定がありません。");
-            Simulation = new CafeSimulation(JsonUtility.FromJson<CafeRules>(asset.text));
+            if (rules == null)
+            {
+                var asset = Resources.Load<TextAsset>("CatCafeStandalone/rules");
+                if (asset == null) throw new InvalidOperationException("単独版の初期設定がありません。");
+                rules = JsonUtility.FromJson<CafeRules>(asset.text);
+            }
+            Simulation = new CafeSimulation(rules);
             saves = new CafeSaveStore(saveDirectory ?? Path.Combine(Application.persistentDataPath, "standalone-v1"), e => JsonUtility.ToJson(e, true), DecodeSave, Simulation.Validate);
         }
         private static CafeSaveEnvelope DecodeSave(string text) { var save = JsonUtility.FromJson<CafeSaveEnvelope>(text); save?.state?.NormalizeJsonStrings(); return save; }
@@ -59,6 +63,7 @@ namespace CatCafePreview
                     case "load_game":
                         if (!int.TryParse(cmd.save_id, out int slot)) throw new ArgumentException("保存スロットを選んでください。");
                         Simulation.Restore(saves.Load(slot).state); break;
+                    case "resolve_customer_trust": Simulation.Execute(cmd.kind, choice: cmd.choice, source: cmd.event_id); break;
                     case "resolve_regular_introduction":
                         if (cmd.cat_id != Simulation.Rules.regular_introduction.cat.id) throw new ArgumentException("紹介された猫を選んでください。");
                         Simulation.Execute(cmd.kind, choice: cmd.choice); break;
@@ -100,8 +105,8 @@ namespace CatCafePreview
                 popularity = (float)s.popularity, popularity_gain = (float)s.popularity_gain,
                 customer_satisfaction = new PythonSatisfactionCounts { satisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "satisfied"), normal = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "normal"), dissatisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "dissatisfied") },
                 store_event_label = StoreEventLabel(), store_event = StoreEventView(), items = SupplyView(),
-                customer_progress = CustomerProgress(), customer_schedule = Simulation.CustomerSchedule(s.day),
-                regular_introduction = RegularIntroductionView(), intake_request = IntakeView(), required_action = Simulation.IntakeWaiting ? "intake_request" : Simulation.RegularIntroductionWaiting ? "regular_introduction" : Simulation.StoreEventWaiting ? "store_event" : "", rest_proposal = new string[0], missing_cats = new PythonMissingCat[0], growth_choices = new PythonGrowthChoice[0],
+                customer_trust = CustomerTrustView(), customer_progress = CustomerProgress(), customer_schedule = Simulation.CustomerSchedule(s.day),
+                regular_introduction = RegularIntroductionView(), intake_request = IntakeView(), required_action = Simulation.IntakeWaiting ? "intake_request" : Simulation.RegularIntroductionWaiting ? "regular_introduction" : Simulation.CustomerTrustWaiting ? "customer_trust" : Simulation.StoreEventWaiting ? "store_event" : "", rest_proposal = new string[0], missing_cats = new PythonMissingCat[0], growth_choices = new PythonGrowthChoice[0],
                 new_game_options = new[] { new PythonNewGameOption { choice = "free", label = "自由営業（単独版・第1段階）", detail = "新規開始・出勤・自動接客・閉店・翌日・保存再開", conditions = "初期猫5匹 / 2席 / 資金1000。目標・設備・用品購入・派遣・高度な顧客イベントは後続移植。" } },
                 cats = s.cats.Select(c => new PythonCatState { cat_id = c.id, content_cat_id = c.id, name = Simulation.Definition(c.id).name, stamina = (float)c.stamina, max_stamina = (float)rules.max_stamina, fatigue = (float)c.fatigue, stress = (float)c.stress, working = c.working, health_status = c.health, health_label = c.health == "healthy" ? "健康" : "療養中", activity = c.activity, activity_label = c.activity == "cafe" ? "在店" : "家出中", records = new PythonCatRecords() }).ToArray(),
                 seats = Enumerable.Range(0, 2).Select(i => { var e = s.exchanges.Find(x => x.seat == i); return new PythonSeatState { seat_id = "seat-" + (i + 1), customer_id = e?.customer_id, customer_name = e?.customer_id, cat_id = e?.cat_id, disabled = Simulation.DisabledSeat(i) }; }).ToArray(),

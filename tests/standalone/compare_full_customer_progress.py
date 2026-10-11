@@ -32,6 +32,7 @@ def compare(reference):
                     elif kind == 'next_day': full.next_day()
                     elif kind == 'day_off' or kind == 'resolve_store_event' and operation['choice']=='close': full.day_off()
                     elif kind == 'resolve_store_event': full.resolve_store_event(operation['choice'])
+                    elif kind == 'resolve_customer_trust': full.core.resolve_customer_trust(operation['source'], operation['choice'])
                     elif kind == 'resolve_regular_introduction': full.resolve_regular_introduction(operation['choice'])
                     elif kind == 'resolve_intake': full.resolve_intake_request(operation['choice'])
                     elif kind == 'use_item': full.use_item(operation['source'], operation['cat_id'])
@@ -46,7 +47,7 @@ def compare(reference):
                     break
                 report['equal_operations'] += 1; report['checked_through_day'] = full.core.day
             rows.append(report)
-    return dict(note='Compare identical commands through day 14 or the first difference. Fixed intake requests and regular introductions are included. Trust, growth and other acquisition events remain outside the migration.', rows=rows)
+    return dict(note='Compare identical commands through day 14 or the first difference. Fixed intake requests and regular introductions are included. Customer trust is included. Growth and other acquisition events remain outside the migration.', rows=rows)
 
 
 if __name__ == '__main__':
