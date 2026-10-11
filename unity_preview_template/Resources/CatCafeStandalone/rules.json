@@ -229,7 +229,9 @@
       "switch_affinity": -0.2,
       "service_stress": 0.5,
       "service_fatigue": 1.25,
-      "rest_fatigue": 1
+      "rest_fatigue": 1,
+      "dispatch_reward": 1,
+      "return_stress": 0
     },
     {
       "id": "cat-tama",
@@ -257,7 +259,9 @@
       "switch_affinity": 0.2,
       "service_stress": 1,
       "service_fatigue": 1,
-      "rest_fatigue": 1
+      "rest_fatigue": 1,
+      "dispatch_reward": 1.25,
+      "return_stress": 10
     },
     {
       "id": "cat-sora",
@@ -285,7 +289,9 @@
       "switch_affinity": -0.1,
       "service_stress": 1,
       "service_fatigue": 1,
-      "rest_fatigue": 1
+      "rest_fatigue": 1,
+      "dispatch_reward": 1,
+      "return_stress": 0
     },
     {
       "id": "cat-kohaku",
@@ -313,7 +319,9 @@
       "switch_affinity": 0,
       "service_stress": 1,
       "service_fatigue": 1.25,
-      "rest_fatigue": 1.5
+      "rest_fatigue": 1.5,
+      "dispatch_reward": 1,
+      "return_stress": 0
     },
     {
       "id": "cat-mugi",
@@ -341,7 +349,9 @@
       "switch_affinity": 0,
       "service_stress": 1,
       "service_fatigue": 1,
-      "rest_fatigue": 1
+      "rest_fatigue": 1,
+      "dispatch_reward": 1,
+      "return_stress": 0
     }
   ],
   "satisfaction": {
@@ -521,6 +531,24 @@
     "second_type_mastery_threshold": 30,
     "second_mastery_threshold": 30
   },
+  "dispatch": {
+    "id": "neighborhood_visit",
+    "name": "近所のお店への訪問",
+    "days": 1,
+    "reward": 100,
+    "max_fatigue": 60,
+    "welcome": {
+      "feature": "long_hair",
+      "specialization": "dispatch",
+      "reward_bonus": 20,
+      "satisfaction_bonus": 0
+    },
+    "item_reward": {
+      "id": "care_supplies",
+      "name": "ケア用品",
+      "stress_relief": 10
+    }
+  },
   "item_shop": [
     {
       "cost": 100,
@@ -596,7 +624,9 @@
       "switch_affinity": -0.2,
       "service_stress": 1,
       "service_fatigue": 1.25,
-      "rest_fatigue": 1.5
+      "rest_fatigue": 1.5,
+      "dispatch_reward": 1,
+      "return_stress": 0
     },
     "features_label": "白黒・長毛"
   },
@@ -631,8 +661,10 @@
       "switch_affinity": -0.2,
       "service_stress": 1,
       "service_fatigue": 1.25,
-      "rest_fatigue": 1.5
+      "rest_fatigue": 1.5,
+      "dispatch_reward": 1,
+      "return_stress": 0
     }
   },
-  "rules_id": "1f8a134613e83534ed163231da8c643093598189e65d6593e75da33053acf36c"
+  "rules_id": "ea1fc6b3129b802125e1f96ae74dc60089c6da6627cda1e3638183283b481370"
 }

@@ -16,6 +16,7 @@ namespace CatCafePreview.Standalone
         }
         public string GoalResponseReason(string kind)
         {
+            if(DispatchWaiting)return "派遣の帰還結果を確認してください。";
             if(State.game_over!=null)return "経営終了後は目標を変更できません。";
             if(State.goal.Count==0)return "この営業は人気集計のみです。";
             if (ReservationWaiting) return "特別予約に回答してください。";

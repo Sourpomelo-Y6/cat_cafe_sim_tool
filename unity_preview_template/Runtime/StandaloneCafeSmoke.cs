@@ -70,6 +70,7 @@ namespace CatCafePreview
             checks+=StandaloneServiceSmoke.Run(Path.Combine(directory,"service-failure-smoke-saves"),"cat_tower",true);
             foreach(string customer in new[]{"advanced-longhair","vip-calico"})foreach(bool fail in new[]{false,true})checks+=StandaloneLateCustomerSmoke.Run(Path.Combine(directory,"late-"+customer+"-"+fail),customer,fail);
             foreach(string variant in new[]{"cleared","expired","funds","popularity"})checks+=StandaloneClearResultsSmoke.Run(Path.Combine(directory,"clear-"+variant),variant);
+            checks += StandaloneDispatchSmoke.Run(Path.Combine(directory,"dispatch-smoke-saves"));
             checks += StandaloneItemsSmoke.Run(Path.Combine(directory,"items-smoke-saves"));
             checks += StandaloneHousingSmoke.Run(Path.Combine(directory, "housing-smoke-saves"));
             checks += StandaloneGrowthSmoke.Run(Path.Combine(Path.GetDirectoryName(Path.GetFullPath(reportPath)), "growth-smoke-saves"));

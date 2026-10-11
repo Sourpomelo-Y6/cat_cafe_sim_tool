@@ -173,3 +173,6 @@ Unityテンプレートには交流試作も含まれます。Play中の4ボタ�
 Unityの接客に[手動割り当て画面](../Docs/UnityServiceAssignment.md)を追加しました。イベント一覧から自動割り当てをOFFにし、待機客・猫・空席を選びます。割り当て設定と接客状態は保存・再開できます。テンプレート導入後は `PythonServiceAssignmentSetup.Build` で画面を生成します。
 
 Unityに[おまかせ画面](../Docs/UnityAutoPlay.md)を追加しました。イベント一覧から目標・3方針・1〜10日を選び、確認して進めます。中止と回答待ち停止、実行結果・判断理由・操作ログ、結果の保存再開に対応します。テンプレート導入後は `PythonAutoPlaySetup.Build` で生成します。
+
+
+Unity単独版に[最初の通常派遣往復](../Docs/UnityStandaloneDispatch.md)を追加しました。準備中の派遣、帰還確認、報酬・用品・成長、途中保存・再開に対応します。単独画面で「近所のお店への訪問」を選べます。他の派遣先と有力者目標は後続です。

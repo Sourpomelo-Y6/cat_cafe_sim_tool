@@ -34,6 +34,7 @@ namespace CatCafePreview.Standalone
         public double[] expansion_costs; public GoalStageRule[] goal_stages;
         public ExchangeType[] types;
         public IntakeRules intake, regular_introduction;
+        public DispatchRules dispatch;
         public string rules_id;
     }
     [Serializable] public class IntakeRules { public int day, capacity; public double cost; public string personality, trait, features_label; public CatDefinition cat; }
@@ -70,7 +71,7 @@ namespace CatCafePreview.Standalone
         public string id, name;
         public string[] features;
         public double[] type_preferences, intensity_preferences;
-        public double boredom_decay, switch_affinity, service_stress = 1, service_fatigue = 1, rest_fatigue = 1;
+        public double boredom_decay, switch_affinity, service_stress = 1, service_fatigue = 1, rest_fatigue = 1, dispatch_reward = 1, return_stress;
     }
     [Serializable] public class ExchangeType { public string id, group; public double gain, cost; public string[] actions; }
     [Serializable] public class ExchangeRules
@@ -117,7 +118,7 @@ namespace CatCafePreview.Standalone
         public int seat_count = 2;
         public double opening_funds, revenue, expenses, closing_funds;
         public double recruitment_expenses, housing_expenses, housing_cost, item_expenses, item_sales_income, expansion_expenses, goal_popularity, equipment_expenses;
-        public double popularity_gain;
+        public double popularity_gain,dispatch_income;
         public int satisfied, normal, dissatisfied;
         public List<string> resting_cats = new List<string>();
         public List<CafeCustomerRecord> customer_records = new List<CafeCustomerRecord>();
@@ -130,7 +131,7 @@ namespace CatCafePreview.Standalone
         public int completed;
         public int seat_count = 2;
         public double recruitment_expenses, housing_expenses, housing_cost, item_expenses, item_sales_income, expansion_expenses, goal_popularity, equipment_expenses;
-        public double popularity_gain;
+        public double popularity_gain,dispatch_income;
         public List<CafeCat> cats = new List<CafeCat>();
         public List<CafeVisit> visits = new List<CafeVisit>();
         public List<string> queue = new List<string>();
@@ -149,6 +150,7 @@ namespace CatCafePreview.Standalone
         public List<CafeTrustCustomer> trust_customers = new List<CafeTrustCustomer>();
         public List<CafeTrustEvent> trust_events = new List<CafeTrustEvent>();
         public string objective = "free";
+        public List<CafeDispatch> dispatches=new List<CafeDispatch>();
         public List<CafeGoalStage> goal = new List<CafeGoalStage>();
         public List<CafeClearRecord> clear_results = new List<CafeClearRecord>();
         public List<CafeEquipmentPurchase> equipment_purchases=new List<CafeEquipmentPurchase>();
@@ -162,6 +164,7 @@ namespace CatCafePreview.Standalone
         // Unity JsonUtility materializes JSON null strings as empty strings.
         public void NormalizeJsonStrings()
         {
+            if(dispatches!=null)foreach(var e in dispatches)if(e.choice=="")e.choice=null;
             if (regular_introduction != null && regular_introduction.customer_id == "") regular_introduction.customer_id = null;
             if (growth != null) foreach (var row in growth) row.Normalize();
             if (reservation != null) { if (reservation.result == "") reservation.result = null; if (reservation.choice == "") reservation.choice = null; }

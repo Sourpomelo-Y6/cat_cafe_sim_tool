@@ -36,6 +36,8 @@ def exported_rules():
     for key in ('quiet_customer','play_customer','contact_customer'): result[key]=read('cafe_'+key)
     result['equipment']=read('cafe_seat_equipment')
     result['growth'] = read('cafe_growth')
+    result['dispatch']=read('cafe_dispatch')
+    result['dispatch']['item_reward']=read('cafe_item_rewards')[result['dispatch']['id']]
     result['item_shop'] = [dict(**row, sale_price=read('cafe_item_sales')[row['item']['id']]) for row in (read('cafe_item_shop'), read('cafe_nutrition_snack'), read('cafe_special_care_set'))]
     result['housing'] = read('cafe_housing')
     result['housing_upgrade'] = read('cafe_housing_upgrade')
@@ -48,7 +50,7 @@ def exported_rules():
                                    type_preferences=[p['type_preferences'][t['id']] for t in relationship['types']],
                                    intensity_preferences=[p['intensity_preferences'][key] for key in ('gentle', 'standard', 'active')],
                                    boredom_decay=p['boredom_decay'], switch_affinity=p['switch_affinity'],
-                                   **{key: trait.get(key, 1) for key in ('service_stress', 'service_fatigue', 'rest_fatigue')}))
+                                   **{key: trait.get(key, 1) for key in ('service_stress', 'service_fatigue', 'rest_fatigue')},dispatch_reward=trait.get('dispatch_reward',1),return_stress=trait.get('return_stress',0)))
     intake = read('cafe_intake_request')
     p = presets[intake['preset']]
     trait = traits[intake['trait']]
@@ -59,7 +61,7 @@ def exported_rules():
                  type_preferences=[p['type_preferences'][t['id']] for t in relationship['types']],
                  intensity_preferences=[p['intensity_preferences'][k] for k in ('gentle', 'standard', 'active')],
                  boredom_decay=p['boredom_decay'], switch_affinity=p['switch_affinity'],
-                 **{k: trait.get(k, 1) for k in ('service_stress', 'service_fatigue', 'rest_fatigue')}))
+                 **{k: trait.get(k, 1) for k in ('service_stress', 'service_fatigue', 'rest_fatigue')},dispatch_reward=trait.get('dispatch_reward',1),return_stress=trait.get('return_stress',0)))
     # Read the original display labels without importing the game package or copying its constants.
     module = ast.parse((ROOT / 'cat_cafe_sim/cat_cafe_sim/core/cafe_preferences.py').read_text(encoding='utf-8'))
     features = ast.literal_eval(next(node.value for node in module.body
@@ -77,7 +79,7 @@ def exported_rules():
                  type_preferences=[p['type_preferences'][t['id']] for t in relationship['types']],
                  intensity_preferences=[p['intensity_preferences'][k] for k in ('gentle', 'standard', 'active')],
                  boredom_decay=p['boredom_decay'], switch_affinity=p['switch_affinity'],
-                 **{k: trait.get(k, 1) for k in ('service_stress', 'service_fatigue', 'rest_fatigue')}))
+                 **{k: trait.get(k, 1) for k in ('service_stress', 'service_fatigue', 'rest_fatigue')},dispatch_reward=trait.get('dispatch_reward',1),return_stress=trait.get('return_stress',0)))
     result['rules_id'] = hashlib.sha256(json.dumps(result, sort_keys=True, ensure_ascii=True).encode()).hexdigest()
     return result
 

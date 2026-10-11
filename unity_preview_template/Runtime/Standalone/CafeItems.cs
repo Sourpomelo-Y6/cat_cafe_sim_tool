@@ -9,11 +9,13 @@ namespace CatCafePreview.Standalone
     public class CafeOwnedSupply { public string source; public int day; public CafeSupply item; }
     public sealed partial class CafeSimulation
     {
-        private IEnumerable<CafeOwnedSupply> ItemRewards(CafeSnapshot s) => s.store_events.Where(e=>e.type=="supplies").Select(e=>new CafeOwnedSupply {source="store-event-"+e.day,day=e.day,item=Rules.store_events.supply})
+        private IEnumerable<CafeOwnedSupply> ItemRewards(CafeSnapshot s) => s.dispatches.Where(e=>e.status=="resolved").Select(e=>new CafeOwnedSupply {source=e.id,day=e.resolved_day,item=Rules.dispatch.item_reward})
+            .Concat(s.store_events.Where(e=>e.type=="supplies").Select(e=>new CafeOwnedSupply {source="store-event-"+e.day,day=e.day,item=Rules.store_events.supply}))
             .Concat(s.item_purchases.Select(p=>new CafeOwnedSupply {source=p.source,day=p.day,item=Rules.item_shop.Single(r=>r.item.id==p.item_id).item}));
         public CafeOwnedSupply[] ItemInventory() => ItemRewards(State).Where(r=>!State.item_uses.Any(u=>u.source==r.source) && !State.item_sales.Any(u=>u.source==r.source)).ToArray();
         public string ItemsReason()
         {
+            if(DispatchWaiting)return "派遣の帰還結果を確認してください。";
             if(State.game_over!=null)return "経営終了後は用品を操作できません。";
             if(State.cats.Any(c=>c.activity=="missing" && c.missing_remaining==0))return "帰還結果を確認してください。";
             if(GoalWaiting)return "人気目標の結果を確認してください。";

@@ -132,6 +132,7 @@ namespace CatCafePreview.Standalone
         private void ApplyGrowthOperation(CafeGrowth r, CafeGrowthOperation op)
         {
             if (op.kind == "start") return;
+            if(op.kind=="dispatch"){r.dispatch+=Rules.growth.dispatch_xp;return;}
             if (op.kind == "rest") { r.rest += Rules.growth.rest_xp; return; }
             if (op.kind == "service")
             {

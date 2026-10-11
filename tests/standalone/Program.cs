@@ -83,6 +83,22 @@ static class Program
                 }
             }
         }
+        if(args.Length>12)
+        {
+            using var cases=JsonDocument.Parse(File.ReadAllText(args[12]));
+            foreach(var fixture in cases.RootElement.GetProperty("cases").EnumerateArray())
+            {
+                var dispatch=new CafeSimulation(Decode<CafeRules>(fixture.GetProperty("rules").GetRawText()),objective:fixture.GetProperty("objective").GetString());scenarios++;
+                foreach(var op in fixture.GetProperty("operations").EnumerateArray())
+                {
+                    string beforeSeats=Encode(dispatch.State);bool rejected=false;
+                    try{dispatch.Execute(op.GetProperty("kind").GetString(),working:Decode<string[]>(op.GetProperty("working").GetRawText()),choice:op.GetProperty("choice").GetString(),source:op.GetProperty("source").GetString(),catId:op.GetProperty("cat_id").GetString(),seatId:op.TryGetProperty("seat_id",out var seatId)?seatId.GetString():null);}catch(InvalidOperationException){rejected=true;}catch(ArgumentException){rejected=true;}
+                    Assert(rejected==op.GetProperty("rejected").GetBoolean(),"Python dispatch rejection mismatch: "+op.GetProperty("kind")+" day "+dispatch.State.day);
+                    if(rejected)Assert(beforeSeats==Encode(dispatch.State),"Rejected dispatch operation changed state");
+                    using var current=JsonDocument.Parse(Encode(dispatch.State));Equal(op.GetProperty("expected"),current.RootElement,"dispatch boundary");dispatch.Restore(Decode<CafeSnapshot>(Encode(dispatch.State)));ticks++;
+                }
+            }
+        }
         if(args.Length>9)
         {
             using var cases=JsonDocument.Parse(File.ReadAllText(args[9]));
