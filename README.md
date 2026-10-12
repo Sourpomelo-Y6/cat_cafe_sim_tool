@@ -199,3 +199,5 @@ Unity単独版に[ペットショップの猫購入](../Docs/UnityStandalonePetS
 Unity単独版に[保護猫の募集・受け入れ](../Docs/UnityStandaloneRecruitment.md)を追加しました。3日ごとの3匹追加、候補保持・一巡後の再紹介、加入条件・収支・成長・個別交流・派遣と保存再開に対応します。
 
 Unity単独版に[猫の譲渡イベント](../Docs/UnityStandaloneAdoption.md)を追加しました。初期OFFの設定、客好感度80以上かつプレイヤーを上回る申し出、譲渡／見送り、記録保持・飼育枠解放と保存再開に対応します。
+
+Unity単独版に[休養スペース・強化・防音改修](../Docs/UnityStandaloneRestSpace.md)を追加しました。購入条件・人気段階での解放・日末の疲労／ストレス回復・設備費・保存再開に対応し、元の費用と回復量を維持しています。

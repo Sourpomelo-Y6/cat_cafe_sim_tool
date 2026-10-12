@@ -37,6 +37,7 @@ def exported_rules():
     result['vip_customer']=read('cafe_vip_customer')
     for key in ('quiet_customer','play_customer','contact_customer'): result[key]=read('cafe_'+key)
     result['equipment']=read('cafe_seat_equipment')
+    for key in ('rest_space','rest_space_upgrade','rest_space_soundproof'):result[key]=read('cafe_'+key)
     result['growth'] = read('cafe_growth')
     result['dispatch']=read('cafe_dispatch')
     result['dispatch']['item_reward']=read('cafe_item_rewards')[result['dispatch']['id']]

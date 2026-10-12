@@ -51,6 +51,12 @@ static class Program
                 foreach(var op in fixture.GetProperty("operations").EnumerateArray())
                 {
                     string beforeSeats=Encode(dispatch.State);bool rejected=false;string error=null;
+                    if(op.TryGetProperty("rest_boundaries",out var restBounds))
+                    {
+                        double funds=dispatch.State.funds;
+                        foreach(var row in restBounds.EnumerateArray()){dispatch.State.funds=row.GetProperty("funds").GetDouble();Assert((dispatch.RestSpaceReason(op.GetProperty("kind").GetString())=="")==row.GetProperty("can_execute").GetBoolean(),"Python rest space funding boundary differs");}
+                        dispatch.State.funds=funds;
+                    }
                     try{dispatch.Execute(op.GetProperty("kind").GetString(),working:Decode<string[]>(op.GetProperty("working").GetRawText()),choice:op.GetProperty("choice").GetString(),source:op.GetProperty("source").GetString(),catId:op.GetProperty("cat_id").GetString(),seatId:op.TryGetProperty("seat_id",out var seatId)?seatId.GetString():null);}catch(InvalidOperationException ex){rejected=true;error=ex.Message;}catch(ArgumentException ex){rejected=true;error=ex.Message;}
                     Assert(rejected==op.GetProperty("rejected").GetBoolean(),"Python dispatch rejection mismatch ("+fixture.GetProperty("variant")+"): "+op.GetProperty("kind")+" day "+dispatch.State.day+" / "+error);
                     if(rejected)Assert(beforeSeats==Encode(dispatch.State),"Rejected dispatch operation changed state");
@@ -72,6 +78,18 @@ static class Program
                         if(variant==0)e.threshold++;else if(variant==1)e.source="invalid";else if(variant==2)e.tick++;else if(variant==3)e.guest_affinity--;else if(variant==4)e.player_affinity++;else if(variant==5)a.events.Add(e);else if(variant==6)e.resolved_day++;else a.events=null;
                         bool rejected=false;try{dispatch.Restore(bad);}catch(ArgumentException){rejected=true;}
                         Assert(rejected && before==Encode(dispatch.State),"Corrupt adoption save accepted or changed state");
+                    }
+                }
+                if(fixture.GetProperty("variant").GetString().StartsWith("rest-"))
+                {
+                    string before=Encode(dispatch.State);
+                    for(int mutation=0;mutation<8;mutation++)
+                    {
+                        var bad=Decode<CafeSnapshot>(before);var r=bad.rest_space;
+                        if(mutation==0)bad.rest_space=null;else if(mutation==1)r.purchased_day=-1;else if(mutation==2)r.purchased_day=bad.day+1;else if(mutation==3)r.upgraded_day=1;else if(mutation==4)r.soundproofed_day=1;else if(mutation==5)bad.rest_space_expenses++;else if(mutation==6)bad.history[0].rest_space_expenses++;else r.purchased_day=0;
+                        if(mutation==7 && dispatch.State.rest_space.purchased_day==0)continue;
+                        bool rejected=false;try{dispatch.Restore(bad);}catch(ArgumentException){rejected=true;}
+                        Assert(rejected && before==Encode(dispatch.State),"Corrupt rest space save accepted or changed state");
                     }
                 }
                 if(dispatch.State.recruitment!=null && fixture.GetProperty("operations").EnumerateArray().Any(o=>o.GetProperty("expected").TryGetProperty("recruitment",out var recruits)))

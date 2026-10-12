@@ -182,6 +182,15 @@ namespace CatCafePreview
                     GUI.enabled=!busy && goal.can_continue;if(GUILayout.Button("目標結果を確認して営業継続"))StartCoroutine(Send(state.objective=="bond"?"continue_bond_goal":state.objective=="patron"?"continue_patron":"continue_goal"));
                     var next=state.next_goal;if(next!=null){GUI.enabled=!busy && next.can_advance;if(GUILayout.Button("次の人気目標へ（目標 "+next.target+"）"))StartCoroutine(Send("advance_goal"));}
                 }
+                var rest=state.rest_space;
+                GUILayout.Label("休養スペース："+rest.status+" / 疲労回復＋"+rest.recovery_bonus+" / ストレス回復＋"+rest.stress_recovery_bonus+"\n"+rest.details+"\n"+rest.notes);
+                foreach(var action in rest.actions)
+                {
+                    GUILayout.Label(action.label+" / 費用 "+action.cost+" / 支払い後 "+action.funds_after+" / 疲労回復＋"+action.recovery_before+" → ＋"+action.recovery_after+" / ストレス回復＋"+action.stress_before+" → ＋"+action.stress_after+" / "+action.reason);
+                    GUI.enabled=!busy && action.can_execute;
+                    if(GUILayout.Button(action.label))StartCoroutine(Send(action.kind));
+                }
+                GUI.enabled=true;
                 var housing = state.housing;
                 GUILayout.Label("飼育スペース：在籍 " + housing.count + " / 上限 " + housing.capacity + " / 空き " + housing.free + " / 拡張 " + housing.stage + "段階 / 維持費 " + housing.daily_cost + " / 通常運営費 " + housing.operating_cost);
                 if (housing.stage < 2)
