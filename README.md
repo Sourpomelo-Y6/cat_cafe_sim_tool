@@ -201,3 +201,5 @@ Unity単独版に[保護猫の募集・受け入れ](../Docs/UnityStandaloneRecr
 Unity単独版に[猫の譲渡イベント](../Docs/UnityStandaloneAdoption.md)を追加しました。初期OFFの設定、客好感度80以上かつプレイヤーを上回る申し出、譲渡／見送り、記録保持・飼育枠解放と保存再開に対応します。
 
 Unity単独版に[休養スペース・強化・防音改修](../Docs/UnityStandaloneRestSpace.md)を追加しました。購入条件・人気段階での解放・日末の疲労／ストレス回復・設備費・保存再開に対応し、元の費用と回復量を維持しています。
+
+Unity単独版に[待合スペースの購入・強化](../Docs/UnityStandaloneWaitingArea.md)を追加しました。人気段階での解放、待機上限・猶予、当日からの維持費と休業、収支・保存再開に対応し、元の費用と待機条件を維持しています。

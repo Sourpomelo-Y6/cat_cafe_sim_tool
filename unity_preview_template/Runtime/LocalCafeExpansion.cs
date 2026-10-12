@@ -7,7 +7,7 @@ namespace CatCafePreview
         {
             var s=Simulation.State;var r=Simulation.Rules;bool next=s.seat_count<2+r.expansion_costs.Length;double cost=next?r.expansion_costs[s.seat_count-2]:0,daily=Simulation.HousingDailyCost(s,s.day);
             return new PythonExpansion {has_next=next,seats=s.seat_count,next_seats=next?s.seat_count+1:s.seat_count,max_seats=2+r.expansion_costs.Length,cost=(float)cost,funds_after=(float)(s.funds-cost),can_expand=Simulation.ExpansionReason()=="",reason=Simulation.ExpansionReason(),
-                operating_cost=(float)(r.base_cost+r.per_seat_cost*s.seat_count+daily),next_operating_cost=(float)(r.base_cost+r.per_seat_cost*(s.seat_count+(next?1:0))+daily),details="増設した当日から席・運営費を反映。4席以降の増設客は購入翌日から来店。"};
+                operating_cost=(float)(Simulation.OperatingCostEstimate),next_operating_cost=(float)(Simulation.OperatingCostEstimate+(next?r.per_seat_cost:0)),details="増設した当日から席・運営費を反映。4席以降の増設客は購入翌日から来店。"};
         }
         private PythonNextGoal NextGoalView()
         {

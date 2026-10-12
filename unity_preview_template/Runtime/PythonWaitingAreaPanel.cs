@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace CatCafePreview
 {
     [Serializable] public class PythonWaitingAreaAction
-    { public string kind,label,reason; public bool can_execute; public float cost,funds_after,capacity_before,capacity_after,wait_before,wait_after,daily_before,daily_after,operating_before,operating_after; }
+    { public string kind,label,reason; public bool can_execute,completed; public float cost,funds_after,capacity_before,capacity_after,wait_before,wait_after,daily_before,daily_after,operating_before,operating_after; }
     [Serializable] public class PythonWaitingArea
     { public string status,details,notes; public int capacity,max_wait_ticks; public float daily_cost,operating_cost; public PythonWaitingAreaAction[] actions; }
     public class PythonWaitingAreaPanel : MonoBehaviour

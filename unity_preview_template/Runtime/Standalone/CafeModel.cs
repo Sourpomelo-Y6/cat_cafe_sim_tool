@@ -9,6 +9,7 @@ namespace CatCafePreview.Standalone
         public int version = 1, opening_ticks, queue_capacity, max_wait_ticks, start_weekday;
         public int popular_customer_count, second_popular_customer_count;
         public double adoption_threshold;
+        public WaitingAreaRules waiting_area,waiting_area_upgrade;
         public RestSpaceRules rest_space,rest_space_upgrade,rest_space_soundproof;
         public double max_stamina, time_price, starting_funds, starting_popularity;
         public double base_cost, per_seat_cost, max_fatigue, fatigue_per_service_tick, rest_day_recovery;
@@ -125,7 +126,7 @@ namespace CatCafePreview.Standalone
         public int day, arrivals, completed;
         public int seat_count = 2;
         public double opening_funds, revenue, expenses, closing_funds;
-        public double pet_shop_expenses, recruitment_expenses, housing_expenses, housing_cost, item_expenses, item_sales_income, expansion_expenses, goal_popularity, equipment_expenses, rest_space_expenses;
+        public double pet_shop_expenses, recruitment_expenses, housing_expenses, housing_cost, item_expenses, item_sales_income, expansion_expenses, goal_popularity, equipment_expenses, rest_space_expenses, waiting_area_expenses, waiting_area_cost;
         public double popularity_gain,dispatch_income,dispatch_trouble_expenses;
         public int satisfied, normal, dissatisfied;
         public List<string> resting_cats = new List<string>();
@@ -138,7 +139,7 @@ namespace CatCafePreview.Standalone
         public double funds, opening_funds, popularity, revenue, expenses;
         public int completed;
         public int seat_count = 2;
-        public double pet_shop_expenses, recruitment_expenses, housing_expenses, housing_cost, item_expenses, item_sales_income, expansion_expenses, goal_popularity, equipment_expenses, rest_space_expenses;
+        public double pet_shop_expenses, recruitment_expenses, housing_expenses, housing_cost, item_expenses, item_sales_income, expansion_expenses, goal_popularity, equipment_expenses, rest_space_expenses, waiting_area_expenses, waiting_area_cost;
         public double popularity_gain,dispatch_income,dispatch_trouble_expenses;
         public List<CafeCat> cats = new List<CafeCat>();
         public List<CafeVisit> visits = new List<CafeVisit>();
@@ -173,6 +174,7 @@ namespace CatCafePreview.Standalone
         public List<CafeSeatPurchase> expansion = new List<CafeSeatPurchase>();
         public CafeHousing housing = new CafeHousing();
         public CafeRestSpace rest_space = new CafeRestSpace();
+        public CafeWaitingArea waiting_area = new CafeWaitingArea();
         public CafeIntake intake_request = new CafeIntake();
         public CafeRegularIntroduction regular_introduction = new CafeRegularIntroduction();
         public CafeVisitingCat visiting_cat = new CafeVisitingCat();

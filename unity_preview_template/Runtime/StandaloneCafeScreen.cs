@@ -182,6 +182,15 @@ namespace CatCafePreview
                     GUI.enabled=!busy && goal.can_continue;if(GUILayout.Button("目標結果を確認して営業継続"))StartCoroutine(Send(state.objective=="bond"?"continue_bond_goal":state.objective=="patron"?"continue_patron":"continue_goal"));
                     var next=state.next_goal;if(next!=null){GUI.enabled=!busy && next.can_advance;if(GUILayout.Button("次の人気目標へ（目標 "+next.target+"）"))StartCoroutine(Send("advance_goal"));}
                 }
+                var waiting=state.waiting_area;
+                GUILayout.Label("待合スペース："+waiting.status+" / 待機上限 "+waiting.capacity+"人 / 猶予 "+waiting.max_wait_ticks+"tick / 維持費 "+waiting.daily_cost+" / 運営費合計 "+waiting.operating_cost+"\n"+waiting.details+"\n"+waiting.notes);
+                foreach(var action in waiting.actions)
+                {
+                    GUILayout.Label(action.label+" / 費用 "+action.cost+" / 支払い後 "+action.funds_after+" / 待機上限 "+action.capacity_before+" → "+action.capacity_after+" / 猶予 "+action.wait_before+" → "+action.wait_after+" / 維持費 "+action.daily_before+" → "+action.daily_after+" / 運営費 "+action.operating_before+" → "+action.operating_after+" / "+action.reason);
+                    GUI.enabled=!busy && action.can_execute;
+                    if(GUILayout.Button(action.label))StartCoroutine(Send(action.kind));
+                }
+                GUI.enabled=true;
                 var rest=state.rest_space;
                 GUILayout.Label("休養スペース："+rest.status+" / 疲労回復＋"+rest.recovery_bonus+" / ストレス回復＋"+rest.stress_recovery_bonus+"\n"+rest.details+"\n"+rest.notes);
                 foreach(var action in rest.actions)

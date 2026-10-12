@@ -11,7 +11,7 @@ namespace CatCafePreview
                 can_expand = Simulation.HousingReason(kind) == "", reason = Simulation.HousingReason(kind), cost = (float)next.cost,
                 funds_after = (float)(s.funds-next.cost), daily_cost = (float)daily, next_daily_cost = (float)next.daily_cost,
                 next_capacity = stage == 2 ? capacity : capacity+next.capacity_bonus,
-                operating_cost = (float)(r.base_cost+s.seat_count*r.per_seat_cost+daily), next_operating_cost = (float)(r.base_cost+s.seat_count*r.per_seat_cost+next.daily_cost) };
+                operating_cost = (float)(Simulation.OperatingCostEstimate), next_operating_cost = (float)(Simulation.OperatingCostEstimate-daily+next.daily_cost) };
         }
     }
 }

@@ -51,6 +51,12 @@ static class Program
                 foreach(var op in fixture.GetProperty("operations").EnumerateArray())
                 {
                     string beforeSeats=Encode(dispatch.State);bool rejected=false;string error=null;
+                    if(op.TryGetProperty("waiting_boundaries",out var waitingBounds))
+                    {
+                        double funds=dispatch.State.funds;
+                        foreach(var row in waitingBounds.EnumerateArray()){dispatch.State.funds=row.GetProperty("funds").GetDouble();Assert((dispatch.WaitingAreaReason(op.GetProperty("kind").GetString())=="")==row.GetProperty("can_execute").GetBoolean(),"Python waiting area funds boundary differs");}
+                        dispatch.State.funds=funds;
+                    }
                     if(op.TryGetProperty("rest_boundaries",out var restBounds))
                     {
                         double funds=dispatch.State.funds;
@@ -67,6 +73,11 @@ static class Program
                         dispatch.State.funds=funds;
                     }
                     if(op.TryGetProperty("recruitment_candidates",out var recruits)){using var candidates=JsonDocument.Parse(Encode(dispatch.RecruitmentCandidates(dispatch.State)));Equal(recruits,candidates.RootElement,"recruitment candidates");}
+                    if(op.TryGetProperty("waiting_limits",out var waitingLimits))
+                    {
+                        Assert(dispatch.QueueCapacity==waitingLimits.GetProperty("capacity").GetInt32() && dispatch.MaxWaitTicks==waitingLimits.GetProperty("wait").GetInt32(),"Python waiting capacity/deadline differs");
+                        Assert(dispatch.WaitingAreaDailyCost(dispatch.State,dispatch.State.day)==waitingLimits.GetProperty("daily").GetDouble() && Math.Abs(dispatch.OperatingCostEstimate-waitingLimits.GetProperty("operating").GetDouble())<1e-8,"Python facility/operating estimate differs");
+                    }
                     using var current=JsonDocument.Parse(Encode(dispatch.State));Equal(op.GetProperty("expected"),current.RootElement,"dispatch boundary");dispatch.Restore(Decode<CafeSnapshot>(Encode(dispatch.State)));ticks++;
                 }
                 if(dispatch.State.adoption!=null && dispatch.State.adoption.events.Count>0)
@@ -78,6 +89,18 @@ static class Program
                         if(variant==0)e.threshold++;else if(variant==1)e.source="invalid";else if(variant==2)e.tick++;else if(variant==3)e.guest_affinity--;else if(variant==4)e.player_affinity++;else if(variant==5)a.events.Add(e);else if(variant==6)e.resolved_day++;else a.events=null;
                         bool rejected=false;try{dispatch.Restore(bad);}catch(ArgumentException){rejected=true;}
                         Assert(rejected && before==Encode(dispatch.State),"Corrupt adoption save accepted or changed state");
+                    }
+                }
+                if(fixture.GetProperty("variant").GetString().StartsWith("waiting-"))
+                {
+                    string before=Encode(dispatch.State);
+                    for(int mutation=0;mutation<9;mutation++)
+                    {
+                        if(mutation>=7 && dispatch.State.history.Count==0)continue;
+                        var bad=Decode<CafeSnapshot>(before);var r=bad.waiting_area;
+                        if(mutation==0)bad.waiting_area=null;else if(mutation==1)r.purchased_day=-1;else if(mutation==2)r.purchased_day=bad.day+1;else if(mutation==3)r.purchased_day=1;else if(mutation==4)r.upgraded_day=1;else if(mutation==5)bad.waiting_area_expenses++;else if(mutation==6)bad.waiting_area_cost++;else if(mutation==7)bad.history[0].waiting_area_cost++;else bad.history[0].waiting_area_expenses++;
+                        bool rejected=false;try{dispatch.Restore(bad);}catch(ArgumentException){rejected=true;}
+                        Assert(rejected && before==Encode(dispatch.State),"Corrupt waiting area save accepted or changed state");
                     }
                 }
                 if(fixture.GetProperty("variant").GetString().StartsWith("rest-"))

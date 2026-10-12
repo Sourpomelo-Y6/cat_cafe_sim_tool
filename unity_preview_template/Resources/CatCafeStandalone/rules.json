@@ -534,6 +534,18 @@
     "cost": 1000,
     "stress_recovery_bonus": 10
   },
+  "waiting_area": {
+    "cost": 800,
+    "queue_bonus": 1,
+    "wait_bonus": 2,
+    "daily_cost": 10
+  },
+  "waiting_area_upgrade": {
+    "cost": 1200,
+    "queue_bonus": 2,
+    "wait_bonus": 4,
+    "daily_cost": 20
+  },
   "growth": {
     "threshold": 20,
     "service_xp": 1,
@@ -2029,5 +2041,5 @@
       }
     }
   ],
-  "rules_id": "3c282acb11861aab71f703822b1cda51f16c9df962d22f6c40c122b07a849c1e"
+  "rules_id": "c03581534ae850665ddb1cb54f86302c5719f0e5c97d83188ee3814c1389f5d9"
 }

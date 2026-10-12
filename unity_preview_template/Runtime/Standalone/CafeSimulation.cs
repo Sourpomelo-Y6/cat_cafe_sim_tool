@@ -48,6 +48,7 @@ namespace CatCafePreview.Standalone
             ValidateDispatch(s);
             ValidateEquipment(s);
             ValidateRestSpace(s);
+            ValidateWaitingArea(s);
             ValidateSpecialists(s);
             ValidateExpansion(s);
             ValidateGoal(s);
@@ -154,6 +155,7 @@ namespace CatCafePreview.Standalone
                 case "dispatch_patron":if(!IsPatronDestination(choice))throw new ArgumentException("有力者の派遣先を選んでください。");Dispatch(catId,choice);break;
                 case "dispatch":case "dispatch_general":Dispatch(catId,choice);break;
                 case "expand_seats": ExpandSeats(); break;
+                case "purchase_waiting_area": case "upgrade_waiting_area": ChangeWaitingArea(kind); break;
                 case "purchase_rest_space": case "upgrade_rest_space": case "soundproof_rest_space": ChangeRestSpace(kind); break;
                 case "purchase_seat_equipment": PurchaseEquipment(seatId,choice); break;
                 case "equip_seat": EquipSeat(seatId,choice); break;
@@ -198,11 +200,11 @@ namespace CatCafePreview.Standalone
         private void AdvanceToNextDay()
         {
             var s = State;
-            s.history.Add(new CafeDayResult { day = s.day, dispatch_trouble_expenses=s.dispatch_trouble_expenses, dispatch_income=s.dispatch_income, rest_space_expenses=s.rest_space_expenses, equipment_expenses=s.equipment_expenses, seat_count = s.seat_count, expansion_expenses = s.expansion_expenses, goal_popularity = s.goal_popularity, arrivals = s.visits.Count, completed = s.completed, opening_funds = s.opening_funds, revenue = s.revenue, expenses = s.expenses, closing_funds = s.funds, popularity_gain = s.popularity_gain, recruitment_expenses = s.recruitment_expenses, pet_shop_expenses = s.pet_shop_expenses, housing_expenses = s.housing_expenses, housing_cost = s.housing_cost, item_expenses = s.item_expenses, item_sales_income = s.item_sales_income, satisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "satisfied"), normal = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "normal"), dissatisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "dissatisfied") });
+            s.history.Add(new CafeDayResult { day = s.day, dispatch_trouble_expenses=s.dispatch_trouble_expenses, dispatch_income=s.dispatch_income, waiting_area_expenses=s.waiting_area_expenses, waiting_area_cost=s.waiting_area_cost, rest_space_expenses=s.rest_space_expenses, equipment_expenses=s.equipment_expenses, seat_count = s.seat_count, expansion_expenses = s.expansion_expenses, goal_popularity = s.goal_popularity, arrivals = s.visits.Count, completed = s.completed, opening_funds = s.opening_funds, revenue = s.revenue, expenses = s.expenses, closing_funds = s.funds, popularity_gain = s.popularity_gain, recruitment_expenses = s.recruitment_expenses, pet_shop_expenses = s.pet_shop_expenses, housing_expenses = s.housing_expenses, housing_cost = s.housing_cost, item_expenses = s.item_expenses, item_sales_income = s.item_sales_income, satisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "satisfied"), normal = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "normal"), dissatisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "dissatisfied") });
             s.history[s.history.Count - 1].customer_records = s.visits.Select(v => new CafeCustomerRecord { customer_id = v.id, cat_id = v.cat_id, completed_tick=v.completed_tick, departure = v.departure, satisfaction = v.satisfaction?.level, connect_count=v.connect_count, open_up_count=v.open_up_count, simultaneous_count=v.simultaneous_count, specialist_result=v.specialist_result, specialist_bonus=v.specialist_bonus, service_count=v.service_count, service_seat=v.service_seat, service_equipment=v.service_equipment, type_actions = (int[])v.type_actions.Clone(), affinity_delta = v.affinity_delta, stamina_spent = v.stamina_spent }).ToList();
             s.history[s.history.Count - 1].resting_cats = s.resting_cats.ToList(); s.resting_cats.Clear();
             foreach(var player in s.player_cats)player.today=0;
-            s.day++; s.tick = 0; s.phase = "preparation"; s.opening_funds = s.funds; s.revenue = s.expenses = 0; s.completed = 0; s.recruitment_expenses = s.pet_shop_expenses = 0; s.equipment_expenses=s.rest_space_expenses=0; s.housing_expenses = s.housing_cost = s.item_expenses = s.item_sales_income = s.expansion_expenses = s.goal_popularity = 0;
+            s.day++; s.tick = 0; s.phase = "preparation"; s.opening_funds = s.funds; s.revenue = s.expenses = 0; s.completed = 0; s.recruitment_expenses = s.pet_shop_expenses = 0; s.waiting_area_expenses=s.waiting_area_cost=0; s.equipment_expenses=s.rest_space_expenses=0; s.housing_expenses = s.housing_cost = s.item_expenses = s.item_sales_income = s.expansion_expenses = s.goal_popularity = 0;
             s.visits.Clear(); s.queue.Clear(); s.exchanges.Clear(); s.popularity_gain = 0;s.dispatch_income=s.dispatch_trouble_expenses=0;
             foreach (var c in s.cats) { c.service_ticks = 0; if (c.activity == "cafe") { c.stamina = Rules.max_stamina; c.cannot_continue = c.health != "healthy"; } c.working &= c.health == "healthy" && c.activity == "cafe"; }
             foreach (var cat in State.cats) EnsureGrowthCat(cat.id);
@@ -261,7 +263,7 @@ namespace CatCafePreview.Standalone
                     s.completed++; s.exchanges.Remove(e); if (cat.stamina == 0) cat.cannot_continue = true;
                 }
             }
-            foreach (string id in s.queue.ToArray()) { var v = s.visits.Find(r => r.id == id); if (s.tick - v.arrival + 1 >= Rules.max_wait_ticks) Depart(v, "wait_timeout"); }
+            foreach (string id in s.queue.ToArray()) { var v = s.visits.Find(r => r.id == id); if (s.tick - v.arrival + 1 >= MaxWaitTicks) Depart(v, "wait_timeout"); }
             if (s.tick + 1 >= Rules.opening_ticks) { foreach (var v in s.visits.Where(v => v.departure == null).ToArray()) Depart(v, "closing"); Close(); }
             s.tick++;
         }
@@ -275,7 +277,7 @@ namespace CatCafePreview.Standalone
         private void Arrive(string id)
         {
             var visit = new CafeVisit { id = id, arrival = State.tick }; State.visits.Add(visit);
-            if (State.queue.Count >= Rules.queue_capacity) Depart(visit, "queue_full"); else State.queue.Add(id);
+            if (State.queue.Count >= QueueCapacity) Depart(visit, "queue_full"); else State.queue.Add(id);
         }
         private string BestGrowthType(CafeExchange e, string group, string current, string exclude = null)
         {
@@ -381,7 +383,8 @@ namespace CatCafePreview.Standalone
             }
             DispatchCloseDay();
             s.housing_cost = HousingDailyCost(s, s.day);
-            double expenses = s.housing_cost + Rules.base_cost + Rules.per_seat_cost * s.seat_count + (CurrentStoreEvent.choice == "repair" ? Rules.store_events.trouble_cost : 0);
+            s.waiting_area_cost=WaitingAreaDailyCost(s,s.day);
+            double expenses = s.waiting_area_cost + s.housing_cost + Rules.base_cost + Rules.per_seat_cost * s.seat_count + (CurrentStoreEvent.choice == "repair" ? Rules.store_events.trouble_cost : 0);
             s.expenses += expenses; s.funds -= expenses; s.phase = "closed"; CheckEnd(); s.goal_popularity = s.popularity; SettleGoal();
         }
         private void CheckEnd() { if (State.game_over == null) State.game_over = State.funds <= 0 ? "funds" : State.popularity <= 0 ? "popularity" : null; }
