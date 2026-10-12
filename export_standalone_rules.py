@@ -21,6 +21,8 @@ def exported_rules():
                   **shifts, **health, **read('cafe_operating_cost'), start_weekday=weekdays['start_weekday'],
                   patterns=[dict(days=days) for days in weekdays['patterns']], preference_pool=preferences['pool'],
                   tension_multiplier=preferences['tension_multiplier'], exchange=relationship['rules'], types=relationship['types'], cats=[])
+    adoption_module=ast.parse((ROOT/'cat_cafe_sim/cat_cafe_sim/core/cafe_adoption.py').read_text(encoding='utf-8'))
+    result['adoption_threshold']=next(ast.literal_eval(node.value) for node in adoption_module.body if isinstance(node,ast.Assign) and node.targets[0].id=='THRESHOLD')
     result['satisfaction'] = read('cafe_customer_satisfaction')
     result['popularity'] = {key: read('cafe_goal')[key] for key in ('cap', 'gain_per_success')}
     result['store_events'] = read('cafe_store_events')

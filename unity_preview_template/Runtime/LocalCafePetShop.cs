@@ -5,7 +5,7 @@ namespace CatCafePreview
     {
         private PythonPetShop PetShopView()
         {
-            var s=Simulation.State;return new PythonPetShop {housing="在籍 "+s.cats.Count+" / 上限 "+Simulation.HousingCapacity(s,s.day),notes="候補と価格は新規開始時の設定で固定されます。準備中に購入でき、同じ候補は再購入できません。",
+            var s=Simulation.State;return new PythonPetShop {housing="在籍 "+Simulation.ActiveCatCount(s)+" / 上限 "+Simulation.HousingCapacity(s,s.day),notes="候補と価格は新規開始時の設定で固定されます。準備中に購入でき、同じ候補は再購入できません。",
                 rows=(Simulation.Rules.pet_shop ?? new Standalone.IntakeRules[0]).Select(r=>
                 {
                     var purchase=s.shop_purchases.SingleOrDefault(p=>p.cat_id==r.cat.id);string reason=Simulation.CatPurchaseReason(r.cat.id);

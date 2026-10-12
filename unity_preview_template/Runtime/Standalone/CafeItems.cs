@@ -16,6 +16,7 @@ namespace CatCafePreview.Standalone
         public CafeOwnedSupply[] ItemInventory() => ItemRewards(State).Where(r=>!State.item_uses.Any(u=>u.source==r.source) && !State.item_sales.Any(u=>u.source==r.source)).ToArray();
         public string ItemsReason()
         {
+            if(AdoptionWaiting)return "譲渡の申し出に回答してください。";
             if(PlayerActive)return "進行中の交流を終了してください。";
             if(DispatchWaiting || DispatchChoiceWaiting || DispatchTroubleWaiting)return "派遣の帰還結果を確認してください。";
             if(State.game_over!=null)return "経営終了後は用品を操作できません。";

@@ -15,7 +15,7 @@ namespace CatCafePreview.Standalone
                 r.status = "waiting"; r.customer_id = first.customer_id; r.regular_day = first.regular_day; r.presented_day = State.day;
             }
         }
-        public string RegularIntroductionAcceptReason => State.cats.Count >= HousingCapacity(State, State.day) ? "飼育スペースが満員です。" : State.funds <= Rules.regular_introduction.cost ? "受け入れ後に資金が残る必要があります。" : "";
+        public string RegularIntroductionAcceptReason => ActiveCatCount(State) >= HousingCapacity(State, State.day) ? "飼育スペースが満員です。" : State.funds <= Rules.regular_introduction.cost ? "受け入れ後に資金が残る必要があります。" : "";
         private void ResolveRegularIntroduction(string choice)
         {
             if (choice != "accept" && choice != "decline") throw new ArgumentException("常連からの猫紹介で迎える／見送るを選んでください。");

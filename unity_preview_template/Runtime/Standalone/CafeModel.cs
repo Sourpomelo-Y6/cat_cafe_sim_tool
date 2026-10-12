@@ -8,6 +8,7 @@ namespace CatCafePreview.Standalone
     {
         public int version = 1, opening_ticks, queue_capacity, max_wait_ticks, start_weekday;
         public int popular_customer_count, second_popular_customer_count;
+        public double adoption_threshold;
         public double max_stamina, time_price, starting_funds, starting_popularity;
         public double base_cost, per_seat_cost, max_fatigue, fatigue_per_service_tick, rest_day_recovery;
         public double safe_fatigue, probability_per_fatigue, max_probability;
@@ -62,7 +63,7 @@ namespace CatCafePreview.Standalone
     [Serializable] public class CafeTrustCustomer { public string customer_id, status, event_id, reason; public int departed_day; }
     [Serializable] public class CafeTrustEvent { public string id, customer_id, status, choice, outcome; public int day, suspensions, resolved_day; }
     [Serializable] public class CafeArrival { public string customer_id; public int tick; }
-    [Serializable] public class CafeCustomerRecord { public string customer_id, cat_id, departure, satisfaction; public int[] type_actions = new int[8]; public int connect_count, open_up_count, simultaneous_count; public string specialist_result; public double specialist_bonus; public bool service_equipment; public int service_count; public int service_seat=-1;
+    [Serializable] public class CafeCustomerRecord { public string customer_id, cat_id, departure, satisfaction; public int completed_tick; public int[] type_actions = new int[8]; public int connect_count, open_up_count, simultaneous_count; public string specialist_result; public double specialist_bonus; public bool service_equipment; public int service_count; public int service_seat=-1;
         public double affinity_delta, stamina_spent; }
     [Serializable] public class CafeSatisfaction
     {
@@ -104,7 +105,7 @@ namespace CatCafePreview.Standalone
         public string id, cat_id, departure;
         public int arrival, seated_at = -1, seated_ticks;
         public double bill;
-        public int[] type_actions = new int[8]; public int connect_count, open_up_count, simultaneous_count; public string specialist_result; public double specialist_bonus; public bool service_equipment; public int service_count; public int service_seat=-1;
+        public int completed_tick; public int[] type_actions = new int[8]; public int connect_count, open_up_count, simultaneous_count; public string specialist_result; public double specialist_bonus; public bool service_equipment; public int service_count; public int service_seat=-1;
         public double affinity_delta, stamina_spent;
         public CafeSatisfaction satisfaction;
     }
@@ -174,7 +175,7 @@ namespace CatCafePreview.Standalone
         public CafeRegularIntroduction regular_introduction = new CafeRegularIntroduction();
         public CafeVisitingCat visiting_cat = new CafeVisitingCat();
         public List<CafeShopPurchase> shop_purchases = new List<CafeShopPurchase>();
-        public CafeRecruitment recruitment;
+        public CafeRecruitment recruitment; public CafeAdoption adoption;
         // Unity JsonUtility materializes JSON null strings as empty strings.
         public void NormalizeJsonStrings()
         {
@@ -189,6 +190,8 @@ namespace CatCafePreview.Standalone
             if(dispatches!=null)foreach(var e in dispatches){if(e.patron_match!=null && string.IsNullOrEmpty(e.patron_match.member_id))e.patron_match=null;if(e.patron_match?.condition!=null){if(e.patron_match.condition.feature=="")e.patron_match.condition.feature=null;if(e.patron_match.condition.specialization=="")e.patron_match.condition.specialization=null;}}
             if(dispatches!=null)foreach(var e in dispatches)if(e.choice=="")e.choice=null;
             if (regular_introduction != null && regular_introduction.customer_id == "") regular_introduction.customer_id = null;
+            if(adoption!=null && string.IsNullOrEmpty(adoption.id) && !adoption.enabled && (adoption.events==null || adoption.events.Count==0))adoption=null;
+            if(adoption!=null && adoption.events!=null)foreach(var e in adoption.events)if(e.choice=="")e.choice=null;
             if(recruitment!=null && string.IsNullOrEmpty(recruitment.id) && (recruitment.days==null || recruitment.days.Count==0) && (recruitment.accepted==null || recruitment.accepted.Count==0))recruitment=null;
             if (growth != null) foreach (var row in growth) row.Normalize();
             if (reservation != null) { if (reservation.result == "") reservation.result = null; if (reservation.choice == "") reservation.choice = null; }

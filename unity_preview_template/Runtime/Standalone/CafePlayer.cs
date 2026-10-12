@@ -24,6 +24,7 @@ namespace CatCafePreview.Standalone
         private void EnsurePlayerCat(string id){if(!State.player_cats.Any(c=>c.cat_id==id))State.player_cats.Add(new CafePlayerCat {cat_id=id});}
         public string PlayerBeginReason(string id)
         {
+            if(AdoptionWaiting)return "譲渡の申し出に回答してください。";
             if(PlayerActive)return "進行中の交流を再開または終了してください。";
             if(BondWaiting)return "好感度目標の結果を確認してください。";
             string reason=ItemsReason();if(reason!="")return reason;
@@ -63,15 +64,15 @@ namespace CatCafePreview.Standalone
             }
             State.revision++;
         }
-        public string[] BondQualifying(CafeSnapshot s)=>s.player_cats.Where(c=>c.affinity>=Rules.bond.affinity).Select(c=>c.cat_id).OrderBy(id=>id,StringComparer.Ordinal).ToArray();
+        public string[] BondQualifying(CafeSnapshot s)=>s.player_cats.Where(c=>s.cats.Any(cat=>cat.id==c.cat_id && cat.activity!="adopted") && c.affinity>=Rules.bond.affinity).Select(c=>c.cat_id).OrderBy(id=>id,StringComparer.Ordinal).ToArray();
         private void EvaluateBond()
         {
             var goal=State.bond_goal;if(goal==null || goal.status!="active" || State.game_over!=null)return;var cats=BondQualifying(State);if(cats.Length<Rules.bond.target)return;
-            goal.status="cleared";goal.resolved_day=State.day;goal.achieved_cats=cats.ToList();State.clear_results.Add(new CafeClearRecord {mode="bond",day=State.day,target=Rules.bond.target,value=cats.Length,funds=State.funds,popularity=State.popularity,cats=State.cats.Count,revenue=State.history.Sum(h=>h.revenue)+State.visits.Sum(v=>v.bill)});
+            goal.status="cleared";goal.resolved_day=State.day;goal.achieved_cats=cats.ToList();State.clear_results.Add(new CafeClearRecord {mode="bond",day=State.day,target=Rules.bond.target,value=cats.Length,funds=State.funds,popularity=State.popularity,cats=ActiveCatCount(State),revenue=State.history.Sum(h=>h.revenue)+State.visits.Sum(v=>v.bill)});
         }
         public string BondContinueReason()
         {
-            if(!BondWaiting || DispatchWaiting || DispatchChoiceWaiting || DispatchTroubleWaiting || DispatchIntroductionWaiting || CustomerTrustWaiting || ReservationWaiting || State.cats.Any(c=>c.activity=="missing" && c.missing_remaining==0 && !DispatchMissing(State,c.id)))return "確認待ちの好感度目標がないか、先に帰還・イベントの確認が必要です。";
+            if(!BondWaiting || AdoptionWaiting || DispatchWaiting || DispatchChoiceWaiting || DispatchTroubleWaiting || DispatchIntroductionWaiting || CustomerTrustWaiting || ReservationWaiting || State.cats.Any(c=>c.activity=="missing" && c.missing_remaining==0 && !DispatchMissing(State,c.id)))return "確認待ちの好感度目標がないか、先に帰還・イベントの確認が必要です。";
             return "";
         }
         private void ContinueBond(){string reason=BondContinueReason();if(reason!="")throw new InvalidOperationException(reason);State.bond_goal.continued=true;State.revision++;}

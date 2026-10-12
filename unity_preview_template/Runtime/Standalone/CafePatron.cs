@@ -33,11 +33,12 @@ namespace CatCafePreview.Standalone
             if(p.status=="active" && p.satisfaction>=Rules.patron.target && p.members.All(score=>score.value>=Rules.patron.members.Single(r=>r.id==score.id).target))
             {
                 p.status="cleared";p.resolved_day=State.day;double target=Rules.patron.target+Rules.patron.members.Sum(r=>r.target);
-                State.clear_results.Add(new CafeClearRecord {mode="patron",day=State.day,target=target,value=target,funds=State.funds,popularity=State.popularity,cats=State.cats.Count,revenue=State.history.Sum(h=>h.revenue)+State.visits.Sum(v=>v.bill)});
+                State.clear_results.Add(new CafeClearRecord {mode="patron",day=State.day,target=target,value=target,funds=State.funds,popularity=State.popularity,cats=ActiveCatCount(State),revenue=State.history.Sum(h=>h.revenue)+State.visits.Sum(v=>v.bill)});
             }
         }
         public string PatronContinueReason()
         {
+            if(AdoptionWaiting)return "譲渡の申し出に回答してください。";
             if(!PatronWaiting)return "確認待ちの有力者目標の結果はありません。";
             if(DispatchWaiting || DispatchChoiceWaiting || DispatchTroubleWaiting || DispatchIntroductionWaiting || ReservationWaiting || CustomerTrustWaiting || State.cats.Any(c=>c.activity=="missing" && c.missing_remaining==0 && !DispatchMissing(State,c.id)))return "先に帰還・イベントを確認してください。";
             return "";

@@ -16,7 +16,7 @@ namespace CatCafePreview.Standalone
             var rule=ShopRules.SingleOrDefault(r=>r.cat.id==id);if(rule==null)return "ペットショップの購入候補を選んでください。";
             if(State.shop_purchases.Any(p=>p.cat_id==id))return "この猫はすでに購入しています。";
             if(State.funds<=rule.cost)return "受け入れ後に資金が残る必要があります。";
-            return State.cats.Count>=HousingCapacity(State,State.day)?"飼育スペースが満員です。":"";
+            return ActiveCatCount(State)>=HousingCapacity(State,State.day)?"飼育スペースが満員です。":"";
         }
         private void PurchaseCat(string id)
         {

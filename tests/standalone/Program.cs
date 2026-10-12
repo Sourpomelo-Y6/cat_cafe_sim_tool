@@ -63,7 +63,18 @@ static class Program
                     if(op.TryGetProperty("recruitment_candidates",out var recruits)){using var candidates=JsonDocument.Parse(Encode(dispatch.RecruitmentCandidates(dispatch.State)));Equal(recruits,candidates.RootElement,"recruitment candidates");}
                     using var current=JsonDocument.Parse(Encode(dispatch.State));Equal(op.GetProperty("expected"),current.RootElement,"dispatch boundary");dispatch.Restore(Decode<CafeSnapshot>(Encode(dispatch.State)));ticks++;
                 }
-                if(fixture.GetProperty("operations").EnumerateArray().Any(o=>o.GetProperty("expected").TryGetProperty("recruitment",out var recruits)))
+                if(dispatch.State.adoption!=null && dispatch.State.adoption.events.Count>0)
+                {
+                    string before=Encode(dispatch.State);
+                    for(int variant=0;variant<8;variant++)
+                    {
+                        var bad=Decode<CafeSnapshot>(before);var a=bad.adoption;var e=a.events[0];
+                        if(variant==0)e.threshold++;else if(variant==1)e.source="invalid";else if(variant==2)e.tick++;else if(variant==3)e.guest_affinity--;else if(variant==4)e.player_affinity++;else if(variant==5)a.events.Add(e);else if(variant==6)e.resolved_day++;else a.events=null;
+                        bool rejected=false;try{dispatch.Restore(bad);}catch(ArgumentException){rejected=true;}
+                        Assert(rejected && before==Encode(dispatch.State),"Corrupt adoption save accepted or changed state");
+                    }
+                }
+                if(dispatch.State.recruitment!=null && fixture.GetProperty("operations").EnumerateArray().Any(o=>o.GetProperty("expected").TryGetProperty("recruitment",out var recruits)))
                 {
                     string before=Encode(dispatch.State);
                     for(int variant=0;variant<8;variant++)

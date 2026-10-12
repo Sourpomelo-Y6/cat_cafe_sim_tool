@@ -26,7 +26,7 @@ namespace CatCafePreview.Standalone
         {
             string reason=VisitingResponseReason();if(reason!="")return reason;
             if(State.visiting_cat.status!="ready")return "迎えるには店先で"+Rules.visiting_cat.interactions_required+"回の交流が必要です。";
-            if(State.cats.Count>=HousingCapacity(State,State.day))return "飼育スペースが満員です。";
+            if(ActiveCatCount(State)>=HousingCapacity(State,State.day))return "飼育スペースが満員です。";
             return State.funds<=Rules.visiting_cat.cost?"受け入れ後に資金が残る必要があります。":"";
         }
         private void ResolveVisitingCat(string choice)

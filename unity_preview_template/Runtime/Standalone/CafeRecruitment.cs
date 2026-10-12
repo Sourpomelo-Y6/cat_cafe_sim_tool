@@ -32,7 +32,7 @@ namespace CatCafePreview.Standalone
         {
             string reason=ItemsReason();if(reason!="")return reason;var r=RecruitmentCandidates(State).SingleOrDefault(r=>r.cat.id==id);if(r==null)return "受け入れる候補を選んでください。";
             if(State.recruitment.accepted.Any(p=>p.cat_id==id))return "この猫はすでに受け入れています。";
-            if(State.funds<=r.cost)return "受け入れ後に資金が残る必要があります。";return State.cats.Count>=HousingCapacity(State,State.day)?"飼育スペースが満員です。":"";
+            if(State.funds<=r.cost)return "受け入れ後に資金が残る必要があります。";return ActiveCatCount(State)>=HousingCapacity(State,State.day)?"飼育スペースが満員です。":"";
         }
         private void RecruitCat(string id){string reason=RecruitReason(id);if(reason!="")throw new InvalidOperationException(reason);JoinCat(RecruitmentCandidates(State).Single(r=>r.cat.id==id));State.recruitment.accepted.Add(new CafeShopPurchase {cat_id=id,day=State.day});State.revision++;}
         private void ValidateRecruitment(CafeSnapshot s)

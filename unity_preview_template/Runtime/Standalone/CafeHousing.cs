@@ -14,6 +14,7 @@ namespace CatCafePreview.Standalone
         private double HousingExpenses(CafeSnapshot s, int day) => (s.housing.purchased_day == day ? Rules.housing.cost : 0) + (s.housing.upgraded_day == day ? Rules.housing_upgrade.cost : 0);
         public string HousingReason(string kind)
         {
+            if(AdoptionWaiting)return "譲渡の申し出に回答してください。";
             if (State.game_over != null) return "経営終了後は拡張できません。";
             if (State.cats.Any(c => c.activity == "missing" && c.missing_remaining == 0 && !DispatchMissing(State,c.id))) return "帰還結果を確認してください。";
             if (GoalWaiting || PatronWaiting || BondWaiting) return "目標の結果を確認してください。";
@@ -50,13 +51,14 @@ namespace CatCafePreview.Standalone
                 || !Range(r.cost,double.Epsilon,double.MaxValue) || !Range(u.cost,double.Epsilon,double.MaxValue) || !Range(r.daily_cost,double.Epsilon,double.MaxValue) || !Range(u.daily_cost,r.daily_cost+double.Epsilon,double.MaxValue) || u.daily_cost <= r.daily_cost
                 || h.purchased_day < 0 || h.purchased_day > s.day || h.upgraded_day < 0 || h.upgraded_day > s.day
                 || h.upgraded_day > 0 && (h.purchased_day == 0 || h.upgraded_day < h.purchased_day)
-                || s.cats.Count > HousingCapacity(s,s.day) || s.housing_expenses != HousingExpenses(s,s.day)
+                || ActiveCatCount(s) > HousingCapacity(s,s.day) || s.housing_expenses != HousingExpenses(s,s.day)
                 || s.housing_cost != (s.phase == "closed" ? HousingDailyCost(s,s.day) : 0)
                 || s.expenses < s.housing_expenses + s.housing_cost) throw new ArgumentException("Invalid housing state or expenses");
             foreach (var row in s.history)
             {
                 int count = Rules.cats.Length + (s.intake_request.status == "accepted" && s.intake_request.resolved_day <= row.day ? 1 : 0)
                     + (s.regular_introduction.status == "accepted" && s.regular_introduction.resolved_day <= row.day ? 1 : 0)+DispatchJoinedCount(s,row.day)+VisitingJoinedCount(s,row.day)+ShopJoinedCount(s,row.day)+RecruitmentJoinedCount(s,row.day);
+                count -= AdoptedBy(s,row.day,Rules.opening_ticks);
                 if (count > HousingCapacity(s,row.day) || row.housing_expenses != HousingExpenses(s,row.day) || row.housing_cost != HousingDailyCost(s,row.day)
                     || row.expenses < row.housing_expenses + row.housing_cost) throw new ArgumentException("Housing disagrees with daily history");
             }

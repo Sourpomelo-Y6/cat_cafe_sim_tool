@@ -16,6 +16,7 @@ namespace CatCafePreview.Standalone
         }
         public string GoalResponseReason(string kind)
         {
+            if(AdoptionWaiting)return "譲渡の申し出に回答してください。";
             if(PlayerActive || kind=="advance_goal" && (PatronWaiting || BondWaiting))return "交流・他の目標結果を確認してください。";
             if(DispatchWaiting || DispatchChoiceWaiting || DispatchTroubleWaiting)return "派遣の帰還結果を確認してください。";
             if(State.game_over!=null)return "経営終了後は目標を変更できません。";

@@ -359,6 +359,7 @@
       "return_stress": 0
     }
   ],
+  "adoption_threshold": 80,
   "satisfaction": {
     "satisfied_score": 2,
     "dissatisfied_score": 0,
@@ -2016,5 +2017,5 @@
       }
     }
   ],
-  "rules_id": "515b6aa875224c7121d844cd30b88084ad8c1fe1322ee52d6ae7e4c7a7a98f38"
+  "rules_id": "2ba5627e6119edc5dcba2624425fc132ee471e2fb8508d23c40c78026491631f"
 }
