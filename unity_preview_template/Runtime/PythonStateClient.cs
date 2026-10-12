@@ -215,6 +215,7 @@ namespace CatCafePreview
         public void SaveToSlot(int slot){if(slot<1 || slot>10 || !CanManageSaves)return;QueueSave("save_game", "");pending.save_slot=slot;}
         public void LoadSaved(string id) { QueueSave("load_game", id); }
         public void LoadPythonSaved(string id) { QueueSave("load_python_game", id); }
+        public void ImportLegacy(string path,int slot){if(slot<1 || slot>10 || !CanManageSaves)return;QueueSave("import_legacy_save",path);pending.save_slot=slot;}
         public int ServerPort => port;
         public void PauseAutomaticForSave(){StopAutomatic();preview.RefreshPythonControls();}
         public bool CanContinueGoal { get { return CanManageSaves && current.goal_result != null && current.goal_result.can_continue; } }
@@ -450,7 +451,7 @@ namespace CatCafePreview
         public void DayOff() { if(CanDayOff){StopAutomatic();QueuePlayer("day_off","","","");} }
         public bool CanStartAutoPlay(string objective,string mode,int days){var view=current?.autoplay;return CanManageSaves && view?.can_start==true && days>=1 && days<=10 && Array.Exists(view.objectives ?? new PythonAutoPlayOption[0],r=>r.choice==objective && r.can_start) && Array.Exists(view.modes ?? new PythonAutoPlayOption[0],r=>r.choice==mode);}
         public void StartAutoPlay(string objective,string mode,int days){if(!CanStartAutoPlay(objective,mode,days))return;StopAutomatic();batchAutomatic=true;batchStopRequested=false;pending=new PythonShiftCommand{kind="start_autoplay",request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,expected_revision=current.revision,working_cats=new string[0],autoplay_objective=objective,autoplay_mode=mode,autoplay_days=days};preview.RefreshPythonControls();}
-        public void ResumeAutoPlay(){if(!CanSendCommands || HasPendingResults || !AutoPlayRunning || batchStopRequested)return;StopAutomatic();batchAutomatic=true;preview.RefreshPythonControls();}
+        public void ResumeAutoPlay(){if(!CanSendCommands || HasPendingResults || !AutoPlayRunning || batchStopRequested)return;StopAutomatic();batchAutomatic=true;if(CafeBackends.Standalone && current.autoplay.paused)pending=new PythonShiftCommand{kind="resume_autoplay",request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,expected_revision=current.revision,working_cats=new string[0]};preview.RefreshPythonControls();}
         public void StopAutoPlay(){if(!AutoPlayRunning && !batchAutomatic && pending?.kind!="start_autoplay")return;batchAutomatic=false;batchStopRequested=true;StopAutomatic();QueueAutoPlay();preview.RefreshPythonControls();}
         private void QueueAutoPlay(){if(!CanSendCommands || HasPendingResults)return;if(batchStopRequested && !AutoPlayRunning){batchStopRequested=false;return;}if(!AutoPlayRunning || (!batchAutomatic && !batchStopRequested))return;pending=new PythonShiftCommand{kind=batchStopRequested ? "stop_autoplay" : "step_autoplay",request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,expected_revision=current.revision,working_cats=new string[0]};preview.RefreshPythonControls();}
         public bool CanChangeAutoAssignment => CanManageSaves && current.game_over==null;
@@ -543,15 +544,16 @@ namespace CatCafePreview
                                 if (request.result == UnityWebRequest.Result.Success)
                                 {
                                     var reply = JsonUtility.FromJson<PythonCommandReply>(request.Text);
-                                    if(command.kind=="load_game" || command.kind=="load_python_game" || command.kind=="new_game"){GetComponent<PythonEventPresentation>()?.Clear();GetComponent<PythonEventListPanel>()?.ResetNavigation();GetComponent<PythonCatDetailsPanel>()?.ResetSelection();GetComponent<PythonMenuPanel>()?.ResetFacilities();GetComponent<PythonCatAcquisitionNavigation>()?.ResetNavigation();}
+                                    bool loaded=command.kind=="load_game" || command.kind=="load_python_game" || command.kind=="import_legacy_save";
+                                    bool restarted=loaded || command.kind=="new_game";
+                                    if(restarted){GetComponent<PythonEventPresentation>()?.Clear();GetComponent<PythonEventListPanel>()?.ResetNavigation();GetComponent<PythonCatDetailsPanel>()?.ResetSelection();GetComponent<PythonMenuPanel>()?.ResetFacilities();GetComponent<PythonCatAcquisitionNavigation>()?.ResetNavigation();}
                                     Accept(reply.state);
-                                    if(command.kind=="load_python_game")GetComponent<PythonLegacySavePanel>()?.Close();if(command.kind=="load_game" || command.kind=="load_python_game")GetComponent<PythonSaveBrowser>()?.Close();
-                                    if(command.kind=="load_game" || command.kind=="load_python_game" || command.kind=="new_game"){GetComponent<PythonDispatchComparisonPanel>()?.ResetSelection();GetComponent<PythonDispatchPanel>()?.ResetSelection();GetComponent<PythonGeneralDispatchPanel>()?.ResetSelection();GetComponent<PythonServiceAssignmentPanel>()?.ResetSelection();GetComponent<PythonAutoPlayPanel>()?.ResetSelection();}
-                                    if(command.kind=="load_game" || command.kind=="load_python_game")
-                                    { var player=GetComponent<PythonPlayerPanel>();if(player!=null)player.Restore(); }
-                                    if(command.kind=="new_game" || command.kind=="load_game" || command.kind=="load_python_game") { var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.ResetConfirmation();var menu=GetComponent<PythonNewGamePanel>(); if(menu!=null) menu.Close(); }
-                                    notice = command.kind == "start_autoplay" ? "おまかせを開始しました。" : command.kind == "stop_autoplay" ? "おまかせを中止しました。実行結果を保存できます。" : command.kind == "step_autoplay" ? "" : command.kind == "assign_service" ? "選んだ客・猫・席で接客を開始しました。営業を進める操作で交流を進めます。" : command.kind == "set_auto_assignment" ? "自動割り当て設定を変更しました。" : command.kind == "set_shifts" ? "出勤・休養を変更しました。"
-                                        : command.kind == "persist_retry" ? "交流結果を確定しました。セーブで進捗を保存してください。" : command.kind == "save_game" ? "保存しました。" : command.kind == "load_game" || command.kind == "load_python_game" ? "保存したゲームを再開しました。"
+                                    if(command.kind=="load_python_game" || command.kind=="import_legacy_save")GetComponent<PythonLegacySavePanel>()?.Close();if(loaded)GetComponent<PythonSaveBrowser>()?.Close();
+                                    if(restarted){GetComponent<PythonDispatchComparisonPanel>()?.ResetSelection();GetComponent<PythonDispatchPanel>()?.ResetSelection();GetComponent<PythonGeneralDispatchPanel>()?.ResetSelection();GetComponent<PythonServiceAssignmentPanel>()?.ResetSelection();GetComponent<PythonAutoPlayPanel>()?.ResetSelection();}
+                                    if(loaded){var player=GetComponent<PythonPlayerPanel>();if(player!=null)player.Restore();}
+                                    if(restarted){var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.ResetConfirmation();var menu=GetComponent<PythonNewGamePanel>();if(menu!=null)menu.Close();}
+                                    notice = command.kind == "resume_autoplay" ? "おまかせを再開しました。" : command.kind == "start_autoplay" ? "おまかせを開始しました。" : command.kind == "stop_autoplay" ? "おまかせを中止しました。実行結果を保存できます。" : command.kind == "step_autoplay" ? "" : command.kind == "assign_service" ? "選んだ客・猫・席で接客を開始しました。営業を進める操作で交流を進めます。" : command.kind == "set_auto_assignment" ? "自動割り当て設定を変更しました。" : command.kind == "set_shifts" ? "出勤・休養を変更しました。"
+                                        : command.kind == "persist_retry" ? "交流結果を確定しました。セーブで進捗を保存してください。" : command.kind == "save_game" ? "保存しました。" : loaded ? "保存したゲームを再開しました。"
                                         : command.kind == "new_game" ? "新規ゲームを作成し、初期状態を保存しました。出勤・休養を設定して営業を始めてください。"
                                         : command.kind == "next_day" ? "翌日の営業準備へ進みました。出勤・休養を設定してください。"
                                         : command.kind == "resolve_intake" ? (command.choice == "accept" ? "保護猫を迎えました。休養予定で猫一覧に加わりました。" : "受け入れ依頼を見送りました。")

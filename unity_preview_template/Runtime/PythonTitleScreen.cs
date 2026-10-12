@@ -22,6 +22,7 @@ namespace CatCafePreview
         public PythonCafeState CurrentState => state;
         public bool CanManageSaves => online && !busy && state!=null;
         public void ResumePython(string token){if(CanManageSaves)StartCoroutine(Send("load_python_game","",token));}
+        public void ImportLegacy(string path,int slot){if(CanManageSaves)StartCoroutine(Send("import_legacy_save","",path,slot));}
         private PythonCafeState state;
         private PythonSavedGame[] entries=new PythonSavedGame[0];
         private bool busy, online, savesAvailable;
@@ -74,7 +75,7 @@ namespace CatCafePreview
                     {
                         yield return request.SendWebRequest();
                         if(busy)continue;
-                        if(request.result!=UnityWebRequest.Result.Success)Disconnect("Python未接続です。状態サーバーを起動してください。");
+                        if(request.result!=UnityWebRequest.Result.Success)Disconnect("ゲーム状態を取得できません。");
                         else {try{Apply(JsonUtility.FromJson<PythonCafeState>(request.Text));if(!commandFailed)notice.text=Guide;}catch(Exception ex){Disconnect(ex.Message);}}
                     }
                     if(online && !busy)using(var request=new CafeRequest(CafeBackends.Resolve(port),"/saves"))
@@ -90,11 +91,11 @@ namespace CatCafePreview
         public void StartNewGame() {if(!CanManageSaves || !startGame.interactable || state.new_game_options==null || objectives.value<0 || objectives.value>=state.new_game_options.Length)return;if(!confirming){confirming=true;RenderObjective(objectives.value);RefreshControls();ResetConditionsScroll();return;}confirming=false;StartCoroutine(Send("new_game",state.new_game_options[objectives.value].choice,""));}
         public void Resume() {if(resume.interactable)StartCoroutine(Send("load_game","",entries[saves.value].save_id));}
         public void ResumeSaved(string id){if(CanManageSaves)StartCoroutine(Send("load_game","",id));}
-        private IEnumerator Send(string kind,string choice,string saveId)
+        private IEnumerator Send(string kind,string choice,string saveId,int slot=0)
         {
-            busy=true;commandFailed=false;RefreshControls();notice.text=kind=="load_game" || kind=="load_python_game" ? "保存したゲームを読み込んでいます。" : "新しいゲームを準備しています。";
+            busy=true;commandFailed=false;RefreshControls();notice.text=kind=="load_game" || kind=="load_python_game" || kind=="import_legacy_save" ? "保存したゲームを読み込んでいます。" : "新しいゲームを準備しています。";
             var command=new PythonShiftCommand{request_id=Guid.NewGuid().ToString("N"),instance_id=state.instance_id,expected_revision=state.revision,
-                kind=kind,choice=choice,save_id=saveId,working_cats=new string[0]};
+                kind=kind,choice=choice,save_id=saveId,save_slot=slot,working_cats=new string[0]};
             for(int attempt=0;attempt<2;attempt++)
             {
                 using(var request=new CafeRequest(CafeBackends.Resolve(port),"/commands",JsonUtility.ToJson(command)))

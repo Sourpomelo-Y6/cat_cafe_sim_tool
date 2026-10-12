@@ -12,6 +12,8 @@ namespace CatCafePreview
         public InputField path;
         public Text details,notice;
         public Button inspect,resume,close,entry;
+        public Dropdown slots;
+        private PythonLegacyImportView imported;
         private PythonLegacySavePreview selected;
         private bool inspecting;
         private int generation;
@@ -20,28 +22,37 @@ namespace CatCafePreview
         private PythonCafeState State => Client!=null ? Client.CurrentState : Title.CurrentState;
         private bool Ready => Client!=null ? Client.CanManageSaves : Title.CanManageSaves;
         private int Port => Client!=null ? Client.ServerPort : Title.port;
-        public void Open(){if(!Ready)return;Client?.PauseAutomaticForSave();Invalidate();panel.SetActive(true);panel.transform.SetAsLastSibling();notice.text="Python版の営業セーブ（cafe.jsonなど）の絶対パスを入力し、内容を確認してください。";RefreshControls();}
+        public void Open(){if(!Ready)return;Client?.PauseAutomaticForSave();Invalidate();panel.SetActive(true);panel.transform.SetAsLastSibling();notice.text=CafeBackends.Standalone ? "変換済み取込JSONの絶対パスを入力してください。元のPythonセーブは convert_python_save.py で事前に変換します。" : "Python版の営業セーブの絶対パスを入力してください。";var help=panel.transform.Find("Card/Help")?.GetComponent<Text>();if(help!=null)help.text=CafeBackends.Standalone ? "変換済み取込JSONの絶対パスを貼り付けてください。\n元のPythonセーブは convert_python_save.py で事前に変換します。" : "営業セーブの絶対パスを貼り付けてください。\n関連する関係データが読み込めることも確認します。";if(slots!=null)slots.gameObject.SetActive(CafeBackends.Standalone);resume.GetComponentInChildren<Text>().text=CafeBackends.Standalone ? "空きスロットへ取込・再開" : "このセーブで再開（未保存の進捗を置換）";RefreshControls();}
         public void Close(){Invalidate();panel.SetActive(false);}
-        private void Invalidate(){generation++;inspecting=false;selected=null;details.text="内容を確認してから再開できます。元のセーブと関係データは変更しません。";}
+        private void Invalidate(){generation++;inspecting=false;selected=null;imported=null;details.text="内容を確認してから再開できます。元のセーブと関係データは変更しません。";}
         public void PathChanged(string value){Invalidate();notice.text="パスを変更しました。内容を再確認してください。";RefreshControls();}
         public void Inspect(){if(!Ready || inspecting || string.IsNullOrWhiteSpace(path.text))return;StartCoroutine(ReadPreview());}
         private IEnumerator ReadPreview()
         {
             Invalidate();int ticket=generation;inspecting=true;notice.text="保存内容を確認しています。";RefreshControls();
-            using(var request=new CafeRequest(CafeBackends.Resolve(Port),"/python-save?path="+UnityWebRequest.EscapeURL(path.text.Trim().Trim('"'))))
+            using(var request=new CafeRequest(CafeBackends.Resolve(Port),(CafeBackends.Standalone ? "/legacy-import?path=" : "/python-save?path=")+UnityWebRequest.EscapeURL(path.text.Trim().Trim('"'))))
             {
                 request.timeout=30;yield return request.SendWebRequest();
                 if(ticket!=generation)yield break;
                 inspecting=false;
                 try
                 {
+                    if(CafeBackends.Standalone){var native=JsonUtility.FromJson<PythonLegacyImportView>(request.Text);if(request.result!=UnityWebRequest.Result.Success)throw new Exception(native?.error ?? request.error);AcceptImport(native);}else {
                     var row=JsonUtility.FromJson<PythonLegacySavePreview>(request.Text);
                     if(request.result!=UnityWebRequest.Result.Success)throw new Exception(!string.IsNullOrEmpty(row?.error) ? row.error : "内容を確認できません。接続とパスを確認してください。");
-                    AcceptPreview(row);
+                    AcceptPreview(row);}
                 }
                 catch(Exception ex){selected=null;notice.text=ex.Message;}
                 RefreshControls();
             }
+        }
+        public void AcceptImport(PythonLegacyImportView row)
+        {
+            if(row==null || string.IsNullOrEmpty(row.path) || row.free_slots==null || slots==null || !Ready || State.instance_id!=row.instance_id || State.revision!=row.revision)throw new ArgumentException("状態が変わりました。内容を再確認してください。");
+            imported=row;slots.options.Clear();foreach(int slot in row.free_slots)slots.options.Add(new Dropdown.OptionData("空きスロット "+slot));
+            slots.SetValueWithoutNotify(0);slots.RefreshShownValue();details.text=row.summary+"\n\n"+string.Join("\n",row.notes ?? new string[0]);
+            notice.text=row.free_slots.Length==0 ? "空きスロットがありません。取込はできません。" : "取込先を選択してください。現在の未保存の進捗は置き換わります。";
+            Canvas.ForceUpdateCanvases();details.GetComponentInParent<ScrollRect>().verticalNormalizedPosition=1;RefreshControls();
         }
         public void AcceptPreview(PythonLegacySavePreview row)
         {
@@ -51,17 +62,19 @@ namespace CatCafePreview
         }
         public void Resume()
         {
+            if(CafeBackends.Standalone){if(!Ready || imported==null || imported.free_slots.Length==0 || State.instance_id!=imported.instance_id || State.revision!=imported.revision)return;string file=imported.path;int slot=imported.free_slots[slots.value];imported=null;if(Client!=null)Client.ImportLegacy(file,slot);else Title.ImportLegacy(file,slot);RefreshControls();return;}
             if(!Ready || selected==null || State.instance_id!=selected.instance_id || State.revision!=selected.revision)return;
             string token=selected.save_id;selected=null;notice.text="保存したゲームを読み込んでいます。";
             if(Client!=null)Client.LoadPythonSaved(token);else Title.ResumePython(token);RefreshControls();
         }
         public void Apply(PythonCafeState state)
         {
+            if(imported!=null && (imported.instance_id!=state.instance_id || imported.revision!=state.revision)){Invalidate();notice.text="状態が変わりました。内容を再確認してください。";}
             if(selected!=null && (selected.instance_id!=state.instance_id || selected.revision!=state.revision)){Invalidate();notice.text="状態が変わりました。内容を再確認してください。";}
             RefreshControls();
         }
         public void Notify(string message){if(panel.activeSelf && !string.IsNullOrEmpty(message))notice.text=message;}
-        public void RefreshControls(){bool ready=Ready && !inspecting;entry.interactable=Ready;inspect.interactable=ready && !string.IsNullOrWhiteSpace(path.text);path.interactable=ready;resume.interactable=ready && selected!=null;close.interactable=true;}
+        public void RefreshControls(){bool ready=Ready && !inspecting;entry.interactable=Ready;inspect.interactable=ready && !string.IsNullOrWhiteSpace(path.text);path.interactable=ready;resume.interactable=ready && (CafeBackends.Standalone ? imported!=null && imported.free_slots.Length>0 : selected!=null);if(slots!=null)slots.interactable=ready && imported!=null && imported.free_slots.Length>0;close.interactable=true;}
         public void Disconnect(){Invalidate();notice.text="未接続です。接続後に保存内容を再確認してください。";RefreshControls();}
     }
 }

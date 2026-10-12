@@ -20,7 +20,7 @@ namespace CatCafePreview
             if(client.AutoPlayRunning)hint.text="おまかせ実行中：上部から停止できます。";
             else if(client.HasPendingResults)hint.text="未保存の交流結果を確認し、保存を再試行してください。";
             else if(!client.CanLeaveResult)hint.text="操作を送信しています。完了までお待ちください。";
-            else if(!client.CanManageSaves)hint.text="Python未接続です。再接続を待っています。";
+            else if(!client.CanManageSaves)hint.text="ゲーム状態を取得できません。";
             else if(state.game_over!=null)hint.text="経営が終了しました。結果を保存できます。";
             else if(!string.IsNullOrEmpty(state.required_action))hint.text="先に確認："+state.required_action;
             else if(state.player_interaction!=null && state.player_interaction.active)hint.text="猫との交流中です。交流を終えると営業できます。";

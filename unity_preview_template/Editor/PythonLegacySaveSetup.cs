@@ -33,6 +33,7 @@ namespace CatCafePreview.Editor
         }
         public static void BuildAndVerify()
         {
+            bool previous=CafeBackends.Standalone;CafeBackends.Standalone=false;try {
             PythonObjectiveStartSetup.Build();Build();
             foreach(string scenePath in new[]{"Assets/Scenes/CatCafePythonState.unity","Assets/Scenes/CatCafeTitle.unity"})
             {
@@ -48,6 +49,7 @@ namespace CatCafePreview.Editor
                 if(preview!=null){row.details="旧セーブ";p.AcceptPreview(row);p.resume.onClick.Invoke();var client=preview.GetComponent<PythonStateClient>();var command=(PythonShiftCommand)typeof(PythonStateClient).GetField("pending",f).GetValue(client);if(command==null || command.kind!="load_python_game" || command.save_id!="preview-token" || command.working_cats.Length!=0 || p.resume.interactable)throw new Exception("Python load command incorrect");var id=command.request_id;p.Resume();if(((PythonShiftCommand)typeof(PythonStateClient).GetField("pending",f).GetValue(client)).request_id!=id)throw new Exception("Duplicate import queued");}
             }
             VerifyManagement();Debug.Log("CAT_CAFE_PYTHON_SAVE_DISPLAY_OK");
+            }finally{CafeBackends.Standalone=previous;}
         }
         static void VerifyManagement()
         {

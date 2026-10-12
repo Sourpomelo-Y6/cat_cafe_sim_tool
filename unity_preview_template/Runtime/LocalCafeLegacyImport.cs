@@ -21,7 +21,7 @@ namespace CatCafePreview
         private bool SlotExists(int slot)=>File.Exists(Path.Combine(saveDirectory,"slot-"+slot+".json")) || File.Exists(Path.Combine(saveDirectory,"slot-"+slot+".json.bak")) || File.Exists(Path.Combine(saveDirectory,"slot-"+slot+".json.tmp"));
         private PythonLegacyImportView LegacyPreview(string route)
         {
-            const string prefix="/legacy-import?path=";if(!route.StartsWith(prefix,StringComparison.Ordinal))throw new ArgumentException("変換済みファイルを指定してください。");string path=Uri.UnescapeDataString(route.Substring(prefix.Length));var bundle=ReadLegacyBundle(path);var s=bundle.state;
+            const string prefix="/legacy-import?path=";if(!route.StartsWith(prefix,StringComparison.Ordinal))throw new ArgumentException("変換済みファイルを指定してください。");string path=Uri.UnescapeDataString(route.Substring(prefix.Length).Replace("+"," "));var bundle=ReadLegacyBundle(path);var s=bundle.state;
             return new PythonLegacyImportView {instance_id=Simulation.State.instance_id,revision=Simulation.State.revision,path=path,free_slots=Enumerable.Range(1,10).Where(slot=>!SlotExists(slot)).ToArray(),notes=bundle.notes,summary="Python形式"+bundle.source_version+" / "+s.objective+" / "+s.day+"日目 / "+s.tick+"tick / "+s.phase+"\n猫 "+s.cats.Count+"匹 / 資金 "+s.funds+" / 人気 "+s.popularity+" / 派遣 "+s.dispatches.Count+"件\n変換日時："+bundle.converted_at+"\n元セーブ："+bundle.source_path};
         }
         private void ImportLegacy(string path,int slot)

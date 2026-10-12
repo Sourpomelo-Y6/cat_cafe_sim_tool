@@ -46,11 +46,13 @@ namespace CatCafePreview
     }
     public static class CafeBackends
     {
-        public static bool Standalone;
+        public static bool Standalone = true;
         private static ICafeBackend local;
         public static ICafeBackend Resolve(int port) => Standalone ? Local : new HttpCafeBackend(port);
         public static ICafeBackend Local => local ?? (local = new LocalCafeBackend());
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-        private static void Reset() { local = null; Standalone = false; }
+        private static void Reset() { local = null; Standalone = !Array.Exists(Environment.GetCommandLineArgs(), value => value == "--catcafe-http"); }
+        // Session ownership survives title/business scene transitions.
+        public static void UseLocal(ICafeBackend backend) { local = backend ?? throw new ArgumentNullException(nameof(backend)); Standalone = true; }
     }
 }

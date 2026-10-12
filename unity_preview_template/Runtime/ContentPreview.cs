@@ -480,7 +480,7 @@ namespace CatCafePreview
             }
             AppendObjectiveProgress();
             GetComponent<PythonBusinessHeader>()?.RefreshControls();
-            status.text = "Python接続中：" + pythonState.day + "日目 / 時刻 " + pythonState.tick + "/" + pythonState.opening_ticks
+            status.text = (CafeBackends.Standalone ? "営業中：" : "Python接続中：") + pythonState.day + "日目 / 時刻 " + pythonState.tick + "/" + pythonState.opening_ticks
                 + " / 資金 " + pythonState.funds + (pythonState.closed ? " / 閉店" : pythonState.can_set_shifts ? " / 営業準備" : " / 営業中");
             if (!string.IsNullOrEmpty(pythonState.required_action))
                 description.text += "\n\n進行に必要な操作\n" + pythonState.required_action;
@@ -555,8 +555,8 @@ namespace CatCafePreview
             var header=GetComponent<PythonBusinessHeader>();if(header!=null){header.Connected=false;header.RefreshControls();}GetComponent<PythonEventRecordPanel>()?.Refresh();
             GetComponent<PythonCatAcquisitionNavigation>()?.Refresh();
             GetComponent<PythonSaveBrowser>()?.Refresh();
-            status.text = "Python未接続：" + message;
-            description.text = "Python状態サーバーを起動してください。接続は自動で再試行します。";
+            status.text = (CafeBackends.Standalone ? "状態取得エラー：" : "Python未接続：") + message;
+            description.text = CafeBackends.Standalone ? "ゲーム状態を取得できません。最新状態の取得を再試行します。" : "Python状態サーバーを起動してください。接続は自動で再試行します。";
             picture.texture = null; picture.enabled = false; emptyImage.enabled = true;
         }
     }
