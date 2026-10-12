@@ -123,6 +123,23 @@ def exported_rules():
                      boredom_decay=p['boredom_decay'], switch_affinity=p['switch_affinity'],
                      **{k: trait.get(k, 1) for k in ('service_stress', 'service_fatigue', 'rest_fatigue')},
                      dispatch_reward=trait.get('dispatch_reward',1), return_stress=trait.get('return_stress',0))))
+    result['recruitment_catalog'] = []
+    for index, row in enumerate(read('cafe_recruitment'), 1):
+        p = presets[row['preset']]
+        trait = traits[row['trait']]
+        result['recruitment_catalog'].append(dict(
+            cost=row['cost'], personality=row['preset'], trait=trait['name'],
+            features_label='・'.join(features[key][0] for key in row['features']),
+            cat=dict(trait_id=row['trait'], id=f'catalog-{index}', name=row['name'], features=row['features'],
+                     type_preferences=[p['type_preferences'][t['id']] for t in relationship['types']],
+                     intensity_preferences=[p['intensity_preferences'][k] for k in ('gentle', 'standard', 'active')],
+                     boredom_decay=p['boredom_decay'], switch_affinity=p['switch_affinity'],
+                     **{k: trait.get(k, 1) for k in ('service_stress', 'service_fatigue', 'rest_fatigue')},
+                     dispatch_reward=trait.get('dispatch_reward',1), return_stress=trait.get('return_stress',0))))
+    recruitment_module=ast.parse((ROOT/'cat_cafe_sim/cat_cafe_sim/core/cafe_recruitment.py').read_text(encoding='utf-8'))
+    recruitment_constants={node.targets[0].id:ast.literal_eval(node.value) for node in recruitment_module.body if isinstance(node,ast.Assign) and isinstance(node.value,ast.Constant)}
+    result['recruitment_refresh_days']=recruitment_constants['REFRESH_DAYS']
+    result['recruitment_batch_size']=recruitment_constants['BATCH_SIZE']
     result['dispatch_introductions'] = []
     for filename in ('cafe_dispatch_introduction', 'cafe_photo_introduction'):
         row = read(filename); p = presets[row['preset']]; trait = traits[row['trait']]

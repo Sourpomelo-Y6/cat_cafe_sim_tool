@@ -35,7 +35,7 @@ namespace CatCafePreview.Standalone
         public PatronRules patron;
         public double[] expansion_costs; public GoalStageRule[] goal_stages;
         public ExchangeType[] types;
-        public IntakeRules intake, regular_introduction; public VisitingCatRules visiting_cat; public IntakeRules[] pet_shop;
+        public IntakeRules intake, regular_introduction; public VisitingCatRules visiting_cat; public IntakeRules[] pet_shop, recruitment_catalog; public int recruitment_refresh_days, recruitment_batch_size;
         public DispatchRules dispatch;public DispatchTroubleRules dispatch_trouble; public DispatchIntroductionRule[] dispatch_introductions;
         public DispatchRules[] dispatch_destinations;public DispatchUnlockRule[] dispatch_unlocks;public DispatchEncounterRule[] dispatch_encounters;
         public string rules_id;
@@ -174,6 +174,7 @@ namespace CatCafePreview.Standalone
         public CafeRegularIntroduction regular_introduction = new CafeRegularIntroduction();
         public CafeVisitingCat visiting_cat = new CafeVisitingCat();
         public List<CafeShopPurchase> shop_purchases = new List<CafeShopPurchase>();
+        public CafeRecruitment recruitment;
         // Unity JsonUtility materializes JSON null strings as empty strings.
         public void NormalizeJsonStrings()
         {
@@ -188,6 +189,7 @@ namespace CatCafePreview.Standalone
             if(dispatches!=null)foreach(var e in dispatches){if(e.patron_match!=null && string.IsNullOrEmpty(e.patron_match.member_id))e.patron_match=null;if(e.patron_match?.condition!=null){if(e.patron_match.condition.feature=="")e.patron_match.condition.feature=null;if(e.patron_match.condition.specialization=="")e.patron_match.condition.specialization=null;}}
             if(dispatches!=null)foreach(var e in dispatches)if(e.choice=="")e.choice=null;
             if (regular_introduction != null && regular_introduction.customer_id == "") regular_introduction.customer_id = null;
+            if(recruitment!=null && string.IsNullOrEmpty(recruitment.id) && (recruitment.days==null || recruitment.days.Count==0) && (recruitment.accepted==null || recruitment.accepted.Count==0))recruitment=null;
             if (growth != null) foreach (var row in growth) row.Normalize();
             if (reservation != null) { if (reservation.result == "") reservation.result = null; if (reservation.choice == "") reservation.choice = null; }
             if (game_over == "") game_over = null;

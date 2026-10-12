@@ -1264,6 +1264,676 @@
       }
     }
   ],
+  "recruitment_catalog": [
+    {
+      "cost": 200,
+      "personality": "穏やかな甘えん坊",
+      "trait": "接客好き",
+      "features_label": "白猫・短毛",
+      "cat": {
+        "trait_id": "hospitality",
+        "id": "catalog-1",
+        "name": "ハル",
+        "features": [
+          "white",
+          "short_hair"
+        ],
+        "type_preferences": [
+          0.8,
+          0.6,
+          1.2,
+          0.5,
+          1.8,
+          1.5,
+          1.2,
+          1.3
+        ],
+        "intensity_preferences": [
+          1.3,
+          1,
+          0.4
+        ],
+        "boredom_decay": 0.08,
+        "switch_affinity": -0.2,
+        "service_stress": 0.5,
+        "service_fatigue": 1.25,
+        "rest_fatigue": 1,
+        "dispatch_reward": 1,
+        "return_stress": 0
+      }
+    },
+    {
+      "cost": 200,
+      "personality": "活発な探検家",
+      "trait": "外出好き",
+      "features_label": "黒猫・短毛",
+      "cat": {
+        "trait_id": "outgoing",
+        "id": "catalog-2",
+        "name": "リン",
+        "features": [
+          "black",
+          "short_hair"
+        ],
+        "type_preferences": [
+          1.5,
+          1.7,
+          0.8,
+          1.8,
+          0.7,
+          0.5,
+          0.8,
+          0.4
+        ],
+        "intensity_preferences": [
+          0.8,
+          1,
+          1.3
+        ],
+        "boredom_decay": 0.2,
+        "switch_affinity": 0.2,
+        "service_stress": 1,
+        "service_fatigue": 1,
+        "rest_fatigue": 1,
+        "dispatch_reward": 1.25,
+        "return_stress": 10
+      }
+    },
+    {
+      "cost": 200,
+      "personality": "距離を大切にする猫",
+      "trait": "のんびり屋",
+      "features_label": "三毛・長毛",
+      "cat": {
+        "trait_id": "relaxed",
+        "id": "catalog-3",
+        "name": "ユキ",
+        "features": [
+          "calico",
+          "long_hair"
+        ],
+        "type_preferences": [
+          1.2,
+          1.3,
+          0.8,
+          1.4,
+          0.2,
+          0,
+          1.4,
+          1.8
+        ],
+        "intensity_preferences": [
+          1.2,
+          0.8,
+          0.5
+        ],
+        "boredom_decay": 0.12,
+        "switch_affinity": -0.1,
+        "service_stress": 1,
+        "service_fatigue": 1.25,
+        "rest_fatigue": 1.5,
+        "dispatch_reward": 1,
+        "return_stress": 0
+      }
+    },
+    {
+      "cost": 200,
+      "personality": "遊び好きで繊細な猫",
+      "trait": "体力自慢",
+      "features_label": "茶トラ・短毛",
+      "cat": {
+        "trait_id": "hardy",
+        "id": "catalog-4",
+        "name": "ソラ",
+        "features": [
+          "orange_tabby",
+          "short_hair"
+        ],
+        "type_preferences": [
+          1.8,
+          1.6,
+          1.4,
+          1.2,
+          0.9,
+          0.8,
+          1,
+          0.8
+        ],
+        "intensity_preferences": [
+          1.3,
+          1,
+          0.2
+        ],
+        "boredom_decay": 0.15,
+        "switch_affinity": 0,
+        "service_stress": 1,
+        "service_fatigue": 0.75,
+        "rest_fatigue": 0.75,
+        "dispatch_reward": 1,
+        "return_stress": 0
+      }
+    },
+    {
+      "cost": 200,
+      "personality": "穏やかな甘えん坊",
+      "trait": "外出好き",
+      "features_label": "白黒・長毛",
+      "cat": {
+        "trait_id": "outgoing",
+        "id": "catalog-5",
+        "name": "モモ",
+        "features": [
+          "black_white",
+          "long_hair"
+        ],
+        "type_preferences": [
+          0.8,
+          0.6,
+          1.2,
+          0.5,
+          1.8,
+          1.5,
+          1.2,
+          1.3
+        ],
+        "intensity_preferences": [
+          1.3,
+          1,
+          0.4
+        ],
+        "boredom_decay": 0.08,
+        "switch_affinity": -0.2,
+        "service_stress": 1,
+        "service_fatigue": 1,
+        "rest_fatigue": 1,
+        "dispatch_reward": 1.25,
+        "return_stress": 10
+      }
+    },
+    {
+      "cost": 200,
+      "personality": "中立",
+      "trait": "のんびり屋",
+      "features_label": "キジトラ・短毛",
+      "cat": {
+        "trait_id": "relaxed",
+        "id": "catalog-6",
+        "name": "ムギ",
+        "features": [
+          "brown_tabby",
+          "short_hair"
+        ],
+        "type_preferences": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "intensity_preferences": [
+          1,
+          1,
+          1
+        ],
+        "boredom_decay": 0.15,
+        "switch_affinity": 0,
+        "service_stress": 1,
+        "service_fatigue": 1.25,
+        "rest_fatigue": 1.5,
+        "dispatch_reward": 1,
+        "return_stress": 0
+      }
+    },
+    {
+      "cost": 200,
+      "personality": "活発な探検家",
+      "trait": "のんびり屋",
+      "features_label": "白猫・長毛",
+      "cat": {
+        "trait_id": "relaxed",
+        "id": "catalog-7",
+        "name": "コハク",
+        "features": [
+          "white",
+          "long_hair"
+        ],
+        "type_preferences": [
+          1.5,
+          1.7,
+          0.8,
+          1.8,
+          0.7,
+          0.5,
+          0.8,
+          0.4
+        ],
+        "intensity_preferences": [
+          0.8,
+          1,
+          1.3
+        ],
+        "boredom_decay": 0.2,
+        "switch_affinity": 0.2,
+        "service_stress": 1,
+        "service_fatigue": 1.25,
+        "rest_fatigue": 1.5,
+        "dispatch_reward": 1,
+        "return_stress": 0
+      }
+    },
+    {
+      "cost": 200,
+      "personality": "距離を大切にする猫",
+      "trait": "接客好き",
+      "features_label": "黒猫・長毛",
+      "cat": {
+        "trait_id": "hospitality",
+        "id": "catalog-8",
+        "name": "スズ",
+        "features": [
+          "black",
+          "long_hair"
+        ],
+        "type_preferences": [
+          1.2,
+          1.3,
+          0.8,
+          1.4,
+          0.2,
+          0,
+          1.4,
+          1.8
+        ],
+        "intensity_preferences": [
+          1.2,
+          0.8,
+          0.5
+        ],
+        "boredom_decay": 0.12,
+        "switch_affinity": -0.1,
+        "service_stress": 0.5,
+        "service_fatigue": 1.25,
+        "rest_fatigue": 1,
+        "dispatch_reward": 1,
+        "return_stress": 0
+      }
+    },
+    {
+      "cost": 200,
+      "personality": "中立",
+      "trait": "外出好き",
+      "features_label": "三毛・短毛",
+      "cat": {
+        "trait_id": "outgoing",
+        "id": "catalog-9",
+        "name": "マメ",
+        "features": [
+          "calico",
+          "short_hair"
+        ],
+        "type_preferences": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "intensity_preferences": [
+          1,
+          1,
+          1
+        ],
+        "boredom_decay": 0.15,
+        "switch_affinity": 0,
+        "service_stress": 1,
+        "service_fatigue": 1,
+        "rest_fatigue": 1,
+        "dispatch_reward": 1.25,
+        "return_stress": 10
+      }
+    },
+    {
+      "cost": 200,
+      "personality": "穏やかな甘えん坊",
+      "trait": "のんびり屋",
+      "features_label": "茶トラ・長毛",
+      "cat": {
+        "trait_id": "relaxed",
+        "id": "catalog-10",
+        "name": "アンズ",
+        "features": [
+          "orange_tabby",
+          "long_hair"
+        ],
+        "type_preferences": [
+          0.8,
+          0.6,
+          1.2,
+          0.5,
+          1.8,
+          1.5,
+          1.2,
+          1.3
+        ],
+        "intensity_preferences": [
+          1.3,
+          1,
+          0.4
+        ],
+        "boredom_decay": 0.08,
+        "switch_affinity": -0.2,
+        "service_stress": 1,
+        "service_fatigue": 1.25,
+        "rest_fatigue": 1.5,
+        "dispatch_reward": 1,
+        "return_stress": 0
+      }
+    },
+    {
+      "cost": 200,
+      "personality": "遊び好きで繊細な猫",
+      "trait": "外出好き",
+      "features_label": "キジトラ・長毛",
+      "cat": {
+        "trait_id": "outgoing",
+        "id": "catalog-11",
+        "name": "カエデ",
+        "features": [
+          "brown_tabby",
+          "long_hair"
+        ],
+        "type_preferences": [
+          1.8,
+          1.6,
+          1.4,
+          1.2,
+          0.9,
+          0.8,
+          1,
+          0.8
+        ],
+        "intensity_preferences": [
+          1.3,
+          1,
+          0.2
+        ],
+        "boredom_decay": 0.15,
+        "switch_affinity": 0,
+        "service_stress": 1,
+        "service_fatigue": 1,
+        "rest_fatigue": 1,
+        "dispatch_reward": 1.25,
+        "return_stress": 10
+      }
+    },
+    {
+      "cost": 200,
+      "personality": "活発な探検家",
+      "trait": "体力自慢",
+      "features_label": "白黒・短毛",
+      "cat": {
+        "trait_id": "hardy",
+        "id": "catalog-12",
+        "name": "フク",
+        "features": [
+          "black_white",
+          "short_hair"
+        ],
+        "type_preferences": [
+          1.5,
+          1.7,
+          0.8,
+          1.8,
+          0.7,
+          0.5,
+          0.8,
+          0.4
+        ],
+        "intensity_preferences": [
+          0.8,
+          1,
+          1.3
+        ],
+        "boredom_decay": 0.2,
+        "switch_affinity": 0.2,
+        "service_stress": 1,
+        "service_fatigue": 0.75,
+        "rest_fatigue": 0.75,
+        "dispatch_reward": 1,
+        "return_stress": 0
+      }
+    },
+    {
+      "cost": 200,
+      "personality": "中立",
+      "trait": "働き者",
+      "features_label": "黒猫・短毛",
+      "cat": {
+        "trait_id": "hardworking",
+        "id": "catalog-13",
+        "name": "ナギ",
+        "features": [
+          "black",
+          "short_hair"
+        ],
+        "type_preferences": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "intensity_preferences": [
+          1,
+          1,
+          1
+        ],
+        "boredom_decay": 0.15,
+        "switch_affinity": 0,
+        "service_stress": 1.25,
+        "service_fatigue": 0.75,
+        "rest_fatigue": 1,
+        "dispatch_reward": 1,
+        "return_stress": 0
+      }
+    },
+    {
+      "cost": 200,
+      "personality": "遊び好きで繊細な猫",
+      "trait": "のんびり屋",
+      "features_label": "白黒・長毛",
+      "cat": {
+        "trait_id": "relaxed",
+        "id": "catalog-14",
+        "name": "ミント",
+        "features": [
+          "black_white",
+          "long_hair"
+        ],
+        "type_preferences": [
+          1.8,
+          1.6,
+          1.4,
+          1.2,
+          0.9,
+          0.8,
+          1,
+          0.8
+        ],
+        "intensity_preferences": [
+          1.3,
+          1,
+          0.2
+        ],
+        "boredom_decay": 0.15,
+        "switch_affinity": 0,
+        "service_stress": 1,
+        "service_fatigue": 1.25,
+        "rest_fatigue": 1.5,
+        "dispatch_reward": 1,
+        "return_stress": 0
+      }
+    },
+    {
+      "cost": 200,
+      "personality": "活発な探検家",
+      "trait": "接客好き",
+      "features_label": "キジトラ・短毛",
+      "cat": {
+        "trait_id": "hospitality",
+        "id": "catalog-15",
+        "name": "レオ",
+        "features": [
+          "brown_tabby",
+          "short_hair"
+        ],
+        "type_preferences": [
+          1.5,
+          1.7,
+          0.8,
+          1.8,
+          0.7,
+          0.5,
+          0.8,
+          0.4
+        ],
+        "intensity_preferences": [
+          0.8,
+          1,
+          1.3
+        ],
+        "boredom_decay": 0.2,
+        "switch_affinity": 0.2,
+        "service_stress": 0.5,
+        "service_fatigue": 1.25,
+        "rest_fatigue": 1,
+        "dispatch_reward": 1,
+        "return_stress": 0
+      }
+    },
+    {
+      "cost": 200,
+      "personality": "距離を大切にする猫",
+      "trait": "マイペース",
+      "features_label": "白猫・短毛",
+      "cat": {
+        "trait_id": "easygoing",
+        "id": "catalog-16",
+        "name": "シオン",
+        "features": [
+          "white",
+          "short_hair"
+        ],
+        "type_preferences": [
+          1.2,
+          1.3,
+          0.8,
+          1.4,
+          0.2,
+          0,
+          1.4,
+          1.8
+        ],
+        "intensity_preferences": [
+          1.2,
+          0.8,
+          0.5
+        ],
+        "boredom_decay": 0.12,
+        "switch_affinity": -0.1,
+        "service_stress": 0.75,
+        "service_fatigue": 1,
+        "rest_fatigue": 0.75,
+        "dispatch_reward": 1,
+        "return_stress": 0
+      }
+    },
+    {
+      "cost": 200,
+      "personality": "穏やかな甘えん坊",
+      "trait": "外出好き",
+      "features_label": "茶トラ・長毛",
+      "cat": {
+        "trait_id": "outgoing",
+        "id": "catalog-17",
+        "name": "ルナ",
+        "features": [
+          "orange_tabby",
+          "long_hair"
+        ],
+        "type_preferences": [
+          0.8,
+          0.6,
+          1.2,
+          0.5,
+          1.8,
+          1.5,
+          1.2,
+          1.3
+        ],
+        "intensity_preferences": [
+          1.3,
+          1,
+          0.4
+        ],
+        "boredom_decay": 0.08,
+        "switch_affinity": -0.2,
+        "service_stress": 1,
+        "service_fatigue": 1,
+        "rest_fatigue": 1,
+        "dispatch_reward": 1.25,
+        "return_stress": 10
+      }
+    },
+    {
+      "cost": 200,
+      "personality": "遊び好きで繊細な猫",
+      "trait": "働き者",
+      "features_label": "三毛・長毛",
+      "cat": {
+        "trait_id": "hardworking",
+        "id": "catalog-18",
+        "name": "チャイ",
+        "features": [
+          "calico",
+          "long_hair"
+        ],
+        "type_preferences": [
+          1.8,
+          1.6,
+          1.4,
+          1.2,
+          0.9,
+          0.8,
+          1,
+          0.8
+        ],
+        "intensity_preferences": [
+          1.3,
+          1,
+          0.2
+        ],
+        "boredom_decay": 0.15,
+        "switch_affinity": 0,
+        "service_stress": 1.25,
+        "service_fatigue": 0.75,
+        "rest_fatigue": 1,
+        "dispatch_reward": 1,
+        "return_stress": 0
+      }
+    }
+  ],
+  "recruitment_refresh_days": 3,
+  "recruitment_batch_size": 3,
   "dispatch_introductions": [
     {
       "destination": "shopping_street_event",
@@ -1346,5 +2016,5 @@
       }
     }
   ],
-  "rules_id": "e5869d0e24bb175e65a5261c31bf0c4c74f440fbae0626fa95a8f52aff74f36a"
+  "rules_id": "515b6aa875224c7121d844cd30b88084ad8c1fe1322ee52d6ae7e4c7a7a98f38"
 }

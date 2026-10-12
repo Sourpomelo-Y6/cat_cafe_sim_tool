@@ -60,7 +60,19 @@ static class Program
                         foreach(var row in admissions.EnumerateArray()){dispatch.State.funds=row.GetProperty("funds").GetDouble();Assert((dispatch.DispatchIntroductionAcceptReason(op.GetProperty("source").GetString())=="")==row.GetProperty("can_accept").GetBoolean(),"Python dispatch admission funds boundary differs");}
                         dispatch.State.funds=funds;
                     }
+                    if(op.TryGetProperty("recruitment_candidates",out var recruits)){using var candidates=JsonDocument.Parse(Encode(dispatch.RecruitmentCandidates(dispatch.State)));Equal(recruits,candidates.RootElement,"recruitment candidates");}
                     using var current=JsonDocument.Parse(Encode(dispatch.State));Equal(op.GetProperty("expected"),current.RootElement,"dispatch boundary");dispatch.Restore(Decode<CafeSnapshot>(Encode(dispatch.State)));ticks++;
+                }
+                if(fixture.GetProperty("operations").EnumerateArray().Any(o=>o.GetProperty("expected").TryGetProperty("recruitment",out var recruits)))
+                {
+                    string before=Encode(dispatch.State);
+                    for(int variant=0;variant<8;variant++)
+                    {
+                        var bad=Decode<CafeSnapshot>(before);var r=bad.recruitment;
+                        if(variant==0)r.id="invalid";else if(variant==1)r.days[0]=0;else if(variant==2)r.days[r.days.Count-1]=bad.day+1;else if(variant==3)r.accepted.Add(new CafeShopPurchase {cat_id="unknown",day=bad.day});else if(variant==4)r.days.Add(r.days.Last()+1);else if(variant==5)r.accepted.Add(null);else if(variant==6)r.days=null;else r.accepted=null;
+                        bool rejected=false;try{dispatch.Restore(bad);}catch(ArgumentException){rejected=true;}
+                        Assert(rejected && before==Encode(dispatch.State),"Corrupt recruitment save accepted or changed state");
+                    }
                 }
                 if(fixture.GetProperty("operations").EnumerateArray().Any(o=>o.GetProperty("expected").TryGetProperty("shop_purchases",out var purchases)))
                 {

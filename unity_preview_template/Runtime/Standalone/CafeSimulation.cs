@@ -35,12 +35,13 @@ namespace CatCafePreview.Standalone
         {
             if (s == null || s.version != 2 || s.rules_id != Rules.rules_id || s.seed < 0 || s.day < 1 || s.tick < 0 || s.tick > Rules.opening_ticks
                 || !new[] { "preparation", "open", "closed" }.Contains(s.phase)
-                || s.cats == null || s.cats.Count != Rules.cats.Length + (s.intake_request != null && s.intake_request.status == "accepted" ? 1 : 0) + (s.regular_introduction != null && s.regular_introduction.status == "accepted" ? 1 : 0) + DispatchJoinedCount(s,s.day) + VisitingJoinedCount(s,s.day) + ShopJoinedCount(s,s.day) || s.visits == null || s.exchanges == null || s.queue == null || s.relationships == null || s.history == null
+                || s.cats == null || s.cats.Count != Rules.cats.Length + (s.intake_request != null && s.intake_request.status == "accepted" ? 1 : 0) + (s.regular_introduction != null && s.regular_introduction.status == "accepted" ? 1 : 0) + DispatchJoinedCount(s,s.day) + VisitingJoinedCount(s,s.day) + ShopJoinedCount(s,s.day) + RecruitmentJoinedCount(s,s.day) || s.visits == null || s.exchanges == null || s.queue == null || s.relationships == null || s.history == null
                 || s.cats.Select(c => c.id).Distinct().Count() != s.cats.Count || s.revision < 0
                 || !Finite(s.funds) || !Finite(s.opening_funds) || !Finite(s.revenue) || !Finite(s.expenses)
                 || s.revenue < 0 || s.expenses < 0 || Math.Abs(s.funds - (s.opening_funds + s.revenue + s.item_sales_income + s.dispatch_income - s.expenses)) > 1e-7
                 || s.history.Count != s.day - 1 || s.completed < 0
                 || !Range(s.popularity, 0, Rules.popularity.cap)) throw new ArgumentException("Invalid standalone save");
+            ValidateRecruitment(s);
             ValidateShop(s);
             ValidateDispatchIntroductions(s);
             ValidateDispatch(s);
@@ -106,6 +107,7 @@ namespace CatCafePreview.Standalone
         private void ExecuteCore(string kind, string[] working = null, string catId = null, string choice = null, string source = null, string seatId = null)
         {
             var s = State;
+            if(kind=="open_recruitment"){OpenRecruitment();return;}
             if (s.game_over != null) throw new InvalidOperationException("経営終了後は保存・閲覧のみ利用できます。");
             if(kind=="start_popularity_challenge" || kind=="start_objective" && choice=="popularity"){StartPopularityChallenge();return;}
             if(kind=="enable_bond_goal" || kind=="enable_patron" || kind=="start_objective" && (choice=="bond" || choice=="patron")){StartIndependentObjective(kind=="enable_bond_goal"?"bond":kind=="enable_patron"?"patron":choice);return;}
@@ -125,6 +127,7 @@ namespace CatCafePreview.Standalone
             if (kind == "purchase_housing" || kind == "upgrade_housing") { ExpandHousing(kind); return; }
             if (kind.StartsWith("resolve_growth", StringComparison.Ordinal)) { ResolveGrowth(kind, catId, choice); return; }
             if (kind == "resolve_customer_trust") { ResolveCustomerTrust(source, choice); return; }
+            if (kind == "recruit_cat") { RecruitCat(catId); return; }
             if (kind == "purchase_cat") { PurchaseCat(catId); return; }
             if (kind == "resolve_visiting_cat") { ResolveVisitingCat(choice); return; }
             if (kind == "resolve_regular_introduction") { ResolveRegularIntroduction(choice); return; }

@@ -38,7 +38,7 @@ namespace CatCafePreview.Standalone
                 if(row==null || !completed || row.mode!="popularity" || row.day!=s.goal.Last().resolved_day || row.cats<0 || row.cats>s.cats.Count || row.target!=Rules.goal_stages.Last().target || !Range(row.value,row.target,Rules.popularity.cap) || row.value!=row.popularity || !Finite(row.funds) || row.funds<=0 || !Range(row.revenue,0,double.MaxValue))throw new ArgumentException("Invalid fixed clear record");
                 double closingPopularity=row.day==s.day?s.goal_popularity:s.history[row.day-1].goal_popularity;
                 double revenue=s.history.Where(h=>h.day<=row.day).Sum(h=>h.revenue)+(row.day==s.day?s.visits.Sum(v=>v.bill):0);
-                int cats=Rules.cats.Length+(s.intake_request.status=="accepted" && s.intake_request.resolved_day<=row.day?1:0)+(s.regular_introduction.status=="accepted" && s.regular_introduction.resolved_day<=row.day?1:0)+DispatchJoinedCount(s,row.day)+VisitingJoinedCount(s,row.day)+ShopJoinedCount(s,row.day);
+                int cats=Rules.cats.Length+(s.intake_request.status=="accepted" && s.intake_request.resolved_day<=row.day?1:0)+(s.regular_introduction.status=="accepted" && s.regular_introduction.resolved_day<=row.day?1:0)+DispatchJoinedCount(s,row.day)+VisitingJoinedCount(s,row.day)+ShopJoinedCount(s,row.day)+RecruitmentJoinedCount(s,row.day);
                 if(row.value!=closingPopularity || row.revenue!=revenue || row.cats!=cats)throw new ArgumentException("Clear record differs from closing history");
             }
         }

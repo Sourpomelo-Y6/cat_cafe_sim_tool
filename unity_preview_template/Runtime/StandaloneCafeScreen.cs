@@ -264,6 +264,13 @@ namespace CatCafePreview
                         if(GUILayout.Button(option.label+" / 帰還報酬 "+option.return_reward+" / 疲労 "+option.fatigue+" / ストレス "+option.stress))StartCoroutine(Send("resolve_dispatch_choice",eventId:encounter.event_id,choice:option.choice));
                     }
                 }
+                if(state.recruitment!=null)
+                {
+                    GUILayout.Label("保護猫の募集 / "+state.recruitment.housing+"\n"+state.recruitment.notes+"\n"+state.recruitment.reason);GUI.enabled=!busy && state.recruitment.can_refresh;
+                    if(GUILayout.Button(state.recruitment.rows.Length==0?"保護猫の募集を開始":"募集候補を追加する"))StartCoroutine(Send("open_recruitment"));
+                    foreach(var row in state.recruitment.rows){GUILayout.Label(row.details+"\n"+row.reason);GUI.enabled=!busy && row.can_purchase;if(GUILayout.Button(row.accepted?row.name+"（受け入れ済み）":row.name+"を迎える（"+row.cost+"）"))StartCoroutine(Send("recruit_cat",catId:row.cat_id));}
+                    GUI.enabled=!busy;
+                }
                 if(state.pet_shop!=null)
                 {
                     GUILayout.Label("ペットショップ / "+state.pet_shop.housing+"\n"+state.pet_shop.notes);
