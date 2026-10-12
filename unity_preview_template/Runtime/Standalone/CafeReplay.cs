@@ -53,7 +53,9 @@ namespace CatCafePreview.Standalone
             if(value is int integer){text.Append(integer.ToString(CultureInfo.InvariantCulture)).Append(';');return;}
             if(value is System.Collections.IEnumerable sequence){text.Append('[');foreach(var item in sequence)Canonical(item,text);text.Append(']');return;}
             text.Append('{');foreach(var field in Fields(value.GetType()))
-            {if(value is CafeSnapshot && (field.Name=="instance_id" || field.Name=="revision") || value is CafeAutoRun && field.Name=="run_id")continue;text.Append(field.Name).Append(':');Canonical(field.GetValue(value),text);}text.Append('}');
+            {if(value is CafeDayResult && field.Name=="legacy_service_ticks" && field.GetValue(value)==null)continue;
+                if(value is CafeSnapshot && field.Name=="import_history" && field.GetValue(value)==null)continue;
+                if(value is CafeSnapshot && (field.Name=="instance_id" || field.Name=="revision") || value is CafeAutoRun && field.Name=="run_id")continue;text.Append(field.Name).Append(':');Canonical(field.GetValue(value),text);}text.Append('}');
         }
         public void Append(CafeSnapshot before,CafeSimulation sim,CafeReplayOperation operation,CafeAutoOperation automatic=null)
         {

@@ -24,9 +24,11 @@ namespace CatCafePreview
                 if (asset == null) throw new InvalidOperationException("単独版の初期設定がありません。");
                 rules = JsonUtility.FromJson<CafeRules>(asset.text);
             }
+            CafeLegacyImport.DecodeBase=text=>DecodeSave(text).state;
+            this.saveDirectory=saveDirectory??Path.Combine(Application.persistentDataPath,"standalone-v1");
             Simulation = new CafeSimulation(rules);
             ResetJournal();
-            saves = new CafeSaveStore(saveDirectory ?? Path.Combine(Application.persistentDataPath, "standalone-v1"), EncodeSave, DecodeSave, Simulation.Validate);
+            saves = new CafeSaveStore(this.saveDirectory, EncodeSave, DecodeSave, Simulation.Validate);
         }
         private static string EncodeSave(CafeSaveEnvelope save) { save.double_bits = CafeDoublePrecision.Capture(save.state); return JsonUtility.ToJson(save, true); }
         private static CafeSaveEnvelope DecodeSave(string text) { var save = JsonUtility.FromJson<CafeSaveEnvelope>(text); save?.state?.NormalizeJsonStrings(); if (save?.state != null) CafeDoublePrecision.Restore(save.state, save.double_bits); return save; }
@@ -40,7 +42,7 @@ namespace CatCafePreview
                     case "/state": response = Success(JsonUtility.ToJson(View())); break;
                     case "/saves": response = Success(JsonUtility.ToJson(ListSaves())); break;
                     case "/commands": response = Command(commandJson); break;
-                    default: if(route.StartsWith("/business-log",StringComparison.Ordinal)){response=Success(JsonUtility.ToJson(BusinessLog(route)));break;}throw new NotSupportedException("単独版の第1段階では未対応です。");
+                    default: if(route.StartsWith("/legacy-import",StringComparison.Ordinal)){response=Success(JsonUtility.ToJson(LegacyPreview(route)));break;}if(route.StartsWith("/business-log",StringComparison.Ordinal)){response=Success(JsonUtility.ToJson(BusinessLog(route)));break;}throw new NotSupportedException("単独版の第1段階では未対応です。");
                 }
             }
             catch (Exception ex) { response = Failure(ex.Message); }
@@ -60,6 +62,7 @@ namespace CatCafePreview
                 var replayBefore=Journal.CaptureBefore(s);Simulation.ReplayActions.Clear();CafeAutoOperation replayAutomatic=null;
                 switch (cmd.kind)
                 {
+                    case "import_legacy_save":ImportLegacy(cmd.save_id,cmd.save_slot);break;
                     case "start_autoplay": Simulation.StartAutoplay(cmd.autoplay_objective,cmd.autoplay_mode,cmd.autoplay_days);break;
                     case "step_autoplay": replayAutomatic=Simulation.StepAutoplay();break;
                     case "stop_autoplay": Simulation.CancelAutoplay();break;
@@ -70,9 +73,9 @@ namespace CatCafePreview
                         var initial = new CafeSimulation(Simulation.Rules, s.seed, cmd.choice).State;
                         saves.Save(1, initial); Simulation.Restore(initial); break;
                     case "save_game":
-                        bool oldPause=s.autoplay?.paused??false;int oldRevision=s.revision;
+                        bool oldPause=s.autoplay?.paused??false;int oldRevision=s.revision;int oldImportCount=s.import_history?.operations.Count??0;
                         try{Simulation.PauseAutoplay();saves.Save(cmd.save_slot == 0 ? 1 : cmd.save_slot, s);s.revision++;}
-                        catch{if(s.autoplay!=null)s.autoplay.paused=oldPause;s.revision=oldRevision;throw;}break;
+                        catch{if(s.autoplay!=null)s.autoplay.paused=oldPause;s.revision=oldRevision;if(s.import_history!=null)s.import_history.operations.RemoveRange(oldImportCount,s.import_history.operations.Count-oldImportCount);throw;}break;
                     case "load_game":
                         if (!int.TryParse(cmd.save_id, out int slot)) throw new ArgumentException("保存スロットを選んでください。");
                         Simulation.Restore(saves.Load(slot).state); break;
@@ -123,7 +126,7 @@ namespace CatCafePreview
                         Simulation.Execute(cmd.kind, choice: cmd.choice); break;
                     default: Simulation.Execute(cmd.kind, cmd.working_cats, cmd.cat_id, cmd.choice, cmd.choice,cmd.seat_id); break;
                 }
-                if(cmd.kind=="new_game" || cmd.kind=="load_game")ResetJournal();else Journal.Append(replayBefore,Simulation,ReplayOperation(cmd),replayAutomatic);
+                if(cmd.kind=="new_game" || cmd.kind=="load_game" || cmd.kind=="import_legacy_save")ResetJournal();else Journal.Append(replayBefore,Simulation,ReplayOperation(cmd),replayAutomatic);
                 response = Success(JsonUtility.ToJson(new PythonCommandReply { state = View() }));
             }
             catch (Exception ex) { response = Failure(ex.Message); }

@@ -23,6 +23,11 @@ namespace CatCafePreview.Standalone
     }
     public sealed partial class CafeSimulation
     {
+        public void StartAutoplay(string objective,string mode,int days)=>TraceImported(new CafeReplayOperation {kind="start_autoplay",objective=objective,mode=mode,days=days},()=>StartAutoplayCore(objective,mode,days));
+        public void PauseAutoplay()=>TraceImported(new CafeReplayOperation {kind="pause_autoplay"},PauseAutoplayCore);
+        public void ResumeAutoplay()=>TraceImported(new CafeReplayOperation {kind="resume_autoplay"},ResumeAutoplayCore);
+        public void CancelAutoplay()=>TraceImported(new CafeReplayOperation {kind="stop_autoplay"},CancelAutoplayCore);
+        public CafeAutoOperation StepAutoplay()=>TraceImported(new CafeReplayOperation {kind="step_autoplay"},StepAutoplayCore);
         public string AutoTargetStatus(string target)=>target=="popularity"?State.goal.LastOrDefault()?.status:target=="bond"?State.bond_goal?.status:target=="patron"?State.patron?.status:null;
         public string AutoStartReason()
         {
@@ -31,7 +36,7 @@ namespace CatCafePreview.Standalone
             if(PlayerActive || AdoptionWaiting || DispatchWaiting || DispatchChoiceWaiting || DispatchTroubleWaiting || DispatchIntroductionWaiting || ReservationWaiting || IntakeWaiting || RegularIntroductionWaiting || CustomerTrustWaiting || GrowthWaiting || StoreEventWaiting || State.cats.Any(c=>c.activity=="missing" && c.missing_remaining==0))return "回答待ちのイベント・交流を先に確認してください。";
             return "";
         }
-        public void StartAutoplay(string objective,string mode,int days)
+        private void StartAutoplayCore(string objective,string mode,int days)
         {
             if(State.autoplay?.running==true)throw new InvalidOperationException("おまかせは実行中です。");
             string problem=AutoStartReason();if(problem!="")throw new InvalidOperationException(problem);
@@ -41,15 +46,15 @@ namespace CatCafePreview.Standalone
         }
         private void UpdateAutoSummary(){var r=State.autoplay;r.summary="資金 "+r.before_funds+" → "+State.funds+" / 人気 "+r.before_popularity+" → "+State.popularity+"\n"+string.Join("\n",State.cats.Select(c=>Definition(c.id).name+"：疲労 "+c.fatigue+" / ストレス "+c.stress+" / "+c.health+" / "+c.activity));}
         private int AutoDayCount()=>State.history.Count+(State.phase=="closed"?1:0);
-        public void PauseAutoplay(){if(State.autoplay?.running==true){State.autoplay.paused=true;State.revision++;}}
-        public void ResumeAutoplay(){if(State.autoplay?.running!=true || !State.autoplay.paused)throw new InvalidOperationException("保存・一時停止したおまかせはありません。");State.autoplay.paused=false;State.auto_assignment=true;State.revision++;}
+        private void PauseAutoplayCore(){if(State.autoplay?.running==true){State.autoplay.paused=true;State.revision++;}}
+        private void ResumeAutoplayCore(){if(State.autoplay?.running!=true || !State.autoplay.paused)throw new InvalidOperationException("保存・一時停止したおまかせはありません。");State.autoplay.paused=false;State.auto_assignment=true;State.revision++;}
         private void StopAutoplay(string reason,string message="")
         {
             var run=State.autoplay;if(run?.running!=true)throw new InvalidOperationException("実行中のおまかせはありません。");
             run.running=false;run.paused=false;run.reason=reason;run.message=message;run.days=AutoDayCount()-run.start_days;State.auto_assignment=run.restore_auto_assignment;UpdateAutoSummary();State.revision++;
         }
-        public void CancelAutoplay()=>StopAutoplay("cancelled");
-        public CafeAutoOperation StepAutoplay()
+        private void CancelAutoplayCore()=>StopAutoplay("cancelled");
+        private CafeAutoOperation StepAutoplayCore()
         {
             var run=State.autoplay;if(run?.running!=true || run.paused)throw new InvalidOperationException("おまかせを開始・再開してください。");
             string terminal=State.game_over!=null?"game_over":State.goal.LastOrDefault()?.status=="expired" && (run.objective=="popularity" || !State.goal.Last().continued)?"expired":AutoTargetStatus(run.objective)=="cleared" && (run.objective!="popularity" || State.goal.Count==Rules.goal_stages.Length)?"completed":GoalWaiting || BondWaiting || PatronWaiting?"goal_cleared":AutoDayCount()-run.start_days>=run.limit?"day_limit":run.operations>=10000?"operation_limit":null;
@@ -130,7 +135,7 @@ namespace CatCafePreview.Standalone
             foreach(var cat in healthy)
             {
                 int individual=mode=="clear"?Math.Max(20,Math.Min(Rules.opening_ticks,workload)):actions;
-                if(mode=="fast")individual=Math.Max(actions,Math.Max(Math.Min(Rules.opening_ticks,arrivals.Where(a=>Matched(cat,a.customer_id)).Sum(a=>Math.Min(duration,Rules.opening_ticks-a.tick))),Math.Min(Rules.opening_ticks,State.history.LastOrDefault()?.customer_records.Where(r=>r.cat_id==cat.id).Sum(r=>r.service_ticks)??0)));
+                if(mode=="fast")individual=Math.Max(actions,Math.Max(Math.Min(Rules.opening_ticks,arrivals.Where(a=>Matched(cat,a.customer_id)).Sum(a=>Math.Min(duration,Rules.opening_ticks-a.tick))),Math.Min(Rules.opening_ticks,State.history.LastOrDefault()?.legacy_service_ticks?.SingleOrDefault(r=>r.cat_id==cat.id)?.ticks??State.history.LastOrDefault()?.customer_records.Where(r=>r.cat_id==cat.id).Sum(r=>r.service_ticks)??0)));
                 var definition=Definition(cat.id);double fatigue=Math.Min(Rules.max_fatigue,cat.fatigue+individual*Rules.fatigue_per_service_tick*definition.service_fatigue),stress=Math.Min(100,cat.stress+individual*Rules.stress_per_service_tick*definition.service_stress);
                 AutoDecision(cat.id,"予測", "接客 "+individual+"手 / 疲労 "+fatigue+" / ストレス "+stress);
                 if(!(patron && reserved.Contains(cat.id)) && fatigue<=(mode=="fast"?65:60) && stress<=60 && workers.Count<desired)workers.Add(cat.id);

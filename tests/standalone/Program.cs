@@ -173,6 +173,14 @@ static partial class Program
     }
     static void Main(string[] args)
     {
+        if(args[0]=="--legacy-template" || args[0]=="--finalize-import"){LegacyTool(args);return;}
+        if(args[0]=="--legacy-only"){LegacyCases(args[1]);return;}
+        if(args[0]=="--verify-old-replays")
+        {
+            var replayRules=Decode<CafeRules>(File.ReadAllText(args[1]));
+            foreach(string file in args.Skip(2)){var document=Decode<CafeReplayDocument>(File.ReadAllText(file));var journal=new CafeReplayJournal(replayRules,new CafeSimulation(replayRules).State,ReplayEncode,ReplayDecode);journal.Verify(document);}
+            Console.WriteLine("PASS: "+(args.Length-2)+" existing Unity replay files.");return;
+        }
         int ticks = 0, scenarios = 0;
         if(args[0]=="--replay-only"){ReplayCases(args.Skip(1).ToArray());return;}
         if(args[0]=="--autoplay-only"){AutoplayCases(args[1]);return;}

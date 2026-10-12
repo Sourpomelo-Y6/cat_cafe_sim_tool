@@ -14,6 +14,7 @@ namespace CatCafePreview
         private bool showCustomers,showClearResults,showBusinessLog;
         private PythonBusinessLogView businessLog;private string logPath="";private int logOffset,logIndex;
         private string adoptionConfirmation,adoptionConfirmationIdentity;
+        private string legacyPath=""; private PythonLegacyImportView legacyPreview;
         private string notice = "Pythonサーバー不要の第1段階です。自由営業の基本ルールを確認できます。";
         private Vector2 scroll;
         private Font font;
@@ -28,18 +29,40 @@ namespace CatCafePreview
         private string autoObjective="popularity",autoMode="basic";private int autoDays=3;private float nextAutoStep;
         private void Update(){if(!title && !showBusinessLog && !busy && state?.autoplay?.running==true && !state.autoplay.paused && Time.unscaledTime>=nextAutoStep){nextAutoStep=Time.unscaledTime+.05f;StartCoroutine(Send("step_autoplay"));}}
         private string assignmentCustomer,assignmentCat,assignmentSeat,assignmentInstance;
-        private IEnumerator Send(string kind, string[] working = null, int slot = 1, string catId = "", string choice = "free", string eventId = "", string seatId = "", string targetType = "",string customerId="")
+        private IEnumerator Send(string kind, string[] working = null, int slot = 1, string catId = "", string choice = "free", string eventId = "", string seatId = "", string targetType = "",string customerId="", string importPath=null)
         {
             if (busy) yield break;
             busy = true;
-            var cmd = new PythonShiftCommand { request_id = Guid.NewGuid().ToString("N"), instance_id = state.instance_id, expected_revision = state.revision, kind = kind, choice = choice, working_cats = working ?? new string[0], save_id = slot.ToString(), save_slot = slot, cat_id = catId, event_id = eventId, seat_id=seatId,target_type=targetType,customer_id=customerId,autoplay_objective=autoObjective,autoplay_mode=autoMode,autoplay_days=autoDays };
+            var cmd = new PythonShiftCommand { request_id = Guid.NewGuid().ToString("N"), instance_id = state.instance_id, expected_revision = state.revision, kind = kind, choice = choice, working_cats = working ?? new string[0], save_id = importPath ?? slot.ToString(), save_slot = slot, cat_id = catId, event_id = eventId, seat_id=seatId,target_type=targetType,customer_id=customerId,autoplay_objective=autoObjective,autoplay_mode=autoMode,autoplay_days=autoDays };
             yield return backend.Request("/commands", JsonUtility.ToJson(cmd), reply =>
             {
                 var result = JsonUtility.FromJson<PythonCommandReply>(reply.text);
                 state = backend.View(); notice = string.IsNullOrEmpty(result.error) ? "操作を反映しました。" : result.error;
-                if (string.IsNullOrEmpty(result.error) && (kind == "new_game" || kind == "load_game")) {title = false;showClearResults=false;scroll=Vector2.zero;}
+                if (string.IsNullOrEmpty(result.error) && (kind == "new_game" || kind == "load_game" || kind == "import_legacy_save")) {title = false;showClearResults=false;scroll=Vector2.zero;}
             });
             busy = false;
+        }
+        private IEnumerator PreviewLegacy()
+        {
+            if(busy)yield break;busy=true;legacyPreview=null;
+            yield return backend.Request("/legacy-import?path="+Uri.EscapeDataString(legacyPath),null,reply=>
+            {
+                try { var view=JsonUtility.FromJson<PythonLegacyImportView>(reply.text);
+                    if(reply.result!=UnityEngine.Networking.UnityWebRequest.Result.Success)throw new Exception(view.error??reply.error);
+                    legacyPreview=view;notice="内容を確認し、空きスロットへ取り込んでください。";
+                } catch(Exception ex){notice=ex.Message;}
+            });busy=false;
+        }
+        private void DrawLegacyImport()
+        {
+            GUILayout.Label("旧Pythonセーブの取り込み");
+            GUILayout.Label("変換ツールで作成した取込JSONの絶対パスを指定してください。元のセーブと既存の保存は上書きしません。");
+            string path=GUILayout.TextField(legacyPath);if(path!=legacyPath){legacyPath=path;legacyPreview=null;}
+            if(GUILayout.Button("取り込む内容を確認"))StartCoroutine(PreviewLegacy());
+            if(legacyPreview==null)return;
+            GUILayout.Label(legacyPreview.summary);foreach(var note in legacyPreview.notes)GUILayout.Label(note);
+            foreach(int slot in legacyPreview.free_slots)if(GUILayout.Button("空きスロット "+slot+"へ取り込んで再開"))StartCoroutine(Send("import_legacy_save",slot:slot,importPath:legacyPreview.path));
+            if(legacyPreview.free_slots.Length==0)GUILayout.Label("空きスロットがありません。");
         }
         private IEnumerator FetchBusinessLog(string route,bool export=false)
         {
@@ -81,6 +104,7 @@ namespace CatCafePreview
                 if (GUILayout.Button("有力者目標で新規開始")) StartCoroutine(Send("new_game",choice:"patron"));
                 if (GUILayout.Button("好感度目標で新規開始")) StartCoroutine(Send("new_game",choice:"bond"));
                 if (GUILayout.Button("新規開始")) StartCoroutine(Send("new_game"));
+                DrawLegacyImport();
                 foreach (var save in backend.ListSaves().saves)
                 {
                     GUI.enabled = !busy && save.phase != "invalid";

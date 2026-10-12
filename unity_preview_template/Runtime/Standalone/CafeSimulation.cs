@@ -28,12 +28,13 @@ namespace CatCafePreview.Standalone
             Validate(value);
             foreach (var e in value.store_events) e.draw = StoreDraw(value.seed, e.day, "occur");
             State = value;
-            if(State.autoplay?.running==true)State.autoplay.paused=true;
+            if(State.autoplay?.running==true && !State.autoplay.paused)PauseAutoplay();
             // A load starts a new command epoch. Old queued buttons cannot mutate it.
             State.instance_id = Guid.NewGuid().ToString("N"); State.revision = 0;
         }
         public void Validate(CafeSnapshot s)
         {
+            if(s?.import_history!=null){ValidateImportedHistory(s);return;}
             if (s == null || s.version != 2 || Rules.service_assignment_version!=1 || Rules.autoplay_version!=1 || s.rules_id != Rules.rules_id || s.seed < 0 || s.day < 1 || s.tick < 0 || s.tick > Rules.opening_ticks
                 || !new[] { "preparation", "open", "closed" }.Contains(s.phase)
                 || s.cats == null || s.cats.Count != Rules.cats.Length + (s.intake_request != null && s.intake_request.status == "accepted" ? 1 : 0) + (s.regular_introduction != null && s.regular_introduction.status == "accepted" ? 1 : 0) + DispatchJoinedCount(s,s.day) + VisitingJoinedCount(s,s.day) + ShopJoinedCount(s,s.day) + RecruitmentJoinedCount(s,s.day) || s.visits == null || s.exchanges == null || s.queue == null || s.relationships == null || s.history == null
@@ -108,7 +109,7 @@ namespace CatCafePreview.Standalone
         private static bool Range(double v, double min, double max) => Finite(v) && v >= min && v <= max;
         private static double Clamp(double v, double max) => Math.Max(0, Math.Min(max, v));
         public void Execute(string kind,string[] working=null,string catId=null,string choice=null,string source=null,string seatId=null,string customerId=null)
-        {ExecuteCore(kind,working,catId,choice,source,seatId,customerId);UpdateDispatchUnlocks();}
+        {TraceImported(new CafeReplayOperation {kind=kind,working=working,cat_id=catId,choice=choice,source=source,seat_id=seatId,customer_id=customerId},()=>{ExecuteCore(kind,working,catId,choice,source,seatId,customerId);UpdateDispatchUnlocks();});}
         private void ExecuteCore(string kind, string[] working = null, string catId = null, string choice = null, string source = null, string seatId = null,string customerId=null)
         {
             var s = State;

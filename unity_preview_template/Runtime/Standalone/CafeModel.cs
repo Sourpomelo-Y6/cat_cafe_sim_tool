@@ -122,9 +122,10 @@ namespace CatCafePreview.Standalone
         public bool pause_after_interaction, connect_pending, open_up_pending;
     }
     [Serializable] public class CafeRelationship { public string cat_id, customer_id; public double affinity; }
+    [Serializable] public class CafeLegacyServiceTotal {public string cat_id;public int ticks;}
     [Serializable] public class CafeDayResult
     {
-        public int day, arrivals, completed;
+        public int day, arrivals, completed;public List<CafeLegacyServiceTotal> legacy_service_ticks;
         public int seat_count = 2;
         public double opening_funds, revenue, expenses, closing_funds;
         public double pet_shop_expenses, recruitment_expenses, housing_expenses, housing_cost, item_expenses, item_sales_income, expansion_expenses, goal_popularity, equipment_expenses, rest_space_expenses, waiting_area_expenses, waiting_area_cost;
@@ -138,7 +139,7 @@ namespace CatCafePreview.Standalone
         public int version = 2, seed, day = 1, tick, revision;
         public string rules_id, instance_id, phase = "preparation", game_over;
         public bool auto_assignment=true;
-        public CafeAutoRun autoplay;
+        public CafeAutoRun autoplay;public CafeImportHistory import_history;
         public double funds, opening_funds, popularity, revenue, expenses;
         public int completed;
         public int seat_count = 2;
@@ -186,6 +187,9 @@ namespace CatCafePreview.Standalone
         // Unity JsonUtility materializes JSON null strings as empty strings.
         public void NormalizeJsonStrings()
         {
+            if(import_history!=null && string.IsNullOrEmpty(import_history.base_json))import_history=null;
+            if(import_history?.operations!=null)foreach(var operation in import_history.operations)CafeLegacyImport.NormalizeOperation(operation);
+            if(history!=null)foreach(var h in history)if(h.legacy_service_ticks!=null && h.legacy_service_ticks.Count==0)h.legacy_service_ticks=null;
             if(autoplay!=null && string.IsNullOrEmpty(autoplay.run_id))autoplay=null;
             if(autoplay!=null){if(autoplay.reason==null)autoplay.reason="";if(autoplay.message==null)autoplay.message="";}
             if(dispatches!=null)foreach(var e in dispatches)if(e.encounter!=null && string.IsNullOrEmpty(e.encounter.id) && string.IsNullOrEmpty(e.encounter.choice) && (string.IsNullOrEmpty(e.encounter.status) || e.encounter.status=="scheduled") && e.encounter.occurred_day==0 && e.encounter.resolved_day==0 && e.encounter.fatigue_before==0 && e.encounter.fatigue_after==0 && e.encounter.stress_before==0 && e.encounter.stress_after==0)e.encounter=null;

@@ -31,6 +31,11 @@ namespace CatCafePreview.Standalone
             if (value == null || value.version != 1 || value.slot != slot || !DateTimeOffset.TryParse(value.created_at, out _)) throw new ArgumentException("Unsupported save envelope");
             validate(value.state); return value;
         }
+        public void SaveNew(int slot,CafeSnapshot state)
+        {
+            validate(state);string path=PathFor(slot);Directory.CreateDirectory(directory);var value=new CafeSaveEnvelope {slot=slot,created_at=DateTimeOffset.UtcNow.ToString("o"),state=state};string temp=path+".import-"+Guid.NewGuid().ToString("N");
+            try{using(var stream=new FileStream(temp,FileMode.CreateNew,FileAccess.Write,FileShare.None)){var bytes=Encoding.UTF8.GetBytes(encode(value));stream.Write(bytes,0,bytes.Length);stream.Flush(true);}var verified=decode(File.ReadAllText(temp,Encoding.UTF8));if(verified==null || verified.slot!=slot || verified.version!=1)throw new IOException("Import verification failed");validate(verified.state);File.Move(temp,path);}finally{if(File.Exists(temp))File.Delete(temp);}
+        }
         public void Save(int slot, CafeSnapshot state)
         {
             validate(state); string path = PathFor(slot); Directory.CreateDirectory(directory);

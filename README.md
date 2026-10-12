@@ -209,3 +209,6 @@ Unity単独版に[手動接客と自動割り当て設定](../Docs/UnityStandalo
 Unity単独版に[複数日おまかせ](../Docs/UnityStandaloneAutoplay.md)を追加しました。3目標・3方針の準備・投資・交流・加入・派遣を既存の通常操作で進め、最大10日、回答待ちの停止、保存時の一時停止・明示再開・中止に対応します。
 
 Unity単独版に[詳細リプレイと営業ログ](../Docs/UnityStandaloneReplay.md)を追加しました。成功操作・接客と個別交流の行動／反応／数値変化、おまかせの判断を記録し、20件表示・別ファイル出力・現在の営業を変更しない独立再生と改変検出に対応します。
+
+
+Unity単独版に[旧Pythonセーブの変換・取り込み](../Docs/UnityStandaloneLegacyImport.md)を追加しました。`python -X utf8 convert_python_save.py 元セーブ.json 新しい取込JSON.json`で読み取り専用変換し、タイトルの取込欄から空きスロットへ保存・再開します。変換はPython版モジュールと.NET 8を使用し、配布Playerの取り込み・営業・保存再開にはPythonサーバーと.NETが不要です。
