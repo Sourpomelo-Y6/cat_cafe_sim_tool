@@ -11,7 +11,7 @@ from export_standalone_rules import exported_rules
 def extend(value,rules):
  if isinstance(value,dict):
   if 'cats' in value and 'exchange' in value and 'rules_id' in value:
-   for key in ('rest_space','rest_space_upgrade','rest_space_soundproof','waiting_area','waiting_area_upgrade'):
+   for key in ('rest_space','rest_space_upgrade','rest_space_soundproof','waiting_area','waiting_area_upgrade','service_assignment_version'):
     if key not in value:value[key]=copy.deepcopy(rules[key])
   for row in value.values():extend(row,rules)
  elif isinstance(value,list):

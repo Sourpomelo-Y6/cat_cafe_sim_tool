@@ -33,7 +33,7 @@ namespace CatCafePreview.Standalone
         }
         public void Validate(CafeSnapshot s)
         {
-            if (s == null || s.version != 2 || s.rules_id != Rules.rules_id || s.seed < 0 || s.day < 1 || s.tick < 0 || s.tick > Rules.opening_ticks
+            if (s == null || s.version != 2 || Rules.service_assignment_version!=1 || s.rules_id != Rules.rules_id || s.seed < 0 || s.day < 1 || s.tick < 0 || s.tick > Rules.opening_ticks
                 || !new[] { "preparation", "open", "closed" }.Contains(s.phase)
                 || s.cats == null || s.cats.Count != Rules.cats.Length + (s.intake_request != null && s.intake_request.status == "accepted" ? 1 : 0) + (s.regular_introduction != null && s.regular_introduction.status == "accepted" ? 1 : 0) + DispatchJoinedCount(s,s.day) + VisitingJoinedCount(s,s.day) + ShopJoinedCount(s,s.day) + RecruitmentJoinedCount(s,s.day) || s.visits == null || s.exchanges == null || s.queue == null || s.relationships == null || s.history == null
                 || s.cats.Select(c => c.id).Distinct().Count() != s.cats.Count || s.revision < 0
@@ -105,13 +105,15 @@ namespace CatCafePreview.Standalone
         private static bool Finite(double v) => !double.IsNaN(v) && !double.IsInfinity(v);
         private static bool Range(double v, double min, double max) => Finite(v) && v >= min && v <= max;
         private static double Clamp(double v, double max) => Math.Max(0, Math.Min(max, v));
-        public void Execute(string kind,string[] working=null,string catId=null,string choice=null,string source=null,string seatId=null)
-        {ExecuteCore(kind,working,catId,choice,source,seatId);UpdateDispatchUnlocks();}
-        private void ExecuteCore(string kind, string[] working = null, string catId = null, string choice = null, string source = null, string seatId = null)
+        public void Execute(string kind,string[] working=null,string catId=null,string choice=null,string source=null,string seatId=null,string customerId=null)
+        {ExecuteCore(kind,working,catId,choice,source,seatId,customerId);UpdateDispatchUnlocks();}
+        private void ExecuteCore(string kind, string[] working = null, string catId = null, string choice = null, string source = null, string seatId = null,string customerId=null)
         {
             var s = State;
             if(kind=="open_recruitment"){OpenRecruitment();return;}
             if (s.game_over != null) throw new InvalidOperationException("経営終了後は保存・閲覧のみ利用できます。");
+            if(kind=="set_auto_assignment"){SetAutoAssignment(choice);return;}
+            if(kind=="assign_service"){AssignService(customerId,catId,seatId);return;}
             if(kind=="resolve_adoption"){ResolveAdoption(source,choice);return;}
             if(AdoptionWaiting && !kind.StartsWith("resolve_growth",StringComparison.Ordinal) && kind!="resolve_activity" && kind!="resolve_missing" && kind!="resolve_customer_trust" && kind!="resolve_dispatch_trouble" && kind!="resolve_dispatch_choice" && !(kind=="resolve_store_event" && choice!="close"))throw new InvalidOperationException("譲渡の申し出に回答してください。");
             if(kind=="configure_adoption"){ConfigureAdoption(choice);return;}
@@ -222,7 +224,8 @@ namespace CatCafePreview.Standalone
         {
             var s = State;
             // Assignment precedes arrival, matching CafeInteractionSession.automatic_step.
-            while(s.queue.Count>0)
+            if(AssignmentWaiting)throw new InvalidOperationException("待機中の客に担当猫と席を割り当てるか、自動割り当てをONにしてください。");
+            while(s.auto_assignment && s.queue.Count>0)
             {
                 int[] free=Enumerable.Range(0,s.seat_count).Where(i=>!DisabledSeat(i) && !s.exchanges.Any(e=>e.seat==i)).ToArray();if(free.Length==0)break;
                 int seat=PreferredSeat(s.queue[0],free);
@@ -230,12 +233,7 @@ namespace CatCafePreview.Standalone
                 var cat = s.cats.Where(c => c.working && c.health == "healthy" && c.activity == "cafe" && !c.cannot_continue && c.stamina > 0 && !s.exchanges.Any(e => e.cat_id == c.id))
                     .OrderByDescending(c => Matched(c, customer)).ThenByDescending(c => c.stamina).ThenBy(c => c.id, StringComparer.Ordinal).FirstOrDefault();
                 if (cat == null) break;
-                s.queue.RemoveAt(0); var visit = s.visits.Find(v => v.id == customer); visit.cat_id = cat.id; visit.seated_at = s.tick;
-                var relationship = s.relationships.Find(r => r.cat_id == cat.id && r.customer_id == customer);
-                var equipment=Installed(seat);
-                s.exchanges.Add(new CafeExchange { service_group=s.goal.Count>0?ServiceGroup(customer):"", equipment_group=equipment?.group??"",equipment_engagement=equipment?.engagement??1,equipment_tension=equipment?.tension??1, seat = seat, customer_id = customer, cat_id = cat.id, stamina = cat.stamina, remaining = Math.Min(Rules.exchange.ticks, Rules.opening_ticks - s.tick), affinity_start = relationship?.affinity ?? 0, growth_groups = LearnedGroups(GrowthCat(cat.id)), growth_types = LearnedTypes(GrowthCat(cat.id)), tension_multiplier = Matched(cat, customer) ? Rules.tension_multiplier : 1 });
-                RecordGrowth(new CafeGrowthOperation { kind = "start", cat_id = cat.id, customer_id = customer, day = s.day, tick = s.tick });
-                foreach (string kind in GrowthPracticeChoices(GrowthCat(cat.id))) RecordGrowth(new CafeGrowthOperation { kind = kind, cat_id = cat.id, day = s.day, tick = s.tick });
+                StartService(customer,cat,seat);
             }
             s.exchanges.Sort((a, b) => a.seat.CompareTo(b.seat));
             foreach (var arrival in CustomerSchedule(s.day).Where(a => a.tick == s.tick)) Arrive(arrival.customer_id);

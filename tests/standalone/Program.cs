@@ -63,7 +63,7 @@ static class Program
                         foreach(var row in restBounds.EnumerateArray()){dispatch.State.funds=row.GetProperty("funds").GetDouble();Assert((dispatch.RestSpaceReason(op.GetProperty("kind").GetString())=="")==row.GetProperty("can_execute").GetBoolean(),"Python rest space funding boundary differs");}
                         dispatch.State.funds=funds;
                     }
-                    try{dispatch.Execute(op.GetProperty("kind").GetString(),working:Decode<string[]>(op.GetProperty("working").GetRawText()),choice:op.GetProperty("choice").GetString(),source:op.GetProperty("source").GetString(),catId:op.GetProperty("cat_id").GetString(),seatId:op.TryGetProperty("seat_id",out var seatId)?seatId.GetString():null);}catch(InvalidOperationException ex){rejected=true;error=ex.Message;}catch(ArgumentException ex){rejected=true;error=ex.Message;}
+                    try{dispatch.Execute(op.GetProperty("kind").GetString(),working:Decode<string[]>(op.GetProperty("working").GetRawText()),choice:op.GetProperty("choice").GetString(),source:op.GetProperty("source").GetString(),catId:op.GetProperty("cat_id").GetString(),seatId:op.TryGetProperty("seat_id",out var seatId)?seatId.GetString():null,customerId:op.TryGetProperty("customer_id",out var customerId)?customerId.GetString():null);}catch(InvalidOperationException ex){rejected=true;error=ex.Message;}catch(ArgumentException ex){rejected=true;error=ex.Message;}
                     Assert(rejected==op.GetProperty("rejected").GetBoolean(),"Python dispatch rejection mismatch ("+fixture.GetProperty("variant")+"): "+op.GetProperty("kind")+" day "+dispatch.State.day+" / "+error);
                     if(rejected)Assert(beforeSeats==Encode(dispatch.State),"Rejected dispatch operation changed state");
                     if(op.TryGetProperty("admission_boundaries",out var admissions))
@@ -73,12 +73,18 @@ static class Program
                         dispatch.State.funds=funds;
                     }
                     if(op.TryGetProperty("recruitment_candidates",out var recruits)){using var candidates=JsonDocument.Parse(Encode(dispatch.RecruitmentCandidates(dispatch.State)));Equal(recruits,candidates.RootElement,"recruitment candidates");}
+                    if(op.TryGetProperty("assignment_projection",out var assignment))
+                    {
+                        Assert(dispatch.AssignmentWaiting==assignment.GetProperty("waiting").GetBoolean() && (dispatch.AssignmentReason()=="")==assignment.GetProperty("can_assign").GetBoolean(),"Python assignment waiting/availability differs");
+                        using var cats=JsonDocument.Parse(Encode(dispatch.AssignmentCats.Select(c=>c.id).ToArray()));Equal(assignment.GetProperty("available_cats"),cats.RootElement,"available assignment cats");
+                        using var seats=JsonDocument.Parse(Encode(dispatch.AssignmentFreeSeats.Select(i=>"seat-"+(i+1)).ToArray()));Equal(assignment.GetProperty("free_seats"),seats.RootElement,"free assignment seats");
+                    }
                     if(op.TryGetProperty("waiting_limits",out var waitingLimits))
                     {
                         Assert(dispatch.QueueCapacity==waitingLimits.GetProperty("capacity").GetInt32() && dispatch.MaxWaitTicks==waitingLimits.GetProperty("wait").GetInt32(),"Python waiting capacity/deadline differs");
                         Assert(dispatch.WaitingAreaDailyCost(dispatch.State,dispatch.State.day)==waitingLimits.GetProperty("daily").GetDouble() && Math.Abs(dispatch.OperatingCostEstimate-waitingLimits.GetProperty("operating").GetDouble())<1e-8,"Python facility/operating estimate differs");
                     }
-                    using var current=JsonDocument.Parse(Encode(dispatch.State));Equal(op.GetProperty("expected"),current.RootElement,"dispatch boundary");dispatch.Restore(Decode<CafeSnapshot>(Encode(dispatch.State)));ticks++;
+                    using var current=JsonDocument.Parse(Encode(dispatch.State));Equal(op.GetProperty("expected"),current.RootElement,"dispatch boundary ("+fixture.GetProperty("variant").GetString()+" day "+dispatch.State.day+" tick "+dispatch.State.tick+")");dispatch.Restore(Decode<CafeSnapshot>(Encode(dispatch.State)));ticks++;
                 }
                 if(dispatch.State.adoption!=null && dispatch.State.adoption.events.Count>0)
                 {
@@ -211,7 +217,7 @@ static class Program
                 foreach(var op in fixture.GetProperty("operations").EnumerateArray())
                 {
                     string beforeSeats=Encode(seats.State);bool rejected=false;
-                    try{seats.Execute(op.GetProperty("kind").GetString(),working:Decode<string[]>(op.GetProperty("working").GetRawText()),choice:op.GetProperty("choice").GetString(),source:op.GetProperty("source").GetString(),catId:op.GetProperty("cat_id").GetString(),seatId:op.TryGetProperty("seat_id",out var seatId)?seatId.GetString():null);}catch(InvalidOperationException){rejected=true;}catch(ArgumentException){rejected=true;}
+                    try{seats.Execute(op.GetProperty("kind").GetString(),working:Decode<string[]>(op.GetProperty("working").GetRawText()),choice:op.GetProperty("choice").GetString(),source:op.GetProperty("source").GetString(),catId:op.GetProperty("cat_id").GetString(),seatId:op.TryGetProperty("seat_id",out var seatId)?seatId.GetString():null,customerId:op.TryGetProperty("customer_id",out var customerId)?customerId.GetString():null);}catch(InvalidOperationException){rejected=true;}catch(ArgumentException){rejected=true;}
                     Assert(rejected==op.GetProperty("rejected").GetBoolean(),"Python expansion rejection mismatch: "+op.GetProperty("kind")+" day "+seats.State.day);
                     if(rejected)Assert(beforeSeats==Encode(seats.State),"Rejected seat operation changed state");
                     using var current=JsonDocument.Parse(Encode(seats.State));Equal(op.GetProperty("expected"),current.RootElement,"expansion boundary");seats.Restore(Decode<CafeSnapshot>(Encode(seats.State)));ticks++;
@@ -239,7 +245,7 @@ static class Program
                 foreach(var op in fixture.GetProperty("operations").EnumerateArray())
                 {
                     string itemBefore=Encode(items.State);bool rejected=false;
-                    try{items.Execute(op.GetProperty("kind").GetString(),choice:op.GetProperty("choice").GetString(),source:op.GetProperty("source").GetString(),catId:op.GetProperty("cat_id").GetString(),seatId:op.TryGetProperty("seat_id",out var seatId)?seatId.GetString():null);}catch(InvalidOperationException){rejected=true;}catch(ArgumentException){rejected=true;}
+                    try{items.Execute(op.GetProperty("kind").GetString(),choice:op.GetProperty("choice").GetString(),source:op.GetProperty("source").GetString(),catId:op.GetProperty("cat_id").GetString(),seatId:op.TryGetProperty("seat_id",out var seatId)?seatId.GetString():null,customerId:op.TryGetProperty("customer_id",out var customerId)?customerId.GetString():null);}catch(InvalidOperationException){rejected=true;}catch(ArgumentException){rejected=true;}
                     Assert(rejected==op.GetProperty("rejected").GetBoolean(),"Python item rejection mismatch: "+op.GetProperty("kind"));if(rejected)Assert(itemBefore==Encode(items.State),"Rejected item changed state");
                     using var current=JsonDocument.Parse(Encode(items.State));Equal(op.GetProperty("expected"),current.RootElement,"item boundary");items.Restore(Decode<CafeSnapshot>(Encode(items.State)));ticks++;
                 }

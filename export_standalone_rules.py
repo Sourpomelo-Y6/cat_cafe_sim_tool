@@ -38,6 +38,7 @@ def exported_rules():
     for key in ('quiet_customer','play_customer','contact_customer'): result[key]=read('cafe_'+key)
     result['equipment']=read('cafe_seat_equipment')
     for key in ('rest_space','rest_space_upgrade','rest_space_soundproof'):result[key]=read('cafe_'+key)
+    result['service_assignment_version']=1
     result['waiting_area']=read('cafe_waiting_area')
     result['waiting_area_upgrade']=read('cafe_waiting_area_upgrade')
     result['growth'] = read('cafe_growth')

@@ -24,11 +24,12 @@ namespace CatCafePreview
             try { StandaloneCafeSmoke.Run(args[index + 1]); Application.Quit(0); }
             catch (Exception ex) { Debug.LogException(ex); Application.Quit(1); }
         }
-        private IEnumerator Send(string kind, string[] working = null, int slot = 1, string catId = "", string choice = "free", string eventId = "", string seatId = "", string targetType = "")
+        private string assignmentCustomer,assignmentCat,assignmentSeat,assignmentInstance;
+        private IEnumerator Send(string kind, string[] working = null, int slot = 1, string catId = "", string choice = "free", string eventId = "", string seatId = "", string targetType = "",string customerId="")
         {
             if (busy) yield break;
             busy = true;
-            var cmd = new PythonShiftCommand { request_id = Guid.NewGuid().ToString("N"), instance_id = state.instance_id, expected_revision = state.revision, kind = kind, choice = choice, working_cats = working ?? new string[0], save_id = slot.ToString(), save_slot = slot, cat_id = catId, event_id = eventId, seat_id=seatId,target_type=targetType };
+            var cmd = new PythonShiftCommand { request_id = Guid.NewGuid().ToString("N"), instance_id = state.instance_id, expected_revision = state.revision, kind = kind, choice = choice, working_cats = working ?? new string[0], save_id = slot.ToString(), save_slot = slot, cat_id = catId, event_id = eventId, seat_id=seatId,target_type=targetType,customer_id=customerId };
             yield return backend.Request("/commands", JsonUtility.ToJson(cmd), reply =>
             {
                 var result = JsonUtility.FromJson<PythonCommandReply>(reply.text);
@@ -182,6 +183,25 @@ namespace CatCafePreview
                     GUI.enabled=!busy && goal.can_continue;if(GUILayout.Button("目標結果を確認して営業継続"))StartCoroutine(Send(state.objective=="bond"?"continue_bond_goal":state.objective=="patron"?"continue_patron":"continue_goal"));
                     var next=state.next_goal;if(next!=null){GUI.enabled=!busy && next.can_advance;if(GUILayout.Button("次の人気目標へ（目標 "+next.target+"）"))StartCoroutine(Send("advance_goal"));}
                 }
+                var assignment=state.service_assignment;
+                if(assignmentInstance!=state.instance_id){assignmentCustomer=assignmentCat=assignmentSeat=null;assignmentInstance=state.instance_id;}
+                if(!assignment.customers.Any(r=>r.customer_id==assignmentCustomer))assignmentCustomer=null;
+                if(!assignment.cats.Any(r=>r.cat_id==assignmentCat && r.available))assignmentCat=null;
+                if(!assignment.seats.Any(r=>r.seat_id==assignmentSeat && r.available))assignmentSeat=null;
+                GUILayout.Label("接客の割り当て / "+assignment.reason+"\n"+assignment.notes);
+                GUI.enabled=!busy && state.game_over==null;
+                if(GUILayout.Button("自動割り当て："+(assignment.auto_assign?"ON":"OFF")))StartCoroutine(Send("set_auto_assignment",choice:assignment.auto_assign?"manual":"automatic"));
+                if(!assignment.auto_assign)
+                {
+                    foreach(var row in assignment.customers){GUI.enabled=!busy;if(GUILayout.Button((assignmentCustomer==row.customer_id?"選択中 ":"")+row.name+" / "+row.details))assignmentCustomer=row.customer_id;}
+                    foreach(var row in assignment.cats){GUI.enabled=!busy && row.available;if(GUILayout.Button((assignmentCat==row.cat_id?"選択中 ":"")+row.name+" / "+row.details+" / "+row.reason))assignmentCat=row.cat_id;}
+                    foreach(var row in assignment.seats){GUI.enabled=!busy && row.available;if(GUILayout.Button((assignmentSeat==row.seat_id?"選択中 ":"")+row.label+" / "+row.details+" / "+row.reason))assignmentSeat=row.seat_id;}
+                    var customer=assignment.customers.FirstOrDefault(r=>r.customer_id==assignmentCustomer);
+                    if(customer!=null)foreach(var match in customer.matches)GUILayout.Label(match.cat_id+" / "+match.details);
+                    GUI.enabled=!busy && assignment.can_assign && assignmentCustomer!=null && assignmentCat!=null && assignmentSeat!=null;
+                    if(GUILayout.Button("選んだ客・猫・席で接客を開始"))StartCoroutine(Send("assign_service",customerId:assignmentCustomer,catId:assignmentCat,seatId:assignmentSeat));
+                }
+                GUI.enabled=true;
                 var waiting=state.waiting_area;
                 GUILayout.Label("待合スペース："+waiting.status+" / 待機上限 "+waiting.capacity+"人 / 猶予 "+waiting.max_wait_ticks+"tick / 維持費 "+waiting.daily_cost+" / 運営費合計 "+waiting.operating_cost+"\n"+waiting.details+"\n"+waiting.notes);
                 foreach(var action in waiting.actions)
@@ -336,6 +356,7 @@ namespace CatCafePreview
                     GUI.enabled=!busy && cat.can_player_start;if(GUILayout.Button(cat.name+"と交流する"))StartCoroutine(Send("player_begin",catId:cat.cat_id));
                 }
                 GUI.enabled = !busy && !state.adoption.events.Any(e=>e.status=="waiting") && !(state.player_interaction?.active??false) && !(state.bond_goal?.pending??false) && !state.patron_dispatch.events.Any(e=>e.needs_response) && !(state.patron_goal?.pending??false) && !state.general_dispatch.events.Any(e=>e.needs_response) && !state.dispatch_troubles.Any(e=>e.status=="waiting") && !state.dispatch_choices.Any(e=>e.status=="waiting") && (state.reservation==null || state.reservation.status!="waiting") && state.game_over == null && !state.customer_trust.events.Any(e => e.status == "waiting") && state.growth_choices.Length == 0 && !(state.goal_result != null && state.goal_result.pending) && state.store_event == null && state.intake_request.status != "waiting" && state.regular_introduction.status != "waiting" && !state.dispatch_introductions.Any(e=>e.status=="waiting");
+                GUI.enabled=GUI.enabled && !state.service_assignment.waiting;
                 if (!state.can_set_shifts || state.cats.Any(c => c.working) || state.reservation!=null && state.reservation.status=="accepted" && state.reservation.visit_day==state.day)
                     if (GUILayout.Button(state.closed ? "翌日へ" : state.can_set_shifts ? "営業開始" : "営業を1tick進める")) StartCoroutine(Send(state.closed ? "next_day" : state.can_set_shifts ? "start_business" : "advance_business"));
                 GUI.enabled=GUI.enabled && !(state.reservation!=null && state.reservation.status=="accepted" && state.reservation.visit_day==state.day);

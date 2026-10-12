@@ -9,6 +9,7 @@ namespace CatCafePreview.Standalone
         public int version = 1, opening_ticks, queue_capacity, max_wait_ticks, start_weekday;
         public int popular_customer_count, second_popular_customer_count;
         public double adoption_threshold;
+        public int service_assignment_version;
         public WaitingAreaRules waiting_area,waiting_area_upgrade;
         public RestSpaceRules rest_space,rest_space_upgrade,rest_space_soundproof;
         public double max_stamina, time_price, starting_funds, starting_popularity;
@@ -136,6 +137,7 @@ namespace CatCafePreview.Standalone
     {
         public int version = 2, seed, day = 1, tick, revision;
         public string rules_id, instance_id, phase = "preparation", game_over;
+        public bool auto_assignment=true;
         public double funds, opening_funds, popularity, revenue, expenses;
         public int completed;
         public int seat_count = 2;
