@@ -11,7 +11,8 @@ namespace CatCafePreview
         private LocalCafeBackend backend;
         private PythonCafeState state;
         private bool title = true, busy;
-        private bool showCustomers,showClearResults;
+        private bool showCustomers,showClearResults,showBusinessLog;
+        private PythonBusinessLogView businessLog;private string logPath="";private int logOffset,logIndex;
         private string adoptionConfirmation,adoptionConfirmationIdentity;
         private string notice = "Pythonサーバー不要の第1段階です。自由営業の基本ルールを確認できます。";
         private Vector2 scroll;
@@ -25,7 +26,7 @@ namespace CatCafePreview
             catch (Exception ex) { Debug.LogException(ex); Application.Quit(1); }
         }
         private string autoObjective="popularity",autoMode="basic";private int autoDays=3;private float nextAutoStep;
-        private void Update(){if(!title && !busy && state?.autoplay?.running==true && !state.autoplay.paused && Time.unscaledTime>=nextAutoStep){nextAutoStep=Time.unscaledTime+.05f;StartCoroutine(Send("step_autoplay"));}}
+        private void Update(){if(!title && !showBusinessLog && !busy && state?.autoplay?.running==true && !state.autoplay.paused && Time.unscaledTime>=nextAutoStep){nextAutoStep=Time.unscaledTime+.05f;StartCoroutine(Send("step_autoplay"));}}
         private string assignmentCustomer,assignmentCat,assignmentSeat,assignmentInstance;
         private IEnumerator Send(string kind, string[] working = null, int slot = 1, string catId = "", string choice = "free", string eventId = "", string seatId = "", string targetType = "",string customerId="")
         {
@@ -39,6 +40,21 @@ namespace CatCafePreview
                 if (string.IsNullOrEmpty(result.error) && (kind == "new_game" || kind == "load_game")) {title = false;showClearResults=false;scroll=Vector2.zero;}
             });
             busy = false;
+        }
+        private IEnumerator FetchBusinessLog(string route,bool export=false)
+        {
+            if(busy)yield break;busy=true;
+            yield return backend.Request(route,null,reply=>{try{var view=JsonUtility.FromJson<PythonBusinessLogView>(reply.text);if(reply.result!=UnityEngine.Networking.UnityWebRequest.Result.Success)throw new Exception(view.error??reply.error);if(export){logPath=PythonBusinessLogPanel.WriteExport(view.log_json,null);notice="営業ログを出力しました："+logPath;}else{businessLog=view;logOffset=view.offset;logIndex=0;notice=view.notes;}}catch(Exception ex){businessLog=null;notice=ex.Message;}});busy=false;
+        }
+        private void DrawBusinessLog()
+        {
+            GUILayout.Label("営業ログ・詳細リプレイ");GUILayout.Label("ファイルの再生は独立した状態で検証します。現在の営業は変更しません。");
+            if(GUILayout.Button("現在のログ"))StartCoroutine(FetchBusinessLog("/business-log?offset="+int.MaxValue));
+            if(GUILayout.Button("現在のログを別ファイルへ出力"))StartCoroutine(FetchBusinessLog("/business-log/export",true));
+            GUILayout.Label("確認する営業ログJSONの絶対パス");logPath=GUILayout.TextField(logPath);
+            if(GUILayout.Button("ファイルを再生して確認"))StartCoroutine(FetchBusinessLog("/business-log?path="+Uri.EscapeDataString(logPath)+"&offset=0"));
+            if(businessLog!=null){GUILayout.Label(businessLog.summary+"\n"+businessLog.notes);string path=businessLog.source=="現在の営業"?"":businessLog.source;GUILayout.BeginHorizontal();GUI.enabled=!busy && logOffset>0;if(GUILayout.Button("前の20件"))StartCoroutine(FetchBusinessLog("/business-log?path="+Uri.EscapeDataString(path)+"&offset="+Math.Max(0,logOffset-20)));GUI.enabled=!busy && logOffset+20<businessLog.total;if(GUILayout.Button("次の20件"))StartCoroutine(FetchBusinessLog("/business-log?path="+Uri.EscapeDataString(path)+"&offset="+(logOffset+20)));GUILayout.EndHorizontal();GUI.enabled=!busy;for(int i=0;i<businessLog.rows.Length;i++)if(GUILayout.Button(businessLog.rows[i].label))logIndex=i;if(businessLog.rows.Length>0)GUILayout.Label(businessLog.rows[Math.Min(logIndex,businessLog.rows.Length-1)].details);}
+            GUI.enabled=!busy;if(GUILayout.Button("営業画面へ戻る")){showBusinessLog=false;businessLog=null;}
         }
         private void DrawAutoplay()
         {
@@ -56,6 +72,8 @@ namespace CatCafePreview
             scroll = GUILayout.BeginScrollView(scroll);
             GUILayout.Label("猫カフェ — Unity単独版・第1段階");
             GUILayout.Label(notice); GUI.enabled = !busy;
+            if(showBusinessLog){DrawBusinessLog();GUI.enabled=true;GUILayout.EndScrollView();GUILayout.EndArea();return;}
+            if(GUILayout.Button("営業ログを確認")){showBusinessLog=true;StartCoroutine(FetchBusinessLog("/business-log?offset="+int.MaxValue));}
             if (title)
             {
                 GUILayout.Label("自由営業・段階人気目標 / 初期猫5匹 / 2席。白猫のこだわり客・特別予約に対応。静かな交流・遊び・触れ合い客と接客設備に対応。長毛専門客・VIPにも対応。人気のクリア記録・結果表示・継続営業に対応。通常派遣と途中の二択イベントに対応。通常派遣9種類と有力者3人への派遣・満足度目標に対応。個別交流と猫6匹の好感度目標にも対応。\n新規開始は単独版スロット1へ初期状態を保存します。");

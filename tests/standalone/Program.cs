@@ -174,6 +174,7 @@ static partial class Program
     static void Main(string[] args)
     {
         int ticks = 0, scenarios = 0;
+        if(args[0]=="--replay-only"){ReplayCases(args.Skip(1).ToArray());return;}
         if(args[0]=="--autoplay-only"){AutoplayCases(args[1]);return;}
         if(args[0]=="--dispatch-only"){DispatchCases(args[1],ref scenarios,ref ticks);Console.WriteLine($"PASS: {scenarios} dispatch scenarios, {ticks} boundaries, {assertions} assertions.");return;}
         var rules = Decode<CafeRules>(File.ReadAllText(args[0]));

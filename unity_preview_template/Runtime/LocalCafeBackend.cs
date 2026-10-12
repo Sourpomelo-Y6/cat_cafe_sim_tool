@@ -13,6 +13,7 @@ namespace CatCafePreview
     {
         public readonly CafeSimulation Simulation;
         private readonly CafeSaveStore saves;
+        public CafeReplayJournal Journal {get;private set;}
         // Cache the response AND payload: one ID must never name different commands.
         private readonly Dictionary<string, KeyValuePair<string, CafeResponse>> replies = new Dictionary<string, KeyValuePair<string, CafeResponse>>();
         public LocalCafeBackend(string saveDirectory = null, CafeRules rules = null)
@@ -24,6 +25,7 @@ namespace CatCafePreview
                 rules = JsonUtility.FromJson<CafeRules>(asset.text);
             }
             Simulation = new CafeSimulation(rules);
+            ResetJournal();
             saves = new CafeSaveStore(saveDirectory ?? Path.Combine(Application.persistentDataPath, "standalone-v1"), EncodeSave, DecodeSave, Simulation.Validate);
         }
         private static string EncodeSave(CafeSaveEnvelope save) { save.double_bits = CafeDoublePrecision.Capture(save.state); return JsonUtility.ToJson(save, true); }
@@ -38,7 +40,7 @@ namespace CatCafePreview
                     case "/state": response = Success(JsonUtility.ToJson(View())); break;
                     case "/saves": response = Success(JsonUtility.ToJson(ListSaves())); break;
                     case "/commands": response = Command(commandJson); break;
-                    default: throw new NotSupportedException("単独版の第1段階では未対応です。");
+                    default: if(route.StartsWith("/business-log",StringComparison.Ordinal)){response=Success(JsonUtility.ToJson(BusinessLog(route)));break;}throw new NotSupportedException("単独版の第1段階では未対応です。");
                 }
             }
             catch (Exception ex) { response = Failure(ex.Message); }
@@ -55,10 +57,11 @@ namespace CatCafePreview
                 var s = Simulation.State;
                 if (cmd.instance_id != s.instance_id || cmd.expected_revision != s.revision) throw new InvalidOperationException("状態が更新されています。最新状態で再操作してください。");
                 if(s.autoplay?.running==true && !new[]{"step_autoplay","stop_autoplay","pause_autoplay","resume_autoplay","save_game","load_game"}.Contains(cmd.kind))throw new InvalidOperationException("おまかせを中止してから通常操作へ戻ってください。");
+                var replayBefore=Journal.CaptureBefore(s);Simulation.ReplayActions.Clear();CafeAutoOperation replayAutomatic=null;
                 switch (cmd.kind)
                 {
                     case "start_autoplay": Simulation.StartAutoplay(cmd.autoplay_objective,cmd.autoplay_mode,cmd.autoplay_days);break;
-                    case "step_autoplay": Simulation.StepAutoplay();break;
+                    case "step_autoplay": replayAutomatic=Simulation.StepAutoplay();break;
                     case "stop_autoplay": Simulation.CancelAutoplay();break;
                     case "pause_autoplay": Simulation.PauseAutoplay();break;
                     case "resume_autoplay": Simulation.ResumeAutoplay();break;
@@ -120,6 +123,7 @@ namespace CatCafePreview
                         Simulation.Execute(cmd.kind, choice: cmd.choice); break;
                     default: Simulation.Execute(cmd.kind, cmd.working_cats, cmd.cat_id, cmd.choice, cmd.choice,cmd.seat_id); break;
                 }
+                if(cmd.kind=="new_game" || cmd.kind=="load_game")ResetJournal();else Journal.Append(replayBefore,Simulation,ReplayOperation(cmd),replayAutomatic);
                 response = Success(JsonUtility.ToJson(new PythonCommandReply { state = View() }));
             }
             catch (Exception ex) { response = Failure(ex.Message); }
