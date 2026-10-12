@@ -28,12 +28,13 @@ namespace CatCafePreview.Standalone
             Validate(value);
             foreach (var e in value.store_events) e.draw = StoreDraw(value.seed, e.day, "occur");
             State = value;
+            if(State.autoplay?.running==true)State.autoplay.paused=true;
             // A load starts a new command epoch. Old queued buttons cannot mutate it.
             State.instance_id = Guid.NewGuid().ToString("N"); State.revision = 0;
         }
         public void Validate(CafeSnapshot s)
         {
-            if (s == null || s.version != 2 || Rules.service_assignment_version!=1 || s.rules_id != Rules.rules_id || s.seed < 0 || s.day < 1 || s.tick < 0 || s.tick > Rules.opening_ticks
+            if (s == null || s.version != 2 || Rules.service_assignment_version!=1 || Rules.autoplay_version!=1 || s.rules_id != Rules.rules_id || s.seed < 0 || s.day < 1 || s.tick < 0 || s.tick > Rules.opening_ticks
                 || !new[] { "preparation", "open", "closed" }.Contains(s.phase)
                 || s.cats == null || s.cats.Count != Rules.cats.Length + (s.intake_request != null && s.intake_request.status == "accepted" ? 1 : 0) + (s.regular_introduction != null && s.regular_introduction.status == "accepted" ? 1 : 0) + DispatchJoinedCount(s,s.day) + VisitingJoinedCount(s,s.day) + ShopJoinedCount(s,s.day) + RecruitmentJoinedCount(s,s.day) || s.visits == null || s.exchanges == null || s.queue == null || s.relationships == null || s.history == null
                 || s.cats.Select(c => c.id).Distinct().Count() != s.cats.Count || s.revision < 0
@@ -41,6 +42,7 @@ namespace CatCafePreview.Standalone
                 || s.revenue < 0 || s.expenses < 0 || Math.Abs(s.funds - (s.opening_funds + s.revenue + s.item_sales_income + s.dispatch_income - s.expenses)) > 1e-7
                 || s.history.Count != s.day - 1 || s.completed < 0
                 || !Range(s.popularity, 0, Rules.popularity.cap)) throw new ArgumentException("Invalid standalone save");
+            ValidateAutoplay(s);
             ValidateAdoption(s);
             ValidateRecruitment(s);
             ValidateShop(s);
@@ -203,7 +205,7 @@ namespace CatCafePreview.Standalone
         {
             var s = State;
             s.history.Add(new CafeDayResult { day = s.day, dispatch_trouble_expenses=s.dispatch_trouble_expenses, dispatch_income=s.dispatch_income, waiting_area_expenses=s.waiting_area_expenses, waiting_area_cost=s.waiting_area_cost, rest_space_expenses=s.rest_space_expenses, equipment_expenses=s.equipment_expenses, seat_count = s.seat_count, expansion_expenses = s.expansion_expenses, goal_popularity = s.goal_popularity, arrivals = s.visits.Count, completed = s.completed, opening_funds = s.opening_funds, revenue = s.revenue, expenses = s.expenses, closing_funds = s.funds, popularity_gain = s.popularity_gain, recruitment_expenses = s.recruitment_expenses, pet_shop_expenses = s.pet_shop_expenses, housing_expenses = s.housing_expenses, housing_cost = s.housing_cost, item_expenses = s.item_expenses, item_sales_income = s.item_sales_income, satisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "satisfied"), normal = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "normal"), dissatisfied = s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "dissatisfied") });
-            s.history[s.history.Count - 1].customer_records = s.visits.Select(v => new CafeCustomerRecord { customer_id = v.id, cat_id = v.cat_id, completed_tick=v.completed_tick, departure = v.departure, satisfaction = v.satisfaction?.level, connect_count=v.connect_count, open_up_count=v.open_up_count, simultaneous_count=v.simultaneous_count, specialist_result=v.specialist_result, specialist_bonus=v.specialist_bonus, service_count=v.service_count, service_seat=v.service_seat, service_equipment=v.service_equipment, type_actions = (int[])v.type_actions.Clone(), affinity_delta = v.affinity_delta, stamina_spent = v.stamina_spent }).ToList();
+            s.history[s.history.Count - 1].customer_records = s.visits.Select(v => new CafeCustomerRecord { customer_id = v.id, cat_id = v.cat_id, service_ticks=v.seated_ticks, completed_tick=v.completed_tick, departure = v.departure, satisfaction = v.satisfaction?.level, connect_count=v.connect_count, open_up_count=v.open_up_count, simultaneous_count=v.simultaneous_count, specialist_result=v.specialist_result, specialist_bonus=v.specialist_bonus, service_count=v.service_count, service_seat=v.service_seat, service_equipment=v.service_equipment, type_actions = (int[])v.type_actions.Clone(), affinity_delta = v.affinity_delta, stamina_spent = v.stamina_spent }).ToList();
             s.history[s.history.Count - 1].resting_cats = s.resting_cats.ToList(); s.resting_cats.Clear();
             foreach(var player in s.player_cats)player.today=0;
             s.day++; s.tick = 0; s.phase = "preparation"; s.opening_funds = s.funds; s.revenue = s.expenses = 0; s.completed = 0; s.recruitment_expenses = s.pet_shop_expenses = 0; s.waiting_area_expenses=s.waiting_area_cost=0; s.equipment_expenses=s.rest_space_expenses=0; s.housing_expenses = s.housing_cost = s.item_expenses = s.item_sales_income = s.expansion_expenses = s.goal_popularity = 0;

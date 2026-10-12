@@ -7,7 +7,7 @@ namespace CatCafePreview
     [Serializable] public class PythonAutoPlayOption {public string choice,label,status;public bool can_start;}
     [Serializable] public class PythonAutoPlayDecision {public int day;public string target,choice,reason,subject,status;}
     [Serializable] public class PythonAutoPlayReport {public int version,limit,days,operations;public string run_id,objective,mode,reason,message,summary;public bool running;public string[] lines;public PythonAutoPlayDecision[] decisions;}
-    [Serializable] public class PythonAutoPlay {public bool running,can_start;public string reason,notes;public PythonAutoPlayOption[] objectives,modes;public PythonAutoPlayReport report;}
+    [Serializable] public class PythonAutoPlay {public bool running,can_start,paused;public string reason,notes;public PythonAutoPlayOption[] objectives,modes;public PythonAutoPlayReport report;}
     public class PythonAutoPlayPanel : MonoBehaviour
     {
         public GameObject panel,confirmation,activity;public Button activityStop,activityDetails;public Text activityStatus;public Dropdown objectives,modes,days;public Text title,details,notice,confirmationText;public Button proceed,stop,save,close,confirm,cancel,previous,next;public Button[] tabs;

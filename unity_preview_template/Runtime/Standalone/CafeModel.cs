@@ -9,7 +9,7 @@ namespace CatCafePreview.Standalone
         public int version = 1, opening_ticks, queue_capacity, max_wait_ticks, start_weekday;
         public int popular_customer_count, second_popular_customer_count;
         public double adoption_threshold;
-        public int service_assignment_version;
+        public int service_assignment_version,autoplay_version;
         public WaitingAreaRules waiting_area,waiting_area_upgrade;
         public RestSpaceRules rest_space,rest_space_upgrade,rest_space_soundproof;
         public double max_stamina, time_price, starting_funds, starting_popularity;
@@ -66,7 +66,7 @@ namespace CatCafePreview.Standalone
     [Serializable] public class CafeTrustCustomer { public string customer_id, status, event_id, reason; public int departed_day; }
     [Serializable] public class CafeTrustEvent { public string id, customer_id, status, choice, outcome; public int day, suspensions, resolved_day; }
     [Serializable] public class CafeArrival { public string customer_id; public int tick; }
-    [Serializable] public class CafeCustomerRecord { public string customer_id, cat_id, departure, satisfaction; public int completed_tick; public int[] type_actions = new int[8]; public int connect_count, open_up_count, simultaneous_count; public string specialist_result; public double specialist_bonus; public bool service_equipment; public int service_count; public int service_seat=-1;
+    [Serializable] public class CafeCustomerRecord { public string customer_id, cat_id, departure, satisfaction; public int service_ticks; public int completed_tick; public int[] type_actions = new int[8]; public int connect_count, open_up_count, simultaneous_count; public string specialist_result; public double specialist_bonus; public bool service_equipment; public int service_count; public int service_seat=-1;
         public double affinity_delta, stamina_spent; }
     [Serializable] public class CafeSatisfaction
     {
@@ -138,6 +138,7 @@ namespace CatCafePreview.Standalone
         public int version = 2, seed, day = 1, tick, revision;
         public string rules_id, instance_id, phase = "preparation", game_over;
         public bool auto_assignment=true;
+        public CafeAutoRun autoplay;
         public double funds, opening_funds, popularity, revenue, expenses;
         public int completed;
         public int seat_count = 2;
@@ -185,6 +186,8 @@ namespace CatCafePreview.Standalone
         // Unity JsonUtility materializes JSON null strings as empty strings.
         public void NormalizeJsonStrings()
         {
+            if(autoplay!=null && string.IsNullOrEmpty(autoplay.run_id))autoplay=null;
+            if(autoplay!=null){if(autoplay.reason==null)autoplay.reason="";if(autoplay.message==null)autoplay.message="";}
             if(dispatches!=null)foreach(var e in dispatches)if(e.encounter!=null && string.IsNullOrEmpty(e.encounter.id) && string.IsNullOrEmpty(e.encounter.choice) && (string.IsNullOrEmpty(e.encounter.status) || e.encounter.status=="scheduled") && e.encounter.occurred_day==0 && e.encounter.resolved_day==0 && e.encounter.fatigue_before==0 && e.encounter.fatigue_after==0 && e.encounter.stress_before==0 && e.encounter.stress_after==0)e.encounter=null;
             if(dispatches!=null)foreach(var e in dispatches)if(e.encounter!=null && e.encounter.choice=="")e.encounter.choice=null;
             if(dispatches!=null)foreach(var e in dispatches)if(e.introduction!=null && string.IsNullOrEmpty(e.introduction.cat_id) && string.IsNullOrEmpty(e.introduction.name) && (string.IsNullOrEmpty(e.introduction.status) || e.introduction.status=="scheduled") && e.introduction.cost==0 && e.introduction.presented_day==0 && e.introduction.resolved_day==0)e.introduction=null;

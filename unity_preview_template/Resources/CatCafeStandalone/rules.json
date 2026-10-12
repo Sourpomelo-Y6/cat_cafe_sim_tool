@@ -535,6 +535,7 @@
     "stress_recovery_bonus": 10
   },
   "service_assignment_version": 1,
+  "autoplay_version": 1,
   "waiting_area": {
     "cost": 800,
     "queue_bonus": 1,
@@ -2042,5 +2043,5 @@
       }
     }
   ],
-  "rules_id": "21328fac1fea8845b7e72b029b99ed2905c7dd44fa771334e2cd02f7a122505b"
+  "rules_id": "6c3e11fb49b1e1e74b6de28feaac11ae867e47587899455e945e33e80d4ba964"
 }

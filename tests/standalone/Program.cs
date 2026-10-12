@@ -1,7 +1,7 @@
 using System.Text.Json;
 using CatCafePreview.Standalone;
 
-static class Program
+static partial class Program
 {
     static readonly JsonSerializerOptions Options = new() { IncludeFields = true };
     static string Encode<T>(T value) => JsonSerializer.Serialize(value, Options);
@@ -174,6 +174,7 @@ static class Program
     static void Main(string[] args)
     {
         int ticks = 0, scenarios = 0;
+        if(args[0]=="--autoplay-only"){AutoplayCases(args[1]);return;}
         if(args[0]=="--dispatch-only"){DispatchCases(args[1],ref scenarios,ref ticks);Console.WriteLine($"PASS: {scenarios} dispatch scenarios, {ticks} boundaries, {assertions} assertions.");return;}
         var rules = Decode<CafeRules>(File.ReadAllText(args[0]));
         using(var reference=JsonDocument.Parse(File.ReadAllText(args[1])))

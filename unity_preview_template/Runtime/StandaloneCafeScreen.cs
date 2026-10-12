@@ -24,12 +24,14 @@ namespace CatCafePreview
             try { StandaloneCafeSmoke.Run(args[index + 1]); Application.Quit(0); }
             catch (Exception ex) { Debug.LogException(ex); Application.Quit(1); }
         }
+        private string autoObjective="popularity",autoMode="basic";private int autoDays=3;private float nextAutoStep;
+        private void Update(){if(!title && !busy && state?.autoplay?.running==true && !state.autoplay.paused && Time.unscaledTime>=nextAutoStep){nextAutoStep=Time.unscaledTime+.05f;StartCoroutine(Send("step_autoplay"));}}
         private string assignmentCustomer,assignmentCat,assignmentSeat,assignmentInstance;
         private IEnumerator Send(string kind, string[] working = null, int slot = 1, string catId = "", string choice = "free", string eventId = "", string seatId = "", string targetType = "",string customerId="")
         {
             if (busy) yield break;
             busy = true;
-            var cmd = new PythonShiftCommand { request_id = Guid.NewGuid().ToString("N"), instance_id = state.instance_id, expected_revision = state.revision, kind = kind, choice = choice, working_cats = working ?? new string[0], save_id = slot.ToString(), save_slot = slot, cat_id = catId, event_id = eventId, seat_id=seatId,target_type=targetType,customer_id=customerId };
+            var cmd = new PythonShiftCommand { request_id = Guid.NewGuid().ToString("N"), instance_id = state.instance_id, expected_revision = state.revision, kind = kind, choice = choice, working_cats = working ?? new string[0], save_id = slot.ToString(), save_slot = slot, cat_id = catId, event_id = eventId, seat_id=seatId,target_type=targetType,customer_id=customerId,autoplay_objective=autoObjective,autoplay_mode=autoMode,autoplay_days=autoDays };
             yield return backend.Request("/commands", JsonUtility.ToJson(cmd), reply =>
             {
                 var result = JsonUtility.FromJson<PythonCommandReply>(reply.text);
@@ -37,6 +39,13 @@ namespace CatCafePreview
                 if (string.IsNullOrEmpty(result.error) && (kind == "new_game" || kind == "load_game")) {title = false;showClearResults=false;scroll=Vector2.zero;}
             });
             busy = false;
+        }
+        private void DrawAutoplay()
+        {
+            var view=state.autoplay;if(view==null)return;GUILayout.Label("複数日おまかせ\n"+view.notes);
+            if(view.running){GUILayout.Label(view.paused?"一時停止中":"実行中");if(GUILayout.Button(view.paused?"おまかせを再開":"一時停止"))StartCoroutine(Send(view.paused?"resume_autoplay":"pause_autoplay"));if(GUILayout.Button("中止して手動操作へ戻る"))StartCoroutine(Send("stop_autoplay"));}
+            else{foreach(var target in view.objectives){GUI.enabled=!busy && target.can_start;if(GUILayout.Toggle(autoObjective==target.choice,target.label))autoObjective=target.choice;}GUI.enabled=!busy;foreach(var mode in view.modes)if(GUILayout.Toggle(autoMode==mode.choice,mode.label))autoMode=mode.choice;GUILayout.BeginHorizontal();if(GUILayout.Button("日数 −"))autoDays=Math.Max(1,autoDays-1);GUILayout.Label(autoDays+"日");if(GUILayout.Button("日数 ＋"))autoDays=Math.Min(10,autoDays+1);GUILayout.EndHorizontal();GUI.enabled=!busy && view.can_start && view.objectives.Any(t=>t.choice==autoObjective && t.can_start);if(GUILayout.Button("おまかせ開始"))StartCoroutine(Send("start_autoplay"));GUI.enabled=!busy;GUILayout.Label(view.reason);}
+            if(view.report!=null){GUILayout.Label(view.report.days+"日 / "+view.report.operations+"操作 / "+view.report.reason+" / "+view.report.message+"\n"+view.report.summary);foreach(var row in view.report.decisions.Reverse().Take(12))GUILayout.Label(row.day+"日目 "+row.target+"："+row.choice+" / "+row.reason);}
         }
         private void OnGUI()
         {
@@ -65,6 +74,8 @@ namespace CatCafePreview
                 GUILayout.Label(state.day + "日目 / " + (state.closed ? "閉店" : state.can_set_shifts ? "営業準備" : "営業中") + " / 時刻 " + state.tick + "/" + state.opening_ticks);
                 GUILayout.Label("資金 " + state.funds + " / 売上 " + state.revenue + " / 支出 " + state.finance.total_expenses + " / 猫購入費 " + state.finance.pet_shop_expenses + " / 完了接客 " + state.completed_interactions + " / 待機 " + state.waiting_count);
                 GUILayout.Label("人気 " + state.popularity + " / 本日の人気上昇 " + state.popularity_gain + " / 満足 " + state.customer_satisfaction.satisfied + " / 普通 " + state.customer_satisfaction.normal + " / 不満 " + state.customer_satisfaction.dissatisfied);
+                DrawAutoplay();
+                if(state.autoplay?.running==true){GUI.enabled=!busy;for(int i=1;i<=3;i++)if(GUILayout.Button("保存・一時停止 "+i))StartCoroutine(Send("save_game",slot:i));GUI.enabled=true;GUILayout.EndScrollView();GUILayout.EndArea();return;}
                 if (state.game_over != null) GUILayout.Label("経営終了：" + state.game_over.reason);
                 var ending=state.ending;
                 if(ending!=null)

@@ -54,13 +54,22 @@ namespace CatCafePreview
             {
                 var s = Simulation.State;
                 if (cmd.instance_id != s.instance_id || cmd.expected_revision != s.revision) throw new InvalidOperationException("状態が更新されています。最新状態で再操作してください。");
+                if(s.autoplay?.running==true && !new[]{"step_autoplay","stop_autoplay","pause_autoplay","resume_autoplay","save_game","load_game"}.Contains(cmd.kind))throw new InvalidOperationException("おまかせを中止してから通常操作へ戻ってください。");
                 switch (cmd.kind)
                 {
+                    case "start_autoplay": Simulation.StartAutoplay(cmd.autoplay_objective,cmd.autoplay_mode,cmd.autoplay_days);break;
+                    case "step_autoplay": Simulation.StepAutoplay();break;
+                    case "stop_autoplay": Simulation.CancelAutoplay();break;
+                    case "pause_autoplay": Simulation.PauseAutoplay();break;
+                    case "resume_autoplay": Simulation.ResumeAutoplay();break;
                     case "new_game":
                         if (cmd.choice != "free" && cmd.choice != "popularity" && cmd.choice != "patron" && cmd.choice != "bond") throw new NotSupportedException("単独版は自由営業・人気・有力者・好感度目標に対応しています。");
                         var initial = new CafeSimulation(Simulation.Rules, s.seed, cmd.choice).State;
                         saves.Save(1, initial); Simulation.Restore(initial); break;
-                    case "save_game": saves.Save(cmd.save_slot == 0 ? 1 : cmd.save_slot, s); s.revision++; break;
+                    case "save_game":
+                        bool oldPause=s.autoplay?.paused??false;int oldRevision=s.revision;
+                        try{Simulation.PauseAutoplay();saves.Save(cmd.save_slot == 0 ? 1 : cmd.save_slot, s);s.revision++;}
+                        catch{if(s.autoplay!=null)s.autoplay.paused=oldPause;s.revision=oldRevision;throw;}break;
                     case "load_game":
                         if (!int.TryParse(cmd.save_id, out int slot)) throw new ArgumentException("保存スロットを選んでください。");
                         Simulation.Restore(saves.Load(slot).state); break;
@@ -141,7 +150,7 @@ namespace CatCafePreview
             var s = Simulation.State; var rules = Simulation.Rules;
             return new PythonCafeState
             {
-                version = 1, instance_id = s.instance_id, revision = s.revision, objective = s.objective, phase = s.phase, day = s.day, tick = s.tick,
+                autoplay=AutoplayView(), version = 1, instance_id = s.instance_id, revision = s.revision, objective = s.objective, phase = s.phase, day = s.day, tick = s.tick,
                 can_set_shifts = s.phase == "preparation", closed = s.phase == "closed", opening_ticks = rules.opening_ticks,
                 funds = (float)s.funds, revenue = (float)s.revenue, waiting_count = s.queue.Count, completed_interactions = s.completed,
                 popularity = (float)s.popularity, popularity_gain = (float)s.popularity_gain,

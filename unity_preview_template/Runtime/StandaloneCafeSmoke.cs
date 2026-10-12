@@ -75,6 +75,7 @@ namespace CatCafePreview
             foreach(bool trigger in new[]{false,true})foreach(string choice in new[]{"search","wait"})foreach(bool closed in new[]{false,true})checks+=StandaloneDispatchTroubleSmoke.Run(Path.Combine(directory,"lodging-"+trigger+"-"+choice+"-"+closed),trigger,choice,closed);
             foreach(bool closed in new[]{false,true})checks+=StandalonePatronSmoke.Run(Path.Combine(directory,"patron-"+closed),closed);
             checks+=StandalonePatronSmoke.Run(Path.Combine(directory,"patron-dispatch-specialist"),specialization:"dispatch");
+            checks+=StandaloneAutoplaySmoke.Run(Path.Combine(directory,"autoplay"));
             checks+=StandaloneServiceAssignmentSmoke.Run(Path.Combine(directory,"service-assignment"));
             checks+=StandaloneWaitingAreaSmoke.Run(Path.Combine(directory,"waiting-area"));
             checks+=StandaloneRestSpaceSmoke.Run(Path.Combine(directory,"rest-space"));
