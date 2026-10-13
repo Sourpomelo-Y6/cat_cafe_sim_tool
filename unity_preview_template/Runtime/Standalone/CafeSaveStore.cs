@@ -5,12 +5,14 @@ using System.Threading;
 
 namespace CatCafePreview.Standalone
 {
+    [Serializable] public class CafeDisplayReceipt {public int day;public string cat_id,net_stamina;}
     [Serializable] public class CafeSaveEnvelope
     {
         public int version = 1, slot;
         public string created_at;
         public CafeSnapshot state;
         public string[] double_bits;
+        public CafeDisplayReceipt[] display_receipts; // Optional UI facts; outside gameplay and replay digests.
     }
     public sealed class CafeSaveStore
     {

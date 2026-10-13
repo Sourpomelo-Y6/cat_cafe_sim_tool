@@ -215,3 +215,6 @@ Unity単独版に[旧Pythonセーブの変換・取り込み](../Docs/UnityStand
 
 
 [既存タイトル・営業・詳細画面をUnity単独経路へ統合](../Docs/UnityStandaloneScreenIntegration.md)しました。標準起動はPythonサーバーなしで動作し、シーン間で共通の状態を保持します。変換済み旧セーブの空きスロット取込、回答待ちの保存再開、おまかせの明示再開に対応します。比較用HTTP起動は `--catcafe-http`。詳細な表示情報と全目標の手動入力確認は後続です。
+
+
+[猫詳細・体調予測・客名](../Docs/UnityStandaloneCatDetails.md)を単独版へ追加しました。標準プロフィール・外見と記録された出来事・関係・日次実績を表示し、確認済みの体力消耗は任意の表示記録として保存再開後にも保持します。表示だけの定義は `python -X utf8 export_standalone_presentation.py` で更新します。ゲームルールは変更しません。保存にない過去の値は補いません。
