@@ -8,6 +8,9 @@ namespace CatCafePreview.Standalone
     public sealed partial class CafeSimulation
     {
         public readonly CafeRules Rules;
+        internal Action DailyStateObserved;
+        internal Action<string> DailyFatigueReset;
+        internal Action<bool> BeforeDailyClose; internal Action AfterDailyClose, BeginDailyRecord;
         public CafeSnapshot State { get; private set; }
         public CafeSimulation(CafeRules rules, int seed = 0, string objective = "free")
         {
@@ -109,7 +112,7 @@ namespace CatCafePreview.Standalone
         private static bool Range(double v, double min, double max) => Finite(v) && v >= min && v <= max;
         private static double Clamp(double v, double max) => Math.Max(0, Math.Min(max, v));
         public void Execute(string kind,string[] working=null,string catId=null,string choice=null,string source=null,string seatId=null,string customerId=null)
-        {TraceImported(new CafeReplayOperation {kind=kind,working=working,cat_id=catId,choice=choice,source=source,seat_id=seatId,customer_id=customerId},()=>{ExecuteCore(kind,working,catId,choice,source,seatId,customerId);UpdateDispatchUnlocks();});}
+        {TraceImported(new CafeReplayOperation {kind=kind,working=working,cat_id=catId,choice=choice,source=source,seat_id=seatId,customer_id=customerId},()=>{ExecuteCore(kind,working,catId,choice,source,seatId,customerId);UpdateDispatchUnlocks();});DailyStateObserved?.Invoke();}
         private void ExecuteCore(string kind, string[] working = null, string catId = null, string choice = null, string source = null, string seatId = null,string customerId=null)
         {
             var s = State;
@@ -187,7 +190,7 @@ namespace CatCafePreview.Standalone
                     if (StoreEventWaiting) { CurrentStoreEvent.status = "resolved"; CurrentStoreEvent.choice = "close"; }
                     var planned = s.cats.Where(c => c.working).Select(c => c.id).ToArray();
                     foreach (var c in s.cats) c.working = false;
-                    Close(); s.tick = Rules.opening_ticks;
+                    Close(true); s.tick = Rules.opening_ticks;
                     foreach (var c in s.cats) c.working = planned.Contains(c.id) && c.health == "healthy" && c.activity == "cafe";
                     if (s.game_over == null) AdvanceToNextDay();
                     s.revision++;
@@ -213,6 +216,7 @@ namespace CatCafePreview.Standalone
             s.visits.Clear(); s.queue.Clear(); s.exchanges.Clear(); s.popularity_gain = 0;s.dispatch_income=s.dispatch_trouble_expenses=0;
             foreach (var c in s.cats) { c.service_ticks = 0; if (c.activity == "cafe") { c.stamina = Rules.max_stamina; c.cannot_continue = c.health != "healthy"; } c.working &= c.health == "healthy" && c.activity == "cafe"; }
             foreach (var cat in State.cats) EnsureGrowthCat(cat.id);
+            BeginDailyRecord?.Invoke();
             PresentStoreEvent();
             PresentIntake();
             PresentRegularIntroduction();
@@ -355,9 +359,10 @@ namespace CatCafePreview.Standalone
             e.connect_pending = e.end_reason == null && e.tension >= c.forced_threshold;
             e.open_up_pending = e.end_reason == null && e.engagement >= c.forced_threshold;
         }
-        private void Close()
+        private void Close(bool dayOff=false)
         {
             var s = State;
+            BeforeDailyClose?.Invoke(dayOff);
             GrowthRestDay();
             double after = Math.Min(Rules.popularity.cap, s.popularity + s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "satisfied") * Rules.popularity.gain_per_success + CurrentStoreEvent.popularity + s.visits.Sum(v=>SpecialistPopularity(v.id,v.specialist_result)));
             s.popularity_gain = after - s.popularity; s.popularity = after;
@@ -387,6 +392,7 @@ namespace CatCafePreview.Standalone
             s.waiting_area_cost=WaitingAreaDailyCost(s,s.day);
             double expenses = s.waiting_area_cost + s.housing_cost + Rules.base_cost + Rules.per_seat_cost * s.seat_count + (CurrentStoreEvent.choice == "repair" ? Rules.store_events.trouble_cost : 0);
             s.expenses += expenses; s.funds -= expenses; s.phase = "closed"; CheckEnd(); s.goal_popularity = s.popularity; SettleGoal();
+            AfterDailyClose?.Invoke();
         }
         private void CheckEnd() { if (State.game_over == null) State.game_over = State.funds <= 0 ? "funds" : State.popularity <= 0 ? "popularity" : null; }
     }

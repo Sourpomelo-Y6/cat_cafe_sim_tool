@@ -76,6 +76,7 @@ namespace CatCafePreview.Standalone
         private string importBase;private int importDay;
         private int ImportedDay{get{if(S.import_history==null){importBase=null;importDay=0;return 0;}if(importBase!=S.import_history.base_json){importBase=S.import_history.base_json;importDay=CafeLegacyImport.DecodeBase(importBase).day;}return importDay;}}
         public Func<int,string,string> SavedNetStamina;
+        public Func<int,string,CafeDailyRecord> SavedDailyRecord;
         public string ClosedNetStamina(string id)
         {
             var cat=S.cats.Single(c=>c.id==id);return (S.import_history==null || S.day>ImportedDay) && S.phase=="closed" && cat.activity=="cafe" && !S.dispatches.Any(e=>e.cat_id==id && (e.occurred_day==S.day || e.resolved_day==S.day))?Number(sim.Rules.max_stamina-cat.stamina):null;
@@ -87,13 +88,14 @@ namespace CatCafePreview.Standalone
             var rows=new List<string>();foreach(var day in days)
             {
                 var operations=S.growth_operations.Where(o=>o.day==day.day && o.cat_id==id).ToArray();if(day.day<JoinedDay(id))continue;
+                var saved=SavedDailyRecord?.Invoke(day.day,id);if(saved!=null){rows.Add(saved.Text());continue;}
                 var services=operations.Where(o=>o.kind=="service").ToArray();bool exact=S.import_history==null || day.day>ImportedDay; // Imported compact receipts cannot prove all older per-cat totals.
                 string count=exact?services.Length.ToString():"記録なし";var legacy=day.ticks?.FirstOrDefault(r=>r.cat_id==id);string ticks=legacy!=null?legacy.ticks.ToString():day.records.Any(r=>r.service_count>1)?"記録なし":day.records.Where(r=>r.cat_id==id).Sum(r=>r.service_ticks).ToString();
                 var current=S.cats.Single(c=>c.id==id);bool currentClosed=day.day==S.day && S.phase=="closed";string spent=(currentClosed?ClosedNetStamina(id):null) ?? SavedNetStamina?.Invoke(day.day,id) ?? "記録なし";
                 string xp=exact?"接客＋"+Number(services.Length*sim.Rules.growth.service_xp)+"・休養＋"+Number(operations.Count(o=>o.kind=="rest")*sim.Rules.growth.rest_xp)+"・派遣＋"+Number(operations.Count(o=>o.kind=="dispatch")*sim.Rules.growth.dispatch_xp):"記録なし";
-                rows.Add("日目："+day.day+"\n営業区分："+(currentClosed || operations.Any(o=>o.kind=="start")?"営業":operations.Any(o=>o.kind=="rest" && o.tick==0)?"休業":"記録なし")+"\n予定："+(currentClosed?(current.activity=="cafe"?current.working?"出勤":"休養":current.activity=="dispatched"?"派遣中":current.activity=="adopted"?"譲渡済み":"家出中"):day.resting.Contains(id)?"休養":operations.Any(o=>o.kind=="start")?"出勤":"記録なし")+"\n接客件数："+count+"\n接客行動数："+ticks+"\n体力消耗："+spent+"\n疲労変化：記録なし\n体調変化：記録なし\n獲得経験："+xp+"\n親しみ増減合計："+(exact?Number(services.Sum(o=>o.affinity_delta)):"記録なし"));
+                rows.Add("日目："+day.day+"\n営業区分："+(operations.Any(o=>o.kind=="start")?"営業":operations.Any(o=>o.kind=="rest" && o.tick==0)?"休業":"記録なし")+"\n予定："+(currentClosed?(current.activity=="cafe"?current.working?"出勤":"休養":current.activity=="dispatched"?"派遣中":current.activity=="adopted"?"譲渡済み":"家出中"):day.resting.Contains(id)?"休養":operations.Any(o=>o.kind=="start")?"出勤":"記録なし")+"\n接客件数："+count+"\n接客行動数："+ticks+"\n体力消耗："+spent+"\n疲労変化：記録なし\n体調変化：記録なし\n獲得経験："+xp+"\n親しみ増減合計："+(exact?Number(services.Sum(o=>o.affinity_delta)):"記録なし"));
             }
-            return "閉店済みの日次実績です。個々の行動履歴ではありません。体力消耗は回復を差し引いた値です。\n保存に含まれない項目は補いません。体力消耗は確認できる当日閉店状態と保存済みの表示記録を使います。\n\n"+(rows.Count==0?"閉店済みの日次実績はありません。":string.Join("\n\n",rows));
+            return "閉店済みの日次実績です。個々の行動履歴ではありません。体力消耗は回復を差し引いた値です。\n保存済みの日次記録を優先します。開始値がない日や旧セーブの欠落項目は補いません。\n\n"+(rows.Count==0?"閉店済みの日次実績はありません。":string.Join("\n\n",rows));
         }
         private string ItemName(string source){var purchase=S.item_purchases.FirstOrDefault(p=>p.source==source);if(purchase!=null)return sim.Rules.item_shop.Single(r=>r.item.id==purchase.item_id).item.name;var dispatch=S.dispatches.FirstOrDefault(e=>e.id==source);return dispatch!=null?sim.DispatchDestination(dispatch.destination).item_reward.name:sim.Rules.store_events.supply.name;}
         public string Events(string id)

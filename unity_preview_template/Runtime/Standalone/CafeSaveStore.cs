@@ -12,6 +12,8 @@ namespace CatCafePreview.Standalone
         public string created_at;
         public CafeSnapshot state;
         public string[] double_bits;
+        public CafeDailyBaseline[] daily_baselines;
+        public CafeDailyRecord[] daily_records;
         public CafeDisplayReceipt[] display_receipts; // Optional UI facts; outside gameplay and replay digests.
     }
     public sealed class CafeSaveStore

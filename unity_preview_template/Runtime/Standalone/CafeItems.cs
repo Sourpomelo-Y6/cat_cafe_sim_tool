@@ -55,7 +55,7 @@ namespace CatCafePreview.Standalone
             string reason=ItemUseReason(source,id);if(reason!="")throw new ArgumentException(reason);var item=ItemInventory().Single(r=>r.source==source).item;var cat=State.cats.Single(c=>c.id==id);
             var use=new CafeSupplyUse {source=source,cat_id=id,day=State.day,before=item.stress_relief>0?cat.stress:0,before_fatigue=item.fatigue_relief>0?cat.fatigue:0};
             use.after=Math.Max(0,use.before-item.stress_relief);use.after_fatigue=Math.Max(0,use.before_fatigue-item.fatigue_relief);
-            if(item.stress_relief>0)cat.stress=use.after;if(item.fatigue_relief>0)cat.fatigue=use.after_fatigue;State.item_uses.Add(use);
+            if(item.stress_relief>0)cat.stress=use.after;if(item.fatigue_relief>0){cat.fatigue=use.after_fatigue;DailyFatigueReset?.Invoke(id);}State.item_uses.Add(use);
         }
         private void ValidateItems(CafeSnapshot s)
         {

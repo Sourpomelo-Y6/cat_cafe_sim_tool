@@ -13,7 +13,9 @@ namespace CatCafePreview
     {
         public readonly CafeSimulation Simulation;
         private readonly CafeSaveStore saves;
+        private CafeSnapshot newGameSaveState;
         private string displayEpoch;private System.Collections.Generic.List<CafeDisplayReceipt> displayReceipts=new System.Collections.Generic.List<CafeDisplayReceipt>();
+        public CafeDailyRecords DailyRecords {get;private set;}
         public CafeDetailPresentation Details {get;private set;}
         public CafeReplayJournal Journal {get;private set;}
         // Cache the response AND payload: one ID must never name different commands.
@@ -30,13 +32,14 @@ namespace CatCafePreview
             this.saveDirectory=saveDirectory??Path.Combine(Application.persistentDataPath,"standalone-v1");
             Simulation = new CafeSimulation(rules);
             var presentation=Resources.Load<TextAsset>("CatCafeStandalone/presentation");if(presentation==null)throw new InvalidOperationException("単独版の表示定義がありません。");Details=new CafeDetailPresentation(Simulation,JsonUtility.FromJson<CafePresentationCatalog>(presentation.text));displayEpoch=Simulation.State.instance_id;Details.SavedNetStamina=(day,id)=>displayEpoch==Simulation.State.instance_id?displayReceipts.FirstOrDefault(r=>r.day==day && r.cat_id==id)?.net_stamina:null;
+            DailyRecords=new CafeDailyRecords(Simulation,true);Details.SavedDailyRecord=DailyRecords.Find;
             ResetJournal();
             saves = new CafeSaveStore(this.saveDirectory, EncodeSaveWithDisplay, DecodeSave, Simulation.Validate);
         }
-        private string EncodeSaveWithDisplay(CafeSaveEnvelope save){save.display_receipts=ReferenceEquals(save.state,Simulation.State) && displayEpoch==Simulation.State.instance_id?displayReceipts.ToArray():null;return EncodeSave(save);}
+        private string EncodeSaveWithDisplay(CafeSaveEnvelope save){DailyRecords.Sync();if(ReferenceEquals(save.state,Simulation.State)){save.daily_baselines=DailyRecords.Baselines.ToArray();save.daily_records=DailyRecords.Records.ToArray();}save.display_receipts=ReferenceEquals(save.state,Simulation.State) && displayEpoch==Simulation.State.instance_id?displayReceipts.ToArray():null;if(ReferenceEquals(save.state,newGameSaveState)){save.daily_baselines=save.state.cats.Select(c=>new CafeDailyBaseline{day=save.state.day,cat_id=c.id,fatigue=c.fatigue.ToString("R",System.Globalization.CultureInfo.InvariantCulture)}).ToArray();}return EncodeSave(save);}
         private void CaptureDisplay()
         {
-            var state=Simulation.State;if(displayEpoch!=state.instance_id){displayEpoch=state.instance_id;displayReceipts.Clear();}if(state.phase!="closed")return;
+            DailyRecords.Sync();var state=Simulation.State;if(displayEpoch!=state.instance_id){displayEpoch=state.instance_id;displayReceipts.Clear();}if(state.phase!="closed")return;
             foreach(var cat in state.cats){string value=Details.ClosedNetStamina(cat.id);if(value==null)continue;var row=displayReceipts.FirstOrDefault(r=>r.day==state.day && r.cat_id==cat.id);if(row==null)displayReceipts.Add(new CafeDisplayReceipt{day=state.day,cat_id=cat.id,net_stamina=value});else row.net_stamina=value;}
         }
         private void ValidateDisplay(CafeSaveEnvelope save)
@@ -85,14 +88,14 @@ namespace CatCafePreview
                     case "new_game":
                         if (cmd.choice != "free" && cmd.choice != "popularity" && cmd.choice != "patron" && cmd.choice != "bond") throw new NotSupportedException("単独版は自由営業・人気・有力者・好感度目標に対応しています。");
                         var initial = new CafeSimulation(Simulation.Rules, s.seed, cmd.choice).State;
-                        saves.Save(1, initial); Simulation.Restore(initial); break;
+                        newGameSaveState=initial;try{saves.Save(1, initial);}finally{newGameSaveState=null;} Simulation.Restore(initial);DailyRecords.Reset(true); break;
                     case "save_game":
                         bool oldPause=s.autoplay?.paused??false;int oldRevision=s.revision;int oldImportCount=s.import_history?.operations.Count??0;
                         try{Simulation.PauseAutoplay();saves.Save(cmd.save_slot == 0 ? 1 : cmd.save_slot, s);s.revision++;}
                         catch{if(s.autoplay!=null)s.autoplay.paused=oldPause;s.revision=oldRevision;if(s.import_history!=null)s.import_history.operations.RemoveRange(oldImportCount,s.import_history.operations.Count-oldImportCount);throw;}break;
                     case "load_game":
                         if (!int.TryParse(cmd.save_id, out int slot)) throw new ArgumentException("保存スロットを選んでください。");
-                        var loaded=saves.Load(slot);ValidateDisplay(loaded);Simulation.Restore(loaded.state);displayReceipts=(loaded.display_receipts??new CafeDisplayReceipt[0]).ToList();displayEpoch=Simulation.State.instance_id;break;
+                        var loaded=saves.Load(slot);ValidateDisplay(loaded);CafeDailyRecords.Validate(loaded);Simulation.Restore(loaded.state);displayReceipts=(loaded.display_receipts??new CafeDisplayReceipt[0]).ToList();displayEpoch=Simulation.State.instance_id;DailyRecords.Restore(loaded.daily_baselines,loaded.daily_records);break;
                     case "player_step":Simulation.Execute(cmd.kind,choice:cmd.choice,source:string.IsNullOrEmpty(cmd.target_type)?null:cmd.target_type);break;
                     case "receive_patron":
                     case "receive_general":
