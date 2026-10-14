@@ -252,7 +252,7 @@ namespace CatCafePreview.Standalone
             foreach (var e in s.exchanges.OrderBy(e => e.seat).ToArray())
             {
                 var cat = s.cats.Find(c => c.id == e.cat_id); var definition = Definition(cat.id);
-                Choose(e, out string action, out string target); string replayBefore=ReplayBefore(e);int replayOpened=e.open_up_count; StepExchange(e, definition, action, target); RecordReplayAction(e,action,target,replayBefore,replayOpened);
+                Choose(e, out string action, out string target); string replayBefore=ReplayBefore(e);int replayOpened=e.open_up_count; double narrativeBefore=e.stamina;string narrativeMode=action=="switch"?target:e.mode; StepExchange(e, definition, action, target); ExchangeObserved?.Invoke(e,narrativeMode,action,narrativeBefore,replayOpened); RecordReplayAction(e,action,target,replayBefore,replayOpened);
                 cat.stamina = e.stamina; cat.service_ticks++; var visit = s.visits.Find(v => v.id == e.customer_id); visit.seated_ticks++;
                 if (e.end_reason != null)
                 {

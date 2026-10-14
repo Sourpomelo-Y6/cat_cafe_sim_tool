@@ -80,9 +80,9 @@ namespace CatCafePreview
                 card.stateText.text += "\n"+(string.IsNullOrEmpty(seat.equipment_name) ? "設備なし" : seat.equipment_name);
                 if(card.details!=null)
                 {
-                    card.details.gameObject.SetActive(occupied && cat!=null);card.details.onClick.RemoveAllListeners();
-                    string catId=cat?.cat_id;card.details.onClick.AddListener(()=>GetComponent<PythonCatDetailsPanel>().OpenFromList(catId,true));
-                    card.details.GetComponentInChildren<Text>().text="担当猫の詳細";
+                    card.details.gameObject.SetActive(true);card.details.onClick.RemoveAllListeners();
+                    int seatIndex=i;card.details.onClick.AddListener(()=> { var reader=GetComponent<PythonSeatNarrativePanel>()??gameObject.AddComponent<PythonSeatNarrativePanel>();reader.Open(seats[seatIndex],seatIndex,cat); });
+                    card.details.GetComponentInChildren<Text>().text="席の詳細";
                 }
             }
             RefreshControls();
@@ -101,7 +101,7 @@ namespace CatCafePreview
         public void RefreshControls()
         {
             var client=GetComponent<PythonStateClient>();
-            foreach(var card in cards)if(card.details!=null)card.details.interactable=state!=null && card.state!=null && client.CanManageSaves;
+            foreach(var card in cards)if(card.details!=null)card.details.interactable=state!=null && client.CanManageSaves;
             if(state==null || serviceSummary==null)return;
             var seats=state.seats ?? new PythonSeatState[0];int occupied=Array.FindAll(seats,seat=>!string.IsNullOrEmpty(seat.customer_id)).Length;
             serviceSummary.text="営業時間 "+state.tick+" / "+state.opening_ticks+"刻　来店 "+(state.customers?.Length ?? 0)+"人　接客中 "+occupied+" / "+seats.Length+"席　待ち "+state.waiting_count+"人　接客完了 "+state.completed_interactions+"件"

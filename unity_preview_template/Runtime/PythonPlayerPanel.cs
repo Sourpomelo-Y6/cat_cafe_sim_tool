@@ -75,7 +75,16 @@ namespace CatCafePreview
                 if(texture!=null && fitter!=null)fitter.aspectRatio=(float)texture.width/texture.height;
                 if(imageNotice!=null)imageNotice.text=texture==null ? "この猫の画像は未登録です。" : "";
             }
+            bool narrativeChanged=history.text!=current.history;
+            bool narrative=current.history!=null && current.history.StartsWith("最新のやり取り");
+            if(picture!=null){var frame=picture.transform.parent.GetComponent<RectTransform>();frame.anchoredPosition=new Vector2(480,-72);frame.sizeDelta=new Vector2(436,narrative?112:208);}
+            var heading=historyScroll.transform.parent.Find("History Heading") as RectTransform;
+            if(heading!=null)heading.anchoredPosition=new Vector2(480,narrative?-194:-292);
+            var area=historyScroll.GetComponent<RectTransform>();area.anchoredPosition=new Vector2(480,narrative?-228:-330);area.sizeDelta=new Vector2(436,narrative?310:208);
+            historyScroll.viewport.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,narrative?298:196);
+            history.fontSize=narrative?18:17;history.lineSpacing=narrative?1.15f:1;
             history.text=string.IsNullOrEmpty(current.history) ? "行動を選ぶと猫の反応を表示します。" : current.history;
+            if(narrativeChanged && current.cat_id=="cat-mike"){Canvas.ForceUpdateCanvases();historyScroll.verticalNormalizedPosition=1;}
             string selected=targets.options.Count>0 ? targets.options[targets.value].text : "";
             bool changed=renderedMode!=current.mode || renderedSession!=current.session_id || renderedInstance!=instanceId;
             targets.options.Clear();

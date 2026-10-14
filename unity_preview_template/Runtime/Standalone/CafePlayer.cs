@@ -96,7 +96,7 @@ namespace CatCafePreview.Standalone
         {
             var session=ActivePlayer;if(session==null){if(finish)return;throw new InvalidOperationException("交流を開始してください。");}
             var e=ReplayPlayer(State,session);string replayBefore=ReplayBefore(e);int replayOpened=e.open_up_count;
-            if(finish){e.end_reason="manual";e.connect_pending=e.open_up_pending=false;}else StepExchange(e,Definition(session.cat_id),action,target);
+            if(finish){e.end_reason="manual";e.connect_pending=e.open_up_pending=false;}else {double before=e.stamina;string mode=action=="switch"?target:e.mode;StepExchange(e,Definition(session.cat_id),action,target);ExchangeObserved?.Invoke(e,mode,action,before,replayOpened);}
             RecordReplayAction(e,finish?"finish":action,target,replayBefore,replayOpened);
             if(finish)session.manual=true;else session.actions.Add(new CafePlayerAction {action=action,target=target});session.exchange=e;
             var cat=State.cats.Single(c=>c.id==session.cat_id);cat.stamina=e.stamina;if(cat.stamina==0)cat.cannot_continue=true;

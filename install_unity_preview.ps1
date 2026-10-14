@@ -39,6 +39,7 @@ $previewFiles += @('Runtime/PythonCatDetailsPanel.cs', 'Editor/PythonCatDetailsS
 $previewFiles += @('Runtime/PythonAdoptionPanel.cs', 'Runtime/PythonGameOverPanel.cs', 'Editor/PythonAdoptionSetup.cs', 'Editor/PythonGameOverSetup.cs', 'Editor/PythonGameOverVerification.cs', 'Editor/PythonAdoptionVerification.cs')
 $previewFiles += @('Runtime/PythonMissingPanel.cs', 'Editor/PythonMissingSetup.cs', 'Editor/PythonMissingVerification.cs')
 $previewFiles += @('Runtime/PythonDispatchPanel.cs', 'Editor/PythonDispatchSetup.cs', 'Editor/PythonDispatchVerification.cs')
+$previewFiles += @('Runtime/PythonSeatNarrativePanel.cs', 'Runtime/StandaloneNarrativeSmoke.cs', 'Editor/NarrativeVerification.cs')
 $previewFiles += @('Runtime/PythonPlayerPanel.cs', 'Editor/PythonPlayerSetup.cs', 'Editor/PythonPlayerLayout.cs', 'Editor/PythonPlayerVerification.cs')
 $previewFiles += @('Runtime/PythonAutoPanel.cs', 'Editor/PythonAutoSetup.cs', 'Editor/PythonAutoVerification.cs')
 $previewFiles += @('Runtime/PythonPreparationPanel.cs', 'Editor/PythonPreparationSetup.cs', 'Editor/PythonPreparationVerification.cs')
