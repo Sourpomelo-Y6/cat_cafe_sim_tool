@@ -44,8 +44,8 @@ namespace CatCafePreview.Standalone
         }
         private CafeAutoOperation PlanAutoPlayer(bool keepStamina)
         {
-            var session=ActivePlayer;var cat=Definition(session.cat_id);string key=session.cat_id+":"+session.initial_stamina.ToString("R",System.Globalization.CultureInfo.InvariantCulture)+":"+keepStamina;
-            if(!autoPlayerPlans.TryGetValue(key,out var path)){var initial=new CafeExchange {cat_id=session.cat_id,remaining=Rules.player.set_ticks,stamina=session.initial_stamina};path=AutoBeam(initial,cat,keepStamina?Rules.exchange.max_stamina*.6:0);if(autoPlayerPlans.Count>=128)autoPlayerPlans.Clear();autoPlayerPlans[key]=path;}
+            var session=ActivePlayer;var cat=Definition(session.cat_id);string key=PlayerSessionTicks(session)+":"+session.cat_id+":"+session.initial_stamina.ToString("R",System.Globalization.CultureInfo.InvariantCulture)+":"+keepStamina;
+            if(!autoPlayerPlans.TryGetValue(key,out var path)){var initial=new CafeExchange {cat_id=session.cat_id,remaining=PlayerSessionTicks(session),stamina=session.initial_stamina};path=AutoBeam(initial,cat,keepStamina?Rules.exchange.max_stamina*.6:0);if(autoPlayerPlans.Count>=128)autoPlayerPlans.Clear();autoPlayerPlans[key]=path;}
             bool matches=session.actions.Count<path.Count && session.actions.Select((a,i)=>a.action==path[i].action && a.target==path[i].target).All(v=>v);var action=matches?path[session.actions.Count]:AutoBeam(session.exchange,cat,keepStamina?Rules.exchange.max_stamina*.6:0).First();return AutoOp("player_step",choice:action.action,source:action.target);
         }
     }

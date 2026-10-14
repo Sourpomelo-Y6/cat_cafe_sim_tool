@@ -9,13 +9,54 @@ namespace CatCafePreview.Standalone
     [Serializable] public class CafePlayerAction {public string action,target;}
     [Serializable] public class CafePlayerSession
     {
-        public string id,cat_id;public int day,ordinal,initial_revision;
+        public string id,cat_id;public int day,ordinal,initial_revision,set_ticks;
         public double initial_stamina,initial_affinity,stress_before,stress_after;
         public bool manual;public CafeExchange exchange;public List<CafePlayerAction> actions=new List<CafePlayerAction>();
     }
     [Serializable] public class CafeBondGoal {public string id,status="active";public int started_day=1,resolved_day;public bool continued;public List<string> achieved_cats=new List<string>();}
     public sealed partial class CafeSimulation
     {
+        // Save/replay policy v2: missing per-session limits are legacy ten-turn sessions.
+        public const int PlayerSetTicks = 20;
+        internal bool LegacyPlayerReplay;
+        public int PlayerSessionTicks(CafePlayerSession session)
+        {
+            if(session.set_ticks!=0 && session.set_ticks!=10 && session.set_ticks!=PlayerSetTicks)throw new ArgumentException("Invalid player session limit");
+            return session.set_ticks==0?Rules.player.set_ticks:session.set_ticks;
+        }
+        public static readonly string[] PlayerActions={"direct","adapt","intense","feint","pause","switch","connect"};
+        public string PlayerChoiceReason(string action)
+        {
+            if(action!="switch")return PlayerActionReason(action);
+            var reasons=Rules.types.Where(t=>ActivePlayer==null || t.id!=ActivePlayer.exchange.mode).Select(t=>PlayerActionReason("switch",t.id)).ToArray();
+            return reasons.Contains("")?"":reasons.FirstOrDefault()??"切り替え先がありません。";
+        }
+        // Rebuild presentation from saved actions so older saves also retain every reaction.
+        public string PlayerHistory(CafePlayerSession session)
+        {
+            var e=new CafeExchange {cat_id=session.cat_id,customer_id="player",remaining=PlayerSessionTicks(session),stamina=session.initial_stamina,affinity_start=session.initial_affinity};
+            var rows=new List<string>();
+            foreach(var a in session.actions)
+            {
+                double affinity=e.affinity_pending;int opened=e.open_up_count;
+                StepExchange(e,Definition(session.cat_id),a.action,a.target);
+                string reaction=e.open_up_count>opened?"open_up":a.action=="connect"?"received":e.previous_reaction;
+                double delta=e.affinity_pending-affinity;
+                rows.Add((rows.Count+1)+"："+PlayerActionName(a.action)+(a.target==null?"":" → "+PlayerTypeName(a.target))+" / "+PlayerReactionName(reaction)+"\n体力 "+CafeDetailPresentation.Number(e.stamina)+" / 好感度 "+(delta>=0?"+":"")+CafeDetailPresentation.Number(delta));
+            }
+            return string.Join("\n\n",rows);
+        }
+        public string PlayerEventImageKey(CafePlayerSession session)
+        {
+            if(session.actions.Count==0)return "";
+            var previous=new CafePlayerSession {set_ticks=session.set_ticks,cat_id=session.cat_id,initial_stamina=session.initial_stamina,initial_affinity=session.initial_affinity,actions=session.actions.Take(session.actions.Count-1).ToList()};
+            var before=ReplayPlayer(State,previous);var after=ReplayPlayer(State,new CafePlayerSession {set_ticks=session.set_ticks,cat_id=session.cat_id,initial_stamina=session.initial_stamina,initial_affinity=session.initial_affinity,actions=session.actions});
+            return after.open_up_count==before.open_up_count?"":after.mode+"__"+(after.connect_count>before.connect_count?"simultaneous":"open_up");
+        }
+        public static string PlayerActionName(string action)=>action=="direct"?"素直に動かす":action=="adapt"?"相手に合わせる":action=="intense"?"激しく動かす":action=="feint"?"フェイントを入れる":action=="pause"?"動きを止めて待つ":action=="connect"?"心をつかむ":"動作を切り替える";
+        public static string PlayerTypeName(string mode)=>mode=="teaser"?"ねこじゃらし":mode=="ball"?"ボール遊び":mode=="plush"?"ぬいぐるみ遊び":mode=="tunnel"?"トンネル遊び":mode=="pet"?"なでる":mode=="brush"?"ブラッシング":mode=="voice"?"声をかける":"そばで見守る";
+        public static string PlayerReactionName(string reaction)=>reaction=="turn_away"?"そっぽを向く":reaction=="listless"?"けだるそうにする":reaction=="confused"?"戸惑う":reaction=="enthusiastic"?"熱心に応じる":reaction=="favorable"?"好意的に応じる":reaction=="open_up"?"心を開く":reaction=="received"?"特別な働きかけを受け止める":"普通に応じる";
+        public static string PlayerEndName(string reason)=>reason=="manual"?"自分で切り上げました":reason=="exhausted"?"体力がなくなり、交流終了":reason=="success"?"交流成功！":reason=="time_limit"?"交流時間が終了しました":reason=="timeout"?"時間になり、交流終了":"";
         public CafePlayerSession ActivePlayer=>State.player_sessions.LastOrDefault(e=>e.exchange.end_reason==null);
         public bool PlayerActive=>ActivePlayer!=null;
         public bool BondWaiting=>State.game_over==null && State.bond_goal?.status=="cleared" && !State.bond_goal.continued;
@@ -34,7 +75,7 @@ namespace CatCafePreview.Standalone
         }
         private CafeExchange ReplayPlayer(CafeSnapshot s,CafePlayerSession session)
         {
-            var e=new CafeExchange {cat_id=session.cat_id,customer_id="player",remaining=Rules.player.set_ticks,stamina=session.initial_stamina,affinity_start=session.initial_affinity};
+            var e=new CafeExchange {cat_id=session.cat_id,customer_id="player",remaining=PlayerSessionTicks(session),stamina=session.initial_stamina,affinity_start=session.initial_affinity};
             foreach(var a in session.actions)StepExchange(e,Definitions(s).Single(c=>c.id==session.cat_id),a.action,a.target);
             if(session.manual){if(e.end_reason!=null)throw new ArgumentException("Manual finish after automatic end");e.end_reason="manual";e.connect_pending=e.open_up_pending=false;}
             return e;
@@ -47,7 +88,7 @@ namespace CatCafePreview.Standalone
         private void BeginPlayer(string id)
         {
             string reason=PlayerBeginReason(id);if(reason!="")throw new InvalidOperationException(reason);var c=State.cats.Single(c=>c.id==id);var bond=PlayerCat(id);
-            var session=new CafePlayerSession {id="player-"+State.day+"-"+(State.player_cats.Sum(r=>r.today)+1),cat_id=id,day=State.day,ordinal=State.player_cats.Sum(r=>r.today)+1,initial_revision=bond.total,initial_affinity=bond.affinity,initial_stamina=c.stamina};
+            var session=new CafePlayerSession {set_ticks=LegacyPlayerReplay?0:PlayerSetTicks,id="player-"+State.day+"-"+(State.player_cats.Sum(r=>r.today)+1),cat_id=id,day=State.day,ordinal=State.player_cats.Sum(r=>r.today)+1,initial_revision=bond.total,initial_affinity=bond.affinity,initial_stamina=c.stamina};
             session.exchange=ReplayPlayer(State,session);bond.today++;bond.total++;State.player_sessions.Add(session);State.revision++;
         }
         private void AdvancePlayer(string action,string target,bool finish)
@@ -83,7 +124,7 @@ namespace CatCafePreview.Standalone
             var scores=s.cats.ToDictionary(c=>c.id,c=>0.0);var totals=s.cats.ToDictionary(c=>c.id,c=>0);var today=s.cats.ToDictionary(c=>c.id,c=>0);int active=0,previous=0;
             foreach(var session in s.player_sessions)
             {
-                if(session==null || !scores.ContainsKey(session.cat_id) || session.day<JoinedDay(s,session.cat_id) || session.day>s.day || session.day<previous || session.ordinal!=s.player_sessions.TakeWhile(e=>e!=session).Count(e=>e.day==session.day)+1 || session.ordinal>Rules.player.daily_turns || session.id!="player-"+session.day+"-"+session.ordinal || session.initial_revision!=totals[session.cat_id] || session.initial_affinity!=scores[session.cat_id] || !Range(session.initial_stamina,double.Epsilon,Rules.max_stamina) || session.actions==null || session.exchange==null)throw new ArgumentException("Invalid player departure");
+                if(session==null || (session.set_ticks!=0 && session.set_ticks!=10 && session.set_ticks!=PlayerSetTicks) || !scores.ContainsKey(session.cat_id) || session.day<JoinedDay(s,session.cat_id) || session.day>s.day || session.day<previous || session.ordinal!=s.player_sessions.TakeWhile(e=>e!=session).Count(e=>e.day==session.day)+1 || session.ordinal>Rules.player.daily_turns || session.id!="player-"+session.day+"-"+session.ordinal || session.initial_revision!=totals[session.cat_id] || session.initial_affinity!=scores[session.cat_id] || !Range(session.initial_stamina,double.Epsilon,Rules.max_stamina) || session.actions==null || session.exchange==null)throw new ArgumentException("Invalid player departure");
                 previous=session.day;var expected=ReplayPlayer(s,session);var e=session.exchange;
                 // Check the entire public exchange, including counters, pending reactions and disabled growth/equipment modifiers.
                 foreach(var field in typeof(CafeExchange).GetFields())

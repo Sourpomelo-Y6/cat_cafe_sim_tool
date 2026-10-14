@@ -47,7 +47,7 @@ namespace CatCafePreview.Standalone
         private int importDepth;
         private T TraceImported<T>(CafeReplayOperation operation,Func<T> action)
         {
-            bool record=State.import_history!=null && importDepth==0;if(record)CafeLegacyImport.NormalizeOperation(operation);importDepth++;T result;try{result=action();}finally{importDepth--;}
+            bool record=State.import_history!=null && importDepth==0;if(record){operation.player_policy_version=LegacyPlayerReplay?0:2;CafeLegacyImport.NormalizeOperation(operation);}importDepth++;T result;try{result=action();}finally{importDepth--;}
             if(record)State.import_history.operations.Add(operation);return result;
         }
         private void TraceImported(CafeReplayOperation operation,Action action)=>TraceImported(operation,()=>{action();return 0;});
@@ -58,7 +58,7 @@ namespace CatCafePreview.Standalone
             var h=state.import_history;if(h.version!=1 || !CafeLegacyImport.Hash(h.source_hash) || !CafeLegacyImport.Hash(h.base_digest) || h.operations==null || h.operations.Count>50000 || string.IsNullOrEmpty(h.base_json) || CafeLegacyImport.DecodeBase==null)throw new ArgumentException("移行起点と操作記録が不正です。");
             var baseline=CafeLegacyImport.DecodeBase(h.base_json);if(baseline==null || baseline.import_history!=null || CafeLegacyImport.GameDigest(baseline)!=h.base_digest)throw new ArgumentException("移行起点が変更されています。");
             var sim=new CafeSimulation(Rules);sim.ValidateImportedBase(baseline);sim.State=baseline;
-            try{foreach(var operation in h.operations)CafeReplayJournal.Apply(sim,operation);}
+            try{foreach(var operation in h.operations){if(operation.player_policy_version!=0 && operation.player_policy_version!=2)throw new ArgumentException("Invalid player policy");sim.LegacyPlayerReplay=operation.player_policy_version==0;CafeReplayJournal.Apply(sim,operation);}}
             catch(InvalidOperationException ex){throw new ArgumentException("移行後の操作記録を再生できません。",ex);}
             if(CafeLegacyImport.GameDigest(sim.State)!=CafeLegacyImport.GameDigest(state)){
                 var changed=typeof(CafeSnapshot).GetFields().Where(f=>f.Name!="import_history" && f.Name!="instance_id" && f.Name!="revision").Where(f=>{var a=new CafeSnapshot();var b=new CafeSnapshot();f.SetValue(a,f.GetValue(sim.State));f.SetValue(b,f.GetValue(state));return CafeLegacyImport.GameDigest(a)!=CafeLegacyImport.GameDigest(b);}).Select(f=>f.Name);

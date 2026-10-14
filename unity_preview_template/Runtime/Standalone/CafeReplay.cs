@@ -10,7 +10,7 @@ namespace CatCafePreview.Standalone
     [Serializable] public class CafeReplayOperation
     {
         public string kind,cat_id,choice,source,seat_id,customer_id,objective,mode;
-        public int days;public string[] working;
+        public int player_policy_version,days;public string[] working;
     }
     [Serializable] public class CafeReplayRow
     {
@@ -20,7 +20,7 @@ namespace CatCafePreview.Standalone
     }
     [Serializable] public class CafeReplayDocument
     {
-        public int format_version=1;public string mode_id="unity-cafe-replay",rules_id,base_json,base_digest,final_digest;
+        public int player_policy_version;public int format_version=1;public string mode_id="unity-cafe-replay",rules_id,base_json,base_digest,final_digest;
         public List<CafeReplayRow> operations=new List<CafeReplayRow>();
     }
     // Runtime journal is deliberately outside compact gameplay saves. Reload creates a new base.
@@ -33,7 +33,7 @@ namespace CatCafePreview.Standalone
         public CafeReplayJournal(CafeRules rules,CafeSnapshot initial,Func<CafeSaveEnvelope,string> encode,Func<string,CafeSaveEnvelope> decode)
         {
             this.rules=rules;this.encode=encode;this.decode=decode;
-            Document=new CafeReplayDocument {rules_id=rules.rules_id,base_json=encode(new CafeSaveEnvelope {state=initial}),base_digest=Digest(initial),final_digest=Digest(initial)};
+            Document=new CafeReplayDocument {player_policy_version=2,rules_id=rules.rules_id,base_json=encode(new CafeSaveEnvelope {state=initial}),base_digest=Digest(initial),final_digest=Digest(initial)};
         }
         // Only presentation before-values are needed; never serialize the entire historical save per tick.
         public CafeSnapshot CaptureBefore(CafeSnapshot s)=>new CafeSnapshot {day=s.day,tick=s.tick,phase=s.phase,funds=s.funds,popularity=s.popularity,cats=s.cats.Select(c=>new CafeCat {id=c.id,fatigue=c.fatigue,stress=c.stress,health=c.health,activity=c.activity}).ToList(),visits=s.visits.Select(v=>new CafeVisit {id=v.id,cat_id=v.cat_id,departure=v.departure}).ToList()};
@@ -53,13 +53,15 @@ namespace CatCafePreview.Standalone
             if(value is int integer){text.Append(integer.ToString(CultureInfo.InvariantCulture)).Append(';');return;}
             if(value is System.Collections.IEnumerable sequence){text.Append('[');foreach(var item in sequence)Canonical(item,text);text.Append(']');return;}
             text.Append('{');foreach(var field in Fields(value.GetType()))
-            {if(value is CafeDayResult && field.Name=="legacy_service_ticks" && field.GetValue(value)==null)continue;
+            {if(value is CafeReplayOperation && field.Name=="player_policy_version" && (int)field.GetValue(value)==0)continue;
+                if(value is CafePlayerSession && field.Name=="set_ticks" && (int)field.GetValue(value)==0)continue;
+                if(value is CafeDayResult && field.Name=="legacy_service_ticks" && field.GetValue(value)==null)continue;
                 if(value is CafeSnapshot && field.Name=="import_history" && field.GetValue(value)==null)continue;
                 if(value is CafeSnapshot && (field.Name=="instance_id" || field.Name=="revision") || value is CafeAutoRun && field.Name=="run_id")continue;text.Append(field.Name).Append(':');Canonical(field.GetValue(value),text);}text.Append('}');
         }
         public void Append(CafeSnapshot before,CafeSimulation sim,CafeReplayOperation operation,CafeAutoOperation automatic=null)
         {
-            var after=sim.State;var events=new List<string>(sim.ReplayActions);
+            operation.player_policy_version=sim.LegacyPlayerReplay?0:2;var after=sim.State;var events=new List<string>(sim.ReplayActions);
             foreach(var v in after.visits){var old=before.day==after.day?before.visits.Find(x=>x.id==v.id):null;if(old==null)events.Add("来店："+v.id+" / "+v.arrival+"tick");if(v.cat_id!=null && old?.cat_id!=v.cat_id)events.Add("接客開始："+v.id+" / "+v.cat_id+" / seat-"+(v.service_seat+1));if(v.departure!=null && old?.departure!=v.departure)events.Add("退店："+v.id+" / "+v.departure+" / 売上 "+N(v.bill)+" / "+v.satisfaction?.level);}
             foreach(var cat in after.cats){var old=before.cats.Find(c=>c.id==cat.id);if(old==null)events.Add("猫の加入："+cat.id);else if(old.fatigue!=cat.fatigue || old.stress!=cat.stress || old.health!=cat.health || old.activity!=cat.activity)events.Add(cat.id+"：疲労 "+N(old.fatigue)+" → "+N(cat.fatigue)+" / ストレス "+N(old.stress)+" → "+N(cat.stress)+" / "+old.health+" → "+cat.health+" / "+old.activity+" → "+cat.activity);}
             if(before.phase!=after.phase || before.day!=after.day)events.Add("営業："+before.day+"日目 "+before.phase+" → "+after.day+"日目 "+after.phase);
@@ -91,9 +93,9 @@ namespace CatCafePreview.Standalone
         }
         public CafeSimulation Verify(CafeReplayDocument data)
         {
-            if(data==null || data.format_version!=1 || data.mode_id!="unity-cafe-replay" || data.rules_id!=rules.rules_id || data.operations==null || data.operations.Count>50000 || string.IsNullOrEmpty(data.base_json) || data.base_digest==null || data.final_digest==null)throw new ArgumentException("対応するUnity営業ログとルールが必要です。");
+            if(data==null || data.format_version!=1 || (data.player_policy_version!=0 && data.player_policy_version!=2) || data.mode_id!="unity-cafe-replay" || data.rules_id!=rules.rules_id || data.operations==null || data.operations.Count>50000 || string.IsNullOrEmpty(data.base_json) || data.base_digest==null || data.final_digest==null)throw new ArgumentException("対応するUnity営業ログとルールが必要です。");
             foreach(var row in data.operations){NormalizeOperation(row?.operation);NormalizeOperation(row?.automatic_operation);if(row?.automatic_operation!=null && string.IsNullOrEmpty(row.automatic_operation.kind))row.automatic_operation=null;}
-            var envelope=decode(data.base_json);if(envelope==null || envelope.version!=1 || envelope.state==null)throw new ArgumentException("営業ログの起点が不正です。");var sim=new CafeSimulation(rules);bool basePaused=envelope.state.autoplay?.paused??false;sim.Restore(envelope.state);if(sim.State.autoplay?.running==true)sim.State.autoplay.paused=basePaused;
+            var envelope=decode(data.base_json);if(envelope==null || envelope.version!=1 || envelope.state==null)throw new ArgumentException("営業ログの起点が不正です。");var sim=new CafeSimulation(rules);sim.LegacyPlayerReplay=data.player_policy_version==0;bool basePaused=envelope.state.autoplay?.paused??false;sim.Restore(envelope.state);if(sim.State.autoplay?.running==true)sim.State.autoplay.paused=basePaused;
             if(Digest(sim.State)!=data.base_digest)throw new ArgumentException("営業ログの起点が一致しません。");
             var reconstructed=new CafeReplayJournal(rules,sim.State,encode,decode);
             foreach(var row in data.operations)

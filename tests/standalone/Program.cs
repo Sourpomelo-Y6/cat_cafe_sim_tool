@@ -173,6 +173,7 @@ static partial class Program
     }
     static void Main(string[] args)
     {
+        if(args.Length>0 && args[0]=="--player-turns"){PlayerTurnsChecks(args[1],args[2]);return;}
         if(args.Length>0 && args[0]=="--daily"){DailyCases(args);return;}
         if(args.Length>0 && args[0]=="--details"){DetailsCases(args);return;}
         if(args[0]=="--legacy-template" || args[0]=="--finalize-import"){LegacyTool(args);return;}
