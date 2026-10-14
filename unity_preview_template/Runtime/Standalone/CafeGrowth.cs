@@ -43,7 +43,7 @@ namespace CatCafePreview.Standalone
     }
     [Serializable] public class CafeGrowthOperation
     {
-        public string kind, cat_id, customer_id, choice; public int day, tick; public int[] actions = new int[8]; public double affinity_delta, stamina_spent;
+        public string kind, cat_id, customer_id, choice; public int stamina_policy_version; public int day, tick; public int[] actions = new int[8]; public double affinity_delta, stamina_spent;
     }
     public sealed partial class CafeSimulation
     {
@@ -105,7 +105,13 @@ namespace CatCafePreview.Standalone
             return choices.ToArray();
         }
         private void RecordGrowth(CafeGrowthOperation op)
-        { ApplyGrowthOperation(GrowthCat(op.cat_id), op); State.growth_operations.Add(op); }
+        {
+            double before=GrowthExperience(GrowthCat(op.cat_id));bool upgrading=State.stamina_growth==null;
+            ApplyGrowthOperation(GrowthCat(op.cat_id), op);
+            EnableStaminaGrowth();
+            if(upgrading && State.stamina_growth!=null)State.cats.Single(c=>c.id==op.cat_id).stamina_experience_origin=before;
+            op.stamina_policy_version=LegacyStaminaReplay?0:1;State.growth_operations.Add(op); ApplyStaminaGrowth(op.cat_id);
+        }
         private void ResolveGrowth(string kind, string id, string choice)
         {
             var row = State.growth.Find(r => r.cat_id == id);
@@ -121,7 +127,7 @@ namespace CatCafePreview.Standalone
         private void GrowthService(string id, CafeVisit v)
         {
             RecordGrowth(new CafeGrowthOperation { kind = "service", cat_id = id, customer_id = v.id, day = State.day, tick = State.tick, actions = (int[])v.type_actions.Clone(), affinity_delta = v.affinity_delta, stamina_spent = v.stamina_spent });
-            if (GrowthCat(id).specialization == "service") State.cats.Single(c => c.id == id).stamina = Math.Min(Rules.max_stamina, State.cats.Single(c => c.id == id).stamina + v.stamina_spent * Rules.growth.service_stamina_refund);
+            if (GrowthCat(id).specialization == "service") State.cats.Single(c => c.id == id).stamina = Math.Min(MaxStamina(id), State.cats.Single(c => c.id == id).stamina + v.stamina_spent * Rules.growth.service_stamina_refund);
         }
         private void GrowthRestDay()
         {

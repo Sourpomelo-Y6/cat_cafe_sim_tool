@@ -3,6 +3,8 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="PlayerTurnsChecks.cs" />
+    <Compile Include="StaminaChecks.cs" />
+    <Compile Include="StaminaBalance.cs" />
     <Compile Include="DetailsChecks.cs" />
     <Compile Include="DailyChecks.cs" />
     <Compile Include="LegacyImportChecks.cs" />

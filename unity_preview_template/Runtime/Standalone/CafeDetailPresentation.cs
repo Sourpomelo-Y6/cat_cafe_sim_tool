@@ -79,7 +79,7 @@ namespace CatCafePreview.Standalone
         public Func<int,string,CafeDailyRecord> SavedDailyRecord;
         public string ClosedNetStamina(string id)
         {
-            var cat=S.cats.Single(c=>c.id==id);return (S.import_history==null || S.day>ImportedDay) && S.phase=="closed" && cat.activity=="cafe" && !S.dispatches.Any(e=>e.cat_id==id && (e.occurred_day==S.day || e.resolved_day==S.day))?Number(sim.Rules.max_stamina-cat.stamina):null;
+            var cat=S.cats.Single(c=>c.id==id);return (S.import_history==null || S.day>ImportedDay) && S.phase=="closed" && cat.activity=="cafe" && !S.dispatches.Any(e=>e.cat_id==id && (e.occurred_day==S.day || e.resolved_day==S.day))?Number(sim.MaxStamina(cat.id)-cat.stamina):null;
         }
         public string History(string id)
         {

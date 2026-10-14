@@ -63,7 +63,7 @@ namespace CatCafePreview.Standalone
         {
             if(choice!="receive")throw new ArgumentException("イベントと選択肢を確認してください。");
             string reason=DispatchReceiveReason(id);if(reason!="")throw new InvalidOperationException(reason);var e=State.dispatches.Single(e=>e.id==id);if(e.status=="resolved")return;
-            e.status="resolved";e.choice=choice;e.resolved_day=State.day;var c=State.cats.Single(c=>c.id==e.cat_id);c.activity="cafe";if(DispatchInterrupted(e)){c.stress=Rules.dispatch_trouble.return_stress;c.stamina=Rules.max_stamina;c.cannot_continue=c.health!="healthy";}else c.stress=Math.Min(100,c.stress+e.return_stress);
+            e.status="resolved";e.choice=choice;e.resolved_day=State.day;var c=State.cats.Single(c=>c.id==e.cat_id);c.activity="cafe";if(DispatchInterrupted(e)){c.stress=Rules.dispatch_trouble.return_stress;c.stamina=MaxStamina(c.id);c.cannot_continue=c.health!="healthy";}else c.stress=Math.Min(100,c.stress+e.return_stress);
             State.funds+=DispatchReceivedReward(e);State.dispatch_income+=DispatchReceivedReward(e);
             ReceivePatron(e);
             if(!DispatchInterrupted(e))RecordGrowth(new CafeGrowthOperation {kind="dispatch",cat_id=c.id,customer_id=e.id,day=State.day,tick=State.tick});PresentDispatchIntroductions();State.revision++;

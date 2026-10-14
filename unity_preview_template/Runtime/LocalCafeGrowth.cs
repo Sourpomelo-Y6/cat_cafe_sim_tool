@@ -15,7 +15,7 @@ namespace CatCafePreview
         private string GrowthDetails(string id)
         {
             var r = Simulation.GrowthCat(id);
-            return "経験：接客 " + r.service + " / 休養 " + r.rest + " / 派遣 " + r.dispatch + " / 得意分野 " + GrowthLabel(r.specialization)
+            return "最大体力 " + Simulation.MaxStamina(id) + "（基礎成長 " + Simulation.State.cats.Single(c=>c.id==id).stamina_stage + "段階） / 経験：接客 " + r.service + " / 休養 " + r.rest + " / 派遣 " + r.dispatch + " / 得意分野 " + GrowthLabel(r.specialization)
                 + " / 得意分類 " + string.Join("・", CafeSimulation.LearnedGroups(r).Select(GrowthLabel)) + " / 得意行動 " + string.Join("・", CafeSimulation.LearnedTypes(r).Select(GrowthLabel));
         }
         private PythonGrowthChoice[] GrowthChoices()

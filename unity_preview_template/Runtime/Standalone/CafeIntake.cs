@@ -20,7 +20,7 @@ namespace CatCafePreview.Standalone
             if (State.cats.Any(c => c.id == rule.cat.id)) throw new InvalidOperationException("この猫はすでに加入しています。");
             if (State.funds <= rule.cost) throw new InvalidOperationException("受け入れ後に資金が残る必要があります。");
             if (ActiveCatCount(State) >= HousingCapacity(State, State.day)) throw new InvalidOperationException("飼育スペースが満員です。");
-            State.cats.Add(new CafeCat { id = rule.cat.id, stamina = Rules.max_stamina, working = false });
+            State.cats.Add(new CafeCat { id = rule.cat.id, stamina = State.stamina_growth?.initial??Rules.max_stamina, working = false });
             EnsureGrowthCat(rule.cat.id);
             State.funds -= rule.cost; State.expenses += rule.cost; if(shop) State.pet_shop_expenses += rule.cost; else State.recruitment_expenses += rule.cost;
         }

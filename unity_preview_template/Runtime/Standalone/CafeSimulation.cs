@@ -19,6 +19,8 @@ namespace CatCafePreview.Standalone
             State = new CafeSnapshot { seed = seed, rules_id = rules.rules_id, instance_id = Guid.NewGuid().ToString("N"), funds = rules.starting_funds, opening_funds = rules.starting_funds, popularity = rules.starting_popularity };
             foreach (var cat in rules.cats.OrderBy(c => c.id, StringComparer.Ordinal)) State.cats.Add(new CafeCat { id = cat.id, stamina = rules.max_stamina });
             foreach (var cat in State.cats) EnsureGrowthCat(cat.id);
+            EnableStaminaGrowth(); foreach(var cat in State.cats)cat.stamina=MaxStamina(cat.id);
+            ValidateStaminaGrowth(State);
             if(rules.visiting_cat==null)State.visiting_cat=null;
             State.objective = objective; if (objective == "popularity") State.goal.Add(new CafeGoalStage { started_day = 1 }); else if(objective=="patron")State.patron=new CafePatron {id="patron",members=rules.patron.members.Select(r=>new CafePatronScore {id=r.id}).ToList()}; else if(objective=="bond")State.bond_goal=new CafeBondGoal {id="bond"}; else if (objective != "free") throw new ArgumentException("Invalid objective");
             PresentStoreEvent();
@@ -46,6 +48,7 @@ namespace CatCafePreview.Standalone
                 || s.revenue < 0 || s.expenses < 0 || Math.Abs(s.funds - (s.opening_funds + s.revenue + s.item_sales_income + s.dispatch_income - s.expenses)) > 1e-7
                 || s.history.Count != s.day - 1 || s.completed < 0
                 || !Range(s.popularity, 0, Rules.popularity.cap)) throw new ArgumentException("Invalid standalone save");
+            ValidateStaminaGrowth(s);
             ValidateAutoplay(s);
             ValidateAdoption(s);
             ValidateRecruitment(s);
@@ -71,7 +74,7 @@ namespace CatCafePreview.Standalone
             ValidateCustomers(s);
             ValidateRegularIntroduction(s);
             foreach (var c in s.cats)
-                if (!Definitions(s).Any(d => d.id == c.id) || !Range(c.stamina, 0, Rules.max_stamina) || !Range(c.fatigue, 0, Rules.max_fatigue)
+                if (!Definitions(s).Any(d => d.id == c.id) || !Range(c.stamina, 0, MaxStamina(s,c.id)) || !Range(c.fatigue, 0, Rules.max_fatigue)
                     || !Range(c.stress, 0, 100) || !new[] { "healthy", "sick" }.Contains(c.health) || !new[] { "cafe", "missing", "dispatched", "adopted" }.Contains(c.activity)
                     || c.service_ticks < 0 || c.recovery_remaining < 0 || c.missing_remaining < 0) throw new ArgumentException("Invalid saved cat");
             if (s.phase == "preparation" && (s.tick != 0 || s.visits.Count != 0 || s.exchanges.Count != 0)
@@ -97,7 +100,7 @@ namespace CatCafePreview.Standalone
                 if (s.phase != "open" || e.seat < 0 || e.seat >= s.seat_count || !s.cats.Any(c => c.id == e.cat_id)
                     || !s.visits.Any(v => v.id == e.customer_id && v.cat_id == e.cat_id && v.departure == null && v.seated_at >= 0)
                     || !Rules.types.Any(t => t.id == e.mode) || e.remaining < 1 || e.end_reason != null
-                    || !Range(e.stamina, 0, Rules.max_stamina) || !Range(e.tension, 0, Rules.exchange.target) || !Range(e.engagement, 0, Rules.exchange.target)
+                    || (e.max_stamina!=0 && e.max_stamina!=MaxStamina(s,e.cat_id)) || !Range(e.stamina, 0, MaxStamina(s,e.cat_id)) || !Range(e.tension, 0, Rules.exchange.target) || !Range(e.engagement, 0, Rules.exchange.target)
                     || !Finite(e.bonus) || !Finite(e.affinity_pending) || !Range(e.affinity_start, 0, 100)) throw new ArgumentException("Invalid saved exchange");
             foreach (var r in s.relationships) if (!s.cats.Any(c => c.id == r.cat_id) || string.IsNullOrEmpty(r.customer_id) || !Range(r.affinity, 0, 100)) throw new ArgumentException("Invalid relationship");
             for (int i = 0; i < s.history.Count; i++)
@@ -198,7 +201,7 @@ namespace CatCafePreview.Standalone
                 case "resolve_missing":
                     var cat = s.cats.Find(c => c.id == catId && c.activity == "missing" && c.missing_remaining == 0 && !DispatchMissing(State,c.id));
                     if (cat == null) throw new ArgumentException("帰還待ちの猫を選んでください。");
-                    cat.activity = "cafe"; cat.stamina = Rules.max_stamina; cat.cannot_continue = cat.health != "healthy"; cat.stress = Rules.return_stress;
+                    cat.activity = "cafe"; cat.stamina = MaxStamina(cat.id); cat.cannot_continue = cat.health != "healthy"; cat.stress = Rules.return_stress;
                     double cost = cat.kitten ? Rules.kitten_cost : 0; s.funds -= cost; s.expenses += cost; CheckEnd(); break;
                 default: throw new NotSupportedException("単独版の第1段階では未対応の操作です：" + kind);
             }
@@ -214,8 +217,10 @@ namespace CatCafePreview.Standalone
             foreach(var player in s.player_cats)player.today=0;
             s.day++; s.tick = 0; s.phase = "preparation"; s.opening_funds = s.funds; s.revenue = s.expenses = 0; s.completed = 0; s.recruitment_expenses = s.pet_shop_expenses = 0; s.waiting_area_expenses=s.waiting_area_cost=0; s.equipment_expenses=s.rest_space_expenses=0; s.housing_expenses = s.housing_cost = s.item_expenses = s.item_sales_income = s.expansion_expenses = s.goal_popularity = 0;
             s.visits.Clear(); s.queue.Clear(); s.exchanges.Clear(); s.popularity_gain = 0;s.dispatch_income=s.dispatch_trouble_expenses=0;
-            foreach (var c in s.cats) { c.service_ticks = 0; if (c.activity == "cafe") { c.stamina = Rules.max_stamina; c.cannot_continue = c.health != "healthy"; } c.working &= c.health == "healthy" && c.activity == "cafe"; }
+            foreach (var c in s.cats) { c.service_ticks = 0; if (c.activity == "cafe") { c.stamina = MaxStamina(c.id); c.cannot_continue = c.health != "healthy"; } c.working &= c.health == "healthy" && c.activity == "cafe"; }
             foreach (var cat in State.cats) EnsureGrowthCat(cat.id);
+            EnableStaminaGrowth(); foreach(var cat in State.cats)cat.stamina=MaxStamina(cat.id);
+            ValidateStaminaGrowth(State);
             BeginDailyRecord?.Invoke();
             PresentStoreEvent();
             PresentIntake();
@@ -341,7 +346,7 @@ namespace CatCafePreview.Standalone
                 e.stamina_spent += Math.Min(e.stamina, cost);
                 e.engagement = Math.Min(c.target, e.engagement + score * (reaction == "turn_away" || reaction == "listless" ? 0 : reaction == "confused" ? c.confused_multiplier : 1));
                 e.stamina = Math.Max(0, e.stamina - cost);
-                if (action == "pause") e.stamina = Math.Min(c.max_stamina, e.stamina + c.pause_recovery);
+                if (action == "pause") e.stamina = Math.Min(e.max_stamina==0?c.max_stamina:e.max_stamina, e.stamina + c.pause_recovery);
                 if (action == "switch") e.mode = target;
                 e.pause_after_interaction = action == "pause" && new[] { "direct", "adapt", "intense", "feint" }.Contains(e.previous_action);
             }

@@ -76,7 +76,7 @@ namespace CatCafePreview
                 card.picture.enabled = card.picture.texture != null;
                 card.customerIcon.SetActive(occupied); card.work.gameObject.SetActive(false); card.rest.gameObject.SetActive(false);
                 card.state=cat;
-                card.stateText.text = occupied ? "お客さん："+seat.customer_name+"\n担当："+(cat == null ? "未配置" : cat.name)+ (cat==null ? "" : "\n体力 "+cat.stamina.ToString("0.#")+" / 疲労 "+cat.fatigue.ToString("0.#")) : "お客さんを待っています";
+                card.stateText.text = occupied ? "お客さん："+seat.customer_name+"\n担当："+(cat == null ? "未配置" : cat.name)+ (cat==null ? "" : "\n体力 "+cat.stamina.ToString("0.#")+" / "+cat.max_stamina.ToString("0.#")+"・疲労 "+cat.fatigue.ToString("0.#")) : "お客さんを待っています";
                 card.stateText.text += "\n"+(string.IsNullOrEmpty(seat.equipment_name) ? "設備なし" : seat.equipment_name);
                 if(card.details!=null)
                 {

@@ -65,7 +65,7 @@ namespace CatCafePreview
             title.text=current.name+(current.active ? "と交流中" : "との交流結果");
             summary.text="現在の動作："+current.mode+"\n残り "+current.remaining_ticks+"ターン / 本日あと "+current.remaining_sets+"セット"
                 +"\n好感度 "+current.affinity_before.ToString("0.#")+" → "+current.affinity_after.ToString("0.#")+"（"+current.affinity_delta.ToString("+0.#;-0.#;0")+"・"+(current.active ? "見込み" : "確定")+"）"
-                +"\n体力 "+current.stamina_before.ToString("0.#")+" → "+current.stamina.ToString("0.#")
+                +"\n体力 "+current.stamina_before.ToString("0.#")+" → "+current.stamina.ToString("0.#")+" / "+(current.max_stamina>0?current.max_stamina:100).ToString("0.#")
                 +"\n関心 "+current.engagement.ToString("0.#")+" / テンション "+current.tension.ToString("0.#");
             if(picture != null)
             {

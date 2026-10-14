@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "initial": 100,
+  "increment": 10,
+  "cap": 300,
+  "experience_per_stage": 20
+}

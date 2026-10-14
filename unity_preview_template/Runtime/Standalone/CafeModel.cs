@@ -12,6 +12,7 @@ namespace CatCafePreview.Standalone
         public int service_assignment_version,autoplay_version;
         public WaitingAreaRules waiting_area,waiting_area_upgrade;
         public RestSpaceRules rest_space,rest_space_upgrade,rest_space_soundproof;
+        public CafeStaminaRules stamina_growth;
         public double max_stamina, time_price, starting_funds, starting_popularity;
         public double base_cost, per_seat_cost, max_fatigue, fatigue_per_service_tick, rest_day_recovery;
         public double safe_fatigue, probability_per_fatigue, max_probability;
@@ -98,6 +99,7 @@ namespace CatCafePreview.Standalone
     [Serializable] public class CafeCat
     {
         public string id, health = "healthy", activity = "cafe";
+        public int stamina_stage; public double stamina_experience_origin;
         public double stamina, fatigue, stress;
         public bool working = true, cannot_continue;
         public int service_ticks, recovery_remaining, missing_remaining;
@@ -116,6 +118,7 @@ namespace CatCafePreview.Standalone
     {
         public string customer_id, cat_id, mode = "teaser", last_group, previous_action, previous_reaction, end_reason;
         public string service_group="",equipment_group=""; public double equipment_engagement=1,equipment_tension=1;
+        public double max_stamina;
         public int seat, remaining, streak, connect_count, open_up_count, simultaneous_count;
         public double stamina, engagement, tension, bonus, affinity_start, affinity_pending, tension_multiplier = 1;
         public int[] type_actions = new int[8]; public string[] growth_groups = new string[0], growth_types = new string[0]; public double stamina_spent;
@@ -139,6 +142,7 @@ namespace CatCafePreview.Standalone
         public int version = 2, seed, day = 1, tick, revision;
         public string rules_id, instance_id, phase = "preparation", game_over;
         public bool auto_assignment=true;
+        public CafeStaminaRules stamina_growth;
         public CafeAutoRun autoplay;public CafeImportHistory import_history;
         public double funds, opening_funds, popularity, revenue, expenses;
         public int completed;
@@ -187,6 +191,7 @@ namespace CatCafePreview.Standalone
         // Unity JsonUtility materializes JSON null strings as empty strings.
         public void NormalizeJsonStrings()
         {
+            if(stamina_growth!=null && stamina_growth.version==0 && stamina_growth.initial==0 && stamina_growth.cap==0 && stamina_growth.increment==0 && stamina_growth.experience_per_stage==0)stamina_growth=null;
             if(import_history!=null && string.IsNullOrEmpty(import_history.base_json))import_history=null;
             if(import_history?.operations!=null)foreach(var operation in import_history.operations)CafeLegacyImport.NormalizeOperation(operation);
             if(history!=null)foreach(var h in history)if(h.legacy_service_ticks!=null && h.legacy_service_ticks.Count==0)h.legacy_service_ticks=null;
@@ -206,6 +211,7 @@ namespace CatCafePreview.Standalone
             if(adoption!=null && string.IsNullOrEmpty(adoption.id) && !adoption.enabled && (adoption.events==null || adoption.events.Count==0))adoption=null;
             if(adoption!=null && adoption.events!=null)foreach(var e in adoption.events)if(e.choice=="")e.choice=null;
             if(recruitment!=null && string.IsNullOrEmpty(recruitment.id) && (recruitment.days==null || recruitment.days.Count==0) && (recruitment.accepted==null || recruitment.accepted.Count==0))recruitment=null;
+            if(growth_operations!=null)foreach(var op in growth_operations)if(op.stamina_policy_version==1){if(op.choice=="")op.choice=null;if(op.customer_id=="")op.customer_id=null;}
             if (growth != null) foreach (var row in growth) row.Normalize();
             if (reservation != null) { if (reservation.result == "") reservation.result = null; if (reservation.choice == "") reservation.choice = null; }
             if (game_over == "") game_over = null;

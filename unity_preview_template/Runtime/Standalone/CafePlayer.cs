@@ -10,6 +10,7 @@ namespace CatCafePreview.Standalone
     [Serializable] public class CafePlayerSession
     {
         public string id,cat_id;public int day,ordinal,initial_revision,set_ticks;
+        public double max_stamina; public int stamina_rule_version;
         public double initial_stamina,initial_affinity,stress_before,stress_after;
         public bool manual;public CafeExchange exchange;public List<CafePlayerAction> actions=new List<CafePlayerAction>();
     }
@@ -34,7 +35,7 @@ namespace CatCafePreview.Standalone
         // Rebuild presentation from saved actions so older saves also retain every reaction.
         public string PlayerHistory(CafePlayerSession session)
         {
-            var e=new CafeExchange {cat_id=session.cat_id,customer_id="player",remaining=PlayerSessionTicks(session),stamina=session.initial_stamina,affinity_start=session.initial_affinity};
+            var e=new CafeExchange {cat_id=session.cat_id,customer_id="player",max_stamina=session.max_stamina,remaining=PlayerSessionTicks(session),stamina=session.initial_stamina,affinity_start=session.initial_affinity};
             var rows=new List<string>();
             foreach(var a in session.actions)
             {
@@ -42,15 +43,15 @@ namespace CatCafePreview.Standalone
                 StepExchange(e,Definition(session.cat_id),a.action,a.target);
                 string reaction=e.open_up_count>opened?"open_up":a.action=="connect"?"received":e.previous_reaction;
                 double delta=e.affinity_pending-affinity;
-                rows.Add((rows.Count+1)+"："+PlayerActionName(a.action)+(a.target==null?"":" → "+PlayerTypeName(a.target))+" / "+PlayerReactionName(reaction)+"\n体力 "+CafeDetailPresentation.Number(e.stamina)+" / 好感度 "+(delta>=0?"+":"")+CafeDetailPresentation.Number(delta));
+                rows.Add((rows.Count+1)+"："+PlayerActionName(a.action)+(a.target==null?"":" → "+PlayerTypeName(a.target))+" / "+PlayerReactionName(reaction)+"\n体力 "+CafeDetailPresentation.Number(e.stamina)+" / "+CafeDetailPresentation.Number(session.max_stamina==0?Rules.max_stamina:session.max_stamina)+" / 好感度 "+(delta>=0?"+":"")+CafeDetailPresentation.Number(delta));
             }
             return string.Join("\n\n",rows);
         }
         public string PlayerEventImageKey(CafePlayerSession session)
         {
             if(session.actions.Count==0)return "";
-            var previous=new CafePlayerSession {set_ticks=session.set_ticks,cat_id=session.cat_id,initial_stamina=session.initial_stamina,initial_affinity=session.initial_affinity,actions=session.actions.Take(session.actions.Count-1).ToList()};
-            var before=ReplayPlayer(State,previous);var after=ReplayPlayer(State,new CafePlayerSession {set_ticks=session.set_ticks,cat_id=session.cat_id,initial_stamina=session.initial_stamina,initial_affinity=session.initial_affinity,actions=session.actions});
+            var previous=new CafePlayerSession {max_stamina=session.max_stamina,stamina_rule_version=session.stamina_rule_version,set_ticks=session.set_ticks,cat_id=session.cat_id,initial_stamina=session.initial_stamina,initial_affinity=session.initial_affinity,actions=session.actions.Take(session.actions.Count-1).ToList()};
+            var before=ReplayPlayer(State,previous);var after=ReplayPlayer(State,new CafePlayerSession {max_stamina=session.max_stamina,stamina_rule_version=session.stamina_rule_version,set_ticks=session.set_ticks,cat_id=session.cat_id,initial_stamina=session.initial_stamina,initial_affinity=session.initial_affinity,actions=session.actions});
             return after.open_up_count==before.open_up_count?"":after.mode+"__"+(after.connect_count>before.connect_count?"simultaneous":"open_up");
         }
         public static string PlayerActionName(string action)=>action=="direct"?"素直に動かす":action=="adapt"?"相手に合わせる":action=="intense"?"激しく動かす":action=="feint"?"フェイントを入れる":action=="pause"?"動きを止めて待つ":action=="connect"?"心をつかむ":"動作を切り替える";
@@ -75,7 +76,7 @@ namespace CatCafePreview.Standalone
         }
         private CafeExchange ReplayPlayer(CafeSnapshot s,CafePlayerSession session)
         {
-            var e=new CafeExchange {cat_id=session.cat_id,customer_id="player",remaining=PlayerSessionTicks(session),stamina=session.initial_stamina,affinity_start=session.initial_affinity};
+            var e=new CafeExchange {cat_id=session.cat_id,customer_id="player",max_stamina=session.max_stamina,remaining=PlayerSessionTicks(session),stamina=session.initial_stamina,affinity_start=session.initial_affinity};
             foreach(var a in session.actions)StepExchange(e,Definitions(s).Single(c=>c.id==session.cat_id),a.action,a.target);
             if(session.manual){if(e.end_reason!=null)throw new ArgumentException("Manual finish after automatic end");e.end_reason="manual";e.connect_pending=e.open_up_pending=false;}
             return e;
@@ -88,7 +89,7 @@ namespace CatCafePreview.Standalone
         private void BeginPlayer(string id)
         {
             string reason=PlayerBeginReason(id);if(reason!="")throw new InvalidOperationException(reason);var c=State.cats.Single(c=>c.id==id);var bond=PlayerCat(id);
-            var session=new CafePlayerSession {set_ticks=LegacyPlayerReplay?0:PlayerSetTicks,id="player-"+State.day+"-"+(State.player_cats.Sum(r=>r.today)+1),cat_id=id,day=State.day,ordinal=State.player_cats.Sum(r=>r.today)+1,initial_revision=bond.total,initial_affinity=bond.affinity,initial_stamina=c.stamina};
+            var session=new CafePlayerSession {max_stamina=State.stamina_growth==null?0:MaxStamina(id),stamina_rule_version=State.stamina_growth==null?0:1,set_ticks=LegacyPlayerReplay?0:PlayerSetTicks,id="player-"+State.day+"-"+(State.player_cats.Sum(r=>r.today)+1),cat_id=id,day=State.day,ordinal=State.player_cats.Sum(r=>r.today)+1,initial_revision=bond.total,initial_affinity=bond.affinity,initial_stamina=c.stamina};
             session.exchange=ReplayPlayer(State,session);bond.today++;bond.total++;State.player_sessions.Add(session);State.revision++;
         }
         private void AdvancePlayer(string action,string target,bool finish)
@@ -124,7 +125,7 @@ namespace CatCafePreview.Standalone
             var scores=s.cats.ToDictionary(c=>c.id,c=>0.0);var totals=s.cats.ToDictionary(c=>c.id,c=>0);var today=s.cats.ToDictionary(c=>c.id,c=>0);int active=0,previous=0;
             foreach(var session in s.player_sessions)
             {
-                if(session==null || (session.set_ticks!=0 && session.set_ticks!=10 && session.set_ticks!=PlayerSetTicks) || !scores.ContainsKey(session.cat_id) || session.day<JoinedDay(s,session.cat_id) || session.day>s.day || session.day<previous || session.ordinal!=s.player_sessions.TakeWhile(e=>e!=session).Count(e=>e.day==session.day)+1 || session.ordinal>Rules.player.daily_turns || session.id!="player-"+session.day+"-"+session.ordinal || session.initial_revision!=totals[session.cat_id] || session.initial_affinity!=scores[session.cat_id] || !Range(session.initial_stamina,double.Epsilon,Rules.max_stamina) || session.actions==null || session.exchange==null)throw new ArgumentException("Invalid player departure");
+                if(session==null || (session.set_ticks!=0 && session.set_ticks!=10 && session.set_ticks!=PlayerSetTicks) || !scores.ContainsKey(session.cat_id) || session.day<JoinedDay(s,session.cat_id) || session.day>s.day || session.day<previous || session.ordinal!=s.player_sessions.TakeWhile(e=>e!=session).Count(e=>e.day==session.day)+1 || session.ordinal>Rules.player.daily_turns || session.id!="player-"+session.day+"-"+session.ordinal || session.initial_revision!=totals[session.cat_id] || session.initial_affinity!=scores[session.cat_id] || !Range(session.initial_stamina,double.Epsilon,session.max_stamina==0?Rules.max_stamina:session.max_stamina) || (session.stamina_rule_version==0?session.max_stamina!=0:session.stamina_rule_version!=1 || !Range(session.max_stamina,1,10000) || session.max_stamina>MaxStamina(s,session.cat_id)) || session.actions==null || session.exchange==null)throw new ArgumentException("Invalid player departure");
                 previous=session.day;var expected=ReplayPlayer(s,session);var e=session.exchange;
                 // Check the entire public exchange, including counters, pending reactions and disabled growth/equipment modifiers.
                 foreach(var field in typeof(CafeExchange).GetFields())

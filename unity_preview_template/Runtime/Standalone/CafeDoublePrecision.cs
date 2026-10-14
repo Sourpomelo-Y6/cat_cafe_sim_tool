@@ -15,7 +15,11 @@ namespace CatCafePreview.Standalone
             if (value == null || value is string || value.GetType().IsPrimitive) return;
             if (value is IEnumerable collection) { foreach (object item in collection) Walk(item,visit); return; }
             foreach (var f in value.GetType().GetFields(BindingFlags.Public | BindingFlags.Instance).OrderBy(f => f.Name,StringComparer.Ordinal))
+                {
+                // Newly added zero fields did not occupy a slot in legacy precision tapes.
+                if ((value is CafeCat && f.Name=="stamina_experience_origin" || (value is CafePlayerSession || value is CafeExchange) && f.Name=="max_stamina") && (double)f.GetValue(value)==0)continue;
                 if (f.FieldType == typeof(double)) visit(value,f); else Walk(f.GetValue(value),visit);
+                }
         }
         public static string[] Capture(CafeSnapshot state)
         {
