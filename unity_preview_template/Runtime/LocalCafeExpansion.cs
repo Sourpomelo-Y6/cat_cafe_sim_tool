@@ -11,13 +11,21 @@ namespace CatCafePreview
         }
         private PythonNextGoal NextGoalView()
         {
-            var s=Simulation.State;if(s.goal.Count==0 || s.goal.Count>=Simulation.Rules.goal_stages.Length)return null;var r=Simulation.Rules.goal_stages[s.goal.Count];
-            return new PythonNextGoal {stage=s.goal.Count+1,days=r.days,target=(float)r.target,can_advance=Simulation.GoalResponseReason("advance_goal")=="",reason=Simulation.GoalResponseReason("advance_goal")};
+            var s=Simulation.State;if(s.goal.Count==0 || s.goal.Last().status!="cleared" || s.goal.Count>=Simulation.Rules.goal_stages.Length)return null;var r=Simulation.Rules.goal_stages[s.goal.Count];
+            int start=s.day+(s.phase=="closed"?1:0);
+            return new PythonNextGoal {started_day=start,deadline=start+r.days-1,stage=s.goal.Count+1,days=r.days,target=(float)r.target,can_advance=Simulation.GoalResponseReason("advance_goal")=="",reason=Simulation.GoalResponseReason("advance_goal")};
         }
         private PythonGoalResult GoalResultView()
         {
-            var s=Simulation.State;if(s.goal.Count==0)return null;var g=s.goal.Last();var r=Simulation.Rules.goal_stages[s.goal.Count-1];
-            return new PythonGoalResult {pending=Simulation.GoalWaiting,stage=s.goal.Count,started_day=g.started_day,deadline=g.started_day+r.days-1,resolved_day=g.resolved_day,status=g.status,target=(float)r.target,popularity=(float)s.popularity,funds=(float)s.funds,can_continue=Simulation.GoalResponseReason("continue_goal")=="",kind="continue_goal",title=EndingView()?.title??"人気目標の進捗",summary="人気 "+Number(s.popularity)+" / "+Number(r.target),details="結果："+g.status+" / 確定日："+g.resolved_day+"日目。"+(s.clear_results.Any(row=>row.mode=="popularity")?"\nクリア時の成果\n"+ClearResultsView().rows.Single(row=>row.mode=="popularity").details:"")};
+            var s=Simulation.State;
+            if(Simulation.PatronWaiting || Simulation.BondWaiting)
+            {
+                bool patron=Simulation.PatronWaiting;string mode=patron?"patron":"bond",reason=patron?Simulation.PatronContinueReason():Simulation.BondContinueReason();
+                var record=ClearResultsView().rows.FirstOrDefault(row=>row.mode==mode);string summary=patron?PatronGoalView().details:BondGoalView().details;
+                return new PythonGoalResult{pending=true,status="cleared",kind=patron?"continue_patron":"continue_bond_goal",title=patron?"有力者の満足度目標を達成しました":"好感度目標を達成しました",resolved_day=patron?s.patron.resolved_day:s.bond_goal.resolved_day,funds=(float)s.funds,can_continue=reason=="",reason=reason,summary=summary,details=summary+(record==null?"":"\n\nクリア時の成果\n"+record.details)+"\n\n結果を確認して継続営業できます。"};
+            }
+            if(!Simulation.GoalWaiting)return null;var g=s.goal.Last();var r=Simulation.Rules.goal_stages[s.goal.Count-1];
+            return new PythonGoalResult {pending=Simulation.GoalWaiting,stage=s.goal.Count,started_day=g.started_day,deadline=g.started_day+r.days-1,resolved_day=g.resolved_day,status=g.status,target=(float)r.target,popularity=(float)s.popularity,funds=(float)s.funds,can_continue=Simulation.GoalResponseReason("continue_goal")=="",kind="continue_goal",title=EndingView()?.title??"人気目標の結果",summary="人気 "+Number(s.popularity)+" / "+Number(r.target),details="結果："+(g.status=="cleared"?"達成":"期限内未達")+" / 確定日："+g.resolved_day+"日目。"+(s.clear_results.Any(row=>row.mode=="popularity")?"\nクリア時の成果\n"+ClearResultsView().rows.Single(row=>row.mode=="popularity").details:"")};
         }
     }
 }

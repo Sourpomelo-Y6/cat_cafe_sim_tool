@@ -7,7 +7,7 @@ namespace CatCafePreview
     {
         private static string GrowthLabel(string value)
         {
-            switch (value) { case "service": return "接客"; case "rest": return "休養"; case "dispatch": return "派遣（派遣処理は後続移植）";
+            switch (value) { case "service": return "接客"; case "rest": return "休養"; case "dispatch": return "派遣";
                 case "play": return "遊び"; case "contact": return "触れ合い"; case "quiet": return "静かな交流";
                 case "teaser": return "猫じゃらし"; case "ball": return "ボール"; case "plush": return "ぬいぐるみ"; case "tunnel": return "トンネル";
                 case "pet": return "なでる"; case "brush": return "ブラッシング"; case "voice": return "声かけ"; case "presence": return "そばにいる"; default: return value ?? "未選択"; }
@@ -31,7 +31,7 @@ namespace CatCafePreview
                     threshold = Simulation.GrowthThreshold(r, kind), service = (float)r.service, rest = (float)r.rest, dispatch = (float)r.dispatch,
                     play = r.groups[0], contact = r.groups[1], quiet = r.groups[2], learned = string.Join("・", CafeSimulation.LearnedGroups(r).Concat(CafeSimulation.LearnedTypes(r)).Select(GrowthLabel)),
                     choices = choices.Select(c => new PythonEventChoice { choice = c, label = GrowthLabel(c), can_select = Simulation.State.game_over == null,
-                        detail = kind == "resolve_growth" ? c == "service" ? "接客終了時の消費体力を" + rules.service_stamina_refund * 100 + "%回復" : c == "rest" ? "在店休養時の疲労回復＋" + rules.rest_recovery_bonus : "派遣報酬×" + rules.dispatch_reward_multiplier + "（派遣は未移植）"
+                        detail = kind == "resolve_growth" ? c == "service" ? "接客終了時の消費体力を" + rules.service_stamina_refund * 100 + "%回復" : c == "rest" ? "在店休養時の疲労回復＋" + rules.rest_recovery_bonus : "派遣報酬×" + rules.dispatch_reward_multiplier
                         : "以降に開始する接客の関心の通常増加×" + (kind == "resolve_growth_mastery" ? rules.mastery_engagement_multiplier : rules.type_mastery_engagement_multiplier) }).ToArray() };
             }).Where(r => r != null).ToArray();
         }

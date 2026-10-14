@@ -1,0 +1,26 @@
+using System;
+using System.Linq;
+using CatCafePreview.Standalone;
+namespace CatCafePreview
+{
+    public sealed partial class LocalCafeBackend
+    {
+        private bool MissingWaiting => Simulation.State.cats.Any(c=>c.activity=="missing" && c.missing_remaining==0 && !Simulation.DispatchMissing(Simulation.State,c.id));
+        private PythonMissingCat[] MissingView()
+        {
+            var s=Simulation.State;
+            return s.cats.Where(c=>c.activity=="missing" && !Simulation.DispatchMissing(s,c.id)).Select(c=>
+            {
+                bool waiting=c.missing_remaining==0;double cost=waiting && c.kitten?Simulation.Rules.kitten_cost:0;
+                string reason="";
+                if(waiting)
+                {
+                    var probe=new CafeSimulation(Simulation.Rules,s.seed,s.objective);var copy=UnityEngine.JsonUtility.FromJson<CafeSnapshot>(UnityEngine.JsonUtility.ToJson(s));copy.NormalizeJsonStrings();CafeDoublePrecision.Restore(copy,CafeDoublePrecision.Capture(s));probe.Restore(copy);
+                    try{probe.Execute("resolve_missing",catId:c.id);}catch(Exception ex){reason=ex.Message;}
+                }
+                // Older snapshots do not store the departure date. Do not invent it.
+                return new PythonMissingCat{choice=c.id,cat_id=c.id,name=Simulation.Definition(c.id).name,status=waiting?"waiting":"missing",departed_day=0,remaining=c.missing_remaining,kitten=waiting && c.kitten,cost=(float)cost,funds_after=(float)(s.funds-cost),return_stress=(float)Simulation.Rules.return_stress,max_stamina=(float)Simulation.Rules.max_stamina,can_resolve=waiting && reason=="",reason=reason};
+            }).ToArray();
+        }
+    }
+}

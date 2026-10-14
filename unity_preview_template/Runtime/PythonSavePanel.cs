@@ -37,7 +37,7 @@ namespace CatCafePreview
         {
             bool ready = entries.Length > 0 && GetComponent<PythonStateClient>().CanManageSaves;
             saves.interactable = resume.interactable = ready;
-            if(save!=null)save.interactable=GetComponent<PythonStateClient>().CanManageSaves;
+            if(save!=null)save.interactable=GetComponent<PythonStateClient>().CanSaveNow;
         }
         public void Disconnect() { saves.interactable = resume.interactable = false;if(save!=null)save.interactable=false; }
         public void ListUnavailable()

@@ -14,7 +14,7 @@ namespace CatCafePreview
         private PythonStateClient Client=>GetComponent<PythonStateClient>();
         private static string N(float value)=>value.ToString("0.#");
         private void Clear(){choosing=false;if(confirmation!=null)confirmation.SetActive(false);}
-        public void Open(){if(Client.CurrentState?.housing==null || !Client.CanManageSaves)return;GetComponent<PythonMenuPanel>()?.Close();Clear();panel.SetActive(true);panel.transform.SetAsLastSibling();Apply(Client.CurrentState);Canvas.ForceUpdateCanvases();var scroll=details.GetComponentInParent<ScrollRect>();if(scroll!=null)scroll.verticalNormalizedPosition=1;}
+        public void Open(){if(Client.CurrentState?.housing==null || !Client.CanManageSaves)return;GetComponent<PythonAutoPlayPanel>()?.Close();GetComponent<PythonMenuPanel>()?.Close();Clear();panel.SetActive(true);panel.transform.SetAsLastSibling();Apply(Client.CurrentState);Canvas.ForceUpdateCanvases();var scroll=details.GetComponentInParent<ScrollRect>();if(scroll!=null)scroll.verticalNormalizedPosition=1;}
         public void Close(){Clear();panel.SetActive(false);}
         public void Expand()
         {

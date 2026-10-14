@@ -35,7 +35,7 @@ namespace CatCafePreview
         private void RenderObjective(int index)
         {
             if(state==null || state.new_game_options==null || index<0 || index>=state.new_game_options.Length){confirming=false;conditions.text="開始できる目標の情報を取得していません。再接続後に確認してください。";return;}
-            var option=state.new_game_options[index];conditions.text=(confirming?"開始の確認\n":"目標\n")+option.label+"\n\n"+option.detail+"\n\n開始条件\n"+option.conditions;var scroll=conditions.GetComponentInParent<ScrollRect>(true);if(scroll!=null)conditions.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,Math.Max(scroll.viewport.rect.height,conditions.preferredHeight+12));
+            var option=state.new_game_options[index];conditions.text=(confirming?"開始の確認\n":"目標\n")+option.label+"\n\n"+option.detail+"\n\n開始条件\n"+option.conditions;var scroll=conditions.GetComponentInParent<ScrollRect>(true);if(scroll!=null){conditions.raycastTarget=true;conditions.verticalOverflow=VerticalWrapMode.Overflow;scroll.scrollSensitivity=20;Canvas.ForceUpdateCanvases();conditions.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,Math.Max(scroll.viewport.rect.height,conditions.preferredHeight+12));}
         }
         public void RefreshControls()
         {

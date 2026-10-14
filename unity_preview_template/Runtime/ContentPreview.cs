@@ -323,7 +323,7 @@ namespace CatCafePreview
             sceneButtons[1].interactable = client.CanChangeShifts && cat!=null && cat.working;
             sceneButtons[2].interactable = client.CanProgressBusiness;
             sceneButtons[2].GetComponentInChildren<Text>().text = pythonState.closed ? "翌日へ" : pythonState.can_set_shifts ? "営業開始" : "1刻み進める";
-            sceneButtons[3].interactable = client.CanManageSaves;
+            sceneButtons[3].interactable = client.CanSaveNow;
             var savePanel = GetComponent<PythonSavePanel>();
             if(savePanel != null) savePanel.RefreshControls();
             var intake = GetComponent<PythonIntakePanel>();

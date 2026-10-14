@@ -54,7 +54,7 @@ namespace CatCafePreview
             if(sessionId!=current.session_id || instanceId!=state.instance_id || (wasAutomatic && !automatic))
             { showing=true;sessionId=current.session_id;instanceId=state.instance_id;historyScroll.verticalNormalizedPosition=1; }
             wasAutomatic=automatic;
-            if(automatic)showing=false;
+            if(automatic || (!current.active && !string.IsNullOrEmpty(state.required_action)))showing=false;
             if(showing)GetComponent<PythonCatDetailsPanel>().Close();
             Render();
         }

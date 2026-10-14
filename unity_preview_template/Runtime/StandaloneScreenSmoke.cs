@@ -96,7 +96,8 @@ namespace CatCafePreview
                 yield return Wait(()=>Client?.CanManageSaves==true,"restart business ready");Check(Client.CurrentState.day==1 && Client.CurrentState.closed && Client.CurrentState.funds==1730,"cross process restores known settlement");Check(Client.CurrentState.cats[4].records.history.Contains("疲労変化：0 →") && !Client.CurrentState.cats[4].records.history.Contains("体調変化：記録なし"),"cross process restores complete daily record");
                 var closePanel=Client.GetComponent<PythonClosingPanel>();int old=Client.CurrentState.revision;yield return Click(closePanel.next,"restart next day");yield return Changed(old);Check(Client.CurrentState.day==2 && Client.CurrentState.can_set_shifts,"restart continues next day");yield return Capture("09-restart");yield break;
             }
-            yield return Click(title.newGame,"new game");title.objectives.value=Array.FindIndex(title.CurrentState.new_game_options,r=>r.choice=="free");
+            yield return Click(title.newGame,"new game");title.objectives.value=Array.FindIndex(title.CurrentState.new_game_options,r=>r.choice=="popularity");Canvas.ForceUpdateCanvases();var startScroll=title.conditions.GetComponentInParent<ScrollRect>();
+            Check(title.conditions.verticalOverflow==VerticalWrapMode.Overflow && title.conditions.raycastTarget,"start conditions render full scroll content");Check(startScroll.content.rect.height>=title.conditions.preferredHeight,"start conditions height includes all text");startScroll.verticalNormalizedPosition=0;yield return Capture("01-popularity-conditions-end");title.objectives.value=Array.FindIndex(title.CurrentState.new_game_options,r=>r.choice=="free");
             yield return Click(title.startGame,"new game confirmation");Check(title.conditions.text.Contains("開始の確認"),"new game review");yield return Click(title.startGame,"confirmed new game");
             yield return Wait(()=>Client?.CanManageSaves==true,"business scene ready");Check(Client.CurrentState.day==1 && Client.CurrentState.can_set_shifts,"initial preparation");Check(Client.CurrentState.rest_proposal.SequenceEqual(new[]{"cat-mugi","cat-sora","cat-tama"}),"rest proposal matches Python initial tie ordering");
             var reference=new CafeSimulation(backend.Simulation.Rules,backend.Simulation.State.seed,"free");
@@ -136,7 +137,32 @@ namespace CatCafePreview
             // A paused native autoplay save needs an explicit resume command, not only a UI flag.
             RestoreFixture(new CafeSimulation(backend.Simulation.Rules,0,"bond").State);backend.Simulation.StartAutoplay("bond","basic",1);backend.Simulation.PauseAutoplay();yield return Wait(()=>Client.CurrentState.autoplay?.paused==true,"paused autoplay displayed");
             var auto=owner.GetComponent<PythonAutoPlayPanel>();auto.Open();yield return Click(auto.proceed,"resume paused autoplay");yield return Wait(()=>backend.Simulation.State.autoplay.paused==false,"native autoplay resumed");Client.StopAutoPlay();yield return Wait(()=>Client.CanManageSaves && !Client.AutoPlayRunning,"autoplay stopped through UI client");
+            yield return GoalPlaytestRegressions();
             Check(CafeBackends.Standalone,"all UI operations remain standalone");yield return Capture("07-resumed");
+        }
+        private IEnumerator GoalPlaytestRegressions()
+        {
+            RestoreFixture(new CafeSimulation(backend.Simulation.Rules,0,"popularity").State);
+            yield return Wait(()=>Client.CurrentState.instance_id==backend.Simulation.State.instance_id && Client.CanManageSaves,"goal regression preparation ready");
+            var owner=Client.gameObject;var auto=owner.GetComponent<PythonAutoPlayPanel>();var housing=owner.GetComponent<PythonHousingPanel>();
+            auto.Open();housing.Open();yield return null;Check(housing.panel.activeSelf && !auto.panel.activeSelf,"housing closes autoplay overlay");
+            yield return Click(housing.expand,"housing expansion review");yield return null;Check(housing.confirmation.activeSelf && housing.confirm.interactable,"housing confirmation remains accessible");housing.Cancel();housing.Close();
+            Client.StartAutoPlay("popularity","basic",10);
+            yield return Wait(()=>Client.BatchAutomatic && Client.AutoPlayRunning && Client.CanSaveNow && backend.Simulation.State.phase=="open","running autoplay yields to UI before completing day");
+            int savedDay=backend.Simulation.State.day;Client.SaveToSlot(5);
+            yield return Wait(()=>Client.CanSaveNow && Client.CurrentState.autoplay?.paused==true && !Client.BatchAutomatic,"running save pauses native autoplay");
+            var saved=JsonUtility.FromJson<CafeSaveEnvelope>(File.ReadAllText(Path.Combine(output,"saves/slot-5.json")));Check(saved.state.autoplay.paused && saved.state.day==savedDay && saved.state.phase=="open","saved autoplay is paused midbusiness");
+            int savedTick=backend.Simulation.State.tick;for(int frame=0;frame<4;frame++)yield return null;Check(backend.Simulation.State.tick==savedTick,"saved autoplay does not advance implicitly");
+            Client.StopAutoPlay();yield return Wait(()=>Client.CanManageSaves && !Client.AutoPlayRunning,"stop before replacing paused session");
+            var browser=owner.GetComponent<PythonSaveBrowser>();browser.OpenLoad();browser.Select(4);yield return Click(browser.action,"paused autoplay load review");yield return Click(browser.confirm,"paused autoplay load");
+            yield return Wait(()=>Client.CanSaveNow && Client.CurrentState.autoplay?.paused==true,"load preserves explicit autoplay pause");browser.Close();auto.Open();yield return Click(auto.proceed,"saved autoplay explicit resume");yield return Wait(()=>Client.BatchAutomatic && !backend.Simulation.State.autoplay.paused,"saved autoplay resumes through screen");
+            var pendingField=typeof(PythonStateClient).GetField("pending",System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Instance);
+            yield return Wait(()=>Client.CanSaveNow && (pendingField.GetValue(Client) as PythonShiftCommand)?.kind=="step_autoplay","save remains enabled during queued autoplay operation");
+            Client.SaveToSlot(6);Client.SaveToSlot(7);yield return Wait(()=>Client.CanSaveNow && Client.CurrentState.autoplay?.paused==true && !Client.BatchAutomatic,"queued autoplay operation finishes before deferred save");
+            Check(File.Exists(Path.Combine(output,"saves/slot-6.json")) && !File.Exists(Path.Combine(output,"saves/slot-7.json")),"deferred save retains chosen slot and rejects duplicate request");
+            Client.StopAutoPlay();yield return Wait(()=>Client.CanManageSaves && !Client.AutoPlayRunning,"resumed autoplay stops");
+            var bond=new CafeSimulation(backend.Simulation.Rules,0,"bond");bond.StartAutoplay("bond","fast",10);for(int step=0;step<1000 && bond.State.autoplay.running;step++)bond.StepAutoplay();Check(bond.State.day==4 && bond.State.player_sessions.Count>0 && bond.IntakeWaiting,"legitimate autoplay reaches intake after exchanges");
+            RestoreFixture(bond.State);yield return Wait(()=>Client.CurrentState.instance_id==bond.State.instance_id && Client.CanManageSaves,"blocked bond gameplay displayed");Check(!owner.GetComponent<PythonPlayerPanel>().panel.activeSelf && owner.GetComponent<PythonIntakePanel>().panel.activeSelf,"answered exchange does not cover unanswered intake");yield return Capture("10-bond-intake-priority");
         }
     }
 }

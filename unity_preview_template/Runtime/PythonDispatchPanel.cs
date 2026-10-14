@@ -41,7 +41,7 @@ namespace CatCafePreview
             var waiting=(state.patron_dispatch?.events ?? new PythonDispatchEvent[0]).FirstOrDefault(r=>r.status=="waiting");
             if(waiting!=null && waiting.choice!=lastWaiting){lastWaiting=waiting.choice;catId=waiting.cat_id;showing=true;focusWaiting=true;GetComponent<PythonCatDetailsPanel>().Close();}if(waiting==null)lastWaiting=null;Render();
         }
-        static void Fill(Dropdown dropdown,string[] captions,int index){dropdown.options.Clear();foreach(var caption in captions)dropdown.options.Add(new Dropdown.OptionData(caption));if(captions.Length==0)dropdown.options.Add(new Dropdown.OptionData("記録・選択肢なし"));dropdown.SetValueWithoutNotify(Math.Max(0,Math.Min(index,captions.Length-1)));dropdown.RefreshShownValue();}
+        static void Fill(Dropdown dropdown,string[] captions,int index){if(dropdown.captionText!=null){dropdown.captionText.resizeTextForBestFit=true;dropdown.captionText.resizeTextMinSize=12;dropdown.captionText.resizeTextMaxSize=18;}dropdown.options.Clear();foreach(var caption in captions)dropdown.options.Add(new Dropdown.OptionData(caption));if(captions.Length==0)dropdown.options.Add(new Dropdown.OptionData("記録・選択肢なし"));dropdown.SetValueWithoutNotify(Math.Max(0,Math.Min(index,captions.Length-1)));dropdown.RefreshShownValue();}
         private void Render()
         {
             panel.SetActive(showing);if(!showing || state==null)return;

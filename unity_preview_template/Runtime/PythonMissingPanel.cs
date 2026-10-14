@@ -52,7 +52,7 @@ namespace CatCafePreview
         private void Render()
         {
             panel.SetActive(showing);if(!showing)return;
-            cats.options.Clear();foreach(var row in rows)cats.options.Add(new Dropdown.OptionData(row.name+" / "+row.departed_day+"日目（"+(row.status=="missing" ? "家出中" : row.status=="waiting" ? "帰還待ち" : "確認済み")+"）"));
+            cats.options.Clear();foreach(var row in rows)cats.options.Add(new Dropdown.OptionData(row.name+" / "+(row.departed_day>0 ? row.departed_day+"日目" : "家出日不明")+"（"+(row.status=="missing" ? "家出中" : row.status=="waiting" ? "帰還待ち" : "確認済み")+"）"));
             if(rows.Length==0)cats.options.Add(new Dropdown.OptionData("家出の記録はありません"));
             cats.SetValueWithoutNotify(Math.Max(0,Array.FindIndex(rows,r=>r.choice==selected)));cats.RefreshShownValue();
             selected=cats.value<rows.Length ? rows[cats.value].choice : null;RenderDetails();
@@ -62,7 +62,7 @@ namespace CatCafePreview
             var row=Array.Find(rows,r=>r.choice==selected);title.text="猫の家出・帰還";
             rest.gameObject.SetActive(row!=null && row.status=="missing");
             if(row==null) { details.text="家出の記録はありません。";notice.text="猫のストレスは猫一覧や詳細画面で確認できます。";RefreshControls();return; }
-            details.text=row.name+" / "+row.departed_day+"日目に家出\n";
+            details.text=row.name+" / "+(row.departed_day>0 ? row.departed_day+"日目に家出" : "家出日の記録なし")+"\n";
             if(row.status=="missing")
             {
                 details.text+="あと "+row.remaining+"回の閉店で帰還予定\n家出した日の閉店は残り日数に含みません。\n\n家出中は接客・プレイヤーとの交流・派遣を担当できません。\n帰還時に結果と費用を表示します。";

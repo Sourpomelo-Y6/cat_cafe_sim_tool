@@ -9,6 +9,24 @@ namespace CatCafePreview
         private string lastHint;
         private enum Destination {None,Events,Assignment,Persist,Player,Closing,Goal}
         private Destination destination;
+        private static string RequiredActionLabel(string value)
+        {
+            switch(value)
+            {
+                case "goal_result": return "目標の結果";
+                case "missing_return": return "猫の帰還";
+                case "reservation": return "特別予約";
+                case "customer_trust": return "お客さんの信頼回復";
+                case "bond_result": return "好感度目標の結果";
+                case "patron_result": return "有力者目標の結果";
+                case "growth": return "猫の成長";
+                case "intake_request": return "新しい猫の受け入れ";
+                case "regular_introduction": return "常連からの猫の紹介";
+                case "visiting_cat": return "訪問した猫";
+                case "store_event": return "店舗イベント";
+                default: return "回答待ちの内容";
+            }
+        }
         public void OpenAttention()
         {
             if(attention==null || !attention.interactable)return;
@@ -36,7 +54,7 @@ namespace CatCafePreview
             else if(running)hint.text="おまかせ実行中です。停止ボタンから中断できます。";
             else if(!client.CanSendCommands)hint.text=client.Automatic ? "接客を進めています。停止ボタンで自動進行を止められます。" : "操作を送信しています。完了までお待ちください。";
             else if(state.player_interaction?.active==true){hint.text="猫との交流中です。交流を終了してから営業を進めてください。";destination=Destination.Player;caption="交流に戻る";}
-            else if(!string.IsNullOrEmpty(state.required_action)){hint.text="確認が必要です："+state.required_action;destination=state.goal_result!=null ? Destination.Goal : Destination.Events;caption=state.goal_result!=null ? "目標の結果を確認" : "回答待ちを確認";}
+            else if(!string.IsNullOrEmpty(state.required_action)){hint.text="確認が必要です："+RequiredActionLabel(state.required_action);destination=state.goal_result!=null ? Destination.Goal : Destination.Events;caption=state.goal_result!=null ? "目標の結果を確認" : "回答待ちを確認";}
             else if(state.service_assignment?.waiting==true){hint.text="接客の割り当て待ちです。お客さん・猫・席を選んでください。";destination=Destination.Assignment;caption="接客を割り当てる";}
             else if(state.game_over!=null)hint.text="経営が終了しました。結果を確認してください。";
             else if(state.closed){hint.text="本日の営業は終了しました。閉店結果を確認し、保存して「翌日へ」。";destination=Destination.Closing;caption="閉店結果を確認";}

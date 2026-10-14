@@ -165,6 +165,7 @@ namespace CatCafePreview
         [SerializeField] private int port = 8190;
         private PythonCafeState current;
         private PythonShiftCommand pending;
+        private int? deferredSaveSlot;
         private bool online;
         private ContentPreview preview;
         private bool automatic, fast, pendingAutomatic, sendingCommand;
@@ -211,8 +212,9 @@ namespace CatCafePreview
                 expected_revision=current.revision,working_cats=new string[0],kind="new_game",choice=objective};
             preview.RefreshPythonControls();
         }
+        public bool CanSaveNow => online && current!=null && !HasPendingResults && !deferredSaveSlot.HasValue && !batchStopRequested && (!AutoPlayRunning || CafeBackends.Standalone) && (pending==null || (CafeBackends.Standalone && batchAutomatic && pending.kind=="step_autoplay"));
         public void SaveGame() { QueueSave("save_game", ""); }
-        public void SaveToSlot(int slot){if(slot<1 || slot>10 || !CanManageSaves)return;QueueSave("save_game", "");pending.save_slot=slot;}
+        public void SaveToSlot(int slot){if(slot<1 || slot>10 || !CanSaveNow)return;QueueSave("save_game", "",slot);}
         public void LoadSaved(string id) { QueueSave("load_game", id); }
         public void LoadPythonSaved(string id) { QueueSave("load_python_game", id); }
         public void ImportLegacy(string path,int slot){if(slot<1 || slot>10 || !CanManageSaves)return;QueueSave("import_legacy_save",path);pending.save_slot=slot;}
@@ -424,12 +426,17 @@ namespace CatCafePreview
             if(!CanRespondVisiting(choice))return;
             QueuePlayer("resolve_visiting_cat",current.visiting_cat.cat_id,choice,"");
         }
-        private void QueueSave(string kind, string id)
+        private void QueueSave(string kind, string id,int slot=0)
         {
-            if (!CanManageSaves) return;
+            if (kind=="save_game" ? !CanSaveNow : !CanManageSaves) return;
+            if(kind=="save_game")
+            {
+                StopAutomatic();batchAutomatic=false;
+                if(pending!=null){deferredSaveSlot=slot;GetComponent<PythonSavePanel>()?.Notify("進行中の処理が終わり次第、保存して一時停止します。");preview.RefreshPythonControls();return;}
+            }
             if (kind == "load_game" || kind == "load_python_game") StopAutomatic();
             pending = new PythonShiftCommand { request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,
-                expected_revision=current.revision,working_cats=new string[0],kind=kind,save_id=id };
+                expected_revision=current.revision,working_cats=new string[0],kind=kind,save_id=id,save_slot=slot };
             GetComponent<PythonSavePanel>()?.Notify(kind=="save_game" ? "保存しています。完了までお待ちください。" : "保存したゲームを読み込んでいます。");
             preview.RefreshPythonControls();
         }
@@ -619,8 +626,11 @@ namespace CatCafePreview
                     }
                 }
                 float until = Time.realtimeSinceStartup + 2;
+                if(deferredSaveSlot.HasValue && CanSendCommands && !HasPendingResults){int slot=deferredSaveSlot.Value;deferredSaveSlot=null;QueueSave("save_game","",slot);}
                 if(automatic) ResetAutomaticTimer();
                 preview.RefreshPythonControls();
+                // Local requests can complete synchronously; give input and rendering a frame.
+                yield return null;
                 while (pending == null && Time.realtimeSinceStartup < until)
                 {
                     if(batchAutomatic || batchStopRequested){QueueAutoPlay();if(pending!=null)break;}
