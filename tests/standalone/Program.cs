@@ -174,6 +174,31 @@ static partial class Program
     static void Main(string[] args)
     {
         if(args.Length>0 && args[0]=="--player-turns"){PlayerTurnsChecks(args[1],args[2]);return;}
+        if(args.Length>0 && args[0]=="--player-presentation")
+        {
+            using var cases=JsonDocument.Parse(File.ReadAllText(args[1]));int count=0;
+            foreach(var fixture in cases.RootElement.GetProperty("cases").EnumerateArray())
+            {
+                var sim=new CafeSimulation(Decode<CafeRules>(fixture.GetProperty("rules").GetRawText()),seed:fixture.GetProperty("seed").GetInt32(),objective:fixture.GetProperty("objective").GetString());
+                foreach(var op in fixture.GetProperty("operations").EnumerateArray())
+                {
+                    try { sim.Execute(op.GetProperty("kind").GetString(),catId:op.GetProperty("cat_id").GetString(),choice:op.GetProperty("choice").GetString(),source:op.GetProperty("source").GetString(),working:op.GetProperty("working").ValueKind==JsonValueKind.Null?null:op.GetProperty("working").EnumerateArray().Select(v=>v.GetString()).ToArray()); Assert(!op.GetProperty("rejected").GetBoolean(),"Python rejected operation was accepted"); } catch(InvalidOperationException) { Assert(op.GetProperty("rejected").GetBoolean(),"Unexpected rejected operation"); } catch(ArgumentException) { Assert(op.GetProperty("rejected").GetBoolean(),"Unexpected invalid operation"); }
+                    using(var actual=JsonDocument.Parse(Encode(sim.State)))Equal(op.GetProperty("expected"),actual.RootElement,"player reactions");
+                    sim.Restore(Decode<CafeSnapshot>(Encode(sim.State)));
+                    var expected=op.GetProperty("presentation");if(expected.ValueKind==JsonValueKind.Null)continue;
+                    var session=sim.State.player_sessions.Last();string presentationBefore=Encode(sim.State);
+                    Assert(CafeSimulation.PlayerActions.Contains("switch") && CafeSimulation.PlayerActions.Length==7,"Player switch button missing");
+                    var switchChoice=expected.GetProperty("actions").EnumerateArray().Single(a=>a.GetProperty("choice").GetString()=="switch");
+                    Assert((sim.PlayerChoiceReason("switch")=="" && session.exchange.end_reason==null)==switchChoice.GetProperty("can_select").GetBoolean(),"Python switch availability differs");
+                    Assert(sim.PlayerHistory(session)==expected.GetProperty("history").GetString(),"Python reaction history differs: "+fixture.GetProperty("variant")+" / "+op.GetProperty("kind"));
+                    Assert(sim.PlayerEventImageKey(session)==expected.GetProperty("event_image_key").GetString(),"Python special image differs");
+                    Assert(CafeSimulation.PlayerTypeName(session.exchange.mode)==expected.GetProperty("mode").GetString(),"Python mode label differs");
+                    if(session.exchange.end_reason!=null)Assert(CafeSimulation.PlayerEndName(session.exchange.end_reason)==expected.GetProperty("reason").GetString(),"Python end label differs");
+                    Assert(presentationBefore==Encode(sim.State),"Presentation mutated save");count++;
+                }
+            }
+            Console.WriteLine("PASS: "+count+" Python player presentation comparisons, "+assertions+" assertions.");return;
+        }
         if(args.Length>0 && args[0]=="--daily"){DailyCases(args);return;}
         if(args.Length>0 && args[0]=="--details"){DetailsCases(args);return;}
         if(args[0]=="--legacy-template" || args[0]=="--finalize-import"){LegacyTool(args);return;}

@@ -94,6 +94,11 @@ namespace CatCafePreview.Editor
                 targets=new[]{new PythonEventChoice{choice="voice",label="声をかける"}},history="1：素直に動かす / 好意的に応じる\n体力95 / 好感度 +0.5"};
             apply();var player=preview.GetComponent<PythonPlayerPanel>();
             if(!player.panel.activeSelf || details.panel.activeSelf || !player.finish.interactable || !player.summary.text.Contains("見込み"))throw new Exception("Active interaction display missing");
+            player.targets.value=1;player.RefreshControls();
+            if(player.actions[0].interactable || !player.actions[1].interactable)throw new Exception("Pending mode selection must enable only switch action");
+            apply();if(player.targets.value!=1 || player.actions[0].interactable)throw new Exception("Polling lost pending switch selection");
+            player.targets.value=0;player.RefreshControls();
+            if(!player.actions[0].interactable || player.actions[1].interactable)throw new Exception("Current mode must restore normal actions");
             Canvas.ForceUpdateCanvases();typeof(ContentPreviewSetup).GetMethod("CaptureCanvas",System.Reflection.BindingFlags.Static|System.Reflection.BindingFlags.NonPublic).Invoke(null,new object[]{preview,"Logs/PlayerInteraction.png"});
             player.Close();apply();if(player.panel.activeSelf)throw new Exception("Dismissed interaction reopened during polling");player.Open();
             player.Disconnect();if(player.finish.interactable || player.actions[0].interactable)throw new Exception("Player offline guard failed");

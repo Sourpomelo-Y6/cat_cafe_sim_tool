@@ -42,6 +42,7 @@ namespace CatCafePreview
         {
             if(current==null || current.actions==null || index<0 || index>=current.actions.Length || !GetComponent<PythonStateClient>().CanPlayerAction(current.actions[index].choice))return;
             int targetIndex=targets.value-1;
+            if(targetIndex>=0 && current.actions[index].choice!="switch")return;
             if(current.actions[index].choice=="switch" && targetIndex<0)return;
             string target=current.targets!=null && targetIndex>=0 && targetIndex<current.targets.Length ? current.targets[targetIndex].choice : "";
             GetComponent<PythonStateClient>().PlayerAction(current.actions[index].choice,target);
@@ -104,18 +105,18 @@ namespace CatCafePreview
                 bool exists=current!=null && current.actions!=null && i<current.actions.Length;
                 var row=exists ? current.actions[i] : null;
                 bool switching=exists && row.choice=="switch";
-                actions[i].interactable=!disconnected && exists && client.CanPlayerAction(row.choice) && (!switching || targets.value>0);
+                actions[i].interactable=!disconnected && exists && client.CanPlayerAction(row.choice) && (switching ? targets.value>0 : targets.value==0);
                 if(actionHints!=null && i<actionHints.Length && actionHints[i]!=null)
                 {
                     var hint=actionHints[i];hint.gameObject.SetActive(exists && current.active);
                     hint.text=!exists ? "" : !row.can_select ? (string.IsNullOrEmpty(row.reason) ? "現在の動作・猫の状態では選べません" : row.reason)
-                        : switching ? (targets.value>0 ? "選んだ動作へ変更（1ターン使用）" : "先に切り替え先を選んでください") : "";
+                        : switching ? (targets.value>0 ? "選んだ動作へ変更（1ターン使用）" : "先に切り替え先を選んでください") : targets.value>0 ? "先に動作を切り替えてください" : "";
                     hint.color=exists && !row.can_select ? new Color(.55f,.29f,.12f) : new Color(.28f,.36f,.30f);
                 }
             }
             if(current!=null && notice!=null)
                 notice.text=disconnected ? "Python未接続です。再接続後に交流を再開できます。" : !client.CanManageSaves ? (client.HasPendingResults ? "未保存の接客結果を先に確定してください。" : client.AutoPlayRunning ? "おまかせ実行中です。" : "通信を確認中です。操作の完了をお待ちください。")
-                    : current.active ? (string.IsNullOrEmpty(current.reason) ? "好感度は終了時に確定。戻っても交流は続きます。" : current.reason) : "好感度は確定済みです。猫の詳細へ戻れます。";
+                    : current.active ? (targets.value>0 ? "「動作を切り替える」を押すと、選んだ動作へ変更します（1ターン使用）。" : string.IsNullOrEmpty(current.reason) ? "好感度は終了時に確定。戻っても交流は続きます。" : current.reason) : "好感度は確定済みです。猫の詳細へ戻れます。";
             if(back!=null)back.interactable=!disconnected && current!=null && client.CanManageSaves;
             targets.interactable=!disconnected && client.CanPlayerAction("switch");finish.interactable=!disconnected && client.CanFinishPlayer;
         }

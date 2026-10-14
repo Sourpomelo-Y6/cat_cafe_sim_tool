@@ -8,10 +8,11 @@ from cat_cafe_sim.cafe_new_game import create_game,starting_conditions
 from cat_cafe_sim.core import cafe_player
 from cat_cafe_sim.core.human_cat_relationship import verify_relationship
 from cat_cafe_sim.cafe_autoplay_player import _short_action
+from cat_cafe_sim.unity_state_server import player_interaction_view
 
-def generate():
+def generate(variants=None):
  cases=[]
- for variant in ('actions','daily','exhaustion','store-gate','funds-end','clear','natural'):
+ for variant in variants or ('actions','daily','exhaustion','store-gate','funds-end','clear','natural'):
   with tempfile.TemporaryDirectory(dir=ROOT/'Logs/Standalone') as temp:
    mode='bond' if variant in ('clear','natural','funds-end') else 'free';rules=exported_rules();selected=starting_conditions(mode)
    rules['store_events']['probability']=selected['store_events']['probability']=1 if variant=='store-gate' else 0
@@ -57,7 +58,7 @@ def generate():
       else:history.append(row)
     after=expected()
     if failed:assert before==after,(variant,kind)
-    case['operations'].append(dict(kind=kind,cat_id=cat_id,choice=choice,source=source,working=working,rejected=failed,expected=after))
+    case['operations'].append(dict(kind=kind,cat_id=cat_id,choice=choice,source=source,working=working,rejected=failed,expected=after,presentation=player_interaction_view(session)))
    def events(accept=True):
     if c.management['game_over']:return
     for e in list((c.activities or {}).get('events',{}).values()):
