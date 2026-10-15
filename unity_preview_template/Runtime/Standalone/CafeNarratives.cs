@@ -24,16 +24,17 @@ namespace CatCafePreview.Standalone
         public void Restore(CafeNarrativeRow[] rows){epoch=sim.State.instance_id;Rows=(rows??new CafeNarrativeRow[0]).ToList();}
         private void Observe(CafeExchange e,string mode,string action,double before,int opened)
         {
-            Sync();if(e.cat_id!="cat-mike")return;
+            Sync();if(e.cat_id!="cat-mike" && !(catalog?.SupportsCat(e.cat_id)??false))return;
             bool player=e.customer_id=="player";var p=player?sim.ActivePlayer:null;
             string session=player?p?.id:"service-"+sim.State.day+"-"+e.customer_id+"-"+e.cat_id+"-"+sim.State.visits.Single(v=>v.id==e.customer_id).seated_at;
             if(session==null)return;
-            var row=Compose(player?"プレイヤー":CustomerName(e.customer_id),mode,action,e.previous_reaction,before,e.stamina,e.open_up_count>opened,action=="connect");
+            var row=Compose(player?"プレイヤー":CustomerName(e.customer_id),mode,action,e.previous_reaction,before,e.stamina,e.open_up_count>opened,action=="connect",sim.Definition(e.cat_id).name);
+            row.cat_id=e.cat_id;
             if(catalog!=null)ApplyCatalog(row,player?"player":e.customer_id,player?"プレイヤー":CustomerName(e.customer_id),before,e.stamina,e.open_up_count>opened);
             row.day=sim.State.day;row.session=session;row.cat_id=e.cat_id;row.customer_id=e.customer_id;row.seat=player?-1:e.seat;row.turn=player?p.actions.Count+1:sim.State.visits.Single(v=>v.id==e.customer_id).seated_ticks+1;
             Rows.Add(row);
         }
-        public static CafeNarrativeRow Compose(string human,string mode,string action,string reaction,double before,double after,bool opened=false,bool connect=false)
+        public static CafeNarrativeRow Compose(string human,string mode,string action,string reaction,double before,double after,bool opened=false,bool connect=false,string catName="ミケ")
         {
             string speech,move,cat,scene;
             if(action=="pause"){speech="少し休もうか。";move="は手を止め、ミケが落ち着くのを待った。";cat=before<=20?"ミケは体を丸め、ゆっくり息を整えた。":"ミケは前足をそろえ、静かに座った。";scene=after>before?"ひと息つく間に、体力が少し戻った。":"急がず、静かな時間を過ごした。";}
@@ -48,6 +49,7 @@ namespace CatCafePreview.Standalone
             }
             if(opened)cat+=" ミケは心を開いた様子を見せた。";
             if(after==0)scene+=" 体力が尽き、交流を切り上げた。";
+            speech=speech.Replace("ミケ",catName);move=move.Replace("ミケ",catName);cat=cat.Replace("ミケ",catName);
             var row=new CafeNarrativeRow{mode=mode,action=action,reaction=reaction??"received",speech=speech,human_action=human+move,cat_response=cat,narration=scene};
             row.text=Format(row,human,before,after);return row;
         }
@@ -56,24 +58,25 @@ namespace CatCafePreview.Standalone
         {
             string mode=row.action=="pause"?"pause":row.mode;
             if(!new[]{"teaser","pet","pause"}.Contains(mode) || !new[]{"direct","adapt","intense","feint","pause"}.Contains(row.action))return;
+            string catName=sim.Definition(row.cat_id).name;
             row.catalog_revision=catalog.revision;
-            var speech=catalog.Find("speech",person,mode,row.action,"any");
-            var cat=catalog.Find("cat_response","cat-mike",mode,row.action,row.reaction);
+            var speech=catalog.Find("speech",person,mode,row.action,"any",row.cat_id);
+            var cat=catalog.Find("cat_response",row.cat_id,mode,row.action,row.reaction,row.cat_id);
             if(speech!=null)
             {
                 var previous=Rows.LastOrDefault(r=>r.speech_pool==speech.Key());var chosen=Next(speech,previous?.speech_id,Rows.LastOrDefault(r=>r.customer_id==person)?.speech);
-                row.speech=chosen.text;row.speech_id=chosen.id;row.speech_pool=speech.Key();
+                row.speech=catalog.Expand(chosen.text,person,catName);row.speech_id=chosen.id;row.speech_pool=speech.Key();
             }
             if(cat!=null)
             {
-                var previous=Rows.LastOrDefault(r=>r.cat_pool==cat.Key());var chosen=Next(cat,previous?.cat_text_id,Rows.LastOrDefault()?.cat_response);
-                row.cat_response=chosen.text+(opened?" ミケは心を開いた様子を見せた。":"");row.cat_text_id=chosen.id;row.cat_pool=cat.Key();
+                var previous=Rows.LastOrDefault(r=>r.cat_pool==cat.Key());var chosen=Next(cat,previous?.cat_text_id,Rows.LastOrDefault(r=>r.cat_id==row.cat_id)?.cat_response);
+                row.cat_response=catalog.Expand(chosen.text,person,catName)+(opened?" "+catName+"は心を開いた様子を見せた。":"");row.cat_text_id=chosen.id;row.cat_pool=cat.Key();
             }
             var move=catalog.action_texts.FirstOrDefault(r=>r.mode==mode && r.action==row.action);
-            if(move!=null)row.human_action=move.text.Replace("{human}",human).Replace("{cat}","ミケ");
+            if(move!=null)row.human_action=move.text.Replace("{human}",human).Replace("{cat}",catName);
             string scene=mode=="pause"?catalog.rest_narration:catalog.narration_texts.FirstOrDefault(r=>r.reaction==row.reaction)?.text;
             if(scene!=null)row.narration=scene+(mode=="pause" && after>before?" 体力が少し戻った。":"")+(after==0?" 体力が尽き、交流を切り上げた。":"");
-            var image=catalog.image_bindings.FirstOrDefault(i=>i.scene_key==CafeNarrativeCatalog.Scene(mode,row.action));
+            var image=catalog.image_bindings.FirstOrDefault(i=>i.cat_id==row.cat_id && i.scene_key==CafeNarrativeCatalog.Scene(mode,row.action));
             // Existing special-event images keep priority when this action also opens up.
             if(image!=null && image.image!="" && !opened)
             {row.image_resource="CatCafeContent/Imports/"+catalog.pack_id+"/"+image.image.Substring(0,image.image.Length-4);row.image_scene_key=image.resolved_scene_key;}
@@ -91,12 +94,12 @@ namespace CatCafePreview.Standalone
             var rows=save.narratives??new CafeNarrativeRow[0];if(rows.Length>100000)throw new ArgumentException("Too many narrative receipts");var keys=new HashSet<string>();
             foreach(var r in rows)
             {
-                if(r==null || r.version!=1 || r.day<1 || r.day>save.state.day || r.cat_id!="cat-mike" || string.IsNullOrEmpty(r.session) || r.turn<1 || string.IsNullOrEmpty(r.text) || r.text.Length>3000 || !keys.Add(r.session+"/"+r.turn))throw new ArgumentException("Invalid narrative receipt");
+                if(r==null || r.version!=1 || r.day<1 || r.day>save.state.day || !CafeNarrativeCatalog.Id(r.cat_id) || string.IsNullOrEmpty(r.session) || r.turn<1 || string.IsNullOrEmpty(r.text) || r.text.Length>3000 || !keys.Add(r.session+"/"+r.turn))throw new ArgumentException("Invalid narrative receipt");
                 if(!string.IsNullOrEmpty(r.catalog_revision) && !CafeNarrativeCatalog.Hex(r.catalog_revision,64)
                     || !string.IsNullOrEmpty(r.image_resource) && !CafeNarrativeCatalog.Resource(r.image_resource))throw new ArgumentException("Invalid saved narrative catalog/image");
                 foreach(string id in new[]{r.speech_id,r.cat_text_id})if(!string.IsNullOrEmpty(id) && (!CafeNarrativeCatalog.Hex(id,32) || string.IsNullOrEmpty(r.catalog_revision)))throw new ArgumentException("Invalid saved narrative candidate");
                 if(string.IsNullOrEmpty(r.speech_id)!=string.IsNullOrEmpty(r.speech_pool) || string.IsNullOrEmpty(r.cat_text_id)!=string.IsNullOrEmpty(r.cat_pool)
-                    || (r.speech_pool?.Length??0)>200 || (r.cat_pool?.Length??0)>200
+                    || (r.speech_pool?.Length??0)>400 || (r.cat_pool?.Length??0)>400
                     || new[]{r.speech,r.human_action,r.cat_response,r.narration}.Any(s=>(s?.Length??0)>1200))throw new ArgumentException("Invalid saved narrative fields");
             }
         }

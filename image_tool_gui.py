@@ -13,14 +13,18 @@ class ContentImageToolWindow:
         self.window = tk.Toplevel(parent)
         self.window.title('猫の素材制作')
         self.window.protocol('WM_DELETE_WINDOW', self.close)
-        self.catalog_provider = catalog_provider
+        self.base_catalog_provider = catalog_provider
         self.registry = registry or ImageRegistry()
+        from interaction_subjects import SubjectRegistry
+        self.subject_registry=SubjectRegistry(self.registry.directory/'interaction_subjects.json')
+        self.catalog_provider=lambda subjects=self.subject_registry,base=catalog_provider:subjects.image_catalog(base())
         from content_texts import TextStore, DEFAULT_DRAFT_PATH
         self.text_drafts = text_drafts or TextStore(DEFAULT_DRAFT_PATH)
         self.published_texts = TextStore(self.registry.directory / 'texts.json')
         from interaction_texts import InteractionTextStore, DEFAULT_DRAFT_PATH as INTERACTION_DRAFT_PATH
         self.interaction_drafts = interaction_drafts or InteractionTextStore(INTERACTION_DRAFT_PATH)
-        self.interaction_published = InteractionTextStore(self.registry.directory / 'interaction_texts.json', published=True)
+        self.interaction_drafts.subject_registry=self.subject_registry
+        self.interaction_published = InteractionTextStore(self.registry.directory / 'interaction_texts.json', published=True, subject_registry=self.subject_registry)
         from prompt_presets import PromptPresets
         self.presets = presets or PromptPresets()
         from lora_settings import LoraSettings
@@ -46,10 +50,15 @@ class ContentImageToolWindow:
         self.tabs = ttk.Notebook(frame)
         self.tabs.pack(fill='both', expand=True)
         self.pages = {}
-        for name in ('画像', '文章', '生成設定'):
+        for name in ('対象管理', '画像', '文章', '生成設定'):
             page = ttk.Frame(self.tabs, padding=12)
             self.tabs.add(page, text=name)
             self.pages[name] = page
+        subjects_page=self.pages['対象管理']
+        ttk.Label(subjects_page,text='猫・人物・お客さんを追加し、生成用の資料とゲーム・画像IDの対応を管理します。',wraplength=780).pack(anchor='w',pady=12)
+        ttk.Button(subjects_page,text='猫・人物の登録と資料…',command=self.open_subject_manager).pack(anchor='w')
+        ttk.Label(subjects_page,text='登録した対象は文章編集・連続生成で選べます。ゲームIDが空欄の対象は制作専用です。',wraplength=780).pack(anchor='w',pady=12)
+        self.tabs.select(self.pages['画像'])
         image_page = self.pages['画像']
         selection = ttk.LabelFrame(image_page, text='1. 場面・行動を選ぶ', padding=10)
         selection.pack(fill='x')
@@ -130,7 +139,22 @@ class ContentImageToolWindow:
         editor = getattr(self, 'interaction_text_editor', None)
         if editor is not None and editor.window.winfo_exists() and not editor.confirm_leave():
             return
+        manager=getattr(self,'subject_manager',None)
+        if manager is not None and manager.window.winfo_exists() and not manager.confirm_leave():return
         self.window.destroy()
+
+    def open_subject_manager(self):
+        from interaction_subject_gui import SubjectManagerWindow
+        existing=getattr(self,'subject_manager',None)
+        if existing is not None and existing.window.winfo_exists():existing.window.lift();return
+        def saved():
+            self.cats={f'{name}（{id}）':id for id,name in self.catalog_provider().items()}
+            self.cat_selector.configure(values=list(self.cats))
+            editor=getattr(self,'interaction_text_editor',None)
+            if editor is not None and editor.window.winfo_exists():editor.refresh_subjects()
+        try:
+            self.subject_manager=SubjectManagerWindow(self.window,self.subject_registry,catalog=self.catalog_provider(),drafts=self.interaction_drafts,published=self.interaction_published,on_saved=saved)
+        except (OSError,ValueError) as exc:self.notice.set(f'対象台帳を開けません：{exc}')
 
     def reload_cats(self):
         catalog = self.catalog_provider()
@@ -332,7 +356,7 @@ class ContentImageToolWindow:
         try:
             self.interaction_text_editor = InteractionTextEditorWindow(
                 self.window, self.interaction_drafts, self.interaction_published,
-                image_registry=self.registry, catalog_provider=self.catalog_provider)
+                image_registry=self.registry, catalog_provider=self.catalog_provider, subject_registry=self.subject_registry)
         except (OSError, ValueError) as exc:
             self.notice.set(f'日常交流の文章を開けません：{exc}')
 

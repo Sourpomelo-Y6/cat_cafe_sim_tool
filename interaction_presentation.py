@@ -84,33 +84,33 @@ def select_entry(entries, value, *, overlay=None):
         validate_entry(overlay)
         rows = [(row, source) for row, source in rows if key(row['condition']) != key(overlay['condition'])]
         rows.append((overlay, '編集中・未登録'))
-    targets = [value]
-    if value['action'] not in ('any', 'pause'):
-        targets.append(condition(value['kind'], value['subject_id'], value['mode'], 'any', value['reaction']))
-    for target in targets:
-        for row, source in rows:
-            if key(row['condition']) == key(target):
-                candidates = [v for v in row['variants'] if v['text']]
-                if candidates:
-                    return dict(candidates=candidates, source=source,
-                                match='専用' if target == value else '操作共通', condition=row['condition'])
+    cat_id = value.get('target_cat', 'cat-mike')
+    for scope in ([cat_id, '*'] if value['kind']=='speech' and cat_id!='*' else [cat_id]):
+        for action in dict.fromkeys([value['action'], 'any']):
+            for row, source in rows:
+                c=row['condition']
+                if (all(c[k]==value[k] for k in ('kind','subject_id','mode','reaction'))
+                        and c['action']==action and (c['kind']!='speech' or c.get('target_cat','cat-mike')==scope)):
+                    candidates=[v for v in row['variants'] if v['text']]
+                    if candidates:return dict(candidates=candidates,source=source,
+                        match='専用' if action==value['action'] else '操作共通',condition=c)
     return dict(candidates=[], source='未制作', match='', condition=value)
 
 
-def expected_conditions():
-    for kind, subjects in SUBJECTS.items():
-        for subject in subjects:
+def expected_conditions(subjects=None, target_cat=None):
+    for kind, members in (subjects or SUBJECTS).items():
+        for subject in members:
             for mode in MODES:
                 for action in actions(mode):
                     if action == 'any':
                         continue
                     for reaction in reactions(kind, mode):
-                        yield condition(kind, subject, mode, action, reaction)
+                        yield condition(kind, subject, mode, action, reaction, subjects=subjects,target_cat=target_cat if kind=="speech" else None)
 
 
-def coverage(entries):
+def coverage(entries, subjects=None, target_cat=None):
     missing, covered, common = [], 0, 0
-    for value in expected_conditions():
+    for value in expected_conditions(subjects,target_cat):
         found = select_entry(entries, value)
         if not found['candidates']:
             missing.append(value)
@@ -121,9 +121,9 @@ def coverage(entries):
                 common_count=common, missing_count=len(missing), missing_conditions=missing)
 
 
-def condition_label(value):
+def condition_label(value, subjects=None):
     from interaction_scenes import ACTION_LABELS
-    return ('人物：' if value['kind'] == 'speech' else '猫：') + SUBJECTS[value['kind']][value['subject_id']] \
+    return ('人物：' if value['kind'] == 'speech' else '猫：') + (subjects or SUBJECTS)[value['kind']][value['subject_id']] \
         + ' ／ ' + MODES[value['mode']] + ' ／ ' + ACTION_LABELS.get(value['action'], '操作共通') \
         + ' ／ ' + REACTIONS.get(value['reaction'], '反応指定なし')
 
@@ -143,19 +143,26 @@ NARRATION_TEXTS = [dict(reaction=reaction, text=text) for reaction, text in [
 REST_NARRATION = '急がず、静かな休憩の時間を過ごした。'
 
 
-def compose_preview(human, mode, action, reaction, speech, cat_response):
+def compose_preview(human, mode, action, reaction, speech, cat_response, cat_name="ミケ", call="{cat}"):
+    from interaction_subjects import expand
+    speech, cat_response = expand(speech, cat_name, call), expand(cat_response, cat_name, call)
     move = next(r['text'] for r in ACTION_TEXTS if r['mode'] == mode and r['action'] == action)
     narration = REST_NARRATION if mode == 'pause' else next(r['text'] for r in NARRATION_TEXTS if r['reaction'] == reaction)
     return (human + '「' + speech + '」' if speech else '（未制作：人物のセリフ）') + '\n' \
-        + move.format(human=human, cat='ミケ') + '\n\n' \
-        + (cat_response or '（未制作：ミケの反応）') + '\n\n' + narration
+        + move.format(human=human, cat=cat_name) + '\n\n' \
+        + (cat_response or '（未制作：'+cat_name+'の反応）') + '\n\n' + narration
 
 
 def build_interaction_catalog(catalog, registry, *, store=None, bindings=None):
-    store = store or InteractionTextStore(registry.directory / 'interaction_texts.json', published=True)
+    if store is None:
+        from interaction_subjects import SubjectRegistry
+        subjects=SubjectRegistry(registry.directory/'interaction_subjects.json')
+        store=InteractionTextStore(registry.directory/'interaction_texts.json',published=True,subject_registry=subjects if subjects.path.exists() else None)
     if not store.published:
         raise ValueError('Unity向けには登録済み文章ストアを指定してください。')
     entries = store.read()['entries']
+    if getattr(store, 'subject_registry', None):
+        return build_registered_catalog(catalog, registry, store, entries)
     bindings = bindings or InteractionImageBindings(registry.directory / 'interaction_image_bindings.json')
     content_id = bindings.get(catalog)
     result = dict(version=1, cat_bindings=[dict(cat_id=CAT_ID, content_cat_id=content_id)],
@@ -180,3 +187,36 @@ def build_interaction_catalog(catalog, registry, *, store=None, bindings=None):
     result['revision'] = hashlib.sha256(json.dumps(result, ensure_ascii=False, sort_keys=True,
                                                   separators=(',', ':')).encode('utf-8')).hexdigest()
     return result, report, blobs
+
+
+def build_registered_catalog(catalog, registry, store, entries):
+    subjects=store.subject_registry
+    rows=[r for r in subjects.read()['subjects'] if r['enabled'] and r['game_id']]
+    cats=[r for r in rows if r['kind']=='cat_response']
+    people=[r for r in rows if r['kind']=='speech']
+    ids={r['id'] for r in rows}; cat_ids={r['id'] for r in cats}
+    result=dict(version=2,cat_bindings=[dict(cat_id=r['game_id'],content_cat_id=r['content_id'],subject_id=r['id'],name=r['name']) for r in cats],
+        people=[dict(id=r['id'],name=r['name'],game_id=r['game_id'],call=r['call']) for r in people],
+        entries=[],image_bindings=[],action_texts=copy.deepcopy(ACTION_TEXTS),narration_texts=copy.deepcopy(NARRATION_TEXTS),rest_narration=REST_NARRATION)
+    for entry in sorted(entries,key=lambda r:key(r['condition'])):
+        c=entry['condition']; target=c.get('target_cat','cat-mike') if c['kind']=='speech' else ''
+        if c['subject_id'] not in ids or (target and target!='*' and target not in cat_ids):continue
+        from interaction_subjects import expand
+        person=next((r for r in people if r['id']==c['subject_id']),None)
+        for cat in cats:
+            if (c['kind']=='cat_response' and cat['id']==c['subject_id'] or c['kind']=='speech' and target in ('*',cat['id'])):
+                for v in entry['variants']:expand(v['text'],cat['name'],person['call'] if person else '{cat}')
+        result['entries'].append(dict(c,target_cat=target,pool_key=key(c),variants=[copy.deepcopy(v) for v in entry['variants'] if v['text']]))
+    blobs,warnings={},[]
+    for cat in cats:
+        for mode in MODES:
+            for action in actions(mode):
+                image=resolve_image(registry,cat['content_id'],mode,action)
+                result['image_bindings'].append(dict(cat_id=cat['game_id'],content_cat_id=cat['content_id'],scene_key=image['requested_scene_key'],resolved_scene_key=image['resolved_scene_key'],image=image['image']))
+                warnings.extend(cat['name']+' / '+image['requested_scene_key']+'：'+w for w in image['warnings'])
+                if image['data'] is not None:blobs[image['image']]=image['data']
+    report=coverage(entries,subjects.labels())
+    report.update(entry_count=len(result['entries']),candidate_count=sum(len(e['variants']) for e in result['entries']),image_warnings=warnings,
+        excluded_entry_count=len(entries)-len(result['entries']),excluded_subjects=[dict(id=r['id'],name=r['name'],reason='利用対象外' if not r['enabled'] else 'ゲームID未対応') for r in subjects.read()['subjects'] if not r['enabled'] or not r['game_id']])
+    result['revision']=hashlib.sha256(json.dumps(result,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode('utf-8')).hexdigest()
+    return result,report,blobs

@@ -4,6 +4,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="NarrativeChecks.cs" />
     <Compile Include="CatalogChecks.cs" />
+    <Compile Include="SubjectCatalogChecks.cs" />
     <Compile Include="PlayerTurnsChecks.cs" />
     <Compile Include="StaminaChecks.cs" />
     <Compile Include="StaminaBalance.cs" />

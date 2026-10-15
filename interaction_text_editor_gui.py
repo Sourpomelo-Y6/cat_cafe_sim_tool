@@ -11,10 +11,17 @@ REACTION_NAMES = dict(REACTIONS, any='指定なし（人物のセリフ）')
 
 class InteractionTextEditorWindow:
     def __init__(self, parent, drafts, published, *, generation_settings=None, generation_output=None,
-                 image_registry=None, catalog_provider=None):
+                 image_registry=None, catalog_provider=None, subject_registry=None):
         import tkinter as tk
         from tkinter import ttk
         from tkinter.scrolledtext import ScrolledText
+        self.subject_registry=subject_registry or getattr(published,'subject_registry',None)
+        if self.subject_registry:
+            drafts.subject_registry=published.subject_registry=self.subject_registry
+            from interaction_llm import InteractionLlmSettings
+            generation_settings=generation_settings or InteractionLlmSettings(subject_registry=self.subject_registry)
+            generation_settings.subject_registry=self.subject_registry
+        self.subjects=self.subject_registry.labels(include_disabled=True) if self.subject_registry else SUBJECTS
         # 初回読込に失敗しても、空の編集画面や上書き経路を作らない。
         drafts.read()
         published.read()
@@ -53,6 +60,13 @@ class InteractionTextEditorWindow:
             row=6, column=0, sticky='ew', padx=(0, 8), pady=(2, 0))
         self.batch_button = ttk.Button(grid, text='人物のセリフを連続生成…', command=self.open_batch_generation)
         self.batch_button.grid(row=6, column=1, sticky='ew', padx=(0, 8), pady=(2, 0))
+        self.target_cat=tk.StringVar(master=self.window,value='従来のミケ専用')
+        self.target_options={'従来のミケ専用':None,'どの猫でも使う（{cat_call}）':'*'}
+        self.target_options.update({name+'専用':id for id,name in self.subjects['cat_response'].items() if id!='cat-mike'})
+        target=ttk.Combobox(grid,textvariable=self.target_cat,values=list(self.target_options),state='readonly')
+        target.grid(row=7,column=0,columnspan=2,sticky='ew',padx=(0,8),pady=2)
+        self.target_selector=target
+        target.bind('<<ComboboxSelected>>',self.selection_changed)
         self.scope = tk.StringVar(master=self.window)
         ttk.Label(frame, textvariable=self.scope, wraplength=760).pack(anchor='w', pady=4)
         self.fields = []
@@ -77,16 +91,25 @@ class InteractionTextEditorWindow:
         self.load_condition(condition())
 
     def _set_selectors(self, value):
+        self.target_selector.configure(values=list(self.target_options),state='readonly' if value['kind']=='speech' else 'disabled')
         self.batch_button.configure(text='猫の反応を連続生成…' if value['kind'] == 'cat_response' else '人物のセリフを連続生成…')
-        maps = {'kind': KINDS, 'subject_id': SUBJECTS[value['kind']], 'mode': MODES,
+        maps = {'kind': KINDS, 'subject_id': self.subjects[value['kind']], 'mode': MODES,
                 'action': {k: ACTION_NAMES[k] for k in actions(value['mode'])},
                 'reaction': {k: REACTION_NAMES[k] for k in reactions(value['kind'], value['mode'])}}
         for name, labels in maps.items():
             self.selectors[name].configure(values=list(labels.values()))
             self.choices[name].set(labels[value[name]])
+        if 'target_cat' in value:
+            self.target_cat.set(next((label for label,id in self.target_options.items() if id==value['target_cat']), 'どの猫でも使う（{cat_call}）'))
+        else:self.target_cat.set('従来のミケ専用')
         self.selectors['reaction'].configure(state='disabled' if value['kind'] == 'speech' else 'readonly')
         self.scope.set('対象ID：' + value['subject_id'] + '　／　画像の場面キー：' + value['scene_key']
-                       + '　／　交流相手の猫：ミケ（cat-mike）')
+                       + '　／　猫名は {cat}、呼び名は {cat_call} で差し込めます。')
+
+    def refresh_subjects(self):
+        if self.subject_registry:self.subjects=self.subject_registry.labels(include_disabled=True)
+        self.target_options.update({name+'専用':id for id,name in self.subjects['cat_response'].items() if id!='cat-mike'})
+        if self._condition:self._set_selectors(self._condition)
 
     def values(self):
         return make_entry(self._condition, [w.get('1.0', 'end-1c') for w in self.fields])
@@ -149,12 +172,14 @@ class InteractionTextEditorWindow:
         def selected(name, labels, default):
             return next((k for k, label in labels.items() if label == self.choices[name].get()), default)
         kind = selected('kind', KINDS, 'speech')
-        subject = selected('subject_id', SUBJECTS[kind], next(iter(SUBJECTS[kind])))
+        subject = selected('subject_id', self.subjects[kind], next(iter(self.subjects[kind])))
         mode = selected('mode', MODES, 'teaser')
         action = selected('action', {k: ACTION_NAMES[k] for k in actions(mode)}, actions(mode)[0])
         reaction = selected('reaction', {k: REACTION_NAMES[k] for k in reactions(kind, mode)},
                             reactions(kind, mode)[0])
-        self.load_condition(condition(kind, subject, mode, action, reaction))
+        target=self.target_options.get(self.target_cat.get()) if kind=='speech' else None
+        if kind=='speech' and subject not in ('player','guest-1') and target is None:target='*'
+        self.load_condition(condition(kind, subject, mode, action, reaction, subjects=self.subjects, target_cat=target))
 
     def reload(self):
         return self.load_condition(self._condition)
@@ -190,7 +215,7 @@ class InteractionTextEditorWindow:
             entry = self.values()
             validate_entry(entry, published=True)
             value = entry['condition']
-            text = [KINDS[value['kind']] + '：' + SUBJECTS[value['kind']][value['subject_id']],
+            text = [KINDS[value['kind']] + '：' + self.subjects[value['kind']][value['subject_id']],
                     MODES[value['mode']] + ' ／ ' + ACTION_NAMES[value['action']] + ' ／ '
                     + REACTION_NAMES[value['reaction']], '画像の場面キー：' + value['scene_key']]
             text.extend(f"案{r['slot']}：{r['text'] or '（未制作・登録候補なし）'}" for r in entry['variants'])
@@ -232,7 +257,7 @@ class InteractionTextEditorWindow:
             if existing is not None and existing.window.winfo_exists():
                 existing.window.destroy()
             self.preview_window = InteractionPreviewWindow(self.window, self.catalog_provider(),
-                                     self.image_registry, self.published, editing_entry=entry)
+                                     self.image_registry, self.published, editing_entry=entry, drafts=self.drafts)
         except (OSError, ValueError) as exc:
             self.notice.set(f'プレビューを開けません：{exc}')
 
@@ -299,8 +324,10 @@ class InteractionTextEditorWindow:
             if value == self._condition:
                 entries.append(self.values())
             return any(row['text'] for entry in entries if entry for row in entry['variants'])
+        def get_entry(value):
+            return self.values() if value==self._condition else self.drafts.get(value) or self.published.get(value)
         try:
-            options = dict(settings=self.generation_settings, has_text=has_text, kind=kind)
+            options = dict(get_entry=get_entry, settings=self.generation_settings, has_text=has_text, kind=kind, subject_registry=self.subject_registry, initial_subject=self._condition['subject_id'], target_cat=self._condition.get('target_cat'))
             if self.generation_output is not None:
                 options['output'] = self.generation_output
             self.batch_window = InteractionBatchWindow(self.window, result, **options)

@@ -6,7 +6,7 @@ from interaction_presentation import (InteractionImageBindings, resolve_image, s
 
 
 class InteractionPreviewWindow:
-    def __init__(self, parent, catalog, registry, published, *, editing_entry=None, bindings=None):
+    def __init__(self, parent, catalog, registry, published, *, editing_entry=None, bindings=None, drafts=None):
         import tkinter as tk
         from tkinter import ttk
         from tkinter.scrolledtext import ScrolledText
@@ -14,7 +14,11 @@ class InteractionPreviewWindow:
             validate_entry(editing_entry)
         self.entries = published.read()['entries']
         self.catalog, self.registry, self.published = dict(catalog), registry, published
+        self.subject_registry=getattr(published,"subject_registry",None)
+        self.subjects=self.subject_registry.labels(include_disabled=True) if self.subject_registry else SUBJECTS
+        self.selected_cat=None
         self.overlay, self.image = editing_entry, None
+        self.drafts=drafts
         self.bindings = bindings or InteractionImageBindings(registry.directory / 'interaction_image_bindings.json')
         binding_error = ''
         try:
@@ -47,12 +51,17 @@ class InteractionPreviewWindow:
             combo.grid(row=row + 1, column=col, sticky='ew', padx=(0, 8))
             combo.bind('<<ComboboxSelected>>', lambda event: self.render())
             self.variables[name], self.selectors[name] = var, combo
-        for name, labels in [('human', SUBJECTS['speech']), ('mode', MODES),
+        for name, labels in [('human', self.subjects['speech']), ('mode', MODES),
                              ('action', dict(ACTION_LABELS, any='操作共通')), ('reaction', REACTIONS)]:
             self.variables[name].set(labels[defaults[name]])
         line = ttk.Frame(frame)
         line.pack(fill='x', pady=6)
-        ttk.Label(line, text='ミケ（cat-mike）の制作画像ID：').pack(side='left')
+        self.cat_subject=tk.StringVar(master=self.window,value=self.subjects['cat_response'].get(initial['subject_id'],next(iter(self.subjects['cat_response'].values()))))
+        ttk.Label(line,text='対象猫：').pack(side='left')
+        self.cat_selector=ttk.Combobox(line,textvariable=self.cat_subject,values=list(self.subjects['cat_response'].values()),state='readonly',width=12)
+        self.cat_selector.pack(side='left')
+        self.cat_selector.bind('<<ComboboxSelected>>',lambda event:self.render())
+        ttk.Label(line,text='制作画像ID：').pack(side='left')
         self.image_ids = {'未設定': ''}
         self.image_ids.update({f'{name}（{id}）': id for id, name in self.catalog.items()})
         self.content = tk.StringVar(master=self.window, value=next(label for label, id in self.image_ids.items() if id == content_id))
@@ -115,9 +124,11 @@ class InteractionPreviewWindow:
     def save_binding(self):
         try:
             content_id = self.image_ids[self.content.get()]
-            self.bindings.save(content_id, self.catalog)
+            if self.subject_registry:
+                row=self.subject_registry.get(self.selected_cat);row['content_id']=content_id;self.subject_registry.save(row)
+            else:self.bindings.save(content_id, self.catalog)
             self.saved_content_id = content_id
-            self.notice.set('ミケと制作画像IDの対応を保存しました。文章・ゲームのセーブは変更していません。')
+            self.notice.set('対象猫と制作画像IDの対応を保存しました。文章・ゲームのセーブは変更していません。')
             self.render()
         except (OSError, ValueError, KeyError) as exc:
             self.notice.set(f'対応を保存できません：{exc}')
@@ -131,14 +142,20 @@ class InteractionPreviewWindow:
             if self.variables[name].get() not in labels.values():
                 self.variables[name].set(next(iter(labels.values())))
             return next(k for k, label in labels.items() if label == self.variables[name].get())
-        human = choice('human', SUBJECTS['speech'])
+        human = choice('human', self.subjects['speech'])
+        cat_id=next(k for k,v in self.subjects['cat_response'].items() if v==self.cat_subject.get())
+        if self.selected_cat!=cat_id:
+            self.selected_cat=cat_id
+            if self.subject_registry:
+                self.saved_content_id=self.subject_registry.get(cat_id)['content_id']
+                self.content.set(next((label for label,id in self.image_ids.items() if id==self.saved_content_id),'未設定'))
         mode = choice('mode', MODES)
         action = choice('action', {k: ACTION_LABELS[k] for k in actions(mode) if k != 'any'})
         reaction = choice('reaction', {k: REACTIONS[k] for k in reactions('cat_response', mode)})
         selections, texts = [], []
         for name, kind, subject, outcome in [('speech', 'speech', human, 'any'),
-                                              ('cat', 'cat_response', 'cat-mike', reaction)]:
-            found = select_entry(self.entries, condition(kind, subject, mode, action, outcome),
+                                              ('cat', 'cat_response', cat_id, reaction)]:
+            found = select_entry(self.entries, condition(kind, subject, mode, action, outcome, subjects=self.subjects, target_cat=cat_id if kind=='speech' else None),
                                  overlay=self.overlay if self.use_edit.get() else None)
             labels = {str(i): '案' + str(v['slot']) for i, v in enumerate(found['candidates'])}
             if labels:
@@ -150,7 +167,7 @@ class InteractionPreviewWindow:
                 texts.append('')
             selections.append(('人：' if name == 'speech' else '猫：') + found['source'] + ' ' + found['match'])
         self.source_notice.set(' ／ '.join(selections) + '（専用操作を優先、なければ同じ反応の操作共通文）')
-        self.write(self.body, compose_preview(SUBJECTS['speech'][human], mode, action, reaction, *texts))
+        self.write(self.body, compose_preview(self.subjects['speech'][human], mode, action, reaction, *texts, cat_name=self.subjects['cat_response'][cat_id],call=self.subject_registry.get(human)['call'] if self.subject_registry else '{cat}'))
         self.image = None
         self.picture.configure(image='', text='画像なし')
         try:
@@ -166,7 +183,19 @@ class InteractionPreviewWindow:
                 self.picture.configure(image=self.image, text='')
         except (OSError, ValueError, tk.TclError) as exc:
             self.image_notice.set(f'画像を表示できません：{exc}')
-        report = coverage(self.entries)
+        report = coverage(self.entries,dict(speech=self.subjects['speech'],cat_response={cat_id:self.subjects['cat_response'][cat_id]}),cat_id)
         self.write(self.missing_text, f"登録済みで対応：{report['covered_count']} / {report['expected_count']}条件"
                    + f"（操作共通文を利用：{report['common_count']}）\n未制作：{report['missing_count']}条件\n\n"
-                   + '\n'.join(condition_label(v) for v in report['missing_conditions']))
+                   + '\n'.join(condition_label(v,self.subjects) for v in report['missing_conditions']))
+        if self.drafts:
+            from interaction_texts import key
+            from interaction_presentation import expected_conditions
+            drafts=self.drafts.read()['entries'];registered={key(e['condition']):e for e in self.entries};working={key(e['condition']):e for e in drafts}
+            values={key(v):v for v in expected_conditions(self.subjects,cat_id)}
+            for e in drafts+self.entries:values[key(e['condition'])]=e['condition']
+            lines=[]
+            for identity,value in sorted(values.items()):
+                d,p=working.get(identity),registered.get(identity)
+                count=lambda e:sum(bool(v['text']) for v in e['variants']) if e else 0
+                lines.append(condition_label(value,self.subjects)+' / 下書き '+str(count(d))+' / 登録 '+str(count(p))+(' / 登録版と差分あり' if d and d!=p else '')+(' / 猫範囲 '+value.get('target_cat','cat-mike') if value['kind']=='speech' else ''))
+            self.write(self.missing_text,self.missing_text.get('1.0','end-1c')+'\n\n── 条件別の制作状況（直接登録の案数） ──\n'+'\n'.join(lines))

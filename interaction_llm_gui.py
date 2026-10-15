@@ -16,6 +16,7 @@ class InteractionLlmWindow(LlmGenerationWindow):
         from tkinter import ttk
         from tkinter.scrolledtext import ScrolledText
         self.settings = settings or InteractionLlmSettings()
+        self.subjects=self.settings.subject_registry.labels(include_disabled=True) if self.settings.subject_registry else SUBJECTS
         saved = self.settings.get(value)  # 壊れた設定は開く前に報告し、上書きしない。
         self.value = copy.deepcopy(value)
         self.on_result, self.output = on_result, output
@@ -28,7 +29,7 @@ class InteractionLlmWindow(LlmGenerationWindow):
         self.window.bind('<Destroy>', self.destroyed)
         frame = ttk.Frame(self.window, padding=12)
         frame.pack(fill='both', expand=True)
-        self.target = (KINDS[value['kind']] + ' ／ ' + SUBJECTS[value['kind']][value['subject_id']]
+        self.target = (KINDS[value['kind']] + ' ／ ' + self.subjects[value['kind']][value['subject_id']]
                        + ' ／ ' + MODES[value['mode']] + ' ／ '
                        + ACTION_LABELS.get(value['action'], '動作共通') + ' ／ '
                        + REACTIONS.get(value['reaction'], '人物のセリフ・結果指定なし')
@@ -96,7 +97,7 @@ class InteractionLlmWindow(LlmGenerationWindow):
         if self.running:
             return
         try:
-            client = InteractionLlmClient(self.url.get())
+            client = InteractionLlmClient(self.url.get(), subject_registry=self.settings.subject_registry)
         except ValueError as exc:
             self.status.set(str(exc))
             return
@@ -114,7 +115,7 @@ class InteractionLlmWindow(LlmGenerationWindow):
         if self.running:
             return
         try:
-            client = InteractionLlmClient(self.url.get())
+            client = InteractionLlmClient(self.url.get(), subject_registry=self.settings.subject_registry)
             model, notes = self.model.get().strip(), self.inputs()
             validate_inputs(**notes)
             if not model:

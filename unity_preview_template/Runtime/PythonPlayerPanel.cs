@@ -84,7 +84,7 @@ namespace CatCafePreview
             historyScroll.viewport.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,narrative?298:196);
             history.fontSize=17;history.lineSpacing=narrative?1.05f:1;
             history.text=string.IsNullOrEmpty(current.history) ? "行動を選ぶと猫の反応を表示します。" : current.history;
-            if(narrativeChanged && current.cat_id=="cat-mike"){Canvas.ForceUpdateCanvases();historyScroll.verticalNormalizedPosition=1;}
+            if(narrativeChanged){Canvas.ForceUpdateCanvases();historyScroll.verticalNormalizedPosition=1;}
             string selected=targets.options.Count>0 ? targets.options[targets.value].text : "";
             bool changed=renderedMode!=current.mode || renderedSession!=current.session_id || renderedInstance!=instanceId;
             targets.options.Clear();
