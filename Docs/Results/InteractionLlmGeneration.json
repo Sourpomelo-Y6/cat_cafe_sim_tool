@@ -1,0 +1,74 @@
+{
+  "date": "2026-10-15",
+  "scope": "実Tkの生成・取り込み・確認登録と保存一致。検証用データのみ。生成文は要校正でありゲーム採用ではない。",
+  "cases": [
+    {
+      "case": "player-teaser",
+      "model": "gemma-4-12b-it-uncensored-Q4_K_M.gguf",
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "teaser",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "teaser"
+      },
+      "variants": [
+        "ミケちゃん、これを見てごらん？",
+        "ねこじゃらし、動くよ。",
+        "これ、追いかけてみて。"
+      ]
+    },
+    {
+      "case": "guest-pet",
+      "model": "gemma-4-12b-it-uncensored-Q4_K_M.gguf",
+      "condition": {
+        "kind": "speech",
+        "subject_id": "guest-1",
+        "mode": "pet",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "pet"
+      },
+      "variants": [
+        "いい子ね、ミケちゃん。",
+        "よしよし、いい毛並みね。",
+        "リラックスしてね、ミケちゃん。"
+      ]
+    },
+    {
+      "case": "mike-favorable",
+      "model": "gemma-4-12b-it-uncensored-Q4_K_M.gguf",
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "pet",
+        "action": "adapt",
+        "reaction": "favorable",
+        "scene_key": "pet__adapt"
+      },
+      "variants": [
+        "ミケは手に従順に頭を預け、心地よさそうに目を細めた。",
+        "ミケは手になでられる感触を楽しみながら、穏やかに目を細めた。",
+        "ミケは手に身を委ねるように座り、満足げに目を細めた。"
+      ]
+    },
+    {
+      "case": "mike-low-rest",
+      "model": "gemma-4-12b-it-uncensored-Q4_K_M.gguf",
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "pause",
+        "action": "pause",
+        "reaction": "listless",
+        "scene_key": "pause"
+      },
+      "variants": [
+        "ミケは体を丸めて静かに眠り、手から放たれる動きをじっと待った。",
+        "ミケは丸い体を丸めて静かに休み、手からの合図を待つように佇んだ。",
+        "ミケは目を閉じて静かに体を丸め、手との距離を保ちながら静かに待った。"
+      ]
+    }
+  ]
+}

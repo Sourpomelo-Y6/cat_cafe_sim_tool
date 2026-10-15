@@ -227,4 +227,4 @@ Unity単独版に[旧Pythonセーブの変換・取り込み](../Docs/UnityStand
 
 ## 日常交流の文章を手入力する
 
-制作画面の「日常交流の文章を編集…」から、プレイヤー・佐藤さんのセリフとミケの反応を、ねこじゃらし・なでる・休憩の条件別に最大3案ずつ入力できます。「下書きを保存」または「登録内容を確認」→「確認した文章を登録」で保存します。登録先は画像出力先の `interaction_texts.json`、下書きは `user_data/interaction_text_drafts.json` です。今回は制作素材の編集・保存までで、ローカルLLM生成とUnityへの反映は後続です。[操作・仕様・検証結果](Docs/InteractionTextEditor.md)を参照してください。
+制作画面の「日常交流の文章を編集…」から、プレイヤー・佐藤さんのセリフとミケの反応を、ねこじゃらし・なでる・休憩の条件別に最大3案ずつ入力できます。「下書きを保存」または「登録内容を確認」→「確認した文章を登録」で保存します。登録先は画像出力先の `interaction_texts.json`、下書きは `user_data/interaction_text_drafts.json` です。「ローカルLLMで3案生成…」から条件に合う候補を生成し、選んだ案だけ編集欄へ取り込めます。Unityへの反映は後続です。[LLM生成の操作と検証](Docs/InteractionLlmGeneration.md)も参照してください。[操作・仕様・検証結果](Docs/InteractionTextEditor.md)を参照してください。

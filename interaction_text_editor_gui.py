@@ -10,7 +10,7 @@ REACTION_NAMES = dict(REACTIONS, any='指定なし（人物のセリフ）')
 
 
 class InteractionTextEditorWindow:
-    def __init__(self, parent, drafts, published):
+    def __init__(self, parent, drafts, published, *, generation_settings=None, generation_output=None):
         import tkinter as tk
         from tkinter import ttk
         from tkinter.scrolledtext import ScrolledText
@@ -18,9 +18,10 @@ class InteractionTextEditorWindow:
         drafts.read()
         published.read()
         self.drafts, self.published = drafts, published
+        self.generation_settings, self.generation_output = generation_settings, generation_output
         self.reviewed = None
         self.window = tk.Toplevel(parent)
-        self.window.title('日常交流の文章 — 手入力・確認登録')
+        self.window.title('日常交流の文章 — 編集・生成・確認登録')
         self.window.geometry('820x720')
         self.window.minsize(720, 650)
         self.window.protocol('WM_DELETE_WINDOW', self.close)
@@ -28,7 +29,7 @@ class InteractionTextEditorWindow:
         frame.pack(fill='both', expand=True)
         ttk.Label(frame, text='日常交流の文章', font=('', 14, 'bold')).pack(anchor='w')
         ttk.Label(frame, text='人物のセリフと猫の反応を別々に制作します。1〜3案、各200文字まで。\n'
-                  '登録は制作素材の保存です。ゲームへの反映・LLM生成・画像プレビューは次の段階です。',
+                  '登録は制作素材の保存です。ゲームへの反映・画像プレビューは次の段階です。',
                   wraplength=760).pack(anchor='w', pady=(4, 8))
         grid = ttk.Frame(frame)
         grid.pack(fill='x')
@@ -44,6 +45,8 @@ class InteractionTextEditorWindow:
             combo.grid(row=row + 1, column=column, sticky='ew', padx=(0, 8), pady=(0, 4))
             combo.bind('<<ComboboxSelected>>', self.selection_changed)
             self.choices[name], self.selectors[name] = var, combo
+        self.generation_button = ttk.Button(grid, text='ローカルLLMで3案生成…', command=self.open_generation)
+        self.generation_button.grid(row=5, column=1, sticky='ew', padx=(0, 8), pady=(0, 4))
         self.scope = tk.StringVar(master=self.window)
         ttk.Label(frame, textvariable=self.scope, wraplength=760).pack(anchor='w', pady=4)
         self.fields = []
@@ -211,3 +214,40 @@ class InteractionTextEditorWindow:
     def close(self):
         if self.confirm_leave():
             self.window.destroy()
+
+    def open_generation(self):
+        from interaction_llm_gui import InteractionLlmWindow
+        existing = getattr(self, 'generation_window', None)
+        if existing is not None and existing.window.winfo_exists():
+            existing.window.lift()
+            self.notice.set('開いている生成画面の対象・条件を確認してください。変更する場合は閉じて開き直します。')
+            return
+        try:
+            baseline = self.values()
+            def result(changes):
+                nonlocal baseline
+                if not self.window.winfo_exists():
+                    return False
+                try:
+                    if self.values() != baseline:
+                        return False
+                    texts = [row['text'] for row in baseline['variants']]
+                    for slot, text in changes.items():
+                        texts[slot] = text
+                    make_entry(self._condition, texts)  # 残した既存案との重複も検証する。
+                except ValueError:
+                    return False
+                for slot, text in changes.items():
+                    self.fields[slot].delete('1.0', 'end')
+                    self.fields[slot].insert('1.0', text)
+                self.reviewed = None
+                self.set_preview('')
+                baseline = self.values()
+                self.notice.set('選択した生成案を取り込みました。未保存・未登録です。修正して確認してください。')
+                return True
+            options = dict(settings=self.generation_settings)
+            if self.generation_output is not None:
+                options['output'] = self.generation_output
+            self.generation_window = InteractionLlmWindow(self.window, result, self._condition, **options)
+        except (OSError, ValueError) as exc:
+            self.notice.set(f'生成画面を開けません：{exc}')
