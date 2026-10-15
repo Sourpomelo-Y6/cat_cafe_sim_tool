@@ -50,7 +50,9 @@ class InteractionTextEditorWindow:
         self.generation_button = ttk.Button(grid, text='ローカルLLMで3案生成…', command=self.open_generation)
         self.generation_button.grid(row=5, column=1, sticky='ew', padx=(0, 8), pady=(0, 4))
         ttk.Button(grid, text='画像付きで組み合わせを確認…', command=self.open_preview).grid(
-            row=6, column=0, columnspan=2, sticky='ew', padx=(0, 8), pady=(2, 0))
+            row=6, column=0, sticky='ew', padx=(0, 8), pady=(2, 0))
+        ttk.Button(grid, text='人物のセリフを連続生成…', command=self.open_batch_generation).grid(
+            row=6, column=1, sticky='ew', padx=(0, 8), pady=(2, 0))
         self.scope = tk.StringVar(master=self.window)
         ttk.Label(frame, textvariable=self.scope, wraplength=760).pack(anchor='w', pady=4)
         self.fields = []
@@ -209,7 +211,7 @@ class InteractionTextEditorWindow:
             self.published.save(entry, expected=self._published_snapshot)
             self._published_snapshot = copy.deepcopy(entry)
             self._baseline = copy.deepcopy(entry)
-            self.notice.set('この条件の制作素材を登録しました。Unity・ゲームへの読み込みはまだ接続していません。')
+            self.notice.set('この条件の制作素材を登録しました。Unityへ反映するには素材を書き出して取り込んでください。')
             return True
         except (OSError, ValueError) as exc:
             self.notice.set(f'登録できません：{exc}')
@@ -269,3 +271,28 @@ class InteractionTextEditorWindow:
             self.generation_window = InteractionLlmWindow(self.window, result, self._condition, **options)
         except (OSError, ValueError) as exc:
             self.notice.set(f'生成画面を開けません：{exc}')
+
+    def open_batch_generation(self):
+        from interaction_batch_gui import InteractionBatchWindow
+        existing = getattr(self, 'batch_window', None)
+        if existing is not None and existing.window.winfo_exists():
+            existing.window.lift()
+            return
+        def result(entry):
+            if not self.load_condition(entry['condition']):
+                return False
+            for field, variant in zip(self.fields, entry['variants']):
+                field.delete('1.0', 'end')
+                field.insert('1.0', variant['text'])
+            self.reviewed = None
+            self.set_preview('')
+            self.notice.set('連続生成の3案を取り込みました。未保存・未登録です。修正して確認してください。')
+            self.window.lift()
+            return True
+        try:
+            options = dict(settings=self.generation_settings)
+            if self.generation_output is not None:
+                options['output'] = self.generation_output
+            self.batch_window = InteractionBatchWindow(self.window, result, **options)
+        except (OSError, ValueError) as exc:
+            self.notice.set(f'連続生成画面を開けません：{exc}')
