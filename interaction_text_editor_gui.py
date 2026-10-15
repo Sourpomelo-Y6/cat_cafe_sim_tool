@@ -31,7 +31,7 @@ class InteractionTextEditorWindow:
         frame.pack(fill='both', expand=True)
         ttk.Label(frame, text='日常交流の文章', font=('', 14, 'bold')).pack(anchor='w')
         ttk.Label(frame, text='人物のセリフと猫の反応を別々に制作します。1〜3案、各200文字まで。\n'
-                  '登録は制作素材の保存です。画像付きで確認してUnity向けに書き出せます。ゲーム内への接続は次の段階です。',
+                  '下書き保存 → 内容を確認 → 確認した文章を登録。画像付きで確認し、Unity向けに書き出します。',
                   wraplength=760).pack(anchor='w', pady=(4, 8))
         grid = ttk.Frame(frame)
         grid.pack(fill='x')

@@ -1,4 +1,4 @@
-"""猫と場面を選んで、背景込みPNGを登録する制作画面。"""
+"""画像・文章・生成設定を作業別にまとめた猫の素材制作画面。"""
 from pathlib import Path
 from content_images import ImageRegistry, load_display_image
 
@@ -11,7 +11,7 @@ class ContentImageToolWindow:
         import tkinter as tk
         from tkinter import ttk
         self.window = tk.Toplevel(parent)
-        self.window.title('猫の画像制作 — 登録とプレビュー')
+        self.window.title('猫の素材制作')
         self.window.protocol('WM_DELETE_WINDOW', self.close)
         self.catalog_provider = catalog_provider
         self.registry = registry or ImageRegistry()
@@ -29,53 +29,98 @@ class ContentImageToolWindow:
         self.reference_image = None
         self.pending = None
         self.image = None
-        frame = ttk.Frame(self.window, padding=12)
+        self.window.geometry('1000x760')
+        self.window.minsize(900, 700)
+        frame = ttk.Frame(self.window, padding=16)
         frame.pack(fill='both', expand=True)
-        ttk.Label(frame, text='猫と場面を選び、背景込みのPNGを登録します。', wraplength=520).pack(anchor='w')
+        ttk.Label(frame, text='猫の素材制作', font=('', 16, 'bold')).pack(anchor='w')
+        ttk.Label(frame, text='対象を選ぶ → 画像・文章を制作 → 確認してUnityへ書き出す').pack(anchor='w', pady=(4, 12))
+        target = ttk.Frame(frame)
+        target.pack(fill='x', pady=(0, 12))
+        ttk.Label(target, text='対象の猫').pack(side='left', padx=(0, 12))
         self.cat = tk.StringVar(master=self.window)
         self.scene = tk.StringVar(master=self.window, value='通常')
-        self.cat_selector = ttk.Combobox(frame, textvariable=self.cat, state='readonly', width=40)
-        self.cat_selector.pack(fill='x', pady=6)
-        self.scene_selector = ttk.Combobox(frame, textvariable=self.scene, state='readonly',
+        self.cat_selector = ttk.Combobox(target, textvariable=self.cat, state='readonly', width=40)
+        self.cat_selector.pack(side='left', fill='x', expand=True)
+        ttk.Button(target, text='猫一覧を更新', command=self.reload_cats).pack(side='left', padx=(12, 0))
+        self.tabs = ttk.Notebook(frame)
+        self.tabs.pack(fill='both', expand=True)
+        self.pages = {}
+        for name in ('画像', '文章', '生成設定'):
+            page = ttk.Frame(self.tabs, padding=12)
+            self.tabs.add(page, text=name)
+            self.pages[name] = page
+        image_page = self.pages['画像']
+        selection = ttk.LabelFrame(image_page, text='1. 場面・行動を選ぶ', padding=10)
+        selection.pack(fill='x')
+        for col in (0, 1):
+            selection.columnconfigure(col, weight=1)
+        ttk.Label(selection, text='場面・動作').grid(row=0, column=0, sticky='w')
+        ttk.Label(selection, text='行動・強さ').grid(row=0, column=1, sticky='w', padx=(12, 0))
+        self.scene_selector = ttk.Combobox(selection, textvariable=self.scene, state='readonly',
                                           values=[row[1] for row in SCENES])
-        self.scene_selector.pack(fill='x')
+        self.scene_selector.grid(row=1, column=0, sticky='ew')
         self.action = tk.StringVar(master=self.window, value='動作の共通画像')
-        ttk.Label(frame, text='行動（動作との組み合わせ画像）').pack(anchor='w')
-        self.action_selector = ttk.Combobox(frame, textvariable=self.action, state='readonly',
+        self.action_selector = ttk.Combobox(selection, textvariable=self.action, state='readonly',
                                             values=['動作の共通画像'])
-        self.action_selector.pack(fill='x')
+        self.action_selector.grid(row=1, column=1, sticky='ew', padx=(12, 0))
         self.action_selector.bind('<<ComboboxSelected>>', lambda event: self.refresh())
         self.cat_selector.bind('<<ComboboxSelected>>', lambda event: self.refresh())
         self.scene_selector.bind('<<ComboboxSelected>>', lambda event: self.refresh())
-        controls = ttk.Frame(frame)
-        controls.pack(fill='x', pady=8)
+        controls = ttk.LabelFrame(image_page, text='2. 画像を用意する → 確認して登録', padding=10)
+        controls.pack(fill='x', pady=10)
         ttk.Button(controls, text='画像を選ぶ…', command=self.choose).pack(side='left')
-        self.save_button = ttk.Button(controls, text='この画像を登録', command=self.save)
-        self.save_button.pack(side='left', padx=8)
-        ttk.Button(controls, text='猫一覧を更新', command=self.reload_cats).pack(side='left')
         ttk.Button(controls, text='ComfyUIで生成…', command=self.open_generation).pack(side='left', padx=8)
-        ttk.Button(frame, text='外見・行動・背景の設定…', command=self.open_prompt_editor).pack(anchor='w', pady=(0, 8))
-        ttk.Button(frame, text='デザイン・ポーズLoRAの設定…', command=self.open_lora_editor).pack(anchor='w', pady=(0, 8))
-        ttk.Button(frame, text='紹介文・行動描写の編集…', command=self.open_text_editor).pack(anchor='w', pady=(0, 8))
-        ttk.Button(frame, text='日常交流の文章を編集…', command=self.open_interaction_text_editor).pack(anchor='w', pady=(0, 8))
-        ttk.Button(frame, text='Unity向けに書き出す…', command=self.export_unity).pack(anchor='w', pady=(0, 8))
-        reference_controls = ttk.Frame(frame)
-        reference_controls.pack(fill='x', pady=(0, 8))
+        self.save_button = ttk.Button(controls, text='この画像を登録', command=self.save)
+        self.save_button.pack(side='right')
+        images = ttk.Frame(image_page)
+        images.pack(fill='both', expand=True)
+        images.columnconfigure(0, weight=1, uniform='preview')
+        images.columnconfigure(1, weight=1, uniform='preview')
+        images.rowconfigure(1, weight=1)
+        ttk.Label(images, text='基準画像（この猫の外見）').grid(row=0, column=0, sticky='w')
+        ttk.Label(images, text='登録画像・未登録の候補').grid(row=0, column=1, sticky='w', padx=(12, 0))
+        self.reference_label = ttk.Label(images, anchor='center')
+        self.reference_label.grid(row=1, column=0, sticky='nsew', padx=(0, 6))
+        self.image_label = ttk.Label(images, anchor='center')
+        self.image_label.grid(row=1, column=1, sticky='nsew', padx=(6, 0))
+        reference_controls = ttk.Frame(image_page)
+        reference_controls.pack(fill='x', pady=(8, 0))
         ttk.Button(reference_controls, text='基準画像を選ぶ…', command=self.choose_reference).pack(side='left')
         ttk.Button(reference_controls, text='登録済み通常画像を基準に', command=self.use_normal_reference).pack(side='left', padx=8)
-        images = ttk.Frame(frame)
-        images.pack(fill='both', expand=True)
-        images.columnconfigure(0, weight=1)
-        images.columnconfigure(1, weight=1)
-        ttk.Label(images, text='基準画像（個体別）').grid(row=0, column=0)
-        ttk.Label(images, text='登録画像・生成候補').grid(row=0, column=1)
-        self.reference_label = ttk.Label(images, anchor='center')
-        self.reference_label.grid(row=1, column=0, sticky='nsew', padx=4)
-        self.image_label = ttk.Label(images, anchor='center')
-        self.image_label.grid(row=1, column=1, sticky='nsew', padx=4)
+        text_page = self.pages['文章']
+        ttk.Label(text_page, text='作りたい文章を選んでください。', font=('', 12, 'bold')).pack(anchor='w', pady=(0, 12))
+        for title, description, label, command in (
+            ('猫の紹介・場面の描写', '選択した猫の紹介文と、通常・遊ぶ・撫でられる・眠る場面の文章を制作します。',
+             '紹介文・行動描写の編集…', self.open_text_editor),
+            ('日常交流の文章', 'プレイヤー・お客さんのセリフとミケの反応を条件別に制作します。手入力・ローカルLLM生成・画像付き確認に対応しています。対象は編集画面で選びます。',
+             '日常交流の文章を編集…', self.open_interaction_text_editor)):
+            group = ttk.LabelFrame(text_page, text=title, padding=14)
+            group.pack(fill='x', pady=(0, 16))
+            ttk.Label(group, text=description, wraplength=780).pack(anchor='w', pady=(0, 10))
+            ttk.Button(group, text=label, command=command).pack(anchor='w')
+        ttk.Label(text_page, text='下書き保存 → 内容を確認 → 確認した文章を登録 → Unity向けに書き出す', wraplength=780).pack(anchor='w')
+        settings = self.pages['生成設定']
+        ttk.Label(settings, text='画像生成の準備', font=('', 12, 'bold')).pack(anchor='w', pady=(0, 12))
+        self.settings_target = tk.StringVar(master=self.window)
+        ttk.Label(settings, textvariable=self.settings_target, wraplength=780).pack(anchor='w', pady=(0, 16))
+        for title, description, label, command in (
+            ('生成する内容', '猫の外見、動作・行動、背景を設定します。場面・行動は「画像」タブで選択します。',
+             '外見・行動・背景の設定…', self.open_prompt_editor),
+            ('モデルへの追加設定', 'デザイン・ポーズ用LoRAと適用する強さを設定します。',
+             'デザイン・ポーズLoRAの設定…', self.open_lora_editor)):
+            group = ttk.LabelFrame(settings, text=title, padding=14)
+            group.pack(fill='x', pady=(0, 16))
+            ttk.Label(group, text=description, wraplength=780).pack(anchor='w', pady=(0, 10))
+            ttk.Button(group, text=label, command=command).pack(anchor='w')
         self.notice = tk.StringVar(master=self.window)
-        ttk.Label(frame, textvariable=self.notice, wraplength=540).pack(anchor='w', pady=8)
-        ttk.Button(frame, text='閉じる', command=self.close).pack(anchor='e')
+        ttk.Separator(frame).pack(fill='x', pady=(12, 8))
+        ttk.Label(frame, textvariable=self.notice, wraplength=840).pack(anchor='w')
+        footer = ttk.Frame(frame)
+        footer.pack(fill='x', pady=(8, 0))
+        ttk.Label(footer, text='書き出し対象：登録済みの全猫・画像・文章').pack(side='left')
+        ttk.Button(footer, text='閉じる', command=self.close).pack(side='right')
+        ttk.Button(footer, text='Unity向けに書き出す…', command=self.export_unity).pack(side='right', padx=12)
         self.reload_cats()
         if cat_id is not None:
             self.cat.set(next((label for label, key in self.cats.items() if key == cat_id), self.cat.get()))
@@ -113,7 +158,7 @@ class ContentImageToolWindow:
         return cat_id, key
 
     def display(self, path):
-        image = load_display_image(self.window, path, 420, 360)
+        image = load_display_image(self.window, path, 380, 260)
         self.image = image
         self.image_label.configure(image=image, text='')
 
@@ -125,6 +170,7 @@ class ContentImageToolWindow:
         self.image_label.configure(image='', text='未登録：ゲームでは仮画像を使います。')
         try:
             cat_id, key = self.selection()
+            self.settings_target.set(f'設定対象：{self.cat.get()} / {self.scene.get()} / {self.action.get()}')
             self.show_reference(cat_id)
             path = self.registry.image_path(cat_id, key)
             if path:
@@ -218,7 +264,7 @@ class ContentImageToolWindow:
         self.reference_label.configure(image='', text='基準画像は未登録')
         path = self.references.image_path(cat_id, 'normal')
         if path is not None:
-            self.reference_image = load_display_image(self.window, path, 420, 360)
+            self.reference_image = load_display_image(self.window, path, 380, 260)
             self.reference_label.configure(image=self.reference_image, text='')
 
     def choose_reference(self):
@@ -233,7 +279,7 @@ class ContentImageToolWindow:
         try:
             cat_id, _ = self.selection()
             # 読み込める画像だけを登録する。
-            load_display_image(self.window, path, 420, 360)
+            load_display_image(self.window, path, 380, 260)
             self.references.register(cat_id, 'normal', path)
             self.show_reference(cat_id)
             self.notice.set('基準画像を保存しました。生成画面を閉じて開き直すと反映されます。')
@@ -316,7 +362,7 @@ class ContentImageToolWindow:
         window.title('Unity向け素材の書き出し結果')
         frame = ttk.Frame(window, padding=12)
         frame.pack(fill='both', expand=True)
-        ttk.Label(frame, text=f'保存先：{folder}\nUnityの Cat Cafe → Import Content Pack… から、このフォルダを選んでください。',
+        ttk.Label(frame, text=f'保存先：{folder}\nUnityの Cat Cafe → 素材 → 素材パックを取り込む… から、このフォルダを選んでください。',
                   wraplength=650).pack(anchor='w')
         body = ScrolledText(frame, width=85, height=18, wrap='word')
         body.pack(fill='both', expand=True, pady=8)
@@ -326,7 +372,7 @@ class ContentImageToolWindow:
         if interaction:
             details += (f"\n\n交流文：{interaction['entry_count']}条件・{interaction['candidate_count']}案"
                         + f"\n対応：{interaction['covered_count']} / {interaction['expected_count']}条件"
-                        + '\n交流文カタログのUnity取り込み・ゲーム内読み込みは次の段階です。別添のinteraction_texts.jsonを出力しています。'
+                        + '\n交流文カタログも同梱しました。Unityで取り込むと、以後の交流に登録済みの文章が使われます。'
                         + '\n\n未制作の条件：\n'
                         + '\n'.join(condition_label(v) for v in interaction['missing_conditions']))
         body.insert('1.0', details)
