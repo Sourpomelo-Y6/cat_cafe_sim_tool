@@ -51,8 +51,8 @@ class InteractionTextEditorWindow:
         self.generation_button.grid(row=5, column=1, sticky='ew', padx=(0, 8), pady=(0, 4))
         ttk.Button(grid, text='画像付きで組み合わせを確認…', command=self.open_preview).grid(
             row=6, column=0, sticky='ew', padx=(0, 8), pady=(2, 0))
-        ttk.Button(grid, text='人物のセリフを連続生成…', command=self.open_batch_generation).grid(
-            row=6, column=1, sticky='ew', padx=(0, 8), pady=(2, 0))
+        self.batch_button = ttk.Button(grid, text='人物のセリフを連続生成…', command=self.open_batch_generation)
+        self.batch_button.grid(row=6, column=1, sticky='ew', padx=(0, 8), pady=(2, 0))
         self.scope = tk.StringVar(master=self.window)
         ttk.Label(frame, textvariable=self.scope, wraplength=760).pack(anchor='w', pady=4)
         self.fields = []
@@ -77,6 +77,7 @@ class InteractionTextEditorWindow:
         self.load_condition(condition())
 
     def _set_selectors(self, value):
+        self.batch_button.configure(text='猫の反応を連続生成…' if value['kind'] == 'cat_response' else '人物のセリフを連続生成…')
         maps = {'kind': KINDS, 'subject_id': SUBJECTS[value['kind']], 'mode': MODES,
                 'action': {k: ACTION_NAMES[k] for k in actions(value['mode'])},
                 'reaction': {k: REACTION_NAMES[k] for k in reactions(value['kind'], value['mode'])}}
@@ -274,8 +275,12 @@ class InteractionTextEditorWindow:
 
     def open_batch_generation(self):
         from interaction_batch_gui import InteractionBatchWindow
-        existing = getattr(self, 'batch_window', None)
+        kind = self._condition['kind']
+        if not hasattr(self, 'batch_windows'):
+            self.batch_windows = {}
+        existing = self.batch_windows.get(kind)
         if existing is not None and existing.window.winfo_exists():
+            self.batch_window = existing
             existing.window.lift()
             return
         def result(entry):
@@ -289,10 +294,16 @@ class InteractionTextEditorWindow:
             self.notice.set('連続生成の3案を取り込みました。未保存・未登録です。修正して確認してください。')
             self.window.lift()
             return True
+        def has_text(value):
+            entries = [self.drafts.get(value), self.published.get(value)]
+            if value == self._condition:
+                entries.append(self.values())
+            return any(row['text'] for entry in entries if entry for row in entry['variants'])
         try:
-            options = dict(settings=self.generation_settings)
+            options = dict(settings=self.generation_settings, has_text=has_text, kind=kind)
             if self.generation_output is not None:
                 options['output'] = self.generation_output
             self.batch_window = InteractionBatchWindow(self.window, result, **options)
+            self.batch_windows[kind] = self.batch_window
         except (OSError, ValueError) as exc:
             self.notice.set(f'連続生成画面を開けません：{exc}')

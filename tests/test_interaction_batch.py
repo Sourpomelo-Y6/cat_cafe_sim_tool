@@ -10,19 +10,69 @@ from unittest.mock import patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from interaction_batch_gui import prepare_jobs, InteractionBatchWindow
 from interaction_llm import InteractionLlmSettings
-from interaction_texts import condition, key, InteractionTextStore
+from interaction_texts import condition, key, InteractionTextStore, actions, reactions
 
 
 def settings_at(folder):
     settings = InteractionLlmSettings(Path(folder) / 'settings.json')
     for subject in ('player', 'guest-1'):
         for mode in ('teaser', 'pet', 'pause'):
-            settings.save(condition(subject_id=subject, mode=mode, action='pause' if mode == 'pause' else 'any'),
-                          'http://127.0.0.1:8080', 'test-model', subject+'の資料', mode+'の絵のメモ', '短い文')
+            for action in actions(mode):
+                settings.save(condition(subject_id=subject, mode=mode, action=action),
+                              'http://127.0.0.1:8080', 'test-model', subject+'の資料', mode+'の絵のメモ', '短い文')
+    for mode in ('teaser', 'pet', 'pause'):
+        for action in actions(mode):
+            for reaction in reactions('cat_response',mode):
+                settings.save(condition('cat_response','cat-mike',mode,action,reaction),
+                    'http://127.0.0.1:8080','test-model','ミケの資料',mode+'／'+reaction,'短い文')
     return settings
 
 
 class BatchPlanTests(unittest.TestCase):
+    def test_cat_reactions_operations_and_missing_filter(self):
+        with tempfile.TemporaryDirectory() as folder:
+            settings=settings_at(folder)
+            common=prepare_jobs(settings,['cat-mike'],['teaser','pet','pause'],kind='cat_response')
+            self.assertEqual(len(common),14)
+            all_jobs=prepare_jobs(settings,['cat-mike'],['teaser','pet','pause'],kind='cat_response',scope='all')
+            self.assertEqual(len(all_jobs),50)
+            specific=prepare_jobs(settings,['cat-mike'],['teaser','pet','pause'],kind='cat_response',scope='specific')
+            self.assertEqual(len(specific),36)
+            for value,notes in all_jobs:
+                self.assertEqual(value['kind'],'cat_response')
+                self.assertEqual(notes['subject_notes'],'ミケの資料')
+                self.assertIn(value['reaction'],notes['image_notes'])
+                if value['mode']=='pause':
+                    self.assertIn(value['reaction'],('neutral','listless'))
+            boundary=prepare_jobs(settings,['cat-mike'],['teaser','pet','pause'],kind='cat_response',
+                selected_reactions=['turn_away','listless'])
+            self.assertEqual(len(boundary),5)
+            self.assertEqual({v['reaction'] for v,_ in boundary},{'turn_away','listless'})
+            self.assertFalse(any(v['mode']=='pause' and v['reaction']=='turn_away' for v,_ in boundary))
+            existing=key(common[0][0])
+            remaining=prepare_jobs(settings,['cat-mike'],['teaser','pet','pause'],kind='cat_response',has_text=lambda v:key(v)==existing)
+            self.assertEqual(len(remaining),13)
+            self.assertNotIn(existing,[key(v) for v,_ in remaining])
+            for chosen in ([],['invalid']):
+                with self.assertRaises(ValueError):
+                    prepare_jobs(settings,['cat-mike'],['teaser'],kind='cat_response',selected_reactions=chosen)
+
+    def test_specific_operations_and_skip_existing(self):
+        with tempfile.TemporaryDirectory() as folder:
+            settings=settings_at(folder)
+            all_jobs=prepare_jobs(settings,['player','guest-1'],['teaser','pet','pause'],scope='all')
+            self.assertEqual(len(all_jobs),18)
+            specific=prepare_jobs(settings,['player','guest-1'],['teaser','pet','pause'],scope='specific')
+            self.assertEqual(len(specific),12)
+            self.assertEqual({v['action'] for v,_ in specific},{'direct','adapt','intense','feint'})
+            existing={key(v) for v,_ in all_jobs[:6]}
+            remaining=prepare_jobs(settings,['player','guest-1'],['teaser','pet','pause'],scope='all',has_text=lambda v:key(v) in existing)
+            self.assertEqual(len(remaining),12)
+            self.assertFalse(existing.intersection(key(v) for v,_ in remaining))
+            self.assertTrue(any(v['action']=='intense' for v,_ in remaining))
+            with self.assertRaises(ValueError):
+                prepare_jobs(settings,['player'],['pet'],scope='all',has_text=lambda _:True)
+
     def test_six_conditions_and_preflight_missing_notes(self):
         with tempfile.TemporaryDirectory() as folder:
             settings = settings_at(folder)
@@ -62,6 +112,45 @@ class BatchGuiTests(unittest.TestCase):
 
     def fake(self, model, value, *args, **kwargs):
         return ['案一', '案二', '案三'], Path(self.temp.name)/'record.json'
+
+    def test_cat_window_routes_reactions_and_imports_after_retry(self):
+        from interaction_text_editor_gui import InteractionTextEditorWindow
+        from interaction_texts import make_entry
+        drafts=InteractionTextStore(Path(self.temp.name)/'cat-drafts.json')
+        published=InteractionTextStore(Path(self.temp.name)/'cat-published.json',published=True)
+        old=make_entry(condition('cat_response','cat-mike',reaction='neutral'),['既存の反応','',''])
+        drafts.save(old)
+        editor=InteractionTextEditorWindow(self.root,drafts,published,generation_settings=self.settings)
+        editor.open_batch_generation();human=editor.batch_window
+        editor.load_condition(condition('cat_response','cat-mike',reaction='neutral'))
+        self.assertEqual(editor.batch_button.cget('text'),'猫の反応を連続生成…')
+        editor.open_batch_generation();self.window=editor.batch_window
+        self.assertIsNot(self.window,human)
+        self.assertEqual(self.window.kind,'cat_response')
+        self.assertEqual(self.window.scope.get(),'動作共通のみ')
+        for r,var in self.window.reaction_choices.items():
+            var.set(r in ('turn_away','listless'))
+        calls=[]
+        def generate(model,value,*args,**kwargs):
+            calls.append(value.copy())
+            if len(calls)==2:raise ValueError('検証用の猫エラー')
+            return ['ミケは静かに体を丸めた。','ミケは前足をそろえた。','ミケはゆっくり息をついた。'],Path(self.temp.name)/'cat-record.json'
+        with patch('interaction_batch_gui.InteractionLlmClient.generate_variants',side_effect=generate):
+            self.window.start();self.wait()
+            self.assertEqual(len(self.window.results),1)
+            self.window.start();self.wait()
+        self.assertEqual(len(self.window.results),5)
+        self.assertTrue(all(v['kind']=='cat_response' for v in calls))
+        self.assertEqual(sum(key(v)==key(calls[0]) for v in calls),1)
+        self.window.apply()
+        self.assertEqual(editor._condition['kind'],'cat_response')
+        self.assertEqual(editor._condition['mode'],'pause')
+        self.assertEqual(editor._condition['reaction'],'listless')
+        self.assertTrue(editor.dirty())
+        self.assertEqual(drafts.get(old['condition']),old)
+        self.assertEqual(len(drafts.read()['entries']),1)
+        self.assertFalse(published.path.exists())
+        editor.open_batch_generation();self.assertIs(editor.batch_window,self.window)
 
     def test_sequential_six_results_retry_without_regeneration_and_apply(self):
         calls = []
@@ -124,6 +213,10 @@ class BatchGuiTests(unittest.TestCase):
         editor=InteractionTextEditorWindow(self.root,drafts,published,generation_settings=self.settings)
         editor.fields[0].insert('1.0','消してはいけない文')
         editor.open_batch_generation();batch=editor.batch_window
+        self.assertEqual(batch.scope.get(),'共通＋操作別')
+        self.assertTrue(batch.only_missing.get())
+        self.assertTrue(batch.has_text(condition()))
+        self.assertFalse(batch.has_text(condition(action='intense')))
         entry=make_entry(condition(subject_id='guest-1',mode='pet'),['案一','案二','案三'])
         with patch('tkinter.messagebox.askyesnocancel',return_value=None):
             self.assertFalse(batch.on_result(entry))

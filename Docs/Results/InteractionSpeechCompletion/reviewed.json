@@ -1,0 +1,329 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "teaser",
+        "action": "intense",
+        "reaction": "any",
+        "scene_key": "teaser__intense"
+      },
+      "variants": [
+        {
+          "id": "0d28ffddb2765434a7064e7ec8f70140",
+          "slot": 1,
+          "text": "ミケ、今度は大きく揺らしてみるね。"
+        },
+        {
+          "id": "4404bae108e35582b841dfa3bb1f838d",
+          "slot": 2,
+          "text": "少し勢いをつけて動かしてみようか。"
+        },
+        {
+          "id": "546adfaaa9bc51f1ae21254f1f91fb5c",
+          "slot": 3,
+          "text": "ミケ、この動きはどうかな？"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "teaser",
+        "action": "feint",
+        "reaction": "any",
+        "scene_key": "teaser__feint"
+      },
+      "variants": [
+        {
+          "id": "0497a9ceaef65b14a1c13d5764df81d3",
+          "slot": 1,
+          "text": "ミケ、次はどっちに動くかな？"
+        },
+        {
+          "id": "bf593ea9a089583686dd770e145cbc94",
+          "slot": 2,
+          "text": "ここでちょっと、動きを変えてみよう。"
+        },
+        {
+          "id": "c3fc869c7dfb5d37b2e1a6a39730546d",
+          "slot": 3,
+          "text": "ミケ、今度はこっちに揺らしてみるね。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "pet",
+        "action": "direct",
+        "reaction": "any",
+        "scene_key": "pet__direct"
+      },
+      "variants": [
+        {
+          "id": "b26ef73d43fe56238ad3bcb3673029af",
+          "slot": 1,
+          "text": "ミケ、少しだけなでてもいいかな？"
+        },
+        {
+          "id": "5df0c7485cb6506e88b3e5acf63d3a44",
+          "slot": 2,
+          "text": "ミケ、そっとなでてみるね。"
+        },
+        {
+          "id": "542db4af140052b383e386415e9a90ec",
+          "slot": 3,
+          "text": "少しだけ、手を添えてみてもいいかな。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "pet",
+        "action": "adapt",
+        "reaction": "any",
+        "scene_key": "pet__adapt"
+      },
+      "variants": [
+        {
+          "id": "547a48fc93005e69a81b4df3a5e3b85c",
+          "slot": 1,
+          "text": "ミケ、このくらいのなで方でいいかな。"
+        },
+        {
+          "id": "9e037f451f235d7bbef868f2a0fdcbb7",
+          "slot": 2,
+          "text": "様子を見ながら、そっとなでるね。"
+        },
+        {
+          "id": "107f1e7947935e77a9c49495f0c9775c",
+          "slot": 3,
+          "text": "ミケのペースで、少しずつにしようか。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "guest-1",
+        "mode": "teaser",
+        "action": "direct",
+        "reaction": "any",
+        "scene_key": "teaser__direct"
+      },
+      "variants": [
+        {
+          "id": "3d71d5e5c6df582b8ec7294336cfb7ed",
+          "slot": 1,
+          "text": "ミケちゃん、ねこじゃらしを揺らしてみますね。"
+        },
+        {
+          "id": "c928528c0ac050be9b6bcacc84fefaff",
+          "slot": 2,
+          "text": "このおもちゃで、少し遊んでみませんか。"
+        },
+        {
+          "id": "c5b3e8a4eac655f7b19ac2c16f993456",
+          "slot": 3,
+          "text": "ミケちゃん、こんな動かし方はいかがですか。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "guest-1",
+        "mode": "teaser",
+        "action": "adapt",
+        "reaction": "any",
+        "scene_key": "teaser__adapt"
+      },
+      "variants": [
+        {
+          "id": "1ac7531ab6965e88a6bbd98d67ec8725",
+          "slot": 1,
+          "text": "ミケちゃん、このくらいの速さでどうでしょう。"
+        },
+        {
+          "id": "c8ef5e876a4e58819a20ae8f222c0c35",
+          "slot": 2,
+          "text": "様子を見ながら、動かしてみますね。"
+        },
+        {
+          "id": "04b3eeb6e509568bb062fa70014d38a7",
+          "slot": 3,
+          "text": "ミケちゃん、無理のないペースで遊びましょう。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "guest-1",
+        "mode": "teaser",
+        "action": "intense",
+        "reaction": "any",
+        "scene_key": "teaser__intense"
+      },
+      "variants": [
+        {
+          "id": "acdd5f32d16d5238bd1ad8667faa46f3",
+          "slot": 1,
+          "text": "ミケちゃん、今度は大きく揺らしてみますね。"
+        },
+        {
+          "id": "fce38434ffb75143ad6d5fcfe6d3983e",
+          "slot": 2,
+          "text": "少し勢いのある動きにしてみましょうか。"
+        },
+        {
+          "id": "657fee0f23fa5e8d862d51fa118926e2",
+          "slot": 3,
+          "text": "ミケちゃん、この動きで遊んでみませんか。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "guest-1",
+        "mode": "teaser",
+        "action": "feint",
+        "reaction": "any",
+        "scene_key": "teaser__feint"
+      },
+      "variants": [
+        {
+          "id": "5258fff79bb05a3fa7e693d37a166862",
+          "slot": 1,
+          "text": "ミケちゃん、次はどちらに動くでしょう。"
+        },
+        {
+          "id": "dd405a2644ef53f6b051aef9740f40f1",
+          "slot": 2,
+          "text": "ここで少し、動きを変えてみますね。"
+        },
+        {
+          "id": "811c2828b29b5b519f1df301bf672a06",
+          "slot": 3,
+          "text": "ミケちゃん、今度はこちらに揺らしてみますね。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "guest-1",
+        "mode": "pet",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "pet"
+      },
+      "variants": [
+        {
+          "id": "e4565d09b0f85c649fa17b5c1b755d66",
+          "slot": 1,
+          "text": "ミケちゃん、少しだけなでてもいいですか？"
+        },
+        {
+          "id": "526e0faedbd95c439e406bd3d6f81878",
+          "slot": 2,
+          "text": "そっとなでてみてもよろしいですか。"
+        },
+        {
+          "id": "97f72af11f525cd4aa5c71d8f6606bbd",
+          "slot": 3,
+          "text": "ミケちゃん、少し触らせてもらえますか。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "guest-1",
+        "mode": "pet",
+        "action": "direct",
+        "reaction": "any",
+        "scene_key": "pet__direct"
+      },
+      "variants": [
+        {
+          "id": "f1f342162f895329a721c23a7b2c9a2b",
+          "slot": 1,
+          "text": "ミケちゃん、そっとなでてみますね。"
+        },
+        {
+          "id": "f789a67ac5d5573aa7b88ddb03640ae9",
+          "slot": 2,
+          "text": "少しだけ、手を添えてもいいですか。"
+        },
+        {
+          "id": "fac891e6e5d853f59c05bd4fe535015c",
+          "slot": 3,
+          "text": "ミケちゃん、なでさせてもらってもいいですか。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "guest-1",
+        "mode": "pet",
+        "action": "adapt",
+        "reaction": "any",
+        "scene_key": "pet__adapt"
+      },
+      "variants": [
+        {
+          "id": "5a3dc803ef72519eb3b5030d86e9f950",
+          "slot": 1,
+          "text": "ミケちゃん、このくらいのなで方でどうでしょう。"
+        },
+        {
+          "id": "0b2897ae03cd5da99924c14035513dca",
+          "slot": 2,
+          "text": "様子を見ながら、少しずつなでてみますね。"
+        },
+        {
+          "id": "0436362f7f8f5236ad19451b61fa4f6c",
+          "slot": 3,
+          "text": "ミケちゃん、無理のないようにしましょうね。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "guest-1",
+        "mode": "pause",
+        "action": "pause",
+        "reaction": "any",
+        "scene_key": "pause"
+      },
+      "variants": [
+        {
+          "id": "35eec389b702554fb8c48a4d5f251a2d",
+          "slot": 1,
+          "text": "ミケちゃん、少しお休みしましょうか。"
+        },
+        {
+          "id": "41860acd06cf5fe5a5e917db537c7dfb",
+          "slot": 2,
+          "text": "急がず、ここでひと息つきましょう。"
+        },
+        {
+          "id": "4149b702d3ec53a4ab1227862085a0c8",
+          "slot": 3,
+          "text": "ミケちゃん、しばらく静かにしていましょうか。"
+        }
+      ]
+    }
+  ]
+}
