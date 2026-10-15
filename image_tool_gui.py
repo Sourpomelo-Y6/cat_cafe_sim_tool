@@ -285,7 +285,8 @@ class ContentImageToolWindow:
             return
         try:
             self.interaction_text_editor = InteractionTextEditorWindow(
-                self.window, self.interaction_drafts, self.interaction_published)
+                self.window, self.interaction_drafts, self.interaction_published,
+                image_registry=self.registry, catalog_provider=self.catalog_provider)
         except (OSError, ValueError) as exc:
             self.notice.set(f'日常交流の文章を開けません：{exc}')
 
@@ -300,8 +301,9 @@ class ContentImageToolWindow:
             defaults = catalog_profiles()
             profiles = {key: dict(defaults.get(key, {}), appearance=self.presets.appearance_profile(key))
                         for key in self.catalog_provider()}
-            folder, report = export_bundle(self.catalog_provider(), self.registry, self.published_texts, parent, profiles=profiles)
-            self.notice.set(f"書き出しました：{folder}\n猫{report['cat_count']}匹・画像{report['image_count']}枚。")
+            folder, report = export_bundle(self.catalog_provider(), self.registry, self.published_texts, parent, profiles=profiles,
+                                           interaction_texts=self.interaction_published)
+            self.notice.set(f"書き出しました：{folder}\n猫{report['cat_count']}匹・画像{report['image_count']}枚・交流文{report['interactions']['candidate_count']}案。")
             self.show_export_report(folder, report)
         except (OSError, ValueError) as exc:
             self.notice.set(f'書き出せません：{exc}')
@@ -318,6 +320,15 @@ class ContentImageToolWindow:
                   wraplength=650).pack(anchor='w')
         body = ScrolledText(frame, width=85, height=18, wrap='word')
         body.pack(fill='both', expand=True, pady=8)
-        body.insert('1.0', '\n'.join(report['warnings']) or '登録素材に欠落はありません。')
+        from interaction_presentation import condition_label
+        interaction = report.get('interactions', {})
+        details = '\n'.join(report['warnings']) or '登録素材に欠落はありません。'
+        if interaction:
+            details += (f"\n\n交流文：{interaction['entry_count']}条件・{interaction['candidate_count']}案"
+                        + f"\n対応：{interaction['covered_count']} / {interaction['expected_count']}条件"
+                        + '\n交流文カタログのUnity取り込み・ゲーム内読み込みは次の段階です。別添のinteraction_texts.jsonを出力しています。'
+                        + '\n\n未制作の条件：\n'
+                        + '\n'.join(condition_label(v) for v in interaction['missing_conditions']))
+        body.insert('1.0', details)
         body.configure(state='disabled')
         ttk.Button(frame, text='閉じる', command=window.destroy).pack(anchor='e')

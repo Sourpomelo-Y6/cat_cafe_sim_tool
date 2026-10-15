@@ -10,7 +10,8 @@ REACTION_NAMES = dict(REACTIONS, any='指定なし（人物のセリフ）')
 
 
 class InteractionTextEditorWindow:
-    def __init__(self, parent, drafts, published, *, generation_settings=None, generation_output=None):
+    def __init__(self, parent, drafts, published, *, generation_settings=None, generation_output=None,
+                 image_registry=None, catalog_provider=None):
         import tkinter as tk
         from tkinter import ttk
         from tkinter.scrolledtext import ScrolledText
@@ -19,6 +20,7 @@ class InteractionTextEditorWindow:
         published.read()
         self.drafts, self.published = drafts, published
         self.generation_settings, self.generation_output = generation_settings, generation_output
+        self.image_registry, self.catalog_provider = image_registry, catalog_provider
         self.reviewed = None
         self.window = tk.Toplevel(parent)
         self.window.title('日常交流の文章 — 編集・生成・確認登録')
@@ -29,7 +31,7 @@ class InteractionTextEditorWindow:
         frame.pack(fill='both', expand=True)
         ttk.Label(frame, text='日常交流の文章', font=('', 14, 'bold')).pack(anchor='w')
         ttk.Label(frame, text='人物のセリフと猫の反応を別々に制作します。1〜3案、各200文字まで。\n'
-                  '登録は制作素材の保存です。ゲームへの反映・画像プレビューは次の段階です。',
+                  '登録は制作素材の保存です。画像付きで確認してUnity向けに書き出せます。ゲーム内への接続は次の段階です。',
                   wraplength=760).pack(anchor='w', pady=(4, 8))
         grid = ttk.Frame(frame)
         grid.pack(fill='x')
@@ -47,6 +49,8 @@ class InteractionTextEditorWindow:
             self.choices[name], self.selectors[name] = var, combo
         self.generation_button = ttk.Button(grid, text='ローカルLLMで3案生成…', command=self.open_generation)
         self.generation_button.grid(row=5, column=1, sticky='ew', padx=(0, 8), pady=(0, 4))
+        ttk.Button(grid, text='画像付きで組み合わせを確認…', command=self.open_preview).grid(
+            row=6, column=0, columnspan=2, sticky='ew', padx=(0, 8), pady=(2, 0))
         self.scope = tk.StringVar(master=self.window)
         ttk.Label(frame, textvariable=self.scope, wraplength=760).pack(anchor='w', pady=4)
         self.fields = []
@@ -214,6 +218,20 @@ class InteractionTextEditorWindow:
     def close(self):
         if self.confirm_leave():
             self.window.destroy()
+
+    def open_preview(self):
+        from interaction_preview_gui import InteractionPreviewWindow
+        try:
+            if self.image_registry is None or self.catalog_provider is None:
+                raise ValueError('画像制作画面から交流文編集を開いてください。')
+            entry = self.values()
+            existing = getattr(self, 'preview_window', None)
+            if existing is not None and existing.window.winfo_exists():
+                existing.window.destroy()
+            self.preview_window = InteractionPreviewWindow(self.window, self.catalog_provider(),
+                                     self.image_registry, self.published, editing_entry=entry)
+        except (OSError, ValueError) as exc:
+            self.notice.set(f'プレビューを開けません：{exc}')
 
     def open_generation(self):
         from interaction_llm_gui import InteractionLlmWindow

@@ -17,7 +17,7 @@ SCENES = (
 )
 
 
-def export_bundle(catalog, registry, texts, destination, *, profiles=None):
+def export_bundle(catalog, registry, texts, destination, *, profiles=None, interaction_texts=None, interaction_bindings=None):
     if (not isinstance(catalog, dict) or not catalog or any(
             not isinstance(key, str) or not key or not isinstance(name, str) or not name
             for key, name in catalog.items())):
@@ -26,10 +26,14 @@ def export_bundle(catalog, registry, texts, destination, *, profiles=None):
     from cat_appearance import catalog_profiles, validate_appearance
     profiles = catalog_profiles() if profiles is None else profiles
     records = texts.read()
+    from interaction_presentation import build_interaction_catalog
+    interactions, interaction_report, interaction_blobs = build_interaction_catalog(
+        catalog, registry, store=interaction_texts, bindings=interaction_bindings)
     destination = Path(destination).resolve()
     if destination == registry.directory.resolve() or registry.directory.resolve() in destination.parents:
         raise ValueError('書き出し先は登録素材のフォルダとは別にしてください。')
     pack_id = uuid.uuid4().hex
+    interactions['pack_id'] = pack_id
     folder = destination / f'CatCafeContent-{pack_id}'
     warnings, cats, blobs = [], [], {}
     for cat_id, name in catalog.items():
@@ -65,14 +69,18 @@ def export_bundle(catalog, registry, texts, destination, *, profiles=None):
                 warnings.append(f'{name} / {label}：画像が未登録。画像なしで書き出します。')
             cat['scenes'].append({'key': key, 'label': label, 'text': text or fallback, 'image': image})
         cats.append(cat)
+    blobs.update(interaction_blobs)
+    warnings.extend(interaction_report['image_warnings'])
+    if interaction_report['missing_count']:
+        warnings.append(f"交流文：{interaction_report['missing_count']}条件が未制作です。validation.jsonを確認してください。")
     bundle = {'version': 1, 'pack_id': pack_id, 'cats': cats}
-    report = {'version': 1, 'cat_count': len(cats), 'image_count': len(blobs), 'warnings': warnings}
+    report = {'version': 1, 'cat_count': len(cats), 'image_count': len(blobs), 'warnings': warnings, 'interactions': interaction_report}
     folder.mkdir(parents=True, exist_ok=False)
     try:
         (folder / 'images').mkdir()
         for relative, data in blobs.items():
             (folder / relative).write_bytes(data)
-        for filename, value in (('bundle.json', bundle), ('validation.json', report)):
+        for filename, value in (('bundle.json', bundle), ('interaction_texts.json', interactions), ('validation.json', report)):
             (folder / filename).write_text(json.dumps(value, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     except Exception:
         # 自分で作成した新規パックだけを片付ける。既存の出力は触らない。
