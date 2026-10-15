@@ -7,16 +7,20 @@ SCENES = (('normal', '通常'), ('play', '遊ぶ'), ('pet', '撫でられる'), 
 
 
 class ContentImageToolWindow:
-    def __init__(self, parent, catalog_provider, *, registry=None, cat_id=None, presets=None, references=None, lora_settings=None, text_drafts=None):
+    def __init__(self, parent, catalog_provider, *, registry=None, cat_id=None, presets=None, references=None, lora_settings=None, text_drafts=None, interaction_drafts=None):
         import tkinter as tk
         from tkinter import ttk
         self.window = tk.Toplevel(parent)
         self.window.title('猫の画像制作 — 登録とプレビュー')
+        self.window.protocol('WM_DELETE_WINDOW', self.close)
         self.catalog_provider = catalog_provider
         self.registry = registry or ImageRegistry()
         from content_texts import TextStore, DEFAULT_DRAFT_PATH
         self.text_drafts = text_drafts or TextStore(DEFAULT_DRAFT_PATH)
         self.published_texts = TextStore(self.registry.directory / 'texts.json')
+        from interaction_texts import InteractionTextStore, DEFAULT_DRAFT_PATH as INTERACTION_DRAFT_PATH
+        self.interaction_drafts = interaction_drafts or InteractionTextStore(INTERACTION_DRAFT_PATH)
+        self.interaction_published = InteractionTextStore(self.registry.directory / 'interaction_texts.json', published=True)
         from prompt_presets import PromptPresets
         self.presets = presets or PromptPresets()
         from lora_settings import LoraSettings
@@ -53,6 +57,7 @@ class ContentImageToolWindow:
         ttk.Button(frame, text='外見・行動・背景の設定…', command=self.open_prompt_editor).pack(anchor='w', pady=(0, 8))
         ttk.Button(frame, text='デザイン・ポーズLoRAの設定…', command=self.open_lora_editor).pack(anchor='w', pady=(0, 8))
         ttk.Button(frame, text='紹介文・行動描写の編集…', command=self.open_text_editor).pack(anchor='w', pady=(0, 8))
+        ttk.Button(frame, text='日常交流の文章を編集…', command=self.open_interaction_text_editor).pack(anchor='w', pady=(0, 8))
         ttk.Button(frame, text='Unity向けに書き出す…', command=self.export_unity).pack(anchor='w', pady=(0, 8))
         reference_controls = ttk.Frame(frame)
         reference_controls.pack(fill='x', pady=(0, 8))
@@ -70,11 +75,17 @@ class ContentImageToolWindow:
         self.image_label.grid(row=1, column=1, sticky='nsew', padx=4)
         self.notice = tk.StringVar(master=self.window)
         ttk.Label(frame, textvariable=self.notice, wraplength=540).pack(anchor='w', pady=8)
-        ttk.Button(frame, text='閉じる', command=self.window.destroy).pack(anchor='e')
+        ttk.Button(frame, text='閉じる', command=self.close).pack(anchor='e')
         self.reload_cats()
         if cat_id is not None:
             self.cat.set(next((label for label, key in self.cats.items() if key == cat_id), self.cat.get()))
             self.refresh()
+
+    def close(self):
+        editor = getattr(self, 'interaction_text_editor', None)
+        if editor is not None and editor.window.winfo_exists() and not editor.confirm_leave():
+            return
+        self.window.destroy()
 
     def reload_cats(self):
         catalog = self.catalog_provider()
@@ -265,6 +276,18 @@ class ContentImageToolWindow:
                                                 cat_id, self.cat.get())
         except (OSError, ValueError) as exc:
             self.notice.set(f'文章編集画面を開けません：{exc}')
+
+    def open_interaction_text_editor(self):
+        from interaction_text_editor_gui import InteractionTextEditorWindow
+        existing = getattr(self, 'interaction_text_editor', None)
+        if existing is not None and existing.window.winfo_exists():
+            existing.window.lift()
+            return
+        try:
+            self.interaction_text_editor = InteractionTextEditorWindow(
+                self.window, self.interaction_drafts, self.interaction_published)
+        except (OSError, ValueError) as exc:
+            self.notice.set(f'日常交流の文章を開けません：{exc}')
 
     def export_unity(self):
         from tkinter import filedialog
