@@ -8,6 +8,67 @@ namespace CatCafePreview.Editor
 {
     public static class CatalogVerification
     {
+        [Serializable] private class RotationRows { public CafeNarrativeRow[] rows; }
+
+        // Unlike the temporary import probe, this explicitly activates the authored pack for ordinary Play.
+        public static void ActivateAndVerifyAuthoredPack()
+        {
+            string folder=Environment.GetEnvironmentVariable("CATCAFE_IMPORT_PACK");
+            string output=Environment.GetEnvironmentVariable("CATCAFE_NARRATIVE_OUTPUT");
+            Directory.CreateDirectory(output);
+            string pointer=Path.Combine(Application.dataPath,"Resources/CatCafeContent/catalog.json");
+            byte[] original=File.ReadAllBytes(pointer);
+            try
+            {
+                ContentPreviewSetup.Import(folder);
+                var catalog=CafeNarrativeResources.Load();
+                if(catalog==null)throw new Exception("No active narrative catalog after import");
+                string saves=Path.Combine(output,"rotation-saves");
+                var b=new LocalCafeBackend(saves);
+                b.Simulation.Execute("player_begin",catId:"cat-mike");
+                for(int i=0;i<4;i++)b.Simulation.Execute("player_step",choice:"pause");
+                var rows=b.Narratives.Rows.ToArray();
+                if(rows.Length!=4 || rows.Any(r=>r.catalog_revision!=catalog.revision)
+                    || rows.Take(3).Select(r=>r.cat_text_id).Distinct().Count()!=3
+                    || rows.Take(3).Select(r=>r.speech_id).Distinct().Count()!=3
+                    || rows[3].cat_text_id!=rows[0].cat_text_id || rows[3].speech_id!=rows[0].speech_id)
+                    throw new Exception("Active authored candidates did not rotate 1/2/3/1");
+                string session=b.Simulation.ActivePlayer.id, prose=b.Narratives.Read(session);
+                string before=JsonUtility.ToJson(b.Simulation.State);
+                for(int i=0;i<20;i++)if(b.Narratives.Read(session)!=prose)throw new Exception("Read changed prose");
+                if(JsonUtility.ToJson(b.Simulation.State)!=before)throw new Exception("Read changed gameplay");
+                SaveCommand(b,"save_game");
+                var reopened=new LocalCafeBackend(saves);SaveCommand(reopened,"load_game");
+                if(reopened.Narratives.Read(session)!=prose)throw new Exception("Load changed historical prose");
+                reopened.Simulation.Execute("player_step",choice:"pause");
+                var next=reopened.Narratives.Rows.Last();
+                if(next.cat_text_id!=rows[1].cat_text_id || next.speech_id!=rows[1].speech_id)
+                    throw new Exception("Candidate rotation did not resume after load");
+                File.WriteAllText(Path.Combine(output,"rotation-rows.json"),JsonUtility.ToJson(new RotationRows{rows=reopened.Narratives.Rows.ToArray()},true));
+                NarrativeVerification.Run();
+                if(CafeNarrativeResources.Load()?.pack_id!=catalog.pack_id)throw new Exception("Active pack changed during screen verification");
+                File.WriteAllText(Path.Combine(output,"active-catalog-result.txt"),"PASS: authored catalog active for ordinary Editor Play; speech and cat 1/2/3/1, disk save/load then candidate 2, 20 stable read-only views, current screens verified.\nPack: "+catalog.pack_id+"\nRevision: "+catalog.revision+"\n");
+                Debug.Log("CAT_CAFE_ACTIVE_CATALOG_OK");
+            }
+            catch
+            {
+                File.WriteAllBytes(pointer,original);
+                AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
+                throw;
+            }
+        }
+
+        private static void SaveCommand(LocalCafeBackend b,string kind)
+        {
+            CafeResponse response=null;
+            var command=new PythonShiftCommand{kind=kind,save_id="2",save_slot=2,instance_id=b.Simulation.State.instance_id,
+                expected_revision=b.Simulation.State.revision,request_id=Guid.NewGuid().ToString("N")};
+            var request=b.Request("/commands",JsonUtility.ToJson(command),r=>response=r);
+            while(request.MoveNext()){}
+            if(response==null || response.result!=UnityEngine.Networking.UnityWebRequest.Result.Success)
+                throw new Exception(response?.text??"Save/load returned no response");
+        }
+
         // Verify a real authored export without changing the ordinary active pack or making a build.
         public static void VerifyAuthoredPack()
         {
