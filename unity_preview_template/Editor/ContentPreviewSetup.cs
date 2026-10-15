@@ -60,6 +60,22 @@ namespace CatCafePreview.Editor
             var json = File.ReadAllText(Path.Combine(folder, "bundle.json"));
             var bundle = JsonUtility.FromJson<ContentBundle>(json);
             ContentValidation.Validate(bundle);
+            string interactionPath=Path.Combine(folder,"interaction_texts.json");
+            string interactionJson=File.Exists(interactionPath)?File.ReadAllText(interactionPath):null;
+            CatCafePreview.Standalone.CafeNarrativeCatalog interactions=null;
+            if(interactionJson!=null)
+            {
+                interactions=JsonUtility.FromJson<CatCafePreview.Standalone.CafeNarrativeCatalog>(interactionJson);interactions.Validate();
+                if(interactions.pack_id!=bundle.pack_id)throw new ArgumentException("交流文と素材パックのIDが一致しません。");
+                foreach(var binding in interactions.cat_bindings)
+                    if(binding.content_cat_id!="" && !Array.Exists(bundle.cats,c=>c.cat_id==binding.content_cat_id))throw new ArgumentException("交流文の猫画像IDが素材パックにありません。");
+                foreach(var image in interactions.image_bindings)
+                {
+                    if(image.image=="")continue;
+                    var cat=Array.Find(bundle.cats,c=>c.cat_id==image.content_cat_id);
+                    if(cat==null || !Array.Exists(cat.scenes,r=>r.key==image.resolved_scene_key && r.image==image.image))throw new ArgumentException("交流文の画像対応が素材と一致しません。");
+                }
+            }
             var imagePaths = new HashSet<string>();
             foreach (var cat in bundle.cats) foreach (var scene in cat.scenes)
                 if (scene.image != "") imagePaths.Add(scene.image);
@@ -79,20 +95,34 @@ namespace CatCafePreview.Editor
             {
                 if (File.ReadAllText(Path.Combine(target, "bundle.json")) != json)
                     throw new ArgumentException("同じパックIDで異なる内容が存在します。制作ツールから書き出し直してください。");
+                string existingInteraction=Path.Combine(target,"interaction_texts.json");
+                if(File.Exists(existingInteraction)!=(interactionJson!=null) || interactionJson!=null && File.ReadAllText(existingInteraction)!=interactionJson)
+                    throw new ArgumentException("同じパックIDで交流文が変更されています。書き出し直してください。");
                 foreach (var relative in imagePaths)
                     if (!File.Exists(Path.Combine(target, relative)) || !SameBytes(Path.Combine(folder, relative), Path.Combine(target, relative)))
                         throw new ArgumentException("取り込み済み画像が欠落・変更されています。新しいパックとして書き出してください。");
             }
             else
             {
-                Directory.CreateDirectory(Path.Combine(target, "images"));
-                foreach (var relative in imagePaths) File.Copy(Path.Combine(folder, relative), Path.Combine(target, relative));
-                File.WriteAllText(Path.Combine(target, "bundle.json"), json, new System.Text.UTF8Encoding(false));
-                var report = Path.Combine(folder, "validation.json");
-                if (File.Exists(report)) File.Copy(report, Path.Combine(target, "validation.json"));
+                string pending=target+".pending-"+Guid.NewGuid().ToString("N");
+                try
+                {
+                    Directory.CreateDirectory(Path.Combine(pending, "images"));
+                    foreach (var relative in imagePaths) File.Copy(Path.Combine(folder, relative), Path.Combine(pending, relative));
+                    File.WriteAllText(Path.Combine(pending, "bundle.json"), json, new System.Text.UTF8Encoding(false));
+                    if(interactionJson!=null)File.WriteAllText(Path.Combine(pending,"interaction_texts.json"),interactionJson,new System.Text.UTF8Encoding(false));
+                    var report=Path.Combine(folder,"validation.json");if(File.Exists(report))File.Copy(report,Path.Combine(pending,"validation.json"));
+                    Directory.Move(pending,target);
+                }
+                finally
+                {
+                    string expected=Path.GetFullPath(Path.Combine(root,"Imports"))+Path.DirectorySeparatorChar;
+                    if(Directory.Exists(pending) && Path.GetFullPath(pending).StartsWith(expected,StringComparison.OrdinalIgnoreCase)
+                        && Path.GetFileName(pending).StartsWith(bundle.pack_id+".pending-",StringComparison.Ordinal))Directory.Delete(pending,true);
+                }
             }
             // 全素材を配置した後に参照先だけを切り替える。以前のパックは保持する。
-            var catalog = new ContentCatalog { bundleResource = "CatCafeContent/Imports/" + bundle.pack_id + "/bundle" };
+            var catalog = new ContentCatalog { bundleResource = "CatCafeContent/Imports/" + bundle.pack_id + "/bundle", interactionResource=interactionJson==null?null:"CatCafeContent/Imports/"+bundle.pack_id+"/interaction_texts" };
             var catalogPath = Path.Combine(root, "catalog.json");
             var temporary = catalogPath + ".tmp";
             File.WriteAllText(temporary, JsonUtility.ToJson(catalog, true), new System.Text.UTF8Encoding(false));

@@ -96,6 +96,7 @@ namespace CatCafePreview
     [Serializable] public class PythonObjectiveProgress { public string mode, label, status, summary, details; }
     [Serializable] public class PythonPlayerInteraction
     {
+        public string narrative_image;
         public string session_id, cat_id, content_cat_id, scene_key, image_key, event_image_key, name, mode, history, reason;
         public bool active, can_finish;
         public int remaining_ticks, remaining_sets;
@@ -118,7 +119,7 @@ namespace CatCafePreview
         public string kind, reason;
         public float cost, funds_after, daily_cost, next_daily_cost, operating_cost, next_operating_cost;
     }
-    [Serializable] public class PythonSeatState { public string narrative; public string seat_id, customer_id, customer_name, cat_id, equipment_id, equipment_description, equipment_name; public bool disabled; }
+    [Serializable] public class PythonSeatState { public string narrative_image; public string narrative; public string seat_id, customer_id, customer_name, cat_id, equipment_id, equipment_description, equipment_name; public bool disabled; }
     [Serializable] public class PythonIntakeState
     {
         public string cat_id, name, status, personality, features, trait, housing, response_reason, accept_reason;

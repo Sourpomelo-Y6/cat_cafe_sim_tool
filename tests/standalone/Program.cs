@@ -173,6 +173,7 @@ static partial class Program
     }
     static void Main(string[] args)
     {
+        if(args.Length>0 && args[0]=="--catalog"){CatalogChecks(args[1],args[2],args[3]);return;}
         if(args.Length>0 && args[0]=="--narrative-resume"){NarrativeResume(args[1],args[2]);return;}
         if(args.Length>0 && args[0]=="--narratives"){NarrativeChecks(args[1],args[2]);return;}
         if(args.Length>0 && args[0]=="--stamina-resume"){StaminaResume(args[1]);return;}

@@ -227,6 +227,6 @@ Unity単独版に[旧Pythonセーブの変換・取り込み](../Docs/UnityStand
 
 ## 日常交流の文章を手入力する
 
-制作画面の「日常交流の文章を編集…」から、プレイヤー・佐藤さんのセリフとミケの反応を、ねこじゃらし・なでる・休憩の条件別に最大3案ずつ入力できます。「下書きを保存」または「登録内容を確認」→「確認した文章を登録」で保存します。登録先は画像出力先の `interaction_texts.json`、下書きは `user_data/interaction_text_drafts.json` です。「ローカルLLMで3案生成…」から条件に合う候補を生成し、選んだ案だけ編集欄へ取り込めます。Unityへの反映は後続です。[LLM生成の操作と検証](Docs/InteractionLlmGeneration.md)も参照してください。[操作・仕様・検証結果](Docs/InteractionTextEditor.md)を参照してください。
+制作画面の「日常交流の文章を編集…」から、プレイヤー・佐藤さんのセリフとミケの反応を、ねこじゃらし・なでる・休憩の条件別に最大3案ずつ入力できます。「下書きを保存」または「登録内容を確認」→「確認した文章を登録」で保存します。登録先は画像出力先の `interaction_texts.json`、下書きは `user_data/interaction_text_drafts.json` です。「ローカルLLMで3案生成…」から条件に合う候補を生成し、選んだ案だけ編集欄へ取り込めます。Unityへの反映は素材パックの取り込みに対応しました。[LLM生成の操作と検証](Docs/InteractionLlmGeneration.md)も参照してください。[操作・仕様・検証結果](Docs/InteractionTextEditor.md)を参照してください。
 
-「画像付きで組み合わせを確認…」では、人と猫の文章候補・共通の行動文・地の文を画像と並べ、未制作条件も確認できます。採用済み交流文は既存の素材書き出しに別添 `interaction_texts.json` として含まれ、下書き・編集中の案は含まれません。[プレビュー・書き出しの仕様と検証](Docs/InteractionPreviewExport.md)を参照してください。Unity側でのカタログ取り込みとゲーム内の文章選択は次の段階です。
+「画像付きで組み合わせを確認…」では、人と猫の文章候補・共通の行動文・地の文を画像と並べ、未制作条件も確認できます。採用済み交流文は既存の素材書き出しに別添 `interaction_texts.json` として含まれ、下書き・編集中の案は含まれません。[プレビュー・書き出しの仕様と検証](Docs/InteractionPreviewExport.md)を参照してください。Unity側での取り込み、実行動・反応による候補選択、選択済み本文の保存にも対応しました。[Unity接続の使い方と検証](Docs/InteractionUnityCatalog.md)を参照してください。
