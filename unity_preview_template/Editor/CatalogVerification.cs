@@ -8,6 +8,57 @@ namespace CatCafePreview.Editor
 {
     public static class CatalogVerification
     {
+        // Verify a real authored export without changing the ordinary active pack or making a build.
+        public static void VerifyAuthoredPack()
+        {
+            string folder=Environment.GetEnvironmentVariable("CATCAFE_IMPORT_PACK");
+            string output=Environment.GetEnvironmentVariable("CATCAFE_NARRATIVE_OUTPUT");
+            Directory.CreateDirectory(output);
+            var expected=JsonUtility.FromJson<CafeNarrativeCatalog>(File.ReadAllText(Path.Combine(folder,"interaction_texts.json")));
+            expected.Validate();
+            string pointer=Path.Combine(Application.dataPath,"Resources/CatCafeContent/catalog.json");
+            byte[] original=File.ReadAllBytes(pointer);
+            string imports=Path.GetFullPath(Path.Combine(Application.dataPath,"Resources/CatCafeContent/Imports"));
+            string target=Path.GetFullPath(Path.Combine(imports,expected.pack_id));
+            if(!CafeNarrativeCatalog.Hex(expected.pack_id,32) || !target.StartsWith(imports+Path.DirectorySeparatorChar,StringComparison.OrdinalIgnoreCase)
+                || Directory.Exists(target))throw new Exception("Verification requires a new isolated import target");
+            try
+            {
+                ContentPreviewSetup.Import(folder);
+                ContentPreviewSetup.Import(folder);
+                var loaded=CafeNarrativeResources.Load();
+                if(loaded==null || loaded.pack_id!=expected.pack_id || loaded.revision!=expected.revision
+                    || loaded.entries.Length!=expected.entries.Length)throw new Exception("Authored catalog was not loaded intact");
+                var b=new LocalCafeBackend(Path.Combine(output,"authored-saves"));
+                b.Simulation.Execute("player_begin",catId:"cat-mike");
+                b.Simulation.Execute("player_step",choice:"direct");
+                var row=b.Narratives.Rows.Last();
+                var cat=loaded.Find("cat_response","cat-mike","teaser","direct",row.reaction);
+                if(row.catalog_revision!=loaded.revision || cat==null || !cat.variants.Any(v=>v.id==row.cat_text_id && row.text.Contains(v.text)))
+                    throw new Exception("Actual action/reaction did not select authored cat text");
+                if(string.IsNullOrEmpty(row.image_resource) || CafeNarrativeResources.Texture(row.image_resource)==null)
+                    throw new Exception("Authored receipt image not loaded");
+                b.Simulation.Execute("player_step",choice:"switch",source:"pet");
+                b.Simulation.Execute("player_step",choice:"direct");
+                row=b.Narratives.Rows.Last();
+                if(loaded.Find("speech","player","pet","direct","any")==null
+                    && (!string.IsNullOrEmpty(row.speech_id) || string.IsNullOrEmpty(row.speech)))throw new Exception("Missing speech fallback failed");
+                NarrativeVerification.Run();
+                File.WriteAllText(Path.Combine(output,"authored-import-result.txt"),
+                    "PASS: actual authored export imported twice, revision/entries preserved, Resources catalog and receipt image loaded, actual reaction selected authored text, missing speech fallback, save/load and both existing screen captures.\n"
+                    +"Pack: "+loaded.pack_id+"\nEntries: "+loaded.entries.Length+"\nCandidates: "+loaded.entries.Sum(e=>e.variants.Length)+"\nRevision: "+loaded.revision+"\n");
+                Debug.Log("CAT_CAFE_AUTHORED_IMPORT_OK");
+            }
+            finally
+            {
+                File.WriteAllBytes(pointer,original);
+                // Remove only this verification's newly created temporary import; retain the exported pack.
+                if(Directory.Exists(target))Directory.Delete(target,true);
+                if(File.Exists(target+".meta"))File.Delete(target+".meta");
+                AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
+            }
+        }
+
         public static void VerifyAndBuild()
         {
             string folder=Environment.GetEnvironmentVariable("CATCAFE_CATALOG_FIXTURE");
