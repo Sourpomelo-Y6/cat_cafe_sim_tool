@@ -136,7 +136,7 @@ class InteractionTextStore:
         identity = key(value)
         return next((row for row in self.read()['entries'] if key(row['condition']) == identity), None)
 
-    def save(self, entry, *, expected=_UNSET):
+    def validate_for_save(self, entry):
         validate_entry(entry, published=self.published)
         validate_condition(entry['condition'], subjects=self.labels())
         if self.subject_registry:
@@ -148,14 +148,29 @@ class InteractionTextStore:
                 target=c.get('target_cat','cat-mike') if c['kind']=='speech' else c['subject_id']
                 if target!='*' and cat['id']!=target:continue
                 for variant in entry['variants']:expand(variant['text'],cat['name'],person['call'] if c['kind']=='speech' else '{cat}')
-        data = self.read()  # 不正な既存ファイルは上書きしない。
-        identity = key(entry['condition'])
-        old = next((row for row in data['entries'] if key(row['condition']) == identity), None)
-        if expected is not _UNSET and old != expected:
-            raise ValueError('この条件は別の編集で更新されています。再読込して確認してください。')
-        if self.subject_registry: data['version'] = 2
-        data['entries'] = [row for row in data['entries'] if key(row['condition']) != identity]
-        data['entries'].append(copy.deepcopy(entry))
+    def save(self, entry, *, expected=_UNSET):
+        snapshots=None if expected is _UNSET else {key(entry['condition']):expected}
+        self.save_many([entry], expected=snapshots)
+
+    def save_many(self, entries, *, expected=None):
+        """全候補・競合を検証してから、1ファイルを一度だけ置き換える。"""
+        entries=copy.deepcopy(list(entries))
+        if not entries:return
+        identities=set()
+        for entry in entries:
+            self.validate_for_save(entry)
+            identity=key(entry['condition'])
+            if identity in identities:raise ValueError('まとめ保存の条件が重複しています。')
+            identities.add(identity)
+        data=self.read()
+        old={key(e['condition']):e for e in data['entries']}
+        if expected is not None:
+            for identity in identities:
+                if identity not in expected or old.get(identity)!=expected[identity]:
+                    raise ValueError('保存対象が別の編集で更新されています。上書きせず中止しました。')
+        if len(set(old)|identities)>10000:raise ValueError('保存できる条件数を超えています。')
+        if self.subject_registry:data['version']=2
+        data['entries']=[e for e in data['entries'] if key(e['condition']) not in identities]+entries
         self.path.parent.mkdir(parents=True, exist_ok=True)
         temp = self.path.with_name(self.path.stem + '-' + uuid.uuid4().hex + '.tmp')
         try:

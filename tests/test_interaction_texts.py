@@ -118,6 +118,7 @@ class InteractionEditorTests(unittest.TestCase):
         self.drafts = InteractionTextStore(Path(self.temp.name) / 'draft.json')
         self.published = InteractionTextStore(Path(self.temp.name) / 'published.json', published=True)
         self.editor = InteractionTextEditorWindow(self.root, self.drafts, self.published)
+        self.editor.load_condition(condition())
         self.root.update()
 
     def fill(self, texts):
@@ -141,6 +142,7 @@ class InteractionEditorTests(unittest.TestCase):
         expected = e.values()
         e.close()
         self.editor = InteractionTextEditorWindow(self.root, self.drafts, self.published)
+        self.editor.load_condition(condition())
         self.assertEqual(self.editor.values(), expected)
         self.assertEqual(self.published.get(condition()), expected)
 
@@ -203,6 +205,7 @@ class InteractionEditorTests(unittest.TestCase):
         tool = ContentImageToolWindow(self.root, lambda: {'playtest-mike': 'ミケ'},
                     registry=ImageRegistry(Path(self.temp.name) / 'images'), interaction_drafts=self.drafts)
         tool.open_interaction_text_editor()
+        tool.interaction_text_editor.load_condition(condition())
         tool.interaction_text_editor.fields[0].insert('1.0', '親を閉じても保護する文章')
         with patch('tkinter.messagebox.askyesnocancel', return_value=None):
             tool.close()

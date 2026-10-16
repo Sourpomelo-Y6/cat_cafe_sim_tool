@@ -145,6 +145,10 @@ class InteractionLlmSettings:
         data = self.read()
         row=self.subject_registry.get(value['subject_id']) if self.subject_registry else None
         memo=data['scenes'].get(key(value), '')
+        if not memo and 'target_cat' in value:
+            legacy={k:v for k,v in value.items() if k!='target_cat'}
+            memo=data['scenes'].get(key(legacy),'')
+            if value['target_cat']=='*':memo=memo.replace('ミケ','対象の猫')
         if not memo and self.subject_registry:
             memo=('動作：'+MODES[value['mode']]+'。操作：'+ACTION_LABELS.get(value['action'],'動作共通')+'。反応：'+REACTIONS.get(value['reaction'],'結果を決めない人物の発話')+'。画像の姿勢・背景は未確認。条件を優先し、未確認の仕草・場所・来歴や数値変化を追加しない。')
         return dict(url=data['url'], model=data['model'], style=data['style'],

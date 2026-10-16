@@ -77,7 +77,7 @@ def resolve_image(registry, content_id, mode, action):
                 image='', data=None, warnings=warnings)
 
 
-def select_entry(entries, value, *, overlay=None):
+def select_entry(entries, value, *, overlay=None, prefer_overlay=False):
     """専用操作を優先し、なければ同じ反応の操作共通文を使う。"""
     rows = [(row, '登録済み') for row in entries]
     if overlay is not None:
@@ -85,6 +85,15 @@ def select_entry(entries, value, *, overlay=None):
         rows = [(row, source) for row, source in rows if key(row['condition']) != key(overlay['condition'])]
         rows.append((overlay, '編集中・未登録'))
     cat_id = value.get('target_cat', 'cat-mike')
+    if prefer_overlay and overlay is not None:
+        c=overlay['condition']
+        if (all(c[k]==value[k] for k in ('kind','subject_id','mode','reaction'))
+                and c['action'] in (value['action'],'any')
+                and (c['kind']!='speech' or c.get('target_cat','cat-mike') in (cat_id,'*'))):
+            candidates=[v for v in overlay['variants'] if v['text']]
+            if candidates:return dict(candidates=candidates,source='編集中・未登録',
+                match='専用' if c['action']==value['action'] else '操作共通',condition=c)
+
     for scope in ([cat_id, '*'] if value['kind']=='speech' and cat_id!='*' else [cat_id]):
         for action in dict.fromkeys([value['action'], 'any']):
             for row, source in rows:

@@ -60,8 +60,8 @@ class InteractionTextEditorWindow:
             row=6, column=0, sticky='ew', padx=(0, 8), pady=(2, 0))
         self.batch_button = ttk.Button(grid, text='人物のセリフを連続生成…', command=self.open_batch_generation)
         self.batch_button.grid(row=6, column=1, sticky='ew', padx=(0, 8), pady=(2, 0))
-        self.target_cat=tk.StringVar(master=self.window,value='従来のミケ専用')
-        self.target_options={'従来のミケ専用':None,'どの猫でも使う（{cat_call}）':'*'}
+        self.target_cat=tk.StringVar(master=self.window,value='どの猫でも使う（{cat_call}）')
+        self.target_options={'どの猫でも使う（{cat_call}）':'*','従来のミケ専用':None}
         self.target_options.update({name+'専用':id for id,name in self.subjects['cat_response'].items() if id!='cat-mike'})
         target=ttk.Combobox(grid,textvariable=self.target_cat,values=list(self.target_options),state='readonly')
         target.grid(row=7,column=0,columnspan=2,sticky='ew',padx=(0,8),pady=2)
@@ -88,7 +88,7 @@ class InteractionTextEditorWindow:
         ttk.Button(frame, text='閉じる', command=self.close).pack(anchor='e')
         self._condition = None
         self._baseline = None
-        self.load_condition(condition())
+        self.load_condition(condition(target_cat='*'))
 
     def _set_selectors(self, value):
         self.target_selector.configure(values=list(self.target_options),state='readonly' if value['kind']=='speech' else 'disabled')
@@ -101,7 +101,7 @@ class InteractionTextEditorWindow:
             self.choices[name].set(labels[value[name]])
         if 'target_cat' in value:
             self.target_cat.set(next((label for label,id in self.target_options.items() if id==value['target_cat']), 'どの猫でも使う（{cat_call}）'))
-        else:self.target_cat.set('従来のミケ専用')
+        else:self.target_cat.set('従来のミケ専用' if value['kind']=='speech' else 'どの猫でも使う（{cat_call}）')
         self.selectors['reaction'].configure(state='disabled' if value['kind'] == 'speech' else 'readonly')
         self.scope.set('対象ID：' + value['subject_id'] + '　／　画像の場面キー：' + value['scene_key']
                        + '　／　猫名は {cat}、呼び名は {cat_call} で差し込めます。')
@@ -326,8 +326,13 @@ class InteractionTextEditorWindow:
             return any(row['text'] for entry in entries if entry for row in entry['variants'])
         def get_entry(value):
             return self.values() if value==self._condition else self.drafts.get(value) or self.published.get(value)
+        def before_save(entries):
+            from interaction_texts import key
+            return not (self.dirty() and any(key(e['condition'])==key(self._condition) for e in entries))
+        def after_save(entries):
+            if not self.dirty() and any(e['condition']==self._condition for e in entries):self.load_condition(self._condition)
         try:
-            options = dict(get_entry=get_entry, settings=self.generation_settings, has_text=has_text, kind=kind, subject_registry=self.subject_registry, initial_subject=self._condition['subject_id'], target_cat=self._condition.get('target_cat'))
+            options = dict(drafts=self.drafts, published=self.published, before_save=before_save, after_save=after_save, get_entry=get_entry, settings=self.generation_settings, has_text=has_text, kind=kind, subject_registry=self.subject_registry, initial_subject=self._condition['subject_id'], target_cat=self._condition.get('target_cat'))
             if self.generation_output is not None:
                 options['output'] = self.generation_output
             self.batch_window = InteractionBatchWindow(self.window, result, **options)

@@ -2,6 +2,8 @@
 
 2026-10-16実装。[設計案](InteractionSubjectRegistryPlan.md)の対象台帳、登録画面、多対象の編集・生成・プレビュー・Unity連携に対応。
 
+スキップ・まとめ保存・汎用初期値の追加：[連続生成の操作改善](InteractionBatchWorkflow.md)。
+
 ## 操作
 
 1. 「猫の素材制作」→「対象管理」→「猫・人物の登録と資料…」を開く。

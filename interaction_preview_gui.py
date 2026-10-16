@@ -156,7 +156,7 @@ class InteractionPreviewWindow:
         for name, kind, subject, outcome in [('speech', 'speech', human, 'any'),
                                               ('cat', 'cat_response', cat_id, reaction)]:
             found = select_entry(self.entries, condition(kind, subject, mode, action, outcome, subjects=self.subjects, target_cat=cat_id if kind=='speech' else None),
-                                 overlay=self.overlay if self.use_edit.get() else None)
+                                 overlay=self.overlay if self.use_edit.get() else None,prefer_overlay=True)
             labels = {str(i): '案' + str(v['slot']) for i, v in enumerate(found['candidates'])}
             if labels:
                 index = int(choice(name, labels))
@@ -166,7 +166,7 @@ class InteractionPreviewWindow:
                 self.variables[name].set('未制作')
                 texts.append('')
             selections.append(('人：' if name == 'speech' else '猫：') + found['source'] + ' ' + found['match'])
-        self.source_notice.set(' ／ '.join(selections) + '（専用操作を優先、なければ同じ反応の操作共通文）')
+        self.source_notice.set(' ／ '.join(selections) + ('（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）' if self.use_edit.get() else '（専用操作を優先、なければ同じ反応の操作共通文）'))
         self.write(self.body, compose_preview(self.subjects['speech'][human], mode, action, reaction, *texts, cat_name=self.subjects['cat_response'][cat_id],call=self.subject_registry.get(human)['call'] if self.subject_registry else '{cat}'))
         self.image = None
         self.picture.configure(image='', text='画像なし')

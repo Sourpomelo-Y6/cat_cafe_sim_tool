@@ -120,7 +120,7 @@ class BatchGuiTests(unittest.TestCase):
         published=InteractionTextStore(Path(self.temp.name)/'cat-published.json',published=True)
         old=make_entry(condition('cat_response','cat-mike',reaction='neutral'),['既存の反応','',''])
         drafts.save(old)
-        editor=InteractionTextEditorWindow(self.root,drafts,published,generation_settings=self.settings)
+        editor=InteractionTextEditorWindow(self.root,drafts,published,generation_settings=self.settings,generation_output=Path(self.temp.name)/'records')
         editor.open_batch_generation();human=editor.batch_window
         editor.load_condition(condition('cat_response','cat-mike',reaction='neutral'))
         self.assertEqual(editor.batch_button.cget('text'),'猫の反応を連続生成…')
@@ -136,6 +136,7 @@ class BatchGuiTests(unittest.TestCase):
             if len(calls)==2:raise ValueError('検証用の猫エラー')
             return ['ミケは静かに体を丸めた。','ミケは前足をそろえた。','ミケはゆっくり息をついた。'],Path(self.temp.name)/'cat-record.json'
         with patch('interaction_batch_gui.InteractionLlmClient.generate_variants',side_effect=generate):
+            self.window.continue_errors.set(False)
             self.window.start();self.wait()
             self.assertEqual(len(self.window.results),1)
             self.window.start();self.wait()
@@ -160,6 +161,7 @@ class BatchGuiTests(unittest.TestCase):
                 raise ValueError('検証用の失敗')
             return self.fake(model, value)
         with patch('interaction_batch_gui.InteractionLlmClient.generate_variants', side_effect=generate):
+            self.window.continue_errors.set(False)
             self.window.start();self.wait()
             self.assertEqual(len(self.window.results), 2)
             self.assertIn('失敗', self.window.status.get())
@@ -210,7 +212,8 @@ class BatchGuiTests(unittest.TestCase):
         from interaction_texts import make_entry
         drafts=InteractionTextStore(Path(self.temp.name)/'drafts.json')
         published=InteractionTextStore(Path(self.temp.name)/'published.json',published=True)
-        editor=InteractionTextEditorWindow(self.root,drafts,published,generation_settings=self.settings)
+        editor=InteractionTextEditorWindow(self.root,drafts,published,generation_settings=self.settings,generation_output=Path(self.temp.name)/'records')
+        editor.load_condition(condition())
         editor.fields[0].insert('1.0','消してはいけない文')
         editor.open_batch_generation();batch=editor.batch_window
         self.assertEqual(batch.scope.get(),'共通＋操作別')
