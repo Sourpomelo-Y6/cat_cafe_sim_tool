@@ -1,0 +1,14 @@
+{
+  "registered_scenes": 28,
+  "registry_cat_ids": [
+    "request-cat-1"
+  ],
+  "previous_unity_catalog": {
+    "bundleResource": "CatCafeContent/Imports/7ede2b392dfb445a8b65fe85ccb88f10/bundle"
+  },
+  "unity_catalog": {
+    "bundleResource": "CatCafeContent/Imports/ee695293218d4083b1c7a5439ec126cf/bundle"
+  },
+  "registry_backup": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\backups\\manifest-before-nana-2f159ff110734326bb54935c0ea1f538.json",
+  "verified": true
+}

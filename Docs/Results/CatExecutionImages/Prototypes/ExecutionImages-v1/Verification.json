@@ -1,0 +1,217 @@
+{
+  "date": "2026-10-17",
+  "scope": "images and records only; no registration/integration/build/commit",
+  "inventory_rows": 56,
+  "generated_count": 13,
+  "reused_count": 43,
+  "source_byte_checks": [
+    {
+      "file": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\SoraActionExecution-v1\\sora-plush-execute.png",
+      "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146ae-a270-79e0-8273-a462fe944e5f\\exec-777aa936-fcdc-4d09-9fda-b80d9a0f4662.png",
+      "bytes": 1834793,
+      "sha256": "8721ec6977409c134999b1e7c26e0eed765bb85d52116da48a1d694cc57a7157",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "background": "opaque",
+      "byte_identical": true
+    },
+    {
+      "file": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\KohakuActionExecution-v1\\kohaku-ball-execute.png",
+      "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146ae-a270-79e0-8273-a462fe944e5f\\exec-0d74745b-b092-4b28-988b-646ddf8bec1e.png",
+      "bytes": 1989460,
+      "sha256": "8d0c6026880fe2e9f985aa0fa7fa330d49e4f4bb84bd3b88378f92fda679ec5a",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "background": "opaque",
+      "byte_identical": true
+    },
+    {
+      "file": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\KohakuActionExecution-v1\\kohaku-plush-execute.png",
+      "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146ae-a270-79e0-8273-a462fe944e5f\\exec-ffff732a-7a65-4ea7-9c2a-35dc9d3e30cf.png",
+      "bytes": 2004337,
+      "sha256": "ef2b859e6260b4c7c88746b26a9fe6b5f007ab41398d225ff601d8183f329581",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "background": "opaque",
+      "byte_identical": true
+    },
+    {
+      "file": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\MugiActionExecution-v1\\mugi-ball-execute.png",
+      "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146ae-a270-79e0-8273-a462fe944e5f\\exec-8b548305-0a7d-4263-8743-ff508659ecc6.png",
+      "bytes": 2015743,
+      "sha256": "7b2e4f0f3d9911033be92b7b13b33946e0644e451b305cc701e4f109bc3bbfd5",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "background": "opaque",
+      "byte_identical": true
+    },
+    {
+      "file": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\MugiActionExecution-v1\\mugi-plush-execute.png",
+      "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146ae-a270-79e0-8273-a462fe944e5f\\exec-7dec4f5e-93cc-4225-a890-4b44f50bac09.png",
+      "bytes": 2046980,
+      "sha256": "b37d8809b38107e4b0ec48049cbbe264cb3ab3a3eba7a3c2af4052cb81027ade",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "background": "opaque",
+      "byte_identical": true
+    },
+    {
+      "file": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\NanaActionExecution-v1\\nana-ball-execute.png",
+      "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146ae-a270-79e0-8273-a462fe944e5f\\exec-6b84de1d-bd10-42fd-bbdd-034e40bfb778.png",
+      "bytes": 1994152,
+      "sha256": "71cdd74fcec7bcd54b6f2103598ee4fd1b523f1040c4fe30c49a195eba76f5cf",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "background": "opaque",
+      "byte_identical": true
+    },
+    {
+      "file": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\NanaActionExecution-v1\\nana-plush-execute.png",
+      "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146ae-a270-79e0-8273-a462fe944e5f\\exec-41c12f86-e1ce-4330-acee-b65fce59c941.png",
+      "bytes": 2008674,
+      "sha256": "31599d30efc4baa51e1cbecabf3e1642ba4a08e5140e880e8fb9d8e37cd5e171",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "background": "opaque",
+      "byte_identical": true
+    },
+    {
+      "file": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\MaronActionExecution-v1\\maron-teaser-execute.png",
+      "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146ae-a270-79e0-8273-a462fe944e5f\\exec-59d270b5-b5d0-45f5-a6e3-072fe53eb0eb.png",
+      "bytes": 1971061,
+      "sha256": "3cc0a7c3cb0b8e9337ebeb2ba6de2706a7a12eba9f2207348e34b839c8bd0141",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "background": "opaque",
+      "byte_identical": true
+    },
+    {
+      "file": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\MaronActionExecution-v1\\maron-ball-execute.png",
+      "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146ae-a270-79e0-8273-a462fe944e5f\\exec-069770b3-0821-48b7-af01-e9315f2e1a90.png",
+      "bytes": 1958942,
+      "sha256": "772ac34b50d7fc0338d9c7b15e3c4070249679b23f42db32f03ad5fdcd802ce5",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "background": "opaque",
+      "byte_identical": true
+    },
+    {
+      "file": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\MaronActionExecution-v1\\maron-plush-execute.png",
+      "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146ae-a270-79e0-8273-a462fe944e5f\\exec-dbd077c8-f67f-4f14-96de-de1e690fd7cd.png",
+      "bytes": 2041853,
+      "sha256": "cd1ebaf5657370a72183fd0d7208c0b110f561fcaba9afebb50340f6b4622e70",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "background": "opaque",
+      "byte_identical": true
+    },
+    {
+      "file": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\CocoActionExecution-v1\\coco-teaser-execute.png",
+      "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146ae-a270-79e0-8273-a462fe944e5f\\exec-b31cb542-3187-411d-aee3-39d3744d913c.png",
+      "bytes": 2068492,
+      "sha256": "873e8d212f1244ae9abfb2158aa1994d036153e47dced00b2b6cbf0d9f609fc2",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "background": "opaque",
+      "byte_identical": true
+    },
+    {
+      "file": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\CocoActionExecution-v1\\coco-ball-execute.png",
+      "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146ae-a270-79e0-8273-a462fe944e5f\\exec-58cedd64-c581-4170-bce7-26d107bfd551.png",
+      "bytes": 2103733,
+      "sha256": "7e7f78a31af5f177fcbf4c70f133561da0d0a581598ddbd7c19e3f776475f809",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "background": "opaque",
+      "byte_identical": true
+    },
+    {
+      "file": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\CocoActionExecution-v1\\coco-plush-execute.png",
+      "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146ae-a270-79e0-8273-a462fe944e5f\\exec-2e2d9bca-7d03-4e64-9f87-682e4150a2d9.png",
+      "bytes": 2046709,
+      "sha256": "07fd648aef2b5e35663028a665bad3d7db4608ccc5714e20d7afcc46c59bcca0",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "background": "opaque",
+      "byte_identical": true
+    }
+  ],
+  "comparison": "Generated images viewed at original size and side-by-side Comparison.jpg; no material defect requiring regeneration found.",
+  "html_links": "all resolve",
+  "pairs": "56 distinct file pairs",
+  "start_bytes": {
+    "Docs\\Prototypes": 479355843,
+    "Logs": 13383956556,
+    "Logs\\StandaloneBuild\\Latest": 4184220754,
+    "Logs\\StandaloneBuild\\Runs": 2168462
+  },
+  "end_bytes_before_this_report": {
+    "Docs\\Prototypes": 507499910,
+    "Logs": 13383956556,
+    "Logs\\StandaloneBuild\\Latest": 4184220754,
+    "Logs\\StandaloneBuild\\Runs": 2168462
+  },
+  "delta_bytes": {
+    "Docs\\Prototypes": 28144067,
+    "Logs": 0,
+    "Logs\\StandaloneBuild\\Latest": 0,
+    "Logs\\StandaloneBuild\\Runs": 0
+  },
+  "new_folder_bytes": {
+    "Docs\\Prototypes\\ExecutionImages-v1": 996367,
+    "Docs\\Prototypes\\TamaActionExecution-v1": 31471,
+    "Docs\\Prototypes\\SoraActionExecution-v1": 1917636,
+    "Docs\\Prototypes\\KohakuActionExecution-v1": 4166493,
+    "Docs\\Prototypes\\MugiActionExecution-v1": 4223791,
+    "Docs\\Prototypes\\NanaActionExecution-v1": 4155686,
+    "Docs\\Prototypes\\MaronActionExecution-v1": 6194411,
+    "Docs\\Prototypes\\CocoActionExecution-v1": 6458212
+  },
+  "generated_image_bytes": 26084929,
+  "build_directories": [
+    "Latest",
+    "Runs"
+  ],
+  "pending": false,
+  "successful_build": "Latest only",
+  "external_generator_originals_preserved": true
+}

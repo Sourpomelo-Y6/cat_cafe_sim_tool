@@ -1,0 +1,15 @@
+{
+  "registered_scenes": 25,
+  "registry_cat_ids": [
+    "playtest-kohaku",
+    "cat-kohaku"
+  ],
+  "previous_unity_catalog": {
+    "bundleResource": "CatCafeContent/Imports/23ca0b2cfd384ee38f4ff83135bb6969/bundle"
+  },
+  "unity_catalog": {
+    "bundleResource": "CatCafeContent/Imports/9fb4383b47854aeea789ece120d4b281/bundle"
+  },
+  "registry_backup": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\backups\\manifest-before-kohaku-e1e81ebe16244cce90be5964429e04ee.json",
+  "verified": true
+}

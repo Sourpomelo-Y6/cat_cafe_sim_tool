@@ -1,0 +1,51 @@
+{
+  "cat_id": "cat-sora",
+  "preview_cat_id": "playtest-sora",
+  "images": [
+    {
+      "scene": "teaser",
+      "label": "ねこじゃらし",
+      "file": "sora-teaser-base.png"
+    },
+    {
+      "scene": "ball",
+      "label": "ボール遊び",
+      "file": "sora-ball-base.png"
+    },
+    {
+      "scene": "plush",
+      "label": "ぬいぐるみ遊び",
+      "file": "sora-plush-base.png"
+    },
+    {
+      "scene": "tunnel",
+      "label": "トンネル遊び",
+      "file": "sora-tunnel-base.png"
+    },
+    {
+      "scene": "pet",
+      "label": "なでる",
+      "file": "sora-pet-base.png"
+    },
+    {
+      "scene": "brush",
+      "label": "ブラッシング",
+      "file": "sora-brush-base.png"
+    },
+    {
+      "scene": "voice",
+      "label": "声をかける",
+      "file": "sora-voice-base.png"
+    },
+    {
+      "scene": "presence",
+      "label": "そばで見守る",
+      "file": "sora-presence-base.png"
+    },
+    {
+      "scene": "pause",
+      "label": "動きを止めて待つ",
+      "file": "sora-pause-base.png"
+    }
+  ]
+}

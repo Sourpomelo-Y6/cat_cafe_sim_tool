@@ -1,0 +1,51 @@
+{
+  "cat_id": "regular-rescue-1",
+  "preview_cat_id": "regular-rescue-1",
+  "images": [
+    {
+      "scene": "teaser",
+      "label": "ねこじゃらし",
+      "file": "maron-teaser-base.png"
+    },
+    {
+      "scene": "ball",
+      "label": "ボール遊び",
+      "file": "maron-ball-base.png"
+    },
+    {
+      "scene": "plush",
+      "label": "ぬいぐるみ遊び",
+      "file": "maron-plush-base.png"
+    },
+    {
+      "scene": "tunnel",
+      "label": "トンネル遊び",
+      "file": "maron-tunnel-base.png"
+    },
+    {
+      "scene": "pet",
+      "label": "なでる",
+      "file": "maron-pet-base.png"
+    },
+    {
+      "scene": "brush",
+      "label": "ブラッシング",
+      "file": "maron-brush-base.png"
+    },
+    {
+      "scene": "voice",
+      "label": "声をかける",
+      "file": "maron-voice-base.png"
+    },
+    {
+      "scene": "presence",
+      "label": "そばで見守る",
+      "file": "maron-presence-base.png"
+    },
+    {
+      "scene": "pause",
+      "label": "動きを止めて待つ",
+      "file": "maron-pause-base.png"
+    }
+  ]
+}

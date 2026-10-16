@@ -1,0 +1,59 @@
+{
+  "date": "2026-10-17",
+  "status": "verified",
+  "tests": {
+    "active_pack_assertions": 1024,
+    "standard_pack_assertions": 896,
+    "unity_cases": 320,
+    "catalog_assertions": 96,
+    "all_mode_assertions": 609,
+    "python_tests": 4,
+    "preview_tests_pass": 9,
+    "preview_tests_skipped": 5,
+    "player_ui_checks": 217,
+    "player_errors": []
+  },
+  "build": {
+    "executable": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Logs\\StandaloneBuild\\Latest\\CatCafeStandalone.exe",
+    "log": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Logs\\StandaloneBuild\\Runs\\20261017-073533-156-1d7eb54eaf6648e292d75ed97f3dcc67.log",
+    "bytes": 8247442140,
+    "pending": false,
+    "successful_builds": "Latest only"
+  },
+  "storage": {
+    "start_bytes": {
+      "Docs/Prototypes": 507509090,
+      "Logs": 13383956556,
+      "Logs/StandaloneBuild/Latest": 4184220754,
+      "Logs/StandaloneBuild/Runs": 2168462,
+      "cat_cafe_sim_tool/generated": 3277372585
+    },
+    "end_bytes_before_report": {
+      "Docs/Prototypes": 507509090,
+      "Logs": 17464938592,
+      "Logs/StandaloneBuild/Latest": 8247442140,
+      "Logs/StandaloneBuild/Runs": 5323973,
+      "cat_cafe_sim_tool/generated": 3277372585
+    },
+    "delta_bytes": {
+      "Docs/Prototypes": 0,
+      "Logs": 4080982036,
+      "Logs/StandaloneBuild/Latest": 4063221386,
+      "Logs/StandaloneBuild/Runs": 3155511,
+      "cat_cafe_sim_tool/generated": 0
+    },
+    "versioned_asset_bytes": 158305676,
+    "registry_image_addition": 26084929,
+    "unity_active_pack_image_addition": 26084929,
+    "unity_standard_pack_image_addition": 26084929,
+    "build_growth_explanation": "Previous successful build was from 2026-10-15. Current Resources includes 13 existing historical content packs and subsequent cat assets, stored as Unity textures. resources.assets.resS is 8157703904 bytes; original assets and old receipt references retained."
+  },
+  "preserved": {
+    "existing_registry_scenes": 309,
+    "active_authored_entries": 239,
+    "standard_authored_entries": 180,
+    "old_receipts": true,
+    "preexisting_unrelated_changes": true
+  },
+  "scope": "No push. Only task-owned files staged; preexisting active catalog switch and unrelated packs/build infrastructure excluded."
+}

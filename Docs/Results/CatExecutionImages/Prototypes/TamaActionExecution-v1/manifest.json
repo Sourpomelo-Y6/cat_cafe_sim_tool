@@ -1,0 +1,378 @@
+{
+  "date": "2026-10-17",
+  "status": "制作・記録のみ／未登録",
+  "game_cat_id": "cat-tama",
+  "display_cat_id": "playtest-tama",
+  "images": [
+    {
+      "cat": "tama",
+      "name": "タマ",
+      "game_cat_id": "cat-tama",
+      "display_cat_id": "playtest-tama",
+      "action": "pet",
+      "label": "頭をなでる",
+      "identity": "../CatAppearance-v1/tama-normal.png",
+      "existing_action": "../TamaBasePoses-v1/tama-pet-base.png",
+      "preparation": "../CatAppearance-v1/tama-normal.png",
+      "execution": "../TamaBasePoses-v1/tama-pet-base.png",
+      "decision": "既存再利用",
+      "reason": "既存baseの手は頭の毛に接している。開眼した通常反応なので再利用。旧pet画像の閉眼・甘えた反応へ置換しない。",
+      "comparison": "既存baseの手は頭の毛に接している。開眼した通常反応なので再利用。旧pet画像の閉眼・甘えた反応へ置換しない。",
+      "notes": [
+        "準備候補は道具・手をまだ出していない中立の基準画像。専用の道具あり未接触準備画像は今回制作しない。現在のbase登録は変更しない。"
+      ],
+      "keys": {
+        "pet": "../CatAppearance-v1/tama-normal.png",
+        "pet__switch": "../CatAppearance-v1/tama-normal.png",
+        "pet__direct": "../TamaBasePoses-v1/tama-pet-base.png",
+        "pet__adapt": "../TamaBasePoses-v1/tama-pet-base.png"
+      },
+      "preparation_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 1789607,
+        "sha256": "99a0df52628d4fcbc0d20479a02e9d592ed25e74e8a8f2266cae8ac803e80d93"
+      },
+      "execution_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 1870347,
+        "sha256": "fad11bd2d65b88343d279fba921e3807895768cbdc4c1d7fa2ab0c5e654e83e0"
+      }
+    },
+    {
+      "cat": "tama",
+      "name": "タマ",
+      "game_cat_id": "cat-tama",
+      "display_cat_id": "playtest-tama",
+      "action": "teaser",
+      "label": "ねこじゃらし",
+      "identity": "../CatAppearance-v1/tama-normal.png",
+      "existing_action": "../TamaBasePoses-v1/tama-teaser-base.png",
+      "preparation": "../CatAppearance-v1/tama-normal.png",
+      "execution": "../TamaBasePoses-v1/tama-teaser-base.png",
+      "decision": "既存再利用",
+      "reason": "前足を上げ羽根へ働きかける既存の通常遊びを再利用。静止画のため連続した動きは断定しない。",
+      "comparison": "前足を上げ羽根へ働きかける既存の通常遊びを再利用。静止画のため連続した動きは断定しない。",
+      "notes": [
+        "準備候補は道具・手をまだ出していない中立の基準画像。専用の道具あり未接触準備画像は今回制作しない。現在のbase登録は変更しない。"
+      ],
+      "keys": {
+        "teaser": "../CatAppearance-v1/tama-normal.png",
+        "teaser__switch": "../CatAppearance-v1/tama-normal.png",
+        "teaser__direct": "../TamaBasePoses-v1/tama-teaser-base.png",
+        "teaser__adapt": "../TamaBasePoses-v1/tama-teaser-base.png"
+      },
+      "preparation_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 1789607,
+        "sha256": "99a0df52628d4fcbc0d20479a02e9d592ed25e74e8a8f2266cae8ac803e80d93"
+      },
+      "execution_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 1947655,
+        "sha256": "2876d2011983ffc759cc16d4751a654f85507fea32427865695ee453ebeb4367"
+      }
+    },
+    {
+      "cat": "tama",
+      "name": "タマ",
+      "game_cat_id": "cat-tama",
+      "display_cat_id": "playtest-tama",
+      "action": "ball",
+      "label": "ボール",
+      "identity": "../CatAppearance-v1/tama-normal.png",
+      "existing_action": "../TamaBasePoses-v1/tama-ball-base.png",
+      "preparation": "../CatAppearance-v1/tama-normal.png",
+      "execution": "../TamaBasePoses-v1/tama-ball-base.png",
+      "decision": "既存再利用",
+      "reason": "既存baseで前足が赤い球の上に接しており、すでに通常遊びを表す。再利用。",
+      "comparison": "既存baseで前足が赤い球の上に接しており、すでに通常遊びを表す。再利用。",
+      "notes": [
+        "準備候補は道具・手をまだ出していない中立の基準画像。専用の道具あり未接触準備画像は今回制作しない。現在のbase登録は変更しない。"
+      ],
+      "keys": {
+        "ball": "../CatAppearance-v1/tama-normal.png",
+        "ball__switch": "../CatAppearance-v1/tama-normal.png",
+        "ball__direct": "../TamaBasePoses-v1/tama-ball-base.png",
+        "ball__adapt": "../TamaBasePoses-v1/tama-ball-base.png"
+      },
+      "preparation_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 1789607,
+        "sha256": "99a0df52628d4fcbc0d20479a02e9d592ed25e74e8a8f2266cae8ac803e80d93"
+      },
+      "execution_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 1978638,
+        "sha256": "8e47ec30c67638e8d0851a61001f153f5c9657c927ff1f7200c45684111574b8"
+      }
+    },
+    {
+      "cat": "tama",
+      "name": "タマ",
+      "game_cat_id": "cat-tama",
+      "display_cat_id": "playtest-tama",
+      "action": "plush",
+      "label": "ぬいぐるみ",
+      "identity": "../CatAppearance-v1/tama-normal.png",
+      "existing_action": "../TamaBasePoses-v1/tama-plush-base.png",
+      "preparation": "../CatAppearance-v1/tama-normal.png",
+      "execution": "../TamaBasePoses-v1/tama-plush-base.png",
+      "decision": "既存再利用",
+      "reason": "既存baseで前足が鼠の背に乗っている。通常遊びとして再利用。",
+      "comparison": "既存baseで前足が鼠の背に乗っている。通常遊びとして再利用。",
+      "notes": [
+        "準備候補は道具・手をまだ出していない中立の基準画像。専用の道具あり未接触準備画像は今回制作しない。現在のbase登録は変更しない。"
+      ],
+      "keys": {
+        "plush": "../CatAppearance-v1/tama-normal.png",
+        "plush__switch": "../CatAppearance-v1/tama-normal.png",
+        "plush__direct": "../TamaBasePoses-v1/tama-plush-base.png",
+        "plush__adapt": "../TamaBasePoses-v1/tama-plush-base.png"
+      },
+      "preparation_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 1789607,
+        "sha256": "99a0df52628d4fcbc0d20479a02e9d592ed25e74e8a8f2266cae8ac803e80d93"
+      },
+      "execution_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 1980229,
+        "sha256": "85755e2ec02f0ed8e1faaaa0f403584fa968f0b0c24add0d5298faed3d1c72fd"
+      }
+    },
+    {
+      "cat": "tama",
+      "name": "タマ",
+      "game_cat_id": "cat-tama",
+      "display_cat_id": "playtest-tama",
+      "action": "tunnel",
+      "label": "トンネル",
+      "identity": "../CatAppearance-v1/tama-normal.png",
+      "existing_action": "../TamaBasePoses-v1/tama-tunnel-base.png",
+      "preparation": "../CatAppearance-v1/tama-normal.png",
+      "execution": "../TamaBasePoses-v1/tama-tunnel-base.png",
+      "decision": "既存再利用",
+      "reason": "既存baseで胴体が筒の内側、前足が入口に出ている。トンネルへ入って遊ぶ静止場面として再利用。速度や通過方向は断定しない。",
+      "comparison": "既存baseで胴体が筒の内側、前足が入口に出ている。トンネルへ入って遊ぶ静止場面として再利用。速度や通過方向は断定しない。",
+      "notes": [
+        "準備候補は道具・手をまだ出していない中立の基準画像。専用の道具あり未接触準備画像は今回制作しない。現在のbase登録は変更しない。",
+        "後半身・後足はトンネルで遮蔽されるため全四肢の輪郭は確認できない。入口内で座る遊びを表し、走り抜ける専用画ではない。"
+      ],
+      "keys": {
+        "tunnel": "../CatAppearance-v1/tama-normal.png",
+        "tunnel__switch": "../CatAppearance-v1/tama-normal.png",
+        "tunnel__direct": "../TamaBasePoses-v1/tama-tunnel-base.png",
+        "tunnel__adapt": "../TamaBasePoses-v1/tama-tunnel-base.png"
+      },
+      "preparation_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 1789607,
+        "sha256": "99a0df52628d4fcbc0d20479a02e9d592ed25e74e8a8f2266cae8ac803e80d93"
+      },
+      "execution_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 2039934,
+        "sha256": "d6129b6ef573811e050e40e00b06b19f36a5a0fd20ab809b58dfc25dfa36920c"
+      }
+    },
+    {
+      "cat": "tama",
+      "name": "タマ",
+      "game_cat_id": "cat-tama",
+      "display_cat_id": "playtest-tama",
+      "action": "brush",
+      "label": "ブラッシング",
+      "identity": "../CatAppearance-v1/tama-normal.png",
+      "existing_action": "../TamaBasePoses-v1/tama-brush-base.png",
+      "preparation": "../CatAppearance-v1/tama-normal.png",
+      "execution": "../TamaBasePoses-v1/tama-brush-base.png",
+      "decision": "既存再利用",
+      "reason": "既存baseでブラシ毛先と肩の毛の境界が接している。通常のブラッシングとして再利用。",
+      "comparison": "既存baseでブラシ毛先と肩の毛の境界が接している。通常のブラッシングとして再利用。",
+      "notes": [
+        "準備候補は道具・手をまだ出していない中立の基準画像。専用の道具あり未接触準備画像は今回制作しない。現在のbase登録は変更しない。"
+      ],
+      "keys": {
+        "brush": "../CatAppearance-v1/tama-normal.png",
+        "brush__switch": "../CatAppearance-v1/tama-normal.png",
+        "brush__direct": "../TamaBasePoses-v1/tama-brush-base.png",
+        "brush__adapt": "../TamaBasePoses-v1/tama-brush-base.png"
+      },
+      "preparation_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 1789607,
+        "sha256": "99a0df52628d4fcbc0d20479a02e9d592ed25e74e8a8f2266cae8ac803e80d93"
+      },
+      "execution_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 2032921,
+        "sha256": "271b8e08873b90feff263980858fcf9d42495506d50cbd140fb6a4aba7842dff"
+      }
+    },
+    {
+      "cat": "tama",
+      "name": "タマ",
+      "game_cat_id": "cat-tama",
+      "display_cat_id": "playtest-tama",
+      "action": "voice",
+      "label": "声かけ",
+      "identity": "../CatAppearance-v1/tama-normal.png",
+      "existing_action": "../TamaBasePoses-v1/tama-voice-base.png",
+      "preparation": "../CatAppearance-v1/tama-normal.png",
+      "execution": "../TamaBasePoses-v1/tama-voice-base.png",
+      "decision": "既存再利用",
+      "reason": "既存baseの開いた目・耳・軽い顔の向きで話者へ注意を向ける通常場面として再利用。接触は加えない。",
+      "comparison": "既存baseの開いた目・耳・軽い顔の向きで話者へ注意を向ける通常場面として再利用。接触は加えない。",
+      "notes": [
+        "準備候補は道具・手をまだ出していない中立の基準画像。専用の道具あり未接触準備画像は今回制作しない。現在のbase登録は変更しない。",
+        "基準との姿勢差は控えめ。発話は静止画で見えないため後日の行動文で補う。大きな耳・視線差を必須にする場合は別途差分を検討。"
+      ],
+      "keys": {
+        "voice": "../CatAppearance-v1/tama-normal.png",
+        "voice__switch": "../CatAppearance-v1/tama-normal.png",
+        "voice__direct": "../TamaBasePoses-v1/tama-voice-base.png",
+        "voice__adapt": "../TamaBasePoses-v1/tama-voice-base.png"
+      },
+      "preparation_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 1789607,
+        "sha256": "99a0df52628d4fcbc0d20479a02e9d592ed25e74e8a8f2266cae8ac803e80d93"
+      },
+      "execution_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 1907587,
+        "sha256": "e7e584fce71c43bf9b7c7e2cfb499e9c96bdaafe3a65c0e6082994a349b8b3ba"
+      }
+    },
+    {
+      "cat": "tama",
+      "name": "タマ",
+      "game_cat_id": "cat-tama",
+      "display_cat_id": "playtest-tama",
+      "action": "presence",
+      "label": "見守り",
+      "identity": "../CatAppearance-v1/tama-normal.png",
+      "existing_action": "../TamaBasePoses-v1/tama-presence-base.png",
+      "preparation": "../CatAppearance-v1/tama-normal.png",
+      "execution": "../TamaBasePoses-v1/tama-presence-base.png",
+      "decision": "既存再利用",
+      "reason": "既存baseの画面端に青いズボンの膝があり、接触せず穏やかに座る。そばで見守る実行として再利用。",
+      "comparison": "既存baseの画面端に青いズボンの膝があり、接触せず穏やかに座る。そばで見守る実行として再利用。",
+      "notes": [
+        "準備候補は道具・手をまだ出していない中立の基準画像。専用の道具あり未接触準備画像は今回制作しない。現在のbase登録は変更しない。"
+      ],
+      "keys": {
+        "presence": "../CatAppearance-v1/tama-normal.png",
+        "presence__switch": "../CatAppearance-v1/tama-normal.png",
+        "presence__direct": "../TamaBasePoses-v1/tama-presence-base.png",
+        "presence__adapt": "../TamaBasePoses-v1/tama-presence-base.png"
+      },
+      "preparation_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 1789607,
+        "sha256": "99a0df52628d4fcbc0d20479a02e9d592ed25e74e8a8f2266cae8ac803e80d93"
+      },
+      "execution_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 2051327,
+        "sha256": "5a746d4c0f211706ce24423a9c0ec95fa5ab567bb117cc8e06e610687424f92a"
+      }
+    }
+  ]
+}

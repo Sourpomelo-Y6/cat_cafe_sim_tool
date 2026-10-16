@@ -41,7 +41,9 @@ try {
     $env:CATCAFE_WORKSPACE_ROOT = $workspaceRoot
     $env:CATCAFE_STANDALONE_BUILD = Join-Path $workspaceRoot 'Logs/StandaloneBuild/Latest/CatCafeStandalone.exe'
     $arguments = @('-batchmode', '-quit', '-projectPath', ('"' + $projectRoot + '"'), '-executeMethod', $ExecuteMethod, '-logFile', ('"' + $logPath + '"'))
-    $process = Start-Process -FilePath $UnityPath -ArgumentList $arguments -WindowStyle Hidden -Wait -PassThru
+    $process = Start-Process -FilePath $UnityPath -ArgumentList $arguments -WindowStyle Hidden -PassThru
+    # Wait for the Editor itself, not persistent licensing/crash-handler children.
+    $process.WaitForExit()
     if ($process.ExitCode -ne 0) { throw "Unity failed ($($process.ExitCode)). Log: $logPath" }
     if (-not [IO.File]::ReadAllText($logPath).Contains('CAT_CAFE_STANDALONE_BUILD_OK:')) { throw "No successful build recorded. Log: $logPath" }
     Write-Output "Build: $env:CATCAFE_STANDALONE_BUILD"

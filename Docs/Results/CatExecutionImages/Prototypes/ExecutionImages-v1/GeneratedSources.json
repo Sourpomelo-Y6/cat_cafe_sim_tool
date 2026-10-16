@@ -1,0 +1,132 @@
+[
+  {
+    "cat": "sora",
+    "action": "plush",
+    "prompt": "Use case: identity-preserve. Asset type: cat cafe game ordinary action execution still, one square illustration. Input image 1 is the individual identity reference; input image 2 is the existing action scene and composition reference. Preserve exactly the same individual, face shape, eye color, left/right markings, build, fur length, tail, warm hand-painted illustration style, cream wall, wooden baseboard and floor, sage mat, camera framing, lighting and background treatment. Preserve the action reference's toy shape, material and color and any human hand, skin, sleeve and tool design. Change only what is required for the action. Natural mild ordinary response usable for normal and gentle interaction, open calm eyes, no ecstatic or special bonding pose. Anatomically coherent four limbs; no duplicate paws or tails. No text, UI, hearts, symbols, motion lines or watermark. Opaque background, same square size as references (1254x1254). Primary request: Sora, entirely white long-haired cat with pale blue eyes, is actually playing with the same beige woven mouse with pink ears and nose and braided tail. Lower the head slightly to look toward the mouse and place ONE front paw visibly on its back, gently patting it; opposite front paw supports the seated cat on the mat. Keep all other scene elements, fur and tail placement consistent with image 2. Produce only the execution image.",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146ae-a270-79e0-8273-a462fe944e5f\\exec-777aa936-fcdc-4d09-9fda-b80d9a0f4662.png",
+    "references": [
+      "C:/Users/hi-wa/source/codex_repos/CatCafeSim/Docs/Prototypes/CatAppearance-v1/sora-normal.png",
+      "C:/Users/hi-wa/source/codex_repos/CatCafeSim/Docs/Prototypes/SoraBasePoses-v1/sora-plush-base.png"
+    ]
+  },
+  {
+    "cat": "kohaku",
+    "action": "ball",
+    "prompt": "Use case: identity-preserve. Asset type: cat cafe game ordinary action execution still, one square illustration. Input image 1 is the individual identity reference; input image 2 is the existing action scene and composition reference. Preserve exactly the same individual, face shape, eye color, left/right markings, build, fur length, tail, warm hand-painted illustration style, cream wall, wooden baseboard and floor, sage mat, camera framing, lighting and background treatment. Preserve the action reference's toy shape, material and color and any human hand, skin, sleeve and tool design. Change only what is required for the action. Natural mild ordinary response usable for normal and gentle interaction, open calm eyes, no ecstatic or special bonding pose. Anatomically coherent four limbs; no duplicate paws or tails. No text, UI, hearts, symbols, motion lines or watermark. Opaque background, same square size as references (1254x1254). Kohaku: orange long-haired tabby, golden eyes, broad dark orange stripes, cream chest, fluffy ringed tail, rounded build; no white socks. Primary request: Actually playing with the same small RED ball: move ONE front paw onto the upper side of the ball, visibly contacting and gently nudging it on the mat. Slightly lower head and direct gaze toward the ball. Opposite front paw stays planted, natural seated supporting hindquarters. Produce only the execution image.",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146ae-a270-79e0-8273-a462fe944e5f\\exec-0d74745b-b092-4b28-988b-646ddf8bec1e.png",
+    "references": [
+      "C:/Users/hi-wa/source/codex_repos/CatCafeSim/Docs/Prototypes/CatAppearance-v1/kohaku-normal.png",
+      "C:/Users/hi-wa/source/codex_repos/CatCafeSim/Docs/Prototypes/KohakuBasePoses-v1/kohaku-ball-base.png"
+    ]
+  },
+  {
+    "cat": "kohaku",
+    "action": "plush",
+    "prompt": "Use case: identity-preserve. Asset type: cat cafe game ordinary action execution still, one square illustration. Input image 1 is the individual identity reference; input image 2 is the existing action scene and composition reference. Preserve exactly the same individual, face shape, eye color, left/right markings, build, fur length, tail, warm hand-painted illustration style, cream wall, wooden baseboard and floor, sage mat, camera framing, lighting and background treatment. Preserve the action reference's toy shape, material and color and any human hand, skin, sleeve and tool design. Change only what is required for the action. Natural mild ordinary response usable for normal and gentle interaction, open calm eyes, no ecstatic or special bonding pose. Anatomically coherent four limbs; no duplicate paws or tails. No text, UI, hearts, symbols, motion lines or watermark. Opaque background, same square size as references (1254x1254). Kohaku: orange long-haired tabby, golden eyes, broad dark orange stripes, cream chest, fluffy ringed tail, rounded build; no white socks. Primary request: Actually playing with the same beige woven mouse, pink ears/nose and cord tail: move ONE front paw visibly onto its back, gently patting the mouse, look toward it. Opposite front paw stays planted with natural seated supporting hindquarters. Produce only the execution image.",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146ae-a270-79e0-8273-a462fe944e5f\\exec-ffff732a-7a65-4ea7-9c2a-35dc9d3e30cf.png",
+    "references": [
+      "C:/Users/hi-wa/source/codex_repos/CatCafeSim/Docs/Prototypes/CatAppearance-v1/kohaku-normal.png",
+      "C:/Users/hi-wa/source/codex_repos/CatCafeSim/Docs/Prototypes/KohakuBasePoses-v1/kohaku-plush-base.png"
+    ]
+  },
+  {
+    "cat": "mugi",
+    "action": "ball",
+    "prompt": "Use case: identity-preserve. Asset type: cat cafe game ordinary action execution still, one square illustration. Input image 1 is the individual identity reference; input image 2 is the existing action scene and composition reference. Preserve exactly the same individual, face shape, eye color, left/right markings, build, fur length, tail, warm hand-painted illustration style, cream wall, wooden baseboard and floor, sage mat, camera framing, lighting and background treatment. Preserve the action reference's toy shape, material and color and any human hand, skin, sleeve and tool design. Change only what is required for the action. Natural mild ordinary response usable for normal and gentle interaction, open calm eyes, no ecstatic or special bonding pose. Anatomically coherent four limbs; no duplicate paws or tails. No text, UI, hearts, symbols, motion lines or watermark. Opaque background, same square size as references (1254x1254). Mugi: short-haired warm brown tabby with olive green eyes, fine dark stripes, beige muzzle and dark tail tip, no white patches. Primary request: Actually playing with the same small RED ball: move ONE front paw onto the upper side of the ball, visibly contacting and gently nudging it on the mat. Slightly lower head and direct gaze toward the ball. Opposite front paw stays planted, natural seated supporting hindquarters. Produce only the execution image.",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146ae-a270-79e0-8273-a462fe944e5f\\exec-8b548305-0a7d-4263-8743-ff508659ecc6.png",
+    "references": [
+      "C:/Users/hi-wa/source/codex_repos/CatCafeSim/Docs/Prototypes/CatAppearance-v1/mugi-normal.png",
+      "C:/Users/hi-wa/source/codex_repos/CatCafeSim/Docs/Prototypes/MugiBasePoses-v1/mugi-ball-base.png"
+    ]
+  },
+  {
+    "cat": "mugi",
+    "action": "plush",
+    "prompt": "Use case: identity-preserve. Asset type: cat cafe game ordinary action execution still, one square illustration. Input image 1 is the individual identity reference; input image 2 is the existing action scene and composition reference. Preserve exactly the same individual, face shape, eye color, left/right markings, build, fur length, tail, warm hand-painted illustration style, cream wall, wooden baseboard and floor, sage mat, camera framing, lighting and background treatment. Preserve the action reference's toy shape, material and color and any human hand, skin, sleeve and tool design. Change only what is required for the action. Natural mild ordinary response usable for normal and gentle interaction, open calm eyes, no ecstatic or special bonding pose. Anatomically coherent four limbs; no duplicate paws or tails. No text, UI, hearts, symbols, motion lines or watermark. Opaque background, same square size as references (1254x1254). Mugi: short-haired warm brown tabby with olive green eyes, fine dark stripes, beige muzzle and dark tail tip, no white patches. Primary request: Actually playing with the same beige woven mouse, pink ears/nose and cord tail: move ONE front paw visibly onto its back, gently patting the mouse, look toward it. Opposite front paw stays planted with natural seated supporting hindquarters. Produce only the execution image.",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146ae-a270-79e0-8273-a462fe944e5f\\exec-7dec4f5e-93cc-4225-a890-4b44f50bac09.png",
+    "references": [
+      "C:/Users/hi-wa/source/codex_repos/CatCafeSim/Docs/Prototypes/CatAppearance-v1/mugi-normal.png",
+      "C:/Users/hi-wa/source/codex_repos/CatCafeSim/Docs/Prototypes/MugiBasePoses-v1/mugi-plush-base.png"
+    ]
+  },
+  {
+    "cat": "nana",
+    "action": "ball",
+    "prompt": "Use case: identity-preserve. Asset type: cat cafe game ordinary action execution still, one square illustration. Input image 1 is the individual identity reference; input image 2 is the existing action scene and composition reference. Preserve exactly the same individual, face shape, eye color, left/right markings, build, fur length, tail, warm hand-painted illustration style, cream wall, wooden baseboard and floor, sage mat, camera framing, lighting and background treatment. Preserve the action reference's toy shape, material and color and any human hand, skin, sleeve and tool design. Change only what is required for the action. Natural mild ordinary response usable for normal and gentle interaction, open calm eyes, no ecstatic or special bonding pose. Anatomically coherent four limbs; no duplicate paws or tails. No text, UI, hearts, symbols, motion lines or watermark. Opaque background, same square size as references (1254x1254). Nana: long-haired black and white cat, amber eyes, white inverted V face blaze, chest and legs, fluffy black tail, no spot beside nose. Primary request: Actually playing with the same small RED ball: move ONE front paw onto the upper side of the ball, visibly contacting and gently nudging it on the mat. Slightly lower head and direct gaze toward the ball. Opposite front paw stays planted, natural seated supporting hindquarters. Produce only the execution image.",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146ae-a270-79e0-8273-a462fe944e5f\\exec-6b84de1d-bd10-42fd-bbdd-034e40bfb778.png",
+    "references": [
+      "C:/Users/hi-wa/source/codex_repos/CatCafeSim/Docs/Prototypes/CatAppearance-v1/nana-normal.png",
+      "C:/Users/hi-wa/source/codex_repos/CatCafeSim/Docs/Prototypes/NanaBasePoses-v1/nana-ball-base.png"
+    ]
+  },
+  {
+    "cat": "nana",
+    "action": "plush",
+    "prompt": "Use case: identity-preserve. Asset type: cat cafe game ordinary action execution still, one square illustration. Input image 1 is the individual identity reference; input image 2 is the existing action scene and composition reference. Preserve exactly the same individual, face shape, eye color, left/right markings, build, fur length, tail, warm hand-painted illustration style, cream wall, wooden baseboard and floor, sage mat, camera framing, lighting and background treatment. Preserve the action reference's toy shape, material and color and any human hand, skin, sleeve and tool design. Change only what is required for the action. Natural mild ordinary response usable for normal and gentle interaction, open calm eyes, no ecstatic or special bonding pose. Anatomically coherent four limbs; no duplicate paws or tails. No text, UI, hearts, symbols, motion lines or watermark. Opaque background, same square size as references (1254x1254). Nana: long-haired black and white cat, amber eyes, white inverted V face blaze, chest and legs, fluffy black tail, no spot beside nose. Primary request: Actually playing with the same beige woven mouse, pink ears/nose and cord tail: move ONE front paw visibly onto its back, gently patting the mouse, look toward it. Opposite front paw stays planted with natural seated supporting hindquarters. Produce only the execution image.",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146ae-a270-79e0-8273-a462fe944e5f\\exec-41c12f86-e1ce-4330-acee-b65fce59c941.png",
+    "references": [
+      "C:/Users/hi-wa/source/codex_repos/CatCafeSim/Docs/Prototypes/CatAppearance-v1/nana-normal.png",
+      "C:/Users/hi-wa/source/codex_repos/CatCafeSim/Docs/Prototypes/NanaBasePoses-v1/nana-plush-base.png"
+    ]
+  },
+  {
+    "cat": "maron",
+    "action": "teaser",
+    "prompt": "Use case: identity-preserve. Asset type: cat cafe game ordinary action execution still, one square illustration. Input image 1 is the individual identity reference; input image 2 is the existing action scene and composition reference. Preserve exactly the same individual, face shape, eye color, left/right markings, build, fur length, tail, warm hand-painted illustration style, cream wall, wooden baseboard and floor, sage mat, camera framing, lighting and background treatment. Preserve the action reference's toy shape, material and color and any human hand, skin, sleeve and tool design. Change only what is required for the action. Natural mild ordinary response usable for normal and gentle interaction, open calm eyes, no ecstatic or special bonding pose. Anatomically coherent four limbs; no duplicate paws or tails. No text, UI, hearts, symbols, motion lines or watermark. Opaque background, same square size as references (1254x1254). Maron: short-haired orange tabby, bright green eyes, fine dark orange stripes, cream muzzle, ringed slender orange tail, no white socks. Primary request: Actually playing with the same brown feather wand held by the same hand: lift ONE front paw and visibly touch the feather tuft, with eyes following the feathers. Keep the feather and rod colors, human hand/sleeve and entry side from image 2. Opposite forepaw and seated hindquarters support the body. Produce only the execution image.",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146ae-a270-79e0-8273-a462fe944e5f\\exec-59d270b5-b5d0-45f5-a6e3-072fe53eb0eb.png",
+    "references": [
+      "C:/Users/hi-wa/source/codex_repos/CatCafeSim/Docs/Prototypes/CatAppearance-v1/maron-normal.png",
+      "C:/Users/hi-wa/source/codex_repos/CatCafeSim/Docs/Prototypes/MaronBasePoses-v1/maron-teaser-base.png"
+    ]
+  },
+  {
+    "cat": "maron",
+    "action": "ball",
+    "prompt": "Use case: identity-preserve. Asset type: cat cafe game ordinary action execution still, one square illustration. Input image 1 is the individual identity reference; input image 2 is the existing action scene and composition reference. Preserve exactly the same individual, face shape, eye color, left/right markings, build, fur length, tail, warm hand-painted illustration style, cream wall, wooden baseboard and floor, sage mat, camera framing, lighting and background treatment. Preserve the action reference's toy shape, material and color and any human hand, skin, sleeve and tool design. Change only what is required for the action. Natural mild ordinary response usable for normal and gentle interaction, open calm eyes, no ecstatic or special bonding pose. Anatomically coherent four limbs; no duplicate paws or tails. No text, UI, hearts, symbols, motion lines or watermark. Opaque background, same square size as references (1254x1254). Maron: short-haired orange tabby, bright green eyes, fine dark orange stripes, cream muzzle, ringed slender orange tail, no white socks. Primary request: Actually playing with the same small RED ball: move ONE front paw onto the upper side of the ball, visibly contacting and gently nudging it on the mat. Slightly lower head and direct gaze toward the ball. Opposite front paw stays planted, natural seated supporting hindquarters. Produce only the execution image.",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146ae-a270-79e0-8273-a462fe944e5f\\exec-069770b3-0821-48b7-af01-e9315f2e1a90.png",
+    "references": [
+      "C:/Users/hi-wa/source/codex_repos/CatCafeSim/Docs/Prototypes/CatAppearance-v1/maron-normal.png",
+      "C:/Users/hi-wa/source/codex_repos/CatCafeSim/Docs/Prototypes/MaronBasePoses-v1/maron-ball-base.png"
+    ]
+  },
+  {
+    "cat": "maron",
+    "action": "plush",
+    "prompt": "Use case: identity-preserve. Asset type: cat cafe game ordinary action execution still, one square illustration. Input image 1 is the individual identity reference; input image 2 is the existing action scene and composition reference. Preserve exactly the same individual, face shape, eye color, left/right markings, build, fur length, tail, warm hand-painted illustration style, cream wall, wooden baseboard and floor, sage mat, camera framing, lighting and background treatment. Preserve the action reference's toy shape, material and color and any human hand, skin, sleeve and tool design. Change only what is required for the action. Natural mild ordinary response usable for normal and gentle interaction, open calm eyes, no ecstatic or special bonding pose. Anatomically coherent four limbs; no duplicate paws or tails. No text, UI, hearts, symbols, motion lines or watermark. Opaque background, same square size as references (1254x1254). Maron: short-haired orange tabby, bright green eyes, fine dark orange stripes, cream muzzle, ringed slender orange tail, no white socks. Primary request: Actually playing with the same beige woven mouse, pink ears/nose and cord tail: move ONE front paw visibly onto its back, gently patting the mouse, look toward it. Opposite front paw stays planted with natural seated supporting hindquarters. Produce only the execution image.",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146ae-a270-79e0-8273-a462fe944e5f\\exec-dbd077c8-f67f-4f14-96de-de1e690fd7cd.png",
+    "references": [
+      "C:/Users/hi-wa/source/codex_repos/CatCafeSim/Docs/Prototypes/CatAppearance-v1/maron-normal.png",
+      "C:/Users/hi-wa/source/codex_repos/CatCafeSim/Docs/Prototypes/MaronBasePoses-v1/maron-plush-base.png"
+    ]
+  },
+  {
+    "cat": "coco",
+    "action": "teaser",
+    "prompt": "Use case: identity-preserve. Asset type: cat cafe game ordinary action execution still, one square illustration. Input image 1 is the individual identity reference; input image 2 is the existing action scene and composition reference. Preserve exactly the same individual, face shape, eye color, left/right markings, build, fur length, tail, warm hand-painted illustration style, cream wall, wooden baseboard and floor, sage mat, camera framing, lighting and background treatment. Preserve the action reference's toy shape, material and color and any human hand, skin, sleeve and tool design. Change only what is required for the action. Natural mild ordinary response usable for normal and gentle interaction, open calm eyes, no ecstatic or special bonding pose. Anatomically coherent four limbs; no duplicate paws or tails. No text, UI, hearts, symbols, motion lines or watermark. Opaque background, same square size as references (1254x1254). Coco: short-haired dark brown tabby, amber eyes, fine black-brown stripes, beige muzzle, slim ringed dark-tipped tail, no white patches. Primary request: Actually playing with the same brown feather wand held by the same hand: lift ONE front paw and visibly touch the feather tuft, with eyes following the feathers. Keep the feather and rod colors, human hand/sleeve and entry side from image 2. Opposite forepaw and seated hindquarters support the body. Produce only the execution image.",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146ae-a270-79e0-8273-a462fe944e5f\\exec-b31cb542-3187-411d-aee3-39d3744d913c.png",
+    "references": [
+      "C:/Users/hi-wa/source/codex_repos/CatCafeSim/Docs/Prototypes/CatAppearance-v1/coco-normal.png",
+      "C:/Users/hi-wa/source/codex_repos/CatCafeSim/Docs/Prototypes/CocoBasePoses-v1/coco-teaser-base.png"
+    ]
+  },
+  {
+    "cat": "coco",
+    "action": "ball",
+    "prompt": "Use case: identity-preserve. Asset type: cat cafe game ordinary action execution still, one square illustration. Input image 1 is the individual identity reference; input image 2 is the existing action scene and composition reference. Preserve exactly the same individual, face shape, eye color, left/right markings, build, fur length, tail, warm hand-painted illustration style, cream wall, wooden baseboard and floor, sage mat, camera framing, lighting and background treatment. Preserve the action reference's toy shape, material and color and any human hand, skin, sleeve and tool design. Change only what is required for the action. Natural mild ordinary response usable for normal and gentle interaction, open calm eyes, no ecstatic or special bonding pose. Anatomically coherent four limbs; no duplicate paws or tails. No text, UI, hearts, symbols, motion lines or watermark. Opaque background, same square size as references (1254x1254). Coco: short-haired dark brown tabby, amber eyes, fine black-brown stripes, beige muzzle, slim ringed dark-tipped tail, no white patches. Primary request: Actually playing with the same small RED ball: move ONE front paw onto the upper side of the ball, visibly contacting and gently nudging it on the mat. Slightly lower head and direct gaze toward the ball. Opposite front paw stays planted, natural seated supporting hindquarters. Produce only the execution image.",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146ae-a270-79e0-8273-a462fe944e5f\\exec-58cedd64-c581-4170-bce7-26d107bfd551.png",
+    "references": [
+      "C:/Users/hi-wa/source/codex_repos/CatCafeSim/Docs/Prototypes/CatAppearance-v1/coco-normal.png",
+      "C:/Users/hi-wa/source/codex_repos/CatCafeSim/Docs/Prototypes/CocoBasePoses-v1/coco-ball-base.png"
+    ]
+  },
+  {
+    "cat": "coco",
+    "action": "plush",
+    "prompt": "Use case: identity-preserve. Asset type: cat cafe game ordinary action execution still, one square illustration. Input image 1 is the individual identity reference; input image 2 is the existing action scene and composition reference. Preserve exactly the same individual, face shape, eye color, left/right markings, build, fur length, tail, warm hand-painted illustration style, cream wall, wooden baseboard and floor, sage mat, camera framing, lighting and background treatment. Preserve the action reference's toy shape, material and color and any human hand, skin, sleeve and tool design. Change only what is required for the action. Natural mild ordinary response usable for normal and gentle interaction, open calm eyes, no ecstatic or special bonding pose. Anatomically coherent four limbs; no duplicate paws or tails. No text, UI, hearts, symbols, motion lines or watermark. Opaque background, same square size as references (1254x1254). Coco: short-haired dark brown tabby, amber eyes, fine black-brown stripes, beige muzzle, slim ringed dark-tipped tail, no white patches. Primary request: Actually playing with the same beige woven mouse, pink ears/nose and cord tail: move ONE front paw visibly onto its back, gently patting the mouse, look toward it. Opposite front paw stays planted with natural seated supporting hindquarters. Produce only the execution image.",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146ae-a270-79e0-8273-a462fe944e5f\\exec-2e2d9bca-7d03-4e64-9f87-682e4150a2d9.png",
+    "references": [
+      "C:/Users/hi-wa/source/codex_repos/CatCafeSim/Docs/Prototypes/CatAppearance-v1/coco-normal.png",
+      "C:/Users/hi-wa/source/codex_repos/CatCafeSim/Docs/Prototypes/CocoBasePoses-v1/coco-plush-base.png"
+    ]
+  }
+]

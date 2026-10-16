@@ -1,0 +1,376 @@
+{
+  "date": "2026-10-17",
+  "status": "制作・記録のみ／未登録",
+  "game_cat_id": "cat-sora",
+  "display_cat_id": "playtest-sora",
+  "images": [
+    {
+      "cat": "sora",
+      "name": "ソラ",
+      "game_cat_id": "cat-sora",
+      "display_cat_id": "playtest-sora",
+      "action": "pet",
+      "label": "頭をなでる",
+      "identity": "../CatAppearance-v1/sora-normal.png",
+      "existing_action": "../SoraBasePoses-v1/sora-pet-base.png",
+      "preparation": "../CatAppearance-v1/sora-normal.png",
+      "execution": "../SoraBasePoses-v1/sora-pet-base.png",
+      "decision": "既存再利用",
+      "reason": "既存baseの手は頭の毛に接している。開眼した通常反応なので再利用。旧pet画像の閉眼・甘えた反応へ置換しない。",
+      "comparison": "既存baseの手は頭の毛に接している。開眼した通常反応なので再利用。旧pet画像の閉眼・甘えた反応へ置換しない。",
+      "notes": [
+        "準備候補は道具・手をまだ出していない中立の基準画像。専用の道具あり未接触準備画像は今回制作しない。現在のbase登録は変更しない。"
+      ],
+      "keys": {
+        "pet": "../CatAppearance-v1/sora-normal.png",
+        "pet__switch": "../CatAppearance-v1/sora-normal.png",
+        "pet__direct": "../SoraBasePoses-v1/sora-pet-base.png",
+        "pet__adapt": "../SoraBasePoses-v1/sora-pet-base.png"
+      },
+      "preparation_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 1694873,
+        "sha256": "45f74d32f7bc44a7e7691d52d9e3537719077196cef50dbd2ad91074dd2f8938"
+      },
+      "execution_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 1911269,
+        "sha256": "22aa5508be878d7467871fa2e3a569dc5e670cff90460648b334bc036f3efde9"
+      }
+    },
+    {
+      "cat": "sora",
+      "name": "ソラ",
+      "game_cat_id": "cat-sora",
+      "display_cat_id": "playtest-sora",
+      "action": "teaser",
+      "label": "ねこじゃらし",
+      "identity": "../CatAppearance-v1/sora-normal.png",
+      "existing_action": "../SoraBasePoses-v1/sora-teaser-base.png",
+      "preparation": "../CatAppearance-v1/sora-normal.png",
+      "execution": "../SoraBasePoses-v1/sora-teaser-base.png",
+      "decision": "既存再利用",
+      "reason": "前足を上げ羽根へ働きかける既存の通常遊びを再利用。静止画のため連続した動きは断定しない。",
+      "comparison": "前足を上げ羽根へ働きかける既存の通常遊びを再利用。静止画のため連続した動きは断定しない。",
+      "notes": [
+        "準備候補は道具・手をまだ出していない中立の基準画像。専用の道具あり未接触準備画像は今回制作しない。現在のbase登録は変更しない。"
+      ],
+      "keys": {
+        "teaser": "../CatAppearance-v1/sora-normal.png",
+        "teaser__switch": "../CatAppearance-v1/sora-normal.png",
+        "teaser__direct": "../SoraBasePoses-v1/sora-teaser-base.png",
+        "teaser__adapt": "../SoraBasePoses-v1/sora-teaser-base.png"
+      },
+      "preparation_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 1694873,
+        "sha256": "45f74d32f7bc44a7e7691d52d9e3537719077196cef50dbd2ad91074dd2f8938"
+      },
+      "execution_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 1833847,
+        "sha256": "759d4a851a1b9fb0a39b6001e83da38f7ee39ee2ee0083e9d77d5125e059d651"
+      }
+    },
+    {
+      "cat": "sora",
+      "name": "ソラ",
+      "game_cat_id": "cat-sora",
+      "display_cat_id": "playtest-sora",
+      "action": "ball",
+      "label": "ボール",
+      "identity": "../CatAppearance-v1/sora-normal.png",
+      "existing_action": "../SoraBasePoses-v1/sora-ball-base.png",
+      "preparation": "../CatAppearance-v1/sora-normal.png",
+      "execution": "../SoraBasePoses-v1/sora-ball-base.png",
+      "decision": "既存再利用",
+      "reason": "既存baseで前足が赤い球の上に接しており、すでに通常遊びを表す。再利用。",
+      "comparison": "既存baseで前足が赤い球の上に接しており、すでに通常遊びを表す。再利用。",
+      "notes": [
+        "準備候補は道具・手をまだ出していない中立の基準画像。専用の道具あり未接触準備画像は今回制作しない。現在のbase登録は変更しない。"
+      ],
+      "keys": {
+        "ball": "../CatAppearance-v1/sora-normal.png",
+        "ball__switch": "../CatAppearance-v1/sora-normal.png",
+        "ball__direct": "../SoraBasePoses-v1/sora-ball-base.png",
+        "ball__adapt": "../SoraBasePoses-v1/sora-ball-base.png"
+      },
+      "preparation_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 1694873,
+        "sha256": "45f74d32f7bc44a7e7691d52d9e3537719077196cef50dbd2ad91074dd2f8938"
+      },
+      "execution_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 1815375,
+        "sha256": "8a0001aa27e4f5dc68a052e214ee8c5cab6ab7616d6f4c5b3c17e357d1acacf4"
+      }
+    },
+    {
+      "cat": "sora",
+      "name": "ソラ",
+      "game_cat_id": "cat-sora",
+      "display_cat_id": "playtest-sora",
+      "action": "plush",
+      "label": "ぬいぐるみ",
+      "identity": "../CatAppearance-v1/sora-normal.png",
+      "existing_action": "../SoraBasePoses-v1/sora-plush-base.png",
+      "preparation": "../SoraBasePoses-v1/sora-plush-base.png",
+      "execution": "../SoraActionExecution-v1/sora-plush-execute.png",
+      "decision": "追加制作",
+      "reason": "既存は鼠の横に座っており接触なし。前足で触れて遊ぶ通常実行を1枚追加。",
+      "comparison": "片前足が布製の鼠の背に接する。反対前足は接地、鼠の耳・鼻・編み尾を維持。頭を下げた自然な遊び。",
+      "notes": [],
+      "keys": {
+        "plush": "../SoraBasePoses-v1/sora-plush-base.png",
+        "plush__switch": "../SoraBasePoses-v1/sora-plush-base.png",
+        "plush__direct": "../SoraActionExecution-v1/sora-plush-execute.png",
+        "plush__adapt": "../SoraActionExecution-v1/sora-plush-execute.png"
+      },
+      "preparation_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 1852910,
+        "sha256": "c2e5be5bc02a8e9215058644457a1c400243327b866474082b0dd13815f0c659"
+      },
+      "execution_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 1834793,
+        "sha256": "8721ec6977409c134999b1e7c26e0eed765bb85d52116da48a1d694cc57a7157"
+      }
+    },
+    {
+      "cat": "sora",
+      "name": "ソラ",
+      "game_cat_id": "cat-sora",
+      "display_cat_id": "playtest-sora",
+      "action": "tunnel",
+      "label": "トンネル",
+      "identity": "../CatAppearance-v1/sora-normal.png",
+      "existing_action": "../SoraBasePoses-v1/sora-tunnel-base.png",
+      "preparation": "../CatAppearance-v1/sora-normal.png",
+      "execution": "../SoraBasePoses-v1/sora-tunnel-base.png",
+      "decision": "既存再利用",
+      "reason": "既存baseで胴体が筒の内側、前足が入口に出ている。トンネルへ入って遊ぶ静止場面として再利用。速度や通過方向は断定しない。",
+      "comparison": "既存baseで胴体が筒の内側、前足が入口に出ている。トンネルへ入って遊ぶ静止場面として再利用。速度や通過方向は断定しない。",
+      "notes": [
+        "準備候補は道具・手をまだ出していない中立の基準画像。専用の道具あり未接触準備画像は今回制作しない。現在のbase登録は変更しない。",
+        "後半身・後足はトンネルで遮蔽されるため全四肢の輪郭は確認できない。入口内で座る遊びを表し、走り抜ける専用画ではない。"
+      ],
+      "keys": {
+        "tunnel": "../CatAppearance-v1/sora-normal.png",
+        "tunnel__switch": "../CatAppearance-v1/sora-normal.png",
+        "tunnel__direct": "../SoraBasePoses-v1/sora-tunnel-base.png",
+        "tunnel__adapt": "../SoraBasePoses-v1/sora-tunnel-base.png"
+      },
+      "preparation_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 1694873,
+        "sha256": "45f74d32f7bc44a7e7691d52d9e3537719077196cef50dbd2ad91074dd2f8938"
+      },
+      "execution_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 1974948,
+        "sha256": "35cb878d8ff6a4f7db46caebfa45784455c738e794df7a4238e16b9a3e1d3af1"
+      }
+    },
+    {
+      "cat": "sora",
+      "name": "ソラ",
+      "game_cat_id": "cat-sora",
+      "display_cat_id": "playtest-sora",
+      "action": "brush",
+      "label": "ブラッシング",
+      "identity": "../CatAppearance-v1/sora-normal.png",
+      "existing_action": "../SoraBasePoses-v1/sora-brush-base.png",
+      "preparation": "../CatAppearance-v1/sora-normal.png",
+      "execution": "../SoraBasePoses-v1/sora-brush-base.png",
+      "decision": "既存再利用",
+      "reason": "既存baseでブラシ毛先と肩の毛の境界が接している。通常のブラッシングとして再利用。",
+      "comparison": "既存baseでブラシ毛先と肩の毛の境界が接している。通常のブラッシングとして再利用。",
+      "notes": [
+        "準備候補は道具・手をまだ出していない中立の基準画像。専用の道具あり未接触準備画像は今回制作しない。現在のbase登録は変更しない。"
+      ],
+      "keys": {
+        "brush": "../CatAppearance-v1/sora-normal.png",
+        "brush__switch": "../CatAppearance-v1/sora-normal.png",
+        "brush__direct": "../SoraBasePoses-v1/sora-brush-base.png",
+        "brush__adapt": "../SoraBasePoses-v1/sora-brush-base.png"
+      },
+      "preparation_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 1694873,
+        "sha256": "45f74d32f7bc44a7e7691d52d9e3537719077196cef50dbd2ad91074dd2f8938"
+      },
+      "execution_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 1936126,
+        "sha256": "4db0de2b151dfbccff464f151f621644250dd0b015b6684c1a38cc379a96f77c"
+      }
+    },
+    {
+      "cat": "sora",
+      "name": "ソラ",
+      "game_cat_id": "cat-sora",
+      "display_cat_id": "playtest-sora",
+      "action": "voice",
+      "label": "声かけ",
+      "identity": "../CatAppearance-v1/sora-normal.png",
+      "existing_action": "../SoraBasePoses-v1/sora-voice-base.png",
+      "preparation": "../CatAppearance-v1/sora-normal.png",
+      "execution": "../SoraBasePoses-v1/sora-voice-base.png",
+      "decision": "既存再利用",
+      "reason": "既存baseの開いた目・耳・軽い顔の向きで話者へ注意を向ける通常場面として再利用。接触は加えない。",
+      "comparison": "既存baseの開いた目・耳・軽い顔の向きで話者へ注意を向ける通常場面として再利用。接触は加えない。",
+      "notes": [
+        "準備候補は道具・手をまだ出していない中立の基準画像。専用の道具あり未接触準備画像は今回制作しない。現在のbase登録は変更しない。",
+        "基準との姿勢差は控えめ。発話は静止画で見えないため後日の行動文で補う。大きな耳・視線差を必須にする場合は別途差分を検討。"
+      ],
+      "keys": {
+        "voice": "../CatAppearance-v1/sora-normal.png",
+        "voice__switch": "../CatAppearance-v1/sora-normal.png",
+        "voice__direct": "../SoraBasePoses-v1/sora-voice-base.png",
+        "voice__adapt": "../SoraBasePoses-v1/sora-voice-base.png"
+      },
+      "preparation_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 1694873,
+        "sha256": "45f74d32f7bc44a7e7691d52d9e3537719077196cef50dbd2ad91074dd2f8938"
+      },
+      "execution_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 1879470,
+        "sha256": "040e5de67d4627bd7c17026a18d1ced5b2f4db034e3d33989d2e5bb623cd462a"
+      }
+    },
+    {
+      "cat": "sora",
+      "name": "ソラ",
+      "game_cat_id": "cat-sora",
+      "display_cat_id": "playtest-sora",
+      "action": "presence",
+      "label": "見守り",
+      "identity": "../CatAppearance-v1/sora-normal.png",
+      "existing_action": "../SoraBasePoses-v1/sora-presence-base.png",
+      "preparation": "../CatAppearance-v1/sora-normal.png",
+      "execution": "../SoraBasePoses-v1/sora-presence-base.png",
+      "decision": "既存再利用",
+      "reason": "既存baseの画面端に青いズボンの膝があり、接触せず穏やかに座る。そばで見守る実行として再利用。",
+      "comparison": "既存baseの画面端に青いズボンの膝があり、接触せず穏やかに座る。そばで見守る実行として再利用。",
+      "notes": [
+        "準備候補は道具・手をまだ出していない中立の基準画像。専用の道具あり未接触準備画像は今回制作しない。現在のbase登録は変更しない。"
+      ],
+      "keys": {
+        "presence": "../CatAppearance-v1/sora-normal.png",
+        "presence__switch": "../CatAppearance-v1/sora-normal.png",
+        "presence__direct": "../SoraBasePoses-v1/sora-presence-base.png",
+        "presence__adapt": "../SoraBasePoses-v1/sora-presence-base.png"
+      },
+      "preparation_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 1694873,
+        "sha256": "45f74d32f7bc44a7e7691d52d9e3537719077196cef50dbd2ad91074dd2f8938"
+      },
+      "execution_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 2059063,
+        "sha256": "06711b150507b1d7515fd9d62bbb894211d135ef789496b052594be384bf519c"
+      }
+    }
+  ]
+}

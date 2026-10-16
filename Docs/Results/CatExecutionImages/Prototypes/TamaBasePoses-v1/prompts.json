@@ -1,0 +1,42 @@
+{
+  "tool": "built-in image_gen",
+  "reference": "../CatAppearance-v1/tama-normal.png",
+  "images": [
+    {
+      "scene": "teaser",
+      "prompt": "Use case: illustration-story. Generate one square standalone game illustration of Tama, the same black-and-white short-haired adult cat in reference image 1 (identity and painted illustration style reference). Preserve yellow-green eyes, pink nose, white blaze/muzzle/chest/belly/paws, black ears/back/flanks and all-black long tail, small black dot beside cat's LEFT nostril (viewer right in frontal view). Cream wall, wooden floor, sage green mat, warm soft light, entire cat and tail visible, no text/watermark, no extra limbs or cats. Scene: playing with a feather teaser held from edge by only one human hand; cat alert, ears forward, one white forepaw reaching naturally toward the feather, lively curious expression. This is the normal teaser-mode pose, not an emotional culmination. Match reference's refined soft detailed brushwork."
+    },
+    {
+      "scene": "ball",
+      "prompt": "Use case: illustration-story. One square standalone cat game illustration, not a collage. Reference image 1 defines Tama's identity and refined soft painted style. Same adult slender black-white short-haired tuxedo cat, yellow-green eyes, pink nose, white face blaze/muzzle/chest/belly/four paw tips, black ears/back/flanks and long entirely black tail. Small black dot beside cat's LEFT nostril, viewer right in frontal view. Cream wall, wooden floor, sage green mat, warm soft lighting. Whole cat and tail visible. Natural anatomy, exactly one cat, no text or watermark, no human face. Activity: small red toy ball. Emotional/pose state: normal mode: alert curious calm expression, natural seated or crouched pose."
+    },
+    {
+      "scene": "plush",
+      "prompt": "Use case: illustration-story. One square standalone cat game illustration, not a collage. Reference image 1 defines Tama's identity and refined soft painted style. Same adult slender black-white short-haired tuxedo cat, yellow-green eyes, pink nose, white face blaze/muzzle/chest/belly/four paw tips, black ears/back/flanks and long entirely black tail. Small black dot beside cat's LEFT nostril, viewer right in frontal view. Cream wall, wooden floor, sage green mat, warm soft lighting. Whole cat and tail visible. Natural anatomy, exactly one cat, no text or watermark, no human face. Activity: small fabric mouse plush toy. Emotional/pose state: normal mode: alert curious calm expression, natural seated or crouched pose."
+    },
+    {
+      "scene": "tunnel",
+      "prompt": "Use case: illustration-story. One square standalone cat game illustration, not a collage. Reference image 1 defines Tama's identity and refined soft painted style. Same adult slender black-white short-haired tuxedo cat, yellow-green eyes, pink nose, white face blaze/muzzle/chest/belly/four paw tips, black ears/back/flanks and long entirely black tail. Small black dot beside cat's LEFT nostril, viewer right in frontal view. Cream wall, wooden floor, sage green mat, warm soft lighting. Whole cat and tail visible. Natural anatomy, exactly one cat, no text or watermark, no human face. Activity: short beige fabric cat play tunnel with cat visible at entrance. Emotional/pose state: normal mode: alert curious calm expression, natural seated or crouched pose."
+    },
+    {
+      "scene": "brush",
+      "prompt": "Use case: illustration-story. One square standalone cat game illustration, not a collage. Reference image 1 defines Tama's identity and refined soft painted style. Same adult slender black-white short-haired tuxedo cat, yellow-green eyes, pink nose, white face blaze/muzzle/chest/belly/four paw tips, black ears/back/flanks and long entirely black tail. Small black dot beside cat's LEFT nostril, viewer right in frontal view. Cream wall, wooden floor, sage green mat, warm soft lighting. Whole cat and tail visible. Natural anatomy, exactly one cat, no text or watermark, no human face. Activity: soft pet brush held by one hand at edge gently brushing back. Emotional/pose state: normal mode: alert curious calm expression, natural seated or crouched pose."
+    },
+    {
+      "scene": "voice",
+      "prompt": "Use case: illustration-story. One square standalone cat game illustration, not a collage. Reference image 1 defines Tama's identity and refined soft painted style. Same adult slender black-white short-haired tuxedo cat, yellow-green eyes, pink nose, white face blaze/muzzle/chest/belly/four paw tips, black ears/back/flanks and long entirely black tail. Small black dot beside cat's LEFT nostril, viewer right in frontal view. Cream wall, wooden floor, sage green mat, warm soft lighting. Whole cat and tail visible. Natural anatomy, exactly one cat, no text or watermark, no human face. Activity: cat listening toward player viewpoint, no props or hands. Emotional/pose state: normal mode: alert curious calm expression, natural seated or crouched pose."
+    },
+    {
+      "scene": "presence",
+      "prompt": "Use case: illustration-story. One square standalone cat game illustration, not a collage. Reference image 1 defines Tama's identity and refined soft painted style. Same adult slender black-white short-haired tuxedo cat, yellow-green eyes, pink nose, white face blaze/muzzle/chest/belly/four paw tips, black ears/back/flanks and long entirely black tail. Small black dot beside cat's LEFT nostril, viewer right in frontal view. Cream wall, wooden floor, sage green mat, warm soft lighting. Whole cat and tail visible. Natural anatomy, exactly one cat, no text or watermark, no human face. Activity: cat resting on mat near seated player, only small clothed knee visible at edge. Emotional/pose state: normal mode: alert curious calm expression, natural seated or crouched pose."
+    },
+    {
+      "scene": "pet",
+      "prompt": "Use case: illustration-story. One square standalone cat game illustration, not a collage. Reference image 1 defines Tama's identity and refined soft painted style. Same adult slender black-white short-haired tuxedo cat, yellow-green eyes, pink nose, white face blaze/muzzle/chest/belly/four paw tips, black ears/back/flanks and long entirely black tail. Small black dot beside cat's LEFT nostril, viewer right in frontal view. Cream wall, wooden floor, sage green mat, warm soft lighting. Whole cat and tail visible. Natural anatomy, exactly one cat, no text or watermark, no human face. Activity: one human hand gently stroking cat forehead. Emotional/pose state: normal mode: alert curious calm expression, natural seated or crouched pose."
+    },
+    {
+      "scene": "pause",
+      "prompt": "Use case: illustration-story. One square standalone cat game illustration, not a collage. Reference image 1 defines Tama's identity and refined soft painted style. Same adult slender black-white short-haired tuxedo cat, yellow-green eyes, pink nose, white face blaze/muzzle/chest/belly/four paw tips, black ears/back/flanks and long entirely black tail. Small black dot beside cat's LEFT nostril, viewer right in frontal view. Cream wall, wooden floor, sage green mat, warm soft lighting. Whole cat and tail visible. Natural anatomy, exactly one cat, no text or watermark, no human face. Activity: stationary feather teaser resting on mat, cat calmly waiting. Emotional/pose state: normal mode: alert curious calm expression, natural seated or crouched pose."
+    }
+  ]
+}

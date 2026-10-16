@@ -1,0 +1,51 @@
+{
+  "cat_id": "cat-mugi",
+  "preview_cat_id": "playtest-mugi",
+  "images": [
+    {
+      "scene": "teaser",
+      "label": "ねこじゃらし",
+      "file": "mugi-teaser-base.png"
+    },
+    {
+      "scene": "ball",
+      "label": "ボール遊び",
+      "file": "mugi-ball-base.png"
+    },
+    {
+      "scene": "plush",
+      "label": "ぬいぐるみ遊び",
+      "file": "mugi-plush-base.png"
+    },
+    {
+      "scene": "tunnel",
+      "label": "トンネル遊び",
+      "file": "mugi-tunnel-base.png"
+    },
+    {
+      "scene": "pet",
+      "label": "なでる",
+      "file": "mugi-pet-base.png"
+    },
+    {
+      "scene": "brush",
+      "label": "ブラッシング",
+      "file": "mugi-brush-base.png"
+    },
+    {
+      "scene": "voice",
+      "label": "声をかける",
+      "file": "mugi-voice-base.png"
+    },
+    {
+      "scene": "presence",
+      "label": "そばで見守る",
+      "file": "mugi-presence-base.png"
+    },
+    {
+      "scene": "pause",
+      "label": "動きを止めて待つ",
+      "file": "mugi-pause-base.png"
+    }
+  ]
+}

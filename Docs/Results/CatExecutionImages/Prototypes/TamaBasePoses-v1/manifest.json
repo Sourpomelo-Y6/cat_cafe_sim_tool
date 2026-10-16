@@ -1,0 +1,51 @@
+{
+  "cat_id": "cat-tama",
+  "preview_cat_id": "playtest-tama",
+  "images": [
+    {
+      "scene": "teaser",
+      "label": "ねこじゃらし",
+      "file": "tama-teaser-base.png"
+    },
+    {
+      "scene": "ball",
+      "label": "ボール遊び",
+      "file": "tama-ball-base.png"
+    },
+    {
+      "scene": "plush",
+      "label": "ぬいぐるみ遊び",
+      "file": "tama-plush-base.png"
+    },
+    {
+      "scene": "tunnel",
+      "label": "トンネル遊び",
+      "file": "tama-tunnel-base.png"
+    },
+    {
+      "scene": "brush",
+      "label": "ブラッシング",
+      "file": "tama-brush-base.png"
+    },
+    {
+      "scene": "voice",
+      "label": "声をかける",
+      "file": "tama-voice-base.png"
+    },
+    {
+      "scene": "presence",
+      "label": "そばで見守る",
+      "file": "tama-presence-base.png"
+    },
+    {
+      "scene": "pet",
+      "label": "なでる",
+      "file": "tama-pet-base.png"
+    },
+    {
+      "scene": "pause",
+      "label": "動きを止めて待つ",
+      "file": "tama-pause-base.png"
+    }
+  ]
+}

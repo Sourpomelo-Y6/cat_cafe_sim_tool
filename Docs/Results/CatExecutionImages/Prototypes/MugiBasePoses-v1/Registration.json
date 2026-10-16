@@ -1,0 +1,15 @@
+{
+  "registered_scenes": 25,
+  "registry_cat_ids": [
+    "playtest-mugi",
+    "cat-mugi"
+  ],
+  "previous_unity_catalog": {
+    "bundleResource": "CatCafeContent/Imports/9fb4383b47854aeea789ece120d4b281/bundle"
+  },
+  "unity_catalog": {
+    "bundleResource": "CatCafeContent/Imports/7ede2b392dfb445a8b65fe85ccb88f10/bundle"
+  },
+  "registry_backup": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\backups\\manifest-before-mugi-40dc04833ed4440b8a53c89ce9a3fda7.json",
+  "verified": true
+}

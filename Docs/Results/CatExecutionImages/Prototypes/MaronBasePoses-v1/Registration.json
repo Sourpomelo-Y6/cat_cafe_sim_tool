@@ -1,0 +1,14 @@
+{
+  "registered_scenes": 28,
+  "registry_cat_ids": [
+    "regular-rescue-1"
+  ],
+  "previous_unity_catalog": {
+    "bundleResource": "CatCafeContent/Imports/ee695293218d4083b1c7a5439ec126cf/bundle"
+  },
+  "unity_catalog": {
+    "bundleResource": "CatCafeContent/Imports/f11cad7b3f174d86a8ca4b102e9dc480/bundle"
+  },
+  "registry_backup": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\backups\\manifest-before-maron-075a6308ab11430391e624159f7a40f8.json",
+  "verified": true
+}

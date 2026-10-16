@@ -1,0 +1,12 @@
+[
+  {
+    "cat": "sora",
+    "action": "plush",
+    "prompt": "Use case: identity-preserve. Asset type: cat cafe game ordinary action execution still, one square illustration. Input image 1 is the individual identity reference; input image 2 is the existing action scene and composition reference. Preserve exactly the same individual, face shape, eye color, left/right markings, build, fur length, tail, warm hand-painted illustration style, cream wall, wooden baseboard and floor, sage mat, camera framing, lighting and background treatment. Preserve the action reference's toy shape, material and color and any human hand, skin, sleeve and tool design. Change only what is required for the action. Natural mild ordinary response usable for normal and gentle interaction, open calm eyes, no ecstatic or special bonding pose. Anatomically coherent four limbs; no duplicate paws or tails. No text, UI, hearts, symbols, motion lines or watermark. Opaque background, same square size as references (1254x1254). Primary request: Sora, entirely white long-haired cat with pale blue eyes, is actually playing with the same beige woven mouse with pink ears and nose and braided tail. Lower the head slightly to look toward the mouse and place ONE front paw visibly on its back, gently patting it; opposite front paw supports the seated cat on the mat. Keep all other scene elements, fur and tail placement consistent with image 2. Produce only the execution image.",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146ae-a270-79e0-8273-a462fe944e5f\\exec-777aa936-fcdc-4d09-9fda-b80d9a0f4662.png",
+    "references": [
+      "C:/Users/hi-wa/source/codex_repos/CatCafeSim/Docs/Prototypes/CatAppearance-v1/sora-normal.png",
+      "C:/Users/hi-wa/source/codex_repos/CatCafeSim/Docs/Prototypes/SoraBasePoses-v1/sora-plush-base.png"
+    ]
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "registered_scenes": 25,
+  "registry_cat_ids": [
+    "playtest-sora",
+    "cat-sora"
+  ],
+  "previous_unity_catalog": {
+    "bundleResource": "CatCafeContent/Imports/734f905fa2644777a3d1059d1de1e7b0/bundle"
+  },
+  "unity_catalog": {
+    "bundleResource": "CatCafeContent/Imports/23ca0b2cfd384ee38f4ff83135bb6969/bundle"
+  },
+  "registry_backup": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\backups\\manifest-before-sora-3eadaa5929a542408553aacb42355a2f.json",
+  "verified": true
+}

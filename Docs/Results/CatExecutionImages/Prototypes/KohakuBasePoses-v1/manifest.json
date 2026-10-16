@@ -1,0 +1,51 @@
+{
+  "cat_id": "cat-kohaku",
+  "preview_cat_id": "playtest-kohaku",
+  "images": [
+    {
+      "scene": "teaser",
+      "label": "ねこじゃらし",
+      "file": "kohaku-teaser-base.png"
+    },
+    {
+      "scene": "ball",
+      "label": "ボール遊び",
+      "file": "kohaku-ball-base.png"
+    },
+    {
+      "scene": "plush",
+      "label": "ぬいぐるみ遊び",
+      "file": "kohaku-plush-base.png"
+    },
+    {
+      "scene": "tunnel",
+      "label": "トンネル遊び",
+      "file": "kohaku-tunnel-base.png"
+    },
+    {
+      "scene": "pet",
+      "label": "なでる",
+      "file": "kohaku-pet-base.png"
+    },
+    {
+      "scene": "brush",
+      "label": "ブラッシング",
+      "file": "kohaku-brush-base.png"
+    },
+    {
+      "scene": "voice",
+      "label": "声をかける",
+      "file": "kohaku-voice-base.png"
+    },
+    {
+      "scene": "presence",
+      "label": "そばで見守る",
+      "file": "kohaku-presence-base.png"
+    },
+    {
+      "scene": "pause",
+      "label": "動きを止めて待つ",
+      "file": "kohaku-pause-base.png"
+    }
+  ]
+}

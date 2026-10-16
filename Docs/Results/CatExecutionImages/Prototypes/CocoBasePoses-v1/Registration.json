@@ -1,0 +1,16 @@
+{
+  "registered_scenes": 28,
+  "registry_cat_ids": [
+    "visiting-cat-1"
+  ],
+  "previous_unity_catalog": {
+    "bundleResource": "CatCafeContent/Imports/da80a2d0df414e9181ac6345f375cfc8/bundle",
+    "interactionResource": "CatCafeContent/Imports/da80a2d0df414e9181ac6345f375cfc8/interaction_texts"
+  },
+  "unity_catalog": {
+    "bundleResource": "CatCafeContent/Imports/8d646380ed694a51be2c16dbe7b19134/bundle",
+    "interactionResource": "CatCafeContent/Imports/8d646380ed694a51be2c16dbe7b19134/interaction_texts"
+  },
+  "registry_backup": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\backups\\manifest-before-coco-f49fa76cc10f4db7919c7a597ff1652e.json",
+  "verified": true
+}

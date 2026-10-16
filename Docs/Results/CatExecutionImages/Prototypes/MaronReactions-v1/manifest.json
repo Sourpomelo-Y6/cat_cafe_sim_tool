@@ -1,0 +1,86 @@
+{
+  "cat_id": "regular-rescue-1",
+  "preview_cat_id": "regular-rescue-1",
+  "images": [
+    {
+      "scene": "teaser__open_up",
+      "label": "ねこじゃらし × （なにか）+心を開く",
+      "file": "maron-teaser__open_up.png"
+    },
+    {
+      "scene": "teaser__simultaneous",
+      "label": "ねこじゃらし × 心をつかむ+心を開く",
+      "file": "maron-teaser__simultaneous.png"
+    },
+    {
+      "scene": "ball__open_up",
+      "label": "ボール遊び × （なにか）+心を開く",
+      "file": "maron-ball__open_up.png"
+    },
+    {
+      "scene": "ball__simultaneous",
+      "label": "ボール遊び × 心をつかむ+心を開く",
+      "file": "maron-ball__simultaneous.png"
+    },
+    {
+      "scene": "plush__open_up",
+      "label": "ぬいぐるみ遊び × （なにか）+心を開く",
+      "file": "maron-plush__open_up.png"
+    },
+    {
+      "scene": "plush__simultaneous",
+      "label": "ぬいぐるみ遊び × 心をつかむ+心を開く",
+      "file": "maron-plush__simultaneous.png"
+    },
+    {
+      "scene": "tunnel__open_up",
+      "label": "トンネル遊び × （なにか）+心を開く",
+      "file": "maron-tunnel__open_up.png"
+    },
+    {
+      "scene": "tunnel__simultaneous",
+      "label": "トンネル遊び × 心をつかむ+心を開く",
+      "file": "maron-tunnel__simultaneous.png"
+    },
+    {
+      "scene": "pet__open_up",
+      "label": "なでる × （なにか）+心を開く",
+      "file": "maron-pet__open_up.png"
+    },
+    {
+      "scene": "pet__simultaneous",
+      "label": "なでる × 心をつかむ+心を開く",
+      "file": "maron-pet__simultaneous.png"
+    },
+    {
+      "scene": "brush__open_up",
+      "label": "ブラッシング × （なにか）+心を開く",
+      "file": "maron-brush__open_up.png"
+    },
+    {
+      "scene": "brush__simultaneous",
+      "label": "ブラッシング × 心をつかむ+心を開く",
+      "file": "maron-brush__simultaneous.png"
+    },
+    {
+      "scene": "voice__open_up",
+      "label": "声をかける × （なにか）+心を開く",
+      "file": "maron-voice__open_up.png"
+    },
+    {
+      "scene": "voice__simultaneous",
+      "label": "声をかける × 心をつかむ+心を開く",
+      "file": "maron-voice__simultaneous.png"
+    },
+    {
+      "scene": "presence__open_up",
+      "label": "そばで見守る × （なにか）+心を開く",
+      "file": "maron-presence__open_up.png"
+    },
+    {
+      "scene": "presence__simultaneous",
+      "label": "そばで見守る × 心をつかむ+心を開く",
+      "file": "maron-presence__simultaneous.png"
+    }
+  ]
+}

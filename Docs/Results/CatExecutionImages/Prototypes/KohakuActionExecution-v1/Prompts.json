@@ -1,0 +1,22 @@
+[
+  {
+    "cat": "kohaku",
+    "action": "ball",
+    "prompt": "Use case: identity-preserve. Asset type: cat cafe game ordinary action execution still, one square illustration. Input image 1 is the individual identity reference; input image 2 is the existing action scene and composition reference. Preserve exactly the same individual, face shape, eye color, left/right markings, build, fur length, tail, warm hand-painted illustration style, cream wall, wooden baseboard and floor, sage mat, camera framing, lighting and background treatment. Preserve the action reference's toy shape, material and color and any human hand, skin, sleeve and tool design. Change only what is required for the action. Natural mild ordinary response usable for normal and gentle interaction, open calm eyes, no ecstatic or special bonding pose. Anatomically coherent four limbs; no duplicate paws or tails. No text, UI, hearts, symbols, motion lines or watermark. Opaque background, same square size as references (1254x1254). Kohaku: orange long-haired tabby, golden eyes, broad dark orange stripes, cream chest, fluffy ringed tail, rounded build; no white socks. Primary request: Actually playing with the same small RED ball: move ONE front paw onto the upper side of the ball, visibly contacting and gently nudging it on the mat. Slightly lower head and direct gaze toward the ball. Opposite front paw stays planted, natural seated supporting hindquarters. Produce only the execution image.",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146ae-a270-79e0-8273-a462fe944e5f\\exec-0d74745b-b092-4b28-988b-646ddf8bec1e.png",
+    "references": [
+      "C:/Users/hi-wa/source/codex_repos/CatCafeSim/Docs/Prototypes/CatAppearance-v1/kohaku-normal.png",
+      "C:/Users/hi-wa/source/codex_repos/CatCafeSim/Docs/Prototypes/KohakuBasePoses-v1/kohaku-ball-base.png"
+    ]
+  },
+  {
+    "cat": "kohaku",
+    "action": "plush",
+    "prompt": "Use case: identity-preserve. Asset type: cat cafe game ordinary action execution still, one square illustration. Input image 1 is the individual identity reference; input image 2 is the existing action scene and composition reference. Preserve exactly the same individual, face shape, eye color, left/right markings, build, fur length, tail, warm hand-painted illustration style, cream wall, wooden baseboard and floor, sage mat, camera framing, lighting and background treatment. Preserve the action reference's toy shape, material and color and any human hand, skin, sleeve and tool design. Change only what is required for the action. Natural mild ordinary response usable for normal and gentle interaction, open calm eyes, no ecstatic or special bonding pose. Anatomically coherent four limbs; no duplicate paws or tails. No text, UI, hearts, symbols, motion lines or watermark. Opaque background, same square size as references (1254x1254). Kohaku: orange long-haired tabby, golden eyes, broad dark orange stripes, cream chest, fluffy ringed tail, rounded build; no white socks. Primary request: Actually playing with the same beige woven mouse, pink ears/nose and cord tail: move ONE front paw visibly onto its back, gently patting the mouse, look toward it. Opposite front paw stays planted with natural seated supporting hindquarters. Produce only the execution image.",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146ae-a270-79e0-8273-a462fe944e5f\\exec-ffff732a-7a65-4ea7-9c2a-35dc9d3e30cf.png",
+    "references": [
+      "C:/Users/hi-wa/source/codex_repos/CatCafeSim/Docs/Prototypes/CatAppearance-v1/kohaku-normal.png",
+      "C:/Users/hi-wa/source/codex_repos/CatCafeSim/Docs/Prototypes/KohakuBasePoses-v1/kohaku-plush-base.png"
+    ]
+  }
+]

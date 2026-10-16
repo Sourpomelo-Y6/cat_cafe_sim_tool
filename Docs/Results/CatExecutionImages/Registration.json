@@ -1,0 +1,1047 @@
+{
+  "cats": {
+    "cat-tama": {
+      "content_cat_id": "playtest-tama",
+      "scenes": {
+        "pet": {
+          "image": "images/99a0df52628d4fcbc0d20479a02e9d592ed25e74e8a8f2266cae8ac803e80d93.png",
+          "source": "CatAppearance-v1/tama-normal.png"
+        },
+        "pet__switch": {
+          "image": "images/99a0df52628d4fcbc0d20479a02e9d592ed25e74e8a8f2266cae8ac803e80d93.png",
+          "source": "CatAppearance-v1/tama-normal.png"
+        },
+        "pet__direct": {
+          "image": "images/fad11bd2d65b88343d279fba921e3807895768cbdc4c1d7fa2ab0c5e654e83e0.png",
+          "source": "TamaBasePoses-v1/tama-pet-base.png"
+        },
+        "pet__adapt": {
+          "image": "images/fad11bd2d65b88343d279fba921e3807895768cbdc4c1d7fa2ab0c5e654e83e0.png",
+          "source": "TamaBasePoses-v1/tama-pet-base.png"
+        },
+        "teaser": {
+          "image": "images/99a0df52628d4fcbc0d20479a02e9d592ed25e74e8a8f2266cae8ac803e80d93.png",
+          "source": "CatAppearance-v1/tama-normal.png"
+        },
+        "teaser__switch": {
+          "image": "images/99a0df52628d4fcbc0d20479a02e9d592ed25e74e8a8f2266cae8ac803e80d93.png",
+          "source": "CatAppearance-v1/tama-normal.png"
+        },
+        "teaser__direct": {
+          "image": "images/2876d2011983ffc759cc16d4751a654f85507fea32427865695ee453ebeb4367.png",
+          "source": "TamaBasePoses-v1/tama-teaser-base.png"
+        },
+        "teaser__adapt": {
+          "image": "images/2876d2011983ffc759cc16d4751a654f85507fea32427865695ee453ebeb4367.png",
+          "source": "TamaBasePoses-v1/tama-teaser-base.png"
+        },
+        "ball": {
+          "image": "images/99a0df52628d4fcbc0d20479a02e9d592ed25e74e8a8f2266cae8ac803e80d93.png",
+          "source": "CatAppearance-v1/tama-normal.png"
+        },
+        "ball__switch": {
+          "image": "images/99a0df52628d4fcbc0d20479a02e9d592ed25e74e8a8f2266cae8ac803e80d93.png",
+          "source": "CatAppearance-v1/tama-normal.png"
+        },
+        "ball__direct": {
+          "image": "images/8e47ec30c67638e8d0851a61001f153f5c9657c927ff1f7200c45684111574b8.png",
+          "source": "TamaBasePoses-v1/tama-ball-base.png"
+        },
+        "ball__adapt": {
+          "image": "images/8e47ec30c67638e8d0851a61001f153f5c9657c927ff1f7200c45684111574b8.png",
+          "source": "TamaBasePoses-v1/tama-ball-base.png"
+        },
+        "plush": {
+          "image": "images/99a0df52628d4fcbc0d20479a02e9d592ed25e74e8a8f2266cae8ac803e80d93.png",
+          "source": "CatAppearance-v1/tama-normal.png"
+        },
+        "plush__switch": {
+          "image": "images/99a0df52628d4fcbc0d20479a02e9d592ed25e74e8a8f2266cae8ac803e80d93.png",
+          "source": "CatAppearance-v1/tama-normal.png"
+        },
+        "plush__direct": {
+          "image": "images/85755e2ec02f0ed8e1faaaa0f403584fa968f0b0c24add0d5298faed3d1c72fd.png",
+          "source": "TamaBasePoses-v1/tama-plush-base.png"
+        },
+        "plush__adapt": {
+          "image": "images/85755e2ec02f0ed8e1faaaa0f403584fa968f0b0c24add0d5298faed3d1c72fd.png",
+          "source": "TamaBasePoses-v1/tama-plush-base.png"
+        },
+        "tunnel": {
+          "image": "images/99a0df52628d4fcbc0d20479a02e9d592ed25e74e8a8f2266cae8ac803e80d93.png",
+          "source": "CatAppearance-v1/tama-normal.png"
+        },
+        "tunnel__switch": {
+          "image": "images/99a0df52628d4fcbc0d20479a02e9d592ed25e74e8a8f2266cae8ac803e80d93.png",
+          "source": "CatAppearance-v1/tama-normal.png"
+        },
+        "tunnel__direct": {
+          "image": "images/d6129b6ef573811e050e40e00b06b19f36a5a0fd20ab809b58dfc25dfa36920c.png",
+          "source": "TamaBasePoses-v1/tama-tunnel-base.png"
+        },
+        "tunnel__adapt": {
+          "image": "images/d6129b6ef573811e050e40e00b06b19f36a5a0fd20ab809b58dfc25dfa36920c.png",
+          "source": "TamaBasePoses-v1/tama-tunnel-base.png"
+        },
+        "brush": {
+          "image": "images/99a0df52628d4fcbc0d20479a02e9d592ed25e74e8a8f2266cae8ac803e80d93.png",
+          "source": "CatAppearance-v1/tama-normal.png"
+        },
+        "brush__switch": {
+          "image": "images/99a0df52628d4fcbc0d20479a02e9d592ed25e74e8a8f2266cae8ac803e80d93.png",
+          "source": "CatAppearance-v1/tama-normal.png"
+        },
+        "brush__direct": {
+          "image": "images/271b8e08873b90feff263980858fcf9d42495506d50cbd140fb6a4aba7842dff.png",
+          "source": "TamaBasePoses-v1/tama-brush-base.png"
+        },
+        "brush__adapt": {
+          "image": "images/271b8e08873b90feff263980858fcf9d42495506d50cbd140fb6a4aba7842dff.png",
+          "source": "TamaBasePoses-v1/tama-brush-base.png"
+        },
+        "voice": {
+          "image": "images/99a0df52628d4fcbc0d20479a02e9d592ed25e74e8a8f2266cae8ac803e80d93.png",
+          "source": "CatAppearance-v1/tama-normal.png"
+        },
+        "voice__switch": {
+          "image": "images/99a0df52628d4fcbc0d20479a02e9d592ed25e74e8a8f2266cae8ac803e80d93.png",
+          "source": "CatAppearance-v1/tama-normal.png"
+        },
+        "voice__direct": {
+          "image": "images/e7e584fce71c43bf9b7c7e2cfb499e9c96bdaafe3a65c0e6082994a349b8b3ba.png",
+          "source": "TamaBasePoses-v1/tama-voice-base.png"
+        },
+        "voice__adapt": {
+          "image": "images/e7e584fce71c43bf9b7c7e2cfb499e9c96bdaafe3a65c0e6082994a349b8b3ba.png",
+          "source": "TamaBasePoses-v1/tama-voice-base.png"
+        },
+        "presence": {
+          "image": "images/99a0df52628d4fcbc0d20479a02e9d592ed25e74e8a8f2266cae8ac803e80d93.png",
+          "source": "CatAppearance-v1/tama-normal.png"
+        },
+        "presence__switch": {
+          "image": "images/99a0df52628d4fcbc0d20479a02e9d592ed25e74e8a8f2266cae8ac803e80d93.png",
+          "source": "CatAppearance-v1/tama-normal.png"
+        },
+        "presence__direct": {
+          "image": "images/5a746d4c0f211706ce24423a9c0ec95fa5ab567bb117cc8e06e610687424f92a.png",
+          "source": "TamaBasePoses-v1/tama-presence-base.png"
+        },
+        "presence__adapt": {
+          "image": "images/5a746d4c0f211706ce24423a9c0ec95fa5ab567bb117cc8e06e610687424f92a.png",
+          "source": "TamaBasePoses-v1/tama-presence-base.png"
+        }
+      }
+    },
+    "cat-sora": {
+      "content_cat_id": "playtest-sora",
+      "scenes": {
+        "pet": {
+          "image": "images/45f74d32f7bc44a7e7691d52d9e3537719077196cef50dbd2ad91074dd2f8938.png",
+          "source": "CatAppearance-v1/sora-normal.png"
+        },
+        "pet__switch": {
+          "image": "images/45f74d32f7bc44a7e7691d52d9e3537719077196cef50dbd2ad91074dd2f8938.png",
+          "source": "CatAppearance-v1/sora-normal.png"
+        },
+        "pet__direct": {
+          "image": "images/22aa5508be878d7467871fa2e3a569dc5e670cff90460648b334bc036f3efde9.png",
+          "source": "SoraBasePoses-v1/sora-pet-base.png"
+        },
+        "pet__adapt": {
+          "image": "images/22aa5508be878d7467871fa2e3a569dc5e670cff90460648b334bc036f3efde9.png",
+          "source": "SoraBasePoses-v1/sora-pet-base.png"
+        },
+        "teaser": {
+          "image": "images/45f74d32f7bc44a7e7691d52d9e3537719077196cef50dbd2ad91074dd2f8938.png",
+          "source": "CatAppearance-v1/sora-normal.png"
+        },
+        "teaser__switch": {
+          "image": "images/45f74d32f7bc44a7e7691d52d9e3537719077196cef50dbd2ad91074dd2f8938.png",
+          "source": "CatAppearance-v1/sora-normal.png"
+        },
+        "teaser__direct": {
+          "image": "images/759d4a851a1b9fb0a39b6001e83da38f7ee39ee2ee0083e9d77d5125e059d651.png",
+          "source": "SoraBasePoses-v1/sora-teaser-base.png"
+        },
+        "teaser__adapt": {
+          "image": "images/759d4a851a1b9fb0a39b6001e83da38f7ee39ee2ee0083e9d77d5125e059d651.png",
+          "source": "SoraBasePoses-v1/sora-teaser-base.png"
+        },
+        "ball": {
+          "image": "images/45f74d32f7bc44a7e7691d52d9e3537719077196cef50dbd2ad91074dd2f8938.png",
+          "source": "CatAppearance-v1/sora-normal.png"
+        },
+        "ball__switch": {
+          "image": "images/45f74d32f7bc44a7e7691d52d9e3537719077196cef50dbd2ad91074dd2f8938.png",
+          "source": "CatAppearance-v1/sora-normal.png"
+        },
+        "ball__direct": {
+          "image": "images/8a0001aa27e4f5dc68a052e214ee8c5cab6ab7616d6f4c5b3c17e357d1acacf4.png",
+          "source": "SoraBasePoses-v1/sora-ball-base.png"
+        },
+        "ball__adapt": {
+          "image": "images/8a0001aa27e4f5dc68a052e214ee8c5cab6ab7616d6f4c5b3c17e357d1acacf4.png",
+          "source": "SoraBasePoses-v1/sora-ball-base.png"
+        },
+        "plush": {
+          "image": "images/c2e5be5bc02a8e9215058644457a1c400243327b866474082b0dd13815f0c659.png",
+          "source": "SoraBasePoses-v1/sora-plush-base.png"
+        },
+        "plush__switch": {
+          "image": "images/c2e5be5bc02a8e9215058644457a1c400243327b866474082b0dd13815f0c659.png",
+          "source": "SoraBasePoses-v1/sora-plush-base.png"
+        },
+        "plush__direct": {
+          "image": "images/8721ec6977409c134999b1e7c26e0eed765bb85d52116da48a1d694cc57a7157.png",
+          "source": "SoraActionExecution-v1/sora-plush-execute.png"
+        },
+        "plush__adapt": {
+          "image": "images/8721ec6977409c134999b1e7c26e0eed765bb85d52116da48a1d694cc57a7157.png",
+          "source": "SoraActionExecution-v1/sora-plush-execute.png"
+        },
+        "tunnel": {
+          "image": "images/45f74d32f7bc44a7e7691d52d9e3537719077196cef50dbd2ad91074dd2f8938.png",
+          "source": "CatAppearance-v1/sora-normal.png"
+        },
+        "tunnel__switch": {
+          "image": "images/45f74d32f7bc44a7e7691d52d9e3537719077196cef50dbd2ad91074dd2f8938.png",
+          "source": "CatAppearance-v1/sora-normal.png"
+        },
+        "tunnel__direct": {
+          "image": "images/35cb878d8ff6a4f7db46caebfa45784455c738e794df7a4238e16b9a3e1d3af1.png",
+          "source": "SoraBasePoses-v1/sora-tunnel-base.png"
+        },
+        "tunnel__adapt": {
+          "image": "images/35cb878d8ff6a4f7db46caebfa45784455c738e794df7a4238e16b9a3e1d3af1.png",
+          "source": "SoraBasePoses-v1/sora-tunnel-base.png"
+        },
+        "brush": {
+          "image": "images/45f74d32f7bc44a7e7691d52d9e3537719077196cef50dbd2ad91074dd2f8938.png",
+          "source": "CatAppearance-v1/sora-normal.png"
+        },
+        "brush__switch": {
+          "image": "images/45f74d32f7bc44a7e7691d52d9e3537719077196cef50dbd2ad91074dd2f8938.png",
+          "source": "CatAppearance-v1/sora-normal.png"
+        },
+        "brush__direct": {
+          "image": "images/4db0de2b151dfbccff464f151f621644250dd0b015b6684c1a38cc379a96f77c.png",
+          "source": "SoraBasePoses-v1/sora-brush-base.png"
+        },
+        "brush__adapt": {
+          "image": "images/4db0de2b151dfbccff464f151f621644250dd0b015b6684c1a38cc379a96f77c.png",
+          "source": "SoraBasePoses-v1/sora-brush-base.png"
+        },
+        "voice": {
+          "image": "images/45f74d32f7bc44a7e7691d52d9e3537719077196cef50dbd2ad91074dd2f8938.png",
+          "source": "CatAppearance-v1/sora-normal.png"
+        },
+        "voice__switch": {
+          "image": "images/45f74d32f7bc44a7e7691d52d9e3537719077196cef50dbd2ad91074dd2f8938.png",
+          "source": "CatAppearance-v1/sora-normal.png"
+        },
+        "voice__direct": {
+          "image": "images/040e5de67d4627bd7c17026a18d1ced5b2f4db034e3d33989d2e5bb623cd462a.png",
+          "source": "SoraBasePoses-v1/sora-voice-base.png"
+        },
+        "voice__adapt": {
+          "image": "images/040e5de67d4627bd7c17026a18d1ced5b2f4db034e3d33989d2e5bb623cd462a.png",
+          "source": "SoraBasePoses-v1/sora-voice-base.png"
+        },
+        "presence": {
+          "image": "images/45f74d32f7bc44a7e7691d52d9e3537719077196cef50dbd2ad91074dd2f8938.png",
+          "source": "CatAppearance-v1/sora-normal.png"
+        },
+        "presence__switch": {
+          "image": "images/45f74d32f7bc44a7e7691d52d9e3537719077196cef50dbd2ad91074dd2f8938.png",
+          "source": "CatAppearance-v1/sora-normal.png"
+        },
+        "presence__direct": {
+          "image": "images/06711b150507b1d7515fd9d62bbb894211d135ef789496b052594be384bf519c.png",
+          "source": "SoraBasePoses-v1/sora-presence-base.png"
+        },
+        "presence__adapt": {
+          "image": "images/06711b150507b1d7515fd9d62bbb894211d135ef789496b052594be384bf519c.png",
+          "source": "SoraBasePoses-v1/sora-presence-base.png"
+        }
+      }
+    },
+    "cat-kohaku": {
+      "content_cat_id": "playtest-kohaku",
+      "scenes": {
+        "pet": {
+          "image": "images/b29ca453a3929bb3edb658bf3e68af05765153a7c5bae296d249ca76dafb9150.png",
+          "source": "CatAppearance-v1/kohaku-normal.png"
+        },
+        "pet__switch": {
+          "image": "images/b29ca453a3929bb3edb658bf3e68af05765153a7c5bae296d249ca76dafb9150.png",
+          "source": "CatAppearance-v1/kohaku-normal.png"
+        },
+        "pet__direct": {
+          "image": "images/4f69f9b196c7a992ff5d26ded84f99ce04f899f3cbaebf49c3689cabb1582178.png",
+          "source": "KohakuBasePoses-v1/kohaku-pet-base.png"
+        },
+        "pet__adapt": {
+          "image": "images/4f69f9b196c7a992ff5d26ded84f99ce04f899f3cbaebf49c3689cabb1582178.png",
+          "source": "KohakuBasePoses-v1/kohaku-pet-base.png"
+        },
+        "teaser": {
+          "image": "images/9477f161a1fbdd9b5b27d7896caab80bf0520a026515ee877ae0af3e6a8b8ac4.png",
+          "source": "KohakuBasePoses-v1/kohaku-teaser-base.png"
+        },
+        "teaser__switch": {
+          "image": "images/9477f161a1fbdd9b5b27d7896caab80bf0520a026515ee877ae0af3e6a8b8ac4.png",
+          "source": "KohakuBasePoses-v1/kohaku-teaser-base.png"
+        },
+        "teaser__direct": {
+          "image": "images/954529fdf4272cd95a50115899520b79ce752da3a7e10474d828cfc377a4eb81.png",
+          "source": "CatAppearance-v1/kohaku-play.png"
+        },
+        "teaser__adapt": {
+          "image": "images/954529fdf4272cd95a50115899520b79ce752da3a7e10474d828cfc377a4eb81.png",
+          "source": "CatAppearance-v1/kohaku-play.png"
+        },
+        "ball": {
+          "image": "images/363b57938f0412836d73f7b2d704a827d6307cf2abfffe0e53db8cce6185645d.png",
+          "source": "KohakuBasePoses-v1/kohaku-ball-base.png"
+        },
+        "ball__switch": {
+          "image": "images/363b57938f0412836d73f7b2d704a827d6307cf2abfffe0e53db8cce6185645d.png",
+          "source": "KohakuBasePoses-v1/kohaku-ball-base.png"
+        },
+        "ball__direct": {
+          "image": "images/8d0c6026880fe2e9f985aa0fa7fa330d49e4f4bb84bd3b88378f92fda679ec5a.png",
+          "source": "KohakuActionExecution-v1/kohaku-ball-execute.png"
+        },
+        "ball__adapt": {
+          "image": "images/8d0c6026880fe2e9f985aa0fa7fa330d49e4f4bb84bd3b88378f92fda679ec5a.png",
+          "source": "KohakuActionExecution-v1/kohaku-ball-execute.png"
+        },
+        "plush": {
+          "image": "images/dee4ea5428bbe8ad03b26c522a4e29197bf04aee376dab0591937c5c0f4f7240.png",
+          "source": "KohakuBasePoses-v1/kohaku-plush-base.png"
+        },
+        "plush__switch": {
+          "image": "images/dee4ea5428bbe8ad03b26c522a4e29197bf04aee376dab0591937c5c0f4f7240.png",
+          "source": "KohakuBasePoses-v1/kohaku-plush-base.png"
+        },
+        "plush__direct": {
+          "image": "images/ef2b859e6260b4c7c88746b26a9fe6b5f007ab41398d225ff601d8183f329581.png",
+          "source": "KohakuActionExecution-v1/kohaku-plush-execute.png"
+        },
+        "plush__adapt": {
+          "image": "images/ef2b859e6260b4c7c88746b26a9fe6b5f007ab41398d225ff601d8183f329581.png",
+          "source": "KohakuActionExecution-v1/kohaku-plush-execute.png"
+        },
+        "tunnel": {
+          "image": "images/b29ca453a3929bb3edb658bf3e68af05765153a7c5bae296d249ca76dafb9150.png",
+          "source": "CatAppearance-v1/kohaku-normal.png"
+        },
+        "tunnel__switch": {
+          "image": "images/b29ca453a3929bb3edb658bf3e68af05765153a7c5bae296d249ca76dafb9150.png",
+          "source": "CatAppearance-v1/kohaku-normal.png"
+        },
+        "tunnel__direct": {
+          "image": "images/03e22697c98a9546705bbec312691c9a3903d907ff974fa84f7abbb8d8aec9ad.png",
+          "source": "KohakuBasePoses-v1/kohaku-tunnel-base.png"
+        },
+        "tunnel__adapt": {
+          "image": "images/03e22697c98a9546705bbec312691c9a3903d907ff974fa84f7abbb8d8aec9ad.png",
+          "source": "KohakuBasePoses-v1/kohaku-tunnel-base.png"
+        },
+        "brush": {
+          "image": "images/b29ca453a3929bb3edb658bf3e68af05765153a7c5bae296d249ca76dafb9150.png",
+          "source": "CatAppearance-v1/kohaku-normal.png"
+        },
+        "brush__switch": {
+          "image": "images/b29ca453a3929bb3edb658bf3e68af05765153a7c5bae296d249ca76dafb9150.png",
+          "source": "CatAppearance-v1/kohaku-normal.png"
+        },
+        "brush__direct": {
+          "image": "images/73bbed64e172feb1e47e8b8ce4e893cd1aed67d76223b2afd1f78b81eccd57bf.png",
+          "source": "KohakuBasePoses-v1/kohaku-brush-base.png"
+        },
+        "brush__adapt": {
+          "image": "images/73bbed64e172feb1e47e8b8ce4e893cd1aed67d76223b2afd1f78b81eccd57bf.png",
+          "source": "KohakuBasePoses-v1/kohaku-brush-base.png"
+        },
+        "voice": {
+          "image": "images/b29ca453a3929bb3edb658bf3e68af05765153a7c5bae296d249ca76dafb9150.png",
+          "source": "CatAppearance-v1/kohaku-normal.png"
+        },
+        "voice__switch": {
+          "image": "images/b29ca453a3929bb3edb658bf3e68af05765153a7c5bae296d249ca76dafb9150.png",
+          "source": "CatAppearance-v1/kohaku-normal.png"
+        },
+        "voice__direct": {
+          "image": "images/96b20aafc9a1b2d9f18f4457957a504d1c7bc40b52332ef3bde1a0ec9fedb326.png",
+          "source": "KohakuBasePoses-v1/kohaku-voice-base.png"
+        },
+        "voice__adapt": {
+          "image": "images/96b20aafc9a1b2d9f18f4457957a504d1c7bc40b52332ef3bde1a0ec9fedb326.png",
+          "source": "KohakuBasePoses-v1/kohaku-voice-base.png"
+        },
+        "presence": {
+          "image": "images/b29ca453a3929bb3edb658bf3e68af05765153a7c5bae296d249ca76dafb9150.png",
+          "source": "CatAppearance-v1/kohaku-normal.png"
+        },
+        "presence__switch": {
+          "image": "images/b29ca453a3929bb3edb658bf3e68af05765153a7c5bae296d249ca76dafb9150.png",
+          "source": "CatAppearance-v1/kohaku-normal.png"
+        },
+        "presence__direct": {
+          "image": "images/02ce61fa8f06b2470641d12cf77291a1ad192af79bc9dd7bfebad3b3c7451a1f.png",
+          "source": "KohakuBasePoses-v1/kohaku-presence-base.png"
+        },
+        "presence__adapt": {
+          "image": "images/02ce61fa8f06b2470641d12cf77291a1ad192af79bc9dd7bfebad3b3c7451a1f.png",
+          "source": "KohakuBasePoses-v1/kohaku-presence-base.png"
+        }
+      }
+    },
+    "cat-mugi": {
+      "content_cat_id": "playtest-mugi",
+      "scenes": {
+        "pet": {
+          "image": "images/3278e8f2e625f2cb4174766a65098e5a626989c68095fc6a881f7edc7b246c1a.png",
+          "source": "CatAppearance-v1/mugi-normal.png"
+        },
+        "pet__switch": {
+          "image": "images/3278e8f2e625f2cb4174766a65098e5a626989c68095fc6a881f7edc7b246c1a.png",
+          "source": "CatAppearance-v1/mugi-normal.png"
+        },
+        "pet__direct": {
+          "image": "images/4c00d210950c810c58f3454e7fa5d5518708c4eab75094a6fd3a43772edfc3ba.png",
+          "source": "MugiBasePoses-v1/mugi-pet-base.png"
+        },
+        "pet__adapt": {
+          "image": "images/4c00d210950c810c58f3454e7fa5d5518708c4eab75094a6fd3a43772edfc3ba.png",
+          "source": "MugiBasePoses-v1/mugi-pet-base.png"
+        },
+        "teaser": {
+          "image": "images/5d0c7e973afb29f93a92c3b7cb5b0c3e38f122e224e6e877e3f4e349654e793f.png",
+          "source": "MugiBasePoses-v1/mugi-teaser-base.png"
+        },
+        "teaser__switch": {
+          "image": "images/5d0c7e973afb29f93a92c3b7cb5b0c3e38f122e224e6e877e3f4e349654e793f.png",
+          "source": "MugiBasePoses-v1/mugi-teaser-base.png"
+        },
+        "teaser__direct": {
+          "image": "images/ed99965862abecacda8fa106b4e8692cc1e87599079955c37429247a501af078.png",
+          "source": "CatAppearance-v1/mugi-play.png"
+        },
+        "teaser__adapt": {
+          "image": "images/ed99965862abecacda8fa106b4e8692cc1e87599079955c37429247a501af078.png",
+          "source": "CatAppearance-v1/mugi-play.png"
+        },
+        "ball": {
+          "image": "images/b94ff6a9f8b4881ba4305acee8a315f0baa555862a10f919abb20d460a5b4f11.png",
+          "source": "MugiBasePoses-v1/mugi-ball-base.png"
+        },
+        "ball__switch": {
+          "image": "images/b94ff6a9f8b4881ba4305acee8a315f0baa555862a10f919abb20d460a5b4f11.png",
+          "source": "MugiBasePoses-v1/mugi-ball-base.png"
+        },
+        "ball__direct": {
+          "image": "images/7b2e4f0f3d9911033be92b7b13b33946e0644e451b305cc701e4f109bc3bbfd5.png",
+          "source": "MugiActionExecution-v1/mugi-ball-execute.png"
+        },
+        "ball__adapt": {
+          "image": "images/7b2e4f0f3d9911033be92b7b13b33946e0644e451b305cc701e4f109bc3bbfd5.png",
+          "source": "MugiActionExecution-v1/mugi-ball-execute.png"
+        },
+        "plush": {
+          "image": "images/68c4e3e6f8e9f77846647843af788a42e47245616f54aecb9619dcf72fa6c17e.png",
+          "source": "MugiBasePoses-v1/mugi-plush-base.png"
+        },
+        "plush__switch": {
+          "image": "images/68c4e3e6f8e9f77846647843af788a42e47245616f54aecb9619dcf72fa6c17e.png",
+          "source": "MugiBasePoses-v1/mugi-plush-base.png"
+        },
+        "plush__direct": {
+          "image": "images/b37d8809b38107e4b0ec48049cbbe264cb3ab3a3eba7a3c2af4052cb81027ade.png",
+          "source": "MugiActionExecution-v1/mugi-plush-execute.png"
+        },
+        "plush__adapt": {
+          "image": "images/b37d8809b38107e4b0ec48049cbbe264cb3ab3a3eba7a3c2af4052cb81027ade.png",
+          "source": "MugiActionExecution-v1/mugi-plush-execute.png"
+        },
+        "tunnel": {
+          "image": "images/3278e8f2e625f2cb4174766a65098e5a626989c68095fc6a881f7edc7b246c1a.png",
+          "source": "CatAppearance-v1/mugi-normal.png"
+        },
+        "tunnel__switch": {
+          "image": "images/3278e8f2e625f2cb4174766a65098e5a626989c68095fc6a881f7edc7b246c1a.png",
+          "source": "CatAppearance-v1/mugi-normal.png"
+        },
+        "tunnel__direct": {
+          "image": "images/c9b0f4323c885c4531f55be03b39b515f3c02d51eaf420c52f4aa9bad6292507.png",
+          "source": "MugiBasePoses-v1/mugi-tunnel-base.png"
+        },
+        "tunnel__adapt": {
+          "image": "images/c9b0f4323c885c4531f55be03b39b515f3c02d51eaf420c52f4aa9bad6292507.png",
+          "source": "MugiBasePoses-v1/mugi-tunnel-base.png"
+        },
+        "brush": {
+          "image": "images/3278e8f2e625f2cb4174766a65098e5a626989c68095fc6a881f7edc7b246c1a.png",
+          "source": "CatAppearance-v1/mugi-normal.png"
+        },
+        "brush__switch": {
+          "image": "images/3278e8f2e625f2cb4174766a65098e5a626989c68095fc6a881f7edc7b246c1a.png",
+          "source": "CatAppearance-v1/mugi-normal.png"
+        },
+        "brush__direct": {
+          "image": "images/8e711b8dd66c60a30855152b668f864268ad49da49de949f246eca1b03e251f5.png",
+          "source": "MugiBasePoses-v1/mugi-brush-base.png"
+        },
+        "brush__adapt": {
+          "image": "images/8e711b8dd66c60a30855152b668f864268ad49da49de949f246eca1b03e251f5.png",
+          "source": "MugiBasePoses-v1/mugi-brush-base.png"
+        },
+        "voice": {
+          "image": "images/3278e8f2e625f2cb4174766a65098e5a626989c68095fc6a881f7edc7b246c1a.png",
+          "source": "CatAppearance-v1/mugi-normal.png"
+        },
+        "voice__switch": {
+          "image": "images/3278e8f2e625f2cb4174766a65098e5a626989c68095fc6a881f7edc7b246c1a.png",
+          "source": "CatAppearance-v1/mugi-normal.png"
+        },
+        "voice__direct": {
+          "image": "images/03fc2b222e7a93a7dce9bc894b45e142b1faba32163c05d076dc43f194898db4.png",
+          "source": "MugiBasePoses-v1/mugi-voice-base.png"
+        },
+        "voice__adapt": {
+          "image": "images/03fc2b222e7a93a7dce9bc894b45e142b1faba32163c05d076dc43f194898db4.png",
+          "source": "MugiBasePoses-v1/mugi-voice-base.png"
+        },
+        "presence": {
+          "image": "images/3278e8f2e625f2cb4174766a65098e5a626989c68095fc6a881f7edc7b246c1a.png",
+          "source": "CatAppearance-v1/mugi-normal.png"
+        },
+        "presence__switch": {
+          "image": "images/3278e8f2e625f2cb4174766a65098e5a626989c68095fc6a881f7edc7b246c1a.png",
+          "source": "CatAppearance-v1/mugi-normal.png"
+        },
+        "presence__direct": {
+          "image": "images/dfe1736f6f6d2733fca3ca4490ca7c5ef95ef291a19ac5623ed8ac24bc689672.png",
+          "source": "MugiBasePoses-v1/mugi-presence-base.png"
+        },
+        "presence__adapt": {
+          "image": "images/dfe1736f6f6d2733fca3ca4490ca7c5ef95ef291a19ac5623ed8ac24bc689672.png",
+          "source": "MugiBasePoses-v1/mugi-presence-base.png"
+        }
+      }
+    },
+    "request-cat-1": {
+      "content_cat_id": "request-cat-1",
+      "scenes": {
+        "pet": {
+          "image": "images/28268070046116ebf79681f82362f5fe2351d7b0e91af60bc7f90b6084abc377.png",
+          "source": "CatAppearance-v1/nana-normal.png"
+        },
+        "pet__switch": {
+          "image": "images/28268070046116ebf79681f82362f5fe2351d7b0e91af60bc7f90b6084abc377.png",
+          "source": "CatAppearance-v1/nana-normal.png"
+        },
+        "pet__direct": {
+          "image": "images/399b86404c05dd40d880704a829faa7e8dc988c5907c824e1dd79b80be48e960.png",
+          "source": "NanaBasePoses-v1/nana-pet-base.png"
+        },
+        "pet__adapt": {
+          "image": "images/399b86404c05dd40d880704a829faa7e8dc988c5907c824e1dd79b80be48e960.png",
+          "source": "NanaBasePoses-v1/nana-pet-base.png"
+        },
+        "teaser": {
+          "image": "images/28268070046116ebf79681f82362f5fe2351d7b0e91af60bc7f90b6084abc377.png",
+          "source": "CatAppearance-v1/nana-normal.png"
+        },
+        "teaser__switch": {
+          "image": "images/28268070046116ebf79681f82362f5fe2351d7b0e91af60bc7f90b6084abc377.png",
+          "source": "CatAppearance-v1/nana-normal.png"
+        },
+        "teaser__direct": {
+          "image": "images/5218985ad4426347628a8ade9f97cd39d1a42de70e9fb638850471537a7e51e9.png",
+          "source": "NanaBasePoses-v1/nana-teaser-base.png"
+        },
+        "teaser__adapt": {
+          "image": "images/5218985ad4426347628a8ade9f97cd39d1a42de70e9fb638850471537a7e51e9.png",
+          "source": "NanaBasePoses-v1/nana-teaser-base.png"
+        },
+        "ball": {
+          "image": "images/32a9185b777b8e9920ed9269e939f9d34272ead7cf1faed06480231833643399.png",
+          "source": "NanaBasePoses-v1/nana-ball-base.png"
+        },
+        "ball__switch": {
+          "image": "images/32a9185b777b8e9920ed9269e939f9d34272ead7cf1faed06480231833643399.png",
+          "source": "NanaBasePoses-v1/nana-ball-base.png"
+        },
+        "ball__direct": {
+          "image": "images/71cdd74fcec7bcd54b6f2103598ee4fd1b523f1040c4fe30c49a195eba76f5cf.png",
+          "source": "NanaActionExecution-v1/nana-ball-execute.png"
+        },
+        "ball__adapt": {
+          "image": "images/71cdd74fcec7bcd54b6f2103598ee4fd1b523f1040c4fe30c49a195eba76f5cf.png",
+          "source": "NanaActionExecution-v1/nana-ball-execute.png"
+        },
+        "plush": {
+          "image": "images/93af4b515ecf31c700a518a62714af75faefcdcf51c4d2760a66c1e7636c6d0f.png",
+          "source": "NanaBasePoses-v1/nana-plush-base.png"
+        },
+        "plush__switch": {
+          "image": "images/93af4b515ecf31c700a518a62714af75faefcdcf51c4d2760a66c1e7636c6d0f.png",
+          "source": "NanaBasePoses-v1/nana-plush-base.png"
+        },
+        "plush__direct": {
+          "image": "images/31599d30efc4baa51e1cbecabf3e1642ba4a08e5140e880e8fb9d8e37cd5e171.png",
+          "source": "NanaActionExecution-v1/nana-plush-execute.png"
+        },
+        "plush__adapt": {
+          "image": "images/31599d30efc4baa51e1cbecabf3e1642ba4a08e5140e880e8fb9d8e37cd5e171.png",
+          "source": "NanaActionExecution-v1/nana-plush-execute.png"
+        },
+        "tunnel": {
+          "image": "images/28268070046116ebf79681f82362f5fe2351d7b0e91af60bc7f90b6084abc377.png",
+          "source": "CatAppearance-v1/nana-normal.png"
+        },
+        "tunnel__switch": {
+          "image": "images/28268070046116ebf79681f82362f5fe2351d7b0e91af60bc7f90b6084abc377.png",
+          "source": "CatAppearance-v1/nana-normal.png"
+        },
+        "tunnel__direct": {
+          "image": "images/bf5e3315303277460e232c351af3a804ce3ac3bd347ca735ecd42e5ee0594c91.png",
+          "source": "NanaBasePoses-v1/nana-tunnel-base.png"
+        },
+        "tunnel__adapt": {
+          "image": "images/bf5e3315303277460e232c351af3a804ce3ac3bd347ca735ecd42e5ee0594c91.png",
+          "source": "NanaBasePoses-v1/nana-tunnel-base.png"
+        },
+        "brush": {
+          "image": "images/28268070046116ebf79681f82362f5fe2351d7b0e91af60bc7f90b6084abc377.png",
+          "source": "CatAppearance-v1/nana-normal.png"
+        },
+        "brush__switch": {
+          "image": "images/28268070046116ebf79681f82362f5fe2351d7b0e91af60bc7f90b6084abc377.png",
+          "source": "CatAppearance-v1/nana-normal.png"
+        },
+        "brush__direct": {
+          "image": "images/943e74740fb636f413578d48a708b0fe6e01232d24d7c6c16095cb256293e564.png",
+          "source": "NanaBasePoses-v1/nana-brush-base.png"
+        },
+        "brush__adapt": {
+          "image": "images/943e74740fb636f413578d48a708b0fe6e01232d24d7c6c16095cb256293e564.png",
+          "source": "NanaBasePoses-v1/nana-brush-base.png"
+        },
+        "voice": {
+          "image": "images/28268070046116ebf79681f82362f5fe2351d7b0e91af60bc7f90b6084abc377.png",
+          "source": "CatAppearance-v1/nana-normal.png"
+        },
+        "voice__switch": {
+          "image": "images/28268070046116ebf79681f82362f5fe2351d7b0e91af60bc7f90b6084abc377.png",
+          "source": "CatAppearance-v1/nana-normal.png"
+        },
+        "voice__direct": {
+          "image": "images/16c048525e2fd5000774ee32bea6a47078f6d2462f1228fc2c3302355dde2e6b.png",
+          "source": "NanaBasePoses-v1/nana-voice-base.png"
+        },
+        "voice__adapt": {
+          "image": "images/16c048525e2fd5000774ee32bea6a47078f6d2462f1228fc2c3302355dde2e6b.png",
+          "source": "NanaBasePoses-v1/nana-voice-base.png"
+        },
+        "presence": {
+          "image": "images/28268070046116ebf79681f82362f5fe2351d7b0e91af60bc7f90b6084abc377.png",
+          "source": "CatAppearance-v1/nana-normal.png"
+        },
+        "presence__switch": {
+          "image": "images/28268070046116ebf79681f82362f5fe2351d7b0e91af60bc7f90b6084abc377.png",
+          "source": "CatAppearance-v1/nana-normal.png"
+        },
+        "presence__direct": {
+          "image": "images/6cbedf01aecd863a495d90c049a2845b04aae160419343ed11f1947ab26f5da9.png",
+          "source": "NanaBasePoses-v1/nana-presence-base.png"
+        },
+        "presence__adapt": {
+          "image": "images/6cbedf01aecd863a495d90c049a2845b04aae160419343ed11f1947ab26f5da9.png",
+          "source": "NanaBasePoses-v1/nana-presence-base.png"
+        }
+      }
+    },
+    "regular-rescue-1": {
+      "content_cat_id": "regular-rescue-1",
+      "scenes": {
+        "pet": {
+          "image": "images/f07162a67d38e61867288e1814bc8a9d688f6c425a2177baf39aa3d97cb2b301.png",
+          "source": "CatAppearance-v1/maron-normal.png"
+        },
+        "pet__switch": {
+          "image": "images/f07162a67d38e61867288e1814bc8a9d688f6c425a2177baf39aa3d97cb2b301.png",
+          "source": "CatAppearance-v1/maron-normal.png"
+        },
+        "pet__direct": {
+          "image": "images/970fc0eb141a65286a333527d4e3889ce34a317c5c53abea136eeb1764ebc0a1.png",
+          "source": "MaronBasePoses-v1/maron-pet-base.png"
+        },
+        "pet__adapt": {
+          "image": "images/970fc0eb141a65286a333527d4e3889ce34a317c5c53abea136eeb1764ebc0a1.png",
+          "source": "MaronBasePoses-v1/maron-pet-base.png"
+        },
+        "teaser": {
+          "image": "images/6f4766c9aeb40e5292f93dae8e857cbb2260f628894dcf0cbcb3c79667cff77f.png",
+          "source": "MaronBasePoses-v1/maron-teaser-base.png"
+        },
+        "teaser__switch": {
+          "image": "images/6f4766c9aeb40e5292f93dae8e857cbb2260f628894dcf0cbcb3c79667cff77f.png",
+          "source": "MaronBasePoses-v1/maron-teaser-base.png"
+        },
+        "teaser__direct": {
+          "image": "images/3cc0a7c3cb0b8e9337ebeb2ba6de2706a7a12eba9f2207348e34b839c8bd0141.png",
+          "source": "MaronActionExecution-v1/maron-teaser-execute.png"
+        },
+        "teaser__adapt": {
+          "image": "images/3cc0a7c3cb0b8e9337ebeb2ba6de2706a7a12eba9f2207348e34b839c8bd0141.png",
+          "source": "MaronActionExecution-v1/maron-teaser-execute.png"
+        },
+        "ball": {
+          "image": "images/fe66cb656b92966ce104ca0e2f6fcd53417b70792c9fc163c4049ae5fe43a429.png",
+          "source": "MaronBasePoses-v1/maron-ball-base.png"
+        },
+        "ball__switch": {
+          "image": "images/fe66cb656b92966ce104ca0e2f6fcd53417b70792c9fc163c4049ae5fe43a429.png",
+          "source": "MaronBasePoses-v1/maron-ball-base.png"
+        },
+        "ball__direct": {
+          "image": "images/772ac34b50d7fc0338d9c7b15e3c4070249679b23f42db32f03ad5fdcd802ce5.png",
+          "source": "MaronActionExecution-v1/maron-ball-execute.png"
+        },
+        "ball__adapt": {
+          "image": "images/772ac34b50d7fc0338d9c7b15e3c4070249679b23f42db32f03ad5fdcd802ce5.png",
+          "source": "MaronActionExecution-v1/maron-ball-execute.png"
+        },
+        "plush": {
+          "image": "images/d2027cf9f30af42d84bd2f3d65aebf51277f977e489966df4abe62268fa41295.png",
+          "source": "MaronBasePoses-v1/maron-plush-base.png"
+        },
+        "plush__switch": {
+          "image": "images/d2027cf9f30af42d84bd2f3d65aebf51277f977e489966df4abe62268fa41295.png",
+          "source": "MaronBasePoses-v1/maron-plush-base.png"
+        },
+        "plush__direct": {
+          "image": "images/cd1ebaf5657370a72183fd0d7208c0b110f561fcaba9afebb50340f6b4622e70.png",
+          "source": "MaronActionExecution-v1/maron-plush-execute.png"
+        },
+        "plush__adapt": {
+          "image": "images/cd1ebaf5657370a72183fd0d7208c0b110f561fcaba9afebb50340f6b4622e70.png",
+          "source": "MaronActionExecution-v1/maron-plush-execute.png"
+        },
+        "tunnel": {
+          "image": "images/f07162a67d38e61867288e1814bc8a9d688f6c425a2177baf39aa3d97cb2b301.png",
+          "source": "CatAppearance-v1/maron-normal.png"
+        },
+        "tunnel__switch": {
+          "image": "images/f07162a67d38e61867288e1814bc8a9d688f6c425a2177baf39aa3d97cb2b301.png",
+          "source": "CatAppearance-v1/maron-normal.png"
+        },
+        "tunnel__direct": {
+          "image": "images/6db47458e3d872096ad4de4ddc15518eb5ab4ef36fc895367de3a6ae1561901b.png",
+          "source": "MaronBasePoses-v1/maron-tunnel-base.png"
+        },
+        "tunnel__adapt": {
+          "image": "images/6db47458e3d872096ad4de4ddc15518eb5ab4ef36fc895367de3a6ae1561901b.png",
+          "source": "MaronBasePoses-v1/maron-tunnel-base.png"
+        },
+        "brush": {
+          "image": "images/f07162a67d38e61867288e1814bc8a9d688f6c425a2177baf39aa3d97cb2b301.png",
+          "source": "CatAppearance-v1/maron-normal.png"
+        },
+        "brush__switch": {
+          "image": "images/f07162a67d38e61867288e1814bc8a9d688f6c425a2177baf39aa3d97cb2b301.png",
+          "source": "CatAppearance-v1/maron-normal.png"
+        },
+        "brush__direct": {
+          "image": "images/69baed3701dace0e8694f1737b9cd96130d58754287ea46c046b6043b676332d.png",
+          "source": "MaronBasePoses-v1/maron-brush-base.png"
+        },
+        "brush__adapt": {
+          "image": "images/69baed3701dace0e8694f1737b9cd96130d58754287ea46c046b6043b676332d.png",
+          "source": "MaronBasePoses-v1/maron-brush-base.png"
+        },
+        "voice": {
+          "image": "images/f07162a67d38e61867288e1814bc8a9d688f6c425a2177baf39aa3d97cb2b301.png",
+          "source": "CatAppearance-v1/maron-normal.png"
+        },
+        "voice__switch": {
+          "image": "images/f07162a67d38e61867288e1814bc8a9d688f6c425a2177baf39aa3d97cb2b301.png",
+          "source": "CatAppearance-v1/maron-normal.png"
+        },
+        "voice__direct": {
+          "image": "images/4e9c00487b4ba99bfeffc9049082a02749d97b3444034d8136db03990692956d.png",
+          "source": "MaronBasePoses-v1/maron-voice-base.png"
+        },
+        "voice__adapt": {
+          "image": "images/4e9c00487b4ba99bfeffc9049082a02749d97b3444034d8136db03990692956d.png",
+          "source": "MaronBasePoses-v1/maron-voice-base.png"
+        },
+        "presence": {
+          "image": "images/f07162a67d38e61867288e1814bc8a9d688f6c425a2177baf39aa3d97cb2b301.png",
+          "source": "CatAppearance-v1/maron-normal.png"
+        },
+        "presence__switch": {
+          "image": "images/f07162a67d38e61867288e1814bc8a9d688f6c425a2177baf39aa3d97cb2b301.png",
+          "source": "CatAppearance-v1/maron-normal.png"
+        },
+        "presence__direct": {
+          "image": "images/5ee6770d244e03403f14ede365721c08847b7313a60d9377259088ab5e8cfa3e.png",
+          "source": "MaronBasePoses-v1/maron-presence-base.png"
+        },
+        "presence__adapt": {
+          "image": "images/5ee6770d244e03403f14ede365721c08847b7313a60d9377259088ab5e8cfa3e.png",
+          "source": "MaronBasePoses-v1/maron-presence-base.png"
+        }
+      }
+    },
+    "visiting-cat-1": {
+      "content_cat_id": "visiting-cat-1",
+      "scenes": {
+        "pet": {
+          "image": "images/7689d60b37e3b2aecb55995659da1b8576a542bf515afb10c574fbea332eb486.png",
+          "source": "CatAppearance-v1/coco-normal.png"
+        },
+        "pet__switch": {
+          "image": "images/7689d60b37e3b2aecb55995659da1b8576a542bf515afb10c574fbea332eb486.png",
+          "source": "CatAppearance-v1/coco-normal.png"
+        },
+        "pet__direct": {
+          "image": "images/a4bdf26930f015ad2bf0d58864c9092ec7ac7336ccf1df6304ffc0cfb3aeb6cf.png",
+          "source": "CocoBasePoses-v1/coco-pet-base.png"
+        },
+        "pet__adapt": {
+          "image": "images/a4bdf26930f015ad2bf0d58864c9092ec7ac7336ccf1df6304ffc0cfb3aeb6cf.png",
+          "source": "CocoBasePoses-v1/coco-pet-base.png"
+        },
+        "teaser": {
+          "image": "images/f79a091ca0742b7608936dc05a768806c9923d6ab1d8b3a2f4625116bc53e40d.png",
+          "source": "CocoBasePoses-v1/coco-teaser-base.png"
+        },
+        "teaser__switch": {
+          "image": "images/f79a091ca0742b7608936dc05a768806c9923d6ab1d8b3a2f4625116bc53e40d.png",
+          "source": "CocoBasePoses-v1/coco-teaser-base.png"
+        },
+        "teaser__direct": {
+          "image": "images/873e8d212f1244ae9abfb2158aa1994d036153e47dced00b2b6cbf0d9f609fc2.png",
+          "source": "CocoActionExecution-v1/coco-teaser-execute.png"
+        },
+        "teaser__adapt": {
+          "image": "images/873e8d212f1244ae9abfb2158aa1994d036153e47dced00b2b6cbf0d9f609fc2.png",
+          "source": "CocoActionExecution-v1/coco-teaser-execute.png"
+        },
+        "ball": {
+          "image": "images/ba66b746b1791c422a86588069582bfd146eaa53d5cde24ca276f049e1da975f.png",
+          "source": "CocoBasePoses-v1/coco-ball-base.png"
+        },
+        "ball__switch": {
+          "image": "images/ba66b746b1791c422a86588069582bfd146eaa53d5cde24ca276f049e1da975f.png",
+          "source": "CocoBasePoses-v1/coco-ball-base.png"
+        },
+        "ball__direct": {
+          "image": "images/7e7f78a31af5f177fcbf4c70f133561da0d0a581598ddbd7c19e3f776475f809.png",
+          "source": "CocoActionExecution-v1/coco-ball-execute.png"
+        },
+        "ball__adapt": {
+          "image": "images/7e7f78a31af5f177fcbf4c70f133561da0d0a581598ddbd7c19e3f776475f809.png",
+          "source": "CocoActionExecution-v1/coco-ball-execute.png"
+        },
+        "plush": {
+          "image": "images/d8e638207c5174dea57aa209efc918352bde1bee252b4af4fd439fc0c3921109.png",
+          "source": "CocoBasePoses-v1/coco-plush-base.png"
+        },
+        "plush__switch": {
+          "image": "images/d8e638207c5174dea57aa209efc918352bde1bee252b4af4fd439fc0c3921109.png",
+          "source": "CocoBasePoses-v1/coco-plush-base.png"
+        },
+        "plush__direct": {
+          "image": "images/07fd648aef2b5e35663028a665bad3d7db4608ccc5714e20d7afcc46c59bcca0.png",
+          "source": "CocoActionExecution-v1/coco-plush-execute.png"
+        },
+        "plush__adapt": {
+          "image": "images/07fd648aef2b5e35663028a665bad3d7db4608ccc5714e20d7afcc46c59bcca0.png",
+          "source": "CocoActionExecution-v1/coco-plush-execute.png"
+        },
+        "tunnel": {
+          "image": "images/7689d60b37e3b2aecb55995659da1b8576a542bf515afb10c574fbea332eb486.png",
+          "source": "CatAppearance-v1/coco-normal.png"
+        },
+        "tunnel__switch": {
+          "image": "images/7689d60b37e3b2aecb55995659da1b8576a542bf515afb10c574fbea332eb486.png",
+          "source": "CatAppearance-v1/coco-normal.png"
+        },
+        "tunnel__direct": {
+          "image": "images/fbffe0752a069bde439e67e9448d3077e5516b90d848cc04467539bfe5726625.png",
+          "source": "CocoBasePoses-v1/coco-tunnel-base.png"
+        },
+        "tunnel__adapt": {
+          "image": "images/fbffe0752a069bde439e67e9448d3077e5516b90d848cc04467539bfe5726625.png",
+          "source": "CocoBasePoses-v1/coco-tunnel-base.png"
+        },
+        "brush": {
+          "image": "images/7689d60b37e3b2aecb55995659da1b8576a542bf515afb10c574fbea332eb486.png",
+          "source": "CatAppearance-v1/coco-normal.png"
+        },
+        "brush__switch": {
+          "image": "images/7689d60b37e3b2aecb55995659da1b8576a542bf515afb10c574fbea332eb486.png",
+          "source": "CatAppearance-v1/coco-normal.png"
+        },
+        "brush__direct": {
+          "image": "images/2b0726c29073a545783e2d68251ba930103c0bd9153cc445dd18046fb9500964.png",
+          "source": "CocoBasePoses-v1/coco-brush-base.png"
+        },
+        "brush__adapt": {
+          "image": "images/2b0726c29073a545783e2d68251ba930103c0bd9153cc445dd18046fb9500964.png",
+          "source": "CocoBasePoses-v1/coco-brush-base.png"
+        },
+        "voice": {
+          "image": "images/7689d60b37e3b2aecb55995659da1b8576a542bf515afb10c574fbea332eb486.png",
+          "source": "CatAppearance-v1/coco-normal.png"
+        },
+        "voice__switch": {
+          "image": "images/7689d60b37e3b2aecb55995659da1b8576a542bf515afb10c574fbea332eb486.png",
+          "source": "CatAppearance-v1/coco-normal.png"
+        },
+        "voice__direct": {
+          "image": "images/90301714cac907212791d545c20fcead83a003733027ec7e5399ea7affc985fd.png",
+          "source": "CocoBasePoses-v1/coco-voice-base.png"
+        },
+        "voice__adapt": {
+          "image": "images/90301714cac907212791d545c20fcead83a003733027ec7e5399ea7affc985fd.png",
+          "source": "CocoBasePoses-v1/coco-voice-base.png"
+        },
+        "presence": {
+          "image": "images/7689d60b37e3b2aecb55995659da1b8576a542bf515afb10c574fbea332eb486.png",
+          "source": "CatAppearance-v1/coco-normal.png"
+        },
+        "presence__switch": {
+          "image": "images/7689d60b37e3b2aecb55995659da1b8576a542bf515afb10c574fbea332eb486.png",
+          "source": "CatAppearance-v1/coco-normal.png"
+        },
+        "presence__direct": {
+          "image": "images/589e1c0f9bae8a55ee8fc970baa3cad5289a6ce61190bca39d3aa33b6b3eb7c1.png",
+          "source": "CocoBasePoses-v1/coco-presence-base.png"
+        },
+        "presence__adapt": {
+          "image": "images/589e1c0f9bae8a55ee8fc970baa3cad5289a6ce61190bca39d3aa33b6b3eb7c1.png",
+          "source": "CocoBasePoses-v1/coco-presence-base.png"
+        }
+      }
+    }
+  },
+  "registered_keys": 224,
+  "active_pack": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\Imports\\4762dd1bd978461bb07c041c59417281",
+  "backup": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Logs\\CatExecutionImages\\20261017-071055-787319",
+  "added_files": [
+    {
+      "path": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\Imports\\4762dd1bd978461bb07c041c59417281\\images\\8721ec6977409c134999b1e7c26e0eed765bb85d52116da48a1d694cc57a7157.png",
+      "bytes": 1834793
+    },
+    {
+      "path": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8721ec6977409c134999b1e7c26e0eed765bb85d52116da48a1d694cc57a7157.png",
+      "bytes": 1834793
+    },
+    {
+      "path": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\Imports\\4762dd1bd978461bb07c041c59417281\\images\\8d0c6026880fe2e9f985aa0fa7fa330d49e4f4bb84bd3b88378f92fda679ec5a.png",
+      "bytes": 1989460
+    },
+    {
+      "path": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8d0c6026880fe2e9f985aa0fa7fa330d49e4f4bb84bd3b88378f92fda679ec5a.png",
+      "bytes": 1989460
+    },
+    {
+      "path": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\Imports\\4762dd1bd978461bb07c041c59417281\\images\\ef2b859e6260b4c7c88746b26a9fe6b5f007ab41398d225ff601d8183f329581.png",
+      "bytes": 2004337
+    },
+    {
+      "path": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\ef2b859e6260b4c7c88746b26a9fe6b5f007ab41398d225ff601d8183f329581.png",
+      "bytes": 2004337
+    },
+    {
+      "path": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\Imports\\4762dd1bd978461bb07c041c59417281\\images\\7b2e4f0f3d9911033be92b7b13b33946e0644e451b305cc701e4f109bc3bbfd5.png",
+      "bytes": 2015743
+    },
+    {
+      "path": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\7b2e4f0f3d9911033be92b7b13b33946e0644e451b305cc701e4f109bc3bbfd5.png",
+      "bytes": 2015743
+    },
+    {
+      "path": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\Imports\\4762dd1bd978461bb07c041c59417281\\images\\b37d8809b38107e4b0ec48049cbbe264cb3ab3a3eba7a3c2af4052cb81027ade.png",
+      "bytes": 2046980
+    },
+    {
+      "path": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b37d8809b38107e4b0ec48049cbbe264cb3ab3a3eba7a3c2af4052cb81027ade.png",
+      "bytes": 2046980
+    },
+    {
+      "path": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\Imports\\4762dd1bd978461bb07c041c59417281\\images\\71cdd74fcec7bcd54b6f2103598ee4fd1b523f1040c4fe30c49a195eba76f5cf.png",
+      "bytes": 1994152
+    },
+    {
+      "path": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\71cdd74fcec7bcd54b6f2103598ee4fd1b523f1040c4fe30c49a195eba76f5cf.png",
+      "bytes": 1994152
+    },
+    {
+      "path": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\Imports\\4762dd1bd978461bb07c041c59417281\\images\\31599d30efc4baa51e1cbecabf3e1642ba4a08e5140e880e8fb9d8e37cd5e171.png",
+      "bytes": 2008674
+    },
+    {
+      "path": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\31599d30efc4baa51e1cbecabf3e1642ba4a08e5140e880e8fb9d8e37cd5e171.png",
+      "bytes": 2008674
+    },
+    {
+      "path": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\Imports\\4762dd1bd978461bb07c041c59417281\\images\\3cc0a7c3cb0b8e9337ebeb2ba6de2706a7a12eba9f2207348e34b839c8bd0141.png",
+      "bytes": 1971061
+    },
+    {
+      "path": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\3cc0a7c3cb0b8e9337ebeb2ba6de2706a7a12eba9f2207348e34b839c8bd0141.png",
+      "bytes": 1971061
+    },
+    {
+      "path": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\Imports\\4762dd1bd978461bb07c041c59417281\\images\\772ac34b50d7fc0338d9c7b15e3c4070249679b23f42db32f03ad5fdcd802ce5.png",
+      "bytes": 1958942
+    },
+    {
+      "path": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\772ac34b50d7fc0338d9c7b15e3c4070249679b23f42db32f03ad5fdcd802ce5.png",
+      "bytes": 1958942
+    },
+    {
+      "path": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\Imports\\4762dd1bd978461bb07c041c59417281\\images\\cd1ebaf5657370a72183fd0d7208c0b110f561fcaba9afebb50340f6b4622e70.png",
+      "bytes": 2041853
+    },
+    {
+      "path": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\cd1ebaf5657370a72183fd0d7208c0b110f561fcaba9afebb50340f6b4622e70.png",
+      "bytes": 2041853
+    },
+    {
+      "path": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\Imports\\4762dd1bd978461bb07c041c59417281\\images\\873e8d212f1244ae9abfb2158aa1994d036153e47dced00b2b6cbf0d9f609fc2.png",
+      "bytes": 2068492
+    },
+    {
+      "path": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\873e8d212f1244ae9abfb2158aa1994d036153e47dced00b2b6cbf0d9f609fc2.png",
+      "bytes": 2068492
+    },
+    {
+      "path": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\Imports\\4762dd1bd978461bb07c041c59417281\\images\\7e7f78a31af5f177fcbf4c70f133561da0d0a581598ddbd7c19e3f776475f809.png",
+      "bytes": 2103733
+    },
+    {
+      "path": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\7e7f78a31af5f177fcbf4c70f133561da0d0a581598ddbd7c19e3f776475f809.png",
+      "bytes": 2103733
+    },
+    {
+      "path": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\Imports\\4762dd1bd978461bb07c041c59417281\\images\\07fd648aef2b5e35663028a665bad3d7db4608ccc5714e20d7afcc46c59bcca0.png",
+      "bytes": 2046709
+    },
+    {
+      "path": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\07fd648aef2b5e35663028a665bad3d7db4608ccc5714e20d7afcc46c59bcca0.png",
+      "bytes": 2046709
+    }
+  ],
+  "revision": "280af78394aa91d3daf2390df44fdbb1f9364642811f13f24da346a7d8ab315b",
+  "authored_entries_unchanged": true,
+  "unrelated_scenes_unchanged": true
+}

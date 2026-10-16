@@ -1,0 +1,372 @@
+{
+  "date": "2026-10-17",
+  "status": "制作・記録のみ／未登録",
+  "game_cat_id": "visiting-cat-1",
+  "display_cat_id": "visiting-cat-1",
+  "images": [
+    {
+      "cat": "coco",
+      "name": "ココ",
+      "game_cat_id": "visiting-cat-1",
+      "display_cat_id": "visiting-cat-1",
+      "action": "pet",
+      "label": "頭をなでる",
+      "identity": "../CatAppearance-v1/coco-normal.png",
+      "existing_action": "../CocoBasePoses-v1/coco-pet-base.png",
+      "preparation": "../CatAppearance-v1/coco-normal.png",
+      "execution": "../CocoBasePoses-v1/coco-pet-base.png",
+      "decision": "既存再利用",
+      "reason": "既存baseの手は頭の毛に接している。開眼した通常反応なので再利用。旧pet画像の閉眼・甘えた反応へ置換しない。",
+      "comparison": "既存baseの手は頭の毛に接している。開眼した通常反応なので再利用。旧pet画像の閉眼・甘えた反応へ置換しない。",
+      "notes": [
+        "準備候補は道具・手をまだ出していない中立の基準画像。専用の道具あり未接触準備画像は今回制作しない。現在のbase登録は変更しない。"
+      ],
+      "keys": {
+        "pet": "../CatAppearance-v1/coco-normal.png",
+        "pet__switch": "../CatAppearance-v1/coco-normal.png",
+        "pet__direct": "../CocoBasePoses-v1/coco-pet-base.png",
+        "pet__adapt": "../CocoBasePoses-v1/coco-pet-base.png"
+      },
+      "preparation_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 2057861,
+        "sha256": "7689d60b37e3b2aecb55995659da1b8576a542bf515afb10c574fbea332eb486"
+      },
+      "execution_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 2047961,
+        "sha256": "a4bdf26930f015ad2bf0d58864c9092ec7ac7336ccf1df6304ffc0cfb3aeb6cf"
+      }
+    },
+    {
+      "cat": "coco",
+      "name": "ココ",
+      "game_cat_id": "visiting-cat-1",
+      "display_cat_id": "visiting-cat-1",
+      "action": "teaser",
+      "label": "ねこじゃらし",
+      "identity": "../CatAppearance-v1/coco-normal.png",
+      "existing_action": "../CocoBasePoses-v1/coco-teaser-base.png",
+      "preparation": "../CocoBasePoses-v1/coco-teaser-base.png",
+      "execution": "../CocoActionExecution-v1/coco-teaser-execute.png",
+      "decision": "追加制作",
+      "reason": "既存baseとplayは前足を下ろし羽根を眺める。前足で羽根に触れる通常実行を1枚追加。",
+      "comparison": "片前足が羽根へ接触し、反対前足と後肢で支持。茶色と斑点の羽根、暗色の棒、右上の手を維持。見える手指に明瞭な余剰・分裂なし。",
+      "notes": [],
+      "keys": {
+        "teaser": "../CocoBasePoses-v1/coco-teaser-base.png",
+        "teaser__switch": "../CocoBasePoses-v1/coco-teaser-base.png",
+        "teaser__direct": "../CocoActionExecution-v1/coco-teaser-execute.png",
+        "teaser__adapt": "../CocoActionExecution-v1/coco-teaser-execute.png"
+      },
+      "preparation_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 2101875,
+        "sha256": "f79a091ca0742b7608936dc05a768806c9923d6ab1d8b3a2f4625116bc53e40d"
+      },
+      "execution_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 2068492,
+        "sha256": "873e8d212f1244ae9abfb2158aa1994d036153e47dced00b2b6cbf0d9f609fc2"
+      }
+    },
+    {
+      "cat": "coco",
+      "name": "ココ",
+      "game_cat_id": "visiting-cat-1",
+      "display_cat_id": "visiting-cat-1",
+      "action": "ball",
+      "label": "ボール",
+      "identity": "../CatAppearance-v1/coco-normal.png",
+      "existing_action": "../CocoBasePoses-v1/coco-ball-base.png",
+      "preparation": "../CocoBasePoses-v1/coco-ball-base.png",
+      "execution": "../CocoActionExecution-v1/coco-ball-execute.png",
+      "decision": "追加制作",
+      "reason": "既存は前足を下ろして球の横に座る。接触する通常実行が不足。1枚追加。",
+      "comparison": "前足が赤い球の上側に接する。反対前足で支持し、頭と視線を球へ向ける。球の質感・色、尾、床・マット配置を維持。",
+      "notes": [],
+      "keys": {
+        "ball": "../CocoBasePoses-v1/coco-ball-base.png",
+        "ball__switch": "../CocoBasePoses-v1/coco-ball-base.png",
+        "ball__direct": "../CocoActionExecution-v1/coco-ball-execute.png",
+        "ball__adapt": "../CocoActionExecution-v1/coco-ball-execute.png"
+      },
+      "preparation_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 2117666,
+        "sha256": "ba66b746b1791c422a86588069582bfd146eaa53d5cde24ca276f049e1da975f"
+      },
+      "execution_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 2103733,
+        "sha256": "7e7f78a31af5f177fcbf4c70f133561da0d0a581598ddbd7c19e3f776475f809"
+      }
+    },
+    {
+      "cat": "coco",
+      "name": "ココ",
+      "game_cat_id": "visiting-cat-1",
+      "display_cat_id": "visiting-cat-1",
+      "action": "plush",
+      "label": "ぬいぐるみ",
+      "identity": "../CatAppearance-v1/coco-normal.png",
+      "existing_action": "../CocoBasePoses-v1/coco-plush-base.png",
+      "preparation": "../CocoBasePoses-v1/coco-plush-base.png",
+      "execution": "../CocoActionExecution-v1/coco-plush-execute.png",
+      "decision": "追加制作",
+      "reason": "既存は鼠の横に座っており接触なし。前足で触れて遊ぶ通常実行を1枚追加。",
+      "comparison": "片前足が布製の鼠の背に接する。反対前足は接地、鼠の耳・鼻・編み尾を維持。頭を下げた自然な遊び。",
+      "notes": [],
+      "keys": {
+        "plush": "../CocoBasePoses-v1/coco-plush-base.png",
+        "plush__switch": "../CocoBasePoses-v1/coco-plush-base.png",
+        "plush__direct": "../CocoActionExecution-v1/coco-plush-execute.png",
+        "plush__adapt": "../CocoActionExecution-v1/coco-plush-execute.png"
+      },
+      "preparation_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 2089289,
+        "sha256": "d8e638207c5174dea57aa209efc918352bde1bee252b4af4fd439fc0c3921109"
+      },
+      "execution_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 2046709,
+        "sha256": "07fd648aef2b5e35663028a665bad3d7db4608ccc5714e20d7afcc46c59bcca0"
+      }
+    },
+    {
+      "cat": "coco",
+      "name": "ココ",
+      "game_cat_id": "visiting-cat-1",
+      "display_cat_id": "visiting-cat-1",
+      "action": "tunnel",
+      "label": "トンネル",
+      "identity": "../CatAppearance-v1/coco-normal.png",
+      "existing_action": "../CocoBasePoses-v1/coco-tunnel-base.png",
+      "preparation": "../CatAppearance-v1/coco-normal.png",
+      "execution": "../CocoBasePoses-v1/coco-tunnel-base.png",
+      "decision": "既存再利用",
+      "reason": "既存baseで胴体が筒の内側、前足が入口に出ている。トンネルへ入って遊ぶ静止場面として再利用。速度や通過方向は断定しない。",
+      "comparison": "既存baseで胴体が筒の内側、前足が入口に出ている。トンネルへ入って遊ぶ静止場面として再利用。速度や通過方向は断定しない。",
+      "notes": [
+        "準備候補は道具・手をまだ出していない中立の基準画像。専用の道具あり未接触準備画像は今回制作しない。現在のbase登録は変更しない。",
+        "後半身・後足はトンネルで遮蔽されるため全四肢の輪郭は確認できない。入口内で座る遊びを表し、走り抜ける専用画ではない。"
+      ],
+      "keys": {
+        "tunnel": "../CatAppearance-v1/coco-normal.png",
+        "tunnel__switch": "../CatAppearance-v1/coco-normal.png",
+        "tunnel__direct": "../CocoBasePoses-v1/coco-tunnel-base.png",
+        "tunnel__adapt": "../CocoBasePoses-v1/coco-tunnel-base.png"
+      },
+      "preparation_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 2057861,
+        "sha256": "7689d60b37e3b2aecb55995659da1b8576a542bf515afb10c574fbea332eb486"
+      },
+      "execution_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 2264234,
+        "sha256": "fbffe0752a069bde439e67e9448d3077e5516b90d848cc04467539bfe5726625"
+      }
+    },
+    {
+      "cat": "coco",
+      "name": "ココ",
+      "game_cat_id": "visiting-cat-1",
+      "display_cat_id": "visiting-cat-1",
+      "action": "brush",
+      "label": "ブラッシング",
+      "identity": "../CatAppearance-v1/coco-normal.png",
+      "existing_action": "../CocoBasePoses-v1/coco-brush-base.png",
+      "preparation": "../CatAppearance-v1/coco-normal.png",
+      "execution": "../CocoBasePoses-v1/coco-brush-base.png",
+      "decision": "既存再利用",
+      "reason": "既存baseでブラシ毛先と肩の毛の境界が接している。通常のブラッシングとして再利用。",
+      "comparison": "既存baseでブラシ毛先と肩の毛の境界が接している。通常のブラッシングとして再利用。",
+      "notes": [
+        "準備候補は道具・手をまだ出していない中立の基準画像。専用の道具あり未接触準備画像は今回制作しない。現在のbase登録は変更しない。"
+      ],
+      "keys": {
+        "brush": "../CatAppearance-v1/coco-normal.png",
+        "brush__switch": "../CatAppearance-v1/coco-normal.png",
+        "brush__direct": "../CocoBasePoses-v1/coco-brush-base.png",
+        "brush__adapt": "../CocoBasePoses-v1/coco-brush-base.png"
+      },
+      "preparation_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 2057861,
+        "sha256": "7689d60b37e3b2aecb55995659da1b8576a542bf515afb10c574fbea332eb486"
+      },
+      "execution_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 2194837,
+        "sha256": "2b0726c29073a545783e2d68251ba930103c0bd9153cc445dd18046fb9500964"
+      }
+    },
+    {
+      "cat": "coco",
+      "name": "ココ",
+      "game_cat_id": "visiting-cat-1",
+      "display_cat_id": "visiting-cat-1",
+      "action": "voice",
+      "label": "声かけ",
+      "identity": "../CatAppearance-v1/coco-normal.png",
+      "existing_action": "../CocoBasePoses-v1/coco-voice-base.png",
+      "preparation": "../CatAppearance-v1/coco-normal.png",
+      "execution": "../CocoBasePoses-v1/coco-voice-base.png",
+      "decision": "既存再利用",
+      "reason": "既存baseの開いた目・耳・軽い顔の向きで話者へ注意を向ける通常場面として再利用。接触は加えない。",
+      "comparison": "既存baseの開いた目・耳・軽い顔の向きで話者へ注意を向ける通常場面として再利用。接触は加えない。",
+      "notes": [
+        "準備候補は道具・手をまだ出していない中立の基準画像。専用の道具あり未接触準備画像は今回制作しない。現在のbase登録は変更しない。",
+        "基準との姿勢差は控えめ。発話は静止画で見えないため後日の行動文で補う。大きな耳・視線差を必須にする場合は別途差分を検討。"
+      ],
+      "keys": {
+        "voice": "../CatAppearance-v1/coco-normal.png",
+        "voice__switch": "../CatAppearance-v1/coco-normal.png",
+        "voice__direct": "../CocoBasePoses-v1/coco-voice-base.png",
+        "voice__adapt": "../CocoBasePoses-v1/coco-voice-base.png"
+      },
+      "preparation_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 2057861,
+        "sha256": "7689d60b37e3b2aecb55995659da1b8576a542bf515afb10c574fbea332eb486"
+      },
+      "execution_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 2097137,
+        "sha256": "90301714cac907212791d545c20fcead83a003733027ec7e5399ea7affc985fd"
+      }
+    },
+    {
+      "cat": "coco",
+      "name": "ココ",
+      "game_cat_id": "visiting-cat-1",
+      "display_cat_id": "visiting-cat-1",
+      "action": "presence",
+      "label": "見守り",
+      "identity": "../CatAppearance-v1/coco-normal.png",
+      "existing_action": "../CocoBasePoses-v1/coco-presence-base.png",
+      "preparation": "../CatAppearance-v1/coco-normal.png",
+      "execution": "../CocoBasePoses-v1/coco-presence-base.png",
+      "decision": "既存再利用",
+      "reason": "既存baseの画面端に青いズボンの膝があり、接触せず穏やかに座る。そばで見守る実行として再利用。",
+      "comparison": "既存baseの画面端に青いズボンの膝があり、接触せず穏やかに座る。そばで見守る実行として再利用。",
+      "notes": [
+        "準備候補は道具・手をまだ出していない中立の基準画像。専用の道具あり未接触準備画像は今回制作しない。現在のbase登録は変更しない。"
+      ],
+      "keys": {
+        "presence": "../CatAppearance-v1/coco-normal.png",
+        "presence__switch": "../CatAppearance-v1/coco-normal.png",
+        "presence__direct": "../CocoBasePoses-v1/coco-presence-base.png",
+        "presence__adapt": "../CocoBasePoses-v1/coco-presence-base.png"
+      },
+      "preparation_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 2057861,
+        "sha256": "7689d60b37e3b2aecb55995659da1b8576a542bf515afb10c574fbea332eb486"
+      },
+      "execution_info": {
+        "size": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "format": "PNG",
+        "opaque": true,
+        "bytes": 2132286,
+        "sha256": "589e1c0f9bae8a55ee8fc970baa3cad5289a6ce61190bca39d3aa33b6b3eb7c1"
+      }
+    }
+  ]
+}
