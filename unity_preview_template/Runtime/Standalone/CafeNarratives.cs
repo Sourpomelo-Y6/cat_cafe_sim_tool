@@ -44,8 +44,15 @@ namespace CatCafePreview.Standalone
                 speech=mode=="teaser"?"ミケ、遊ぼうか。":mode=="pet"?"ミケ、なでてもいいかな。":"ミケ、付き合ってくれるかな。";
                 string strength=action=="intense"?"強く":action=="adapt"?"ミケの様子に合わせて":action=="feint"?"緩急をつけて":"素直な動きで";
                 move=mode=="teaser"?"は"+strength+"ねこじゃらしを揺らした。":mode=="pet"?"は"+strength+"ミケをなでた。":"は「"+CafeSimulation.PlayerTypeName(mode)+"」で、"+strength+"働きかけた。";
-                cat=reaction=="turn_away"?"ミケは顔を背け、手の届かない方へ身を引いた。":reaction=="listless"?"ミケはまぶたを重そうに下げ、動こうとしなかった。":reaction=="confused"?"ミケは耳を動かし、どう応じるか迷っているようだった。":reaction=="enthusiastic"?(mode=="teaser"?"ミケは穂先を追い、勢いよく前足を伸ばした。":mode=="pet"?"ミケは目を細め、手に頬を寄せた。":"ミケは身を乗り出し、熱心に応じた。"):reaction=="favorable"?(mode=="teaser"?"ミケは穂先を見つめ、前足でそっと触れた。":mode=="pet"?"ミケは力を抜き、気持ちよさそうに目を細めた。":"ミケは穏やかに応じた。"):"ミケは様子を見ながら、静かに応じた。";
+                var actualMove=CafeNarrativeCatalog.DefaultActionText(mode,action);
+                if(actualMove!=null)move=actualMove.Replace("{human}","").Replace("{cat}","ミケ");
+                cat=reaction=="turn_away"?"ミケは顔を背け、手の届かない方へ身を引いた。":reaction=="listless"?"ミケはまぶたを重そうに下げ、動こうとしなかった。":reaction=="confused"?"ミケは耳を動かし、どう応じるか迷っているようだった。":reaction=="enthusiastic"?(mode=="teaser"?"ミケは穂先を追い、勢いよく前足を伸ばした。":(mode=="pet" || mode=="brush")?"ミケは目を細め、手に頬を寄せた。":"ミケは身を乗り出し、熱心に応じた。"):reaction=="favorable"?(mode=="teaser"?"ミケは穂先を見つめ、前足でそっと触れた。":(mode=="pet" || mode=="brush")?"ミケは力を抜き、気持ちよさそうに目を細めた。":"ミケは穏やかに応じた。"):"ミケは様子を見ながら、静かに応じた。";
                 scene=reaction=="turn_away"?"距離を置きたい気持ちが伝わってきた。":reaction=="listless"?"今は休む時間が必要そうだ。":reaction=="confused"?"働きかけと反応の間に、小さな間が空いた。":"穏やかな交流の時間が流れた。";
+            }
+            if(!connect && action!="pause" && action!="switch" && (mode=="voice" || mode=="presence"))
+            {
+                if(reaction=="enthusiastic")cat=mode=="voice"?"ミケは相手へ耳を向け、声に熱心に応じた。":"ミケは落ち着いた様子で、相手の気配を熱心にうかがった。";
+                if(reaction=="favorable")cat="ミケは穏やかな様子で、相手へ注意を向けた。";
             }
             if(opened)cat+=" ミケは心を開いた様子を見せた。";
             if(after==0)scene+=" 体力が尽き、交流を切り上げた。";
@@ -57,7 +64,7 @@ namespace CatCafePreview.Standalone
         private void ApplyCatalog(CafeNarrativeRow row,string person,string human,double before,double after,bool opened)
         {
             string mode=row.action=="pause"?"pause":row.mode;
-            if(!new[]{"teaser","pet","pause"}.Contains(mode) || !new[]{"direct","adapt","intense","feint","pause"}.Contains(row.action))return;
+            if(!CafeNarrativeCatalog.Modes.Contains(mode) || row.action=="any" || !CafeNarrativeCatalog.Actions(mode).Contains(row.action))return;
             string catName=sim.Definition(row.cat_id).name;
             row.catalog_revision=catalog.revision;
             var speech=catalog.Find("speech",person,mode,row.action,"any",row.cat_id);

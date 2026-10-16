@@ -35,7 +35,7 @@ namespace CatCafePreview.Editor
             try
             {
                 ContentPreviewSetup.Import(Environment.GetEnvironmentVariable("CATCAFE_IMPORT_PACK"));
-                var catalog=CafeNarrativeResources.Load();if(catalog.version!=2)throw new Exception("Expected v2");
+                var catalog=CafeNarrativeResources.Load();if(catalog.version<2)throw new Exception("Expected multi-subject catalog");
                 var probeRules=JsonUtility.FromJson<CafeRules>(Resources.Load<TextAsset>("CatCafeStandalone/rules").text);probeRules.store_events.probability=0;
                 var b=new LocalCafeBackend(Path.Combine(output,"saves"),probeRules);var sim=b.Simulation;
                 sim.Execute("player_begin",catId:"cat-tama");for(int i=0;i<4;i++)sim.Execute("player_step",choice:"pause");

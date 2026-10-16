@@ -72,7 +72,7 @@ def resolve_image(registry, content_id, mode, action):
             warnings.append('要求画像 ' + choices[0] + ' がないため ' + scene + ' を代替表示します。')
         return dict(requested_scene_key=choices[0], resolved_scene_key=scene, source_path=path,
                     image='images/' + hashlib.sha256(data).hexdigest() + '.png', data=data, warnings=warnings)
-    warnings.append('画像が未登録です。' if content_id else 'ミケの制作画像IDが未設定です。')
+    warnings.append('画像が未登録です。' if content_id else '対象猫の制作画像IDが未設定です。')
     return dict(requested_scene_key=choices[0], resolved_scene_key='', source_path=None,
                 image='', data=None, warnings=warnings)
 
@@ -142,6 +142,23 @@ ACTION_TEXTS = [dict(mode=mode, action=action, text=text) for mode, action, text
     ('teaser', 'adapt', '{human}は{cat}の様子に合わせてねこじゃらしを動かした。'),
     ('teaser', 'intense', '{human}はねこじゃらしを勢いよく動かした。'),
     ('teaser', 'feint', '{human}はねこじゃらしの動きに緩急をつけた。'),
+    ('ball', 'direct', '{human}はボールを床の上で転がした。'),
+    ('ball', 'adapt', '{human}は{cat}の様子に合わせてボールを転がした。'),
+    ('ball', 'intense', '{human}はボールを勢いよく転がした。'),
+    ('ball', 'feint', '{human}はボールを転がす向きや間合いを変えた。'),
+    ('plush', 'direct', '{human}はぬいぐるみを{cat}の近くで動かした。'),
+    ('plush', 'adapt', '{human}は{cat}の様子に合わせてぬいぐるみを動かした。'),
+    ('plush', 'feint', '{human}はぬいぐるみを動かす向きや間合いを変えた。'),
+    ('tunnel', 'direct', '{human}はトンネルの入口で{cat}を遊びに誘った。'),
+    ('tunnel', 'adapt', '{human}は{cat}の様子に合わせてトンネル遊びに誘った。'),
+    ('tunnel', 'intense', '{human}はトンネル越しに、勢いのある動きで{cat}を遊びに誘った。'),
+    ('tunnel', 'feint', '{human}はトンネルの入口で動きに緩急をつけた。'),
+    ('brush', 'direct', '{human}は{cat}の毛並みに沿ってブラシを動かした。'),
+    ('brush', 'adapt', '{human}は{cat}の様子に合わせて、そっとブラシを動かした。'),
+    ('voice', 'direct', '{human}は{cat}に穏やかに声をかけた。'),
+    ('voice', 'adapt', '{human}は{cat}の様子を見ながら、声の調子や間合いを合わせた。'),
+    ('presence', 'direct', '{human}は{cat}のそばで静かに様子を見守った。'),
+    ('presence', 'adapt', '{human}は{cat}の様子に合わせて距離を保ち、静かに見守った。'),
     ('pet', 'direct', '{human}は{cat}の頭をなでた。'),
     ('pet', 'adapt', '{human}は{cat}の様子に合わせ、そっとなでた。'),
     ('pause', 'pause', '{human}は手を止め、{cat}が落ち着くのを待った。')]]
@@ -170,41 +187,25 @@ def build_interaction_catalog(catalog, registry, *, store=None, bindings=None):
     if not store.published:
         raise ValueError('Unity向けには登録済み文章ストアを指定してください。')
     entries = store.read()['entries']
-    if getattr(store, 'subject_registry', None):
-        return build_registered_catalog(catalog, registry, store, entries)
-    bindings = bindings or InteractionImageBindings(registry.directory / 'interaction_image_bindings.json')
-    content_id = bindings.get(catalog)
-    result = dict(version=1, cat_bindings=[dict(cat_id=CAT_ID, content_cat_id=content_id)],
-                  people=[dict(id=id, name=name) for id, name in SUBJECTS['speech'].items()],
-                  entries=[], image_bindings=[], action_texts=copy.deepcopy(ACTION_TEXTS),
-                  narration_texts=copy.deepcopy(NARRATION_TEXTS), rest_narration=REST_NARRATION)
-    for entry in sorted(entries, key=lambda r: key(r['condition'])):
-        result['entries'].append(dict(entry['condition'], variants=[copy.deepcopy(v) for v in entry['variants'] if v['text']]))
-    blobs, warnings = {}, []
-    for mode in MODES:
-        for action in actions(mode):
-            image = resolve_image(registry, content_id, mode, action)
-            result['image_bindings'].append(dict(cat_id=CAT_ID, content_cat_id=content_id,
-                 scene_key=image['requested_scene_key'], resolved_scene_key=image['resolved_scene_key'], image=image['image']))
-            warnings.extend(image['requested_scene_key'] + '：' + w for w in image['warnings'])
-            if image['data'] is not None:
-                blobs[image['image']] = image['data']
-    report = coverage(entries)
-    report.update(entry_count=len(result['entries']), candidate_count=sum(len(r['variants']) for r in result['entries']),
-                  image_warnings=warnings)
-    # パックIDや出力場所ではなく、採用内容・画像の対応だけから版を固定する。
-    result['revision'] = hashlib.sha256(json.dumps(result, ensure_ascii=False, sort_keys=True,
-                                                  separators=(',', ':')).encode('utf-8')).hexdigest()
-    return result, report, blobs
+    from interaction_subjects import SubjectRegistry
+    subjects=store.subject_registry or SubjectRegistry(registry.directory/'interaction_subjects.json')
+    rows=subjects.read()['subjects']
+    if not store.subject_registry:
+        bindings=bindings or InteractionImageBindings(registry.directory/'interaction_image_bindings.json')
+        content_id=bindings.get(catalog)
+        rows=copy.deepcopy(rows)
+        for row in rows:
+            if row['id']==CAT_ID:row['content_id']=content_id
+    return build_registered_catalog(catalog,registry,store,entries,rows=rows)
 
 
-def build_registered_catalog(catalog, registry, store, entries):
-    subjects=store.subject_registry
-    rows=[r for r in subjects.read()['subjects'] if r['enabled'] and r['game_id']]
+def build_registered_catalog(catalog, registry, store, entries, *, rows):
+    all_rows=rows
+    rows=[r for r in all_rows if r['enabled'] and r['game_id']]
     cats=[r for r in rows if r['kind']=='cat_response']
     people=[r for r in rows if r['kind']=='speech']
     ids={r['id'] for r in rows}; cat_ids={r['id'] for r in cats}
-    result=dict(version=2,cat_bindings=[dict(cat_id=r['game_id'],content_cat_id=r['content_id'],subject_id=r['id'],name=r['name']) for r in cats],
+    result=dict(version=3,cat_bindings=[dict(cat_id=r['game_id'],content_cat_id=r['content_id'],subject_id=r['id'],name=r['name']) for r in cats],
         people=[dict(id=r['id'],name=r['name'],game_id=r['game_id'],call=r['call']) for r in people],
         entries=[],image_bindings=[],action_texts=copy.deepcopy(ACTION_TEXTS),narration_texts=copy.deepcopy(NARRATION_TEXTS),rest_narration=REST_NARRATION)
     for entry in sorted(entries,key=lambda r:key(r['condition'])):
@@ -224,8 +225,9 @@ def build_registered_catalog(catalog, registry, store, entries):
                 result['image_bindings'].append(dict(cat_id=cat['game_id'],content_cat_id=cat['content_id'],scene_key=image['requested_scene_key'],resolved_scene_key=image['resolved_scene_key'],image=image['image']))
                 warnings.extend(cat['name']+' / '+image['requested_scene_key']+'：'+w for w in image['warnings'])
                 if image['data'] is not None:blobs[image['image']]=image['data']
-    report=coverage(entries,subjects.labels())
+    labels={kind:{r['id']:r['name'] for r in rows if r['kind']==kind} for kind in SUBJECTS}
+    report=coverage(entries,labels)
     report.update(entry_count=len(result['entries']),candidate_count=sum(len(e['variants']) for e in result['entries']),image_warnings=warnings,
-        excluded_entry_count=len(entries)-len(result['entries']),excluded_subjects=[dict(id=r['id'],name=r['name'],reason='利用対象外' if not r['enabled'] else 'ゲームID未対応') for r in subjects.read()['subjects'] if not r['enabled'] or not r['game_id']])
+        excluded_entry_count=len(entries)-len(result['entries']),excluded_subjects=[dict(id=r['id'],name=r['name'],reason='利用対象外' if not r['enabled'] else 'ゲームID未対応') for r in all_rows if not r['enabled'] or not r['game_id']])
     result['revision']=hashlib.sha256(json.dumps(result,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode('utf-8')).hexdigest()
     return result,report,blobs

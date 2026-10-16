@@ -45,8 +45,10 @@ class WorkflowTests(unittest.TestCase):
         self.window=self.create()
 
     def create(self):
-        return InteractionBatchWindow(self.root,lambda e:True,settings=self.settings,output=self.output,
+        batch=InteractionBatchWindow(self.root,lambda e:True,settings=self.settings,output=self.output,
             drafts=self.drafts,published=self.published)
+        for mode,var in batch.modes.items():var.set(mode in ('teaser','pet','pause'))
+        return batch
 
     def wait(self):
         deadline=time.monotonic()+5

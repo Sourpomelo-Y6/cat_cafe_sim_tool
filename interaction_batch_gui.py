@@ -81,7 +81,7 @@ class InteractionBatchWindow:
         self.running, self.timer = False, None
         self.window = tk.Toplevel(parent)
         self.window.title('猫の反応を連続生成' if cat else '人物のセリフを連続生成')
-        self.window.geometry('1040x900' if cat else '1040x820')
+        self.window.geometry('1040x940' if cat else '1040x860')
         self.window.minsize(980, 860 if cat else 780)
         self.window.bind('<Destroy>', self.destroyed)
         frame = ttk.Frame(self.window, padding=12)
@@ -107,10 +107,11 @@ class InteractionBatchWindow:
             widget=ttk.Checkbutton(checks,text=label,variable=var)
             widget.grid(row=i//3,column=i%3,sticky='w',padx=10)
             self.option_widgets.append(widget);self.subjects[name]=var
-        for col,(name,label) in enumerate(MODES.items()):
+        modes_frame=ttk.Frame(choices);modes_frame.grid(row=1,column=0,columnspan=3,sticky='ew')
+        for i,(name,label) in enumerate(MODES.items()):
             var=tk.BooleanVar(master=self.window,value=True)
-            widget=ttk.Checkbutton(choices,text=label,variable=var)
-            widget.grid(row=1,column=col,sticky='w',padx=10)
+            widget=ttk.Checkbutton(modes_frame,text=label,variable=var)
+            widget.grid(row=i//3,column=i%3,sticky='w',padx=10)
             self.option_widgets.append(widget);self.modes[name]=var
         self.scopes = {'動作共通のみ': 'common', '操作別のみ': 'specific', '共通＋操作別': 'all'}
         self.scope = tk.StringVar(master=self.window, value='共通＋操作別' if has_text and not cat else '動作共通のみ')
@@ -134,7 +135,7 @@ class InteractionBatchWindow:
             ttk.Label(choices,text='猫への適用：'+scope_label).grid(row=4,column=0,columnspan=3,sticky='w',padx=10)
         self.reaction_choices = {}
         if cat:
-            reaction_frame = ttk.LabelFrame(frame, text='生成する反応（初期範囲：共通14条件・42案、入力済みは除外）', padding=6)
+            reaction_frame = ttk.LabelFrame(frame, text='生成する反応（全動作の共通50条件・150案／猫、入力済みは除外）', padding=6)
             reaction_frame.pack(fill='x', pady=(6, 0))
             for i, (name, label) in enumerate(REACTIONS.items()):
                 var = tk.BooleanVar(master=self.window, value=True)

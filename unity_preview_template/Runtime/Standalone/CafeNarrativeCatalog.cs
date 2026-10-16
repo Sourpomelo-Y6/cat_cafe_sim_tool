@@ -35,7 +35,45 @@ namespace CatCafePreview.Standalone
         public static bool Hex(string s,int count)=>s!=null && Regex.IsMatch(s,"^[a-f0-9]{"+count+"}$");
         public static bool Resource(string s)=>!string.IsNullOrEmpty(s) && Regex.IsMatch(s,"^CatCafeContent/Imports/[a-f0-9]{32}/images/[a-f0-9]{64}$");
         private static bool Text(string s,int limit)=>!string.IsNullOrWhiteSpace(s) && s==s.Trim() && s.Length<=limit && !s.Any(c=>c<32 && c!='\n' && c!='\t');
-        public static string[] Actions(string mode)=>mode=="pause"?new[]{"pause"}:mode=="pet"?new[]{"any","direct","adapt"}:mode=="teaser"?new[]{"any","direct","adapt","intense","feint"}:new string[0];
+        public static readonly string[] Modes={"teaser","ball","plush","tunnel","pet","brush","voice","presence","pause"};
+        private static readonly string[] LegacyModes={"teaser","pet","pause"};
+        private string[] CatalogModes=>version>=3?Modes:LegacyModes;
+        public static string[] Actions(string mode)
+        {
+            if(mode=="pause")return new[]{"pause"};
+            if(!Modes.Contains(mode))return new string[0];
+            var actions=new List<string>{"any","direct","adapt"};
+            if(new[]{"teaser","ball","tunnel"}.Contains(mode))actions.Add("intense");
+            if(new[]{"teaser","ball","plush","tunnel"}.Contains(mode))actions.Add("feint");
+            return actions.ToArray();
+        }
+        public static string DefaultActionText(string mode,string action)=>DefaultActions.FirstOrDefault(r=>r.mode==mode && r.action==action)?.text;
+        private static readonly NarrativeActionText[] DefaultActions={
+            new NarrativeActionText{mode="teaser",action="direct",text="{human}はねこじゃらしを床の近くで揺らした。"},
+            new NarrativeActionText{mode="teaser",action="adapt",text="{human}は{cat}の様子に合わせてねこじゃらしを動かした。"},
+            new NarrativeActionText{mode="teaser",action="intense",text="{human}はねこじゃらしを勢いよく動かした。"},
+            new NarrativeActionText{mode="teaser",action="feint",text="{human}はねこじゃらしの動きに緩急をつけた。"},
+            new NarrativeActionText{mode="ball",action="direct",text="{human}はボールを床の上で転がした。"},
+            new NarrativeActionText{mode="ball",action="adapt",text="{human}は{cat}の様子に合わせてボールを転がした。"},
+            new NarrativeActionText{mode="ball",action="intense",text="{human}はボールを勢いよく転がした。"},
+            new NarrativeActionText{mode="ball",action="feint",text="{human}はボールを転がす向きや間合いを変えた。"},
+            new NarrativeActionText{mode="plush",action="direct",text="{human}はぬいぐるみを{cat}の近くで動かした。"},
+            new NarrativeActionText{mode="plush",action="adapt",text="{human}は{cat}の様子に合わせてぬいぐるみを動かした。"},
+            new NarrativeActionText{mode="plush",action="feint",text="{human}はぬいぐるみを動かす向きや間合いを変えた。"},
+            new NarrativeActionText{mode="tunnel",action="direct",text="{human}はトンネルの入口で{cat}を遊びに誘った。"},
+            new NarrativeActionText{mode="tunnel",action="adapt",text="{human}は{cat}の様子に合わせてトンネル遊びに誘った。"},
+            new NarrativeActionText{mode="tunnel",action="intense",text="{human}はトンネル越しに、勢いのある動きで{cat}を遊びに誘った。"},
+            new NarrativeActionText{mode="tunnel",action="feint",text="{human}はトンネルの入口で動きに緩急をつけた。"},
+            new NarrativeActionText{mode="brush",action="direct",text="{human}は{cat}の毛並みに沿ってブラシを動かした。"},
+            new NarrativeActionText{mode="brush",action="adapt",text="{human}は{cat}の様子に合わせて、そっとブラシを動かした。"},
+            new NarrativeActionText{mode="voice",action="direct",text="{human}は{cat}に穏やかに声をかけた。"},
+            new NarrativeActionText{mode="voice",action="adapt",text="{human}は{cat}の様子を見ながら、声の調子や間合いを合わせた。"},
+            new NarrativeActionText{mode="presence",action="direct",text="{human}は{cat}のそばで静かに様子を見守った。"},
+            new NarrativeActionText{mode="presence",action="adapt",text="{human}は{cat}の様子に合わせて距離を保ち、静かに見守った。"},
+            new NarrativeActionText{mode="pet",action="direct",text="{human}は{cat}の頭をなでた。"},
+            new NarrativeActionText{mode="pet",action="adapt",text="{human}は{cat}の様子に合わせ、そっとなでた。"},
+            new NarrativeActionText{mode="pause",action="pause",text="{human}は手を止め、{cat}が落ち着くのを待った。"},
+        };
         public static string Scene(string mode,string action)=>action=="any" || action=="pause"?mode:mode+"__"+action;
         public static string[] ImageChoices(string scene)
         {
@@ -44,12 +82,12 @@ namespace CatCafePreview.Standalone
         }
         public void Validate()
         {
-            if((version!=1 && version!=2) || !Hex(pack_id,32) || !Hex(revision,64) || cat_bindings==null || cat_bindings.Length>500
+            if((version!=1 && version!=2 && version!=3) || !Hex(pack_id,32) || !Hex(revision,64) || cat_bindings==null || cat_bindings.Length>500
                 || people==null || people.Length>500
-                || entries==null || entries.Length>50000 || image_bindings==null || image_bindings.Length!=9*cat_bindings.Length
+                || entries==null || entries.Length>50000 || image_bindings==null || image_bindings.Length!=CatalogModes.Sum(m=>Actions(m).Length)*cat_bindings.Length
                 || action_texts==null || narration_texts==null || !Text(rest_narration,500))throw new ArgumentException("交流文カタログの見出し・版・対応が不正です。");
             var cats=new HashSet<string>();var games=new HashSet<string>();
-            foreach(var c in cat_bindings)if(c==null || !Id(c.cat_id) || !games.Add(c.cat_id) || c.content_cat_id==null || c.content_cat_id.Length>100 || !cats.Add(version==1?c.cat_id:c.subject_id) || version==2 && (!Id(c.subject_id) || !Text(c.name,100)))throw new ArgumentException("Invalid cat binding");
+            foreach(var c in cat_bindings)if(c==null || !Id(c.cat_id) || !games.Add(c.cat_id) || c.content_cat_id==null || c.content_cat_id.Length>100 || !cats.Add(version==1?c.cat_id:c.subject_id) || version>=2 && (!Id(c.subject_id) || !Text(c.name,100)))throw new ArgumentException("Invalid cat binding");
             if(version==1 && (cat_bindings.Length!=1 || cat_bindings[0].cat_id!="cat-mike" || people.Length!=2))throw new ArgumentException("Invalid legacy bindings");
             games.Clear();var persons=new HashSet<string>();
             foreach(var p in people)if(p==null || (version==1?(p.id!="player" && p.id!="guest-1"):!Id(p.id) || !Id(p.game_id) || !games.Add(p.game_id) || !Text(p.call,100) || !Template(p.call,false)) || !persons.Add(p.id) || !Text(p.name,100))throw new ArgumentException("交流文の人物が不正です。");
@@ -57,14 +95,14 @@ namespace CatCafePreview.Standalone
             foreach(var e in entries)
             {
                 if(e==null || e.kind!="speech" && e.kind!="cat_response" || (e.kind=="speech"?!persons.Contains(e.subject_id):!cats.Contains(e.subject_id))
-                    || !Actions(e.mode).Contains(e.action) || e.scene_key!=Scene(e.mode,e.action)
+                    || !CatalogModes.Contains(e.mode) || !Actions(e.mode).Contains(e.action) || e.scene_key!=Scene(e.mode,e.action)
                     || (e.kind=="speech"?e.reaction!="any":!Reactions.Contains(e.reaction) || e.mode=="pause" && e.reaction!="neutral" && e.reaction!="listless")
-                    || version==2 && !PoolValid(e,cats)
+                    || version>=2 && !PoolValid(e,cats)
                     || !keys.Add(e.Key()) || e.variants==null || e.variants.Length<1 || e.variants.Length>3)throw new ArgumentException("交流文の条件・候補が不正です。");
                 int previous=0;var texts=new HashSet<string>();
                 foreach(var v in e.variants)
                 {
-                    if(v==null || !Hex(v.id,32) || !ids.Add(v.id) || v.slot<=previous || v.slot>3 || !Text(v.text,200) || version==2 && !Template(v.text,true) || !texts.Add(v.text))throw new ArgumentException("交流文の候補ID・順番・本文が不正です。");
+                    if(v==null || !Hex(v.id,32) || !ids.Add(v.id) || v.slot<=previous || v.slot>3 || !Text(v.text,200) || version>=2 && !Template(v.text,true) || !texts.Add(v.text))throw new ArgumentException("交流文の候補ID・順番・本文が不正です。");
                     previous=v.slot;
                 }
             }
@@ -75,14 +113,14 @@ namespace CatCafePreview.Standalone
                     || !scenes.Add(i.cat_id+"/"+i.scene_key) || i.image==null || i.resolved_scene_key==null
                     || (i.image==""?i.resolved_scene_key!="":!Regex.IsMatch(i.image,"^images/[a-f0-9]{64}\\.png$") || !ImageChoices(i.scene_key).Contains(i.resolved_scene_key) || i.content_cat_id==""))throw new ArgumentException("交流文の画像対応が不正です。");
             }
-            if(action_texts.Length!=7 || narration_texts.Length!=6)throw new ArgumentException("交流文の共通文が不足しています。");
+            if(action_texts.Length!=CatalogModes.Sum(m=>Actions(m).Count(a=>a!="any")) || narration_texts.Length!=6)throw new ArgumentException("交流文の共通文が不足しています。");
             keys.Clear();
-            foreach(var a in action_texts)if(a==null || a.action=="any" || !Actions(a.mode).Contains(a.action) || !keys.Add(a.mode+"/"+a.action) || !Text(a.text,500)
+            foreach(var a in action_texts)if(a==null || a.action=="any" || !CatalogModes.Contains(a.mode) || !Actions(a.mode).Contains(a.action) || !keys.Add(a.mode+"/"+a.action) || !Text(a.text,500)
                 || a.text.Replace("{human}","").Replace("{cat}","").Any(c=>c=='{' || c=='}'))throw new ArgumentException("交流文の行動文が不正です。");
             keys.Clear();foreach(var n in narration_texts)if(n==null || !Reactions.Contains(n.reaction) || !keys.Add(n.reaction) || !Text(n.text,500))throw new ArgumentException("交流文の地の文が不正です。");
             if(ComputeRevision()!=revision)throw new ArgumentException("交流文カタログの内容とrevisionが一致しません。書き出し直してください。");
         }
-        private static bool KnownScene(string scene)=>new[]{"teaser","pet","pause"}.Any(m=>Actions(m).Any(a=>Scene(m,a)==scene));
+        private bool KnownScene(string scene)=>CatalogModes.Any(m=>Actions(m).Any(a=>Scene(m,a)==scene));
         private static bool PoolValid(NarrativeEntry e,HashSet<string> cats)
         {
             string basis=string.Join("/",e.kind,e.subject_id,e.mode,e.action,e.reaction,e.scene_key);
@@ -98,7 +136,7 @@ namespace CatCafePreview.Standalone
         public NarrativeEntry Find(string kind,string subject,string mode,string action,string reaction,string catId="cat-mike")
         {
             string cat=version==1?catId:cat_bindings.FirstOrDefault(c=>c.cat_id==catId)?.subject_id;
-            if(version==2)subject=kind=="speech"?people.FirstOrDefault(p=>p.game_id==subject)?.id:cat;
+            if(version>=2)subject=kind=="speech"?people.FirstOrDefault(p=>p.game_id==subject)?.id:cat;
             foreach(var scope in new[]{cat,"*"})foreach(var operation in new[]{action,"any"})
             {var found=entries.FirstOrDefault(e=>e.kind==kind && e.subject_id==subject && e.mode==mode && e.action==operation && e.reaction==reaction && (kind!="speech" || (version==1?"cat-mike":e.target_cat)==scope));if(found!=null)return found;}
             return null;

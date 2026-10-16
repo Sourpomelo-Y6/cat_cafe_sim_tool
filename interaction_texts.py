@@ -10,7 +10,8 @@ DEFAULT_DRAFT_PATH = Path(__file__).resolve().parent / 'user_data' / 'interactio
 KINDS = {'speech': '人物のセリフ', 'cat_response': '猫の反応'}
 SUBJECTS = {'speech': {'player': 'プレイヤー', 'guest-1': '佐藤さん'},
             'cat_response': {'cat-mike': 'ミケ'}}
-MODES = {'teaser': 'ねこじゃらし', 'pet': 'なでる', 'pause': '休憩'}
+MODES = {'teaser': 'ねこじゃらし', 'ball': 'ボール遊び', 'plush': 'ぬいぐるみ遊び', 'tunnel': 'トンネル遊び',
+         'pet': 'なでる', 'brush': 'ブラッシング', 'voice': '声をかける', 'presence': 'そばで見守る', 'pause': '休憩'}
 REACTIONS = {'neutral': '通常', 'favorable': '好意的', 'enthusiastic': '熱心',
              'turn_away': '拒否', 'confused': '戸惑い', 'listless': '低体力'}
 CONDITION_FIELDS = ('kind', 'subject_id', 'mode', 'action', 'reaction', 'scene_key')

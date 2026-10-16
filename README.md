@@ -243,3 +243,5 @@ Unity単独版に[旧Pythonセーブの変換・取り込み](../Docs/UnityStand
 猫の反応も連続生成できます。文章の種類を「猫の反応」にすると「猫の反応を連続生成…」ボタンが表示されます。初期範囲は動作共通14条件・42案で、入力済み条件を除外します。反応を選択でき、操作別を含めると全50条件に対応します。[操作と検証](Docs/CatInteractionBatchGeneration.md)を参照してください。
 
 猫・お客さんを追加して交流文を作る手順と検証結果： [対象登録・多対象の交流文制作](Docs/InteractionSubjectRegistry.md)。
+
+人物セリフと猫の反応文は全8動作＋休憩に対応しました。新しい動作の制作手順・条件数・Unityとの互換性は [全通常動作の交流文](Docs/AllNormalInteractionNarratives.md) を参照してください。

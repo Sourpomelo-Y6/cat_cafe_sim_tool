@@ -4,6 +4,8 @@
 
 スキップ・まとめ保存・汎用初期値の追加：[連続生成の操作改善](InteractionBatchWorkflow.md)。
 
+全通常動作への拡張とversion 3カタログ：[全ての通常動作の交流文制作・Unity表示](AllNormalInteractionNarratives.md)。
+
 ## 操作
 
 1. 「猫の素材制作」→「対象管理」→「猫・人物の登録と資料…」を開く。

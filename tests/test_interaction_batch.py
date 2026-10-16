@@ -10,17 +10,17 @@ from unittest.mock import patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from interaction_batch_gui import prepare_jobs, InteractionBatchWindow
 from interaction_llm import InteractionLlmSettings
-from interaction_texts import condition, key, InteractionTextStore, actions, reactions
+from interaction_texts import condition, key, InteractionTextStore, actions, reactions, MODES
 
 
 def settings_at(folder):
     settings = InteractionLlmSettings(Path(folder) / 'settings.json')
     for subject in ('player', 'guest-1'):
-        for mode in ('teaser', 'pet', 'pause'):
+        for mode in MODES:
             for action in actions(mode):
                 settings.save(condition(subject_id=subject, mode=mode, action=action),
                               'http://127.0.0.1:8080', 'test-model', subject+'の資料', mode+'の絵のメモ', '短い文')
-    for mode in ('teaser', 'pet', 'pause'):
+    for mode in MODES:
         for action in actions(mode):
             for reaction in reactions('cat_response',mode):
                 settings.save(condition('cat_response','cat-mike',mode,action,reaction),
@@ -102,6 +102,7 @@ class BatchGuiTests(unittest.TestCase):
         self.received = []
         self.window = InteractionBatchWindow(self.root, lambda entry: self.received.append(entry) or True,
                 settings=self.settings, output=Path(self.temp.name)/'records')
+        for mode,var in self.window.modes.items():var.set(mode in ('teaser','pet','pause'))
         self.root.update()
 
     def wait(self):
@@ -128,6 +129,7 @@ class BatchGuiTests(unittest.TestCase):
         self.assertIsNot(self.window,human)
         self.assertEqual(self.window.kind,'cat_response')
         self.assertEqual(self.window.scope.get(),'動作共通のみ')
+        for mode,var in self.window.modes.items():var.set(mode in ('teaser','pet','pause'))
         for r,var in self.window.reaction_choices.items():
             var.set(r in ('turn_away','listless'))
         calls=[]

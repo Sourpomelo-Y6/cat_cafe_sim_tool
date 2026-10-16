@@ -66,7 +66,7 @@ class SubjectTests(unittest.TestCase):
                 found=select_entry(store.read()['entries'],value)
                 self.assertEqual(found['condition'].get('target_cat'),None if cat=='cat-mike' else '*')
             catalog,report,_=build_interaction_catalog(registry.image_catalog({}),ImageRegistry(folder),store=store)
-            self.assertEqual(catalog['version'],2)
+            self.assertEqual(catalog['version'],3)
             self.assertEqual(len(catalog['cat_bindings']),2)
             self.assertTrue(report['excluded_entry_count'])
             self.assertNotIn('notes',json.dumps(catalog))

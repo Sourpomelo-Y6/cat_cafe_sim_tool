@@ -102,7 +102,7 @@ class ContentImageToolWindow:
         for title, description, label, command in (
             ('猫の紹介・場面の描写', '選択した猫の紹介文と、通常・遊ぶ・撫でられる・眠る場面の文章を制作します。',
              '紹介文・行動描写の編集…', self.open_text_editor),
-            ('日常交流の文章', 'プレイヤー・お客さんのセリフとミケの反応を条件別に制作します。手入力・ローカルLLM生成・画像付き確認に対応しています。対象は編集画面で選びます。',
+            ('日常交流の文章', 'プレイヤー・お客さんのセリフと猫の反応を、全ての通常動作の条件別に制作します。手入力・ローカルLLM生成・画像付き確認に対応しています。対象は編集画面で選びます。',
              '日常交流の文章を編集…', self.open_interaction_text_editor)):
             group = ttk.LabelFrame(text_page, text=title, padding=14)
             group.pack(fill='x', pady=(0, 16))

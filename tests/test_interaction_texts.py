@@ -33,7 +33,7 @@ class InteractionTextTests(unittest.TestCase):
 
     def test_invalid_conditions(self):
         for kwargs in [dict(subject_id='unknown'), dict(kind='cat_response', subject_id='player'),
-                       dict(mode='pet', action='intense'), dict(mode='ball'),
+                       dict(mode='pet', action='intense'), dict(mode='unknown'),
                        dict(mode='pause', action='pause', reaction='favorable'),
                        dict(reaction='favorable')]:
             with self.subTest(kwargs=kwargs), self.assertRaises(ValueError):

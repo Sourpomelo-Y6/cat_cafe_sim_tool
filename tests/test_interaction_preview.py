@@ -85,7 +85,7 @@ class PreviewDataTests(unittest.TestCase):
         self.save(condition('cat_response', 'cat-mike', reaction='neutral'), '猫の通常文')
         self.save(condition('cat_response', 'cat-mike', action='adapt', reaction='favorable'), '猫の好反応文')
         report = coverage(self.published.read()['entries'])
-        self.assertEqual((report['expected_count'], report['covered_count'], report['common_count']), (52, 9, 8))
+        self.assertEqual((report['expected_count'], report['covered_count'], report['common_count']), (188, 9, 8))
         self.assertTrue(any(v['subject_id'] == 'guest-1' for v in report['missing_conditions']))
         self.assertTrue(any(v['reaction'] == 'listless' for v in report['missing_conditions']))
         for value in expected_conditions():
