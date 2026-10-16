@@ -12,6 +12,17 @@ from unity_export import export_bundle
 
 
 class AppearanceToolTests(unittest.TestCase):
+    def test_coco_matches_game_profile_and_prompt(self):
+        game = Path(__file__).resolve().parents[2] / 'cat_cafe_sim/config/cafe_visiting_cat.json'
+        row = json.loads(game.read_text(encoding='utf-8'))
+        profile = catalog_profiles()[row['cat_id']]
+        self.assertEqual(profile['appearance'], row['appearance'])
+        self.assertEqual(profile['features'], ['brown_tabby', 'short_hair'])
+        with tempfile.TemporaryDirectory() as directory:
+            prompt = PromptPresets(Path(directory) / 'presets.json').assemble(row['cat_id'], 'normal')
+            self.assertIn('琥珀色', prompt)
+            self.assertIn('short_hair', prompt)
+
     def test_maron_matches_game_profile_and_prompt(self):
         game = Path(__file__).resolve().parents[2] / 'cat_cafe_sim/config/cafe_regular_introduction.json'
         row = json.loads(game.read_text(encoding='utf-8'))
