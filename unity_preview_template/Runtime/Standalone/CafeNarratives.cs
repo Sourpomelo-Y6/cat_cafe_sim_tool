@@ -7,6 +7,7 @@ namespace CatCafePreview.Standalone
     {
         public int version=1,day,turn,seat;
         public string session,cat_id,customer_id,mode,action,reaction,text;
+        public string special_reaction;
         public string speech,human_action,cat_response,narration;
         public string catalog_revision,speech_id,cat_text_id,speech_pool,cat_pool,image_resource,image_scene_key;
     }
@@ -16,6 +17,7 @@ namespace CatCafePreview.Standalone
         private readonly CafeSimulation sim;private string epoch;
         public List<CafeNarrativeRow> Rows=new List<CafeNarrativeRow>();
         public Func<string,string> CustomerName=id=>id;
+        public Func<string,string,string> SpecialImage;
         private CafeNarrativeCatalog catalog;
         public CafeNarrativeCatalog Catalog=>catalog;
         public void SetCatalog(CafeNarrativeCatalog value){value?.Validate();catalog=value;}
@@ -24,13 +26,19 @@ namespace CatCafePreview.Standalone
         public void Restore(CafeNarrativeRow[] rows){epoch=sim.State.instance_id;Rows=(rows??new CafeNarrativeRow[0]).ToList();}
         private void Observe(CafeExchange e,string mode,string action,double before,int opened)
         {
-            Sync();if(e.cat_id!="cat-mike" && !(catalog?.SupportsCat(e.cat_id)??false))return;
+            Sync();
             bool player=e.customer_id=="player";var p=player?sim.ActivePlayer:null;
             string session=player?p?.id:"service-"+sim.State.day+"-"+e.customer_id+"-"+e.cat_id+"-"+sim.State.visits.Single(v=>v.id==e.customer_id).seated_at;
             if(session==null)return;
             var row=Compose(player?"プレイヤー":CustomerName(e.customer_id),mode,action,e.previous_reaction,before,e.stamina,e.open_up_count>opened,action=="connect",sim.Definition(e.cat_id).name);
             row.cat_id=e.cat_id;
+            row.special_reaction=e.open_up_count>opened?(action=="connect"?"simultaneous":"open_up"):action=="connect"?"connect":null;
             if(catalog!=null)ApplyCatalog(row,player?"player":e.customer_id,player?"プレイヤー":CustomerName(e.customer_id),before,e.stamina,e.open_up_count>opened);
+            if(row.special_reaction=="open_up" || row.special_reaction=="simultaneous")
+            {
+                string scene=mode+"__"+row.special_reaction;
+                row.image_resource=SpecialImage?.Invoke(e.cat_id,scene);row.image_scene_key=scene;
+            }
             row.day=sim.State.day;row.session=session;row.cat_id=e.cat_id;row.customer_id=e.customer_id;row.seat=player?-1:e.seat;row.turn=player?p.actions.Count+1:sim.State.visits.Single(v=>v.id==e.customer_id).seated_ticks+1;
             Rows.Add(row);
         }
@@ -64,6 +72,12 @@ namespace CatCafePreview.Standalone
         private void ApplyCatalog(CafeNarrativeRow row,string person,string human,double before,double after,bool opened)
         {
             string mode=row.action=="pause"?"pause":row.mode;
+            if(row.action=="switch" || row.action=="connect")
+            {
+                var preparation=catalog.image_bindings.FirstOrDefault(i=>i.cat_id==row.cat_id && i.scene_key==mode);
+                if(preparation!=null && !string.IsNullOrEmpty(preparation.image))
+                {row.image_resource="CatCafeContent/Imports/"+catalog.pack_id+"/"+preparation.image.Substring(0,preparation.image.Length-4);row.image_scene_key=preparation.resolved_scene_key;}
+            }
             if(!CafeNarrativeCatalog.Modes.Contains(mode) || row.action=="any" || !CafeNarrativeCatalog.Actions(mode).Contains(row.action))return;
             string catName=sim.Definition(row.cat_id).name;
             row.catalog_revision=catalog.revision;
@@ -97,11 +111,15 @@ namespace CatCafePreview.Standalone
         {if(e==null)return null;Sync();var v=sim.State.visits.Single(r=>r.id==e.customer_id);string id="service-"+sim.State.day+"-"+e.customer_id+"-"+e.cat_id+"-"+v.seated_at;return Rows.LastOrDefault(r=>r.session==id);}
         public string Read(string session){Sync();var rows=Rows.Where(r=>r.session==session).ToArray();if(rows.Length==0)return "文章の記録はまだありません。";return "最新のやり取り（"+rows.Last().turn+"手目）\n\n"+rows.Last().text+"\n\n── 履歴（新しい順） ──\n\n"+string.Join("\n\n",rows.Reverse().Skip(1).Select(r=>r.turn+"手目\n"+r.text));}
         public string Seat(CafeExchange e){if(e==null)return "空席です。お客さんを待っています。";Sync();var v=sim.State.visits.Single(r=>r.id==e.customer_id);return Read("service-"+sim.State.day+"-"+e.customer_id+"-"+e.cat_id+"-"+v.seated_at);}
+        public static string ActionLabel(CafeNarrativeRow row)=>row==null?"行動の記録なし":
+            row.action=="pause"?"動きを止めて待つ":CafeSimulation.PlayerTypeName(row.mode)+" / "+CafeSimulation.PlayerActionName(row.action);
+        public static string ReactionLabel(CafeNarrativeRow row)=>row==null?"—":row.special_reaction=="simultaneous"?"心をつかむ・心を開く（同時）":row.special_reaction=="open_up"?"心を開いた":row.special_reaction=="connect"?"心をつかんだ":row.action=="switch"?"次の働きかけを待っている":CafeSimulation.PlayerReactionName(row.reaction);
         public static void Validate(CafeSaveEnvelope save)
         {
             var rows=save.narratives??new CafeNarrativeRow[0];if(rows.Length>100000)throw new ArgumentException("Too many narrative receipts");var keys=new HashSet<string>();
             foreach(var r in rows)
             {
+                if(r!=null && !string.IsNullOrEmpty(r.special_reaction) && !new[]{"connect","open_up","simultaneous"}.Contains(r.special_reaction))throw new ArgumentException("Invalid special reaction receipt");
                 if(r==null || r.version!=1 || r.day<1 || r.day>save.state.day || !CafeNarrativeCatalog.Id(r.cat_id) || string.IsNullOrEmpty(r.session) || r.turn<1 || string.IsNullOrEmpty(r.text) || r.text.Length>3000 || !keys.Add(r.session+"/"+r.turn))throw new ArgumentException("Invalid narrative receipt");
                 if(!string.IsNullOrEmpty(r.catalog_revision) && !CafeNarrativeCatalog.Hex(r.catalog_revision,64)
                     || !string.IsNullOrEmpty(r.image_resource) && !CafeNarrativeCatalog.Resource(r.image_resource))throw new ArgumentException("Invalid saved narrative catalog/image");

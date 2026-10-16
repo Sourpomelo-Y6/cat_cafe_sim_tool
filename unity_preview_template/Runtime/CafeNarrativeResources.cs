@@ -18,6 +18,17 @@ namespace CatCafePreview
             if(pointer.interactionResource!="CatCafeContent/Imports/"+result.pack_id+"/interaction_texts")throw new ArgumentException("交流文のパックIDが一致しません。");
             return result;
         }
+        // Resolve once when the action is observed; the receipt saves the exact pack resource.
+        public static string SceneResource(CafeNarrativeCatalog catalog,string catId,string sceneKey)
+        {
+            if(catalog==null)return null;
+            string root="CatCafeContent/Imports/"+catalog.pack_id+"/";
+            var asset=Resources.Load<TextAsset>(root+"bundle");if(asset==null)return null;
+            var bundle=JsonUtility.FromJson<ContentBundle>(asset.text);
+            var cat=Array.Find(bundle.cats,c=>c.cat_id==catalog.ContentId(catId,catId));
+            var scene=cat==null?null:Array.Find(cat.scenes,s=>s.key==sceneKey);
+            return string.IsNullOrEmpty(scene?.image)?null:root+scene.image.Substring(0,scene.image.Length-4);
+        }
         public static Texture2D Texture(string resource)=>CafeNarrativeCatalog.Resource(resource)?Resources.Load<Texture2D>(resource):null;
     }
 }

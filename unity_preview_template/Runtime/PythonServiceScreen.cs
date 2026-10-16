@@ -69,14 +69,16 @@ namespace CatCafePreview
             for(int i=0;i<cards.Count;i++)
             {
                 var card = cards[i]; card.gameObject.SetActive(i<seats.Length); if(i>=seats.Length) continue;
+                StyleSeatCard(card);
                 var seat = seats[i]; bool occupied = !string.IsNullOrEmpty(seat.customer_id);
                 var cat = Array.Find(state.cats,value=>value.cat_id == seat.cat_id);
-                card.catName.text = "席 " + (i+1) + (occupied ? "　接客中" : "　空席");
-                card.picture.texture = cat == null ? null : GetComponent<ContentPreview>().PythonCatTexture(cat);
+                card.catName.text = "席 " + (i+1) + (occupied ? cat==null?"　担当待ち":"　接客中" : "　空席");
+                card.picture.texture = !occupied || cat == null ? null : CafeNarrativeResources.Texture(seat.narrative_image) ?? GetComponent<ContentPreview>().PythonCatTexture(cat);
                 card.picture.enabled = card.picture.texture != null;
                 card.customerIcon.SetActive(occupied); card.work.gameObject.SetActive(false); card.rest.gameObject.SetActive(false);
                 card.state=cat;
-                card.stateText.text = occupied ? "お客さん："+seat.customer_name+"\n担当："+(cat == null ? "未配置" : cat.name)+ (cat==null ? "" : "\n体力 "+cat.stamina.ToString("0.#")+" / "+cat.max_stamina.ToString("0.#")+"・疲労 "+cat.fatigue.ToString("0.#")) : "お客さんを待っています";
+                card.stateText.text = occupied ? "お客さん："+seat.customer_name+"\n担当："+(cat == null ? "未配置" : cat.name)+ (cat==null ? "" : "\n体力 "+cat.stamina.ToString("0.#")+" / "+cat.max_stamina.ToString("0.#")+"・疲労 "+cat.fatigue.ToString("0.#")) : state.service_assignment?.waiting==true ? "担当待ちのお客さんがいます\n手動接客から配置してください" : "お客さんを待っています";
+                card.stateText.text += occupied ? "\n直近の行動："+(cat==null?"担当待ち":string.IsNullOrEmpty(seat.latest_action)?"行動の記録なし":seat.latest_action)+"\n猫の反応："+(cat==null?"—":seat.cat_reaction??"—") : "";
                 card.stateText.text += "\n"+(string.IsNullOrEmpty(seat.equipment_name) ? "設備なし" : seat.equipment_name);
                 if(card.details!=null)
                 {
@@ -98,6 +100,18 @@ namespace CatCafePreview
             text += "\n各席の設備\n";foreach(var seat in seats)text+=seat.seat_id+"："+(seat.equipment_description ?? "設備なし")+"\n\n";
             GetComponent<ContentPreview>().SetServiceDescription(text);
         }
+        // Seat cards have a separate, fixed reading area; roster cards retain their layout.
+        private void StyleSeatCard(PythonCatCard card)
+        {
+            var grid=seatContent.GetComponent<GridLayoutGroup>();if(grid!=null)grid.cellSize=new Vector2(230,350);
+            Place(card.stateText.rectTransform,10,146,210,164);
+            card.stateText.fontSize=15;card.stateText.resizeTextForBestFit=false;card.stateText.lineSpacing=1;
+            card.stateText.horizontalOverflow=HorizontalWrapMode.Wrap;card.stateText.verticalOverflow=VerticalWrapMode.Truncate;
+            card.stateText.supportRichText=false;
+            if(card.details!=null)Place(card.details.GetComponent<RectTransform>(),10,314,210,30);
+        }
+        private static void Place(RectTransform rect,float x,float y,float w,float h)
+        {rect.anchorMin=rect.anchorMax=rect.pivot=new Vector2(0,1);rect.anchoredPosition=new Vector2(x,-y);rect.sizeDelta=new Vector2(w,h);}
         public void RefreshControls()
         {
             var client=GetComponent<PythonStateClient>();

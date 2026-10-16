@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-17",
+  "unity": "2021.3.45f2",
+  "unity_assertions": 3318,
+  "dotnet_narrative_assertions": 67,
+  "dotnet_separate_process_assertions": 2,
+  "player": {
+    "success": true,
+    "checks": 222,
+    "errors": 0,
+    "result": "Logs/SeatActions/Player/result.json",
+    "normal_seconds_per_tick": 1,
+    "fast_seconds_per_tick": 0.25,
+    "independent_simulation_digest_matched": true
+  },
+  "build": "Logs/StandaloneBuild/Latest/CatCafeStandalone.exe",
+  "build_log": "Logs/StandaloneBuild/Runs/20261017-081140-277-d65f809481c4474baa19791405bd1be5.log",
+  "initial_bytes": {
+    "Logs/StandaloneBuild": 8252766113,
+    "UnityLibrary": 10982536096
+  },
+  "final_capacity": [
+    {
+      "Path": "Logs/StandaloneBuild",
+      "Bytes": 8254397740,
+      "Files": 171
+    },
+    {
+      "Path": "Logs/StandaloneBuild/Latest",
+      "Bytes": 8247456140,
+      "Files": 156
+    },
+    {
+      "Path": "Logs/StandaloneBuild/Runs",
+      "Bytes": 6941600,
+      "Files": 14
+    },
+    {
+      "Path": "Logs/SeatActions",
+      "Bytes": 8570365,
+      "Files": 50
+    },
+    {
+      "Path": "C:/Users/hi-wa/unity_workspase/CatCafeSim/Library",
+      "Bytes": 10982535494,
+      "Files": 31839
+    }
+  ],
+  "standalone_storage_increase_bytes": 1631627,
+  "unity_library_change_bytes": -602,
+  "build_directories": [
+    "Latest",
+    "Runs"
+  ],
+  "timed_hold": false,
+  "manual_mouse_play": false
+}

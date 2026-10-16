@@ -112,7 +112,30 @@ namespace CatCafePreview
             for(int i=0;i<200 && !Client.CurrentState.closed;i++)
             {
                 Check(string.IsNullOrEmpty(Client.CurrentState.required_action),"free day no unanswered event");revision=Client.CurrentState.revision;yield return Click(owner.GetComponent<ContentPreview>().GetSceneButton(2),"advance service");yield return Changed(revision);
-                if(Client.CurrentState.tick==11){var service=owner.GetComponent<PythonServiceScreen>();Check(service.OccupiedCount>0,"occupied seats rendered");yield return Capture("04-active-service");var card=service.GetSeatCard(0);yield return Click(card.details,"active seat details");var seatDetails=owner.GetComponent<PythonSeatNarrativePanel>();Check(seatDetails!=null && seatDetails.panel.activeSelf,"active seat opens interaction details");seatDetails.panel.SetActive(false);}
+                if(Client.CurrentState.tick==11){var service=owner.GetComponent<PythonServiceScreen>();Check(service.OccupiedCount>0,"occupied seats rendered");yield return Capture("04-active-service");var card=service.GetSeatCard(0);yield return Click(card.details,"active seat details");var seatDetails=owner.GetComponent<PythonSeatNarrativePanel>();Check(seatDetails!=null && seatDetails.panel.activeSelf,"active seat opens interaction details");seatDetails.panel.SetActive(false);
+                    // Exercise the real one-second and quarter-second scheduler with seat receipts.
+                    var seatAuto=owner.GetComponent<PythonAutoPanel>();
+                    foreach(bool fastMode in new[]{false,true})
+                    {
+                        if(Client.Fast!=fastMode)yield return Click(seatAuto.speed,"seat speed change");
+                        int startTick=Client.CurrentState.tick;
+                        yield return Click(seatAuto.toggle,"seat automatic start");
+                        yield return Wait(()=>Client.CurrentState.tick>=startTick+3,"seat timed progress");
+                        yield return Click(seatAuto.toggle,"seat automatic stop");
+                        yield return Wait(()=>Client.CanManageSaves,"seat timed progress settled");
+                        service.ShowSeats();Canvas.ForceUpdateCanvases();
+                        foreach(var seat in Client.CurrentState.seats.Where(s=>!string.IsNullOrEmpty(s.cat_id)))
+                        {
+                            int index=Array.IndexOf(Client.CurrentState.seats,seat);var visible=service.GetSeatCard(index);
+                            Check(visible.stateText.text.Contains(seat.latest_action) && visible.stateText.text.Contains(seat.cat_reaction),"timed seat uses receipt");
+                            Check(visible.picture.texture==(CafeNarrativeResources.Texture(seat.narrative_image)??owner.GetComponent<ContentPreview>().PythonCatTexture(visible.state)),"timed seat image matches receipt");
+                            Check(visible.stateText.preferredHeight<=visible.stateText.rectTransform.rect.height+1,"timed seat text fits");
+                        }
+                        yield return Capture(fastMode?"04-seat-fast":"04-seat-normal");
+                    }
+                    Check(service.OccupiedCount>=2,"timed multiple seats visible");
+                    if(Client.Fast)yield return Click(seatAuto.speed,"restore normal speed");
+                }
             }
             Check(Client.CurrentState.closed,"full day closes");while(reference.State.phase!="closed")reference.Execute("advance_business");Check(CafeLegacyImport.GameDigest(reference.State)==CafeLegacyImport.GameDigest(backend.Simulation.State),"UI full day matches independent simulation");ComparePythonDay();var closing=owner.GetComponent<PythonClosingPanel>();Check(closing.panel.activeSelf,"closing panel opened");yield return Capture("05-closing");details.Open(Client.CurrentState.cats[4].cat_id);details.DailyRecords();Check(details.details.text.Contains("日目：1") && details.details.text.Contains("体力消耗：83"),"closing cat net stamina history");Check(!details.details.text.Contains("疲労変化：記録なし") && !details.details.text.Contains("体調変化：記録なし"),"complete daily health and fatigue rendered");yield return Capture("05-cat-history");details.scroll.verticalNormalizedPosition=0;yield return Capture("05-cat-history-end");details.Close();
             var browser=owner.GetComponent<PythonSaveBrowser>();yield return Click(closing.save,"open closing save");browser.Select(1);yield return Click(browser.action,"save slot 2 review");Check(browser.confirmation.activeSelf,"save confirmation");revision=Client.CurrentState.revision;yield return Click(browser.confirm,"save slot 2");yield return Changed(revision);Check(File.Exists(Path.Combine(output,"saves/slot-2.json")),"selected slot saved");browser.Close();

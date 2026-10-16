@@ -53,3 +53,8 @@ python -X utf8 cat_cafe_sim_tool/register_cat_execution_images.py --project-path
 開始時はLogs 13,383,956,556 bytes、Latest 4,184,220,754 bytes、Runs 2,168,462 bytes、制作ツールgenerated 3,277,372,585 bytes。素材正本のGit保存約150 MiB、画像登録用約24.9 MiB、有効パックとGit管理済み標準パックへ各約24.9 MiBを追加した。既存素材・セーブ・他作業のパックは削除しない。終了時の容量・ビルド結果は [Verification.json](Results/CatExecutionImages/Verification.json) に記録する。
 
 最終Latestは8,247,442,140 bytes（約7.68 GiB）、前回から4,063,221,386 bytes（約3.78 GiB）増加。最大ファイルは画像のビルドデータ `CatCafeStandalone_Data/resources.assets.resS` の8,157,703,904 bytes。前回成功ビルドは10月15日で、以後の猫素材・履歴用パックも今回のResourcesへ含まれる。プロジェクトのResources配下には13個の既存画像パックがあり、PNGファイルの容量より大きいUnityのテクスチャ形式で格納される。今回の13枚だけによる増加ではない。過去receiptの参照を維持するため既存パックは削除しない。成功ビルドはLatestの1組、PendingとPreviousなし。制作ツールgeneratedの容量変化は0 bytes。Gitの素材オブジェクトは別途保持する。
+
+
+## 2026-10-17追補：営業中の席カード
+
+[直近の行動・猫画像・反応の席カード表示](UnitySeatActionCards.md)を実装した。席詳細と同じ確定receiptを使用し、全8行動・登録済み8匹・画像未登録猫の代替表示に対応。切り替えの準備画像と特別発動の画像参照も新しいreceiptへ保存する。過去の記録は書き換えず、ルール・バランスを維持した。検証・実画面・容量・残る課題はリンク先を参照。

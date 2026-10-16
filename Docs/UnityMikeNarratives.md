@@ -53,3 +53,8 @@ dotnet cat_cafe_sim_tool/tests/standalone/bin/Debug/net8.0/StandaloneChecks.dll 
 Unity入口は `CatCafePreview.Editor.NarrativeVerification.VerifyAndBuild`。`CATCAFE_NARRATIVE_OUTPUT` に検証先、`CATCAFE_STANDALONE_BUILD` にexeの絶対パスを設定する。最終検証先は `Logs/StandaloneNarratives/verified`、ビルドは `Logs/StandaloneBuild/Latest/CatCafeStandalone.exe` に固定し、`build_standalone.ps1 -ExecuteMethod CatCafePreview.Editor.NarrativeVerification.VerifyAndBuild` から実行する（[保存ルール](BuildStorage.md)）。配布Playerへ `-batchmode -nographics --catcafe-narrative-resume <検証先の絶対パス>` を渡すと別プロセスの保存再開を検証する。ログと保存はGit管理外、本文と代表画面2枚は本資料と共にGit管理する。
 
 今後は他の猫の専用文章、客ごとの口調、終了した接客や過去セットを一覧から選ぶ回想、全交流種別の専用文、行動描写の校正を拡張できる。今回の閲覧対象は現在の接客と既存UIが示す最新の個別交流セットであり、Extraへの登録は行わない。
+
+
+## 2026-10-17追補：営業中の席カード
+
+[直近の行動・猫画像・反応の席カード表示](UnitySeatActionCards.md)を実装した。席詳細と同じ確定receiptを使用し、全8行動・登録済み8匹・画像未登録猫の代替表示に対応。切り替えの準備画像と特別発動の画像参照も新しいreceiptへ保存する。過去の記録は書き換えず、ルール・バランスを維持した。検証・実画面・容量・残る課題はリンク先を参照。
