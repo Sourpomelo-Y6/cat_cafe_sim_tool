@@ -37,12 +37,7 @@ namespace CatCafePreview.Editor
         }
         public static void Build()
         {
-            var destination=Environment.GetEnvironmentVariable("CATCAFE_STANDALONE_BUILD");
-            if(!string.IsNullOrEmpty(destination))
-            {
-                var report=BuildPipeline.BuildPlayer(Scenes,destination,BuildTarget.StandaloneWindows64,BuildOptions.None);
-                if(report.summary.result!=UnityEditor.Build.Reporting.BuildResult.Succeeded)throw new Exception("Existing screen build failed");
-            }
+            StandaloneBuildStorage.Build(Scenes);
             Debug.Log("CAT_CAFE_STANDALONE_SCREENS_BUILD_OK");
         }
     }

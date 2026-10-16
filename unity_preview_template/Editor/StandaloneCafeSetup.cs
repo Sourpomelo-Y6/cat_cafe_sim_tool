@@ -31,12 +31,7 @@ namespace CatCafePreview
             while (sim.State.phase != "closed") sim.Execute("advance_business");
             sim.Execute("next_day"); sim.Validate(sim.State);
             CreateScene();
-            string destination = Environment.GetEnvironmentVariable("CATCAFE_STANDALONE_BUILD");
-            if (!string.IsNullOrEmpty(destination))
-            {
-                var report = BuildPipeline.BuildPlayer(new[] { ScenePath }, destination, BuildTarget.StandaloneWindows64, BuildOptions.None);
-                if (report.summary.result != UnityEditor.Build.Reporting.BuildResult.Succeeded) throw new Exception("Standalone build failed");
-            }
+            Editor.StandaloneBuildStorage.Build(new[] { ScenePath });
             File.WriteAllText("StandaloneVerification.json", "{\"unity_json_roundtrip\":true,\"day\":" + sim.State.day + ",\"funds\":" + sim.State.funds.ToString(System.Globalization.CultureInfo.InvariantCulture) + "}");
             Debug.Log("Standalone verification succeeded");
         }
