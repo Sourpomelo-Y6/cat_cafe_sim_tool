@@ -57,7 +57,7 @@ def prepare_jobs(settings, subjects, modes, *, scope='common', has_text=None, ki
 
 
 class InteractionBatchWindow:
-    def __init__(self, parent, on_result, *, settings=None, output=DEFAULT_OUTPUT, has_text=None, kind='speech', subject_registry=None, initial_subject=None, target_cat='*', get_entry=None, drafts=None, published=None, before_save=None, after_save=None):
+    def __init__(self, parent, on_result, *, settings=None, output=DEFAULT_OUTPUT, has_text=None, kind='speech', subject_registry=None, initial_subject=None, target_cat='*', get_entry=None, drafts=None, published=None, before_save=None, after_save=None, on_open_saved=None):
         import tkinter as tk
         from tkinter import ttk
         from tkinter.scrolledtext import ScrolledText
@@ -67,6 +67,7 @@ class InteractionBatchWindow:
         self.target_cat,self.get_entry=target_cat,get_entry
         self.drafts,self.published=drafts,published
         self.before_save,self.after_save=before_save,after_save
+        self.on_open_saved=on_open_saved
         self.skipped,self.errors,self.excluded=set(),{},set()
         saved = self.settings.read()
         self.output, self.on_result = output, on_result
@@ -176,6 +177,8 @@ class InteractionBatchWindow:
         self.stop_button.pack(side='left', padx=8)
         self.apply_button = ttk.Button(controls, text='選択結果の3案を編集欄へ', command=self.apply, state='disabled')
         self.apply_button.pack(side='left')
+        self.open_saved_button=ttk.Button(controls,text='選択条件を個別画面で確認',command=self.open_saved_selected,state='disabled')
+        self.open_saved_button.pack(side='left',padx=6)
         ttk.Button(controls,text='前回の続き',command=self.resume).pack(side='left',padx=6)
         ttk.Button(controls, text='閉じる', command=self.window.destroy).pack(side='right')
         navigation=ttk.Frame(frame);navigation.pack(fill='x',pady=(0,4))
@@ -329,11 +332,24 @@ class InteractionBatchWindow:
         if selected and selected[0] in self.errors:
             self.preview.configure(state='normal');self.preview.insert('end','\n失敗理由：'+self.errors[selected[0]]);self.preview.configure(state='disabled')
         self.apply_button.state(['!disabled'] if result and not self.running else ['disabled'])
-        for widget,enabled in ((self.skip_button, bool(selected)),
+        for widget,enabled in ((self.open_saved_button,bool(selected) and self.on_open_saved is not None),
+                (self.skip_button, bool(selected)),
                 (self.retry_button,bool(selected) and selected[0] in self.skipped|self.excluded),
                 (self.draft_button,bool(self.completed_entries()) and self.drafts is not None),
                 (self.review_button,bool(self.completed_entries()) and self.drafts is not None and self.published is not None)):
             widget.state(['!disabled'] if enabled and not self.running else ['disabled'])
+
+    def open_saved_selected(self):
+        selected=self.tree.selection()
+        if self.running or not selected or not self.on_open_saved:return False
+        value=next((v for v,_ in self.jobs if key(v)==selected[0]),None)
+        if value is None:return False
+        try:
+            opened=self.on_open_saved(copy.deepcopy(value))
+            self.status.set('個別画面で保存済みの文章を開きました。' if opened else '個別画面へ移動できません。保存状況と個別画面の案内を確認してください。')
+            return opened
+        except (OSError,ValueError) as exc:
+            self.status.set(f'個別画面を開けません：{exc}');return False
 
     def apply(self):
         selected = self.tree.selection()

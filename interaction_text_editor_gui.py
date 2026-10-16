@@ -31,8 +31,8 @@ class InteractionTextEditorWindow:
         self.reviewed = None
         self.window = tk.Toplevel(parent)
         self.window.title('日常交流の文章 — 編集・生成・確認登録')
-        self.window.geometry('820x720')
-        self.window.minsize(720, 650)
+        self.window.geometry('940x780')
+        self.window.minsize(720, 700)
         self.window.protocol('WM_DELETE_WINDOW', self.close)
         frame = ttk.Frame(self.window, padding=12)
         frame.pack(fill='both', expand=True)
@@ -62,11 +62,16 @@ class InteractionTextEditorWindow:
         self.batch_button.grid(row=6, column=1, sticky='ew', padx=(0, 8), pady=(2, 0))
         self.target_cat=tk.StringVar(master=self.window,value='どの猫でも使う（{cat_call}）')
         self.target_options={'どの猫でも使う（{cat_call}）':'*','従来のミケ専用':None}
-        self.target_options.update({name+'専用':id for id,name in self.subjects['cat_response'].items() if id!='cat-mike'})
+        self.target_options.update({name+'専用':id for id,name in self.subjects['cat_response'].items()})
         target=ttk.Combobox(grid,textvariable=self.target_cat,values=list(self.target_options),state='readonly')
         target.grid(row=7,column=0,columnspan=2,sticky='ew',padx=(0,8),pady=2)
         self.target_selector=target
         target.bind('<<ComboboxSelected>>',self.selection_changed)
+        self.saved_choice=tk.StringVar(master=self.window,value='保存済みの条件から開く…')
+        self.saved_conditions={}
+        self.saved_selector=ttk.Combobox(grid,textvariable=self.saved_choice,state='readonly')
+        self.saved_selector.grid(row=8,column=0,columnspan=2,sticky='ew',padx=(0,8),pady=2)
+        self.saved_selector.bind('<<ComboboxSelected>>',self.open_saved_condition)
         self.scope = tk.StringVar(master=self.window)
         ttk.Label(frame, textvariable=self.scope, wraplength=760).pack(anchor='w', pady=4)
         self.fields = []
@@ -102,14 +107,41 @@ class InteractionTextEditorWindow:
         if 'target_cat' in value:
             self.target_cat.set(next((label for label,id in self.target_options.items() if id==value['target_cat']), 'どの猫でも使う（{cat_call}）'))
         else:self.target_cat.set('従来のミケ専用' if value['kind']=='speech' else 'どの猫でも使う（{cat_call}）')
+        self.saved_choice.set(next((label for label,c in self.saved_conditions.items() if c==value),'保存済みの条件から開く…'))
         self.selectors['reaction'].configure(state='disabled' if value['kind'] == 'speech' else 'readonly')
         self.scope.set('対象ID：' + value['subject_id'] + '　／　画像の場面キー：' + value['scene_key']
                        + '　／　猫名は {cat}、呼び名は {cat_call} で差し込めます。')
 
     def refresh_subjects(self):
         if self.subject_registry:self.subjects=self.subject_registry.labels(include_disabled=True)
-        self.target_options.update({name+'専用':id for id,name in self.subjects['cat_response'].items() if id!='cat-mike'})
+        self.target_options.update({name+'専用':id for id,name in self.subjects['cat_response'].items()})
         if self._condition:self._set_selectors(self._condition)
+        self.refresh_saved_conditions()
+
+    def refresh_saved_conditions(self):
+        from interaction_texts import key
+        try:
+            drafts={key(e['condition']):e for e in self.drafts.read()['entries']}
+            published={key(e['condition']):e for e in self.published.read()['entries']}
+            choices={}
+            for identity in sorted(set(drafts)|set(published)):
+                entry=drafts.get(identity) or published[identity];c=entry['condition']
+                parts=[KINDS[c['kind']]+'：'+self.subjects[c['kind']][c['subject_id']],MODES[c['mode']],ACTION_NAMES[c['action']]]
+                if c['kind']=='cat_response':parts.append(REACTION_NAMES[c['reaction']])
+                else:parts.append('猫共通' if c.get('target_cat')=='*' else '従来のミケ専用' if 'target_cat' not in c else self.subjects['cat_response'].get(c['target_cat'],'指定猫')+'専用')
+                count=lambda e:sum(bool(v['text']) for v in e['variants']) if e else 0
+                label=' ／ '.join(parts)+f" ［下書き{count(drafts.get(identity))}・登録{count(published.get(identity))}］"
+                choices[label]=copy.deepcopy(c)
+            self.saved_conditions=choices;self.saved_selector.configure(values=list(choices))
+            self.saved_choice.set(next((label for label,c in choices.items() if c==self._condition),'保存済みの条件から開く…'))
+            return True
+        except (OSError,ValueError) as exc:
+            self.notice.set(f'保存済み条件を読み込めません：{exc}');return False
+
+    def open_saved_condition(self,event=None):
+        value=self.saved_conditions.get(self.saved_choice.get())
+        if value is not None:return self.load_condition(value)
+        return False
 
     def values(self):
         return make_entry(self._condition, [w.get('1.0', 'end-1c') for w in self.fields])
@@ -166,6 +198,7 @@ class InteractionTextEditorWindow:
         self.set_preview('')
         source = '下書き' if draft is not None else '登録済み素材' if published is not None else '空欄'
         self.notice.set(source + 'を読み込みました。人物のセリフは発話本文だけ、猫の反応は描写だけを入力してください。')
+        self.refresh_saved_conditions()
         return True
 
     def selection_changed(self, event=None):
@@ -202,6 +235,7 @@ class InteractionTextEditorWindow:
             self.drafts.save(entry, expected=self._draft_snapshot)
             self._draft_snapshot = copy.deepcopy(entry)
             self._baseline = copy.deepcopy(entry)
+            self.refresh_saved_conditions()
             self.notice.set('この条件の下書きを保存しました。登録済み素材は変更していません。')
             return True
         except (OSError, ValueError) as exc:
@@ -237,6 +271,7 @@ class InteractionTextEditorWindow:
             self.published.save(entry, expected=self._published_snapshot)
             self._published_snapshot = copy.deepcopy(entry)
             self._baseline = copy.deepcopy(entry)
+            self.refresh_saved_conditions()
             self.notice.set('この条件の制作素材を登録しました。Unityへ反映するには素材を書き出して取り込んでください。')
             return True
         except (OSError, ValueError) as exc:
@@ -330,9 +365,20 @@ class InteractionTextEditorWindow:
             from interaction_texts import key
             return not (self.dirty() and any(key(e['condition'])==key(self._condition) for e in entries))
         def after_save(entries):
-            if not self.dirty() and any(e['condition']==self._condition for e in entries):self.load_condition(self._condition)
+            self.refresh_saved_conditions()
+            if self.dirty():return
+            batch=self.batch_windows.get(kind)
+            selected=batch.tree.selection() if batch else ()
+            from interaction_texts import key
+            chosen=next((e for e in entries if selected and key(e['condition'])==selected[0]),entries[0])
+            self.load_condition(chosen['condition'])
+        def open_saved(value):
+            if not self.drafts.get(value) and not self.published.get(value):
+                self.notice.set('この条件はまだ保存されていません。先にまとめ下書き保存、または確認登録してください。');return False
+            if not self.load_condition(value):return False
+            self.window.lift();self.window.focus_force();return True
         try:
-            options = dict(drafts=self.drafts, published=self.published, before_save=before_save, after_save=after_save, get_entry=get_entry, settings=self.generation_settings, has_text=has_text, kind=kind, subject_registry=self.subject_registry, initial_subject=self._condition['subject_id'], target_cat=self._condition.get('target_cat'))
+            options = dict(on_open_saved=open_saved, drafts=self.drafts, published=self.published, before_save=before_save, after_save=after_save, get_entry=get_entry, settings=self.generation_settings, has_text=has_text, kind=kind, subject_registry=self.subject_registry, initial_subject=self._condition['subject_id'], target_cat=self._condition.get('target_cat'))
             if self.generation_output is not None:
                 options['output'] = self.generation_output
             self.batch_window = InteractionBatchWindow(self.window, result, **options)
