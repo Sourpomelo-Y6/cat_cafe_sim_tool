@@ -6,6 +6,8 @@
 
 全通常動作への拡張とversion 3カタログ：[全ての通常動作の交流文制作・Unity表示](AllNormalInteractionNarratives.md)。
 
+猫の全定義・登録状況：[全猫一覧](AllCats.md)。
+
 ## 操作
 
 1. 「猫の素材制作」→「対象管理」→「猫・人物の登録と資料…」を開く。
