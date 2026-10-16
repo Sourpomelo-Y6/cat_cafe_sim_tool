@@ -1,0 +1,15 @@
+{
+  "registered_scenes": 25,
+  "registry_cat_ids": [
+    "playtest-mike",
+    "cat-mike"
+  ],
+  "previous_unity_catalog": {
+    "bundleResource": "CatCafeContent/Imports/5a186caed1ce4b6cad0b62ff10d1f8a1/bundle"
+  },
+  "unity_catalog": {
+    "bundleResource": "CatCafeContent/Imports/5c611610be304b3887d1d5ad7176208a/bundle"
+  },
+  "registry_backup": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\backups\\manifest-before-mike-9601fc1f80cf40f8a1fc6963fdae5805.json",
+  "verified": true
+}

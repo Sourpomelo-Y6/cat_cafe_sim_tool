@@ -173,6 +173,7 @@ static partial class Program
     }
     static void Main(string[] args)
     {
+        if(args.Length>0 && args[0]=="--mike-images"){MikeImageChecks(args[1],args[2],args[3]);return;}
         if(args.Length>0 && args[0]=="--all-modes"){AllModeNarrativeChecks(args[1],args[2],args[3]);return;}
         if(args.Length>0 && args[0]=="--validate-narratives"){ValidateNarrativeCatalog(args[1]);return;}
         if(args.Length>0 && args[0]=="--subjects"){SubjectCatalogChecks(args[1],args[2],args[3]);return;}

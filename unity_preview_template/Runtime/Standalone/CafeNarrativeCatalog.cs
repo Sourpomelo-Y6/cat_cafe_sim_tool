@@ -75,6 +75,9 @@ namespace CatCafePreview.Standalone
             new NarrativeActionText{mode="pause",action="pause",text="{human}は手を止め、{cat}が落ち着くのを待った。"},
         };
         public static string Scene(string mode,string action)=>action=="any" || action=="pause"?mode:mode+"__"+action;
+        public static bool UsePreparationImage(string catId,string action,string reaction)=>
+            catId=="cat-mike" && (action=="direct" || action=="adapt")
+            && (reaction=="turn_away" || reaction=="confused" || reaction=="listless");
         public static string[] ImageChoices(string scene)
         {
             string mode=scene.Split(new[]{"__"},StringSplitOptions.None)[0];

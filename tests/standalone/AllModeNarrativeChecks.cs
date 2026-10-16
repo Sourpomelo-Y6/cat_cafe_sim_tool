@@ -1,6 +1,46 @@
 using CatCafePreview.Standalone;
 static partial class Program
 {
+    static void MikeImageChecks(string rulesPath,string pack,string output)
+    {
+        Directory.CreateDirectory(output);
+        var catalog=Decode<CafeNarrativeCatalog>(File.ReadAllText(Path.Combine(pack,"interaction_texts.json")));catalog.Validate();
+        var rules=Decode<CafeRules>(File.ReadAllText(rulesPath));rules.store_events.probability=0;
+        foreach(string mode in rules.types.Select(t=>t.id))
+        {
+            var prep=catalog.image_bindings.Single(i=>i.cat_id=="cat-mike" && i.scene_key==mode);
+            foreach(string action in new[]{"direct","adapt"})
+            {
+                var execution=catalog.image_bindings.Single(i=>i.cat_id=="cat-mike" && i.scene_key==mode+"__"+action);
+                Assert(execution.image!=prep.image,"Preparation/execution not distinct: "+mode);
+                Assert(File.Exists(Path.Combine(pack,execution.image)),"Execution PNG missing");
+                var positive=Decode<CafeRules>(Encode(rules));int modeIndex=Array.FindIndex(positive.types,t=>t.id==mode);
+                positive.cats.Single(c=>c.id=="cat-mike").type_preferences[modeIndex]=12/(positive.exchange.direct_gain*positive.types[modeIndex].gain);
+                var sim=new CafeSimulation(positive);var n=new CafeNarratives(sim);n.SetCatalog(catalog);
+                sim.Execute("player_begin",catId:"cat-mike");if(mode!="teaser")sim.Execute("player_step",choice:"switch",source:mode);
+                sim.Execute("player_step",choice:action);var row=n.Rows.Last();
+                Assert(row.image_scene_key==mode+"__"+action && row.image_resource.EndsWith(execution.image[..^4]),"Actual action did not select execution: "+mode+"/"+row.reaction);
+                string before=CafeReplayJournal.Digest(sim.State);n.Read(sim.ActivePlayer.id);
+                Assert(before==CafeReplayJournal.Digest(sim.State),"Reading consumed gameplay");
+                var store=new CafeSaveStore(Path.Combine(output,mode+action),s=>{s.narratives=n.Rows.ToArray();return ReplayEncode(s);},ReplayDecode,sim.Validate);
+                store.Save(1,sim.State);var save=store.Load(1);CafeNarratives.Validate(save);n.Restore(save.narratives);
+                Assert(n.Rows.Last().image_resource==row.image_resource,"Reload changed saved image");
+            }
+            foreach(string reaction in new[]{"turn_away","confused","listless"})
+            {
+                var r=Decode<CafeRules>(Encode(rules));var cat=r.cats.Single(c=>c.id=="cat-mike");int index=Array.FindIndex(r.types,t=>t.id==mode);
+                if(reaction=="turn_away")cat.type_preferences[index]=0;
+                if(reaction=="confused")cat.type_preferences[index]=2/(r.exchange.direct_gain*r.types[index].gain);
+                var sim=new CafeSimulation(r);if(reaction=="listless")sim.State.cats.Single(c=>c.id=="cat-mike").stamina=10;
+                var n=new CafeNarratives(sim);n.SetCatalog(catalog);sim.Execute("player_begin",catId:"cat-mike");
+                if(mode!="teaser")sim.Execute("player_step",choice:"switch",source:mode);sim.Execute("player_step",choice:"direct");
+                var row=n.Rows.Last();Assert(row.reaction==reaction,"Fixture reaction differs: "+mode+"/"+reaction+"/"+row.reaction);
+                Assert(row.image_scene_key==mode && row.image_resource.EndsWith(prep.image[..^4]),"Refusal/confusion/fatigue used execution image");
+            }
+        }
+        File.WriteAllText(Path.Combine(output,"result.txt"),assertions+" assertions passed: Mike eight-mode preparation/execution, negative reactions, saved receipts, read-only display.");
+        Console.WriteLine(assertions+" Mike image assertions passed");
+    }
     static void ValidateNarrativeCatalog(string path)
     {
         var c=Decode<CafeNarrativeCatalog>(File.ReadAllText(path));c.Validate();
@@ -28,7 +68,8 @@ static partial class Program
                 string name=sim.Definition(catId).name;
                 Assert(row.text.Contains(name) && !row.text.Contains("{cat"),"Name expansion failed");
                 Assert(row.human_action==catalog.action_texts.Single(a=>a.mode==type.id && a.action==action).text.Replace("{human}","プレイヤー").Replace("{cat}",name),"Action prose differs from actual movement");
-                var image=catalog.image_bindings.Single(i=>i.cat_id==catId && i.scene_key==CafeNarrativeCatalog.Scene(type.id,action));
+                string selectedScene=catId=="cat-mike" && (action=="direct" || action=="adapt") && new[]{"turn_away","confused","listless"}.Contains(row.reaction)?type.id:CafeNarrativeCatalog.Scene(type.id,action);
+                var image=catalog.image_bindings.Single(i=>i.cat_id==catId && i.scene_key==selectedScene);
                 Assert(row.image_resource.EndsWith(image.image[..^4]) && row.image_scene_key==image.resolved_scene_key,"Wrong cat/mode image");
                 string text=n.Read(sim.ActivePlayer.id),state=CafeReplayJournal.Digest(sim.State);
                 for(int i=0;i<3;i++)Assert(n.Read(sim.ActivePlayer.id)==text,"Reading changed new-mode text");

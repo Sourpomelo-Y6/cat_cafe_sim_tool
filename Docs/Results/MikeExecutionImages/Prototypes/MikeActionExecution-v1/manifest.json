@@ -1,0 +1,90 @@
+{
+  "date": "2026-10-16",
+  "cat_id": "cat-mike",
+  "preview_cat_id": "playtest-mike",
+  "tool": "built-in image_gen",
+  "images": [
+    {
+      "mode": "brush",
+      "file": "mike-brush-execute.png",
+      "purpose": "normal_and_gentle_execution",
+      "suggested_scene_keys": [
+        "brush__direct",
+        "brush__adapt"
+      ],
+      "references": [
+        "../MikeBasePoses-v1/mike-brush-base.png",
+        "../CatAppearance-v1/mike-normal.png"
+      ],
+      "generation_order": 1,
+      "registration_status": "registered_registry_and_unity_project",
+      "review_status": "agent_visual_review_user_selection_pending"
+    },
+    {
+      "mode": "ball",
+      "file": "mike-ball-execute.png",
+      "purpose": "normal_and_gentle_execution",
+      "suggested_scene_keys": [
+        "ball__direct",
+        "ball__adapt"
+      ],
+      "references": [
+        "../MikeBasePoses-v1/mike-ball-base.png",
+        "../CatAppearance-v1/mike-normal.png"
+      ],
+      "generation_order": 2,
+      "registration_status": "registered_registry_and_unity_project",
+      "review_status": "agent_visual_review_user_selection_pending"
+    },
+    {
+      "mode": "plush",
+      "file": "mike-plush-execute.png",
+      "purpose": "normal_and_gentle_execution",
+      "suggested_scene_keys": [
+        "plush__direct",
+        "plush__adapt"
+      ],
+      "references": [
+        "../MikeBasePoses-v1/mike-plush-base.png",
+        "../CatAppearance-v1/mike-normal.png"
+      ],
+      "generation_order": 3,
+      "registration_status": "registered_registry_and_unity_project",
+      "review_status": "agent_visual_review_user_selection_pending"
+    },
+    {
+      "mode": "tunnel",
+      "file": "mike-tunnel-execute.png",
+      "purpose": "normal_and_gentle_execution",
+      "suggested_scene_keys": [
+        "tunnel__direct",
+        "tunnel__adapt"
+      ],
+      "references": [
+        "../MikeBasePoses-v1/mike-tunnel-base.png",
+        "../CatAppearance-v1/mike-normal.png"
+      ],
+      "generation_order": 4,
+      "registration_status": "registered_registry_and_unity_project",
+      "review_status": "agent_visual_review_user_selection_pending"
+    }
+  ],
+  "reused": [
+    {
+      "label": "ねこじゃらし",
+      "preparation": "../MikeBasePoses-v1/mike-teaser-base.png",
+      "execution": "../CatAppearance-v1/mike-play.png"
+    },
+    {
+      "label": "声かけ",
+      "preparation": "../CatAppearance-v1/mike-normal.png",
+      "execution": "../MikeBasePoses-v1/mike-voice-base.png"
+    },
+    {
+      "label": "見守り",
+      "preparation": "../CatAppearance-v1/mike-normal.png",
+      "execution": "../MikeBasePoses-v1/mike-presence-base.png"
+    }
+  ],
+  "note": "Registered preparation/direct/adapt pairs on 2026-10-16. Existing saved image receipts preserved. No Player build or commit; Unity UI verification pending."
+}

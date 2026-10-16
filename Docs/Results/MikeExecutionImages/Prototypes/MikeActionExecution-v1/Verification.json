@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-16",
+  "images": [
+    {
+      "file": "mike-ball-execute.png",
+      "bytes": 1834625,
+      "width": 1254,
+      "height": 1254,
+      "pixel_format": "Format24bppRgb",
+      "sha256": "01340596DB2F2AF4312028DA481445F3DE0C8C6490DB5214B7032CA732B398AF"
+    },
+    {
+      "file": "mike-brush-execute.png",
+      "bytes": 1847828,
+      "width": 1254,
+      "height": 1254,
+      "pixel_format": "Format24bppRgb",
+      "sha256": "2097A59F6D1947E2729E14A9F4D51DC6DF9F1E5A78EA06C37FDA6ACAAC0EA986"
+    },
+    {
+      "file": "mike-plush-execute.png",
+      "bytes": 1869057,
+      "width": 1254,
+      "height": 1254,
+      "pixel_format": "Format24bppRgb",
+      "sha256": "DF7ECB3BC26CA427B0EDE96F655389D6FAF126A975ECEE415B1F869FD149C546"
+    },
+    {
+      "file": "mike-tunnel-execute.png",
+      "bytes": 1890471,
+      "width": 1254,
+      "height": 1254,
+      "pixel_format": "Format24bppRgb",
+      "sha256": "DB77F50F50B810E74720E1496CE3F77476419A1C035C23D8245E8FFAB738E9E0"
+    }
+  ],
+  "comparison_references_checked": 17,
+  "prototype_before_bytes": 471878724,
+  "build_directories": [
+    {
+      "name": "Latest",
+      "bytes": 4184220754.0
+    },
+    {
+      "name": "Runs",
+      "bytes": 2168462.0
+    }
+  ],
+  "pending_exists": false,
+  "generated_sources": "GeneratedSources.json"
+}

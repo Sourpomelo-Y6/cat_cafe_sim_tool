@@ -1,0 +1,148 @@
+{
+  "scenes": {
+    "teaser": {
+      "image": "images/4fc3fbe54602d781d55a490b0ac88e3d5153ea05140940a1efeb5f52ae253c60.png",
+      "source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\MikeBasePoses-v1\\mike-teaser-base.png"
+    },
+    "teaser__switch": {
+      "image": "images/4fc3fbe54602d781d55a490b0ac88e3d5153ea05140940a1efeb5f52ae253c60.png",
+      "source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\MikeBasePoses-v1\\mike-teaser-base.png"
+    },
+    "teaser__direct": {
+      "image": "images/2569dc55c1ed6dd954d8f601bb23bb88faac5b0a8b83e921499c9b64ace11a93.png",
+      "source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\CatAppearance-v1\\mike-play.png"
+    },
+    "teaser__adapt": {
+      "image": "images/2569dc55c1ed6dd954d8f601bb23bb88faac5b0a8b83e921499c9b64ace11a93.png",
+      "source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\CatAppearance-v1\\mike-play.png"
+    },
+    "ball": {
+      "image": "images/a561b243c8bfc45e1e33eb5c1b1aec0af02a068c00fc3c3455d69c4a3e082722.png",
+      "source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\MikeBasePoses-v1\\mike-ball-base.png"
+    },
+    "ball__switch": {
+      "image": "images/a561b243c8bfc45e1e33eb5c1b1aec0af02a068c00fc3c3455d69c4a3e082722.png",
+      "source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\MikeBasePoses-v1\\mike-ball-base.png"
+    },
+    "ball__direct": {
+      "image": "images/01340596db2f2af4312028da481445f3de0c8c6490db5214b7032ca732b398af.png",
+      "source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\MikeActionExecution-v1\\mike-ball-execute.png"
+    },
+    "ball__adapt": {
+      "image": "images/01340596db2f2af4312028da481445f3de0c8c6490db5214b7032ca732b398af.png",
+      "source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\MikeActionExecution-v1\\mike-ball-execute.png"
+    },
+    "plush": {
+      "image": "images/8b87da617648ad5fb1971a381b48b830cee1cc3324f4100c656f64b105221fb6.png",
+      "source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\MikeBasePoses-v1\\mike-plush-base.png"
+    },
+    "plush__switch": {
+      "image": "images/8b87da617648ad5fb1971a381b48b830cee1cc3324f4100c656f64b105221fb6.png",
+      "source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\MikeBasePoses-v1\\mike-plush-base.png"
+    },
+    "plush__direct": {
+      "image": "images/df7ecb3bc26ca427b0ede96f655389d6faf126a975ecee415b1f869fd149c546.png",
+      "source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\MikeActionExecution-v1\\mike-plush-execute.png"
+    },
+    "plush__adapt": {
+      "image": "images/df7ecb3bc26ca427b0ede96f655389d6faf126a975ecee415b1f869fd149c546.png",
+      "source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\MikeActionExecution-v1\\mike-plush-execute.png"
+    },
+    "tunnel": {
+      "image": "images/d04686bd80308366b751956bc976e45c5d262b1b0a760575404416a13c73328f.png",
+      "source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\MikeBasePoses-v1\\mike-tunnel-base.png"
+    },
+    "tunnel__switch": {
+      "image": "images/d04686bd80308366b751956bc976e45c5d262b1b0a760575404416a13c73328f.png",
+      "source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\MikeBasePoses-v1\\mike-tunnel-base.png"
+    },
+    "tunnel__direct": {
+      "image": "images/db77f50f50b810e74720e1496ce3f77476419a1c035c23d8245e8ffab738e9e0.png",
+      "source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\MikeActionExecution-v1\\mike-tunnel-execute.png"
+    },
+    "tunnel__adapt": {
+      "image": "images/db77f50f50b810e74720e1496ce3f77476419a1c035c23d8245e8ffab738e9e0.png",
+      "source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\MikeActionExecution-v1\\mike-tunnel-execute.png"
+    },
+    "pet": {
+      "image": "images/43a1925b8977ae102b3ede796b2ec9720c7c02cda70080ff688b93e06d200b8d.png",
+      "source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\MikeBasePoses-v1\\mike-pet-base.png"
+    },
+    "pet__switch": {
+      "image": "images/43a1925b8977ae102b3ede796b2ec9720c7c02cda70080ff688b93e06d200b8d.png",
+      "source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\MikeBasePoses-v1\\mike-pet-base.png"
+    },
+    "pet__direct": {
+      "image": "images/d819c0931dcc17264d267c3cd6456c1f24814bf4ab9b1ed0eb114167c2cc3247.png",
+      "source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\MikePetExecution-v1\\mike-pet-execute.png"
+    },
+    "pet__adapt": {
+      "image": "images/d819c0931dcc17264d267c3cd6456c1f24814bf4ab9b1ed0eb114167c2cc3247.png",
+      "source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\MikePetExecution-v1\\mike-pet-execute.png"
+    },
+    "brush": {
+      "image": "images/722b2e4944d31f0650eb3763cc62591aecc76e36cab460ac2eba8912c48101f5.png",
+      "source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\MikeBasePoses-v1\\mike-brush-base.png"
+    },
+    "brush__switch": {
+      "image": "images/722b2e4944d31f0650eb3763cc62591aecc76e36cab460ac2eba8912c48101f5.png",
+      "source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\MikeBasePoses-v1\\mike-brush-base.png"
+    },
+    "brush__direct": {
+      "image": "images/2097a59f6d1947e2729e14a9f4d51dc6df9f1e5a78ea06c37fda6acaac0ea986.png",
+      "source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\MikeActionExecution-v1\\mike-brush-execute.png"
+    },
+    "brush__adapt": {
+      "image": "images/2097a59f6d1947e2729e14a9f4d51dc6df9f1e5a78ea06c37fda6acaac0ea986.png",
+      "source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\MikeActionExecution-v1\\mike-brush-execute.png"
+    },
+    "voice": {
+      "image": "images/341239d6351314493ee21e28f46ff362eb43f945f01a866751851985f68a2719.png",
+      "source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\CatAppearance-v1\\mike-normal.png"
+    },
+    "voice__switch": {
+      "image": "images/341239d6351314493ee21e28f46ff362eb43f945f01a866751851985f68a2719.png",
+      "source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\CatAppearance-v1\\mike-normal.png"
+    },
+    "voice__direct": {
+      "image": "images/c9b1f737420c68080928189dfbe249d7c42777d1b0f4cd80d5335d02f7b4fb79.png",
+      "source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\MikeBasePoses-v1\\mike-voice-base.png"
+    },
+    "voice__adapt": {
+      "image": "images/c9b1f737420c68080928189dfbe249d7c42777d1b0f4cd80d5335d02f7b4fb79.png",
+      "source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\MikeBasePoses-v1\\mike-voice-base.png"
+    },
+    "presence": {
+      "image": "images/341239d6351314493ee21e28f46ff362eb43f945f01a866751851985f68a2719.png",
+      "source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\CatAppearance-v1\\mike-normal.png"
+    },
+    "presence__switch": {
+      "image": "images/341239d6351314493ee21e28f46ff362eb43f945f01a866751851985f68a2719.png",
+      "source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\CatAppearance-v1\\mike-normal.png"
+    },
+    "presence__direct": {
+      "image": "images/4dc4768f6268e2d6e88436fa724ae4e96d7171e0fcb08c2cc6181a42a67bea11.png",
+      "source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\MikeBasePoses-v1\\mike-presence-base.png"
+    },
+    "presence__adapt": {
+      "image": "images/4dc4768f6268e2d6e88436fa724ae4e96d7171e0fcb08c2cc6181a42a67bea11.png",
+      "source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes\\MikeBasePoses-v1\\mike-presence-base.png"
+    }
+  },
+  "active_pack": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\Imports\\4762dd1bd978461bb07c041c59417281",
+  "backup": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Logs\\MikeExecutionImages\\d4632fdb103b4f8791b68acb1a593b20",
+  "added_files": [
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\01340596db2f2af4312028da481445f3de0c8c6490db5214b7032ca732b398af.png",
+    "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\Imports\\4762dd1bd978461bb07c041c59417281\\images\\01340596db2f2af4312028da481445f3de0c8c6490db5214b7032ca732b398af.png",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\df7ecb3bc26ca427b0ede96f655389d6faf126a975ecee415b1f869fd149c546.png",
+    "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\Imports\\4762dd1bd978461bb07c041c59417281\\images\\df7ecb3bc26ca427b0ede96f655389d6faf126a975ecee415b1f869fd149c546.png",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\db77f50f50b810e74720e1496ce3f77476419a1c035c23d8245e8ffab738e9e0.png",
+    "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\Imports\\4762dd1bd978461bb07c041c59417281\\images\\db77f50f50b810e74720e1496ce3f77476419a1c035c23d8245e8ffab738e9e0.png",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d819c0931dcc17264d267c3cd6456c1f24814bf4ab9b1ed0eb114167c2cc3247.png",
+    "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\Imports\\4762dd1bd978461bb07c041c59417281\\images\\d819c0931dcc17264d267c3cd6456c1f24814bf4ab9b1ed0eb114167c2cc3247.png",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\2097a59f6d1947e2729e14a9f4d51dc6df9f1e5a78ea06c37fda6acaac0ea986.png",
+    "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\Imports\\4762dd1bd978461bb07c041c59417281\\images\\2097a59f6d1947e2729e14a9f4d51dc6df9f1e5a78ea06c37fda6acaac0ea986.png"
+  ],
+  "revision": "f7b106c78c964d2d9c6eab1d410bbb829cb26deaec250d8fceebfd629bff1652",
+  "build_run": false
+}

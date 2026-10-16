@@ -83,7 +83,8 @@ namespace CatCafePreview.Standalone
             if(move!=null)row.human_action=move.text.Replace("{human}",human).Replace("{cat}",catName);
             string scene=mode=="pause"?catalog.rest_narration:catalog.narration_texts.FirstOrDefault(r=>r.reaction==row.reaction)?.text;
             if(scene!=null)row.narration=scene+(mode=="pause" && after>before?" 体力が少し戻った。":"")+(after==0?" 体力が尽き、交流を切り上げた。":"");
-            var image=catalog.image_bindings.FirstOrDefault(i=>i.cat_id==row.cat_id && i.scene_key==CafeNarrativeCatalog.Scene(mode,row.action));
+            string imageScene=CafeNarrativeCatalog.UsePreparationImage(row.cat_id,row.action,row.reaction)?mode:CafeNarrativeCatalog.Scene(mode,row.action);
+            var image=catalog.image_bindings.FirstOrDefault(i=>i.cat_id==row.cat_id && i.scene_key==imageScene);
             // Existing special-event images keep priority when this action also opens up.
             if(image!=null && image.image!="" && !opened)
             {row.image_resource="CatCafeContent/Imports/"+catalog.pack_id+"/"+image.image.Substring(0,image.image.Length-4);row.image_scene_key=image.resolved_scene_key;}

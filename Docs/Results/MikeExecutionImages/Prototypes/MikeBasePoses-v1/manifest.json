@@ -1,0 +1,52 @@
+{
+  "cat_id": "cat-mike",
+  "preview_cat_id": "playtest-mike",
+  "purpose": "basic_mode_pose",
+  "images": [
+    {
+      "scene": "teaser",
+      "label": "ねこじゃらし",
+      "file": "mike-teaser-base.png"
+    },
+    {
+      "scene": "ball",
+      "label": "ボール遊び",
+      "file": "mike-ball-base.png"
+    },
+    {
+      "scene": "plush",
+      "label": "ぬいぐるみ遊び",
+      "file": "mike-plush-base.png"
+    },
+    {
+      "scene": "tunnel",
+      "label": "トンネル遊び",
+      "file": "mike-tunnel-base.png"
+    },
+    {
+      "scene": "brush",
+      "label": "ブラッシング",
+      "file": "mike-brush-base.png"
+    },
+    {
+      "scene": "voice",
+      "label": "声をかける",
+      "file": "mike-voice-base.png"
+    },
+    {
+      "scene": "presence",
+      "label": "そばで見守る",
+      "file": "mike-presence-base.png"
+    },
+    {
+      "scene": "pet",
+      "label": "なでる",
+      "file": "mike-pet-base.png"
+    },
+    {
+      "scene": "pause",
+      "label": "動きを止めて待つ",
+      "file": "mike-pause-base.png"
+    }
+  ]
+}

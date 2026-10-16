@@ -1,0 +1,32 @@
+{
+  "prototype_before_bytes": 470057414,
+  "files": [
+    {
+      "Name": "Generation.md",
+      "Length": 6402
+    },
+    {
+      "Name": "index.html",
+      "Length": 967
+    },
+    {
+      "Name": "mike-pet-execute.png",
+      "Length": 1810975
+    },
+    {
+      "Name": "Prompt.md",
+      "Length": 2432
+    }
+  ],
+  "build_directories": [
+    {
+      "name": "Latest",
+      "bytes": 4184220754.0
+    },
+    {
+      "name": "Runs",
+      "bytes": 2168462.0
+    }
+  ],
+  "pending_exists": false
+}
