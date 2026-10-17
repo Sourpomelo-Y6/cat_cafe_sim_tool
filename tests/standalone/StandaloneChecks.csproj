@@ -2,6 +2,7 @@
   <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework><EnableDefaultCompileItems>false</EnableDefaultCompileItems><ImplicitUsings>enable</ImplicitUsings><Nullable>disable</Nullable></PropertyGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
+    <Compile Include="ConversationChecks.cs" />
     <Compile Include="NarrativeChecks.cs" />
     <Compile Include="CatalogChecks.cs" />
     <Compile Include="SubjectCatalogChecks.cs" />

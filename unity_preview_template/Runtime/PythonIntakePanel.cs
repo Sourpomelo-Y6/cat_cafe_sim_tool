@@ -28,6 +28,7 @@ namespace CatCafePreview
         public void Housing(){Cancel();GetComponent<PythonCatAcquisitionNavigation>().OpenHousing(panel);}
         public void Apply(PythonCafeState state)
         {
+            if(CafeBackends.Standalone){var dialogue=GetComponent<IntakeConversationPanel>() ?? gameObject.AddComponent<IntakeConversationPanel>();dialogue.Apply(state,this);return;}
             var intake = state.intake_request;
             string revision=state.instance_id+"/"+state.revision;if(identity!=revision){identity=revision;selection=null;if(confirmation!=null)confirmation.SetActive(false);}
             panel.SetActive(intake != null && intake.status == "waiting");
@@ -55,6 +56,7 @@ namespace CatCafePreview
         }
         public void RefreshControls()
         {
+            if(CafeBackends.Standalone && GetComponent<IntakeConversationPanel>()!=null){GetComponent<IntakeConversationPanel>().Refresh();return;}
             var client = GetComponent<PythonStateClient>();
             accept.interactable = !selection.HasValue && client.CanRespondIntake(true);
             decline.interactable = !selection.HasValue && client.CanRespondIntake(false);
