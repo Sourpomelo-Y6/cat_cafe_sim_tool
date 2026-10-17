@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +9,10 @@ namespace CatCafePreview
     public sealed class IntakeConversationPanel : MonoBehaviour
     {
         PythonIntakePanel owner; PythonCafeState state; CafeConversationProgress progress;
-        GameObject card; Text heading,body,speaker,hint,acceptEffect,declineEffect; RawImage portrait;
+        GameObject card,dialogue,choiceGroup,historyWindow; Text heading,body,speaker,hint,acceptEffect,declineEffect,catLabel,historyBody,sceneLabel; RawImage portrait;
+        CanvasGroup catGroup; ScrollRect historyScroll; Vector2 layoutSize; bool layoutHistory;
+        static readonly Color Paper=new Color(.99f,.97f,.92f),Ink=new Color(.22f,.26f,.20f),Olive=new Color(.36f,.43f,.31f);
+        public ScrollRect HistoryScroll=>historyScroll;
         Button next,accept,decline,backlog,close; ScrollRect scroll;
         string rendered,epoch; float revealed; bool history,hidden; int lastFrame=-1;
         LocalCafeBackend Backend=>CafeBackends.Local as LocalCafeBackend;
@@ -39,21 +42,21 @@ namespace CatCafePreview
             string key=progress.branch_id+":"+progress.node+":"+history;
             if(rendered!=key)
             {
-                rendered=key;revealed=0;scroll.verticalNormalizedPosition=1;
-                speaker.text=history?"会話バックログ":choosing?"受け入れの判断":progress.node<lines.Length?(string.IsNullOrEmpty(lines[progress.node].speaker)?"地の文":lines[progress.node].speaker):"会話の終わり";
+                rendered=key;revealed=0;scroll.verticalNormalizedPosition=historyScroll.verticalNormalizedPosition=1;
+                speaker.text=choosing?"あなた":progress.node<lines.Length?(string.IsNullOrEmpty(lines[progress.node].speaker)?"地の文":lines[progress.node].speaker):"会話の終わり";
             }
-            heading.text="保護猫の受け入れ依頼 — "+q.name;
-            float height=history?384:164;scroll.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,height);scroll.viewport.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,height-12);scroll.verticalScrollbar.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,height-12);
-            string full=history?History(lines):choosing?"迎えるか、見送るかを選んでください。回答は一度だけ確定します。\n\n他の確認待ちがある場合は「閉じる」から先に対応できます。":progress.node<lines.Length?lines[progress.node].text:"営業準備へ戻りましょう。営業・自動進行は手動で再開してください。";
-            body.text=history || choosing?full:full.Substring(0,Math.Min(full.Length,(int)revealed));
+            heading.text="保護猫の受け入れ依頼";sceneLabel.text=state.day+"日目 · 営業準備";catLabel.text=q.name+"\n"+q.personality;
+            Layout();historyWindow.SetActive(history);dialogue.SetActive(!history);choiceGroup.SetActive(choosing && !history);catGroup.alpha=choosing?.20f:1f;
+            string full=choosing?"この子を、ここへ迎えましょうか。\n迎えるか、見送るかを選んでください。":progress.node<lines.Length?lines[progress.node].text:"営業準備へ戻りましょう。営業・自動進行は手動で再開してください。";
+            body.text=choosing?full:full.Substring(0,Math.Min(full.Length,(int)revealed));
+            if(history)historyBody.text=History(lines);
             next.gameObject.SetActive(!choosing && !history);next.GetComponentInChildren<Text>().text=revealed<full.Length?"全文表示":progress.node>=lines.Length?"会話を終える":"次へ";
             bool ready=Client.CanManageSaves;
             next.interactable=ready;close.interactable=ready;backlog.interactable=ready;
             accept.gameObject.SetActive(choosing && !history);decline.gameObject.SetActive(choosing && !history);
-            acceptEffect.transform.parent.parent.gameObject.SetActive(choosing && !history);declineEffect.transform.parent.parent.gameObject.SetActive(choosing && !history);
             accept.interactable=ready && Client.CanRespondIntake(true);decline.interactable=ready && Client.CanRespondIntake(false);
-            acceptEffect.text="初期費用："+q.cost+" / 資金："+state.funds+" → "+(state.funds-q.cost)+"\n飼育枠："+q.housing+"\n健康・体力全回復、休養予定で加入。\n"+(q.can_accept?"選択可能":("選べない理由："+(string.IsNullOrEmpty(q.response_reason)?q.accept_reason:q.response_reason)));
-            declineEffect.text="費用・人気の変化なし。\nこの依頼は再発生しません。\n"+(q.can_decline?"選択可能":"選べない理由："+q.response_reason);
+            acceptEffect.text=(q.can_accept?"選択可能":"選べない理由："+(string.IsNullOrEmpty(q.response_reason)?q.accept_reason:q.response_reason))+"\n初期費用："+q.cost+" / 資金："+state.funds+" → "+(state.funds-q.cost)+"\n飼育枠："+q.housing+"\n健康・体力全回復、休養予定で加入。";
+            declineEffect.text=(q.can_decline?"選択可能":"選べない理由："+q.response_reason)+"\n費用・人気の変化なし。\nこの依頼は再発生しません。";
             hint.text=!Client.CanSendCommands?"処理中です。完了をお待ちください。":progress.branch_id=="introduction"?"営業・自動進行は停止中。閉じても未回答の依頼と会話の位置を保持します。":"回答は確定済みです。閉じた結果会話はイベント一覧から再開できます。";
             portrait.texture=GetComponent<ContentPreview>().CandidateCatTexture(q.cat_id)??ContentPreview.CatPlaceholderTexture();portrait.enabled=portrait.texture!=null;
             if(portrait.texture!=null)portrait.GetComponent<AspectRatioFitter>().aspectRatio=(float)portrait.texture.width/portrait.texture.height;
@@ -81,27 +84,51 @@ namespace CatCafePreview
         void Build()
         {
             foreach(Transform child in owner.panel.transform)child.gameObject.SetActive(false);
-            card=Box(owner.panel.transform,"Intake Conversation",170,8,940,600,new Color(.98f,.97f,.93f));
-            heading=Label(card.transform,"Title",24,16,892,40,23);
-            portrait=Image(card.transform,24,66,200,192);
-            speaker=Label(card.transform,"Speaker",244,66,648,30,20);
-            body=Scroll(card.transform,"Dialogue",244,102,672,164,19,out scroll);
-            acceptEffect=Scroll(card.transform,"Accept effect",24,280,436,162,17,out var a);
-            declineEffect=Scroll(card.transform,"Decline effect",480,280,436,162,17,out var d);
-            accept=Button(card.transform,"迎える",24,450,436,()=>Answer(true));decline=Button(card.transform,"見送る",480,450,436,()=>Answer(false));
-            next=Button(card.transform,"次へ",680,450,236,Next);
-            backlog=Button(card.transform,"バックログ",24,506,164,ToggleHistory);
-            Button(card.transform,"保存",204,506,128,()=>GetComponent<PythonSaveBrowser>().OpenSave());
-            Button(card.transform,"読込",348,506,128,()=>GetComponent<PythonSaveBrowser>().OpenLoad());
-            close=Button(card.transform,"閉じる",736,506,180,Close);
-            hint=Label(card.transform,"Notice",24,556,892,40,15);
+            // The original event panel was below the business header. Stretch the same panel
+            // to the whole canvas so existing event ordering and save overlays still own it.
+            Stretch(owner.panel.GetComponent<RectTransform>());owner.panel.GetComponent<UnityEngine.UI.Image>().color=Paper;
+            card=Box(owner.panel.transform,"Intake Conversation",0,0,1280,800,Paper);Stretch(card.GetComponent<RectTransform>());
+            var room=new GameObject("Cafe Interior",typeof(RectTransform),typeof(ConversationRoomGraphic));room.transform.SetParent(card.transform,false);Stretch(room.GetComponent<RectTransform>());room.GetComponent<ConversationRoomGraphic>().raycastTarget=false;
+            heading=Label(card.transform,"Title",48,30,900,42,25);sceneLabel=Label(card.transform,"Scene",48,78,800,30,17);
+            var stage=new GameObject("Cat Stage",typeof(RectTransform),typeof(CanvasGroup));stage.transform.SetParent(card.transform,false);Stretch(stage.GetComponent<RectTransform>());catGroup=stage.GetComponent<CanvasGroup>();catGroup.blocksRaycasts=false;
+            portrait=Image(stage.transform,0,0,322,310);var frame=portrait.transform.parent.parent.GetComponent<RectTransform>();frame.anchorMin=frame.anchorMax=new Vector2(.5f,.60f);frame.pivot=new Vector2(.5f,.5f);frame.anchoredPosition=Vector2.zero;
+            var tag=Box(stage.transform,"Cat Label",0,0,344,96,new Color(Paper.r,Paper.g,Paper.b,.94f),12);var tagRect=tag.GetComponent<RectTransform>();tagRect.anchorMin=tagRect.anchorMax=new Vector2(.5f,.60f);tagRect.anchoredPosition=new Vector2(184,36);catLabel=Label(tag.transform,"Cat Name",16,12,312,80,21);catLabel.lineSpacing=1.4f;
+            dialogue=Box(card.transform,"Dialogue Window",48,0,1184,254,Paper,16);var dock=dialogue.GetComponent<RectTransform>();dock.anchorMin=new Vector2(0,0);dock.anchorMax=new Vector2(1,0);dock.pivot=new Vector2(.5f,0);dock.offsetMin=new Vector2(48,32);dock.offsetMax=new Vector2(-48,286);
+            var plate=Box(dialogue.transform,"Name Plate",24,-20,170,48,Olive,9);speaker=Label(plate.transform,"Speaker",12,8,146,32,20);speaker.color=Paper;speaker.alignment=TextAnchor.MiddleCenter;
+            body=Scroll(dialogue.transform,"Dialogue",32,46,1120,112,23,out scroll);body.lineSpacing=1.2f;var surface=scroll.gameObject.AddComponent<ConversationAdvanceSurface>();surface.conversation=this;
+            hint=Label(dialogue.transform,"Notice",32,164,1120,25,14);
+            backlog=Button(dialogue.transform,"バックログ",24,202,120,ToggleHistory);
+            Button(dialogue.transform,"保存",156,202,96,()=>GetComponent<PythonSaveBrowser>().OpenSave());
+            Button(dialogue.transform,"読込",264,202,96,()=>GetComponent<PythonSaveBrowser>().OpenLoad());
+            close=Button(dialogue.transform,"閉じる",388,202,144,Close);
+            next=Button(dialogue.transform,"次へ",948,202,200,Next);next.GetComponent<ConversationShape>().color=Olive;next.GetComponentInChildren<Text>().color=Paper;
+            choiceGroup=new GameObject("Choices",typeof(RectTransform));choiceGroup.transform.SetParent(card.transform,false);var choices=choiceGroup.GetComponent<RectTransform>();choices.anchorMin=choices.anchorMax=new Vector2(.5f,.61f);choices.pivot=new Vector2(.5f,.5f);choices.sizeDelta=new Vector2(760,354);choices.anchoredPosition=Vector2.zero;
+            var first=Box(choiceGroup.transform,"Accept choice",0,0,760,170,Paper,12);var second=Box(choiceGroup.transform,"Decline choice",0,184,760,170,Paper,12);
+            accept=Button(first.transform,"迎える",16,8,728,()=>Answer(true));decline=Button(second.transform,"見送る",16,8,728,()=>Answer(false));
+            acceptEffect=Scroll(first.transform,"Accept effect",20,52,720,110,17,out var a);declineEffect=Scroll(second.transform,"Decline effect",20,52,720,110,17,out var d);
+            historyWindow=Box(card.transform,"History Window",96,110,1088,620,Paper,16);Label(historyWindow.transform,"History Title",32,22,900,42,24).text="会話の履歴";
+            historyBody=Scroll(historyWindow.transform,"History",32,82,1024,454,21,out historyScroll);historyBody.lineSpacing=1.3f;
+            Button(historyWindow.transform,"会話へ戻る",32,558,210,ToggleHistory);historyWindow.SetActive(false);Layout();
         }
+        void Layout()
+        {
+            var size=card.GetComponent<RectTransform>().rect.size;if(size==layoutSize && layoutHistory==history)return;layoutSize=size;layoutHistory=history;
+            float width=size.x-96;var dock=dialogue.GetComponent<RectTransform>();dock.offsetMin=new Vector2(48,32);dock.offsetMax=new Vector2(-48,286);
+            SetScroll(scroll,width-64,112);hint.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,width-64);next.GetComponent<RectTransform>().anchoredPosition=new Vector2(width-224,-202);
+            var box=historyWindow.GetComponent<RectTransform>();Place(box,96,110,size.x-192,size.y-158);SetScroll(historyScroll,size.x-256,size.y-334);
+            historyWindow.transform.Find("会話へ戻る").GetComponent<RectTransform>().anchoredPosition=new Vector2(32,-(size.y-216));
+        }
+        static void SetScroll(ScrollRect s,float w,float h)
+        {
+            s.GetComponent<RectTransform>().sizeDelta=new Vector2(w,h);s.viewport.sizeDelta=new Vector2(w-32,h-12);s.content.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,w-32);var bar=s.verticalScrollbar.GetComponent<RectTransform>();bar.anchoredPosition=new Vector2(w-18,-6);bar.sizeDelta=new Vector2(12,h-12);
+        }
+        static void Stretch(RectTransform r){r.anchorMin=Vector2.zero;r.anchorMax=Vector2.one;r.pivot=new Vector2(.5f,.5f);r.offsetMin=r.offsetMax=Vector2.zero;}
         Font Font=>owner.title.font;
         static void Place(RectTransform r,float x,float y,float w,float h){r.anchorMin=r.anchorMax=r.pivot=new Vector2(0,1);r.anchoredPosition=new Vector2(x,-y);r.sizeDelta=new Vector2(w,h);}
-        static GameObject Box(Transform p,string name,float x,float y,float w,float h,Color c){var g=new GameObject(name,typeof(RectTransform),typeof(UnityEngine.UI.Image));g.transform.SetParent(p,false);Place(g.GetComponent<RectTransform>(),x,y,w,h);g.GetComponent<UnityEngine.UI.Image>().color=c;return g;}
-        Text Label(Transform p,string n,float x,float y,float w,float h,int size){var g=new GameObject(n,typeof(RectTransform),typeof(Text));g.transform.SetParent(p,false);Place(g.GetComponent<RectTransform>(),x,y,w,h);var t=g.GetComponent<Text>();t.font=Font;t.fontSize=size;t.color=new Color(.15f,.21f,.18f);t.supportRichText=false;t.raycastTarget=false;return t;}
-        Text Scroll(Transform p,string n,float x,float y,float w,float h,int size,out ScrollRect s){var g=Box(p,n,x,y,w,h,new Color(.93f,.94f,.89f));s=g.AddComponent<ScrollRect>();s.horizontal=false;s.movementType=ScrollRect.MovementType.Clamped;var v=Box(g.transform,"Viewport",8,6,w-32,h-12,Color.white);v.AddComponent<Mask>().showMaskGraphic=false;var t=Label(v.transform,"Text",0,0,w-32,h-12,size);t.gameObject.AddComponent<ContentSizeFitter>().verticalFit=ContentSizeFitter.FitMode.PreferredSize;s.viewport=v.GetComponent<RectTransform>();s.content=t.rectTransform;var bar=DefaultControls.CreateScrollbar(new DefaultControls.Resources());bar.transform.SetParent(g.transform,false);Place(bar.GetComponent<RectTransform>(),w-18,6,12,h-12);s.verticalScrollbar=bar.GetComponent<Scrollbar>();s.verticalScrollbar.direction=Scrollbar.Direction.BottomToTop;return t;}
-        RawImage Image(Transform p,float x,float y,float w,float h){var g=Box(p,"Cat",x,y,w,h,new Color(.9f,.92f,.86f));var i=new GameObject("Portrait",typeof(RectTransform),typeof(RawImage),typeof(AspectRatioFitter));i.transform.SetParent(g.transform,false);var r=i.GetComponent<RectTransform>();r.anchorMin=Vector2.zero;r.anchorMax=Vector2.one;r.offsetMin=r.offsetMax=Vector2.zero;i.GetComponent<AspectRatioFitter>().aspectMode=AspectRatioFitter.AspectMode.FitInParent;i.GetComponent<RawImage>().raycastTarget=false;return i.GetComponent<RawImage>();}
-        Button Button(Transform p,string text,float x,float y,float w,UnityEngine.Events.UnityAction action){var g=DefaultControls.CreateButton(new DefaultControls.Resources());g.transform.SetParent(p,false);g.name=text;Place(g.GetComponent<RectTransform>(),x,y,w,40);var t=g.GetComponentInChildren<Text>();t.font=Font;t.fontSize=18;t.text=text;g.GetComponent<Button>().onClick.AddListener(action);return g.GetComponent<Button>();}
+        static GameObject Box(Transform p,string name,float x,float y,float w,float h,Color c,float radius=0){var g=new GameObject(name,typeof(RectTransform),typeof(ConversationShape));g.transform.SetParent(p,false);Place(g.GetComponent<RectTransform>(),x,y,w,h);var graphic=g.GetComponent<ConversationShape>();graphic.color=c;graphic.radius=radius;return g;}
+        Text Label(Transform p,string n,float x,float y,float w,float h,int size){var g=new GameObject(n,typeof(RectTransform),typeof(Text));g.transform.SetParent(p,false);Place(g.GetComponent<RectTransform>(),x,y,w,h);var t=g.GetComponent<Text>();t.font=Font;t.fontSize=size;t.color=Ink;t.supportRichText=false;t.raycastTarget=false;return t;}
+        Text Scroll(Transform p,string n,float x,float y,float w,float h,int size,out ScrollRect s){var g=Box(p,n,x,y,w,h,Paper);s=g.AddComponent<ScrollRect>();s.horizontal=false;s.scrollSensitivity=28;s.movementType=ScrollRect.MovementType.Clamped;var v=Box(g.transform,"Viewport",8,6,w-32,h-12,Paper);v.AddComponent<Mask>().showMaskGraphic=false;var t=Label(v.transform,"Text",0,0,w-32,h-12,size);t.gameObject.AddComponent<ContentSizeFitter>().verticalFit=ContentSizeFitter.FitMode.PreferredSize;s.viewport=v.GetComponent<RectTransform>();s.content=t.rectTransform;var bar=DefaultControls.CreateScrollbar(new DefaultControls.Resources());bar.transform.SetParent(g.transform,false);Place(bar.GetComponent<RectTransform>(),w-18,6,12,h-12);s.verticalScrollbar=bar.GetComponent<Scrollbar>();s.verticalScrollbar.direction=Scrollbar.Direction.BottomToTop;s.verticalScrollbarVisibility=ScrollRect.ScrollbarVisibility.AutoHide;bar.GetComponent<UnityEngine.UI.Image>().color=new Color(.91f,.90f,.84f);s.verticalScrollbar.targetGraphic.color=new Color(.58f,.64f,.51f);return t;}
+        RawImage Image(Transform p,float x,float y,float w,float h){var g=Box(p,"Cat",x,y,w,h,Paper,24);var inside=Box(g.transform,"Portrait Mask",8,8,w-16,h-16,Paper,18);inside.AddComponent<Mask>().showMaskGraphic=false;var i=new GameObject("Portrait",typeof(RectTransform),typeof(RawImage),typeof(AspectRatioFitter));i.transform.SetParent(inside.transform,false);Stretch(i.GetComponent<RectTransform>());i.GetComponent<AspectRatioFitter>().aspectMode=AspectRatioFitter.AspectMode.FitInParent;i.GetComponent<RawImage>().raycastTarget=false;return i.GetComponent<RawImage>();}
+        Button Button(Transform p,string text,float x,float y,float w,UnityEngine.Events.UnityAction action){var g=Box(p,text,x,y,w,40,new Color(.94f,.93f,.87f),8);var button=g.AddComponent<Button>();button.targetGraphic=g.GetComponent<ConversationShape>();var t=Label(g.transform,"Caption",8,2,w-16,36,18);t.alignment=TextAnchor.MiddleCenter;t.text=text;button.onClick.AddListener(action);return button;}
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.IO;
 using System.Linq;
@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using CatCafePreview.Standalone;
 namespace CatCafePreview
 {
@@ -69,7 +70,11 @@ namespace CatCafePreview
             var ui=FindObjectOfType<IntakeConversationPanel>();Check(ui!=null && ui.Showing,"Actual scene conversation opened");
             var owner=ui.GetComponent<PythonIntakePanel>();var client=ui.GetComponent<PythonStateClient>();
             Check(!client.Automatic,"Automatic stopped");
-            typeof(IntakeConversationPanel).GetField("revealed",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic).SetValue(ui,0f);ui.Next();ui.Next();Check(backend.Conversation.node==0,"Same-frame repeated next skipped line");yield return null;
+            Canvas.ForceUpdateCanvases();var bounds=owner.panel.GetComponent<RectTransform>();var canvas=owner.panel.GetComponentInParent<Canvas>().GetComponent<RectTransform>();
+            Check(Vector2.Distance(bounds.rect.size,canvas.rect.size)<1,"Conversation covers full canvas");
+            var dock=owner.panel.transform.Find("Intake Conversation/Dialogue Window").GetComponent<RectTransform>();
+            Check(dock.rect.width>canvas.rect.width*.85f && dock.rect.height>=250,"Readable bottom dialogue window");
+            typeof(IntakeConversationPanel).GetField("revealed",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic).SetValue(ui,0f);var advance=owner.panel.GetComponentInChildren<ConversationAdvanceSurface>(true);ExecuteEvents.Execute(advance.gameObject,new PointerEventData(EventSystem.current){button=PointerEventData.InputButton.Left},ExecuteEvents.pointerClickHandler);ui.Next();Check(backend.Conversation.node==0,"Text click reveals without same-frame skip");yield return null;
             ui.Next();Check(backend.Conversation.node==1,"Next after reveal");yield return null;
             ui.Close();Check(!owner.panel.activeSelf && backend.Simulation.IntakeWaiting,"Closing answered request");ui.Open();Check(owner.panel.activeSelf && backend.Conversation.node==1,"Reopen lost position");
             // Both choices and conditions use the real state projection.
@@ -80,7 +85,7 @@ namespace CatCafePreview
             int capacity=backend.Simulation.Rules.housing.initial_capacity;backend.Simulation.Rules.housing.initial_capacity=5;ApplyView(ui);Check(!accept.interactable && decline.interactable,"Housing display eligibility");backend.Simulation.Rules.housing.initial_capacity=capacity;
             ApplyView(ui);yield return null;
             buttons.First(b=>b.name=="バックログ").onClick.Invoke();yield return null;Canvas.ForceUpdateCanvases();
-            var historyArea=owner.panel.transform.Find("Intake Conversation/Dialogue").GetComponent<ScrollRect>();Check(historyArea.content.rect.height>historyArea.viewport.rect.height,"Long backlog scroll extent");historyArea.verticalNormalizedPosition=0;yield return null;Check(historyArea.verticalNormalizedPosition<.01f,"Backlog bottom reachable");buttons.First(b=>b.name=="バックログ").onClick.Invoke();yield return null;
+            var historyArea=ui.HistoryScroll;Check(historyArea.content.rect.height>=historyArea.content.GetComponent<Text>().preferredHeight-1,"Backlog retains full text height");historyArea.verticalNormalizedPosition=0;yield return null;Check(historyArea.content.rect.height<=historyArea.viewport.rect.height+1 || historyArea.verticalNormalizedPosition<.01f,"Backlog bottom reachable");buttons.First(b=>b.name=="バックログ").onClick.Invoke();yield return null;
             ui.Answer(true);ui.Answer(true);yield return new WaitForSecondsRealtime(2);
             Check(backend.Simulation.State.intake_request.status=="accepted" && backend.Simulation.State.cats.Count==6 && backend.Simulation.State.funds==funds-backend.Simulation.Rules.intake.cost,"Actual UI duplicate answer");
             Check(ui.Showing && backend.Conversation.branch_id=="accepted","Result conversation visible");Check(!client.CanProgressBusiness && !client.CanDayOff && !client.CanStartAutomatic,"Result progress controls disabled");
