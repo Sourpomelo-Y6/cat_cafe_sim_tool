@@ -11,7 +11,7 @@ namespace CatCafePreview
         public Button open, close;
         public Button[] entries,tabs,detailClose;
         public GameObject[] detailPanels;public RectTransform content;public ScrollRect scroll;public Text title;
-        public static readonly string[] GroupNames={"回答待ち","出会い・交流","派遣・帰還","記録"};
+        public static readonly string[] GroupNames={"回答・会話待ち","出会い・交流","派遣・帰還","記録"};
         public int SelectedGroup=>group;public int PendingCount=>Enumerable.Range(0,14).Sum(PendingFor);
         private int group=1;private GameObject returnPanel;private Button returnButton;private string returnCaption;
         private readonly HashSet<Button> bound=new HashSet<Button>();
@@ -41,9 +41,11 @@ namespace CatCafePreview
         private void Track(int index,GameObject target){if(detailClose==null || index>=detailClose.Length || detailClose[index]==null)return;returnPanel=target;returnButton=detailClose[index];returnCaption=returnButton.GetComponentInChildren<Text>().text;returnButton.GetComponentInChildren<Text>().text="イベント一覧へ戻る";if(IsAddedReturn(returnButton))returnButton.gameObject.SetActive(true);}
         private void ReturnFromDetail(GameObject source){if(returnPanel==source)OpenList(false);}
         public void SelectGroup(int value){if(value<0 || value>=4)return;group=value;RefreshControls();if(scroll!=null)scroll.verticalNormalizedPosition=1;}
+        private bool ResultPending(int i)=>CafeBackends.Standalone && (i==1?(CafeBackends.Local as LocalCafeBackend)?.IntakeResultPending==true:i==7 && (CafeBackends.Local as LocalCafeBackend)?.RegularResultPending==true);
         public int PendingFor(int i)
         {
             if(current==null)return 0;
+            if(ResultPending(i))return 1;
             switch(i){
                 case 1:return current.intake_request?.status=="waiting"?1:0;
                 case 2:return current.store_event!=null?1:0;
@@ -185,18 +187,19 @@ namespace CatCafePreview
                 "有力者派遣の帰還："+dispatch.Count(r=>r.status=="waiting")+"件の帰還待ち / 派遣中 "+dispatch.Count(r=>r.status=="travelling")+"匹",
                 "常連からの猫紹介："+(current.regular_introduction==null ? "対象なし" : current.regular_introduction.status=="untriggered" ? "まだ届いていません" : current.regular_introduction.name+" / "+(current.regular_introduction.status=="waiting" ? "確認待ち" : current.regular_introduction.status=="accepted" ? "加入済み" : "見送り済み"))};
             for(int i=0;i<entries.Length;i++){entries[i].GetComponentInChildren<Text>().text=i<captions.Length ? captions[i] : i==24 ? "おまかせ：方針・複数日進行・実行結果" : i==23 ? "接客の手動割り当て・自動割り当て設定" : i==22 ? "猫ごとの派遣先比較" : i==21 ? "経営ルール・目標の開始・進捗："+(current.objective_start?.rows ?? new PythonStartObjective[0]).Count(r=>r.can_start)+"件の開始候補" : i==20 ? "ペットショップ：候補 "+(current.pet_shop?.rows?.Length ?? 0)+"匹 / 購入済み "+(current.pet_shop?.rows ?? new PythonShopCat[0]).Count(r=>r.accepted)+"匹" : i==19 ? "お客さんの名簿・来店予定："+(current.customer_directory?.rows?.Length ?? 0)+"名" : i==18 ? "待合スペース："+(current.waiting_area?.status ?? "この営業では利用できません") : i==17 ? "休養スペース："+(current.rest_space?.status ?? "情報なし") : i==16 ? "席の接客設備：所持 "+(current.seat_equipment?.owned?.Length ?? 0)+"個 / "+(current.seat_equipment?.can_manage==true ? "購入・配置" : "条件を確認") : i==15 ? "席数の増設："+(current.expansion?.seats ?? 0)+"席 / "+(current.expansion?.can_expand==true ? "増設可能" : current.expansion?.has_next==true ? "条件を確認" : "追加できる席なし") : i==14 ? "用品・猫のケア：所持 "+(current.items?.count ?? 0)+"個" : i==13 ? "派遣先からの猫紹介："+(current.dispatch_introductions ?? new PythonDispatchIntroduction[0]).Count(e=>e.status=="waiting")+"件の回答待ち / 記録 "+(current.dispatch_introductions?.Length ?? 0)+"件" : i==12 ? "山あいの宿のトラブル："+(current.dispatch_troubles ?? new PythonDispatchTrouble[0]).Count(e=>e.status=="waiting")+"件の回答待ち / 記録 "+(current.dispatch_troubles?.Length ?? 0)+"件" : i==11 ? "派遣中の選択イベント："+(current.dispatch_choices ?? new PythonDispatchEncounter[0]).Count(e=>e.status=="waiting")+"件の回答待ち / 記録 "+(current.dispatch_choices?.Length ?? 0)+"件" : i==10 ? "一般派遣の帰還："+(current.general_dispatch?.events ?? new PythonDispatchEvent[0]).Count(e=>e.status=="waiting")+"件の帰還待ち / 派遣中 "+(current.general_dispatch?.events ?? new PythonDispatchEvent[0]).Count(e=>e.status=="travelling")+"匹" : i==9 ? "顧客の信頼回復："+(current.customer_trust==null ? "対象なし" : (current.customer_trust.events ?? new PythonTrustEvent[0]).Count(e=>e.status=="waiting")+"件の回答待ち / 記録 "+(current.customer_trust.events?.Length ?? 0)+"件") : "特別予約："+(current.reservation==null ? "対象なし" : current.reservation.status=="untriggered" ? "解放前" : current.reservation.visit_day+"日目 / "+(current.reservation.status=="waiting" ? "確認待ち" : current.reservation.status=="declined" ? "辞退済み" : "引き受け済み"));entries[i].interactable=MenuAvailable(i) && (i==6 ? dispatch.Length>0 : i==10 ? current.general_dispatch?.events?.Length>0 : true);}
+            foreach(int index in new[]{1,7})if(ResultPending(index))entries[index].GetComponentInChildren<Text>().text+=" / 結果会話が未完了・続きへ";
             RefreshGroups();
             if(returnButton!=null && returnPanel!=null && returnPanel.activeSelf)returnButton.GetComponentInChildren<Text>().text="イベント一覧へ戻る";
-            notice.text=!online ? "Python未接続です。再接続後にイベントを開けます。" : client.HasPendingResults ? "接客結果が未保存です。保存待ちの内容を確認してください。" : client.AutoPlayRunning ? "おまかせ実行中です。停止後に回答できます。" : !client.CanManageSaves ? "操作を送信しています。完了するまでお待ちください。" : group==0 && PendingCount==0 ? "回答待ちはありません。出会い・交流や記録は別の分類で確認できます。" : "回答待ち "+PendingCount+"件。店先の猫との交流は任意です。回答待ちに対応すると営業を再開できます。";if(online && client.CanManageSaves && !string.IsNullOrEmpty(resolution))notice.text=resolution+"\n"+notice.text;
+            notice.text=!online ? "Python未接続です。再接続後にイベントを開けます。" : client.HasPendingResults ? "接客結果が未保存です。保存待ちの内容を確認してください。" : client.AutoPlayRunning ? "おまかせ実行中です。停止後に回答できます。" : !client.CanManageSaves ? "操作を送信しています。完了するまでお待ちください。" : group==0 && PendingCount==0 ? "回答待ちはありません。出会い・交流や記録は別の分類で確認できます。" : "未完了 "+PendingCount+"件。回答・結果会話を完了すると営業を再開できます。店先の猫との交流は任意です。";if(online && client.CanManageSaves && !string.IsNullOrEmpty(resolution))notice.text=resolution+"\n"+notice.text;
         }
         private void RefreshGroups()
         {
-            int total=PendingCount;var caption=open.GetComponentInChildren<Text>();caption.text=total>0?"イベント一覧\n回答待ち "+total+"件":"イベント一覧";caption.fontSize=total>0?14:17;caption.resizeTextForBestFit=total>0;caption.resizeTextMinSize=10;caption.resizeTextMaxSize=14;
+            int total=PendingCount;var caption=open.GetComponentInChildren<Text>();caption.text=total>0?"イベント一覧\n要確認 "+total+"件":"イベント一覧";caption.fontSize=total>0?14:17;caption.resizeTextForBestFit=total>0;caption.resizeTextMinSize=10;caption.resizeTextMaxSize=14;
             if(tabs==null || tabs.Length!=4)return;
             int rows=0;for(int i=0;i<entries.Length;i++)
             {
                 bool visible=i<14 && GroupFor(i)==group;entries[i].gameObject.SetActive(visible);
-                if(visible){entries[i].GetComponent<RectTransform>().anchoredPosition=new Vector2(4,-rows*72);entries[i].GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,64);rows++;int pending=PendingFor(i);var label=entries[i].GetComponentInChildren<Text>();label.text=(pending>0 ? "【回答待ち "+pending+"件】" : group==3 ? Available(i) ? "【記録・閲覧】" : "【現在の記録なし】" : group==2 ? "【派遣・帰還】" : "【任意の交流・候補】")+"\n"+label.text;label.fontSize=16;label.resizeTextForBestFit=true;label.resizeTextMinSize=13;label.resizeTextMaxSize=16;entries[i].GetComponent<Image>().color=pending>0?new Color(1f,.94f,.77f):group==3?new Color(.91f,.94f,.98f):Color.white;}
+                if(visible){entries[i].GetComponent<RectTransform>().anchoredPosition=new Vector2(4,-rows*72);entries[i].GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,64);rows++;int pending=PendingFor(i);var label=entries[i].GetComponentInChildren<Text>();label.text=(pending>0 ? ResultPending(i)?"【回答済み・結果会話の続き】":"【回答待ち "+pending+"件】" : group==3 ? Available(i) ? "【記録・閲覧】" : "【現在の記録なし】" : group==2 ? "【派遣・帰還】" : "【任意の交流・候補】")+"\n"+label.text;label.fontSize=16;label.resizeTextForBestFit=true;label.resizeTextMinSize=13;label.resizeTextMaxSize=16;entries[i].GetComponent<Image>().color=pending>0?new Color(1f,.94f,.77f):group==3?new Color(.91f,.94f,.98f):Color.white;}
             }
             content.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,Mathf.Max(342,rows*72));
             title.text="イベント一覧 / "+GroupNames[group];

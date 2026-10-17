@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -456,6 +457,16 @@ namespace CatCafePreview
         public void WaitingArea(string kind){if(CanWaitingArea(kind))QueuePlayer(kind,"","","");}
         public bool CanExpandSeats { get { return CanManageSaves && current.game_over==null && current.expansion!=null && current.expansion.can_expand; } }
         public void ExpandSeats() { if(CanExpandSeats)QueuePlayer("expand_seats","","",""); }
+        public string DayOffBlockReason
+        {
+            get
+            {
+                if(current==null)return "状態を取得してから休業できます。";
+                if(!CanManageSaves)return "操作・保存を処理中です。完了するまでお待ちください。";
+                string conversationReason=CafeBackends.Standalone?(CafeBackends.Local as LocalCafeBackend)?.ConversationProgressReason:"";
+                return string.Join("\n",new[]{conversationReason,current.day_off==null?"休業情報を取得していません。":current.day_off.reason}.Where(v=>!string.IsNullOrEmpty(v)));
+            }
+        }
         public bool CanDayOff { get { return !ConversationBlocksProgress && CanManageSaves && current.game_over==null && current.day_off!=null && current.day_off.can_select; } }
         public void DayOff() { if(CanDayOff){StopAutomatic();QueuePlayer("day_off","","","");} }
         public bool CanStartAutoPlay(string objective,string mode,int days){var view=current?.autoplay;return !ConversationBlocksProgress && CanManageSaves && view?.can_start==true && days>=1 && days<=10 && Array.Exists(view.objectives ?? new PythonAutoPlayOption[0],r=>r.choice==objective && r.can_start) && Array.Exists(view.modes ?? new PythonAutoPlayOption[0],r=>r.choice==mode);}

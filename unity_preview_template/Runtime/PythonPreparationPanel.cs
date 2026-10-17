@@ -116,6 +116,8 @@ namespace CatCafePreview
         {
             if(!online){notice.text="Python未接続です。再接続後に出勤の変更と営業開始ができます。";return;}
             var client=GetComponent<PythonStateClient>();
+            string offReason=client.DayOffBlockReason;
+            if(!string.IsNullOrEmpty(offReason)){notice.text="休業できない理由："+offReason;return;}
             if(client.HasPendingResults){notice.text="接客結果の保存を再試行してから、営業準備を進めてください。";return;}
             if(client.AutoPlayRunning){notice.text="おまかせ実行中です。停止してから出勤を変更できます。";return;}
             if(current.player_interaction?.active==true){notice.text="猫との交流を終了してから、営業準備を進めてください。";return;}
@@ -133,7 +135,7 @@ namespace CatCafePreview
             if(rest!=null)rest.interactable=ready && Working(cat);
             if(cats!=null)cats.interactable=online && client.CanManageSaves && VisibleCats.Length>0;
             if(start!=null)start.interactable=online && current!=null && current.can_set_shifts && !current.closed && current.game_over==null && client.CanProgressBusiness && draft==null;
-            if(dayOff!=null)dayOff.interactable=draft==null && online && client.CanManageSaves && current!=null && current.day_off!=null;
+            if(dayOff!=null)dayOff.interactable=draft==null && online && client.CanManageSaves && current!=null;
             bool proposalReady=online && !client.AutoPlayRunning && client.CanChangeShifts && current!=null && string.IsNullOrEmpty(current.required_action);
             if(propose!=null)propose.interactable=proposalReady && current.rest_proposal!=null;
             if(confirmProposal!=null)confirmProposal.interactable=proposalReady && draft!=null;

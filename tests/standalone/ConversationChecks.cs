@@ -39,8 +39,29 @@ static partial class Program
         Assert(ordered>0,"No overlapping event order cases exercised");
         var invalid=CafeIntakeConversation.Start();invalid.node=99;bool invalidRejected=false;try{CafeIntakeConversation.Validate(invalid,"waiting");}catch(ArgumentException){invalidRejected=true;}Assert(invalidRejected,"Invalid node accepted");
         RegularConversationChecks(rules);
+        DayOffProgressChecks(rules);
         IntakeChecks.Run(rules,Assert,Path.GetFullPath("Logs/StandaloneConversation/core-saves"));
         Console.WriteLine("PASS conversation: "+assertions+" assertions; both branches, every node save roundtrip, old saves, funds, housing, order, repeated answers.");
+    }
+    static void DayOffProgressChecks(CafeRules defaults)
+    {
+        foreach(bool maximum in new[]{false,true})foreach(bool poor in new[]{false,true})
+        {
+            var rules=Decode<CafeRules>(Encode(defaults));rules.intake.day=1;rules.starting_funds=poor?2000:10000;
+            int count=maximum?12:6;var cats=rules.cats.ToList();while(cats.Count<count){var c=Decode<CatDefinition>(Encode(cats[0]));c.id="qa-full-"+cats.Count;cats.Add(c);}rules.cats=cats.ToArray();
+            var sim=new CafeSimulation(rules);var s=sim.State;
+            if(maximum){s.housing.purchased_day=s.housing.upgraded_day=1;s.housing_expenses=rules.housing.cost+rules.housing_upgrade.cost;s.expenses=s.housing_expenses;s.funds-=s.housing_expenses;}
+            if(poor){s.funds-=s.funds-rules.intake.cost;s.opening_funds=s.funds+s.expenses;rules.starting_funds=s.opening_funds;}
+            if(sim.StoreEventWaiting)sim.Execute("resolve_store_event",choice:sim.CurrentStoreEvent.type=="trouble"?"patch":"decline");
+            string before=Encode(s);Rejected(()=>sim.PreviewDayOff(v=>Decode<CafeSnapshot>(Encode(v))));Assert(before==Encode(s),"Blocked preview changed live state");
+            Assert(sim.IntakeAcceptReason!="","Full intake accepted");sim.Execute("resolve_intake",choice:"decline");before=Encode(s);
+            for(int i=0;i<8;i++)sim.Execute("resolve_intake",choice:"decline");Assert(before==Encode(s),"Repeated decline changed state");
+            var prediction=sim.PreviewDayOff(v=>Decode<CafeSnapshot>(Encode(v)));Assert(before==Encode(s),"Day-off preview settled real day");sim.Execute("day_off");Assert(Encode(s)==Encode(prediction),"Preview differs from actual day off");Assert(s.day==2 && s.cats.Count==count,"Full roster requires admission or transfer to proceed");
+        }
+        var probe=new CafeSimulation(defaults);if(probe.StoreEventWaiting)probe.Execute("resolve_store_event",choice:probe.CurrentStoreEvent.type=="trouble"?"patch":"decline");
+        probe.State.reservation.status="accepted";probe.State.reservation.visit_day=1;
+        Rejected(()=>probe.PreviewDayOff(v=>Decode<CafeSnapshot>(Encode(v))));
+        bool isolated=false;try{probe.PreviewDayOff(v=>v);}catch(ArgumentException){isolated=true;}Assert(isolated,"Preview accepted live state");
     }
     static void RegularConversationChecks(CafeRules defaults)
     {

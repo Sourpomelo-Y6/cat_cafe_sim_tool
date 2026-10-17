@@ -187,7 +187,7 @@ namespace CatCafePreview
             var s = Simulation.State; var rules = Simulation.Rules;
             return new PythonCafeState
             {
-                autoplay=AutoplayView(), version = 1, instance_id = s.instance_id, revision = s.revision, objective = s.objective, phase = s.phase, day = s.day, tick = s.tick,
+                day_off=DayOffView(), autoplay=AutoplayView(), version = 1, instance_id = s.instance_id, revision = s.revision, objective = s.objective, phase = s.phase, day = s.day, tick = s.tick,
                 can_set_shifts = s.phase == "preparation", closed = s.phase == "closed", opening_ticks = rules.opening_ticks,
                 funds = (float)s.funds, revenue = (float)s.revenue, waiting_count = s.queue.Count, completed_interactions = s.completed,
                 popularity = (float)s.popularity, popularity_gain = (float)s.popularity_gain,
