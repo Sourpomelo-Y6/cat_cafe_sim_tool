@@ -126,6 +126,10 @@ Logsはビルドログ・専用セーブ・画面証跡で約7MB増。Libraryは
 
 検証ビルドは既存の `build_standalone.ps1 -ProjectPath C:/Users/hi-wa/unity_workspase/CatCafeSim -ExecuteMethod CatCafePreview.Editor.ConversationRendererVerification.VerifyAndBuild` を使用し、出力は `Logs/StandaloneBuild/Latest/CatCafeStandalone.exe` の一組に固定する。
 
+## 続く実装
+
+2026-10-18：[常連からの猫紹介の会話](UnityRegularIntroductionConversation.md)を追加。共用表示と独立保存の詳細・検証はリンク先を参照。
+
 ## 残る課題
 
-紹介・派遣などの別イベントの会話本文と接続、依頼人や場面背景の専用素材、全プレイ共通のExtra記録と閲覧UIは後続。今回は新規画像生成、音声、実行時LLMを使用していない。変更対象は単独版の固定依頼一本で、バランスの再調整はしていない。
+派遣などの別イベントの会話本文と接続、依頼人や場面背景の専用素材、全プレイ共通のExtra記録と閲覧UIは後続。今回は新規画像生成、音声、実行時LLMを使用していない。変更対象は単独版の固定依頼一本で、バランスの再調整はしていない。

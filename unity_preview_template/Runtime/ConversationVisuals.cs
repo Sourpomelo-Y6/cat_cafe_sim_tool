@@ -70,7 +70,7 @@ namespace CatCafePreview
 
     public class ConversationAdvanceSurface : MonoBehaviour, IPointerClickHandler
     {
-        public IntakeConversationPanel conversation;
+        public AcquisitionConversationPanel conversation;
         public void OnPointerClick(PointerEventData data){if(data.button==PointerEventData.InputButton.Left)conversation.Next();}
     }
 }

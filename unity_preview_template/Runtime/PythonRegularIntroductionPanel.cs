@@ -21,11 +21,12 @@ namespace CatCafePreview
         private bool online;
         public void Open()
         {
+            if(CafeBackends.Standalone && (CafeBackends.Local as LocalCafeBackend)?.RegularConversation?.completed==false){GetComponent<RegularConversationPanel>().Open();return;}
             if(current?.regular_introduction==null || !GetComponent<PythonStateClient>().CanManageSaves)return;
-            Clear();panel.SetActive(true);panel.transform.SetAsLastSibling();Render();
+            Clear();if(CafeBackends.Standalone)GetComponent<RegularConversationPanel>()?.ShowOriginal();panel.SetActive(true);panel.transform.SetAsLastSibling();Render();RefreshControls();
             Canvas.ForceUpdateCanvases();details.GetComponentInParent<ScrollRect>().verticalNormalizedPosition=1;
         }
-        public void Close(){Clear();panel.SetActive(false);}
+        public void Close(){if(CafeBackends.Standalone && GetComponent<RegularConversationPanel>()!=null){GetComponent<RegularConversationPanel>().Close();return;}Clear();panel.SetActive(false);}
         public void Accept(){Choose("accept");} public void Decline(){Choose("decline");}
         public void Housing(){Clear();GetComponent<PythonCatAcquisitionNavigation>().OpenHousing(panel);}
         private void Choose(string choice)
@@ -41,6 +42,7 @@ namespace CatCafePreview
         private void Clear(){selection=null;confirmation.SetActive(false);}
         public void Apply(PythonCafeState state)
         {
+            if(CafeBackends.Standalone){current=state;online=true;var dialogue=GetComponent<RegularConversationPanel>() ?? gameObject.AddComponent<RegularConversationPanel>();dialogue.ApplyRegular(state,this);return;}
             if(instance!=state.instance_id){instance=state.instance_id;panel.SetActive(false);lastWaiting=null;Clear();}
             var row=state.regular_introduction;current=state;online=true;
             string key=state.instance_id+"/"+state.revision+"/"+state.day+"/"+row?.cat_id+"/"+row?.status;
@@ -65,6 +67,7 @@ namespace CatCafePreview
         }
         public void RefreshControls()
         {
+            if(CafeBackends.Standalone && GetComponent<RegularConversationPanel>()!=null && !GetComponent<RegularConversationPanel>().OriginalShowing){GetComponent<RegularConversationPanel>().Refresh();return;}
             var client=GetComponent<PythonStateClient>();var row=current?.regular_introduction;bool ready=online && client.CanManageSaves && row!=null;
             accept.interactable=ready && selection==null && row.can_accept;decline.interactable=ready && selection==null && row.can_decline;
             housing.interactable=ready && selection==null && row.status=="waiting";

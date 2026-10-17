@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 namespace CatCafePreview.Standalone
 {
     // Presentation-only progress. Stable IDs are suitable for a future Extra index.
@@ -39,8 +39,12 @@ namespace CatCafePreview.Standalone
         }
         public static void Validate(CafeConversationProgress p,string status)
         {
+            ValidateProgress(p,status,Id,"scheduled",Lines);
+        }
+        internal static void ValidateProgress(CafeConversationProgress p,string status,string id,string inactive,Func<string,string,CafeConversationLine[]> lines)
+        {
             if(p==null)return;bool answered=status=="accepted" || status=="declined";
-            if(p.conversation_id!=Id || p.branch_id!="introduction" && p.branch_id!="accepted" && p.branch_id!="declined" || p.node<0 || p.node>Lines(p.branch_id,"").Length || p.completed && (!answered || p.branch_id!=status || p.node!=Lines(status,"").Length) || p.branch_id!="introduction" && p.branch_id!=status || status=="scheduled" || p.viewed_branches==null || p.completed && p.viewed_branches.Length!=1 || p.viewed_branches.Length>1 || p.viewed_branches.Length==1 && (!p.completed || p.viewed_branches[0]!=status))throw new ArgumentException("会話の保存進行が不正です。");
+            if(p.conversation_id!=id || p.branch_id!="introduction" && p.branch_id!="accepted" && p.branch_id!="declined" || p.node<0 || p.node>lines(p.branch_id,"").Length || p.completed && (!answered || p.branch_id!=status || p.node!=lines(status,"").Length) || p.branch_id!="introduction" && p.branch_id!=status || status==inactive || p.viewed_branches==null || p.completed && p.viewed_branches.Length!=1 || p.viewed_branches.Length>1 || p.viewed_branches.Length==1 && (!p.completed || p.viewed_branches[0]!=status))throw new ArgumentException("会話の保存進行が不正です。");
         }
         public static void SyncAnswer(CafeConversationProgress p,string status)
         {

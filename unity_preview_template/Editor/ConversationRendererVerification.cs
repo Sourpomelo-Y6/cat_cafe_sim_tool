@@ -64,6 +64,24 @@ namespace CatCafePreview.Editor
                 // A new backend and a saved third day exercise the late activation path again.
                 var waiting=new LocalCafeBackend(Path.Combine(folder,"third-day"));CafeBackends.UseLocal(waiting);
                 while(waiting.Simulation.State.day<3)Day(waiting);Send(waiting,"save_game");Day(waiting);Apply(preview,waiting);Send(waiting,"load_game");Apply(preview,waiting);Day(waiting);Apply(preview,waiting);Renderers(owner.panel);
+                string regularPath=Path.Combine(workspace,"Logs/StandaloneRegularConversation/Editor/rules");
+                Check(StandaloneRegularIntroductionSmoke.Run(regularPath)>0,"Regular game rules regression");
+                var introduced=new LocalCafeBackend(Path.Combine(regularPath,"accept"));CafeBackends.UseLocal(introduced);
+                var reply=StandaloneRegularConversationSmoke.Command(introduced,"load_game",slot:2);Check(reply.result==UnityWebRequest.Result.Success,"Regular fixture load");Apply(preview,introduced);
+                var regularUi=preview.GetComponent<RegularConversationPanel>();var regularOwner=preview.GetComponent<PythonRegularIntroductionPanel>();Check(regularUi.Showing,"Regular late activation");Renderers(regularOwner.panel);
+                for(int i=0;i<3;i++){regularUi.Close();regularUi.Open();Renderers(regularOwner.panel);}
+                foreach(var raycaster in preview.GetComponentsInChildren<GraphicRaycaster>())raycaster.Raycast(new PointerEventData(events){position=new Vector2(Screen.width*.5f,Screen.height*.5f)},results);
+                // Accelerated fixture only: both offers arrive together; production rules remain unchanged.
+                var rules=JsonUtility.FromJson<CatCafePreview.Standalone.CafeRules>(Resources.Load<TextAsset>("CatCafeStandalone/rules").text);rules.loyalty.threshold=25;rules.intake.day=2;
+                var both=new LocalCafeBackend(Path.Combine(workspace,"Logs/StandaloneRegularConversation/Editor/coexisting"),rules);CafeBackends.UseLocal(both);
+                Send(both,"start_business");while(both.Simulation.State.phase!="closed")Send(both,"advance_business");Send(both,"next_day");
+                if(both.Simulation.StoreEventWaiting)Send(both,"resolve_store_event",both.Simulation.CurrentStoreEvent.type=="trouble"?"patch":"decline");Apply(preview,both);
+                Check(both.Conversation!=null && both.RegularConversation!=null,"Both conversation states created");Check(ui.Showing!=regularUi.Showing,"Conversations overlap or both hidden");ui.Open();Check(ui.Showing && !regularUi.Showing,"Intake open did not hide regular");regularUi.Open();Check(!ui.Showing && regularUi.Showing,"Regular open did not hide intake");
+                both.Conversation.node=2;both.RegularConversation.node=3;Send(both,"save_game");Send(both,"load_game");Apply(preview,both);Check(both.Conversation.node==2 && both.RegularConversation.node==3,"Independent saved positions lost");
+                var answer=StandaloneRegularConversationSmoke.Command(both,"resolve_regular_introduction","accept");Check(answer.result==UnityWebRequest.Result.Success,"Regular first answer failed");Send(both,"resolve_intake","decline");Apply(preview,both);
+                Check(both.Conversation.branch_id=="declined" && both.RegularConversation.branch_id=="accepted" && both.Simulation.State.cats.Count==6,"Coexisting answers mixed");
+                both.Conversation.node=4;CatCafePreview.Standalone.CafeIntakeConversation.Finish(both.Conversation);Check(both.ConversationBlocksProgress,"Other unfinished result released progress");
+                both.RegularConversation.node=4;CatCafePreview.Standalone.CafeRegularConversation.Finish(both.RegularConversation);Apply(preview,both);Check(!both.ConversationBlocksProgress,"Completed conversations still block");Send(both,"day_off");
                 var inactive=new GameObject("Inactive custom graphic test");inactive.SetActive(false);
                 inactive.AddComponent<ConversationShape>();Check(inactive.GetComponent<CanvasRenderer>()!=null,"Shape requirement missing on inactive object");UnityEngine.Object.DestroyImmediate(inactive);
                 inactive=new GameObject("Inactive room test");inactive.SetActive(false);inactive.AddComponent<ConversationRoomGraphic>();Check(inactive.GetComponent<CanvasRenderer>()!=null,"Room requirement missing on inactive object");UnityEngine.Object.DestroyImmediate(inactive);

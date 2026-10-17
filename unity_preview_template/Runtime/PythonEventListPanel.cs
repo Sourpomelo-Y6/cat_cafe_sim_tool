@@ -133,6 +133,7 @@ namespace CatCafePreview
         {
             if(!MenuAvailable(i))return;
             if(i==1 && CafeBackends.Standalone && (CafeBackends.Local as LocalCafeBackend)?.Conversation?.completed==false){Close();GetComponent<IntakeConversationPanel>()?.Open();return;}
+            if(i==7 && CafeBackends.Standalone && (CafeBackends.Local as LocalCafeBackend)?.RegularConversation?.completed==false){Close();GetComponent<RegularConversationPanel>()?.Open();return;}
             if(i==1 && current.intake_request.status!="waiting"){Close();GetComponent<PythonEventRecordPanel>().Open();return;}
             GameObject target=null;
             switch(i){

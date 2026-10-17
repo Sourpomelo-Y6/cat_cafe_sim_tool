@@ -16,6 +16,7 @@ namespace CatCafePreview.Standalone
         public CafeDailyRecord[] daily_records;
         public CafeNarrativeRow[] narratives;
         public CafeConversationProgress conversation;
+        public CafeConversationProgress regular_conversation;
         public CafeDisplayReceipt[] display_receipts; // Optional UI facts; outside gameplay and replay digests.
     }
     public sealed class CafeSaveStore

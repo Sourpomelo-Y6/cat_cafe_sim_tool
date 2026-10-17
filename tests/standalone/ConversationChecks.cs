@@ -1,4 +1,4 @@
-﻿using CatCafePreview.Standalone;
+using CatCafePreview.Standalone;
 static partial class Program
 {
     static void Rejected(Action action){bool rejected=false;try{action();}catch(InvalidOperationException){rejected=true;}Assert(rejected,"Invalid choice accepted");}
@@ -38,7 +38,41 @@ static partial class Program
         }
         Assert(ordered>0,"No overlapping event order cases exercised");
         var invalid=CafeIntakeConversation.Start();invalid.node=99;bool invalidRejected=false;try{CafeIntakeConversation.Validate(invalid,"waiting");}catch(ArgumentException){invalidRejected=true;}Assert(invalidRejected,"Invalid node accepted");
+        RegularConversationChecks(rules);
         IntakeChecks.Run(rules,Assert,Path.GetFullPath("Logs/StandaloneConversation/core-saves"));
         Console.WriteLine("PASS conversation: "+assertions+" assertions; both branches, every node save roundtrip, old saves, funds, housing, order, repeated answers.");
     }
+    static void RegularConversationChecks(CafeRules defaults)
+    {
+        RegularIntroductionChecks.Run(defaults,Assert,Path.GetFullPath("Logs/StandaloneRegularConversation/core-rules"));
+        foreach(string answer in new[]{"accept","decline"})
+        {
+            var rules=Decode<CafeRules>(Encode(defaults));rules.loyalty.threshold=25;rules.intake.day=2;
+            var sim=new CafeSimulation(rules);sim.Execute("start_business");while(sim.State.phase!="closed")sim.Execute("advance_business");sim.Execute("next_day");
+            if(sim.StoreEventWaiting)sim.Execute("resolve_store_event",choice:sim.CurrentStoreEvent.type=="trouble"?"patch":"decline");
+            var intake=CafeIntakeConversation.Start();intake.node=2;var regular=CafeRegularConversation.Start();
+            for(int node=0;node<=CafeRegularConversation.Lines("introduction","").Length;node++)
+            {
+                regular.node=node;var save=Decode<CafeSaveEnvelope>(Encode(new CafeSaveEnvelope{state=sim.State,conversation=intake,regular_conversation=regular}));
+                CafeIntakeConversation.Validate(save.conversation,"waiting");CafeRegularConversation.Validate(save.regular_conversation,"waiting");
+                sim.Restore(save.state);regular=save.regular_conversation;Assert(regular.node==node && save.conversation.node==2,"Independent progress lost");
+            }
+            sim.Execute("resolve_regular_introduction",choice:answer);CafeRegularConversation.SyncAnswer(regular,sim.State.regular_introduction.status);
+            for(int node=0;node<=CafeRegularConversation.Lines(regular.branch_id,"").Length;node++)
+            {
+                regular.node=node;var save=Decode<CafeSaveEnvelope>(Encode(new CafeSaveEnvelope{state=sim.State,conversation=intake,regular_conversation=regular}));
+                CafeRegularConversation.Validate(save.regular_conversation,save.state.regular_introduction.status);sim.Restore(save.state);regular=save.regular_conversation;
+                string before=Encode(sim.State);for(int n=0;n<5;n++)sim.Execute("resolve_regular_introduction",choice:answer);Assert(before==Encode(sim.State),"Repeated regular answer mutated state");
+            }
+            CafeRegularConversation.Finish(regular);CafeRegularConversation.Finish(regular);CafeRegularConversation.Validate(regular,sim.State.regular_introduction.status);
+            Assert(regular.completed && regular.viewed_branches.Length==1 && !intake.completed,"Completion records mixed or duplicated");
+            var old=Decode<CafeSaveEnvelope>(Encode(new CafeSaveEnvelope{state=sim.State,conversation=intake}));Assert(old.regular_conversation==null,"Old save fabricated regular viewing");
+            foreach(Action<CafeConversationProgress> forge in new Action<CafeConversationProgress>[]{p=>p.conversation_id=CafeIntakeConversation.Id,p=>p.node=999,p=>p.branch_id="forged",p=>p.viewed_branches=new[]{"accepted","accepted"},p=>p.completed=false})
+            {
+                var bad=Decode<CafeConversationProgress>(Encode(regular));forge(bad);bool rejected=false;try{CafeRegularConversation.Validate(bad,sim.State.regular_introduction.status);}catch(ArgumentException){rejected=true;}Assert(rejected,"Forged regular progress accepted");
+            }
+        }
+        Assert(CafeRegularConversation.Lines("introduction","マロン","紹介者の名前").Any(l=>l.speaker=="紹介者の名前"),"Introducer speaker not used");
+    }
+
 }
