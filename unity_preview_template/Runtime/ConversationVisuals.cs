@@ -5,6 +5,7 @@ using UnityEngine.UI;
 namespace CatCafePreview
 {
     // Small UI primitives, not new bitmap assets. They scale with the full-screen canvas.
+    [RequireComponent(typeof(CanvasRenderer))]
     public class ConversationShape : MaskableGraphic
     {
         public float radius;
@@ -25,6 +26,7 @@ namespace CatCafePreview
         }
     }
 
+    [RequireComponent(typeof(CanvasRenderer))]
     public class ConversationRoomGraphic : MaskableGraphic
     {
         VertexHelper mesh;

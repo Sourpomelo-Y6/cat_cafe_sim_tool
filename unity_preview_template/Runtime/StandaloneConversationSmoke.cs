@@ -13,7 +13,11 @@ namespace CatCafePreview
     // Explicit opt-in QA only. Uses isolated saves, never the player's slots.
     public sealed class StandaloneConversationSmoke : MonoBehaviour
     {
-        string output;LocalCafeBackend backend;int checks;
+        string output;LocalCafeBackend backend;int checks;bool completed,failed;
+        readonly System.Collections.Generic.List<string> errors=new System.Collections.Generic.List<string>();
+        void CaptureLog(string message,string stack,LogType type){if(type!=LogType.Error && type!=LogType.Exception && type!=LogType.Assert)return;errors.Add(message+"\n"+stack);if(completed && !failed)Fail(new Exception("Unity UI error: "+message));}
+        void OnDestroy(){Application.logMessageReceived-=CaptureLog;}
+        void Renderers(GameObject root){var graphics=root.GetComponentsInChildren<Graphic>(true);Check(graphics.Length>0 && graphics.All(g=>g.GetComponent<CanvasRenderer>()!=null),"All active and hidden UI graphics have CanvasRenderer");}
         void Check(bool value,string label){if(!value)throw new Exception(label);checks++;}
         static void Send(LocalCafeBackend b,string kind,string choice=null,int slot=1)
         {
@@ -30,10 +34,10 @@ namespace CatCafePreview
         static void Install()
         {
             var args=Environment.GetCommandLineArgs();int i=Array.IndexOf(args,"--catcafe-conversation-check");if(i<0 || FindObjectOfType<StandaloneConversationSmoke>()!=null)return;
-            var go=new GameObject("Conversation verification");DontDestroyOnLoad(go);var runner=go.AddComponent<StandaloneConversationSmoke>();runner.output=Path.GetFullPath(args[i+1]);Directory.CreateDirectory(runner.output);Application.runInBackground=true;
+            var go=new GameObject("Conversation verification");DontDestroyOnLoad(go);var runner=go.AddComponent<StandaloneConversationSmoke>();runner.output=Path.GetFullPath(args[i+1]);Directory.CreateDirectory(runner.output);Application.runInBackground=true;Application.logMessageReceived+=runner.CaptureLog;
             try{runner.VerifySaves(Array.IndexOf(args,"--conversation-restart")>=0);runner.StartCoroutine(runner.Guard());}catch(Exception e){runner.Fail(e);}
         }
-        void Fail(Exception e){File.WriteAllText(Path.Combine(output,"failure.txt"),e.ToString());Debug.LogException(e);Application.Quit(1);}
+        void Fail(Exception e){failed=true;File.WriteAllText(Path.Combine(output,"failure.txt"),e.ToString());Debug.LogException(e);Application.Quit(1);}
         void VerifySaves(bool restart)
         {
             foreach(string choice in new[]{"accept","decline"})
@@ -57,18 +61,21 @@ namespace CatCafePreview
                 string savePath=Path.Combine(path,"slot-4.json");var envelope=JsonUtility.FromJson<CafeSaveEnvelope>(File.ReadAllText(savePath));envelope.conversation=null;envelope.slot=6;File.WriteAllText(Path.Combine(path,"slot-6.json"),JsonUtility.ToJson(envelope));Send(fresh,"load_game",slot:6);Check(fresh.Conversation==null,"Old answered save fabricated a conversation");
             }
             if(!restart)Check(StandaloneIntakeSmoke.Run(Path.Combine(output,"existing-intake"))>0,"Existing intake rules regression");
-            backend=new LocalCafeBackend(Path.Combine(output,"interactive"));Prepare(backend);CafeBackends.UseLocal(backend);
+            backend=new LocalCafeBackend(Path.Combine(output,"interactive"));CafeBackends.UseLocal(backend);
         }
         void ApplyView(IntakeConversationPanel ui){var client=ui.GetComponent<PythonStateClient>();typeof(PythonStateClient).GetMethod("Accept",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic).Invoke(client,new object[]{backend.View()});}
         IEnumerator Guard()
         {
-            var run=Run();while(true){bool more;try{more=run.MoveNext();}catch(Exception e){Fail(e);yield break;}if(!more)yield break;yield return run.Current;}
+            var run=Run();while(true){bool more;try{if(errors.Count>0)throw new Exception("Unity errors during verification: "+string.Join("\n",errors));more=run.MoveNext();}catch(Exception e){Fail(e);yield break;}if(!more)yield break;yield return run.Current;}
         }
         IEnumerator Run()
         {
             SceneManager.LoadScene("CatCafePythonState");yield return new WaitForSecondsRealtime(3);
-            var ui=FindObjectOfType<IntakeConversationPanel>();Check(ui!=null && ui.Showing,"Actual scene conversation opened");
-            var owner=ui.GetComponent<PythonIntakePanel>();var client=ui.GetComponent<PythonStateClient>();
+            var ui=FindObjectOfType<IntakeConversationPanel>();Check(ui!=null && !ui.Showing && backend.Simulation.State.day==1,"Day-one UI constructed while hidden");
+            var owner=ui.GetComponent<PythonIntakePanel>();var client=ui.GetComponent<PythonStateClient>();Renderers(owner.panel);
+            while(backend.Simulation.State.day<4){if(backend.Simulation.StoreEventWaiting)Send(backend,"resolve_store_event",backend.Simulation.CurrentStoreEvent.type=="trouble"?"patch":"decline");Send(backend,"day_off");ApplyView(ui);yield return null;}
+            if(backend.Simulation.StoreEventWaiting){ui.Close();Send(backend,"resolve_store_event",backend.Simulation.CurrentStoreEvent.type=="trouble"?"patch":"decline");ApplyView(ui);ui.Open();}
+            Check(ui.Showing,"Day-four UI enabled from normal progress");Renderers(owner.panel);
             Check(!client.Automatic,"Automatic stopped");
             Canvas.ForceUpdateCanvases();var bounds=owner.panel.GetComponent<RectTransform>();var canvas=owner.panel.GetComponentInParent<Canvas>().GetComponent<RectTransform>();
             Check(Vector2.Distance(bounds.rect.size,canvas.rect.size)<1,"Conversation covers full canvas");
@@ -92,9 +99,10 @@ namespace CatCafePreview
             ui.Close();ui.GetComponent<PythonEventListPanel>().ShowMenu(1);Check(ui.Showing,"Result reopen from event list");
             backend.Conversation.node=4;ApplyView(ui);yield return null;ui.Next();
             Check(!ui.Showing && backend.Conversation.completed && backend.Conversation.viewed_branches.Length==1 && !client.Automatic,"Result finished and manual resume");
-            File.WriteAllText(Path.Combine(output,"result.txt"),"PASS: "+checks+" Unity/Player checks. Both branches and restart fixtures retained. Interactive result scene ready.");
             // Leave a choice ready for independent native input and visual inspection.
             backend.ConversationOpen=false;backend=new LocalCafeBackend(Path.Combine(output,"manual"));Prepare(backend);backend.BeginIntakeConversation();backend.Conversation.node=5;CafeBackends.UseLocal(backend);SceneManager.LoadScene("CatCafePythonState");
+            yield return new WaitForSecondsRealtime(1);Check(errors.Count==0,"Zero Unity errors including scene reload and hidden masks");completed=true;
+            File.WriteAllText(Path.Combine(output,"result.txt"),"PASS: "+checks+" Unity/Player checks; zero Unity errors. Day 1 → day 4, both branches, masks, saves and scene reload.");
         }
     }
 }

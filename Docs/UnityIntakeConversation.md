@@ -102,6 +102,30 @@ Logsの増加は約10MBで、ビルド実行ログ・検証セーブ・画面証
 
 Logsはビルドログ・専用セーブ・画面証跡で約7MB増。Libraryは約37KB減で、大きな容量増加はない。新しい画像データは加えず、既存のUnityプロジェクトとLibraryを再利用。Latest一組のみを残し、Pending・ビルドコピー・ZIPは残していない。作業前からの猫資料、rules／presentation JSONなどの変更は今回のコミット対象から除外する。
 
+## 4日目のCanvasRenderer不足の修正（2026-10-17）
+
+ユーザー報告の `Portrait Mask`／`Viewport` の `Mask.OnEnable` と `Intake Conversation` の `GraphicRaycaster.Raycast` から出る `MissingComponentException` を修正した。
+
+原因は自作 `ConversationShape`／`ConversationRoomGraphic` に `CanvasRenderer` の必須宣言がなく、生成処理でも追加していなかったこと。導入済みUGUIの `Graphic` は `RectTransform` だけを必須宣言し、`canvasRenderer` のgetterで不足を補う。しかしEditorでは `GetComponent` が未取得を示すUnityの疑似nullを返す場合があり、`ReferenceEquals` を使う補完処理を通らない。Playerの自動補完だけに依存した状態だった。
+
+両クラスに `[RequireComponent(typeof(CanvasRenderer))]` を追加し、会話の図形と店内背景を作る `GameObject` の生成引数でも、Graphicより先にRendererを付ける。画像枠、スクロール領域、クリック判定の背景を含め、マスクが有効になる前に必要な部品が必ず存在するようにした。会話・ゲームルール・セーブ形式は変えていない。
+
+### 再現と回帰検証
+
+`ConversationRendererVerification.VerifyAndBuild` を追加。既存の実シーンをEditorのEdit Modeで開き、1日目に非表示の会話UIを生成した後、既存コマンドで4日目へ進める。同じ有効化／無効化のコールバックとRaycastを実行し、途中保存の読込み、3日目のセーブから再び4日目へ入る経路、非アクティブなGameObjectへ自作Graphicを追加する経路も確認する。シーンは保存せず、検証中の変更を破棄する。
+
+- 修正前：49項目目のRenderer存在確認で失敗し、ユーザー報告と同じ `Portrait Mask`／`Viewport` の例外8件を捕捉した。証跡は `Logs/StandaloneConversation/RendererFix/Editor/before-fix.json`。検証失敗時はビルドせず、直前のLatestを保持した。
+- 修正後：Editor **588項目成功、Unity Error／Exception／Assertログ0件**。証跡は同じディレクトリの `result.json`。
+- Player用の検証も、最初から4日目のシーンを開く方式から「1日目の非表示UI構築→通常の日次コマンドで4日目に入る」方式へ変えた。未表示のGraphicにもRendererがあることを確認し、コルーチン外のUnityエラーログも検証失敗にする。再読込み後のシーンが落ち着くまで成功判定を遅らせ、手動確認中のエラーでも異常終了する。
+
+- 修正したPlayerも初回 **37項目**、別プロセスでの再起動 **30項目** 成功。いずれもUnity Error／Exception／Assertログ0件。証跡は `Logs/StandaloneConversation/RendererFix/Player/result-first.txt`、`result-restart.txt` と `player-first.log`、`player-restart.log`。見えない間の生成、4日目への遷移、両分岐、途中保存、結果会話再開、再表示とマスクの切り替えを含む。
+- 今回はEditorのEdit Modeで実シーンのUIライフサイクルを直接検証し、配布Playerでもフレームを進めて確認した。EditorのPlay Modeをネイティブ操作した手動通し確認は行っていない。前回のPlayer中心の検証では、このEditor固有の差異を見落としていた。
+- 最終ビルドログ：`Logs/StandaloneBuild/Runs/20261017-143204-696-53901162207648ac8c80068c2c51b8a5.log`。ソースと既存Unityプロジェクトの両方へ修正を反映済み。再生をいったん停止し、次の再生開始で修正後のUIを作り直す。セーブデータの移行・作り直しは不要。
+
+容量はLogsが開始時17,491,961,331 bytes→終了時17,494,291,013 bytes（約2.33MB増：再現ログ・検証セーブなど）、Libraryが10,982,781,681→10,982,831,756 bytes（約50KB増）。Latest一組は8,247,484,888 bytes。大きな増加はなく、Pending、追加ビルド、ZIP、プロジェクト／Libraryの複製は残していない。検証用Playerも終了した。既存の素材・設定変更は今回のコミットに含めない。
+
+検証ビルドは既存の `build_standalone.ps1 -ProjectPath C:/Users/hi-wa/unity_workspase/CatCafeSim -ExecuteMethod CatCafePreview.Editor.ConversationRendererVerification.VerifyAndBuild` を使用し、出力は `Logs/StandaloneBuild/Latest/CatCafeStandalone.exe` の一組に固定する。
+
 ## 残る課題
 
 紹介・派遣などの別イベントの会話本文と接続、依頼人や場面背景の専用素材、全プレイ共通のExtra記録と閲覧UIは後続。今回は新規画像生成、音声、実行時LLMを使用していない。変更対象は単独版の固定依頼一本で、バランスの再調整はしていない。
