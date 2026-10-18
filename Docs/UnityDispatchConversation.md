@@ -80,3 +80,5 @@ Logsは約26.32MB増。主に派遣の各段階と既存会話・休業の回帰
 再実行は作業ルートから dotnet run --project cat_cafe_sim_tool/tests/standalone/StandaloneChecks.csproj -- --conversation cat_cafe_sim_tool/unity_preview_template/Resources/CatCafeStandalone/rules.json 。ビルドは cat_cafe_sim_tool/build_standalone.ps1 -ProjectPath C:/Users/hi-wa/unity_workspase/CatCafeSim -ExecuteMethod CatCafePreview.Editor.DispatchConversationVerification.VerifyAndBuild 。既存のStandaloneBuildStorageを使い、Logs/StandaloneBuild/Pendingから成功時に移動してLatest一組を置換する。
 
 Player専用検証は --catcafe-dispatch-conversation-check <専用記録ディレクトリ>、別プロセス再開は --dispatch-conversation-restart 、ネイティブ保存したmanual/slot-8.jsonの確認には --dispatch-manual-load を併用する。通常セーブは使わない。
+
+2026-10-18追補：[商店街の派遣中二択「追加の交流」](UnityDispatchEncounterConversation.md)をやさしいADVへ接続した。既存の回答・効果・日程は維持し、両結果と保存再開を追加。

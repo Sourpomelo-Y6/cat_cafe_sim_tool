@@ -32,10 +32,22 @@ namespace CatCafePreview
         private string instance, identity, waiting, selection;
         private bool online;
         private PythonDispatchEncounter Row { get { return records.value<events.Length ? events[records.value] : null; } }
-        public void Open(){if(events.Length==0 || !GetComponent<PythonStateClient>().CanManageSaves)return;Clear();panel.SetActive(true);panel.transform.SetAsLastSibling();Render();ResetScroll();}
-        public void Close(){Clear();panel.SetActive(false);}
+        public EncounterConversationPanel Dialogue=>GetComponent<EncounterConversationPanel>()??gameObject.AddComponent<EncounterConversationPanel>();
+        public void HideForConversation(){Clear();panel.SetActive(false);}
+        public void Open()
+        {
+            if(events.Length==0 || !GetComponent<PythonStateClient>().CanManageSaves)return;
+            if(CafeBackends.Standalone)
+            {
+                var b=CafeBackends.Local as LocalCafeBackend;Dialogue.Apply(GetComponent<PythonStateClient>().CurrentState,this);
+                if(b.EncounterResultPending){Dialogue.Open();return;}
+                if(Row!=null && Dialogue.OpenEvent(Row.event_id))return;
+            }
+            Clear();panel.SetActive(true);panel.transform.SetAsLastSibling();Render();ResetScroll();
+        }
+        public void Close(){Clear();panel.SetActive(false);if(CafeBackends.Standalone && GetComponent<EncounterConversationPanel>()?.Showing==true)Dialogue.Close();}
         private void Clear(){selection=null;confirmation.SetActive(false);}
-        public void Select(int _){Clear();Render();ResetScroll();}
+        public void Select(int _){Clear();Render();ResetScroll();if(panel.activeSelf && CafeBackends.Standalone && Row!=null)Dialogue.OpenEvent(Row.event_id);}
         private void ResetScroll(){var scroll=details.transform.parent.parent.GetComponent<ScrollRect>();if(scroll!=null)scroll.verticalNormalizedPosition=1;}
         public void First(){Choose(0);} public void Second(){Choose(1);}
         static string Number(float value){return value.ToString("0.#");}
@@ -70,7 +82,7 @@ namespace CatCafePreview
             records.options.Clear();foreach(var ev in events)records.options.Add(new Dropdown.OptionData(ev.label+"（"+(ev.status=="waiting" ? "回答待ち" : ev.status=="scheduled" ? "発生前" : "回答済み")+"）"));
             if(events.Length==0)records.options.Add(new Dropdown.OptionData("記録なし"));records.SetValueWithoutNotify(index);records.RefreshShownValue();
             if(newlyWaiting){panel.SetActive(true);panel.transform.SetAsLastSibling();}
-            if(events.Length==0 || state.game_over!=null)panel.SetActive(false);Render();if(newlyWaiting)ResetScroll();
+            if(events.Length==0 || state.game_over!=null)panel.SetActive(false);Render();if(newlyWaiting)ResetScroll();if(CafeBackends.Standalone){Dialogue.Apply(state,this);if(Dialogue.Showing || GetComponents<AcquisitionConversationPanel>().Any(v=>v.Showing))HideForConversation();}
         }
         private void Render()
         {
