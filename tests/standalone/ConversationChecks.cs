@@ -38,6 +38,7 @@ static partial class Program
         }
         Assert(ordered>0,"No overlapping event order cases exercised");
         var invalid=CafeIntakeConversation.Start();invalid.node=99;bool invalidRejected=false;try{CafeIntakeConversation.Validate(invalid,"waiting");}catch(ArgumentException){invalidRejected=true;}Assert(invalidRejected,"Invalid node accepted");
+        DispatchConversationChecks(rules);
         RegularConversationChecks(rules);
         DayOffProgressChecks(rules);
         IntakeChecks.Run(rules,Assert,Path.GetFullPath("Logs/StandaloneConversation/core-saves"));
@@ -94,6 +95,38 @@ static partial class Program
             }
         }
         Assert(CafeRegularConversation.Lines("introduction","マロン","紹介者の名前").Any(l=>l.speaker=="紹介者の名前"),"Introducer speaker not used");
+    }
+
+    static void DispatchConversationChecks(CafeRules rules)
+    {
+        foreach(bool cancelFirst in new[]{false,true})
+        {
+            var sim=new CafeSimulation(rules);string cat="cat-tama",id="dispatch-1-"+cat;
+            var row=new CafeDispatchConversation{event_id=id,cat_id=cat,day=1,departure=CafeDispatchDialogue.Start("departure")};
+            void Roundtrip()
+            {
+                var save=Decode<CafeSaveEnvelope>(Encode(new CafeSaveEnvelope{state=sim.State,dispatch_conversations=new[]{row},dispatch_conversation_selected=id}));
+                CafeDispatchDialogue.Validate(save.dispatch_conversations,save.dispatch_conversation_selected,save.state);sim.Restore(save.state);row=save.dispatch_conversations[0];
+            }
+            string Capture(){var value=Decode<CafeSnapshot>(Encode(sim.State));value.instance_id="";value.revision=0;return Encode(value);}
+            string before=Capture();for(int n=0;n<=CafeDispatchDialogue.Lines("departure","introduction","").Length;n++){row.departure.node=n;Roundtrip();Assert(Capture()==before,"Reading changed dispatch game state");}
+            if(cancelFirst){row.departure.branch_id="cancelled";for(int n=0;n<=2;n++){row.departure.node=n;Roundtrip();}CafeDispatchDialogue.Finish(row);CafeDispatchDialogue.Finish(row);Roundtrip();Assert(row.departure.viewed_branches.Length==1,"Cancel viewing duplicated");row.departure.branch_id="introduction";row.departure.node=0;row.departure.completed=false;}
+            double funds=sim.State.funds;sim.Execute("dispatch_general",catId:cat,choice:CafeDispatchDialogue.Destination);var ev=sim.State.dispatches[0];CafeDispatchDialogue.Sync(row,ev);
+            Assert(row.departure.branch_id=="departed" && sim.State.funds==funds && sim.State.cats.Single(c=>c.id==cat).activity=="dispatched","Departure sync changed payment");
+            for(int n=0;n<=3;n++){row.departure.node=n;Roundtrip();}CafeDispatchDialogue.Finish(row);Roundtrip();Assert(!CafeDispatchDialogue.ResultPending(row),"Finished departure still pending");
+            row.stage="travelling";row.travelling=CafeDispatchDialogue.Start("travelling");for(int n=0;n<=3;n++){row.travelling.node=n;Roundtrip();}CafeDispatchDialogue.Finish(row);Roundtrip();
+            if(sim.StoreEventWaiting)sim.Execute("resolve_store_event",choice:sim.CurrentStoreEvent.type=="trouble"?"patch":"decline");sim.Execute("day_off");ev=sim.State.dispatches[0];CafeDispatchDialogue.Sync(row,ev);Assert(row.stage=="return" && row.returning.branch_id=="introduction","Return phase missing");
+            for(int n=0;n<=3;n++){row.returning.node=n;Roundtrip();}
+            funds=sim.State.funds;sim.Execute("resolve_activity",source:id,choice:"receive");ev=sim.State.dispatches[0];CafeDispatchDialogue.Sync(row,ev);
+            Assert(CafeDispatchDialogue.ResultPending(row) && row.returning.branch_id=="received","Received result missing");
+            for(int n=0;n<=3;n++){row.returning.node=n;Roundtrip();string answered=Encode(sim.State);for(int j=0;j<5;j++)sim.Execute("resolve_activity",source:id,choice:"receive");Assert(answered==Encode(sim.State),"Return paid twice");}
+            Assert(sim.State.funds==funds+ev.reward,"Return reward mismatch");CafeDispatchDialogue.Finish(row);CafeDispatchDialogue.Finish(row);Roundtrip();Assert(row.returning.viewed_branches.Length==1 && !CafeDispatchDialogue.ResultPending(row),"Receipt viewing duplicated");
+            foreach(Action<CafeDispatchConversation> forge in new Action<CafeDispatchConversation>[]{r=>r.event_id="wrong",r=>r.cat_id="wrong",r=>r.day++,r=>r.stage="unknown",r=>r.returning.node=99,r=>r.returning.branch_id="introduction",r=>r.returning.conversation_id=CafeIntakeConversation.Id,r=>r.returning.viewed_branches=new[]{"received","received"},r=>r.returning.completed=false})
+            {
+                var bad=Decode<CafeDispatchConversation>(Encode(row));forge(bad);bool rejected=false;try{CafeDispatchDialogue.Validate(new[]{bad},id,sim.State);}catch(ArgumentException){rejected=true;}Assert(rejected,"Forged dispatch conversation accepted");
+            }
+            CafeDispatchDialogue.Validate(null,null,sim.State);Assert(Decode<CafeSaveEnvelope>(Encode(new CafeSaveEnvelope{state=sim.State})).dispatch_conversations==null,"Old save fabricated dispatch viewing");
+        }
     }
 
 }

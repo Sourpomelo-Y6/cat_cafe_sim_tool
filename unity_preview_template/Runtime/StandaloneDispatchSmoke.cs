@@ -19,7 +19,7 @@ namespace CatCafePreview
         private static void Resume(LocalCafeBackend b,int slot){string before=Capture(b);Good(b,"save_game",slot:slot);Good(b,"load_game",slot:slot);Check(before==Capture(b),"Save changed dispatch");}
         public static int Run(string path)
         {
-            checks=0;var rules=JsonUtility.FromJson<CafeRules>(Resources.Load<TextAsset>("CatCafeStandalone/rules").text);rules.store_events.probability=0;rules.rules_id+="-dispatch-smoke";
+            checks=0;var rules=JsonUtility.FromJson<CafeRules>(Resources.Load<TextAsset>("CatCafeStandalone/rules").text);rules.store_events.probability=0; // Isolated fixture directory; keep the presentation catalog ID compatible.
             var b=new LocalCafeBackend(path,rules);
             if(File.Exists(Path.Combine(path,"slot-6.json")))
             {

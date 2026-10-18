@@ -8,7 +8,7 @@ namespace CatCafePreview
     // Scene-independent view; scenario text and progress have no dependency on this UI.
     public class AcquisitionConversationPanel : MonoBehaviour
     {
-        GameObject panel,confirmation; Font font; bool regular; PythonCafeState state; CafeConversationProgress progress;
+        GameObject panel,confirmation; Font font; bool regular; protected PythonCafeState state; protected CafeConversationProgress progress;
         Transform[] originalChildren; bool[] originalActive; Vector2 originalMin,originalMax,originalPivot,originalOffsetMin,originalOffsetMax;
         public bool OriginalShowing {get;private set;}
         GameObject card,dialogue,choiceGroup,historyWindow; Text heading,body,speaker,hint,acceptEffect,declineEffect,catLabel,historyBody,sceneLabel; RawImage portrait;
@@ -17,12 +17,12 @@ namespace CatCafePreview
         public ScrollRect HistoryScroll=>historyScroll;
         Button next,accept,decline,backlog,close; ScrollRect scroll;
         string rendered,epoch; float revealed; bool history,hidden; int lastFrame=-1;
-        LocalCafeBackend Backend=>CafeBackends.Local as LocalCafeBackend;
-        PythonStateClient Client=>GetComponent<PythonStateClient>();
+        protected LocalCafeBackend Backend=>CafeBackends.Local as LocalCafeBackend;
+        protected PythonStateClient Client=>GetComponent<PythonStateClient>();
         public bool Showing=>!OriginalShowing && panel!=null && panel.activeSelf && progress!=null && !progress.completed;
-        bool CanAnswer(bool answer)=>regular?Client.CanRespondRegular(answer?"accept":"decline"):Client.CanRespondIntake(answer);
-        CafeConversationLine[] Lines(string branch)=>regular?CafeRegularConversation.Lines(branch,state.regular_introduction.name,state.regular_introduction.customer_name):CafeIntakeConversation.Lines(branch,state.intake_request.name);
-        PythonIntakeState Request
+        protected virtual bool CanAnswer(bool answer)=>regular?Client.CanRespondRegular(answer?"accept":"decline"):Client.CanRespondIntake(answer);
+        protected virtual CafeConversationLine[] Lines(string branch)=>regular?CafeRegularConversation.Lines(branch,state.regular_introduction.name,state.regular_introduction.customer_name):CafeIntakeConversation.Lines(branch,state.intake_request.name);
+        protected virtual PythonIntakeState Request
         {
             get
             {
@@ -31,19 +31,33 @@ namespace CatCafePreview
                 return new PythonIntakeState{cat_id=q.content_cat_id,name=q.name,personality=q.personality,cost=q.cost,housing=q.housing,can_accept=q.can_accept,can_decline=q.can_decline,response_reason=q.response_reason,accept_reason=q.accept_reason};
             }
         }
-        void SetOpen(bool open){if(regular)Backend.RegularConversationOpen=open;else Backend.ConversationOpen=open;}
+        protected virtual void SetOpen(bool open){if(regular)Backend.RegularConversationOpen=open;else Backend.ConversationOpen=open;}
         public void Apply(PythonCafeState value,PythonIntakePanel original){panel=original.panel;confirmation=original.confirmation;font=original.title.font;ApplyState(value);}
         public void ApplyRegular(PythonCafeState value,PythonRegularIntroductionPanel original){regular=true;panel=original.panel;confirmation=original.confirmation;font=original.title.font;ApplyState(value);}
+        protected virtual CafeConversationProgress ResolveProgress(){if(regular)Backend.BeginRegularConversation();else Backend.BeginIntakeConversation();return regular?Backend.RegularConversation:Backend.Conversation;}
+        protected void Bind(PythonCafeState value,GameObject host,Font textFont){panel=host;font=textFont;ApplyState(value);}
+        protected virtual bool Available=>progress!=null && !progress.completed;
+        protected virtual bool Choosing=>progress.branch_id=="introduction" && progress.node>=Lines(progress.branch_id).Length;
+        protected virtual string Title=>regular?"常連からの猫紹介":"保護猫の受け入れ依頼";
+        protected virtual string SceneLabel=>state.day+"日目 · 営業準備";
+        protected virtual string ChoicePrompt=>"この子を、ここへ迎えましょうか。\n迎えるか、見送るかを選んでください。";
+        protected virtual string AcceptCaption=>"迎える";
+        protected virtual string DeclineCaption=>"見送る";
+        protected virtual string AcceptEffect {get{var q=Request;return (q.can_accept?"選択可能":"選べない理由："+(string.IsNullOrEmpty(q.response_reason)?q.accept_reason:q.response_reason))+"\n初期費用："+q.cost+" / 資金："+state.funds+" → "+(state.funds-q.cost)+"\n飼育枠："+q.housing+"\n健康・体力全回復、休養予定で加入。";}}
+        protected virtual string DeclineEffect {get{var q=Request;return (q.can_decline?"選択可能":"選べない理由："+q.response_reason)+"\n費用・人気"+(regular?"・常連度":"")+"の変化なし。\nこの"+(regular?"紹介":"依頼")+"は再発生しません。";}}
+        protected virtual string Notice=>progress.branch_id=="introduction"?"営業・自動進行は停止中。閉じても未回答の相談と会話の位置を保持します。":"回答は確定済みです。閉じた結果会話はイベント一覧から再開できます。";
+        protected virtual string HistoryPrefix=>progress.branch_id=="introduction"?"":string.Join("\n\n",Lines("introduction").Select(l=>(string.IsNullOrEmpty(l.speaker)?"地の文":l.speaker)+"\n"+l.text))+"\n\n【"+(progress.branch_id=="accepted"?"迎える":"見送る")+"】\n\n";
+        protected virtual void Finish(){if(regular)CafeRegularConversation.Finish(progress);else CafeIntakeConversation.Finish(progress);}
+        protected virtual void SendAnswer(bool answer){if(regular)Client.RespondRegular(answer?"accept":"decline");else Client.RespondIntake(answer);}
         void ApplyState(PythonCafeState value)
         {
-            state=value;if(regular)Backend.BeginRegularConversation();else Backend.BeginIntakeConversation();
-            var restored=regular?Backend.RegularConversation:Backend.Conversation;if(!ReferenceEquals(progress,restored)){hidden=false;rendered=null;history=false;}progress=restored;
+            state=value;var restored=ResolveProgress();if(!ReferenceEquals(progress,restored)){hidden=false;rendered=null;history=false;}progress=restored;
             if(card==null && progress==null){panel.SetActive(false);return;}
             if(card==null)Build();
             if(progress!=null && !progress.completed){OriginalShowing=false;foreach(var child in originalChildren)child.gameObject.SetActive(false);card.SetActive(true);Stretch(panel.GetComponent<RectTransform>());}
             string key=value.instance_id+"/"+progress?.branch_id;
             if(epoch!=key){epoch=key;hidden=false;history=false;rendered=null;}
-            bool available=progress!=null && !progress.completed;
+            bool available=Available;
             if(available && GetComponents<AcquisitionConversationPanel>().Any(other=>other!=this && other.Showing))hidden=true;
             panel.SetActive(available && !hidden && !Client.AutoPlayRunning);
             if(confirmation!=null)confirmation.SetActive(false);
@@ -58,16 +72,16 @@ namespace CatCafePreview
             if(!Showing)return;
             if(Client.Automatic)Client.PauseAutomaticForSave();
             var q=Request;var lines=Lines(progress.branch_id);
-            bool choosing=progress.branch_id=="introduction" && progress.node>=lines.Length;
+            bool choosing=Choosing;
             string key=progress.branch_id+":"+progress.node+":"+history;
             if(rendered!=key)
             {
                 rendered=key;revealed=0;scroll.verticalNormalizedPosition=historyScroll.verticalNormalizedPosition=1;
                 speaker.text=choosing?"あなた":progress.node<lines.Length?(string.IsNullOrEmpty(lines[progress.node].speaker)?"地の文":lines[progress.node].speaker):"会話の終わり";
             }
-            heading.text=regular?"常連からの猫紹介":"保護猫の受け入れ依頼";sceneLabel.text=state.day+"日目 · 営業準備";catLabel.text=q.name+"\n"+q.personality;
+            heading.text=Title;sceneLabel.text=SceneLabel;catLabel.text=q.name+"\n"+q.personality;
             Layout();historyWindow.SetActive(history);dialogue.SetActive(!history);choiceGroup.SetActive(choosing && !history);catGroup.alpha=choosing?.20f:1f;
-            string full=choosing?"この子を、ここへ迎えましょうか。\n迎えるか、見送るかを選んでください。":progress.node<lines.Length?lines[progress.node].text:"営業準備へ戻りましょう。営業・自動進行は手動で再開してください。";
+            string full=choosing?ChoicePrompt:progress.node<lines.Length?lines[progress.node].text:"通常画面へ戻りましょう。営業・自動進行は手動で再開してください。";
             body.text=choosing?full:full.Substring(0,Math.Min(full.Length,(int)revealed));
             if(history)historyBody.text=History(lines);
             next.gameObject.SetActive(!choosing && !history);next.GetComponentInChildren<Text>().text=revealed<full.Length?"全文表示":progress.node>=lines.Length?"会話を終える":"次へ";
@@ -75,16 +89,15 @@ namespace CatCafePreview
             next.interactable=ready;close.interactable=ready;backlog.interactable=ready;
             accept.gameObject.SetActive(choosing && !history);decline.gameObject.SetActive(choosing && !history);
             accept.interactable=ready && CanAnswer(true);decline.interactable=ready && CanAnswer(false);
-            acceptEffect.text=(q.can_accept?"選択可能":"選べない理由："+(string.IsNullOrEmpty(q.response_reason)?q.accept_reason:q.response_reason))+"\n初期費用："+q.cost+" / 資金："+state.funds+" → "+(state.funds-q.cost)+"\n飼育枠："+q.housing+"\n健康・体力全回復、休養予定で加入。";
-            declineEffect.text=(q.can_decline?"選択可能":"選べない理由："+q.response_reason)+"\n費用・人気"+(regular?"・常連度":"")+"の変化なし。\nこの"+(regular?"紹介":"依頼")+"は再発生しません。";
-            hint.text=!Client.CanSendCommands?"処理中です。完了をお待ちください。":progress.branch_id=="introduction"?"営業・自動進行は停止中。閉じても未回答の相談と会話の位置を保持します。":"回答は確定済みです。閉じた結果会話はイベント一覧から再開できます。";
+            accept.GetComponentInChildren<Text>().text=AcceptCaption;decline.GetComponentInChildren<Text>().text=DeclineCaption;
+            acceptEffect.text=AcceptEffect;declineEffect.text=DeclineEffect;
+            hint.text=!Client.CanSendCommands?"処理中です。完了をお待ちください。":Notice;
             portrait.texture=GetComponent<ContentPreview>().CandidateCatTexture(q.cat_id)??ContentPreview.CatPlaceholderTexture();portrait.enabled=portrait.texture!=null;
             if(portrait.texture!=null)portrait.GetComponent<AspectRatioFitter>().aspectRatio=(float)portrait.texture.width/portrait.texture.height;
         }
         string History(CafeConversationLine[] lines)
         {
-            string result="";
-            if(progress.branch_id!="introduction")result=string.Join("\n\n",Lines("introduction").Select(l=>(string.IsNullOrEmpty(l.speaker)?"地の文":l.speaker)+"\n"+l.text))+"\n\n【"+(progress.branch_id=="accepted"?"迎える":"見送る")+"】\n\n";
+            string result=HistoryPrefix;
             return result+string.Join("\n\n",lines.Take(Math.Min(progress.node+1,lines.Length)).Select(l=>(string.IsNullOrEmpty(l.speaker)?"地の文":l.speaker)+"\n"+l.text));
         }
         protected virtual void Update(){if(Showing){revealed+=Time.unscaledDeltaTime*40;Refresh();}else if(Backend!=null)SetOpen(false);}
@@ -94,12 +107,12 @@ namespace CatCafePreview
             if(!Showing || !Click() || progress==null || history)return;
             var lines=Lines(progress.branch_id);
             if(progress.node<lines.Length){if(revealed<lines[progress.node].text.Length)revealed=lines[progress.node].text.Length;else progress.node++;}
-            else if(progress.branch_id!="introduction"){if(regular)CafeRegularConversation.Finish(progress);else CafeIntakeConversation.Finish(progress);Close();return;}
+            else if(progress.branch_id!="introduction"){Finish();Close();return;}
             Refresh();
         }
-        public void Answer(bool answer){if(!Showing || !Click() || progress==null || progress.branch_id!="introduction" || progress.node<Lines("introduction").Length)return;if(regular)Client.RespondRegular(answer?"accept":"decline");else Client.RespondIntake(answer);Refresh();}
-        public void Open(){foreach(var other in GetComponents<AcquisitionConversationPanel>())if(other!=this && other.Showing)other.Close();hidden=false;OriginalShowing=false;if(card!=null){card.SetActive(true);foreach(var child in originalChildren)child.gameObject.SetActive(false);Stretch(panel.GetComponent<RectTransform>());}panel.SetActive(progress!=null && !progress.completed);panel.transform.SetAsLastSibling();Refresh();}
-        public void Close(){if(!Client.CanManageSaves)return;hidden=true;panel.SetActive(false);SetOpen(false);GetComponent<ContentPreview>().RefreshPythonControls();}
+        public void Answer(bool answer){if(!Showing || !Click() || progress==null || progress.branch_id!="introduction" || progress.node<Lines("introduction").Length)return;SendAnswer(answer);Refresh();}
+        public virtual void Open(){foreach(var other in GetComponents<AcquisitionConversationPanel>())if(other!=this && other.Showing)other.Close();hidden=false;OriginalShowing=false;if(card!=null){card.SetActive(true);foreach(var child in originalChildren)child.gameObject.SetActive(false);Stretch(panel.GetComponent<RectTransform>());}panel.SetActive(Available);panel.transform.SetAsLastSibling();Refresh();}
+        public virtual void Close(){if(!Client.CanManageSaves)return;hidden=true;panel.SetActive(false);SetOpen(false);GetComponent<ContentPreview>().RefreshPythonControls();}
         void ToggleHistory(){if(!Click())return;history=!history;Refresh();}
         public void ShowOriginal()
         {
