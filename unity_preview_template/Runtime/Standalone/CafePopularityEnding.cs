@@ -12,7 +12,7 @@ namespace CatCafePreview.Standalone
         public static void Validate(CafeEndingProgress row,CafeSnapshot s)
         {
             if(row==null)return;var p=row.progress;int length=Lines(Record(s),"猫").Length;
-            if(Record(s)==null || (!string.IsNullOrEmpty(row.cat_id) && !s.cats.Any(c=>c.id==row.cat_id)) || p==null || p.conversation_id!=Id || p.branch_id!=Branch || p.node<0 || p.node>length || p.completed && p.node!=length || p.viewed_branches==null || !p.viewed_branches.SequenceEqual(p.completed?new[]{Branch}:new string[0]))throw new ArgumentException("人気エンディングの保存位置が不正です。");
+            if(Record(s)==null || (!string.IsNullOrEmpty(row.cat_id) && !s.cats.Any(c=>c.id==row.cat_id)) || p==null || p.conversation_id!=Id || p.branch_id!=Branch || p.node<0 || p.node>length || p.page_offset<0 || p.page_offset>1000000 || p.completed && p.node!=length || p.viewed_branches==null || !p.viewed_branches.SequenceEqual(p.completed?new[]{Branch}:new string[0]))throw new ArgumentException("人気エンディングの保存位置が不正です。");
         }
         public static void Finish(CafeConversationProgress p){if(p.completed)return;p.completed=true;p.viewed_branches=new[]{Branch};}
         static string N(double v)=>v.ToString("G6",CultureInfo.InvariantCulture);

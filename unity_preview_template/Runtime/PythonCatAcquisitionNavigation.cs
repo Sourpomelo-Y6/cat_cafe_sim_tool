@@ -57,7 +57,7 @@ namespace CatCafePreview
             if(s.game_over!=null)ResetNavigation();
             if(origin!=null && (!origin.activeSelf || !GetComponent<PythonHousingPanel>().panel.activeSelf)){origin=null;scroll=null;RestoreCaption();}
             if(Accepted(watched,s) && Cat(watched)!=null){joined=watched;watched=null;}
-            if(joinedEntry!=null){var c=Cat(joined);joinedEntry.gameObject.SetActive(c!=null);joinedEntry.interactable=Client.CanManageSaves;joinedEntry.GetComponentInChildren<Text>().text=c==null?"迎えた猫の詳細":"迎えた猫："+c.name+" の詳細";}
+            if(joinedEntry!=null){var c=Cat(joined);joinedEntry.gameObject.SetActive(false);joinedEntry.interactable=Client.CanManageSaves;joinedEntry.GetComponentInChildren<Text>().text=c==null?"迎えた猫の詳細":"迎えた猫："+c.name+" の詳細";}
             for(int i=0;i<panels.Length;i++)
             {
                 float cost=0,after=s.funds;string status="候補";bool done=Accepted(Id(i,s),s);

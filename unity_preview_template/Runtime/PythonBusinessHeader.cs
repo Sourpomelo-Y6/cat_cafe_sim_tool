@@ -32,13 +32,28 @@ namespace CatCafePreview
             if(attention==null || !attention.interactable)return;
             switch(destination){case Destination.Goal:var goal=GetComponent<PythonGoalPanel>();goal.Apply(GetComponent<PythonStateClient>().CurrentState);goal.panel.transform.SetAsLastSibling();break;case Destination.Events:GetComponent<PythonEventListPanel>()?.Open();break;case Destination.Assignment:GetComponent<PythonServiceAssignmentPanel>()?.Open();break;case Destination.Persist:GetComponent<PythonPersistPanel>()?.Open();break;case Destination.Player:GetComponent<PythonPlayerPanel>()?.Open();break;case Destination.Closing:GetComponent<PythonClosingPanel>()?.Open();break;}
         }
+        void AlignCommands()
+        {
+            var root=transform.Find("Content Canvas/Background");
+            if(root==null)return;
+            var buttons=new[]{GetComponent<ContentPreview>().GetSceneButton(3),root.Find("Open Save Browser")?.GetComponent<Button>(),root.Find("Return To Title")?.GetComponent<Button>(),GetComponent<PythonMenuPanel>()?.open,GetComponent<PythonEventListPanel>()?.open,GetComponent<PythonHousingPanel>()?.open};
+            var speed=auto.speed.GetComponent<RectTransform>();speed.anchoredPosition=new Vector2(554,-44);speed.sizeDelta=new Vector2(124,38);
+            for(int i=0;i<buttons.Length;i++)
+            {
+                if(buttons[i]==null)continue;var r=buttons[i].GetComponent<RectTransform>();
+                r.anchorMin=r.anchorMax=r.pivot=new Vector2(0,1);r.anchoredPosition=new Vector2(804+i%3*152,-(4+i/3*40));r.sizeDelta=new Vector2(148,38);
+                var t=buttons[i].GetComponentInChildren<Text>();t.fontSize=i==4?14:16;t.resizeTextForBestFit=i==4;t.resizeTextMinSize=10;t.resizeTextMaxSize=14;t.horizontalOverflow=HorizontalWrapMode.Wrap;t.verticalOverflow=VerticalWrapMode.Truncate;
+                t.rectTransform.anchorMin=Vector2.zero;t.rectTransform.anchorMax=Vector2.one;t.rectTransform.offsetMin=new Vector2(4,0);t.rectTransform.offsetMax=new Vector2(-4,0);
+            }
+        }
         public void RefreshControls()
         {
             var client=GetComponent<PythonStateClient>();var state=client.CurrentState;destination=Destination.None;
             if(state==null){summary.text="接続を待っています";hint.text="再接続後に営業状況を表示します。";if(attention!=null)attention.gameObject.SetActive(false);return;}
             string phase=state.game_over!=null ? "経営終了" : state.closed ? "閉店後" : state.can_set_shifts ? "営業準備" : "営業中";
             summary.text=!Connected ? "未接続 / 再接続を待っています" : state.day+"日目 / "+phase+" / 資金 "+state.funds.ToString("0.#");
-            bool running=client.AutoPlayRunning || client.BatchAutomatic || client.BatchStopping;
+            AlignCommands();
+            bool running=client.AutoPlayExecuting || client.BatchAutomatic || client.BatchStopping;
             preparation.gameObject.SetActive(state.can_set_shifts && !state.closed && state.game_over==null && !running);
             progress.gameObject.SetActive(state.game_over==null && !running);progress.interactable=Connected && client.CanProgressBusiness;
             auto.toggle.gameObject.SetActive((!state.can_set_shifts && !state.closed && state.game_over==null && !running) || client.Automatic);
@@ -54,6 +69,7 @@ namespace CatCafePreview
             else if(running)hint.text="おまかせ実行中です。停止ボタンから中断できます。";
             else if(!client.CanSendCommands)hint.text=client.Automatic ? "接客を進めています。停止ボタンで自動進行を止められます。" : "操作を送信しています。完了までお待ちください。";
             else if(state.player_interaction?.active==true){hint.text="猫との交流中です。交流を終了してから営業を進めてください。";destination=Destination.Player;caption="交流に戻る";}
+            else if(state.growth_choices?.Length>0){hint.text="猫の成長を選んでください。おまかせは回答後に手動で再開します。";destination=Destination.Events;caption="成長を選択";}
             else if(!string.IsNullOrEmpty(state.required_action)){hint.text="確認が必要です："+RequiredActionLabel(state.required_action);destination=state.goal_result!=null ? Destination.Goal : Destination.Events;caption=state.goal_result!=null ? "目標の結果を確認" : "回答待ちを確認";}
             else if(state.service_assignment?.waiting==true){hint.text="接客の割り当て待ちです。お客さん・猫・席を選んでください。";destination=Destination.Assignment;caption="接客を割り当てる";}
             else if(state.game_over!=null)hint.text="経営が終了しました。結果を確認してください。";

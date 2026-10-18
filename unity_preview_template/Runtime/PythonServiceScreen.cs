@@ -50,12 +50,12 @@ namespace CatCafePreview
             if(rosterScroll!=null){rosterPanel.GetComponent<RectTransform>().anchoredPosition=new Vector2(24,phase=="open" ? -262 : -220);rosterPanel.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,phase=="open" ? 476 : 518);rosterScroll.viewport.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,phase=="open" ? 476 : 518);}
             var visibility=GetComponent<PythonCatVisibility>();if(visibility?.rosterToggle!=null)visibility.rosterToggle.GetComponent<RectTransform>().anchoredPosition=new Vector2(24,phase=="open" ? -94 : -184);
             heading.text = phase == "closed" ? "閉店結果・猫の状態" : showSeats ? "席一覧　　人物アイコン：接客中のお客さん" : "猫一覧";
-            if(state.objective_progress != null)
+            if((state.sidebar_progress ?? (CafeBackends.Standalone ? null : state.objective_progress)) != null)
             {
                 heading.fontSize=16;heading.lineSpacing=1;
                 heading.rectTransform.anchoredPosition=new Vector2(24,-78);
                 heading.rectTransform.sizeDelta=new Vector2(750,48);
-                heading.text=state.objective_progress.label + "\n" + state.objective_progress.summary;
+                var goals=state.sidebar_progress ?? state.objective_progress;heading.text=goals.label + "\n" + goals.summary;
             }
 
             if(!showSeats)

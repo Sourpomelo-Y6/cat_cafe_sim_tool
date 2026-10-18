@@ -22,7 +22,7 @@ namespace CatCafePreview
             var ui=owner.GetComponent<GameOptionsPanel>()??owner.gameObject.AddComponent<GameOptionsPanel>();if(ui.Panel!=null)return ui;ui.client=owner.GetComponent<PythonStateClient>();var menu=owner.GetComponent<PythonMenuPanel>();ui.font=menu.title.font;ui.Build(owner.GetComponentInChildren<Canvas>(true).transform);
             ui.Entry=ui.Button(menu.title.transform.parent,"Options","オプション",0,24,180,40,ui.Open);var r=ui.Entry.GetComponent<RectTransform>();r.anchorMin=r.anchorMax=new Vector2(1,1);r.pivot=new Vector2(1,1);r.anchoredPosition=new Vector2(-24,-24);return ui;
         }
-        public bool CanOpen=>!IsOpen && (title!=null?title.CanManageSaves:client!=null && client.CanSendCommands && !client.AutoPlayRunning && !client.BatchAutomatic && !client.BatchStopping);
+        public bool CanOpen=>!IsOpen && (title!=null?title.CanManageSaves:client!=null && client.CanSendCommands && !client.AutoPlayExecuting && !client.BatchAutomatic && !client.BatchStopping);
         public void Open()
         {
             if(!CanOpen)return;client?.PauseAutomaticForSave();draft=CafeOptions.Current.Copy();active=this;Panel.SetActive(true);Panel.transform.SetAsLastSibling();Refresh();Status.text=CafeOptions.Store?.Notice??"設定は全セーブ共通です。保存すると反映します。";

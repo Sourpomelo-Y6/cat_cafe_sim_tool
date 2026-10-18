@@ -16,12 +16,13 @@ namespace CatCafePreview
         static readonly Color Paper=new Color(.99f,.97f,.92f),Ink=new Color(.22f,.26f,.20f),Olive=new Color(.36f,.43f,.31f);
         public ScrollRect HistoryScroll=>historyScroll;
         Button next,accept,decline,backlog,close; ScrollRect scroll;
-        string rendered,epoch; float revealed; bool history,hidden; int lastFrame=-1;
+        string rendered,epoch; string pageText=""; float revealed; bool history,hidden; int lastFrame=-1;
         protected LocalCafeBackend Backend=>CafeBackends.Local as LocalCafeBackend;
         protected PythonStateClient Client=>GetComponent<PythonStateClient>();
         public bool Showing=>!OriginalShowing && panel!=null && panel.activeSelf && progress!=null && !progress.completed;
         protected virtual bool Ready=>Client.CanManageSaves;
-        protected virtual bool AutoRunning=>Client.AutoPlayRunning;
+        protected virtual bool AutoRunning=>Client.AutoPlayExecuting;
+        protected virtual bool ThreeLinePages=>false;
         protected virtual bool SaveControls=>true;
         protected virtual string EndText=>"通常画面へ戻りましょう。営業・自動進行は手動で再開してください。";
         protected virtual string BusyNotice=>!Client.CanSendCommands?"処理中です。完了をお待ちください。":Notice;
@@ -83,7 +84,10 @@ namespace CatCafePreview
             PauseProgress();
             var q=Request;var lines=Lines(progress.branch_id);
             bool choosing=Choosing;
-            string key=progress.branch_id+":"+progress.node+":"+history;
+            Layout();
+            string full=choosing?ChoicePrompt:progress.node<lines.Length?lines[progress.node].text:EndText;
+            pageText=ThreeLinePages && !choosing?Page(full):full;
+            string key=progress.branch_id+":"+progress.node+":"+progress.page_offset+":"+history+":"+pageText;
             if(rendered!=key)
             {
                 rendered=key;revealed=0;scroll.verticalNormalizedPosition=historyScroll.verticalNormalizedPosition=1;
@@ -91,9 +95,10 @@ namespace CatCafePreview
             }
             heading.text=Title;sceneLabel.text=SceneLabel;catLabel.text=q.name+"\n"+q.personality;
             Layout();historyWindow.SetActive(history);dialogue.SetActive(!history);choiceGroup.SetActive(choosing && !history);catGroup.alpha=choosing?.20f:1f;
-            string full=choosing?ChoicePrompt:progress.node<lines.Length?lines[progress.node].text:EndText;
+            full=pageText;
             if(CafeOptions.Current.instant)revealed=full.Length;
             body.text=choosing?full:full.Substring(0,Math.Min(full.Length,(int)revealed));
+            if(ThreeLinePages)body.text=body.text.TrimEnd('\r','\n');
             if(history)historyBody.text=History(lines);
             next.gameObject.SetActive(!choosing && !history);next.GetComponentInChildren<Text>().text=revealed<full.Length?"全文表示":progress.node>=lines.Length?"会話を終える":"次へ";
             bool ready=Ready;
@@ -102,14 +107,26 @@ namespace CatCafePreview
             accept.interactable=ready && CanAnswer(true);decline.interactable=ready && CanAnswer(false);
             accept.GetComponentInChildren<Text>().text=AcceptCaption;decline.GetComponentInChildren<Text>().text=DeclineCaption;
             acceptEffect.text=AcceptEffect;declineEffect.text=DeclineEffect;
-            hint.text=BusyNotice;
+            hint.text=BusyNotice;hint.gameObject.SetActive(!ThreeLinePages);
             portrait.texture=PortraitTexture(q.cat_id)??ContentPreview.CatPlaceholderTexture();portrait.enabled=portrait.texture!=null;
             if(portrait.texture!=null)portrait.GetComponent<AspectRatioFitter>().aspectRatio=(float)portrait.texture.width/portrait.texture.height;
+        }
+        string Page(string full)
+        {
+            // Use the same font, width, wrapping and spacing as the rendered text.
+            int start=Mathf.Clamp(progress.page_offset,0,Math.Max(0,full.Length-1));
+            progress.page_offset=start;string remaining=full.Substring(start);
+            var settings=body.GetGenerationSettings(new Vector2(body.rectTransform.rect.width,10000));
+            settings.verticalOverflow=VerticalWrapMode.Overflow;
+            var generator=new TextGenerator();generator.Populate(remaining,settings);
+            int count=generator.lines.Count>3?generator.lines[3].startCharIdx:remaining.Length;
+            if(count<=0)count=remaining.Length;
+            return remaining.Substring(0,count);
         }
         string History(CafeConversationLine[] lines)
         {
             string result=HistoryPrefix;
-            return result+string.Join("\n\n",lines.Take(Math.Min(progress.node+1,lines.Length)).Select(l=>(string.IsNullOrEmpty(l.speaker)?"地の文":l.speaker)+"\n"+l.text));
+            return result+string.Join("\n\n",lines.Take(Math.Min(progress.node+1,lines.Length)).Select((l,i)=>(string.IsNullOrEmpty(l.speaker)?"地の文":l.speaker)+"\n"+(ThreeLinePages && i==progress.node?l.text.Substring(0,Math.Min(l.text.Length,progress.page_offset+pageText.Length)):l.text)));
         }
         protected virtual void Update(){if(Showing){if(!GameOptionsPanel.IsOpen)revealed=CafeOptions.Reveal(revealed,Time.unscaledDeltaTime,1000000);Refresh();}else if(Backend!=null)SetOpen(false);}
         bool Click(){if(GameOptionsPanel.IsOpen || !Ready || lastFrame==Time.frameCount)return false;lastFrame=Time.frameCount;return true;}
@@ -117,7 +134,7 @@ namespace CatCafePreview
         {
             if(!Showing || !Click() || progress==null || history)return;
             var lines=Lines(progress.branch_id);
-            if(progress.node<lines.Length){if(revealed<lines[progress.node].text.Length)revealed=lines[progress.node].text.Length;else progress.node++;}
+            if(progress.node<lines.Length){if(revealed<pageText.Length)revealed=pageText.Length;else if(ThreeLinePages && progress.page_offset+pageText.Length<lines[progress.node].text.Length)progress.page_offset+=pageText.Length;else {progress.node++;progress.page_offset=0;}}
             else if(progress.branch_id!="introduction"){Finish();RecordCompletion();Close();return;}
             Refresh();
         }
@@ -171,7 +188,8 @@ namespace CatCafePreview
         {
             var size=card.GetComponent<RectTransform>().rect.size;if(size==layoutSize && layoutHistory==history)return;layoutSize=size;layoutHistory=history;
             float width=size.x-96;var dock=dialogue.GetComponent<RectTransform>();dock.offsetMin=new Vector2(48,32);dock.offsetMax=new Vector2(-48,286);
-            SetScroll(scroll,width-64,112);hint.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,width-64);next.GetComponent<RectTransform>().anchoredPosition=new Vector2(width-224,-202);
+            SetScroll(scroll,width-64,ThreeLinePages?144:112);
+            if(ThreeLinePages){scroll.vertical=false;scroll.verticalScrollbar.gameObject.SetActive(false);}hint.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,width-64);next.GetComponent<RectTransform>().anchoredPosition=new Vector2(width-224,-202);
             var box=historyWindow.GetComponent<RectTransform>();Place(box,96,110,size.x-192,size.y-158);SetScroll(historyScroll,size.x-256,size.y-334);
             historyWindow.transform.Find("会話へ戻る").GetComponent<RectTransform>().anchoredPosition=new Vector2(32,-(size.y-216));
         }

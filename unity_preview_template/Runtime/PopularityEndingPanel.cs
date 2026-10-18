@@ -14,12 +14,13 @@ namespace CatCafePreview
             owner=original;
             if(host==null){host=new GameObject("Popularity Ending",typeof(RectTransform),typeof(CanvasRenderer),typeof(Image));host.transform.SetParent(owner.panel.transform.parent,false);host.SetActive(false);}
             if(Row==null || !CafePopularityEnding.Waiting(Backend.Simulation.State)){host.SetActive(false);if(outro!=null)outro.SetActive(false);offered=false;return;}
-            if(value.required_action!="goal_result" || GetComponents<AcquisitionConversationPanel>().Any(p=>p!=this && p.Showing)){host.SetActive(false);if(outro!=null)outro.SetActive(false);return;}
+            if(value.growth_choices?.Length>0 || value.required_action!="goal_result" || GetComponents<AcquisitionConversationPanel>().Any(p=>p!=this && p.Showing)){host.SetActive(false);if(outro!=null)outro.SetActive(false);return;}
             bool first=!offered;offered=true;Bind(value,host,owner.title.font);if(first && !Row.progress.completed)Open();
             if(Row.progress.completed)ShowOutro();else if(Showing)owner.panel.SetActive(false);
         }
         protected override CafeConversationProgress ResolveProgress()=>Row?.progress;
         protected override bool Choosing=>false;
+        protected override bool ThreeLinePages=>true;
         protected override void SetOpen(bool open){}
         protected override string Title=>"人気目標エンディング · 猫カフェのこれから";
         protected override string SceneLabel=>"達成 "+CafePopularityEnding.Record(Backend.Simulation.State).day+"日目 · 最終段階";

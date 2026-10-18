@@ -3,6 +3,12 @@ namespace CatCafePreview
 {
     public sealed partial class LocalCafeBackend
     {
+        private PythonObjectiveProgress SidebarProgressView()
+        {
+            var rows=new[]{"popularity","bond","patron"}.Where(t=>Simulation.AutoTargetStatus(t)!=null && !(t=="popularity" && Simulation.AutoTargetStatus(t)=="cleared")).Select(t=>ObjectiveProgressView(t,false)).ToArray();
+            if(rows.Length==0)return null;
+            return new PythonObjectiveProgress{label="挑戦中の目標",summary=string.Join("\n",rows.Select(r=>r.label+"："+r.summary)),details=string.Join("\n\n",rows.Select(r=>r.label+"\n"+r.details))};
+        }
         private PythonObjectiveProgress ObjectiveProgressView(string mode=null,bool includeOther=true)
         {
             var s=Simulation.State;var rules=Simulation.Rules;mode=mode??s.objective;string label=mode=="popularity"?"人気目標":mode=="patron"?"有力者の満足度":mode=="bond"?"猫6匹との好感度":"自由営業",status=Simulation.AutoTargetStatus(mode)??"active",summary,details;bool continued=mode=="popularity"?s.goal.LastOrDefault()?.continued==true:mode=="patron"?s.patron?.continued==true:mode=="bond" && s.bond_goal?.continued==true;

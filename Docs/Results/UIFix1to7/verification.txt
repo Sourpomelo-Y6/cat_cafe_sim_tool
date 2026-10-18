@@ -1,0 +1,10 @@
+2026-10-19 Windows verification
+Editor autoplay: 859 PASS
+Visible player with physical growth answer: 75 PASS
+New-process restart and final JSON roundtrip: 77 PASS; exit 0; zero Unity errors
+1280x800 and 1600x900; count 1000; wrapped ending <=3 lines/page
+User slot-1 (28 days, funds 36800) loaded from title without overwriting
+Latest bytes: 8375096784 -> 8375114517 (+17733)
+Runs bytes: 38603952 -> 42442926 (+3838974)
+Latest only; no Pending/Previous/build zip
+Full evidence: workspace Logs/UIFix1to7/Verified and Docs/UnityUIFix1to7.md

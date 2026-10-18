@@ -6,6 +6,8 @@ namespace CatCafePreview.Standalone
     {
         public string conversation_id, branch_id;
         public int node;
+        // Presentation offset within the existing node; absent in old saves means zero.
+        public int page_offset;
         public bool completed;
         public string[] viewed_branches;
     }

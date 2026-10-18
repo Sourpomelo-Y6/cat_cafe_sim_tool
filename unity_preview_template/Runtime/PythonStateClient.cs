@@ -79,7 +79,7 @@ namespace CatCafePreview
         public PythonMissingRest missing_rest;
         public PythonAdoption adoption;
         public PythonGameOver game_over;
-        public PythonObjectiveProgress objective_progress;
+        public PythonObjectiveProgress objective_progress, sidebar_progress;
         public PythonStoreEvent store_event;
         public PythonGrowthChoice[] growth_choices;
         public float funds;
@@ -175,12 +175,14 @@ namespace CatCafePreview
         public bool BatchAutomatic => batchAutomatic;
         public bool BatchStopping => batchStopRequested;
         public bool AutoPlayRunning => current?.autoplay?.running==true;
+        public bool AutoPlayPaused => AutoPlayRunning && current.autoplay.paused;
+        public bool AutoPlayExecuting => AutoPlayRunning && !AutoPlayPaused;
         public bool CanSendCommands => online && pending==null && current!=null && !GameOptionsPanel.IsOpen;
         private float nextAutomaticTick;
         public bool Automatic { get { return automatic; } }
         public bool Fast { get { return fast; } }
         private bool ConversationBlocksProgress=>CafeBackends.Standalone && (CafeBackends.Local as LocalCafeBackend)?.ConversationBlocksProgress==true;
-        public bool CanStartAutomatic { get { return !ConversationBlocksProgress && CanManageSaves && IsOpen(current); } }
+        public bool CanStartAutomatic { get { return !ConversationBlocksProgress && !AutoPlayRunning && CanManageSaves && IsOpen(current); } }
         private static bool IsOpen(PythonCafeState state)
         { return state != null && state.game_over == null && !state.closed && !state.can_set_shifts && state.service_assignment?.waiting!=true && string.IsNullOrEmpty(state.required_action); }
         public void ToggleAutomatic()
@@ -197,10 +199,10 @@ namespace CatCafePreview
             if(pendingAutomatic && !sendingCommand) { pending=null; pendingAutomatic=false; }
         }
         public PythonCafeState CurrentState { get { return current; } }
-        public bool CanLeaveResult { get { return pending == null && !HasPendingResults && !AutoPlayRunning && !batchAutomatic && !batchStopRequested; } }
+        public bool CanLeaveResult { get { return pending == null && !HasPendingResults && !AutoPlayExecuting && !batchAutomatic && !batchStopRequested; } }
         public bool HasPendingResults => current?.pending_results?.count>0;
         public bool CanRetryPersist => CanSendCommands && HasPendingResults;
-        public bool CanManageSaves { get { return CanSendCommands && !AutoPlayRunning && !HasPendingResults; } }
+        public bool CanManageSaves { get { return CanSendCommands && !AutoPlayExecuting && !batchAutomatic && !batchStopRequested && !HasPendingResults; } }
         public void RetryPersist()
         {
             if(!CanRetryPersist)return;StopAutomatic();batchAutomatic=false;
@@ -276,7 +278,7 @@ namespace CatCafePreview
                 expected_revision=current.revision,working_cats=new string[0],kind=kind,cat_id=catId,choice=choice,event_id=eventId};preview.RefreshPythonControls();
         }
         public void RestForMissing()
-        { if(CanManageSaves && current.missing_rest!=null && current.missing_rest.can_rest)QueuePlayer("rest_for_missing","","",""); }
+        { if(!AutoPlayRunning && CanManageSaves && current.missing_rest!=null && current.missing_rest.can_rest)QueuePlayer("rest_for_missing","","",""); }
         public void ResolveMissing(string eventId)
         {
             if(!CanManageSaves || current.missing_cats==null)return;
@@ -467,18 +469,18 @@ namespace CatCafePreview
                 return string.Join("\n",new[]{conversationReason,current.day_off==null?"休業情報を取得していません。":current.day_off.reason}.Where(v=>!string.IsNullOrEmpty(v)));
             }
         }
-        public bool CanDayOff { get { return !ConversationBlocksProgress && CanManageSaves && current.game_over==null && current.day_off!=null && current.day_off.can_select; } }
+        public bool CanDayOff { get { return !ConversationBlocksProgress && !AutoPlayRunning && CanManageSaves && current.game_over==null && current.day_off!=null && current.day_off.can_select; } }
         public void DayOff() { if(CanDayOff){StopAutomatic();QueuePlayer("day_off","","","");} }
         public bool CanStartAutoPlay(string objective,string mode,int days){var view=current?.autoplay;return !ConversationBlocksProgress && CanManageSaves && view?.can_start==true && days>=1 && days<=10 && Array.Exists(view.objectives ?? new PythonAutoPlayOption[0],r=>r.choice==objective && r.can_start) && Array.Exists(view.modes ?? new PythonAutoPlayOption[0],r=>r.choice==mode);}
         public void StartAutoPlay(string objective,string mode,int days){if(!CanStartAutoPlay(objective,mode,days))return;StopAutomatic();batchAutomatic=true;batchStopRequested=false;pending=new PythonShiftCommand{kind="start_autoplay",request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,expected_revision=current.revision,working_cats=new string[0],autoplay_objective=objective,autoplay_mode=mode,autoplay_days=days};preview.RefreshPythonControls();}
-        public void ResumeAutoPlay(){if(ConversationBlocksProgress || !CanSendCommands || HasPendingResults || !AutoPlayRunning || batchStopRequested)return;StopAutomatic();batchAutomatic=true;if(CafeBackends.Standalone && current.autoplay.paused)pending=new PythonShiftCommand{kind="resume_autoplay",request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,expected_revision=current.revision,working_cats=new string[0]};preview.RefreshPythonControls();}
+        public void ResumeAutoPlay(){if(ConversationBlocksProgress || !CanSendCommands || HasPendingResults || !AutoPlayRunning || batchStopRequested || !string.IsNullOrEmpty(current.required_action) || current.growth_choices?.Length>0)return;StopAutomatic();batchAutomatic=true;if(CafeBackends.Standalone && current.autoplay.paused)pending=new PythonShiftCommand{kind="resume_autoplay",request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,expected_revision=current.revision,working_cats=new string[0]};preview.RefreshPythonControls();}
         public void StopAutoPlay(){if(!AutoPlayRunning && !batchAutomatic && pending?.kind!="start_autoplay")return;batchAutomatic=false;batchStopRequested=true;StopAutomatic();QueueAutoPlay();preview.RefreshPythonControls();}
         private void QueueAutoPlay(){if(!CanSendCommands || HasPendingResults)return;if(batchStopRequested && !AutoPlayRunning){batchStopRequested=false;return;}if(!AutoPlayRunning || (!batchAutomatic && !batchStopRequested))return;pending=new PythonShiftCommand{kind=batchStopRequested ? "stop_autoplay" : "step_autoplay",request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,expected_revision=current.revision,working_cats=new string[0]};preview.RefreshPythonControls();}
         public bool CanChangeAutoAssignment => CanManageSaves && current.game_over==null;
         public void ToggleAutoAssignment(){if(!CanChangeAutoAssignment || current.service_assignment==null)return;StopAutomatic();QueuePlayer("set_auto_assignment","",current.service_assignment.auto_assign ? "manual" : "automatic","");}
         public bool CanAssignService(string customer,string cat,string seat){var view=current?.service_assignment;return CanManageSaves && view?.can_assign==true && Array.Exists(view.customers ?? new PythonAssignmentCustomer[0],r=>r.customer_id==customer) && Array.Exists(view.cats ?? new PythonAssignmentCat[0],r=>r.cat_id==cat && r.available) && Array.Exists(view.seats ?? new PythonAssignmentSeat[0],r=>r.seat_id==seat && r.available);}
         public void AssignService(string customer,string cat,string seat){if(!CanAssignService(customer,cat,seat))return;StopAutomatic();pending=new PythonShiftCommand{request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,expected_revision=current.revision,kind="assign_service",customer_id=customer,cat_id=cat,seat_id=seat,working_cats=new string[0]};preview.RefreshPythonControls();}
-        public bool CanProgressBusiness { get { return !ConversationBlocksProgress && CanManageSaves && current.game_over == null && !automatic
+        public bool CanProgressBusiness { get { return !ConversationBlocksProgress && !AutoPlayRunning && CanManageSaves && current.game_over == null && !automatic
             && string.IsNullOrEmpty(current.required_action) && current.service_assignment?.waiting!=true
             && (current.closed || !current.can_set_shifts || Array.Exists(current.cats, cat => cat.working)); } }
         public void ProgressBusiness()
@@ -530,6 +532,7 @@ namespace CatCafePreview
             if(state.autoplay?.report!=null && string.IsNullOrEmpty(state.autoplay.report.run_id))state.autoplay.report=null;
             if (state.goal_result != null && string.IsNullOrEmpty(state.goal_result.status)) state.goal_result = null;
             if(state.next_goal != null && state.next_goal.stage < 2)state.next_goal=null;
+            if(state.sidebar_progress!=null && string.IsNullOrEmpty(state.sidebar_progress.details))state.sidebar_progress=null;
             if(state.player_interaction!=null && string.IsNullOrEmpty(state.player_interaction.session_id))state.player_interaction=null;
             if(state.store_event != null && string.IsNullOrEmpty(state.store_event.kind)) state.store_event=null;
             if(state.game_over!=null && string.IsNullOrEmpty(state.game_over.reason))state.game_over=null;

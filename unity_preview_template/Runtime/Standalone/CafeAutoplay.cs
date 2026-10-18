@@ -47,7 +47,7 @@ namespace CatCafePreview.Standalone
         private void UpdateAutoSummary(){var r=State.autoplay;r.summary="資金 "+r.before_funds+" → "+State.funds+" / 人気 "+r.before_popularity+" → "+State.popularity+"\n"+string.Join("\n",State.cats.Select(c=>Definition(c.id).name+"：疲労 "+c.fatigue+" / ストレス "+c.stress+" / "+c.health+" / "+c.activity));}
         private int AutoDayCount()=>State.history.Count+(State.phase=="closed"?1:0);
         private void PauseAutoplayCore(){if(State.autoplay?.running==true){State.autoplay.paused=true;State.revision++;}}
-        private void ResumeAutoplayCore(){if(State.autoplay?.running!=true || !State.autoplay.paused)throw new InvalidOperationException("保存・一時停止したおまかせはありません。");State.autoplay.paused=false;State.auto_assignment=true;State.revision++;}
+        private void ResumeAutoplayCore(){if(State.autoplay?.running!=true || !State.autoplay.paused)throw new InvalidOperationException("保存・一時停止したおまかせはありません。");if(GrowthWaiting)throw new InvalidOperationException("猫の成長を選択してからおまかせを再開してください。");State.autoplay.paused=false;State.auto_assignment=true;State.revision++;}
         private void StopAutoplay(string reason,string message="")
         {
             var run=State.autoplay;if(run?.running!=true)throw new InvalidOperationException("実行中のおまかせはありません。");
