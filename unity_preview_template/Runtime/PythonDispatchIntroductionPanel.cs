@@ -23,14 +23,17 @@ namespace CatCafePreview
         private bool online;
         private PythonDispatchIntroduction[] events=new PythonDispatchIntroduction[0];
         public PythonDispatchIntroduction Row { get { return records.value<events.Length ? events[records.value] : null; } }
-        public void Select(int _){Clear();Render();RefreshControls();GetComponent<PythonCatAcquisitionNavigation>()?.Refresh();Canvas.ForceUpdateCanvases();details.GetComponentInParent<ScrollRect>().verticalNormalizedPosition=1;}
+        public DispatchIntroductionConversationPanel Dialogue=>GetComponent<DispatchIntroductionConversationPanel>()??gameObject.AddComponent<DispatchIntroductionConversationPanel>();
+        public void HideForConversation(){Clear();panel.SetActive(false);}
+        public void Select(int _){Clear();Render();RefreshControls();GetComponent<PythonCatAcquisitionNavigation>()?.Refresh();Canvas.ForceUpdateCanvases();details.GetComponentInParent<ScrollRect>().verticalNormalizedPosition=1;if(panel.activeSelf && CafeBackends.Standalone && Row!=null)Dialogue.OpenEvent(Row.event_id);}
         public void Open()
         {
             if(Row==null || !GetComponent<PythonStateClient>().CanManageSaves)return;
+            if(CafeBackends.Standalone){var b=CafeBackends.Local as LocalCafeBackend;Dialogue.Apply(GetComponent<PythonStateClient>().CurrentState,this);if(b.DispatchIntroductionResultPending){Dialogue.Open();return;}if(Dialogue.OpenEvent(Row.event_id))return;}
             Clear();panel.SetActive(true);panel.transform.SetAsLastSibling();Render();
             Canvas.ForceUpdateCanvases();details.GetComponentInParent<ScrollRect>().verticalNormalizedPosition=1;
         }
-        public void Close(){Clear();panel.SetActive(false);}
+        public void Close(){Clear();panel.SetActive(false);if(CafeBackends.Standalone && GetComponent<DispatchIntroductionConversationPanel>()?.Showing==true)Dialogue.Close();}
         public void Accept(){Choose("accept");} public void Decline(){Choose("decline");}
         public void Housing(){Clear();GetComponent<PythonCatAcquisitionNavigation>().OpenHousing(panel);}
         private void Choose(string choice)
@@ -57,6 +60,7 @@ namespace CatCafePreview
             if(events.Length==0)records.options.Add(new Dropdown.OptionData("紹介記録なし"));records.SetValueWithoutNotify(index);records.RefreshShownValue();
             if(newlyWaiting){panel.SetActive(true);panel.transform.SetAsLastSibling();}
             if(events.Length==0 || state.game_over!=null)panel.SetActive(false);Render();RefreshControls();if(newlyWaiting){Canvas.ForceUpdateCanvases();details.GetComponentInParent<ScrollRect>().verticalNormalizedPosition=1;}
+            if(CafeBackends.Standalone){Dialogue.Apply(state,this);if(Dialogue.Showing || GetComponents<AcquisitionConversationPanel>().Any(v=>v.Showing))HideForConversation();}
         }
         private void Render()
         {

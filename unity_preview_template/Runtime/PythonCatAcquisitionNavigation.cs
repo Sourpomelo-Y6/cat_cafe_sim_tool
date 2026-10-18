@@ -14,6 +14,7 @@ namespace CatCafePreview
         private ScrollRect scroll;
         private float position;
         private PythonStateClient Client=>GetComponent<PythonStateClient>();
+        public bool HousingFrom(GameObject source)=>origin==source && source!=null && GetComponent<PythonHousingPanel>().panel.activeSelf;
         public void Watch(string id){watched=id;}
         public void ResetNavigation(){origin=null;scroll=null;watched=joined=null;RestoreCaption();if(joinedEntry!=null)joinedEntry.gameObject.SetActive(false);}
         void RestoreCaption(){var h=GetComponent<PythonHousingPanel>();if(caption!=null && h?.close!=null)h.close.GetComponentInChildren<Text>().text=caption;caption=null;}

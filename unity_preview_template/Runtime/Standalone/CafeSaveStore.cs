@@ -21,6 +21,8 @@ namespace CatCafePreview.Standalone
         public string dispatch_conversation_selected;
         public CafeEncounterConversation[] encounter_conversations;
         public string encounter_conversation_selected;
+        public CafeDispatchIntroductionConversation[] dispatch_introduction_conversations;
+        public string dispatch_introduction_conversation_selected;
         public CafeDisplayReceipt[] display_receipts; // Optional UI facts; outside gameplay and replay digests.
     }
     public sealed class CafeSaveStore

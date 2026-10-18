@@ -36,6 +36,7 @@ namespace CatCafePreview
         public void ApplyRegular(PythonCafeState value,PythonRegularIntroductionPanel original){regular=true;panel=original.panel;confirmation=original.confirmation;font=original.title.font;ApplyState(value);}
         protected virtual CafeConversationProgress ResolveProgress(){if(regular)Backend.BeginRegularConversation();else Backend.BeginIntakeConversation();return regular?Backend.RegularConversation:Backend.Conversation;}
         protected void Bind(PythonCafeState value,GameObject host,Font textFont){panel=host;font=textFont;ApplyState(value);}
+        protected virtual bool CanRaise=>true;
         protected virtual bool Available=>progress!=null && !progress.completed;
         protected virtual bool Choosing=>progress.branch_id=="introduction" && progress.node>=Lines(progress.branch_id).Length;
         protected virtual string Title=>regular?"常連からの猫紹介":"保護猫の受け入れ依頼";
@@ -62,7 +63,7 @@ namespace CatCafePreview
             panel.SetActive(available && !hidden && !Client.AutoPlayRunning);
             if(confirmation!=null)confirmation.SetActive(false);
             Refresh();
-            if(Showing && (Request.can_decline || progress.branch_id!="introduction") && !GetComponent<PythonSavePanel>().panel.activeSelf)panel.transform.SetAsLastSibling();
+            if(Showing && CanRaise && (Request.can_decline || progress.branch_id!="introduction") && !GetComponent<PythonSavePanel>().panel.activeSelf)panel.transform.SetAsLastSibling();
         }
         public void Refresh()
         {
