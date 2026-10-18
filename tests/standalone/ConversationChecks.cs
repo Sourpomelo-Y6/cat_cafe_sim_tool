@@ -38,6 +38,7 @@ static partial class Program
         }
         Assert(ordered>0,"No overlapping event order cases exercised");
         var invalid=CafeIntakeConversation.Start();invalid.node=99;bool invalidRejected=false;try{CafeIntakeConversation.Validate(invalid,"waiting");}catch(ArgumentException){invalidRejected=true;}Assert(invalidRejected,"Invalid node accepted");
+        ReplayArchiveChecks(rules);
         DispatchIntroductionDialogueChecks(rules);
         DispatchIntroductionOrderChecks(rules);
         EncounterConversationChecks(rules);
@@ -49,6 +50,25 @@ static partial class Program
         Console.WriteLine("PASS conversation: "+assertions+" assertions; both branches, every node save roundtrip, old saves, funds, housing, order, repeated answers.");
     }
 
+    static void ReplayArchiveChecks(CafeRules defaults)
+    {
+        string folder=Path.GetFullPath("Logs/StandaloneExtraConversation/core/"+Guid.NewGuid().ToString("N"));
+        var store=new CafeReplayStore(folder,v=>Encode(v),v=>Decode<CafeReplayProfile>(v));var stale=new CafeReplayStore(folder,v=>Encode(v),v=>Decode<CafeReplayProfile>(v));
+        Assert(store.Load().entries.Length==0,"New profile unlocked");
+        foreach(string answer in new[]{"accept","decline"})
+        {
+            var r=Decode<CafeRules>(Encode(defaults));r.store_events.probability=0;var sim=new CafeSimulation(r);while(sim.State.day<4)sim.Execute("day_off");sim.Execute("resolve_intake",choice:answer);var p=CafeIntakeConversation.Start();CafeIntakeConversation.SyncAnswer(p,sim.State.intake_request.status);
+            var save=new CafeSaveEnvelope{state=sim.State,conversation=p};string before=Encode(sim.State);Assert(CafeReplayCatalog.FromSave(save,r,id=>id,id=>id,id=>id).Length==0,"Incomplete view unlocked");p.node=4;CafeIntakeConversation.Finish(p);var rows=CafeReplayCatalog.FromSave(save,r,id=>id,id=>id,id=>id);Assert(rows.Length==1 && rows[0].lines.Length==9 && rows[0].branch_id==p.branch_id,"Wrong replay script");Assert(before==Encode(sim.State),"Replay extraction changed simulation");Assert(store.Merge(rows) && stale.Merge(rows),"Profile merge failed");Assert(store.Load().entries.Length==(answer=="accept"?1:2),"Union lost or duplicated branch");
+            save.conversation=null;Assert(CafeReplayCatalog.FromSave(save,r,id=>id,id=>id,id=>id).Length==0,"Legacy response fabricated viewing");
+        }
+        string path=Path.Combine(folder,"extra-v1.json"),good=File.ReadAllText(path);var broken=new CafeReplayStore(folder,v=>throw new IOException("injected"),v=>Decode<CafeReplayProfile>(v));
+        var extra=Decode<CafeReplayEntry>(Encode(Decode<CafeReplayProfile>(good).entries[0]));extra.conversation_id=CafeRegularConversation.Id;Assert(!broken.Merge(new[]{extra}) && File.ReadAllText(path)==good,"Write failure replaced existing profile");
+        File.WriteAllText(path,"broken");Assert(store.Load().entries.Length==1 && store.Recovered,"Profile backup not recovered");var saved=Decode<CafeReplayProfile>(good);Assert(store.Merge(saved.entries) && store.Load().entries.Length==2 && File.Exists(path+".invalid"),"Recovery lost union");
+        var changed=Decode<CafeReplayProfile>(good);changed.entries[0].lines[0].text="snapshot";Assert(store.Merge(changed.entries) && store.Load().entries[0].lines[0].text!="snapshot","Repeated viewing replaced first snapshot");
+        string failureFolder=folder+"-failure";Directory.CreateDirectory(failureFolder);var errorStore=new CafeReplayStore(failureFolder,v=>throw new IOException("injected"),v=>Decode<CafeReplayProfile>(v));Assert(!errorStore.Merge(saved.entries) && errorStore.Error!=null && !File.Exists(Path.Combine(failureFolder,"extra-v1.json")),"Write failure reported success");
+        File.WriteAllText(path,"broken");File.WriteAllText(path+".bak","broken");Assert(!store.Merge(saved.entries) && File.ReadAllText(path)=="broken","Corrupt profile overwritten");
+        var bad=Decode<CafeReplayProfile>(good);bad.entries[0].branch_id="unseen";bool rejected=false;try{CafeReplayCatalog.Validate(bad);}catch(ArgumentException){rejected=true;}Assert(rejected,"Unknown branch accepted");
+    }
     static void DispatchIntroductionDialogueChecks(CafeRules defaults)
     {
         foreach(string choice in new[]{"accept","decline"})
@@ -63,7 +83,7 @@ static partial class Program
             sim.Execute("resolve_dispatch_introduction",source:ev.id,choice:choice);CafeDispatchIntroductionDialogue.Sync(row,sim.State.dispatches.Single());string state=Encode(sim.State);for(int n=0;n<5;n++)sim.Execute("resolve_dispatch_introduction",source:ev.id,choice:choice);Assert(state==Encode(sim.State),"Duplicate joining or expense");
             Assert(sim.State.funds==funds-(choice=="accept"?200:0) && sim.State.cats.Count==count+(choice=="accept"?1:0),"Introduction effect changed");
             for(int i=0;i<=CafeDispatchIntroductionDialogue.Lines(row.progress.branch_id,"").Length;i++){row.progress.node=i;var save=Decode<CafeSaveEnvelope>(Encode(new CafeSaveEnvelope{state=sim.State,dispatch_introduction_conversations=rows}));sim.Restore(save.state);CafeDispatchIntroductionDialogue.Validate(save.dispatch_introduction_conversations,ev.id,sim.State);Assert(save.dispatch_introduction_conversations[0].progress.node==i,"Introduction result lost");}
-            CafeDispatchIntroductionDialogue.Finish(row.progress);CafeDispatchIntroductionDialogue.Finish(row.progress);CafeDispatchIntroductionDialogue.Validate(rows,ev.id,sim.State);Assert(row.progress.completed && row.progress.viewed_branches.Length==1,"Introduction viewing duplicated");CafeDispatchIntroductionDialogue.Validate(null,null,sim.State);
+            CafeDispatchIntroductionDialogue.Finish(row.progress);CafeDispatchIntroductionDialogue.Finish(row.progress);CafeDispatchIntroductionDialogue.Validate(rows,ev.id,sim.State);Assert(CafeReplayCatalog.FromSave(new CafeSaveEnvelope{state=sim.State,dispatch_introduction_conversations=rows},r,id=>id,id=>id,id=>id).Single().lines.Length==9,"Introduction replay script incomplete");Assert(row.progress.completed && row.progress.viewed_branches.Length==1,"Introduction viewing duplicated");CafeDispatchIntroductionDialogue.Validate(null,null,sim.State);
             row.progress.branch_id=choice=="accept"?"declined":"accepted";bool rejected=false;try{CafeDispatchIntroductionDialogue.Validate(rows,ev.id,sim.State);}catch(ArgumentException){rejected=true;}Assert(rejected,"Forged introduction result allowed");
         }
     }
@@ -90,7 +110,7 @@ static partial class Program
             Assert(sim.State.funds==funds && sim.DispatchReceivedReward(sim.State.dispatches.Single())==baseReward+(branch=="accept"?100:0),"Encounter reward paid early or changed");
             for(int i=0;i<=CafeEncounterDialogue.Lines(branch,"").Length;i++)
             {row.progress.node=i;var save=Decode<CafeSaveEnvelope>(Encode(new CafeSaveEnvelope{state=sim.State,encounter_conversations=rows}));sim.Restore(save.state);CafeEncounterDialogue.Validate(save.encounter_conversations,ev.id,sim.State);Assert(save.encounter_conversations[0].progress.branch_id==branch,"Encounter result lost");}
-            CafeEncounterDialogue.Finish(row.progress);CafeEncounterDialogue.Finish(row.progress);CafeEncounterDialogue.Validate(rows,ev.id,sim.State);Assert(row.progress.completed && row.progress.viewed_branches.Length==1,"Encounter viewed duplicate");
+            CafeEncounterDialogue.Finish(row.progress);CafeEncounterDialogue.Finish(row.progress);CafeEncounterDialogue.Validate(rows,ev.id,sim.State);Assert(CafeReplayCatalog.FromSave(new CafeSaveEnvelope{state=sim.State,encounter_conversations=rows},rules,id=>id,id=>id,id=>id).Single().lines.Length==7,"Encounter replay script incomplete");Assert(row.progress.completed && row.progress.viewed_branches.Length==1,"Encounter viewed duplicate");
             CafeEncounterDialogue.Validate(null,null,sim.State);row.progress.node=99;bool rejected=false;try{CafeEncounterDialogue.Validate(rows,ev.id,sim.State);}catch(ArgumentException){rejected=true;}Assert(rejected,"Invalid encounter node accepted");
         }
     }
@@ -146,6 +166,7 @@ static partial class Program
                 string before=Encode(sim.State);for(int n=0;n<5;n++)sim.Execute("resolve_regular_introduction",choice:answer);Assert(before==Encode(sim.State),"Repeated regular answer mutated state");
             }
             CafeRegularConversation.Finish(regular);CafeRegularConversation.Finish(regular);CafeRegularConversation.Validate(regular,sim.State.regular_introduction.status);
+            Assert(CafeReplayCatalog.FromSave(new CafeSaveEnvelope{state=sim.State,regular_conversation=regular},rules,id=>id,id=>"紹介者の名前",id=>id).Single().lines.Any(l=>l.speaker=="紹介者の名前"),"Regular replay speaker lost");
             Assert(regular.completed && regular.viewed_branches.Length==1 && !intake.completed,"Completion records mixed or duplicated");
             var old=Decode<CafeSaveEnvelope>(Encode(new CafeSaveEnvelope{state=sim.State,conversation=intake}));Assert(old.regular_conversation==null,"Old save fabricated regular viewing");
             foreach(Action<CafeConversationProgress> forge in new Action<CafeConversationProgress>[]{p=>p.conversation_id=CafeIntakeConversation.Id,p=>p.node=999,p=>p.branch_id="forged",p=>p.viewed_branches=new[]{"accepted","accepted"},p=>p.completed=false})
@@ -180,6 +201,7 @@ static partial class Program
             Assert(CafeDispatchDialogue.ResultPending(row) && row.returning.branch_id=="received","Received result missing");
             for(int n=0;n<=3;n++){row.returning.node=n;Roundtrip();string answered=Encode(sim.State);for(int j=0;j<5;j++)sim.Execute("resolve_activity",source:id,choice:"receive");Assert(answered==Encode(sim.State),"Return paid twice");}
             Assert(sim.State.funds==funds+ev.reward,"Return reward mismatch");CafeDispatchDialogue.Finish(row);CafeDispatchDialogue.Finish(row);Roundtrip();Assert(row.returning.viewed_branches.Length==1 && !CafeDispatchDialogue.ResultPending(row),"Receipt viewing duplicated");
+            Assert(CafeReplayCatalog.FromSave(new CafeSaveEnvelope{state=sim.State,dispatch_conversations=new[]{row}},rules,c=>sim.Definition(c).name,c=>c,c=>c).Length==(cancelFirst?4:3),"Dispatch replay phases lost");
             foreach(Action<CafeDispatchConversation> forge in new Action<CafeDispatchConversation>[]{r=>r.event_id="wrong",r=>r.cat_id="wrong",r=>r.day++,r=>r.stage="unknown",r=>r.returning.node=99,r=>r.returning.branch_id="introduction",r=>r.returning.conversation_id=CafeIntakeConversation.Id,r=>r.returning.viewed_branches=new[]{"received","received"},r=>r.returning.completed=false})
             {
                 var bad=Decode<CafeDispatchConversation>(Encode(row));forge(bad);bool rejected=false;try{CafeDispatchDialogue.Validate(new[]{bad},id,sim.State);}catch(ArgumentException){rejected=true;}Assert(rejected,"Forged dispatch conversation accepted");

@@ -9,7 +9,7 @@ namespace CatCafePreview.Standalone
         public bool completed;
         public string[] viewed_branches;
     }
-    public sealed class CafeConversationLine
+    [Serializable] public sealed class CafeConversationLine
     {
         public string speaker, text;
         public CafeConversationLine(string speaker,string text){this.speaker=speaker;this.text=text;}

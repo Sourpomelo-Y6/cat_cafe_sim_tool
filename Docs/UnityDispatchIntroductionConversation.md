@@ -68,3 +68,5 @@ Logsは約3.02MB増、主に検証セーブ・画面証跡・ビルドログ。L
 再実行は作業ルートからdotnet run --project cat_cafe_sim_tool/tests/standalone/StandaloneChecks.csproj -- --conversation cat_cafe_sim_tool/unity_preview_template/Resources/CatCafeStandalone/rules.json。Playerの専用検証は--catcafe-dispatch-introduction-conversation-check <専用出力>、別プロセス再開は--dispatch-introduction-restart、実操作で保存したスロット8へ復帰する場合は--dispatch-introduction-manual-loadを併用する。
 
 猫の専用画像、撮影スタジオの紹介、宿のトラブル、他の派遣二択、Extra・CG一覧・エンディング・全体オプションは後続。別スレッドの休業変更と作業前からの未コミットの猫資料・rules／presentationは保持し、今回の会話・接続・検証・記録だけをコミットする。pushは行わない。
+
+2026-10-18追補：[タイトルのExtra・会話の回想](UnityExtraConversation.md)を実装。営業スロット内の完了記録を独立プロフィールへ結合し、閲覧済み分岐を読み返せる。

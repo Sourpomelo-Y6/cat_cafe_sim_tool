@@ -26,7 +26,7 @@ namespace CatCafePreview
         private PythonCafeState state;
         private PythonSavedGame[] entries=new PythonSavedGame[0];
         private bool busy, online, savesAvailable;
-        public void ShowHome() { confirming=false;GetComponent<PythonSaveBrowser>()?.Cancel();home.SetActive(true);conditionsPanel.SetActive(false);savesPanel.SetActive(false);RefreshControls(); }
+        public void ShowHome() { GetComponent<TitleExtraPanel>()?.Hide();confirming=false;GetComponent<PythonSaveBrowser>()?.Cancel();home.SetActive(true);conditionsPanel.SetActive(false);savesPanel.SetActive(false);RefreshControls(); }
         public void ShowConditions() { confirming=false;home.SetActive(false);conditionsPanel.SetActive(true);savesPanel.SetActive(false);SelectObjective(objectives.value); }
         public void ShowSaves() { confirming=false;home.SetActive(false);conditionsPanel.SetActive(false);savesPanel.SetActive(true);SelectSave(saves.value);RefreshControls(); }
         public void BackFromConditions(){if(confirming){confirming=false;RenderObjective(objectives.value);RefreshControls();}else ShowHome();}
@@ -66,6 +66,7 @@ namespace CatCafePreview
         public void Disconnect(string message) {confirming=false;RenderObjective(objectives.value);online=false;GetComponent<PythonLegacySavePanel>()?.Disconnect();notice.text=message;GetComponent<PythonSaveBrowser>()?.Notify(message);RefreshControls();}
         private IEnumerator Start()
         {
+            (GetComponent<TitleExtraPanel>()??gameObject.AddComponent<TitleExtraPanel>()).Initialize(this);
             ShowHome();notice.text="接続しています。";RefreshControls();
             while(true)
             {
