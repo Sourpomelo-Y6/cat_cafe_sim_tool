@@ -9,7 +9,7 @@ namespace CatCafePreview
     {
         public CafeReplayStore Replays {get;private set;}
         public string ReplayImportNotice {get;private set;}
-        CafeSaveEnvelope ViewingSnapshot()=>new CafeSaveEnvelope{state=Simulation.State,conversation=Conversation,regular_conversation=RegularConversation,dispatch_conversations=DispatchConversations,dispatch_conversation_selected=DispatchConversationSelected,encounter_conversations=EncounterConversations,encounter_conversation_selected=EncounterConversationSelected,dispatch_introduction_conversations=DispatchIntroductionConversations,dispatch_introduction_conversation_selected=DispatchIntroductionConversationSelected};
+        CafeSaveEnvelope ViewingSnapshot()=>new CafeSaveEnvelope{state=Simulation.State,popularity_ending=PopularityEnding,conversation=Conversation,regular_conversation=RegularConversation,dispatch_conversations=DispatchConversations,dispatch_conversation_selected=DispatchConversationSelected,encounter_conversations=EncounterConversations,encounter_conversation_selected=EncounterConversationSelected,dispatch_introduction_conversations=DispatchIntroductionConversations,dispatch_introduction_conversation_selected=DispatchIntroductionConversationSelected};
         public void RememberViewedConversations()
         {
             try{if(!Replays.Merge(CafeReplayCatalog.FromSave(ViewingSnapshot(),Simulation.Rules,id=>Simulation.Definition(id).name,Details.CustomerName,Details.ContentId)))ReplayImportNotice=Replays.Error;}

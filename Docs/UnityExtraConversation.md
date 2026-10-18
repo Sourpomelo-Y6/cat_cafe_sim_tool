@@ -65,3 +65,6 @@ CG一覧・エンディング一覧・全体オプション、会話未対応の
 
 
 CG一覧は[UnityCGGallery.md](UnityCGGallery.md)で実装・検証済み。上記の後続項目のうち猫の通常画像一覧を今回追加した。
+
+
+人気目標の成功エンディングとExtraの切替を[UnityPopularityEnding.md](UnityPopularityEnding.md)で追加した。他目標と未達の演出は後続。
