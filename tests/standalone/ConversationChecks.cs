@@ -38,6 +38,7 @@ static partial class Program
         }
         Assert(ordered>0,"No overlapping event order cases exercised");
         var invalid=CafeIntakeConversation.Start();invalid.node=99;bool invalidRejected=false;try{CafeIntakeConversation.Validate(invalid,"waiting");}catch(ArgumentException){invalidRejected=true;}Assert(invalidRejected,"Invalid node accepted");
+        ImageGalleryChecks();
         ReplayArchiveChecks(rules);
         DispatchIntroductionDialogueChecks(rules);
         DispatchIntroductionOrderChecks(rules);
@@ -50,6 +51,16 @@ static partial class Program
         Console.WriteLine("PASS conversation: "+assertions+" assertions; both branches, every node save roundtrip, old saves, funds, housing, order, repeated answers.");
     }
 
+    static void ImageGalleryChecks()
+    {
+        string a="normal/"+new string('a',64),b="normal/"+new string('b',64),c="normal/"+new string('c',64);string folder=Path.GetFullPath("Logs/StandaloneCGGallery/core/"+Guid.NewGuid().ToString("N"));
+        var store=new CafeImageGalleryStore(folder,v=>Encode(v),v=>Decode<CafeImageProfile>(v));var stale=new CafeImageGalleryStore(folder,v=>Encode(v),v=>Decode<CafeImageProfile>(v));
+        Assert(store.Load().viewed.Length==0,"CG new profile unlocked");Assert(CafeImageGallery.Key("images/"+new string('a',64)+".png")==a,"CG asset identity wrong");Assert(CafeImageGallery.Key("../hidden.png")==null && CafeImageGallery.Key("")==null,"CG invalid path accepted");
+        Assert(store.Merge(new[]{a,a}) && stale.Merge(new[]{b}) && store.Load().viewed.Length==2,"CG union/duplicate lost");string path=Path.Combine(folder,"extra-images-v1.json"),before=File.ReadAllText(path);
+        var fault=new CafeImageGalleryStore(folder,v=>throw new IOException("injected"),v=>Decode<CafeImageProfile>(v));Assert(!fault.Merge(new[]{c}) && File.ReadAllText(path)==before,"CG write failure replaced profile");
+        File.WriteAllText(path,"corrupt");Assert(store.Load().viewed.SequenceEqual(new[]{a}) && store.Recovered,"CG backup recovery failed");Assert(store.Merge(new[]{a,b}) && store.Load().viewed.Length==2 && File.Exists(path+".invalid"),"CG recovery union failed");File.WriteAllText(path,"corrupt");File.WriteAllText(path+".bak","corrupt");Assert(!store.Merge(new[]{c}) && File.ReadAllText(path)=="corrupt","CG corrupt profile overwritten");
+        foreach(var bad in new[]{new CafeImageProfile{version=1,viewed=new[]{a,a}},new CafeImageProfile{version=1,viewed=new[]{"play/"+new string('a',64)}},new CafeImageProfile{viewed=new[]{a}},new CafeImageProfile{version=2,viewed=new[]{a}}}){bool rejected=false;try{CafeImageGallery.Validate(bad);}catch(ArgumentException){rejected=true;}Assert(rejected,"CG invalid record accepted");}
+    }
     static void ReplayArchiveChecks(CafeRules defaults)
     {
         string folder=Path.GetFullPath("Logs/StandaloneExtraConversation/core/"+Guid.NewGuid().ToString("N"));

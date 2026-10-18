@@ -12,6 +12,7 @@ namespace CatCafePreview
     public sealed partial class LocalCafeBackend : ICafeBackend
     {
         public readonly CafeSimulation Simulation;
+        public CafeImageGalleryStore Gallery {get;private set;}
         private readonly CafeSaveStore saves;
         private CafeSnapshot newGameSaveState;
         private string displayEpoch;private System.Collections.Generic.List<CafeDisplayReceipt> displayReceipts=new System.Collections.Generic.List<CafeDisplayReceipt>();
@@ -33,6 +34,7 @@ namespace CatCafePreview
             }
             CafeLegacyImport.DecodeBase=text=>DecodeSave(text).state;
             this.saveDirectory=saveDirectory??Path.Combine(Application.persistentDataPath,"standalone-v1");
+            Gallery=new CafeImageGalleryStore(this.saveDirectory,value=>JsonUtility.ToJson(value,true),text=>JsonUtility.FromJson<CafeImageProfile>(text));
             Replays=new CafeReplayStore(this.saveDirectory,value=>JsonUtility.ToJson(value,true),text=>JsonUtility.FromJson<CafeReplayProfile>(text));
             Simulation = new CafeSimulation(rules);
             var presentation=Resources.Load<TextAsset>("CatCafeStandalone/presentation");if(presentation==null)throw new InvalidOperationException("単独版の表示定義がありません。");Details=new CafeDetailPresentation(Simulation,JsonUtility.FromJson<CafePresentationCatalog>(presentation.text));displayEpoch=Simulation.State.instance_id;Details.SavedNetStamina=(day,id)=>displayEpoch==Simulation.State.instance_id?displayReceipts.FirstOrDefault(r=>r.day==day && r.cat_id==id)?.net_stamina:null;

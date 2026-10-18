@@ -62,3 +62,6 @@ Logsは約20.96MB増で、主に既存会話の回帰検証用セーブ、Extra�
 再実行は作業ルートからdotnet run --project cat_cafe_sim_tool/tests/standalone/StandaloneChecks.csproj -- --conversation cat_cafe_sim_tool/unity_preview_template/Resources/CatCafeStandalone/rules.json。Player専用検証は--catcafe-extra-conversation-check <専用出力>、再起動は--extra-restartを併用する。
 
 CG一覧・エンディング一覧・全体オプション、会話未対応のイベント、すべての猫・紹介者の別バリエーション一覧、端末間同期は後続。初回の全分岐解放まで通常営業を通す長期プレイは今回再実施せず、検証用ルールを複製して店舗イベントを抑止した専用状態で保存・表示を確認した。配布用rules／presentationと既存の未コミット猫資料は変更対象外。今回の実装・検証・記録だけをコミットし、pushしない。
+
+
+CG一覧は[UnityCGGallery.md](UnityCGGallery.md)で実装・検証済み。上記の後続項目のうち猫の通常画像一覧を今回追加した。

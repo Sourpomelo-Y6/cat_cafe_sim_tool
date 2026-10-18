@@ -9,13 +9,15 @@ namespace CatCafePreview
     {
         PythonTitleScreen title;GameObject surface,replaySurface;Font font;Text notice;ScrollRect list;
         public Button Entry {get;private set;}
+        public CatImageGalleryPanel Images {get;private set;}
+        public bool CanOpen=>CafeBackends.Standalone && title.CanManageSaves;
         public GameObject Panel=>surface;
         public ReplayConversationPanel Replay {get;private set;}
         LocalCafeBackend Backend=>CafeBackends.Local as LocalCafeBackend;
         public void Initialize(PythonTitleScreen owner)
         {
             if(Entry!=null)return;title=owner;font=owner.newGame.GetComponentInChildren<Text>().font;
-            Entry=UnityEngine.Object.Instantiate(owner.newGame,owner.home.transform);Entry.name="Extra";Entry.GetComponentInChildren<Text>().text="Extra · 会話の回想";Entry.GetComponent<RectTransform>().anchoredPosition=new Vector2(260,-215);Entry.onClick=new Button.ButtonClickedEvent();Entry.onClick.AddListener(Open);
+            Entry=UnityEngine.Object.Instantiate(owner.newGame,owner.home.transform);Entry.name="Extra";Entry.GetComponentInChildren<Text>().text="Extra";Entry.GetComponent<RectTransform>().anchoredPosition=new Vector2(260,-215);Entry.onClick=new Button.ButtonClickedEvent();Entry.onClick.AddListener(Open);
             surface=Box(transform,"Extra Conversations");Stretch(surface.GetComponent<RectTransform>());Label(surface.transform,"Heading",48,32,1000,44,28).text="Extra · 会話の回想";
             notice=Label(surface.transform,"Notice",48,86,1184,68,17);
             var go=Box(surface.transform,"List");var rect=go.GetComponent<RectTransform>();rect.anchorMin=new Vector2(0,0);rect.anchorMax=Vector2.one;rect.offsetMin=new Vector2(48,104);rect.offsetMax=new Vector2(-48,-160);list=go.AddComponent<ScrollRect>();list.horizontal=false;list.scrollSensitivity=36;
@@ -25,12 +27,13 @@ namespace CatCafePreview
             for(int i=0;i<CafeReplayCatalog.All.Length;i++){var d=CafeReplayCatalog.All[i];var button=MakeButton(content.transform,d.Key.Replace('/','_'),d.title,0,i*76,1184,66);var r=button.GetComponent<RectTransform>();r.anchorMax=Vector2.one;r.anchorMin=new Vector2(0,1);r.offsetMin=new Vector2(0,-i*76-66);r.offsetMax=new Vector2(0,-i*76);button.onClick.AddListener(()=>OpenReplay(d.Key));}
             MakeButton(surface.transform,"タイトルへ戻る","タイトルへ戻る",48,0,240,48).GetComponent<RectTransform>().SetBottom(48,28,240,48);
             surface.transform.Find("タイトルへ戻る").GetComponent<Button>().onClick.AddListener(Hide);
+            Images=gameObject.AddComponent<CatImageGalleryPanel>();Images.Initialize(this,font);MakeButton(surface.transform,"CG一覧","CG一覧",1000,32,232,44).onClick.AddListener(Images.Open);
             replaySurface=Box(transform,"Extra Replay");Stretch(replaySurface.GetComponent<RectTransform>());replaySurface.SetActive(false);Replay=gameObject.AddComponent<ReplayConversationPanel>();surface.SetActive(false);
         }
         void Update(){if(Entry!=null)Entry.interactable=CafeBackends.Standalone && title.CanManageSaves;}
         public void Open()
         {
-            if(!CafeBackends.Standalone || !title.CanManageSaves)return;Backend.ImportViewedSaves();RefreshList();surface.SetActive(true);surface.transform.SetAsLastSibling();list.verticalNormalizedPosition=1;
+            if(!CafeBackends.Standalone || !title.CanManageSaves)return;Images?.Hide();Backend.ImportViewedSaves();RefreshList();surface.SetActive(true);surface.transform.SetAsLastSibling();list.verticalNormalizedPosition=1;
         }
         public void RefreshList()
         {
@@ -42,7 +45,7 @@ namespace CatCafePreview
             var profile=Backend.Replays.Load();var entry=profile.entries.FirstOrDefault(e=>e.Key==key);if(entry==null || !surface.activeSelf)return;
             surface.SetActive(false);Replay.Play(entry,replaySurface,font,()=>{RefreshList();surface.SetActive(true);surface.transform.SetAsLastSibling();});
         }
-        public void Hide(){if(surface!=null)surface.SetActive(false);if(replaySurface!=null)replaySurface.SetActive(false);}
+        public void Hide(){Images?.Hide();if(surface!=null)surface.SetActive(false);if(replaySurface!=null)replaySurface.SetActive(false);}
         GameObject Box(Transform parent,string name){var go=new GameObject(name,typeof(RectTransform),typeof(CanvasRenderer),typeof(Image));go.transform.SetParent(parent,false);go.GetComponent<Image>().color=new Color(.99f,.97f,.92f);return go;}
         static void Stretch(RectTransform r){r.anchorMin=Vector2.zero;r.anchorMax=Vector2.one;r.offsetMin=r.offsetMax=Vector2.zero;}
         static void Place(RectTransform r,float x,float y,float w,float h){r.anchorMin=r.anchorMax=new Vector2(0,1);r.pivot=new Vector2(0,1);r.anchoredPosition=new Vector2(x,-y);r.sizeDelta=new Vector2(w,h);}
