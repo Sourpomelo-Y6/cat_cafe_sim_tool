@@ -45,7 +45,7 @@ namespace CatCafePreview
         }
         public void Initialize()
         {
-            if(Application.isPlaying && CafeBackends.Standalone && GetComponent<PythonStateClient>()!=null && GetComponent<ViewedCatImages>()==null)gameObject.AddComponent<ViewedCatImages>();
+            if(Application.isPlaying && CafeBackends.Standalone && GetComponent<PythonStateClient>()!=null){if(GetComponent<ViewedCatImages>()==null)gameObject.AddComponent<ViewedCatImages>();GameOptionsPanel.Attach(this);}
             if (!HasUIBindings)
             {
                 Debug.LogError("Content Preview UI references are missing. Open the scene through Cat Cafe > Open Content Preview.", this);

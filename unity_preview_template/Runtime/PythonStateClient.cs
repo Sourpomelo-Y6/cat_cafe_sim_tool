@@ -175,7 +175,7 @@ namespace CatCafePreview
         public bool BatchAutomatic => batchAutomatic;
         public bool BatchStopping => batchStopRequested;
         public bool AutoPlayRunning => current?.autoplay?.running==true;
-        public bool CanSendCommands => online && pending==null && current!=null;
+        public bool CanSendCommands => online && pending==null && current!=null && !GameOptionsPanel.IsOpen;
         private float nextAutomaticTick;
         public bool Automatic { get { return automatic; } }
         public bool Fast { get { return fast; } }

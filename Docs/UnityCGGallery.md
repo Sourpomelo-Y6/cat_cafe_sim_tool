@@ -51,3 +51,6 @@ Logsは約5.41MB、Libraryは約0.29MB増。主因は4回のビルドログ、�
 ## 残る課題
 
 他の画像種別・イベントCG、エンディング、全体オプションは後続。全8枚の通常進行による長期収集は今回未実施。観測の汎用化、複数プロセス同期は必要時に検討する。既存の未コミットAllCats・CatImageSchedule・CatImageTodoとrules／presentationは今回のコミットから除外する。pushしない。
+
+
+全体オプションは[UnityOptions.md](UnityOptions.md)で追加済み。音声とエンディングは引き続き後続。

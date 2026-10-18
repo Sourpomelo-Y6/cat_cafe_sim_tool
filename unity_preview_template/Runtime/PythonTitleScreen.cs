@@ -67,6 +67,7 @@ namespace CatCafePreview
         private IEnumerator Start()
         {
             (GetComponent<TitleExtraPanel>()??gameObject.AddComponent<TitleExtraPanel>()).Initialize(this);
+            GameOptionsPanel.Attach(this);
             ShowHome();notice.text="接続しています。";RefreshControls();
             while(true)
             {

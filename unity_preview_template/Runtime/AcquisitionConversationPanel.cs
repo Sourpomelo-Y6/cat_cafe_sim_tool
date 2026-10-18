@@ -72,7 +72,7 @@ namespace CatCafePreview
             panel.SetActive(available && !hidden && !AutoRunning);
             if(confirmation!=null)confirmation.SetActive(false);
             Refresh();
-            if(Showing && CanRaise && (Request.can_decline || progress.branch_id!="introduction") && GetComponent<PythonSavePanel>()?.panel.activeSelf!=true)panel.transform.SetAsLastSibling();
+            if(Showing && !GameOptionsPanel.IsOpen && CanRaise && (Request.can_decline || progress.branch_id!="introduction") && GetComponent<PythonSavePanel>()?.panel.activeSelf!=true)panel.transform.SetAsLastSibling();
         }
         public void Refresh()
         {
@@ -92,6 +92,7 @@ namespace CatCafePreview
             heading.text=Title;sceneLabel.text=SceneLabel;catLabel.text=q.name+"\n"+q.personality;
             Layout();historyWindow.SetActive(history);dialogue.SetActive(!history);choiceGroup.SetActive(choosing && !history);catGroup.alpha=choosing?.20f:1f;
             string full=choosing?ChoicePrompt:progress.node<lines.Length?lines[progress.node].text:EndText;
+            if(CafeOptions.Current.instant)revealed=full.Length;
             body.text=choosing?full:full.Substring(0,Math.Min(full.Length,(int)revealed));
             if(history)historyBody.text=History(lines);
             next.gameObject.SetActive(!choosing && !history);next.GetComponentInChildren<Text>().text=revealed<full.Length?"全文表示":progress.node>=lines.Length?"会話を終える":"次へ";
@@ -110,8 +111,8 @@ namespace CatCafePreview
             string result=HistoryPrefix;
             return result+string.Join("\n\n",lines.Take(Math.Min(progress.node+1,lines.Length)).Select(l=>(string.IsNullOrEmpty(l.speaker)?"地の文":l.speaker)+"\n"+l.text));
         }
-        protected virtual void Update(){if(Showing){revealed+=Time.unscaledDeltaTime*40;Refresh();}else if(Backend!=null)SetOpen(false);}
-        bool Click(){if(!Ready || lastFrame==Time.frameCount)return false;lastFrame=Time.frameCount;return true;}
+        protected virtual void Update(){if(Showing){if(!GameOptionsPanel.IsOpen)revealed=CafeOptions.Reveal(revealed,Time.unscaledDeltaTime,1000000);Refresh();}else if(Backend!=null)SetOpen(false);}
+        bool Click(){if(GameOptionsPanel.IsOpen || !Ready || lastFrame==Time.frameCount)return false;lastFrame=Time.frameCount;return true;}
         public void Next()
         {
             if(!Showing || !Click() || progress==null || history)return;
@@ -156,6 +157,7 @@ namespace CatCafePreview
             Button(dialogue.transform,"保存",156,202,96,()=>GetComponent<PythonSaveBrowser>().OpenSave()).gameObject.SetActive(SaveControls);
             Button(dialogue.transform,"読込",264,202,96,()=>GetComponent<PythonSaveBrowser>().OpenLoad()).gameObject.SetActive(SaveControls);
             close=Button(dialogue.transform,"閉じる",388,202,144,Close);
+            Button(dialogue.transform,"設定",548,202,120,()=>GetComponent<GameOptionsPanel>()?.Open());
             next=Button(dialogue.transform,"次へ",948,202,200,Next);next.GetComponent<ConversationShape>().color=Olive;next.GetComponentInChildren<Text>().color=Paper;
             choiceGroup=new GameObject("Choices",typeof(RectTransform));choiceGroup.transform.SetParent(card.transform,false);var choices=choiceGroup.GetComponent<RectTransform>();choices.anchorMin=choices.anchorMax=new Vector2(.5f,.61f);choices.pivot=new Vector2(.5f,.5f);choices.sizeDelta=new Vector2(760,354);choices.anchoredPosition=Vector2.zero;
             var first=Box(choiceGroup.transform,"Accept choice",0,0,760,170,Paper,12);var second=Box(choiceGroup.transform,"Decline choice",0,184,760,170,Paper,12);
