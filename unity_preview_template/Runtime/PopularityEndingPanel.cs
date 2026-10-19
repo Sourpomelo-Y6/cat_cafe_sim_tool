@@ -8,13 +8,16 @@ namespace CatCafePreview
     {
         GameObject host,outro;PythonGoalPanel owner;bool offered;Button continueButton,titleButton,saveButton;
         public GameObject Panel=>host;public GameObject Outro=>outro;
-        CafeEndingProgress Row=>Backend.PopularityEnding;
+        bool bond;
+        CafeEndingProgress Row=>bond?Backend.BondEnding:Backend.PopularityEnding;
+        CafeClearRecord Record=>bond?CafeBondEnding.Record(Backend.Simulation.State):CafePopularityEnding.Record(Backend.Simulation.State);
+        bool Waiting=>bond?CafeBondEnding.Waiting(Backend.Simulation.State):CafePopularityEnding.Waiting(Backend.Simulation.State);
         public void Apply(PythonCafeState value,PythonGoalPanel original)
         {
-            owner=original;
+            owner=original;bool nextBond=value.goal_result?.kind=="continue_bond_goal";if(nextBond!=bond){offered=false;if(host!=null)host.SetActive(false);if(outro!=null)outro.SetActive(false);}bond=nextBond;
             if(host==null){host=new GameObject("Popularity Ending",typeof(RectTransform),typeof(CanvasRenderer),typeof(Image));host.transform.SetParent(owner.panel.transform.parent,false);host.SetActive(false);}
-            if(Row==null || !CafePopularityEnding.Waiting(Backend.Simulation.State)){host.SetActive(false);if(outro!=null)outro.SetActive(false);offered=false;return;}
-            if(value.growth_choices?.Length>0 || value.required_action!="goal_result" || GetComponents<AcquisitionConversationPanel>().Any(p=>p!=this && p.Showing)){host.SetActive(false);if(outro!=null)outro.SetActive(false);return;}
+            if(Row==null || !Waiting){host.SetActive(false);if(outro!=null)outro.SetActive(false);offered=false;return;}
+            if(value.growth_choices?.Length>0 || value.required_action!=(bond?"bond_result":"goal_result") || GetComponents<AcquisitionConversationPanel>().Any(p=>p!=this && p.Showing)){host.SetActive(false);if(outro!=null)outro.SetActive(false);return;}
             bool first=!offered;offered=true;Bind(value,host,owner.title.font);if(first && !Row.progress.completed)Open();
             if(Row.progress.completed)ShowOutro();else if(Showing)owner.panel.SetActive(false);
         }
@@ -22,9 +25,9 @@ namespace CatCafePreview
         protected override bool Choosing=>false;
         protected override bool ThreeLinePages=>true;
         protected override void SetOpen(bool open){}
-        protected override string Title=>"人気目標エンディング · 猫カフェのこれから";
-        protected override string SceneLabel=>"達成 "+CafePopularityEnding.Record(Backend.Simulation.State).day+"日目 · 最終段階";
-        protected override CafeConversationLine[] Lines(string branch)=>CafePopularityEnding.Lines(CafePopularityEnding.Record(Backend.Simulation.State),string.IsNullOrEmpty(Row.cat_id)?"":Backend.Simulation.Definition(Row.cat_id).name);
+        protected override string Title=>bond?"好感度目標エンディング · 猫たちとのつながり":"人気目標エンディング · 猫カフェのこれから";
+        protected override string SceneLabel=>"達成 "+Record.day+(bond?"日目 · 好感度目標達成":"日目 · 最終段階");
+        protected override CafeConversationLine[] Lines(string branch){string name=string.IsNullOrEmpty(Row.cat_id)?"":Backend.Simulation.Definition(Row.cat_id).name;return bond?CafeBondEnding.Lines(Record,name):CafePopularityEnding.Lines(Record,name);}
         protected override PythonIntakeState Request=>new PythonIntakeState{cat_id=string.IsNullOrEmpty(Row.cat_id)?"":Backend.Details.ContentId(Row.cat_id),name=string.IsNullOrEmpty(Row.cat_id)?"猫たちのカフェ":Backend.Simulation.Definition(Row.cat_id).name,personality="達成時のカフェ",can_decline=true};
         protected override bool CanAnswer(bool answer)=>false;
         protected override void SendAnswer(bool answer){}
@@ -44,7 +47,7 @@ namespace CatCafePreview
                 Label("Save Hint","進捗を残す場合は、タイトルへ戻る前に保存してください。\n営業・自動進行は手動で再開します。",60,540,1100,70,18);
                 saveButton=Button("保存",60,660,220,()=>GetComponent<PythonSaveBrowser>().OpenSave());continueButton=Button("継続営業",320,660,280,()=>Client.ContinueGoal());titleButton=Button("タイトルへ",640,660,280,()=>GetComponent<PythonReturnToTitle>().Return());
             }
-            outro.transform.Find("Record").GetComponent<Text>().text=string.Join("\n",Lines("").Where(l=>l.speaker=="営業の記録").Select(l=>l.text));owner.panel.SetActive(false);outro.SetActive(true);Client.PauseAutomaticForSave();
+            outro.transform.Find("Ending Heading").GetComponent<Text>().text=bond?"猫たちとのつながり":"猫カフェのこれから";outro.transform.Find("Thanks").GetComponent<Text>().text=(bond?"好感度目標を達成しました。":"人気目標の最終段階を達成しました。")+"\n猫や資金を引き継いで、これからの営業を続けられます。";outro.transform.Find("Record").GetComponent<Text>().text=string.Join("\n",Lines("").Where(l=>l.speaker=="営業の記録").Select(l=>l.text));owner.panel.SetActive(false);outro.SetActive(true);Client.PauseAutomaticForSave();
         }
         protected override void Update(){base.Update();if(outro!=null && outro.activeSelf){continueButton.interactable=Client.CanContinueGoal;saveButton.interactable=Client.CanSaveNow;titleButton.interactable=Client.CanLeaveResult;}}
         void LateUpdate(){if(GameOptionsPanel.IsOpen || GetComponent<PythonSavePanel>()?.panel.activeSelf==true)return;if(outro!=null && outro.activeSelf)outro.transform.SetAsLastSibling();else if(Showing)host.transform.SetAsLastSibling();}

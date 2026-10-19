@@ -1,0 +1,3 @@
+using System;using System.IO;
+namespace CatCafePreview.Editor {public static class BondEndingVerification {
+public static void VerifyAndBuild(){string path=Path.Combine(Environment.GetEnvironmentVariable("CATCAFE_WORKSPACE_ROOT"),"Logs/StandaloneBondEnding/Editor");Directory.CreateDirectory(path);int n=StandaloneBondEndingSmoke.BackendChecks(Path.Combine(path,"cases"),false);int popularity=StandaloneEndingSmoke.BackendChecks(Path.Combine(path,"popularity"),false);File.WriteAllText(Path.Combine(path,"result.txt"),"PASS: "+n+" bond; "+popularity+" popularity checks");StandaloneScreenSetup.Build();}}}

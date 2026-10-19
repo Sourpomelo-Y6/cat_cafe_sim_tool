@@ -37,13 +37,13 @@ namespace CatCafePreview
         }
         public void RefreshList()
         {
-            var profile=Backend.Replays.Load();int row=0;foreach(var d in CafeReplayCatalog.All){var b=list.content.Find(d.Key.Replace('/','_')).GetComponent<Button>();bool visible=(d.id==CafePopularityEnding.Id)==endings;b.gameObject.SetActive(visible);if(visible){var rect=b.GetComponent<RectTransform>();rect.offsetMin=new Vector2(0,-row*76-66);rect.offsetMax=new Vector2(0,-row*76);row++;}bool unlocked=profile.entries.Any(e=>e.Key==d.Key);b.interactable=unlocked;b.GetComponentInChildren<Text>().text=d.title+"  ·  "+(unlocked?"閲覧済み":"未解放");}
+            var profile=Backend.Replays.Load();int row=0;foreach(var d in CafeReplayCatalog.All){var b=list.content.Find(d.Key.Replace('/','_')).GetComponent<Button>();bool visible=(CafeReplayCatalog.IsEnding(d.id))==endings;b.gameObject.SetActive(visible);if(visible){var rect=b.GetComponent<RectTransform>();rect.offsetMin=new Vector2(0,-row*76-66);rect.offsetMax=new Vector2(0,-row*76);row++;}bool unlocked=profile.entries.Any(e=>e.Key==d.Key);b.interactable=unlocked;b.GetComponentInChildren<Text>().text=d.title+"  ·  "+(unlocked?"閲覧済み":"未解放");}
             list.content.sizeDelta=new Vector2(0,row*76);surface.transform.Find("Heading").GetComponent<Text>().text=endings?"Extra · エンディング":"Extra · 会話の回想";surface.transform.Find("エンディング").GetComponentInChildren<Text>().text=endings?"会話の回想":"エンディング";
-            var shown=CafeReplayCatalog.All.Where(d=>(d.id==CafePopularityEnding.Id)==endings).ToArray();int viewed=shown.Count(d=>profile.entries.Any(e=>e.Key==d.Key));notice.text=(endings?"最後まで読んだエンディングを読み返せます（":"最後まで読んだ分岐を読み返せます（")+viewed+" / "+shown.Length+"）。回想は営業に影響しません。\n"+(Backend.Replays.Error??(Backend.Replays.Recovered?"バックアップの回想記録を使用しています。":Backend.ReplayImportNotice));
+            var shown=CafeReplayCatalog.All.Where(d=>(CafeReplayCatalog.IsEnding(d.id))==endings).ToArray();int viewed=shown.Count(d=>profile.entries.Any(e=>e.Key==d.Key));notice.text=(endings?"最後まで読んだエンディングを読み返せます（":"最後まで読んだ分岐を読み返せます（")+viewed+" / "+shown.Length+"）。回想は営業に影響しません。\n"+(Backend.Replays.Error??(Backend.Replays.Recovered?"バックアップの回想記録を使用しています。":Backend.ReplayImportNotice));
         }
         public void OpenReplay(string key)
         {
-            var profile=Backend.Replays.Load();var entry=profile.entries.FirstOrDefault(e=>e.Key==key);if(entry==null || !surface.activeSelf || (entry.conversation_id==CafePopularityEnding.Id)!=endings)return;
+            var profile=Backend.Replays.Load();var entry=profile.entries.FirstOrDefault(e=>e.Key==key);if(entry==null || !surface.activeSelf || (CafeReplayCatalog.IsEnding(entry.conversation_id))!=endings)return;
             surface.SetActive(false);Replay.Play(entry,replaySurface,font,()=>{RefreshList();surface.SetActive(true);surface.transform.SetAsLastSibling();});
         }
         public void Hide(){Images?.Hide();if(surface!=null)surface.SetActive(false);if(replaySurface!=null)replaySurface.SetActive(false);}

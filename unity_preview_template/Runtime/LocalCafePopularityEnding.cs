@@ -4,7 +4,10 @@ namespace CatCafePreview
 {
     public sealed partial class LocalCafeBackend
     {
-        CafeEndingProgress popularityEnding;string endingEpoch;
+        CafeEndingProgress popularityEnding,bondEnding;string endingEpoch,bondEpoch;
+        public CafeEndingProgress BondEnding { get {var s=Simulation.State;if(bondEpoch!=s.instance_id){bondEnding=null;bondEpoch=s.instance_id;}if(bondEnding==null && CafeBondEnding.Waiting(s))bondEnding=new CafeEndingProgress{cat_id=s.bond_goal.achieved_cats.FirstOrDefault(id=>s.cats.Any(c=>c.id==id))??"",progress=new CafeConversationProgress{conversation_id=CafeBondEnding.Id,branch_id=CafePopularityEnding.Branch,viewed_branches=new string[0]}};return bondEnding;} }
+        public bool BondEndingPending=>BondEnding!=null && !BondEnding.progress.completed;
+        void RestoreBondEnding(CafeEndingProgress row){bondEnding=row;bondEpoch=Simulation.State.instance_id;}
         public CafeEndingProgress PopularityEnding
         {
             get

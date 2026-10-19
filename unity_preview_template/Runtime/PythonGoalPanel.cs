@@ -10,7 +10,7 @@ namespace CatCafePreview
         private string instance;private bool online;private PythonCafeState current;
         public Button resume, advance, openNext, close;
         private bool showingNext;
-        public void Continue() { if(current?.goal_result?.kind=="continue_goal" && CafeBackends.Standalone && (CafeBackends.Local as LocalCafeBackend)?.PopularityEndingPending==true)GetComponent<PopularityEndingPanel>()?.Open();else GetComponent<PythonStateClient>().ContinueGoal(); }
+        public void Continue() { if(CafeBackends.Standalone && ((current?.goal_result?.kind=="continue_goal" && (CafeBackends.Local as LocalCafeBackend)?.PopularityEndingPending==true) || (current?.goal_result?.kind=="continue_bond_goal" && (CafeBackends.Local as LocalCafeBackend)?.BondEndingPending==true)))GetComponent<PopularityEndingPanel>()?.Open();else GetComponent<PythonStateClient>().ContinueGoal(); }
         public void Advance() { GetComponent<PythonStateClient>().AdvanceGoal(); }
         public void OpenNext() { if(!GetComponent<PythonStateClient>().CanManageSaves)return;showingNext=true; Apply(GetComponent<PythonStateClient>().CurrentState); }
         public void Close() { showingNext=false; Apply(GetComponent<PythonStateClient>().CurrentState); }
@@ -64,7 +64,7 @@ namespace CatCafePreview
         {
             var client=GetComponent<PythonStateClient>();
             resume.interactable=online && client.CanContinueGoal;
-            bool ending=current?.goal_result?.kind=="continue_goal" && CafeBackends.Standalone && (CafeBackends.Local as LocalCafeBackend)?.PopularityEndingPending==true;if(ending)resume.interactable=online && client.CanManageSaves;resume.GetComponentInChildren<Text>().text=ending?"エンディングを再開":"結果を確認して継続営業";
+            bool ending=CafeBackends.Standalone && ((current?.goal_result?.kind=="continue_goal" && (CafeBackends.Local as LocalCafeBackend)?.PopularityEndingPending==true) || (current?.goal_result?.kind=="continue_bond_goal" && (CafeBackends.Local as LocalCafeBackend)?.BondEndingPending==true));if(ending)resume.interactable=online && client.CanManageSaves;resume.GetComponentInChildren<Text>().text=ending?"エンディングを再開":"結果を確認して継続営業";
             if(advance!=null)advance.GetComponentInChildren<Text>().text=current?.next_goal!=null ? "第"+current.next_goal.stage+"段階へ挑戦" : "次の人気目標へ";
             if(panel.activeSelf && notice!=null && !client.CanManageSaves)notice.text=!online ? "Python未接続です。再接続後に結果を確認できます。" : client.HasPendingResults ? "未保存の接客結果を先に確定してください。" : "操作の完了をお待ちください。";
             if(advance!=null)advance.interactable=online && client.CanAdvanceGoal;

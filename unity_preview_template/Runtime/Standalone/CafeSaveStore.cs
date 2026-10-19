@@ -16,7 +16,7 @@ namespace CatCafePreview.Standalone
         public CafeDailyRecord[] daily_records;
         public CafeNarrativeRow[] narratives;
         public CafeOpeningProgress opening;
-        public CafeEndingProgress popularity_ending;
+        public CafeEndingProgress popularity_ending,bond_ending;
         public CafeConversationProgress conversation;
         public CafeConversationProgress regular_conversation;
         public CafeDispatchConversation[] dispatch_conversations;
