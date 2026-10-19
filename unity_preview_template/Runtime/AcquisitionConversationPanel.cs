@@ -24,6 +24,7 @@ namespace CatCafePreview
         protected virtual bool AutoRunning=>Client.AutoPlayExecuting;
         protected virtual bool ThreeLinePages=>false;
         protected virtual bool SaveControls=>true;
+        protected virtual string CloseCaption=>"閉じる";
         protected virtual string EndText=>"通常画面へ戻りましょう。営業・自動進行は手動で再開してください。";
         protected virtual string BusyNotice=>!Client.CanSendCommands?"処理中です。完了をお待ちください。":Notice;
         protected virtual Texture2D PortraitTexture(string id)=>GetComponent<ContentPreview>().CandidateCatTexture(id);
@@ -173,7 +174,7 @@ namespace CatCafePreview
             backlog=Button(dialogue.transform,"バックログ",24,202,120,ToggleHistory);
             Button(dialogue.transform,"保存",156,202,96,()=>GetComponent<PythonSaveBrowser>().OpenSave()).gameObject.SetActive(SaveControls);
             Button(dialogue.transform,"読込",264,202,96,()=>GetComponent<PythonSaveBrowser>().OpenLoad()).gameObject.SetActive(SaveControls);
-            close=Button(dialogue.transform,"閉じる",388,202,144,Close);
+            close=Button(dialogue.transform,CloseCaption,388,202,144,Close);
             Button(dialogue.transform,"設定",548,202,120,()=>GetComponent<GameOptionsPanel>()?.Open());
             next=Button(dialogue.transform,"次へ",948,202,200,Next);next.GetComponent<ConversationShape>().color=Olive;next.GetComponentInChildren<Text>().color=Paper;
             choiceGroup=new GameObject("Choices",typeof(RectTransform));choiceGroup.transform.SetParent(card.transform,false);var choices=choiceGroup.GetComponent<RectTransform>();choices.anchorMin=choices.anchorMax=new Vector2(.5f,.61f);choices.pivot=new Vector2(.5f,.5f);choices.sizeDelta=new Vector2(760,354);choices.anchoredPosition=Vector2.zero;

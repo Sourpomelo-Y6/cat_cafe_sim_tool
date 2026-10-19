@@ -208,6 +208,7 @@ namespace CatCafePreview
             GetComponent<PythonBusinessLogPanel>()?.Apply(state);
             GetComponent<PythonClearResultsPanel>()?.Apply(state);
             GetComponent<PythonPersistPanel>()?.Apply(state);GetComponent<PythonCatAcquisitionNavigation>()?.Refresh();
+            if(Application.isPlaying && CafeBackends.Standalone)(GetComponent<OpeningPanel>()??gameObject.AddComponent<OpeningPanel>()).Apply(state,GetComponent<PythonPreparationPanel>());
         }
         private void AppendObjectiveProgress()
         {

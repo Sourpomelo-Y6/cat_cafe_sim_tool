@@ -44,6 +44,7 @@ $previewFiles += @('Editor/ConversationRendererVerification.cs', 'Editor/Dispatc
 $previewFiles += @('Runtime/Standalone/CafeGrowthBatch.cs', 'Runtime/StandaloneGrowthBatchSmoke.cs', 'Editor/GrowthBatchVerification.cs')
 $previewFiles += @('Runtime/StandaloneUIFixSmoke.cs', 'Editor/UIFixVerification.cs')
 $previewFiles += @('Runtime/Standalone/CafePopularityEnding.cs', 'Runtime/LocalCafePopularityEnding.cs', 'Runtime/PopularityEndingPanel.cs', 'Runtime/StandaloneEndingSmoke.cs', 'Editor/EndingVerification.cs')
+$previewFiles += @('Runtime/Standalone/CafeOpening.cs', 'Runtime/LocalCafeOpening.cs', 'Runtime/OpeningPanel.cs', 'Runtime/StandaloneOpeningSmoke.cs', 'Editor/OpeningVerification.cs')
 $previewFiles += @('Runtime/CafeOptions.cs', 'Runtime/GameOptionsPanel.cs', 'Runtime/StandaloneOptionsSmoke.cs', 'Editor/OptionsVerification.cs')
 $previewFiles += @('Runtime/CafeNarrativeResources.cs', 'Editor/CatalogVerification.cs', 'Editor/SubjectCatalogVerification.cs', 'Editor/AllModeNarrativeVerification.cs')
 $previewFiles += @('Runtime/PythonPlayerPanel.cs', 'Editor/PythonPlayerSetup.cs', 'Editor/PythonPlayerLayout.cs', 'Editor/PythonPlayerVerification.cs')

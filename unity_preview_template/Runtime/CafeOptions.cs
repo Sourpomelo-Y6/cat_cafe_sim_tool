@@ -41,7 +41,7 @@ namespace CatCafePreview
         public static CafeOptionsStore Store {get;private set;}
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]static void Initialize()
         {
-            string path=System.IO.Path.Combine(Application.persistentDataPath,"options-v1.json");var args=Environment.GetCommandLineArgs();int i=Array.IndexOf(args,"--catcafe-options-check");if(i>=0 && i+1<args.Length)path=System.IO.Path.Combine(System.IO.Path.GetFullPath(args[i+1]),"profile/options-v1.json");
+            string path=System.IO.Path.Combine(Application.persistentDataPath,"options-v1.json");var args=Environment.GetCommandLineArgs();int i=Array.IndexOf(args,"--catcafe-options-check");if(i<0)i=Array.IndexOf(args,"--catcafe-opening-check");if(i>=0 && i+1<args.Length)path=System.IO.Path.Combine(System.IO.Path.GetFullPath(args[i+1]),"profile/options-v1.json");
             Store=new CafeOptionsStore(path);Current=Store.Load();if(File.Exists(path) || Store.Recovered)ApplyScreen();
         }
         public static bool Save(CafeOptionsData draft){if(Store==null || !Store.Save(draft))return false;Current=draft.Copy();ApplyScreen();return true;}

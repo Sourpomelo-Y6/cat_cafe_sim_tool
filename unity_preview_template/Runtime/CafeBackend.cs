@@ -47,9 +47,11 @@ namespace CatCafePreview
     public static class CafeBackends
     {
         public static bool Standalone = true;
+        // Explicit debug policy, independent of Editor and development-build flags.
+        public static bool OpeningEnabled(string[] args)=>Array.IndexOf(args,"--catcafe-opening")>=0 || !(Array.Exists(args,a=>a=="--catcafe-debug" || a.StartsWith("--catcafe-") && a.EndsWith("-check")));
         private static ICafeBackend local;
         public static ICafeBackend Resolve(int port) => Standalone ? Local : new HttpCafeBackend(port);
-        public static ICafeBackend Local => local ?? (local = new LocalCafeBackend());
+        public static ICafeBackend Local => local ?? (local = new LocalCafeBackend(playOpening:OpeningEnabled(Environment.GetCommandLineArgs())));
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void Reset() { local = null; Standalone = !Array.Exists(Environment.GetCommandLineArgs(), value => value == "--catcafe-http"); }
         // Session ownership survives title/business scene transitions.
