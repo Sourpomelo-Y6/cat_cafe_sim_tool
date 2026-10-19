@@ -40,7 +40,7 @@ namespace CatCafePreview
             foreach (string specialization in new[] { "service", "rest", "dispatch" })
             {
                 var rules = JsonUtility.FromJson<CafeRules>(Resources.Load<TextAsset>("CatCafeStandalone/rules").text);
-                rules.rules_id += "-growth-fixture-" + specialization; rules.growth.threshold = 2; rules.growth.mastery_threshold = 2;
+                rules.growth.threshold = 2; rules.growth.mastery_threshold = 2;
                 rules.growth.type_mastery_threshold = 2; rules.growth.second_mastery_threshold = 2; rules.growth.second_type_mastery_threshold = 2;
                 rules.store_events.probability = 0;
                 string path = Path.Combine(directory,specialization); var b = new LocalCafeBackend(path,rules);

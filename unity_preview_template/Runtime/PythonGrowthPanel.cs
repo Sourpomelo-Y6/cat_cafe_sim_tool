@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 namespace CatCafePreview
@@ -8,46 +9,54 @@ namespace CatCafePreview
         public Text title, details, notice;
         public Button[] choices;
         public Text[] choiceDetails;
-        private string key, prompt;
-        public void First() { GetComponent<PythonStateClient>().RespondGrowth(0); }
-        public void Second() { GetComponent<PythonStateClient>().RespondGrowth(1); }
-        public void Third() { GetComponent<PythonStateClient>().RespondGrowth(2); }
-        public void Fourth() { GetComponent<PythonStateClient>().RespondGrowth(3); }
-        public void Apply(PythonCafeState state)
+        Button manual,previous,automatic,confirm;PythonCafeState state;
+        public void First(){GetComponent<PythonStateClient>().RespondGrowth(0);}
+        public void Second(){GetComponent<PythonStateClient>().RespondGrowth(1);}
+        public void Third(){GetComponent<PythonStateClient>().RespondGrowth(2);}
+        public void Fourth(){GetComponent<PythonStateClient>().RespondGrowth(3);}
+        Button Add(string label,float x,float width,UnityEngine.Events.UnityAction action)
         {
-            var rows=state.growth_choices;
-            panel.SetActive(rows != null && rows.Length>0);
-            if(!panel.activeSelf) return;
-            var ev=rows[0];
-            bool mastery=ev.kind == "resolve_growth_mastery";
-            title.text=ev.name+"の"+(string.IsNullOrEmpty(ev.title) ? "得意分野" : ev.title)+"を選択";
-            details.text="選択待ち："+rows.Length+"匹 / 経験："+ev.experience+"（必要："+ev.threshold+"）\n接客："+ev.service+" / 休養："+ev.rest+" / 派遣："+ev.dispatch+"\n\n";
-            if(mastery) details.text="選択待ち："+rows.Length+"匹 / 接客実績："+ev.experience+"（必要："+ev.threshold+"）\n遊び："+ev.play+" / 触れ合い："+ev.contact+" / 静かな交流："+ev.quiet+"\n習得済み："+(string.IsNullOrEmpty(ev.learned) ? "なし" : ev.learned)+"\n\n";
-            bool individual=ev.kind == "resolve_growth_type_mastery";
-            details.fontSize=17;
-            details.lineSpacing=individual ? 1 : 1.12f;
-            if(individual) details.text="分類："+ev.group+" / 選択待ち："+rows.Length+"件\n対象実績："+ev.experience+"（必要："+ev.threshold+"）\n習得済み："+(string.IsNullOrEmpty(ev.learned) ? "なし" : ev.learned)+"\n"+ev.effect+"\n\n";
+            var go=DefaultControls.CreateButton(new DefaultControls.Resources());go.name=label;go.transform.SetParent(title.transform.parent,false);
+            var rect=go.GetComponent<RectTransform>();rect.anchorMin=rect.anchorMax=rect.pivot=new Vector2(0,1);rect.anchoredPosition=new Vector2(x,-548);rect.sizeDelta=new Vector2(width,36);
+            var t=go.GetComponentInChildren<Text>();t.font=title.font;t.fontSize=14;t.text=label;var b=go.GetComponent<Button>();b.onClick.AddListener(action);return b;
+        }
+        void Controls()
+        {
+            if(manual!=null)return;
+            previous=Add("前の成長",24,104,()=>Move(-1));
+            manual=Add("自分で選ぶ：次の成長",136,214,()=>Move(1));
+            automatic=Add("猫に合う内容で自動決定",358,290,()=>GetComponent<PythonStateClient>().GrowthBatch("resolve_growth_auto"));
+            confirm=Add("一覧をまとめて確定",656,260,()=>GetComponent<PythonStateClient>().GrowthBatch("resolve_growth_batch"));
+        }
+        void Move(int delta)
+        {
+            if(state?.growth_choices==null || state.growth_choices.Length==0)return;
+            var c=GetComponent<PythonStateClient>();c.GrowthRowIndex=(c.GrowthRowIndex+delta+state.growth_choices.Length)%state.growth_choices.Length;Apply(state);
+        }
+        static string Label(PythonGrowthChoice row,string value)=>row.choices?.FirstOrDefault(c=>c.choice==value)?.label ?? "未選択";
+        public void Apply(PythonCafeState value)
+        {
+            state=value;var rows=state.growth_choices;panel.SetActive(rows!=null && rows.Length>0);if(!panel.activeSelf)return;
+            Controls();var client=GetComponent<PythonStateClient>();client.GrowthRowIndex=Mathf.Clamp(client.GrowthRowIndex,0,rows.Length-1);var ev=rows[client.GrowthRowIndex];
+            title.text="営業後の成長確認（"+(client.GrowthRowIndex+1)+" / "+rows.Length+"）  "+ev.name+"："+ev.title;
+            details.fontSize=15;details.lineSpacing=1.05f;
+            details.text="対象の猫と成長事項の一覧\n"+string.Join("\n",rows.Select((r,i)=>(i==client.GrowthRowIndex?"▶ ":"・")+r.name+" / "+r.title+" → "+Label(r,r.selected)))+"\n\n自分で選ぶ：右の候補を押します。\n前／次の成長で猫を切り替えます。\n\n"+ev.name+"の選択理由\n"+ev.decision_reason+"\n\n経験："+ev.experience+" / 必要："+ev.threshold+"\n習得済み："+ev.learned;
             for(int i=0;i<choices.Length;i++)
             {
-                bool exists=ev.choices != null && i<ev.choices.Length;
-                choices[i].gameObject.SetActive(exists);
-                if(!exists) continue;
-                var option=ev.choices[i];
-                choices[i].GetComponentInChildren<Text>().text=option.label;
-                if(!PythonEventPresentation.HasDescriptions(choiceDetails))details.text+=option.label+"\n"+option.detail+"\n"+(option.can_select ? "" : option.reason+"\n")+(individual ? "" : "\n");
+                bool exists=ev.choices!=null && i<ev.choices.Length;choices[i].gameObject.SetActive(exists);if(!exists)continue;
+                var option=ev.choices[i];choices[i].GetComponentInChildren<Text>().text=(ev.selected==option.choice?"選択中：":"自分で選ぶ：")+option.label;
             }
             PythonEventPresentation.Choices(choiceDetails,ev.choices);
-            if(PythonEventPresentation.HasDescriptions(choiceDetails))details.text+="営業を進める前に、この選択を確定してください。";
-            string nextKey=state.instance_id+"/"+PythonEventPresentation.GrowthKey(ev);if(key!=nextKey){key=nextKey;PythonEventPresentation.Reset(details,choiceDetails);}
-            prompt="1つ選ぶと確定します。選び直しはできません。\n次の確認がなければ画面を閉じます。自動進行は手動で再開してください。";
             RefreshControls();
         }
         public void RefreshControls()
-        { var client=GetComponent<PythonStateClient>();for(int i=0;i<choices.Length;i++) choices[i].interactable=client.CanRespondGrowth(i);if(panel.activeSelf)notice.text=PythonEventPresentation.Notice(client,prompt); }
-        public void Disconnect()
         {
-            foreach(var button in choices) button.interactable=false;
-            if(panel.activeSelf) notice.text="Python未接続です。再接続後に回答できます。";
+            var c=GetComponent<PythonStateClient>();for(int i=0;i<choices.Length;i++)choices[i].interactable=c.CanRespondGrowth(i);
+            if(!panel.activeSelf || automatic==null || state?.growth_choices==null)return;
+            bool ready=c.CanManageSaves;automatic.interactable=ready;previous.interactable=manual.interactable=ready;
+            confirm.interactable=ready && state.growth_choices.All(r=>!string.IsNullOrEmpty(r.selected));
+            notice.text=PythonEventPresentation.Notice(c,"内容は確定前に変更できます。全員を選んで「一覧をまとめて確定」。\n効果は確定後から適用。追加の成長があれば次の一覧で確認します。自動進行は手動で再開してください。");
         }
+        public void Disconnect(){foreach(var b in choices)b.interactable=false;if(automatic!=null)automatic.interactable=confirm.interactable=manual.interactable=previous.interactable=false;}
     }
 }

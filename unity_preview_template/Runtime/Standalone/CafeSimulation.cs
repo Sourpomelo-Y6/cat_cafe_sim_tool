@@ -69,7 +69,7 @@ namespace CatCafePreview.Standalone
             ValidateIntake(s);
             ValidateVisitingCat(s);
             ValidateStoreEvents(s);
-            ValidateGrowth(s);
+            ValidateGrowth(s); ValidateGrowthSelections(s);
             ValidateTrust(s);
             ValidateCustomers(s);
             ValidateRegularIntroduction(s);
@@ -119,6 +119,7 @@ namespace CatCafePreview.Standalone
         private void ExecuteCore(string kind, string[] working = null, string catId = null, string choice = null, string source = null, string seatId = null,string customerId=null)
         {
             var s = State;
+            if(kind=="resolve_growth_stage" || kind=="resolve_growth_auto" || kind=="resolve_growth_batch"){GrowthBatchCommand(kind,catId,choice);return;}
             if(kind=="open_recruitment"){OpenRecruitment();return;}
             if (s.game_over != null) throw new InvalidOperationException("経営終了後は保存・閲覧のみ利用できます。");
             if(kind=="set_auto_assignment"){SetAutoAssignment(choice);return;}
@@ -195,7 +196,7 @@ namespace CatCafePreview.Standalone
                     foreach (var c in s.cats) c.working = false;
                     Close(true); s.tick = Rules.opening_ticks;
                     foreach (var c in s.cats) c.working = planned.Contains(c.id) && c.health == "healthy" && c.activity == "cafe";
-                    if (s.game_over == null) AdvanceToNextDay();
+                    if (s.game_over == null && (LegacyGrowthReplay || !GrowthWaiting)) AdvanceToNextDay();
                     s.revision++;
                     return;
                 case "resolve_missing":

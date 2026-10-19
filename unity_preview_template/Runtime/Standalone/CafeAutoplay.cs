@@ -58,8 +58,9 @@ namespace CatCafePreview.Standalone
         {
             var run=State.autoplay;if(run?.running!=true || run.paused)throw new InvalidOperationException("おまかせを開始・再開してください。");
             string terminal=State.game_over!=null?"game_over":State.goal.LastOrDefault()?.status=="expired" && (run.objective=="popularity" || !State.goal.Last().continued)?"expired":AutoTargetStatus(run.objective)=="cleared" && (run.objective!="popularity" || State.goal.Count==Rules.goal_stages.Length)?"completed":GoalWaiting || BondWaiting || PatronWaiting?"goal_cleared":AutoDayCount()-run.start_days>=run.limit?"day_limit":run.operations>=10000?"operation_limit":null;
-            if(terminal!=null){StopAutoplay(terminal);return null;}
-            // HTTP Python autoplay yields to the user for external pending answers.
+            if(terminal!=null && (LegacyGrowthReplay || !GrowthWaiting || terminal=="operation_limit")){StopAutoplay(terminal);return null;}
+            if(!LegacyGrowthReplay && GrowthWaiting){GrowthBatchCommand("resolve_growth_auto",null,null);GrowthBatchCommand("resolve_growth_batch",null,null);run.operations++;run.days=AutoDayCount()-run.start_days;run.lines.Add(State.day+":resolve_growth_batch::");UpdateAutoSummary();if(terminal!=null && !GrowthWaiting)StopAutoplay(terminal);return AutoOp("resolve_growth_batch");}
+            // Other pending events still yield to the user.
             if(!PlayerActive && AutoStartReason()!=""){StopAutoplay("blocked",AutoStartReason());return null;}
             var op=PlanAutoplay(run.objective,run.mode);
             try{Execute(op.kind,op.working,op.cat_id,op.choice,op.source,op.seat_id);run.operations++;run.days=AutoDayCount()-run.start_days;run.lines.Add(State.day+":"+op.kind+":"+op.cat_id+":"+op.choice);UpdateAutoSummary();}

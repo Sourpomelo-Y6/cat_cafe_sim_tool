@@ -43,7 +43,7 @@ namespace CatCafePreview.Standalone
     }
     [Serializable] public class CafeGrowthOperation
     {
-        public string kind, cat_id, customer_id, choice; public int stamina_policy_version; public int day, tick; public int[] actions = new int[8]; public double affinity_delta, stamina_spent;
+        public string kind, cat_id, customer_id, choice, decision_reason; public int stamina_policy_version; public int day, tick; public int[] actions = new int[8]; public double affinity_delta, stamina_spent;
     }
     public sealed partial class CafeSimulation
     {
@@ -54,12 +54,13 @@ namespace CatCafePreview.Standalone
         private void EnsureGrowthCat(string id) { EnsurePlayerCat(id);if (!State.growth.Any(r => r.cat_id == id)) State.growth.Add(new CafeGrowth { cat_id = id }); }
         public static string[] LearnedGroups(CafeGrowth r) => new[] { r.mastery, r.second_mastery, r.third_group_practice?.mastery }.Where(v => v != null).ToArray();
         public static string[] LearnedTypes(CafeGrowth r) => new[] { r.type_mastery, r.second_type_mastery, r.second_group_type_practice?.type_mastery, r.second_group_type_practice?.second?.type_mastery, r.third_group_practice?.individual?.type_mastery, r.third_group_practice?.individual?.second?.type_mastery }.Where(v => v != null).ToArray();
-        public bool GrowthWaiting => State.growth.Any(r => GrowthPendingKind(r) != null);
+        internal bool LegacyGrowthReplay;
+        public bool GrowthWaiting => (LegacyGrowthReplay || State.phase != "open") && State.growth.Any(r => GrowthPendingKind(r) != null);
         public string GrowthPendingKind(CafeGrowth r)
         {
             if (r.specialization == null && r.service + r.rest + r.dispatch >= Rules.growth.threshold) return "resolve_growth";
             if (MasteryChoices(r).Length > 0) return "resolve_growth_mastery";
-            return TypePractice(r, out _, out _) != null ? "resolve_growth_type_mastery" : null;
+            return TypeMasteryChoices(r).Length > 0 ? "resolve_growth_type_mastery" : null;
         }
         public string[] MasteryChoices(CafeGrowth r)
         {
@@ -114,9 +115,10 @@ namespace CatCafePreview.Standalone
         }
         private void ResolveGrowth(string kind, string id, string choice)
         {
+            if (!LegacyGrowthReplay && State.phase == "open") throw new InvalidOperationException("成長は営業終了後に確定してください。");
             var row = State.growth.Find(r => r.cat_id == id);
             if (row == null) throw new ArgumentException("成長できる猫を選んでください。");
-            RecordGrowth(new CafeGrowthOperation { kind = kind, cat_id = id, choice = choice, day = State.day, tick = State.tick }); State.revision++;
+            RecordGrowth(new CafeGrowthOperation { kind = kind, cat_id = id, choice = choice, day = State.day, tick = State.tick }); State.growth_selections?.RemoveAll(x=>x.cat_id==id); State.revision++;
         }
         private void BeginGrowthPractice(string kind, string id)
         {

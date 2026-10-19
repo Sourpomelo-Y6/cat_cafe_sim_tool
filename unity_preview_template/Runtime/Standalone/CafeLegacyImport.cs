@@ -48,7 +48,7 @@ namespace CatCafePreview.Standalone
         private int importDepth;
         private T TraceImported<T>(CafeReplayOperation operation,Func<T> action)
         {
-            bool record=State.import_history!=null && importDepth==0;if(record){operation.stamina_policy_version=LegacyStaminaReplay?0:1;operation.player_policy_version=LegacyPlayerReplay?0:2;CafeLegacyImport.NormalizeOperation(operation);}importDepth++;T result;try{result=action();}finally{importDepth--;}
+            bool record=State.import_history!=null && importDepth==0;if(record){operation.growth_policy_version=1;operation.stamina_policy_version=LegacyStaminaReplay?0:1;operation.player_policy_version=LegacyPlayerReplay?0:2;CafeLegacyImport.NormalizeOperation(operation);}importDepth++;T result;try{result=action();}finally{importDepth--;}
             if(record){operation.stamina_rules=LegacyStaminaReplay?null:State.stamina_growth;State.import_history.operations.Add(operation);}return result;
         }
         private void TraceImported(CafeReplayOperation operation,Action action)=>TraceImported(operation,()=>{action();return 0;});

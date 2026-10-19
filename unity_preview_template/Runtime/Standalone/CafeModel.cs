@@ -13,6 +13,7 @@ namespace CatCafePreview.Standalone
         public WaitingAreaRules waiting_area,waiting_area_upgrade;
         public RestSpaceRules rest_space,rest_space_upgrade,rest_space_soundproof;
         public CafeStaminaRules stamina_growth;
+        public List<CafeGrowthSelection> growth_selections = new List<CafeGrowthSelection>();
         public double max_stamina, time_price, starting_funds, starting_popularity;
         public double base_cost, per_seat_cost, max_fatigue, fatigue_per_service_tick, rest_day_recovery;
         public double safe_fatigue, probability_per_fatigue, max_probability;
@@ -143,6 +144,7 @@ namespace CatCafePreview.Standalone
         public string rules_id, instance_id, phase = "preparation", game_over;
         public bool auto_assignment=true;
         public CafeStaminaRules stamina_growth;
+        public List<CafeGrowthSelection> growth_selections = new List<CafeGrowthSelection>();
         public CafeAutoRun autoplay;public CafeImportHistory import_history;
         public double funds, opening_funds, popularity, revenue, expenses;
         public int completed;

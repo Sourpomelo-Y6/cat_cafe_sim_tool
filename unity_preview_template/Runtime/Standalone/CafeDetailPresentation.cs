@@ -119,6 +119,7 @@ namespace CatCafePreview.Standalone
             }
             foreach(var e in S.adoption?.events ?? new List<CafeAdoptionEvent>())if(e.cat_id==id){add(e.day,"譲渡の申し出",CustomerName(e.customer_id),e.status=="waiting"?"回答待ち":"回答済み");if(e.status=="resolved"){add(e.resolved_day,"譲渡への回答",CustomerName(e.customer_id),e.choice=="accept"?"譲渡成立":"見送り");if(e.choice=="accept"){admission.Add("譲渡先："+CustomerName(e.customer_id));admission.Add("譲渡成立日："+e.resolved_day+"日目");}}}
             foreach(var use in S.item_uses.Where(u=>u.cat_id==id))add(use.day,"用品の使用",ItemName(use.source),"1個使用 / ストレス "+Number(use.before)+" → "+Number(use.after)+" / 疲労 "+Number(use.before_fatigue)+" → "+Number(use.after_fatigue));
+            foreach(var op in S.growth_operations.Where(o=>o.cat_id==id && !string.IsNullOrEmpty(o.decision_reason)))add(op.day,"成長の確定理由","成長",Label(catalog.growth_labels,op.choice,op.choice)+"："+op.decision_reason);
             var growth=sim.GrowthCat(id);
             Action<int,string,string> learned=(day,title,value)=>{if(!string.IsNullOrEmpty(value))add(day,title,"成長",Label(catalog.growth_labels,value,value));};
             learned(growth.selected_day,"得意分野の選択",growth.specialization);learned(growth.mastery_selected_day,"得意な交流の選択",growth.mastery);learned(growth.second_mastery_selected_day,"2つ目の得意な交流の選択",growth.second_mastery);

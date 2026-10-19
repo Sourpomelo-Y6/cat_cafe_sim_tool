@@ -88,7 +88,7 @@ namespace CatCafePreview
     [Serializable] public class PythonSpecialistResult { public string customer_id,cat_id,result; public int connect_count,open_up_count,simultaneous_count,service_count; public bool service_equipment; public float bonus; }
     [Serializable] public class PythonNewGameOption { public string choice, label, detail, conditions; }
     [Serializable] public class PythonGrowthChoice
-    { public string cat_id, name, kind, title, learned, group, effect; public float experience, threshold, service, rest, dispatch, play, contact, quiet; public PythonEventChoice[] choices; }
+    { public string cat_id, name, kind, title, learned, group, effect, selected, recommendation, decision_reason; public float experience, threshold, service, rest, dispatch, play, contact, quiet; public PythonEventChoice[] choices; }
     [Serializable] public class PythonGrowthPracticeChoice { public string cat_id, kind, label; public bool can_select; }
     [Serializable] public class PythonStoreEvent
     { public string kind, title; public int day; public float funds; public PythonEventChoice[] choices; }
@@ -358,18 +358,25 @@ namespace CatCafePreview
                 expected_revision=current.revision,working_cats=new string[0],kind=string.IsNullOrEmpty(current.goal_result.kind) ? "continue_goal" : current.goal_result.kind };
             preview.RefreshPythonControls();
         }
+        public int GrowthRowIndex;
         public bool CanRespondGrowth(int index)
         {
             var rows=current == null ? null : current.growth_choices;
-            return CanManageSaves && rows != null && rows.Length>0 && rows[0].choices != null
-                && index>=0 && index<rows[0].choices.Length && rows[0].choices[index].can_select;
+            int n=rows==null || rows.Length==0?0:Mathf.Clamp(GrowthRowIndex,0,rows.Length-1);
+            return CanManageSaves && rows != null && rows.Length>0 && rows[n].choices != null
+                && index>=0 && index<rows[n].choices.Length && rows[n].choices[index].can_select;
+        }
+        public void GrowthBatch(string kind)
+        {
+            if(!CanManageSaves || current?.growth_choices?.Length<1)return;
+            StopAutomatic();pending=new PythonShiftCommand {request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,expected_revision=current.revision,working_cats=new string[0],kind=kind};preview.RefreshPythonControls();
         }
         public void RespondGrowth(int index)
         {
             if(!CanRespondGrowth(index))return;
-            StopAutomatic(); var row=current.growth_choices[0];
+            StopAutomatic(); var row=current.growth_choices[Mathf.Clamp(GrowthRowIndex,0,current.growth_choices.Length-1)];
             pending=new PythonShiftCommand { request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,
-                expected_revision=current.revision,working_cats=new string[0],kind=string.IsNullOrEmpty(row.kind) ? "resolve_growth" : row.kind,cat_id=row.cat_id,choice=row.choices[index].choice };
+                expected_revision=current.revision,working_cats=new string[0],kind=CafeBackends.Standalone ? "resolve_growth_stage" : row.kind,cat_id=row.cat_id,choice=row.choices[index].choice };
             preview.RefreshPythonControls();
         }
         public bool CanRespondStore(int index)

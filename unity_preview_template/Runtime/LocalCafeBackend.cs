@@ -85,7 +85,7 @@ namespace CatCafePreview
                 if (cmd.instance_id != s.instance_id || cmd.expected_revision != s.revision) throw new InvalidOperationException("状態が更新されています。最新状態で再操作してください。");
                 if(s.autoplay?.running==true && !s.autoplay.paused && !new[]{"step_autoplay","stop_autoplay","pause_autoplay","resume_autoplay","save_game","load_game"}.Contains(cmd.kind))throw new InvalidOperationException("おまかせを中止してから通常操作へ戻ってください。");
                 if(s.autoplay?.running==true && s.autoplay.paused && new[]{"start_business","advance_business","next_day","day_off","rest_for_missing"}.Contains(cmd.kind))throw new InvalidOperationException("おまかせを再開するか中止してから営業を進めてください。");
-                if(ConversationBlocksProgress && new[]{"start_business","advance_business","next_day","day_off","start_autoplay","resume_autoplay","step_autoplay"}.Contains(cmd.kind))throw new InvalidOperationException("会話を終えてから操作してください。結果会話はイベント一覧から再開できます。");
+                if(ConversationBlocksProgress && !(cmd.kind=="step_autoplay" && PopularityEndingPending) && new[]{"start_business","advance_business","next_day","day_off","start_autoplay","resume_autoplay","step_autoplay"}.Contains(cmd.kind))throw new InvalidOperationException("会話を終えてから操作してください。結果会話はイベント一覧から再開できます。");
                 if(PopularityEndingPending && cmd.kind=="continue_goal")throw new InvalidOperationException("人気エンディングを最後まで読むか、結果画面から再開してください。");
                 var replayBefore=Journal.CaptureBefore(s);Simulation.ReplayActions.Clear();CafeAutoOperation replayAutomatic=null;
                 switch (cmd.kind)

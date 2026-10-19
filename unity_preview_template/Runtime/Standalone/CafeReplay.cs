@@ -10,6 +10,7 @@ namespace CatCafePreview.Standalone
     [Serializable] public class CafeReplayOperation
     {
         public string kind,cat_id,choice,source,seat_id,customer_id,objective,mode;
+        public int growth_policy_version;
         public CafeStaminaRules stamina_rules;public int stamina_policy_version; public int player_policy_version,days;public string[] working;
     }
     [Serializable] public class CafeReplayRow
@@ -53,8 +54,11 @@ namespace CatCafePreview.Standalone
             if(value is int integer){text.Append(integer.ToString(CultureInfo.InvariantCulture)).Append(';');return;}
             if(value is System.Collections.IEnumerable sequence){text.Append('[');foreach(var item in sequence)Canonical(item,text);text.Append(']');return;}
             text.Append('{');foreach(var field in Fields(value.GetType()))
-            {if(field.Name=="stamina_policy_version" && (value is CafeReplayOperation || value is CafeGrowthOperation) && (int)field.GetValue(value)==0)continue;
+            {if(field.Name=="growth_policy_version" && value is CafeReplayOperation && (int)field.GetValue(value)==0)continue;
+                if(field.Name=="stamina_policy_version" && (value is CafeReplayOperation || value is CafeGrowthOperation) && (int)field.GetValue(value)==0)continue;
                 if(field.Name=="stamina_rules" && value is CafeReplayOperation && field.GetValue(value)==null)continue;
+                if(field.Name=="growth_selections" && value is CafeSnapshot  && (((CafeSnapshot)value).growth_selections==null || ((CafeSnapshot)value).growth_selections.Count==0))continue;
+                if(field.Name=="decision_reason" && value is CafeGrowthOperation && string.IsNullOrEmpty((string)field.GetValue(value)))continue;
                 if(field.Name=="stamina_growth" && value is CafeSnapshot && field.GetValue(value)==null)continue;
                 if(value is CafeCat && (field.Name=="stamina_stage" && (int)field.GetValue(value)==0 || field.Name=="stamina_experience_origin" && (double)field.GetValue(value)==0))continue;
                 if((value is CafePlayerSession || value is CafeExchange) && field.Name=="max_stamina" && (double)field.GetValue(value)==0)continue;
@@ -67,7 +71,7 @@ namespace CatCafePreview.Standalone
         }
         public void Append(CafeSnapshot before,CafeSimulation sim,CafeReplayOperation operation,CafeAutoOperation automatic=null)
         {
-            operation.stamina_policy_version=sim.LegacyStaminaReplay?0:1;operation.stamina_rules=sim.LegacyStaminaReplay?null:sim.State.stamina_growth;operation.player_policy_version=sim.LegacyPlayerReplay?0:2;var after=sim.State;var events=new List<string>(sim.ReplayActions);
+            operation.growth_policy_version=1;operation.stamina_policy_version=sim.LegacyStaminaReplay?0:1;operation.stamina_rules=sim.LegacyStaminaReplay?null:sim.State.stamina_growth;operation.player_policy_version=sim.LegacyPlayerReplay?0:2;var after=sim.State;var events=new List<string>(sim.ReplayActions);
             foreach(var v in after.visits){var old=before.day==after.day?before.visits.Find(x=>x.id==v.id):null;if(old==null)events.Add("来店："+v.id+" / "+v.arrival+"tick");if(v.cat_id!=null && old?.cat_id!=v.cat_id)events.Add("接客開始："+v.id+" / "+v.cat_id+" / seat-"+(v.service_seat+1));if(v.departure!=null && old?.departure!=v.departure)events.Add("退店："+v.id+" / "+v.departure+" / 売上 "+N(v.bill)+" / "+v.satisfaction?.level);}
             foreach(var cat in after.cats){var old=before.cats.Find(c=>c.id==cat.id);if(old==null)events.Add("猫の加入："+cat.id);else if(old.fatigue!=cat.fatigue || old.stress!=cat.stress || old.health!=cat.health || old.activity!=cat.activity)events.Add(cat.id+"：疲労 "+N(old.fatigue)+" → "+N(cat.fatigue)+" / ストレス "+N(old.stress)+" → "+N(cat.stress)+" / "+old.health+" → "+cat.health+" / "+old.activity+" → "+cat.activity);}
             if(before.phase!=after.phase || before.day!=after.day)events.Add("営業："+before.day+"日目 "+before.phase+" → "+after.day+"日目 "+after.phase);
@@ -81,8 +85,10 @@ namespace CatCafePreview.Standalone
         {switch(kind){case "start_business":return "営業開始";case "advance_business":return "営業を進行";case "set_shifts":return "出勤・休養の設定";case "next_day":return "翌日へ";case "day_off":return "休業";case "assign_service":return "接客の手動配置";case "player_begin":return "プレイヤー交流開始";case "player_step":return "プレイヤー交流の行動";case "player_finish":return "プレイヤー交流終了";case "start_autoplay":return "おまかせ開始";case "step_autoplay":return "おまかせ進行";case "stop_autoplay":return "おまかせ中止";case "pause_autoplay":return "おまかせ一時停止";case "resume_autoplay":return "おまかせ再開";case "save_game":return "営業保存";default:return kind;}}
         public static CafeAutoOperation Apply(CafeSimulation sim,CafeReplayOperation op)
         {
+            if(op!=null && op.growth_policy_version!=0 && op.growth_policy_version!=1)throw new ArgumentException("Invalid growth policy");
+            sim.LegacyGrowthReplay=op?.growth_policy_version==0;
             if(op==null || string.IsNullOrEmpty(op.kind))throw new ArgumentException("リプレイの操作がありません。");
-            if(sim.State.autoplay?.running==true && !new[]{"step_autoplay","stop_autoplay","pause_autoplay","resume_autoplay","save_game"}.Contains(op.kind))throw new ArgumentException("おまかせ中の通常操作は再生できません。");
+            if(sim.State.autoplay?.running==true && !sim.State.autoplay.paused && !new[]{"step_autoplay","stop_autoplay","pause_autoplay","resume_autoplay","save_game"}.Contains(op.kind))throw new ArgumentException("おまかせ中の通常操作は再生できません。");
             if(op.stamina_policy_version!=0 && op.stamina_policy_version!=1)throw new ArgumentException("Invalid stamina policy");
 
             sim.ReplayStaminaRules=CafeStaminaRules.Missing(op.stamina_rules)?null:op.stamina_rules;
