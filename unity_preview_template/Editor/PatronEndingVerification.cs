@@ -1,0 +1,3 @@
+using System;using System.IO;
+namespace CatCafePreview.Editor {public static class PatronEndingVerification {
+public static void VerifyAndBuild(){string path=Path.Combine(Environment.GetEnvironmentVariable("CATCAFE_WORKSPACE_ROOT"),"Logs/StandalonePatronEnding/Editor");Directory.CreateDirectory(path);int n=StandalonePatronEndingSmoke.BackendChecks(Path.Combine(path,"cases"),false);int bond=StandaloneBondEndingSmoke.BackendChecks(Path.Combine(path,"bond"),false);int popularity=StandaloneEndingSmoke.BackendChecks(Path.Combine(path,"popularity"),false);File.WriteAllText(Path.Combine(path,"result.txt"),"PASS: "+n+" patron; "+popularity+" popularity; "+bond+" bond checks");StandaloneScreenSetup.Build();}}}

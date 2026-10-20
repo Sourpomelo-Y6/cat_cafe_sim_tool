@@ -20,9 +20,10 @@ namespace CatCafePreview.Standalone
     }
     public static class CafeReplayCatalog
     {
-        public static bool IsEnding(string id)=>id==CafePopularityEnding.Id || id==CafeBondEnding.Id;
+        public static bool IsEnding(string id)=>id==CafePopularityEnding.Id || id==CafeBondEnding.Id || id==CafePatronEnding.Id;
         public static readonly CafeReplayDefinition[] All={
             new CafeReplayDefinition(CafeOpening.Id,"popularity","オープニング · 人気"),new CafeReplayDefinition(CafeOpening.Id,"patron","オープニング · 有力者"),new CafeReplayDefinition(CafeOpening.Id,"bond","オープニング · 好感度"),new CafeReplayDefinition(CafeOpening.Id,"free","オープニング · 自由営業"),
+            new CafeReplayDefinition(CafePatronEnding.Id,CafePopularityEnding.Branch,"有力者目標 · 店の外へつながる信頼"),
             new CafeReplayDefinition(CafeBondEnding.Id,CafePopularityEnding.Branch,"好感度目標 · 猫たちとのつながり"),
             new CafeReplayDefinition(CafePopularityEnding.Id,CafePopularityEnding.Branch,"人気目標 · 猫カフェのこれから"),
             new CafeReplayDefinition(CafeIntakeConversation.Id,"accepted","保護猫の受け入れ依頼 · 迎える"),new CafeReplayDefinition(CafeIntakeConversation.Id,"declined","保護猫の受け入れ依頼 · 見送る"),
@@ -38,7 +39,7 @@ namespace CatCafePreview.Standalone
         }
         public static void ValidateSave(CafeSaveEnvelope s)
         {
-            CafeBondEnding.Validate(s.bond_ending,s.state);CafeOpening.Validate(s.opening,s.state);CafePopularityEnding.Validate(s.popularity_ending,s.state);CafeIntakeConversation.Validate(s.conversation,s.state.intake_request.status);CafeRegularConversation.Validate(s.regular_conversation,s.state.regular_introduction.status);
+            CafePatronEnding.Validate(s.patron_ending,s.state);CafeBondEnding.Validate(s.bond_ending,s.state);CafeOpening.Validate(s.opening,s.state);CafePopularityEnding.Validate(s.popularity_ending,s.state);CafeIntakeConversation.Validate(s.conversation,s.state.intake_request.status);CafeRegularConversation.Validate(s.regular_conversation,s.state.regular_introduction.status);
             CafeDispatchDialogue.Validate(s.dispatch_conversations,s.dispatch_conversation_selected,s.state);CafeEncounterDialogue.Validate(s.encounter_conversations,s.encounter_conversation_selected,s.state);CafeDispatchIntroductionDialogue.Validate(s.dispatch_introduction_conversations,s.dispatch_introduction_conversation_selected,s.state);
         }
         public static CafeReplayEntry[] FromSave(CafeSaveEnvelope save,CafeRules rules,Func<string,string> catName,Func<string,string> customerName,Func<string,string> contentId)
@@ -67,6 +68,7 @@ namespace CatCafePreview.Standalone
             foreach(var row in save.dispatch_introduction_conversations??new CafeDispatchIntroductionConversation[0])
             {var ev=save.state.dispatches.Single(e=>e.id==row.event_id);var c=rules.dispatch_introductions.Single(x=>x.destination==ev.destination).candidate;string name=ev.introduction.name;add(row.progress,"intro-"+ev.destination,name,c.personality,b=>CafeDispatchIntroductionDialogue.Lines(b,name,c.personality,c.features_label,c.trait),true);}
             if(save.popularity_ending?.progress.completed==true){var e=save.popularity_ending;string name=string.IsNullOrEmpty(e.cat_id)?"":catName(e.cat_id);result.Add(new CafeReplayEntry{conversation_id=CafePopularityEnding.Id,branch_id=CafePopularityEnding.Branch,title="人気目標 · 猫カフェのこれから",cat_id=string.IsNullOrEmpty(e.cat_id)?"":contentId(e.cat_id),cat_name=name,personality="達成時のカフェ",lines=CafePopularityEnding.Lines(CafePopularityEnding.Record(save.state),name)});}
+            if(save.patron_ending?.progress.completed==true)result.Add(new CafeReplayEntry{conversation_id=CafePatronEnding.Id,branch_id=CafePopularityEnding.Branch,title="有力者目標 · 店の外へつながる信頼",cat_id="",cat_name="猫たちのカフェ",personality="達成時のカフェ",lines=CafePatronEnding.Lines(CafePatronEnding.Record(save.state),"")});
             if(save.bond_ending?.progress.completed==true){var e=save.bond_ending;string name=string.IsNullOrEmpty(e.cat_id)?"":catName(e.cat_id);result.Add(new CafeReplayEntry{conversation_id=CafeBondEnding.Id,branch_id=CafePopularityEnding.Branch,title="好感度目標 · 猫たちとのつながり",cat_id=string.IsNullOrEmpty(e.cat_id)?"":contentId(e.cat_id),cat_name=name,personality="達成時のカフェ",lines=CafeBondEnding.Lines(CafeBondEnding.Record(save.state),name)});}
             if(save.opening?.outcome=="viewed"){var o=save.opening;string id=o.cat_ids.FirstOrDefault()??"";result.Add(new CafeReplayEntry{conversation_id=CafeOpening.Id,branch_id=o.mode,title=All.Single(d=>d.id==CafeOpening.Id && d.branch==o.mode).title,cat_id=id==""?"":contentId(id),cat_name=o.cat_names.FirstOrDefault()??"猫たちのカフェ",personality="1日目の営業前",lines=CafeOpening.Lines(o)});}
             return result.ToArray();

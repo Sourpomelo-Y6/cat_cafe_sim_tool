@@ -12,7 +12,7 @@ namespace CatCafePreview.Standalone
         public static void Validate(CafeEndingProgress row,CafeSnapshot s)=>Validate(row,s,Record(s),Id);
         public static void Validate(CafeEndingProgress row,CafeSnapshot s,CafeClearRecord record,string id)
         {
-            if(row==null)return;var p=row.progress;int length=(id==CafeBondEnding.Id?CafeBondEnding.Lines(record,"猫"):Lines(record,"猫")).Length;
+            if(row==null)return;var p=row.progress;int length=(id==CafePatronEnding.Id?CafePatronEnding.Lines(record,""):id==CafeBondEnding.Id?CafeBondEnding.Lines(record,"猫"):Lines(record,"猫")).Length;
             if(record==null || (!string.IsNullOrEmpty(row.cat_id) && !s.cats.Any(c=>c.id==row.cat_id)) || p==null || p.conversation_id!=id || p.branch_id!=Branch || p.node<0 || p.node>length || p.page_offset<0 || p.page_offset>1000000 || p.completed && p.node!=length || p.viewed_branches==null || !p.viewed_branches.SequenceEqual(p.completed?new[]{Branch}:new string[0]))throw new ArgumentException("エンディングの保存位置が不正です。");
         }
         public static void Finish(CafeConversationProgress p){if(p.completed)return;p.completed=true;p.viewed_branches=new[]{Branch};}

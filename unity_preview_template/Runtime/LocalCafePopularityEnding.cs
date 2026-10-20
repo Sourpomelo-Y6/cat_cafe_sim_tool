@@ -4,7 +4,10 @@ namespace CatCafePreview
 {
     public sealed partial class LocalCafeBackend
     {
-        CafeEndingProgress popularityEnding,bondEnding;string endingEpoch,bondEpoch;
+        CafeEndingProgress popularityEnding,bondEnding,patronEnding;string endingEpoch,bondEpoch,patronEpoch;
+        public CafeEndingProgress PatronEnding { get {var s=Simulation.State;if(patronEpoch!=s.instance_id){patronEnding=null;patronEpoch=s.instance_id;}if(patronEnding==null && CafePatronEnding.Waiting(s))patronEnding=new CafeEndingProgress{cat_id="",progress=new CafeConversationProgress{conversation_id=CafePatronEnding.Id,branch_id=CafePopularityEnding.Branch,viewed_branches=new string[0]}};return patronEnding;} }
+        public bool PatronEndingPending=>PatronEnding!=null && !PatronEnding.progress.completed;
+        void RestorePatronEnding(CafeEndingProgress row){patronEnding=row;patronEpoch=Simulation.State.instance_id;}
         public CafeEndingProgress BondEnding { get {var s=Simulation.State;if(bondEpoch!=s.instance_id){bondEnding=null;bondEpoch=s.instance_id;}if(bondEnding==null && CafeBondEnding.Waiting(s))bondEnding=new CafeEndingProgress{cat_id=s.bond_goal.achieved_cats.FirstOrDefault(id=>s.cats.Any(c=>c.id==id))??"",progress=new CafeConversationProgress{conversation_id=CafeBondEnding.Id,branch_id=CafePopularityEnding.Branch,viewed_branches=new string[0]}};return bondEnding;} }
         public bool BondEndingPending=>BondEnding!=null && !BondEnding.progress.completed;
         void RestoreBondEnding(CafeEndingProgress row){bondEnding=row;bondEpoch=Simulation.State.instance_id;}

@@ -20,7 +20,7 @@ namespace CatCafePreview
             var s=Simulation.State;
             if(Simulation.PatronWaiting || Simulation.BondWaiting)
             {
-                bool patron=Simulation.PatronWaiting;string mode=patron?"patron":"bond",reason=patron?Simulation.PatronContinueReason():Simulation.BondContinueReason();
+                bool patron=Simulation.PatronWaiting && !Simulation.BondWaiting;string mode=patron?"patron":"bond",reason=patron?Simulation.PatronContinueReason():Simulation.BondContinueReason();
                 var record=ClearResultsView().rows.FirstOrDefault(row=>row.mode==mode);string summary=patron?PatronGoalView().details:BondGoalView().details;
                 return new PythonGoalResult{pending=true,status="cleared",kind=patron?"continue_patron":"continue_bond_goal",title=patron?"有力者の満足度目標を達成しました":"好感度目標を達成しました",resolved_day=patron?s.patron.resolved_day:s.bond_goal.resolved_day,funds=(float)s.funds,can_continue=reason=="",reason=reason,summary=summary,details=summary+(record==null?"":"\n\nクリア時の成果\n"+record.details)+"\n\n結果を確認して継続営業できます。"};
             }
