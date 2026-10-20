@@ -42,6 +42,7 @@ static partial class Program
         ReplayArchiveChecks(rules);
         DispatchIntroductionDialogueChecks(rules);
         DispatchIntroductionOrderChecks(rules);
+        StudioShoppingOverlapChecks(rules);
         EncounterConversationChecks(rules);
         EncounterOrderChecks(rules);
         DispatchConversationChecks(rules);
@@ -82,21 +83,38 @@ static partial class Program
     }
     static void DispatchIntroductionDialogueChecks(CafeRules defaults)
     {
+        foreach(string destination in new[]{CafeDispatchIntroductionDialogue.Destination,CafeDispatchIntroductionDialogue.StudioDestination})
         foreach(string choice in new[]{"accept","decline"})
         {
-            var r=Decode<CafeRules>(Encode(defaults));r.store_events.probability=0;r.dispatch_unlocks=r.dispatch_unlocks.Where(u=>u.id!=CafeDispatchIntroductionDialogue.Destination).ToArray();
-            var sim=new CafeSimulation(r);sim.Execute("dispatch_general",catId:"cat-mike",choice:CafeDispatchIntroductionDialogue.Destination);sim.Execute("day_off");var ev=sim.State.dispatches.Single();sim.Execute("resolve_dispatch_choice",source:ev.id,choice:"decline");sim.Execute("day_off");sim.Execute("resolve_activity",source:ev.id,choice:"receive");
-            var row=new CafeDispatchIntroductionConversation{event_id=ev.id,progress=CafeDispatchIntroductionDialogue.Start()};var rows=new[]{row};double funds=sim.State.funds;int count=sim.State.cats.Count;
+            var r=Decode<CafeRules>(Encode(defaults));r.store_events.probability=0;r.dispatch_unlocks=r.dispatch_unlocks.Where(u=>u.id!=destination).ToArray();
+            var sim=new CafeSimulation(r);sim.Execute("dispatch_general",catId:"cat-mike",choice:destination);sim.Execute("day_off");var ev=sim.State.dispatches.Single();sim.Execute("resolve_dispatch_choice",source:ev.id,choice:"decline");sim.Execute("day_off");sim.Execute("resolve_activity",source:ev.id,choice:"receive");
+            var row=new CafeDispatchIntroductionConversation{event_id=ev.id,progress=CafeDispatchIntroductionDialogue.Start(destination)};var rows=new[]{row};double funds=sim.State.funds;int count=sim.State.cats.Count;
             for(int i=0;i<=CafeDispatchIntroductionDialogue.Lines("introduction","").Length;i++){row.progress.node=i;var save=Decode<CafeSaveEnvelope>(Encode(new CafeSaveEnvelope{state=sim.State,dispatch_introduction_conversations=rows}));sim.Restore(save.state);CafeDispatchIntroductionDialogue.Validate(save.dispatch_introduction_conversations,ev.id,sim.State);Assert(save.dispatch_introduction_conversations[0].progress.node==i,"Dispatch introduction node lost");}
-            sim.State.funds=200;Assert(sim.DispatchIntroductionAcceptReason(ev.id).Contains("資金"),"Exact cost accepted");Rejected(()=>sim.Execute("resolve_dispatch_introduction",source:ev.id,choice:"accept"));sim.State.funds=funds;
+            double cost=ev.introduction.cost;sim.State.funds=cost;Assert(sim.DispatchIntroductionAcceptReason(ev.id).Contains("資金"),"Exact cost accepted");Rejected(()=>sim.Execute("resolve_dispatch_introduction",source:ev.id,choice:"accept"));sim.State.funds=funds;
             int capacity=r.housing.initial_capacity;r.housing.initial_capacity=count;Assert(sim.DispatchIntroductionAcceptReason(ev.id).Contains("満員"),"Full housing accepted");Rejected(()=>sim.Execute("resolve_dispatch_introduction",source:ev.id,choice:"accept"));r.housing.initial_capacity=capacity;
+            var growth=sim.State.growth[0];double oldService=growth.service;string oldSpec=growth.specialization;growth.specialization=null;growth.service=r.growth.threshold;
+            Assert(sim.DispatchIntroductionResponseReason(ev.id).Contains("成長"),"Growth priority missing");Rejected(()=>sim.Execute("resolve_dispatch_introduction",source:ev.id,choice:"decline"));growth.service=oldService;growth.specialization=oldSpec;
+            sim.State.goal.Add(new CafeGoalStage{status="cleared"});Assert(sim.DispatchIntroductionResponseReason(ev.id).Contains("目標"),"Goal priority missing");Rejected(()=>sim.Execute("resolve_dispatch_introduction",source:ev.id,choice:"decline"));sim.State.goal.RemoveAt(sim.State.goal.Count-1);
             string phase=sim.State.phase;sim.State.phase="open";Assert(sim.DispatchIntroductionResponseReason(ev.id)!="","Open-phase introduction allowed");sim.State.phase=phase;
             sim.Execute("resolve_dispatch_introduction",source:ev.id,choice:choice);CafeDispatchIntroductionDialogue.Sync(row,sim.State.dispatches.Single());string state=Encode(sim.State);for(int n=0;n<5;n++)sim.Execute("resolve_dispatch_introduction",source:ev.id,choice:choice);Assert(state==Encode(sim.State),"Duplicate joining or expense");
-            Assert(sim.State.funds==funds-(choice=="accept"?200:0) && sim.State.cats.Count==count+(choice=="accept"?1:0),"Introduction effect changed");
+            Assert(sim.State.funds==funds-(choice=="accept"?cost:0) && sim.State.cats.Count==count+(choice=="accept"?1:0),"Introduction effect changed");
             for(int i=0;i<=CafeDispatchIntroductionDialogue.Lines(row.progress.branch_id,"").Length;i++){row.progress.node=i;var save=Decode<CafeSaveEnvelope>(Encode(new CafeSaveEnvelope{state=sim.State,dispatch_introduction_conversations=rows}));sim.Restore(save.state);CafeDispatchIntroductionDialogue.Validate(save.dispatch_introduction_conversations,ev.id,sim.State);Assert(save.dispatch_introduction_conversations[0].progress.node==i,"Introduction result lost");}
             CafeDispatchIntroductionDialogue.Finish(row.progress);CafeDispatchIntroductionDialogue.Finish(row.progress);CafeDispatchIntroductionDialogue.Validate(rows,ev.id,sim.State);Assert(CafeReplayCatalog.FromSave(new CafeSaveEnvelope{state=sim.State,dispatch_introduction_conversations=rows},r,id=>id,id=>id,id=>id).Single().lines.Length==9,"Introduction replay script incomplete");Assert(row.progress.completed && row.progress.viewed_branches.Length==1,"Introduction viewing duplicated");CafeDispatchIntroductionDialogue.Validate(null,null,sim.State);
             row.progress.branch_id=choice=="accept"?"declined":"accepted";bool rejected=false;try{CafeDispatchIntroductionDialogue.Validate(rows,ev.id,sim.State);}catch(ArgumentException){rejected=true;}Assert(rejected,"Forged introduction result allowed");
         }
+    }
+    static void StudioShoppingOverlapChecks(CafeRules defaults)
+    {
+        var r=Decode<CafeRules>(Encode(defaults));r.store_events.probability=0;r.dispatch_unlocks=r.dispatch_unlocks.Where(u=>u.id!=CafeDispatchIntroductionDialogue.Destination && u.id!=CafeDispatchIntroductionDialogue.StudioDestination).ToArray();
+        // Fixture supplies a second eligible cat; shipping rules are unchanged.
+        r.cats.Single(c=>c.id=="cat-kohaku").trait_id="hospitality";
+        var sim=new CafeSimulation(r);sim.Execute("dispatch_general",catId:"cat-mike",choice:CafeDispatchIntroductionDialogue.StudioDestination);sim.Execute("dispatch_general",catId:"cat-kohaku",choice:CafeDispatchIntroductionDialogue.Destination);sim.Execute("day_off");
+        foreach(var e in sim.State.dispatches)sim.Execute("resolve_dispatch_choice",source:e.id,choice:"decline");sim.Execute("day_off");foreach(var e in sim.State.dispatches)sim.Execute("resolve_activity",source:e.id,choice:"receive");
+        Assert(sim.State.dispatches.All(e=>e.introduction.status=="waiting"),"Both introductions not waiting");
+        var rows=sim.State.dispatches.Select(e=>new CafeDispatchIntroductionConversation{event_id=e.id,progress=CafeDispatchIntroductionDialogue.Start(e.destination)}).ToArray();
+        foreach(var row in rows){sim.Execute("resolve_dispatch_introduction",source:row.event_id,choice:"decline");CafeDispatchIntroductionDialogue.Sync(row,sim.State.dispatches.Single(e=>e.id==row.event_id));row.progress.node=4;CafeDispatchIntroductionDialogue.Finish(row.progress);}
+        CafeDispatchIntroductionDialogue.Validate(rows,rows[0].event_id,sim.State);var save=new CafeSaveEnvelope{state=sim.State,dispatch_introduction_conversations=rows};string before=Encode(save);var entries=CafeReplayCatalog.FromSave(save,r,id=>id,id=>id,id=>id);
+        Assert(entries.Length==2 && entries.Select(e=>e.Key).Distinct().Count()==2,"Studio/shopping replay collision");Assert(entries.Single(e=>e.conversation_id==CafeDispatchIntroductionDialogue.StudioId).lines.Any(l=>l.speaker=="撮影スタジオの担当者"),"Studio replay used shopping script");Assert(before==Encode(save),"Replay mutated save");
     }
     static void DispatchIntroductionOrderChecks(CafeRules defaults)
     {

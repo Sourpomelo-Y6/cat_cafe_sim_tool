@@ -11,10 +11,14 @@ namespace CatCafePreview.Standalone
     public static class CafeDispatchIntroductionDialogue
     {
         public const string Id="dispatch.shopping_street_introduction.v1",Destination="shopping_street_event";
-        public static bool Supports(CafeDispatch e)=>e?.destination==Destination && e.introduction!=null;
-        public static CafeConversationProgress Start()=>new CafeConversationProgress{conversation_id=Id,branch_id="introduction",viewed_branches=new string[0]};
-        public static CafeConversationLine[] Lines(string branch,string name,string personality="",string features="",string trait="")
+        public const string StudioDestination="cat_photo_studio",StudioId="dispatch.photo_studio_introduction.v1";
+        public static string ConversationId(string destination)=>destination==StudioDestination?StudioId:Id;
+        public static string Title(string destination)=>destination==StudioDestination?"撮影スタジオからの猫紹介":"商店街からの猫紹介";
+        public static bool Supports(CafeDispatch e)=>e!=null && (e.destination==Destination || e.destination==StudioDestination) && e.introduction!=null;
+        public static CafeConversationProgress Start(string destination=Destination)=>new CafeConversationProgress{conversation_id=ConversationId(destination),branch_id="introduction",viewed_branches=new string[0]};
+        public static CafeConversationLine[] Lines(string branch,string name,string personality="",string features="",string trait="",string destination=Destination)
         {
+            if(destination==StudioDestination)return StudioLines(branch,name,personality,features,trait);
             if(branch=="accepted")return new[]{
                 new CafeConversationLine("あなた","この子を迎えます。まずは落ち着いて休める場所を用意して、少しずつ慣れてもらいましょう。"),
                 new CafeConversationLine("商店街の担当者","ありがとうございます。この子のペースで、よろしくお願いします。"),
@@ -32,7 +36,26 @@ namespace CatCafePreview.Standalone
                 new CafeConversationLine("",name+"は動くものへ目を向け、前足を少し浮かせた。こちらへ一歩近づくと、立ち止まって様子をうかがう。遊びへの興味を大切にしながら、強く誘いすぎないようにしよう。"),
                 new CafeConversationLine("あなた","この子が落ち着いて過ごせる場所と、受け入れの費用を確認しましょう。迎えるかどうかは、そのうえで決めます。")};
         }
-        public static void Sync(CafeDispatchIntroductionConversation r,CafeDispatch e){if(e!=null)CafeIntakeConversation.SyncAnswer(r.progress,e.introduction.status);}
+        static CafeConversationLine[] StudioLines(string branch,string name,string personality,string features,string trait)
+        {
+            if(branch=="accepted")return new[]{
+                new CafeConversationLine("あなた","この子を迎えます。静かに休める場所を整えて、少しずつ慣れてもらいましょう。"),
+                new CafeConversationLine("撮影スタジオの担当者","ありがとうございます。この子のペースで、よろしくお願いします。"),
+                new CafeConversationLine("",name+"はそっと近づき、こちらのそばで足を止めた。差し出した手を動かさず、落ち着いて触れ合えるのを待つ。"),
+                new CafeConversationLine("","受け入れの手続きが終わった。初期費用は支払い済み。この子は健康・体力全回復、疲労・ストレス・好感度0の休養予定で加わった。出勤は営業準備で決めよう。")};
+            if(branch=="declined")return new[]{
+                new CafeConversationLine("あなた","今回は、受け入れを見送ります。無理なく迎えられる場所と予定を整えることを大切にしたいんです。"),
+                new CafeConversationLine("撮影スタジオの担当者","わかりました。この子のことを考えてくださって、ありがとうございます。"),
+                new CafeConversationLine("",name+"はそばで静かに座っている。急に抱き上げたりせず、穏やかな様子を見守って相談を終えた。"),
+                new CafeConversationLine("","この候補の受け入れを見送った。費用・人気・受け取った派遣報酬は変わらず、今回の回答は変更できない。")};
+            return new[]{
+                new CafeConversationLine("","撮影スタジオへの派遣が終わり、帰還の確認も済んだ営業準備の時間。スタジオの担当者から、猫の紹介が届いている。"),
+                new CafeConversationLine("撮影スタジオの担当者","訪問してくださって、ありがとうございました。猫の受け入れについても、ご相談したいことがあります。この子を紹介させてください。"),
+                new CafeConversationLine("撮影スタジオの担当者","名前は"+name+"。個性は「"+personality+"」、特徴は"+features+"で、特性は「"+trait+"」です。ゆっくり様子を見てくださいね。"),
+                new CafeConversationLine("",name+"はゆっくりこちらへ近づき、そばに腰を下ろした。穏やかな甘えん坊のこの子には、急がず、落ち着いた触れ合いから始めてみよう。"),
+                new CafeConversationLine("あなた","この子が安心して過ごせる場所と、受け入れの費用を確認しましょう。迎えるかどうかは、そのうえで決めます。")};
+        }
+        public static void Sync(CafeDispatchIntroductionConversation r,CafeDispatch e){if(e!=null){string before=r.progress.branch_id;CafeIntakeConversation.SyncAnswer(r.progress,e.introduction.status);if(before!=r.progress.branch_id)r.progress.page_offset=0;}}
         public static bool ResultPending(CafeDispatchIntroductionConversation r)=>r.progress!=null && !r.progress.completed && r.progress.branch_id!="introduction";
         public static void Finish(CafeConversationProgress p){if(p!=null && p.branch_id!="introduction" && p.node>=Lines(p.branch_id,"").Length){p.completed=true;p.viewed_branches=new[]{p.branch_id};}}
         public static void Validate(CafeDispatchIntroductionConversation[] rows,string selected,CafeSnapshot state)
@@ -43,7 +66,7 @@ namespace CatCafePreview.Standalone
             {
                 var ev=state.dispatches.SingleOrDefault(e=>e.id==r.event_id);var v=ev?.introduction;var q=r.progress;
                 if(!Supports(ev) || v.status=="scheduled" || q==null || (v.status=="waiting"?q.branch_id!="introduction":q.branch_id!=v.status))throw new ArgumentException("派遣紹介の会話対象・回答が不正です。");
-                CafeIntakeConversation.ValidateProgress(q,v.status,Id,"scheduled",(b,n)=>Lines(b,n));
+                CafeIntakeConversation.ValidateProgress(q,v.status,ConversationId(ev.destination),"scheduled",(b,n)=>Lines(b,n));
             }
         }
     }

@@ -14,10 +14,13 @@ namespace CatCafePreview
     {
         static readonly BindingFlags Hidden=BindingFlags.Instance|BindingFlags.NonPublic;
         string output;int checks;bool completed,failed;LocalCafeBackend backend;readonly List<string> errors=new List<string>();
-        public static LocalCafeBackend Create(string path){var r=StandaloneEncounterConversationSmoke.Rules();return new LocalCafeBackend(path,r);}
+        static bool Studio=>Environment.GetCommandLineArgs().Contains("--studio-introduction");
+        static string ReplayId=>Studio?CafeDispatchIntroductionDialogue.StudioId:CafeIntakeConversation.Id;
+        public static LocalCafeBackend Create(string path){if(Studio)return StandaloneDispatchIntroductionConversationSmoke.Create(path);var r=StandaloneEncounterConversationSmoke.Rules();return new LocalCafeBackend(path,r);}
         static void Good(LocalCafeBackend b,string kind,string choice=null,int slot=1)=>StandaloneDispatchConversationSmoke.Good(b,kind,choice,slot:slot);
         public static int BackendChecks(string folder,bool restart)
         {
+            if(Studio){var studio=Create(folder);foreach(string answer in new[]{"accept","decline"}){string id=StandaloneDispatchIntroductionConversationSmoke.Setup(studio);StandaloneDispatchIntroductionConversationSmoke.Good(studio,"resolve_dispatch_introduction",answer,id,cat:studio.Simulation.State.dispatches.Single().introduction.cat_id);var p=studio.DispatchIntroductionConversation.progress;p.node=4;CafeDispatchIntroductionDialogue.Finish(p);studio.RememberViewedConversations();Good(studio,"save_game",slot:answer=="accept"?3:4);}if(studio.Replays.Load().entries.Length!=2)throw new Exception("Studio Extra unlocks missing");return 1;}
             int n=0;Action<bool,string> check=(ok,label)=>{n++;if(!ok)throw new Exception(label);};var b=Create(folder);
             if(restart)check(b.Replays.Load().entries.Length==2,"Profile lost after restart");
             foreach(string answer in new[]{"accept","decline"})
@@ -47,12 +50,12 @@ namespace CatCafePreview
             var title=FindObjectOfType<PythonTitleScreen>();var extra=title.GetComponent<TitleExtraPanel>();extra.Open();yield return null;Check(extra.Panel.activeSelf && extra.Entry.interactable,"Extra cannot open");
             Check(extra.Panel.GetComponentsInChildren<Button>(true).Count(b=>b.name!="タイトルへ戻る" && b.name!="CG一覧" && b.name!="エンディング" && b.interactable)==2,"Locked/unlocked list wrong");extra.OpenReplay(CafeRegularConversation.Id+"/accepted");Check(!extra.Replay.Showing && extra.Panel.activeSelf,"Locked direct entry opened");
             string state=JsonUtility.ToJson(backend.Simulation.State),meta=JsonUtility.ToJson(backend.Conversation);var profile=backend.Replays.Load();string snapshot=JsonUtility.ToJson(profile);
-            string path=Path.Combine(output,"cases/slot-3.json"),save=File.ReadAllText(path);extra.OpenReplay(CafeIntakeConversation.Id+"/accepted");yield return null;var ui=extra.Replay;
+            string path=Path.Combine(output,"cases/slot-3.json"),save=File.ReadAllText(path);extra.OpenReplay(ReplayId+"/accepted");yield return null;var ui=extra.Replay;
             Check(ui.Showing && !extra.Panel.activeSelf,"Replay not shown");Check(ui.Panel.GetComponentsInChildren<Graphic>(true).All(g=>g.GetComponent<CanvasRenderer>()!=null),"Renderer absent");Check(!ui.Panel.GetComponentsInChildren<Button>(true).Any(b=>(b.name=="保存" || b.name=="読込" || b.name=="迎える" || b.name=="見送る") && b.gameObject.activeInHierarchy),"Replay exposed game actions");
             typeof(AcquisitionConversationPanel).GetField("revealed",Hidden).SetValue(ui,0f);ui.Next();ui.Next();var progress=(CafeConversationProgress)typeof(AcquisitionConversationPanel).GetField("progress",Hidden).GetValue(ui);Check(progress.node==0,"Same-frame skipped text");yield return null;ui.Next();Check(progress.node==1,"Next failed");ui.Answer(true);ui.Answer(false);yield return null;
             ui.Panel.GetComponentsInChildren<Button>(true).Single(b=>b.name=="バックログ").onClick.Invoke();yield return null;Canvas.ForceUpdateCanvases();Check(ui.HistoryScroll.content.rect.height>=ui.HistoryScroll.content.GetComponent<Text>().preferredHeight-1,"History clipped");ui.HistoryScroll.verticalNormalizedPosition=0;yield return null;ui.Panel.GetComponentsInChildren<Button>(true).Single(b=>b.name=="バックログ").onClick.Invoke();yield return null;
             progress.node=profile.entries.Single(e=>e.branch_id=="accepted").lines.Length;ui.Refresh();yield return null;ui.Next();yield return null;Check(!ui.Showing && extra.Panel.activeSelf,"Replay did not finish to list");
-            extra.OpenReplay(CafeIntakeConversation.Id+"/declined");yield return null;Check(ui.Showing,"Second branch unavailable");ui.Close();yield return null;Check(extra.Panel.activeSelf && state==JsonUtility.ToJson(backend.Simulation.State) && meta==JsonUtility.ToJson(backend.Conversation) && save==File.ReadAllText(path) && snapshot==JsonUtility.ToJson(backend.Replays.Load()),"Replay mutated state, meta, save or unlocks");
+            extra.OpenReplay(ReplayId+"/declined");yield return null;Check(ui.Showing,"Second branch unavailable");ui.Close();yield return null;Check(extra.Panel.activeSelf && state==JsonUtility.ToJson(backend.Simulation.State) && meta==JsonUtility.ToJson(backend.Conversation) && save==File.ReadAllText(path) && snapshot==JsonUtility.ToJson(backend.Replays.Load()),"Replay mutated state, meta, save or unlocks");
             extra.Hide();title.ShowConditions();Check(title.conditionsPanel.activeSelf && !extra.Panel.activeSelf,"Title conditions navigation regressed");title.ShowHome();extra.Open();yield return null;completed=true;File.WriteAllText(Path.Combine(output,"result.txt"),"PASS: "+checks+" Extra checks; zero Unity errors. Profile union, migration, locked branches, read-only ADV, backlog and title navigation.");
         }
     }
