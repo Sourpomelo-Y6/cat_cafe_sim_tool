@@ -43,6 +43,7 @@ static partial class Program
         DispatchIntroductionDialogueChecks(rules);
         DispatchIntroductionOrderChecks(rules);
         StudioShoppingOverlapChecks(rules);
+        LodgeConversationChecks(rules);
         EncounterConversationChecks(rules);
         EncounterOrderChecks(rules);
         DispatchConversationChecks(rules);
@@ -123,6 +124,31 @@ static partial class Program
         sim.Execute("resolve_dispatch_choice",source:id,choice:"decline");sim.Execute("resolve_activity",source:first,choice:"receive");sim.Execute("dispatch_general",catId:"cat-kohaku",choice:"neighborhood_visit");sim.Execute("day_off");sim.Execute("resolve_activity",source:id,choice:"receive");
         Assert(sim.DispatchIntroductionWaiting && sim.DispatchWaiting,"Introduction/return overlap absent");string before=Encode(sim.State);Rejected(()=>sim.Execute("resolve_dispatch_introduction",source:id,choice:"accept"));Rejected(()=>sim.Execute("resolve_dispatch_introduction",source:id,choice:"decline"));Assert(before==Encode(sim.State) && sim.DispatchIntroductionResponseReason(id).Contains("帰還"),"Return priority changed");
         sim.Execute("resolve_activity",source:sim.State.dispatches.Last().id,choice:"receive");Assert(sim.DispatchIntroductionResponseReason(id)=="","Return did not release introduction");sim.Execute("resolve_dispatch_introduction",source:id,choice:"decline");Assert(!sim.DispatchIntroductionWaiting,"Introduction not resolved after return");
+    }
+    static void LodgeConversationChecks(CafeRules defaults)
+    {
+        foreach(string branch in new[]{"search","wait"})
+        {
+            var r=Decode<CafeRules>(Encode(defaults));r.store_events.probability=0;r.intake.day=r.regular_introduction.day=9999;r.starting_funds=20000;r.dispatch_trouble.base_probability=1;r.dispatch_trouble.stress_probability=0;
+            var sim=new CafeSimulation(r);sim.Execute("dispatch_general",catId:"cat-tama",choice:"mountain_lodge_visit");sim.Execute("day_off");
+            var e=sim.State.dispatches.Single();var row=new CafeLodgeConversation{event_id=e.id,response=CafeLodgeDialogue.Start(false)};
+            void Roundtrip(bool returning)
+            {
+                var p=row.Current;for(int n=0;n<=CafeLodgeDialogue.Lines(returning,p.branch_id,"").Length;n++)
+                {p.node=n;var save=Decode<CafeSaveEnvelope>(Encode(new CafeSaveEnvelope{state=sim.State,lodge_conversations=new[]{row},lodge_conversation_selected=e.id}));sim.Restore(save.state);e=sim.State.dispatches.Single();CafeLodgeDialogue.Validate(save.lodge_conversations,e.id,sim.State);Assert(save.lodge_conversations[0].Current.node==n,"Lodge position lost");}
+            }
+            Roundtrip(false);Assert(!CafeLodgeDialogue.Supports(new CafeDispatch{destination="neighborhood_visit"}),"Normal missing event supported");
+            double funds=sim.State.funds;sim.State.funds=r.dispatch_trouble.search_cost;Assert(sim.DispatchTroubleReason(e.id,"search")!="" && sim.DispatchTroubleReason(e.id,"wait")=="","Lodge funds boundary blocks free wait");sim.State.funds=funds;
+            sim.Execute("resolve_dispatch_trouble",source:e.id,choice:branch);CafeLodgeDialogue.Sync(row,e);Assert(row.Current.node==0 && row.Current.page_offset==0 && CafeLodgeDialogue.ResultPending(row),"Lodge answer sync lost");
+            string before=Encode(sim.State);for(int i=0;i<8;i++)sim.Execute("resolve_dispatch_trouble",source:e.id,choice:branch);Assert(before==Encode(sim.State),"Lodge duplicated search cost");
+            Assert(sim.State.funds==funds-(branch=="search"?r.dispatch_trouble.search_cost:0),"Lodge cost changed");Roundtrip(false);CafeLodgeDialogue.Finish(row);CafeLodgeDialogue.Finish(row);Assert(!CafeLodgeDialogue.ResultPending(row),"Lodge wait blocks schedule after reading");
+            if(branch=="wait"){Assert(e.status=="missing","Wait returned early");Rejected(()=>sim.Execute("resolve_activity",source:e.id,choice:"receive"));for(int d=0;d<r.dispatch_trouble.missing_days;d++){sim.Execute("day_off");e=sim.State.dispatches.Single();Assert(e.status==(d==r.dispatch_trouble.missing_days-1?"waiting":"missing"),"Wait date changed");}}
+            row.returning=CafeLodgeDialogue.Start(true);Roundtrip(true);sim.Execute("resolve_activity",source:e.id,choice:"receive");CafeLodgeDialogue.Sync(row,e);Roundtrip(true);CafeLodgeDialogue.Finish(row);CafeLodgeDialogue.Validate(new[]{row},e.id,sim.State);
+            before=Encode(sim.State);for(int i=0;i<8;i++)sim.Execute("resolve_activity",source:e.id,choice:"receive");Assert(before==Encode(sim.State),"Lodge duplicate return mutated state");
+            Assert(sim.DispatchReceivedReward(e)==0 && !sim.State.growth_operations.Any(o=>o.kind=="dispatch"),"Interrupted dispatch earned rewards");var cat=sim.State.cats.Single(c=>c.id==e.cat_id);Assert(cat.stress==r.dispatch_trouble.return_stress && cat.stamina==sim.MaxStamina(cat.id),"Lodge return health changed");
+            var entries=CafeReplayCatalog.FromSave(new CafeSaveEnvelope{state=sim.State,lodge_conversations=new[]{row}},r,x=>x,x=>x,x=>x);Assert(entries.Length==2 && entries.Any(x=>x.branch_id==branch),"Lodge Extra missing branch");Assert(before==Encode(sim.State),"Lodge replay mutated state");CafeLodgeDialogue.Validate(null,null,sim.State);
+            row.returning.page_offset=-1;bool bad=false;try{CafeLodgeDialogue.Validate(new[]{row},e.id,sim.State);}catch(ArgumentException){bad=true;}Assert(bad,"Invalid Lodge page accepted");
+        }
     }
     static void EncounterConversationChecks(CafeRules defaults)
     {

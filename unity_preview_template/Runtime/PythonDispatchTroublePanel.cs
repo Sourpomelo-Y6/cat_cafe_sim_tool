@@ -28,10 +28,12 @@ namespace CatCafePreview
         private string instance, identity, waiting, selection;
         private bool online;
         private PythonDispatchTrouble Row { get { return records.value<events.Length ? events[records.value] : null; } }
-        public void Open(){if(events.Length==0 || !GetComponent<PythonStateClient>().CanManageSaves)return;Clear();panel.SetActive(true);panel.transform.SetAsLastSibling();Render();ResetScroll();}
-        public void Close(){Clear();panel.SetActive(false);}
+        public LodgeConversationPanel Dialogue=>GetComponent<LodgeConversationPanel>()??gameObject.AddComponent<LodgeConversationPanel>();
+        public void HideForConversation(){Clear();panel.SetActive(false);}
+        public void Open(){if(CafeBackends.Standalone){Dialogue.Apply(GetComponent<PythonStateClient>().CurrentState,this);var b=CafeBackends.Local as LocalCafeBackend;if(b.LodgeResultPending){Dialogue.Open();return;}if(Row!=null && Dialogue.OpenEvent(Row.event_id))return;}if(events.Length==0 || !GetComponent<PythonStateClient>().CanManageSaves)return;Clear();panel.SetActive(true);panel.transform.SetAsLastSibling();Render();ResetScroll();}
+        public void Close(){Clear();panel.SetActive(false);if(GetComponent<LodgeConversationPanel>()?.Showing==true)Dialogue.Close();}
         private void Clear(){selection=null;confirmation.SetActive(false);}
-        public void Select(int _){Clear();Render();ResetScroll();}
+        public void Select(int _){Clear();Render();ResetScroll();if(CafeBackends.Standalone && panel.activeSelf && Row!=null)Dialogue.OpenEvent(Row.event_id);}
         private void ResetScroll(){var scroll=details.transform.parent.parent.GetComponent<ScrollRect>();if(scroll!=null)scroll.verticalNormalizedPosition=1;}
         public void First(){Choose(0);} public void Second(){Choose(1);}
         static string Number(float value){return value.ToString("0.#");}
@@ -68,7 +70,7 @@ namespace CatCafePreview
             records.options.Clear();foreach(var ev in events)records.options.Add(new Dropdown.OptionData(ev.label+"（"+(ev.status=="waiting" ? "回答待ち" : ev.status=="scheduled" ? "発生前" : ev.status=="not_triggered" ? "発生なし" : "回答済み")+"）"));
             if(events.Length==0)records.options.Add(new Dropdown.OptionData("記録なし"));records.SetValueWithoutNotify(index);records.RefreshShownValue();
             if(newlyWaiting){panel.SetActive(true);panel.transform.SetAsLastSibling();}
-            if(events.Length==0 || state.game_over!=null)panel.SetActive(false);Render();if(newlyWaiting)ResetScroll();
+            if(events.Length==0 || state.game_over!=null)panel.SetActive(false);Render();if(newlyWaiting)ResetScroll();if(CafeBackends.Standalone)Dialogue.Apply(state,this);
         }
         private void Render()
         {

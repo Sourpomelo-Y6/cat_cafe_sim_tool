@@ -321,7 +321,7 @@ namespace CatCafePreview
             return CanManageSaves && row?.choices!=null && Array.Exists(row.choices,r=>r.choice==choice && r.can_select);
         }
         public void RespondDispatchTrouble(string eventId,string choice)
-        {if(CanRespondDispatchTrouble(eventId,choice))QueueAdoption("resolve_dispatch_trouble","",choice,eventId);}
+        {if(CanRespondDispatchTrouble(eventId,choice)){var row=Array.Find(current.dispatch_troubles,r=>r.event_id==eventId);QueueAdoption("resolve_dispatch_trouble",row.cat_id,choice,eventId);}}
         public bool CanRespondDispatchChoice(string eventId,string choice)
         {
             var row=current?.dispatch_choices==null ? null : Array.Find(current.dispatch_choices,r=>r.event_id==eventId);

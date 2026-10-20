@@ -22,6 +22,7 @@ namespace CatCafePreview.Standalone
     {
         public static bool IsEnding(string id)=>id==CafeOutcome.Id || id==CafePopularityEnding.Id || id==CafeBondEnding.Id || id==CafePatronEnding.Id;
         public static readonly CafeReplayDefinition[] All={
+            new CafeReplayDefinition(CafeLodgeDialogue.Id+".response","search","山あいの宿の家出 · 捜索"),new CafeReplayDefinition(CafeLodgeDialogue.Id+".response","wait","山あいの宿の家出 · 待機"),new CafeReplayDefinition(CafeLodgeDialogue.Id+".return","received","山あいの宿の家出 · 帰還確認"),
             new CafeReplayDefinition(CafeOutcome.Id,"expired","未達の結末 · ひとつの区切り"),new CafeReplayDefinition(CafeOutcome.Id,"funds","経営終了 · 資金不足"),new CafeReplayDefinition(CafeOutcome.Id,"popularity","経営終了 · 人気低下"),
             new CafeReplayDefinition(CafeOpening.Id,"popularity","オープニング · 人気"),new CafeReplayDefinition(CafeOpening.Id,"patron","オープニング · 有力者"),new CafeReplayDefinition(CafeOpening.Id,"bond","オープニング · 好感度"),new CafeReplayDefinition(CafeOpening.Id,"free","オープニング · 自由営業"),
             new CafeReplayDefinition(CafePatronEnding.Id,CafePopularityEnding.Branch,"有力者目標 · 店の外へつながる信頼"),
@@ -42,7 +43,7 @@ namespace CatCafePreview.Standalone
         public static void ValidateSave(CafeSaveEnvelope s)
         {
             CafeOutcome.Validate(s.outcome,s.state);CafePatronEnding.Validate(s.patron_ending,s.state);CafeBondEnding.Validate(s.bond_ending,s.state);CafeOpening.Validate(s.opening,s.state);CafePopularityEnding.Validate(s.popularity_ending,s.state);CafeIntakeConversation.Validate(s.conversation,s.state.intake_request.status);CafeRegularConversation.Validate(s.regular_conversation,s.state.regular_introduction.status);
-            CafeDispatchDialogue.Validate(s.dispatch_conversations,s.dispatch_conversation_selected,s.state);CafeEncounterDialogue.Validate(s.encounter_conversations,s.encounter_conversation_selected,s.state);CafeDispatchIntroductionDialogue.Validate(s.dispatch_introduction_conversations,s.dispatch_introduction_conversation_selected,s.state);
+            CafeLodgeDialogue.Validate(s.lodge_conversations,s.lodge_conversation_selected,s.state);CafeDispatchDialogue.Validate(s.dispatch_conversations,s.dispatch_conversation_selected,s.state);CafeEncounterDialogue.Validate(s.encounter_conversations,s.encounter_conversation_selected,s.state);CafeDispatchIntroductionDialogue.Validate(s.dispatch_introduction_conversations,s.dispatch_introduction_conversation_selected,s.state);
         }
         public static CafeReplayEntry[] FromSave(CafeSaveEnvelope save,CafeRules rules,Func<string,string> catName,Func<string,string> customerName,Func<string,string> contentId)
         {
@@ -65,6 +66,8 @@ namespace CatCafePreview.Standalone
                 add(row.travelling,image,name,"派遣中",b=>CafeDispatchDialogue.Lines("travelling",b,name),false);
                 add(row.returning,image,name,"帰還",b=>CafeDispatchDialogue.Lines("return",b,name),true);
             }
+            foreach(var row in save.lodge_conversations??new CafeLodgeConversation[0])
+            {var ev=save.state.dispatches.Single(e=>e.id==row.event_id);string name=catName(ev.cat_id);add(row.response,contentId(ev.cat_id),name,"山あいの宿・トラブル対応",b=>CafeLodgeDialogue.Lines(false,b,name),true);add(row.returning,contentId(ev.cat_id),name,"山あいの宿・帰還確認",b=>CafeLodgeDialogue.Lines(true,b,name),true);}
             foreach(var row in save.encounter_conversations??new CafeEncounterConversation[0])
             {var ev=save.state.dispatches.Single(e=>e.id==row.event_id);string name=catName(ev.cat_id);add(row.progress,contentId(ev.cat_id),name,"商店街への派遣中",b=>CafeEncounterDialogue.Lines(b,name),true);}
             foreach(var row in save.dispatch_introduction_conversations??new CafeDispatchIntroductionConversation[0])

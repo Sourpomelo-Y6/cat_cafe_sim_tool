@@ -22,6 +22,8 @@ namespace CatCafePreview.Standalone
         public CafeConversationProgress regular_conversation;
         public CafeDispatchConversation[] dispatch_conversations;
         public string dispatch_conversation_selected;
+        public CafeLodgeConversation[] lodge_conversations;
+        public string lodge_conversation_selected;
         public CafeEncounterConversation[] encounter_conversations;
         public string encounter_conversation_selected;
         public CafeDispatchIntroductionConversation[] dispatch_introduction_conversations;
