@@ -22,6 +22,7 @@ namespace CatCafePreview.Standalone
     {
         public static bool IsEnding(string id)=>id==CafeOutcome.Id || id==CafePopularityEnding.Id || id==CafeBondEnding.Id || id==CafePatronEnding.Id;
         public static readonly CafeReplayDefinition[] All={
+            new CafeReplayDefinition(CafeTrustDialogue.Id+".response","recover","顧客の信頼 · 回復を試みる"),new CafeReplayDefinition(CafeTrustDialogue.Id+".response","ignore","顧客の信頼 · 見送る"),new CafeReplayDefinition(CafeTrustDialogue.Id+".result","recovered","顧客の信頼 · 満足接客による回復"),new CafeReplayDefinition(CafeTrustDialogue.Id+".result","departed","顧客の信頼 · 不満接客による永久離脱"),
             new CafeReplayDefinition(CafeAdoptionDialogue.Id,"accept","猫の譲渡申し出 · 譲渡する"),new CafeReplayDefinition(CafeAdoptionDialogue.Id,"decline","猫の譲渡申し出 · 見送る"),
             new CafeReplayDefinition(CafeLodgeDialogue.Id+".response","search","山あいの宿の家出 · 捜索"),new CafeReplayDefinition(CafeLodgeDialogue.Id+".response","wait","山あいの宿の家出 · 待機"),new CafeReplayDefinition(CafeLodgeDialogue.Id+".return","received","山あいの宿の家出 · 帰還確認"),
             new CafeReplayDefinition(CafeOutcome.Id,"expired","未達の結末 · ひとつの区切り"),new CafeReplayDefinition(CafeOutcome.Id,"funds","経営終了 · 資金不足"),new CafeReplayDefinition(CafeOutcome.Id,"popularity","経営終了 · 人気低下"),
@@ -44,7 +45,7 @@ namespace CatCafePreview.Standalone
         public static void ValidateSave(CafeSaveEnvelope s)
         {
             CafeOutcome.Validate(s.outcome,s.state);CafePatronEnding.Validate(s.patron_ending,s.state);CafeBondEnding.Validate(s.bond_ending,s.state);CafeOpening.Validate(s.opening,s.state);CafePopularityEnding.Validate(s.popularity_ending,s.state);CafeIntakeConversation.Validate(s.conversation,s.state.intake_request.status);CafeRegularConversation.Validate(s.regular_conversation,s.state.regular_introduction.status);
-            CafeAdoptionDialogue.Validate(s.adoption_conversations,s.adoption_conversation_selected,s.state);CafeLodgeDialogue.Validate(s.lodge_conversations,s.lodge_conversation_selected,s.state);CafeDispatchDialogue.Validate(s.dispatch_conversations,s.dispatch_conversation_selected,s.state);CafeEncounterDialogue.Validate(s.encounter_conversations,s.encounter_conversation_selected,s.state);CafeDispatchIntroductionDialogue.Validate(s.dispatch_introduction_conversations,s.dispatch_introduction_conversation_selected,s.state);
+            CafeTrustDialogue.Validate(s.trust_conversations,s.trust_conversation_selected,s.state);CafeAdoptionDialogue.Validate(s.adoption_conversations,s.adoption_conversation_selected,s.state);CafeLodgeDialogue.Validate(s.lodge_conversations,s.lodge_conversation_selected,s.state);CafeDispatchDialogue.Validate(s.dispatch_conversations,s.dispatch_conversation_selected,s.state);CafeEncounterDialogue.Validate(s.encounter_conversations,s.encounter_conversation_selected,s.state);CafeDispatchIntroductionDialogue.Validate(s.dispatch_introduction_conversations,s.dispatch_introduction_conversation_selected,s.state);
         }
         public static CafeReplayEntry[] FromSave(CafeSaveEnvelope save,CafeRules rules,Func<string,string> catName,Func<string,string> customerName,Func<string,string> contentId)
         {
@@ -67,6 +68,7 @@ namespace CatCafePreview.Standalone
                 add(row.travelling,image,name,"派遣中",b=>CafeDispatchDialogue.Lines("travelling",b,name),false);
                 add(row.returning,image,name,"帰還",b=>CafeDispatchDialogue.Lines("return",b,name),true);
             }
+            foreach(var row in save.trust_conversations??new CafeTrustConversation[0]){var ev=save.state.trust_events.Single(e=>e.id==row.event_id);string name=customerName(ev.customer_id);add(row.response,"",name,"顧客の信頼",b=>CafeTrustDialogue.Lines(false,b,name,rules.trust.popularity_loss),true);add(row.result,"",name,"接客結果",b=>CafeTrustDialogue.Lines(true,b,name,rules.trust.popularity_loss),false);}
             foreach(var row in save.adoption_conversations??new CafeAdoptionConversation[0])
             {var ev=save.state.adoption.events.Single(e=>e.id==row.event_id);string name=catName(ev.cat_id);add(row.progress,contentId(ev.cat_id),name,customerName(ev.customer_id)+"からの譲渡申し出",b=>CafeAdoptionDialogue.Lines(b,name,customerName(ev.customer_id),ev),true);}
             foreach(var row in save.lodge_conversations??new CafeLodgeConversation[0])

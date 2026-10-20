@@ -55,6 +55,7 @@ namespace CatCafePreview
             proceed.interactable=online && !choosing && client.CanDayOff;confirm.interactable=online && choosing && client.CanDayOff;close.interactable=cancel.interactable=true;
             if(resolveBlock!=null){resolveBlock.gameObject.SetActive(!client.CanDayOff);resolveBlock.interactable=online && client.CanManageSaves;resolveBlock.GetComponentInChildren<Text>().text=current?.player_interaction?.active==true?"交流へ戻る":"イベント一覧で確認";}
             notice.text=!online ? "Python未接続です。再接続後に休業できます。" : !client.CanManageSaves ? "操作を送信しています。完了するまでお待ちください。" : client.DayOffBlockReason;
+            if(online && client.CanDayOff && CafeBackends.Standalone && (CafeBackends.Local as LocalCafeBackend).TrustConversationReason!="")notice.text=(CafeBackends.Local as LocalCafeBackend).TrustConversationReason;
             if(online && client.CanManageSaves && string.IsNullOrEmpty(notice.text))notice.text="費用と猫の変化を確認し、確認画面で休業を確定してください。";
         }
         public void Disconnect(){online=false;Clear();RefreshControls();}

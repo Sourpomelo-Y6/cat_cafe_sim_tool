@@ -9,25 +9,29 @@ namespace CatCafePreview
     public class PythonCustomerTrustPanel : MonoBehaviour
     {
         public GameObject panel,confirmation;public Text title,details,notice,confirmationText;public Button recover,ignore,close,confirm,cancel;
+        public bool Confirming=>selection!=null;
+        public TrustConversationPanel Dialogue=>GetComponent<TrustConversationPanel>()??gameObject.AddComponent<TrustConversationPanel>();
+        private string conversationConfirm;
+        public void BeginConversationIgnore(string id){if(!GetComponent<PythonStateClient>().CanRespondTrust(id))return;conversationConfirm=id;selection="ignore";panel.SetActive(true);panel.transform.SetAsLastSibling();var row=current.customer_trust.events.First(e=>e.event_id==id);confirmationText.text=row.name+"の信頼回復を見送りますか？\n永久離脱し、今後は来店しません。人気 −"+current.customer_trust.popularity_loss.ToString("0.#")+"（下限0）。\n経営終了になる場合があります。取消では回答しません。";confirmation.SetActive(true);confirmation.transform.SetAsLastSibling();RefreshControls();}
         private PythonCafeState current;private string instance,identity,waiting,selection;private bool online;
         private PythonTrustEvent Pending{get{return current?.customer_trust?.events?.FirstOrDefault(e=>e.status=="waiting");}}
-        public void Open(){if(current?.customer_trust==null || !GetComponent<PythonStateClient>().CanManageSaves)return;Clear();panel.SetActive(true);panel.transform.SetAsLastSibling();Render();}
-        public void Close(){Clear();panel.SetActive(false);}private void Clear(){selection=null;confirmation.SetActive(false);}
+        public void Open(){if(current?.customer_trust==null || !GetComponent<PythonStateClient>().CanManageSaves)return;Clear();if(CafeBackends.Standalone && Dialogue.OpenPending())return;panel.SetActive(true);panel.transform.SetAsLastSibling();Render();}
+        public void Close(){Clear();panel.SetActive(false);if(GetComponent<TrustConversationPanel>()?.Showing==true)Dialogue.Close();}private void Clear(){selection=null;conversationConfirm=null;confirmation.SetActive(false);}
         public void Recover(){Choose("recover");}public void Ignore(){Choose("ignore");}
         private void Choose(string choice)
         {
-            var row=Pending;if(!online || row==null || !GetComponent<PythonStateClient>().CanRespondTrust(row.event_id))return;
+            if(CafeBackends.Standalone){Dialogue.OpenPending();return;}var row=Pending;if(!online || row==null || !GetComponent<PythonStateClient>().CanRespondTrust(row.event_id))return;
             selection=choice;confirmation.SetActive(true);
             confirmationText.text=choice=="recover" ? row.name+"の信頼回復に取り組みますか？\n費用はかかりません。停止期間後の接客が\n「満足」なら回復、「不満」なら永久離脱します。" : row.name+"への対応をしませんか？\n永久離脱し、人気が"+current.customer_trust.popularity_loss.ToString("0.#")+"下がります。\n費用はかかりません。";RefreshControls();
         }
-        public void Confirm(){var row=Pending;if(!online || selection==null || row==null || !GetComponent<PythonStateClient>().CanRespondTrust(row.event_id))return;var choice=selection;Clear();GetComponent<PythonStateClient>().RespondTrust(row.event_id,choice);}
-        public void Cancel(){Clear();RefreshControls();}
+        public void Confirm(){var row=conversationConfirm==null?Pending:current.customer_trust.events.FirstOrDefault(e=>e.event_id==conversationConfirm);if(!online || selection==null || row==null || !GetComponent<PythonStateClient>().CanRespondTrust(row.event_id))return;var choice=selection;Clear();GetComponent<PythonStateClient>().RespondTrust(row.event_id,choice);}
+        public void Cancel(){Clear();if(CafeBackends.Standalone)panel.SetActive(false);RefreshControls();if(CafeBackends.Standalone)GetComponent<TrustConversationPanel>()?.Refresh();}
         public void Apply(PythonCafeState state)
         {
             if(instance!=state.instance_id){instance=state.instance_id;waiting=null;Close();}current=state;online=true;
             var key=state.instance_id+"/"+state.revision+"/"+Pending?.event_id;if(identity!=key){identity=key;Clear();}
             var next=Pending?.event_id;if(next!=null && waiting!=next){panel.SetActive(true);panel.transform.SetAsLastSibling();}waiting=next;
-            if(state.customer_trust==null || state.game_over!=null)panel.SetActive(false);Render();RefreshControls();
+            if(state.customer_trust==null || state.game_over!=null)panel.SetActive(false);Render();RefreshControls();if(Application.isPlaying && CafeBackends.Standalone)Dialogue.Apply(state,this);
         }
         static string Status(PythonTrustEvent row){return row.outcome=="recovered" ? "回復" : row.outcome=="departed" ? "永久離脱" : row.status=="waiting" ? "回答待ち" : "信頼回復中";}
         private void Render()
@@ -38,7 +42,7 @@ namespace CatCafePreview
         }
         public void RefreshControls()
         {
-            var client=GetComponent<PythonStateClient>();var row=Pending;bool ready=online && row!=null && client.CanRespondTrust(row.event_id);
+            var client=GetComponent<PythonStateClient>();var row=conversationConfirm==null?Pending:current?.customer_trust?.events?.FirstOrDefault(e=>e.event_id==conversationConfirm);bool ready=online && row!=null && client.CanRespondTrust(row.event_id);
             recover.interactable=ignore.interactable=ready && selection==null;confirm.interactable=ready && selection!=null;close.interactable=cancel.interactable=true;
             notice.text=!online ? "Python未接続です。再接続後に回答できます。" : !client.CanManageSaves ? "操作を送信しています。完了するまでお待ちください。" : row==null ? "回答待ちの信頼回復イベントはありません。" : !string.IsNullOrEmpty(row.reason) ? row.reason : row.name+"が離脱を考えています。対応方針を選んでください。";
         }

@@ -125,7 +125,7 @@ namespace CatCafePreview
             if(!string.IsNullOrEmpty(current.required_action)){notice.text="営業開始前に確認してください："+current.required_action;return;}
             if(draft!=null){notice.text="休養案（未確定）：一覧で変更し「休養案を確定」を押してください。閉じる・取消で破棄します。全員休養の場合は確定後に休業できます。";return;}
             if(!Array.Exists(current.cats ?? new PythonCatState[0],cat=>cat.working)){notice.text="出勤する猫がいません。一覧の「出勤」を押してください。";return;}
-            notice.text="出勤する猫を確認したら「営業開始」を押してください。";
+            notice.text="出勤する猫を確認したら「営業開始」を押してください。";if(CafeBackends.Standalone && (CafeBackends.Local as LocalCafeBackend).TrustConversationReason!="")notice.text+="\n"+(CafeBackends.Local as LocalCafeBackend).TrustConversationReason;
         }
         public void RefreshControls()
         {

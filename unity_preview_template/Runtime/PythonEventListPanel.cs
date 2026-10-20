@@ -41,7 +41,7 @@ namespace CatCafePreview
         private void Track(int index,GameObject target){if(detailClose==null || index>=detailClose.Length || detailClose[index]==null)return;returnPanel=target;returnButton=detailClose[index];returnCaption=returnButton.GetComponentInChildren<Text>().text;returnButton.GetComponentInChildren<Text>().text="イベント一覧へ戻る";if(IsAddedReturn(returnButton))returnButton.gameObject.SetActive(true);}
         private void ReturnFromDetail(GameObject source){if(returnPanel==source)OpenList(false);}
         public void SelectGroup(int value){if(value<0 || value>=4)return;group=value;RefreshControls();if(scroll!=null)scroll.verticalNormalizedPosition=1;}
-        private bool ResultPending(int i)=>CafeBackends.Standalone && (i==5?(CafeBackends.Local as LocalCafeBackend)?.AdoptionResultPending==true:i==1?(CafeBackends.Local as LocalCafeBackend)?.IntakeResultPending==true:i==7?(CafeBackends.Local as LocalCafeBackend)?.RegularResultPending==true:i==10?(CafeBackends.Local as LocalCafeBackend)?.DispatchResultPending==true:i==11?(CafeBackends.Local as LocalCafeBackend)?.EncounterResultPending==true:i==12?(CafeBackends.Local as LocalCafeBackend)?.LodgeResultPending==true:i==13 && (CafeBackends.Local as LocalCafeBackend)?.DispatchIntroductionResultPending==true);
+        private bool ResultPending(int i)=>CafeBackends.Standalone && (i==9?(CafeBackends.Local as LocalCafeBackend)?.TrustResultPending==true:i==5?(CafeBackends.Local as LocalCafeBackend)?.AdoptionResultPending==true:i==1?(CafeBackends.Local as LocalCafeBackend)?.IntakeResultPending==true:i==7?(CafeBackends.Local as LocalCafeBackend)?.RegularResultPending==true:i==10?(CafeBackends.Local as LocalCafeBackend)?.DispatchResultPending==true:i==11?(CafeBackends.Local as LocalCafeBackend)?.EncounterResultPending==true:i==12?(CafeBackends.Local as LocalCafeBackend)?.LodgeResultPending==true:i==13 && (CafeBackends.Local as LocalCafeBackend)?.DispatchIntroductionResultPending==true);
         public int PendingFor(int i)
         {
             if(current==null)return 0;
@@ -142,6 +142,7 @@ namespace CatCafePreview
                 var backend=CafeBackends.Local as LocalCafeBackend;var waiting=backend.Simulation.State.dispatches.FirstOrDefault(e=>e.destination==CatCafePreview.Standalone.CafeDispatchDialogue.Destination && e.status=="waiting");
                 if(backend.DispatchResultPending || waiting!=null){Close();var general=GetComponent<PythonGeneralDispatchPanel>();if(backend.DispatchResultPending){general.Dialogue.Apply(current,general);general.Dialogue.Open();}else general.Dialogue.OpenEvent(waiting.id);return;}
             }
+            if(i==9 && CafeBackends.Standalone){Close();var trustPanel=GetComponent<PythonCustomerTrustPanel>();trustPanel.Open();if(trustPanel.Dialogue.Showing)return;}
             if(i==12 && CafeBackends.Standalone){Close();var troublePanel=GetComponent<PythonDispatchTroublePanel>();troublePanel.Open();if(troublePanel.Dialogue.Showing)return;}
             if(i==5 && CafeBackends.Standalone){Close();var adoptionPanel=GetComponent<PythonAdoptionPanel>();adoptionPanel.Open("");if(adoptionPanel.Dialogue.Showing)return;}
             if(i==11 && CafeBackends.Standalone){Close();var choicePanel=GetComponent<PythonDispatchChoicePanel>();choicePanel.Open();if(choicePanel.Dialogue.Showing)return;}

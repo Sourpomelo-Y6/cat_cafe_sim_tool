@@ -1,11 +1,36 @@
 using CatCafePreview.Standalone;
 static partial class Program
 {
+    static void TrustDialogueChecks(CafeRules rules)
+    {
+        foreach(string branch in new[]{"recover","ignore","recovered","departed"})
+        {
+            bool result=branch=="recovered" || branch=="departed";
+            var sim=new CafeSimulation(rules);var e=new CafeTrustEvent{id="trust-1-guest-2",customer_id="guest-2",day=1,status=result || branch=="ignore"?"resolved":"recovery",choice=branch=="ignore"?"ignore":"recover",outcome=result?branch:branch=="ignore"?"departed":null};sim.State.trust_events.Add(e);
+            var row=new CafeTrustConversation{event_id=e.id,observe_result=true,response=result?null:CafeTrustDialogue.Start()};CafeTrustDialogue.Sync(row,e);
+            var p=row.Current;Assert(p.branch_id==branch,"Trust branch mismatch");
+            for(int n=0;n<=3;n++)
+            {
+                p.node=n;p.page_offset=n<3?2:0;
+                var save=Decode<CafeSaveEnvelope>(Encode(new CafeSaveEnvelope{state=sim.State,trust_conversations=new[]{row},trust_conversation_selected=e.id}));
+                CafeTrustDialogue.Validate(save.trust_conversations,save.trust_conversation_selected,save.state);
+                Assert(save.trust_conversations[0].Current.node==n && save.trust_conversations[0].Current.page_offset==p.page_offset,"Trust position lost");
+                Assert(save.trust_conversations[0].Current.viewed_branches.Length==0,"Unread trust unlocked");
+            }
+            string before=Encode(sim.State);CafeTrustDialogue.Finish(row);CafeTrustDialogue.Finish(row);Assert(before==Encode(sim.State),"Trust viewing changed effects");
+            Assert(p.completed && p.viewed_branches.SequenceEqual(new[]{branch}),"Trust duplicate completion");CafeTrustDialogue.Validate(new[]{row},e.id,sim.State);
+            var entries=CafeReplayCatalog.FromSave(new CafeSaveEnvelope{state=sim.State,trust_conversations=new[]{row}},rules,id=>id,id=>"佐藤さん",id=>id);
+            Assert(entries.Length==1 && entries[0].lines.Any(l=>l.text.Contains("佐藤さん")),"Trust replay missing actual customer");
+            Assert(before==Encode(sim.State),"Trust replay changed gameplay");
+            p.branch_id="forged";bool rejected=false;try{CafeTrustDialogue.Validate(new[]{row},e.id,sim.State);}catch(ArgumentException){rejected=true;}Assert(rejected,"Forged trust branch accepted");
+        }
+        var legacy=new CafeSimulation(rules);foreach(string status in new[]{"waiting","recovery","resolved"}){legacy.State.trust_events.Add(new CafeTrustEvent{id=status,status=status});CafeTrustDialogue.Validate(null,null,legacy.State);Assert(CafeReplayCatalog.FromSave(new CafeSaveEnvelope{state=legacy.State},rules,id=>id,id=>id,id=>id).Length==0,"Legacy trust fabricated viewing");}
+    }
     static void Rejected(Action action){bool rejected=false;try{action();}catch(InvalidOperationException){rejected=true;}Assert(rejected,"Invalid choice accepted");}
     static void ConversationChecks(string rulePath)
     {
         var rules=Decode<CafeRules>(File.ReadAllText(rulePath));
-        AdoptionDialogueChecks(rules);
+        AdoptionDialogueChecks(rules);TrustDialogueChecks(rules);
         foreach(var answer in new[]{"accept","decline"})
         {
             var sim=new CafeSimulation(rules);
