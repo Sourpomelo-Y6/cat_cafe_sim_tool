@@ -10,7 +10,7 @@ namespace CatCafePreview
         private string instance;private bool online;private PythonCafeState current;
         public Button resume, advance, openNext, close;
         private bool showingNext;
-        public void Continue() { if(CafeBackends.Standalone && ((current?.goal_result?.kind=="continue_goal" && (CafeBackends.Local as LocalCafeBackend)?.PopularityEndingPending==true) || (current?.goal_result?.kind=="continue_patron" && (CafeBackends.Local as LocalCafeBackend)?.PatronEndingPending==true) || (current?.goal_result?.kind=="continue_bond_goal" && (CafeBackends.Local as LocalCafeBackend)?.BondEndingPending==true)))GetComponent<PopularityEndingPanel>()?.Open();else GetComponent<PythonStateClient>().ContinueGoal(); }
+        public void Continue() { if(CafeBackends.Standalone && current?.goal_result?.kind=="continue_goal" && (CafeBackends.Local as LocalCafeBackend)?.OutcomePending==true){OutcomeConversationPanel.Ensure(gameObject).Open();return;} if(CafeBackends.Standalone && ((current?.goal_result?.kind=="continue_goal" && (CafeBackends.Local as LocalCafeBackend)?.PopularityEndingPending==true) || (current?.goal_result?.kind=="continue_patron" && (CafeBackends.Local as LocalCafeBackend)?.PatronEndingPending==true) || (current?.goal_result?.kind=="continue_bond_goal" && (CafeBackends.Local as LocalCafeBackend)?.BondEndingPending==true)))GetComponent<PopularityEndingPanel>()?.Open();else GetComponent<PythonStateClient>().ContinueGoal(); }
         public void Advance() { GetComponent<PythonStateClient>().AdvanceGoal(); }
         public void OpenNext() { if(!GetComponent<PythonStateClient>().CanManageSaves)return;showingNext=true; Apply(GetComponent<PythonStateClient>().CurrentState); }
         public void Close() { showingNext=false; Apply(GetComponent<PythonStateClient>().CurrentState); }
@@ -56,6 +56,7 @@ namespace CatCafePreview
             if(summary!=null)summary.text=result==null ? "次の段階への挑戦を確認します。" : "結果："+(result.status=="cleared" ? "達成" : "期限内未達")+" / 確定："+result.resolved_day+"日目\n"+(result.summary ?? (string.IsNullOrEmpty(result.kind) || result.kind=="continue_goal" ? "人気 "+result.popularity+" / 目標 "+result.target : "詳しい達成値は結果欄に表示します。"));
             if(nextSummary!=null)nextSummary.text=next!=null && (result==null || string.IsNullOrEmpty(result.kind) || result.kind=="continue_goal") ? NextDetails(next)+"\n\n現在の猫・資金・人気を引き継ぎます。\n"+(next.can_advance ? "次の段階に進めます。" : next.reason) : "継続営業で結果を確認します。\n\n猫や資金を引き継いで遊べます。";
             RefreshControls();
+            if(Application.isPlaying && CafeBackends.Standalone)OutcomeConversationPanel.Ensure(gameObject).ApplyOutcome(state);
             if(Application.isPlaying && CafeBackends.Standalone)(GetComponent<PopularityEndingPanel>()??gameObject.AddComponent<PopularityEndingPanel>()).Apply(state,this);
         }
         private static string NextDetails(PythonNextGoal next)
@@ -64,7 +65,7 @@ namespace CatCafePreview
         {
             var client=GetComponent<PythonStateClient>();
             resume.interactable=online && client.CanContinueGoal;
-            bool ending=CafeBackends.Standalone && ((current?.goal_result?.kind=="continue_goal" && (CafeBackends.Local as LocalCafeBackend)?.PopularityEndingPending==true) || (current?.goal_result?.kind=="continue_patron" && (CafeBackends.Local as LocalCafeBackend)?.PatronEndingPending==true) || (current?.goal_result?.kind=="continue_bond_goal" && (CafeBackends.Local as LocalCafeBackend)?.BondEndingPending==true));if(ending)resume.interactable=online && client.CanManageSaves;resume.GetComponentInChildren<Text>().text=ending?"エンディングを再開":"結果を確認して継続営業";
+            bool ending=CafeBackends.Standalone && ((current?.goal_result?.kind=="continue_goal" && (CafeBackends.Local as LocalCafeBackend)?.OutcomePending==true) || (current?.goal_result?.kind=="continue_goal" && (CafeBackends.Local as LocalCafeBackend)?.PopularityEndingPending==true) || (current?.goal_result?.kind=="continue_patron" && (CafeBackends.Local as LocalCafeBackend)?.PatronEndingPending==true) || (current?.goal_result?.kind=="continue_bond_goal" && (CafeBackends.Local as LocalCafeBackend)?.BondEndingPending==true));if(ending)resume.interactable=online && client.CanManageSaves;resume.GetComponentInChildren<Text>().text=ending?"エンディングを再開":"結果を確認して継続営業";
             if(advance!=null)advance.GetComponentInChildren<Text>().text=current?.next_goal!=null ? "第"+current.next_goal.stage+"段階へ挑戦" : "次の人気目標へ";
             if(panel.activeSelf && notice!=null && !client.CanManageSaves)notice.text=!online ? "Python未接続です。再接続後に結果を確認できます。" : client.HasPendingResults ? "未保存の接客結果を先に確定してください。" : "操作の完了をお待ちください。";
             if(advance!=null)advance.interactable=online && client.CanAdvanceGoal;

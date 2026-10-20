@@ -20,8 +20,9 @@ namespace CatCafePreview.Standalone
     }
     public static class CafeReplayCatalog
     {
-        public static bool IsEnding(string id)=>id==CafePopularityEnding.Id || id==CafeBondEnding.Id || id==CafePatronEnding.Id;
+        public static bool IsEnding(string id)=>id==CafeOutcome.Id || id==CafePopularityEnding.Id || id==CafeBondEnding.Id || id==CafePatronEnding.Id;
         public static readonly CafeReplayDefinition[] All={
+            new CafeReplayDefinition(CafeOutcome.Id,"expired","未達の結末 · ひとつの区切り"),new CafeReplayDefinition(CafeOutcome.Id,"funds","経営終了 · 資金不足"),new CafeReplayDefinition(CafeOutcome.Id,"popularity","経営終了 · 人気低下"),
             new CafeReplayDefinition(CafeOpening.Id,"popularity","オープニング · 人気"),new CafeReplayDefinition(CafeOpening.Id,"patron","オープニング · 有力者"),new CafeReplayDefinition(CafeOpening.Id,"bond","オープニング · 好感度"),new CafeReplayDefinition(CafeOpening.Id,"free","オープニング · 自由営業"),
             new CafeReplayDefinition(CafePatronEnding.Id,CafePopularityEnding.Branch,"有力者目標 · 店の外へつながる信頼"),
             new CafeReplayDefinition(CafeBondEnding.Id,CafePopularityEnding.Branch,"好感度目標 · 猫たちとのつながり"),
@@ -39,7 +40,7 @@ namespace CatCafePreview.Standalone
         }
         public static void ValidateSave(CafeSaveEnvelope s)
         {
-            CafePatronEnding.Validate(s.patron_ending,s.state);CafeBondEnding.Validate(s.bond_ending,s.state);CafeOpening.Validate(s.opening,s.state);CafePopularityEnding.Validate(s.popularity_ending,s.state);CafeIntakeConversation.Validate(s.conversation,s.state.intake_request.status);CafeRegularConversation.Validate(s.regular_conversation,s.state.regular_introduction.status);
+            CafeOutcome.Validate(s.outcome,s.state);CafePatronEnding.Validate(s.patron_ending,s.state);CafeBondEnding.Validate(s.bond_ending,s.state);CafeOpening.Validate(s.opening,s.state);CafePopularityEnding.Validate(s.popularity_ending,s.state);CafeIntakeConversation.Validate(s.conversation,s.state.intake_request.status);CafeRegularConversation.Validate(s.regular_conversation,s.state.regular_introduction.status);
             CafeDispatchDialogue.Validate(s.dispatch_conversations,s.dispatch_conversation_selected,s.state);CafeEncounterDialogue.Validate(s.encounter_conversations,s.encounter_conversation_selected,s.state);CafeDispatchIntroductionDialogue.Validate(s.dispatch_introduction_conversations,s.dispatch_introduction_conversation_selected,s.state);
         }
         public static CafeReplayEntry[] FromSave(CafeSaveEnvelope save,CafeRules rules,Func<string,string> catName,Func<string,string> customerName,Func<string,string> contentId)
@@ -71,6 +72,7 @@ namespace CatCafePreview.Standalone
             if(save.patron_ending?.progress.completed==true)result.Add(new CafeReplayEntry{conversation_id=CafePatronEnding.Id,branch_id=CafePopularityEnding.Branch,title="有力者目標 · 店の外へつながる信頼",cat_id="",cat_name="猫たちのカフェ",personality="達成時のカフェ",lines=CafePatronEnding.Lines(CafePatronEnding.Record(save.state),"")});
             if(save.bond_ending?.progress.completed==true){var e=save.bond_ending;string name=string.IsNullOrEmpty(e.cat_id)?"":catName(e.cat_id);result.Add(new CafeReplayEntry{conversation_id=CafeBondEnding.Id,branch_id=CafePopularityEnding.Branch,title="好感度目標 · 猫たちとのつながり",cat_id=string.IsNullOrEmpty(e.cat_id)?"":contentId(e.cat_id),cat_name=name,personality="達成時のカフェ",lines=CafeBondEnding.Lines(CafeBondEnding.Record(save.state),name)});}
             if(save.opening?.outcome=="viewed"){var o=save.opening;string id=o.cat_ids.FirstOrDefault()??"";result.Add(new CafeReplayEntry{conversation_id=CafeOpening.Id,branch_id=o.mode,title=All.Single(d=>d.id==CafeOpening.Id && d.branch==o.mode).title,cat_id=id==""?"":contentId(id),cat_name=o.cat_names.FirstOrDefault()??"猫たちのカフェ",personality="1日目の営業前",lines=CafeOpening.Lines(o)});}
+            if(save.outcome?.progress.completed==true){var o=save.outcome;result.Add(new CafeReplayEntry{conversation_id=CafeOutcome.Id,branch_id=o.cause,title=o.Title,cat_id="",cat_name="カフェの記録",personality="結果確定時",lines=o.Lines()});}
             return result.ToArray();
         }
     }

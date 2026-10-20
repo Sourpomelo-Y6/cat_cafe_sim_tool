@@ -12,6 +12,7 @@ namespace CatCafePreview
         public Text details, notice,summary;
         public ScrollRect scroll;
         public Button save, title;
+        private Button resumeOutcome;
         private bool disconnected;
         private string instance;
         public void Apply(PythonCafeState state)
@@ -29,6 +30,7 @@ namespace CatCafePreview
                 text.Append(cat.name+" / "+cat.health_label+" / "+cat.activity_label+"\n体力："+cat.stamina.ToString("0.#")+" / 疲労："+cat.fatigue.ToString("0.#")+" / ストレス："+cat.stress.ToString("0.#")+"\n\n");
             if(details.text!=text.ToString()){details.text=text.ToString();Canvas.ForceUpdateCanvases();scroll.verticalNormalizedPosition=1;}
             RefreshControls();
+            if(Application.isPlaying && CafeBackends.Standalone){if(resumeOutcome==null){resumeOutcome=Instantiate(save,save.transform.parent);resumeOutcome.name="結末を再開";var resumeRect=resumeOutcome.GetComponent<RectTransform>();resumeRect.anchorMin=resumeRect.anchorMax=resumeRect.pivot=new Vector2(0,1);resumeRect.anchoredPosition=new Vector2(600,-20);resumeRect.sizeDelta=new Vector2(290,40);resumeOutcome.GetComponentInChildren<Text>().text="結末を再開";resumeOutcome.onClick=new Button.ButtonClickedEvent();resumeOutcome.onClick.AddListener(()=>OutcomeConversationPanel.Ensure(gameObject).Open());}resumeOutcome.gameObject.SetActive((CafeBackends.Local as LocalCafeBackend).OutcomePending);resumeOutcome.interactable=GetComponent<PythonStateClient>().CanManageSaves;OutcomeConversationPanel.Ensure(gameObject).ApplyOutcome(state);}
         }
         public void RefreshControls()
         { var client=GetComponent<PythonStateClient>();save.interactable=client.CanManageSaves;title.interactable=client.CanLeaveResult;if(!disconnected)notice.text=!client.CanManageSaves?"操作の完了、または再接続を待っています。":"結果はセーブ画面で保存し、「つづきから」で見返せます。\n新しいカフェを始める場合は、タイトルの「はじめから」を選んでください。"; }

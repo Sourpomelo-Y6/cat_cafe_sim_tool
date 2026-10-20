@@ -225,7 +225,7 @@ namespace CatCafePreview
         public void ImportLegacy(string path,int slot){if(slot<1 || slot>10 || !CanManageSaves)return;QueueSave("import_legacy_save",path);pending.save_slot=slot;}
         public int ServerPort => port;
         public void PauseAutomaticForSave(){StopAutomatic();preview.RefreshPythonControls();}
-        public bool CanContinueGoal { get { return CanManageSaves && (!CafeBackends.Standalone || !((current.goal_result?.kind=="continue_goal" && (CafeBackends.Local as LocalCafeBackend)?.PopularityEndingPending==true) || (current.goal_result?.kind=="continue_patron" && (CafeBackends.Local as LocalCafeBackend)?.PatronEndingPending==true) || (current.goal_result?.kind=="continue_bond_goal" && (CafeBackends.Local as LocalCafeBackend)?.BondEndingPending==true))) && current.goal_result != null && current.goal_result.can_continue; } }
+        public bool CanContinueGoal { get { return CanManageSaves && (!CafeBackends.Standalone || (current.goal_result?.kind!="continue_goal" || (CafeBackends.Local as LocalCafeBackend)?.OutcomePending!=true)) && (!CafeBackends.Standalone || !((current.goal_result?.kind=="continue_goal" && (CafeBackends.Local as LocalCafeBackend)?.PopularityEndingPending==true) || (current.goal_result?.kind=="continue_patron" && (CafeBackends.Local as LocalCafeBackend)?.PatronEndingPending==true) || (current.goal_result?.kind=="continue_bond_goal" && (CafeBackends.Local as LocalCafeBackend)?.BondEndingPending==true))) && current.goal_result != null && current.goal_result.can_continue; } }
         public bool CanBeginPlayer(string catId)
         { return CanManageSaves && Array.Exists(current.cats,row=>row.cat_id==catId && row.can_player_start); }
         public bool CanPurchaseCat(string catId)
