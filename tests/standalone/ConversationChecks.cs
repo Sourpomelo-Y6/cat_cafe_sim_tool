@@ -5,6 +5,7 @@ static partial class Program
     static void ConversationChecks(string rulePath)
     {
         var rules=Decode<CafeRules>(File.ReadAllText(rulePath));
+        AdoptionDialogueChecks(rules);
         foreach(var answer in new[]{"accept","decline"})
         {
             var sim=new CafeSimulation(rules);
@@ -262,6 +263,22 @@ static partial class Program
                 var bad=Decode<CafeDispatchConversation>(Encode(row));forge(bad);bool rejected=false;try{CafeDispatchDialogue.Validate(new[]{bad},id,sim.State);}catch(ArgumentException){rejected=true;}Assert(rejected,"Forged dispatch conversation accepted");
             }
             CafeDispatchDialogue.Validate(null,null,sim.State);Assert(Decode<CafeSaveEnvelope>(Encode(new CafeSaveEnvelope{state=sim.State})).dispatch_conversations==null,"Old save fabricated dispatch viewing");
+        }
+    }
+
+    static void AdoptionDialogueChecks(CafeRules original)
+    {
+        foreach(string choice in new[]{"accept","decline"})
+        {
+            var rules=Decode<CafeRules>(Encode(original));rules.starting_funds=20000;rules.store_events.probability=0;rules.growth.threshold=10000;rules.exchange.ticks=1;rules.exchange.affinity_enthusiastic=rules.exchange.affinity_favorable=80;rules.opening_ticks=2;rules.arrival_ticks=new[]{0,0};rules.patterns=Enumerable.Range(0,7).Select(i=>new WeekPattern{days=Enumerable.Range(0,7).ToArray()}).ToArray();rules.max_probability=rules.stress_per_service_tick=rules.fatigue_per_service_tick=0;
+            var sim=new CafeSimulation(rules);sim.Execute("configure_adoption",choice:"on");sim.Execute("start_business");sim.Execute("advance_business");var e=sim.State.adoption.events[0];var row=new CafeAdoptionConversation{event_id=e.id,progress=CafeAdoptionDialogue.Start()};
+            void Roundtrip(){var save=Decode<CafeSaveEnvelope>(Encode(new CafeSaveEnvelope{state=sim.State,adoption_conversations=new[]{row},adoption_conversation_selected=e.id}));sim.Restore(save.state);row=save.adoption_conversations[0];e=sim.State.adoption.events.Single(x=>x.id==row.event_id);CafeAdoptionDialogue.Validate(new[]{row},e.id,sim.State);Assert(row.progress!=null,"Adoption metadata lost");}
+            for(int i=0;i<=4;i++){row.progress.node=i;Roundtrip();}
+            double funds=sim.State.funds;sim.Execute("resolve_adoption",source:e.id,choice:choice);CafeAdoptionDialogue.Sync(row,e);Assert(row.progress.branch_id==choice && CafeAdoptionDialogue.ResultPending(row),"Adoption branch missing");
+            for(int i=0;i<=3;i++){row.progress.node=i;Roundtrip();Assert(CafeReplayCatalog.FromSave(new CafeSaveEnvelope{state=sim.State,adoption_conversations=new[]{row}},rules,x=>sim.Definition(x).name,x=>x,x=>x).Length==0,"Unread adoption unlocked");}
+            CafeAdoptionDialogue.Finish(row);CafeAdoptionDialogue.Finish(row);Roundtrip();var entries=CafeReplayCatalog.FromSave(new CafeSaveEnvelope{state=sim.State,adoption_conversations=new[]{row}},rules,x=>sim.Definition(x).name,x=>x,x=>x);Assert(entries.Length==1 && entries[0].branch_id==choice,"Adoption Extra missing");Assert(entries[0].cat_name==sim.Definition(e.cat_id).name && entries[0].lines.Any(l=>l.text.Contains(e.customer_id)),"Adoption identities mixed");Assert(sim.State.funds==funds,"Adoption reward changed");
+            CafeAdoptionDialogue.Validate(null,null,sim.State);Assert(CafeReplayCatalog.FromSave(new CafeSaveEnvelope{state=sim.State},rules,x=>x,x=>x,x=>x).Length==0,"Legacy adoption fabricated reading");
+            foreach(Action<CafeAdoptionConversation> forge in new Action<CafeAdoptionConversation>[]{r=>r.event_id="wrong",r=>r.progress.branch_id="introduction",r=>r.progress.node=99,r=>r.progress.viewed_branches=new[]{"accept","decline"},r=>r.progress.completed=false}){var bad=Decode<CafeAdoptionConversation>(Encode(row));forge(bad);bool rejected=false;try{CafeAdoptionDialogue.Validate(new[]{bad},bad.event_id,sim.State);}catch(ArgumentException){rejected=true;}Assert(rejected,"Forged adoption metadata accepted");}
         }
     }
 

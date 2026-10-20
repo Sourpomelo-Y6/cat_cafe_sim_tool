@@ -24,26 +24,32 @@ namespace CatCafePreview
         private bool showing;
         static string Identity(PythonAdoptionEvent row)
         { return row.event_id+"|"+row.cat_id+"|"+row.customer_id+"|"+row.day+"|"+row.guest_affinity+"|"+row.player_affinity; }
+        public AdoptionConversationPanel Dialogue=>GetComponent<AdoptionConversationPanel>()??gameObject.AddComponent<AdoptionConversationPanel>();
+        public bool Confirming=>confirming!=null;
+        public void HideForConversation(){showing=false;panel.SetActive(false);}
+        public void BeginConversationAccept(string id){selected=id;showing=true;Render();BeginAccept();panel.transform.SetAsLastSibling();}
         public void Open(string catId)
         {
             if(!GetComponent<PythonStateClient>().CanManageSaves)return;
+            if(CafeBackends.Standalone){Dialogue.Apply(GetComponent<PythonStateClient>().CurrentState,this);var b=CafeBackends.Local as LocalCafeBackend;var match=b.Simulation.State.adoption?.events.LastOrDefault(e=>e.cat_id==catId && (e.status=="waiting" || b.AdoptionConversations.Any(r=>r.event_id==e.id && !r.progress.completed)));if(match!=null && Dialogue.OpenEvent(match.id))return;if(b.AdoptionConversation?.progress.completed==false){Dialogue.Open();return;}}
             selected=rows.LastOrDefault(r=>r.cat_id==catId)?.event_id;showing=true;ResetConfirmation();GetComponent<PythonCatDetailsPanel>().Close();Render();
         }
-        public void Close() { showing=false;ResetConfirmation();panel.SetActive(false); }
+        public void Close() { showing=false;ResetConfirmation();panel.SetActive(false);if(GetComponent<AdoptionConversationPanel>()?.Showing==true)Dialogue.Close(); }
         public void ResetConfirmation() { confirming=null;confirmationIdentity=null;confirmation.SetActive(false); }
-        public void CancelAccept() { ResetConfirmation();RefreshControls(); }
+        public void CancelAccept() { ResetConfirmation();if(CafeBackends.Standalone){HideForConversation();Dialogue.Refresh();}RefreshControls(); }
         public void Configure() { GetComponent<PythonStateClient>().ToggleAdoption(); }
         public void Select(int index)
-        { if(index>=0 && index<rows.Length)selected=rows[index].event_id;ResetConfirmation();RenderDetails(); }
-        public void Decline() { if(selected!=null)GetComponent<PythonStateClient>().ResolveAdoption(selected,"decline"); }
+        { if(index>=0 && index<rows.Length)selected=rows[index].event_id;ResetConfirmation();RenderDetails();if(CafeBackends.Standalone && selected!=null)Dialogue.OpenEvent(selected); }
+        public void Decline() { if(CafeBackends.Standalone && Dialogue.OpenEvent(selected))return;if(selected!=null)GetComponent<PythonStateClient>().ResolveAdoption(selected,"decline"); }
         public void BeginAccept()
         {
+            if(CafeBackends.Standalone && !Dialogue.Showing && Dialogue.OpenEvent(selected))return;
             var row=Array.Find(rows,r=>r.event_id==selected);
             if(row==null || !row.can_accept || !GetComponent<PythonStateClient>().CanManageSaves)return;
-            confirming=row.event_id;confirmationIdentity=Identity(row);confirmationDetails.text=row.name+"を "+row.customer_name+"へ譲渡します。\n\nこのゲームでは、カフェの接客・派遣・プレイヤーとの交流に戻せません。\n\n猫の詳細と関係の記録は残ります。\n譲渡する猫と相手を確認してから確定してください。";
+            confirming=row.event_id;confirmationIdentity=Identity(row);confirmationDetails.text=row.name+"を "+row.customer_name+"へ譲渡します。\n\nこのゲームでは、カフェの接客・派遣・プレイヤーとの交流に戻せません。\n\n金銭報酬はありません。猫の詳細と関係の記録は保持します。\nゲーム内では復帰できません。譲渡する猫と相手を確認してから確定してください。";
             confirmation.SetActive(true);RefreshControls();
         }
-        public void ConfirmAccept() { if(confirming!=null)GetComponent<PythonStateClient>().ResolveAdoption(confirming,"accept"); }
+        public void ConfirmAccept() { if(confirming==null || !confirmAccept.interactable)return;string id=confirming;ResetConfirmation();if(CafeBackends.Standalone)HideForConversation();GetComponent<PythonStateClient>().ResolveAdoption(id,"accept"); }
         public void Apply(PythonCafeState state)
         {
             bool hadRecords=rows.Length>0;current=state.adoption;rows=current?.events ?? new PythonAdoptionEvent[0];
@@ -57,7 +63,7 @@ namespace CatCafePreview
             if(hadRecords && rows.Length==0) { showing=false;selected=null; }
             var pending=Array.Find(rows,r=>r.event_id==confirming);
             if(confirming!=null && (pending==null || pending.status!="waiting" || Identity(pending)!=confirmationIdentity))ResetConfirmation();
-            Render();
+            Render();if(Application.isPlaying && CafeBackends.Standalone)Dialogue.Apply(state,this);
         }
         private void Render()
         {
@@ -84,7 +90,7 @@ namespace CatCafePreview
             configure.interactable=ready && current!=null && current.can_configure && confirming==null;
             events.interactable=ready && rows.Length>0 && confirming==null;
             accept.interactable=ready && row!=null && row.can_accept && confirming==null;decline.interactable=ready && row!=null && row.can_decline && confirming==null;
-            close.interactable=confirming==null && !rows.Any(r=>r.status=="waiting" && (r.can_accept || r.can_decline));
+            close.interactable=confirming==null && (CafeBackends.Standalone || !rows.Any(r=>r.status=="waiting" && (r.can_accept || r.can_decline)));
             var pending=Array.Find(rows,r=>r.event_id==confirming);confirmAccept.interactable=ready && pending!=null && pending.can_accept && Identity(pending)==confirmationIdentity;
             cancel.interactable=ready;
         }

@@ -8,7 +8,7 @@ namespace CatCafePreview
         public bool ConversationOpen {get;set;}
         public bool RegularConversationOpen {get;set;}
         static bool UnfinishedResult(CafeConversationProgress p)=>p!=null && !p.completed && p.branch_id!="introduction";
-        public bool ConversationBlocksProgress=>LodgeConversationOpen || LodgeResultPending || OutcomePending || OpeningPending || PatronEndingPending || BondEndingPending || PopularityEndingPending || ConversationOpen || RegularConversationOpen || DispatchConversationOpen || UnfinishedResult(Conversation) || UnfinishedResult(RegularConversation) || DispatchResultPending || EncounterConversationOpen || EncounterResultPending || DispatchIntroductionConversationOpen || DispatchIntroductionResultPending;
+        public bool ConversationBlocksProgress=>AdoptionConversationOpen || AdoptionResultPending || LodgeConversationOpen || LodgeResultPending || OutcomePending || OpeningPending || PatronEndingPending || BondEndingPending || PopularityEndingPending || ConversationOpen || RegularConversationOpen || DispatchConversationOpen || UnfinishedResult(Conversation) || UnfinishedResult(RegularConversation) || DispatchResultPending || EncounterConversationOpen || EncounterResultPending || DispatchIntroductionConversationOpen || DispatchIntroductionResultPending;
         public bool IntakeResultPending=>UnfinishedResult(Conversation);
         public bool RegularResultPending=>UnfinishedResult(RegularConversation);
         public string ConversationProgressReason
@@ -20,6 +20,7 @@ namespace CatCafePreview
                 if(RegularResultPending)reason+="常連からの猫紹介は"+(Simulation.State.regular_introduction.status=="declined"?"見送り済み":"受け入れ済み")+"ですが、結果会話が未完了です。イベント一覧の「回答・会話待ち」から再開し、「会話を終える」まで進めてください。\n";
                 if(reason=="" && (ConversationOpen || RegularConversationOpen))reason="依頼・紹介の会話中です。回答後の会話を最後まで進めてください。閉じた会話はイベント一覧から再開できます。";
                 if(DispatchConversationReason!="")reason+="\n"+DispatchConversationReason;
+                if(AdoptionConversationReason!="")reason+="\n"+AdoptionConversationReason;
                 if(LodgeConversationReason!="")reason+="\n"+LodgeConversationReason;
                 if(EncounterConversationReason!="")reason+="\n"+EncounterConversationReason;
                 if(DispatchIntroductionConversationReason!="")reason+="\n"+DispatchIntroductionConversationReason;
@@ -29,10 +30,10 @@ namespace CatCafePreview
         void SyncConversations()
         {
             var s=Simulation.State;
-            if(conversationEpoch!=s.instance_id){conversation=regularConversation=null;RestoreDispatchConversations(null,null);RestoreEncounterConversations(null,null);RestoreLodgeConversations(null,null);RestoreDispatchIntroductionConversations(null,null);ConversationOpen=RegularConversationOpen=false;conversationEpoch=s.instance_id;}
+            if(conversationEpoch!=s.instance_id){conversation=regularConversation=null;RestoreDispatchConversations(null,null);RestoreEncounterConversations(null,null);RestoreLodgeConversations(null,null);RestoreAdoptionConversations(null,null);RestoreDispatchIntroductionConversations(null,null);ConversationOpen=RegularConversationOpen=false;conversationEpoch=s.instance_id;}
             CafeIntakeConversation.SyncAnswer(conversation,s.intake_request.status);
             CafeRegularConversation.SyncAnswer(regularConversation,s.regular_introduction.status);
-            SyncDispatchConversations();SyncEncounterConversations();SyncLodgeConversations();SyncDispatchIntroductionConversations();
+            SyncDispatchConversations();SyncEncounterConversations();SyncLodgeConversations();SyncAdoptionConversations();SyncDispatchIntroductionConversations();
         }
         public CafeConversationProgress Conversation {get{SyncConversations();return conversation;}}
         public CafeConversationProgress RegularConversation {get{SyncConversations();return regularConversation;}}
