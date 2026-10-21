@@ -22,6 +22,7 @@ namespace CatCafePreview.Standalone
     {
         public static bool IsEnding(string id)=>id==CafeOutcome.Id || id==CafePopularityEnding.Id || id==CafeBondEnding.Id || id==CafePatronEnding.Id;
         public static readonly CafeReplayDefinition[] All={
+            new CafeReplayDefinition(CafeEquipmentDialogue.SupportId,"full","支援依頼 · 支援"),new CafeReplayDefinition(CafeEquipmentDialogue.SupportId,"small","支援依頼 · 少額支援"),new CafeReplayDefinition(CafeEquipmentDialogue.SupportId,"decline","支援依頼 · 見送り"),
             new CafeReplayDefinition(CafeEquipmentDialogue.Id,"repair","設備トラブル · 修理"),new CafeReplayDefinition(CafeEquipmentDialogue.Id,"patch","設備トラブル · 応急処置"),new CafeReplayDefinition(CafeEquipmentDialogue.Id,"close","設備トラブル · 休業"),
             new CafeReplayDefinition(CafeMissingDialogue.Id+".notice","departed","店からの家出 · 通知"),new CafeReplayDefinition(CafeMissingDialogue.Id+".waiting","waiting","店からの家出 · 待機"),new CafeReplayDefinition(CafeMissingDialogue.Id+".confirmation","waiting_return","店からの家出 · 帰還待ち"),new CafeReplayDefinition(CafeMissingDialogue.Id+".result","kitten","店からの家出 · 子猫ありの帰還"),new CafeReplayDefinition(CafeMissingDialogue.Id+".result","alone","店からの家出 · 子猫なしの帰還"),
             new CafeReplayDefinition(CafeReservationDialogue.Id+".response","accept","特別予約 · 引き受ける"),new CafeReplayDefinition(CafeReservationDialogue.Id+".response","decline","特別予約 · 辞退する"),new CafeReplayDefinition(CafeReservationDialogue.Id+".result","success","特別予約 · 条件達成"),new CafeReplayDefinition(CafeReservationDialogue.Id+".result","failure","特別予約 · 条件未達"),new CafeReplayDefinition(CafeReservationDialogue.Id+".result","unserved","特別予約 · 未接客"),
@@ -72,7 +73,7 @@ namespace CatCafePreview.Standalone
                 add(row.travelling,image,name,"派遣中",b=>CafeDispatchDialogue.Lines("travelling",b,name),false);
                 add(row.returning,image,name,"帰還",b=>CafeDispatchDialogue.Lines("return",b,name),true);
             }
-            foreach(var row in save.equipment_conversations??new CafeEquipmentConversation[0])add(row.progress,"","設備トラブル",row.day+"日目",b=>CafeEquipmentDialogue.Lines(row,b),true);
+            foreach(var row in save.equipment_conversations??new CafeEquipmentConversation[0])add(row.progress,"",CafeEquipmentDialogue.Title(row),row.day+"日目",b=>CafeEquipmentDialogue.Lines(row,b),true);
             foreach(var row in save.reservation_conversations??new CafeReservationConversation[0]){add(row.response,"",row.name,"特別予約",b=>CafeReservationDialogue.Lines(row,false,b),true);add(row.result,"",row.name,"特別予約の接客結果",b=>CafeReservationDialogue.Lines(row,true,b),false);}
             foreach(var row in save.trust_conversations??new CafeTrustConversation[0]){var ev=save.state.trust_events.Single(e=>e.id==row.event_id);string name=customerName(ev.customer_id);add(row.response,"",name,"顧客の信頼",b=>CafeTrustDialogue.Lines(false,b,name,rules.trust.popularity_loss),true);add(row.result,"",name,"接客結果",b=>CafeTrustDialogue.Lines(true,b,name,rules.trust.popularity_loss),false);}
             foreach(var row in save.adoption_conversations??new CafeAdoptionConversation[0])

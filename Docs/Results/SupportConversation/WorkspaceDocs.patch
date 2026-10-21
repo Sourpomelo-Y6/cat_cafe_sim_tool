@@ -1,0 +1,36 @@
+--- a/Docs/DevelopmentStatus.md
++++ b/Docs/DevelopmentStatus.md
+@@ -16 +16 @@
+-| イベント会話 | [受け入れ依頼](../cat_cafe_sim_tool/Docs/UnityIntakeConversation.md)、[常連紹介](../cat_cafe_sim_tool/Docs/UnityRegularIntroductionConversation.md)、[近所への派遣](../cat_cafe_sim_tool/Docs/UnityDispatchConversation.md)、[派遣二択](../cat_cafe_sim_tool/Docs/UnityDispatchEncounterConversation.md)、[商店街の猫紹介](../cat_cafe_sim_tool/Docs/UnityDispatchIntroductionConversation.md)、[撮影スタジオ紹介](../cat_cafe_sim_tool/Docs/UnityPhotoStudioIntroductionConversation.md)、[宿の家出・帰還](../cat_cafe_sim_tool/Docs/UnityLodgeTroubleConversation.md)、[譲渡](../cat_cafe_sim_tool/Docs/UnityAdoptionConversation.md)、[信頼回復](../cat_cafe_sim_tool/Docs/UnityCustomerTrustConversation.md)、[店からの家出・帰還](../cat_cafe_sim_tool/Docs/UnityMissingConversation.md)、[特別予約](../cat_cafe_sim_tool/Docs/UnityReservationConversation.md)。未対応のイベントは個別に確認する |
++| イベント会話 | [受け入れ依頼](../cat_cafe_sim_tool/Docs/UnityIntakeConversation.md)、[常連紹介](../cat_cafe_sim_tool/Docs/UnityRegularIntroductionConversation.md)、[近所への派遣](../cat_cafe_sim_tool/Docs/UnityDispatchConversation.md)、[派遣二択](../cat_cafe_sim_tool/Docs/UnityDispatchEncounterConversation.md)、[商店街の猫紹介](../cat_cafe_sim_tool/Docs/UnityDispatchIntroductionConversation.md)、[撮影スタジオ紹介](../cat_cafe_sim_tool/Docs/UnityPhotoStudioIntroductionConversation.md)、[宿の家出・帰還](../cat_cafe_sim_tool/Docs/UnityLodgeTroubleConversation.md)、[譲渡](../cat_cafe_sim_tool/Docs/UnityAdoptionConversation.md)、[信頼回復](../cat_cafe_sim_tool/Docs/UnityCustomerTrustConversation.md)、[店からの家出・帰還](../cat_cafe_sim_tool/Docs/UnityMissingConversation.md)、[特別予約](../cat_cafe_sim_tool/Docs/UnityReservationConversation.md)。[設備トラブル](../cat_cafe_sim_tool/Docs/UnityEquipmentTroubleConversation.md)、[支援依頼](../cat_cafe_sim_tool/Docs/UnitySupportRequestConversation.md)。未対応のイベントは個別に確認する |
+@@ -29 +29 @@
+-2. **主要イベント会話を拡張する。** [残イベントの棚卸し（2026-10-21）](EventConversationInventory.md)を参照。設備トラブルのADV接続は実装済み。次は支援依頼→来訪猫ココの出会い・加入を推奨。通常派遣は9か所中1か所、途中選択は8種類中1種類が専用ADV対応済みで、残りは既存UIで動作する。選択なしの通知や成長結果は一律にADV化しない。
++2. **主要イベント会話を拡張する。** [残イベントの棚卸し（2026-10-21）](EventConversationInventory.md)を参照。設備トラブルのADV接続は実装済み。支援依頼もADV接続済み。次は来訪猫ココの出会い・加入を推奨。通常派遣は9か所中1か所、途中選択は8種類中1種類が専用ADV対応済みで、残りは既存UIで動作する。選択なしの通知や成長結果は一律にADV化しない。
+@@ -86,0 +87,6 @@
++
++## 2026-10-22：保護団体からの支援依頼ADV
++
++店舗イベントの支援依頼を導入→支援／少額支援／見送り→最終確認→結果へ接続した。既存設定から費用・残金・閉店時の人気加算を表示し、資金が尽きる選択も既存どおり許して経営終了を事前説明する。設備トラブルの共通3択・日別案件・結果優先・保存・Extraを再利用し、旧回答済みの過去会話を既読補完しない。確率・費用・人気・バランスは維持した。
++
++C#共通655項目、Editor支援181・設備191項目、配布Player201・別プロセス184項目成功。実画面で1280×800の3択・確認取消・設定、1024×768の結果途中復元・バックログ・読了→営業準備を確認。Latestは1組・Pendingなし、8,757,649,391→8,757,664,634 bytes（＋15,243 bytes）。[本文・仕様・互換・検証・容量・残る課題](../cat_cafe_sim_tool/Docs/UnitySupportRequestConversation.md)を参照。次はココの出会い・加入と標準条件の長期評価。
+--- a/Docs/EventConversationInventory.md
++++ b/Docs/EventConversationInventory.md
+@@ -3 +3 @@
+-確認日：2026-10-21。対象はUnity単独版。イベント定義・一覧画面・専用会話の対象判定と実装資料を照合した。今回はゲームの実行・ビルド・画像生成を行っていない。
++確認日：2026-10-22。対象はUnity単独版。イベント定義・一覧画面・専用会話の対象判定と実装資料を照合した。初回はソース調査。設備トラブルと支援依頼は、その後の実装・配布版検証に合わせて更新した。
+@@ -5 +5 @@
+-「未対応」は専用ADV会話がないという意味で、ゲーム処理・既存の選択画面がない意味ではない。以下の推奨する表現と優先順位は提案であり、実装済みとは区別する。前回提案した設備トラブルの会話化はユーザー申告どおり未着手。
++「未対応」は専用ADV会話がないという意味で、ゲーム処理・既存の選択画面がない意味ではない。以下の推奨する表現と優先順位は提案であり、実装済みとは区別する。設備トラブルと支援依頼は共通ADVへ接続済み。
+@@ -15 +15 @@
+-| 店舗イベント | 5種類とも専用ADV未対応 | 設備トラブル・支援依頼を優先。祭り・雨・支援物資は通知中心 |
++| 店舗イベント | 設備トラブル・支援依頼は対応済み | 祭り・雨・支援物資は既存通知中心。選択を追加しない |
+@@ -34,2 +34,2 @@
+-| 設備トラブル | 修理／応急処置／休業の選択 | 導入・選択・結果の短いADV。休業による翌日遷移と結果会話の保存が重要 | A |
+-| 支援依頼 | 支援／少額支援／見送り | 費用・人気への効果を明示する短いADV。即時支出と後の効果を混同しない | A |
++| 設備トラブル | 修理／応急処置／休業の選択 | 対応済み。[日別保存・休業・結果・Extra](../cat_cafe_sim_tool/Docs/UnityEquipmentTroubleConversation.md) | A |
++| 支援依頼 | 支援／少額支援／見送り | 対応済み。[3択・確認・即時支出と閉店時人気・Extra](../cat_cafe_sim_tool/Docs/UnitySupportRequestConversation.md) | A |
+@@ -86,2 +86,2 @@
+-1. **A：設備トラブル。** 前回の提案を再開。休業・翌日・結果会話が重なる代表例を完成させる。
+-2. **A：支援依頼。** 店舗イベントの選択型2種類を揃える。
++1. **完了：設備トラブル。** 日別保存・休業・結果会話を実装済み。標準条件の長期評価と組み合わせ回帰を継続する。
++2. **完了：支援依頼。** 店舗イベントの選択型2種類を共通ADVへ接続済み。本文・互換・検証は個別資料を参照する。

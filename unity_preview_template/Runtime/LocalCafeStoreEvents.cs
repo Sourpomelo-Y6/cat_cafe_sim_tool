@@ -20,12 +20,13 @@ namespace CatCafePreview
             string[] choices = e.type == "trouble" ? new[] { "repair", "patch", "close" } : new[] { "full", "small", "decline" };
             return new PythonStoreEvent { kind = e.type, title = StoreEventLabel(), day = e.day, funds = (float)Simulation.State.funds,
                 choices = choices.Select(c => new PythonEventChoice { choice = c, label = ChoiceLabel(c), can_select = StoreChoiceReason(c)=="", reason=StoreChoiceReason(c),
-                    detail = c == "repair" ? "閉店時に修理費 " + r.trouble_cost : c == "patch" ? "本日は " + Math.Min(Simulation.State.seat_count, r.trouble_seat_loss) + "席を停止" : c == "close" ? (DayOffView().can_select ? "支出："+DayOffView().cost+" / 資金："+DayOffView().funds_after+"。"+(DayOffView().ends_game?"精算で経営終了。翌日へ進みません。":DayOffView().day_after+"日目へ（確認待ちで閉店に留まる場合あり）。")+"猫・日程の変化は確認画面で表示します。" : DayOffView().reason) : c == "full" ? "今 " + r.support_full_cost + "支出 / 閉店時の人気 +" + r.support_full_popularity : c == "small" ? "今 " + r.support_small_cost + "支出 / 閉店時の人気 +" + r.support_small_popularity : "費用・人気変化なし" }).ToArray() };
+                    detail = c == "repair" ? "閉店時に修理費 " + r.trouble_cost : c == "patch" ? "本日は " + Math.Min(Simulation.State.seat_count, r.trouble_seat_loss) + "席を停止" : c == "close" ? (DayOffView().can_select ? "支出："+DayOffView().cost+" / 資金："+DayOffView().funds_after+"。"+(DayOffView().ends_game?"精算で経営終了。翌日へ進みません。":DayOffView().day_after+"日目へ（確認待ちで閉店に留まる場合あり）。")+"猫・日程の変化は確認画面で表示します。" : DayOffView().reason) : c == "full" ? SupportEffect(r.support_full_cost,r.support_full_popularity) : c == "small" ? SupportEffect(r.support_small_cost,r.support_small_popularity) : "費用・人気変化なし" }).ToArray() };
         }
+        private string SupportEffect(double cost,double popularity){var funds=Simulation.State.funds;return "回答時に "+cost.ToString("0.#")+" 支出 / 資金 "+funds.ToString("0.#")+" → "+(funds-cost).ToString("0.#")+"。"+(funds-cost<=0?"この回答で資金が尽き、経営終了します。閉店時に予定する人気 +"+popularity.ToString("0.#")+" は未反映のまま終了します。":"閉店時の人気 +"+popularity.ToString("0.#")+"（上限 "+Simulation.Rules.popularity.cap.ToString("0.#")+"）。回答時の人気変化はありません。");}
         private string StoreChoiceReason(string choice)
         {
             if(Simulation.State.autoplay?.running==true)return "おまかせを中止してください。";
-            if(EquipmentResultPendingWithoutSync)return "前の設備トラブルの結果会話をイベント一覧から完了してください。";
+            if(EquipmentResultPendingWithoutSync)return "前の店舗イベントの結果会話をイベント一覧から完了してください。";
             if(choice=="close"){var rest=DayOffView();return rest.can_select?"":rest.reason;}
             try {
                 var copy=UnityEngine.JsonUtility.FromJson<Standalone.CafeSnapshot>(UnityEngine.JsonUtility.ToJson(Simulation.State));

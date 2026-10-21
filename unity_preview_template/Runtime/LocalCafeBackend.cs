@@ -99,7 +99,7 @@ namespace CatCafePreview
                 if(OpeningPending && !new[]{"save_game","load_game","new_game"}.Contains(cmd.kind))throw new InvalidOperationException("オープニングを最後まで読むか、スキップしてください。");
                 if(cmd.kind=="resolve_missing"){SyncConversations();if(!s.missing_cases.Any(e=>e.id==cmd.choice && e.cat_id==cmd.cat_id && e.resolved_day==0))throw new InvalidOperationException("現在の帰還案件を選び直してください。");}
                 SyncConversations();
-                if(cmd.kind=="resolve_store_event" && Simulation.CurrentStoreEvent.type=="trouble" && !string.IsNullOrEmpty(cmd.event_id) && cmd.event_id!=CafeEquipmentDialogue.EventId(s.day))throw new InvalidOperationException("設備トラブルの案件を選び直してください。");
+                if(cmd.kind=="resolve_store_event" && CafeEquipmentDialogue.Supports(Simulation.CurrentStoreEvent.type) && !string.IsNullOrEmpty(cmd.event_id) && cmd.event_id!=CafeEquipmentDialogue.EventId(s.day,Simulation.CurrentStoreEvent.type))throw new InvalidOperationException("店舗イベントの案件を選び直してください。");
                 var replayBefore=Journal.CaptureBefore(s);Simulation.ReplayActions.Clear();CafeAutoOperation replayAutomatic=null;
                 switch (cmd.kind)
                 {

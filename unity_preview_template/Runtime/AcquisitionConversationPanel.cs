@@ -148,7 +148,7 @@ namespace CatCafePreview
         }
         public void Answer(bool answer){if(!Showing || !Click() || progress==null || progress.branch_id!="introduction" || progress.node<Lines("introduction").Length)return;SendAnswer(answer);Refresh();}
         public virtual void Open(){foreach(var other in GetComponents<AcquisitionConversationPanel>())if(other!=this && other.Showing)other.Close();hidden=false;OriginalShowing=false;if(card!=null){card.SetActive(true);foreach(var child in originalChildren)child.gameObject.SetActive(false);Stretch(panel.GetComponent<RectTransform>());}panel.SetActive(Available);panel.transform.SetAsLastSibling();Refresh();}
-        public virtual void Close(){if(!Ready)return;hidden=true;panel.SetActive(false);SetOpen(false);AfterClose();}
+        public virtual void Close(){if(!Ready)return;if(answerConfirmation!=null){Destroy(answerConfirmation);answerConfirmation=null;}hidden=true;panel.SetActive(false);SetOpen(false);AfterClose();}
         void ToggleHistory(){if(!Click())return;history=!history;Refresh();}
         public void ShowOriginal()
         {
@@ -159,6 +159,16 @@ namespace CatCafePreview
                 var rect=panel.GetComponent<RectTransform>();rect.anchorMin=originalMin;rect.anchorMax=originalMax;rect.pivot=originalPivot;rect.offsetMin=originalOffsetMin;rect.offsetMax=originalOffsetMax;
             }
             panel.SetActive(true);panel.transform.SetAsLastSibling();SetOpen(false);
+        }
+        // Shared local confirmation. Cancellation never sends a command.
+        GameObject answerConfirmation;
+        protected void AskConfirmation(string text,Action confirmed){
+            if(answerConfirmation!=null)Destroy(answerConfirmation);
+            answerConfirmation=Box(panel.transform,"Answer Confirmation",0,0,1280,800,Paper);Stretch(answerConfirmation.GetComponent<RectTransform>());
+            var c=Box(answerConfirmation.transform,"Confirm",0,0,900,390,Paper,16);var r=c.GetComponent<RectTransform>();r.anchorMin=r.anchorMax=r.pivot=new Vector2(.5f,.5f);r.anchoredPosition=Vector2.zero;
+            Scroll(c.transform,"Effect",24,20,852,270,22,out var effect).text=text;
+            Button(c.transform,"取消",24,324,240,()=>{Destroy(answerConfirmation);answerConfirmation=null;});
+            Button(c.transform,"この内容で回答",620,324,250,()=>{if(!Click())return;Destroy(answerConfirmation);answerConfirmation=null;confirmed();});
         }
         void Build()
         {

@@ -16,7 +16,7 @@ namespace CatCafePreview
         public void Apply(PythonCafeState state)
         {
             var ev=state.store_event;
-            if(Application.isPlaying && CafeBackends.Standalone && (ev?.kind=="trouble" || (CafeBackends.Local as LocalCafeBackend).EquipmentResultPending)){panel.SetActive(false);Dialogue.Apply(state,this);return;}
+            if(Application.isPlaying && CafeBackends.Standalone && (CatCafePreview.Standalone.CafeEquipmentDialogue.Supports(ev?.kind) || (CafeBackends.Local as LocalCafeBackend).EquipmentResultPending)){panel.SetActive(false);Dialogue.Apply(state,this);return;}
             panel.SetActive(ev != null && !string.IsNullOrEmpty(ev.kind));
             if(!panel.activeSelf) return;
             title.text=ev.title;
