@@ -23,6 +23,7 @@ namespace CatCafePreview.Standalone
         public CafeDispatchConversation[] dispatch_conversations;
         public string dispatch_conversation_selected;
         public string missing_conversation_selected,missing_conversation_phase;
+        public CafeCocoConversation[] coco_conversations;
         public CafeEquipmentConversation[] equipment_conversations;
         public string equipment_conversation_selected;
         public CafeReservationConversation[] reservation_conversations;

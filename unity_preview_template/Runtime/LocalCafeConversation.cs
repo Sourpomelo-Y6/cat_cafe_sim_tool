@@ -34,10 +34,10 @@ namespace CatCafePreview
         void SyncConversations()
         {
             var s=Simulation.State;
-            if(conversationEpoch!=s.instance_id){conversation=regularConversation=null;missingSelected=missingPhase=null;MissingConversationOpen=false;RestoreDispatchConversations(null,null);RestoreEncounterConversations(null,null);RestoreLodgeConversations(null,null);RestoreAdoptionConversations(null,null);RestoreTrustConversations(null,null);RestoreEquipmentConversations(null,null);RestoreReservationConversations(null,null);RestoreDispatchIntroductionConversations(null,null);ConversationOpen=RegularConversationOpen=false;conversationEpoch=s.instance_id;}
+            if(conversationEpoch!=s.instance_id){conversation=regularConversation=null;missingSelected=missingPhase=null;MissingConversationOpen=false;RestoreDispatchConversations(null,null);RestoreEncounterConversations(null,null);RestoreLodgeConversations(null,null);RestoreAdoptionConversations(null,null);RestoreTrustConversations(null,null);RestoreCocoConversations(null);RestoreEquipmentConversations(null,null);RestoreReservationConversations(null,null);RestoreDispatchIntroductionConversations(null,null);ConversationOpen=RegularConversationOpen=false;conversationEpoch=s.instance_id;}
             CafeIntakeConversation.SyncAnswer(conversation,s.intake_request.status);
             CafeRegularConversation.SyncAnswer(regularConversation,s.regular_introduction.status);
-            SyncDispatchConversations();SyncEncounterConversations();SyncLodgeConversations();SyncAdoptionConversations();SyncTrustConversations();SyncEquipmentConversations();SyncReservationConversations();SyncMissingConversations();SyncDispatchIntroductionConversations();
+            SyncDispatchConversations();SyncEncounterConversations();SyncLodgeConversations();SyncAdoptionConversations();SyncTrustConversations();SyncCocoConversations();SyncEquipmentConversations();SyncReservationConversations();SyncMissingConversations();SyncDispatchIntroductionConversations();
         }
         public CafeConversationProgress Conversation {get{SyncConversations();return conversation;}}
         public CafeConversationProgress RegularConversation {get{SyncConversations();return regularConversation;}}

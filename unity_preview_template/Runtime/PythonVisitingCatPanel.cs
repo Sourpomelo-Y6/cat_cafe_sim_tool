@@ -22,13 +22,16 @@ namespace CatCafePreview
         public void Open()
         {
             if(current?.visiting_cat==null || !current.can_set_shifts || current.closed || current.game_over!=null)return;
+            if(CafeBackends.Local is LocalCafeBackend && ConversationUI().OpenPending(true))return;
             ClearConfirmation();panel.SetActive(true);panel.transform.SetAsLastSibling();Render();
             Canvas.ForceUpdateCanvases();details.GetComponentInParent<ScrollRect>().verticalNormalizedPosition=1;
         }
+        public void ShowDaily() { ClearConfirmation();panel.SetActive(true);panel.transform.SetAsLastSibling();Render();RefreshControls(); }
         public void Close() { ClearConfirmation();panel.SetActive(false);GetComponent<PythonPreparationPanel>()?.Open(); }
         public void Interact() { Choose("interact"); }
         public void Skip() { Choose("skip"); }
-        public void Accept() { Choose("accept"); }
+        public void Accept() { if(CafeBackends.Local is LocalCafeBackend){ConversationUI().OpenPending(true);return;}Choose("accept"); }
+        CocoConversationPanel ConversationUI()=>GetComponent<CocoConversationPanel>()??gameObject.AddComponent<CocoConversationPanel>();
         public void Housing() { ClearConfirmation();GetComponent<PythonCatAcquisitionNavigation>().OpenHousing(panel); }
         private void Choose(string choice)
         {
@@ -55,6 +58,7 @@ namespace CatCafePreview
             if(identity!=key){identity=key;ClearConfirmation();}
             if(cat==null || !state.can_set_shifts || state.closed || state.game_over!=null)panel.SetActive(false);
             Render();RefreshControls();
+            if(CafeBackends.Local is LocalCafeBackend)ConversationUI().Apply(state,this);
         }
         private void Render()
         {

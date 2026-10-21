@@ -135,6 +135,7 @@ namespace CatCafePreview
         private void Show(int i,bool fromList=true)
         {
             if(!MenuAvailable(i))return;
+            if(i==0 && CafeBackends.Standalone){Close();GetComponent<PythonMenuPanel>()?.Close();var visiting=GetComponent<PythonVisitingCatPanel>();visiting.Open();if(GetComponent<CocoConversationPanel>()?.Showing==true)return;}
             if(i==2 && CafeBackends.Standalone && ((CafeBackends.Local as LocalCafeBackend).EquipmentResultPending || CatCafePreview.Standalone.CafeEquipmentDialogue.Supports(current.store_event?.kind))){Close();GetComponent<PythonStoreEventPanel>().Dialogue.OpenPending();return;}
             if(i==1 && CafeBackends.Standalone && (CafeBackends.Local as LocalCafeBackend)?.Conversation?.completed==false){Close();GetComponent<IntakeConversationPanel>()?.Open();return;}
             if(i==7 && CafeBackends.Standalone && (CafeBackends.Local as LocalCafeBackend)?.RegularConversation?.completed==false){Close();GetComponent<RegularConversationPanel>()?.Open();return;}
