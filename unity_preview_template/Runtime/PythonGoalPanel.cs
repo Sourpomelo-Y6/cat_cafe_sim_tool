@@ -17,7 +17,7 @@ namespace CatCafePreview
         public void Apply(PythonCafeState state)
         {
             if(state==null)return;if(instance!=state.instance_id){instance=state.instance_id;showingNext=false;}current=state;online=true;
-            if(Application.isPlaying && CafeBackends.Standalone && (CafeBackends.Local as LocalCafeBackend).ReservationBlocksProgress){panel.SetActive(false);GetComponent<PopularityEndingPanel>()?.Apply(state,this);return;}
+            if(Application.isPlaying && CafeBackends.Standalone && ((CafeBackends.Local as LocalCafeBackend).EquipmentBlocksProgress || (CafeBackends.Local as LocalCafeBackend).ReservationBlocksProgress)){panel.SetActive(false);GetComponent<PopularityEndingPanel>()?.Apply(state,this);return;}
             var result=state.goal_result;
             var next=state.next_goal;
             if(next==null || result!=null)showingNext=false;

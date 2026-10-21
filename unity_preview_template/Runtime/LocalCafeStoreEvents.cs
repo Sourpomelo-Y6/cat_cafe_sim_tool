@@ -19,9 +19,21 @@ namespace CatCafePreview
             var e = Simulation.CurrentStoreEvent; var r = Simulation.Rules.store_events;
             string[] choices = e.type == "trouble" ? new[] { "repair", "patch", "close" } : new[] { "full", "small", "decline" };
             return new PythonStoreEvent { kind = e.type, title = StoreEventLabel(), day = e.day, funds = (float)Simulation.State.funds,
-                choices = choices.Select(c => new PythonEventChoice { choice = c, label = ChoiceLabel(c), can_select = CanPrepare && !(c == "close" && (Simulation.DispatchIntroductionWaiting || Simulation.DispatchTroubleWaiting || Simulation.DispatchWaiting || Simulation.DispatchChoiceWaiting || Simulation.IntakeWaiting || Simulation.RegularIntroductionWaiting || Simulation.CustomerTrustWaiting || Simulation.GrowthWaiting || Simulation.GoalWaiting || Simulation.PatronWaiting || Simulation.BondWaiting || Simulation.PlayerActive || Simulation.ReservationWaiting || Simulation.ReservationVisitToday)),
-                    detail = c == "repair" ? "閉店時に修理費 " + r.trouble_cost : c == "patch" ? "本日は " + Math.Min(Simulation.State.seat_count, r.trouble_seat_loss) + "席を停止" : c == "close" ? "営業せず運営費を精算し翌日へ" : c == "full" ? "今 " + r.support_full_cost + "支出 / 閉店時の人気 +" + r.support_full_popularity : c == "small" ? "今 " + r.support_small_cost + "支出 / 閉店時の人気 +" + r.support_small_popularity : "費用・人気変化なし" }).ToArray() };
+                choices = choices.Select(c => new PythonEventChoice { choice = c, label = ChoiceLabel(c), can_select = StoreChoiceReason(c)=="", reason=StoreChoiceReason(c),
+                    detail = c == "repair" ? "閉店時に修理費 " + r.trouble_cost : c == "patch" ? "本日は " + Math.Min(Simulation.State.seat_count, r.trouble_seat_loss) + "席を停止" : c == "close" ? (DayOffView().can_select ? "支出："+DayOffView().cost+" / 資金："+DayOffView().funds_after+"。"+(DayOffView().ends_game?"精算で経営終了。翌日へ進みません。":DayOffView().day_after+"日目へ（確認待ちで閉店に留まる場合あり）。")+"猫・日程の変化は確認画面で表示します。" : DayOffView().reason) : c == "full" ? "今 " + r.support_full_cost + "支出 / 閉店時の人気 +" + r.support_full_popularity : c == "small" ? "今 " + r.support_small_cost + "支出 / 閉店時の人気 +" + r.support_small_popularity : "費用・人気変化なし" }).ToArray() };
         }
+        private string StoreChoiceReason(string choice)
+        {
+            if(Simulation.State.autoplay?.running==true)return "おまかせを中止してください。";
+            if(EquipmentResultPendingWithoutSync)return "前の設備トラブルの結果会話をイベント一覧から完了してください。";
+            if(choice=="close"){var rest=DayOffView();return rest.can_select?"":rest.reason;}
+            try {
+                var copy=UnityEngine.JsonUtility.FromJson<Standalone.CafeSnapshot>(UnityEngine.JsonUtility.ToJson(Simulation.State));
+                copy.NormalizeJsonStrings();Standalone.CafeDoublePrecision.Restore(copy,Standalone.CafeDoublePrecision.Capture(Simulation.State));
+                var preview=new Standalone.CafeSimulation(Simulation.Rules);preview.Restore(copy);preview.Execute("resolve_store_event",choice:choice);return "";
+            }catch(Exception ex){return ex.Message;}
+        }
+        private bool EquipmentResultPendingWithoutSync=>equipmentConversations.Any(r=>!r.progress.completed && r.progress.branch_id!="introduction");
         private static string ItemEffect(Standalone.CafeSupply item) => (item.fatigue_relief>0 ? "疲労 −"+item.fatigue_relief : "") + (item.fatigue_relief>0 && item.stress_relief>0 ? " / " : "") + (item.stress_relief>0 ? "ストレス −"+item.stress_relief : "");
         private PythonItems SupplyView()
         {

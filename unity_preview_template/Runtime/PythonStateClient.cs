@@ -389,7 +389,7 @@ namespace CatCafePreview
             if(!CanRespondStore(index)) return;
             StopAutomatic();
             pending=new PythonShiftCommand { request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,
-                expected_revision=current.revision,working_cats=new string[0],kind="resolve_store_event",choice=current.store_event.choices[index].choice };
+                expected_revision=current.revision,working_cats=new string[0],kind="resolve_store_event",event_id=current.store_event.kind=="trouble"?CatCafePreview.Standalone.CafeEquipmentDialogue.EventId(current.store_event.day):null,choice=current.store_event.choices[index].choice };
             preview.RefreshPythonControls();
         }
         public bool CanExpandHousing { get { return CanManageSaves && current.housing != null && current.housing.can_expand; } }

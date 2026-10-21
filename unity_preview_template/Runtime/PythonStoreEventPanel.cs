@@ -9,12 +9,14 @@ namespace CatCafePreview
         public Button[] choices;
         public Text[] choiceDetails;
         private string key, prompt;
+        public EquipmentConversationPanel Dialogue=>GetComponent<EquipmentConversationPanel>()??gameObject.AddComponent<EquipmentConversationPanel>();
         public void First() { GetComponent<PythonStateClient>().RespondStore(0); }
         public void Second() { GetComponent<PythonStateClient>().RespondStore(1); }
         public void Third() { GetComponent<PythonStateClient>().RespondStore(2); }
         public void Apply(PythonCafeState state)
         {
             var ev=state.store_event;
+            if(Application.isPlaying && CafeBackends.Standalone && (ev?.kind=="trouble" || (CafeBackends.Local as LocalCafeBackend).EquipmentResultPending)){panel.SetActive(false);Dialogue.Apply(state,this);return;}
             panel.SetActive(ev != null && !string.IsNullOrEmpty(ev.kind));
             if(!panel.activeSelf) return;
             title.text=ev.title;

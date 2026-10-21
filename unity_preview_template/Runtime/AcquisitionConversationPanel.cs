@@ -15,6 +15,12 @@ namespace CatCafePreview
         CanvasGroup catGroup; ScrollRect historyScroll; Vector2 layoutSize; bool layoutHistory;
         static readonly Color Paper=new Color(.99f,.97f,.92f),Ink=new Color(.22f,.26f,.20f),Olive=new Color(.36f,.43f,.31f);
         public ScrollRect HistoryScroll=>historyScroll;
+        Button third;Text thirdEffect;
+        protected virtual bool HasThirdChoice=>false;
+        protected virtual string ThirdCaption=>"";
+        protected virtual string ThirdEffect=>"";
+        protected virtual bool CanThird=>false;
+        protected virtual void SendThird(){}
         Button next,accept,decline,backlog,close; ScrollRect scroll;
         string rendered,epoch; string pageText=""; float revealed; bool history,hidden; int lastFrame=-1;
         protected LocalCafeBackend Backend=>CafeBackends.Local as LocalCafeBackend;
@@ -48,7 +54,7 @@ namespace CatCafePreview
         protected virtual CafeConversationProgress ResolveProgress(){if(regular)Backend.BeginRegularConversation();else Backend.BeginIntakeConversation();return regular?Backend.RegularConversation:Backend.Conversation;}
         protected void Bind(PythonCafeState value,GameObject host,Font textFont){panel=host;font=textFont;ApplyState(value);}
         protected virtual bool CanRaise=>true;
-        protected virtual bool Available=>progress!=null && !progress.completed;
+        protected virtual bool Available=>progress!=null && !progress.completed && (!Backend.EquipmentResultPending || this is EquipmentConversationPanel || this is ReplayConversationPanel);
         protected virtual bool Choosing=>progress.branch_id=="introduction" && progress.node>=Lines(progress.branch_id).Length;
         protected virtual string Title=>regular?"常連からの猫紹介":"保護猫の受け入れ依頼";
         protected virtual string SceneLabel=>state.day+"日目 · 営業準備";
@@ -107,6 +113,7 @@ namespace CatCafePreview
             accept.gameObject.SetActive(choosing && !history);decline.gameObject.SetActive(choosing && !history);
             accept.interactable=ready && CanAnswer(true);decline.interactable=ready && CanAnswer(false);
             accept.GetComponentInChildren<Text>().text=AcceptCaption;decline.GetComponentInChildren<Text>().text=DeclineCaption;
+            if(third!=null){third.gameObject.SetActive(choosing && !history);third.interactable=ready && CanThird;third.GetComponentInChildren<Text>().text=ThirdCaption;thirdEffect.text=ThirdEffect;}
             acceptEffect.text=AcceptEffect;declineEffect.text=DeclineEffect;
             hint.text=BusyNotice;hint.gameObject.SetActive(!ThreeLinePages);
             portrait.texture=PortraitTexture(q.cat_id)??ContentPreview.CatPlaceholderTexture();portrait.enabled=portrait.texture!=null;
@@ -181,6 +188,7 @@ namespace CatCafePreview
             var first=Box(choiceGroup.transform,"Accept choice",0,0,760,170,Paper,12);var second=Box(choiceGroup.transform,"Decline choice",0,184,760,170,Paper,12);
             accept=Button(first.transform,"迎える",16,8,728,()=>Answer(true));decline=Button(second.transform,"見送る",16,8,728,()=>Answer(false));
             acceptEffect=Scroll(first.transform,"Accept effect",20,52,720,110,17,out var a);declineEffect=Scroll(second.transform,"Decline effect",20,52,720,110,17,out var d);
+            if(HasThirdChoice){choices.sizeDelta=new Vector2(760,354);Place(first.GetComponent<RectTransform>(),0,0,760,110);Place(second.GetComponent<RectTransform>(),0,122,760,110);SetScroll(a,720,50);SetScroll(d,720,50);var extra=Box(choiceGroup.transform,"Third choice",0,244,760,110,Paper,12);third=Button(extra.transform,ThirdCaption,16,8,728,()=>{if(Click() && CanThird)SendThird();});thirdEffect=Scroll(extra.transform,"Third effect",20,52,720,50,17,out var t);}
             historyWindow=Box(card.transform,"History Window",96,110,1088,620,Paper,16);Label(historyWindow.transform,"History Title",32,22,900,42,24).text="会話の履歴";
             historyBody=Scroll(historyWindow.transform,"History",32,82,1024,454,21,out historyScroll);historyBody.lineSpacing=1.3f;
             Button(historyWindow.transform,"会話へ戻る",32,558,210,ToggleHistory);historyWindow.SetActive(false);Layout();

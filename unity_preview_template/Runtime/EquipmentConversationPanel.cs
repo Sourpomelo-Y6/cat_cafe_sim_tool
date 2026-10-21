@@ -1,0 +1,38 @@
+using UnityEngine;
+using CatCafePreview.Standalone;
+namespace CatCafePreview {
+ public sealed class EquipmentConversationPanel:AcquisitionConversationPanel {
+  GameObject host;PythonStoreEventPanel owner;
+  CafeEquipmentConversation Row=>Backend.EquipmentConversation;
+  public void Apply(PythonCafeState value,PythonStoreEventPanel original){owner=original;Backend.PrepareEquipmentConversation();if(host==null){host=new GameObject("Equipment Conversation",typeof(RectTransform),typeof(UnityEngine.UI.Image));host.transform.SetParent(owner.panel.transform.parent,false);host.SetActive(false);}Bind(value,host,owner.title.font);if(Showing)owner.panel.SetActive(false);}
+  public bool OpenPending(){Apply(Client.CurrentState,GetComponent<PythonStoreEventPanel>());if(Row==null || Row.progress.completed)return false;Open();return true;}
+  protected override CafeConversationProgress ResolveProgress()=>Row?.progress;
+  protected override bool ThreeLinePages=>true;
+  protected override bool AutoRunning=>false;
+  protected override bool Ready=>base.Ready && GetComponent<PythonDayOffPanel>()?.panel.activeSelf!=true;
+  protected override void SetOpen(bool open){Backend.EquipmentConversationOpen=open;}
+  protected override CafeConversationLine[] Lines(string branch)=>CafeEquipmentDialogue.Lines(Row,branch);
+  protected override PythonIntakeState Request=>new PythonIntakeState{cat_id="",name="設備トラブル",personality=Row.day+"日目の案件",can_decline=true};
+  protected override string Title=>"設備トラブル";
+  protected override string SceneLabel=>Row.event_id+" · "+(progress.branch_id=="introduction"?"回答待ち":"対応確定・結果会話");
+  protected override string ChoicePrompt=>"費用・停止席・休業時の変化を確認して対応を選んでください。休業は確認画面を経て確定します。";
+  PythonEventChoice Option(int index)=>state.store_event?.kind=="trouble" && state.store_event.day==Row.day?state.store_event.choices[index]:null;
+  string Effect(int index){var o=Option(index);return o==null?"回答済みです。":o.detail+(o.can_select?"":"\n選べない理由："+o.reason);}
+  protected override bool CanAnswer(bool yes)=>Client.CanRespondStore(yes?0:1) && Option(yes?0:1)!=null;
+  protected override string AcceptCaption=>"修理";
+  protected override string DeclineCaption=>"応急処置";
+  protected override string AcceptEffect=>Effect(0);
+  protected override string DeclineEffect=>Effect(1);
+  protected override bool HasThirdChoice=>true;
+  protected override string ThirdCaption=>"休業（費用と猫の変化を確認）";
+  protected override string ThirdEffect=>Effect(2);
+  protected override bool CanThird=>Client.CanRespondStore(2) && Option(2)!=null;
+  protected override void SendThird(){Close();GetComponent<PythonDayOffPanel>().Open();}
+  protected override void SendAnswer(bool yes){if(CanAnswer(yes))Client.RespondStore(yes?0:1);}
+  protected override void Finish()=>CafeEquipmentDialogue.Finish(Row);
+  protected override string HistoryPrefix=>progress.branch_id=="introduction"?"":string.Join("\n\n",System.Array.ConvertAll(CafeEquipmentDialogue.Lines(Row,"introduction"),l=>l.text))+"\n\n";
+  protected override string Notice=>Backend.EquipmentConversationReason;
+  protected override string EndText=>"対応は記録済みです。会話を終えると、残る確認待ちへ戻ります。";
+  protected override void AfterClose(){owner.Apply(Client.CurrentState);GetComponent<PythonGrowthPanel>()?.Apply(Client.CurrentState);GetComponent<PythonGoalPanel>()?.Apply(Client.CurrentState);GetComponent<PythonGameOverPanel>()?.Apply(Client.CurrentState);base.AfterClose();}
+ }
+}
