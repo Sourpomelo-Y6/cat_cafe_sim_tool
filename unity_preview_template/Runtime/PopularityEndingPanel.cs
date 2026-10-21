@@ -17,7 +17,7 @@ namespace CatCafePreview
             owner=original;bool nextBond=value.goal_result?.kind=="continue_bond_goal",nextPatron=value.goal_result?.kind=="continue_patron";if(nextBond!=bond || nextPatron!=patron){offered=false;if(host!=null)host.SetActive(false);if(outro!=null)outro.SetActive(false);}bond=nextBond;patron=nextPatron;
             if(host==null){host=new GameObject("Popularity Ending",typeof(RectTransform),typeof(CanvasRenderer),typeof(Image));host.transform.SetParent(owner.panel.transform.parent,false);host.SetActive(false);}
             if(Row==null || !Waiting){host.SetActive(false);if(outro!=null)outro.SetActive(false);offered=false;return;}
-            if(Backend.MissingResultPending || Backend.TrustResultPending || value.growth_choices?.Length>0 || value.required_action!=(patron?"patron_result":bond?"bond_result":"goal_result") || GetComponents<AcquisitionConversationPanel>().Any(p=>p!=this && p.Showing)){host.SetActive(false);if(outro!=null)outro.SetActive(false);return;}
+            if(Backend.ReservationResultPending || Backend.MissingResultPending || Backend.TrustResultPending || value.growth_choices?.Length>0 || value.required_action!=(patron?"patron_result":bond?"bond_result":"goal_result") || GetComponents<AcquisitionConversationPanel>().Any(p=>p!=this && p.Showing)){host.SetActive(false);if(outro!=null)outro.SetActive(false);return;}
             bool first=!offered;offered=true;Bind(value,host,owner.title.font);if(first && !Row.progress.completed)Open();
             if(Row.progress.completed)ShowOutro();else if(Showing)owner.panel.SetActive(false);
         }
@@ -36,7 +36,7 @@ namespace CatCafePreview
         protected override string EndText=>"目標達成、おめでとうございます。\n会話を終えると、継続営業かタイトルへ戻る操作を選べます。";
         protected override void Finish(){CafePopularityEnding.Finish(progress);}
         protected override void AfterClose(){if(Row?.progress.completed==true)ShowOutro();else owner.Apply(Client.CurrentState);GetComponent<ContentPreview>().RefreshPythonControls();}
-        public override void Open(){if(Backend.MissingResultPending){var e=Backend.Simulation.State.missing_cases.First(x=>x.result!=null && !x.result.completed);GetComponent<PythonMissingPanel>().Open(e.cat_id);return;}if(Backend.TrustResultPending){GetComponent<PythonCustomerTrustPanel>()?.Dialogue.OpenPending();return;}base.Open();if(Showing)owner.panel.SetActive(false);}
+        public override void Open(){if(Backend.ReservationResultPending){GetComponent<PythonReservationPanel>()?.Dialogue.OpenPending();return;}if(Backend.MissingResultPending){var e=Backend.Simulation.State.missing_cases.First(x=>x.result!=null && !x.result.completed);GetComponent<PythonMissingPanel>().Open(e.cat_id);return;}if(Backend.TrustResultPending){GetComponent<PythonCustomerTrustPanel>()?.Dialogue.OpenPending();return;}base.Open();if(Showing)owner.panel.SetActive(false);}
         void ShowOutro()
         {
             if(outro==null)

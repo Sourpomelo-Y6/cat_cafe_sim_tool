@@ -8,7 +8,7 @@ namespace CatCafePreview
         public bool ConversationOpen {get;set;}
         public bool RegularConversationOpen {get;set;}
         static bool UnfinishedResult(CafeConversationProgress p)=>p!=null && !p.completed && p.branch_id!="introduction";
-        public bool ConversationBlocksProgress=>MissingBlocksProgress || TrustBlocksProgress || AdoptionConversationOpen || AdoptionResultPending || LodgeConversationOpen || LodgeResultPending || OutcomePending || OpeningPending || PatronEndingPending || BondEndingPending || PopularityEndingPending || ConversationOpen || RegularConversationOpen || DispatchConversationOpen || UnfinishedResult(Conversation) || UnfinishedResult(RegularConversation) || DispatchResultPending || EncounterConversationOpen || EncounterResultPending || DispatchIntroductionConversationOpen || DispatchIntroductionResultPending;
+        public bool ConversationBlocksProgress=>ReservationBlocksProgress || MissingBlocksProgress || TrustBlocksProgress || AdoptionConversationOpen || AdoptionResultPending || LodgeConversationOpen || LodgeResultPending || OutcomePending || OpeningPending || PatronEndingPending || BondEndingPending || PopularityEndingPending || ConversationOpen || RegularConversationOpen || DispatchConversationOpen || UnfinishedResult(Conversation) || UnfinishedResult(RegularConversation) || DispatchResultPending || EncounterConversationOpen || EncounterResultPending || DispatchIntroductionConversationOpen || DispatchIntroductionResultPending;
         public bool IntakeResultPending=>UnfinishedResult(Conversation);
         public bool RegularResultPending=>UnfinishedResult(RegularConversation);
         public string ConversationProgressReason
@@ -22,6 +22,7 @@ namespace CatCafePreview
                 if(DispatchConversationReason!="")reason+="\n"+DispatchConversationReason;
                 if(AdoptionConversationReason!="")reason+="\n"+AdoptionConversationReason;
                 if((TrustBlocksProgress || Simulation.CustomerTrustWaiting) && TrustConversationReason!="")reason+="\n"+TrustConversationReason;
+                if(ReservationConversationReason!="")reason+="\n"+ReservationConversationReason;
                 if(MissingConversationReason!="")reason+="\n"+MissingConversationReason;
                 if(LodgeConversationReason!="")reason+="\n"+LodgeConversationReason;
                 if(EncounterConversationReason!="")reason+="\n"+EncounterConversationReason;
@@ -32,10 +33,10 @@ namespace CatCafePreview
         void SyncConversations()
         {
             var s=Simulation.State;
-            if(conversationEpoch!=s.instance_id){conversation=regularConversation=null;missingSelected=missingPhase=null;MissingConversationOpen=false;RestoreDispatchConversations(null,null);RestoreEncounterConversations(null,null);RestoreLodgeConversations(null,null);RestoreAdoptionConversations(null,null);RestoreTrustConversations(null,null);RestoreDispatchIntroductionConversations(null,null);ConversationOpen=RegularConversationOpen=false;conversationEpoch=s.instance_id;}
+            if(conversationEpoch!=s.instance_id){conversation=regularConversation=null;missingSelected=missingPhase=null;MissingConversationOpen=false;RestoreDispatchConversations(null,null);RestoreEncounterConversations(null,null);RestoreLodgeConversations(null,null);RestoreAdoptionConversations(null,null);RestoreTrustConversations(null,null);RestoreReservationConversations(null,null);RestoreDispatchIntroductionConversations(null,null);ConversationOpen=RegularConversationOpen=false;conversationEpoch=s.instance_id;}
             CafeIntakeConversation.SyncAnswer(conversation,s.intake_request.status);
             CafeRegularConversation.SyncAnswer(regularConversation,s.regular_introduction.status);
-            SyncDispatchConversations();SyncEncounterConversations();SyncLodgeConversations();SyncAdoptionConversations();SyncTrustConversations();SyncMissingConversations();SyncDispatchIntroductionConversations();
+            SyncDispatchConversations();SyncEncounterConversations();SyncLodgeConversations();SyncAdoptionConversations();SyncTrustConversations();SyncReservationConversations();SyncMissingConversations();SyncDispatchIntroductionConversations();
         }
         public CafeConversationProgress Conversation {get{SyncConversations();return conversation;}}
         public CafeConversationProgress RegularConversation {get{SyncConversations();return regularConversation;}}

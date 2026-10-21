@@ -36,7 +36,7 @@ namespace CatCafePreview
         static string Label(PythonGrowthChoice row,string value)=>row.choices?.FirstOrDefault(c=>c.choice==value)?.label ?? "未選択";
         public void Apply(PythonCafeState value)
         {
-            state=value;if(CafeBackends.Standalone && ((CafeBackends.Local as LocalCafeBackend).TrustBlocksProgress || (CafeBackends.Local as LocalCafeBackend).MissingBlocksProgress)){panel.SetActive(false);return;}var rows=state.growth_choices;panel.SetActive(rows!=null && rows.Length>0);if(!panel.activeSelf)return;
+            state=value;if(CafeBackends.Standalone && ((CafeBackends.Local as LocalCafeBackend).ReservationBlocksProgress || (CafeBackends.Local as LocalCafeBackend).TrustBlocksProgress || (CafeBackends.Local as LocalCafeBackend).MissingBlocksProgress)){panel.SetActive(false);return;}var rows=state.growth_choices;panel.SetActive(rows!=null && rows.Length>0);if(!panel.activeSelf)return;
             Controls();var client=GetComponent<PythonStateClient>();client.GrowthRowIndex=Mathf.Clamp(client.GrowthRowIndex,0,rows.Length-1);var ev=rows[client.GrowthRowIndex];
             title.text="営業後の成長確認（"+(client.GrowthRowIndex+1)+" / "+rows.Length+"）  "+ev.name+"："+ev.title;
             details.fontSize=15;details.lineSpacing=1.05f;
