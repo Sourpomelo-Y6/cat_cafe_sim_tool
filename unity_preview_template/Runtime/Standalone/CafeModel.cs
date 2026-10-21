@@ -174,6 +174,7 @@ namespace CatCafePreview.Standalone
         public int challenge_started_day;
         public string objective = "free";
         public List<CafeDispatchUnlock> dispatch_unlocks=new List<CafeDispatchUnlock>();
+        public List<CafeMissingCase> missing_cases=new List<CafeMissingCase>();
         public List<CafeDispatch> dispatches=new List<CafeDispatch>();
         public List<CafeGoalStage> goal = new List<CafeGoalStage>();
         public List<CafeClearRecord> clear_results = new List<CafeClearRecord>();
@@ -193,6 +194,8 @@ namespace CatCafePreview.Standalone
         // Unity JsonUtility materializes JSON null strings as empty strings.
         public void NormalizeJsonStrings()
         {
+            if(missing_cases==null)missing_cases=new List<CafeMissingCase>();
+            foreach(var e in missing_cases){if(e==null)continue;if(string.IsNullOrEmpty(e.notice?.conversation_id))e.notice=null;if(string.IsNullOrEmpty(e.waiting?.conversation_id))e.waiting=null;if(string.IsNullOrEmpty(e.confirmation?.conversation_id))e.confirmation=null;if(string.IsNullOrEmpty(e.result?.conversation_id))e.result=null;}
             if(stamina_growth!=null && stamina_growth.version==0 && stamina_growth.initial==0 && stamina_growth.cap==0 && stamina_growth.increment==0 && stamina_growth.experience_per_stage==0)stamina_growth=null;
             if(import_history!=null && string.IsNullOrEmpty(import_history.base_json))import_history=null;
             if(import_history?.operations!=null)foreach(var operation in import_history.operations)CafeLegacyImport.NormalizeOperation(operation);

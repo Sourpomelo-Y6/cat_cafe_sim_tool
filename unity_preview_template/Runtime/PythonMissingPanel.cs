@@ -22,15 +22,18 @@ namespace CatCafePreview
         private PythonMissingCat[] rows=new PythonMissingCat[0];
         private string signature, selected, instanceId;
         private bool showing;
+        private string offered;
+        public void ShowRecords(){showing=true;Render();}
+        MissingConversationPanel Dialogue=>GetComponent<MissingConversationPanel>()??gameObject.AddComponent<MissingConversationPanel>();
         public void Open(string catId)
         {
             if(!GetComponent<PythonStateClient>().CanManageSaves)return;
-            selected=rows.LastOrDefault(r=>r.cat_id==catId)?.choice;showing=true;
-            GetComponent<PythonCatDetailsPanel>().Close();Render();
+            selected=rows.LastOrDefault(r=>r.cat_id==catId && r.status!="resolved")?.choice ?? rows.LastOrDefault(r=>r.cat_id==catId)?.choice;showing=true;
+            GetComponent<PythonCatDetailsPanel>().Close();Render();if(CafeBackends.Standalone && selected!=null)Dialogue.Begin(selected);
         }
         public void Close() { showing=false;panel.SetActive(false); }
         public void Select(int index)
-        { if(index>=0 && index<rows.Length)selected=rows[index].choice;RenderDetails(); }
+        { if(index>=0 && index<rows.Length)selected=rows[index].choice;RenderDetails();if(CafeBackends.Standalone && selected!=null)Dialogue.Begin(selected); }
         public void Confirm() { if(selected!=null)GetComponent<PythonStateClient>().ResolveMissing(selected); }
         public void Rest() { GetComponent<PythonStateClient>().RestForMissing(); }
         public void Apply(PythonCafeState state)
@@ -47,7 +50,7 @@ namespace CatCafePreview
                 if(active!=null) { selected=active.choice;showing=true;GetComponent<PythonCatDetailsPanel>().Close(); }
             }
             if(rows.Length==0) { if(hadRecords)showing=false;selected=null; }
-            Render();
+            Render();if(CafeBackends.Standalone){var backend=CafeBackends.Local as LocalCafeBackend;var pending=backend.Simulation.State.missing_cases.FirstOrDefault(e=>e.result!=null && !e.result.completed) ?? backend.Simulation.State.missing_cases.FirstOrDefault(e=>e.confirmation!=null && !e.confirmation.completed) ?? backend.Simulation.State.missing_cases.FirstOrDefault(e=>e.notice!=null && !e.notice.completed);string offer=pending==null?null:state.instance_id+"/"+pending.id+"/"+(pending.result!=null?"result":pending.confirmation!=null?"confirmation":"notice");if(offer!=null && offered!=offer){offered=offer;selected=pending.id;Dialogue.Begin(selected);}Dialogue.Apply(state,this);}
         }
         private void Render()
         {
@@ -75,6 +78,7 @@ namespace CatCafePreview
                     +"\n\n"+(row.kitten ? "子猫を連れて帰還しました。引き渡し費用："+row.cost.ToString("0.#")+"\n子猫はカフェの在籍猫には加わりません。" : "子猫の引き渡しはありません。費用：0")
                     +"\n\n帰還時：体力 "+row.max_stamina.ToString("0.#")+" / ストレス "+row.return_stress.ToString("0.#")
                     +"\n体調と疲労は引き継ぎます。出勤設定を確認してください。";
+                if(row.status=="resolved")details.text+="\n精算直後の資金："+row.funds_after.ToString("0.#");
                 if(row.status=="waiting")details.text+="\n確認後の資金："+row.funds_after.ToString("0.#")+(row.funds_after<=0 ? "（資金不足で経営終了）" : "");
                 notice.text=!string.IsNullOrEmpty(row.reason) ? row.reason : row.status=="waiting" ? "帰還待ちの猫を確認すると、営業・翌日への進行を再開できます。" : "帰還と費用は確定済みです。";
             }
@@ -85,7 +89,7 @@ namespace CatCafePreview
             bool ready=GetComponent<PythonStateClient>().CanManageSaves;var row=Array.Find(rows,r=>r.choice==selected);
             confirm.interactable=ready && row!=null && row.can_resolve;cats.interactable=ready && rows.Length>0;
             rest.interactable=ready && row!=null && row.status=="missing" && restState!=null && restState.can_rest;
-            close.interactable=!rows.Any(r=>r.status=="waiting" && r.can_resolve);
+            close.interactable=CafeBackends.Standalone || !rows.Any(r=>r.status=="waiting" && r.can_resolve);
         }
         public void Disconnect()
         { signature=null;rest.interactable=confirm.interactable=cats.interactable=false;close.interactable=true;if(panel.activeSelf)notice.text="Python未接続です。再接続後に帰還を確認できます。"; }

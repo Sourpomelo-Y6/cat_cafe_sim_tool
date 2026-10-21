@@ -59,7 +59,7 @@ namespace CatCafePreview
                 Reject(b, "start_business"); Reject(b, "day_off"); Reject(b, "set_shifts"); Reject(b, "resolve_regular_introduction", "invalid"); Reject(b, "resolve_regular_introduction", choice, "wrong-cat");
                 string pending = Capture(b); var returning = b.Simulation.State.cats[0]; returning.activity = "missing"; returning.missing_remaining = 0;
                 Check(!b.View().regular_introduction.can_decline, "Return did not gate response"); Reject(b, "resolve_regular_introduction", choice);
-                Check(Send(b, "resolve_missing", catId: returning.id).result == UnityWebRequest.Result.Success && b.View().regular_introduction.can_decline, "Return and introduction deadlock");
+                Check(Send(b, "resolve_missing", choice: b.View().missing_cats.Single(e=>e.cat_id==returning.id && e.status=="waiting").choice, catId: returning.id).result == UnityWebRequest.Result.Success && b.View().regular_introduction.can_decline, "Return and introduction deadlock");
                 Good(b, "load_game", slot: 2); Check(Capture(b) == pending, "Pending restore mismatch");
                 double funds = b.Simulation.State.funds; b.Simulation.State.funds = b.Simulation.Rules.regular_introduction.cost;
                 Check(!b.View().regular_introduction.can_accept && b.View().regular_introduction.can_decline, "Poor customer offer cannot be declined"); Reject(b, "resolve_regular_introduction", "accept"); b.Simulation.State.funds = funds;

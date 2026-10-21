@@ -23,7 +23,7 @@ namespace CatCafePreview
         protected override string Title=>entry.title;
         protected override string SceneLabel=>"Extra · 閲覧済みの会話";
         protected override bool Choosing=>false;
-        protected override bool ThreeLinePages=>entry?.conversation_id?.StartsWith(CafeTrustDialogue.Id)==true || entry?.conversation_id?.StartsWith(CafeLodgeDialogue.Id)==true || entry?.conversation_id==CafeDispatchIntroductionDialogue.StudioId || CafeReplayCatalog.IsEnding(entry?.conversation_id) || entry?.conversation_id==CafeOpening.Id;
+        protected override bool ThreeLinePages=>entry?.conversation_id?.StartsWith(CafeMissingDialogue.Id)==true || entry?.conversation_id?.StartsWith(CafeTrustDialogue.Id)==true || entry?.conversation_id?.StartsWith(CafeLodgeDialogue.Id)==true || entry?.conversation_id==CafeDispatchIntroductionDialogue.StudioId || CafeReplayCatalog.IsEnding(entry?.conversation_id) || entry?.conversation_id==CafeOpening.Id;
         protected override CafeConversationProgress ResolveProgress()=>position;
         protected override CafeConversationLine[] Lines(string branch)=>entry.lines;
         protected override PythonIntakeState Request=>new PythonIntakeState{cat_id=entry.cat_id,name=entry.cat_name,personality=entry.personality,can_decline=true};
