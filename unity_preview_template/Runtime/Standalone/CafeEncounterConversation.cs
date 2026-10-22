@@ -14,16 +14,31 @@ namespace CatCafePreview.Standalone
         public const string RestId="dispatch.rest_stop.v1", PhotoId="dispatch.extra_photo_session.v1";
         public const string ExerciseId="dispatch.exercise_program.v1", ReadingId="dispatch.reading_extension.v1";
         public const string ProductId="dispatch.extra_product_trial.v1", ModelId="dispatch.product_model_request.v1";
+        public const string MuseumId="dispatch.museum_visitor_request.v1";
+        public static bool HasItemReward(string id)=>IsProduct(id) || id==MuseumId;
         public static bool IsProduct(string id)=>id==ProductId || id==ModelId;
-        public static bool Supports(CafeDispatch e)=>e!=null && ((e.destination=="cat_product_trial" && (e.encounter?.id=="extra_product_trial" || e.encounter?.id=="product_model_request")) || (e.destination=="cat_exercise_class" && e.encounter?.id=="exercise_program") || (e.destination=="quiet_reading_salon" && e.encounter?.id=="reading_extension") || (e.destination==Destination && e.encounter?.id=="extra_work") || (e.destination=="out_of_town_visit" && e.encounter?.id=="rest_stop") || (e.destination=="cat_photo_studio" && e.encounter?.id=="extra_photo_session"));
-        public static string ConversationId(CafeDispatch e)=>e.destination=="cat_product_trial"?(e.encounter?.id=="extra_product_trial"?ProductId:ModelId):e.destination=="cat_exercise_class"?ExerciseId:e.destination=="quiet_reading_salon"?ReadingId:e.destination=="out_of_town_visit"?RestId:e.destination=="cat_photo_studio"?PhotoId:Id;
+        public static bool Supports(CafeDispatch e)=>e!=null && ((e.destination=="small_art_museum" && e.encounter?.id=="museum_visitor_request") || (e.destination=="cat_product_trial" && (e.encounter?.id=="extra_product_trial" || e.encounter?.id=="product_model_request")) || (e.destination=="cat_exercise_class" && e.encounter?.id=="exercise_program") || (e.destination=="quiet_reading_salon" && e.encounter?.id=="reading_extension") || (e.destination==Destination && e.encounter?.id=="extra_work") || (e.destination=="out_of_town_visit" && e.encounter?.id=="rest_stop") || (e.destination=="cat_photo_studio" && e.encounter?.id=="extra_photo_session"));
+        public static string ConversationId(CafeDispatch e)=>e.destination=="small_art_museum"?MuseumId:e.destination=="cat_product_trial"?(e.encounter?.id=="extra_product_trial"?ProductId:ModelId):e.destination=="cat_exercise_class"?ExerciseId:e.destination=="quiet_reading_salon"?ReadingId:e.destination=="out_of_town_visit"?RestId:e.destination=="cat_photo_studio"?PhotoId:Id;
         public static string FirstChoice(string id)=>id==RestId?"rest":"accept";
         public static string SecondChoice(string id)=>id==RestId?"continue":"decline";
-        public static string Title(string id)=>id==ProductId?"追加の用品体験":id==ModelId?"用品の撮影モデル":id==ExerciseId?"追加の運動":id==ReadingId?"触れ合いの延長":id==RestId?"郊外での休憩":id==PhotoId?"追加撮影":"商店街からの追加のお願い";
+        public static string Title(string id)=>id==MuseumId?"美術館の来館者との交流":id==ProductId?"追加の用品体験":id==ModelId?"用品の撮影モデル":id==ExerciseId?"追加の運動":id==ReadingId?"触れ合いの延長":id==RestId?"郊外での休憩":id==PhotoId?"追加撮影":"商店街からの追加のお願い";
         public static CafeConversationProgress Start(CafeDispatch e){var p=Start();p.conversation_id=ConversationId(e);return p;}
         public static CafeConversationLine[] Lines(string branch,string name,string id)
         {
             if(id==Id)return Lines(branch,name);
+            if(id==MuseumId)
+            {
+                bool accept=branch=="accept";
+                if(branch=="introduction")return new[]{
+                    new CafeConversationLine("",name+"の派遣先の小さな美術館から、来館者との交流について相談が届いた。"),
+                    new CafeConversationLine("美術館担当者","来館者との交流をお願いできますか。引き受けた分のお礼は、帰還時の報酬に加えます。"),
+                    new CafeConversationLine("",name+"の今の状態を確かめ、交流を引き受ける場合と予定どおり終える場合を比べる。"),
+                    new CafeConversationLine("あなた","疲労とストレスの変化も確認して決めましょう。もとの用品報酬は、どちらでも帰還時に受け取るのですね。")};
+                return new[]{
+                    new CafeConversationLine("あなた",accept?"来館者との交流を引き受けます。"+name+"の様子を見ながらお願いします。":"今回は交流を見送ります。予定どおり終えてください。"),
+                    new CafeConversationLine("美術館担当者",accept?"承知しました。交流のお礼は帰還時の金銭報酬にまとめます。":"承知しました。来館者との交流は見送り、もとの予定で終えますね。"),
+                    new CafeConversationLine("",name+(accept?"は来館者との交流を引き受けることになった。":"は来館者との交流を見送り、予定どおり終えることになった。")+"回答による疲労・ストレスの変化は反映済み。金銭と既存の用品報酬は帰還時に受け取る。")};
+            }
             if(IsProduct(id))
             {
                 bool model=id==ModelId, accept=branch=="accept";

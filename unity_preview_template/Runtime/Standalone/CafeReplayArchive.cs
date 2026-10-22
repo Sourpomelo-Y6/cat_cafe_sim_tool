@@ -39,6 +39,7 @@ namespace CatCafePreview.Standalone
             new CafeReplayDefinition(CafeRegularConversation.Id,"accepted","常連からの猫紹介 · 迎える"),new CafeReplayDefinition(CafeRegularConversation.Id,"declined","常連からの猫紹介 · 見送る"),
             new CafeReplayDefinition(CafeDispatchDialogue.Id+".departure","departed","近所のお店への訪問 · 出発する"),new CafeReplayDefinition(CafeDispatchDialogue.Id+".departure","cancelled","近所のお店への訪問 · 今回は出発しない"),
             new CafeReplayDefinition(CafeDispatchDialogue.Id+".travelling","travelling","近所のお店への訪問 · 派遣中"),new CafeReplayDefinition(CafeDispatchDialogue.Id+".return","received","近所のお店への訪問 · 帰還"),
+            new CafeReplayDefinition(CafeEncounterDialogue.MuseumId,"accept","美術館の来館者との交流 · 引き受ける"),new CafeReplayDefinition(CafeEncounterDialogue.MuseumId,"decline","美術館の来館者との交流 · 見送る"),
             new CafeReplayDefinition(CafeEncounterDialogue.ProductId,"accept","追加の用品体験 · 参加する"),new CafeReplayDefinition(CafeEncounterDialogue.ProductId,"decline","追加の用品体験 · 予定どおり終える"),
             new CafeReplayDefinition(CafeEncounterDialogue.ModelId,"accept","用品の撮影モデル · 引き受ける"),new CafeReplayDefinition(CafeEncounterDialogue.ModelId,"decline","用品の撮影モデル · 見送る"),
             new CafeReplayDefinition(CafeEncounterDialogue.ExerciseId,"accept","追加の運動 · 参加する"),new CafeReplayDefinition(CafeEncounterDialogue.ExerciseId,"decline","追加の運動 · 予定どおり終える"),
