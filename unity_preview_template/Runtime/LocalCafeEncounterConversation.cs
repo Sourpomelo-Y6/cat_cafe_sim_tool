@@ -19,7 +19,7 @@ namespace CatCafePreview
             SyncConversations();var ev=Simulation.State.dispatches.FirstOrDefault(e=>e.id==id);
             if(!CafeEncounterDialogue.Supports(ev) || ev.encounter.status=="scheduled")return false;
             var row=encounterConversations.FirstOrDefault(r=>r.event_id==id);
-            if(row==null){if(ev.encounter.status!="waiting")return false;row=new CafeEncounterConversation{event_id=id,progress=CafeEncounterDialogue.Start()};encounterConversations.Add(row);}
+            if(row==null){if(ev.encounter.status!="waiting")return false;row=new CafeEncounterConversation{event_id=id,progress=CafeEncounterDialogue.Start(ev)};encounterConversations.Add(row);}
             if(row.progress.completed)return false;encounterSelected=id;return true;
         }
         public void PrepareEncounterConversation()

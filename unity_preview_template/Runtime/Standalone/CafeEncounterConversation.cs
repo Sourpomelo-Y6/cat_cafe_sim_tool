@@ -11,7 +11,28 @@ namespace CatCafePreview.Standalone
     public static class CafeEncounterDialogue
     {
         public const string Id="dispatch.extra_work.v1",Destination="shopping_street_event";
-        public static bool Supports(CafeDispatch e)=>e?.destination==Destination && e.encounter?.id=="extra_work";
+        public const string RestId="dispatch.rest_stop.v1", PhotoId="dispatch.extra_photo_session.v1";
+        public static bool Supports(CafeDispatch e)=>e!=null && ((e.destination==Destination && e.encounter?.id=="extra_work") || (e.destination=="out_of_town_visit" && e.encounter?.id=="rest_stop") || (e.destination=="cat_photo_studio" && e.encounter?.id=="extra_photo_session"));
+        public static string ConversationId(CafeDispatch e)=>e.destination=="out_of_town_visit"?RestId:e.destination=="cat_photo_studio"?PhotoId:Id;
+        public static string FirstChoice(string id)=>id==RestId?"rest":"accept";
+        public static string SecondChoice(string id)=>id==RestId?"continue":"decline";
+        public static string Title(string id)=>id==RestId?"郊外での休憩":id==PhotoId?"追加撮影":"商店街からの追加のお願い";
+        public static CafeConversationProgress Start(CafeDispatch e){var p=Start();p.conversation_id=ConversationId(e);return p;}
+        public static CafeConversationLine[] Lines(string branch,string name,string id)
+        {
+            if(id==Id)return Lines(branch,name);
+            bool rest=id==RestId, first=branch==FirstChoice(id);
+            string person=rest?"訪問先の担当者":"撮影スタジオの担当者";
+            if(branch=="introduction")return new[]{
+                new CafeConversationLine("",name+"の派遣先から、このあとの予定について連絡が届いた。"),
+                new CafeConversationLine(person,rest?"移動の途中で、休憩を取れます。費用は帰還時の報酬から差し引く形になります。":"予定の撮影に加えて、もう少し撮影を続けていただけますか。追加のお礼は帰還時にお渡しします。"),
+                new CafeConversationLine("",name+"が体の向きを変え、周囲を見渡している。連絡を確かめ、このあとの過ごし方を考える。"),
+                new CafeConversationLine("あなた",rest?"休憩する場合と予定どおり進む場合の報酬や体調の変化を、確認しましょう。":"切り上げる場合にも負担はありますね。どちらの変化も確認して決めましょう。")};
+            return new[]{
+                new CafeConversationLine("あなた",rest?(first?"報酬の一部を使って、休憩をお願いします。":"今回は予定どおり進めてください。"):(first?"追加撮影をお願いします。様子も引き続き見ていてください。":"追加の撮影は断って、ここで切り上げます。")),
+                new CafeConversationLine(person,rest?(first?"承知しました。休憩分は帰還時のお礼から差し引きます。":"承知しました。もとの予定で進めますね。"):(first?"ありがとうございます。追加のお礼は帰還時にまとめますね。":"承知しました。撮影を切り上げて、帰還の準備をしますね。")),
+                new CafeConversationLine("",name+(rest?(first?"は休憩を取ることになった。所持金からの支出はなく、帰還報酬が減額される。":"はもとの予定を続けることになった。"):(first?"は追加の撮影を続けることになった。":"は撮影を切り上げることになった。切り上げる場合の疲労とストレスの変化も反映された。"))+"疲労・ストレスは回答時、報酬は帰還時に反映される。")};
+        }
         public static CafeConversationProgress Start()=>new CafeConversationProgress{conversation_id=Id,branch_id="introduction",viewed_branches=new string[0]};
         public static CafeConversationLine[] Lines(string branch,string name)
         {
@@ -32,13 +53,13 @@ namespace CatCafePreview.Standalone
         public static void Sync(CafeEncounterConversation row,CafeDispatch ev)
         {
             if(ev?.encounter?.status=="resolved" && row.progress.branch_id=="introduction")
-            {row.progress.branch_id=ev.encounter.choice;row.progress.node=0;row.progress.completed=false;}
+            {row.progress.branch_id=ev.encounter.choice;row.progress.node=row.progress.page_offset=0;row.progress.completed=false;}
         }
         public static bool ResultPending(CafeEncounterConversation r)=>r.progress!=null && !r.progress.completed && r.progress.branch_id!="introduction";
         public static void Finish(CafeConversationProgress p)
         {
-            if(p==null || p.branch_id=="introduction" || p.node<Lines(p.branch_id,"").Length)return;
-            p.completed=true;p.viewed_branches=(p.viewed_branches??new string[0]).Concat(new[]{p.branch_id}).Distinct().ToArray();
+            if(p==null || p.branch_id=="introduction" || p.node<Lines(p.branch_id,"",p.conversation_id).Length)return;
+            p.completed=true;p.page_offset=0;p.viewed_branches=(p.viewed_branches??new string[0]).Concat(new[]{p.branch_id}).Distinct().ToArray();
         }
         public static void Validate(CafeEncounterConversation[] rows,string selected,CafeSnapshot state)
         {
@@ -47,7 +68,7 @@ namespace CatCafePreview.Standalone
             foreach(var r in rows)
             {
                 var ev=state.dispatches.SingleOrDefault(e=>e.id==r.event_id);var p=r.progress;
-                if(!Supports(ev) || ev.encounter.status=="scheduled" || p==null || p.conversation_id!=Id || (ev.encounter.status=="waiting"?p.branch_id!="introduction":p.branch_id!=ev.encounter.choice) || p.node<0 || p.node>Lines(p.branch_id,"").Length || p.viewed_branches==null || p.viewed_branches.Distinct().Count()!=p.viewed_branches.Length || p.viewed_branches.Any(b=>b!=p.branch_id || b=="introduction") || p.completed && (p.branch_id=="introduction" || p.node!=Lines(p.branch_id,"").Length || p.viewed_branches.Length!=1) || !p.completed && p.viewed_branches.Length!=0)throw new ArgumentException("派遣中の会話進行が不正です。");
+                if(!Supports(ev) || ev.encounter.status=="scheduled" || p==null || p.conversation_id!=ConversationId(ev) || (ev.encounter.status=="waiting"?p.branch_id!="introduction":p.branch_id!=ev.encounter.choice) || p.node<0 || p.node>Lines(p.branch_id,"",p.conversation_id).Length || p.page_offset<0 || p.node==Lines(p.branch_id,"",p.conversation_id).Length && p.page_offset!=0 || p.node<Lines(p.branch_id,"",p.conversation_id).Length && p.page_offset>Lines(p.branch_id,"",p.conversation_id)[p.node].text.Length+256 || p.viewed_branches==null || p.viewed_branches.Distinct().Count()!=p.viewed_branches.Length || p.viewed_branches.Any(b=>b!=p.branch_id || b=="introduction") || p.completed && (p.branch_id=="introduction" || p.node!=Lines(p.branch_id,"",p.conversation_id).Length || p.viewed_branches.Length!=1) || !p.completed && p.viewed_branches.Length!=0)throw new ArgumentException("派遣中の会話進行が不正です。");
             }
         }
     }
