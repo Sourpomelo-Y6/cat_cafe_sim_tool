@@ -13,6 +13,8 @@ namespace CatCafePreview.Editor
             DispatchConversationVerification.Run();
             int introductions=StandaloneDispatchIntroductionConversationSmoke.BackendChecks(Path.Combine(folder,"introduction-regression"),false);
             File.WriteAllText(Path.Combine(folder,"introduction-regression.txt"),"PASS: "+introductions);
+            File.WriteAllText(Path.Combine(folder,"lodge-regression.txt"),"PASS: "+StandaloneLodgeConversationSmoke.BackendChecks(Path.Combine(folder,"lodge-regression"),false));
+            File.WriteAllText(Path.Combine(folder,"encounter-regression.txt"),"PASS: "+StandaloneEncounterConversationSmoke.BackendChecks(Path.Combine(folder,"encounter-regression"),false));
             StandaloneScreenSetup.Build();
         }
     }

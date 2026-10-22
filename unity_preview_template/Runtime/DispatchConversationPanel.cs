@@ -23,7 +23,7 @@ namespace CatCafePreview
         public void Departure(string cat,string destination=CafeDispatchDialogue.Destination){Backend.BeginDispatchDeparture(cat,destination);Apply(Client.CurrentState,GetComponent<PythonGeneralDispatchPanel>());Open();}
         public bool OpenEvent(string id){if(!Backend.BeginDispatchEvent(id))return false;Apply(Client.CurrentState,GetComponent<PythonGeneralDispatchPanel>());Open();return true;}
         protected override CafeConversationProgress ResolveProgress(){Backend.PrepareDispatchConversation();return Row?.Current;}
-        protected override bool Available=>base.Available && Row!=null && (Event!=null || Row.day==state.day);
+        protected override bool Available=>base.Available && Row!=null && (Event!=null ? !CafeSimulation.DispatchInterrupted(Event) : Row.day==state.day);
         protected override void SetOpen(bool open){Backend.DispatchConversationOpen=open;}
         protected override CafeConversationLine[] Lines(string branch)=>CafeDispatchDialogue.Lines(Row.stage,branch,Backend.Simulation.Definition(Row.cat_id).name,Row.Destination);
         protected override PythonIntakeState Request=>new PythonIntakeState{cat_id=Backend.Details.ContentId(Row.cat_id),name=Backend.Simulation.Definition(Row.cat_id).name,personality=Row.stage=="departure"?CafeDispatchDialogue.Title(Row.Destination):Row.stage=="travelling"?"派遣中 · あと "+(Event?.remaining??0)+"回の閉店":"帰還 · "+(Event?.status=="resolved"?"受取済み":"確認待ち"),can_decline=true};

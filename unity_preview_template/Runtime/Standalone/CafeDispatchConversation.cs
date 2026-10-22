@@ -14,9 +14,9 @@ namespace CatCafePreview.Standalone
     public static class CafeDispatchDialogue
     {
         public const string Destination="neighborhood_visit",Id="dispatch.neighborhood_visit.v1";
-        public static readonly string[] Destinations={Destination,"shopping_street_event","out_of_town_visit","cat_exercise_class","quiet_reading_salon","cat_photo_studio","cat_product_trial"};
+        public static readonly string[] Destinations={Destination,"shopping_street_event","out_of_town_visit","cat_exercise_class","quiet_reading_salon","cat_photo_studio","cat_product_trial","small_art_museum","mountain_lodge_visit"};
         public static bool Supports(string destination)=>Destinations.Contains(destination);
-        public static string Title(string destination)=>destination=="shopping_street_event"?"商店街の交流会":destination=="out_of_town_visit"?"郊外への出張訪問":destination=="cat_exercise_class"?"猫の運動教室":destination=="quiet_reading_salon"?"静かな読書サロン":destination=="cat_photo_studio"?"猫の撮影スタジオ":destination=="cat_product_trial"?"猫用品の体験会":"近所のお店への訪問";
+        public static string Title(string destination)=>destination=="shopping_street_event"?"商店街の交流会":destination=="out_of_town_visit"?"郊外への出張訪問":destination=="cat_exercise_class"?"猫の運動教室":destination=="quiet_reading_salon"?"静かな読書サロン":destination=="cat_photo_studio"?"猫の撮影スタジオ":destination=="cat_product_trial"?"猫用品の体験会":destination=="small_art_museum"?"小さな美術館":destination=="mountain_lodge_visit"?"山あいの宿":"近所のお店への訪問";
         public static string ConversationId(string destination)=>"dispatch."+destination+".v1";
         public static string Key(int day,string cat,string destination)=>"dispatch-"+day+"-"+cat+(destination==Destination?"":":"+destination);
         public static CafeConversationProgress Start(string stage,string destination=Destination)=>new CafeConversationProgress{conversation_id=ConversationId(destination)+"."+stage,branch_id=stage=="travelling"?"travelling":"introduction",viewed_branches=new string[0]};
@@ -24,6 +24,21 @@ namespace CatCafePreview.Standalone
         {
             if(destination!=Destination)
             {
+                if(destination=="small_art_museum" || destination=="mountain_lodge_visit")
+                {
+                    bool museum=destination=="small_art_museum";
+                    string place=Title(destination),contact=museum?"美術館の担当者":"宿の担当者";
+                    var result=Lines(stage,branch,name);
+                    if(stage=="departure" && branch=="introduction")
+                    {
+                        result[1]=new CafeConversationLine(contact,place+"への派遣をお願いできますか。猫の体調と、お店を離れる日程を確かめてから決めてください。");
+                        result[3]=new CafeConversationLine("",museum?"条件・日数・報酬見込みを確かめよう。来館者との交流依頼は、別の途中選択で回答する。":"条件・日数・報酬見込みを確かめよう。派遣中に家出が発生した場合は派遣が中断され、専用の相談で対応する。");
+                    }
+                    if(stage=="travelling")result[1]=new CafeConversationLine("あなた",museum?"来館者との交流依頼は、イベント一覧の『派遣中の選択』で確認しましょう。留守の間も営業の準備を進められます。":"宿でのトラブルは、イベント一覧の『山あいの宿・トラブル対応』で確認しましょう。現在の日程は派遣の記録に従います。");
+                    if(stage=="return" && branch=="introduction")result[2]=new CafeConversationLine("あなた",museum?"来館者との交流への回答を反映した確定金銭と、既存の用品報酬を確認します。ここで回答をやり直す必要はありません。":"通常の日程を終えた記録ですね。確定報酬と、この子の帰還時の状態を確認します。");
+                    if(stage=="return" && branch=="received")result[2]=new CafeConversationLine("","確定した報酬と派遣経験は受け取り済みだ。用品の有無は受取内容に従う。営業準備で次の予定を確認しよう。");
+                    return result.Select(l=>new CafeConversationLine(l.speaker=="お店の人"?contact:l.speaker,l.text.Replace("近所のお店への訪問",place).Replace("近所のお店",place))).ToArray();
+                }
                 if(destination=="cat_exercise_class" || destination=="quiet_reading_salon" || destination=="cat_photo_studio" || destination=="cat_product_trial")
                 {
                     bool exercise=destination=="cat_exercise_class",studio=destination=="cat_photo_studio",product=destination=="cat_product_trial";
@@ -86,7 +101,7 @@ namespace CatCafePreview.Standalone
         }
         public static void Sync(CafeDispatchConversation row,CafeDispatch ev)
         {
-            if(ev==null)return;
+            if(ev==null || CafeSimulation.DispatchInterrupted(ev))return;
             if(row.departure?.branch_id=="introduction"){row.departure.branch_id="departed";row.departure.node=row.departure.page_offset=0;row.departure.completed=false;}
             if(ev.status=="resolved" && row.returning?.branch_id=="introduction"){row.returning.branch_id="received";row.returning.node=row.returning.page_offset=0;}
             if(ev.status=="waiting" && row.departure?.completed!=false){row.returning=row.returning??Start("return",row.Destination);row.stage="return";}
@@ -118,7 +133,7 @@ namespace CatCafePreview.Standalone
             invalid|=p.page_offset<0 || p.node==lines.Length && p.page_offset!=0 || p.node>=0 && p.node<lines.Length && p.page_offset>lines[p.node].text.Length+256;
             if(!invalid)invalid=p.viewed_branches.Distinct().Count()!=p.viewed_branches.Length || p.viewed_branches.Any(b=>!completed.Contains(b)) || p.completed && (p.branch_id=="introduction" || p.node!=Lines(stage,p.branch_id,"").Length || !p.viewed_branches.Contains(p.branch_id)) || !p.completed && p.viewed_branches.Any(b=>b!="cancelled");
             if(stage=="departure")invalid|=ev==null?p.branch_id=="departed" || (p.viewed_branches??new string[0]).Contains("departed"):p.branch_id!="departed";
-            if(stage=="return")invalid|=ev==null || ev.status=="travelling" || (ev.status=="resolved"?p.branch_id!="received":p.branch_id!="introduction");
+            if(stage=="return")invalid|=ev==null || CafeSimulation.DispatchInterrupted(ev) || ev.status=="travelling" || (ev.status=="resolved"?p.branch_id!="received":p.branch_id!="introduction");
             if(stage=="travelling")invalid|=ev==null;
             if(invalid)throw new ArgumentException("派遣会話の保存進行が不正です。");
         }

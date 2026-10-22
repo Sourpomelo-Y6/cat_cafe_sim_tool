@@ -22,6 +22,14 @@ namespace CatCafePreview.Standalone
     {
         public static bool IsEnding(string id)=>id==CafeOutcome.Id || id==CafePopularityEnding.Id || id==CafeBondEnding.Id || id==CafePatronEnding.Id;
         public static readonly CafeReplayDefinition[] All={
+            new CafeReplayDefinition("dispatch.small_art_museum.v1.departure","departed","小さな美術館 · 出発"),
+            new CafeReplayDefinition("dispatch.small_art_museum.v1.departure","cancelled","小さな美術館 · 今回は出発しない"),
+            new CafeReplayDefinition("dispatch.small_art_museum.v1.travelling","travelling","小さな美術館 · 派遣中"),
+            new CafeReplayDefinition("dispatch.small_art_museum.v1.return","received","小さな美術館 · 通常帰還"),
+            new CafeReplayDefinition("dispatch.mountain_lodge_visit.v1.departure","departed","山あいの宿 · 出発"),
+            new CafeReplayDefinition("dispatch.mountain_lodge_visit.v1.departure","cancelled","山あいの宿 · 今回は出発しない"),
+            new CafeReplayDefinition("dispatch.mountain_lodge_visit.v1.travelling","travelling","山あいの宿 · 派遣中"),
+            new CafeReplayDefinition("dispatch.mountain_lodge_visit.v1.return","received","山あいの宿 · 通常帰還"),
             new CafeReplayDefinition("dispatch.cat_photo_studio.v1.departure","departed","猫の撮影スタジオ · 出発"),
             new CafeReplayDefinition("dispatch.cat_photo_studio.v1.departure","cancelled","猫の撮影スタジオ · 今回は出発しない"),
             new CafeReplayDefinition("dispatch.cat_photo_studio.v1.travelling","travelling","猫の撮影スタジオ · 派遣中"),

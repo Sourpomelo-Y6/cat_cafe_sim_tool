@@ -27,7 +27,7 @@ namespace CatCafePreview
         }
         public bool BeginDispatchEvent(string id)
         {
-            SyncConversations();var ev=Simulation.State.dispatches.FirstOrDefault(e=>e.id==id && CafeDispatchDialogue.Supports(e.destination));if(ev==null)return false;
+            SyncConversations();var ev=Simulation.State.dispatches.FirstOrDefault(e=>e.id==id && CafeDispatchDialogue.Supports(e.destination));if(ev==null || CafeSimulation.DispatchInterrupted(ev))return false;
             var row=dispatchConversations.FirstOrDefault(r=>r.DispatchId==id && r.Destination==ev.destination);
             if(row==null){if(ev.status=="resolved")return false;row=new CafeDispatchConversation{event_id=CafeDispatchDialogue.Key(ev.started_day,ev.cat_id,ev.destination),destination=ev.destination,cat_id=ev.cat_id,day=ev.started_day};dispatchConversations.Add(row);}
             if(row.departure!=null && !row.departure.completed && row.departure.branch_id=="departed")row.stage="departure";
@@ -41,8 +41,8 @@ namespace CatCafePreview
         {
             var rows=DispatchConversations;var pending=rows.FirstOrDefault(CafeDispatchDialogue.ResultPending);
             if(pending!=null){dispatchSelected=pending.event_id;pending.stage=pending.departure!=null && !pending.departure.completed && pending.departure.branch_id!="introduction"?"departure":"return";return;}
-            var waiting=Simulation.State.dispatches.FirstOrDefault(e=>CafeDispatchDialogue.Supports(e.destination) && e.status=="waiting");if(waiting!=null){BeginDispatchEvent(waiting.id);return;}
-            var current=DispatchConversation;if(current?.Current?.completed==false && (Simulation.State.dispatches.Any(e=>e.id==current.DispatchId && e.destination==current.Destination) || current.day==Simulation.State.day))return;
+            var waiting=Simulation.State.dispatches.FirstOrDefault(e=>CafeDispatchDialogue.Supports(e.destination) && e.status=="waiting" && !CafeSimulation.DispatchInterrupted(e));if(waiting!=null){BeginDispatchEvent(waiting.id);return;}
+            var current=DispatchConversation;if(current?.Current?.completed==false && (Simulation.State.dispatches.Any(e=>e.id==current.DispatchId && e.destination==current.Destination && !CafeSimulation.DispatchInterrupted(e)) || current.day==Simulation.State.day))return;
 
         }
         void RestoreDispatchConversations(CafeDispatchConversation[] rows,string selected){dispatchConversations=(rows??new CafeDispatchConversation[0]).ToList();dispatchSelected=selected;DispatchConversationOpen=false;}
