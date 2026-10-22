@@ -156,3 +156,8 @@ Latestの増加は20,341 bytes、Build領域全体は2,855,164 bytes増（主に
 証跡：`capacity-start.json`／`capacity-end.json`、`core-result.txt`、`Editor/result.txt`（107）、`Editor/introduction-regression.txt`（37）、`Player/result-first-success.txt`（186）、`Player/result-restart-success.txt`（214）、`Player/result.txt`（最終214）、各playerログ、`manual-cancel-1280.json`／`manual-out-received-1024.json`、`NearbyPlayerRegression/result.txt`（47）。既存近所Editor313は `Logs/StandaloneDispatchConversation/Editor/result.json`。最終ビルドログは `Logs/StandaloneBuild/Runs/20261022-162351-805-e52cbfa72650454bb64ae750a164bcd6.log`。
 
 残る範囲は通常往復6か所、有力者3人の往復、全猫・全解像度・全イベント組み合わせの網羅、予定の会話追加後の総合確認と長期バランス評価。今回の2か所と共通化の必要な回帰に限定し、全目標の長期通し確認は行っていない。上位共有DocsのDevelopmentStatus／EventConversationInventoryは更新したが、ツールGit外のためコミット対象外。既存の画像関連・rules／presentation・LocalCafeBackend・猫描写関連の未コミット変更は含めず、今回の17ファイルだけをコミットする。
+
+
+## 2026-10-23：運動教室・読書サロンの追加
+
+通常往復を5/9か所へ拡張。商店街・郊外で共通化した進行を再利用し、途中選択の既存IDと既読記録を保持する。[今回の本文・仕様・互換・検証・容量・残課題](UnityExerciseReadingRoundTripConversation.md)を参照。過去の記録中の残り件数は当時の状態。残る通常往復は撮影スタジオ・用品体験会・美術館・山あいの宿の4か所。

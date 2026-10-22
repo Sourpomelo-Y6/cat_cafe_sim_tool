@@ -22,6 +22,14 @@ namespace CatCafePreview.Standalone
     {
         public static bool IsEnding(string id)=>id==CafeOutcome.Id || id==CafePopularityEnding.Id || id==CafeBondEnding.Id || id==CafePatronEnding.Id;
         public static readonly CafeReplayDefinition[] All={
+            new CafeReplayDefinition("dispatch.cat_exercise_class.v1.departure","departed","猫の運動教室 · 出発"),
+            new CafeReplayDefinition("dispatch.cat_exercise_class.v1.departure","cancelled","猫の運動教室 · 今回は出発しない"),
+            new CafeReplayDefinition("dispatch.cat_exercise_class.v1.travelling","travelling","猫の運動教室 · 派遣中"),
+            new CafeReplayDefinition("dispatch.cat_exercise_class.v1.return","received","猫の運動教室 · 帰還"),
+            new CafeReplayDefinition("dispatch.quiet_reading_salon.v1.departure","departed","静かな読書サロン · 出発"),
+            new CafeReplayDefinition("dispatch.quiet_reading_salon.v1.departure","cancelled","静かな読書サロン · 今回は出発しない"),
+            new CafeReplayDefinition("dispatch.quiet_reading_salon.v1.travelling","travelling","静かな読書サロン · 派遣中"),
+            new CafeReplayDefinition("dispatch.quiet_reading_salon.v1.return","received","静かな読書サロン · 帰還"),
             new CafeReplayDefinition("dispatch.shopping_street_event.v1.departure","departed","商店街の交流会 · 出発"),
             new CafeReplayDefinition("dispatch.shopping_street_event.v1.departure","cancelled","商店街の交流会 · 今回は出発しない"),
             new CafeReplayDefinition("dispatch.shopping_street_event.v1.travelling","travelling","商店街の交流会 · 派遣中"),

@@ -14,6 +14,8 @@ namespace CatCafePreview
     {
         static readonly BindingFlags Hidden=BindingFlags.NonPublic|BindingFlags.Instance;
         static int checks;
+        static readonly string[] TestedDestinations={"shopping_street_event","out_of_town_visit","cat_exercise_class","quiet_reading_salon"};
+        static string Cat(string destination)=>destination=="shopping_street_event"?"cat-mike":destination=="cat_exercise_class"?"cat-sora":destination=="quiet_reading_salon"?"cat-kohaku":"cat-tama";
         string output;LocalCafeBackend backend;
         static void Check(bool ok,string label){checks++;if(!ok)throw new Exception(label);}
         static LocalCafeBackend Create(string folder)=>StandaloneEncounterConversationSmoke.Create(folder);
@@ -26,9 +28,9 @@ namespace CatCafePreview
         public static int BackendChecks(string folder,bool restart)
         {
             checks=0;
-            foreach(string destination in new[]{"shopping_street_event","out_of_town_visit"})foreach(string branch in destination=="shopping_street_event"?new[]{"accept","decline"}:new[]{"rest","continue"})
+            foreach(string destination in TestedDestinations)foreach(string branch in destination=="out_of_town_visit"?new[]{"rest","continue"}:new[]{"accept","decline"})
             {
-                string path=Path.Combine(folder,destination,branch),cat=destination=="shopping_street_event"?"cat-mike":"cat-tama";var b=Create(path);
+                string path=Path.Combine(folder,destination,branch),cat=Cat(destination);var b=Create(path);
                 if(restart)foreach(int slot in new[]{1,2,3,4,5,6,7}){Good(b,"load_game",slot:slot);Check(b.DispatchConversation!=null,"Process restart lost conversation");}
                 Good(b,"new_game","free");b.BeginDispatchDeparture(cat,destination);var row=b.DispatchConversation;row.Current.node=1;Good(b,"save_game",slot:1);Good(b,"load_game",slot:1);Check(b.DispatchConversation.Current.node==1,"Departure resume");
                 row=b.DispatchConversation;row.Current.branch_id="cancelled";Finish(b);Good(b,"save_game",slot:2);Check(b.Simulation.State.dispatches.Count==0 && row.departure.viewed_branches.SequenceEqual(new[]{"cancelled"}),"Cancel side effects");
@@ -44,6 +46,12 @@ namespace CatCafePreview
                 if(b.Simulation.IntakeWaiting)Good(b,"resolve_intake","decline");
                 b.BeginDispatchDeparture(cat,destination);Good(b,"dispatch_general",destination,cat:cat);Check(b.DispatchConversations.Count(r=>r.Destination==destination)==2,"Repeat trip overwrote history");
             }
+            var addedMulti=Create(Path.Combine(folder,"added-multiple"));Good(addedMulti,"new_game","free");
+            foreach(string destination in new[]{"cat_exercise_class","quiet_reading_salon"}){addedMulti.BeginDispatchDeparture(Cat(destination),destination);Good(addedMulti,"dispatch_general",destination,cat:Cat(destination));Finish(addedMulti);}
+            Good(addedMulti,"day_off");foreach(var e in addedMulti.Simulation.State.dispatches.ToArray())Good(addedMulti,"resolve_dispatch_choice","decline",e.id);
+            Good(addedMulti,"day_off");Check(addedMulti.Simulation.State.dispatches.Count(e=>e.status=="waiting")==2,"Added simultaneous returns absent");
+            foreach(int index in new[]{0,1}){addedMulti.PrepareDispatchConversation();string id=addedMulti.DispatchConversation.DispatchId;Good(addedMulti,"receive_general",id);Check(addedMulti.DispatchResultPending,"Added receipt result absent");Finish(addedMulti);}
+            Check(!addedMulti.Simulation.DispatchWaiting && addedMulti.Simulation.State.growth.Where(g=>g.cat_id=="cat-sora" || g.cat_id=="cat-kohaku").All(g=>g.dispatch==1),"Added multiple receipts duplicated or stranded");
             var multi=Create(Path.Combine(folder,"multiple"));Good(multi,"new_game","free");foreach(var pair in new[]{new[]{"cat-mike","shopping_street_event"},new[]{"cat-tama","out_of_town_visit"}}){multi.BeginDispatchDeparture(pair[0],pair[1]);Good(multi,"dispatch_general",pair[1],cat:pair[0]);Finish(multi);}Good(multi,"day_off");foreach(var ev in multi.Simulation.State.dispatches.ToArray())Good(multi,"resolve_dispatch_choice",ev.destination=="shopping_street_event"?"decline":"continue",ev.id);Good(multi,"day_off");multi.PrepareDispatchConversation();string first=multi.DispatchConversation.DispatchId;Good(multi,"receive_general",first);Finish(multi);Check(multi.Simulation.DispatchIntroductionWaiting,"First introduction lost");Good(multi,"resolve_dispatch_introduction","decline",first,cat:multi.Simulation.State.dispatches.Single(e=>e.id==first).introduction.cat_id);Good(multi,"day_off");multi.PrepareDispatchConversation();Check(multi.DispatchConversation.DispatchId!=first && multi.Simulation.DispatchWaiting,"Multiple returns stranded");Good(multi,"receive_general",multi.DispatchConversation.DispatchId);Finish(multi);Check(!multi.DispatchResultPending && !multi.Simulation.DispatchWaiting && !multi.Simulation.DispatchIntroductionWaiting,"Multiple returns released wrong work");
             var simultaneous=Create(Path.Combine(folder,"simultaneous"));Good(simultaneous,"new_game","free");simultaneous.BeginDispatchDeparture("cat-tama","out_of_town_visit");Good(simultaneous,"dispatch_general","out_of_town_visit",cat:"cat-tama");Finish(simultaneous);string outside=simultaneous.Simulation.State.dispatches.Single().id;Good(simultaneous,"day_off");Good(simultaneous,"resolve_dispatch_choice","continue",outside);
             simultaneous.BeginDispatchDeparture("cat-mike","shopping_street_event");Good(simultaneous,"dispatch_general","shopping_street_event");Finish(simultaneous);string streetId=simultaneous.Simulation.State.dispatches.Last().id;Good(simultaneous,"day_off");Good(simultaneous,"resolve_dispatch_choice","decline",streetId);Good(simultaneous,"day_off");Check(simultaneous.Simulation.State.dispatches.Count(e=>e.status=="waiting")==2,"Simultaneous returns absent");
@@ -62,10 +70,10 @@ namespace CatCafePreview
         {
             SceneManager.LoadScene("CatCafePythonState");yield return new WaitForSecondsRealtime(2);
             var client=FindObjectOfType<PythonStateClient>();var owner=client.GetComponent<PythonGeneralDispatchPanel>();var ui=owner.Dialogue;
-            foreach(string destination in new[]{"shopping_street_event","out_of_town_visit"})foreach(bool yes in new[]{true,false})
+            foreach(string destination in TestedDestinations)foreach(bool yes in new[]{true,false})
             {
                 backend=Create(Path.Combine(output,"ui-"+destination+yes));CafeBackends.UseLocal(backend);Good(backend,"new_game","free");Apply(client);yield return null;
-                string cat=destination=="shopping_street_event"?"cat-mike":"cat-tama";
+                string cat=Cat(destination);
                 owner.OpenOption(cat,destination);owner.Send();yield return null;Check(ui.Showing && backend.DispatchConversation.Destination==destination && !owner.panel.activeSelf,"Destination UI routing failed");
                 backend.DispatchConversation.Current.node=4;Apply(client);yield return null;
                 var accept=ui.Panel.GetComponentsInChildren<Button>(true).Single(x=>x.name=="迎える");var c=backend.Simulation.State.cats.Single(x=>x.id==cat);double fatigue=c.fatigue;c.fatigue=100;Apply(client);Check(!accept.interactable,"Insufficient condition accepted");c.fatigue=fatigue;Apply(client);yield return null;
@@ -85,7 +93,7 @@ namespace CatCafePreview
                 Check(client.GetComponent<PythonGrowthPanel>().panel.activeSelf,"Growth did not resume after receipt");Good(backend,"resolve_growth_auto");Apply(client);yield return null;
                 if(destination=="shopping_street_event"){var intro=client.GetComponent<PythonDispatchIntroductionPanel>();intro.Open();yield return null;Check(intro.Dialogue.Showing,"Existing introduction cannot open after result");intro.Close();}
             }
-            backend=Create(Path.Combine(output,"manual"));if(Environment.GetCommandLineArgs().Contains("--round-trip-manual-load"))Good(backend,"load_game",slot:8);else {Good(backend,"new_game","free");backend.BeginDispatchDeparture("cat-mike","shopping_street_event");backend.DispatchConversation.Current.node=4;Good(backend,"save_game",slot:1);}CafeBackends.UseLocal(backend);Apply(client);yield return null;Check(ui.Showing,"Manual ADV absent");File.WriteAllText(Path.Combine(output,"result.txt"),"PASS: "+checks+" backend + Player startup checks");
+            backend=Create(Path.Combine(output,"manual"));if(Environment.GetCommandLineArgs().Contains("--round-trip-manual-load"))Good(backend,"load_game",slot:8);else {Good(backend,"new_game","free");backend.BeginDispatchDeparture("cat-sora","cat_exercise_class");backend.DispatchConversation.Current.node=4;Good(backend,"save_game",slot:1);}CafeBackends.UseLocal(backend);Apply(client);yield return null;Check(ui.Showing,"Manual ADV absent");File.WriteAllText(Path.Combine(output,"result.txt"),"PASS: "+checks+" backend + Player startup checks");
         }
     }
 }
