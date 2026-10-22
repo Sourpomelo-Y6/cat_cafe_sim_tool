@@ -15,18 +15,18 @@ namespace CatCafePreview
     {
         static readonly BindingFlags Hidden=BindingFlags.NonPublic|BindingFlags.Instance;
         string output;int checks;LocalCafeBackend backend;bool completed,failed;readonly List<string> errors=new List<string>();
-        public static CafeRules Rules(){var r=JsonUtility.FromJson<CafeRules>(Resources.Load<TextAsset>("CatCafeStandalone/rules").text);r.store_events.probability=0;r.dispatch_unlocks=r.dispatch_unlocks.Where(u=>u.id!=CafeEncounterDialogue.Destination && u.id!="out_of_town_visit" && u.id!="cat_photo_studio").ToArray();return r;}
+        public static CafeRules Rules(){var r=JsonUtility.FromJson<CafeRules>(Resources.Load<TextAsset>("CatCafeStandalone/rules").text);r.store_events.probability=0;r.dispatch_unlocks=r.dispatch_unlocks.Where(u=>u.id!=CafeEncounterDialogue.Destination && u.id!="out_of_town_visit" && u.id!="cat_photo_studio" && u.id!="cat_exercise_class" && u.id!="quiet_reading_salon").ToArray();r.cats.Single(c=>c.id=="cat-sora").trait_id="hardy";return r;}
         public static LocalCafeBackend Create(string path)=>new LocalCafeBackend(path,Rules());
         public static void Good(LocalCafeBackend b,string kind,string choice=null,string id=null,int slot=1)
         {var reply=Send(b,kind,choice,id,slot);if(reply.result!=UnityWebRequest.Result.Success)throw new Exception(kind+": "+reply.error);}
         public static CafeResponse Send(LocalCafeBackend b,string kind,string choice=null,string id=null,int slot=1)=>StandaloneDispatchConversationSmoke.Raw(b,Payload(b,kind,choice,id,slot));
-        static string Payload(LocalCafeBackend b,string kind,string choice,string id,int slot)=>JsonUtility.ToJson(new PythonShiftCommand{kind=kind,choice=choice,event_id=id,cat_id=kind=="receive_general"?b.Simulation.State.dispatches.Single(e=>e.id==choice).cat_id:kind=="dispatch_general" && choice=="out_of_town_visit"?"cat-tama":"cat-mike",save_id=slot.ToString(),save_slot=slot,instance_id=b.Simulation.State.instance_id,expected_revision=b.Simulation.State.revision,request_id=Guid.NewGuid().ToString("N")});
+        static string Payload(LocalCafeBackend b,string kind,string choice,string id,int slot)=>JsonUtility.ToJson(new PythonShiftCommand{kind=kind,choice=choice,event_id=id,cat_id=kind=="receive_general"?b.Simulation.State.dispatches.Single(e=>e.id==choice).cat_id:kind=="dispatch_general" && choice=="cat_exercise_class"?"cat-sora":kind=="dispatch_general" && choice=="quiet_reading_salon"?"cat-kohaku":kind=="dispatch_general" && choice=="out_of_town_visit"?"cat-tama":"cat-mike",save_id=slot.ToString(),save_slot=slot,instance_id=b.Simulation.State.instance_id,expected_revision=b.Simulation.State.revision,request_id=Guid.NewGuid().ToString("N")});
         public static string Setup(LocalCafeBackend b,string destination=CafeEncounterDialogue.Destination)
         {Good(b,"new_game","free");Good(b,"dispatch_general",destination);Good(b,"day_off");string id=b.Simulation.State.dispatches.Single().id;if(!b.BeginEncounterConversation(id))throw new Exception("Encounter not started");return id;}
         public static int BackendChecks(string folder,bool restart)
         {
             int n=0;Action<bool,string> check=(ok,label)=>{n++;if(!ok)throw new Exception(label);};
-            foreach(string destination in new[]{CafeEncounterDialogue.Destination,"out_of_town_visit","cat_photo_studio"})
+            foreach(string destination in new[]{CafeEncounterDialogue.Destination,"out_of_town_visit","cat_photo_studio","cat_exercise_class","quiet_reading_salon"})
             foreach(string branch in destination=="out_of_town_visit"?new[]{"rest","continue"}:new[]{"accept","decline"})
             {
                 var b=Create(Path.Combine(folder,destination,branch));
@@ -66,7 +66,7 @@ namespace CatCafePreview
             ui.Answer(true);ui.Answer(false);yield return new WaitForSecondsRealtime(1);Check(backend.EncounterConversation.progress.branch_id=="accept" && !client.CanDayOff,"UI repeated answer changed result");ui.Close();client.GetComponent<PythonEventListPanel>().ShowMenu(11);Check(ui.Showing && client.GetComponent<PythonEventListPanel>().PendingFor(11)>0,"Result stranded");
             ui.Panel.GetComponentsInChildren<Button>(true).Single(b=>b.name=="バックログ").onClick.Invoke();yield return null;Canvas.ForceUpdateCanvases();Check(ui.HistoryScroll.content.rect.height>=ui.HistoryScroll.content.GetComponent<Text>().preferredHeight-1,"History clipped");ui.HistoryScroll.verticalNormalizedPosition=0;yield return null;ui.Panel.GetComponentsInChildren<Button>(true).Single(b=>b.name=="バックログ").onClick.Invoke();yield return null;
             backend.EncounterConversation.progress.node=3;Apply(client);yield return null;ui.Next();yield return null;Check(!ui.Showing && !backend.EncounterResultPending && !client.Automatic,"Finish auto resumed or pending");
-            foreach(string destination in new[]{"out_of_town_visit","cat_photo_studio"})foreach(bool yes in new[]{true,false})
+            foreach(string destination in new[]{"out_of_town_visit","cat_photo_studio","cat_exercise_class","quiet_reading_salon"})foreach(bool yes in new[]{true,false})
             {
                 backend=Create(Path.Combine(output,"ui-"+destination+yes));CafeBackends.UseLocal(backend);id=Setup(backend,destination);Apply(client);yield return null;
                 Check(ui.Showing && !owner.panel.activeSelf,"New event missing or overlapping");ui.Close();client.GetComponent<PythonEventListPanel>().ShowMenu(11);Check(ui.Showing,"New event list resume failed");
@@ -77,7 +77,7 @@ namespace CatCafePreview
                 Check(backend.EncounterConversation.progress.branch_id==(yes?CafeEncounterDialogue.FirstChoice(cid):CafeEncounterDialogue.SecondChoice(cid)),"New event answer mapping or repeat failed");
                 ui.Close();client.GetComponent<PythonEventListPanel>().ShowMenu(11);Check(ui.Showing,"New result list resume failed");backend.EncounterConversation.progress.node=3;Apply(client);yield return null;ui.Next();yield return null;Check(!ui.Showing && !backend.EncounterResultPending,"New result stuck");
             }
-            string manual=Path.Combine(output,"manual");backend=Create(manual);if(Environment.GetCommandLineArgs().Contains("--encounter-manual-load"))Good(backend,"load_game",slot:8);else {Setup(backend,Environment.GetCommandLineArgs().Contains("--encounter-photo")?"cat_photo_studio":"out_of_town_visit");backend.EncounterConversation.progress.node=4;Good(backend,"save_game",slot:2);}CafeBackends.UseLocal(backend);Apply(client);yield return null;
+            string manual=Path.Combine(output,"manual");backend=Create(manual);if(Environment.GetCommandLineArgs().Contains("--encounter-manual-load"))Good(backend,"load_game",slot:8);else {Setup(backend,Environment.GetCommandLineArgs().Contains("--encounter-exercise")?"cat_exercise_class":Environment.GetCommandLineArgs().Contains("--encounter-reading")?"quiet_reading_salon":Environment.GetCommandLineArgs().Contains("--encounter-photo")?"cat_photo_studio":"out_of_town_visit");backend.EncounterConversation.progress.node=4;Good(backend,"save_game",slot:2);}CafeBackends.UseLocal(backend);Apply(client);yield return null;
             completed=true;File.WriteAllText(Path.Combine(output,"result.txt"),"PASS: "+checks+" encounter checks; zero Unity errors.");
         }
     }

@@ -178,13 +178,14 @@ static partial class Program
     }
     static void EncounterConversationChecks(CafeRules defaults)
     {
-        foreach(string destination in new[]{CafeEncounterDialogue.Destination,"out_of_town_visit","cat_photo_studio"})
+        foreach(string destination in new[]{CafeEncounterDialogue.Destination,"out_of_town_visit","cat_photo_studio","cat_exercise_class","quiet_reading_salon"})
         foreach(bool first in new[]{true,false})
         foreach(bool high in new[]{true,false})
         {
             var rules=Decode<CafeRules>(Encode(defaults));rules.store_events.probability=0;
             rules.dispatch_unlocks=rules.dispatch_unlocks.Where(r=>r.id!=destination).ToArray();
-            var sim=new CafeSimulation(rules);sim.Execute("dispatch_general",catId:destination=="out_of_town_visit"?"cat-tama":"cat-mike",choice:destination);sim.Execute("day_off");
+            if(destination=="cat_exercise_class")rules.cats.Single(c=>c.id=="cat-sora").trait_id="hardy";
+            var sim=new CafeSimulation(rules);sim.Execute("dispatch_general",catId:destination=="cat_exercise_class"?"cat-sora":destination=="quiet_reading_salon"?"cat-kohaku":destination=="out_of_town_visit"?"cat-tama":"cat-mike",choice:destination);sim.Execute("day_off");
             var ev=sim.State.dispatches.Single();var row=new CafeEncounterConversation{event_id=ev.id,progress=CafeEncounterDialogue.Start(ev)};var rows=new[]{row};
             string cid=row.progress.conversation_id,branch=first?CafeEncounterDialogue.FirstChoice(cid):CafeEncounterDialogue.SecondChoice(cid);
             var cat=sim.State.cats.Single(c=>c.id==ev.cat_id);cat.fatigue=high?98:2;cat.stress=high?99:2;
@@ -199,20 +200,32 @@ static partial class Program
             for(int i=0;i<=CafeEncounterDialogue.Lines(branch,"",cid).Length;i++)
             {row.progress.node=i;var save=Decode<CafeSaveEnvelope>(Encode(new CafeSaveEnvelope{state=sim.State,encounter_conversations=rows}));sim.Restore(save.state);CafeEncounterDialogue.Validate(save.encounter_conversations,ev.id,sim.State);Assert(save.encounter_conversations[0].progress.branch_id==branch,"Encounter result lost");}
             state=Encode(sim.State);CafeEncounterDialogue.Finish(row.progress);CafeEncounterDialogue.Finish(row.progress);CafeEncounterDialogue.Validate(rows,ev.id,sim.State);Assert(CafeReplayCatalog.FromSave(new CafeSaveEnvelope{state=sim.State,encounter_conversations=rows},rules,id=>id,id=>id,id=>id).Single().lines.Length==7,"Encounter replay script incomplete");Assert(row.progress.completed && row.progress.viewed_branches.Length==1,"Encounter viewed duplicate");
+            if(cid==CafeEncounterDialogue.ExerciseId || cid==CafeEncounterDialogue.ReadingId) {
+            // A second dispatch for the same cat must own a fresh introduction.
+            var returned=sim.State.dispatches.Single();while(returned.remaining>0)sim.Execute("day_off");
+            double receipt=sim.State.funds,amount=sim.DispatchReceivedReward(returned);sim.Execute("resolve_activity",source:returned.id,choice:"receive");
+            Assert(sim.State.funds==receipt+amount,"Encounter return reward differs");
+            double paid=sim.State.funds;try{sim.Execute("resolve_activity",source:returned.id,choice:"receive");}catch(ArgumentException){}Assert(sim.State.funds==paid,"Repeated return paid twice");
+            cat=sim.State.cats.Single(c=>c.id==returned.cat_id);cat.fatigue=0;cat.stress=0;
+            sim.Execute("dispatch_general",catId:returned.cat_id,choice:destination);sim.Execute("day_off");
+            var next=sim.State.dispatches.Single(e=>e.id!=returned.id);var nextRow=new CafeEncounterConversation{event_id=next.id,progress=CafeEncounterDialogue.Start(next)};
+            CafeEncounterDialogue.Validate(new[]{row,nextRow},next.id,sim.State);Assert(nextRow.progress.branch_id=="introduction" && nextRow.event_id!=row.event_id,"Same cat later dispatch mixed");
+            state=Encode(sim.State);
+            }
             Assert(state==Encode(sim.State),"Replay mutated game");CafeEncounterDialogue.Validate(null,null,sim.State);row.progress.node=99;bool rejected=false;try{CafeEncounterDialogue.Validate(rows,ev.id,sim.State);}catch(ArgumentException){rejected=true;}Assert(rejected,"Invalid encounter node accepted");
         }
     }
     static void EncounterOrderChecks(CafeRules defaults)
     {
-        var r=Decode<CafeRules>(Encode(defaults));r.store_events.probability=0;r.dispatch_unlocks=r.dispatch_unlocks.Where(u=>u.id!=CafeEncounterDialogue.Destination && u.id!="out_of_town_visit").ToArray();
-        var sim=new CafeSimulation(r);sim.Execute("dispatch_general",catId:"cat-mike",choice:CafeEncounterDialogue.Destination);sim.Execute("dispatch_general",catId:"cat-tama",choice:"out_of_town_visit");sim.Execute("day_off");
-        Assert(sim.State.dispatches.Count(e=>e.encounter?.status=="waiting")==2,"Overlap fixture absent");var ev=sim.State.dispatches.Single(e=>e.cat_id=="cat-mike");var other=sim.State.dispatches.Single(e=>e.cat_id=="cat-tama");
+        var r=Decode<CafeRules>(Encode(defaults));r.store_events.probability=0;r.cats.Single(c=>c.id=="cat-sora").trait_id="hardy";r.dispatch_unlocks=r.dispatch_unlocks.Where(u=>u.id!="cat_exercise_class" && u.id!="quiet_reading_salon").ToArray();
+        var sim=new CafeSimulation(r);sim.Execute("dispatch_general",catId:"cat-sora",choice:"cat_exercise_class");sim.Execute("dispatch_general",catId:"cat-kohaku",choice:"quiet_reading_salon");sim.Execute("day_off");
+        Assert(sim.State.dispatches.Count(e=>e.encounter?.status=="waiting")==2,"Overlap fixture absent");var ev=sim.State.dispatches.Single(e=>e.cat_id=="cat-sora");var other=sim.State.dispatches.Single(e=>e.cat_id=="cat-kohaku");
         var rows=new[]{new CafeEncounterConversation{event_id=ev.id,progress=CafeEncounterDialogue.Start(ev)},new CafeEncounterConversation{event_id=other.id,progress=CafeEncounterDialogue.Start(other)}};
         CafeEncounterDialogue.Validate(rows,other.id,sim.State);
         Assert(sim.DispatchChoiceReason(ev.id,"accept")=="","Other encounter changed existing answer order");sim.State.phase="open";Assert(sim.DispatchChoiceReason(ev.id,"accept")!="","Open phase allowed response");sim.State.phase="preparation";
-        var cat=sim.State.cats.Single(c=>c.id==ev.cat_id);cat.fatigue=98;cat.stress=99;sim.Execute("resolve_dispatch_choice",source:ev.id,choice:"accept");Assert(cat.fatigue==r.max_fatigue && cat.stress==100,"Effect clamp changed");
-        Assert(other.encounter.status=="waiting" && sim.DispatchChoiceWaiting,"First answer consumed another event");Rejected(()=>sim.Execute("day_off"));sim.Execute("resolve_dispatch_choice",source:other.id,choice:"rest");Assert(!sim.DispatchChoiceWaiting,"Other encounter no longer answerable");
-        foreach(var row in rows)CafeEncounterDialogue.Sync(row,sim.State.dispatches.Single(e=>e.id==row.event_id));CafeEncounterDialogue.Validate(rows,other.id,sim.State);Assert(rows[0].progress.branch_id=="accept" && rows[1].progress.branch_id=="rest" && rows[0].progress.conversation_id!=rows[1].progress.conversation_id,"Multiple cases mixed");
+        var cat=sim.State.cats.Single(c=>c.id==ev.cat_id);cat.fatigue=98;cat.stress=99;sim.Execute("resolve_dispatch_choice",source:ev.id,choice:"accept");Assert(cat.fatigue==r.max_fatigue && cat.stress==99,"Effect clamp changed");
+        Assert(other.encounter.status=="waiting" && sim.DispatchChoiceWaiting,"First answer consumed another event");Rejected(()=>sim.Execute("day_off"));sim.Execute("resolve_dispatch_choice",source:other.id,choice:"decline");Assert(!sim.DispatchChoiceWaiting,"Other encounter no longer answerable");
+        foreach(var row in rows)CafeEncounterDialogue.Sync(row,sim.State.dispatches.Single(e=>e.id==row.event_id));CafeEncounterDialogue.Validate(rows,other.id,sim.State);Assert(rows[0].progress.branch_id=="accept" && rows[1].progress.branch_id=="decline" && rows[0].progress.conversation_id!=rows[1].progress.conversation_id,"Multiple cases mixed");
     }
     static void DayOffProgressChecks(CafeRules defaults)
     {

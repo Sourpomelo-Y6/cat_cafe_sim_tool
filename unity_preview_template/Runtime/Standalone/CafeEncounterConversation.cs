@@ -12,15 +12,30 @@ namespace CatCafePreview.Standalone
     {
         public const string Id="dispatch.extra_work.v1",Destination="shopping_street_event";
         public const string RestId="dispatch.rest_stop.v1", PhotoId="dispatch.extra_photo_session.v1";
-        public static bool Supports(CafeDispatch e)=>e!=null && ((e.destination==Destination && e.encounter?.id=="extra_work") || (e.destination=="out_of_town_visit" && e.encounter?.id=="rest_stop") || (e.destination=="cat_photo_studio" && e.encounter?.id=="extra_photo_session"));
-        public static string ConversationId(CafeDispatch e)=>e.destination=="out_of_town_visit"?RestId:e.destination=="cat_photo_studio"?PhotoId:Id;
+        public const string ExerciseId="dispatch.exercise_program.v1", ReadingId="dispatch.reading_extension.v1";
+        public static bool Supports(CafeDispatch e)=>e!=null && ((e.destination=="cat_exercise_class" && e.encounter?.id=="exercise_program") || (e.destination=="quiet_reading_salon" && e.encounter?.id=="reading_extension") || (e.destination==Destination && e.encounter?.id=="extra_work") || (e.destination=="out_of_town_visit" && e.encounter?.id=="rest_stop") || (e.destination=="cat_photo_studio" && e.encounter?.id=="extra_photo_session"));
+        public static string ConversationId(CafeDispatch e)=>e.destination=="cat_exercise_class"?ExerciseId:e.destination=="quiet_reading_salon"?ReadingId:e.destination=="out_of_town_visit"?RestId:e.destination=="cat_photo_studio"?PhotoId:Id;
         public static string FirstChoice(string id)=>id==RestId?"rest":"accept";
         public static string SecondChoice(string id)=>id==RestId?"continue":"decline";
-        public static string Title(string id)=>id==RestId?"郊外での休憩":id==PhotoId?"追加撮影":"商店街からの追加のお願い";
+        public static string Title(string id)=>id==ExerciseId?"追加の運動":id==ReadingId?"触れ合いの延長":id==RestId?"郊外での休憩":id==PhotoId?"追加撮影":"商店街からの追加のお願い";
         public static CafeConversationProgress Start(CafeDispatch e){var p=Start();p.conversation_id=ConversationId(e);return p;}
         public static CafeConversationLine[] Lines(string branch,string name,string id)
         {
             if(id==Id)return Lines(branch,name);
+            if(id==ExerciseId || id==ReadingId)
+            {
+                bool exercise=id==ExerciseId, accept=branch=="accept";
+                string activity=exercise?"追加の運動":"触れ合いの延長", contact=exercise?"運動教室担当":"サロン担当者";
+                if(branch=="introduction")return new[]{
+                    new CafeConversationLine("",name+"の派遣先から、"+activity+"について相談が届いた。"),
+                    new CafeConversationLine(contact,exercise?"予定のプログラムのあとに、追加の運動に参加できます。参加分のお礼は帰還時にお渡しします。":"予定の時間のあとも、触れ合いを延長していただけますか。延長分のお礼は帰還時にお渡しします。"),
+                    new CafeConversationLine("",name+"の今の状態を確かめ、参加する場合と予定どおり終える場合を比べる。"),
+                    new CafeConversationLine("あなた","報酬だけでなく、疲労とストレスの変化も確認して決めましょう。")};
+                return new[]{
+                    new CafeConversationLine("あなた",accept?activity+"に参加します。"+name+"の様子を見ながらお願いします。":"今回は予定どおり終えてください。"),
+                    new CafeConversationLine(contact,accept?"承知しました。参加分のお礼は帰還時にまとめます。":"承知しました。追加分には参加せず、もとの予定で終えますね。"),
+                    new CafeConversationLine("",name+(accept?"は"+activity+"に参加することになった。":"は追加分には参加せず、予定どおり終えることになった。")+"回答による疲労・ストレスの変化は反映済み。報酬は帰還時に受け取る。")};
+            }
             bool rest=id==RestId, first=branch==FirstChoice(id);
             string person=rest?"訪問先の担当者":"撮影スタジオの担当者";
             if(branch=="introduction")return new[]{

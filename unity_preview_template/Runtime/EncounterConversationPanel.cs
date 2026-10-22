@@ -22,6 +22,7 @@ namespace CatCafePreview
         protected override CafeConversationLine[] Lines(string branch)=>CafeEncounterDialogue.Lines(branch,Event.label,progress.conversation_id);
         protected override PythonIntakeState Request=>new PythonIntakeState{cat_id=Backend.Details.ContentId(Event.cat_id),name=Event.label,personality=Title+" · 派遣中",can_decline=true};
         protected override bool CanAnswer(bool yes)=>Option(yes)?.can_select==true && Client.CanRespondDispatchChoice(Row.event_id,yes?CafeEncounterDialogue.FirstChoice(progress.conversation_id):CafeEncounterDialogue.SecondChoice(progress.conversation_id));
+        protected override bool ThreeLinePages=>progress?.conversation_id==CafeEncounterDialogue.ExerciseId || progress?.conversation_id==CafeEncounterDialogue.ReadingId;
         protected override string Title=>CafeEncounterDialogue.Title(progress.conversation_id);
         protected override string SceneLabel=>state.day+"日目 · "+(progress.branch_id=="introduction"?"派遣中の相談":"回答済み · "+Event.selected_label);
         protected override string ChoicePrompt=>"猫の状態と両方の効果を確認して選んでください。";
