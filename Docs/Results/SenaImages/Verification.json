@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-21",
+  "cat_id": "intro-shopping_street_event",
+  "name": "セナ",
+  "status": "completed",
+  "tool": "built-in image_gen",
+  "selected_png_count": 27,
+  "retained_candidate_png_count": 0,
+  "scene_keys": 52,
+  "narrative_bindings": 32,
+  "python_tests": {
+    "total": 31,
+    "passed": 28,
+    "skipped": 3,
+    "note": "Import path corrected; simplified core compatibility fixed and all 4 unity_player tests passed on rerun"
+  },
+  "actual_dispatch_admission_appearance_save_reload": true,
+  "photo_first_sena_second_mapping": true,
+  "unity_reaction_cases": 40,
+  "unity_normal_sleep_roster": true,
+  "unity_special_resources": true,
+  "unity_admission_save_reload": true,
+  "unity_log": "Logs/CatDailyImages/20261021/unity.log",
+  "visual_qa": "All 27 selected images and four Unity screenshots reviewed; blue eyes, white long coat, slender face/body and action composition confirmed",
+  "selected_png_bytes": 58633278,
+  "retained_source_png_bytes": 58633278,
+  "registered_png_bytes_each": 58633278,
+  "build_performed": false,
+  "capacity_before": {
+    "latest_bytes": 8630202196,
+    "runs_bytes": 73746986,
+    "generated_bytes": 3277372585
+  },
+  "capacity_after": {
+    "latest_bytes": 8630202196,
+    "runs_bytes": 73746986,
+    "generated_bytes": 3277372585
+  },
+  "runtime_mapping": {
+    "dispatch-rescue-1 or later": "intro-shopping_street_event via event destination; not a fixed runtime ID"
+  }
+}

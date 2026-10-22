@@ -1,0 +1,218 @@
+[
+  {
+    "scene": "normal",
+    "file": "sena-normal.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-6f184b8b-fa12-4c88-a0c1-bc6f88c639da.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim identity illustration of a NEW cat SENA. Input reference CHIRO is ONLY style and room; create a distinct individual. Adult pure WHITE LONGHAIR, slim elegant medium-small body, long slender legs, narrow oval face with tapered muzzle, tall triangular tufted ears. BOTH eyes clear sapphire BLUE, almond-shaped. Pink nose, white facial fur without patches or stripes. Silky long white coat, modest chest ruff, very long slender plume tail gently curved sideways with a pointed feathery end. Distinct from Chiro's round golden eyes, rounded broad face and thick curled tail. Curious but gently cautious playful-sensitive expression. Sitting, ENTIRE cat and tail in frame with margins. Same fine softly painted storybook fur, cream wall honey wood floor sage green mat warm diffuse light. One anatomically correct cat, no text UI watermark props humans.",
+    "reference": "../ChiroImages/chiro-normal.png",
+    "reference_role": "style_and_room"
+  },
+  {
+    "scene": "teaser",
+    "file": "sena-teaser.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-006a2d8a-2407-4e42-b16e-2ebbe2bda9ab.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is SENA exact identity and style. Adult pure WHITE LONGHAIR, slim elegant body, slender legs, narrow oval face tapered muzzle, tall tufted triangular ears. BOTH eyes sapphire BLUE almond shaped, pink nose. Pure white silky long fur, modest chest ruff, very long white feathery plume tail with tapered end. No patches stripes dark fur or collar. Same fine softly painted storybook style, cream wall honey wood floor sage green mat warm diffuse light. Entire cat and tail visible with margins. One anatomically correct cat, no text UI watermark human face. Basic attentive play: one hand at edge holds feather teaser near cat. Cat reaches one forepaw toward feather, sapphire blue eyes open, gentle calm engagement.",
+    "reference": "sena-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball",
+    "file": "sena-ball.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-1c9afa71-6050-42b5-bf50-c93952b0f0a0.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is SENA exact identity and style. Adult pure WHITE LONGHAIR, slim elegant body, slender legs, narrow oval face tapered muzzle, tall tufted triangular ears. BOTH eyes sapphire BLUE almond shaped, pink nose. Pure white silky long fur, modest chest ruff, very long white feathery plume tail with tapered end. No patches stripes dark fur or collar. Same fine softly painted storybook style, cream wall honey wood floor sage green mat warm diffuse light. Entire cat and tail visible with margins. One anatomically correct cat, no text UI watermark human face. Basic play: crouches and gently touches small blue toy ball on mat with one paw, attentive open sapphire blue eyes. No humans or other toys.",
+    "reference": "sena-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush",
+    "file": "sena-plush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-d5974b00-1fb0-424a-a7ff-5fea11f74c55.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is SENA exact identity and style. Adult pure WHITE LONGHAIR, slim elegant body, slender legs, narrow oval face tapered muzzle, tall tufted triangular ears. BOTH eyes sapphire BLUE almond shaped, pink nose. Pure white silky long fur, modest chest ruff, very long white feathery plume tail with tapered end. No patches stripes dark fur or collar. Same fine softly painted storybook style, cream wall honey wood floor sage green mat warm diffuse light. Entire cat and tail visible with margins. One anatomically correct cat, no text UI watermark human face. Basic play: holds small plain beige fabric mouse toy between front paws, calmly sniffing, sapphire blue eyes open. No humans or other toys.",
+    "reference": "sena-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel",
+    "file": "sena-tunnel.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-135cb0bf-f042-47cf-af11-287c37f0aa92.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is SENA exact identity and style. Adult pure WHITE LONGHAIR, slim elegant body, slender legs, narrow oval face tapered muzzle, tall tufted triangular ears. BOTH eyes sapphire BLUE almond shaped, pink nose. Pure white silky long fur, modest chest ruff, very long white feathery plume tail with tapered end. No patches stripes dark fur or collar. Same fine softly painted storybook style, cream wall honey wood floor sage green mat warm diffuse light. Entire cat and tail visible with margins. One anatomically correct cat, no text UI watermark human face. Basic play: crouches just inside short beige fabric cat tunnel, head front paws and tail fully visible at entrance, eyes open curious gentle expression. No humans or other toys.",
+    "reference": "sena-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet",
+    "file": "sena-pet.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-4585b4cf-6b4c-4118-9f8b-235a97b8db70.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is SENA exact identity and style. Adult pure WHITE LONGHAIR, slim elegant body, slender legs, narrow oval face tapered muzzle, tall tufted triangular ears. BOTH eyes sapphire BLUE almond shaped, pink nose. Pure white silky long fur, modest chest ruff, very long white feathery plume tail with tapered end. No patches stripes dark fur or collar. Same fine softly painted storybook style, cream wall honey wood floor sage green mat warm diffuse light. Entire cat and tail visible with margins. One anatomically correct cat, no text UI watermark human face. Basic petting: one human hand gently strokes forehead, cat relaxed and attentive, sapphire blue eyes open. No toys.",
+    "reference": "sena-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush",
+    "file": "sena-brush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-a44185e6-41c8-4973-966e-9593a55296c3.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is SENA exact identity and style. Adult pure WHITE LONGHAIR, slim elegant body, slender legs, narrow oval face tapered muzzle, tall tufted triangular ears. BOTH eyes sapphire BLUE almond shaped, pink nose. Pure white silky long fur, modest chest ruff, very long white feathery plume tail with tapered end. No patches stripes dark fur or collar. Same fine softly painted storybook style, cream wall honey wood floor sage green mat warm diffuse light. Entire cat and tail visible with margins. One anatomically correct cat, no text UI watermark human face. Basic brushing: one human hand uses wooden pet brush on shoulder, bristles contact SHORT fur, cat calmly stands with eyes open. No other props.",
+    "reference": "sena-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice",
+    "file": "sena-voice.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-dba7085c-1ba6-4971-adce-08d18b105b0e.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is SENA exact identity and style. Adult pure WHITE LONGHAIR, slim elegant body, slender legs, narrow oval face tapered muzzle, tall tufted triangular ears. BOTH eyes sapphire BLUE almond shaped, pink nose. Pure white silky long fur, modest chest ruff, very long white feathery plume tail with tapered end. No patches stripes dark fur or collar. Same fine softly painted storybook style, cream wall honey wood floor sage green mat warm diffuse light. Entire cat and tail visible with margins. One anatomically correct cat, no text UI watermark human face. Basic voice interaction: sits calmly, ears turn toward viewer listening, sapphire blue eyes open, mouth closed. No human hands knees speech bubbles or props.",
+    "reference": "sena-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence",
+    "file": "sena-presence.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-fedd8383-0534-4ab6-a05e-be4b6741292a.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is SENA exact identity and style. Adult pure WHITE LONGHAIR, slim elegant body, slender legs, narrow oval face tapered muzzle, tall tufted triangular ears. BOTH eyes sapphire BLUE almond shaped, pink nose. Pure white silky long fur, modest chest ruff, very long white feathery plume tail with tapered end. No patches stripes dark fur or collar. Same fine softly painted storybook style, cream wall honey wood floor sage green mat warm diffuse light. Entire cat and tail visible with margins. One anatomically correct cat, no text UI watermark human face. Basic companionship: cat loafs calmly, sapphire blue eyes open, only part of blue clothed knee at lower edge. No hands or toys.",
+    "reference": "sena-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pause",
+    "file": "sena-pause.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-cf2cf760-3c34-4d85-851c-272bef90416e.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is SENA exact identity and style. Adult pure WHITE LONGHAIR, slim elegant body, slender legs, narrow oval face tapered muzzle, tall tufted triangular ears. BOTH eyes sapphire BLUE almond shaped, pink nose. Pure white silky long fur, modest chest ruff, very long white feathery plume tail with tapered end. No patches stripes dark fur or collar. Same fine softly painted storybook style, cream wall honey wood floor sage green mat warm diffuse light. Entire cat and tail visible with margins. One anatomically correct cat, no text UI watermark human face. Pause/wait: cat calmly sits, forepaws planted, eyes open, feather teaser lies completely still on mat at safe distance. No hands.",
+    "reference": "sena-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "sleep",
+    "file": "sena-sleep.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-a8d2a67c-07f2-4df5-a364-1bc43d130f0d.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is SENA exact identity and style. Adult pure WHITE LONGHAIR, slim elegant body, slender legs, narrow oval face tapered muzzle, tall tufted triangular ears. BOTH eyes sapphire BLUE almond shaped, pink nose. Pure white silky long fur, modest chest ruff, very long white feathery plume tail with tapered end. No patches stripes dark fur or collar. Same fine softly painted storybook style, cream wall honey wood floor sage green mat warm diffuse light. Entire cat and tail visible with margins. One anatomically correct cat, no text UI watermark human face. Sleep: cat curled into a relaxed ball sleeping, eyes closed, head on front paws, slim striped tail around body. No humans or toys.",
+    "reference": "sena-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "teaser__open_up",
+    "file": "sena-teaser__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-b63916bc-3f20-4686-9d46-ce9bff1ec27e.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is SENA exact identity and style. Adult pure WHITE LONGHAIR, slim elegant body, slender legs, narrow oval face tapered muzzle, tall tufted triangular ears. BOTH eyes sapphire BLUE almond shaped, pink nose. Pure white silky long fur, modest chest ruff, very long white feathery plume tail with tapered end. No patches stripes dark fur or collar. Same fine softly painted storybook style, cream wall honey wood floor sage green mat warm diffuse light. Entire cat and tail visible with margins. One anatomically correct cat, no text UI watermark human face. Special deep trust playing with feather teaser: one hand holds feather close; cat leans toward viewer, eyes soft half closed, paw reaches gently. Relaxed ears.",
+    "reference": "sena-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "teaser__simultaneous",
+    "file": "sena-teaser__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-967792d4-3320-4a23-94f9-805869e909a8.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is SENA exact identity and style. Adult pure WHITE LONGHAIR, slim elegant body, slender legs, narrow oval face tapered muzzle, tall tufted triangular ears. BOTH eyes sapphire BLUE almond shaped, pink nose. Pure white silky long fur, modest chest ruff, very long white feathery plume tail with tapered end. No patches stripes dark fur or collar. Same fine softly painted storybook style, cream wall honey wood floor sage green mat warm diffuse light. Entire cat and tail visible with margins. One anatomically correct cat, no text UI watermark human face. Special excited and deeply trusting play: joyfully bats feather teaser held by one edge hand, ears forward bright sapphire blue eyes, lifted paw, confident happy posture. No aggressive expression.",
+    "reference": "sena-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball__open_up",
+    "file": "sena-ball__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-0a30503b-7d95-42b0-8865-2bc7f4c6c673.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is SENA exact identity and style. Adult pure WHITE LONGHAIR, slim elegant body, slender legs, narrow oval face tapered muzzle, tall tufted triangular ears. BOTH eyes sapphire BLUE almond shaped, pink nose. Pure white silky long fur, modest chest ruff, very long white feathery plume tail with tapered end. No patches stripes dark fur or collar. Same fine softly painted storybook style, cream wall honey wood floor sage green mat warm diffuse light. Entire cat and tail visible with margins. One anatomically correct cat, no text UI watermark human face. Special deep trust: relaxed on side beside small blue ball, paw resting on ball, head tipped affectionately toward viewer, soft half closed eyes. No humans.",
+    "reference": "sena-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball__simultaneous",
+    "file": "sena-ball__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-28750132-7fd7-4797-9f1f-176fa5f19f2b.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is SENA exact identity and style. Adult pure WHITE LONGHAIR, slim elegant body, slender legs, narrow oval face tapered muzzle, tall tufted triangular ears. BOTH eyes sapphire BLUE almond shaped, pink nose. Pure white silky long fur, modest chest ruff, very long white feathery plume tail with tapered end. No patches stripes dark fur or collar. Same fine softly painted storybook style, cream wall honey wood floor sage green mat warm diffuse light. Entire cat and tail visible with margins. One anatomically correct cat, no text UI watermark human face. Special excited and trusting: playfully hugs small blue ball between forepaws, crouched with confident happy energy, bright sapphire blue eyes. No humans or other toys.",
+    "reference": "sena-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush__open_up",
+    "file": "sena-plush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-881edf9a-df05-4c5d-8a0f-eea280b8f00b.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is SENA exact identity and style. Adult pure WHITE LONGHAIR, slim elegant body, slender legs, narrow oval face tapered muzzle, tall tufted triangular ears. BOTH eyes sapphire BLUE almond shaped, pink nose. Pure white silky long fur, modest chest ruff, very long white feathery plume tail with tapered end. No patches stripes dark fur or collar. Same fine softly painted storybook style, cream wall honey wood floor sage green mat warm diffuse light. Entire cat and tail visible with margins. One anatomically correct cat, no text UI watermark human face. Special deep trust: hugs small beige mouse plush and rests cheek on toy, soft half closed sapphire blue eyes, affectionate expression toward viewer. No humans.",
+    "reference": "sena-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush__simultaneous",
+    "file": "sena-plush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-23b14b3f-3001-4adf-9836-84b7f88062c4.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is SENA exact identity and style. Adult pure WHITE LONGHAIR, slim elegant body, slender legs, narrow oval face tapered muzzle, tall tufted triangular ears. BOTH eyes sapphire BLUE almond shaped, pink nose. Pure white silky long fur, modest chest ruff, very long white feathery plume tail with tapered end. No patches stripes dark fur or collar. Same fine softly painted storybook style, cream wall honey wood floor sage green mat warm diffuse light. Entire cat and tail visible with margins. One anatomically correct cat, no text UI watermark human face. Special excited and trusting: joyfully rolls slightly on side hugging small beige mouse plush with front paws, bright sapphire blue eyes, relaxed ears and happy posture. No humans.",
+    "reference": "sena-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel__open_up",
+    "file": "sena-tunnel__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-3a4c93f7-9c3b-4d4e-9d3c-4aa8dffb4af9.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is SENA exact identity and style. Adult pure WHITE LONGHAIR, slim elegant body, slender legs, narrow oval face tapered muzzle, tall tufted triangular ears. BOTH eyes sapphire BLUE almond shaped, pink nose. Pure white silky long fur, modest chest ruff, very long white feathery plume tail with tapered end. No patches stripes dark fur or collar. Same fine softly painted storybook style, cream wall honey wood floor sage green mat warm diffuse light. Entire cat and tail visible with margins. One anatomically correct cat, no text UI watermark human face. Special deep trust: relaxed at short beige fabric tunnel entrance, chin on rim, soft half closed sapphire blue eyes toward viewer, tail visible outside. No humans.",
+    "reference": "sena-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel__simultaneous",
+    "file": "sena-tunnel__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-08dbc73d-9b67-4fc5-a107-a23ee5d9a611.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is SENA exact identity and style. Adult pure WHITE LONGHAIR, slim elegant body, slender legs, narrow oval face tapered muzzle, tall tufted triangular ears. BOTH eyes sapphire BLUE almond shaped, pink nose. Pure white silky long fur, modest chest ruff, very long white feathery plume tail with tapered end. No patches stripes dark fur or collar. Same fine softly painted storybook style, cream wall honey wood floor sage green mat warm diffuse light. Entire cat and tail visible with margins. One anatomically correct cat, no text UI watermark human face. Special excited and trusting: playfully peeks out of short beige fabric tunnel, front paws reaching forward, bright sapphire blue eyes, forward ears friendly confident expression, tail visible. No humans.",
+    "reference": "sena-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet__open_up",
+    "file": "sena-pet__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-05827723-94a9-45b4-88df-c42992e13176.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is SENA exact identity and style. Adult pure WHITE LONGHAIR, slim elegant body, slender legs, narrow oval face tapered muzzle, tall tufted triangular ears. BOTH eyes sapphire BLUE almond shaped, pink nose. Pure white silky long fur, modest chest ruff, very long white feathery plume tail with tapered end. No patches stripes dark fur or collar. Same fine softly painted storybook style, cream wall honey wood floor sage green mat warm diffuse light. Entire cat and tail visible with margins. One anatomically correct cat, no text UI watermark human face. Special deep trust petting: one hand strokes cheek, cat leans cheek into palm, eyes almost closed, affectionate relaxed expression. No toys.",
+    "reference": "sena-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet__simultaneous",
+    "file": "sena-pet__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-ef13bafa-1433-4ac1-9fa4-5f467152b6b7.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is SENA exact identity and style. Adult pure WHITE LONGHAIR, slim elegant body, slender legs, narrow oval face tapered muzzle, tall tufted triangular ears. BOTH eyes sapphire BLUE almond shaped, pink nose. Pure white silky long fur, modest chest ruff, very long white feathery plume tail with tapered end. No patches stripes dark fur or collar. Same fine softly painted storybook style, cream wall honey wood floor sage green mat warm diffuse light. Entire cat and tail visible with margins. One anatomically correct cat, no text UI watermark human face. Special delighted and trusting petting: one hand rubs under chin, cat lifts chin joyfully, content closed eyes and relaxed ears. No toys.",
+    "reference": "sena-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush__open_up",
+    "file": "sena-brush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-f467838b-d8e0-44ef-9ae7-3b056be90454.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is SENA exact identity and style. Adult pure WHITE LONGHAIR, slim elegant body, slender legs, narrow oval face tapered muzzle, tall tufted triangular ears. BOTH eyes sapphire BLUE almond shaped, pink nose. Pure white silky long fur, modest chest ruff, very long white feathery plume tail with tapered end. No patches stripes dark fur or collar. Same fine softly painted storybook style, cream wall honey wood floor sage green mat warm diffuse light. Entire cat and tail visible with margins. One anatomically correct cat, no text UI watermark human face. Special deep trust brushing: one hand gently brushes short chest fur with wooden pet brush, cat leans toward brush, half closed eyes relaxed affectionate posture.",
+    "reference": "sena-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush__simultaneous",
+    "file": "sena-brush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-f3cec89d-7ae1-4e17-b276-931c6ebd89c2.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is SENA exact identity and style. Adult pure WHITE LONGHAIR, slim elegant body, slender legs, narrow oval face tapered muzzle, tall tufted triangular ears. BOTH eyes sapphire BLUE almond shaped, pink nose. Pure white silky long fur, modest chest ruff, very long white feathery plume tail with tapered end. No patches stripes dark fur or collar. Same fine softly painted storybook style, cream wall honey wood floor sage green mat warm diffuse light. Entire cat and tail visible with margins. One anatomically correct cat, no text UI watermark human face. Special delighted and trusting brushing: one hand brushes shoulder with wooden brush, cat stretches neck and raises chin slightly, blissfully closed eyes, happy relaxed posture.",
+    "reference": "sena-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice__open_up",
+    "file": "sena-voice__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-94a24992-cb8f-47b1-a7b0-d9431d440083.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is SENA exact identity and style. Adult pure WHITE LONGHAIR, slim elegant body, slender legs, narrow oval face tapered muzzle, tall tufted triangular ears. BOTH eyes sapphire BLUE almond shaped, pink nose. Pure white silky long fur, modest chest ruff, very long white feathery plume tail with tapered end. No patches stripes dark fur or collar. Same fine softly painted storybook style, cream wall honey wood floor sage green mat warm diffuse light. Entire cat and tail visible with margins. One anatomically correct cat, no text UI watermark human face. Special deep trust response to a familiar voice. Cat leans its head and upper body slightly toward viewer, neck gently extended, EYES VISIBLY NARROWED TO SOFT HALF-CLOSED SLITS in a relaxed slow blink (not wide open), gentle affectionate expression, relaxed forward ears, mouth closed. Both front paws remain on mat. No hands, humans, knees, speech bubbles, toys or other props. Make the facial trust reaction clearly distinct from the open-eyed normal reference.",
+    "reference": "sena-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice__simultaneous",
+    "file": "sena-voice__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-f3df4ca9-3ea1-45b2-818b-617e1bd1b4b2.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is SENA exact identity and style. Adult pure WHITE LONGHAIR, slim elegant body, slender legs, narrow oval face tapered muzzle, tall tufted triangular ears. BOTH eyes sapphire BLUE almond shaped, pink nose. Pure white silky long fur, modest chest ruff, very long white feathery plume tail with tapered end. No patches stripes dark fur or collar. Same fine softly painted storybook style, cream wall honey wood floor sage green mat warm diffuse light. Entire cat and tail visible with margins. One anatomically correct cat, no text UI watermark human face. Special delighted trusting response to voice: stands taking one friendly step toward viewer, bright welcoming sapphire blue eyes and forward ears, low relaxed tail, mouth closed. No human or props.",
+    "reference": "sena-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence__open_up",
+    "file": "sena-presence__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-5aef8403-7154-4dcc-b9ad-8e2f9b5877f9.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is SENA exact identity and style. Adult pure WHITE LONGHAIR, slim elegant body, slender legs, narrow oval face tapered muzzle, tall tufted triangular ears. BOTH eyes sapphire BLUE almond shaped, pink nose. Pure white silky long fur, modest chest ruff, very long white feathery plume tail with tapered end. No patches stripes dark fur or collar. Same fine softly painted storybook style, cream wall honey wood floor sage green mat warm diffuse light. Entire cat and tail visible with margins. One anatomically correct cat, no text UI watermark human face. Special deep trust companionship: lies comfortably on side beside blue clothed knee edge, soft half closed eyes relaxed head. No hands touching, no toys.",
+    "reference": "sena-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence__simultaneous",
+    "file": "sena-presence__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-e34c67d2-e9b0-4a14-b3c0-9698efca5b6d.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is SENA exact identity and style. Adult pure WHITE LONGHAIR, slim elegant body, slender legs, narrow oval face tapered muzzle, tall tufted triangular ears. BOTH eyes sapphire BLUE almond shaped, pink nose. Pure white silky long fur, modest chest ruff, very long white feathery plume tail with tapered end. No patches stripes dark fur or collar. Same fine softly painted storybook style, cream wall honey wood floor sage green mat warm diffuse light. Entire cat and tail visible with margins. One anatomically correct cat, no text UI watermark human face. Special delighted trusting companionship: sits close beside blue clothed knee edge, flank gently leaning against knee, blissfully half closed eyes. No hands touching, no toys.",
+    "reference": "sena-normal.png",
+    "reference_role": "identity_and_style"
+  }
+]

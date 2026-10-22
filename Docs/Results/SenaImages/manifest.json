@@ -1,0 +1,173 @@
+{
+  "cat_id": "intro-shopping_street_event",
+  "name": "セナ",
+  "date": "2026-10-21",
+  "tool": "built-in image_gen",
+  "images": [
+    {
+      "scene": "normal",
+      "file": "sena-normal.png"
+    },
+    {
+      "scene": "sleep",
+      "file": "sena-sleep.png"
+    },
+    {
+      "scene": "pause",
+      "file": "sena-pause.png"
+    },
+    {
+      "scene": "teaser",
+      "file": "sena-teaser.png"
+    },
+    {
+      "scene": "ball",
+      "file": "sena-ball.png"
+    },
+    {
+      "scene": "plush",
+      "file": "sena-plush.png"
+    },
+    {
+      "scene": "tunnel",
+      "file": "sena-tunnel.png"
+    },
+    {
+      "scene": "pet",
+      "file": "sena-pet.png"
+    },
+    {
+      "scene": "brush",
+      "file": "sena-brush.png"
+    },
+    {
+      "scene": "voice",
+      "file": "sena-voice.png"
+    },
+    {
+      "scene": "presence",
+      "file": "sena-presence.png"
+    },
+    {
+      "scene": "teaser__open_up",
+      "file": "sena-teaser__open_up.png"
+    },
+    {
+      "scene": "teaser__simultaneous",
+      "file": "sena-teaser__simultaneous.png"
+    },
+    {
+      "scene": "ball__open_up",
+      "file": "sena-ball__open_up.png"
+    },
+    {
+      "scene": "ball__simultaneous",
+      "file": "sena-ball__simultaneous.png"
+    },
+    {
+      "scene": "plush__open_up",
+      "file": "sena-plush__open_up.png"
+    },
+    {
+      "scene": "plush__simultaneous",
+      "file": "sena-plush__simultaneous.png"
+    },
+    {
+      "scene": "tunnel__open_up",
+      "file": "sena-tunnel__open_up.png"
+    },
+    {
+      "scene": "tunnel__simultaneous",
+      "file": "sena-tunnel__simultaneous.png"
+    },
+    {
+      "scene": "pet__open_up",
+      "file": "sena-pet__open_up.png"
+    },
+    {
+      "scene": "pet__simultaneous",
+      "file": "sena-pet__simultaneous.png"
+    },
+    {
+      "scene": "brush__open_up",
+      "file": "sena-brush__open_up.png"
+    },
+    {
+      "scene": "brush__simultaneous",
+      "file": "sena-brush__simultaneous.png"
+    },
+    {
+      "scene": "voice__open_up",
+      "file": "sena-voice__open_up.png"
+    },
+    {
+      "scene": "voice__simultaneous",
+      "file": "sena-voice__simultaneous.png"
+    },
+    {
+      "scene": "presence__open_up",
+      "file": "sena-presence__open_up.png"
+    },
+    {
+      "scene": "presence__simultaneous",
+      "file": "sena-presence__simultaneous.png"
+    }
+  ],
+  "scenes": {
+    "normal": "images/8ea6aa7e3a2000de6d07945de5fcf6ca26fca2936619c0e463e25599e5ce85bc.png",
+    "sleep": "images/6f10c9a95d26361e4b738c42e693d76e47f0bba052d7563bfebc4d8bbba22f0c.png",
+    "play": "images/edc5324402049eb755af7beecc974a2a9361c34b4070b22c8cbc633eddecf5bb.png",
+    "pause": "images/da19ba320c7d5136f0ba1cc0466a7c41d25a0530e969c97612faa08a521e7f33.png",
+    "teaser": "images/8ea6aa7e3a2000de6d07945de5fcf6ca26fca2936619c0e463e25599e5ce85bc.png",
+    "teaser__switch": "images/8ea6aa7e3a2000de6d07945de5fcf6ca26fca2936619c0e463e25599e5ce85bc.png",
+    "teaser__direct": "images/edc5324402049eb755af7beecc974a2a9361c34b4070b22c8cbc633eddecf5bb.png",
+    "teaser__adapt": "images/edc5324402049eb755af7beecc974a2a9361c34b4070b22c8cbc633eddecf5bb.png",
+    "teaser__open_up": "images/6aa2875c495fc9eed737d39cc3412329501cc16f108db6b8e91ac41e513c816b.png",
+    "teaser__simultaneous": "images/7c53e9f8ca29261f37bd56a9289bfc3947839e2a939a15621ba08e11c907156e.png",
+    "ball": "images/8ea6aa7e3a2000de6d07945de5fcf6ca26fca2936619c0e463e25599e5ce85bc.png",
+    "ball__switch": "images/8ea6aa7e3a2000de6d07945de5fcf6ca26fca2936619c0e463e25599e5ce85bc.png",
+    "ball__direct": "images/270b291ae9da31781ef9c321cea749f7c6f1daa00574e70ccc074c1b418b3f4c.png",
+    "ball__adapt": "images/270b291ae9da31781ef9c321cea749f7c6f1daa00574e70ccc074c1b418b3f4c.png",
+    "ball__open_up": "images/035f376cc5811b804edfb0f4066e682295fcd2de2b7c1c34d074f64e82255eac.png",
+    "ball__simultaneous": "images/05013fc86ca801afd21b3009537e3cb56041260ed086a4160c663ac4b98f9243.png",
+    "plush": "images/8ea6aa7e3a2000de6d07945de5fcf6ca26fca2936619c0e463e25599e5ce85bc.png",
+    "plush__switch": "images/8ea6aa7e3a2000de6d07945de5fcf6ca26fca2936619c0e463e25599e5ce85bc.png",
+    "plush__direct": "images/e7c3ece1b0976b06b76e55a975c07124694311b6ca41de6363abd3c0689031ee.png",
+    "plush__adapt": "images/e7c3ece1b0976b06b76e55a975c07124694311b6ca41de6363abd3c0689031ee.png",
+    "plush__open_up": "images/b83195021fbda2dd6bc49a78fd372b50b47d53617708881f53969be9b89544ab.png",
+    "plush__simultaneous": "images/379956bf3d8848a12a312657031661f8c5208d6f3cdae59a983075046beff754.png",
+    "tunnel": "images/8ea6aa7e3a2000de6d07945de5fcf6ca26fca2936619c0e463e25599e5ce85bc.png",
+    "tunnel__switch": "images/8ea6aa7e3a2000de6d07945de5fcf6ca26fca2936619c0e463e25599e5ce85bc.png",
+    "tunnel__direct": "images/846cded5825ca6953db8241e36b8d30e202fce93e63e6aebed3a7732d7204ebc.png",
+    "tunnel__adapt": "images/846cded5825ca6953db8241e36b8d30e202fce93e63e6aebed3a7732d7204ebc.png",
+    "tunnel__open_up": "images/e30ed2619673def77efa33235ba50f4a8daf375f610165f41a8cce431b10caaf.png",
+    "tunnel__simultaneous": "images/a37153d911774ed20a994b2235510fdc2d3457327cf3f0c90fdebefdb4b29dea.png",
+    "pet": "images/8ea6aa7e3a2000de6d07945de5fcf6ca26fca2936619c0e463e25599e5ce85bc.png",
+    "pet__switch": "images/8ea6aa7e3a2000de6d07945de5fcf6ca26fca2936619c0e463e25599e5ce85bc.png",
+    "pet__direct": "images/68779479dfde253ac7ab08c6cfe1b05dfb3ad349e3da97d9e77bd2666b0bb0f4.png",
+    "pet__adapt": "images/68779479dfde253ac7ab08c6cfe1b05dfb3ad349e3da97d9e77bd2666b0bb0f4.png",
+    "pet__open_up": "images/ffeb9d2574f47b87890340ffcfc06bc087945422e5ed059f6db85dab9a96362e.png",
+    "pet__simultaneous": "images/80b5d74dde03a0c202a97e5e5409b9978e42107c152e4456b9a0856b6d9e583e.png",
+    "brush": "images/8ea6aa7e3a2000de6d07945de5fcf6ca26fca2936619c0e463e25599e5ce85bc.png",
+    "brush__switch": "images/8ea6aa7e3a2000de6d07945de5fcf6ca26fca2936619c0e463e25599e5ce85bc.png",
+    "brush__direct": "images/afddbd1a0d21ca6b2ea94bf5bddf51c1310e8b7e6ef9007b9e4b20cbff04e7f6.png",
+    "brush__adapt": "images/afddbd1a0d21ca6b2ea94bf5bddf51c1310e8b7e6ef9007b9e4b20cbff04e7f6.png",
+    "brush__open_up": "images/1a153fd1b17bfaf5f5d2c7b15196d5aa8e29ea80a509485f12f178dc14b5cc63.png",
+    "brush__simultaneous": "images/7aa2830f41d00b00d83b3fe14072e47b2b1dfdc152cd555ca8f696a32263b219.png",
+    "voice": "images/8ea6aa7e3a2000de6d07945de5fcf6ca26fca2936619c0e463e25599e5ce85bc.png",
+    "voice__switch": "images/8ea6aa7e3a2000de6d07945de5fcf6ca26fca2936619c0e463e25599e5ce85bc.png",
+    "voice__direct": "images/c446ba4f31fda39426060e1b1fcd95819f03c52115f0d91a53883211ee1035fe.png",
+    "voice__adapt": "images/c446ba4f31fda39426060e1b1fcd95819f03c52115f0d91a53883211ee1035fe.png",
+    "voice__open_up": "images/49b8cead8d7635eef18e0b4c80eb29a44ac2cfdeca57d9e5df5da0957c4dbbef.png",
+    "voice__simultaneous": "images/ef0ceaab92d0616881799181535102df3ef904cd2f084491a478f5d9d97c0d7e.png",
+    "presence": "images/8ea6aa7e3a2000de6d07945de5fcf6ca26fca2936619c0e463e25599e5ce85bc.png",
+    "presence__switch": "images/8ea6aa7e3a2000de6d07945de5fcf6ca26fca2936619c0e463e25599e5ce85bc.png",
+    "presence__direct": "images/9b8f9326c9af7e11929b9ffef05c7ce11f7620803172a909d7c9656d931a74bf.png",
+    "presence__adapt": "images/9b8f9326c9af7e11929b9ffef05c7ce11f7620803172a909d7c9656d931a74bf.png",
+    "presence__open_up": "images/bb4b408ee81154ed14fe1c1ad1bc0cb2fc636d38fa463fab7ab4cb15b67d5ff0.png",
+    "presence__simultaneous": "images/e8f974213e7225969067d8ee57b505150588486e5c851b362def5c5c7c487380.png"
+  },
+  "active_pack": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\Imports\\4762dd1bd978461bb07c041c59417281",
+  "authored_entries_unchanged": true,
+  "existing_cats_unchanged": true
+}

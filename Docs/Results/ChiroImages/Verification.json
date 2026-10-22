@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-18",
+  "cat_id": "shop-1",
+  "name": "チロ",
+  "status": "completed",
+  "png_count": 27,
+  "scene_keys": 52,
+  "narrative_bindings": 32,
+  "python_tests": {
+    "total": 41,
+    "passed": 39,
+    "skipped": 2
+  },
+  "unity_cases": 40,
+  "unity_marker": "CAT_CAFE_CHIRO_IMAGES_OK",
+  "admission_and_disk_reload": true,
+  "normal_sleep_special_resources": true,
+  "visual_qa": "27 images plus Unity ball/pet screenshots reviewed; solid white longhair, golden eyes, room/style consistent",
+  "source_png_bytes": 57585350,
+  "registered_png_bytes_each": 57585350,
+  "builtin_originals_retained": true,
+  "build_performed": false,
+  "latest_bytes_before": 8247655370,
+  "generated_bytes_before": 3277372585,
+  "latest_bytes_after": 8247655370,
+  "generated_bytes_after": 3277372585
+}

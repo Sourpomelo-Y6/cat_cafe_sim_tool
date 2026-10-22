@@ -1261,7 +1261,7 @@
       "cat": {
         "trait_id": "hospitality",
         "id": "shop-3",
-        "name": "ナナ",
+        "name": "ハナ",
         "features": [
           "black_white",
           "short_hair"
@@ -1411,7 +1411,7 @@
       "cat": {
         "trait_id": "hardy",
         "id": "catalog-4",
-        "name": "ソラ",
+        "name": "アキ",
         "features": [
           "orange_tabby",
           "short_hair"
@@ -1485,7 +1485,7 @@
       "cat": {
         "trait_id": "relaxed",
         "id": "catalog-6",
-        "name": "ムギ",
+        "name": "クルミ",
         "features": [
           "brown_tabby",
           "short_hair"
@@ -1522,7 +1522,7 @@
       "cat": {
         "trait_id": "relaxed",
         "id": "catalog-7",
-        "name": "コハク",
+        "name": "シロ",
         "features": [
           "white",
           "long_hair"
@@ -1818,7 +1818,7 @@
       "cat": {
         "trait_id": "hospitality",
         "id": "catalog-15",
-        "name": "レオ",
+        "name": "トラ",
         "features": [
           "brown_tabby",
           "short_hair"
@@ -2043,5 +2043,5 @@
       }
     }
   ],
-  "rules_id": "6c3e11fb49b1e1e74b6de28feaac11ae867e47587899455e945e33e80d4ba964"
+  "rules_id": "2613fc4f2312feaf713cfafe96de283a1578fa67c6241f0e2da4dbc539939d8f"
 }

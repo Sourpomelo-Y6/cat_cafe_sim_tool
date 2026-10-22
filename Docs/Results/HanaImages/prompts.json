@@ -1,0 +1,218 @@
+[
+  {
+    "scene": "normal",
+    "file": "hana-normal.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-4ae7269a-3452-4d95-bc0b-0445c2dce16a.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim game identity illustration of a NEW cat HANA. Reference TAMA is ONLY STYLE AND ROOM reference; create a clearly different individual. Adult BLACK AND WHITE SHORTHAIR, small compact rounded body, short sturdy legs, round face and plump cheeks, small triangular ears. Round COPPER ORANGE eyes, pink nose with NO black nose spots. Black ears and black cap on top of head; BROAD WHITE inverted V blaze from forehead widens over eye bridge, cheeks muzzle and chin white. Solid black back and flanks, white chest belly and all four lower legs/paws. Medium-short slim BLACK tail with a CLEAR WHITE TIP, curled LOW beside paws. No stripes, no colored fur other than black/white, no fluffy or long fur. Curious gently reserved expression, playful but sensitive personality. Seated entire cat including tail visible with 10% margin. Same fine soft painted storybook fur as reference, cream wall honey wood floor sage green mat warm diffuse light. One anatomically correct cat, no human props text watermark UI.",
+    "reference": "../CatExecutionImages/Prototypes/CatAppearance-v1/tama-normal.png",
+    "reference_role": "style_and_room"
+  },
+  {
+    "scene": "teaser",
+    "file": "hana-teaser.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-ce5752f7-f4b0-4902-93cd-40e12daeb661.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HANA exact identity and style. Adult BLACK AND WHITE SHORTHAIR, small compact round body, short sturdy legs, round face full cheeks, small triangular ears, round COPPER ORANGE eyes, pink nose with NO nose spots. Black ears and cap, BROAD WHITE inverted V blaze on forehead and nose bridge, white cheeks muzzle chin, solid black back flanks, white chest belly all lower legs and paws. Medium-short slim BLACK tail with clearly WHITE TIP curls low. No stripes, no colored fur, not fluffy or longhair. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING white tail tip visible with margins. One cat, correct limbs, no text UI watermark human face. Basic attentive play: one hand at edge holds feather teaser near cat. Cat reaches one forepaw toward feather, copper-orange eyes open, gentle calm engagement.",
+    "reference": "hana-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball",
+    "file": "hana-ball.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-0d2885e4-4783-4a67-aa6d-c09101ae2f03.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HANA exact identity and style. Adult BLACK AND WHITE SHORTHAIR, small compact round body, short sturdy legs, round face full cheeks, small triangular ears, round COPPER ORANGE eyes, pink nose with NO nose spots. Black ears and cap, BROAD WHITE inverted V blaze on forehead and nose bridge, white cheeks muzzle chin, solid black back flanks, white chest belly all lower legs and paws. Medium-short slim BLACK tail with clearly WHITE TIP curls low. No stripes, no colored fur, not fluffy or longhair. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING white tail tip visible with margins. One cat, correct limbs, no text UI watermark human face. Basic play: crouches and gently touches small blue toy ball on mat with one paw, attentive open copper-orange eyes. No humans or other toys.",
+    "reference": "hana-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush",
+    "file": "hana-plush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-5e5cbcc4-7d0e-4b01-85bd-09d7354d4f51.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HANA exact identity and style. Adult BLACK AND WHITE SHORTHAIR, small compact round body, short sturdy legs, round face full cheeks, small triangular ears, round COPPER ORANGE eyes, pink nose with NO nose spots. Black ears and cap, BROAD WHITE inverted V blaze on forehead and nose bridge, white cheeks muzzle chin, solid black back flanks, white chest belly all lower legs and paws. Medium-short slim BLACK tail with clearly WHITE TIP curls low. No stripes, no colored fur, not fluffy or longhair. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING white tail tip visible with margins. One cat, correct limbs, no text UI watermark human face. Basic play: holds small plain beige fabric mouse toy between front paws, calmly sniffing, copper-orange eyes open. No humans or other toys.",
+    "reference": "hana-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel",
+    "file": "hana-tunnel.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-55990c2e-e747-4e53-897c-0fd27cf53467.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HANA exact identity and style. Adult BLACK AND WHITE SHORTHAIR, small compact round body, short sturdy legs, round face full cheeks, small triangular ears, round COPPER ORANGE eyes, pink nose with NO nose spots. Black ears and cap, BROAD WHITE inverted V blaze on forehead and nose bridge, white cheeks muzzle chin, solid black back flanks, white chest belly all lower legs and paws. Medium-short slim BLACK tail with clearly WHITE TIP curls low. No stripes, no colored fur, not fluffy or longhair. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING white tail tip visible with margins. One cat, correct limbs, no text UI watermark human face. Basic play: crouches just inside short beige fabric cat tunnel, head front paws and tail fully visible at entrance, eyes open curious gentle expression. No humans or other toys.",
+    "reference": "hana-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet",
+    "file": "hana-pet.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-c32cf946-0be7-452d-8a15-fec61626f7a5.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HANA exact identity and style. Adult BLACK AND WHITE SHORTHAIR, small compact round body, short sturdy legs, round face full cheeks, small triangular ears, round COPPER ORANGE eyes, pink nose with NO nose spots. Black ears and cap, BROAD WHITE inverted V blaze on forehead and nose bridge, white cheeks muzzle chin, solid black back flanks, white chest belly all lower legs and paws. Medium-short slim BLACK tail with clearly WHITE TIP curls low. No stripes, no colored fur, not fluffy or longhair. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING white tail tip visible with margins. One cat, correct limbs, no text UI watermark human face. Basic petting: one human hand gently strokes forehead, cat relaxed and attentive, copper-orange eyes open. No toys.",
+    "reference": "hana-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush",
+    "file": "hana-brush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-0dd9b030-e672-42ed-a037-8f5d7625d400.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HANA exact identity and style. Adult BLACK AND WHITE SHORTHAIR, small compact round body, short sturdy legs, round face full cheeks, small triangular ears, round COPPER ORANGE eyes, pink nose with NO nose spots. Black ears and cap, BROAD WHITE inverted V blaze on forehead and nose bridge, white cheeks muzzle chin, solid black back flanks, white chest belly all lower legs and paws. Medium-short slim BLACK tail with clearly WHITE TIP curls low. No stripes, no colored fur, not fluffy or longhair. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING white tail tip visible with margins. One cat, correct limbs, no text UI watermark human face. Basic brushing: one human hand uses wooden pet brush on shoulder, bristles contact SHORT fur, cat calmly stands with eyes open. No other props.",
+    "reference": "hana-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice",
+    "file": "hana-voice.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-a351179d-15b5-46eb-b28b-7db9b4979524.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HANA exact identity and style. Adult BLACK AND WHITE SHORTHAIR, small compact round body, short sturdy legs, round face full cheeks, small triangular ears, round COPPER ORANGE eyes, pink nose with NO nose spots. Black ears and cap, BROAD WHITE inverted V blaze on forehead and nose bridge, white cheeks muzzle chin, solid black back flanks, white chest belly all lower legs and paws. Medium-short slim BLACK tail with clearly WHITE TIP curls low. No stripes, no colored fur, not fluffy or longhair. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING white tail tip visible with margins. One cat, correct limbs, no text UI watermark human face. Basic voice interaction: sits calmly, ears turn toward viewer listening, copper-orange eyes open, mouth closed. No human hands knees speech bubbles or props.",
+    "reference": "hana-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence",
+    "file": "hana-presence.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-3fc299b9-bd8f-49a4-9bce-b6e451d242a2.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HANA exact identity and style. Adult BLACK AND WHITE SHORTHAIR, small compact round body, short sturdy legs, round face full cheeks, small triangular ears, round COPPER ORANGE eyes, pink nose with NO nose spots. Black ears and cap, BROAD WHITE inverted V blaze on forehead and nose bridge, white cheeks muzzle chin, solid black back flanks, white chest belly all lower legs and paws. Medium-short slim BLACK tail with clearly WHITE TIP curls low. No stripes, no colored fur, not fluffy or longhair. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING white tail tip visible with margins. One cat, correct limbs, no text UI watermark human face. Basic companionship: cat loafs calmly, copper-orange eyes open, only part of blue clothed knee at lower edge. No hands or toys.",
+    "reference": "hana-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pause",
+    "file": "hana-pause.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-4b63041e-b88b-45c5-a7b3-0b5b79ed1534.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HANA exact identity and style. Adult BLACK AND WHITE SHORTHAIR, small compact round body, short sturdy legs, round face full cheeks, small triangular ears, round COPPER ORANGE eyes, pink nose with NO nose spots. Black ears and cap, BROAD WHITE inverted V blaze on forehead and nose bridge, white cheeks muzzle chin, solid black back flanks, white chest belly all lower legs and paws. Medium-short slim BLACK tail with clearly WHITE TIP curls low. No stripes, no colored fur, not fluffy or longhair. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING white tail tip visible with margins. One cat, correct limbs, no text UI watermark human face. Pause/wait: cat calmly sits, forepaws planted, eyes open, feather teaser lies completely still on mat at safe distance. No hands.",
+    "reference": "hana-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "sleep",
+    "file": "hana-sleep.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-c32e9db1-a873-481c-9965-0b1f64f607b6.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HANA exact identity and style. Adult BLACK AND WHITE SHORTHAIR, small compact round body, short sturdy legs, round face full cheeks, small triangular ears, round COPPER ORANGE eyes, pink nose with NO nose spots. Black ears and cap, BROAD WHITE inverted V blaze on forehead and nose bridge, white cheeks muzzle chin, solid black back flanks, white chest belly all lower legs and paws. Medium-short slim BLACK tail with clearly WHITE TIP curls low. No stripes, no colored fur, not fluffy or longhair. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING white tail tip visible with margins. One cat, correct limbs, no text UI watermark human face. Sleep: cat curled into a relaxed ball sleeping, eyes closed, head on front paws, slim striped tail around body. No humans or toys.",
+    "reference": "hana-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "teaser__open_up",
+    "file": "hana-teaser__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-8f3d0b51-7a1f-446d-99b3-eb1d53a60a04.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HANA exact identity and style. Adult BLACK AND WHITE SHORTHAIR, small compact round body, short sturdy legs, round face full cheeks, small triangular ears, round COPPER ORANGE eyes, pink nose with NO nose spots. Black ears and cap, BROAD WHITE inverted V blaze on forehead and nose bridge, white cheeks muzzle chin, solid black back flanks, white chest belly all lower legs and paws. Medium-short slim BLACK tail with clearly WHITE TIP curls low. No stripes, no colored fur, not fluffy or longhair. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING white tail tip visible with margins. One cat, correct limbs, no text UI watermark human face. Special deep trust playing with feather teaser: one hand holds feather close; cat leans toward viewer, eyes soft half closed, paw reaches gently. Relaxed ears.",
+    "reference": "hana-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "teaser__simultaneous",
+    "file": "hana-teaser__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-c17cc1bb-4c3b-49f3-8d85-ef5354ee9637.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HANA exact identity and style. Adult BLACK AND WHITE SHORTHAIR, small compact round body, short sturdy legs, round face full cheeks, small triangular ears, round COPPER ORANGE eyes, pink nose with NO nose spots. Black ears and cap, BROAD WHITE inverted V blaze on forehead and nose bridge, white cheeks muzzle chin, solid black back flanks, white chest belly all lower legs and paws. Medium-short slim BLACK tail with clearly WHITE TIP curls low. No stripes, no colored fur, not fluffy or longhair. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING white tail tip visible with margins. One cat, correct limbs, no text UI watermark human face. Special excited and deeply trusting play: joyfully bats feather teaser held by one edge hand, ears forward bright copper-orange eyes, lifted paw, confident happy posture. No aggressive expression.",
+    "reference": "hana-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball__open_up",
+    "file": "hana-ball__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-1689d349-848b-44d5-a359-dd4dcfc1d64a.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HANA exact identity and style. Adult BLACK AND WHITE SHORTHAIR, small compact round body, short sturdy legs, round face full cheeks, small triangular ears, round COPPER ORANGE eyes, pink nose with NO nose spots. Black ears and cap, BROAD WHITE inverted V blaze on forehead and nose bridge, white cheeks muzzle chin, solid black back flanks, white chest belly all lower legs and paws. Medium-short slim BLACK tail with clearly WHITE TIP curls low. No stripes, no colored fur, not fluffy or longhair. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING white tail tip visible with margins. One cat, correct limbs, no text UI watermark human face. Special deep trust: relaxed on side beside small blue ball, paw resting on ball, head tipped affectionately toward viewer, soft half closed eyes. No humans.",
+    "reference": "hana-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball__simultaneous",
+    "file": "hana-ball__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-18726ebf-bb4f-4d8f-9294-0280c69155a5.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HANA exact identity and style. Adult BLACK AND WHITE SHORTHAIR, small compact round body, short sturdy legs, round face full cheeks, small triangular ears, round COPPER ORANGE eyes, pink nose with NO nose spots. Black ears and cap, BROAD WHITE inverted V blaze on forehead and nose bridge, white cheeks muzzle chin, solid black back flanks, white chest belly all lower legs and paws. Medium-short slim BLACK tail with clearly WHITE TIP curls low. No stripes, no colored fur, not fluffy or longhair. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING white tail tip visible with margins. One cat, correct limbs, no text UI watermark human face. Special excited and trusting: playfully hugs small blue ball between forepaws, crouched with confident happy energy, bright copper-orange eyes. No humans or other toys.",
+    "reference": "hana-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush__open_up",
+    "file": "hana-plush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-47d5cb28-5ff2-44b6-822b-8243ef1409ea.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HANA exact identity and style. Adult BLACK AND WHITE SHORTHAIR, small compact round body, short sturdy legs, round face full cheeks, small triangular ears, round COPPER ORANGE eyes, pink nose with NO nose spots. Black ears and cap, BROAD WHITE inverted V blaze on forehead and nose bridge, white cheeks muzzle chin, solid black back flanks, white chest belly all lower legs and paws. Medium-short slim BLACK tail with clearly WHITE TIP curls low. No stripes, no colored fur, not fluffy or longhair. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING white tail tip visible with margins. One cat, correct limbs, no text UI watermark human face. Special deep trust: hugs small beige mouse plush and rests cheek on toy, soft half closed copper-orange eyes, affectionate expression toward viewer. No humans.",
+    "reference": "hana-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush__simultaneous",
+    "file": "hana-plush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-2d284f3a-36c0-444a-93fb-0b8d46a7bafd.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HANA exact identity and style. Adult BLACK AND WHITE SHORTHAIR, small compact round body, short sturdy legs, round face full cheeks, small triangular ears, round COPPER ORANGE eyes, pink nose with NO nose spots. Black ears and cap, BROAD WHITE inverted V blaze on forehead and nose bridge, white cheeks muzzle chin, solid black back flanks, white chest belly all lower legs and paws. Medium-short slim BLACK tail with clearly WHITE TIP curls low. No stripes, no colored fur, not fluffy or longhair. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING white tail tip visible with margins. One cat, correct limbs, no text UI watermark human face. Special excited and trusting: joyfully rolls slightly on side hugging small beige mouse plush with front paws, bright copper-orange eyes, relaxed ears and happy posture. No humans.",
+    "reference": "hana-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel__open_up",
+    "file": "hana-tunnel__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-1694e6c2-5780-4d6f-9314-a1da14de5aee.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HANA exact identity and style. Adult BLACK AND WHITE SHORTHAIR, small compact round body, short sturdy legs, round face full cheeks, small triangular ears, round COPPER ORANGE eyes, pink nose with NO nose spots. Black ears and cap, BROAD WHITE inverted V blaze on forehead and nose bridge, white cheeks muzzle chin, solid black back flanks, white chest belly all lower legs and paws. Medium-short slim BLACK tail with clearly WHITE TIP curls low. No stripes, no colored fur, not fluffy or longhair. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING white tail tip visible with margins. One cat, correct limbs, no text UI watermark human face. Special deep trust: relaxed at short beige fabric tunnel entrance, chin on rim, soft half closed copper-orange eyes toward viewer, tail visible outside. No humans.",
+    "reference": "hana-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel__simultaneous",
+    "file": "hana-tunnel__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-18dc52be-717f-440d-85b3-c50b3f77f41b.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HANA exact identity and style. Adult BLACK AND WHITE SHORTHAIR, small compact round body, short sturdy legs, round face full cheeks, small triangular ears, round COPPER ORANGE eyes, pink nose with NO nose spots. Black ears and cap, BROAD WHITE inverted V blaze on forehead and nose bridge, white cheeks muzzle chin, solid black back flanks, white chest belly all lower legs and paws. Medium-short slim BLACK tail with clearly WHITE TIP curls low. No stripes, no colored fur, not fluffy or longhair. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING white tail tip visible with margins. One cat, correct limbs, no text UI watermark human face. Special excited and trusting: playfully peeks out of short beige fabric tunnel, front paws reaching forward, bright copper-orange eyes, forward ears friendly confident expression, tail visible. No humans.",
+    "reference": "hana-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet__open_up",
+    "file": "hana-pet__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-7f4cc4b7-66f3-4b1c-9166-8c80e1f499f7.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HANA exact identity and style. Adult BLACK AND WHITE SHORTHAIR, small compact round body, short sturdy legs, round face full cheeks, small triangular ears, round COPPER ORANGE eyes, pink nose with NO nose spots. Black ears and cap, BROAD WHITE inverted V blaze on forehead and nose bridge, white cheeks muzzle chin, solid black back flanks, white chest belly all lower legs and paws. Medium-short slim BLACK tail with clearly WHITE TIP curls low. No stripes, no colored fur, not fluffy or longhair. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING white tail tip visible with margins. One cat, correct limbs, no text UI watermark human face. Special deep trust petting: one hand strokes cheek, cat leans cheek into palm, eyes almost closed, affectionate relaxed expression. No toys.",
+    "reference": "hana-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet__simultaneous",
+    "file": "hana-pet__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-a99d61dd-ae52-4c0c-a698-b5a32485726a.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HANA exact identity and style. Adult BLACK AND WHITE SHORTHAIR, small compact round body, short sturdy legs, round face full cheeks, small triangular ears, round COPPER ORANGE eyes, pink nose with NO nose spots. Black ears and cap, BROAD WHITE inverted V blaze on forehead and nose bridge, white cheeks muzzle chin, solid black back flanks, white chest belly all lower legs and paws. Medium-short slim BLACK tail with clearly WHITE TIP curls low. No stripes, no colored fur, not fluffy or longhair. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING white tail tip visible with margins. One cat, correct limbs, no text UI watermark human face. Special delighted and trusting petting: one hand rubs under chin, cat lifts chin joyfully, content closed eyes and relaxed ears. No toys.",
+    "reference": "hana-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush__open_up",
+    "file": "hana-brush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-b5ca424d-15b7-4011-a35c-53ec0e725934.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HANA exact identity and style. Adult BLACK AND WHITE SHORTHAIR, small compact round body, short sturdy legs, round face full cheeks, small triangular ears, round COPPER ORANGE eyes, pink nose with NO nose spots. Black ears and cap, BROAD WHITE inverted V blaze on forehead and nose bridge, white cheeks muzzle chin, solid black back flanks, white chest belly all lower legs and paws. Medium-short slim BLACK tail with clearly WHITE TIP curls low. No stripes, no colored fur, not fluffy or longhair. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING white tail tip visible with margins. One cat, correct limbs, no text UI watermark human face. Special deep trust brushing: one hand gently brushes short chest fur with wooden pet brush, cat leans toward brush, half closed eyes relaxed affectionate posture.",
+    "reference": "hana-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush__simultaneous",
+    "file": "hana-brush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-97c88250-2a14-4953-b0dc-41f2d34b568d.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HANA exact identity and style. Adult BLACK AND WHITE SHORTHAIR, small compact round body, short sturdy legs, round face full cheeks, small triangular ears, round COPPER ORANGE eyes, pink nose with NO nose spots. Black ears and cap, BROAD WHITE inverted V blaze on forehead and nose bridge, white cheeks muzzle chin, solid black back flanks, white chest belly all lower legs and paws. Medium-short slim BLACK tail with clearly WHITE TIP curls low. No stripes, no colored fur, not fluffy or longhair. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING white tail tip visible with margins. One cat, correct limbs, no text UI watermark human face. Special delighted and trusting brushing: one hand brushes shoulder with wooden brush, cat stretches neck and raises chin slightly, blissfully closed eyes, happy relaxed posture.",
+    "reference": "hana-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice__open_up",
+    "file": "hana-voice__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-d5e26ecf-eeae-4d92-ada7-1bfac13cf148.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HANA exact identity and style. Adult BLACK AND WHITE SHORTHAIR, small compact round body, short sturdy legs, round face full cheeks, small triangular ears, round COPPER ORANGE eyes, pink nose with NO nose spots. Black ears and cap, BROAD WHITE inverted V blaze on forehead and nose bridge, white cheeks muzzle chin, solid black back flanks, white chest belly all lower legs and paws. Medium-short slim BLACK tail with clearly WHITE TIP curls low. No stripes, no colored fur, not fluffy or longhair. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING white tail tip visible with margins. One cat, correct limbs, no text UI watermark human face. Special deep trust response to a familiar voice. Cat leans its head and upper body slightly toward viewer, neck gently extended, EYES VISIBLY NARROWED TO SOFT HALF-CLOSED SLITS in a relaxed slow blink (not wide open), gentle affectionate expression, relaxed forward ears, mouth closed. Both front paws remain on mat. No hands, humans, knees, speech bubbles, toys or other props. Make the facial trust reaction clearly distinct from the open-eyed normal reference.",
+    "reference": "hana-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice__simultaneous",
+    "file": "hana-voice__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-068d08b3-fe49-492a-a7d7-529b5566b38f.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HANA exact identity and style. Adult BLACK AND WHITE SHORTHAIR, small compact round body, short sturdy legs, round face full cheeks, small triangular ears, round COPPER ORANGE eyes, pink nose with NO nose spots. Black ears and cap, BROAD WHITE inverted V blaze on forehead and nose bridge, white cheeks muzzle chin, solid black back flanks, white chest belly all lower legs and paws. Medium-short slim BLACK tail with clearly WHITE TIP curls low. No stripes, no colored fur, not fluffy or longhair. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING white tail tip visible with margins. One cat, correct limbs, no text UI watermark human face. Special delighted trusting response to voice: stands taking one friendly step toward viewer, bright welcoming copper-orange eyes and forward ears, low relaxed tail, mouth closed. No human or props.",
+    "reference": "hana-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence__open_up",
+    "file": "hana-presence__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-2678f5e1-ed8d-433f-9bd4-5edd9a935749.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HANA exact identity and style. Adult BLACK AND WHITE SHORTHAIR, small compact round body, short sturdy legs, round face full cheeks, small triangular ears, round COPPER ORANGE eyes, pink nose with NO nose spots. Black ears and cap, BROAD WHITE inverted V blaze on forehead and nose bridge, white cheeks muzzle chin, solid black back flanks, white chest belly all lower legs and paws. Medium-short slim BLACK tail with clearly WHITE TIP curls low. No stripes, no colored fur, not fluffy or longhair. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING white tail tip visible with margins. One cat, correct limbs, no text UI watermark human face. Special deep trust companionship: lies comfortably on side beside blue clothed knee edge, soft half closed eyes relaxed head. No hands touching, no toys.",
+    "reference": "hana-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence__simultaneous",
+    "file": "hana-presence__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-f019250c-a9bd-4ada-ba92-67b7ff66d9d1.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HANA exact identity and style. Adult BLACK AND WHITE SHORTHAIR, small compact round body, short sturdy legs, round face full cheeks, small triangular ears, round COPPER ORANGE eyes, pink nose with NO nose spots. Black ears and cap, BROAD WHITE inverted V blaze on forehead and nose bridge, white cheeks muzzle chin, solid black back flanks, white chest belly all lower legs and paws. Medium-short slim BLACK tail with clearly WHITE TIP curls low. No stripes, no colored fur, not fluffy or longhair. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING white tail tip visible with margins. One cat, correct limbs, no text UI watermark human face. Special delighted trusting companionship: sits close beside blue clothed knee edge, flank gently leaning against knee, blissfully half closed eyes. No hands touching, no toys.",
+    "reference": "hana-normal.png",
+    "reference_role": "identity_and_style"
+  }
+]

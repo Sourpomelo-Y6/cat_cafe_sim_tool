@@ -21,7 +21,7 @@ namespace CatCafePreview.Standalone
         private CafeSnapshot S=>sim.State;
         public static string Number(double value)=>value.ToString("G6",CultureInfo.InvariantCulture).Replace("E","e");
         private string Label(DisplayLabel[] rows,string id,string fallback)=>rows.FirstOrDefault(r=>r.id==id)?.label ?? fallback;
-        public string ContentId(string id)=>Label(catalog.content_ids,id,id);
+        public string ContentId(string id){var intro=S.dispatches.FirstOrDefault(e=>e.introduction?.cat_id==id);return intro==null?Label(catalog.content_ids,id,id):"intro-"+intro.destination;}
         public string CustomerName(string id)
         {
             if(string.IsNullOrEmpty(id))return "";var special=catalog.special_names.FirstOrDefault(r=>r.id==id);if(special!=null)return special.label;

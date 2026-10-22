@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-22",
+  "cat_id": "intro-cat_photo_studio",
+  "name": "ルカ",
+  "status": "completed",
+  "tool": "built-in image_gen",
+  "selected_png_count": 27,
+  "retained_candidate_png_count": 0,
+  "scene_keys": 52,
+  "narrative_bindings": 32,
+  "python_tests": {
+    "total": 21,
+    "passed": 20,
+    "skipped": 1
+  },
+  "actual_photo_admission_appearance_save_replay": true,
+  "later_sena_mapping_distinct": true,
+  "unity_reaction_cases": 40,
+  "unity_normal_sleep_roster": true,
+  "unity_special_resources": true,
+  "unity_admission_save_reload": true,
+  "unity_log": "Logs/CatDailyImages/20261022/unity.log",
+  "visual_qa": "All 27 selected images and four Unity screenshots reviewed; green eyes, pure white short coat, round face and action composition confirmed",
+  "selected_png_bytes": 50539358,
+  "registered_png_bytes_each": 50539358,
+  "build_performed": false,
+  "capacity_before": {
+    "latest_bytes": 8757722753,
+    "runs_bytes": 92682454,
+    "generated_bytes": 3277372585
+  },
+  "capacity_after": {
+    "latest_bytes": 8757722753,
+    "runs_bytes": 92682454,
+    "generated_bytes": 3277372585
+  },
+  "runtime_id_resolution": {
+    "destination": "cat_photo_studio",
+    "content_id": "intro-cat_photo_studio",
+    "rule": "Resolve actual dispatch-rescue-N through saved event destination; never by name or fixed ordinal"
+  }
+}

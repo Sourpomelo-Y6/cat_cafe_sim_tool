@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-20",
+  "cat_id": "shop-3",
+  "name": "ハナ",
+  "status": "completed",
+  "tool": "built-in image_gen",
+  "selected_png_count": 27,
+  "retained_candidate_png_count": 0,
+  "scene_keys": 52,
+  "narrative_bindings": 32,
+  "python_tests": {
+    "total": 41,
+    "passed": 39,
+    "skipped": 2
+  },
+  "hana_admission_appearance_save_reload": true,
+  "hana_reaction_selections": 12,
+  "unity_reaction_cases": 40,
+  "unity_normal_sleep_roster": true,
+  "unity_special_resources": true,
+  "unity_admission_save_reload": true,
+  "unity_log": "Logs/CatDailyImages/20261020/unity.log",
+  "visual_qa": "All 27 selected images and four Unity screenshots reviewed; identity, anatomy, actions, normal/sleep confirmed",
+  "selected_png_bytes": 53056209,
+  "retained_source_png_bytes": 53056209,
+  "registered_png_bytes_each": 53056209,
+  "build_performed": false,
+  "latest_bytes_before": 8502631644,
+  "latest_bytes_after": 8502631644,
+  "generated_bytes_before": 3277372585,
+  "generated_bytes_after": 3277372585
+}

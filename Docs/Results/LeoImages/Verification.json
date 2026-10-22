@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-19",
+  "cat_id": "shop-2",
+  "name": "レオ",
+  "status": "completed",
+  "tool": "built-in image_gen",
+  "selected_png_count": 27,
+  "retained_candidate_png_count": 1,
+  "scene_keys": 52,
+  "narrative_bindings": 32,
+  "python_tests": {
+    "total": 41,
+    "passed": 39,
+    "skipped": 2
+  },
+  "leo_admission_appearance_save_reload": true,
+  "leo_reaction_selections": 12,
+  "unity_reaction_cases": 40,
+  "unity_normal_sleep_roster": true,
+  "unity_special_resources": true,
+  "unity_admission_save_reload": true,
+  "unity_log": "Logs/CatDailyImages/20261019/unity-final.log",
+  "visual_qa": "All 27 selected art images reviewed; voice trust expression refined; normal/sleep and ball/pet Unity screenshots reviewed",
+  "selected_png_bytes": 55673692,
+  "retained_source_png_bytes": 57627746,
+  "registered_png_bytes_each": 55673692,
+  "build_performed": false,
+  "latest_bytes_before": 8375172745,
+  "latest_bytes_after": 8375172745,
+  "generated_bytes_before": 3277372585,
+  "generated_bytes_after": 3277372585
+}

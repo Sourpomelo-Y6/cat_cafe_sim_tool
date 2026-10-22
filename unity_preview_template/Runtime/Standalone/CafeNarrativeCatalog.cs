@@ -76,7 +76,7 @@ namespace CatCafePreview.Standalone
         };
         public static string Scene(string mode,string action)=>action=="any" || action=="pause"?mode:mode+"__"+action;
         public static bool UsePreparationImage(string catId,string action,string reaction)=>
-            new[]{"cat-mike","cat-tama","cat-sora","cat-kohaku","cat-mugi","request-cat-1","regular-rescue-1","visiting-cat-1"}.Contains(catId) && (action=="direct" || action=="adapt")
+            (new[]{"cat-mike","cat-tama","cat-sora","cat-kohaku","cat-mugi","request-cat-1","regular-rescue-1","visiting-cat-1","shop-1","shop-2","shop-3","intro-shopping_street_event","intro-cat_photo_studio"}.Contains(catId) || catId.StartsWith("dispatch-rescue-")) && (action=="direct" || action=="adapt")
             && (reaction=="turn_away" || reaction=="confused" || reaction=="listless");
         public static string[] ImageChoices(string scene)
         {

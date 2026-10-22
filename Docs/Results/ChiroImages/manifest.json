@@ -1,0 +1,173 @@
+{
+  "cat_id": "shop-1",
+  "name": "チロ",
+  "date": "2026-10-18",
+  "tool": "built-in image_gen",
+  "images": [
+    {
+      "scene": "normal",
+      "file": "chiro-normal.png"
+    },
+    {
+      "scene": "sleep",
+      "file": "chiro-sleep.png"
+    },
+    {
+      "scene": "pause",
+      "file": "chiro-pause.png"
+    },
+    {
+      "scene": "teaser",
+      "file": "chiro-teaser.png"
+    },
+    {
+      "scene": "ball",
+      "file": "chiro-ball.png"
+    },
+    {
+      "scene": "plush",
+      "file": "chiro-plush.png"
+    },
+    {
+      "scene": "tunnel",
+      "file": "chiro-tunnel.png"
+    },
+    {
+      "scene": "pet",
+      "file": "chiro-pet.png"
+    },
+    {
+      "scene": "brush",
+      "file": "chiro-brush.png"
+    },
+    {
+      "scene": "voice",
+      "file": "chiro-voice.png"
+    },
+    {
+      "scene": "presence",
+      "file": "chiro-presence.png"
+    },
+    {
+      "scene": "teaser__open_up",
+      "file": "chiro-teaser__open_up.png"
+    },
+    {
+      "scene": "teaser__simultaneous",
+      "file": "chiro-teaser__simultaneous.png"
+    },
+    {
+      "scene": "ball__open_up",
+      "file": "chiro-ball__open_up.png"
+    },
+    {
+      "scene": "ball__simultaneous",
+      "file": "chiro-ball__simultaneous.png"
+    },
+    {
+      "scene": "plush__open_up",
+      "file": "chiro-plush__open_up.png"
+    },
+    {
+      "scene": "plush__simultaneous",
+      "file": "chiro-plush__simultaneous.png"
+    },
+    {
+      "scene": "tunnel__open_up",
+      "file": "chiro-tunnel__open_up.png"
+    },
+    {
+      "scene": "tunnel__simultaneous",
+      "file": "chiro-tunnel__simultaneous.png"
+    },
+    {
+      "scene": "pet__open_up",
+      "file": "chiro-pet__open_up.png"
+    },
+    {
+      "scene": "pet__simultaneous",
+      "file": "chiro-pet__simultaneous.png"
+    },
+    {
+      "scene": "brush__open_up",
+      "file": "chiro-brush__open_up.png"
+    },
+    {
+      "scene": "brush__simultaneous",
+      "file": "chiro-brush__simultaneous.png"
+    },
+    {
+      "scene": "voice__open_up",
+      "file": "chiro-voice__open_up.png"
+    },
+    {
+      "scene": "voice__simultaneous",
+      "file": "chiro-voice__simultaneous.png"
+    },
+    {
+      "scene": "presence__open_up",
+      "file": "chiro-presence__open_up.png"
+    },
+    {
+      "scene": "presence__simultaneous",
+      "file": "chiro-presence__simultaneous.png"
+    }
+  ],
+  "scenes": {
+    "normal": "images/eaad1b3cc4402088b3fbbb653dc3c1fddd5a73c1694818258151b112e4946a7e.png",
+    "sleep": "images/73f68302c74a66cb6b9846d12c2aac6746314f993c63fc103e083f24d307cea2.png",
+    "play": "images/26dca71fae9690f0f65dabdfc7d4cc8f75829e0541095b16255ed60fea8619e9.png",
+    "pause": "images/c6dadcb0bbca1257cd5c8d6dbd6a0f803f5263dd91ef7b3c82690b8a054939df.png",
+    "teaser": "images/eaad1b3cc4402088b3fbbb653dc3c1fddd5a73c1694818258151b112e4946a7e.png",
+    "teaser__switch": "images/eaad1b3cc4402088b3fbbb653dc3c1fddd5a73c1694818258151b112e4946a7e.png",
+    "teaser__direct": "images/26dca71fae9690f0f65dabdfc7d4cc8f75829e0541095b16255ed60fea8619e9.png",
+    "teaser__adapt": "images/26dca71fae9690f0f65dabdfc7d4cc8f75829e0541095b16255ed60fea8619e9.png",
+    "teaser__open_up": "images/cefe5ccb8376606289cd6f3e7797829a8ee08d9a112ea796d3e3bfd398c6e75b.png",
+    "teaser__simultaneous": "images/0409cacec3d7564aeed11afbde622f39232a789fe40712acf4ebf1a2dafffe1e.png",
+    "ball": "images/eaad1b3cc4402088b3fbbb653dc3c1fddd5a73c1694818258151b112e4946a7e.png",
+    "ball__switch": "images/eaad1b3cc4402088b3fbbb653dc3c1fddd5a73c1694818258151b112e4946a7e.png",
+    "ball__direct": "images/fa3635dfb4cbfa765cdabc2fb7bda9fe0b2264d83dfd7473fa81c52585690b6c.png",
+    "ball__adapt": "images/fa3635dfb4cbfa765cdabc2fb7bda9fe0b2264d83dfd7473fa81c52585690b6c.png",
+    "ball__open_up": "images/eabf255f75a84fff5afd76a61bc431d072945ae4e023e887b6d401445dd0d8fa.png",
+    "ball__simultaneous": "images/225107750fb54bea76316314142b09c89b3999b33b21c7600b45855f1c68bb0a.png",
+    "plush": "images/eaad1b3cc4402088b3fbbb653dc3c1fddd5a73c1694818258151b112e4946a7e.png",
+    "plush__switch": "images/eaad1b3cc4402088b3fbbb653dc3c1fddd5a73c1694818258151b112e4946a7e.png",
+    "plush__direct": "images/1d7c7aceb758c190e5dfbd3576eca32088d8da91fd7b7fc10c0394476fa40db6.png",
+    "plush__adapt": "images/1d7c7aceb758c190e5dfbd3576eca32088d8da91fd7b7fc10c0394476fa40db6.png",
+    "plush__open_up": "images/f992ef939f598cbae0b192bd99a89df613966a56862026d7a918d044e7938218.png",
+    "plush__simultaneous": "images/0571a96ccf75177d3e3bd32bf14cdf4aee2978ce750a9c280d32a3a93db9d6f2.png",
+    "tunnel": "images/eaad1b3cc4402088b3fbbb653dc3c1fddd5a73c1694818258151b112e4946a7e.png",
+    "tunnel__switch": "images/eaad1b3cc4402088b3fbbb653dc3c1fddd5a73c1694818258151b112e4946a7e.png",
+    "tunnel__direct": "images/f5d81c3ad042dd37ae1a29a4bb9730e50a0868e2f0884883cfd1220369722484.png",
+    "tunnel__adapt": "images/f5d81c3ad042dd37ae1a29a4bb9730e50a0868e2f0884883cfd1220369722484.png",
+    "tunnel__open_up": "images/926c2effbca371fda59c1da937960bc34b27620f6874964a36f5c2b4be5dd04b.png",
+    "tunnel__simultaneous": "images/57ddd5644893c06124f3c86e2dde2078c05d45012691bf41ee5ad54ebb383a0d.png",
+    "pet": "images/eaad1b3cc4402088b3fbbb653dc3c1fddd5a73c1694818258151b112e4946a7e.png",
+    "pet__switch": "images/eaad1b3cc4402088b3fbbb653dc3c1fddd5a73c1694818258151b112e4946a7e.png",
+    "pet__direct": "images/168edce0f162b9e0f387af56e677dd3c6e094c7e6b490b2a8497f28fc7afaae7.png",
+    "pet__adapt": "images/168edce0f162b9e0f387af56e677dd3c6e094c7e6b490b2a8497f28fc7afaae7.png",
+    "pet__open_up": "images/9fafbb77f0a1fe3ef0e62fa0405f2d5938d3edb767a33e4e7099fae466aecc5d.png",
+    "pet__simultaneous": "images/0a8fafe09e82c3bfd0f27932214868314c9bf4271b203e7d6fb4822b0cbdf6a6.png",
+    "brush": "images/eaad1b3cc4402088b3fbbb653dc3c1fddd5a73c1694818258151b112e4946a7e.png",
+    "brush__switch": "images/eaad1b3cc4402088b3fbbb653dc3c1fddd5a73c1694818258151b112e4946a7e.png",
+    "brush__direct": "images/a955ad91cc78010de4ccfdefec6c1812131cb893de93fbc7ec5df9a9c57d720a.png",
+    "brush__adapt": "images/a955ad91cc78010de4ccfdefec6c1812131cb893de93fbc7ec5df9a9c57d720a.png",
+    "brush__open_up": "images/477239bfed56492a7c13d383936c2b5b9f7b72d4c63393d88b07c6c16a3c9081.png",
+    "brush__simultaneous": "images/d11e880d42fd60f73822ebbe1eb15f9eb1edd3ae27d26edb43bdb6559fab4e3a.png",
+    "voice": "images/eaad1b3cc4402088b3fbbb653dc3c1fddd5a73c1694818258151b112e4946a7e.png",
+    "voice__switch": "images/eaad1b3cc4402088b3fbbb653dc3c1fddd5a73c1694818258151b112e4946a7e.png",
+    "voice__direct": "images/d1bc84020c8ad041d4342bc6568bd55a7ef5d4adaac90df4793f3313df7ad86d.png",
+    "voice__adapt": "images/d1bc84020c8ad041d4342bc6568bd55a7ef5d4adaac90df4793f3313df7ad86d.png",
+    "voice__open_up": "images/997348f712a71bf42db28edfa010b3e7b36d725ced1484ccba90d09448794083.png",
+    "voice__simultaneous": "images/378f8f8502efa5ecd652f0d72f5d1dc7ea0fd3787553ecbb78ab694040fc7d44.png",
+    "presence": "images/eaad1b3cc4402088b3fbbb653dc3c1fddd5a73c1694818258151b112e4946a7e.png",
+    "presence__switch": "images/eaad1b3cc4402088b3fbbb653dc3c1fddd5a73c1694818258151b112e4946a7e.png",
+    "presence__direct": "images/747caea3ab204a19e3cc87baf13d001cc15f89603a10d851dd2b7200aa309291.png",
+    "presence__adapt": "images/747caea3ab204a19e3cc87baf13d001cc15f89603a10d851dd2b7200aa309291.png",
+    "presence__open_up": "images/3ac833da5ba4b77edde40f0263b24f016b399b01bdbcd6585ec0e6492e9a23e5.png",
+    "presence__simultaneous": "images/897f27b228a30d0c54a597c0dc164d69328dd5a3f1bcc604473bef14dca4d4cc.png"
+  },
+  "active_pack": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\Imports\\4762dd1bd978461bb07c041c59417281",
+  "authored_entries_unchanged": true,
+  "existing_cats_unchanged": true
+}

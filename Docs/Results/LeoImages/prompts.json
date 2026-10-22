@@ -1,0 +1,224 @@
+[
+  {
+    "scene": "normal",
+    "file": "leo-normal.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-9177e5f4-15ea-4ee5-860a-9c6ae1defa79.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim game cat identity illustration. Input reference MARON is ONLY style and room reference, create a DIFFERENT cat LEO. Adult ORANGE TABBY SHORTHAIR, medium size lean athletic body, slightly long sturdy legs, slightly angular oval face, prominent triangular ears, almond shaped GOLDEN AMBER eyes (not green), salmon pink nose. Rich deep ginger coat with NARROW DARK ORANGE vertical mackerel stripes, forehead M, two thin cheek stripes, cream muzzle chin and small cream chest, no white socks or white patches. Long slender ringed orange tail with dark ginger tip curves low beside paws, NOT fluffy. Gentle affectionate personality, calm friendly attentive expression. Seated, whole cat and tail inside image with 10% margins. Match fine soft painted storybook fur, cream wall, honey wood floor, sage green mat, warm diffuse light of reference. No humans, props, text, watermark, UI. Anatomically correct one cat.",
+    "reference": "../CatExecutionImages/Prototypes/CatAppearance-v1/maron-normal.png",
+    "reference_role": "style_and_room"
+  },
+  {
+    "scene": "teaser",
+    "file": "leo-teaser.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-700a5d18-43c7-4663-a954-10fdc09e5630.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is LEO exact identity and style. Adult ORANGE TABBY SHORTHAIR, medium lean athletic body, slightly long legs, slightly angular oval face, large triangular ears, almond GOLDEN AMBER eyes, pink nose. Rich deep ginger coat, narrow DARK ORANGE mackerel stripes, forehead M, two thin cheek stripes, cream muzzle chin and small cream chest. No green eyes, no white socks or patches, not longhaired or fluffy. Long slim ringed orange tail with dark ginger tip curved low. Same fine soft painted storybook style, cream wall honey wood floor sage mat warm light. Entire cat and tail visible with margins. One cat, correct limbs, no text UI watermark human face. Basic attentive play: one hand at edge holds feather teaser near cat. Cat reaches one forepaw toward feather, amber eyes open, gentle calm engagement.",
+    "reference": "leo-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball",
+    "file": "leo-ball.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-75442371-71fe-4162-9b44-2bee488529bd.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is LEO exact identity and style. Adult ORANGE TABBY SHORTHAIR, medium lean athletic body, slightly long legs, slightly angular oval face, large triangular ears, almond GOLDEN AMBER eyes, pink nose. Rich deep ginger coat, narrow DARK ORANGE mackerel stripes, forehead M, two thin cheek stripes, cream muzzle chin and small cream chest. No green eyes, no white socks or patches, not longhaired or fluffy. Long slim ringed orange tail with dark ginger tip curved low. Same fine soft painted storybook style, cream wall honey wood floor sage mat warm light. Entire cat and tail visible with margins. One cat, correct limbs, no text UI watermark human face. Basic play: crouches and gently touches small blue toy ball on mat with one paw, attentive open amber eyes. No humans or other toys.",
+    "reference": "leo-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush",
+    "file": "leo-plush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-034cf420-f834-45f6-865d-927a3ea41ed8.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is LEO exact identity and style. Adult ORANGE TABBY SHORTHAIR, medium lean athletic body, slightly long legs, slightly angular oval face, large triangular ears, almond GOLDEN AMBER eyes, pink nose. Rich deep ginger coat, narrow DARK ORANGE mackerel stripes, forehead M, two thin cheek stripes, cream muzzle chin and small cream chest. No green eyes, no white socks or patches, not longhaired or fluffy. Long slim ringed orange tail with dark ginger tip curved low. Same fine soft painted storybook style, cream wall honey wood floor sage mat warm light. Entire cat and tail visible with margins. One cat, correct limbs, no text UI watermark human face. Basic play: holds small plain beige fabric mouse toy between front paws, calmly sniffing, amber eyes open. No humans or other toys.",
+    "reference": "leo-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel",
+    "file": "leo-tunnel.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-b1720d53-d0da-4336-a2c9-499891b80f02.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is LEO exact identity and style. Adult ORANGE TABBY SHORTHAIR, medium lean athletic body, slightly long legs, slightly angular oval face, large triangular ears, almond GOLDEN AMBER eyes, pink nose. Rich deep ginger coat, narrow DARK ORANGE mackerel stripes, forehead M, two thin cheek stripes, cream muzzle chin and small cream chest. No green eyes, no white socks or patches, not longhaired or fluffy. Long slim ringed orange tail with dark ginger tip curved low. Same fine soft painted storybook style, cream wall honey wood floor sage mat warm light. Entire cat and tail visible with margins. One cat, correct limbs, no text UI watermark human face. Basic play: crouches just inside short beige fabric cat tunnel, head front paws and tail fully visible at entrance, eyes open curious gentle expression. No humans or other toys.",
+    "reference": "leo-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet",
+    "file": "leo-pet.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-4fe93bc0-76c1-4cfe-a202-541b2cc0531d.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is LEO exact identity and style. Adult ORANGE TABBY SHORTHAIR, medium lean athletic body, slightly long legs, slightly angular oval face, large triangular ears, almond GOLDEN AMBER eyes, pink nose. Rich deep ginger coat, narrow DARK ORANGE mackerel stripes, forehead M, two thin cheek stripes, cream muzzle chin and small cream chest. No green eyes, no white socks or patches, not longhaired or fluffy. Long slim ringed orange tail with dark ginger tip curved low. Same fine soft painted storybook style, cream wall honey wood floor sage mat warm light. Entire cat and tail visible with margins. One cat, correct limbs, no text UI watermark human face. Basic petting: one human hand gently strokes forehead, cat relaxed and attentive, amber eyes open. No toys.",
+    "reference": "leo-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush",
+    "file": "leo-brush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-b0b78919-071f-4a8f-95f7-7056c3069dbc.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is LEO exact identity and style. Adult ORANGE TABBY SHORTHAIR, medium lean athletic body, slightly long legs, slightly angular oval face, large triangular ears, almond GOLDEN AMBER eyes, pink nose. Rich deep ginger coat, narrow DARK ORANGE mackerel stripes, forehead M, two thin cheek stripes, cream muzzle chin and small cream chest. No green eyes, no white socks or patches, not longhaired or fluffy. Long slim ringed orange tail with dark ginger tip curved low. Same fine soft painted storybook style, cream wall honey wood floor sage mat warm light. Entire cat and tail visible with margins. One cat, correct limbs, no text UI watermark human face. Basic brushing: one human hand uses wooden pet brush on shoulder, bristles contact SHORT fur, cat calmly stands with eyes open. No other props.",
+    "reference": "leo-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice",
+    "file": "leo-voice.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-e0b72ee2-e050-48da-a3d2-ceb9324ddff6.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is LEO exact identity and style. Adult ORANGE TABBY SHORTHAIR, medium lean athletic body, slightly long legs, slightly angular oval face, large triangular ears, almond GOLDEN AMBER eyes, pink nose. Rich deep ginger coat, narrow DARK ORANGE mackerel stripes, forehead M, two thin cheek stripes, cream muzzle chin and small cream chest. No green eyes, no white socks or patches, not longhaired or fluffy. Long slim ringed orange tail with dark ginger tip curved low. Same fine soft painted storybook style, cream wall honey wood floor sage mat warm light. Entire cat and tail visible with margins. One cat, correct limbs, no text UI watermark human face. Basic voice interaction: sits calmly, ears turn toward viewer listening, amber eyes open, mouth closed. No human hands knees speech bubbles or props.",
+    "reference": "leo-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence",
+    "file": "leo-presence.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-8f6b0abc-e013-4da2-91fe-933d3007a60c.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is LEO exact identity and style. Adult ORANGE TABBY SHORTHAIR, medium lean athletic body, slightly long legs, slightly angular oval face, large triangular ears, almond GOLDEN AMBER eyes, pink nose. Rich deep ginger coat, narrow DARK ORANGE mackerel stripes, forehead M, two thin cheek stripes, cream muzzle chin and small cream chest. No green eyes, no white socks or patches, not longhaired or fluffy. Long slim ringed orange tail with dark ginger tip curved low. Same fine soft painted storybook style, cream wall honey wood floor sage mat warm light. Entire cat and tail visible with margins. One cat, correct limbs, no text UI watermark human face. Basic companionship: cat loafs calmly, amber eyes open, only part of blue clothed knee at lower edge. No hands or toys.",
+    "reference": "leo-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pause",
+    "file": "leo-pause.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-21896970-5586-4429-8a2d-16cac32a24ed.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is LEO exact identity and style. Adult ORANGE TABBY SHORTHAIR, medium lean athletic body, slightly long legs, slightly angular oval face, large triangular ears, almond GOLDEN AMBER eyes, pink nose. Rich deep ginger coat, narrow DARK ORANGE mackerel stripes, forehead M, two thin cheek stripes, cream muzzle chin and small cream chest. No green eyes, no white socks or patches, not longhaired or fluffy. Long slim ringed orange tail with dark ginger tip curved low. Same fine soft painted storybook style, cream wall honey wood floor sage mat warm light. Entire cat and tail visible with margins. One cat, correct limbs, no text UI watermark human face. Pause/wait: cat calmly sits, forepaws planted, eyes open, feather teaser lies completely still on mat at safe distance. No hands.",
+    "reference": "leo-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "sleep",
+    "file": "leo-sleep.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-30799b00-6dc4-4f3f-b7b4-8344adcafbc9.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is LEO exact identity and style. Adult ORANGE TABBY SHORTHAIR, medium lean athletic body, slightly long legs, slightly angular oval face, large triangular ears, almond GOLDEN AMBER eyes, pink nose. Rich deep ginger coat, narrow DARK ORANGE mackerel stripes, forehead M, two thin cheek stripes, cream muzzle chin and small cream chest. No green eyes, no white socks or patches, not longhaired or fluffy. Long slim ringed orange tail with dark ginger tip curved low. Same fine soft painted storybook style, cream wall honey wood floor sage mat warm light. Entire cat and tail visible with margins. One cat, correct limbs, no text UI watermark human face. Sleep: cat curled into a relaxed ball sleeping, eyes closed, head on front paws, slim striped tail around body. No humans or toys.",
+    "reference": "leo-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "teaser__open_up",
+    "file": "leo-teaser__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-5e61a3dc-d997-4b55-9628-0eff6bafeec9.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is LEO exact identity and style. Adult ORANGE TABBY SHORTHAIR, medium lean athletic body, slightly long legs, slightly angular oval face, large triangular ears, almond GOLDEN AMBER eyes, pink nose. Rich deep ginger coat, narrow DARK ORANGE mackerel stripes, forehead M, two thin cheek stripes, cream muzzle chin and small cream chest. No green eyes, no white socks or patches, not longhaired or fluffy. Long slim ringed orange tail with dark ginger tip curved low. Same fine soft painted storybook style, cream wall honey wood floor sage mat warm light. Entire cat and tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special deep trust playing with feather teaser: one hand holds feather close; cat leans toward viewer, eyes soft half closed, paw reaches gently. Relaxed ears.",
+    "reference": "leo-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "teaser__simultaneous",
+    "file": "leo-teaser__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-96b4413b-49e2-4452-8c02-7a9802b2c914.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is LEO exact identity and style. Adult ORANGE TABBY SHORTHAIR, medium lean athletic body, slightly long legs, slightly angular oval face, large triangular ears, almond GOLDEN AMBER eyes, pink nose. Rich deep ginger coat, narrow DARK ORANGE mackerel stripes, forehead M, two thin cheek stripes, cream muzzle chin and small cream chest. No green eyes, no white socks or patches, not longhaired or fluffy. Long slim ringed orange tail with dark ginger tip curved low. Same fine soft painted storybook style, cream wall honey wood floor sage mat warm light. Entire cat and tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special excited and deeply trusting play: joyfully bats feather teaser held by one edge hand, ears forward bright amber eyes, lifted paw, confident happy posture. No aggressive expression.",
+    "reference": "leo-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball__open_up",
+    "file": "leo-ball__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-e9a835b6-2706-4fdb-88c9-d82346f77339.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is LEO exact identity and style. Adult ORANGE TABBY SHORTHAIR, medium lean athletic body, slightly long legs, slightly angular oval face, large triangular ears, almond GOLDEN AMBER eyes, pink nose. Rich deep ginger coat, narrow DARK ORANGE mackerel stripes, forehead M, two thin cheek stripes, cream muzzle chin and small cream chest. No green eyes, no white socks or patches, not longhaired or fluffy. Long slim ringed orange tail with dark ginger tip curved low. Same fine soft painted storybook style, cream wall honey wood floor sage mat warm light. Entire cat and tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special deep trust: relaxed on side beside small blue ball, paw resting on ball, head tipped affectionately toward viewer, soft half closed eyes. No humans.",
+    "reference": "leo-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball__simultaneous",
+    "file": "leo-ball__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-55ceec8f-a236-41ff-b2f6-1cb8c3d3c663.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is LEO exact identity and style. Adult ORANGE TABBY SHORTHAIR, medium lean athletic body, slightly long legs, slightly angular oval face, large triangular ears, almond GOLDEN AMBER eyes, pink nose. Rich deep ginger coat, narrow DARK ORANGE mackerel stripes, forehead M, two thin cheek stripes, cream muzzle chin and small cream chest. No green eyes, no white socks or patches, not longhaired or fluffy. Long slim ringed orange tail with dark ginger tip curved low. Same fine soft painted storybook style, cream wall honey wood floor sage mat warm light. Entire cat and tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special excited and trusting: playfully hugs small blue ball between forepaws, crouched with confident happy energy, bright amber eyes. No humans or other toys.",
+    "reference": "leo-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush__open_up",
+    "file": "leo-plush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-27d3af02-04e8-48e1-a36f-fa350e2dc5de.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is LEO exact identity and style. Adult ORANGE TABBY SHORTHAIR, medium lean athletic body, slightly long legs, slightly angular oval face, large triangular ears, almond GOLDEN AMBER eyes, pink nose. Rich deep ginger coat, narrow DARK ORANGE mackerel stripes, forehead M, two thin cheek stripes, cream muzzle chin and small cream chest. No green eyes, no white socks or patches, not longhaired or fluffy. Long slim ringed orange tail with dark ginger tip curved low. Same fine soft painted storybook style, cream wall honey wood floor sage mat warm light. Entire cat and tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special deep trust: hugs small beige mouse plush and rests cheek on toy, soft half closed amber eyes, affectionate expression toward viewer. No humans.",
+    "reference": "leo-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush__simultaneous",
+    "file": "leo-plush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-a02393da-b64f-4f5d-8442-5270b961e731.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is LEO exact identity and style. Adult ORANGE TABBY SHORTHAIR, medium lean athletic body, slightly long legs, slightly angular oval face, large triangular ears, almond GOLDEN AMBER eyes, pink nose. Rich deep ginger coat, narrow DARK ORANGE mackerel stripes, forehead M, two thin cheek stripes, cream muzzle chin and small cream chest. No green eyes, no white socks or patches, not longhaired or fluffy. Long slim ringed orange tail with dark ginger tip curved low. Same fine soft painted storybook style, cream wall honey wood floor sage mat warm light. Entire cat and tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special excited and trusting: joyfully rolls slightly on side hugging small beige mouse plush with front paws, bright amber eyes, relaxed ears and happy posture. No humans.",
+    "reference": "leo-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel__open_up",
+    "file": "leo-tunnel__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-734cd32a-9c1b-4fb0-aa19-a9a75d0958c7.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is LEO exact identity and style. Adult ORANGE TABBY SHORTHAIR, medium lean athletic body, slightly long legs, slightly angular oval face, large triangular ears, almond GOLDEN AMBER eyes, pink nose. Rich deep ginger coat, narrow DARK ORANGE mackerel stripes, forehead M, two thin cheek stripes, cream muzzle chin and small cream chest. No green eyes, no white socks or patches, not longhaired or fluffy. Long slim ringed orange tail with dark ginger tip curved low. Same fine soft painted storybook style, cream wall honey wood floor sage mat warm light. Entire cat and tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special deep trust: relaxed at short beige fabric tunnel entrance, chin on rim, soft half closed amber eyes toward viewer, tail visible outside. No humans.",
+    "reference": "leo-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel__simultaneous",
+    "file": "leo-tunnel__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-8e4df5bc-6e7c-440d-a24f-0b4ba1dcfddb.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is LEO exact identity and style. Adult ORANGE TABBY SHORTHAIR, medium lean athletic body, slightly long legs, slightly angular oval face, large triangular ears, almond GOLDEN AMBER eyes, pink nose. Rich deep ginger coat, narrow DARK ORANGE mackerel stripes, forehead M, two thin cheek stripes, cream muzzle chin and small cream chest. No green eyes, no white socks or patches, not longhaired or fluffy. Long slim ringed orange tail with dark ginger tip curved low. Same fine soft painted storybook style, cream wall honey wood floor sage mat warm light. Entire cat and tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special excited and trusting: playfully peeks out of short beige fabric tunnel, front paws reaching forward, bright amber eyes, forward ears friendly confident expression, tail visible. No humans.",
+    "reference": "leo-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet__open_up",
+    "file": "leo-pet__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-b84b4e9b-b44d-4bc7-95c2-2bb0bd7ff79c.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is LEO exact identity and style. Adult ORANGE TABBY SHORTHAIR, medium lean athletic body, slightly long legs, slightly angular oval face, large triangular ears, almond GOLDEN AMBER eyes, pink nose. Rich deep ginger coat, narrow DARK ORANGE mackerel stripes, forehead M, two thin cheek stripes, cream muzzle chin and small cream chest. No green eyes, no white socks or patches, not longhaired or fluffy. Long slim ringed orange tail with dark ginger tip curved low. Same fine soft painted storybook style, cream wall honey wood floor sage mat warm light. Entire cat and tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special deep trust petting: one hand strokes cheek, cat leans cheek into palm, eyes almost closed, affectionate relaxed expression. No toys.",
+    "reference": "leo-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet__simultaneous",
+    "file": "leo-pet__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-82fa7d76-dc38-4201-9c3d-749c9b717f57.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is LEO exact identity and style. Adult ORANGE TABBY SHORTHAIR, medium lean athletic body, slightly long legs, slightly angular oval face, large triangular ears, almond GOLDEN AMBER eyes, pink nose. Rich deep ginger coat, narrow DARK ORANGE mackerel stripes, forehead M, two thin cheek stripes, cream muzzle chin and small cream chest. No green eyes, no white socks or patches, not longhaired or fluffy. Long slim ringed orange tail with dark ginger tip curved low. Same fine soft painted storybook style, cream wall honey wood floor sage mat warm light. Entire cat and tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special delighted and trusting petting: one hand rubs under chin, cat lifts chin joyfully, content closed eyes and relaxed ears. No toys.",
+    "reference": "leo-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush__open_up",
+    "file": "leo-brush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-f08a798e-e8f8-4ac6-8da4-270d996a8d3f.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is LEO exact identity and style. Adult ORANGE TABBY SHORTHAIR, medium lean athletic body, slightly long legs, slightly angular oval face, large triangular ears, almond GOLDEN AMBER eyes, pink nose. Rich deep ginger coat, narrow DARK ORANGE mackerel stripes, forehead M, two thin cheek stripes, cream muzzle chin and small cream chest. No green eyes, no white socks or patches, not longhaired or fluffy. Long slim ringed orange tail with dark ginger tip curved low. Same fine soft painted storybook style, cream wall honey wood floor sage mat warm light. Entire cat and tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special deep trust brushing: one hand gently brushes short chest fur with wooden pet brush, cat leans toward brush, half closed eyes relaxed affectionate posture.",
+    "reference": "leo-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush__simultaneous",
+    "file": "leo-brush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-2f15840e-a365-4a5c-ae3f-e6d6b654d31b.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is LEO exact identity and style. Adult ORANGE TABBY SHORTHAIR, medium lean athletic body, slightly long legs, slightly angular oval face, large triangular ears, almond GOLDEN AMBER eyes, pink nose. Rich deep ginger coat, narrow DARK ORANGE mackerel stripes, forehead M, two thin cheek stripes, cream muzzle chin and small cream chest. No green eyes, no white socks or patches, not longhaired or fluffy. Long slim ringed orange tail with dark ginger tip curved low. Same fine soft painted storybook style, cream wall honey wood floor sage mat warm light. Entire cat and tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special delighted and trusting brushing: one hand brushes shoulder with wooden brush, cat stretches neck and raises chin slightly, blissfully closed eyes, happy relaxed posture.",
+    "reference": "leo-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice__open_up",
+    "file": "leo-voice__open_up-v2.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-40857efd-319c-47a0-be18-8f89e0dbff00.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is LEO exact identity and style. Adult ORANGE TABBY SHORTHAIR, medium lean athletic body, slightly long legs, slightly angular oval face, large triangular ears, almond GOLDEN AMBER eyes, pink nose. Rich deep ginger coat, narrow DARK ORANGE mackerel stripes, forehead M, two thin cheek stripes, cream muzzle chin and small cream chest. No green eyes, no white socks or patches, not longhaired or fluffy. Long slim ringed orange tail with dark ginger tip curved low. Same fine soft painted storybook style, cream wall honey wood floor sage mat warm light. Entire cat and tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special deep trust response to a familiar voice. Cat leans its head and upper body slightly toward viewer, neck gently extended, EYES VISIBLY NARROWED TO SOFT HALF-CLOSED SLITS in a relaxed slow blink (not wide open), gentle affectionate expression, relaxed forward ears, mouth closed. Both front paws remain on mat. No hands, humans, knees, speech bubbles, toys or other props. Make the facial trust reaction clearly distinct from the open-eyed normal reference.",
+    "previous_candidate": {
+      "file": "leo-voice__open_up.png",
+      "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-8242c64a-ca73-4302-82f7-42699830185c.png",
+      "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is LEO exact identity and style. Adult ORANGE TABBY SHORTHAIR, medium lean athletic body, slightly long legs, slightly angular oval face, large triangular ears, almond GOLDEN AMBER eyes, pink nose. Rich deep ginger coat, narrow DARK ORANGE mackerel stripes, forehead M, two thin cheek stripes, cream muzzle chin and small cream chest. No green eyes, no white socks or patches, not longhaired or fluffy. Long slim ringed orange tail with dark ginger tip curved low. Same fine soft painted storybook style, cream wall honey wood floor sage mat warm light. Entire cat and tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special deep trust listening: sits leaning slightly toward viewer, warm soft half closed amber eyes, ears relaxed toward viewer, mouth closed. No human or props.",
+      "reason": "通常との差を明確にするため、目を細めた信頼表情を再制作した。"
+    },
+    "reference": "leo-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice__simultaneous",
+    "file": "leo-voice__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-c8b983fd-895c-4f1e-a9e5-0c7c4599d5e4.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is LEO exact identity and style. Adult ORANGE TABBY SHORTHAIR, medium lean athletic body, slightly long legs, slightly angular oval face, large triangular ears, almond GOLDEN AMBER eyes, pink nose. Rich deep ginger coat, narrow DARK ORANGE mackerel stripes, forehead M, two thin cheek stripes, cream muzzle chin and small cream chest. No green eyes, no white socks or patches, not longhaired or fluffy. Long slim ringed orange tail with dark ginger tip curved low. Same fine soft painted storybook style, cream wall honey wood floor sage mat warm light. Entire cat and tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special delighted trusting response to voice: stands taking one friendly step toward viewer, bright welcoming amber eyes and forward ears, low relaxed tail, mouth closed. No human or props.",
+    "reference": "leo-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence__open_up",
+    "file": "leo-presence__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-52c8c816-f7aa-4ade-ac77-d60e505c526c.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is LEO exact identity and style. Adult ORANGE TABBY SHORTHAIR, medium lean athletic body, slightly long legs, slightly angular oval face, large triangular ears, almond GOLDEN AMBER eyes, pink nose. Rich deep ginger coat, narrow DARK ORANGE mackerel stripes, forehead M, two thin cheek stripes, cream muzzle chin and small cream chest. No green eyes, no white socks or patches, not longhaired or fluffy. Long slim ringed orange tail with dark ginger tip curved low. Same fine soft painted storybook style, cream wall honey wood floor sage mat warm light. Entire cat and tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special deep trust companionship: lies comfortably on side beside blue clothed knee edge, soft half closed eyes relaxed head. No hands touching, no toys.",
+    "reference": "leo-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence__simultaneous",
+    "file": "leo-presence__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-76567249-6b29-4057-bc62-e52e891ffe1a.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is LEO exact identity and style. Adult ORANGE TABBY SHORTHAIR, medium lean athletic body, slightly long legs, slightly angular oval face, large triangular ears, almond GOLDEN AMBER eyes, pink nose. Rich deep ginger coat, narrow DARK ORANGE mackerel stripes, forehead M, two thin cheek stripes, cream muzzle chin and small cream chest. No green eyes, no white socks or patches, not longhaired or fluffy. Long slim ringed orange tail with dark ginger tip curved low. Same fine soft painted storybook style, cream wall honey wood floor sage mat warm light. Entire cat and tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special delighted trusting companionship: sits close beside blue clothed knee edge, flank gently leaning against knee, blissfully half closed eyes. No hands touching, no toys.",
+    "reference": "leo-normal.png",
+    "reference_role": "identity_and_style"
+  }
+]

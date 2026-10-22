@@ -1,0 +1,153 @@
+using System;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+using CatCafePreview.Standalone;
+
+namespace CatCafePreview.Editor
+{
+    public static class LukaDailyImageVerification
+    {
+        public static void VerifyAndBuild(){Run();StandaloneScreenSetup.Build();}
+        public static void Run()
+        {
+            string output=Environment.GetEnvironmentVariable("CATCAFE_IMAGE_OUTPUT");
+            Directory.CreateDirectory(output);
+            AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
+            var catalog=CafeNarrativeResources.Load();catalog.Validate();
+            EditorSceneManager.OpenScene("Assets/Scenes/CatCafePythonState.unity");
+            var preview=UnityEngine.Object.FindObjectOfType<ContentPreview>();preview.Initialize();
+            var flags=BindingFlags.Instance|BindingFlags.NonPublic;
+            var client=preview.GetComponent<PythonStateClient>();
+            typeof(PythonStateClient).GetField("preview",flags).SetValue(client,preview);
+            var panel=preview.GetComponent<PythonPlayerPanel>();
+            // Exercise a real departure, return, introduction and admission.
+            var shopRules=JsonUtility.FromJson<CafeRules>(Resources.Load<TextAsset>("CatCafeStandalone/rules").text);
+            shopRules.starting_funds=20000;shopRules.store_events.probability=0;shopRules.max_probability=0;
+            foreach(var unlock in shopRules.dispatch_unlocks)if(unlock.stage==0)unlock.popularity=100;
+            var joined=new LocalCafeBackend(Path.Combine(output,"dispatch-saves"),shopRules);
+            Good(joined,"new_game","free");Good(joined,"dispatch_general","neighborhood_visit","cat-sora");Good(joined,"day_off");Good(joined,"receive_general","dispatch-1-cat-sora","cat-sora");Events(joined);
+            Good(joined,"dispatch_general","cat_photo_studio","cat-mike");string dispatchId="dispatch-2-cat-mike";
+            Good(joined,"day_off");Good(joined,"resolve_dispatch_choice","decline",source:dispatchId);Events(joined);Good(joined,"day_off");
+            Good(joined,"receive_general",dispatchId,"cat-mike");Events(joined);Good(joined,"purchase_housing");
+            Good(joined,"resolve_dispatch_introduction","accept","dispatch-rescue-1",dispatchId);
+            string actualId=joined.Simulation.State.dispatches.Single(e=>e.id==dispatchId).introduction.cat_id;
+            if(joined.Details.ContentId(actualId)!="intro-cat_photo_studio")throw new Exception("Dynamic content mapping failed");
+            var normal=preview.PlayerTexture("intro-cat_photo_studio","normal","normal");
+            var sleep=preview.PlayerTexture("intro-cat_photo_studio","sleep","sleep");
+            if(normal==null || sleep==null || normal==sleep || normal==ContentPreview.CatPlaceholderTexture())throw new Exception("Normal/sleep resources missing");
+            CafeBackends.UseLocal(joined);
+            foreach(string scene in new[]{"normal","sleep"})
+            {
+                joined.Simulation.Execute("set_shifts",working:scene=="normal"?new[]{actualId}:new string[0]);
+                typeof(PythonStateClient).GetMethod("Accept",flags).Invoke(client,new object[]{joined.View()});
+                var roster=preview.GetComponent<PythonCatRoster>();
+                var card=Enumerable.Range(0,roster.Count).Select(i=>roster.GetCard(i)).Single(c=>c.state.cat_id==actualId);
+                if(!card.picture.enabled || !card.picture.gameObject.activeInHierarchy || card.picture.texture!=preview.PlayerTexture("intro-cat_photo_studio",scene,scene))throw new Exception("Normal/sleep roster UI mismatch");
+                var preparationPanel=preview.GetComponent<PythonPreparationPanel>();
+                preparationPanel.Open();preparationPanel.SelectCatId(actualId);
+                Canvas.ForceUpdateCanvases();preparationPanel.catsScroll.verticalNormalizedPosition=0;
+                if(preparationPanel.SelectedCatId!=actualId)throw new Exception("Preparation selection mismatch");
+                typeof(NarrativeVerification).GetMethod("Capture",BindingFlags.Static|BindingFlags.NonPublic).Invoke(null,new object[]{preview,Path.Combine(output,"intro-cat_photo_studio-"+scene+".png"),1280,800});
+            }
+            foreach(string mode in new[]{"teaser","ball","plush","tunnel","pet","brush","voice","presence"})
+            foreach(string special in new[]{"open_up","simultaneous"})
+                if(preview.PlayerTexture("intro-cat_photo_studio",mode,mode+"__"+special)==normal)throw new Exception("Special resource missing");
+            joined.Simulation.Execute("player_begin",catId:actualId);
+            joined.Simulation.Execute("player_step",choice:"direct");
+            var admittedReceipt=joined.Narratives.Rows.Last();
+            if(CafeNarrativeResources.Texture(admittedReceipt.image_resource)==null)throw new Exception("Joined cat receipt image missing");
+            Request(joined,"save_game");var loaded=new LocalCafeBackend(Path.Combine(output,"dispatch-saves"),shopRules);Request(loaded,"load_game");
+            if(!loaded.Simulation.State.cats.Any(c=>c.id==actualId) || loaded.Narratives.Rows.Last().image_resource!=admittedReceipt.image_resource)throw new Exception("Joined cat reload changed image");
+            int checkedImages=0;
+            foreach(string catId in new[]{"intro-cat_photo_studio"})
+            foreach(string mode in new[]{"teaser","ball","plush","tunnel","pet","brush","voice","presence"})
+            {
+                var preparation=preview.PlayerTexture(catalog.ContentId(catId,catId),mode,mode+"__switch");
+                var execution=preview.PlayerTexture(catalog.ContentId(catId,catId),mode,mode+"__direct");
+                if(preparation==null || execution==null || preparation==execution)throw new Exception("Missing distinct pair: "+mode);
+                foreach(string action in new[]{"direct","adapt"})
+                {
+                    var rules=Rules(catId);
+                    int modeIndex=Array.FindIndex(rules.types,t=>t.id==mode);
+                    rules.cats.Single(c=>c.id==catId).type_preferences[modeIndex]=12/(rules.exchange.direct_gain*rules.types[modeIndex].gain);
+                    var backend=new LocalCafeBackend(Path.Combine(output,"saves"),rules);
+                    var sim=backend.Simulation;
+                    sim.Execute("player_begin",catId:catId);
+                    if(mode!="teaser")sim.Execute("player_step",choice:"switch",source:mode);
+                    CafeBackends.UseLocal(backend);
+                    typeof(PythonStateClient).GetMethod("Accept",flags).Invoke(client,new object[]{backend.View()});
+                    panel.Open();
+                    if(panel.picture.texture!=preparation)throw new Exception("Preparation UI mismatch: "+mode);
+                    sim.Execute("player_step",choice:action);
+                    var receipt=backend.Narratives.Rows.Last();
+                    if(receipt.image_scene_key!=mode+"__"+action || CafeNarrativeResources.Texture(receipt.image_resource)!=execution)
+                        throw new Exception("Execution receipt mismatch: "+mode+"/"+action+"/"+receipt.reaction);
+                    typeof(PythonStateClient).GetMethod("Accept",flags).Invoke(client,new object[]{backend.View()});
+                    if(panel.picture.texture!=execution)throw new Exception("Execution UI mismatch: "+mode);
+                    if(action=="direct" && (mode=="ball" || mode=="pet"))
+                        typeof(NarrativeVerification).GetMethod("Capture",BindingFlags.Static|BindingFlags.NonPublic).Invoke(null,new object[]{preview,Path.Combine(output,catId+"-"+mode+".png"),1280,800});
+                    // Save actual receipts, then load without recomputing the image.
+                    Request(backend,"save_game");
+                    var reopened=new LocalCafeBackend(Path.Combine(output,"saves"),rules);
+                    Request(reopened,"load_game");
+                    if(reopened.Narratives.Rows.Last().image_resource!=receipt.image_resource)
+                        throw new Exception("Image changed on disk reload: "+mode);
+                    panel.Close();checkedImages++;
+                }
+                foreach(string reaction in new[]{"turn_away","confused","listless"})
+                {
+                    var rules=Rules(catId);var definition=rules.cats.Single(c=>c.id==catId);
+                    int index=Array.FindIndex(rules.types,t=>t.id==mode);
+                    definition.type_preferences[index]=1;
+                    if(reaction=="turn_away")definition.type_preferences[index]=0;
+                    if(reaction=="confused")definition.type_preferences[index]=2/(rules.exchange.direct_gain*rules.types[index].gain);
+                    var backend=new LocalCafeBackend(Path.Combine(output,"negative-saves"),rules);
+                    if(reaction=="listless")backend.Simulation.State.cats.Single(c=>c.id==catId).stamina=10;
+                    backend.Simulation.Execute("player_begin",catId:catId);
+                    if(mode!="teaser")backend.Simulation.Execute("player_step",choice:"switch",source:mode);
+                    backend.Simulation.Execute("player_step",choice:"direct");
+                    var row=backend.Narratives.Rows.Last();
+                    if(row.reaction!=reaction || row.image_scene_key!=mode || CafeNarrativeResources.Texture(row.image_resource)!=preparation)
+                        throw new Exception("Negative reaction image mismatch: "+mode+"/"+reaction+"/"+row.reaction);
+                    if(backend.View().player_interaction.image_key!=mode+"__switch")throw new Exception("Fallback image key mismatch");
+                    checkedImages++;
+                }
+            }
+            File.WriteAllText(Path.Combine(output,"result.txt"),"PASS: "+checkedImages+" actual execution/negative-reaction cases across Luka and eight modes; separate preparation/execution Resources and UI textures; disk save/reload. Resource/UI verification completed.");
+            Debug.Log("CAT_CAFE_LUKA_IMAGES_OK");
+        }
+        private static CafeRules Rules(string catId)
+        {
+            var rules=JsonUtility.FromJson<CafeRules>(Resources.Load<TextAsset>("CatCafeStandalone/rules").text);
+            rules.store_events.probability=0;
+            if(!rules.cats.Any(c=>c.id==catId)){var definition=JsonUtility.FromJson<CatDefinition>(JsonUtility.ToJson(rules.dispatch_introductions.Single(r=>r.destination=="cat_photo_studio").candidate.cat));definition.id=catId;rules.cats=rules.cats.Concat(new[]{definition}).ToArray();}
+            return rules;
+        }
+        private static void Events(LocalCafeBackend b)
+        {
+            while(b.View().growth_choices.Length>0){var row=b.View().growth_choices[0];Good(b,row.kind,row.choices[0].choice,row.cat_id);}
+            if(b.Simulation.ReservationWaiting)Good(b,"resolve_reservation","decline");
+            if(b.Simulation.IntakeWaiting)Good(b,"resolve_intake","decline");
+            if(b.Simulation.RegularIntroductionWaiting)Good(b,"resolve_regular_introduction","decline",b.Simulation.Rules.regular_introduction.cat.id);
+            if(b.Simulation.GoalWaiting)Good(b,"continue_goal");
+        }
+        private static void Good(LocalCafeBackend b,string kind,string choice=null,string cat=null,string source=null)
+        {
+            CafeResponse result=null;var cmd=new PythonShiftCommand{kind=kind,choice=choice,cat_id=cat,event_id=source,request_id=Guid.NewGuid().ToString("N"),instance_id=b.Simulation.State.instance_id,expected_revision=b.Simulation.State.revision,working_cats=b.Simulation.State.cats.Where(c=>c.activity=="cafe" && c.health=="healthy").Select(c=>c.id).ToArray()};
+            var routine=b.Request("/commands",JsonUtility.ToJson(cmd),response=>result=response);while(routine.MoveNext()){}
+            if(result==null || result.result!=UnityEngine.Networking.UnityWebRequest.Result.Success)throw new Exception(kind+": "+result?.text);
+        }
+        private static void Request(LocalCafeBackend backend,string kind)
+        {
+            CafeResponse result=null;
+            var command=new PythonShiftCommand{kind=kind,save_id="2",save_slot=2,instance_id=backend.Simulation.State.instance_id,expected_revision=backend.Simulation.State.revision,request_id=Guid.NewGuid().ToString("N")};
+            var routine=backend.Request("/commands",JsonUtility.ToJson(command),response=>result=response);
+            while(routine.MoveNext()){}
+            if(result==null || result.result!=UnityEngine.Networking.UnityWebRequest.Result.Success)throw new Exception(result?.text??"No response");
+        }
+    }
+}

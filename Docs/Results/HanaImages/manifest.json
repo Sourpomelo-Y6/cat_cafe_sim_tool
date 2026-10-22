@@ -1,0 +1,173 @@
+{
+  "cat_id": "shop-3",
+  "name": "ハナ",
+  "date": "2026-10-20",
+  "tool": "built-in image_gen",
+  "images": [
+    {
+      "scene": "normal",
+      "file": "hana-normal.png"
+    },
+    {
+      "scene": "sleep",
+      "file": "hana-sleep.png"
+    },
+    {
+      "scene": "pause",
+      "file": "hana-pause.png"
+    },
+    {
+      "scene": "teaser",
+      "file": "hana-teaser.png"
+    },
+    {
+      "scene": "ball",
+      "file": "hana-ball.png"
+    },
+    {
+      "scene": "plush",
+      "file": "hana-plush.png"
+    },
+    {
+      "scene": "tunnel",
+      "file": "hana-tunnel.png"
+    },
+    {
+      "scene": "pet",
+      "file": "hana-pet.png"
+    },
+    {
+      "scene": "brush",
+      "file": "hana-brush.png"
+    },
+    {
+      "scene": "voice",
+      "file": "hana-voice.png"
+    },
+    {
+      "scene": "presence",
+      "file": "hana-presence.png"
+    },
+    {
+      "scene": "teaser__open_up",
+      "file": "hana-teaser__open_up.png"
+    },
+    {
+      "scene": "teaser__simultaneous",
+      "file": "hana-teaser__simultaneous.png"
+    },
+    {
+      "scene": "ball__open_up",
+      "file": "hana-ball__open_up.png"
+    },
+    {
+      "scene": "ball__simultaneous",
+      "file": "hana-ball__simultaneous.png"
+    },
+    {
+      "scene": "plush__open_up",
+      "file": "hana-plush__open_up.png"
+    },
+    {
+      "scene": "plush__simultaneous",
+      "file": "hana-plush__simultaneous.png"
+    },
+    {
+      "scene": "tunnel__open_up",
+      "file": "hana-tunnel__open_up.png"
+    },
+    {
+      "scene": "tunnel__simultaneous",
+      "file": "hana-tunnel__simultaneous.png"
+    },
+    {
+      "scene": "pet__open_up",
+      "file": "hana-pet__open_up.png"
+    },
+    {
+      "scene": "pet__simultaneous",
+      "file": "hana-pet__simultaneous.png"
+    },
+    {
+      "scene": "brush__open_up",
+      "file": "hana-brush__open_up.png"
+    },
+    {
+      "scene": "brush__simultaneous",
+      "file": "hana-brush__simultaneous.png"
+    },
+    {
+      "scene": "voice__open_up",
+      "file": "hana-voice__open_up.png"
+    },
+    {
+      "scene": "voice__simultaneous",
+      "file": "hana-voice__simultaneous.png"
+    },
+    {
+      "scene": "presence__open_up",
+      "file": "hana-presence__open_up.png"
+    },
+    {
+      "scene": "presence__simultaneous",
+      "file": "hana-presence__simultaneous.png"
+    }
+  ],
+  "scenes": {
+    "normal": "images/55407a40f400890760c737f8b5bc71cfca5868fa0be007895bf7117353dd975b.png",
+    "sleep": "images/b0aace02bbe1eea48eb8155aaf359bac60d1b779b51aec0fdc7f720fda7fec63.png",
+    "play": "images/6bd0ed427b8343fba0457539b764058ed0f717e3fa45c92e7ff308d08703e284.png",
+    "pause": "images/91b18cdc31b2022eb9aba24d1bf914de4ab3ba650e7b1a8726bdb0bccc02179f.png",
+    "teaser": "images/55407a40f400890760c737f8b5bc71cfca5868fa0be007895bf7117353dd975b.png",
+    "teaser__switch": "images/55407a40f400890760c737f8b5bc71cfca5868fa0be007895bf7117353dd975b.png",
+    "teaser__direct": "images/6bd0ed427b8343fba0457539b764058ed0f717e3fa45c92e7ff308d08703e284.png",
+    "teaser__adapt": "images/6bd0ed427b8343fba0457539b764058ed0f717e3fa45c92e7ff308d08703e284.png",
+    "teaser__open_up": "images/4b2a61b7a438dc62e48c05b5dcbc909a41791f1bcf39c977645d760a6d13535a.png",
+    "teaser__simultaneous": "images/dd4a50d04f87a2df9b2f1b91f75cc587dc360c2855412672961e7219098b72d3.png",
+    "ball": "images/55407a40f400890760c737f8b5bc71cfca5868fa0be007895bf7117353dd975b.png",
+    "ball__switch": "images/55407a40f400890760c737f8b5bc71cfca5868fa0be007895bf7117353dd975b.png",
+    "ball__direct": "images/51856e5665d20cdc1f641d4e82dc18b571d662ab483633040cabe8786736c19b.png",
+    "ball__adapt": "images/51856e5665d20cdc1f641d4e82dc18b571d662ab483633040cabe8786736c19b.png",
+    "ball__open_up": "images/c04e2e6f8716cb4821a0f287b9e613da1f72e95bb61396147569ea1e3cb0e168.png",
+    "ball__simultaneous": "images/d9f2927d281d40e74319e44c751fa3e3a29e3aa36b75dcf370e601980c8beebf.png",
+    "plush": "images/55407a40f400890760c737f8b5bc71cfca5868fa0be007895bf7117353dd975b.png",
+    "plush__switch": "images/55407a40f400890760c737f8b5bc71cfca5868fa0be007895bf7117353dd975b.png",
+    "plush__direct": "images/caae4025b5a9c1ee96fb7afd444d5fa5c59ed63c5cb50e1c355693dd124dfff9.png",
+    "plush__adapt": "images/caae4025b5a9c1ee96fb7afd444d5fa5c59ed63c5cb50e1c355693dd124dfff9.png",
+    "plush__open_up": "images/54ac706044ae890b9dc35d9616dc8b8be40aafe18054c840016b0c1a66eb8084.png",
+    "plush__simultaneous": "images/b670ff6d3dd270ebfe96b731c4e9b736c617df29ed51efc8e0944ba40d0c65f1.png",
+    "tunnel": "images/55407a40f400890760c737f8b5bc71cfca5868fa0be007895bf7117353dd975b.png",
+    "tunnel__switch": "images/55407a40f400890760c737f8b5bc71cfca5868fa0be007895bf7117353dd975b.png",
+    "tunnel__direct": "images/dfb5d1e271b4383b3eb64602d0e845bf453adce83f8209183aa36fe9497be3c4.png",
+    "tunnel__adapt": "images/dfb5d1e271b4383b3eb64602d0e845bf453adce83f8209183aa36fe9497be3c4.png",
+    "tunnel__open_up": "images/f308200ec14128211512c41c2de1b6ae82f6cb9450372aa0d75b98c7e63440a9.png",
+    "tunnel__simultaneous": "images/68f02fa44ed1b5ab77074fd57be54a43645e4065ffb8baafd9f74eb236c481fb.png",
+    "pet": "images/55407a40f400890760c737f8b5bc71cfca5868fa0be007895bf7117353dd975b.png",
+    "pet__switch": "images/55407a40f400890760c737f8b5bc71cfca5868fa0be007895bf7117353dd975b.png",
+    "pet__direct": "images/63eb0bc83088500c603911274d687a2d33ee9f1d4ce3e0194b57d794cc57c270.png",
+    "pet__adapt": "images/63eb0bc83088500c603911274d687a2d33ee9f1d4ce3e0194b57d794cc57c270.png",
+    "pet__open_up": "images/d7306238bd1029affb2995e16b40ec3f15a10af2f81e4b04b0dbe497619b386b.png",
+    "pet__simultaneous": "images/a3c3775e13eff1352abd3a641b14614f2baae56faca8faeb3fa3925e7ae78310.png",
+    "brush": "images/55407a40f400890760c737f8b5bc71cfca5868fa0be007895bf7117353dd975b.png",
+    "brush__switch": "images/55407a40f400890760c737f8b5bc71cfca5868fa0be007895bf7117353dd975b.png",
+    "brush__direct": "images/1d88fbb66dc52ab728cf5c5416def74159399aa7c3c1f267d194828bd4aee414.png",
+    "brush__adapt": "images/1d88fbb66dc52ab728cf5c5416def74159399aa7c3c1f267d194828bd4aee414.png",
+    "brush__open_up": "images/4b13ea443e910f83cb92b06703b6dc098a16bf608b4432347d4d65c7f65a2a33.png",
+    "brush__simultaneous": "images/4ed538bf39164f732ef6d726acfceb8e045ecbc253c9eb141237f5bfcc070613.png",
+    "voice": "images/55407a40f400890760c737f8b5bc71cfca5868fa0be007895bf7117353dd975b.png",
+    "voice__switch": "images/55407a40f400890760c737f8b5bc71cfca5868fa0be007895bf7117353dd975b.png",
+    "voice__direct": "images/d42f3e6ddea54f0f03fdb18c7dad4317bbb744551b9256af0822828cd6b8ff8d.png",
+    "voice__adapt": "images/d42f3e6ddea54f0f03fdb18c7dad4317bbb744551b9256af0822828cd6b8ff8d.png",
+    "voice__open_up": "images/5504628d14cd9e4070f128f0a3ea1dc34af52a7ae8787518ae9edd11f80fb572.png",
+    "voice__simultaneous": "images/c9c5235f011de8da738ee44f02fcde2395214a24c5424ca985d8420ca41bdbf3.png",
+    "presence": "images/55407a40f400890760c737f8b5bc71cfca5868fa0be007895bf7117353dd975b.png",
+    "presence__switch": "images/55407a40f400890760c737f8b5bc71cfca5868fa0be007895bf7117353dd975b.png",
+    "presence__direct": "images/c8a7a8f6dd05e213d7d6fee336f02c1a716863c4687fdf31fb82d3e4a7e36af4.png",
+    "presence__adapt": "images/c8a7a8f6dd05e213d7d6fee336f02c1a716863c4687fdf31fb82d3e4a7e36af4.png",
+    "presence__open_up": "images/c9e617470404be0686fc79d9920450cc44fe4be8f4b2e68011ecf03e9c2d372d.png",
+    "presence__simultaneous": "images/ffcd612f4dd8d2d0766f37eab0223524fc9360411b8f244c90db02ec047e363d.png"
+  },
+  "active_pack": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\Imports\\4762dd1bd978461bb07c041c59417281",
+  "authored_entries_unchanged": true,
+  "existing_cats_unchanged": true
+}

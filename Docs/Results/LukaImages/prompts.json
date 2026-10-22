@@ -1,0 +1,218 @@
+[
+  {
+    "scene": "normal",
+    "file": "luka-normal.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-74debd76-97ea-48e6-8932-fd7f97056747.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim identity illustration of a NEW cat LUKA. Input reference HANA is ONLY style and room reference. Create an adult pure WHITE SHORTHAIR, sturdy medium-small compact body, rounded face with broad gentle cheeks, small rounded triangular ears, BOTH eyes light leaf GREEN, pink nose. Uniform pure white smooth dense SHORT coat, no patches no stripes. Medium length moderately thick WHITE smooth tail curling beside the paws, no plume. Friendly gentle affectionate expression. Entire seated cat and entire tail visible with margins. Same fine softly painted storybook illustration as reference, cream wall honey wood floor sage green mat warm diffuse light. One anatomically correct cat. No black fur, no long hair, no text UI watermark collars props or people.",
+    "reference": "../HanaImages/hana-normal.png",
+    "reference_role": "style_and_room"
+  },
+  {
+    "scene": "teaser",
+    "file": "luka-teaser.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-ed34f9f1-5ed0-4571-999a-30e5a658bdfa.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is LUKA exact identity and style. Adult pure WHITE SHORTHAIR, sturdy medium-small compact body, rounded gentle face broad cheeks, small rounded triangular ears, BOTH eyes light leaf GREEN, pink nose. Uniform WHITE smooth dense SHORT coat, no patches stripes colored fur. Medium length moderately thick smooth white tail curls beside paws, NO plume NO long fur. Gentle affectionate friendly cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Basic attentive play: one hand at edge holds feather teaser near cat. Cat reaches one forepaw toward feather, leaf green eyes open, gentle calm engagement.",
+    "reference": "luka-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball",
+    "file": "luka-ball.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-a5648430-7375-45c4-8285-4717fd044290.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is LUKA exact identity and style. Adult pure WHITE SHORTHAIR, sturdy medium-small compact body, rounded gentle face broad cheeks, small rounded triangular ears, BOTH eyes light leaf GREEN, pink nose. Uniform WHITE smooth dense SHORT coat, no patches stripes colored fur. Medium length moderately thick smooth white tail curls beside paws, NO plume NO long fur. Gentle affectionate friendly cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Basic play: crouches and gently touches small blue toy ball on mat with one paw, attentive open leaf green eyes. No humans or other toys.",
+    "reference": "luka-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush",
+    "file": "luka-plush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-89c33d98-ab1a-461d-9260-2a09b14df056.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is LUKA exact identity and style. Adult pure WHITE SHORTHAIR, sturdy medium-small compact body, rounded gentle face broad cheeks, small rounded triangular ears, BOTH eyes light leaf GREEN, pink nose. Uniform WHITE smooth dense SHORT coat, no patches stripes colored fur. Medium length moderately thick smooth white tail curls beside paws, NO plume NO long fur. Gentle affectionate friendly cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Basic play: holds small plain beige fabric mouse toy between front paws, calmly sniffing, leaf green eyes open. No humans or other toys.",
+    "reference": "luka-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel",
+    "file": "luka-tunnel.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-39ed7688-e045-418a-9a95-1e613bf7919b.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is LUKA exact identity and style. Adult pure WHITE SHORTHAIR, sturdy medium-small compact body, rounded gentle face broad cheeks, small rounded triangular ears, BOTH eyes light leaf GREEN, pink nose. Uniform WHITE smooth dense SHORT coat, no patches stripes colored fur. Medium length moderately thick smooth white tail curls beside paws, NO plume NO long fur. Gentle affectionate friendly cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Basic play: crouches just inside short beige fabric cat tunnel, head front paws and tail fully visible at entrance, eyes open curious gentle expression. No humans or other toys.",
+    "reference": "luka-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet",
+    "file": "luka-pet.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-86667bd8-4172-4758-b6d7-d50e1e77b37f.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is LUKA exact identity and style. Adult pure WHITE SHORTHAIR, sturdy medium-small compact body, rounded gentle face broad cheeks, small rounded triangular ears, BOTH eyes light leaf GREEN, pink nose. Uniform WHITE smooth dense SHORT coat, no patches stripes colored fur. Medium length moderately thick smooth white tail curls beside paws, NO plume NO long fur. Gentle affectionate friendly cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Basic petting: one human hand gently strokes forehead, cat relaxed and attentive, leaf green eyes open. No toys.",
+    "reference": "luka-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush",
+    "file": "luka-brush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-d24d253e-8641-4ccb-ada6-7b2faf048658.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is LUKA exact identity and style. Adult pure WHITE SHORTHAIR, sturdy medium-small compact body, rounded gentle face broad cheeks, small rounded triangular ears, BOTH eyes light leaf GREEN, pink nose. Uniform WHITE smooth dense SHORT coat, no patches stripes colored fur. Medium length moderately thick smooth white tail curls beside paws, NO plume NO long fur. Gentle affectionate friendly cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Basic brushing: one human hand uses wooden pet brush on shoulder, bristles contact SHORT fur, cat calmly stands with eyes open. No other props.",
+    "reference": "luka-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice",
+    "file": "luka-voice.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-a260dcba-c29f-4ad0-9b52-1af0c8889800.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is LUKA exact identity and style. Adult pure WHITE SHORTHAIR, sturdy medium-small compact body, rounded gentle face broad cheeks, small rounded triangular ears, BOTH eyes light leaf GREEN, pink nose. Uniform WHITE smooth dense SHORT coat, no patches stripes colored fur. Medium length moderately thick smooth white tail curls beside paws, NO plume NO long fur. Gentle affectionate friendly cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Basic voice interaction: sits calmly, ears turn toward viewer listening, leaf green eyes open, mouth closed. No human hands knees speech bubbles or props.",
+    "reference": "luka-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence",
+    "file": "luka-presence.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-e2e2b3c1-e2d3-42cc-934b-d00fedd040d4.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is LUKA exact identity and style. Adult pure WHITE SHORTHAIR, sturdy medium-small compact body, rounded gentle face broad cheeks, small rounded triangular ears, BOTH eyes light leaf GREEN, pink nose. Uniform WHITE smooth dense SHORT coat, no patches stripes colored fur. Medium length moderately thick smooth white tail curls beside paws, NO plume NO long fur. Gentle affectionate friendly cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Basic companionship: cat loafs calmly, leaf green eyes open, only part of blue clothed knee at lower edge. No hands or toys.",
+    "reference": "luka-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pause",
+    "file": "luka-pause.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-aaa39e3e-7081-4432-b268-2cb67443b13f.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is LUKA exact identity and style. Adult pure WHITE SHORTHAIR, sturdy medium-small compact body, rounded gentle face broad cheeks, small rounded triangular ears, BOTH eyes light leaf GREEN, pink nose. Uniform WHITE smooth dense SHORT coat, no patches stripes colored fur. Medium length moderately thick smooth white tail curls beside paws, NO plume NO long fur. Gentle affectionate friendly cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Pause/wait: cat calmly sits, forepaws planted, eyes open, feather teaser lies completely still on mat at safe distance. No hands.",
+    "reference": "luka-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "sleep",
+    "file": "luka-sleep.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-4025d5c5-e11d-4be6-8119-15497bf3cf49.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is LUKA exact identity and style. Adult pure WHITE SHORTHAIR, sturdy medium-small compact body, rounded gentle face broad cheeks, small rounded triangular ears, BOTH eyes light leaf GREEN, pink nose. Uniform WHITE smooth dense SHORT coat, no patches stripes colored fur. Medium length moderately thick smooth white tail curls beside paws, NO plume NO long fur. Gentle affectionate friendly cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Sleep: cat curled into a relaxed ball sleeping, eyes closed, head on front paws, slim striped tail around body. No humans or toys.",
+    "reference": "luka-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "teaser__open_up",
+    "file": "luka-teaser__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-7bf5599f-b30c-4f51-a89a-7588e50890a5.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is LUKA exact identity and style. Adult pure WHITE SHORTHAIR, sturdy medium-small compact body, rounded gentle face broad cheeks, small rounded triangular ears, BOTH eyes light leaf GREEN, pink nose. Uniform WHITE smooth dense SHORT coat, no patches stripes colored fur. Medium length moderately thick smooth white tail curls beside paws, NO plume NO long fur. Gentle affectionate friendly cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special deep trust playing with feather teaser: one hand holds feather close; cat leans toward viewer, eyes soft half closed, paw reaches gently. Relaxed ears.",
+    "reference": "luka-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "teaser__simultaneous",
+    "file": "luka-teaser__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-63f53b88-5456-40a3-b52c-c1fb7149d28e.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is LUKA exact identity and style. Adult pure WHITE SHORTHAIR, sturdy medium-small compact body, rounded gentle face broad cheeks, small rounded triangular ears, BOTH eyes light leaf GREEN, pink nose. Uniform WHITE smooth dense SHORT coat, no patches stripes colored fur. Medium length moderately thick smooth white tail curls beside paws, NO plume NO long fur. Gentle affectionate friendly cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special excited and deeply trusting play: joyfully bats feather teaser held by one edge hand, ears forward bright leaf green eyes, lifted paw, confident happy posture. No aggressive expression.",
+    "reference": "luka-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball__open_up",
+    "file": "luka-ball__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-54130c2e-d160-4e83-92d2-737248a9eaa0.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is LUKA exact identity and style. Adult pure WHITE SHORTHAIR, sturdy medium-small compact body, rounded gentle face broad cheeks, small rounded triangular ears, BOTH eyes light leaf GREEN, pink nose. Uniform WHITE smooth dense SHORT coat, no patches stripes colored fur. Medium length moderately thick smooth white tail curls beside paws, NO plume NO long fur. Gentle affectionate friendly cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special deep trust: relaxed on side beside small blue ball, paw resting on ball, head tipped affectionately toward viewer, soft half closed eyes. No humans.",
+    "reference": "luka-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball__simultaneous",
+    "file": "luka-ball__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-a4ca1183-4def-45ee-a037-7c8626d44498.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is LUKA exact identity and style. Adult pure WHITE SHORTHAIR, sturdy medium-small compact body, rounded gentle face broad cheeks, small rounded triangular ears, BOTH eyes light leaf GREEN, pink nose. Uniform WHITE smooth dense SHORT coat, no patches stripes colored fur. Medium length moderately thick smooth white tail curls beside paws, NO plume NO long fur. Gentle affectionate friendly cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special excited and trusting: playfully hugs small blue ball between forepaws, crouched with confident happy energy, bright leaf green eyes. No humans or other toys.",
+    "reference": "luka-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush__open_up",
+    "file": "luka-plush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-4660b2c5-0e72-4abb-9eb2-9901028a99e5.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is LUKA exact identity and style. Adult pure WHITE SHORTHAIR, sturdy medium-small compact body, rounded gentle face broad cheeks, small rounded triangular ears, BOTH eyes light leaf GREEN, pink nose. Uniform WHITE smooth dense SHORT coat, no patches stripes colored fur. Medium length moderately thick smooth white tail curls beside paws, NO plume NO long fur. Gentle affectionate friendly cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special deep trust: hugs small beige mouse plush and rests cheek on toy, soft half closed leaf green eyes, affectionate expression toward viewer. No humans.",
+    "reference": "luka-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush__simultaneous",
+    "file": "luka-plush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-d0ccf4a0-7e8e-4858-9e77-1a8055e1376c.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is LUKA exact identity and style. Adult pure WHITE SHORTHAIR, sturdy medium-small compact body, rounded gentle face broad cheeks, small rounded triangular ears, BOTH eyes light leaf GREEN, pink nose. Uniform WHITE smooth dense SHORT coat, no patches stripes colored fur. Medium length moderately thick smooth white tail curls beside paws, NO plume NO long fur. Gentle affectionate friendly cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special excited and trusting: joyfully rolls slightly on side hugging small beige mouse plush with front paws, bright leaf green eyes, relaxed ears and happy posture. No humans.",
+    "reference": "luka-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel__open_up",
+    "file": "luka-tunnel__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-0cbb5189-3299-463d-963b-3f5c53060364.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is LUKA exact identity and style. Adult pure WHITE SHORTHAIR, sturdy medium-small compact body, rounded gentle face broad cheeks, small rounded triangular ears, BOTH eyes light leaf GREEN, pink nose. Uniform WHITE smooth dense SHORT coat, no patches stripes colored fur. Medium length moderately thick smooth white tail curls beside paws, NO plume NO long fur. Gentle affectionate friendly cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special deep trust: relaxed at short beige fabric tunnel entrance, chin on rim, soft half closed leaf green eyes toward viewer, tail visible outside. No humans.",
+    "reference": "luka-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel__simultaneous",
+    "file": "luka-tunnel__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-351997b7-1471-4b64-9f47-06bc6c021536.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is LUKA exact identity and style. Adult pure WHITE SHORTHAIR, sturdy medium-small compact body, rounded gentle face broad cheeks, small rounded triangular ears, BOTH eyes light leaf GREEN, pink nose. Uniform WHITE smooth dense SHORT coat, no patches stripes colored fur. Medium length moderately thick smooth white tail curls beside paws, NO plume NO long fur. Gentle affectionate friendly cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special excited and trusting: playfully peeks out of short beige fabric tunnel, front paws reaching forward, bright leaf green eyes, forward ears friendly confident expression, tail visible. No humans.",
+    "reference": "luka-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet__open_up",
+    "file": "luka-pet__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-0d1b1a17-469a-45b8-91c5-e6a88f6ff59d.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is LUKA exact identity and style. Adult pure WHITE SHORTHAIR, sturdy medium-small compact body, rounded gentle face broad cheeks, small rounded triangular ears, BOTH eyes light leaf GREEN, pink nose. Uniform WHITE smooth dense SHORT coat, no patches stripes colored fur. Medium length moderately thick smooth white tail curls beside paws, NO plume NO long fur. Gentle affectionate friendly cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special deep trust petting: one hand strokes cheek, cat leans cheek into palm, eyes almost closed, affectionate relaxed expression. No toys.",
+    "reference": "luka-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet__simultaneous",
+    "file": "luka-pet__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-111a93ef-94af-4f1b-bedd-d4011b966f5b.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is LUKA exact identity and style. Adult pure WHITE SHORTHAIR, sturdy medium-small compact body, rounded gentle face broad cheeks, small rounded triangular ears, BOTH eyes light leaf GREEN, pink nose. Uniform WHITE smooth dense SHORT coat, no patches stripes colored fur. Medium length moderately thick smooth white tail curls beside paws, NO plume NO long fur. Gentle affectionate friendly cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special delighted and trusting petting: one hand rubs under chin, cat lifts chin joyfully, content closed eyes and relaxed ears. No toys.",
+    "reference": "luka-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush__open_up",
+    "file": "luka-brush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-27c98e12-1948-4f23-ab94-48c8be06a15a.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is LUKA exact identity and style. Adult pure WHITE SHORTHAIR, sturdy medium-small compact body, rounded gentle face broad cheeks, small rounded triangular ears, BOTH eyes light leaf GREEN, pink nose. Uniform WHITE smooth dense SHORT coat, no patches stripes colored fur. Medium length moderately thick smooth white tail curls beside paws, NO plume NO long fur. Gentle affectionate friendly cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special deep trust brushing: one hand gently brushes short chest fur with wooden pet brush, cat leans toward brush, half closed eyes relaxed affectionate posture.",
+    "reference": "luka-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush__simultaneous",
+    "file": "luka-brush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-beed4da1-ff8a-4cf7-9e0c-6b02d24172b4.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is LUKA exact identity and style. Adult pure WHITE SHORTHAIR, sturdy medium-small compact body, rounded gentle face broad cheeks, small rounded triangular ears, BOTH eyes light leaf GREEN, pink nose. Uniform WHITE smooth dense SHORT coat, no patches stripes colored fur. Medium length moderately thick smooth white tail curls beside paws, NO plume NO long fur. Gentle affectionate friendly cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special delighted and trusting brushing: one hand brushes shoulder with wooden brush, cat stretches neck and raises chin slightly, blissfully closed eyes, happy relaxed posture.",
+    "reference": "luka-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice__open_up",
+    "file": "luka-voice__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-6ecfbbc7-7243-49c5-9c53-8da7f4713a15.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is LUKA exact identity and style. Adult pure WHITE SHORTHAIR, sturdy medium-small compact body, rounded gentle face broad cheeks, small rounded triangular ears, BOTH eyes light leaf GREEN, pink nose. Uniform WHITE smooth dense SHORT coat, no patches stripes colored fur. Medium length moderately thick smooth white tail curls beside paws, NO plume NO long fur. Gentle affectionate friendly cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special deep trust response to a familiar voice. Cat leans its head and upper body slightly toward viewer, neck gently extended, EYES VISIBLY NARROWED TO SOFT HALF-CLOSED SLITS in a relaxed slow blink (not wide open), gentle affectionate expression, relaxed forward ears, mouth closed. Both front paws remain on mat. No hands, humans, knees, speech bubbles, toys or other props. Make the facial trust reaction clearly distinct from the open-eyed normal reference.",
+    "reference": "luka-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice__simultaneous",
+    "file": "luka-voice__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-52f2371f-d382-4e3c-979c-f75f80c10d7e.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is LUKA exact identity and style. Adult pure WHITE SHORTHAIR, sturdy medium-small compact body, rounded gentle face broad cheeks, small rounded triangular ears, BOTH eyes light leaf GREEN, pink nose. Uniform WHITE smooth dense SHORT coat, no patches stripes colored fur. Medium length moderately thick smooth white tail curls beside paws, NO plume NO long fur. Gentle affectionate friendly cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special delighted trusting response to voice: stands taking one friendly step toward viewer, bright welcoming leaf green eyes and forward ears, low relaxed tail, mouth closed. No human or props.",
+    "reference": "luka-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence__open_up",
+    "file": "luka-presence__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-82730906-7b19-44db-a74a-1d9734f1f617.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is LUKA exact identity and style. Adult pure WHITE SHORTHAIR, sturdy medium-small compact body, rounded gentle face broad cheeks, small rounded triangular ears, BOTH eyes light leaf GREEN, pink nose. Uniform WHITE smooth dense SHORT coat, no patches stripes colored fur. Medium length moderately thick smooth white tail curls beside paws, NO plume NO long fur. Gentle affectionate friendly cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special deep trust companionship: lies comfortably on side beside blue clothed knee edge, soft half closed eyes relaxed head. No hands touching, no toys.",
+    "reference": "luka-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence__simultaneous",
+    "file": "luka-presence__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-6fcc1e7e-4d75-4b09-9ab0-7d97e3a49774.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Input reference is LUKA exact identity and style. Adult pure WHITE SHORTHAIR, sturdy medium-small compact body, rounded gentle face broad cheeks, small rounded triangular ears, BOTH eyes light leaf GREEN, pink nose. Uniform WHITE smooth dense SHORT coat, no patches stripes colored fur. Medium length moderately thick smooth white tail curls beside paws, NO plume NO long fur. Gentle affectionate friendly cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special delighted trusting companionship: sits close beside blue clothed knee edge, flank gently leaning against knee, blissfully half closed eyes. No hands touching, no toys.",
+    "reference": "luka-normal.png",
+    "reference_role": "identity_and_style"
+  }
+]
