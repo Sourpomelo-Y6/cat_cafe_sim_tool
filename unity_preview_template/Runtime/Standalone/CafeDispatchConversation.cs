@@ -4,7 +4,9 @@ namespace CatCafePreview.Standalone
 {
     [Serializable] public sealed class CafeDispatchConversation
     {
-        public string event_id,cat_id,stage="departure";
+        public string event_id,cat_id,destination,stage="departure";
+        public string Destination=>string.IsNullOrEmpty(destination)?CafeDispatchDialogue.Destination:destination;
+        public string DispatchId=>"dispatch-"+day+"-"+cat_id;
         public int day;
         public CafeConversationProgress departure,travelling,returning;
         public CafeConversationProgress Current=>stage=="departure"?departure:stage=="travelling"?travelling:returning;
@@ -12,9 +14,29 @@ namespace CatCafePreview.Standalone
     public static class CafeDispatchDialogue
     {
         public const string Destination="neighborhood_visit",Id="dispatch.neighborhood_visit.v1";
-        public static CafeConversationProgress Start(string stage)=>new CafeConversationProgress{conversation_id=Id+"."+stage,branch_id=stage=="travelling"?"travelling":"introduction",viewed_branches=new string[0]};
-        public static CafeConversationLine[] Lines(string stage,string branch,string name)
+        public static readonly string[] Destinations={Destination,"shopping_street_event","out_of_town_visit"};
+        public static bool Supports(string destination)=>Destinations.Contains(destination);
+        public static string Title(string destination)=>destination=="shopping_street_event"?"商店街の交流会":destination=="out_of_town_visit"?"郊外への出張訪問":"近所のお店への訪問";
+        public static string ConversationId(string destination)=>"dispatch."+destination+".v1";
+        public static string Key(int day,string cat,string destination)=>"dispatch-"+day+"-"+cat+(destination==Destination?"":":"+destination);
+        public static CafeConversationProgress Start(string stage,string destination=Destination)=>new CafeConversationProgress{conversation_id=ConversationId(destination)+"."+stage,branch_id=stage=="travelling"?"travelling":"introduction",viewed_branches=new string[0]};
+        public static CafeConversationLine[] Lines(string stage,string branch,string name,string destination=Destination)
         {
+            if(destination!=Destination)
+            {
+                string title=Title(destination),sender=destination=="shopping_street_event"?"商店街の担当者":"訪問先の担当者";
+                var lines=Lines(stage,branch,name);
+                bool street=destination=="shopping_street_event";
+                if(stage=="departure" && branch=="introduction")
+                {
+                    lines[1]=new CafeConversationLine(sender,street?"商店街の交流会に来てもらえますか。猫の体調と、留守の間のお店の予定を確認してから決めてください。":"郊外への出張訪問をお願いできますか。猫の体調と、お店を離れる日程を確かめてください。");
+                    lines[3]=new CafeConversationLine("",street?"出発条件・費用・日数と報酬見込みを確かめよう。途中の追加仕事と帰還後の猫紹介は、別の相談で回答する。":"出発条件・費用・日数と報酬見込みを確かめよう。途中の休憩は、別の相談で回答する。");
+                }
+                if(stage=="travelling")lines[1]=new CafeConversationLine("あなた",street?"追加仕事の相談は、イベント一覧の『派遣中の選択』で確認しましょう。留守の間も、店内の猫たちと営業の準備を進められます。":"途中の休憩の相談は、イベント一覧の『派遣中の選択』で確認しましょう。留守の間も、店内の猫たちと営業の準備を進められます。");
+                if(stage=="return" && branch=="received")lines[2]=new CafeConversationLine("","確定した報酬と派遣経験は受け取り済みだ。用品の有無は受取内容に従い、ここでは再受領しない。"+(street?"帰還結果を読み終えたら、猫の紹介はイベント一覧の『派遣先からの猫紹介』で確認しよう。":"出勤には自動で戻らないので、営業準備で予定を確認しよう。"));
+                if(stage=="return" && branch=="introduction")lines[2]=new CafeConversationLine("あなた","途中の選択を反映した確定報酬と、この子の帰還時の状態を確認しますね。"+(street?"猫の紹介は、受取と帰還結果の確認を終えてから別の相談として伺います。":"途中の休憩も、回答済みの内容で確認しましょう。"));
+                return lines.Select(l=>new CafeConversationLine(l.speaker=="お店の人"?sender:l.speaker,l.text.Replace("近所のお店への訪問",title).Replace("近所のお店",title=="商店街の交流会"?"商店街":"郊外の訪問先").Replace("報酬とケア用品、派遣の経験は受け取り済みだ。","今回の報酬と対象の用品、派遣の経験は受け取り済みだ。"))).ToArray();
+            }
             if(stage=="travelling")return new[]{
                 new CafeConversationLine("","派遣の記録を開いた。"+name+"は、近所のお店への訪問に出ている。"),
                 new CafeConversationLine("あなた","帰ってくるまで、店内の猫たちと営業の準備を進めましょう。残りの日程は派遣の記録で確認できます。"),
@@ -46,15 +68,15 @@ namespace CatCafePreview.Standalone
         public static void Sync(CafeDispatchConversation row,CafeDispatch ev)
         {
             if(ev==null)return;
-            if(row.departure?.branch_id=="introduction"){row.departure.branch_id="departed";row.departure.node=0;row.departure.completed=false;}
-            if(ev.status=="resolved" && row.returning?.branch_id=="introduction"){row.returning.branch_id="received";row.returning.node=0;}
-            if(ev.status=="waiting" && row.departure?.completed!=false){row.returning=row.returning??Start("return");row.stage="return";}
+            if(row.departure?.branch_id=="introduction"){row.departure.branch_id="departed";row.departure.node=row.departure.page_offset=0;row.departure.completed=false;}
+            if(ev.status=="resolved" && row.returning?.branch_id=="introduction"){row.returning.branch_id="received";row.returning.node=row.returning.page_offset=0;}
+            if(ev.status=="waiting" && row.departure?.completed!=false){row.returning=row.returning??Start("return",row.Destination);row.stage="return";}
         }
         public static bool ResultPending(CafeDispatchConversation row)=>new[]{row.departure,row.returning}.Any(p=>p!=null && !p.completed && p.branch_id!="introduction");
         public static void Finish(CafeDispatchConversation row)
         {
-            var p=row.Current;if(p==null || p.branch_id=="introduction" || p.node<Lines(row.stage,p.branch_id,"").Length)return;
-            p.completed=true;p.viewed_branches=(p.viewed_branches??new string[0]).Concat(new[]{p.branch_id}).Distinct().ToArray();
+            var p=row.Current;if(p==null || p.branch_id=="introduction" || p.node<Lines(row.stage,p.branch_id,"",row.Destination).Length)return;
+            p.completed=true;p.page_offset=0;p.viewed_branches=(p.viewed_branches??new string[0]).Concat(new[]{p.branch_id}).Distinct().ToArray();
         }
         public static void Validate(CafeDispatchConversation[] rows,string selected,CafeSnapshot state)
         {
@@ -62,17 +84,19 @@ namespace CatCafePreview.Standalone
             if(rows.Length>10000 || rows.Any(r=>r==null) || rows.Select(r=>r.event_id).Distinct().Count()!=rows.Length || !string.IsNullOrEmpty(selected) && !rows.Any(r=>r.event_id==selected))throw new ArgumentException("派遣会話の一覧が不正です。");
             foreach(var r in rows)
             {
-                var ev=state.dispatches.SingleOrDefault(e=>e.id==r.event_id);
-                if(!state.cats.Any(c=>c.id==r.cat_id) || r.day<1 || r.day>state.day || r.event_id!="dispatch-"+r.day+"-"+r.cat_id || ev!=null && ev.destination!=Destination || r.stage!="departure" && r.stage!="travelling" && r.stage!="return" || r.Current==null || ev==null && (r.travelling!=null || r.returning!=null) || r.departure==null && ev==null)throw new ArgumentException("派遣会話の対象が不正です。");
-                ValidatePhase(r.departure,"departure",ev);ValidatePhase(r.travelling,"travelling",ev);ValidatePhase(r.returning,"return",ev);
+                var ev=state.dispatches.SingleOrDefault(e=>e.id==r.DispatchId && e.destination==r.Destination);
+                if(!state.cats.Any(c=>c.id==r.cat_id) || r.day<1 || r.day>state.day || !Supports(r.Destination) || r.event_id!=Key(r.day,r.cat_id,r.Destination) || r.stage!="departure" && r.stage!="travelling" && r.stage!="return" || r.Current==null || ev==null && (r.travelling!=null || r.returning!=null) || r.departure==null && ev==null)throw new ArgumentException("派遣会話の対象が不正です。");
+                ValidatePhase(r.departure,"departure",ev,r.Destination);ValidatePhase(r.travelling,"travelling",ev,r.Destination);ValidatePhase(r.returning,"return",ev,r.Destination);
             }
         }
-        static void ValidatePhase(CafeConversationProgress p,string stage,CafeDispatch ev)
+        static void ValidatePhase(CafeConversationProgress p,string stage,CafeDispatch ev,string destination)
         {
             if(p==null)return;
             string[] allowed=stage=="departure"?new[]{"introduction","departed","cancelled"}:stage=="return"?new[]{"introduction","received"}:new[]{"travelling"};
             string[] completed=stage=="departure"?new[]{"departed","cancelled"}:stage=="return"?new[]{"received"}:new[]{"travelling"};
-            bool invalid=p.conversation_id!=Id+"."+stage || !allowed.Contains(p.branch_id) || p.node<0 || p.node>Lines(stage,p.branch_id,"").Length || p.viewed_branches==null;
+            bool invalid=p.conversation_id!=ConversationId(destination)+"."+stage || !allowed.Contains(p.branch_id) || p.node<0 || p.node>Lines(stage,p.branch_id,"").Length || p.viewed_branches==null;
+            var lines=Lines(stage,p.branch_id,"",destination);
+            invalid|=p.page_offset<0 || p.node==lines.Length && p.page_offset!=0 || p.node>=0 && p.node<lines.Length && p.page_offset>lines[p.node].text.Length+256;
             if(!invalid)invalid=p.viewed_branches.Distinct().Count()!=p.viewed_branches.Length || p.viewed_branches.Any(b=>!completed.Contains(b)) || p.completed && (p.branch_id=="introduction" || p.node!=Lines(stage,p.branch_id,"").Length || !p.viewed_branches.Contains(p.branch_id)) || !p.completed && p.viewed_branches.Any(b=>b!="cancelled");
             if(stage=="departure")invalid|=ev==null?p.branch_id=="departed" || (p.viewed_branches??new string[0]).Contains("departed"):p.branch_id!="departed";
             if(stage=="return")invalid|=ev==null || ev.status=="travelling" || (ev.status=="resolved"?p.branch_id!="received":p.branch_id!="introduction");

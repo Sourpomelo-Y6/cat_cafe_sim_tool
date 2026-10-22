@@ -28,6 +28,7 @@ namespace CatCafePreview
         public void Select(int _){Clear();Render();RefreshControls();GetComponent<PythonCatAcquisitionNavigation>()?.Refresh();Canvas.ForceUpdateCanvases();details.GetComponentInParent<ScrollRect>().verticalNormalizedPosition=1;if(panel.activeSelf && CafeBackends.Standalone && Row!=null)Dialogue.OpenEvent(Row.event_id);}
         public void Open()
         {
+            if(CafeBackends.Standalone && (CafeBackends.Local as LocalCafeBackend).DispatchResultPending){GetComponent<PythonGeneralDispatchPanel>().Open("");return;}
             if(Row==null || !GetComponent<PythonStateClient>().CanManageSaves)return;
             if(CafeBackends.Standalone){var b=CafeBackends.Local as LocalCafeBackend;Dialogue.Apply(GetComponent<PythonStateClient>().CurrentState,this);if(b.DispatchIntroductionResultPending){Dialogue.Open();return;}if(Dialogue.OpenEvent(Row.event_id))return;}
             Clear();panel.SetActive(true);panel.transform.SetAsLastSibling();Render();

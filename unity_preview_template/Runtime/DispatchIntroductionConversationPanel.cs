@@ -26,6 +26,7 @@ namespace CatCafePreview
         }
         void UpdateHousing(){if(housing!=null){housing.gameObject.SetActive(Showing && progress.branch_id=="introduction");housing.interactable=Client.CanManageSaves;}}
         protected override void Update(){base.Update();UpdateHousing();}
+        protected override bool Available=>base.Available && !Backend.DispatchResultPending && !Backend.Simulation.DispatchWaiting;
         protected override bool CanRaise=>GetComponent<PythonCatAcquisitionNavigation>()?.HousingFrom(host)!=true;
         public bool OpenEvent(string id){if(!Backend.BeginDispatchIntroductionConversation(id))return false;Apply(Client.CurrentState,GetComponent<PythonDispatchIntroductionPanel>());Open();return true;}
         protected override CafeConversationProgress ResolveProgress(){Backend.PrepareDispatchIntroductionConversation();return Row?.progress;}

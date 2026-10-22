@@ -7,6 +7,7 @@ if (-not (Test-Path -LiteralPath (Join-Path $projectRoot 'ProjectSettings/Projec
 $templateRoot = Join-Path $PSScriptRoot 'unity_preview_template'
 $targetRoot = Join-Path $projectRoot 'Assets/CatCafePreview'
 $previewFiles = @('Runtime/ContentBundle.cs', 'Runtime/CatInteractionState.cs', 'Runtime/ContentPreview.cs', 'Editor/ContentPreviewSetup.cs', 'Editor/ContentPreviewLayout.cs', 'Fonts/MPLUS1p-Regular.ttf', 'Fonts/OFL.txt', 'Fonts/README.md')
+$previewFiles += @('Runtime/StandaloneRoundTripConversationSmoke.cs','Editor/RoundTripConversationVerification.cs')
 $previewFiles += @('Runtime/StandaloneEquipmentConversationSmoke.cs','Editor/EquipmentConversationVerification.cs','Runtime/EquipmentConversationPanel.cs','Runtime/LocalCafeEquipmentConversation.cs','Runtime/Standalone/CafeEquipmentDialogue.cs')
 $previewFiles += @('Runtime/PythonStateClient.cs', 'Runtime/PythonCatCard.cs', 'Runtime/PythonCatRoster.cs', 'Editor/PythonStateSetup.cs', 'Editor/PythonShiftVerification.cs', 'Editor/PythonRosterSetup.cs')
 $previewFiles += @('Runtime/PythonServiceScreen.cs', 'Editor/PythonServiceSetup.cs', 'Editor/PythonServiceLayout.cs')

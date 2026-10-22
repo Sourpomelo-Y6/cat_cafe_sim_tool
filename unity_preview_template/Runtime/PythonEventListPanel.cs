@@ -141,7 +141,7 @@ namespace CatCafePreview
             if(i==7 && CafeBackends.Standalone && (CafeBackends.Local as LocalCafeBackend)?.RegularConversation?.completed==false){Close();GetComponent<RegularConversationPanel>()?.Open();return;}
             if(i==10 && CafeBackends.Standalone)
             {
-                var backend=CafeBackends.Local as LocalCafeBackend;var waiting=backend.Simulation.State.dispatches.FirstOrDefault(e=>e.destination==CatCafePreview.Standalone.CafeDispatchDialogue.Destination && e.status=="waiting");
+                var backend=CafeBackends.Local as LocalCafeBackend;var waiting=backend.Simulation.State.dispatches.FirstOrDefault(e=>CatCafePreview.Standalone.CafeDispatchDialogue.Supports(e.destination) && e.status=="waiting");
                 if(backend.DispatchResultPending || waiting!=null){Close();var general=GetComponent<PythonGeneralDispatchPanel>();if(backend.DispatchResultPending){general.Dialogue.Apply(current,general);general.Dialogue.Open();}else general.Dialogue.OpenEvent(waiting.id);return;}
             }
             if(i==4 && CafeBackends.Standalone){Close();var missing=GetComponent<PythonMissingPanel>();var b=CafeBackends.Local as LocalCafeBackend;var e=b.Simulation.State.missing_cases.FirstOrDefault(x=>x.result!=null && !x.result.completed);missing.Open(e?.cat_id ?? current.missing_cats.FirstOrDefault(x=>x.status=="waiting")?.cat_id ?? current.missing_cats.Last().cat_id);if(GetComponent<MissingConversationPanel>()?.Showing==true)return;}

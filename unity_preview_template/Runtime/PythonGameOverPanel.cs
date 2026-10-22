@@ -30,7 +30,7 @@ namespace CatCafePreview
                 text.Append(cat.name+" / "+cat.health_label+" / "+cat.activity_label+"\n体力："+cat.stamina.ToString("0.#")+" / 疲労："+cat.fatigue.ToString("0.#")+" / ストレス："+cat.stress.ToString("0.#")+"\n\n");
             if(details.text!=text.ToString()){details.text=text.ToString();Canvas.ForceUpdateCanvases();scroll.verticalNormalizedPosition=1;}
             RefreshControls();
-            if(CafeBackends.Standalone && (CafeBackends.Local as LocalCafeBackend).EquipmentResultPending){panel.SetActive(false);return;}
+            if(CafeBackends.Standalone && ((CafeBackends.Local as LocalCafeBackend).DispatchResultPending || (CafeBackends.Local as LocalCafeBackend).EquipmentResultPending)){panel.SetActive(false);return;}
             if(Application.isPlaying && CafeBackends.Standalone){if(resumeOutcome==null){resumeOutcome=Instantiate(save,save.transform.parent);resumeOutcome.name="結末を再開";var resumeRect=resumeOutcome.GetComponent<RectTransform>();resumeRect.anchorMin=resumeRect.anchorMax=resumeRect.pivot=new Vector2(0,1);resumeRect.anchoredPosition=new Vector2(600,-20);resumeRect.sizeDelta=new Vector2(290,40);resumeOutcome.GetComponentInChildren<Text>().text="結末を再開";resumeOutcome.onClick=new Button.ButtonClickedEvent();resumeOutcome.onClick.AddListener(()=>OutcomeConversationPanel.Ensure(gameObject).Open());}resumeOutcome.gameObject.SetActive((CafeBackends.Local as LocalCafeBackend).OutcomePending);resumeOutcome.interactable=GetComponent<PythonStateClient>().CanManageSaves;OutcomeConversationPanel.Ensure(gameObject).ApplyOutcome(state);}
         }
         public void RefreshControls()
