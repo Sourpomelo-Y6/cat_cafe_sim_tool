@@ -14,9 +14,9 @@ namespace CatCafePreview.Standalone
     public static class CafeDispatchDialogue
     {
         public const string Destination="neighborhood_visit",Id="dispatch.neighborhood_visit.v1";
-        public static readonly string[] Destinations={Destination,"shopping_street_event","out_of_town_visit","cat_exercise_class","quiet_reading_salon"};
+        public static readonly string[] Destinations={Destination,"shopping_street_event","out_of_town_visit","cat_exercise_class","quiet_reading_salon","cat_photo_studio","cat_product_trial"};
         public static bool Supports(string destination)=>Destinations.Contains(destination);
-        public static string Title(string destination)=>destination=="shopping_street_event"?"商店街の交流会":destination=="out_of_town_visit"?"郊外への出張訪問":destination=="cat_exercise_class"?"猫の運動教室":destination=="quiet_reading_salon"?"静かな読書サロン":"近所のお店への訪問";
+        public static string Title(string destination)=>destination=="shopping_street_event"?"商店街の交流会":destination=="out_of_town_visit"?"郊外への出張訪問":destination=="cat_exercise_class"?"猫の運動教室":destination=="quiet_reading_salon"?"静かな読書サロン":destination=="cat_photo_studio"?"猫の撮影スタジオ":destination=="cat_product_trial"?"猫用品の体験会":"近所のお店への訪問";
         public static string ConversationId(string destination)=>"dispatch."+destination+".v1";
         public static string Key(int day,string cat,string destination)=>"dispatch-"+day+"-"+cat+(destination==Destination?"":":"+destination);
         public static CafeConversationProgress Start(string stage,string destination=Destination)=>new CafeConversationProgress{conversation_id=ConversationId(destination)+"."+stage,branch_id=stage=="travelling"?"travelling":"introduction",viewed_branches=new string[0]};
@@ -24,10 +24,10 @@ namespace CatCafePreview.Standalone
         {
             if(destination!=Destination)
             {
-                if(destination=="cat_exercise_class" || destination=="quiet_reading_salon")
+                if(destination=="cat_exercise_class" || destination=="quiet_reading_salon" || destination=="cat_photo_studio" || destination=="cat_product_trial")
                 {
-                    bool exercise=destination=="cat_exercise_class";
-                    string place=Title(destination),contact=exercise?"教室の担当者":"サロンの担当者",choice=exercise?"追加の運動プログラム":"延長の触れ合い";
+                    bool exercise=destination=="cat_exercise_class",studio=destination=="cat_photo_studio",product=destination=="cat_product_trial";
+                    string place=Title(destination),contact=exercise?"教室の担当者":studio?"スタジオ担当者":product?"体験会の担当者":"サロンの担当者",choice=exercise?"追加の運動プログラム":studio?"追加撮影":product?"追加体験・撮影モデル":"延長の触れ合い";
                     var result=Lines(stage,branch,name);
                     if(stage=="departure" && branch=="introduction")
                     {
@@ -37,6 +37,10 @@ namespace CatCafePreview.Standalone
                     if(stage=="travelling")result[1]=new CafeConversationLine("あなた",choice+"の相談は、イベント一覧の『派遣中の選択』で確認しましょう。留守の間も、店内の猫たちと営業の準備を進められます。");
                     if(stage=="return" && branch=="introduction")result[2]=new CafeConversationLine("あなた","途中の"+choice+"への回答を反映した確定報酬と、この子の帰還時の状態を確認しますね。ここで回答をやり直す必要はありません。");
                     if(stage=="return" && branch=="received")result[2]=new CafeConversationLine("","確定した報酬と派遣経験は受け取り済みだ。用品の有無は受取内容に従う。出勤には自動で戻らないので、営業準備で予定を確認しよう。");
+                    if(studio && stage=="departure" && branch=="introduction")result[3]=new CafeConversationLine("","出発条件・費用・日数と報酬見込みを確かめよう。追加撮影と帰還後の猫紹介は、別の相談で回答する。");
+                    if(studio && stage=="return" && branch=="introduction")result[2]=new CafeConversationLine("あなた","追加撮影への回答を反映した確定報酬を確認します。猫紹介は受領と結果会話の後で、別の相談として伺います。");
+                    if(studio && stage=="return" && branch=="received")result[2]=new CafeConversationLine("","確定報酬と派遣経験は受け取り済みだ。結果を読み終えたら、イベント一覧の『派遣先からの猫紹介』で相談を確認しよう。");
+                    if(product && stage=="return" && branch=="introduction")result[2]=new CafeConversationLine("あなた","途中の回答を反映した金銭と、既存の用品報酬を確認します。追加体験や撮影モデルへの回答を、ここでやり直す必要はありません。");
                     return result.Select(l=>new CafeConversationLine(l.speaker=="お店の人"?contact:l.speaker,l.text.Replace("近所のお店への訪問",place).Replace("近所のお店",place))).ToArray();
                 }
                 string title=Title(destination),sender=destination=="shopping_street_event"?"商店街の担当者":"訪問先の担当者";

@@ -34,7 +34,7 @@ namespace CatCafePreview
         protected override string ChoicePrompt=>Row.stage=="departure"?"この猫に、"+Title+"をお願いしましょうか。":"帰還の報酬を受け取りますか。";
         protected override string AcceptCaption=>Row.stage=="departure"?"この猫で出発する":"報酬を受け取る";
         protected override string DeclineCaption=>Row.stage=="departure"?"今回は出発しない":"あとで確認する";
-        protected override string AcceptEffect=>Row.stage=="departure"?(Option?.can_select==true?"出発可能":"選べない理由："+(Option?.reason??"派遣先の情報がありません。"))+"\n"+("対象："+Request.name+" / 資金："+state.funds+"\n出発費用：0 / 帰還まで："+Option?.days+"回の閉店 / 報酬見込み："+Option?.reward)+"\n"+Option?.detail:(Return?.can_select==true?"受取可能":"選べない理由："+(Return?.reason??"帰還を確認してください。"))+"\n確定報酬："+Return?.reward+" / "+Supply+" / 派遣経験1\n"+Return?.detail;
+        protected override string AcceptEffect=>Row.stage=="departure"?(Option?.can_select==true?"出発可能":"選べない理由："+(Option?.reason??"派遣先の情報がありません。"))+"\n"+("対象："+Request.name+" / 資金："+state.funds+"\n出発費用：0 / 帰還まで："+Option?.days+"回の閉店 / 金銭見込み："+Option?.reward)+" / "+Supply+"（用品見込み）\n"+Option?.detail:(Return?.can_select==true?"受取可能":"選べない理由："+(Return?.reason??"帰還を確認してください。"))+"\n確定金銭："+Return?.reward+" / "+Supply+" / 派遣経験1\n"+Return?.detail;
         string Supply {get{var item=Backend.Simulation.DispatchDestination(Row.Destination).item_reward;return item==null || string.IsNullOrEmpty(item.id)?"用品なし":"用品："+item.name;}}
         protected override string DeclineEffect=>Row.stage=="departure"?"出発・費用・日程の変更なし。条件が整えば再び相談できます。":"未受取のまま保持します。帰還確認が終わるまで既存の進行制限が残ります。";
         protected override string Notice=>Row.stage=="travelling"?"状況の閲覧中です。閉じた後、営業・休業で日程を進めてください。":progress.branch_id=="introduction"?"営業・自動進行は停止中。閉じても相談と会話の位置を保持します。":"手続きは確定済みです。結果会話を最後まで読み、営業・自動進行は手動で再開してください。";

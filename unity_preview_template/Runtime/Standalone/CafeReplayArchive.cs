@@ -22,6 +22,14 @@ namespace CatCafePreview.Standalone
     {
         public static bool IsEnding(string id)=>id==CafeOutcome.Id || id==CafePopularityEnding.Id || id==CafeBondEnding.Id || id==CafePatronEnding.Id;
         public static readonly CafeReplayDefinition[] All={
+            new CafeReplayDefinition("dispatch.cat_photo_studio.v1.departure","departed","猫の撮影スタジオ · 出発"),
+            new CafeReplayDefinition("dispatch.cat_photo_studio.v1.departure","cancelled","猫の撮影スタジオ · 今回は出発しない"),
+            new CafeReplayDefinition("dispatch.cat_photo_studio.v1.travelling","travelling","猫の撮影スタジオ · 派遣中"),
+            new CafeReplayDefinition("dispatch.cat_photo_studio.v1.return","received","猫の撮影スタジオ · 帰還"),
+            new CafeReplayDefinition("dispatch.cat_product_trial.v1.departure","departed","猫用品の体験会 · 出発"),
+            new CafeReplayDefinition("dispatch.cat_product_trial.v1.departure","cancelled","猫用品の体験会 · 今回は出発しない"),
+            new CafeReplayDefinition("dispatch.cat_product_trial.v1.travelling","travelling","猫用品の体験会 · 派遣中"),
+            new CafeReplayDefinition("dispatch.cat_product_trial.v1.return","received","猫用品の体験会 · 帰還"),
             new CafeReplayDefinition("dispatch.cat_exercise_class.v1.departure","departed","猫の運動教室 · 出発"),
             new CafeReplayDefinition("dispatch.cat_exercise_class.v1.departure","cancelled","猫の運動教室 · 今回は出発しない"),
             new CafeReplayDefinition("dispatch.cat_exercise_class.v1.travelling","travelling","猫の運動教室 · 派遣中"),
