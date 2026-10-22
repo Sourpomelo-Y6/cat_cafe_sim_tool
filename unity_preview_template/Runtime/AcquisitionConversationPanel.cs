@@ -12,7 +12,7 @@ namespace CatCafePreview
         Transform[] originalChildren; bool[] originalActive; Vector2 originalMin,originalMax,originalPivot,originalOffsetMin,originalOffsetMax;
         public bool OriginalShowing {get;private set;}
         GameObject card,dialogue,choiceGroup,historyWindow; Text heading,body,speaker,hint,acceptEffect,declineEffect,catLabel,historyBody,sceneLabel; RawImage portrait;
-        CanvasGroup catGroup; ScrollRect historyScroll; Vector2 layoutSize; bool layoutHistory;
+        CanvasGroup catGroup; ScrollRect historyScroll; Vector2 layoutSize; bool layoutHistory,layoutThreeLinePages;
         static readonly Color Paper=new Color(.99f,.97f,.92f),Ink=new Color(.22f,.26f,.20f),Olive=new Color(.36f,.43f,.31f);
         public ScrollRect HistoryScroll=>historyScroll;
         Button third;Text thirdEffect;
@@ -205,10 +205,10 @@ namespace CatCafePreview
         }
         void Layout()
         {
-            var size=card.GetComponent<RectTransform>().rect.size;if(size==layoutSize && layoutHistory==history)return;layoutSize=size;layoutHistory=history;
+            var size=card.GetComponent<RectTransform>().rect.size;if(size==layoutSize && layoutHistory==history && layoutThreeLinePages==ThreeLinePages)return;layoutSize=size;layoutHistory=history;layoutThreeLinePages=ThreeLinePages;
             float width=size.x-96;var dock=dialogue.GetComponent<RectTransform>();dock.offsetMin=new Vector2(48,32);dock.offsetMax=new Vector2(-48,286);
             SetScroll(scroll,width-64,ThreeLinePages?144:112);
-            if(ThreeLinePages){scroll.vertical=false;scroll.verticalScrollbar.gameObject.SetActive(false);}hint.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,width-64);next.GetComponent<RectTransform>().anchoredPosition=new Vector2(width-224,-202);
+            scroll.vertical=!ThreeLinePages;if(ThreeLinePages)scroll.verticalScrollbar.gameObject.SetActive(false);hint.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,width-64);next.GetComponent<RectTransform>().anchoredPosition=new Vector2(width-224,-202);
             var box=historyWindow.GetComponent<RectTransform>();Place(box,96,110,size.x-192,size.y-158);SetScroll(historyScroll,size.x-256,size.y-334);
             historyWindow.transform.Find("会話へ戻る").GetComponent<RectTransform>().anchoredPosition=new Vector2(32,-(size.y-216));
         }
