@@ -16,7 +16,7 @@ namespace CatCafePreview
         {
             var r = Simulation.GrowthCat(id);
             return "最大体力 " + Simulation.MaxStamina(id) + "（基礎成長 " + Simulation.State.cats.Single(c=>c.id==id).stamina_stage + "段階） / 経験：接客 " + r.service + " / 休養 " + r.rest + " / 派遣 " + r.dispatch + " / 得意分野 " + GrowthLabel(r.specialization)
-                + " / 得意分類 " + string.Join("・", CafeSimulation.LearnedGroups(r).Select(GrowthLabel)) + " / 得意行動 " + string.Join("・", CafeSimulation.LearnedTypes(r).Select(GrowthLabel));
+                + " / 得意分類 " + string.Join("・", CafeSimulation.LearnedGroups(r).Select(GrowthLabel)) + " / 得意行動 " + string.Join("・", CafeSimulation.LearnedTypes(r).Select(GrowthLabel)) + PatronGrowthGuide(r);
         }
         private PythonGrowthChoice[] GrowthChoices()
         {
@@ -27,7 +27,7 @@ namespace CatCafePreview
                 string kind = Simulation.GrowthPendingKind(r); if (kind == null) return null;
                 string[] choices = kind == "resolve_growth" ? new[] { "service", "rest", "dispatch" } : kind == "resolve_growth_mastery" ? Simulation.MasteryChoices(r) : Simulation.TypeMasteryChoices(r);
                 return new PythonGrowthChoice { kind = kind, cat_id = r.cat_id, name = Simulation.Definition(r.cat_id).name,
-                    selected = Simulation.GrowthSelection(r)?.choice, recommendation = Simulation.RecommendGrowth(r).choice, decision_reason = Simulation.GrowthSelection(r)?.reason ?? Simulation.RecommendGrowth(r).reason,
+                    selected = Simulation.GrowthSelection(r)?.choice, recommendation = Simulation.RecommendGrowth(r).choice, decision_reason = PatronGrowthGuide(r) + "\n" + (Simulation.GrowthSelection(r)?.reason ?? Simulation.RecommendGrowth(r).reason),
                     title = kind == "resolve_growth" ? "得意分野" : kind == "resolve_growth_mastery" ? "得意な交流分類" : "得意な個別行動",
                     experience = (float)(kind == "resolve_growth" ? r.service + r.rest + r.dispatch : kind == "resolve_growth_mastery" ? (r.mastery == null ? r.mastery_groups.Sum() : r.second_mastery == null ? r.second_mastery_groups.Sum() : r.third_group_practice.groups.Sum()) : Simulation.TypeMasteryExperience(r)),
                     threshold = Simulation.GrowthThreshold(r, kind), service = (float)r.service, rest = (float)r.rest, dispatch = (float)r.dispatch,

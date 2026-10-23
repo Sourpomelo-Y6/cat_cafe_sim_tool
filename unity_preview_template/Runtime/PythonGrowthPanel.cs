@@ -40,7 +40,8 @@ namespace CatCafePreview
             Controls();var client=GetComponent<PythonStateClient>();client.GrowthRowIndex=Mathf.Clamp(client.GrowthRowIndex,0,rows.Length-1);var ev=rows[client.GrowthRowIndex];
             title.text="営業後の成長確認（"+(client.GrowthRowIndex+1)+" / "+rows.Length+"）  "+ev.name+"："+ev.title;
             details.fontSize=15;details.lineSpacing=1.05f;
-            details.text="対象の猫と成長事項の一覧\n"+string.Join("\n",rows.Select((r,i)=>(i==client.GrowthRowIndex?"▶ ":"・")+r.name+" / "+r.title+" → "+Label(r,r.selected)))+"\n\n自分で選ぶ：右の候補を押します。\n前／次の成長で猫を切り替えます。\n\n"+ev.name+"の選択理由\n"+ev.decision_reason+"\n\n経験："+ev.experience+" / 必要："+ev.threshold+"\n習得済み："+ev.learned;
+            details.text=ev.name+"：選択中「"+Label(ev,ev.selected)+"」\n手動に戻す：右の「自分で選ぶ」を押します。\n自動成長は猫適性の比較で、目標達成を保証しません。専門は確定後に変更できません。\n"+ev.decision_reason+"\n\n対象の猫と成長事項の一覧\n"+string.Join("\n",rows.Select((r,i)=>(i==client.GrowthRowIndex?"▶ ":"・")+r.name+" / "+r.title+" → "+Label(r,r.selected)))+"\n\n前／次の成長で猫を切り替えます。\n経験："+ev.experience+" / 必要："+ev.threshold+"\n習得済み："+ev.learned;
+            PythonDispatchDisplay.Size(details);
             for(int i=0;i<choices.Length;i++)
             {
                 bool exists=ev.choices!=null && i<ev.choices.Length;choices[i].gameObject.SetActive(exists);if(!exists)continue;
