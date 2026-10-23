@@ -39,7 +39,7 @@ namespace CatCafePreview
         }
         public void PrepareDispatchConversation()
         {
-            var rows=DispatchConversations;var pending=rows.FirstOrDefault(CafeDispatchDialogue.ResultPending);
+            var rows=DispatchConversations;var selected=DispatchConversation;if(selected?.Current?.completed==false && (CafeDispatchDialogue.ResultPending(selected) || selected.stage=="return"))return;var pending=rows.FirstOrDefault(CafeDispatchDialogue.ResultPending);
             if(pending!=null){dispatchSelected=pending.event_id;pending.stage=pending.departure!=null && !pending.departure.completed && pending.departure.branch_id!="introduction"?"departure":"return";return;}
             var waiting=Simulation.State.dispatches.FirstOrDefault(e=>CafeDispatchDialogue.Supports(e.destination) && e.status=="waiting" && !CafeSimulation.DispatchInterrupted(e));if(waiting!=null){BeginDispatchEvent(waiting.id);return;}
             var current=DispatchConversation;if(current?.Current?.completed==false && (Simulation.State.dispatches.Any(e=>e.id==current.DispatchId && e.destination==current.Destination && !CafeSimulation.DispatchInterrupted(e)) || current.day==Simulation.State.day))return;

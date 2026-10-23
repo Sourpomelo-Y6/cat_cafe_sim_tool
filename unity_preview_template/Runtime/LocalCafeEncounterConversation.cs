@@ -24,6 +24,7 @@ namespace CatCafePreview
         }
         public void PrepareEncounterConversation()
         {
+            if(EncounterConversation?.progress.completed==false)return;
             var pending=EncounterConversations.FirstOrDefault(CafeEncounterDialogue.ResultPending);
             if(pending!=null){encounterSelected=pending.event_id;return;}
             if(EncounterConversation?.progress.completed==false)return;

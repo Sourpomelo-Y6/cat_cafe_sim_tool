@@ -24,6 +24,7 @@ namespace CatCafePreview
         }
         public void PrepareDispatchIntroductionConversation()
         {
+            if(DispatchIntroductionConversation?.progress.completed==false)return;
             var pending=DispatchIntroductionConversations.FirstOrDefault(CafeDispatchIntroductionDialogue.ResultPending);
             if(pending!=null){dispatchIntroductionSelected=pending.event_id;return;}
             if(DispatchIntroductionConversation?.progress.completed==false)return;

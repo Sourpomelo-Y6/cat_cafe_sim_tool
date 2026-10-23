@@ -22,7 +22,8 @@ namespace CatCafePreview {
     r.result=source.type=="support"?("回答時の支出："+source.cost.ToString("0.#")+"。支出後の資金："+Simulation.State.funds.ToString("0.#")+"。"+(Simulation.State.game_over!=null?"資金が尽き、経営終了となりました。閉店していないため、支援による人気加算は未反映です。":source.choice=="decline"?"支出・支援による人気加算はありません。":"支援による人気 +"+source.popularity.ToString("0.#")+" は閉店時の人気計算に加算します（上限 "+Simulation.Rules.popularity.cap.ToString("0.#")+"）。回答時には人気を変更しません。")):source.choice=="repair"?"席は通常どおり使用できます。"+r.repair_effect+"を運営費に加算します。回答時の支出はありません。":source.choice=="patch"?r.patch_effect+"。停止するのは末尾の席です。席を停止しても基本運営費は減りません。":"休業の精算を反映しました。資金："+Simulation.State.funds.ToString("0.#")+"。"+(Simulation.State.game_over!=null?"精算で経営終了となり、翌日には進みません。":Simulation.State.day>r.day?Simulation.State.day+"日目の準備へ進みました。":"成長などの確認待ちのため、閉店状態で日程の進行を待っています。")+"費用・猫の変化は休業前の確認内容に従って反映済みです。";
    }}
   }
-  public void PrepareEquipmentConversation(){var rows=EquipmentConversations;var pending=rows.Where(r=>!r.progress.completed).OrderBy(r=>r.day).FirstOrDefault();equipmentSelected=pending?.event_id;}
+  public void SelectEquipmentConversation(string id){if(EquipmentConversations.Any(r=>r.event_id==id && !r.progress.completed))equipmentSelected=id;}
+  public void PrepareEquipmentConversation(){var rows=EquipmentConversations;if(rows.Any(r=>r.event_id==equipmentSelected && !r.progress.completed))return;var pending=rows.Where(r=>!r.progress.completed).OrderBy(r=>r.day).FirstOrDefault();equipmentSelected=pending?.event_id;}
   void RestoreEquipmentConversations(CafeEquipmentConversation[] rows,string selected){equipmentConversations=(rows??new CafeEquipmentConversation[0]).ToList();equipmentSelected=selected;EquipmentConversationOpen=false;}
  }
 }

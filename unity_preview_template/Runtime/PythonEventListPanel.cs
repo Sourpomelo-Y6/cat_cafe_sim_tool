@@ -5,14 +5,14 @@ using UnityEngine;
 using UnityEngine.UI;
 namespace CatCafePreview
 {
-    public class PythonEventListPanel : MonoBehaviour
+    public partial class PythonEventListPanel : MonoBehaviour
     {
         public GameObject panel;
         public Button open, close;
         public Button[] entries,tabs,detailClose;
         public GameObject[] detailPanels;public RectTransform content;public ScrollRect scroll;public Text title;
         public static readonly string[] GroupNames={"回答・会話待ち","出会い・交流","派遣・帰還","記録"};
-        public int SelectedGroup=>group;public int PendingCount=>Enumerable.Range(0,14).Sum(PendingFor);
+        public int SelectedGroup=>group;public int PendingCount=>CafeBackends.Standalone && current!=null ? PendingCases().Count : Enumerable.Range(0,14).Sum(PendingFor);
         private int group=1;private GameObject returnPanel;private Button returnButton;private string returnCaption;
         private readonly HashSet<Button> bound=new HashSet<Button>();
         public Text notice;
@@ -22,7 +22,7 @@ namespace CatCafePreview
         public void Open(){OpenList(true);}
         private void OpenList(bool prioritize)
         {
-            if(current==null)return;ClearReturnContext();GetComponent<PythonMenuPanel>()?.Close();GetComponent<PythonMenuPanel>()?.CloseDetails();CloseDetails();
+            if(current==null)return;if(GetComponent<PythonStateClient>().Automatic)GetComponent<PythonStateClient>().PauseAutomaticForSave();ClearReturnContext();GetComponent<PythonMenuPanel>()?.Close();GetComponent<PythonMenuPanel>()?.CloseDetails();CloseDetails();
             if(prioritize && PendingCount>0)group=0;panel.SetActive(true);panel.transform.SetAsLastSibling();RefreshControls();if(scroll!=null)scroll.verticalNormalizedPosition=1;
         }
         private void CloseDetails()
@@ -33,7 +33,7 @@ namespace CatCafePreview
             GetComponent<PythonDispatchChoicePanel>()?.Close();GetComponent<PythonDispatchTroublePanel>()?.Close();GetComponent<PythonDispatchIntroductionPanel>()?.Close();
             if(detailPanels!=null)for(int i=1;i<=3;i++)if(detailPanels[i]!=null)detailPanels[i].SetActive(false);
         }
-        public void ResetNavigation(){Close();instance=null;group=1;}
+        public void ResetNavigation(){Close();HoldConversations=false;instance=null;group=1;}
         public void Close(){ClearReturnContext();panel.SetActive(false);}
         public void ReturnToBusiness(){Close();CloseDetails();GetComponent<PythonPreparationPanel>()?.Close();GetComponent<PythonClosingPanel>()?.Close();}
         private void ClearReturnContext(){if(returnButton!=null){if(IsAddedReturn(returnButton))returnButton.gameObject.SetActive(false);else returnButton.GetComponentInChildren<Text>().text=returnCaption;}returnPanel=null;returnButton=null;returnCaption=null;}
@@ -45,6 +45,7 @@ namespace CatCafePreview
         public int PendingFor(int i)
         {
             if(current==null)return 0;
+            if(CafeBackends.Standalone)return PendingCases().Count(r=>r.group==i);
             if(ResultPending(i))return 1;
             switch(i){
                 case 1:return current.intake_request?.status=="waiting"?1:0;
@@ -184,7 +185,7 @@ namespace CatCafePreview
         }
         public void Apply(PythonCafeState s)
         {
-            bool changed=instance!=s.instance_id;if(changed){instance=s.instance_id;Close();}current=s;online=true;if(changed || lastDay!=s.day)resolution=null;else if(PendingCount<lastPending)resolution="回答待ちが更新されました。残り "+PendingCount+"件です。";lastPending=PendingCount;lastDay=s.day;if(changed)group=PendingCount>0?0:1;
+            bool changed=instance!=s.instance_id;if(changed){instance=s.instance_id;HoldConversations=false;Close();}current=s;online=true;if(changed || lastDay!=s.day)resolution=null;else if(PendingCount<lastPending)resolution="回答待ちが更新されました。残り "+PendingCount+"件です。";lastPending=PendingCount;lastDay=s.day;if(changed)group=PendingCount>0?0:1;
             if(detailClose!=null)for(int i=0;i<detailClose.Length;i++){var button=detailClose[i];var target=detailPanels[i];if(button!=null && bound.Add(button))button.onClick.AddListener(()=>ReturnFromDetail(target));}
             if(returnPanel!=null && !returnPanel.activeSelf)OpenList(false);RefreshControls();
         }
@@ -207,6 +208,7 @@ namespace CatCafePreview
             RefreshGroups();
             if(returnButton!=null && returnPanel!=null && returnPanel.activeSelf)returnButton.GetComponentInChildren<Text>().text="イベント一覧へ戻る";
             notice.text=!online ? "Python未接続です。再接続後にイベントを開けます。" : client.HasPendingResults ? "接客結果が未保存です。保存待ちの内容を確認してください。" : client.AutoPlayRunning ? "おまかせ実行中です。停止後に回答できます。" : !client.CanManageSaves ? "操作を送信しています。完了するまでお待ちください。" : group==0 && PendingCount==0 ? "回答待ちはありません。出会い・交流や記録は別の分類で確認できます。" : "未完了 "+PendingCount+"件。回答・結果会話を完了すると営業を再開できます。店先の猫との交流は任意です。";if(online && client.CanManageSaves && !string.IsNullOrEmpty(resolution))notice.text=resolution+"\n"+notice.text;
+            RefreshCaseRows();
         }
         private void RefreshGroups()
         {

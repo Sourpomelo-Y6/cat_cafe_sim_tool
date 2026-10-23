@@ -25,6 +25,7 @@ namespace CatCafePreview
         private string offered;
         public void ShowRecords(){showing=true;Render();}
         MissingConversationPanel Dialogue=>GetComponent<MissingConversationPanel>()??gameObject.AddComponent<MissingConversationPanel>();
+        public void OpenCase(string id){if(!GetComponent<PythonStateClient>().CanManageSaves || !rows.Any(r=>r.choice==id))return;selected=id;showing=true;Render();if(CafeBackends.Standalone)Dialogue.Begin(id);}
         public void Open(string catId)
         {
             if(!GetComponent<PythonStateClient>().CanManageSaves)return;

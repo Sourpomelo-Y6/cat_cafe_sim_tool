@@ -1,0 +1,19 @@
+{
+  "dotnet_conversation_assertions": 1716,
+  "unity_targeted_assertions": 3776,
+  "player_extended_assertions": 65,
+  "player_separate_process_last_case_assertions": 68,
+  "manual_resolutions": [
+    "1280x800",
+    "1024x768"
+  ],
+  "manual_final_pending": 0,
+  "manual_final_phase": "open",
+  "manual_final_funds": 20520,
+  "build_log": "Logs/StandaloneBuild/Runs/20261024-060606-843-07448e213cd04687b49102bd7fb584d9.log",
+  "limitations": [
+    "full event permutations and all subjects not exhaustively tested",
+    "many-row scroll uses display fixture",
+    "long-term routes not rerun"
+  ]
+}

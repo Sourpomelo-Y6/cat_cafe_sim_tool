@@ -18,6 +18,7 @@ namespace CatCafePreview {
    Bind(value,host,owner.title.font);if(Showing){owner.panel.SetActive(owner.Confirming);GetComponent<PythonGameOverPanel>()?.panel.SetActive(false);}
    if(owner.Confirming){owner.panel.SetActive(true);owner.panel.transform.SetAsLastSibling();owner.confirmation.transform.SetAsLastSibling();}
   }
+  public bool OpenEvent(string id){if(!Backend.BeginTrustConversation(id))return false;Apply(Client.CurrentState,GetComponent<PythonCustomerTrustPanel>());Open();return Showing;}
   public bool OpenPending(){Backend.PrepareTrustConversation();if(Row?.Current==null || Row.Current.completed || !Backend.TrustSafe)return false;Apply(Client.CurrentState,GetComponent<PythonCustomerTrustPanel>());Open();return true;}
   protected override CafeConversationProgress ResolveProgress()=>Row?.Current;
   protected override bool ThreeLinePages=>true;

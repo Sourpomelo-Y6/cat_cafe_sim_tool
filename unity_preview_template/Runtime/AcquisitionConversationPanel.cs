@@ -22,7 +22,7 @@ namespace CatCafePreview
         protected virtual bool CanThird=>false;
         protected virtual void SendThird(){}
         Button next,accept,decline,backlog,close; ScrollRect scroll;
-        string rendered,epoch; string pageText=""; float revealed; bool history,hidden; int lastFrame=-1;
+        string rendered,epoch; string pageText=""; float revealed; bool history,hidden,manualSelected; int lastFrame=-1;
         protected LocalCafeBackend Backend=>CafeBackends.Local as LocalCafeBackend;
         protected PythonStateClient Client=>GetComponent<PythonStateClient>();
         public bool Showing=>!OriginalShowing && panel!=null && panel.activeSelf && progress!=null && !progress.completed;
@@ -69,13 +69,14 @@ namespace CatCafePreview
         protected virtual void SendAnswer(bool answer){if(regular)Client.RespondRegular(answer?"accept":"decline");else Client.RespondIntake(answer);}
         void ApplyState(PythonCafeState value)
         {
-            state=value;var restored=ResolveProgress();if(!ReferenceEquals(progress,restored)){hidden=false;rendered=null;history=false;}progress=restored;
+            state=value;var restored=ResolveProgress();if(!ReferenceEquals(progress,restored)){hidden=false;manualSelected=false;rendered=null;history=false;}progress=restored;
             if(card==null && progress==null){panel.SetActive(false);return;}
             if(card==null)Build();
             if(progress!=null && !progress.completed){OriginalShowing=false;foreach(var child in originalChildren)child.gameObject.SetActive(false);card.SetActive(true);Stretch(panel.GetComponent<RectTransform>());}
             string key=value.instance_id+"/"+progress?.branch_id;
             if(epoch!=key){epoch=key;hidden=false;history=false;rendered=null;}
             bool available=Available;
+            if(GetComponent<PythonEventListPanel>()?.HoldConversations==true && EventConversation && !manualSelected)hidden=true;
             if(available && GetComponents<AcquisitionConversationPanel>().Any(other=>other!=this && other.Showing))hidden=true;
             panel.SetActive(available && !hidden && !AutoRunning);
             if(confirmation!=null)confirmation.SetActive(false);
@@ -143,12 +144,14 @@ namespace CatCafePreview
             if(!Showing || !Click() || progress==null || history)return;
             var lines=Lines(progress.branch_id);
             if(progress.node<lines.Length){if(revealed<pageText.Length)revealed=pageText.Length;else if(ThreeLinePages && progress.page_offset+pageText.Length<lines[progress.node].text.Length)progress.page_offset+=pageText.Length;else {progress.node++;progress.page_offset=0;}}
-            else if(progress.branch_id!="introduction"){Finish();RecordCompletion();Close();return;}
+            else if(progress.branch_id!="introduction"){Finish();RecordCompletion();ReturnToEvents();return;}
             Refresh();
         }
         public void Answer(bool answer){if(!Showing || !Click() || progress==null || progress.branch_id!="introduction" || progress.node<Lines("introduction").Length)return;SendAnswer(answer);Refresh();}
-        public virtual void Open(){foreach(var other in GetComponents<AcquisitionConversationPanel>())if(other!=this && other.Showing)other.Close();hidden=false;OriginalShowing=false;if(card!=null){card.SetActive(true);foreach(var child in originalChildren)child.gameObject.SetActive(false);Stretch(panel.GetComponent<RectTransform>());}panel.SetActive(Available);panel.transform.SetAsLastSibling();Refresh();}
-        public virtual void Close(){if(!Ready)return;if(answerConfirmation!=null){Destroy(answerConfirmation);answerConfirmation=null;}hidden=true;panel.SetActive(false);SetOpen(false);AfterClose();}
+        bool EventConversation=>this is IntakeConversationPanel || this is RegularConversationPanel || this is DispatchConversationPanel || this is EquipmentConversationPanel || this is TrustConversationPanel || this is AdoptionConversationPanel || this is MissingConversationPanel || this is ReservationConversationPanel || this is LodgeConversationPanel || this is EncounterConversationPanel || this is DispatchIntroductionConversationPanel;
+        void ReturnToEvents(){if(!Ready)return;var list=GetComponent<PythonEventListPanel>();if(EventConversation && list!=null)list.HoldConversations=true;Close();if(EventConversation && list!=null)list.ConversationReturned();}
+        public virtual void Open(){manualSelected=true;foreach(var other in GetComponents<AcquisitionConversationPanel>())if(other!=this && other.Showing)other.Close();hidden=false;OriginalShowing=false;if(card!=null){card.SetActive(true);foreach(var child in originalChildren)child.gameObject.SetActive(false);Stretch(panel.GetComponent<RectTransform>());}panel.SetActive(Available);panel.transform.SetAsLastSibling();Refresh();}
+        public virtual void Close(){if(!Ready)return;if(answerConfirmation!=null){Destroy(answerConfirmation);answerConfirmation=null;}hidden=true;manualSelected=false;panel.SetActive(false);SetOpen(false);AfterClose();}
         void ToggleHistory(){if(!Click())return;history=!history;Refresh();}
         public void ShowOriginal()
         {
@@ -191,7 +194,7 @@ namespace CatCafePreview
             backlog=Button(dialogue.transform,"バックログ",24,202,120,ToggleHistory);
             Button(dialogue.transform,"保存",156,202,96,()=>GetComponent<PythonSaveBrowser>().OpenSave()).gameObject.SetActive(SaveControls);
             Button(dialogue.transform,"読込",264,202,96,()=>GetComponent<PythonSaveBrowser>().OpenLoad()).gameObject.SetActive(SaveControls);
-            close=Button(dialogue.transform,CloseCaption,388,202,144,Close);
+            close=Button(dialogue.transform,CloseCaption,388,202,144,ReturnToEvents);
             Button(dialogue.transform,"設定",548,202,120,()=>GetComponent<GameOptionsPanel>()?.Open());
             next=Button(dialogue.transform,"次へ",948,202,200,Next);next.GetComponent<ConversationShape>().color=Olive;next.GetComponentInChildren<Text>().color=Paper;
             choiceGroup=new GameObject("Choices",typeof(RectTransform));choiceGroup.transform.SetParent(card.transform,false);var choices=choiceGroup.GetComponent<RectTransform>();choices.anchorMin=choices.anchorMax=new Vector2(.5f,.61f);choices.pivot=new Vector2(.5f,.5f);choices.sizeDelta=new Vector2(760,354);choices.anchoredPosition=Vector2.zero;
