@@ -1,0 +1,12 @@
+{
+  "normalized_core_source_differences": [],
+  "sha256": {
+    "rules.json": "f36ee4f42ce1370e0f900aacd3f0d8ec315bb1dc9dcf12fde2c57a66402d2edf",
+    "stamina_growth.json": "0e98462380f1bde53db3b40a484071d0cce794cbb2ff5a53803b9d4f1e3557eb"
+  },
+  "trial_count": 30,
+  "closed_days_per_trial": 120,
+  "resume_cases": 30,
+  "new_player_build": false,
+  "historical_ui_source": "2026-10-23 IntegratedPlaytest; not rerun in this evaluation"
+}

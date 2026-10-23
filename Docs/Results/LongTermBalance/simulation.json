@@ -1,0 +1,6717 @@
+[
+  {
+    "id": "popularity-clear-0-auto",
+    "target": "popularity",
+    "mode": "clear",
+    "seed": 0,
+    "manual": false,
+    "day": 121,
+    "steps": 5054,
+    "failure": null,
+    "resume": true,
+    "game_over": null,
+    "goal": [
+      {
+        "started_day": 1,
+        "resolved_day": 11,
+        "status": "cleared",
+        "continued": false
+      },
+      {
+        "started_day": 12,
+        "resolved_day": 25,
+        "status": "cleared",
+        "continued": false
+      },
+      {
+        "started_day": 26,
+        "resolved_day": 33,
+        "status": "cleared",
+        "continued": true
+      }
+    ],
+    "bond": null,
+    "patron": null,
+    "funds": 195500,
+    "revenue": 211130,
+    "services": {
+      "cat-kohaku": 95,
+      "cat-mike": 93,
+      "cat-mugi": 98,
+      "cat-sora": 96,
+      "cat-tama": 105,
+      "request-cat-1": 97
+    },
+    "counts": {
+      "purchase_rest_space": 1,
+      "purchase_seat_equipment": 5,
+      "set_shifts": 117,
+      "start_business": 117,
+      "advance_business": 4563,
+      "next_day": 117,
+      "resolve_intake": 1,
+      "resolve_store_event": 18,
+      "expand_seats": 3,
+      "resolve_regular_introduction": 1,
+      "advance_goal": 2,
+      "upgrade_rest_space": 1,
+      "resolve_growth_auto": 10,
+      "resolve_growth_batch": 10,
+      "resolve_customer_trust": 82,
+      "resolve_reservation": 1,
+      "soundproof_rest_space": 1,
+      "continue_goal": 1,
+      "day_off": 3
+    },
+    "dispatches": 0,
+    "dispatch_reward": 0,
+    "cats": [
+      {
+        "id": "cat-kohaku",
+        "stamina": 180,
+        "max": 180,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-mike",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-mugi",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-sora",
+        "stamina": 180,
+        "max": 180,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-tama",
+        "stamina": 180,
+        "max": 180,
+        "specialization": "dispatch"
+      },
+      {
+        "id": "request-cat-1",
+        "stamina": 180,
+        "max": 180,
+        "specialization": "rest"
+      }
+    ],
+    "equipment": 5,
+    "housing": {
+      "purchased_day": 0,
+      "upgraded_day": 0
+    },
+    "seats": 5,
+    "clear_day": 33,
+    "recorded_closed_days": 117,
+    "settled_days": 120,
+    "unsampled_closed_days": [
+      42,
+      80,
+      108
+    ],
+    "funds_at_clear": 38040,
+    "spending": {
+      "pet_shop_expenses": 0,
+      "recruitment_expenses": 200,
+      "housing_expenses": 0,
+      "housing_cost": 0,
+      "expansion_expenses": 2500,
+      "equipment_expenses": 1500,
+      "rest_space_expenses": 2200,
+      "waiting_area_expenses": 0,
+      "waiting_area_cost": 0
+    },
+    "operating_expenses": 16630,
+    "net_change": 194500,
+    "minimum_closed_funds": 1030,
+    "sick_closed_cat_days": 0,
+    "missing_closed_cat_days": 0,
+    "zero_stamina_closed_cat_days": 0,
+    "mean_closed_fatigue": 18.311158798283262,
+    "max_closed_fatigue": 59,
+    "mean_closed_stress": 22.799713876967097,
+    "max_closed_stress": 59,
+    "working_mean_opening_stamina": 134.79876160990713,
+    "working_mean_opening_deficit": 0.0,
+    "working_low_openings": 0,
+    "post_clear": {
+      "counts": {
+        "cat-mugi": 75,
+        "cat-tama": 80,
+        "cat-kohaku": 73,
+        "cat-mike": 70,
+        "request-cat-1": 74,
+        "cat-sora": 72
+      },
+      "largest_share": 0.18018018018018017
+    },
+    "full_period": {
+      "counts": {
+        "cat-kohaku": 95,
+        "cat-mike": 93,
+        "cat-mugi": 98,
+        "cat-sora": 96,
+        "cat-tama": 105,
+        "request-cat-1": 97
+      },
+      "largest_share": 0.1797945205479452
+    },
+    "missing_cases": 0,
+    "max_stamina_at_clear": 120,
+    "player_sessions": 0,
+    "player_session_turns": {},
+    "player_cat_affinity": {
+      "cat-kohaku": 0,
+      "cat-mike": 0,
+      "cat-mugi": 0,
+      "cat-sora": 0,
+      "cat-tama": 0,
+      "request-cat-1": 0
+    },
+    "growth": {
+      "cat-kohaku": {
+        "specialization": "rest",
+        "selected_day": 19,
+        "service": 95,
+        "rest": 66,
+        "dispatch": 0
+      },
+      "cat-mike": {
+        "specialization": "service",
+        "selected_day": 18,
+        "service": 93,
+        "rest": 66,
+        "dispatch": 0
+      },
+      "cat-mugi": {
+        "specialization": "service",
+        "selected_day": 17,
+        "service": 98,
+        "rest": 61,
+        "dispatch": 0
+      },
+      "cat-sora": {
+        "specialization": "rest",
+        "selected_day": 16,
+        "service": 96,
+        "rest": 70,
+        "dispatch": 0
+      },
+      "cat-tama": {
+        "specialization": "dispatch",
+        "selected_day": 16,
+        "service": 105,
+        "rest": 65,
+        "dispatch": 0
+      },
+      "request-cat-1": {
+        "specialization": "rest",
+        "selected_day": 18,
+        "service": 97,
+        "rest": 66,
+        "dispatch": 0
+      }
+    },
+    "dispatch_by_destination": {},
+    "strict_dispatches": []
+  },
+  {
+    "id": "popularity-clear-1-auto",
+    "target": "popularity",
+    "mode": "clear",
+    "seed": 1,
+    "manual": false,
+    "day": 121,
+    "steps": 5047,
+    "failure": null,
+    "resume": true,
+    "game_over": null,
+    "goal": [
+      {
+        "started_day": 1,
+        "resolved_day": 11,
+        "status": "cleared",
+        "continued": false
+      },
+      {
+        "started_day": 12,
+        "resolved_day": 24,
+        "status": "cleared",
+        "continued": false
+      },
+      {
+        "started_day": 25,
+        "resolved_day": 35,
+        "status": "cleared",
+        "continued": true
+      }
+    ],
+    "bond": null,
+    "patron": null,
+    "funds": 187170,
+    "revenue": 202750,
+    "services": {
+      "cat-kohaku": 85,
+      "cat-mike": 98,
+      "cat-mugi": 97,
+      "cat-tama": 99,
+      "cat-sora": 101,
+      "request-cat-1": 94
+    },
+    "counts": {
+      "purchase_rest_space": 1,
+      "purchase_seat_equipment": 5,
+      "set_shifts": 117,
+      "start_business": 117,
+      "advance_business": 4563,
+      "next_day": 117,
+      "resolve_store_event": 12,
+      "resolve_intake": 1,
+      "expand_seats": 3,
+      "resolve_regular_introduction": 1,
+      "advance_goal": 2,
+      "upgrade_rest_space": 1,
+      "resolve_growth_auto": 12,
+      "resolve_growth_batch": 12,
+      "resolve_customer_trust": 77,
+      "resolve_reservation": 1,
+      "soundproof_rest_space": 1,
+      "continue_goal": 1,
+      "day_off": 3
+    },
+    "dispatches": 0,
+    "dispatch_reward": 0,
+    "cats": [
+      {
+        "id": "cat-kohaku",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-mike",
+        "stamina": 180,
+        "max": 180,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-mugi",
+        "stamina": 180,
+        "max": 180,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-sora",
+        "stamina": 180,
+        "max": 180,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-tama",
+        "stamina": 180,
+        "max": 180,
+        "specialization": "dispatch"
+      },
+      {
+        "id": "request-cat-1",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "rest"
+      }
+    ],
+    "equipment": 5,
+    "housing": {
+      "purchased_day": 0,
+      "upgraded_day": 0
+    },
+    "seats": 5,
+    "clear_day": 35,
+    "recorded_closed_days": 117,
+    "settled_days": 120,
+    "unsampled_closed_days": [
+      46,
+      81,
+      87
+    ],
+    "funds_at_clear": 42160,
+    "spending": {
+      "pet_shop_expenses": 0,
+      "recruitment_expenses": 200,
+      "housing_expenses": 0,
+      "housing_cost": 0,
+      "expansion_expenses": 2500,
+      "equipment_expenses": 1500,
+      "rest_space_expenses": 2200,
+      "waiting_area_expenses": 0,
+      "waiting_area_cost": 0
+    },
+    "operating_expenses": 16580,
+    "net_change": 186170,
+    "minimum_closed_funds": 1150,
+    "sick_closed_cat_days": 0,
+    "missing_closed_cat_days": 0,
+    "zero_stamina_closed_cat_days": 0,
+    "mean_closed_fatigue": 17.914878397711014,
+    "max_closed_fatigue": 59,
+    "mean_closed_stress": 21.149499284692418,
+    "max_closed_stress": 59,
+    "working_mean_opening_stamina": 134.90797546012269,
+    "working_mean_opening_deficit": 0.0,
+    "working_low_openings": 0,
+    "post_clear": {
+      "counts": {
+        "cat-kohaku": 61,
+        "cat-sora": 75,
+        "cat-mike": 71,
+        "cat-mugi": 71,
+        "cat-tama": 73,
+        "request-cat-1": 70
+      },
+      "largest_share": 0.17814726840855108
+    },
+    "full_period": {
+      "counts": {
+        "cat-kohaku": 85,
+        "cat-mike": 98,
+        "cat-mugi": 97,
+        "cat-tama": 99,
+        "cat-sora": 101,
+        "request-cat-1": 94
+      },
+      "largest_share": 0.1759581881533101
+    },
+    "missing_cases": 0,
+    "max_stamina_at_clear": 120,
+    "player_sessions": 0,
+    "player_session_turns": {},
+    "player_cat_affinity": {
+      "cat-kohaku": 0,
+      "cat-mike": 0,
+      "cat-mugi": 0,
+      "cat-sora": 0,
+      "cat-tama": 0,
+      "request-cat-1": 0
+    },
+    "growth": {
+      "cat-kohaku": {
+        "specialization": "rest",
+        "selected_day": 19,
+        "service": 85,
+        "rest": 62,
+        "dispatch": 0
+      },
+      "cat-mike": {
+        "specialization": "service",
+        "selected_day": 16,
+        "service": 98,
+        "rest": 69,
+        "dispatch": 0
+      },
+      "cat-mugi": {
+        "specialization": "service",
+        "selected_day": 17,
+        "service": 97,
+        "rest": 65,
+        "dispatch": 0
+      },
+      "cat-sora": {
+        "specialization": "rest",
+        "selected_day": 17,
+        "service": 101,
+        "rest": 63,
+        "dispatch": 0
+      },
+      "cat-tama": {
+        "specialization": "dispatch",
+        "selected_day": 17,
+        "service": 99,
+        "rest": 67,
+        "dispatch": 0
+      },
+      "request-cat-1": {
+        "specialization": "rest",
+        "selected_day": 20,
+        "service": 94,
+        "rest": 65,
+        "dispatch": 0
+      }
+    },
+    "dispatch_by_destination": {},
+    "strict_dispatches": []
+  },
+  {
+    "id": "popularity-clear-42-auto",
+    "target": "popularity",
+    "mode": "clear",
+    "seed": 42,
+    "manual": false,
+    "day": 121,
+    "steps": 5126,
+    "failure": null,
+    "resume": true,
+    "game_over": null,
+    "goal": [
+      {
+        "started_day": 1,
+        "resolved_day": 11,
+        "status": "cleared",
+        "continued": false
+      },
+      {
+        "started_day": 12,
+        "resolved_day": 26,
+        "status": "cleared",
+        "continued": false
+      },
+      {
+        "started_day": 27,
+        "resolved_day": 36,
+        "status": "cleared",
+        "continued": true
+      }
+    ],
+    "bond": null,
+    "patron": null,
+    "funds": 185360,
+    "revenue": 198890,
+    "services": {
+      "cat-kohaku": 87,
+      "cat-mike": 93,
+      "cat-tama": 92,
+      "cat-sora": 98,
+      "cat-mugi": 94,
+      "request-cat-1": 92
+    },
+    "counts": {
+      "purchase_rest_space": 1,
+      "purchase_seat_equipment": 4,
+      "set_shifts": 119,
+      "start_business": 119,
+      "advance_business": 4641,
+      "next_day": 119,
+      "resolve_store_event": 16,
+      "resolve_intake": 1,
+      "expand_seats": 2,
+      "resolve_regular_introduction": 1,
+      "advance_goal": 2,
+      "upgrade_rest_space": 1,
+      "resolve_growth_auto": 13,
+      "resolve_growth_batch": 13,
+      "resolve_customer_trust": 70,
+      "resolve_reservation": 1,
+      "soundproof_rest_space": 1,
+      "continue_goal": 1,
+      "day_off": 1
+    },
+    "dispatches": 0,
+    "dispatch_reward": 0,
+    "cats": [
+      {
+        "id": "cat-kohaku",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-mike",
+        "stamina": 180,
+        "max": 180,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-mugi",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-sora",
+        "stamina": 180,
+        "max": 180,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-tama",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "dispatch"
+      },
+      {
+        "id": "request-cat-1",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "rest"
+      }
+    ],
+    "equipment": 4,
+    "housing": {
+      "purchased_day": 0,
+      "upgraded_day": 0
+    },
+    "seats": 4,
+    "clear_day": 36,
+    "recorded_closed_days": 119,
+    "settled_days": 120,
+    "unsampled_closed_days": [
+      57
+    ],
+    "funds_at_clear": 43750,
+    "spending": {
+      "pet_shop_expenses": 0,
+      "recruitment_expenses": 200,
+      "housing_expenses": 0,
+      "housing_cost": 0,
+      "expansion_expenses": 1500,
+      "equipment_expenses": 1200,
+      "rest_space_expenses": 2200,
+      "waiting_area_expenses": 0,
+      "waiting_area_cost": 0
+    },
+    "operating_expenses": 14530,
+    "net_change": 184360,
+    "minimum_closed_funds": 1550,
+    "sick_closed_cat_days": 0,
+    "missing_closed_cat_days": 0,
+    "zero_stamina_closed_cat_days": 0,
+    "mean_closed_fatigue": 17.797819971870606,
+    "max_closed_fatigue": 59,
+    "mean_closed_stress": 20.921237693389592,
+    "max_closed_stress": 59,
+    "working_mean_opening_stamina": 133.98176291793314,
+    "working_mean_opening_deficit": 0.0,
+    "working_low_openings": 0,
+    "post_clear": {
+      "counts": {
+        "cat-sora": 73,
+        "cat-mugi": 71,
+        "cat-kohaku": 60,
+        "cat-mike": 64,
+        "cat-tama": 68,
+        "request-cat-1": 69
+      },
+      "largest_share": 0.18024691358024691
+    },
+    "full_period": {
+      "counts": {
+        "cat-kohaku": 87,
+        "cat-mike": 93,
+        "cat-tama": 92,
+        "cat-sora": 98,
+        "cat-mugi": 94,
+        "request-cat-1": 92
+      },
+      "largest_share": 0.17625899280575538
+    },
+    "missing_cases": 0,
+    "max_stamina_at_clear": 120,
+    "player_sessions": 0,
+    "player_session_turns": {},
+    "player_cat_affinity": {
+      "cat-kohaku": 0,
+      "cat-mike": 0,
+      "cat-mugi": 0,
+      "cat-sora": 0,
+      "cat-tama": 0,
+      "request-cat-1": 0
+    },
+    "growth": {
+      "cat-kohaku": {
+        "specialization": "rest",
+        "selected_day": 15,
+        "service": 87,
+        "rest": 65,
+        "dispatch": 0
+      },
+      "cat-mike": {
+        "specialization": "service",
+        "selected_day": 16,
+        "service": 93,
+        "rest": 68,
+        "dispatch": 0
+      },
+      "cat-mugi": {
+        "specialization": "service",
+        "selected_day": 21,
+        "service": 94,
+        "rest": 61,
+        "dispatch": 0
+      },
+      "cat-sora": {
+        "specialization": "rest",
+        "selected_day": 16,
+        "service": 98,
+        "rest": 69,
+        "dispatch": 0
+      },
+      "cat-tama": {
+        "specialization": "dispatch",
+        "selected_day": 19,
+        "service": 92,
+        "rest": 61,
+        "dispatch": 0
+      },
+      "request-cat-1": {
+        "specialization": "rest",
+        "selected_day": 20,
+        "service": 92,
+        "rest": 64,
+        "dispatch": 0
+      }
+    },
+    "dispatch_by_destination": {},
+    "strict_dispatches": []
+  },
+  {
+    "id": "popularity-fast-0-auto",
+    "target": "popularity",
+    "mode": "fast",
+    "seed": 0,
+    "manual": false,
+    "day": 121,
+    "steps": 5035,
+    "failure": null,
+    "resume": true,
+    "game_over": null,
+    "goal": [
+      {
+        "started_day": 1,
+        "resolved_day": 11,
+        "status": "cleared",
+        "continued": false
+      },
+      {
+        "started_day": 12,
+        "resolved_day": 24,
+        "status": "cleared",
+        "continued": false
+      },
+      {
+        "started_day": 25,
+        "resolved_day": 34,
+        "status": "cleared",
+        "continued": true
+      }
+    ],
+    "bond": null,
+    "patron": null,
+    "funds": 191590,
+    "revenue": 214370,
+    "services": {
+      "cat-kohaku": 97,
+      "cat-mike": 96,
+      "cat-mugi": 99,
+      "cat-sora": 96,
+      "cat-tama": 100,
+      "regular-rescue-1": 99
+    },
+    "counts": {
+      "purchase_rest_space": 1,
+      "purchase_seat_equipment": 6,
+      "set_shifts": 117,
+      "start_business": 117,
+      "advance_business": 4563,
+      "next_day": 118,
+      "expand_seats": 4,
+      "resolve_intake": 1,
+      "resolve_store_event": 18,
+      "resolve_regular_introduction": 1,
+      "advance_goal": 2,
+      "purchase_waiting_area": 1,
+      "upgrade_rest_space": 1,
+      "day_off": 3,
+      "resolve_growth_auto": 12,
+      "resolve_growth_batch": 12,
+      "resolve_reservation": 1,
+      "upgrade_waiting_area": 1,
+      "soundproof_rest_space": 1,
+      "resolve_customer_trust": 54,
+      "continue_goal": 1
+    },
+    "dispatches": 0,
+    "dispatch_reward": 0,
+    "cats": [
+      {
+        "id": "cat-kohaku",
+        "stamina": 180,
+        "max": 180,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-mike",
+        "stamina": 180,
+        "max": 180,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-mugi",
+        "stamina": 180,
+        "max": 180,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-sora",
+        "stamina": 180,
+        "max": 180,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-tama",
+        "stamina": 180,
+        "max": 180,
+        "specialization": "dispatch"
+      },
+      {
+        "id": "regular-rescue-1",
+        "stamina": 180,
+        "max": 180,
+        "specialization": "rest"
+      }
+    ],
+    "equipment": 6,
+    "housing": {
+      "purchased_day": 0,
+      "upgraded_day": 0
+    },
+    "seats": 6,
+    "clear_day": 34,
+    "recorded_closed_days": 118,
+    "settled_days": 120,
+    "unsampled_closed_days": [
+      14,
+      91
+    ],
+    "funds_at_clear": 34510,
+    "spending": {
+      "pet_shop_expenses": 0,
+      "recruitment_expenses": 200,
+      "housing_expenses": 0,
+      "housing_cost": 0,
+      "expansion_expenses": 4000,
+      "equipment_expenses": 1800,
+      "rest_space_expenses": 2200,
+      "waiting_area_expenses": 2000,
+      "waiting_area_cost": 2050
+    },
+    "operating_expenses": 23780,
+    "net_change": 190590,
+    "minimum_closed_funds": 1030,
+    "sick_closed_cat_days": 2,
+    "missing_closed_cat_days": 0,
+    "zero_stamina_closed_cat_days": 0,
+    "mean_closed_fatigue": 19.786376604850215,
+    "max_closed_fatigue": 66.25,
+    "mean_closed_stress": 26.49358059914408,
+    "max_closed_stress": 75,
+    "working_mean_opening_stamina": 134.95176848874598,
+    "working_mean_opening_deficit": 0.0,
+    "working_low_openings": 0,
+    "post_clear": {
+      "counts": {
+        "cat-mugi": 74,
+        "cat-tama": 75,
+        "cat-kohaku": 74,
+        "cat-mike": 70,
+        "cat-sora": 72,
+        "regular-rescue-1": 76
+      },
+      "largest_share": 0.17233560090702948
+    },
+    "full_period": {
+      "counts": {
+        "cat-kohaku": 97,
+        "cat-mike": 96,
+        "cat-mugi": 99,
+        "cat-sora": 96,
+        "cat-tama": 100,
+        "regular-rescue-1": 99
+      },
+      "largest_share": 0.17035775127768313
+    },
+    "missing_cases": 0,
+    "max_stamina_at_clear": 120,
+    "player_sessions": 0,
+    "player_session_turns": {},
+    "player_cat_affinity": {
+      "cat-kohaku": 0,
+      "cat-mike": 0,
+      "cat-mugi": 0,
+      "cat-sora": 0,
+      "cat-tama": 0,
+      "regular-rescue-1": 0
+    },
+    "growth": {
+      "cat-kohaku": {
+        "specialization": "rest",
+        "selected_day": 19,
+        "service": 97,
+        "rest": 66,
+        "dispatch": 0
+      },
+      "cat-mike": {
+        "specialization": "service",
+        "selected_day": 16,
+        "service": 96,
+        "rest": 70,
+        "dispatch": 0
+      },
+      "cat-mugi": {
+        "specialization": "service",
+        "selected_day": 17,
+        "service": 99,
+        "rest": 68,
+        "dispatch": 0
+      },
+      "cat-sora": {
+        "specialization": "rest",
+        "selected_day": 18,
+        "service": 96,
+        "rest": 69,
+        "dispatch": 0
+      },
+      "cat-tama": {
+        "specialization": "dispatch",
+        "selected_day": 16,
+        "service": 100,
+        "rest": 68,
+        "dispatch": 0
+      },
+      "regular-rescue-1": {
+        "specialization": "rest",
+        "selected_day": 22,
+        "service": 99,
+        "rest": 61,
+        "dispatch": 0
+      }
+    },
+    "dispatch_by_destination": {},
+    "strict_dispatches": []
+  },
+  {
+    "id": "popularity-fast-1-auto",
+    "target": "popularity",
+    "mode": "fast",
+    "seed": 1,
+    "manual": false,
+    "day": 121,
+    "steps": 5141,
+    "failure": null,
+    "resume": true,
+    "game_over": null,
+    "goal": [
+      {
+        "started_day": 1,
+        "resolved_day": 10,
+        "status": "cleared",
+        "continued": false
+      },
+      {
+        "started_day": 11,
+        "resolved_day": 24,
+        "status": "cleared",
+        "continued": false
+      },
+      {
+        "started_day": 25,
+        "resolved_day": 35,
+        "status": "cleared",
+        "continued": true
+      }
+    ],
+    "bond": null,
+    "patron": null,
+    "funds": 176660,
+    "revenue": 199470,
+    "services": {
+      "cat-kohaku": 102,
+      "cat-mike": 103,
+      "cat-mugi": 101,
+      "cat-tama": 98,
+      "cat-sora": 102,
+      "regular-rescue-1": 93
+    },
+    "counts": {
+      "purchase_rest_space": 1,
+      "purchase_seat_equipment": 6,
+      "set_shifts": 120,
+      "start_business": 120,
+      "advance_business": 4680,
+      "next_day": 120,
+      "expand_seats": 4,
+      "resolve_store_event": 12,
+      "resolve_intake": 1,
+      "resolve_regular_introduction": 1,
+      "advance_goal": 2,
+      "purchase_waiting_area": 1,
+      "upgrade_rest_space": 1,
+      "resolve_growth_auto": 12,
+      "resolve_growth_batch": 12,
+      "resolve_customer_trust": 44,
+      "resolve_reservation": 1,
+      "upgrade_waiting_area": 1,
+      "soundproof_rest_space": 1,
+      "continue_goal": 1
+    },
+    "dispatches": 0,
+    "dispatch_reward": 0,
+    "cats": [
+      {
+        "id": "cat-kohaku",
+        "stamina": 180,
+        "max": 180,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-mike",
+        "stamina": 180,
+        "max": 180,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-mugi",
+        "stamina": 180,
+        "max": 180,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-sora",
+        "stamina": 180,
+        "max": 180,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-tama",
+        "stamina": 180,
+        "max": 180,
+        "specialization": "dispatch"
+      },
+      {
+        "id": "regular-rescue-1",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "rest"
+      }
+    ],
+    "equipment": 6,
+    "housing": {
+      "purchased_day": 0,
+      "upgraded_day": 0
+    },
+    "seats": 6,
+    "clear_day": 35,
+    "recorded_closed_days": 120,
+    "settled_days": 120,
+    "unsampled_closed_days": [],
+    "funds_at_clear": 35380,
+    "spending": {
+      "pet_shop_expenses": 0,
+      "recruitment_expenses": 200,
+      "housing_expenses": 0,
+      "housing_cost": 0,
+      "expansion_expenses": 4000,
+      "equipment_expenses": 1800,
+      "rest_space_expenses": 2200,
+      "waiting_area_expenses": 2000,
+      "waiting_area_cost": 2060
+    },
+    "operating_expenses": 23810,
+    "net_change": 175660,
+    "minimum_closed_funds": 1150,
+    "sick_closed_cat_days": 6,
+    "missing_closed_cat_days": 0,
+    "zero_stamina_closed_cat_days": 0,
+    "mean_closed_fatigue": 20.335203366058906,
+    "max_closed_fatigue": 85,
+    "mean_closed_stress": 27.727208976157083,
+    "max_closed_stress": 73,
+    "working_mean_opening_stamina": 136.13293051359517,
+    "working_mean_opening_deficit": 0.0,
+    "working_low_openings": 0,
+    "post_clear": {
+      "counts": {
+        "cat-sora": 77,
+        "cat-kohaku": 77,
+        "cat-mike": 74,
+        "cat-mugi": 74,
+        "cat-tama": 74,
+        "regular-rescue-1": 71
+      },
+      "largest_share": 0.17225950782997762
+    },
+    "full_period": {
+      "counts": {
+        "cat-kohaku": 102,
+        "cat-mike": 103,
+        "cat-mugi": 101,
+        "cat-tama": 98,
+        "cat-sora": 102,
+        "regular-rescue-1": 93
+      },
+      "largest_share": 0.17195325542570952
+    },
+    "missing_cases": 0,
+    "max_stamina_at_clear": 120,
+    "player_sessions": 0,
+    "player_session_turns": {},
+    "player_cat_affinity": {
+      "cat-kohaku": 0,
+      "cat-mike": 0,
+      "cat-mugi": 0,
+      "cat-sora": 0,
+      "cat-tama": 0,
+      "regular-rescue-1": 0
+    },
+    "growth": {
+      "cat-kohaku": {
+        "specialization": "rest",
+        "selected_day": 16,
+        "service": 102,
+        "rest": 63,
+        "dispatch": 0
+      },
+      "cat-mike": {
+        "specialization": "service",
+        "selected_day": 16,
+        "service": 103,
+        "rest": 66,
+        "dispatch": 0
+      },
+      "cat-mugi": {
+        "specialization": "service",
+        "selected_day": 17,
+        "service": 101,
+        "rest": 63,
+        "dispatch": 0
+      },
+      "cat-sora": {
+        "specialization": "rest",
+        "selected_day": 17,
+        "service": 102,
+        "rest": 65,
+        "dispatch": 0
+      },
+      "cat-tama": {
+        "specialization": "dispatch",
+        "selected_day": 18,
+        "service": 98,
+        "rest": 67,
+        "dispatch": 0
+      },
+      "regular-rescue-1": {
+        "specialization": "rest",
+        "selected_day": 23,
+        "service": 93,
+        "rest": 58,
+        "dispatch": 0
+      }
+    },
+    "dispatch_by_destination": {},
+    "strict_dispatches": []
+  },
+  {
+    "id": "popularity-fast-42-auto",
+    "target": "popularity",
+    "mode": "fast",
+    "seed": 42,
+    "manual": false,
+    "day": 121,
+    "steps": 5024,
+    "failure": null,
+    "resume": true,
+    "game_over": null,
+    "goal": [
+      {
+        "started_day": 1,
+        "resolved_day": 12,
+        "status": "cleared",
+        "continued": false
+      },
+      {
+        "started_day": 13,
+        "resolved_day": 26,
+        "status": "cleared",
+        "continued": false
+      },
+      {
+        "started_day": 27,
+        "resolved_day": 36,
+        "status": "cleared",
+        "continued": true
+      }
+    ],
+    "bond": null,
+    "patron": null,
+    "funds": 187660,
+    "revenue": 210370,
+    "services": {
+      "cat-kohaku": 99,
+      "cat-mike": 100,
+      "cat-tama": 99,
+      "cat-sora": 98,
+      "cat-mugi": 99,
+      "request-cat-1": 99
+    },
+    "counts": {
+      "purchase_rest_space": 1,
+      "purchase_seat_equipment": 6,
+      "set_shifts": 117,
+      "start_business": 117,
+      "advance_business": 4563,
+      "next_day": 118,
+      "expand_seats": 4,
+      "resolve_store_event": 16,
+      "resolve_intake": 1,
+      "resolve_regular_introduction": 1,
+      "advance_goal": 2,
+      "purchase_waiting_area": 1,
+      "upgrade_rest_space": 1,
+      "resolve_growth_auto": 13,
+      "resolve_growth_batch": 13,
+      "day_off": 3,
+      "resolve_customer_trust": 43,
+      "resolve_reservation": 1,
+      "upgrade_waiting_area": 1,
+      "soundproof_rest_space": 1,
+      "continue_goal": 1
+    },
+    "dispatches": 0,
+    "dispatch_reward": 0,
+    "cats": [
+      {
+        "id": "cat-kohaku",
+        "stamina": 180,
+        "max": 180,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-mike",
+        "stamina": 180,
+        "max": 180,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-mugi",
+        "stamina": 180,
+        "max": 180,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-sora",
+        "stamina": 180,
+        "max": 180,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-tama",
+        "stamina": 180,
+        "max": 180,
+        "specialization": "dispatch"
+      },
+      {
+        "id": "request-cat-1",
+        "stamina": 180,
+        "max": 180,
+        "specialization": "rest"
+      }
+    ],
+    "equipment": 6,
+    "housing": {
+      "purchased_day": 0,
+      "upgraded_day": 0
+    },
+    "seats": 6,
+    "clear_day": 36,
+    "recorded_closed_days": 118,
+    "settled_days": 120,
+    "unsampled_closed_days": [
+      100,
+      114
+    ],
+    "funds_at_clear": 38640,
+    "spending": {
+      "pet_shop_expenses": 0,
+      "recruitment_expenses": 200,
+      "housing_expenses": 0,
+      "housing_cost": 0,
+      "expansion_expenses": 4000,
+      "equipment_expenses": 1800,
+      "rest_space_expenses": 2200,
+      "waiting_area_expenses": 2000,
+      "waiting_area_cost": 2020
+    },
+    "operating_expenses": 23710,
+    "net_change": 186660,
+    "minimum_closed_funds": 1360,
+    "sick_closed_cat_days": 6,
+    "missing_closed_cat_days": 0,
+    "zero_stamina_closed_cat_days": 0,
+    "mean_closed_fatigue": 20.415602836879433,
+    "max_closed_fatigue": 77.5,
+    "mean_closed_stress": 26.84822695035461,
+    "max_closed_stress": 74,
+    "working_mean_opening_stamina": 134.5141065830721,
+    "working_mean_opening_deficit": 0.0,
+    "working_low_openings": 0,
+    "post_clear": {
+      "counts": {
+        "cat-kohaku": 73,
+        "cat-tama": 76,
+        "request-cat-1": 73,
+        "cat-mike": 72,
+        "cat-mugi": 74,
+        "cat-sora": 72
+      },
+      "largest_share": 0.17272727272727273
+    },
+    "full_period": {
+      "counts": {
+        "cat-kohaku": 99,
+        "cat-mike": 100,
+        "cat-tama": 99,
+        "cat-sora": 98,
+        "cat-mugi": 99,
+        "request-cat-1": 99
+      },
+      "largest_share": 0.16835016835016836
+    },
+    "missing_cases": 0,
+    "max_stamina_at_clear": 120,
+    "player_sessions": 0,
+    "player_session_turns": {},
+    "player_cat_affinity": {
+      "cat-kohaku": 0,
+      "cat-mike": 0,
+      "cat-mugi": 0,
+      "cat-sora": 0,
+      "cat-tama": 0,
+      "request-cat-1": 0
+    },
+    "growth": {
+      "cat-kohaku": {
+        "specialization": "rest",
+        "selected_day": 16,
+        "service": 99,
+        "rest": 69,
+        "dispatch": 0
+      },
+      "cat-mike": {
+        "specialization": "service",
+        "selected_day": 18,
+        "service": 100,
+        "rest": 66,
+        "dispatch": 0
+      },
+      "cat-mugi": {
+        "specialization": "service",
+        "selected_day": 21,
+        "service": 99,
+        "rest": 64,
+        "dispatch": 0
+      },
+      "cat-sora": {
+        "specialization": "rest",
+        "selected_day": 17,
+        "service": 98,
+        "rest": 69,
+        "dispatch": 0
+      },
+      "cat-tama": {
+        "specialization": "dispatch",
+        "selected_day": 20,
+        "service": 99,
+        "rest": 64,
+        "dispatch": 0
+      },
+      "request-cat-1": {
+        "specialization": "rest",
+        "selected_day": 18,
+        "service": 99,
+        "rest": 66,
+        "dispatch": 0
+      }
+    },
+    "dispatch_by_destination": {},
+    "strict_dispatches": []
+  },
+  {
+    "id": "bond-clear-0-auto",
+    "target": "bond",
+    "mode": "clear",
+    "seed": 0,
+    "manual": false,
+    "day": 121,
+    "steps": 6045,
+    "failure": null,
+    "resume": true,
+    "game_over": null,
+    "goal": [],
+    "bond": {
+      "id": "bond",
+      "status": "cleared",
+      "started_day": 1,
+      "resolved_day": 15,
+      "continued": true,
+      "achieved_cats": [
+        "cat-kohaku",
+        "cat-mike",
+        "cat-mugi",
+        "cat-sora",
+        "cat-tama",
+        "rescue-1"
+      ]
+    },
+    "patron": null,
+    "funds": 145940,
+    "revenue": 155280,
+    "services": {
+      "cat-mike": 63,
+      "cat-kohaku": 60,
+      "cat-mugi": 84,
+      "cat-sora": 72,
+      "cat-tama": 81,
+      "rescue-1": 65
+    },
+    "counts": {
+      "open_recruitment": 1,
+      "recruit_cat": 1,
+      "player_begin": 45,
+      "player_step": 900,
+      "purchase_rest_space": 1,
+      "set_shifts": 120,
+      "start_business": 120,
+      "advance_business": 4680,
+      "next_day": 120,
+      "purchase_seat_equipment": 3,
+      "resolve_intake": 1,
+      "resolve_store_event": 18,
+      "expand_seats": 1,
+      "resolve_regular_introduction": 1,
+      "continue_bond_goal": 1,
+      "resolve_growth_auto": 16,
+      "resolve_growth_batch": 16
+    },
+    "dispatches": 0,
+    "dispatch_reward": 0,
+    "cats": [
+      {
+        "id": "cat-kohaku",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-mike",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-mugi",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-sora",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-tama",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "dispatch"
+      },
+      {
+        "id": "rescue-1",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "service"
+      }
+    ],
+    "equipment": 3,
+    "housing": {
+      "purchased_day": 0,
+      "upgraded_day": 0
+    },
+    "seats": 3,
+    "clear_day": 15,
+    "recorded_closed_days": 120,
+    "settled_days": 120,
+    "unsampled_closed_days": [],
+    "funds_at_clear": 10640,
+    "spending": {
+      "pet_shop_expenses": 0,
+      "recruitment_expenses": 200,
+      "housing_expenses": 0,
+      "housing_cost": 0,
+      "expansion_expenses": 500,
+      "equipment_expenses": 900,
+      "rest_space_expenses": 400,
+      "waiting_area_expenses": 0,
+      "waiting_area_cost": 0
+    },
+    "operating_expenses": 10340,
+    "net_change": 144940,
+    "minimum_closed_funds": 860,
+    "sick_closed_cat_days": 0,
+    "missing_closed_cat_days": 0,
+    "zero_stamina_closed_cat_days": 0,
+    "mean_closed_fatigue": 12.999305555555555,
+    "max_closed_fatigue": 54,
+    "mean_closed_stress": 14.66875,
+    "max_closed_stress": 59,
+    "working_mean_opening_stamina": 125.16216216216216,
+    "working_mean_opening_deficit": 2.645645645645646,
+    "working_low_openings": 0,
+    "post_clear": {
+      "counts": {
+        "cat-mike": 56,
+        "cat-tama": 71,
+        "cat-kohaku": 54,
+        "cat-sora": 63,
+        "rescue-1": 59,
+        "cat-mugi": 72
+      },
+      "largest_share": 0.192
+    },
+    "full_period": {
+      "counts": {
+        "cat-mike": 63,
+        "cat-kohaku": 60,
+        "cat-mugi": 84,
+        "cat-sora": 72,
+        "cat-tama": 81,
+        "rescue-1": 65
+      },
+      "largest_share": 0.1976470588235294
+    },
+    "missing_cases": 0,
+    "max_stamina_at_clear": 100,
+    "player_sessions": 45,
+    "player_session_turns": {
+      "20": 45
+    },
+    "player_cat_affinity": {
+      "cat-kohaku": 90,
+      "cat-mike": 80,
+      "cat-mugi": 85,
+      "cat-sora": 84.5,
+      "cat-tama": 80,
+      "rescue-1": 80
+    },
+    "growth": {
+      "cat-kohaku": {
+        "specialization": "rest",
+        "selected_day": 23,
+        "service": 60,
+        "rest": 55,
+        "dispatch": 0
+      },
+      "cat-mike": {
+        "specialization": "service",
+        "selected_day": 21,
+        "service": 63,
+        "rest": 59,
+        "dispatch": 0
+      },
+      "cat-mugi": {
+        "specialization": "service",
+        "selected_day": 16,
+        "service": 84,
+        "rest": 70,
+        "dispatch": 0
+      },
+      "cat-sora": {
+        "specialization": "rest",
+        "selected_day": 18,
+        "service": 72,
+        "rest": 65,
+        "dispatch": 0
+      },
+      "cat-tama": {
+        "specialization": "dispatch",
+        "selected_day": 17,
+        "service": 81,
+        "rest": 71,
+        "dispatch": 0
+      },
+      "rescue-1": {
+        "specialization": "service",
+        "selected_day": 19,
+        "service": 65,
+        "rest": 67,
+        "dispatch": 0
+      }
+    },
+    "dispatch_by_destination": {},
+    "strict_dispatches": []
+  },
+  {
+    "id": "bond-clear-1-auto",
+    "target": "bond",
+    "mode": "clear",
+    "seed": 1,
+    "manual": false,
+    "day": 121,
+    "steps": 5998,
+    "failure": null,
+    "resume": true,
+    "game_over": null,
+    "goal": [],
+    "bond": {
+      "id": "bond",
+      "status": "cleared",
+      "started_day": 1,
+      "resolved_day": 15,
+      "continued": true,
+      "achieved_cats": [
+        "cat-kohaku",
+        "cat-mike",
+        "cat-mugi",
+        "cat-sora",
+        "cat-tama",
+        "rescue-1"
+      ]
+    },
+    "patron": null,
+    "funds": 156610,
+    "revenue": 165950,
+    "services": {
+      "cat-mugi": 70,
+      "cat-mike": 77,
+      "cat-kohaku": 70,
+      "cat-sora": 79,
+      "cat-tama": 66,
+      "rescue-1": 61
+    },
+    "counts": {
+      "open_recruitment": 1,
+      "recruit_cat": 1,
+      "player_begin": 45,
+      "player_step": 900,
+      "purchase_rest_space": 1,
+      "set_shifts": 119,
+      "start_business": 119,
+      "advance_business": 4641,
+      "next_day": 119,
+      "purchase_seat_equipment": 3,
+      "resolve_store_event": 12,
+      "resolve_intake": 1,
+      "expand_seats": 1,
+      "resolve_regular_introduction": 1,
+      "continue_bond_goal": 1,
+      "resolve_growth_auto": 16,
+      "resolve_growth_batch": 16,
+      "day_off": 1
+    },
+    "dispatches": 0,
+    "dispatch_reward": 0,
+    "cats": [
+      {
+        "id": "cat-kohaku",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-mike",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-mugi",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-sora",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-tama",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "dispatch"
+      },
+      {
+        "id": "rescue-1",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "service"
+      }
+    ],
+    "equipment": 3,
+    "housing": {
+      "purchased_day": 0,
+      "upgraded_day": 0
+    },
+    "seats": 3,
+    "clear_day": 15,
+    "recorded_closed_days": 119,
+    "settled_days": 120,
+    "unsampled_closed_days": [
+      90
+    ],
+    "funds_at_clear": 11990,
+    "spending": {
+      "pet_shop_expenses": 0,
+      "recruitment_expenses": 200,
+      "housing_expenses": 0,
+      "housing_cost": 0,
+      "expansion_expenses": 500,
+      "equipment_expenses": 900,
+      "rest_space_expenses": 400,
+      "waiting_area_expenses": 0,
+      "waiting_area_cost": 0
+    },
+    "operating_expenses": 10340,
+    "net_change": 155610,
+    "minimum_closed_funds": 1030,
+    "sick_closed_cat_days": 0,
+    "missing_closed_cat_days": 0,
+    "zero_stamina_closed_cat_days": 0,
+    "mean_closed_fatigue": 13.603641456582633,
+    "max_closed_fatigue": 59,
+    "mean_closed_stress": 14.576330532212886,
+    "max_closed_stress": 59,
+    "working_mean_opening_stamina": 125.23323353293414,
+    "working_mean_opening_deficit": 3.3296407185628745,
+    "working_low_openings": 0,
+    "post_clear": {
+      "counts": {
+        "cat-sora": 70,
+        "cat-kohaku": 62,
+        "cat-mugi": 61,
+        "rescue-1": 55,
+        "cat-tama": 57,
+        "cat-mike": 66
+      },
+      "largest_share": 0.18867924528301888
+    },
+    "full_period": {
+      "counts": {
+        "cat-mugi": 70,
+        "cat-mike": 77,
+        "cat-kohaku": 70,
+        "cat-sora": 79,
+        "cat-tama": 66,
+        "rescue-1": 61
+      },
+      "largest_share": 0.1867612293144208
+    },
+    "missing_cases": 0,
+    "max_stamina_at_clear": 100,
+    "player_sessions": 45,
+    "player_session_turns": {
+      "20": 45
+    },
+    "player_cat_affinity": {
+      "cat-kohaku": 90,
+      "cat-mike": 80,
+      "cat-mugi": 85,
+      "cat-sora": 84.5,
+      "cat-tama": 80,
+      "rescue-1": 80
+    },
+    "growth": {
+      "cat-kohaku": {
+        "specialization": "rest",
+        "selected_day": 20,
+        "service": 70,
+        "rest": 63,
+        "dispatch": 0
+      },
+      "cat-mike": {
+        "specialization": "service",
+        "selected_day": 16,
+        "service": 77,
+        "rest": 69,
+        "dispatch": 0
+      },
+      "cat-mugi": {
+        "specialization": "service",
+        "selected_day": 19,
+        "service": 70,
+        "rest": 63,
+        "dispatch": 0
+      },
+      "cat-sora": {
+        "specialization": "rest",
+        "selected_day": 18,
+        "service": 79,
+        "rest": 66,
+        "dispatch": 0
+      },
+      "cat-tama": {
+        "specialization": "dispatch",
+        "selected_day": 18,
+        "service": 66,
+        "rest": 63,
+        "dispatch": 0
+      },
+      "rescue-1": {
+        "specialization": "service",
+        "selected_day": 20,
+        "service": 61,
+        "rest": 62,
+        "dispatch": 0
+      }
+    },
+    "dispatch_by_destination": {},
+    "strict_dispatches": []
+  },
+  {
+    "id": "bond-clear-42-auto",
+    "target": "bond",
+    "mode": "clear",
+    "seed": 42,
+    "manual": false,
+    "day": 121,
+    "steps": 6045,
+    "failure": null,
+    "resume": true,
+    "game_over": null,
+    "goal": [],
+    "bond": {
+      "id": "bond",
+      "status": "cleared",
+      "started_day": 1,
+      "resolved_day": 15,
+      "continued": true,
+      "achieved_cats": [
+        "cat-kohaku",
+        "cat-mike",
+        "cat-mugi",
+        "cat-sora",
+        "cat-tama",
+        "rescue-1"
+      ]
+    },
+    "patron": null,
+    "funds": 143940,
+    "revenue": 153280,
+    "services": {
+      "cat-kohaku": 78,
+      "cat-mugi": 71,
+      "cat-tama": 69,
+      "cat-sora": 77,
+      "cat-mike": 70,
+      "rescue-1": 64
+    },
+    "counts": {
+      "open_recruitment": 1,
+      "recruit_cat": 1,
+      "player_begin": 45,
+      "player_step": 900,
+      "purchase_rest_space": 1,
+      "set_shifts": 120,
+      "start_business": 120,
+      "advance_business": 4680,
+      "next_day": 120,
+      "purchase_seat_equipment": 3,
+      "resolve_store_event": 16,
+      "resolve_intake": 1,
+      "expand_seats": 1,
+      "resolve_regular_introduction": 1,
+      "continue_bond_goal": 1,
+      "resolve_growth_auto": 17,
+      "resolve_growth_batch": 17
+    },
+    "dispatches": 0,
+    "dispatch_reward": 0,
+    "cats": [
+      {
+        "id": "cat-kohaku",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-mike",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-mugi",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-sora",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-tama",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "dispatch"
+      },
+      {
+        "id": "rescue-1",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "service"
+      }
+    ],
+    "equipment": 3,
+    "housing": {
+      "purchased_day": 0,
+      "upgraded_day": 0
+    },
+    "seats": 3,
+    "clear_day": 15,
+    "recorded_closed_days": 120,
+    "settled_days": 120,
+    "unsampled_closed_days": [],
+    "funds_at_clear": 13800,
+    "spending": {
+      "pet_shop_expenses": 0,
+      "recruitment_expenses": 200,
+      "housing_expenses": 0,
+      "housing_cost": 0,
+      "expansion_expenses": 500,
+      "equipment_expenses": 900,
+      "rest_space_expenses": 400,
+      "waiting_area_expenses": 0,
+      "waiting_area_cost": 0
+    },
+    "operating_expenses": 10340,
+    "net_change": 142940,
+    "minimum_closed_funds": 1100,
+    "sick_closed_cat_days": 0,
+    "missing_closed_cat_days": 0,
+    "zero_stamina_closed_cat_days": 0,
+    "mean_closed_fatigue": 13.39861111111111,
+    "max_closed_fatigue": 59,
+    "mean_closed_stress": 15.594444444444445,
+    "max_closed_stress": 59,
+    "working_mean_opening_stamina": 125.41275964391691,
+    "working_mean_opening_deficit": 3.1629080118694364,
+    "working_low_openings": 0,
+    "post_clear": {
+      "counts": {
+        "cat-sora": 67,
+        "rescue-1": 56,
+        "cat-mike": 63,
+        "cat-mugi": 61,
+        "cat-tama": 61,
+        "cat-kohaku": 66
+      },
+      "largest_share": 0.17914438502673796
+    },
+    "full_period": {
+      "counts": {
+        "cat-kohaku": 78,
+        "cat-mugi": 71,
+        "cat-tama": 69,
+        "cat-sora": 77,
+        "cat-mike": 70,
+        "rescue-1": 64
+      },
+      "largest_share": 0.18181818181818182
+    },
+    "missing_cases": 0,
+    "max_stamina_at_clear": 110,
+    "player_sessions": 45,
+    "player_session_turns": {
+      "20": 45
+    },
+    "player_cat_affinity": {
+      "cat-kohaku": 90,
+      "cat-mike": 80,
+      "cat-mugi": 85,
+      "cat-sora": 84.5,
+      "cat-tama": 80,
+      "rescue-1": 80
+    },
+    "growth": {
+      "cat-kohaku": {
+        "specialization": "rest",
+        "selected_day": 15,
+        "service": 78,
+        "rest": 69,
+        "dispatch": 0
+      },
+      "cat-mike": {
+        "specialization": "service",
+        "selected_day": 22,
+        "service": 70,
+        "rest": 63,
+        "dispatch": 0
+      },
+      "cat-mugi": {
+        "specialization": "service",
+        "selected_day": 20,
+        "service": 71,
+        "rest": 60,
+        "dispatch": 0
+      },
+      "cat-sora": {
+        "specialization": "rest",
+        "selected_day": 16,
+        "service": 77,
+        "rest": 69,
+        "dispatch": 0
+      },
+      "cat-tama": {
+        "specialization": "dispatch",
+        "selected_day": 19,
+        "service": 69,
+        "rest": 65,
+        "dispatch": 0
+      },
+      "rescue-1": {
+        "specialization": "service",
+        "selected_day": 17,
+        "service": 64,
+        "rest": 57,
+        "dispatch": 0
+      }
+    },
+    "dispatch_by_destination": {},
+    "strict_dispatches": []
+  },
+  {
+    "id": "bond-fast-0-auto",
+    "target": "bond",
+    "mode": "fast",
+    "seed": 0,
+    "manual": false,
+    "day": 121,
+    "steps": 5875,
+    "failure": null,
+    "resume": true,
+    "game_over": null,
+    "goal": [],
+    "bond": {
+      "id": "bond",
+      "status": "cleared",
+      "started_day": 1,
+      "resolved_day": 13,
+      "continued": true,
+      "achieved_cats": [
+        "cat-kohaku",
+        "cat-mike",
+        "cat-mugi",
+        "cat-sora",
+        "cat-tama",
+        "rescue-1"
+      ]
+    },
+    "patron": null,
+    "funds": 149550,
+    "revenue": 158940,
+    "services": {
+      "cat-kohaku": 62,
+      "cat-mike": 75,
+      "cat-mugi": 81,
+      "cat-sora": 68,
+      "cat-tama": 80,
+      "rescue-1": 65
+    },
+    "counts": {
+      "open_recruitment": 1,
+      "recruit_cat": 1,
+      "player_begin": 37,
+      "player_step": 740,
+      "purchase_rest_space": 1,
+      "set_shifts": 120,
+      "start_business": 120,
+      "advance_business": 4680,
+      "next_day": 120,
+      "expand_seats": 1,
+      "purchase_seat_equipment": 3,
+      "resolve_intake": 1,
+      "resolve_store_event": 18,
+      "resolve_regular_introduction": 1,
+      "continue_bond_goal": 1,
+      "resolve_growth_auto": 15,
+      "resolve_growth_batch": 15
+    },
+    "dispatches": 0,
+    "dispatch_reward": 0,
+    "cats": [
+      {
+        "id": "cat-kohaku",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-mike",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-mugi",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-sora",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-tama",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "dispatch"
+      },
+      {
+        "id": "rescue-1",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "service"
+      }
+    ],
+    "equipment": 3,
+    "housing": {
+      "purchased_day": 0,
+      "upgraded_day": 0
+    },
+    "seats": 3,
+    "clear_day": 13,
+    "recorded_closed_days": 120,
+    "settled_days": 120,
+    "unsampled_closed_days": [],
+    "funds_at_clear": 8620,
+    "spending": {
+      "pet_shop_expenses": 0,
+      "recruitment_expenses": 200,
+      "housing_expenses": 0,
+      "housing_cost": 0,
+      "expansion_expenses": 500,
+      "equipment_expenses": 900,
+      "rest_space_expenses": 400,
+      "waiting_area_expenses": 0,
+      "waiting_area_cost": 0
+    },
+    "operating_expenses": 10390,
+    "net_change": 148550,
+    "minimum_closed_funds": 860,
+    "sick_closed_cat_days": 4,
+    "missing_closed_cat_days": 0,
+    "zero_stamina_closed_cat_days": 0,
+    "mean_closed_fatigue": 19.127083333333335,
+    "max_closed_fatigue": 86.25,
+    "mean_closed_stress": 22.07986111111111,
+    "max_closed_stress": 71,
+    "working_mean_opening_stamina": 122.21267217630853,
+    "working_mean_opening_deficit": 4.426446280991736,
+    "working_low_openings": 7,
+    "post_clear": {
+      "counts": {
+        "cat-tama": 73,
+        "cat-kohaku": 56,
+        "cat-mike": 68,
+        "cat-sora": 60,
+        "cat-mugi": 73,
+        "rescue-1": 59
+      },
+      "largest_share": 0.18766066838046272
+    },
+    "full_period": {
+      "counts": {
+        "cat-kohaku": 62,
+        "cat-mike": 75,
+        "cat-mugi": 81,
+        "cat-sora": 68,
+        "cat-tama": 80,
+        "rescue-1": 65
+      },
+      "largest_share": 0.18793503480278423
+    },
+    "missing_cases": 0,
+    "max_stamina_at_clear": 100,
+    "player_sessions": 37,
+    "player_session_turns": {
+      "20": 37
+    },
+    "player_cat_affinity": {
+      "cat-kohaku": 90,
+      "cat-mike": 90,
+      "cat-mugi": 84,
+      "cat-sora": 80,
+      "cat-tama": 82.5,
+      "rescue-1": 90
+    },
+    "growth": {
+      "cat-kohaku": {
+        "specialization": "rest",
+        "selected_day": 23,
+        "service": 62,
+        "rest": 53,
+        "dispatch": 0
+      },
+      "cat-mike": {
+        "specialization": "service",
+        "selected_day": 20,
+        "service": 75,
+        "rest": 58,
+        "dispatch": 0
+      },
+      "cat-mugi": {
+        "specialization": "service",
+        "selected_day": 18,
+        "service": 81,
+        "rest": 63,
+        "dispatch": 0
+      },
+      "cat-sora": {
+        "specialization": "rest",
+        "selected_day": 20,
+        "service": 68,
+        "rest": 60,
+        "dispatch": 0
+      },
+      "cat-tama": {
+        "specialization": "dispatch",
+        "selected_day": 18,
+        "service": 80,
+        "rest": 67,
+        "dispatch": 0
+      },
+      "rescue-1": {
+        "specialization": "service",
+        "selected_day": 22,
+        "service": 65,
+        "rest": 56,
+        "dispatch": 0
+      }
+    },
+    "dispatch_by_destination": {},
+    "strict_dispatches": []
+  },
+  {
+    "id": "bond-fast-1-auto",
+    "target": "bond",
+    "mode": "fast",
+    "seed": 1,
+    "manual": false,
+    "day": 121,
+    "steps": 5832,
+    "failure": null,
+    "resume": true,
+    "game_over": null,
+    "goal": [],
+    "bond": {
+      "id": "bond",
+      "status": "cleared",
+      "started_day": 1,
+      "resolved_day": 13,
+      "continued": true,
+      "achieved_cats": [
+        "cat-kohaku",
+        "cat-mike",
+        "cat-mugi",
+        "cat-sora",
+        "cat-tama",
+        "rescue-1"
+      ]
+    },
+    "patron": null,
+    "funds": 164610,
+    "revenue": 174000,
+    "services": {
+      "cat-kohaku": 75,
+      "cat-mike": 82,
+      "cat-mugi": 66,
+      "cat-tama": 59,
+      "cat-sora": 78,
+      "rescue-1": 71
+    },
+    "counts": {
+      "open_recruitment": 1,
+      "recruit_cat": 1,
+      "player_begin": 37,
+      "player_step": 740,
+      "purchase_rest_space": 1,
+      "set_shifts": 119,
+      "start_business": 119,
+      "advance_business": 4641,
+      "next_day": 119,
+      "expand_seats": 1,
+      "purchase_seat_equipment": 3,
+      "resolve_store_event": 12,
+      "resolve_intake": 1,
+      "resolve_regular_introduction": 1,
+      "continue_bond_goal": 1,
+      "resolve_growth_auto": 17,
+      "resolve_growth_batch": 17,
+      "day_off": 1
+    },
+    "dispatches": 0,
+    "dispatch_reward": 0,
+    "cats": [
+      {
+        "id": "cat-kohaku",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-mike",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-mugi",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-sora",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-tama",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "dispatch"
+      },
+      {
+        "id": "rescue-1",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "service"
+      }
+    ],
+    "equipment": 3,
+    "housing": {
+      "purchased_day": 0,
+      "upgraded_day": 0
+    },
+    "seats": 3,
+    "clear_day": 13,
+    "recorded_closed_days": 119,
+    "settled_days": 120,
+    "unsampled_closed_days": [
+      113
+    ],
+    "funds_at_clear": 10410,
+    "spending": {
+      "pet_shop_expenses": 0,
+      "recruitment_expenses": 200,
+      "housing_expenses": 0,
+      "housing_cost": 0,
+      "expansion_expenses": 500,
+      "equipment_expenses": 900,
+      "rest_space_expenses": 400,
+      "waiting_area_expenses": 0,
+      "waiting_area_cost": 0
+    },
+    "operating_expenses": 10390,
+    "net_change": 163610,
+    "minimum_closed_funds": 1030,
+    "sick_closed_cat_days": 4,
+    "missing_closed_cat_days": 0,
+    "zero_stamina_closed_cat_days": 0,
+    "mean_closed_fatigue": 16.894607843137255,
+    "max_closed_fatigue": 71.25,
+    "mean_closed_stress": 22.425770308123248,
+    "max_closed_stress": 76,
+    "working_mean_opening_stamina": 123.27222222222223,
+    "working_mean_opening_deficit": 4.116666666666666,
+    "working_low_openings": 7,
+    "post_clear": {
+      "counts": {
+        "cat-sora": 71,
+        "cat-mugi": 60,
+        "cat-tama": 53,
+        "rescue-1": 63,
+        "cat-kohaku": 67,
+        "cat-mike": 74
+      },
+      "largest_share": 0.19072164948453607
+    },
+    "full_period": {
+      "counts": {
+        "cat-kohaku": 75,
+        "cat-mike": 82,
+        "cat-mugi": 66,
+        "cat-tama": 59,
+        "cat-sora": 78,
+        "rescue-1": 71
+      },
+      "largest_share": 0.1902552204176334
+    },
+    "missing_cases": 0,
+    "max_stamina_at_clear": 100,
+    "player_sessions": 37,
+    "player_session_turns": {
+      "20": 37
+    },
+    "player_cat_affinity": {
+      "cat-kohaku": 90,
+      "cat-mike": 90,
+      "cat-mugi": 84,
+      "cat-sora": 80,
+      "cat-tama": 82.5,
+      "rescue-1": 90
+    },
+    "growth": {
+      "cat-kohaku": {
+        "specialization": "rest",
+        "selected_day": 20,
+        "service": 75,
+        "rest": 60,
+        "dispatch": 0
+      },
+      "cat-mike": {
+        "specialization": "service",
+        "selected_day": 18,
+        "service": 82,
+        "rest": 64,
+        "dispatch": 0
+      },
+      "cat-mugi": {
+        "specialization": "service",
+        "selected_day": 21,
+        "service": 66,
+        "rest": 58,
+        "dispatch": 0
+      },
+      "cat-sora": {
+        "specialization": "rest",
+        "selected_day": 19,
+        "service": 78,
+        "rest": 62,
+        "dispatch": 0
+      },
+      "cat-tama": {
+        "specialization": "dispatch",
+        "selected_day": 20,
+        "service": 59,
+        "rest": 57,
+        "dispatch": 0
+      },
+      "rescue-1": {
+        "specialization": "service",
+        "selected_day": 17,
+        "service": 71,
+        "rest": 59,
+        "dispatch": 0
+      }
+    },
+    "dispatch_by_destination": {},
+    "strict_dispatches": []
+  },
+  {
+    "id": "bond-fast-42-auto",
+    "target": "bond",
+    "mode": "fast",
+    "seed": 42,
+    "manual": false,
+    "day": 121,
+    "steps": 5873,
+    "failure": null,
+    "resume": true,
+    "game_over": null,
+    "goal": [],
+    "bond": {
+      "id": "bond",
+      "status": "cleared",
+      "started_day": 1,
+      "resolved_day": 13,
+      "continued": true,
+      "achieved_cats": [
+        "cat-kohaku",
+        "cat-mike",
+        "cat-mugi",
+        "cat-sora",
+        "cat-tama",
+        "rescue-1"
+      ]
+    },
+    "patron": null,
+    "funds": 152380,
+    "revenue": 161770,
+    "services": {
+      "cat-kohaku": 76,
+      "cat-mike": 88,
+      "cat-tama": 55,
+      "cat-sora": 76,
+      "cat-mugi": 71,
+      "rescue-1": 75
+    },
+    "counts": {
+      "open_recruitment": 1,
+      "recruit_cat": 1,
+      "player_begin": 37,
+      "player_step": 740,
+      "purchase_rest_space": 1,
+      "set_shifts": 120,
+      "start_business": 120,
+      "advance_business": 4680,
+      "next_day": 120,
+      "expand_seats": 1,
+      "purchase_seat_equipment": 3,
+      "resolve_store_event": 16,
+      "resolve_intake": 1,
+      "resolve_regular_introduction": 1,
+      "continue_bond_goal": 1,
+      "resolve_growth_auto": 15,
+      "resolve_growth_batch": 15
+    },
+    "dispatches": 0,
+    "dispatch_reward": 0,
+    "cats": [
+      {
+        "id": "cat-kohaku",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-mike",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-mugi",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-sora",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-tama",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "dispatch"
+      },
+      {
+        "id": "rescue-1",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "service"
+      }
+    ],
+    "equipment": 3,
+    "housing": {
+      "purchased_day": 0,
+      "upgraded_day": 0
+    },
+    "seats": 3,
+    "clear_day": 13,
+    "recorded_closed_days": 120,
+    "settled_days": 120,
+    "unsampled_closed_days": [],
+    "funds_at_clear": 11250,
+    "spending": {
+      "pet_shop_expenses": 0,
+      "recruitment_expenses": 200,
+      "housing_expenses": 0,
+      "housing_cost": 0,
+      "expansion_expenses": 500,
+      "equipment_expenses": 900,
+      "rest_space_expenses": 400,
+      "waiting_area_expenses": 0,
+      "waiting_area_cost": 0
+    },
+    "operating_expenses": 10390,
+    "net_change": 151380,
+    "minimum_closed_funds": 1040,
+    "sick_closed_cat_days": 0,
+    "missing_closed_cat_days": 0,
+    "zero_stamina_closed_cat_days": 0,
+    "mean_closed_fatigue": 20.085416666666667,
+    "max_closed_fatigue": 88.75,
+    "mean_closed_stress": 20.685416666666665,
+    "max_closed_stress": 69,
+    "working_mean_opening_stamina": 123.91546961325967,
+    "working_mean_opening_deficit": 3.7917127071823207,
+    "working_low_openings": 9,
+    "post_clear": {
+      "counts": {
+        "cat-sora": 68,
+        "cat-tama": 49,
+        "cat-mugi": 67,
+        "rescue-1": 69,
+        "cat-kohaku": 66,
+        "cat-mike": 77
+      },
+      "largest_share": 0.19444444444444445
+    },
+    "full_period": {
+      "counts": {
+        "cat-kohaku": 76,
+        "cat-mike": 88,
+        "cat-tama": 55,
+        "cat-sora": 76,
+        "cat-mugi": 71,
+        "rescue-1": 75
+      },
+      "largest_share": 0.19954648526077098
+    },
+    "missing_cases": 0,
+    "max_stamina_at_clear": 100,
+    "player_sessions": 37,
+    "player_session_turns": {
+      "20": 37
+    },
+    "player_cat_affinity": {
+      "cat-kohaku": 90,
+      "cat-mike": 90,
+      "cat-mugi": 84,
+      "cat-sora": 80,
+      "cat-tama": 82.5,
+      "rescue-1": 90
+    },
+    "growth": {
+      "cat-kohaku": {
+        "specialization": "rest",
+        "selected_day": 15,
+        "service": 76,
+        "rest": 68,
+        "dispatch": 0
+      },
+      "cat-mike": {
+        "specialization": "service",
+        "selected_day": 16,
+        "service": 88,
+        "rest": 61,
+        "dispatch": 0
+      },
+      "cat-mugi": {
+        "specialization": "service",
+        "selected_day": 23,
+        "service": 71,
+        "rest": 56,
+        "dispatch": 0
+      },
+      "cat-sora": {
+        "specialization": "rest",
+        "selected_day": 17,
+        "service": 76,
+        "rest": 68,
+        "dispatch": 0
+      },
+      "cat-tama": {
+        "specialization": "dispatch",
+        "selected_day": 21,
+        "service": 55,
+        "rest": 54,
+        "dispatch": 0
+      },
+      "rescue-1": {
+        "specialization": "service",
+        "selected_day": 21,
+        "service": 75,
+        "rest": 51,
+        "dispatch": 0
+      }
+    },
+    "dispatch_by_destination": {},
+    "strict_dispatches": []
+  },
+  {
+    "id": "patron-clear-0-auto",
+    "target": "patron",
+    "mode": "clear",
+    "seed": 0,
+    "manual": false,
+    "day": 121,
+    "steps": 5126,
+    "failure": null,
+    "resume": true,
+    "game_over": null,
+    "goal": [],
+    "bond": null,
+    "patron": {
+      "started_day": 1,
+      "resolved_day": 0,
+      "id": "patron",
+      "status": "active",
+      "continued": false,
+      "satisfaction": 100,
+      "members": [
+        {
+          "id": "patron_moody_visit",
+          "value": 100
+        },
+        {
+          "id": "patron_strict_visit",
+          "value": 0
+        }
+      ]
+    },
+    "funds": 100730,
+    "revenue": 104330,
+    "services": {
+      "cat-mike": 46,
+      "cat-sora": 56,
+      "cat-mugi": 55,
+      "cat-tama": 60,
+      "request-cat-1": 49,
+      "cat-kohaku": 38
+    },
+    "counts": {
+      "dispatch": 14,
+      "set_shifts": 120,
+      "start_business": 120,
+      "advance_business": 4680,
+      "next_day": 120,
+      "resolve_activity": 14,
+      "resolve_intake": 1,
+      "resolve_store_event": 18,
+      "resolve_regular_introduction": 1,
+      "resolve_growth_auto": 14,
+      "resolve_growth_batch": 14,
+      "resolve_customer_trust": 10
+    },
+    "dispatches": 14,
+    "dispatch_reward": 2800,
+    "cats": [
+      {
+        "id": "cat-kohaku",
+        "stamina": 140,
+        "max": 140,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-mike",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-mugi",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-sora",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-tama",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "dispatch"
+      },
+      {
+        "id": "request-cat-1",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "rest"
+      }
+    ],
+    "equipment": 0,
+    "housing": {
+      "purchased_day": 0,
+      "upgraded_day": 0
+    },
+    "seats": 2,
+    "clear_day": 0,
+    "recorded_closed_days": 120,
+    "settled_days": 120,
+    "unsampled_closed_days": [],
+    "funds_at_clear": null,
+    "spending": {
+      "pet_shop_expenses": 0,
+      "recruitment_expenses": 200,
+      "housing_expenses": 0,
+      "housing_cost": 0,
+      "expansion_expenses": 0,
+      "equipment_expenses": 0,
+      "rest_space_expenses": 0,
+      "waiting_area_expenses": 0,
+      "waiting_area_cost": 0
+    },
+    "operating_expenses": 7400,
+    "net_change": 99730,
+    "minimum_closed_funds": 1460,
+    "sick_closed_cat_days": 0,
+    "missing_closed_cat_days": 0,
+    "zero_stamina_closed_cat_days": 0,
+    "mean_closed_fatigue": 12.762900976290098,
+    "max_closed_fatigue": 59,
+    "mean_closed_stress": 11.089260808926081,
+    "max_closed_stress": 59,
+    "working_mean_opening_stamina": 122.99674267100977,
+    "working_mean_opening_deficit": 0.0,
+    "working_low_openings": 0,
+    "post_clear": {
+      "counts": {},
+      "largest_share": 0.0
+    },
+    "full_period": {
+      "counts": {
+        "cat-mike": 46,
+        "cat-sora": 56,
+        "cat-mugi": 55,
+        "cat-tama": 60,
+        "request-cat-1": 49,
+        "cat-kohaku": 38
+      },
+      "largest_share": 0.19736842105263158
+    },
+    "missing_cases": 0,
+    "max_stamina_at_clear": null,
+    "player_sessions": 0,
+    "player_session_turns": {},
+    "player_cat_affinity": {
+      "cat-kohaku": 0,
+      "cat-mike": 0,
+      "cat-mugi": 0,
+      "cat-sora": 0,
+      "cat-tama": 0,
+      "request-cat-1": 0
+    },
+    "growth": {
+      "cat-kohaku": {
+        "specialization": "rest",
+        "selected_day": 31,
+        "service": 38,
+        "rest": 38,
+        "dispatch": 10
+      },
+      "cat-mike": {
+        "specialization": "service",
+        "selected_day": 20,
+        "service": 46,
+        "rest": 71,
+        "dispatch": 0
+      },
+      "cat-mugi": {
+        "specialization": "service",
+        "selected_day": 18,
+        "service": 55,
+        "rest": 60,
+        "dispatch": 0
+      },
+      "cat-sora": {
+        "specialization": "rest",
+        "selected_day": 16,
+        "service": 56,
+        "rest": 63,
+        "dispatch": 4
+      },
+      "cat-tama": {
+        "specialization": "dispatch",
+        "selected_day": 17,
+        "service": 60,
+        "rest": 75,
+        "dispatch": 0
+      },
+      "request-cat-1": {
+        "specialization": "rest",
+        "selected_day": 21,
+        "service": 49,
+        "rest": 75,
+        "dispatch": 0
+      }
+    },
+    "dispatch_by_destination": {
+      "patron_visit": 4,
+      "patron_moody_visit": 10
+    },
+    "strict_dispatches": []
+  },
+  {
+    "id": "patron-clear-1-auto",
+    "target": "patron",
+    "mode": "clear",
+    "seed": 1,
+    "manual": false,
+    "day": 121,
+    "steps": 5127,
+    "failure": null,
+    "resume": true,
+    "game_over": null,
+    "goal": [],
+    "bond": null,
+    "patron": {
+      "started_day": 1,
+      "resolved_day": 0,
+      "id": "patron",
+      "status": "active",
+      "continued": false,
+      "satisfaction": 100,
+      "members": [
+        {
+          "id": "patron_moody_visit",
+          "value": 100
+        },
+        {
+          "id": "patron_strict_visit",
+          "value": 0
+        }
+      ]
+    },
+    "funds": 109750,
+    "revenue": 113350,
+    "services": {
+      "cat-sora": 66,
+      "cat-mike": 64,
+      "cat-mugi": 67,
+      "cat-tama": 61,
+      "request-cat-1": 56,
+      "cat-kohaku": 43
+    },
+    "counts": {
+      "dispatch": 14,
+      "set_shifts": 120,
+      "start_business": 120,
+      "advance_business": 4680,
+      "next_day": 120,
+      "resolve_activity": 14,
+      "resolve_store_event": 12,
+      "resolve_intake": 1,
+      "resolve_regular_introduction": 1,
+      "resolve_growth_auto": 12,
+      "resolve_growth_batch": 12,
+      "resolve_customer_trust": 21
+    },
+    "dispatches": 14,
+    "dispatch_reward": 2800,
+    "cats": [
+      {
+        "id": "cat-kohaku",
+        "stamina": 140,
+        "max": 140,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-mike",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-mugi",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-sora",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-tama",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "dispatch"
+      },
+      {
+        "id": "request-cat-1",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "rest"
+      }
+    ],
+    "equipment": 0,
+    "housing": {
+      "purchased_day": 0,
+      "upgraded_day": 0
+    },
+    "seats": 2,
+    "clear_day": 0,
+    "recorded_closed_days": 120,
+    "settled_days": 120,
+    "unsampled_closed_days": [],
+    "funds_at_clear": null,
+    "spending": {
+      "pet_shop_expenses": 0,
+      "recruitment_expenses": 200,
+      "housing_expenses": 0,
+      "housing_cost": 0,
+      "expansion_expenses": 0,
+      "equipment_expenses": 0,
+      "rest_space_expenses": 0,
+      "waiting_area_expenses": 0,
+      "waiting_area_cost": 0
+    },
+    "operating_expenses": 7400,
+    "net_change": 108750,
+    "minimum_closed_funds": 1630,
+    "sick_closed_cat_days": 0,
+    "missing_closed_cat_days": 0,
+    "zero_stamina_closed_cat_days": 0,
+    "mean_closed_fatigue": 15.87587168758717,
+    "max_closed_fatigue": 58,
+    "mean_closed_stress": 13.907949790794978,
+    "max_closed_stress": 58,
+    "working_mean_opening_stamina": 125.85074626865672,
+    "working_mean_opening_deficit": 0.0,
+    "working_low_openings": 0,
+    "post_clear": {
+      "counts": {},
+      "largest_share": 0.0
+    },
+    "full_period": {
+      "counts": {
+        "cat-sora": 66,
+        "cat-mike": 64,
+        "cat-mugi": 67,
+        "cat-tama": 61,
+        "request-cat-1": 56,
+        "cat-kohaku": 43
+      },
+      "largest_share": 0.1876750700280112
+    },
+    "missing_cases": 0,
+    "max_stamina_at_clear": null,
+    "player_sessions": 0,
+    "player_session_turns": {},
+    "player_cat_affinity": {
+      "cat-kohaku": 0,
+      "cat-mike": 0,
+      "cat-mugi": 0,
+      "cat-sora": 0,
+      "cat-tama": 0,
+      "request-cat-1": 0
+    },
+    "growth": {
+      "cat-kohaku": {
+        "specialization": "rest",
+        "selected_day": 33,
+        "service": 43,
+        "rest": 42,
+        "dispatch": 12
+      },
+      "cat-mike": {
+        "specialization": "service",
+        "selected_day": 17,
+        "service": 64,
+        "rest": 78,
+        "dispatch": 0
+      },
+      "cat-mugi": {
+        "specialization": "service",
+        "selected_day": 18,
+        "service": 67,
+        "rest": 65,
+        "dispatch": 0
+      },
+      "cat-sora": {
+        "specialization": "rest",
+        "selected_day": 19,
+        "service": 66,
+        "rest": 57,
+        "dispatch": 2
+      },
+      "cat-tama": {
+        "specialization": "dispatch",
+        "selected_day": 19,
+        "service": 61,
+        "rest": 59,
+        "dispatch": 0
+      },
+      "request-cat-1": {
+        "specialization": "rest",
+        "selected_day": 24,
+        "service": 56,
+        "rest": 53,
+        "dispatch": 0
+      }
+    },
+    "dispatch_by_destination": {
+      "patron_visit": 4,
+      "patron_moody_visit": 10
+    },
+    "strict_dispatches": []
+  },
+  {
+    "id": "patron-clear-42-auto",
+    "target": "patron",
+    "mode": "clear",
+    "seed": 42,
+    "manual": false,
+    "day": 121,
+    "steps": 5101,
+    "failure": null,
+    "resume": true,
+    "game_over": null,
+    "goal": [],
+    "bond": null,
+    "patron": {
+      "started_day": 1,
+      "resolved_day": 0,
+      "id": "patron",
+      "status": "active",
+      "continued": false,
+      "satisfaction": 100,
+      "members": [
+        {
+          "id": "patron_moody_visit",
+          "value": 100
+        },
+        {
+          "id": "patron_strict_visit",
+          "value": 0
+        }
+      ]
+    },
+    "funds": 114480,
+    "revenue": 117680,
+    "services": {
+      "cat-sora": 70,
+      "cat-mike": 56,
+      "cat-tama": 62,
+      "cat-mugi": 53,
+      "request-cat-1": 64,
+      "cat-kohaku": 53
+    },
+    "counts": {
+      "dispatch": 16,
+      "set_shifts": 119,
+      "start_business": 119,
+      "advance_business": 4641,
+      "next_day": 120,
+      "resolve_activity": 16,
+      "resolve_store_event": 16,
+      "resolve_intake": 1,
+      "resolve_regular_introduction": 1,
+      "day_off": 1,
+      "resolve_growth_auto": 14,
+      "resolve_growth_batch": 14,
+      "resolve_customer_trust": 23
+    },
+    "dispatches": 16,
+    "dispatch_reward": 3200,
+    "cats": [
+      {
+        "id": "cat-kohaku",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-mike",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-mugi",
+        "stamina": 140,
+        "max": 140,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-sora",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-tama",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "dispatch"
+      },
+      {
+        "id": "request-cat-1",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "rest"
+      }
+    ],
+    "equipment": 0,
+    "housing": {
+      "purchased_day": 0,
+      "upgraded_day": 0
+    },
+    "seats": 2,
+    "clear_day": 0,
+    "recorded_closed_days": 120,
+    "settled_days": 120,
+    "unsampled_closed_days": [],
+    "funds_at_clear": null,
+    "spending": {
+      "pet_shop_expenses": 0,
+      "recruitment_expenses": 200,
+      "housing_expenses": 0,
+      "housing_cost": 0,
+      "expansion_expenses": 0,
+      "equipment_expenses": 0,
+      "rest_space_expenses": 0,
+      "waiting_area_expenses": 0,
+      "waiting_area_cost": 0
+    },
+    "operating_expenses": 7400,
+    "net_change": 113480,
+    "minimum_closed_funds": 1630,
+    "sick_closed_cat_days": 0,
+    "missing_closed_cat_days": 0,
+    "zero_stamina_closed_cat_days": 0,
+    "mean_closed_fatigue": 15.418758716875871,
+    "max_closed_fatigue": 59,
+    "mean_closed_stress": 14.839609483960949,
+    "max_closed_stress": 59,
+    "working_mean_opening_stamina": 126.996996996997,
+    "working_mean_opening_deficit": 0.0,
+    "working_low_openings": 0,
+    "post_clear": {
+      "counts": {},
+      "largest_share": 0.0
+    },
+    "full_period": {
+      "counts": {
+        "cat-sora": 70,
+        "cat-mike": 56,
+        "cat-tama": 62,
+        "cat-mugi": 53,
+        "request-cat-1": 64,
+        "cat-kohaku": 53
+      },
+      "largest_share": 0.19553072625698323
+    },
+    "missing_cases": 0,
+    "max_stamina_at_clear": null,
+    "player_sessions": 0,
+    "player_session_turns": {},
+    "player_cat_affinity": {
+      "cat-kohaku": 0,
+      "cat-mike": 0,
+      "cat-mugi": 0,
+      "cat-sora": 0,
+      "cat-tama": 0,
+      "request-cat-1": 0
+    },
+    "growth": {
+      "cat-kohaku": {
+        "specialization": "rest",
+        "selected_day": 29,
+        "service": 53,
+        "rest": 52,
+        "dispatch": 12
+      },
+      "cat-mike": {
+        "specialization": "service",
+        "selected_day": 18,
+        "service": 56,
+        "rest": 62,
+        "dispatch": 1
+      },
+      "cat-mugi": {
+        "specialization": "service",
+        "selected_day": 20,
+        "service": 53,
+        "rest": 46,
+        "dispatch": 0
+      },
+      "cat-sora": {
+        "specialization": "rest",
+        "selected_day": 16,
+        "service": 70,
+        "rest": 67,
+        "dispatch": 2
+      },
+      "cat-tama": {
+        "specialization": "dispatch",
+        "selected_day": 17,
+        "service": 62,
+        "rest": 62,
+        "dispatch": 0
+      },
+      "request-cat-1": {
+        "specialization": "rest",
+        "selected_day": 21,
+        "service": 64,
+        "rest": 63,
+        "dispatch": 1
+      }
+    },
+    "dispatch_by_destination": {
+      "patron_visit": 4,
+      "patron_moody_visit": 12
+    },
+    "strict_dispatches": []
+  },
+  {
+    "id": "patron-fast-0-auto",
+    "target": "patron",
+    "mode": "fast",
+    "seed": 0,
+    "manual": false,
+    "day": 121,
+    "steps": 5100,
+    "failure": null,
+    "resume": true,
+    "game_over": null,
+    "goal": [],
+    "bond": null,
+    "patron": {
+      "started_day": 1,
+      "resolved_day": 0,
+      "id": "patron",
+      "status": "active",
+      "continued": false,
+      "satisfaction": 100,
+      "members": [
+        {
+          "id": "patron_moody_visit",
+          "value": 100
+        },
+        {
+          "id": "patron_strict_visit",
+          "value": 0
+        }
+      ]
+    },
+    "funds": 109700,
+    "revenue": 113500,
+    "services": {
+      "cat-mike": 54,
+      "cat-sora": 63,
+      "cat-mugi": 64,
+      "cat-tama": 74,
+      "rescue-2": 50,
+      "cat-kohaku": 40
+    },
+    "counts": {
+      "open_recruitment": 1,
+      "recruit_cat": 1,
+      "dispatch": 12,
+      "set_shifts": 119,
+      "start_business": 119,
+      "advance_business": 4641,
+      "next_day": 119,
+      "resolve_activity": 12,
+      "resolve_intake": 1,
+      "resolve_store_event": 18,
+      "resolve_regular_introduction": 1,
+      "resolve_growth_auto": 13,
+      "resolve_growth_batch": 13,
+      "day_off": 1,
+      "resolve_customer_trust": 29
+    },
+    "dispatches": 12,
+    "dispatch_reward": 2600,
+    "cats": [
+      {
+        "id": "cat-kohaku",
+        "stamina": 140,
+        "max": 140,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-mike",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-mugi",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-sora",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-tama",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "dispatch"
+      },
+      {
+        "id": "rescue-2",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "dispatch"
+      }
+    ],
+    "equipment": 0,
+    "housing": {
+      "purchased_day": 0,
+      "upgraded_day": 0
+    },
+    "seats": 2,
+    "clear_day": 0,
+    "recorded_closed_days": 119,
+    "settled_days": 120,
+    "unsampled_closed_days": [
+      24
+    ],
+    "funds_at_clear": null,
+    "spending": {
+      "pet_shop_expenses": 0,
+      "recruitment_expenses": 200,
+      "housing_expenses": 0,
+      "housing_cost": 0,
+      "expansion_expenses": 0,
+      "equipment_expenses": 0,
+      "rest_space_expenses": 0,
+      "waiting_area_expenses": 0,
+      "waiting_area_cost": 0
+    },
+    "operating_expenses": 7400,
+    "net_change": 108700,
+    "minimum_closed_funds": 1260,
+    "sick_closed_cat_days": 0,
+    "missing_closed_cat_days": 0,
+    "zero_stamina_closed_cat_days": 0,
+    "mean_closed_fatigue": 15.81232492997199,
+    "max_closed_fatigue": 58,
+    "mean_closed_stress": 14.609943977591037,
+    "max_closed_stress": 59,
+    "working_mean_opening_stamina": 124.72463768115942,
+    "working_mean_opening_deficit": 0.0,
+    "working_low_openings": 0,
+    "post_clear": {
+      "counts": {},
+      "largest_share": 0.0
+    },
+    "full_period": {
+      "counts": {
+        "cat-mike": 54,
+        "cat-sora": 63,
+        "cat-mugi": 64,
+        "cat-tama": 74,
+        "rescue-2": 50,
+        "cat-kohaku": 40
+      },
+      "largest_share": 0.2144927536231884
+    },
+    "missing_cases": 0,
+    "max_stamina_at_clear": null,
+    "player_sessions": 0,
+    "player_session_turns": {},
+    "player_cat_affinity": {
+      "cat-kohaku": 0,
+      "cat-mike": 0,
+      "cat-mugi": 0,
+      "cat-sora": 0,
+      "cat-tama": 0,
+      "rescue-2": 0
+    },
+    "growth": {
+      "cat-kohaku": {
+        "specialization": "rest",
+        "selected_day": 31,
+        "service": 40,
+        "rest": 38,
+        "dispatch": 8
+      },
+      "cat-mike": {
+        "specialization": "service",
+        "selected_day": 19,
+        "service": 54,
+        "rest": 66,
+        "dispatch": 0
+      },
+      "cat-mugi": {
+        "specialization": "service",
+        "selected_day": 17,
+        "service": 64,
+        "rest": 58,
+        "dispatch": 0
+      },
+      "cat-sora": {
+        "specialization": "rest",
+        "selected_day": 21,
+        "service": 63,
+        "rest": 63,
+        "dispatch": 0
+      },
+      "cat-tama": {
+        "specialization": "dispatch",
+        "selected_day": 17,
+        "service": 74,
+        "rest": 69,
+        "dispatch": 0
+      },
+      "rescue-2": {
+        "specialization": "dispatch",
+        "selected_day": 25,
+        "service": 50,
+        "rest": 57,
+        "dispatch": 4
+      }
+    },
+    "dispatch_by_destination": {
+      "patron_visit": 4,
+      "patron_moody_visit": 8
+    },
+    "strict_dispatches": []
+  },
+  {
+    "id": "patron-fast-1-auto",
+    "target": "patron",
+    "mode": "fast",
+    "seed": 1,
+    "manual": false,
+    "day": 121,
+    "steps": 5108,
+    "failure": null,
+    "resume": true,
+    "game_over": null,
+    "goal": [],
+    "bond": null,
+    "patron": {
+      "started_day": 1,
+      "resolved_day": 0,
+      "id": "patron",
+      "status": "active",
+      "continued": false,
+      "satisfaction": 100,
+      "members": [
+        {
+          "id": "patron_moody_visit",
+          "value": 100
+        },
+        {
+          "id": "patron_strict_visit",
+          "value": 0
+        }
+      ]
+    },
+    "funds": 109370,
+    "revenue": 113470,
+    "services": {
+      "cat-sora": 67,
+      "cat-mike": 64,
+      "cat-mugi": 63,
+      "cat-tama": 59,
+      "rescue-2": 46,
+      "cat-kohaku": 48
+    },
+    "counts": {
+      "open_recruitment": 1,
+      "recruit_cat": 1,
+      "dispatch": 11,
+      "set_shifts": 120,
+      "start_business": 120,
+      "advance_business": 4680,
+      "next_day": 120,
+      "resolve_activity": 11,
+      "resolve_store_event": 12,
+      "resolve_intake": 1,
+      "resolve_regular_introduction": 1,
+      "resolve_growth_auto": 13,
+      "resolve_growth_batch": 13,
+      "resolve_customer_trust": 4
+    },
+    "dispatches": 11,
+    "dispatch_reward": 2300,
+    "cats": [
+      {
+        "id": "cat-kohaku",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-mike",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-mugi",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-sora",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-tama",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "dispatch"
+      },
+      {
+        "id": "rescue-2",
+        "stamina": 140,
+        "max": 140,
+        "specialization": "dispatch"
+      }
+    ],
+    "equipment": 0,
+    "housing": {
+      "purchased_day": 0,
+      "upgraded_day": 0
+    },
+    "seats": 2,
+    "clear_day": 0,
+    "recorded_closed_days": 120,
+    "settled_days": 120,
+    "unsampled_closed_days": [],
+    "funds_at_clear": null,
+    "spending": {
+      "pet_shop_expenses": 0,
+      "recruitment_expenses": 200,
+      "housing_expenses": 0,
+      "housing_cost": 0,
+      "expansion_expenses": 0,
+      "equipment_expenses": 0,
+      "rest_space_expenses": 0,
+      "waiting_area_expenses": 0,
+      "waiting_area_cost": 0
+    },
+    "operating_expenses": 7400,
+    "net_change": 108370,
+    "minimum_closed_funds": 1430,
+    "sick_closed_cat_days": 0,
+    "missing_closed_cat_days": 0,
+    "zero_stamina_closed_cat_days": 0,
+    "mean_closed_fatigue": 15.655555555555555,
+    "max_closed_fatigue": 58,
+    "mean_closed_stress": 13.61736111111111,
+    "max_closed_stress": 58,
+    "working_mean_opening_stamina": 125.76368876080691,
+    "working_mean_opening_deficit": 0.0,
+    "working_low_openings": 0,
+    "post_clear": {
+      "counts": {},
+      "largest_share": 0.0
+    },
+    "full_period": {
+      "counts": {
+        "cat-sora": 67,
+        "cat-mike": 64,
+        "cat-mugi": 63,
+        "cat-tama": 59,
+        "rescue-2": 46,
+        "cat-kohaku": 48
+      },
+      "largest_share": 0.1930835734870317
+    },
+    "missing_cases": 0,
+    "max_stamina_at_clear": null,
+    "player_sessions": 0,
+    "player_session_turns": {},
+    "player_cat_affinity": {
+      "cat-kohaku": 0,
+      "cat-mike": 0,
+      "cat-mugi": 0,
+      "cat-sora": 0,
+      "cat-tama": 0,
+      "rescue-2": 0
+    },
+    "growth": {
+      "cat-kohaku": {
+        "specialization": "rest",
+        "selected_day": 28,
+        "service": 48,
+        "rest": 45,
+        "dispatch": 8
+      },
+      "cat-mike": {
+        "specialization": "service",
+        "selected_day": 17,
+        "service": 64,
+        "rest": 76,
+        "dispatch": 0
+      },
+      "cat-mugi": {
+        "specialization": "service",
+        "selected_day": 19,
+        "service": 63,
+        "rest": 62,
+        "dispatch": 0
+      },
+      "cat-sora": {
+        "specialization": "rest",
+        "selected_day": 16,
+        "service": 67,
+        "rest": 63,
+        "dispatch": 1
+      },
+      "cat-tama": {
+        "specialization": "dispatch",
+        "selected_day": 20,
+        "service": 59,
+        "rest": 59,
+        "dispatch": 0
+      },
+      "rescue-2": {
+        "specialization": "dispatch",
+        "selected_day": 24,
+        "service": 46,
+        "rest": 46,
+        "dispatch": 2
+      }
+    },
+    "dispatch_by_destination": {
+      "patron_visit": 4,
+      "patron_moody_visit": 7
+    },
+    "strict_dispatches": []
+  },
+  {
+    "id": "patron-fast-42-auto",
+    "target": "patron",
+    "mode": "fast",
+    "seed": 42,
+    "manual": false,
+    "day": 121,
+    "steps": 5121,
+    "failure": null,
+    "resume": true,
+    "game_over": null,
+    "goal": [],
+    "bond": null,
+    "patron": {
+      "started_day": 1,
+      "resolved_day": 0,
+      "id": "patron",
+      "status": "active",
+      "continued": false,
+      "satisfaction": 100,
+      "members": [
+        {
+          "id": "patron_moody_visit",
+          "value": 100
+        },
+        {
+          "id": "patron_strict_visit",
+          "value": 0
+        }
+      ]
+    },
+    "funds": 119620,
+    "revenue": 123720,
+    "services": {
+      "cat-sora": 72,
+      "cat-mike": 55,
+      "cat-tama": 57,
+      "cat-mugi": 58,
+      "rescue-2": 52,
+      "cat-kohaku": 69
+    },
+    "counts": {
+      "open_recruitment": 1,
+      "recruit_cat": 1,
+      "dispatch": 11,
+      "set_shifts": 120,
+      "start_business": 120,
+      "advance_business": 4680,
+      "next_day": 120,
+      "resolve_activity": 11,
+      "resolve_store_event": 16,
+      "resolve_intake": 1,
+      "resolve_regular_introduction": 1,
+      "resolve_growth_auto": 13,
+      "resolve_growth_batch": 13,
+      "resolve_customer_trust": 13
+    },
+    "dispatches": 11,
+    "dispatch_reward": 2300,
+    "cats": [
+      {
+        "id": "cat-kohaku",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-mike",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-mugi",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-sora",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-tama",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "dispatch"
+      },
+      {
+        "id": "rescue-2",
+        "stamina": 140,
+        "max": 140,
+        "specialization": "dispatch"
+      }
+    ],
+    "equipment": 0,
+    "housing": {
+      "purchased_day": 0,
+      "upgraded_day": 0
+    },
+    "seats": 2,
+    "clear_day": 0,
+    "recorded_closed_days": 120,
+    "settled_days": 120,
+    "unsampled_closed_days": [],
+    "funds_at_clear": null,
+    "spending": {
+      "pet_shop_expenses": 0,
+      "recruitment_expenses": 200,
+      "housing_expenses": 0,
+      "housing_cost": 0,
+      "expansion_expenses": 0,
+      "equipment_expenses": 0,
+      "rest_space_expenses": 0,
+      "waiting_area_expenses": 0,
+      "waiting_area_cost": 0
+    },
+    "operating_expenses": 7400,
+    "net_change": 118620,
+    "minimum_closed_funds": 1430,
+    "sick_closed_cat_days": 0,
+    "missing_closed_cat_days": 0,
+    "zero_stamina_closed_cat_days": 0,
+    "mean_closed_fatigue": 16.783680555555556,
+    "max_closed_fatigue": 59,
+    "mean_closed_stress": 16.961805555555557,
+    "max_closed_stress": 59,
+    "working_mean_opening_stamina": 126.25714285714285,
+    "working_mean_opening_deficit": 0.0,
+    "working_low_openings": 0,
+    "post_clear": {
+      "counts": {},
+      "largest_share": 0.0
+    },
+    "full_period": {
+      "counts": {
+        "cat-sora": 72,
+        "cat-mike": 55,
+        "cat-tama": 57,
+        "cat-mugi": 58,
+        "rescue-2": 52,
+        "cat-kohaku": 69
+      },
+      "largest_share": 0.19834710743801653
+    },
+    "missing_cases": 0,
+    "max_stamina_at_clear": null,
+    "player_sessions": 0,
+    "player_session_turns": {},
+    "player_cat_affinity": {
+      "cat-kohaku": 0,
+      "cat-mike": 0,
+      "cat-mugi": 0,
+      "cat-sora": 0,
+      "cat-tama": 0,
+      "rescue-2": 0
+    },
+    "growth": {
+      "cat-kohaku": {
+        "specialization": "rest",
+        "selected_day": 23,
+        "service": 69,
+        "rest": 63,
+        "dispatch": 6
+      },
+      "cat-mike": {
+        "specialization": "service",
+        "selected_day": 21,
+        "service": 55,
+        "rest": 66,
+        "dispatch": 1
+      },
+      "cat-mugi": {
+        "specialization": "service",
+        "selected_day": 19,
+        "service": 58,
+        "rest": 54,
+        "dispatch": 0
+      },
+      "cat-sora": {
+        "specialization": "rest",
+        "selected_day": 16,
+        "service": 72,
+        "rest": 67,
+        "dispatch": 2
+      },
+      "cat-tama": {
+        "specialization": "dispatch",
+        "selected_day": 19,
+        "service": 57,
+        "rest": 56,
+        "dispatch": 0
+      },
+      "rescue-2": {
+        "specialization": "dispatch",
+        "selected_day": 22,
+        "service": 52,
+        "rest": 42,
+        "dispatch": 2
+      }
+    },
+    "dispatch_by_destination": {
+      "patron_visit": 4,
+      "patron_moody_visit": 7
+    },
+    "strict_dispatches": []
+  },
+  {
+    "id": "patron-clear-0-manual",
+    "target": "patron",
+    "mode": "clear",
+    "seed": 0,
+    "manual": true,
+    "day": 121,
+    "steps": 5158,
+    "failure": null,
+    "resume": true,
+    "game_over": null,
+    "goal": [],
+    "bond": null,
+    "patron": {
+      "started_day": 1,
+      "resolved_day": 36,
+      "id": "patron",
+      "status": "cleared",
+      "continued": true,
+      "satisfaction": 100,
+      "members": [
+        {
+          "id": "patron_moody_visit",
+          "value": 100
+        },
+        {
+          "id": "patron_strict_visit",
+          "value": 100
+        }
+      ]
+    },
+    "funds": 118510,
+    "revenue": 121310,
+    "services": {
+      "cat-mike": 47,
+      "cat-sora": 49,
+      "cat-mugi": 58,
+      "cat-tama": 65,
+      "request-cat-1": 65,
+      "cat-kohaku": 49
+    },
+    "counts": {
+      "dispatch": 18,
+      "set_shifts": 120,
+      "start_business": 120,
+      "advance_business": 4680,
+      "next_day": 120,
+      "resolve_activity": 18,
+      "resolve_intake": 1,
+      "resolve_store_event": 18,
+      "resolve_regular_introduction": 1,
+      "resolve_growth_stage": 1,
+      "resolve_growth_batch": 17,
+      "resolve_growth_auto": 16,
+      "resolve_customer_trust": 27,
+      "continue_patron": 1
+    },
+    "dispatches": 18,
+    "dispatch_reward": 3600,
+    "cats": [
+      {
+        "id": "cat-kohaku",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-mike",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-mugi",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-sora",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-tama",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "dispatch"
+      },
+      {
+        "id": "request-cat-1",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "rest"
+      }
+    ],
+    "equipment": 0,
+    "housing": {
+      "purchased_day": 0,
+      "upgraded_day": 0
+    },
+    "seats": 2,
+    "clear_day": 36,
+    "recorded_closed_days": 120,
+    "settled_days": 120,
+    "unsampled_closed_days": [],
+    "funds_at_clear": 33180,
+    "spending": {
+      "pet_shop_expenses": 0,
+      "recruitment_expenses": 200,
+      "housing_expenses": 0,
+      "housing_cost": 0,
+      "expansion_expenses": 0,
+      "equipment_expenses": 0,
+      "rest_space_expenses": 0,
+      "waiting_area_expenses": 0,
+      "waiting_area_cost": 0
+    },
+    "operating_expenses": 7400,
+    "net_change": 117510,
+    "minimum_closed_funds": 1460,
+    "sick_closed_cat_days": 0,
+    "missing_closed_cat_days": 0,
+    "zero_stamina_closed_cat_days": 0,
+    "mean_closed_fatigue": 15.694560669456067,
+    "max_closed_fatigue": 59,
+    "mean_closed_stress": 14.140167364016737,
+    "max_closed_stress": 59,
+    "working_mean_opening_stamina": 125.89285714285714,
+    "working_mean_opening_deficit": 0.0,
+    "working_low_openings": 0,
+    "post_clear": {
+      "counts": {
+        "cat-mugi": 37,
+        "cat-sora": 37,
+        "cat-tama": 44,
+        "cat-mike": 31,
+        "request-cat-1": 45,
+        "cat-kohaku": 39
+      },
+      "largest_share": 0.19313304721030042
+    },
+    "full_period": {
+      "counts": {
+        "cat-mike": 47,
+        "cat-sora": 49,
+        "cat-mugi": 58,
+        "cat-tama": 65,
+        "request-cat-1": 65,
+        "cat-kohaku": 49
+      },
+      "largest_share": 0.19519519519519518
+    },
+    "missing_cases": 0,
+    "max_stamina_at_clear": 120,
+    "player_sessions": 0,
+    "player_session_turns": {},
+    "player_cat_affinity": {
+      "cat-kohaku": 0,
+      "cat-mike": 0,
+      "cat-mugi": 0,
+      "cat-sora": 0,
+      "cat-tama": 0,
+      "request-cat-1": 0
+    },
+    "growth": {
+      "cat-kohaku": {
+        "specialization": "rest",
+        "selected_day": 28,
+        "service": 49,
+        "rest": 48,
+        "dispatch": 10
+      },
+      "cat-mike": {
+        "specialization": "service",
+        "selected_day": 20,
+        "service": 47,
+        "rest": 62,
+        "dispatch": 0
+      },
+      "cat-mugi": {
+        "specialization": "service",
+        "selected_day": 18,
+        "service": 58,
+        "rest": 56,
+        "dispatch": 0
+      },
+      "cat-sora": {
+        "specialization": "service",
+        "selected_day": 16,
+        "service": 49,
+        "rest": 49,
+        "dispatch": 8
+      },
+      "cat-tama": {
+        "specialization": "dispatch",
+        "selected_day": 17,
+        "service": 65,
+        "rest": 67,
+        "dispatch": 0
+      },
+      "request-cat-1": {
+        "specialization": "rest",
+        "selected_day": 21,
+        "service": 65,
+        "rest": 63,
+        "dispatch": 0
+      }
+    },
+    "dispatch_by_destination": {
+      "patron_visit": 4,
+      "patron_moody_visit": 10,
+      "patron_strict_visit": 4
+    },
+    "strict_dispatches": [
+      {
+        "cat_id": "cat-sora",
+        "started_day": 29,
+        "resolved_day": 30,
+        "patron_match": {
+          "member_id": "patron_strict_visit",
+          "condition_index": 0,
+          "condition": {
+            "feature": "white",
+            "specialization": "service"
+          },
+          "matched": true,
+          "gain": 25
+        }
+      },
+      {
+        "cat_id": "cat-sora",
+        "started_day": 31,
+        "resolved_day": 32,
+        "patron_match": {
+          "member_id": "patron_strict_visit",
+          "condition_index": 0,
+          "condition": {
+            "feature": "white",
+            "specialization": "service"
+          },
+          "matched": true,
+          "gain": 25
+        }
+      },
+      {
+        "cat_id": "cat-sora",
+        "started_day": 33,
+        "resolved_day": 34,
+        "patron_match": {
+          "member_id": "patron_strict_visit",
+          "condition_index": 0,
+          "condition": {
+            "feature": "white",
+            "specialization": "service"
+          },
+          "matched": true,
+          "gain": 25
+        }
+      },
+      {
+        "cat_id": "cat-sora",
+        "started_day": 35,
+        "resolved_day": 36,
+        "patron_match": {
+          "member_id": "patron_strict_visit",
+          "condition_index": 0,
+          "condition": {
+            "feature": "white",
+            "specialization": "service"
+          },
+          "matched": true,
+          "gain": 25
+        }
+      }
+    ]
+  },
+  {
+    "id": "patron-clear-1-manual",
+    "target": "patron",
+    "mode": "clear",
+    "seed": 1,
+    "manual": true,
+    "day": 121,
+    "steps": 5097,
+    "failure": null,
+    "resume": true,
+    "game_over": null,
+    "goal": [],
+    "bond": null,
+    "patron": {
+      "started_day": 1,
+      "resolved_day": 36,
+      "id": "patron",
+      "status": "cleared",
+      "continued": true,
+      "satisfaction": 100,
+      "members": [
+        {
+          "id": "patron_moody_visit",
+          "value": 100
+        },
+        {
+          "id": "patron_strict_visit",
+          "value": 100
+        }
+      ]
+    },
+    "funds": 118580,
+    "revenue": 121380,
+    "services": {
+      "cat-sora": 56,
+      "cat-mike": 66,
+      "cat-mugi": 66,
+      "cat-tama": 63,
+      "request-cat-1": 52,
+      "cat-kohaku": 48
+    },
+    "counts": {
+      "dispatch": 18,
+      "set_shifts": 119,
+      "start_business": 119,
+      "advance_business": 4641,
+      "next_day": 120,
+      "resolve_activity": 18,
+      "resolve_store_event": 12,
+      "resolve_intake": 1,
+      "resolve_regular_introduction": 1,
+      "resolve_growth_auto": 16,
+      "resolve_growth_batch": 16,
+      "resolve_growth_stage": 1,
+      "day_off": 1,
+      "continue_patron": 1,
+      "resolve_customer_trust": 13
+    },
+    "dispatches": 18,
+    "dispatch_reward": 3600,
+    "cats": [
+      {
+        "id": "cat-kohaku",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-mike",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-mugi",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-sora",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-tama",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "dispatch"
+      },
+      {
+        "id": "request-cat-1",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "rest"
+      }
+    ],
+    "equipment": 0,
+    "housing": {
+      "purchased_day": 0,
+      "upgraded_day": 0
+    },
+    "seats": 2,
+    "clear_day": 36,
+    "recorded_closed_days": 120,
+    "settled_days": 120,
+    "unsampled_closed_days": [],
+    "funds_at_clear": 32090,
+    "spending": {
+      "pet_shop_expenses": 0,
+      "recruitment_expenses": 200,
+      "housing_expenses": 0,
+      "housing_cost": 0,
+      "expansion_expenses": 0,
+      "equipment_expenses": 0,
+      "rest_space_expenses": 0,
+      "waiting_area_expenses": 0,
+      "waiting_area_cost": 0
+    },
+    "operating_expenses": 7400,
+    "net_change": 117580,
+    "minimum_closed_funds": 1630,
+    "sick_closed_cat_days": 0,
+    "missing_closed_cat_days": 0,
+    "zero_stamina_closed_cat_days": 0,
+    "mean_closed_fatigue": 16.983612273361228,
+    "max_closed_fatigue": 59,
+    "mean_closed_stress": 13.92189679218968,
+    "max_closed_stress": 59,
+    "working_mean_opening_stamina": 126.48148148148148,
+    "working_mean_opening_deficit": 0.0,
+    "working_low_openings": 0,
+    "post_clear": {
+      "counts": {
+        "cat-mike": 47,
+        "cat-sora": 45,
+        "cat-tama": 43,
+        "request-cat-1": 35,
+        "cat-kohaku": 38,
+        "cat-mugi": 44
+      },
+      "largest_share": 0.1865079365079365
+    },
+    "full_period": {
+      "counts": {
+        "cat-sora": 56,
+        "cat-mike": 66,
+        "cat-mugi": 66,
+        "cat-tama": 63,
+        "request-cat-1": 52,
+        "cat-kohaku": 48
+      },
+      "largest_share": 0.18803418803418803
+    },
+    "missing_cases": 0,
+    "max_stamina_at_clear": 120,
+    "player_sessions": 0,
+    "player_session_turns": {},
+    "player_cat_affinity": {
+      "cat-kohaku": 0,
+      "cat-mike": 0,
+      "cat-mugi": 0,
+      "cat-sora": 0,
+      "cat-tama": 0,
+      "request-cat-1": 0
+    },
+    "growth": {
+      "cat-kohaku": {
+        "specialization": "rest",
+        "selected_day": 29,
+        "service": 48,
+        "rest": 45,
+        "dispatch": 10
+      },
+      "cat-mike": {
+        "specialization": "service",
+        "selected_day": 17,
+        "service": 66,
+        "rest": 76,
+        "dispatch": 1
+      },
+      "cat-mugi": {
+        "specialization": "service",
+        "selected_day": 18,
+        "service": 66,
+        "rest": 62,
+        "dispatch": 0
+      },
+      "cat-sora": {
+        "specialization": "service",
+        "selected_day": 19,
+        "service": 56,
+        "rest": 57,
+        "dispatch": 7
+      },
+      "cat-tama": {
+        "specialization": "dispatch",
+        "selected_day": 19,
+        "service": 63,
+        "rest": 63,
+        "dispatch": 0
+      },
+      "request-cat-1": {
+        "specialization": "rest",
+        "selected_day": 23,
+        "service": 52,
+        "rest": 54,
+        "dispatch": 0
+      }
+    },
+    "dispatch_by_destination": {
+      "patron_visit": 4,
+      "patron_moody_visit": 10,
+      "patron_strict_visit": 4
+    },
+    "strict_dispatches": [
+      {
+        "cat_id": "cat-sora",
+        "started_day": 29,
+        "resolved_day": 30,
+        "patron_match": {
+          "member_id": "patron_strict_visit",
+          "condition_index": 0,
+          "condition": {
+            "feature": "white",
+            "specialization": "service"
+          },
+          "matched": true,
+          "gain": 25
+        }
+      },
+      {
+        "cat_id": "cat-sora",
+        "started_day": 31,
+        "resolved_day": 32,
+        "patron_match": {
+          "member_id": "patron_strict_visit",
+          "condition_index": 0,
+          "condition": {
+            "feature": "white",
+            "specialization": "service"
+          },
+          "matched": true,
+          "gain": 25
+        }
+      },
+      {
+        "cat_id": "cat-sora",
+        "started_day": 33,
+        "resolved_day": 34,
+        "patron_match": {
+          "member_id": "patron_strict_visit",
+          "condition_index": 0,
+          "condition": {
+            "feature": "white",
+            "specialization": "service"
+          },
+          "matched": true,
+          "gain": 25
+        }
+      },
+      {
+        "cat_id": "cat-sora",
+        "started_day": 35,
+        "resolved_day": 36,
+        "patron_match": {
+          "member_id": "patron_strict_visit",
+          "condition_index": 0,
+          "condition": {
+            "feature": "white",
+            "specialization": "service"
+          },
+          "matched": true,
+          "gain": 25
+        }
+      }
+    ]
+  },
+  {
+    "id": "patron-clear-42-manual",
+    "target": "patron",
+    "mode": "clear",
+    "seed": 42,
+    "manual": true,
+    "day": 121,
+    "steps": 5093,
+    "failure": null,
+    "resume": true,
+    "game_over": null,
+    "goal": [],
+    "bond": null,
+    "patron": {
+      "started_day": 1,
+      "resolved_day": 36,
+      "id": "patron",
+      "status": "cleared",
+      "continued": true,
+      "satisfaction": 100,
+      "members": [
+        {
+          "id": "patron_moody_visit",
+          "value": 100
+        },
+        {
+          "id": "patron_strict_visit",
+          "value": 100
+        }
+      ]
+    },
+    "funds": 125590,
+    "revenue": 128390,
+    "services": {
+      "cat-sora": 65,
+      "cat-mike": 48,
+      "cat-tama": 54,
+      "cat-mugi": 44,
+      "request-cat-1": 72,
+      "cat-kohaku": 62
+    },
+    "counts": {
+      "dispatch": 18,
+      "set_shifts": 119,
+      "start_business": 119,
+      "advance_business": 4641,
+      "next_day": 120,
+      "resolve_activity": 18,
+      "resolve_store_event": 16,
+      "resolve_intake": 1,
+      "resolve_regular_introduction": 1,
+      "day_off": 1,
+      "resolve_growth_stage": 1,
+      "resolve_growth_batch": 18,
+      "resolve_growth_auto": 17,
+      "continue_patron": 1,
+      "resolve_customer_trust": 2
+    },
+    "dispatches": 18,
+    "dispatch_reward": 3600,
+    "cats": [
+      {
+        "id": "cat-kohaku",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-mike",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-mugi",
+        "stamina": 140,
+        "max": 140,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-sora",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-tama",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "dispatch"
+      },
+      {
+        "id": "request-cat-1",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "rest"
+      }
+    ],
+    "equipment": 0,
+    "housing": {
+      "purchased_day": 0,
+      "upgraded_day": 0
+    },
+    "seats": 2,
+    "clear_day": 36,
+    "recorded_closed_days": 120,
+    "settled_days": 120,
+    "unsampled_closed_days": [],
+    "funds_at_clear": 34630,
+    "spending": {
+      "pet_shop_expenses": 0,
+      "recruitment_expenses": 200,
+      "housing_expenses": 0,
+      "housing_cost": 0,
+      "expansion_expenses": 0,
+      "equipment_expenses": 0,
+      "rest_space_expenses": 0,
+      "waiting_area_expenses": 0,
+      "waiting_area_cost": 0
+    },
+    "operating_expenses": 7400,
+    "net_change": 124590,
+    "minimum_closed_funds": 1630,
+    "sick_closed_cat_days": 0,
+    "missing_closed_cat_days": 0,
+    "zero_stamina_closed_cat_days": 0,
+    "mean_closed_fatigue": 16.814853556485357,
+    "max_closed_fatigue": 58.75,
+    "mean_closed_stress": 16.020223152022314,
+    "max_closed_stress": 59,
+    "working_mean_opening_stamina": 126.61764705882354,
+    "working_mean_opening_deficit": 0.0,
+    "working_low_openings": 0,
+    "post_clear": {
+      "counts": {
+        "cat-sora": 54,
+        "cat-mike": 30,
+        "request-cat-1": 51,
+        "cat-tama": 33,
+        "cat-kohaku": 50,
+        "cat-mugi": 24
+      },
+      "largest_share": 0.2231404958677686
+    },
+    "full_period": {
+      "counts": {
+        "cat-sora": 65,
+        "cat-mike": 48,
+        "cat-tama": 54,
+        "cat-mugi": 44,
+        "request-cat-1": 72,
+        "cat-kohaku": 62
+      },
+      "largest_share": 0.20869565217391303
+    },
+    "missing_cases": 0,
+    "max_stamina_at_clear": 120,
+    "player_sessions": 0,
+    "player_session_turns": {},
+    "player_cat_affinity": {
+      "cat-kohaku": 0,
+      "cat-mike": 0,
+      "cat-mugi": 0,
+      "cat-sora": 0,
+      "cat-tama": 0,
+      "request-cat-1": 0
+    },
+    "growth": {
+      "cat-kohaku": {
+        "specialization": "rest",
+        "selected_day": 28,
+        "service": 62,
+        "rest": 59,
+        "dispatch": 10
+      },
+      "cat-mike": {
+        "specialization": "service",
+        "selected_day": 18,
+        "service": 48,
+        "rest": 60,
+        "dispatch": 0
+      },
+      "cat-mugi": {
+        "specialization": "service",
+        "selected_day": 21,
+        "service": 44,
+        "rest": 40,
+        "dispatch": 0
+      },
+      "cat-sora": {
+        "specialization": "service",
+        "selected_day": 16,
+        "service": 65,
+        "rest": 61,
+        "dispatch": 8
+      },
+      "cat-tama": {
+        "specialization": "dispatch",
+        "selected_day": 17,
+        "service": 54,
+        "rest": 54,
+        "dispatch": 0
+      },
+      "request-cat-1": {
+        "specialization": "rest",
+        "selected_day": 20,
+        "service": 72,
+        "rest": 67,
+        "dispatch": 0
+      }
+    },
+    "dispatch_by_destination": {
+      "patron_visit": 4,
+      "patron_moody_visit": 10,
+      "patron_strict_visit": 4
+    },
+    "strict_dispatches": [
+      {
+        "cat_id": "cat-sora",
+        "started_day": 29,
+        "resolved_day": 30,
+        "patron_match": {
+          "member_id": "patron_strict_visit",
+          "condition_index": 0,
+          "condition": {
+            "feature": "white",
+            "specialization": "service"
+          },
+          "matched": true,
+          "gain": 25
+        }
+      },
+      {
+        "cat_id": "cat-sora",
+        "started_day": 31,
+        "resolved_day": 32,
+        "patron_match": {
+          "member_id": "patron_strict_visit",
+          "condition_index": 0,
+          "condition": {
+            "feature": "white",
+            "specialization": "service"
+          },
+          "matched": true,
+          "gain": 25
+        }
+      },
+      {
+        "cat_id": "cat-sora",
+        "started_day": 33,
+        "resolved_day": 34,
+        "patron_match": {
+          "member_id": "patron_strict_visit",
+          "condition_index": 0,
+          "condition": {
+            "feature": "white",
+            "specialization": "service"
+          },
+          "matched": true,
+          "gain": 25
+        }
+      },
+      {
+        "cat_id": "cat-sora",
+        "started_day": 35,
+        "resolved_day": 36,
+        "patron_match": {
+          "member_id": "patron_strict_visit",
+          "condition_index": 0,
+          "condition": {
+            "feature": "white",
+            "specialization": "service"
+          },
+          "matched": true,
+          "gain": 25
+        }
+      }
+    ]
+  },
+  {
+    "id": "patron-fast-0-manual",
+    "target": "patron",
+    "mode": "fast",
+    "seed": 0,
+    "manual": true,
+    "day": 121,
+    "steps": 5121,
+    "failure": null,
+    "resume": true,
+    "game_over": null,
+    "goal": [],
+    "bond": null,
+    "patron": {
+      "started_day": 1,
+      "resolved_day": 32,
+      "id": "patron",
+      "status": "cleared",
+      "continued": true,
+      "satisfaction": 100,
+      "members": [
+        {
+          "id": "patron_moody_visit",
+          "value": 100
+        },
+        {
+          "id": "patron_strict_visit",
+          "value": 100
+        }
+      ]
+    },
+    "funds": 117190,
+    "revenue": 120190,
+    "services": {
+      "cat-mike": 54,
+      "cat-sora": 55,
+      "cat-mugi": 64,
+      "cat-tama": 75,
+      "rescue-2": 52,
+      "cat-kohaku": 46
+    },
+    "counts": {
+      "open_recruitment": 1,
+      "recruit_cat": 1,
+      "dispatch": 16,
+      "set_shifts": 119,
+      "start_business": 119,
+      "advance_business": 4641,
+      "next_day": 119,
+      "resolve_activity": 16,
+      "resolve_intake": 1,
+      "resolve_store_event": 18,
+      "resolve_regular_introduction": 1,
+      "resolve_growth_auto": 16,
+      "resolve_growth_batch": 17,
+      "resolve_growth_stage": 1,
+      "day_off": 1,
+      "resolve_customer_trust": 33,
+      "continue_patron": 1
+    },
+    "dispatches": 16,
+    "dispatch_reward": 3400,
+    "cats": [
+      {
+        "id": "cat-kohaku",
+        "stamina": 140,
+        "max": 140,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-mike",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-mugi",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-sora",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-tama",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "dispatch"
+      },
+      {
+        "id": "rescue-2",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "dispatch"
+      }
+    ],
+    "equipment": 0,
+    "housing": {
+      "purchased_day": 0,
+      "upgraded_day": 0
+    },
+    "seats": 2,
+    "clear_day": 32,
+    "recorded_closed_days": 119,
+    "settled_days": 120,
+    "unsampled_closed_days": [
+      24
+    ],
+    "funds_at_clear": 29890,
+    "spending": {
+      "pet_shop_expenses": 0,
+      "recruitment_expenses": 200,
+      "housing_expenses": 0,
+      "housing_cost": 0,
+      "expansion_expenses": 0,
+      "equipment_expenses": 0,
+      "rest_space_expenses": 0,
+      "waiting_area_expenses": 0,
+      "waiting_area_cost": 0
+    },
+    "operating_expenses": 7400,
+    "net_change": 116190,
+    "minimum_closed_funds": 1260,
+    "sick_closed_cat_days": 0,
+    "missing_closed_cat_days": 0,
+    "zero_stamina_closed_cat_days": 0,
+    "mean_closed_fatigue": 16.679621848739497,
+    "max_closed_fatigue": 58,
+    "mean_closed_stress": 14.776610644257703,
+    "max_closed_stress": 58,
+    "working_mean_opening_stamina": 125.32544378698225,
+    "working_mean_opening_deficit": 0.0,
+    "working_low_openings": 0,
+    "post_clear": {
+      "counts": {
+        "cat-kohaku": 36,
+        "cat-sora": 44,
+        "rescue-2": 41,
+        "cat-mike": 37,
+        "cat-tama": 55,
+        "cat-mugi": 43
+      },
+      "largest_share": 0.21484375
+    },
+    "full_period": {
+      "counts": {
+        "cat-mike": 54,
+        "cat-sora": 55,
+        "cat-mugi": 64,
+        "cat-tama": 75,
+        "rescue-2": 52,
+        "cat-kohaku": 46
+      },
+      "largest_share": 0.21676300578034682
+    },
+    "missing_cases": 0,
+    "max_stamina_at_clear": 110,
+    "player_sessions": 0,
+    "player_session_turns": {},
+    "player_cat_affinity": {
+      "cat-kohaku": 0,
+      "cat-mike": 0,
+      "cat-mugi": 0,
+      "cat-sora": 0,
+      "cat-tama": 0,
+      "rescue-2": 0
+    },
+    "growth": {
+      "cat-kohaku": {
+        "specialization": "rest",
+        "selected_day": 28,
+        "service": 46,
+        "rest": 44,
+        "dispatch": 8
+      },
+      "cat-mike": {
+        "specialization": "service",
+        "selected_day": 19,
+        "service": 54,
+        "rest": 65,
+        "dispatch": 0
+      },
+      "cat-mugi": {
+        "specialization": "service",
+        "selected_day": 17,
+        "service": 64,
+        "rest": 59,
+        "dispatch": 0
+      },
+      "cat-sora": {
+        "specialization": "service",
+        "selected_day": 21,
+        "service": 55,
+        "rest": 56,
+        "dispatch": 4
+      },
+      "cat-tama": {
+        "specialization": "dispatch",
+        "selected_day": 17,
+        "service": 75,
+        "rest": 70,
+        "dispatch": 0
+      },
+      "rescue-2": {
+        "specialization": "dispatch",
+        "selected_day": 25,
+        "service": 52,
+        "rest": 56,
+        "dispatch": 4
+      }
+    },
+    "dispatch_by_destination": {
+      "patron_visit": 4,
+      "patron_moody_visit": 8,
+      "patron_strict_visit": 4
+    },
+    "strict_dispatches": [
+      {
+        "cat_id": "cat-sora",
+        "started_day": 25,
+        "resolved_day": 26,
+        "patron_match": {
+          "member_id": "patron_strict_visit",
+          "condition_index": 0,
+          "condition": {
+            "feature": "white",
+            "specialization": "service"
+          },
+          "matched": true,
+          "gain": 25
+        }
+      },
+      {
+        "cat_id": "cat-sora",
+        "started_day": 27,
+        "resolved_day": 28,
+        "patron_match": {
+          "member_id": "patron_strict_visit",
+          "condition_index": 0,
+          "condition": {
+            "feature": "white",
+            "specialization": "service"
+          },
+          "matched": true,
+          "gain": 25
+        }
+      },
+      {
+        "cat_id": "cat-sora",
+        "started_day": 29,
+        "resolved_day": 30,
+        "patron_match": {
+          "member_id": "patron_strict_visit",
+          "condition_index": 0,
+          "condition": {
+            "feature": "white",
+            "specialization": "service"
+          },
+          "matched": true,
+          "gain": 25
+        }
+      },
+      {
+        "cat_id": "cat-sora",
+        "started_day": 31,
+        "resolved_day": 32,
+        "patron_match": {
+          "member_id": "patron_strict_visit",
+          "condition_index": 0,
+          "condition": {
+            "feature": "white",
+            "specialization": "service"
+          },
+          "matched": true,
+          "gain": 25
+        }
+      }
+    ]
+  },
+  {
+    "id": "patron-fast-1-manual",
+    "target": "patron",
+    "mode": "fast",
+    "seed": 1,
+    "manual": true,
+    "day": 121,
+    "steps": 5084,
+    "failure": null,
+    "resume": true,
+    "game_over": null,
+    "goal": [],
+    "bond": null,
+    "patron": {
+      "started_day": 1,
+      "resolved_day": 30,
+      "id": "patron",
+      "status": "cleared",
+      "continued": true,
+      "satisfaction": 100,
+      "members": [
+        {
+          "id": "patron_moody_visit",
+          "value": 100
+        },
+        {
+          "id": "patron_strict_visit",
+          "value": 100
+        }
+      ]
+    },
+    "funds": 122730,
+    "revenue": 126030,
+    "services": {
+      "cat-sora": 63,
+      "cat-mike": 69,
+      "cat-mugi": 65,
+      "cat-tama": 62,
+      "rescue-2": 49,
+      "cat-kohaku": 52
+    },
+    "counts": {
+      "open_recruitment": 1,
+      "recruit_cat": 1,
+      "dispatch": 15,
+      "set_shifts": 119,
+      "start_business": 119,
+      "advance_business": 4641,
+      "next_day": 119,
+      "resolve_activity": 15,
+      "resolve_store_event": 12,
+      "resolve_intake": 1,
+      "resolve_regular_introduction": 1,
+      "resolve_growth_stage": 1,
+      "resolve_growth_batch": 16,
+      "resolve_growth_auto": 15,
+      "day_off": 1,
+      "continue_patron": 1,
+      "resolve_customer_trust": 6
+    },
+    "dispatches": 15,
+    "dispatch_reward": 3100,
+    "cats": [
+      {
+        "id": "cat-kohaku",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-mike",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-mugi",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-sora",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-tama",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "dispatch"
+      },
+      {
+        "id": "rescue-2",
+        "stamina": 140,
+        "max": 140,
+        "specialization": "dispatch"
+      }
+    ],
+    "equipment": 0,
+    "housing": {
+      "purchased_day": 0,
+      "upgraded_day": 0
+    },
+    "seats": 2,
+    "clear_day": 30,
+    "recorded_closed_days": 119,
+    "settled_days": 120,
+    "unsampled_closed_days": [
+      22
+    ],
+    "funds_at_clear": 26570,
+    "spending": {
+      "pet_shop_expenses": 0,
+      "recruitment_expenses": 200,
+      "housing_expenses": 0,
+      "housing_cost": 0,
+      "expansion_expenses": 0,
+      "equipment_expenses": 0,
+      "rest_space_expenses": 0,
+      "waiting_area_expenses": 0,
+      "waiting_area_cost": 0
+    },
+    "operating_expenses": 7400,
+    "net_change": 121730,
+    "minimum_closed_funds": 1430,
+    "sick_closed_cat_days": 0,
+    "missing_closed_cat_days": 0,
+    "zero_stamina_closed_cat_days": 0,
+    "mean_closed_fatigue": 17.795868347338935,
+    "max_closed_fatigue": 58,
+    "mean_closed_stress": 15.322128851540617,
+    "max_closed_stress": 58,
+    "working_mean_opening_stamina": 125.96439169139465,
+    "working_mean_opening_deficit": 0.0,
+    "working_low_openings": 0,
+    "post_clear": {
+      "counts": {
+        "cat-sora": 52,
+        "cat-mugi": 48,
+        "cat-kohaku": 44,
+        "rescue-2": 37,
+        "cat-tama": 45,
+        "cat-mike": 52
+      },
+      "largest_share": 0.18705035971223022
+    },
+    "full_period": {
+      "counts": {
+        "cat-sora": 63,
+        "cat-mike": 69,
+        "cat-mugi": 65,
+        "cat-tama": 62,
+        "rescue-2": 49,
+        "cat-kohaku": 52
+      },
+      "largest_share": 0.19166666666666668
+    },
+    "missing_cases": 0,
+    "max_stamina_at_clear": 110,
+    "player_sessions": 0,
+    "player_session_turns": {},
+    "player_cat_affinity": {
+      "cat-kohaku": 0,
+      "cat-mike": 0,
+      "cat-mugi": 0,
+      "cat-sora": 0,
+      "cat-tama": 0,
+      "rescue-2": 0
+    },
+    "growth": {
+      "cat-kohaku": {
+        "specialization": "rest",
+        "selected_day": 28,
+        "service": 52,
+        "rest": 47,
+        "dispatch": 8
+      },
+      "cat-mike": {
+        "specialization": "service",
+        "selected_day": 17,
+        "service": 69,
+        "rest": 78,
+        "dispatch": 0
+      },
+      "cat-mugi": {
+        "specialization": "service",
+        "selected_day": 19,
+        "service": 65,
+        "rest": 63,
+        "dispatch": 0
+      },
+      "cat-sora": {
+        "specialization": "service",
+        "selected_day": 16,
+        "service": 63,
+        "rest": 58,
+        "dispatch": 5
+      },
+      "cat-tama": {
+        "specialization": "dispatch",
+        "selected_day": 20,
+        "service": 62,
+        "rest": 60,
+        "dispatch": 0
+      },
+      "rescue-2": {
+        "specialization": "dispatch",
+        "selected_day": 24,
+        "service": 49,
+        "rest": 47,
+        "dispatch": 2
+      }
+    },
+    "dispatch_by_destination": {
+      "patron_visit": 4,
+      "patron_moody_visit": 7,
+      "patron_strict_visit": 4
+    },
+    "strict_dispatches": [
+      {
+        "cat_id": "cat-sora",
+        "started_day": 23,
+        "resolved_day": 24,
+        "patron_match": {
+          "member_id": "patron_strict_visit",
+          "condition_index": 0,
+          "condition": {
+            "feature": "white",
+            "specialization": "service"
+          },
+          "matched": true,
+          "gain": 25
+        }
+      },
+      {
+        "cat_id": "cat-sora",
+        "started_day": 25,
+        "resolved_day": 26,
+        "patron_match": {
+          "member_id": "patron_strict_visit",
+          "condition_index": 0,
+          "condition": {
+            "feature": "white",
+            "specialization": "service"
+          },
+          "matched": true,
+          "gain": 25
+        }
+      },
+      {
+        "cat_id": "cat-sora",
+        "started_day": 27,
+        "resolved_day": 28,
+        "patron_match": {
+          "member_id": "patron_strict_visit",
+          "condition_index": 0,
+          "condition": {
+            "feature": "white",
+            "specialization": "service"
+          },
+          "matched": true,
+          "gain": 25
+        }
+      },
+      {
+        "cat_id": "cat-sora",
+        "started_day": 29,
+        "resolved_day": 30,
+        "patron_match": {
+          "member_id": "patron_strict_visit",
+          "condition_index": 0,
+          "condition": {
+            "feature": "white",
+            "specialization": "service"
+          },
+          "matched": true,
+          "gain": 25
+        }
+      }
+    ]
+  },
+  {
+    "id": "patron-fast-42-manual",
+    "target": "patron",
+    "mode": "fast",
+    "seed": 42,
+    "manual": true,
+    "day": 121,
+    "steps": 5136,
+    "failure": null,
+    "resume": true,
+    "game_over": null,
+    "goal": [],
+    "bond": null,
+    "patron": {
+      "started_day": 1,
+      "resolved_day": 30,
+      "id": "patron",
+      "status": "cleared",
+      "continued": true,
+      "satisfaction": 100,
+      "members": [
+        {
+          "id": "patron_moody_visit",
+          "value": 100
+        },
+        {
+          "id": "patron_strict_visit",
+          "value": 100
+        }
+      ]
+    },
+    "funds": 131240,
+    "revenue": 134540,
+    "services": {
+      "cat-sora": 70,
+      "cat-mike": 52,
+      "cat-tama": 60,
+      "cat-mugi": 60,
+      "rescue-2": 49,
+      "cat-kohaku": 69
+    },
+    "counts": {
+      "open_recruitment": 1,
+      "recruit_cat": 1,
+      "dispatch": 15,
+      "set_shifts": 120,
+      "start_business": 120,
+      "advance_business": 4680,
+      "next_day": 120,
+      "resolve_activity": 15,
+      "resolve_store_event": 16,
+      "resolve_intake": 1,
+      "resolve_regular_introduction": 1,
+      "resolve_growth_stage": 1,
+      "resolve_growth_batch": 16,
+      "resolve_growth_auto": 15,
+      "continue_patron": 1,
+      "resolve_customer_trust": 13
+    },
+    "dispatches": 15,
+    "dispatch_reward": 3100,
+    "cats": [
+      {
+        "id": "cat-kohaku",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-mike",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-mugi",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-sora",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-tama",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "dispatch"
+      },
+      {
+        "id": "rescue-2",
+        "stamina": 140,
+        "max": 140,
+        "specialization": "dispatch"
+      }
+    ],
+    "equipment": 0,
+    "housing": {
+      "purchased_day": 0,
+      "upgraded_day": 0
+    },
+    "seats": 2,
+    "clear_day": 30,
+    "recorded_closed_days": 120,
+    "settled_days": 120,
+    "unsampled_closed_days": [],
+    "funds_at_clear": 28830,
+    "spending": {
+      "pet_shop_expenses": 0,
+      "recruitment_expenses": 200,
+      "housing_expenses": 0,
+      "housing_cost": 0,
+      "expansion_expenses": 0,
+      "equipment_expenses": 0,
+      "rest_space_expenses": 0,
+      "waiting_area_expenses": 0,
+      "waiting_area_cost": 0
+    },
+    "operating_expenses": 7400,
+    "net_change": 130240,
+    "minimum_closed_funds": 1430,
+    "sick_closed_cat_days": 0,
+    "missing_closed_cat_days": 0,
+    "zero_stamina_closed_cat_days": 0,
+    "mean_closed_fatigue": 17.908680555555556,
+    "max_closed_fatigue": 59,
+    "mean_closed_stress": 16.799305555555556,
+    "max_closed_stress": 59,
+    "working_mean_opening_stamina": 126.30813953488372,
+    "working_mean_opening_deficit": 0.0,
+    "working_low_openings": 0,
+    "post_clear": {
+      "counts": {
+        "cat-sora": 58,
+        "cat-tama": 44,
+        "cat-kohaku": 56,
+        "cat-mike": 39,
+        "cat-mugi": 42,
+        "rescue-2": 35
+      },
+      "largest_share": 0.2116788321167883
+    },
+    "full_period": {
+      "counts": {
+        "cat-sora": 70,
+        "cat-mike": 52,
+        "cat-tama": 60,
+        "cat-mugi": 60,
+        "rescue-2": 49,
+        "cat-kohaku": 69
+      },
+      "largest_share": 0.19444444444444445
+    },
+    "missing_cases": 0,
+    "max_stamina_at_clear": 110,
+    "player_sessions": 0,
+    "player_session_turns": {},
+    "player_cat_affinity": {
+      "cat-kohaku": 0,
+      "cat-mike": 0,
+      "cat-mugi": 0,
+      "cat-sora": 0,
+      "cat-tama": 0,
+      "rescue-2": 0
+    },
+    "growth": {
+      "cat-kohaku": {
+        "specialization": "rest",
+        "selected_day": 23,
+        "service": 69,
+        "rest": 63,
+        "dispatch": 6
+      },
+      "cat-mike": {
+        "specialization": "service",
+        "selected_day": 21,
+        "service": 52,
+        "rest": 65,
+        "dispatch": 1
+      },
+      "cat-mugi": {
+        "specialization": "service",
+        "selected_day": 19,
+        "service": 60,
+        "rest": 57,
+        "dispatch": 0
+      },
+      "cat-sora": {
+        "specialization": "service",
+        "selected_day": 16,
+        "service": 70,
+        "rest": 63,
+        "dispatch": 6
+      },
+      "cat-tama": {
+        "specialization": "dispatch",
+        "selected_day": 19,
+        "service": 60,
+        "rest": 58,
+        "dispatch": 0
+      },
+      "rescue-2": {
+        "specialization": "dispatch",
+        "selected_day": 22,
+        "service": 49,
+        "rest": 40,
+        "dispatch": 2
+      }
+    },
+    "dispatch_by_destination": {
+      "patron_visit": 4,
+      "patron_moody_visit": 7,
+      "patron_strict_visit": 4
+    },
+    "strict_dispatches": [
+      {
+        "cat_id": "cat-sora",
+        "started_day": 23,
+        "resolved_day": 24,
+        "patron_match": {
+          "member_id": "patron_strict_visit",
+          "condition_index": 0,
+          "condition": {
+            "feature": "white",
+            "specialization": "service"
+          },
+          "matched": true,
+          "gain": 25
+        }
+      },
+      {
+        "cat_id": "cat-sora",
+        "started_day": 25,
+        "resolved_day": 26,
+        "patron_match": {
+          "member_id": "patron_strict_visit",
+          "condition_index": 0,
+          "condition": {
+            "feature": "white",
+            "specialization": "service"
+          },
+          "matched": true,
+          "gain": 25
+        }
+      },
+      {
+        "cat_id": "cat-sora",
+        "started_day": 27,
+        "resolved_day": 28,
+        "patron_match": {
+          "member_id": "patron_strict_visit",
+          "condition_index": 0,
+          "condition": {
+            "feature": "white",
+            "specialization": "service"
+          },
+          "matched": true,
+          "gain": 25
+        }
+      },
+      {
+        "cat_id": "cat-sora",
+        "started_day": 29,
+        "resolved_day": 30,
+        "patron_match": {
+          "member_id": "patron_strict_visit",
+          "condition_index": 0,
+          "condition": {
+            "feature": "white",
+            "specialization": "service"
+          },
+          "matched": true,
+          "gain": 25
+        }
+      }
+    ]
+  },
+  {
+    "id": "service-control-clear-0-auto",
+    "target": "service-control",
+    "mode": "clear",
+    "seed": 0,
+    "manual": false,
+    "day": 121,
+    "steps": 5055,
+    "failure": null,
+    "resume": true,
+    "game_over": null,
+    "goal": [],
+    "bond": null,
+    "patron": null,
+    "funds": 129630,
+    "revenue": 138970,
+    "services": {
+      "cat-kohaku": 60,
+      "cat-mike": 63,
+      "cat-mugi": 67,
+      "cat-sora": 60,
+      "cat-tama": 73,
+      "request-cat-1": 67
+    },
+    "counts": {
+      "purchase_rest_space": 1,
+      "purchase_seat_equipment": 3,
+      "set_shifts": 119,
+      "start_business": 119,
+      "advance_business": 4641,
+      "next_day": 119,
+      "resolve_intake": 1,
+      "resolve_store_event": 18,
+      "expand_seats": 1,
+      "resolve_regular_introduction": 1,
+      "resolve_growth_auto": 13,
+      "resolve_growth_batch": 13,
+      "day_off": 1,
+      "resolve_customer_trust": 5
+    },
+    "dispatches": 0,
+    "dispatch_reward": 0,
+    "cats": [
+      {
+        "id": "cat-kohaku",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-mike",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-mugi",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-sora",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-tama",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "dispatch"
+      },
+      {
+        "id": "request-cat-1",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "rest"
+      }
+    ],
+    "equipment": 3,
+    "housing": {
+      "purchased_day": 0,
+      "upgraded_day": 0
+    },
+    "seats": 3,
+    "clear_day": 0,
+    "recorded_closed_days": 119,
+    "settled_days": 120,
+    "unsampled_closed_days": [
+      22
+    ],
+    "funds_at_clear": null,
+    "spending": {
+      "pet_shop_expenses": 0,
+      "recruitment_expenses": 200,
+      "housing_expenses": 0,
+      "housing_cost": 0,
+      "expansion_expenses": 500,
+      "equipment_expenses": 900,
+      "rest_space_expenses": 400,
+      "waiting_area_expenses": 0,
+      "waiting_area_cost": 0
+    },
+    "operating_expenses": 10340,
+    "net_change": 128630,
+    "minimum_closed_funds": 1030,
+    "sick_closed_cat_days": 0,
+    "missing_closed_cat_days": 0,
+    "zero_stamina_closed_cat_days": 0,
+    "mean_closed_fatigue": 12.96026722925457,
+    "max_closed_fatigue": 55,
+    "mean_closed_stress": 16.40646976090014,
+    "max_closed_stress": 59,
+    "working_mean_opening_stamina": 126.72619047619048,
+    "working_mean_opening_deficit": 0.0,
+    "working_low_openings": 0,
+    "post_clear": {
+      "counts": {},
+      "largest_share": 0.0
+    },
+    "full_period": {
+      "counts": {
+        "cat-kohaku": 60,
+        "cat-mike": 63,
+        "cat-mugi": 67,
+        "cat-sora": 60,
+        "cat-tama": 73,
+        "request-cat-1": 67
+      },
+      "largest_share": 0.18717948717948718
+    },
+    "missing_cases": 0,
+    "max_stamina_at_clear": null,
+    "player_sessions": 0,
+    "player_session_turns": {},
+    "player_cat_affinity": {
+      "cat-kohaku": 0,
+      "cat-mike": 0,
+      "cat-mugi": 0,
+      "cat-sora": 0,
+      "cat-tama": 0,
+      "request-cat-1": 0
+    },
+    "growth": {
+      "cat-kohaku": {
+        "specialization": "rest",
+        "selected_day": 19,
+        "service": 60,
+        "rest": 57,
+        "dispatch": 0
+      },
+      "cat-mike": {
+        "specialization": "service",
+        "selected_day": 20,
+        "service": 63,
+        "rest": 61,
+        "dispatch": 0
+      },
+      "cat-mugi": {
+        "specialization": "service",
+        "selected_day": 16,
+        "service": 67,
+        "rest": 63,
+        "dispatch": 0
+      },
+      "cat-sora": {
+        "specialization": "rest",
+        "selected_day": 18,
+        "service": 60,
+        "rest": 62,
+        "dispatch": 0
+      },
+      "cat-tama": {
+        "specialization": "dispatch",
+        "selected_day": 17,
+        "service": 73,
+        "rest": 71,
+        "dispatch": 0
+      },
+      "request-cat-1": {
+        "specialization": "rest",
+        "selected_day": 20,
+        "service": 67,
+        "rest": 67,
+        "dispatch": 0
+      }
+    },
+    "dispatch_by_destination": {},
+    "strict_dispatches": []
+  },
+  {
+    "id": "service-control-clear-1-auto",
+    "target": "service-control",
+    "mode": "clear",
+    "seed": 1,
+    "manual": false,
+    "day": 121,
+    "steps": 4999,
+    "failure": null,
+    "resume": true,
+    "game_over": null,
+    "goal": [],
+    "bond": null,
+    "patron": null,
+    "funds": 145400,
+    "revenue": 154740,
+    "services": {
+      "cat-kohaku": 62,
+      "cat-mike": 79,
+      "cat-mugi": 73,
+      "cat-tama": 66,
+      "cat-sora": 75,
+      "request-cat-1": 63
+    },
+    "counts": {
+      "purchase_rest_space": 1,
+      "purchase_seat_equipment": 3,
+      "set_shifts": 118,
+      "start_business": 118,
+      "advance_business": 4602,
+      "next_day": 118,
+      "resolve_store_event": 12,
+      "resolve_intake": 1,
+      "expand_seats": 1,
+      "resolve_regular_introduction": 1,
+      "resolve_growth_auto": 11,
+      "resolve_growth_batch": 11,
+      "day_off": 2
+    },
+    "dispatches": 0,
+    "dispatch_reward": 0,
+    "cats": [
+      {
+        "id": "cat-kohaku",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-mike",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-mugi",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-sora",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-tama",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "dispatch"
+      },
+      {
+        "id": "request-cat-1",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "rest"
+      }
+    ],
+    "equipment": 3,
+    "housing": {
+      "purchased_day": 0,
+      "upgraded_day": 0
+    },
+    "seats": 3,
+    "clear_day": 0,
+    "recorded_closed_days": 118,
+    "settled_days": 120,
+    "unsampled_closed_days": [
+      24,
+      45
+    ],
+    "funds_at_clear": null,
+    "spending": {
+      "pet_shop_expenses": 0,
+      "recruitment_expenses": 200,
+      "housing_expenses": 0,
+      "housing_cost": 0,
+      "expansion_expenses": 500,
+      "equipment_expenses": 900,
+      "rest_space_expenses": 400,
+      "waiting_area_expenses": 0,
+      "waiting_area_cost": 0
+    },
+    "operating_expenses": 10340,
+    "net_change": 144400,
+    "minimum_closed_funds": 1150,
+    "sick_closed_cat_days": 0,
+    "missing_closed_cat_days": 0,
+    "zero_stamina_closed_cat_days": 0,
+    "mean_closed_fatigue": 13.159574468085106,
+    "max_closed_fatigue": 53,
+    "mean_closed_stress": 15.804964539007091,
+    "max_closed_stress": 59,
+    "working_mean_opening_stamina": 128.3231707317073,
+    "working_mean_opening_deficit": 0.0,
+    "working_low_openings": 0,
+    "post_clear": {
+      "counts": {},
+      "largest_share": 0.0
+    },
+    "full_period": {
+      "counts": {
+        "cat-kohaku": 62,
+        "cat-mike": 79,
+        "cat-mugi": 73,
+        "cat-tama": 66,
+        "cat-sora": 75,
+        "request-cat-1": 63
+      },
+      "largest_share": 0.18899521531100477
+    },
+    "missing_cases": 0,
+    "max_stamina_at_clear": null,
+    "player_sessions": 0,
+    "player_session_turns": {},
+    "player_cat_affinity": {
+      "cat-kohaku": 0,
+      "cat-mike": 0,
+      "cat-mugi": 0,
+      "cat-sora": 0,
+      "cat-tama": 0,
+      "request-cat-1": 0
+    },
+    "growth": {
+      "cat-kohaku": {
+        "specialization": "rest",
+        "selected_day": 20,
+        "service": 62,
+        "rest": 61,
+        "dispatch": 0
+      },
+      "cat-mike": {
+        "specialization": "service",
+        "selected_day": 17,
+        "service": 79,
+        "rest": 69,
+        "dispatch": 0
+      },
+      "cat-mugi": {
+        "specialization": "service",
+        "selected_day": 17,
+        "service": 73,
+        "rest": 68,
+        "dispatch": 0
+      },
+      "cat-sora": {
+        "specialization": "rest",
+        "selected_day": 18,
+        "service": 75,
+        "rest": 66,
+        "dispatch": 0
+      },
+      "cat-tama": {
+        "specialization": "dispatch",
+        "selected_day": 18,
+        "service": 66,
+        "rest": 65,
+        "dispatch": 0
+      },
+      "request-cat-1": {
+        "specialization": "rest",
+        "selected_day": 21,
+        "service": 63,
+        "rest": 60,
+        "dispatch": 0
+      }
+    },
+    "dispatch_by_destination": {},
+    "strict_dispatches": []
+  },
+  {
+    "id": "service-control-clear-42-auto",
+    "target": "service-control",
+    "mode": "clear",
+    "seed": 42,
+    "manual": false,
+    "day": 121,
+    "steps": 5089,
+    "failure": null,
+    "resume": true,
+    "game_over": null,
+    "goal": [],
+    "bond": null,
+    "patron": null,
+    "funds": 139630,
+    "revenue": 148970,
+    "services": {
+      "cat-kohaku": 75,
+      "cat-mike": 68,
+      "cat-tama": 64,
+      "cat-sora": 76,
+      "cat-mugi": 65,
+      "request-cat-1": 71
+    },
+    "counts": {
+      "purchase_rest_space": 1,
+      "purchase_seat_equipment": 3,
+      "set_shifts": 120,
+      "start_business": 120,
+      "advance_business": 4680,
+      "next_day": 120,
+      "resolve_store_event": 16,
+      "resolve_intake": 1,
+      "expand_seats": 1,
+      "resolve_regular_introduction": 1,
+      "resolve_growth_auto": 13,
+      "resolve_growth_batch": 13
+    },
+    "dispatches": 0,
+    "dispatch_reward": 0,
+    "cats": [
+      {
+        "id": "cat-kohaku",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-mike",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-mugi",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-sora",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-tama",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "dispatch"
+      },
+      {
+        "id": "request-cat-1",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "rest"
+      }
+    ],
+    "equipment": 3,
+    "housing": {
+      "purchased_day": 0,
+      "upgraded_day": 0
+    },
+    "seats": 3,
+    "clear_day": 0,
+    "recorded_closed_days": 120,
+    "settled_days": 120,
+    "unsampled_closed_days": [],
+    "funds_at_clear": null,
+    "spending": {
+      "pet_shop_expenses": 0,
+      "recruitment_expenses": 200,
+      "housing_expenses": 0,
+      "housing_cost": 0,
+      "expansion_expenses": 500,
+      "equipment_expenses": 900,
+      "rest_space_expenses": 400,
+      "waiting_area_expenses": 0,
+      "waiting_area_cost": 0
+    },
+    "operating_expenses": 10340,
+    "net_change": 138630,
+    "minimum_closed_funds": 1550,
+    "sick_closed_cat_days": 0,
+    "missing_closed_cat_days": 0,
+    "zero_stamina_closed_cat_days": 0,
+    "mean_closed_fatigue": 13.42050209205021,
+    "max_closed_fatigue": 59,
+    "mean_closed_stress": 17.921896792189678,
+    "max_closed_stress": 59,
+    "working_mean_opening_stamina": 128.10650887573965,
+    "working_mean_opening_deficit": 0.0,
+    "working_low_openings": 0,
+    "post_clear": {
+      "counts": {},
+      "largest_share": 0.0
+    },
+    "full_period": {
+      "counts": {
+        "cat-kohaku": 75,
+        "cat-mike": 68,
+        "cat-tama": 64,
+        "cat-sora": 76,
+        "cat-mugi": 65,
+        "request-cat-1": 71
+      },
+      "largest_share": 0.18138424821002386
+    },
+    "missing_cases": 0,
+    "max_stamina_at_clear": null,
+    "player_sessions": 0,
+    "player_session_turns": {},
+    "player_cat_affinity": {
+      "cat-kohaku": 0,
+      "cat-mike": 0,
+      "cat-mugi": 0,
+      "cat-sora": 0,
+      "cat-tama": 0,
+      "request-cat-1": 0
+    },
+    "growth": {
+      "cat-kohaku": {
+        "specialization": "rest",
+        "selected_day": 15,
+        "service": 75,
+        "rest": 72,
+        "dispatch": 0
+      },
+      "cat-mike": {
+        "specialization": "service",
+        "selected_day": 16,
+        "service": 68,
+        "rest": 62,
+        "dispatch": 0
+      },
+      "cat-mugi": {
+        "specialization": "service",
+        "selected_day": 23,
+        "service": 65,
+        "rest": 52,
+        "dispatch": 0
+      },
+      "cat-sora": {
+        "specialization": "rest",
+        "selected_day": 17,
+        "service": 76,
+        "rest": 69,
+        "dispatch": 0
+      },
+      "cat-tama": {
+        "specialization": "dispatch",
+        "selected_day": 21,
+        "service": 64,
+        "rest": 58,
+        "dispatch": 0
+      },
+      "request-cat-1": {
+        "specialization": "rest",
+        "selected_day": 21,
+        "service": 71,
+        "rest": 66,
+        "dispatch": 0
+      }
+    },
+    "dispatch_by_destination": {},
+    "strict_dispatches": []
+  },
+  {
+    "id": "service-after-player-clear-0-auto",
+    "target": "service-after-player",
+    "mode": "clear",
+    "seed": 0,
+    "manual": false,
+    "day": 121,
+    "steps": 12648,
+    "failure": null,
+    "resume": true,
+    "game_over": null,
+    "goal": [],
+    "bond": null,
+    "patron": null,
+    "funds": 102810,
+    "revenue": 112150,
+    "services": {
+      "cat-mike": 50,
+      "cat-kohaku": 54,
+      "cat-sora": 77,
+      "cat-tama": 78,
+      "cat-mugi": 78,
+      "regular-rescue-1": 64
+    },
+    "counts": {
+      "player_begin": 360,
+      "player_step": 7200,
+      "purchase_rest_space": 1,
+      "purchase_seat_equipment": 3,
+      "set_shifts": 120,
+      "start_business": 120,
+      "advance_business": 4680,
+      "next_day": 120,
+      "resolve_intake": 1,
+      "resolve_store_event": 18,
+      "expand_seats": 1,
+      "resolve_regular_introduction": 1,
+      "resolve_growth_auto": 10,
+      "resolve_growth_batch": 10,
+      "resolve_customer_trust": 3
+    },
+    "dispatches": 0,
+    "dispatch_reward": 0,
+    "cats": [
+      {
+        "id": "cat-kohaku",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-mike",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-mugi",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-sora",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-tama",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "dispatch"
+      },
+      {
+        "id": "regular-rescue-1",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "rest"
+      }
+    ],
+    "equipment": 3,
+    "housing": {
+      "purchased_day": 0,
+      "upgraded_day": 0
+    },
+    "seats": 3,
+    "clear_day": 0,
+    "recorded_closed_days": 120,
+    "settled_days": 120,
+    "unsampled_closed_days": [],
+    "funds_at_clear": null,
+    "spending": {
+      "pet_shop_expenses": 0,
+      "recruitment_expenses": 200,
+      "housing_expenses": 0,
+      "housing_cost": 0,
+      "expansion_expenses": 500,
+      "equipment_expenses": 900,
+      "rest_space_expenses": 400,
+      "waiting_area_expenses": 0,
+      "waiting_area_cost": 0
+    },
+    "operating_expenses": 10340,
+    "net_change": 101810,
+    "minimum_closed_funds": 660,
+    "sick_closed_cat_days": 0,
+    "missing_closed_cat_days": 0,
+    "zero_stamina_closed_cat_days": 0,
+    "mean_closed_fatigue": 12.674614305750351,
+    "max_closed_fatigue": 59,
+    "mean_closed_stress": 15.199859747545583,
+    "max_closed_stress": 59,
+    "working_mean_opening_stamina": 69.59025787965616,
+    "working_mean_opening_deficit": 56.39828080229226,
+    "working_low_openings": 64,
+    "post_clear": {
+      "counts": {},
+      "largest_share": 0.0
+    },
+    "full_period": {
+      "counts": {
+        "cat-mike": 50,
+        "cat-kohaku": 54,
+        "cat-sora": 77,
+        "cat-tama": 78,
+        "cat-mugi": 78,
+        "regular-rescue-1": 64
+      },
+      "largest_share": 0.19451371571072318
+    },
+    "missing_cases": 0,
+    "max_stamina_at_clear": null,
+    "player_sessions": 360,
+    "player_session_turns": {
+      "20": 360
+    },
+    "player_cat_affinity": {
+      "cat-kohaku": 100,
+      "cat-mike": 0,
+      "cat-mugi": 100,
+      "cat-sora": 0,
+      "cat-tama": 0,
+      "regular-rescue-1": 0
+    },
+    "growth": {
+      "cat-kohaku": {
+        "specialization": "rest",
+        "selected_day": 25,
+        "service": 54,
+        "rest": 47,
+        "dispatch": 0
+      },
+      "cat-mike": {
+        "specialization": "service",
+        "selected_day": 21,
+        "service": 50,
+        "rest": 52,
+        "dispatch": 0
+      },
+      "cat-mugi": {
+        "specialization": "service",
+        "selected_day": 18,
+        "service": 78,
+        "rest": 51,
+        "dispatch": 0
+      },
+      "cat-sora": {
+        "specialization": "rest",
+        "selected_day": 15,
+        "service": 77,
+        "rest": 74,
+        "dispatch": 0
+      },
+      "cat-tama": {
+        "specialization": "dispatch",
+        "selected_day": 17,
+        "service": 78,
+        "rest": 74,
+        "dispatch": 0
+      },
+      "regular-rescue-1": {
+        "specialization": "rest",
+        "selected_day": 24,
+        "service": 64,
+        "rest": 66,
+        "dispatch": 0
+      }
+    },
+    "dispatch_by_destination": {},
+    "strict_dispatches": []
+  },
+  {
+    "id": "service-after-player-clear-1-auto",
+    "target": "service-after-player",
+    "mode": "clear",
+    "seed": 1,
+    "manual": false,
+    "day": 121,
+    "steps": 12635,
+    "failure": null,
+    "resume": true,
+    "game_over": null,
+    "goal": [],
+    "bond": null,
+    "patron": null,
+    "funds": 107500,
+    "revenue": 116840,
+    "services": {
+      "cat-mike": 74,
+      "cat-mugi": 75,
+      "cat-sora": 78,
+      "cat-tama": 70,
+      "cat-kohaku": 61,
+      "request-cat-1": 73
+    },
+    "counts": {
+      "player_begin": 360,
+      "player_step": 7200,
+      "purchase_rest_space": 1,
+      "purchase_seat_equipment": 3,
+      "set_shifts": 120,
+      "start_business": 120,
+      "advance_business": 4680,
+      "next_day": 120,
+      "resolve_store_event": 12,
+      "resolve_intake": 1,
+      "expand_seats": 1,
+      "resolve_regular_introduction": 1,
+      "resolve_growth_auto": 8,
+      "resolve_growth_batch": 8
+    },
+    "dispatches": 0,
+    "dispatch_reward": 0,
+    "cats": [
+      {
+        "id": "cat-kohaku",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-mike",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-mugi",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-sora",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-tama",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "dispatch"
+      },
+      {
+        "id": "request-cat-1",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "rest"
+      }
+    ],
+    "equipment": 3,
+    "housing": {
+      "purchased_day": 0,
+      "upgraded_day": 0
+    },
+    "seats": 3,
+    "clear_day": 0,
+    "recorded_closed_days": 120,
+    "settled_days": 120,
+    "unsampled_closed_days": [],
+    "funds_at_clear": null,
+    "spending": {
+      "pet_shop_expenses": 0,
+      "recruitment_expenses": 200,
+      "housing_expenses": 0,
+      "housing_cost": 0,
+      "expansion_expenses": 500,
+      "equipment_expenses": 900,
+      "rest_space_expenses": 400,
+      "waiting_area_expenses": 0,
+      "waiting_area_cost": 0
+    },
+    "operating_expenses": 10340,
+    "net_change": 106500,
+    "minimum_closed_funds": 790,
+    "sick_closed_cat_days": 0,
+    "missing_closed_cat_days": 0,
+    "zero_stamina_closed_cat_days": 0,
+    "mean_closed_fatigue": 13.857043235704323,
+    "max_closed_fatigue": 59,
+    "mean_closed_stress": 15.87587168758717,
+    "max_closed_stress": 59,
+    "working_mean_opening_stamina": 76.92857142857143,
+    "working_mean_opening_deficit": 51.31547619047619,
+    "working_low_openings": 51,
+    "post_clear": {
+      "counts": {},
+      "largest_share": 0.0
+    },
+    "full_period": {
+      "counts": {
+        "cat-mike": 74,
+        "cat-mugi": 75,
+        "cat-sora": 78,
+        "cat-tama": 70,
+        "cat-kohaku": 61,
+        "request-cat-1": 73
+      },
+      "largest_share": 0.18097447795823665
+    },
+    "missing_cases": 0,
+    "max_stamina_at_clear": null,
+    "player_sessions": 360,
+    "player_session_turns": {
+      "20": 360
+    },
+    "player_cat_affinity": {
+      "cat-kohaku": 100,
+      "cat-mike": 0,
+      "cat-mugi": 100,
+      "cat-sora": 0,
+      "cat-tama": 0,
+      "request-cat-1": 0
+    },
+    "growth": {
+      "cat-kohaku": {
+        "specialization": "rest",
+        "selected_day": 22,
+        "service": 61,
+        "rest": 54,
+        "dispatch": 0
+      },
+      "cat-mike": {
+        "specialization": "service",
+        "selected_day": 17,
+        "service": 74,
+        "rest": 68,
+        "dispatch": 0
+      },
+      "cat-mugi": {
+        "specialization": "service",
+        "selected_day": 17,
+        "service": 75,
+        "rest": 55,
+        "dispatch": 0
+      },
+      "cat-sora": {
+        "specialization": "rest",
+        "selected_day": 17,
+        "service": 78,
+        "rest": 72,
+        "dispatch": 0
+      },
+      "cat-tama": {
+        "specialization": "dispatch",
+        "selected_day": 18,
+        "service": 70,
+        "rest": 68,
+        "dispatch": 0
+      },
+      "request-cat-1": {
+        "specialization": "rest",
+        "selected_day": 21,
+        "service": 73,
+        "rest": 64,
+        "dispatch": 0
+      }
+    },
+    "dispatch_by_destination": {},
+    "strict_dispatches": []
+  },
+  {
+    "id": "service-after-player-clear-42-auto",
+    "target": "service-after-player",
+    "mode": "clear",
+    "seed": 42,
+    "manual": false,
+    "day": 121,
+    "steps": 12645,
+    "failure": null,
+    "resume": true,
+    "game_over": null,
+    "goal": [],
+    "bond": null,
+    "patron": null,
+    "funds": 107530,
+    "revenue": 116870,
+    "services": {
+      "cat-kohaku": 82,
+      "cat-mike": 61,
+      "cat-tama": 64,
+      "cat-sora": 77,
+      "cat-mugi": 48,
+      "request-cat-1": 74
+    },
+    "counts": {
+      "player_begin": 360,
+      "player_step": 7200,
+      "purchase_rest_space": 1,
+      "purchase_seat_equipment": 3,
+      "set_shifts": 120,
+      "start_business": 120,
+      "advance_business": 4680,
+      "next_day": 120,
+      "resolve_store_event": 16,
+      "resolve_intake": 1,
+      "expand_seats": 1,
+      "resolve_regular_introduction": 1,
+      "resolve_growth_auto": 9,
+      "resolve_growth_batch": 9,
+      "resolve_customer_trust": 4
+    },
+    "dispatches": 0,
+    "dispatch_reward": 0,
+    "cats": [
+      {
+        "id": "cat-kohaku",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-mike",
+        "stamina": 150,
+        "max": 150,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-mugi",
+        "stamina": 140,
+        "max": 140,
+        "specialization": "service"
+      },
+      {
+        "id": "cat-sora",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "rest"
+      },
+      {
+        "id": "cat-tama",
+        "stamina": 160,
+        "max": 160,
+        "specialization": "dispatch"
+      },
+      {
+        "id": "request-cat-1",
+        "stamina": 170,
+        "max": 170,
+        "specialization": "rest"
+      }
+    ],
+    "equipment": 3,
+    "housing": {
+      "purchased_day": 0,
+      "upgraded_day": 0
+    },
+    "seats": 3,
+    "clear_day": 0,
+    "recorded_closed_days": 120,
+    "settled_days": 120,
+    "unsampled_closed_days": [],
+    "funds_at_clear": null,
+    "spending": {
+      "pet_shop_expenses": 0,
+      "recruitment_expenses": 200,
+      "housing_expenses": 0,
+      "housing_cost": 0,
+      "expansion_expenses": 500,
+      "equipment_expenses": 900,
+      "rest_space_expenses": 400,
+      "waiting_area_expenses": 0,
+      "waiting_area_cost": 0
+    },
+    "operating_expenses": 10340,
+    "net_change": 106530,
+    "minimum_closed_funds": 1230,
+    "sick_closed_cat_days": 0,
+    "missing_closed_cat_days": 0,
+    "zero_stamina_closed_cat_days": 0,
+    "mean_closed_fatigue": 13.080195258019526,
+    "max_closed_fatigue": 59,
+    "mean_closed_stress": 15.665969316596932,
+    "max_closed_stress": 59,
+    "working_mean_opening_stamina": 70.93859649122807,
+    "working_mean_opening_deficit": 55.40643274853801,
+    "working_low_openings": 65,
+    "post_clear": {
+      "counts": {},
+      "largest_share": 0.0
+    },
+    "full_period": {
+      "counts": {
+        "cat-kohaku": 82,
+        "cat-mike": 61,
+        "cat-tama": 64,
+        "cat-sora": 77,
+        "cat-mugi": 48,
+        "request-cat-1": 74
+      },
+      "largest_share": 0.2019704433497537
+    },
+    "missing_cases": 0,
+    "max_stamina_at_clear": null,
+    "player_sessions": 360,
+    "player_session_turns": {
+      "20": 360
+    },
+    "player_cat_affinity": {
+      "cat-kohaku": 100,
+      "cat-mike": 0,
+      "cat-mugi": 100,
+      "cat-sora": 0,
+      "cat-tama": 0,
+      "request-cat-1": 0
+    },
+    "growth": {
+      "cat-kohaku": {
+        "specialization": "rest",
+        "selected_day": 15,
+        "service": 82,
+        "rest": 63,
+        "dispatch": 0
+      },
+      "cat-mike": {
+        "specialization": "service",
+        "selected_day": 20,
+        "service": 61,
+        "rest": 57,
+        "dispatch": 0
+      },
+      "cat-mugi": {
+        "specialization": "service",
+        "selected_day": 24,
+        "service": 48,
+        "rest": 38,
+        "dispatch": 0
+      },
+      "cat-sora": {
+        "specialization": "rest",
+        "selected_day": 16,
+        "service": 77,
+        "rest": 78,
+        "dispatch": 0
+      },
+      "cat-tama": {
+        "specialization": "dispatch",
+        "selected_day": 20,
+        "service": 64,
+        "rest": 67,
+        "dispatch": 0
+      },
+      "request-cat-1": {
+        "specialization": "rest",
+        "selected_day": 18,
+        "service": 74,
+        "rest": 72,
+        "dispatch": 0
+      }
+    },
+    "dispatch_by_destination": {},
+    "strict_dispatches": []
+  }
+]

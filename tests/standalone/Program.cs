@@ -182,6 +182,8 @@ static partial class Program
         if(args.Length>0 && args[0]=="--narrative-resume"){NarrativeResume(args[1],args[2]);return;}
         if(args.Length>0 && args[0]=="--narratives"){NarrativeChecks(args[1],args[2]);return;}
         if(args.Length>0 && args[0]=="--stamina-resume"){StaminaResume(args[1]);return;}
+        if(args.Length>0 && args[0]=="--long-balance"){LongBalance(args[1],args[2],args.Contains("--manual"),args.Contains("--probe"));return;}
+        if(args.Length>0 && args[0]=="--long-resume"){LongBalanceResume(args[1],args[2]);return;}
         if(args.Length>0 && args[0]=="--stamina-balance"){StaminaBalance(args[1],args[2]);return;}
         if(args.Length>0 && args[0]=="--conversation"){ConversationChecks(args[1]);return;}
         if(args.Length>0 && args[0]=="--stamina"){StaminaChecks(args[1],args[2]);return;}
