@@ -24,7 +24,9 @@ namespace CatCafePreview.Standalone
         }
         public double PatronGain(string cat,string destination)
         {var match=PatronTerms(State,cat,destination);if(match!=null)return match.gain;var terms=DispatchTerms(State,cat,State.day,destination:destination);return Rules.patron.gain+((terms.feature_matched?1:0)+(terms.specialization_matched?1:0))*(Rules.patron.destination.welcome?.satisfaction_bonus??0);}
-        private double PatronEventGain(CafeDispatch e)=>e.patron_match?.gain??(Rules.patron.gain+((e.feature_matched?1:0)+(e.specialization_matched?1:0))*(Rules.patron.destination.welcome?.satisfaction_bonus??0));
+        public static double PatronEventGain(PatronRules rules,CafeDispatch e)=>e.patron_match?.gain??(rules.gain+((e.feature_matched?1:0)+(e.specialization_matched?1:0))*(rules.destination.welcome?.satisfaction_bonus??0));
+        public CafeDispatch PatronPreview(string cat,string destination){var e=DispatchTerms(State,cat,State.day,destination:destination);e.patron_match=PatronTerms(State,cat,destination);return e;}
+        public double PatronEventGain(CafeDispatch e)=>PatronEventGain(Rules.patron,e);
         private void ReceivePatron(CafeDispatch e)
         {
             var p=State.patron;if(p==null || !IsPatronDestination(e.destination))return;

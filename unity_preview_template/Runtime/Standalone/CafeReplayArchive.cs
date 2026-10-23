@@ -22,6 +22,19 @@ namespace CatCafePreview.Standalone
     {
         public static bool IsEnding(string id)=>id==CafeOutcome.Id || id==CafePopularityEnding.Id || id==CafeBondEnding.Id || id==CafePatronEnding.Id;
         public static readonly CafeReplayDefinition[] All={
+            new CafeReplayDefinition("dispatch.patron_visit.v1.departure","departed","地域の有力者 · 出発"),
+            new CafeReplayDefinition("dispatch.patron_visit.v1.departure","cancelled","地域の有力者 · 今回は出発しない"),
+            new CafeReplayDefinition("dispatch.patron_visit.v1.travelling","travelling","地域の有力者 · 派遣中"),
+            new CafeReplayDefinition("dispatch.patron_visit.v1.return","received","地域の有力者 · 帰還"),
+            new CafeReplayDefinition("dispatch.patron_moody_visit.v1.departure","departed","気分が変わる有力者 · 出発"),
+            new CafeReplayDefinition("dispatch.patron_moody_visit.v1.departure","cancelled","気分が変わる有力者 · 今回は出発しない"),
+            new CafeReplayDefinition("dispatch.patron_moody_visit.v1.travelling","travelling","気分が変わる有力者 · 派遣中"),
+            new CafeReplayDefinition("dispatch.patron_moody_visit.v1.return","received","気分が変わる有力者 · 帰還"),
+            new CafeReplayDefinition("dispatch.patron_strict_visit.v1.departure","departed","条件に厳格な有力者 · 出発"),
+            new CafeReplayDefinition("dispatch.patron_strict_visit.v1.departure","cancelled","条件に厳格な有力者 · 今回は出発しない"),
+            new CafeReplayDefinition("dispatch.patron_strict_visit.v1.travelling","travelling","条件に厳格な有力者 · 派遣中"),
+            new CafeReplayDefinition("dispatch.patron_strict_visit.v1.return","received","条件に厳格な有力者 · 帰還"),
+
             new CafeReplayDefinition("dispatch.small_art_museum.v1.departure","departed","小さな美術館 · 出発"),
             new CafeReplayDefinition("dispatch.small_art_museum.v1.departure","cancelled","小さな美術館 · 今回は出発しない"),
             new CafeReplayDefinition("dispatch.small_art_museum.v1.travelling","travelling","小さな美術館 · 派遣中"),
@@ -109,9 +122,11 @@ namespace CatCafePreview.Standalone
             foreach(var row in save.dispatch_conversations??new CafeDispatchConversation[0])
             {
                 string name=catName(row.cat_id),image=contentId(row.cat_id);
+                var ev=save.state.dispatches.FirstOrDefault(e=>e.id==row.DispatchId && e.destination==row.Destination);
+                string facts=CafeDispatchDialogue.Patron(row.Destination) && ev!=null?"固定報酬："+ev.reward+" / "+(ev.patron_match==null?"歓迎一致：特徴 "+ev.feature_matched+" / 専門 "+ev.specialization_matched:"出発時の希望："+(ev.patron_match.condition.feature=="white"?"白猫":ev.patron_match.condition.feature=="black"?"黒猫":ev.patron_match.condition.feature=="long_hair"?"長毛":ev.patron_match.condition.feature)+" "+(ev.patron_match.condition.specialization=="service"?"接客専門":ev.patron_match.condition.specialization)+" / "+(ev.patron_match.matched?"一致":"不一致"))+" / 固定加点："+CafeSimulation.PatronEventGain(rules.patron,ev):null;
                 add(row.departure,image,name,CafeDispatchDialogue.Title(row.Destination),b=>CafeDispatchDialogue.Lines("departure",b,name,row.Destination),true);
                 add(row.travelling,image,name,"派遣中",b=>CafeDispatchDialogue.Lines("travelling",b,name,row.Destination),false);
-                add(row.returning,image,name,"帰還",b=>CafeDispatchDialogue.Lines("return",b,name,row.Destination),true);
+                add(row.returning,image,name,"帰還",b=>CafeDispatchDialogue.Lines("return",b,name,row.Destination,ev,facts),true);
             }
             foreach(var row in save.coco_conversations??new CafeCocoConversation[0])add(row.progress,contentId(rules.visiting_cat.cat.id),rules.visiting_cat.cat.name,rules.visiting_cat.personality,b=>CafeCocoDialogue.Lines(row,b),row.progress.conversation_id==CafeCocoDialogue.AdmissionId);
             foreach(var row in save.equipment_conversations??new CafeEquipmentConversation[0])add(row.progress,"",CafeEquipmentDialogue.Title(row),row.day+"日目",b=>CafeEquipmentDialogue.Lines(row,b),true);

@@ -13,7 +13,7 @@ namespace CatCafePreview
         public CafeDispatchConversation DispatchConversation {get{SyncConversations();return dispatchConversations.FirstOrDefault(r=>r.event_id==dispatchSelected);}}
         public string DispatchConversationSelected=>DispatchConversation?.event_id;
         public bool DispatchResultPending=>DispatchConversations.Any(CafeDispatchDialogue.ResultPending);
-        public string DispatchConversationReason=>DispatchResultPending?"通常派遣の手続きは確定済みですが、結果会話が未完了です。イベント一覧の「一般派遣・帰還」から再開し、「会話を終える」まで進めてください。":DispatchConversationOpen?"通常派遣の会話中です。閉じるか、結果会話を最後まで進めてください。":"";
+        public string DispatchConversationReason=>DispatchResultPending?"派遣の手続きは確定済みですが、結果会話が未完了です。イベント一覧の「有力者への派遣・帰還」または「一般派遣・帰還」から再開し、「会話を終える」まで進めてください。":DispatchConversationOpen?"派遣の会話中です。閉じるか、結果会話を最後まで進めてください。":"";
         void SyncDispatchConversations(){foreach(var row in dispatchConversations)CafeDispatchDialogue.Sync(row,Simulation.State.dispatches.FirstOrDefault(e=>e.id==row.DispatchId && e.destination==row.Destination));}
         public void BeginDispatchDeparture(string cat,string destination=CafeDispatchDialogue.Destination)
         {

@@ -73,10 +73,45 @@ static partial class Program
         EncounterConversationChecks(rules);
         EncounterOrderChecks(rules);
         DispatchConversationChecks(rules);
+        PatronRoundTripChecks(rules);
         RegularConversationChecks(rules);
         DayOffProgressChecks(rules);
         IntakeChecks.Run(rules,Assert,Path.GetFullPath("Logs/StandaloneConversation/core-saves"));
         Console.WriteLine("PASS conversation: "+assertions+" assertions; both branches, every node save roundtrip, old saves, funds, housing, order, repeated answers.");
+    }
+
+    static void PatronRoundTripChecks(CafeRules rules)
+    {
+        foreach(string d in new[]{"patron_visit","patron_moody_visit","patron_strict_visit"})
+        foreach(string feature in new[]{"white","black","long_hair",""})
+        foreach(string specialization in new[]{"service","dispatch",""})
+        {
+            var copy=Decode<CafeRules>(Encode(rules));copy.cats.Single(c=>c.id=="cat-sora").features=feature==""?Array.Empty<string>():new[]{feature};
+            var sim=new CafeSimulation(copy,objective:"patron");sim.State.growth.Single(g=>g.cat_id=="cat-sora").specialization=specialization==""?null:specialization;
+            var preview=sim.PatronPreview("cat-sora",d);double gain=sim.PatronGain("cat-sora",d);
+            Assert(preview.reward==sim.DispatchReward("cat-sora",d) && CafeSimulation.PatronEventGain(copy.patron,preview)==gain,"Patron preview differs from reward/gain source");
+            if(d=="patron_moody_visit")for(int index=0;index<3;index++)
+            {
+                sim.State.dispatches.Clear();for(int n=0;n<index;n++)sim.State.dispatches.Add(new CafeDispatch{destination=d,status="resolved"});
+                var wish=sim.PatronPreview("cat-sora",d).patron_match;
+                Assert(wish.condition_index==index && wish.condition.feature==new[]{"white","black","long_hair"}[index],"Moody wish cycle differs");
+                Assert(wish.matched==(feature==new[]{"white","black","long_hair"}[index]),"Moody feature match differs");
+            }
+            sim.State.dispatches.Clear();
+            string frozen=Encode(preview);sim.State.dispatches.Add(new CafeDispatch{destination="patron_moody_visit",status="resolved"});
+            Assert(Encode(preview)==frozen && CafeSimulation.PatronEventGain(copy.patron,preview)==gain,"Current wish rejudged frozen terms");
+            var row=new CafeDispatchConversation{day=1,cat_id="cat-sora",destination=d,event_id=CafeDispatchDialogue.Key(1,"cat-sora",d),departure=CafeDispatchDialogue.Start("departure",d)};
+            Assert(CafeDispatchDialogue.Supports(d),"Patron not supported by shared dialogue");
+            foreach(string phase in new[]{"departure","travelling","return"})
+            {
+                var lines=CafeDispatchDialogue.Lines(phase,phase=="return"?"received":phase=="departure"?"departed":"travelling","猫",d,preview,"固定加点："+gain);
+                Assert(lines.Length==3 && lines[0].text.Contains("固定加点"),"Patron shared page structure/facts missing");
+            }
+            foreach(string phase in new[]{"departure","travelling","return"})foreach(string branch in phase=="departure"?new[]{"departed","cancelled"}:phase=="return"?new[]{"received"}:new[]{"travelling"})
+                Assert(CafeReplayCatalog.All.Count(e=>e.id==CafeDispatchDialogue.ConversationId(d)+"."+phase && e.branch==branch)==1,"Patron Extra stable ID missing/duplicate");
+            string before=Encode(sim.State);row.departure.branch_id="cancelled";row.departure.node=2;CafeDispatchDialogue.Finish(row);CafeDispatchDialogue.Finish(row);
+            Assert(before==Encode(sim.State) && row.departure.viewed_branches.SequenceEqual(new[]{"cancelled"}),"Patron finish mutated state/duplicate unlock");
+        }
     }
 
     static void ImageGalleryChecks()

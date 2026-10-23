@@ -15,13 +15,25 @@ namespace CatCafePreview.Standalone
     {
         public const string Destination="neighborhood_visit",Id="dispatch.neighborhood_visit.v1";
         public static readonly string[] Destinations={Destination,"shopping_street_event","out_of_town_visit","cat_exercise_class","quiet_reading_salon","cat_photo_studio","cat_product_trial","small_art_museum","mountain_lodge_visit"};
-        public static bool Supports(string destination)=>Destinations.Contains(destination);
-        public static string Title(string destination)=>destination=="shopping_street_event"?"商店街の交流会":destination=="out_of_town_visit"?"郊外への出張訪問":destination=="cat_exercise_class"?"猫の運動教室":destination=="quiet_reading_salon"?"静かな読書サロン":destination=="cat_photo_studio"?"猫の撮影スタジオ":destination=="cat_product_trial"?"猫用品の体験会":destination=="small_art_museum"?"小さな美術館":destination=="mountain_lodge_visit"?"山あいの宿":"近所のお店への訪問";
+        public static bool Patron(string destination)=>destination=="patron_visit" || destination=="patron_moody_visit" || destination=="patron_strict_visit";
+        public static bool Supports(string destination)=>Destinations.Contains(destination) || Patron(destination);
+        public static string Title(string destination)=>destination=="patron_visit"?"地域の有力者":destination=="patron_moody_visit"?"気分が変わる有力者":destination=="patron_strict_visit"?"条件に厳格な有力者":destination=="shopping_street_event"?"商店街の交流会":destination=="out_of_town_visit"?"郊外への出張訪問":destination=="cat_exercise_class"?"猫の運動教室":destination=="quiet_reading_salon"?"静かな読書サロン":destination=="cat_photo_studio"?"猫の撮影スタジオ":destination=="cat_product_trial"?"猫用品の体験会":destination=="small_art_museum"?"小さな美術館":destination=="mountain_lodge_visit"?"山あいの宿":"近所のお店への訪問";
         public static string ConversationId(string destination)=>"dispatch."+destination+".v1";
         public static string Key(int day,string cat,string destination)=>"dispatch-"+day+"-"+cat+(destination==Destination?"":":"+destination);
         public static CafeConversationProgress Start(string stage,string destination=Destination)=>new CafeConversationProgress{conversation_id=ConversationId(destination)+"."+stage,branch_id=stage=="travelling"?"travelling":"introduction",viewed_branches=new string[0]};
-        public static CafeConversationLine[] Lines(string stage,string branch,string name,string destination=Destination)
+        public static CafeConversationLine[] Lines(string stage,string branch,string name,string destination=Destination,CafeDispatch ev=null,string terms=null)
         {
+            if(Patron(destination))
+            {
+                var result=Lines(stage,branch,name);
+                string place=Title(destination);
+                if(stage=="departure" && branch=="introduction") { result[1]=new CafeConversationLine(place,"訪問をお願いできますか。希望条件と日程、猫の体調や店の予定を確認してから決めてください。");result[3]=new CafeConversationLine("","希望に合わない場合も、出発できるかは既存の条件に従う。報酬と満足度の加点見込みを確かめよう。"); }
+                if(stage=="travelling")result[1]=new CafeConversationLine("あなた","今回の希望と一致判定、報酬と加点は出発時の記録を使います。現在の希望が変わっても、この派遣を判定し直すことはありません。");
+                if(stage=="return" && branch=="introduction")result[2]=new CafeConversationLine("あなた","出発時に固定した条件と確定報酬、満足度の加点を確認します。帰還確認をするまで、受け取りは行われません。");
+                if(stage=="return" && branch=="received")result[2]=new CafeConversationLine("","今回の報酬と派遣経験は受け取り済みだ。満足度は記録の加点を目標上限まで反映した。希望との不一致や上限によって、増えない場合もある。");
+                if(!string.IsNullOrEmpty(terms))result[0]=new CafeConversationLine(result[0].speaker,result[0].text+"\n"+terms);
+                return result.Select(l=>new CafeConversationLine(l.speaker=="お店の人"?place:l.speaker,l.text.Replace("近所のお店への訪問",place+"への訪問").Replace("近所のお店",place))).ToArray();
+            }
             if(destination!=Destination)
             {
                 if(destination=="small_art_museum" || destination=="mountain_lodge_visit")
