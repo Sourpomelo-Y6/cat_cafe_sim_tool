@@ -1,0 +1,2 @@
+using System;using System.IO;
+namespace CatCafePreview.Editor {public static class StoreNoticeVerification {public static void VerifyAndBuild(){string p=Path.Combine(Environment.GetEnvironmentVariable("CATCAFE_WORKSPACE_ROOT"),"Logs/StoreNotice/Editor");Directory.CreateDirectory(p);File.WriteAllText(Path.Combine(p,"result.txt"),"PASS "+StandaloneStoreNoticeSmoke.RunChecks(Path.Combine(p,"cases")));StandaloneScreenSetup.Build();}}}

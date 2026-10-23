@@ -1,0 +1,16 @@
+{
+  "editor": 27,
+  "player": 38,
+  "restart_backend": 27,
+  "equipment_regression": 202,
+  "support_regression": 201,
+  "conversation_dotnet": 1716,
+  "build_start_bytes": 8986563166,
+  "build_end_bytes": 8988941387,
+  "latest_bytes": 8885187822,
+  "library_start_bytes": 12267328292,
+  "library_end_bytes": 12267402519,
+  "verification_bytes": 2934717,
+  "pending": false,
+  "build_log": "Logs/StandaloneBuild/Runs/20261023-132607-004-e0092394d57a458dbb9cdf9679d7e95e.log"
+}

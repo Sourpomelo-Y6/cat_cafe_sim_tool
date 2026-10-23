@@ -84,12 +84,13 @@ namespace CatCafePreview
             var rows=current.cats ?? new PythonCatState[0];
             if(title!=null)title.text=current.day+"日目・営業の準備";
             int working=Array.FindAll(rows,cat=>Working(cat)).Length;
-            if(summary!=null)summary.text="出勤 "+working+"匹 / 休養・不在 "+(rows.Length-working)+"匹 / 席 "+(current.seats?.Length ?? 0)+"席 / 資金 "+current.funds.ToString("0.#")+"\n猫の体調と疲労を確認し、今日の出勤を選びましょう。";
+            if(summary!=null)summary.text="出勤 "+working+"匹 / 休養・不在 "+(rows.Length-working)+"匹 / 席 "+(current.seats?.Length ?? 0)+"席 / 資金 "+current.funds.ToString("0.#")+"\n"+(string.IsNullOrEmpty(current.store_event_notice)?"猫の体調と疲労を確認し、今日の出勤を選びましょう。":"本日の通知："+current.store_event_label+"（「目標・営業の案内」で確認）");
             var option=Array.Find(current.new_game_options ?? new PythonNewGameOption[0],row=>row.choice==current.objective);
             var text=new StringBuilder("経営目標："+(current.objective_progress?.label ?? option?.label ?? "自由営業"));
             text.Append("\n"+(current.objective_progress?.details ?? option?.detail ?? "目標情報を取得していません。"));
             text.Append("\n\n営業開始後は「自動進行」で接客を進めます。もう一度押すと停止します。\n\n「休養案を作成」は健康な在店猫を疲労順（同値はID順）に最大2匹休養、残りを出勤にします。案は手動変更・確定・取消できます。疲れた猫は休養にして休ませましょう。病気・派遣中・行方不明・譲渡済みの猫は出勤できません。\n\n席数より多くの猫を出勤させることもできます。");
             if(option!=null)text.Append("\n\n標準の開始条件\n"+option.conditions);
+            if(!string.IsNullOrEmpty(current.store_event_notice))text.Insert(0,current.store_event_notice+"\n\n再確認：イベント一覧の「店舗イベント」。支援物資の所持品は「用品」へ。\n\n");
             details.text=text.ToString();
             var visible=VisibleCats;
             if(cats!=null)

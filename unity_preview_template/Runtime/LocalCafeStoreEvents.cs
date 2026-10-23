@@ -11,6 +11,26 @@ namespace CatCafePreview
             string label = e.type == "festival" ? "地域のお祭り" : e.type == "rain" ? "雨の日" : e.type == "supplies" ? "支援物資" : e.type == "trouble" ? "設備トラブル" : e.type == "support" ? "保護団体からの支援依頼" : "イベントなし";
             return label + (e.choice == null ? "" : "（" + ChoiceLabel(e.choice) + "）");
         }
+        public string StoreEventNotice()
+        {
+            var s=Simulation.State;var e=s.store_events.FirstOrDefault(x=>x.day==s.day);
+            if(e==null || !(e.type=="festival" || e.type=="rain" || e.type=="supplies"))return "";
+            string body;
+            if(e.type=="festival")
+            {
+                string id="event-guest-"+e.day;var arrival=Simulation.CustomerSchedule(e.day).FirstOrDefault(x=>x.customer_id==id);
+                body=arrival==null?"追加来客の予定はありません。":"追加来客1人の予定（tick "+arrival.tick+"）。";
+                body+=s.visits.Any(x=>x.id==id)?" 来店済みです。接客・売上は実際の対応によって決まります。":s.phase=="closed"?" 本日の来店記録はありません。":" まだ来店していません。";
+            }
+            else if(e.type=="rain")body="雨のため、通常客の来店予定から客番号が最大の1人を除きます（対象がいない場合は変更なし）。変更後の予定は来客予定で確認できます。";
+            else
+            {
+                var item=Simulation.Rules.store_events.supply;string source="store-event-"+e.day;
+                string status=s.item_uses.Any(x=>x.source==source)?"使用済み":s.item_sales.Any(x=>x.source==source)?"売却済み":"未使用";
+                body="入手："+item.name+" ×1 / 効果："+ItemEffect(item)+"（0が下限）。この受取分："+status+"。現在の同用品所持数："+Simulation.ItemInventory().Count(x=>x.item.id==item.id)+"。用品画面で確認できます。";
+            }
+            return e.day+"日目・"+StoreEventLabel()+"\n"+body;
+        }
         private static string ChoiceLabel(string choice) => choice == "repair" ? "修理" : choice == "patch" ? "応急処置" : choice == "close" ? "休業" : choice == "full" ? "支援" : choice == "small" ? "少額支援" : "見送り";
         private bool CanPrepare => !Simulation.PlayerActive && Simulation.State.phase == "preparation" && Simulation.State.game_over == null && !Simulation.State.cats.Any(c => c.activity == "missing" && c.missing_remaining == 0 && !Simulation.DispatchMissing(Simulation.State,c.id));
         private PythonStoreEvent StoreEventView()

@@ -104,7 +104,7 @@ namespace CatCafePreview
             switch(i){
                 case 0:return current.visiting_cat!=null && current.can_set_shifts && !current.closed && current.game_over==null;
                 case 1:return current.intake_request!=null && (current.intake_request.status=="waiting" || current.intake_request.status=="accepted" || current.intake_request.status=="declined");
-                case 2:return current.store_event!=null || ResultPending(2);
+                case 2:return current.store_event!=null || ResultPending(2) || !string.IsNullOrEmpty(current.store_event_notice);
                 case 3:return current.growth_choices!=null && current.growth_choices.Length>0;
                 case 4:return current.missing_cats!=null && current.missing_cats.Length>0;
                 case 5:return current.adoption!=null;
@@ -137,6 +137,7 @@ namespace CatCafePreview
             if(!MenuAvailable(i))return;
             if(i==0 && CafeBackends.Standalone){Close();GetComponent<PythonMenuPanel>()?.Close();var visiting=GetComponent<PythonVisitingCatPanel>();visiting.Open();if(GetComponent<CocoConversationPanel>()?.Showing==true)return;}
             if(i==2 && CafeBackends.Standalone && ((CafeBackends.Local as LocalCafeBackend).EquipmentResultPending || CatCafePreview.Standalone.CafeEquipmentDialogue.Supports(current.store_event?.kind))){Close();GetComponent<PythonStoreEventPanel>().Dialogue.OpenPending();return;}
+            if(i==2 && !string.IsNullOrEmpty(current.store_event_notice)){Close();GetComponent<PythonStoreEventPanel>().OpenNotice();return;}
             if(i==1 && CafeBackends.Standalone && (CafeBackends.Local as LocalCafeBackend)?.Conversation?.completed==false){Close();GetComponent<IntakeConversationPanel>()?.Open();return;}
             if(i==7 && CafeBackends.Standalone && (CafeBackends.Local as LocalCafeBackend)?.RegularConversation?.completed==false){Close();GetComponent<RegularConversationPanel>()?.Open();return;}
             if(i==10 && CafeBackends.Standalone)
@@ -194,7 +195,7 @@ namespace CatCafePreview
             var captions=new[]{
                 "店先に通う猫："+(v==null ? "対象なし" : v.status=="untriggered" ? "出現前・人気第1段階達成の翌日から" : v.name+" / "+(v.status=="accepted" ? "加入済み" : v.progress+"/"+v.required+"回")+(!current.can_set_shifts ? "（営業準備中に確認）" : "")),
                 "保護猫の受け入れ："+(intake==null ? "依頼なし" : intake.name+" / "+(intake.status=="waiting" ? "確認待ち" : intake.status=="accepted" ? "受け入れ済み" : "見送り済み")),
-                "店舗イベント："+(current.store_event==null ? "確認待ちなし" : current.store_event.title+" / 確認待ち"),
+                "店舗イベント："+(current.store_event==null ? (string.IsNullOrEmpty(current.store_event_notice)?"確認待ちなし":current.store_event_label+" / 本日の通知") : current.store_event.title+" / 確認待ち"),
                 "猫の成長："+(current.growth_choices?.Length ?? 0)+"件の選択待ち",
                 "猫の家出・帰還："+missing.Count(r=>r.status=="waiting")+"件の帰還待ち / 家出中 "+missing.Count(r=>r.status=="missing")+"匹 / 記録 "+missing.Length+"件",
                 "譲渡の申し出："+adoption.Count(r=>r.status=="waiting")+"件の確認待ち / 記録 "+adoption.Length+"件",

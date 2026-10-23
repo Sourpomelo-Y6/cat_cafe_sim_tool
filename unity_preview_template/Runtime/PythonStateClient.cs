@@ -34,7 +34,7 @@ namespace CatCafePreview
         public float revenue;
         public float popularity, popularity_gain;
         public PythonSatisfactionCounts customer_satisfaction;
-        public string store_event_label;
+        public string store_event_label, store_event_notice, store_event_notice_kind;
         public PythonCustomerProgress[] customer_progress;
         public CatCafePreview.Standalone.CafeArrival[] customer_schedule;
         public PythonSeatState[] seats;
