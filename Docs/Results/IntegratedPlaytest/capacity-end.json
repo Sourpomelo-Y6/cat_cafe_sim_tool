@@ -1,0 +1,22 @@
+[
+  {
+    "Path": "Logs/StandaloneBuild",
+    "Bytes": 8996096033.0,
+    "Files": 388
+  },
+  {
+    "Path": "Logs/StandaloneBuild/Latest",
+    "Bytes": 8885203888.0,
+    "Files": 156
+  },
+  {
+    "Path": "C:/Users/hi-wa/unity_workspase/CatCafeSim/Library",
+    "Bytes": 12267674130.0,
+    "Files": 32095
+  },
+  {
+    "Path": "Logs/IntegratedPlaytest",
+    "Bytes": 180464907.0,
+    "Files": 3614
+  }
+]

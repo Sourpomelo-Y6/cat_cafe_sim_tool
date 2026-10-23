@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-23",
+  "commonConversation": 1716,
+  "backendFirst": 6624,
+  "backendRestart": 7018,
+  "autoplayPauseEditor": 8,
+  "cgFirst": 23,
+  "cgRestart": 24,
+  "equipmentFirst": 202,
+  "equipmentRestart": 194,
+  "supportFirst": 201,
+  "supportRestart": 184,
+  "outcomeFirst": 98,
+  "outcomeRestart": 104,
+  "pythonLegacyImport": {
+    "status": "not rerun: manifest not supplied",
+    "checks": 0
+  },
+  "allRandomsAndCombinationsCovered": false
+}

@@ -8,6 +8,7 @@ namespace CatCafePreview {
   public void Apply(PythonCafeState value,PythonStoreEventPanel original){owner=original;Backend.PrepareEquipmentConversation();if(host==null){host=new GameObject("Equipment Conversation",typeof(RectTransform),typeof(UnityEngine.UI.Image));host.transform.SetParent(owner.panel.transform.parent,false);host.SetActive(false);}Bind(value,host,owner.title.font);if(Showing)owner.panel.SetActive(false);}
   public bool OpenPending(){Apply(Client.CurrentState,GetComponent<PythonStoreEventPanel>());if(Row==null || Row.progress.completed)return false;Open();return true;}
   protected override CafeConversationProgress ResolveProgress()=>Row?.progress;
+  protected override bool Available=>base.Available && (Row.progress.branch_id!="introduction" || string.IsNullOrEmpty(state.required_action) || state.required_action=="store_event");
   protected override bool ThreeLinePages=>true;
   protected override bool AutoRunning=>false;
   protected override bool Ready=>base.Ready && GetComponent<PythonDayOffPanel>()?.panel.activeSelf!=true;

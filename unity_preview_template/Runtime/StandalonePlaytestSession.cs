@@ -6,7 +6,7 @@ using CatCafePreview.Standalone;
 namespace CatCafePreview
 {
     // Opt-in observation only. Actual inputs still go through the normal screens.
-    public sealed class StandalonePlaytestSession : MonoBehaviour, ICafeBackend
+    public sealed class StandalonePlaytestSession : MonoBehaviour
     {
         private LocalCafeBackend backend;
         private string folder;
@@ -17,12 +17,13 @@ namespace CatCafePreview
             var args=Environment.GetCommandLineArgs();int index=Array.IndexOf(args,"--catcafe-playtest");if(index<0)return;
             if(index+1>=args.Length || !Path.IsPathRooted(args[index+1]))throw new ArgumentException("Playtest output needs an absolute path");
             var go=new GameObject("Standalone playtest observer");DontDestroyOnLoad(go);var observer=go.AddComponent<StandalonePlaytestSession>();observer.folder=Path.GetFullPath(args[index+1]);Directory.CreateDirectory(observer.folder);
-            observer.backend=new LocalCafeBackend(Path.Combine(observer.folder,"saves"));CafeBackends.UseLocal(observer);Application.runInBackground=true;observer.Record("launch",null);
+            observer.backend=new LocalCafeBackend(Path.Combine(observer.folder,"saves"),playOpening:CafeBackends.OpeningEnabled(args));
+            observer.backend.CommandObserved+=observer.Observe;CafeBackends.UseLocal(observer.backend);Application.runInBackground=true;observer.Record("launch",null);
             var rules=observer.backend.Simulation.Rules;var probe=new CafeSimulation(rules,0,"patron");File.WriteAllText(Path.Combine(observer.folder,"rule-diagnostic.json"),JsonUtility.ToJson(new RuleDiagnostic{featureOnlySpecializationNull=rules.patron.members[0].conditions[0].specialization==null,featureOnlySpecializationEmpty=rules.patron.members[0].conditions[0].specialization=="",whiteMatches=probe.PatronTerms(probe.State,"cat-sora","patron_moody_visit").matched,memberDestination=probe.DispatchDestination("patron_moody_visit").name},true));
         }
-        public IEnumerator Request(string route,string commandJson,Action<CafeResponse> completed,int timeout=3)
+        private void Observe(string commandJson,CafeResponse response)
         {
-            yield return backend.Request(route,commandJson,response=>{if(route=="/commands"){commands++;File.WriteAllText(Path.Combine(folder,"response.json"),response.text??"");if(response.result!=UnityEngine.Networking.UnityWebRequest.Result.Success)errors++;Record(commandJson,response.error);}completed(response);},timeout);
+            commands++;File.WriteAllText(Path.Combine(folder,"response.json"),response.text??"");if(response.result!=UnityEngine.Networking.UnityWebRequest.Result.Success)errors++;Record(commandJson,response.error);
         }
         private void Record(string command,string error)
         {

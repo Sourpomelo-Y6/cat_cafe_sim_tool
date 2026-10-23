@@ -12,6 +12,7 @@ namespace CatCafePreview
     public sealed partial class LocalCafeBackend : ICafeBackend
     {
         public readonly CafeSimulation Simulation;
+        public event Action<string, CafeResponse> CommandObserved;
         public CafeImageGalleryStore Gallery {get;private set;}
         private readonly CafeSaveStore saves;
         private CafeSnapshot newGameSaveState;
@@ -74,6 +75,7 @@ namespace CatCafePreview
                 }
             }
             catch (Exception ex) { response = Failure(ex.Message); }
+            if(route=="/commands")CommandObserved?.Invoke(commandJson,response);
             completed(response); yield break;
         }
         private CafeResponse Command(string json)
@@ -86,6 +88,9 @@ namespace CatCafePreview
             {
                 var s = Simulation.State;
                 if (cmd.instance_id != s.instance_id || cmd.expected_revision != s.revision) throw new InvalidOperationException("状態が更新されています。最新状態で再操作してください。");
+                // A newly pending conversation must yield control, not reject a step while
+                // leaving the UI locked in an executing run. Record the actual pause in replay.
+                if(cmd.kind=="step_autoplay" && s.autoplay?.running==true && !s.autoplay.paused && ConversationBlocksProgress && (!(OutcomePending || PopularityEndingPending || BondEndingPending || PatronEndingPending) || ConversationProgressReason!=""))cmd.kind="pause_autoplay";
                 if(s.autoplay?.running==true && !s.autoplay.paused && !new[]{"step_autoplay","stop_autoplay","pause_autoplay","resume_autoplay","save_game","load_game"}.Contains(cmd.kind))throw new InvalidOperationException("おまかせを中止してから通常操作へ戻ってください。");
                 if(s.autoplay?.running==true && s.autoplay.paused && new[]{"start_business","advance_business","next_day","day_off","rest_for_missing"}.Contains(cmd.kind))throw new InvalidOperationException("おまかせを再開するか中止してから営業を進めてください。");
                 if(MissingBlocksProgress && new[]{"continue_goal","continue_patron","continue_bond_goal","advance_goal","rest_for_missing"}.Contains(cmd.kind))throw new InvalidOperationException(MissingConversationReason);

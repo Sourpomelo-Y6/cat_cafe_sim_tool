@@ -66,6 +66,9 @@ namespace CatCafePreview
         public void Disconnect(string message) {confirming=false;RenderObjective(objectives.value);online=false;GetComponent<PythonLegacySavePanel>()?.Disconnect();notice.text=message;GetComponent<PythonSaveBrowser>()?.Notify(message);RefreshControls();}
         private IEnumerator Start()
         {
+            // Existing scenes use a fixed 1280x800 background. Fill taller windows too.
+            var backdrop=transform.Find("Background") as RectTransform;
+            if(backdrop!=null){backdrop.anchorMin=Vector2.zero;backdrop.anchorMax=Vector2.one;backdrop.offsetMin=backdrop.offsetMax=Vector2.zero;}
             (GetComponent<TitleExtraPanel>()??gameObject.AddComponent<TitleExtraPanel>()).Initialize(this);
             GameOptionsPanel.Attach(this);
             ShowHome();notice.text="接続しています。";RefreshControls();

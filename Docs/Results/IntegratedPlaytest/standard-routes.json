@@ -1,0 +1,149 @@
+[
+  {
+    "objective": "popularity",
+    "folder": "completed/popularity",
+    "result": "PASS standard UI route popularity day=34 phase=open funds=32840 Extra=9",
+    "day": 34,
+    "phase": "open",
+    "funds": 32840.0,
+    "popularity": 650.0,
+    "commandErrors": 0,
+    "uiActions": 276,
+    "pageActions": 238,
+    "goal": [
+      {
+        "started_day": 1,
+        "resolved_day": 11,
+        "status": "cleared",
+        "continued": true
+      },
+      {
+        "started_day": 12,
+        "resolved_day": 24,
+        "status": "cleared",
+        "continued": true
+      },
+      {
+        "started_day": 25,
+        "resolved_day": 33,
+        "status": "cleared",
+        "continued": true
+      }
+    ],
+    "patron": {
+      "started_day": 1,
+      "resolved_day": 0,
+      "id": "",
+      "status": "active",
+      "continued": false,
+      "satisfaction": 0.0,
+      "members": []
+    },
+    "ending": {
+      "conversation_id": "ending.popularity.v1",
+      "branch_id": "cleared",
+      "node": 7,
+      "page_offset": 0,
+      "completed": true,
+      "viewed_branches": [
+        "cleared"
+      ]
+    }
+  },
+  {
+    "objective": "bond",
+    "folder": "standard/bond",
+    "result": "PASS standard UI route bond day=13 phase=open funds=7890 Extra=5",
+    "day": 13,
+    "phase": "open",
+    "funds": 7890.0,
+    "popularity": 245.0,
+    "commandErrors": 0,
+    "uiActions": 103,
+    "pageActions": 92,
+    "goal": [],
+    "patron": {
+      "started_day": 1,
+      "resolved_day": 0,
+      "id": "",
+      "status": "active",
+      "continued": false,
+      "satisfaction": 0.0,
+      "members": []
+    },
+    "ending": {
+      "conversation_id": "ending.bond.v1",
+      "branch_id": "cleared",
+      "node": 7,
+      "page_offset": 0,
+      "completed": true,
+      "viewed_branches": [
+        "cleared"
+      ]
+    }
+  },
+  {
+    "objective": "patron",
+    "folder": "completed/patron",
+    "result": "PASS standard UI route patron day=52 phase=open funds=40000 Extra=15",
+    "day": 52,
+    "phase": "open",
+    "funds": 40000.0,
+    "popularity": 520.0,
+    "commandErrors": 0,
+    "uiActions": 600,
+    "pageActions": 490,
+    "goal": [],
+    "patron": {
+      "started_day": 1,
+      "resolved_day": 51,
+      "id": "patron",
+      "status": "cleared",
+      "continued": true,
+      "satisfaction": 100.0,
+      "members": [
+        {
+          "id": "patron_moody_visit",
+          "value": 100.0
+        },
+        {
+          "id": "patron_strict_visit",
+          "value": 100.0
+        }
+      ]
+    },
+    "ending": {
+      "conversation_id": "ending.patron.v1",
+      "branch_id": "cleared",
+      "node": 7,
+      "page_offset": 0,
+      "completed": true,
+      "viewed_branches": [
+        "cleared"
+      ]
+    }
+  },
+  {
+    "objective": "free",
+    "folder": "standard/free",
+    "result": "PASS standard UI route free day=11 phase=open funds=8420 Extra=6",
+    "day": 11,
+    "phase": "open",
+    "funds": 8420.0,
+    "popularity": 205.0,
+    "commandErrors": 0,
+    "uiActions": 134,
+    "pageActions": 125,
+    "goal": [],
+    "patron": {
+      "started_day": 1,
+      "resolved_day": 0,
+      "id": "",
+      "status": "active",
+      "continued": false,
+      "satisfaction": 0.0,
+      "members": []
+    },
+    "ending": null
+  }
+]

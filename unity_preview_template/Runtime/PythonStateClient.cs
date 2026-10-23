@@ -546,6 +546,7 @@ namespace CatCafePreview
             if (!IsOpen(state) || (current != null && (state.instance_id != current.instance_id || state.day != current.day))) StopAutomatic();
             if(current!=null && state.instance_id!=current.instance_id){batchAutomatic=false;batchStopRequested=false;}
             if(state.autoplay?.running!=true && pending?.kind!="start_autoplay"){batchAutomatic=false;batchStopRequested=false;}
+            if(state.autoplay?.paused==true && pending?.kind!="resume_autoplay")batchAutomatic=false;
             current = state; online = true;if(HasPendingResults){StopAutomatic();batchAutomatic=false;} preview.ApplyPythonState(state);
         }
         private IEnumerator Start()
