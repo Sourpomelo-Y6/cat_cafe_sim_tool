@@ -1,0 +1,141 @@
+{
+  "png_count": 1897,
+  "unique_png_count": 414,
+  "png_bytes": 3714881558,
+  "duplicate_png_bytes": 2897114697,
+  "dimensions": {
+    "1254x1254": 1889,
+    "1024x1024": 8
+  },
+  "build_bytes": 9012684367,
+  "build_files": [
+    {
+      "path": "CatCafeStandalone_Data/resources.assets.resS",
+      "bytes": 8921956544
+    },
+    {
+      "path": "UnityPlayer.dll",
+      "bytes": 29438200
+    },
+    {
+      "path": "MonoBleedingEdge/EmbedRuntime/mono-2.0-bdwgc.dll",
+      "bytes": 7900408
+    },
+    {
+      "path": "CatCafeStandalone_Data/Resources/unity default resources",
+      "bytes": 4832808
+    },
+    {
+      "path": "CatCafeStandalone_Data/sharedassets0.assets.resS",
+      "bytes": 4719936
+    },
+    {
+      "path": "CatCafeStandalone_Data/Managed/mscorlib.dll",
+      "bytes": 4631552
+    },
+    {
+      "path": "CatCafeStandalone_Data/globalgamemanagers.assets.resS",
+      "bytes": 3948032
+    },
+    {
+      "path": "CatCafeStandalone_Data/resources.assets",
+      "bytes": 3498912
+    },
+    {
+      "path": "CatCafeStandalone_Data/Managed/System.Xml.dll",
+      "bytes": 3160064
+    },
+    {
+      "path": "CatCafeStandalone_Data/Managed/System.dll",
+      "bytes": 2639360
+    },
+    {
+      "path": "CatCafeStandalone_Data/Managed/System.Data.dll",
+      "bytes": 2125312
+    },
+    {
+      "path": "CatCafeStandalone_Data/sharedassets0.assets",
+      "bytes": 1764088
+    }
+  ],
+  "packs": [
+    {
+      "pack": "23ca0b2cfd384ee38f4ff83135bb6969",
+      "count": 95,
+      "png_bytes": 179715255,
+      "rgb24_nomip_bytes": 448167060
+    },
+    {
+      "pack": "4762dd1bd978461bb07c041c59417281",
+      "count": 401,
+      "png_bytes": 802304220,
+      "rgb24_nomip_bytes": 1891736748
+    },
+    {
+      "pack": "5a186caed1ce4b6cad0b62ff10d1f8a1",
+      "count": 20,
+      "png_bytes": 35191608,
+      "rgb24_nomip_bytes": 94350960
+    },
+    {
+      "pack": "5c611610be304b3887d1d5ad7176208a",
+      "count": 45,
+      "png_bytes": 81603730,
+      "rgb24_nomip_bytes": 212289660
+    },
+    {
+      "pack": "734f905fa2644777a3d1059d1de1e7b0",
+      "count": 70,
+      "png_bytes": 131605321,
+      "rgb24_nomip_bytes": 330228360
+    },
+    {
+      "pack": "75f31c320b3f4de7978ac2c77f7eada1",
+      "count": 194,
+      "png_bytes": 383509395,
+      "rgb24_nomip_bytes": 915204312
+    },
+    {
+      "pack": "7ede2b392dfb445a8b65fe85ccb88f10",
+      "count": 145,
+      "png_bytes": 282952998,
+      "rgb24_nomip_bytes": 684044460
+    },
+    {
+      "pack": "8d646380ed694a51be2c16dbe7b19134",
+      "count": 234,
+      "png_bytes": 467110833,
+      "rgb24_nomip_bytes": 1103906232
+    },
+    {
+      "pack": "9fb4383b47854aeea789ece120d4b281",
+      "count": 120,
+      "png_bytes": 230881013,
+      "rgb24_nomip_bytes": 566105760
+    },
+    {
+      "pack": "bba09bb3938148c2b29d74af70d7e849",
+      "count": 8,
+      "png_bytes": 6702931,
+      "rgb24_nomip_bytes": 25165824
+    },
+    {
+      "pack": "da80a2d0df414e9181ac6345f375cfc8",
+      "count": 194,
+      "png_bytes": 383509395,
+      "rgb24_nomip_bytes": 915204312
+    },
+    {
+      "pack": "ee695293218d4083b1c7a5439ec126cf",
+      "count": 172,
+      "png_bytes": 337525754,
+      "rgb24_nomip_bytes": 811418256
+    },
+    {
+      "pack": "f11cad7b3f174d86a8ca4b102e9dc480",
+      "count": 199,
+      "png_bytes": 392269105,
+      "rgb24_nomip_bytes": 938792052
+    }
+  ]
+}

@@ -13,6 +13,8 @@ UIはシーンと `Assets/CatCafePreview/Prefabs/ContentPreview.prefab` に保�
 
 取り込み先は `Assets/Resources/CatCafeContent/Imports/<ID>/`。`catalog.json` が最新の取り込み先を示します。以前のパックは保持し、同じパックを再取り込みしても同じ内容を使います。再取り込み後はPlayを再開してください。
 
+画像の容量確認は[画像容量の調査・設定比較](../Docs/UnityImageStorage.md)を参照してください。PNG容量とUnityテクスチャ容量は別です。1254px画像は既定のWindows取り込みでRGB24になることを確認しています。1024px・BC7は未適用の提案で、今回の登録・取り込み・ビルド設定は変更していません。旧パックは保存された画像参照に必要なため、単に古いという理由で削除しないでください。
+
 素材はResourcesとしてビルドに含まれ、実行時にPython、ComfyUI、LLMへ接続しません。画像未登録時は画像なしの案内を表示します。文章未登録時の定型文は制作ツールで書き出されます。日本語フォントは同梱のM PLUS 1pを利用し、OSフォントに依存しません。[Google Fontsの配布元](https://github.com/google/fonts/tree/main/ofl/mplus1p)から取得した未変更のフォントで、SIL Open Font License 1.1の著作権表示・ライセンスを `Fonts/OFL.txt` に同梱しています。フォントを含めて配布する際はこのファイルも保持してください。
 
 `Assets/Scenes/CatCafeContentPreview.unity` はメニュー初回利用時に作成し、ビルド対象の先頭へ追加します。既存のSampleSceneは残します。営業・交流などのゲーム処理はまだ移植していません。
