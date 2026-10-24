@@ -1,0 +1,29 @@
+{
+  "latestBefore": 9012696043,
+  "latestAfter": 2082007384,
+  "latestFilesBefore": 156,
+  "latestFilesAfter": 156,
+  "resSBefore": 8921956544,
+  "resSAfter": 1991260880,
+  "latestReduction": 6930688659,
+  "latestReductionPercent": 76.89917230020136,
+  "resSReduction": 6930695664,
+  "resSReductionPercent": 77.68134298592702,
+  "oldRulesId": "6c3e11fb49b1e1e74b6de28feaac11ae867e47587899455e945e33e80d4ba964",
+  "currentRulesId": "2613fc4f2312feaf713cfafe96de283a1578fa67c6241f0e2da4dbc539939d8f",
+  "textureLoadMs": {
+    "firstResolution": {
+      "min": 0.0103,
+      "median": 0.11900000000000001,
+      "max": 0.279
+    },
+    "secondResolution": {
+      "min": 0.0059,
+      "median": 0.0115,
+      "max": 0.0167
+    }
+  },
+  "playerProfilerRuntimeBytes": [
+    0
+  ]
+}

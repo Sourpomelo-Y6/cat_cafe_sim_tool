@@ -129,6 +129,7 @@ namespace CatCafePreview.Editor
             if (File.Exists(catalogPath)) File.Replace(temporary, catalogPath, null);
             else File.Move(temporary, catalogPath);
             AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
+            CatTexturePolicy.ApplyPack(target);
             Debug.Log("Imported cat cafe pack: " + bundle.pack_id);
         }
 

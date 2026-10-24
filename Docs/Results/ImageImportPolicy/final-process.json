@@ -1,0 +1,8 @@
+{
+  "exitCode": 0,
+  "firstPreparationScreenshotMs": 6316.5693,
+  "peakWorkingSetBytes": 284651520,
+  "peakPrivateBytes": 434176000,
+  "note": "Process measurements; not GPU allocation. UI fixture includes fixed waits.",
+  "elapsedMs": 12471.3831
+}

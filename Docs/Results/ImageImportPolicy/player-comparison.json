@@ -1,0 +1,146 @@
+[
+  {
+    "cat": "mike",
+    "scene": "normal",
+    "displaySize": 400,
+    "rgbPSNR": 42.79461861663933
+  },
+  {
+    "cat": "mike",
+    "scene": "teaser__switch",
+    "displaySize": 400,
+    "rgbPSNR": 42.645312598385416
+  },
+  {
+    "cat": "mike",
+    "scene": "teaser__direct",
+    "displaySize": 400,
+    "rgbPSNR": 42.755729366878455
+  },
+  {
+    "cat": "mike",
+    "scene": "teaser__open_up",
+    "displaySize": 400,
+    "rgbPSNR": 42.63376587265785
+  },
+  {
+    "cat": "mike",
+    "scene": "normal",
+    "displaySize": 320,
+    "rgbPSNR": 42.96037463716698
+  },
+  {
+    "cat": "mike",
+    "scene": "teaser__switch",
+    "displaySize": 320,
+    "rgbPSNR": 42.82736395543864
+  },
+  {
+    "cat": "mike",
+    "scene": "teaser__direct",
+    "displaySize": 320,
+    "rgbPSNR": 42.79925681790758
+  },
+  {
+    "cat": "mike",
+    "scene": "teaser__open_up",
+    "displaySize": 320,
+    "rgbPSNR": 42.51700983019441
+  },
+  {
+    "cat": "tama",
+    "scene": "normal",
+    "displaySize": 400,
+    "rgbPSNR": 40.84524699135412
+  },
+  {
+    "cat": "tama",
+    "scene": "teaser__switch",
+    "displaySize": 400,
+    "rgbPSNR": 40.84524699135412
+  },
+  {
+    "cat": "tama",
+    "scene": "teaser__direct",
+    "displaySize": 400,
+    "rgbPSNR": 41.56024508010806
+  },
+  {
+    "cat": "tama",
+    "scene": "teaser__open_up",
+    "displaySize": 400,
+    "rgbPSNR": 42.19263521593113
+  },
+  {
+    "cat": "tama",
+    "scene": "normal",
+    "displaySize": 320,
+    "rgbPSNR": 41.210922714078066
+  },
+  {
+    "cat": "tama",
+    "scene": "teaser__switch",
+    "displaySize": 320,
+    "rgbPSNR": 41.210922714078066
+  },
+  {
+    "cat": "tama",
+    "scene": "teaser__direct",
+    "displaySize": 320,
+    "rgbPSNR": 41.66044909812891
+  },
+  {
+    "cat": "tama",
+    "scene": "teaser__open_up",
+    "displaySize": 320,
+    "rgbPSNR": 42.331896324456224
+  },
+  {
+    "cat": "sora",
+    "scene": "normal",
+    "displaySize": 400,
+    "rgbPSNR": 44.387571259436655
+  },
+  {
+    "cat": "sora",
+    "scene": "teaser__switch",
+    "displaySize": 400,
+    "rgbPSNR": 44.387571259436655
+  },
+  {
+    "cat": "sora",
+    "scene": "teaser__direct",
+    "displaySize": 400,
+    "rgbPSNR": 44.56071519057423
+  },
+  {
+    "cat": "sora",
+    "scene": "teaser__open_up",
+    "displaySize": 400,
+    "rgbPSNR": 43.829532129995236
+  },
+  {
+    "cat": "sora",
+    "scene": "normal",
+    "displaySize": 320,
+    "rgbPSNR": 43.668417144519836
+  },
+  {
+    "cat": "sora",
+    "scene": "teaser__switch",
+    "displaySize": 320,
+    "rgbPSNR": 43.668417144519836
+  },
+  {
+    "cat": "sora",
+    "scene": "teaser__direct",
+    "displaySize": 320,
+    "rgbPSNR": 44.1674817856698
+  },
+  {
+    "cat": "sora",
+    "scene": "teaser__open_up",
+    "displaySize": 320,
+    "rgbPSNR": 43.472905297277016
+  }
+]
