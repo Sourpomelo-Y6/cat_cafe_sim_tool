@@ -1,0 +1,27 @@
+{
+  "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Logs": {
+    "bytes": 19210493431,
+    "files": 61946
+  },
+  "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Logs\\StandaloneBuild": {
+    "bytes": 9142002840,
+    "files": 418
+  },
+  "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Logs\\StandaloneBuild\\Latest": {
+    "bytes": 9012696043,
+    "files": 156
+  },
+  "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Logs\\PlayerImageLayout": {
+    "bytes": 13080866,
+    "files": 94
+  },
+  "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Library": {
+    "bytes": 12524130696,
+    "files": 32138
+  },
+  "pending_exists": false,
+  "build_children": [
+    "Latest",
+    "Runs"
+  ]
+}

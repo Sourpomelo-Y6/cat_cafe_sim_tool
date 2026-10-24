@@ -77,7 +77,9 @@ namespace CatCafePreview.Editor
             UnityEventTools.AddPersistentListener(detail.interact.onClick,detail.Interact);
             UnityEventTools.AddPersistentListener(detail.previousInteraction.onClick,detail.PreviousInteraction);
             detail.interact.interactable=detail.previousInteraction.interactable=false;overlay.SetActive(false);
-            EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);Debug.Log("CAT_CAFE_PLAYER_UI_OK");
+            EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);
+            PythonPlayerLayout.Build();
+            Debug.Log("CAT_CAFE_PLAYER_UI_OK");
         }
         public static void BuildAndVerify()
         {

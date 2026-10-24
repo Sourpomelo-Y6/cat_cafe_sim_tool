@@ -22,6 +22,10 @@ namespace CatCafePreview
         private string sessionId, instanceId;
         private bool showing,wasAutomatic,disconnected;
         private string renderedMode, renderedSession, renderedInstance;
+        public Button historyToggle;
+        private bool showHistory;
+        private string renderedHistory;
+        public void ToggleHistory() { showHistory=!showHistory; renderedHistory=null; Render(); }
         public void TargetChanged(int value) { RefreshControls(); }
         public void Open()
         {
@@ -70,7 +74,7 @@ namespace CatCafePreview
             if(current==null) { showing=false;sessionId=null;panel.SetActive(false);return; }
             bool automatic=state.autoplay?.running==true;
             if(sessionId!=current.session_id || instanceId!=state.instance_id || (wasAutomatic && !automatic))
-            { showing=true;sessionId=current.session_id;instanceId=state.instance_id;historyScroll.verticalNormalizedPosition=1; }
+            { showHistory=false;renderedHistory=null;showing=true;sessionId=current.session_id;instanceId=state.instance_id;historyScroll.verticalNormalizedPosition=1; }
             wasAutomatic=automatic;
             if(automatic || (!current.active && !string.IsNullOrEmpty(state.required_action)))showing=false;
             if(showing)GetComponent<PythonCatDetailsPanel>().Close();
@@ -83,11 +87,11 @@ namespace CatCafePreview
             title.text=current.name+(current.active ? "と交流中" : "との交流結果");
             var cat=Array.Find(state?.cats ?? new PythonCatState[0],c=>c.cat_id==current.cat_id);
             summary.fontSize=16;
-            summary.text="現在の動作："+current.mode+"\n残り "+current.remaining_ticks+"ターン / 本日あと "+current.remaining_sets+"セット"
+            summary.text="現在の動作："+current.mode+"　残り "+current.remaining_ticks+"ターン / 本日あと "+current.remaining_sets+"セット"
                 +"\n好感度 "+current.affinity_before.ToString("0.#")+" → "+current.affinity_after.ToString("0.#")+"（"+current.affinity_delta.ToString("+0.#;-0.#;0")+"・"+(current.active ? "見込み" : "確定")+"）"
-                +"\n現在体力 "+(cat?.stamina ?? current.stamina).ToString("0.#")+" / "+(cat?.max_stamina ?? current.max_stamina).ToString("0.#")
+                +"　現在体力 "+(cat?.stamina ?? current.stamina).ToString("0.#")+" / "+(cat?.max_stamina ?? current.max_stamina).ToString("0.#")
                 +"\n"+current.stamina_guidance
-                +"\n交流後の体力で営業へ。疲労・ストレスは別の値です。";
+                +"\n関心 "+current.engagement.ToString("0.#")+" / テンション "+current.tension.ToString("0.#")+"　交流後の体力で営業へ。疲労・ストレスは別の値です。";
             if(picture != null)
             {
                 var texture=CafeNarrativeResources.Texture(current.narrative_image) ?? GetComponent<ContentPreview>().PlayerTexture(current.content_cat_id, current.scene_key, current.image_key, current.event_image_key);
@@ -96,15 +100,21 @@ namespace CatCafePreview
                 if(texture!=null && fitter!=null)fitter.aspectRatio=(float)texture.width/texture.height;
                 if(imageNotice!=null)imageNotice.text=texture==null ? "この猫の画像は未登録です。" : "";
             }
-            bool narrativeChanged=history.text!=current.history;
-            bool narrative=current.history!=null && current.history.StartsWith("最新のやり取り");
-            if(picture!=null){var frame=picture.transform.parent.GetComponent<RectTransform>();frame.anchoredPosition=new Vector2(480,-72);frame.sizeDelta=new Vector2(436,narrative?112:208);}
-            var heading=historyScroll.transform.parent.Find("History Heading") as RectTransform;
-            if(heading!=null){heading.anchoredPosition=new Vector2(480,narrative?-194:-292);var label=heading.GetComponent<Text>();label.fontSize=15;label.text="行動と反応 / 関心 "+current.engagement.ToString("0.#")+" / テンション "+current.tension.ToString("0.#");}
-            var area=historyScroll.GetComponent<RectTransform>();area.anchoredPosition=new Vector2(480,narrative?-228:-330);area.sizeDelta=new Vector2(436,narrative?310:208);
-            historyScroll.viewport.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,narrative?298:196);
-            history.fontSize=17;history.lineSpacing=narrative?1.05f:1;
-            history.text=string.IsNullOrEmpty(current.history) ? "行動を選ぶと猫の反応を表示します。" : current.history;
+            PlayerInteractionLayout.Apply(this);
+            string full=current.history ?? "";
+            int split=full.IndexOf("\n\n── 履歴",StringComparison.Ordinal);
+            int numeric=full.IndexOf("\n\n── 数値履歴",StringComparison.Ordinal);
+            if(split<0 || numeric>=0 && numeric<split)split=numeric;
+            string latest=split>=0 ? full.Substring(0,split) : full;
+            // Legacy text-only responses have chronological numeric blocks.
+            if(!full.StartsWith("最新のやり取り",StringComparison.Ordinal) && split<0)
+            {int last=latest.LastIndexOf("\n\n",StringComparison.Ordinal);if(last>=0)latest=latest.Substring(last+2);}
+            latest=latest.Replace("\n\n","\n");
+            string displayed=showHistory ? full : latest;
+            if(string.IsNullOrEmpty(displayed))displayed="行動を選ぶと猫の反応を表示します。";
+            bool narrativeChanged=renderedHistory!=displayed;
+            history.fontSize=18;history.lineSpacing=1.08f;history.text=displayed;renderedHistory=displayed;
+            historyToggle.GetComponentInChildren<Text>().text=showHistory ? "最新の描写へ戻る" : "過去の文章・数値履歴";
             if(narrativeChanged){Canvas.ForceUpdateCanvases();historyScroll.verticalNormalizedPosition=1;}
             string selected=targets.options.Count>0 ? targets.options[targets.value].text : "";
             bool changed=renderedMode!=current.mode || renderedSession!=current.session_id || renderedInstance!=instanceId;
@@ -123,7 +133,7 @@ namespace CatCafePreview
             if(resultGuide!=null)
             {
                 resultGuide.gameObject.SetActive(!current.active);resultGuide.fontSize=16;
-                resultGuide.rectTransform.sizeDelta=new Vector2(432,232);
+                resultGuide.rectTransform.sizeDelta=new Vector2(396,306);
                 resultGuide.text="交流終了・好感度は確定済み\n"+current.reason
                     +"\n\n休養予定への変更では、今の体力は回復しません。体力は翌日の準備で最大まで回復します。\n疲労・ストレスの休養回復は閉店時です。\n\n"+PreparationReason;
             }

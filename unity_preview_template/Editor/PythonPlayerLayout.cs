@@ -81,6 +81,7 @@ namespace CatCafePreview.Editor
             panel.back=card.Find("Close").GetComponent<Button>();panel.back.onClick=new Button.ButtonClickedEvent();
             UnityEventTools.AddPersistentListener(panel.back.onClick,panel.ReturnToDetails);
             panel.back.GetComponentInChildren<Text>().text="猫の詳細へ戻る";panel.back.GetComponentInChildren<Text>().fontSize=16;
+            PlayerInteractionLayout.Apply(panel);
             panel.panel.SetActive(false);EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);
             Debug.Log("CAT_CAFE_PLAYER_LAYOUT_OK");
         }
@@ -99,7 +100,7 @@ namespace CatCafePreview.Editor
             state.player_interaction.actions=new[]{new PythonEventChoice{choice="direct",label="素直に動かす",can_select=true},new PythonEventChoice{choice="switch",label="動作を切り替える",can_select=true}};
             Action apply=()=>typeof(PythonStateClient).GetMethod("Accept",flags).Invoke(client,new object[]{state});apply();
             var player=preview.GetComponent<PythonPlayerPanel>();
-            if(!player.summary.text.Contains("100 → 92") || !player.back.interactable)throw new Exception("Interaction summary or return missing");
+            if(!player.summary.text.Contains("現在体力") || !player.back.interactable)throw new Exception("Interaction summary or return missing");
             if(player.picture.texture==null || player.picture.texture!=preview.PlayerTexture(state.cats[0].content_cat_id,"teaser"))throw new Exception("Play image fallback missing");
             if(!ContentValidation.ValidSceneKey("ball__feint") || ContentValidation.ValidSceneKey("brush__intense") || ContentValidation.ValidSceneKey("ball__missing"))throw new Exception("Combination keys invalid");
             var contentCat=Array.Find(content.cats,cat=>cat.cat_id==state.cats[0].content_cat_id);

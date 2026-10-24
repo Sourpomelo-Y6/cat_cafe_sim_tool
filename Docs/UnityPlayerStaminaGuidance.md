@@ -42,3 +42,6 @@
 最終Latestの専用配布検証71項目と、別プロセスからslot2の体力0・休養予定を復元する4項目が成功。最終画面は `Logs/PlayerStamina/verified`。最終ビルドログは `Logs/StandaloneBuild/Runs/20261024-104658-941-3d02c2752f71478baa7547d3ae8fbb29.log`。両解像度で文字・ボタンの収まりを目視確認した。
 
 Latestは9,012,670,519 bytes・156ファイルで、開始比＋10,277 bytes。Latestの一組とRunsのみ、Pendingなし。Logs全体は約19.14GB、増分約49MBの主因は約45.9MBの検証用保存・画像・ログ。画像素材やビルドZIPは追加せず、プロジェクト複製も作っていない。正確な終了容量は `Results/PlayerStamina/capacity-end.json`。
+
+
+2026-10-24追補：交流画面を[大画像レイアウト](UnityPlayerImageLayout.md)へ更新。体力・予定・回復の説明と結果からの準備復帰を維持し、最終配布版で既存71項目を再確認した。
