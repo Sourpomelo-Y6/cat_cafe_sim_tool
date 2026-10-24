@@ -72,8 +72,7 @@ namespace CatCafePreview.Standalone
         private void ApplyCatalog(CafeNarrativeRow row,string person,string human,double before,double after,bool opened)
         {
             string mode=row.action=="pause"?"pause":row.mode;
-            var intro=sim.State.dispatches.FirstOrDefault(e=>e.introduction?.cat_id==row.cat_id);
-            string imageCatId=intro==null?row.cat_id:"intro-"+intro.destination;
+            string imageCatId=sim.ContentImageId(row.cat_id);
             if(row.action=="switch" || row.action=="connect")
             {
                 var preparation=catalog.image_bindings.FirstOrDefault(i=>i.cat_id==imageCatId && i.scene_key==mode);

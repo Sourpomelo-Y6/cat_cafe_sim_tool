@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-23",
+  "cat_id": "catalog-1",
+  "name": "ハル",
+  "status": "completed",
+  "tool": "built-in image_gen",
+  "selected_png_count": 27,
+  "retained_candidate_png_count": 0,
+  "scene_keys": 52,
+  "narrative_bindings": 32,
+  "python_tests": {
+    "total": 35,
+    "passed": 28,
+    "skipped": 7
+  },
+  "actual_recruitment_appearance_cost_save_reload": true,
+  "custom_candidate_mapping_cases": 21,
+  "skipped_ids_reversed_keys_catalog_wrap_custom_fallback": true,
+  "unity_reaction_cases": 40,
+  "unity_normal_sleep_roster": true,
+  "unity_special_resources": true,
+  "unity_admission_save_reload": true,
+  "unity_log": "Logs/CatDailyImages/20261023/unity-final.log",
+  "verification_fixture_repair": "Removed unnecessary working_cats from open_recruitment/recruit_cat test commands, then reran successfully",
+  "visual_qa": "All 27 selected images and four Unity screenshots reviewed; amber eyes, white short coat, slender body and tail, action composition confirmed",
+  "selected_png_bytes": 50452544,
+  "registered_png_bytes_each": 50452544,
+  "build_performed": false,
+  "capacity_before": {
+    "latest_bytes": 8885203888,
+    "runs_bytes": 110892145,
+    "generated_bytes": 3277372585
+  },
+  "capacity_after": {
+    "latest_bytes": 8885203888,
+    "runs_bytes": 110892145,
+    "generated_bytes": 3277372585
+  },
+  "runtime_id_resolution": {
+    "content_id": "catalog-1",
+    "rule": "Resolve actual rescue-N through standard saved recruitment batch and catalog position; validate original candidate fields"
+  }
+}

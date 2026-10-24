@@ -10,7 +10,7 @@
 
 ## 対象23枠
 
-2026-10-18にチロの外見・画像27枚・52場面登録・Unity検証を完了（[実施記録](Results/ChiroImages/Status.md)）。2026-10-19にレオも完了（[実施記録](Results/LeoImages/Status.md)）。2026-10-20にハナも完了（[実施記録](Results/HanaImages/Status.md)）。2026-10-21にセナも完了（[実施記録](Results/SenaImages/Status.md)）。2026-10-22にルカも完了（[実施記録](Results/LukaImages/Status.md)）。残り18枠。以下の画像登録数・照合内容は初回調査時点の記録。ユーザー指定によりショップ3匹→派遣紹介2匹→募集18匹の順で、上から1日1匹を制作する。[日程表](CatImageSchedule.md)を参照。
+2026-10-18にチロの外見・画像27枚・52場面登録・Unity検証を完了（[実施記録](Results/ChiroImages/Status.md)）。2026-10-19にレオも完了（[実施記録](Results/LeoImages/Status.md)）。2026-10-20にハナも完了（[実施記録](Results/HanaImages/Status.md)）。2026-10-21にセナも完了（[実施記録](Results/SenaImages/Status.md)）。2026-10-22にルカも完了（[実施記録](Results/LukaImages/Status.md)）。2026-10-23にハルも完了（[実施記録](Results/HaruImages/Status.md)）。残り17枠。以下の画像登録数・照合内容は初回調査時点の記録。ユーザー指定によりショップ3匹→派遣紹介2匹→募集18匹の順で、上から1日1匹を制作する。[日程表](CatImageSchedule.md)を参照。
 
 | 完了 | 名前 | 定義・資料ID | 性格 | 毛色・毛の長さ |
 | --- | --- | --- | --- | --- |
@@ -19,7 +19,7 @@
 | [x] | ハナ | `shop-3` | 遊び好きで繊細な猫 | 白黒・短毛 |
 | [x] | セナ | `intro-shopping_street_event` | 遊び好きで繊細な猫 | 白猫・長毛 |
 | [x] | ルカ | `intro-cat_photo_studio` | 穏やかな甘えん坊 | 白猫・短毛 |
-| [ ] | ハル | `catalog-1` | 穏やかな甘えん坊 | 白猫・短毛 |
+| [x] | ハル | `catalog-1` | 穏やかな甘えん坊 | 白猫・短毛 |
 | [ ] | リン | `catalog-2` | 活発な探検家 | 黒猫・短毛 |
 | [ ] | ユキ | `catalog-3` | 距離を大切にする猫 | 三毛・長毛 |
 | [ ] | アキ | `catalog-4` | 遊び好きで繊細な猫 | 茶トラ・短毛 |

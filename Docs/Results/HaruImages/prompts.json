@@ -1,0 +1,218 @@
+[
+  {
+    "scene": "normal",
+    "file": "haru-normal.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-7faebeb9-51f1-4fee-8251-b47587c3ad10.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim identity illustration of NEW cat HARU. Input LUKA reference is ONLY style and room. Adult pure WHITE SHORTHAIR with BOTH eyes warm AMBER GOLD, slim elegant medium-small body, long slender legs, gently tapered oval face, taller triangular ears, pink nose. Smooth close short white coat, no patches or stripes, not longhair. Long thin smooth WHITE tail curving loosely to side with a gently hooked tip, no plume. Gentle calm affectionate expression. Clearly distinct from Luka's green eyes round cheeks stocky body and thick tail. Entire seated cat and tail visible with margins. Same fine soft painted storybook fur, cream wall honey wood floor sage green mat warm diffuse light. One anatomically correct cat, no human props text watermark UI collar.",
+    "reference": "../LukaImages/luka-normal.png",
+    "reference_role": "style_and_room"
+  },
+  {
+    "scene": "teaser",
+    "file": "haru-teaser.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-02de33c9-951d-4d1d-88f6-8db3639a4f90.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HARU exact identity and style. Adult pure WHITE SHORTHAIR, slim elegant medium-small body long slender legs, gently tapered oval face, tall triangular ears, BOTH eyes warm AMBER GOLD, pink nose. Smooth close short WHITE coat, no patches stripes colored fur or longhair. Long thin smooth white tail gently hooked tip, no plume. Gentle calm affectionate cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Basic attentive play: one hand at edge holds feather teaser near cat. Cat reaches one forepaw toward feather, amber gold eyes open, gentle calm engagement.",
+    "reference": "haru-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball",
+    "file": "haru-ball.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-f2f28734-6c93-44bc-b8f5-8cd1d26ed552.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HARU exact identity and style. Adult pure WHITE SHORTHAIR, slim elegant medium-small body long slender legs, gently tapered oval face, tall triangular ears, BOTH eyes warm AMBER GOLD, pink nose. Smooth close short WHITE coat, no patches stripes colored fur or longhair. Long thin smooth white tail gently hooked tip, no plume. Gentle calm affectionate cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Basic play: crouches and gently touches small blue toy ball on mat with one paw, attentive open amber gold eyes. No humans or other toys.",
+    "reference": "haru-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush",
+    "file": "haru-plush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-dc979ec8-fb04-4c8e-8932-5610f74ab8aa.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HARU exact identity and style. Adult pure WHITE SHORTHAIR, slim elegant medium-small body long slender legs, gently tapered oval face, tall triangular ears, BOTH eyes warm AMBER GOLD, pink nose. Smooth close short WHITE coat, no patches stripes colored fur or longhair. Long thin smooth white tail gently hooked tip, no plume. Gentle calm affectionate cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Basic play: holds small plain beige fabric mouse toy between front paws, calmly sniffing, amber gold eyes open. No humans or other toys.",
+    "reference": "haru-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel",
+    "file": "haru-tunnel.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-98e3951c-5a0e-44eb-a747-1b9b74c02bba.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HARU exact identity and style. Adult pure WHITE SHORTHAIR, slim elegant medium-small body long slender legs, gently tapered oval face, tall triangular ears, BOTH eyes warm AMBER GOLD, pink nose. Smooth close short WHITE coat, no patches stripes colored fur or longhair. Long thin smooth white tail gently hooked tip, no plume. Gentle calm affectionate cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Basic play: crouches just inside short beige fabric cat tunnel, head front paws and tail fully visible at entrance, eyes open curious gentle expression. No humans or other toys.",
+    "reference": "haru-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet",
+    "file": "haru-pet.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-2300eb97-08d3-4648-82ed-52c92efc4b95.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HARU exact identity and style. Adult pure WHITE SHORTHAIR, slim elegant medium-small body long slender legs, gently tapered oval face, tall triangular ears, BOTH eyes warm AMBER GOLD, pink nose. Smooth close short WHITE coat, no patches stripes colored fur or longhair. Long thin smooth white tail gently hooked tip, no plume. Gentle calm affectionate cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Basic petting: one human hand gently strokes forehead, cat relaxed and attentive, amber gold eyes open. No toys.",
+    "reference": "haru-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush",
+    "file": "haru-brush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-842876c3-dd05-4ecf-94bf-188ffd6d6855.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HARU exact identity and style. Adult pure WHITE SHORTHAIR, slim elegant medium-small body long slender legs, gently tapered oval face, tall triangular ears, BOTH eyes warm AMBER GOLD, pink nose. Smooth close short WHITE coat, no patches stripes colored fur or longhair. Long thin smooth white tail gently hooked tip, no plume. Gentle calm affectionate cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Basic brushing: one human hand uses wooden pet brush on shoulder, bristles contact SHORT fur, cat calmly stands with eyes open. No other props.",
+    "reference": "haru-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice",
+    "file": "haru-voice.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-c8f950e8-062c-42b5-bf3f-b925e0ad296e.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HARU exact identity and style. Adult pure WHITE SHORTHAIR, slim elegant medium-small body long slender legs, gently tapered oval face, tall triangular ears, BOTH eyes warm AMBER GOLD, pink nose. Smooth close short WHITE coat, no patches stripes colored fur or longhair. Long thin smooth white tail gently hooked tip, no plume. Gentle calm affectionate cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Basic voice interaction: sits calmly, ears turn toward viewer listening, amber gold eyes open, mouth closed. No human hands knees speech bubbles or props.",
+    "reference": "haru-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence",
+    "file": "haru-presence.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-4ee0208e-92f1-4905-9902-72bed5f4ca46.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HARU exact identity and style. Adult pure WHITE SHORTHAIR, slim elegant medium-small body long slender legs, gently tapered oval face, tall triangular ears, BOTH eyes warm AMBER GOLD, pink nose. Smooth close short WHITE coat, no patches stripes colored fur or longhair. Long thin smooth white tail gently hooked tip, no plume. Gentle calm affectionate cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Basic companionship: cat loafs calmly, amber gold eyes open, only part of blue clothed knee at lower edge. No hands or toys.",
+    "reference": "haru-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pause",
+    "file": "haru-pause.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-f29d251b-9388-45aa-991e-59a7b8781914.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HARU exact identity and style. Adult pure WHITE SHORTHAIR, slim elegant medium-small body long slender legs, gently tapered oval face, tall triangular ears, BOTH eyes warm AMBER GOLD, pink nose. Smooth close short WHITE coat, no patches stripes colored fur or longhair. Long thin smooth white tail gently hooked tip, no plume. Gentle calm affectionate cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Pause/wait: cat calmly sits, forepaws planted, eyes open, feather teaser lies completely still on mat at safe distance. No hands.",
+    "reference": "haru-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "sleep",
+    "file": "haru-sleep.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-323d617f-8936-4f44-b03d-dc10e8e19d43.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HARU exact identity and style. Adult pure WHITE SHORTHAIR, slim elegant medium-small body long slender legs, gently tapered oval face, tall triangular ears, BOTH eyes warm AMBER GOLD, pink nose. Smooth close short WHITE coat, no patches stripes colored fur or longhair. Long thin smooth white tail gently hooked tip, no plume. Gentle calm affectionate cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Sleep: cat curled into a relaxed ball sleeping, eyes closed, head on front paws, slim striped tail around body. No humans or toys.",
+    "reference": "haru-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "teaser__open_up",
+    "file": "haru-teaser__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-6ceacacf-ac62-4950-b92c-e987e3ceb763.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HARU exact identity and style. Adult pure WHITE SHORTHAIR, slim elegant medium-small body long slender legs, gently tapered oval face, tall triangular ears, BOTH eyes warm AMBER GOLD, pink nose. Smooth close short WHITE coat, no patches stripes colored fur or longhair. Long thin smooth white tail gently hooked tip, no plume. Gentle calm affectionate cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special deep trust playing with feather teaser: one hand holds feather close; cat leans toward viewer, eyes soft half closed, paw reaches gently. Relaxed ears.",
+    "reference": "haru-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "teaser__simultaneous",
+    "file": "haru-teaser__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-06289ac0-9edd-44ef-8305-5aeac6431611.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HARU exact identity and style. Adult pure WHITE SHORTHAIR, slim elegant medium-small body long slender legs, gently tapered oval face, tall triangular ears, BOTH eyes warm AMBER GOLD, pink nose. Smooth close short WHITE coat, no patches stripes colored fur or longhair. Long thin smooth white tail gently hooked tip, no plume. Gentle calm affectionate cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special excited and deeply trusting play: joyfully bats feather teaser held by one edge hand, ears forward bright amber gold eyes, lifted paw, confident happy posture. No aggressive expression.",
+    "reference": "haru-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball__open_up",
+    "file": "haru-ball__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-0cade4ef-a534-402b-afb2-6f30d86b2313.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HARU exact identity and style. Adult pure WHITE SHORTHAIR, slim elegant medium-small body long slender legs, gently tapered oval face, tall triangular ears, BOTH eyes warm AMBER GOLD, pink nose. Smooth close short WHITE coat, no patches stripes colored fur or longhair. Long thin smooth white tail gently hooked tip, no plume. Gentle calm affectionate cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special deep trust: relaxed on side beside small blue ball, paw resting on ball, head tipped affectionately toward viewer, soft half closed eyes. No humans.",
+    "reference": "haru-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball__simultaneous",
+    "file": "haru-ball__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-0a0f2cd4-8498-43e9-b358-8efeff767d27.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HARU exact identity and style. Adult pure WHITE SHORTHAIR, slim elegant medium-small body long slender legs, gently tapered oval face, tall triangular ears, BOTH eyes warm AMBER GOLD, pink nose. Smooth close short WHITE coat, no patches stripes colored fur or longhair. Long thin smooth white tail gently hooked tip, no plume. Gentle calm affectionate cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special excited and trusting: playfully hugs small blue ball between forepaws, crouched with confident happy energy, bright amber gold eyes. No humans or other toys.",
+    "reference": "haru-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush__open_up",
+    "file": "haru-plush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-0035bb2c-f0fc-4684-b5cf-20e3de318e66.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HARU exact identity and style. Adult pure WHITE SHORTHAIR, slim elegant medium-small body long slender legs, gently tapered oval face, tall triangular ears, BOTH eyes warm AMBER GOLD, pink nose. Smooth close short WHITE coat, no patches stripes colored fur or longhair. Long thin smooth white tail gently hooked tip, no plume. Gentle calm affectionate cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special deep trust: hugs small beige mouse plush and rests cheek on toy, soft half closed amber gold eyes, affectionate expression toward viewer. No humans.",
+    "reference": "haru-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush__simultaneous",
+    "file": "haru-plush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-6ff8756d-b2e3-46e0-bce5-ede7b3c52c56.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HARU exact identity and style. Adult pure WHITE SHORTHAIR, slim elegant medium-small body long slender legs, gently tapered oval face, tall triangular ears, BOTH eyes warm AMBER GOLD, pink nose. Smooth close short WHITE coat, no patches stripes colored fur or longhair. Long thin smooth white tail gently hooked tip, no plume. Gentle calm affectionate cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special excited and trusting: joyfully rolls slightly on side hugging small beige mouse plush with front paws, bright amber gold eyes, relaxed ears and happy posture. No humans.",
+    "reference": "haru-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel__open_up",
+    "file": "haru-tunnel__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-5184ca1a-948d-48a1-9ae5-0fa65941615e.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HARU exact identity and style. Adult pure WHITE SHORTHAIR, slim elegant medium-small body long slender legs, gently tapered oval face, tall triangular ears, BOTH eyes warm AMBER GOLD, pink nose. Smooth close short WHITE coat, no patches stripes colored fur or longhair. Long thin smooth white tail gently hooked tip, no plume. Gentle calm affectionate cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special deep trust: relaxed at short beige fabric tunnel entrance, chin on rim, soft half closed amber gold eyes toward viewer, tail visible outside. No humans.",
+    "reference": "haru-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel__simultaneous",
+    "file": "haru-tunnel__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-ac82be22-18aa-48cf-b27c-ee24e3fbbcf5.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HARU exact identity and style. Adult pure WHITE SHORTHAIR, slim elegant medium-small body long slender legs, gently tapered oval face, tall triangular ears, BOTH eyes warm AMBER GOLD, pink nose. Smooth close short WHITE coat, no patches stripes colored fur or longhair. Long thin smooth white tail gently hooked tip, no plume. Gentle calm affectionate cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special excited and trusting: playfully peeks out of short beige fabric tunnel, front paws reaching forward, bright amber gold eyes, forward ears friendly confident expression, tail visible. No humans.",
+    "reference": "haru-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet__open_up",
+    "file": "haru-pet__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-1f794c63-7964-476a-86b4-5c4026183b45.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HARU exact identity and style. Adult pure WHITE SHORTHAIR, slim elegant medium-small body long slender legs, gently tapered oval face, tall triangular ears, BOTH eyes warm AMBER GOLD, pink nose. Smooth close short WHITE coat, no patches stripes colored fur or longhair. Long thin smooth white tail gently hooked tip, no plume. Gentle calm affectionate cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special deep trust petting: one hand strokes cheek, cat leans cheek into palm, eyes almost closed, affectionate relaxed expression. No toys.",
+    "reference": "haru-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet__simultaneous",
+    "file": "haru-pet__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-1357bd98-de1d-46df-9a34-51edab2f211f.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HARU exact identity and style. Adult pure WHITE SHORTHAIR, slim elegant medium-small body long slender legs, gently tapered oval face, tall triangular ears, BOTH eyes warm AMBER GOLD, pink nose. Smooth close short WHITE coat, no patches stripes colored fur or longhair. Long thin smooth white tail gently hooked tip, no plume. Gentle calm affectionate cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special delighted and trusting petting: one hand rubs under chin, cat lifts chin joyfully, content closed eyes and relaxed ears. No toys.",
+    "reference": "haru-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush__open_up",
+    "file": "haru-brush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-b4b32bcb-d9fd-46fd-aa72-d7a15f374de5.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HARU exact identity and style. Adult pure WHITE SHORTHAIR, slim elegant medium-small body long slender legs, gently tapered oval face, tall triangular ears, BOTH eyes warm AMBER GOLD, pink nose. Smooth close short WHITE coat, no patches stripes colored fur or longhair. Long thin smooth white tail gently hooked tip, no plume. Gentle calm affectionate cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special deep trust brushing: one hand gently brushes short chest fur with wooden pet brush, cat leans toward brush, half closed eyes relaxed affectionate posture.",
+    "reference": "haru-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush__simultaneous",
+    "file": "haru-brush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-8d04bf12-a800-4373-9a76-7cf6ca266b7b.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HARU exact identity and style. Adult pure WHITE SHORTHAIR, slim elegant medium-small body long slender legs, gently tapered oval face, tall triangular ears, BOTH eyes warm AMBER GOLD, pink nose. Smooth close short WHITE coat, no patches stripes colored fur or longhair. Long thin smooth white tail gently hooked tip, no plume. Gentle calm affectionate cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special delighted and trusting brushing: one hand brushes shoulder with wooden brush, cat stretches neck and raises chin slightly, blissfully closed eyes, happy relaxed posture.",
+    "reference": "haru-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice__open_up",
+    "file": "haru-voice__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-840db83e-4857-4a47-8753-7fde63c11f75.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HARU exact identity and style. Adult pure WHITE SHORTHAIR, slim elegant medium-small body long slender legs, gently tapered oval face, tall triangular ears, BOTH eyes warm AMBER GOLD, pink nose. Smooth close short WHITE coat, no patches stripes colored fur or longhair. Long thin smooth white tail gently hooked tip, no plume. Gentle calm affectionate cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special deep trust response to a familiar voice. Cat leans its head and upper body slightly toward viewer, neck gently extended, EYES VISIBLY NARROWED TO SOFT HALF-CLOSED SLITS in a relaxed slow blink (not wide open), gentle affectionate expression, relaxed forward ears, mouth closed. Both front paws remain on mat. No hands, humans, knees, speech bubbles, toys or other props. Make the facial trust reaction clearly distinct from the open-eyed normal reference.",
+    "reference": "haru-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice__simultaneous",
+    "file": "haru-voice__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-349619be-8c1f-4d0b-85ef-6d60cc81928c.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HARU exact identity and style. Adult pure WHITE SHORTHAIR, slim elegant medium-small body long slender legs, gently tapered oval face, tall triangular ears, BOTH eyes warm AMBER GOLD, pink nose. Smooth close short WHITE coat, no patches stripes colored fur or longhair. Long thin smooth white tail gently hooked tip, no plume. Gentle calm affectionate cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special delighted trusting response to voice: stands taking one friendly step toward viewer, bright welcoming amber gold eyes and forward ears, low relaxed tail, mouth closed. No human or props.",
+    "reference": "haru-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence__open_up",
+    "file": "haru-presence__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-12c2d34a-3dd6-4a71-b78d-0fe71516c490.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HARU exact identity and style. Adult pure WHITE SHORTHAIR, slim elegant medium-small body long slender legs, gently tapered oval face, tall triangular ears, BOTH eyes warm AMBER GOLD, pink nose. Smooth close short WHITE coat, no patches stripes colored fur or longhair. Long thin smooth white tail gently hooked tip, no plume. Gentle calm affectionate cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special deep trust companionship: lies comfortably on side beside blue clothed knee edge, soft half closed eyes relaxed head. No hands touching, no toys.",
+    "reference": "haru-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence__simultaneous",
+    "file": "haru-presence__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-d59ca912-f4d8-41ea-ac77-61b6505eeb91.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is HARU exact identity and style. Adult pure WHITE SHORTHAIR, slim elegant medium-small body long slender legs, gently tapered oval face, tall triangular ears, BOTH eyes warm AMBER GOLD, pink nose. Smooth close short WHITE coat, no patches stripes colored fur or longhair. Long thin smooth white tail gently hooked tip, no plume. Gentle calm affectionate cat. Same fine soft painted storybook style, cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat, correct limbs, no text UI watermark human face. Special delighted trusting companionship: sits close beside blue clothed knee edge, flank gently leaning against knee, blissfully half closed eyes. No hands touching, no toys.",
+    "reference": "haru-normal.png",
+    "reference_role": "identity_and_style"
+  }
+]
