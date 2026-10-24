@@ -1,0 +1,41 @@
+{
+  "sizes": {
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Logs": {
+      "bytes": 19224713155,
+      "files": 62008
+    },
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Logs\\StandaloneBuild": {
+      "bytes": 9142002840,
+      "files": 418
+    },
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Logs\\StandaloneBuild\\Latest": {
+      "bytes": 9012696043,
+      "files": 156
+    },
+    "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Library": {
+      "bytes": 12524371316,
+      "files": 32137
+    },
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\Docs\\Results\\ImageStorageComparison": {
+      "bytes": 2592558,
+      "files": 7
+    },
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\Docs\\Results\\ImageStorageNewUI": {
+      "bytes": 11424290,
+      "files": 19
+    },
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Logs\\ImageStorageNewUI": {
+      "bytes": 14219724,
+      "files": 62
+    }
+  },
+  "protected_files_checked": 3883,
+  "protected_hash_changes": [],
+  "latest_paths_and_sizes_unchanged": true,
+  "pending_exists": false,
+  "standalone_directories": [
+    "Latest",
+    "Runs"
+  ],
+  "checks": "72 GPU measurements, 48 pixel-exact full panels, 13 valid PNGs, 4 Canvas dimension measurements, report links"
+}

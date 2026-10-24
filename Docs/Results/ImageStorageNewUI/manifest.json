@@ -1,0 +1,1594 @@
+{
+  "pack": "4762dd1bd978461bb07c041c59417281",
+  "method": "Unity Graphics.Blit -> ReadPixels; transient CompressTexture Best; full panels pixel-exact; crops nearest 2x",
+  "sources": [
+    {
+      "cat": "playtest-mike",
+      "scene": "normal",
+      "image": "images/341239d6351314493ee21e28f46ff362eb43f945f01a866751851985f68a2719.png",
+      "sha256": "341239d6351314493ee21e28f46ff362eb43f945f01a866751851985f68a2719",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "cat": "playtest-mike",
+      "scene": "teaser__switch",
+      "image": "images/4fc3fbe54602d781d55a490b0ac88e3d5153ea05140940a1efeb5f52ae253c60.png",
+      "sha256": "4fc3fbe54602d781d55a490b0ac88e3d5153ea05140940a1efeb5f52ae253c60",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "cat": "playtest-mike",
+      "scene": "teaser__direct",
+      "image": "images/2569dc55c1ed6dd954d8f601bb23bb88faac5b0a8b83e921499c9b64ace11a93.png",
+      "sha256": "2569dc55c1ed6dd954d8f601bb23bb88faac5b0a8b83e921499c9b64ace11a93",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "cat": "playtest-mike",
+      "scene": "teaser__open_up",
+      "image": "images/8a0a9803084c6a82ac3b33d33b2b0130cfdb374591e00d565e7cf882e185ff3f.png",
+      "sha256": "8a0a9803084c6a82ac3b33d33b2b0130cfdb374591e00d565e7cf882e185ff3f",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "cat": "playtest-tama",
+      "scene": "normal",
+      "image": "images/99a0df52628d4fcbc0d20479a02e9d592ed25e74e8a8f2266cae8ac803e80d93.png",
+      "sha256": "99a0df52628d4fcbc0d20479a02e9d592ed25e74e8a8f2266cae8ac803e80d93",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "cat": "playtest-tama",
+      "scene": "teaser__switch",
+      "image": "images/99a0df52628d4fcbc0d20479a02e9d592ed25e74e8a8f2266cae8ac803e80d93.png",
+      "sha256": "99a0df52628d4fcbc0d20479a02e9d592ed25e74e8a8f2266cae8ac803e80d93",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "cat": "playtest-tama",
+      "scene": "teaser__direct",
+      "image": "images/2876d2011983ffc759cc16d4751a654f85507fea32427865695ee453ebeb4367.png",
+      "sha256": "2876d2011983ffc759cc16d4751a654f85507fea32427865695ee453ebeb4367",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "cat": "playtest-tama",
+      "scene": "teaser__open_up",
+      "image": "images/f2066b53dd30a3a8175525b276f6495155b3fed8c6ffc9007b5d597f0997d2dc.png",
+      "sha256": "f2066b53dd30a3a8175525b276f6495155b3fed8c6ffc9007b5d597f0997d2dc",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "cat": "playtest-sora",
+      "scene": "normal",
+      "image": "images/45f74d32f7bc44a7e7691d52d9e3537719077196cef50dbd2ad91074dd2f8938.png",
+      "sha256": "45f74d32f7bc44a7e7691d52d9e3537719077196cef50dbd2ad91074dd2f8938",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "cat": "playtest-sora",
+      "scene": "teaser__switch",
+      "image": "images/45f74d32f7bc44a7e7691d52d9e3537719077196cef50dbd2ad91074dd2f8938.png",
+      "sha256": "45f74d32f7bc44a7e7691d52d9e3537719077196cef50dbd2ad91074dd2f8938",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "cat": "playtest-sora",
+      "scene": "teaser__direct",
+      "image": "images/759d4a851a1b9fb0a39b6001e83da38f7ee39ee2ee0083e9d77d5125e059d651.png",
+      "sha256": "759d4a851a1b9fb0a39b6001e83da38f7ee39ee2ee0083e9d77d5125e059d651",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "cat": "playtest-sora",
+      "scene": "teaser__open_up",
+      "image": "images/15e8222b71176849dac16379ef3744d9be77507a2c15cb52b89450f54dda0252.png",
+      "sha256": "15e8222b71176849dac16379ef3744d9be77507a2c15cb52b89450f54dda0252",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    }
+  ],
+  "panels": [
+    {
+      "board": "playtest-mike-400.png",
+      "scene": "normal",
+      "format": "source",
+      "xy": [
+        8,
+        60
+      ],
+      "size": 400,
+      "input_sha256": "1721b515f096f3acdf18813c37ccc53f2bbdd883c09c598bcbc5b24d9bb2a9c2"
+    },
+    {
+      "board": "playtest-mike-400.png",
+      "scene": "normal",
+      "format": "BC7",
+      "xy": [
+        428,
+        60
+      ],
+      "size": 400,
+      "input_sha256": "5fe089bbaafc6c7439129b7ebdbdff280519def992db2af98ffaf3f99e084fd5"
+    },
+    {
+      "board": "playtest-mike-400.png",
+      "scene": "teaser__switch",
+      "format": "source",
+      "xy": [
+        8,
+        494
+      ],
+      "size": 400,
+      "input_sha256": "e49b7456102821c9e19eed3756c9041269c15d1a001b69a733db63e97578331b"
+    },
+    {
+      "board": "playtest-mike-400.png",
+      "scene": "teaser__switch",
+      "format": "BC7",
+      "xy": [
+        428,
+        494
+      ],
+      "size": 400,
+      "input_sha256": "939511d939ceb7607f346800e8433ed69f814b3128d0532c738b550389069d32"
+    },
+    {
+      "board": "playtest-mike-400.png",
+      "scene": "teaser__direct",
+      "format": "source",
+      "xy": [
+        8,
+        928
+      ],
+      "size": 400,
+      "input_sha256": "3c4b6bb84fd57457d504b7e992a48b93f153ef1269199363bc067ffbdc1cf7e4"
+    },
+    {
+      "board": "playtest-mike-400.png",
+      "scene": "teaser__direct",
+      "format": "BC7",
+      "xy": [
+        428,
+        928
+      ],
+      "size": 400,
+      "input_sha256": "fa02cef3fc074525dfedc4c4ec19a1937eb176ee99a0733d0b98aaa71c103981"
+    },
+    {
+      "board": "playtest-mike-400.png",
+      "scene": "teaser__open_up",
+      "format": "source",
+      "xy": [
+        8,
+        1362
+      ],
+      "size": 400,
+      "input_sha256": "5d1324bd3a6a7d66e678c8bf364a11fbe1adb6f64fd02c53f60db8f4ccc10dd0"
+    },
+    {
+      "board": "playtest-mike-400.png",
+      "scene": "teaser__open_up",
+      "format": "BC7",
+      "xy": [
+        428,
+        1362
+      ],
+      "size": 400,
+      "input_sha256": "0a15533ee99f64bbe24cc00f6ae15040bf145b37da410f0eabc9ebbacd698be8"
+    },
+    {
+      "board": "playtest-mike-320.png",
+      "scene": "normal",
+      "format": "source",
+      "xy": [
+        8,
+        60
+      ],
+      "size": 320,
+      "input_sha256": "e3355554abbfa51526b6cd5d4ec5d46a6a83081fc9172d50804812e964735a05"
+    },
+    {
+      "board": "playtest-mike-320.png",
+      "scene": "normal",
+      "format": "BC7",
+      "xy": [
+        348,
+        60
+      ],
+      "size": 320,
+      "input_sha256": "fb3031f5bcfbbaa2d61a544fc1904866f49f2684fb0f5d705c9041b13fd20277"
+    },
+    {
+      "board": "playtest-mike-320.png",
+      "scene": "teaser__switch",
+      "format": "source",
+      "xy": [
+        8,
+        414
+      ],
+      "size": 320,
+      "input_sha256": "408411dbf4d7699abae535b4f27dafd0e787bfae169e4fca702d3b1ee0bd93df"
+    },
+    {
+      "board": "playtest-mike-320.png",
+      "scene": "teaser__switch",
+      "format": "BC7",
+      "xy": [
+        348,
+        414
+      ],
+      "size": 320,
+      "input_sha256": "2432337c78006c2fd0d270b2f6a41091bb7a96a2ce6c8b4232ae21134a695c45"
+    },
+    {
+      "board": "playtest-mike-320.png",
+      "scene": "teaser__direct",
+      "format": "source",
+      "xy": [
+        8,
+        768
+      ],
+      "size": 320,
+      "input_sha256": "61812be1fbbe234604f293436174cfe0f07c10f860292bf37dd577dfd3b92c2a"
+    },
+    {
+      "board": "playtest-mike-320.png",
+      "scene": "teaser__direct",
+      "format": "BC7",
+      "xy": [
+        348,
+        768
+      ],
+      "size": 320,
+      "input_sha256": "0d7715db7ff8cd6b91eb9011ebb72ace3d6a7bc1a610d5b006dc926630c45730"
+    },
+    {
+      "board": "playtest-mike-320.png",
+      "scene": "teaser__open_up",
+      "format": "source",
+      "xy": [
+        8,
+        1122
+      ],
+      "size": 320,
+      "input_sha256": "a88fac01bb81c02db3056d71a03c5dc628d736096b83e61f201fa5654453a2f7"
+    },
+    {
+      "board": "playtest-mike-320.png",
+      "scene": "teaser__open_up",
+      "format": "BC7",
+      "xy": [
+        348,
+        1122
+      ],
+      "size": 320,
+      "input_sha256": "8226af18c9bc15cd59d16bb5617cd217fac8c2f89057da642ae29bd0361997f0"
+    },
+    {
+      "board": "playtest-tama-400.png",
+      "scene": "normal",
+      "format": "source",
+      "xy": [
+        8,
+        60
+      ],
+      "size": 400,
+      "input_sha256": "fb1f9a46f11f0cb145684fee3102e6d7ed47b9ef20cce25d17ae934b6fefd748"
+    },
+    {
+      "board": "playtest-tama-400.png",
+      "scene": "normal",
+      "format": "BC7",
+      "xy": [
+        428,
+        60
+      ],
+      "size": 400,
+      "input_sha256": "0abed573a87c8ded8f0cc7c10a29c9f2551beb2f458a38c23d19912292efd04e"
+    },
+    {
+      "board": "playtest-tama-400.png",
+      "scene": "teaser__switch",
+      "format": "source",
+      "xy": [
+        8,
+        494
+      ],
+      "size": 400,
+      "input_sha256": "fb1f9a46f11f0cb145684fee3102e6d7ed47b9ef20cce25d17ae934b6fefd748"
+    },
+    {
+      "board": "playtest-tama-400.png",
+      "scene": "teaser__switch",
+      "format": "BC7",
+      "xy": [
+        428,
+        494
+      ],
+      "size": 400,
+      "input_sha256": "0abed573a87c8ded8f0cc7c10a29c9f2551beb2f458a38c23d19912292efd04e"
+    },
+    {
+      "board": "playtest-tama-400.png",
+      "scene": "teaser__direct",
+      "format": "source",
+      "xy": [
+        8,
+        928
+      ],
+      "size": 400,
+      "input_sha256": "7bc25764caab1758d543c83c3bf7d3cd6b55b87b45dc9d58b60d473b5a413967"
+    },
+    {
+      "board": "playtest-tama-400.png",
+      "scene": "teaser__direct",
+      "format": "BC7",
+      "xy": [
+        428,
+        928
+      ],
+      "size": 400,
+      "input_sha256": "f058b7e89f3107b7d4eb4aac9d050389830dd7e3f7f8285794b7bed01f286d19"
+    },
+    {
+      "board": "playtest-tama-400.png",
+      "scene": "teaser__open_up",
+      "format": "source",
+      "xy": [
+        8,
+        1362
+      ],
+      "size": 400,
+      "input_sha256": "43d0d9a92f9593966f80f19710adee0bf1131cd6c0854b355cf0d96fea5547de"
+    },
+    {
+      "board": "playtest-tama-400.png",
+      "scene": "teaser__open_up",
+      "format": "BC7",
+      "xy": [
+        428,
+        1362
+      ],
+      "size": 400,
+      "input_sha256": "e624878d2638aceda27b158d9cbbcac8e07cd4512766011020dc8bfaa5c26b79"
+    },
+    {
+      "board": "playtest-tama-320.png",
+      "scene": "normal",
+      "format": "source",
+      "xy": [
+        8,
+        60
+      ],
+      "size": 320,
+      "input_sha256": "b34fbc42a1b8b2c72ba17eac66a1daca9ddacd6e61cc2ee653a9ba93ea152f5f"
+    },
+    {
+      "board": "playtest-tama-320.png",
+      "scene": "normal",
+      "format": "BC7",
+      "xy": [
+        348,
+        60
+      ],
+      "size": 320,
+      "input_sha256": "f69b89d065430c80815b0f961abdac76b96190e8a02f296a38e384d7faee07c1"
+    },
+    {
+      "board": "playtest-tama-320.png",
+      "scene": "teaser__switch",
+      "format": "source",
+      "xy": [
+        8,
+        414
+      ],
+      "size": 320,
+      "input_sha256": "b34fbc42a1b8b2c72ba17eac66a1daca9ddacd6e61cc2ee653a9ba93ea152f5f"
+    },
+    {
+      "board": "playtest-tama-320.png",
+      "scene": "teaser__switch",
+      "format": "BC7",
+      "xy": [
+        348,
+        414
+      ],
+      "size": 320,
+      "input_sha256": "f69b89d065430c80815b0f961abdac76b96190e8a02f296a38e384d7faee07c1"
+    },
+    {
+      "board": "playtest-tama-320.png",
+      "scene": "teaser__direct",
+      "format": "source",
+      "xy": [
+        8,
+        768
+      ],
+      "size": 320,
+      "input_sha256": "31f0b02e0747b48b04d69e9fc9f7ebc3a16c59a542586f77066aef5944ec4aca"
+    },
+    {
+      "board": "playtest-tama-320.png",
+      "scene": "teaser__direct",
+      "format": "BC7",
+      "xy": [
+        348,
+        768
+      ],
+      "size": 320,
+      "input_sha256": "46b30b9a6c6422b993cccf60a4e46fe740e69fa7e0c8c772d6282ec9a4d993a7"
+    },
+    {
+      "board": "playtest-tama-320.png",
+      "scene": "teaser__open_up",
+      "format": "source",
+      "xy": [
+        8,
+        1122
+      ],
+      "size": 320,
+      "input_sha256": "835d3224ab35753fa23c168eb52c9ade3ee0ced01f4dab689d2bb28cbcbc4003"
+    },
+    {
+      "board": "playtest-tama-320.png",
+      "scene": "teaser__open_up",
+      "format": "BC7",
+      "xy": [
+        348,
+        1122
+      ],
+      "size": 320,
+      "input_sha256": "b44509f4d2c87e4a765f7755bf435bc52f47158d663287c5e561f7b8061c3feb"
+    },
+    {
+      "board": "playtest-sora-400.png",
+      "scene": "normal",
+      "format": "source",
+      "xy": [
+        8,
+        60
+      ],
+      "size": 400,
+      "input_sha256": "86274824cd4b6d424dcbe12278a9eb5fa027a741b6aa102ac6b92b71a63480c0"
+    },
+    {
+      "board": "playtest-sora-400.png",
+      "scene": "normal",
+      "format": "BC7",
+      "xy": [
+        428,
+        60
+      ],
+      "size": 400,
+      "input_sha256": "c7fa4e4f629580c6228366b0e1ccfa82bbd3839581370cfbd75f24e6a7fe42a4"
+    },
+    {
+      "board": "playtest-sora-400.png",
+      "scene": "teaser__switch",
+      "format": "source",
+      "xy": [
+        8,
+        494
+      ],
+      "size": 400,
+      "input_sha256": "86274824cd4b6d424dcbe12278a9eb5fa027a741b6aa102ac6b92b71a63480c0"
+    },
+    {
+      "board": "playtest-sora-400.png",
+      "scene": "teaser__switch",
+      "format": "BC7",
+      "xy": [
+        428,
+        494
+      ],
+      "size": 400,
+      "input_sha256": "c7fa4e4f629580c6228366b0e1ccfa82bbd3839581370cfbd75f24e6a7fe42a4"
+    },
+    {
+      "board": "playtest-sora-400.png",
+      "scene": "teaser__direct",
+      "format": "source",
+      "xy": [
+        8,
+        928
+      ],
+      "size": 400,
+      "input_sha256": "4716ffd7d3e29e54937f9a52518e99064597e913a13f08d2cd72ab85554d9bb8"
+    },
+    {
+      "board": "playtest-sora-400.png",
+      "scene": "teaser__direct",
+      "format": "BC7",
+      "xy": [
+        428,
+        928
+      ],
+      "size": 400,
+      "input_sha256": "ac34a47af088028e297db5a8e1acea90050b2baf503891c6d8564d098236bf0f"
+    },
+    {
+      "board": "playtest-sora-400.png",
+      "scene": "teaser__open_up",
+      "format": "source",
+      "xy": [
+        8,
+        1362
+      ],
+      "size": 400,
+      "input_sha256": "709342bc737655494251dbcc2a33904f4d1cdc65c57c5682efc7d809d7650006"
+    },
+    {
+      "board": "playtest-sora-400.png",
+      "scene": "teaser__open_up",
+      "format": "BC7",
+      "xy": [
+        428,
+        1362
+      ],
+      "size": 400,
+      "input_sha256": "b76f54bbba57aa97760c419b80245623ca53d568f175a952b05cf916842a6cdb"
+    },
+    {
+      "board": "playtest-sora-320.png",
+      "scene": "normal",
+      "format": "source",
+      "xy": [
+        8,
+        60
+      ],
+      "size": 320,
+      "input_sha256": "99c3be6ab087f33b1dbafd2dbb4b17bd938e8a9001f5807cf9c4dbf4e924831d"
+    },
+    {
+      "board": "playtest-sora-320.png",
+      "scene": "normal",
+      "format": "BC7",
+      "xy": [
+        348,
+        60
+      ],
+      "size": 320,
+      "input_sha256": "8658d117dbac2a7e56b17632b4c69c2879802ad3de750f0019d0043c2c96c35b"
+    },
+    {
+      "board": "playtest-sora-320.png",
+      "scene": "teaser__switch",
+      "format": "source",
+      "xy": [
+        8,
+        414
+      ],
+      "size": 320,
+      "input_sha256": "99c3be6ab087f33b1dbafd2dbb4b17bd938e8a9001f5807cf9c4dbf4e924831d"
+    },
+    {
+      "board": "playtest-sora-320.png",
+      "scene": "teaser__switch",
+      "format": "BC7",
+      "xy": [
+        348,
+        414
+      ],
+      "size": 320,
+      "input_sha256": "8658d117dbac2a7e56b17632b4c69c2879802ad3de750f0019d0043c2c96c35b"
+    },
+    {
+      "board": "playtest-sora-320.png",
+      "scene": "teaser__direct",
+      "format": "source",
+      "xy": [
+        8,
+        768
+      ],
+      "size": 320,
+      "input_sha256": "d7167acc6d42826f1b9750e73be3872b6290c7cb38b230bcb1706d864984707c"
+    },
+    {
+      "board": "playtest-sora-320.png",
+      "scene": "teaser__direct",
+      "format": "BC7",
+      "xy": [
+        348,
+        768
+      ],
+      "size": 320,
+      "input_sha256": "2ff39de1852f8ffee9c82c418f4f037371bbf8b560807dd7319f5017126497d5"
+    },
+    {
+      "board": "playtest-sora-320.png",
+      "scene": "teaser__open_up",
+      "format": "source",
+      "xy": [
+        8,
+        1122
+      ],
+      "size": 320,
+      "input_sha256": "8e2062b95c0f367542fbc838f83ff9aaadce57b8a5fadbb2e9b5c3b39a193b36"
+    },
+    {
+      "board": "playtest-sora-320.png",
+      "scene": "teaser__open_up",
+      "format": "BC7",
+      "xy": [
+        348,
+        1122
+      ],
+      "size": 320,
+      "input_sha256": "793854a799d53eddd947b315cefa07c56b985fd0cda33e405834f78854bd5b79"
+    }
+  ],
+  "crops": [
+    {
+      "cat": "playtest-mike",
+      "size": 400,
+      "scene": "normal",
+      "bounds": [
+        128,
+        40,
+        208,
+        120
+      ],
+      "magnification": 2,
+      "region": 0
+    },
+    {
+      "cat": "playtest-mike",
+      "size": 400,
+      "scene": "normal",
+      "bounds": [
+        88,
+        180,
+        168,
+        260
+      ],
+      "magnification": 2,
+      "region": 1
+    },
+    {
+      "cat": "playtest-mike",
+      "size": 400,
+      "scene": "normal",
+      "bounds": [
+        200,
+        264,
+        280,
+        344
+      ],
+      "magnification": 2,
+      "region": 2
+    },
+    {
+      "cat": "playtest-mike",
+      "size": 400,
+      "scene": "teaser__switch",
+      "bounds": [
+        128,
+        40,
+        208,
+        120
+      ],
+      "magnification": 2,
+      "region": 0
+    },
+    {
+      "cat": "playtest-mike",
+      "size": 400,
+      "scene": "teaser__switch",
+      "bounds": [
+        88,
+        180,
+        168,
+        260
+      ],
+      "magnification": 2,
+      "region": 1
+    },
+    {
+      "cat": "playtest-mike",
+      "size": 400,
+      "scene": "teaser__switch",
+      "bounds": [
+        320,
+        0,
+        400,
+        80
+      ],
+      "magnification": 2,
+      "region": 2
+    },
+    {
+      "cat": "playtest-mike",
+      "size": 400,
+      "scene": "teaser__direct",
+      "bounds": [
+        140,
+        88,
+        220,
+        168
+      ],
+      "magnification": 2,
+      "region": 0
+    },
+    {
+      "cat": "playtest-mike",
+      "size": 400,
+      "scene": "teaser__direct",
+      "bounds": [
+        88,
+        180,
+        168,
+        260
+      ],
+      "magnification": 2,
+      "region": 1
+    },
+    {
+      "cat": "playtest-mike",
+      "size": 400,
+      "scene": "teaser__direct",
+      "bounds": [
+        320,
+        0,
+        400,
+        80
+      ],
+      "magnification": 2,
+      "region": 2
+    },
+    {
+      "cat": "playtest-mike",
+      "size": 400,
+      "scene": "teaser__open_up",
+      "bounds": [
+        140,
+        88,
+        220,
+        168
+      ],
+      "magnification": 2,
+      "region": 0
+    },
+    {
+      "cat": "playtest-mike",
+      "size": 400,
+      "scene": "teaser__open_up",
+      "bounds": [
+        88,
+        180,
+        168,
+        260
+      ],
+      "magnification": 2,
+      "region": 1
+    },
+    {
+      "cat": "playtest-mike",
+      "size": 400,
+      "scene": "teaser__open_up",
+      "bounds": [
+        320,
+        20,
+        400,
+        100
+      ],
+      "magnification": 2,
+      "region": 2
+    },
+    {
+      "cat": "playtest-mike",
+      "size": 320,
+      "scene": "normal",
+      "bounds": [
+        102,
+        32,
+        166,
+        96
+      ],
+      "magnification": 2,
+      "region": 0
+    },
+    {
+      "cat": "playtest-mike",
+      "size": 320,
+      "scene": "normal",
+      "bounds": [
+        70,
+        144,
+        134,
+        208
+      ],
+      "magnification": 2,
+      "region": 1
+    },
+    {
+      "cat": "playtest-mike",
+      "size": 320,
+      "scene": "normal",
+      "bounds": [
+        160,
+        211,
+        224,
+        275
+      ],
+      "magnification": 2,
+      "region": 2
+    },
+    {
+      "cat": "playtest-mike",
+      "size": 320,
+      "scene": "teaser__switch",
+      "bounds": [
+        102,
+        32,
+        166,
+        96
+      ],
+      "magnification": 2,
+      "region": 0
+    },
+    {
+      "cat": "playtest-mike",
+      "size": 320,
+      "scene": "teaser__switch",
+      "bounds": [
+        70,
+        144,
+        134,
+        208
+      ],
+      "magnification": 2,
+      "region": 1
+    },
+    {
+      "cat": "playtest-mike",
+      "size": 320,
+      "scene": "teaser__switch",
+      "bounds": [
+        256,
+        0,
+        320,
+        64
+      ],
+      "magnification": 2,
+      "region": 2
+    },
+    {
+      "cat": "playtest-mike",
+      "size": 320,
+      "scene": "teaser__direct",
+      "bounds": [
+        112,
+        70,
+        176,
+        134
+      ],
+      "magnification": 2,
+      "region": 0
+    },
+    {
+      "cat": "playtest-mike",
+      "size": 320,
+      "scene": "teaser__direct",
+      "bounds": [
+        70,
+        144,
+        134,
+        208
+      ],
+      "magnification": 2,
+      "region": 1
+    },
+    {
+      "cat": "playtest-mike",
+      "size": 320,
+      "scene": "teaser__direct",
+      "bounds": [
+        256,
+        0,
+        320,
+        64
+      ],
+      "magnification": 2,
+      "region": 2
+    },
+    {
+      "cat": "playtest-mike",
+      "size": 320,
+      "scene": "teaser__open_up",
+      "bounds": [
+        112,
+        70,
+        176,
+        134
+      ],
+      "magnification": 2,
+      "region": 0
+    },
+    {
+      "cat": "playtest-mike",
+      "size": 320,
+      "scene": "teaser__open_up",
+      "bounds": [
+        70,
+        144,
+        134,
+        208
+      ],
+      "magnification": 2,
+      "region": 1
+    },
+    {
+      "cat": "playtest-mike",
+      "size": 320,
+      "scene": "teaser__open_up",
+      "bounds": [
+        256,
+        16,
+        320,
+        80
+      ],
+      "magnification": 2,
+      "region": 2
+    },
+    {
+      "cat": "playtest-tama",
+      "size": 400,
+      "scene": "normal",
+      "bounds": [
+        128,
+        40,
+        208,
+        120
+      ],
+      "magnification": 2,
+      "region": 0
+    },
+    {
+      "cat": "playtest-tama",
+      "size": 400,
+      "scene": "normal",
+      "bounds": [
+        88,
+        180,
+        168,
+        260
+      ],
+      "magnification": 2,
+      "region": 1
+    },
+    {
+      "cat": "playtest-tama",
+      "size": 400,
+      "scene": "normal",
+      "bounds": [
+        200,
+        264,
+        280,
+        344
+      ],
+      "magnification": 2,
+      "region": 2
+    },
+    {
+      "cat": "playtest-tama",
+      "size": 400,
+      "scene": "teaser__switch",
+      "bounds": [
+        128,
+        40,
+        208,
+        120
+      ],
+      "magnification": 2,
+      "region": 0
+    },
+    {
+      "cat": "playtest-tama",
+      "size": 400,
+      "scene": "teaser__switch",
+      "bounds": [
+        88,
+        180,
+        168,
+        260
+      ],
+      "magnification": 2,
+      "region": 1
+    },
+    {
+      "cat": "playtest-tama",
+      "size": 400,
+      "scene": "teaser__switch",
+      "bounds": [
+        200,
+        264,
+        280,
+        344
+      ],
+      "magnification": 2,
+      "region": 2
+    },
+    {
+      "cat": "playtest-tama",
+      "size": 400,
+      "scene": "teaser__direct",
+      "bounds": [
+        128,
+        72,
+        208,
+        152
+      ],
+      "magnification": 2,
+      "region": 0
+    },
+    {
+      "cat": "playtest-tama",
+      "size": 400,
+      "scene": "teaser__direct",
+      "bounds": [
+        88,
+        180,
+        168,
+        260
+      ],
+      "magnification": 2,
+      "region": 1
+    },
+    {
+      "cat": "playtest-tama",
+      "size": 400,
+      "scene": "teaser__direct",
+      "bounds": [
+        320,
+        0,
+        400,
+        80
+      ],
+      "magnification": 2,
+      "region": 2
+    },
+    {
+      "cat": "playtest-tama",
+      "size": 400,
+      "scene": "teaser__open_up",
+      "bounds": [
+        128,
+        72,
+        208,
+        152
+      ],
+      "magnification": 2,
+      "region": 0
+    },
+    {
+      "cat": "playtest-tama",
+      "size": 400,
+      "scene": "teaser__open_up",
+      "bounds": [
+        88,
+        180,
+        168,
+        260
+      ],
+      "magnification": 2,
+      "region": 1
+    },
+    {
+      "cat": "playtest-tama",
+      "size": 400,
+      "scene": "teaser__open_up",
+      "bounds": [
+        320,
+        20,
+        400,
+        100
+      ],
+      "magnification": 2,
+      "region": 2
+    },
+    {
+      "cat": "playtest-tama",
+      "size": 320,
+      "scene": "normal",
+      "bounds": [
+        102,
+        32,
+        166,
+        96
+      ],
+      "magnification": 2,
+      "region": 0
+    },
+    {
+      "cat": "playtest-tama",
+      "size": 320,
+      "scene": "normal",
+      "bounds": [
+        70,
+        144,
+        134,
+        208
+      ],
+      "magnification": 2,
+      "region": 1
+    },
+    {
+      "cat": "playtest-tama",
+      "size": 320,
+      "scene": "normal",
+      "bounds": [
+        160,
+        211,
+        224,
+        275
+      ],
+      "magnification": 2,
+      "region": 2
+    },
+    {
+      "cat": "playtest-tama",
+      "size": 320,
+      "scene": "teaser__switch",
+      "bounds": [
+        102,
+        32,
+        166,
+        96
+      ],
+      "magnification": 2,
+      "region": 0
+    },
+    {
+      "cat": "playtest-tama",
+      "size": 320,
+      "scene": "teaser__switch",
+      "bounds": [
+        70,
+        144,
+        134,
+        208
+      ],
+      "magnification": 2,
+      "region": 1
+    },
+    {
+      "cat": "playtest-tama",
+      "size": 320,
+      "scene": "teaser__switch",
+      "bounds": [
+        160,
+        211,
+        224,
+        275
+      ],
+      "magnification": 2,
+      "region": 2
+    },
+    {
+      "cat": "playtest-tama",
+      "size": 320,
+      "scene": "teaser__direct",
+      "bounds": [
+        102,
+        58,
+        166,
+        122
+      ],
+      "magnification": 2,
+      "region": 0
+    },
+    {
+      "cat": "playtest-tama",
+      "size": 320,
+      "scene": "teaser__direct",
+      "bounds": [
+        70,
+        144,
+        134,
+        208
+      ],
+      "magnification": 2,
+      "region": 1
+    },
+    {
+      "cat": "playtest-tama",
+      "size": 320,
+      "scene": "teaser__direct",
+      "bounds": [
+        256,
+        0,
+        320,
+        64
+      ],
+      "magnification": 2,
+      "region": 2
+    },
+    {
+      "cat": "playtest-tama",
+      "size": 320,
+      "scene": "teaser__open_up",
+      "bounds": [
+        102,
+        58,
+        166,
+        122
+      ],
+      "magnification": 2,
+      "region": 0
+    },
+    {
+      "cat": "playtest-tama",
+      "size": 320,
+      "scene": "teaser__open_up",
+      "bounds": [
+        70,
+        144,
+        134,
+        208
+      ],
+      "magnification": 2,
+      "region": 1
+    },
+    {
+      "cat": "playtest-tama",
+      "size": 320,
+      "scene": "teaser__open_up",
+      "bounds": [
+        256,
+        16,
+        320,
+        80
+      ],
+      "magnification": 2,
+      "region": 2
+    },
+    {
+      "cat": "playtest-sora",
+      "size": 400,
+      "scene": "normal",
+      "bounds": [
+        128,
+        40,
+        208,
+        120
+      ],
+      "magnification": 2,
+      "region": 0
+    },
+    {
+      "cat": "playtest-sora",
+      "size": 400,
+      "scene": "normal",
+      "bounds": [
+        88,
+        180,
+        168,
+        260
+      ],
+      "magnification": 2,
+      "region": 1
+    },
+    {
+      "cat": "playtest-sora",
+      "size": 400,
+      "scene": "normal",
+      "bounds": [
+        200,
+        264,
+        280,
+        344
+      ],
+      "magnification": 2,
+      "region": 2
+    },
+    {
+      "cat": "playtest-sora",
+      "size": 400,
+      "scene": "teaser__switch",
+      "bounds": [
+        128,
+        40,
+        208,
+        120
+      ],
+      "magnification": 2,
+      "region": 0
+    },
+    {
+      "cat": "playtest-sora",
+      "size": 400,
+      "scene": "teaser__switch",
+      "bounds": [
+        88,
+        180,
+        168,
+        260
+      ],
+      "magnification": 2,
+      "region": 1
+    },
+    {
+      "cat": "playtest-sora",
+      "size": 400,
+      "scene": "teaser__switch",
+      "bounds": [
+        200,
+        264,
+        280,
+        344
+      ],
+      "magnification": 2,
+      "region": 2
+    },
+    {
+      "cat": "playtest-sora",
+      "size": 400,
+      "scene": "teaser__direct",
+      "bounds": [
+        172,
+        80,
+        252,
+        160
+      ],
+      "magnification": 2,
+      "region": 0
+    },
+    {
+      "cat": "playtest-sora",
+      "size": 400,
+      "scene": "teaser__direct",
+      "bounds": [
+        88,
+        180,
+        168,
+        260
+      ],
+      "magnification": 2,
+      "region": 1
+    },
+    {
+      "cat": "playtest-sora",
+      "size": 400,
+      "scene": "teaser__direct",
+      "bounds": [
+        0,
+        0,
+        80,
+        80
+      ],
+      "magnification": 2,
+      "region": 2
+    },
+    {
+      "cat": "playtest-sora",
+      "size": 400,
+      "scene": "teaser__open_up",
+      "bounds": [
+        128,
+        48,
+        208,
+        128
+      ],
+      "magnification": 2,
+      "region": 0
+    },
+    {
+      "cat": "playtest-sora",
+      "size": 400,
+      "scene": "teaser__open_up",
+      "bounds": [
+        88,
+        180,
+        168,
+        260
+      ],
+      "magnification": 2,
+      "region": 1
+    },
+    {
+      "cat": "playtest-sora",
+      "size": 400,
+      "scene": "teaser__open_up",
+      "bounds": [
+        320,
+        20,
+        400,
+        100
+      ],
+      "magnification": 2,
+      "region": 2
+    },
+    {
+      "cat": "playtest-sora",
+      "size": 320,
+      "scene": "normal",
+      "bounds": [
+        102,
+        32,
+        166,
+        96
+      ],
+      "magnification": 2,
+      "region": 0
+    },
+    {
+      "cat": "playtest-sora",
+      "size": 320,
+      "scene": "normal",
+      "bounds": [
+        70,
+        144,
+        134,
+        208
+      ],
+      "magnification": 2,
+      "region": 1
+    },
+    {
+      "cat": "playtest-sora",
+      "size": 320,
+      "scene": "normal",
+      "bounds": [
+        160,
+        211,
+        224,
+        275
+      ],
+      "magnification": 2,
+      "region": 2
+    },
+    {
+      "cat": "playtest-sora",
+      "size": 320,
+      "scene": "teaser__switch",
+      "bounds": [
+        102,
+        32,
+        166,
+        96
+      ],
+      "magnification": 2,
+      "region": 0
+    },
+    {
+      "cat": "playtest-sora",
+      "size": 320,
+      "scene": "teaser__switch",
+      "bounds": [
+        70,
+        144,
+        134,
+        208
+      ],
+      "magnification": 2,
+      "region": 1
+    },
+    {
+      "cat": "playtest-sora",
+      "size": 320,
+      "scene": "teaser__switch",
+      "bounds": [
+        160,
+        211,
+        224,
+        275
+      ],
+      "magnification": 2,
+      "region": 2
+    },
+    {
+      "cat": "playtest-sora",
+      "size": 320,
+      "scene": "teaser__direct",
+      "bounds": [
+        138,
+        64,
+        202,
+        128
+      ],
+      "magnification": 2,
+      "region": 0
+    },
+    {
+      "cat": "playtest-sora",
+      "size": 320,
+      "scene": "teaser__direct",
+      "bounds": [
+        70,
+        144,
+        134,
+        208
+      ],
+      "magnification": 2,
+      "region": 1
+    },
+    {
+      "cat": "playtest-sora",
+      "size": 320,
+      "scene": "teaser__direct",
+      "bounds": [
+        0,
+        0,
+        64,
+        64
+      ],
+      "magnification": 2,
+      "region": 2
+    },
+    {
+      "cat": "playtest-sora",
+      "size": 320,
+      "scene": "teaser__open_up",
+      "bounds": [
+        102,
+        38,
+        166,
+        102
+      ],
+      "magnification": 2,
+      "region": 0
+    },
+    {
+      "cat": "playtest-sora",
+      "size": 320,
+      "scene": "teaser__open_up",
+      "bounds": [
+        70,
+        144,
+        134,
+        208
+      ],
+      "magnification": 2,
+      "region": 1
+    },
+    {
+      "cat": "playtest-sora",
+      "size": 320,
+      "scene": "teaser__open_up",
+      "bounds": [
+        256,
+        16,
+        320,
+        80
+      ],
+      "magnification": 2,
+      "region": 2
+    }
+  ]
+}

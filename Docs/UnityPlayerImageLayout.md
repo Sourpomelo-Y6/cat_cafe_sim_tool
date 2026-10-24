@@ -70,3 +70,7 @@
 制作ツールの既存ハル画像・文章・素材変更は今回のコミットへ含めない。実Unityは先行差分が多数あるため、同期コードと再生成シーンを未コミットで保持する。共有DocsはGit外で、README／DevelopmentStatus／UnityPlayerImageLayoutPlan／UnityPlayerPresentation／UnityUIFixRequestsを更新。
 
 残る確認は全猫・全反応の大表示品質、代表解像度以外・長い名前の網羅、異なる旧rules_idの移行。画像容量削減は比較・提案段階のままで、今回へ混ぜていない。
+
+## 2026-10-24：圧縮候補の大表示比較
+
+[新UIの画質再評価](UnityImageStorageNewUI.md)で、三毛・白黒・白長毛の通常／準備／実行／特別反応を400／320pxで比較。ミケ実行は既存新UI Canvasで現行RGB24と一時BC7を撮影した。画質上は1024px BC7最高品質を推奨候補とする。実Importer・配布Playerでの圧縮後確認は未実施で、設定適用・ビルド・UI変更は行っていない。

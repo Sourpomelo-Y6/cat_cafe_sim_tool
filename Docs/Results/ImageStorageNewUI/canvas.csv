@@ -1,0 +1,5 @@
+resolution,candidate,displayWidth,displayHeight,format,filter
+1280,source,400,400,RGB24,Bilinear
+1280,BC7,400,400,BC7,Bilinear
+1024,source,320,320,RGB24,Bilinear
+1024,BC7,320,320,BC7,Bilinear
