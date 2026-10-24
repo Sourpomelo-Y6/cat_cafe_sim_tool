@@ -1,0 +1,11 @@
+--- a/Docs/DevelopmentStatus.md
++++ b/Docs/DevelopmentStatus.md
+@@ -23,7 +23,7 @@
+ 
+ ## 次に進める作業
+ 
+-**2026-10-24 操作負担の限定評価：** [比較表・停止原因・再開経路](../cat_cafe_sim_tool/Docs/UnityConversationBurden.md)。標準seed 0の1～8日、複数案件fixture、既読QA、1024×768実入力19クリックを区別して確認。結果読了→一覧は追加0操作、次案件は1操作、信頼回復1件は開く→読了9クリック。現範囲で必須の製品変更なし。最後の回答以降の追加実入力は自動レビューの個別許可待ち、全一時停止総数・読書時間は未測定。会話・数値・画像設定の変更なし。
++**2026-10-24 操作負担の限定評価：** [比較表・停止原因・再開経路](../cat_cafe_sim_tool/Docs/UnityConversationBurden.md)。標準seed 0の1～8日、複数案件fixture、既読QA、1024×768実入力を区別して確認。許可後の別セッションで混在3件→営業開始まで23クリック、残件0・通常自動進行停止を確認。結果読了→一覧は追加0操作、次案件は1操作、信頼回復1件は開く→読了9クリック。現範囲で必須の製品変更なし。全一時停止総数・読書時間は未測定。会話・数値・画像設定の変更なし。
+ 
+ **2026-10-24完了：** [個別交流の大画像UI](../cat_cafe_sim_tool/Docs/UnityPlayerImageLayout.md)を実装済み。[画像取り込み設定の恒久適用](../cat_cafe_sim_tool/Docs/UnityImageImportPolicy.md)も配布版まで検証し、Latestは実測76.90%減少。代表以外の全猫目視・他GPU/API・厳密なGPUメモリ測定は残る。
+ 

@@ -13,7 +13,10 @@
   "failed_build": "Logs/StandaloneBuild/Runs/20261024-220658-578-4aa9603261fb45e1a7dddca8f5807811.log",
   "build_failure": "pre-existing uncommitted Rin textures rejected by existing policy guard; settings not modified; instrumentation withdrawn",
   "physical_successful_clicks": 19,
-  "physical_scope": "1024x768 mixed fixture; Suzuki result completion, Tanaka recover completion, Takahashi choice reached; final answer awaiting explicit approval after auto-review rejection",
+  "physical_scope": "initial session19; final answer was deferred then completed in approved separate session23",
   "reading_time": "not measured",
-  "tests": "existing opt-in QA entrypoints; no product behavior changes"
+  "tests": "existing opt-in QA entrypoints; no product behavior changes",
+  "approved_physical_successful_clicks": 23,
+  "approved_physical_scope": "fresh session from original slot9 mixed fixture: Suzuki4 + Tanaka9 + Takahashi9 + start business1; pending0, day4 open, funds20520, normal automatic stopped",
+  "approval_status": "explicit user permission received; previously blocked operation completed"
 }
