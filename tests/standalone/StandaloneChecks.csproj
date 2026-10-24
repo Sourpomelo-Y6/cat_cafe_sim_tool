@@ -8,6 +8,7 @@
     <Compile Include="SubjectCatalogChecks.cs" />
     <Compile Include="AllModeNarrativeChecks.cs" />
     <Compile Include="PlayerTurnsChecks.cs" />
+    <Compile Include="PlayerStaminaChecks.cs" />
     <Compile Include="StaminaChecks.cs" />
     <Compile Include="StaminaBalance.cs" />
     <Compile Include="LongTermBalance.cs" />

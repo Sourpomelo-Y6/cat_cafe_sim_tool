@@ -98,6 +98,7 @@ namespace CatCafePreview
     [Serializable] public class PythonPlayerInteraction
     {
         public string narrative_image;
+        public string stamina_guidance;
         public string session_id, cat_id, content_cat_id, scene_key, image_key, event_image_key, name, mode, history, reason;
         public bool active, can_finish;
         public int remaining_ticks, remaining_sets;

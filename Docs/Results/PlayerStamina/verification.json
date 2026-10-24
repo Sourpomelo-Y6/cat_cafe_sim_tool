@@ -1,0 +1,16 @@
+{
+  "dotnet_player_turns": 123,
+  "dotnet_guidance": 37,
+  "player_final": "PASS 71",
+  "player_separate_process": "PASS 4",
+  "short_event_regression": 6624,
+  "event_failures": 0,
+  "resolutions": [
+    "1280x800",
+    "1024x768"
+  ],
+  "method": "UI button invocation and screenshot inspection, not physical mouse input",
+  "screenshots": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Logs\\PlayerStamina\\verified",
+  "long_term_evaluation_repeated": false,
+  "known_test_issue": "Existing --stamina runner does not handle closing growth batch at StaminaChecks.cs:31"
+}

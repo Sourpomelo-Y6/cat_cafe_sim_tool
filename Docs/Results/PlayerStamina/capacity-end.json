@@ -1,0 +1,12 @@
+{
+  "Latest_bytes": 9012670519.0,
+  "Latest_files": 156,
+  "Logs_bytes": 19137559356.0,
+  "QA_bytes": 45902830.0,
+  "Library_bytes": 12523735943.0,
+  "Pending": false,
+  "BuildDirectories": [
+    "Latest",
+    "Runs"
+  ]
+}
