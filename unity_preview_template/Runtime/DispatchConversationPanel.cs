@@ -30,6 +30,7 @@ namespace CatCafePreview
         protected override CafeConversationLine[] Lines(string branch)=>CafeDispatchDialogue.Lines(Row.stage,branch,Backend.Simulation.Definition(Row.cat_id).name,Row.Destination,Event,Patron && Event!=null?Backend.PatronFixedTerms(Event):null);
         protected override PythonIntakeState Request=>new PythonIntakeState{cat_id=Backend.Details.ContentId(Row.cat_id),name=Backend.Simulation.Definition(Row.cat_id).name,personality=Row.stage=="departure"?CafeDispatchDialogue.Title(Row.Destination):Row.stage=="travelling"?"派遣中 · あと "+(Event?.remaining??0)+"回の閉店":"帰還 · "+(Event?.status=="resolved"?"受取済み":"確認待ち"),can_decline=true};
         protected override bool CanAnswer(bool yes)=>!yes || (Row.stage=="departure"?Row.day==state.day && Option?.can_select==true:Row.stage=="return" && Return?.can_select==true);
+        protected override bool ReadSkippable(int node)=>progress.branch_id=="introduction" && (Row.stage=="departure" && node<2 || Row.stage=="return" && node==1);
         protected override bool ThreeLinePages=>true;
         protected override string Title=>CafeDispatchDialogue.Title(Row.Destination);
         protected override string SceneLabel=>state.day+"日目 · "+(Row.stage=="departure"?(progress.branch_id=="departed"?"出発済み":progress.branch_id=="cancelled"?"今回は出発しない":"出発前"):Row.stage=="travelling"?"派遣中":Event?.status=="resolved"?"報酬受取済み":"帰還の確認");

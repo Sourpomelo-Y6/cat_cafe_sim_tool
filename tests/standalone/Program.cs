@@ -173,6 +173,7 @@ static partial class Program
     }
     static void Main(string[] args)
     {
+        if(args.Length>0 && args[0]=="--read-check"){ReadChecks(args[1],args.Contains("--resume"));return;}
         if(args.Length>0 && args[0]=="--cat-images"){foreach(string cat in args.Length>4?args[4].Split(','):new[]{"cat-mike","cat-tama","cat-sora","cat-kohaku","cat-mugi","request-cat-1","regular-rescue-1","visiting-cat-1"})MikeImageChecks(args[1],args[2],Path.Combine(args[3],cat),cat);return;}
         if(args.Length>0 && args[0]=="--mike-images"){MikeImageChecks(args[1],args[2],args[3]);return;}
         if(args.Length>0 && args[0]=="--all-modes"){AllModeNarrativeChecks(args[1],args[2],args[3]);return;}

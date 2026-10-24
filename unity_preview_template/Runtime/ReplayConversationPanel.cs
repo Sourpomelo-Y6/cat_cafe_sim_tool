@@ -15,6 +15,7 @@ namespace CatCafePreview
             portraitLoaded=false;cachedPortrait=null;entry=value;host=surface;closed=onClose;position=new CafeConversationProgress{conversation_id=value.conversation_id,branch_id="replay",viewed_branches=new string[0]};
             Bind(new PythonCafeState{instance_id=Guid.NewGuid().ToString("N")},surface,font);Open();
         }
+        protected override bool TrackRead=>false;
         protected override bool Ready=>true;
         protected override bool AutoRunning=>false;
         protected override bool SaveControls=>false;

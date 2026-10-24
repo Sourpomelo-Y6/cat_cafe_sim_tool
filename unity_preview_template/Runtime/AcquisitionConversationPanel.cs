@@ -21,6 +21,9 @@ namespace CatCafePreview
         protected virtual string ThirdEffect=>"";
         protected virtual bool CanThird=>false;
         protected virtual void SendThird(){}
+        Button skipRead;
+        protected virtual bool ReadSkippable(int node)=>false;
+        protected virtual bool TrackRead=>true;
         Button next,accept,decline,backlog,close; ScrollRect scroll;
         string rendered,epoch; string pageText=""; float revealed; bool history,hidden,manualSelected; int lastFrame=-1;
         protected LocalCafeBackend Backend=>CafeBackends.Local as LocalCafeBackend;
@@ -110,13 +113,14 @@ namespace CatCafePreview
             if(history)historyBody.text=History(lines);
             next.gameObject.SetActive(!choosing && !history);next.GetComponentInChildren<Text>().text=revealed<full.Length?"全文表示":progress.node>=lines.Length?"会話を終える":"次へ";
             bool ready=Ready;
+            skipRead.gameObject.SetActive(!history && !choosing && TrackRead);skipRead.interactable=ready && CanSkipRead();
             next.interactable=ready;close.interactable=ready;backlog.interactable=ready;
             accept.gameObject.SetActive(choosing && !history);decline.gameObject.SetActive(choosing && !history);
             accept.interactable=ready && CanAnswer(true);decline.interactable=ready && CanAnswer(false);
             accept.GetComponentInChildren<Text>().text=AcceptCaption;decline.GetComponentInChildren<Text>().text=DeclineCaption;
             if(third!=null){third.gameObject.SetActive(choosing && !history);third.interactable=ready && CanThird;third.GetComponentInChildren<Text>().text=ThirdCaption;thirdEffect.text=ThirdEffect;}
             acceptEffect.text=AcceptEffect;declineEffect.text=DeclineEffect;
-            hint.text=BusyNotice;hint.gameObject.SetActive(!ThreeLinePages);
+            hint.text=Backend?.ReadHistory?.Error??BusyNotice;hint.gameObject.SetActive(!ThreeLinePages);
             portrait.texture=PortraitTexture(q.cat_id)??ContentPreview.CatPlaceholderTexture();portrait.enabled=portrait.texture!=null;
             if(portrait.texture!=null)portrait.GetComponent<AspectRatioFitter>().aspectRatio=(float)portrait.texture.width/portrait.texture.height;
         }
@@ -143,10 +147,15 @@ namespace CatCafePreview
         {
             if(!Showing || !Click() || progress==null || history)return;
             var lines=Lines(progress.branch_id);
-            if(progress.node<lines.Length){if(revealed<pageText.Length)revealed=pageText.Length;else if(ThreeLinePages && progress.page_offset+pageText.Length<lines[progress.node].text.Length)progress.page_offset+=pageText.Length;else {progress.node++;progress.page_offset=0;}}
+            if(progress.node<lines.Length){if(revealed<pageText.Length)revealed=pageText.Length;else { RememberPage(lines);if(ThreeLinePages && progress.page_offset+pageText.Length<lines[progress.node].text.Length)progress.page_offset+=pageText.Length;else {progress.node++;progress.page_offset=0;} }}
             else if(progress.branch_id!="introduction"){Finish();RecordCompletion();ReturnToEvents();return;}
             Refresh();
         }
+        string ReadKey(CafeConversationLine[] lines,int node)=>CafeReadStore.Key(progress.conversation_id,progress.branch_id,lines,node);
+        void RememberPage(CafeConversationLine[] lines){if(TrackRead && Backend!=null)Backend.ReadHistory.Remember(ReadKey(lines,progress.node),progress.page_offset,progress.page_offset+pageText.Length);}
+        bool CanSkipRead(){if(!TrackRead || Backend==null || progress==null || Choosing || answerConfirmation!=null)return false;var lines=Lines(progress.branch_id);return progress.node<lines.Length && ReadSkippable(progress.node) && Backend.ReadHistory.Contains(ReadKey(lines,progress.node),0,lines[progress.node].text.Length);}
+        // A single explicit operation advances only over contiguous known safe sections. Never invokes Next/Answer/Finish.
+        public void SkipRead(){if(!Showing || history || !Click() || !CanSkipRead())return;var lines=Lines(progress.branch_id);while(progress.node<lines.Length && CanSkipRead()){progress.node++;progress.page_offset=0;}Refresh();}
         public void Answer(bool answer){if(!Showing || !Click() || progress==null || progress.branch_id!="introduction" || progress.node<Lines("introduction").Length)return;SendAnswer(answer);Refresh();}
         bool EventConversation=>this is IntakeConversationPanel || this is RegularConversationPanel || this is DispatchConversationPanel || this is EquipmentConversationPanel || this is TrustConversationPanel || this is AdoptionConversationPanel || this is MissingConversationPanel || this is ReservationConversationPanel || this is LodgeConversationPanel || this is EncounterConversationPanel || this is DispatchIntroductionConversationPanel;
         void ReturnToEvents(){if(!Ready)return;var list=GetComponent<PythonEventListPanel>();if(EventConversation && list!=null)list.HoldConversations=true;Close();if(EventConversation && list!=null)list.ConversationReturned();}
@@ -196,6 +205,7 @@ namespace CatCafePreview
             Button(dialogue.transform,"読込",264,202,96,()=>GetComponent<PythonSaveBrowser>().OpenLoad()).gameObject.SetActive(SaveControls);
             close=Button(dialogue.transform,CloseCaption,388,202,144,ReturnToEvents);
             Button(dialogue.transform,"設定",548,202,120,()=>GetComponent<GameOptionsPanel>()?.Open());
+            skipRead=Button(dialogue.transform,"既読部分をスキップ",684,202,250,SkipRead);
             next=Button(dialogue.transform,"次へ",948,202,200,Next);next.GetComponent<ConversationShape>().color=Olive;next.GetComponentInChildren<Text>().color=Paper;
             choiceGroup=new GameObject("Choices",typeof(RectTransform));choiceGroup.transform.SetParent(card.transform,false);var choices=choiceGroup.GetComponent<RectTransform>();choices.anchorMin=choices.anchorMax=new Vector2(.5f,.61f);choices.pivot=new Vector2(.5f,.5f);choices.sizeDelta=new Vector2(760,354);choices.anchoredPosition=Vector2.zero;
             var first=Box(choiceGroup.transform,"Accept choice",0,0,760,170,Paper,12);var second=Box(choiceGroup.transform,"Decline choice",0,184,760,170,Paper,12);
@@ -210,6 +220,7 @@ namespace CatCafePreview
         {
             var size=card.GetComponent<RectTransform>().rect.size;if(size==layoutSize && layoutHistory==history && layoutThreeLinePages==ThreeLinePages)return;layoutSize=size;layoutHistory=history;layoutThreeLinePages=ThreeLinePages;
             float width=size.x-96;var dock=dialogue.GetComponent<RectTransform>();dock.offsetMin=new Vector2(48,32);dock.offsetMax=new Vector2(-48,286);
+            skipRead.GetComponent<RectTransform>().anchoredPosition=new Vector2(width-274,8);
             SetScroll(scroll,width-64,ThreeLinePages?144:112);
             scroll.vertical=!ThreeLinePages;if(ThreeLinePages)scroll.verticalScrollbar.gameObject.SetActive(false);hint.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,width-64);next.GetComponent<RectTransform>().anchoredPosition=new Vector2(width-224,-202);
             var box=historyWindow.GetComponent<RectTransform>();Place(box,96,110,size.x-192,size.y-158);SetScroll(historyScroll,size.x-256,size.y-334);

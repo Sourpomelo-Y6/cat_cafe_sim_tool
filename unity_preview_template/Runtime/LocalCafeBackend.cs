@@ -12,6 +12,7 @@ namespace CatCafePreview
     public sealed partial class LocalCafeBackend : ICafeBackend
     {
         public readonly CafeSimulation Simulation;
+        public CafeReadStore ReadHistory {get;private set;}
         public event Action<string, CafeResponse> CommandObserved;
         public CafeImageGalleryStore Gallery {get;private set;}
         private readonly CafeSaveStore saves;
@@ -37,6 +38,7 @@ namespace CatCafePreview
             }
             CafeLegacyImport.DecodeBase=text=>DecodeSave(text).state;
             this.saveDirectory=saveDirectory??Path.Combine(Application.persistentDataPath,"standalone-v1");
+            ReadHistory=new CafeReadStore(this.saveDirectory,value=>JsonUtility.ToJson(value,true),text=>JsonUtility.FromJson<CafeReadProfile>(text));
             Gallery=new CafeImageGalleryStore(this.saveDirectory,value=>JsonUtility.ToJson(value,true),text=>JsonUtility.FromJson<CafeImageProfile>(text));
             Replays=new CafeReplayStore(this.saveDirectory,value=>JsonUtility.ToJson(value,true),text=>JsonUtility.FromJson<CafeReplayProfile>(text));
             Simulation = new CafeSimulation(rules);

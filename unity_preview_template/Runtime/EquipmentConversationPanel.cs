@@ -9,6 +9,7 @@ namespace CatCafePreview {
   public bool OpenPending(){Apply(Client.CurrentState,GetComponent<PythonStoreEventPanel>());if(Row==null || Row.progress.completed)return false;Open();return true;}
   protected override CafeConversationProgress ResolveProgress()=>Row?.progress;
   protected override bool Available=>base.Available && (Row.progress.branch_id!="introduction" || string.IsNullOrEmpty(state.required_action) || state.required_action=="store_event");
+  protected override bool ReadSkippable(int node)=>progress.branch_id=="introduction" && node<2;
   protected override bool ThreeLinePages=>true;
   protected override bool AutoRunning=>false;
   protected override bool Ready=>base.Ready && GetComponent<PythonDayOffPanel>()?.panel.activeSelf!=true;
