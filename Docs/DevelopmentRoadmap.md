@@ -18,7 +18,9 @@
 
 正本：[全体進捗](../../Docs/DevelopmentStatus.md)、[通常交流文](AllNormalInteractionNarratives.md)、[制作UI](ToolUiOrganization.md)、[育成案内](UnityPatronGrowthGuidance.md)、[残件一覧](UnityPendingCases.md)。本整理ではゲームを再実行しておらず、上記は既存資料に記録された範囲。
 
-## 1. 最優先：会話と営業復帰の負担を測る
+## 1. 会話と営業復帰の負担評価
+
+2026-10-24：[限定した操作負担評価](UnityConversationBurden.md)を記録。標準seed 0の1～8日・混在fixture・既読QA・実入力19クリックを区別した。現範囲で必須の製品変更なし。最後の回答から営業再開までの追加実入力はレビュー承認待ち、厳密な全停止数は未測定。以下は評価開始時の計画。
 
 残件一覧と再開導線を土台に、会話が重なる日の使いやすさを確認する。主要会話の追加や一覧の新設を未着手として扱わない。
 

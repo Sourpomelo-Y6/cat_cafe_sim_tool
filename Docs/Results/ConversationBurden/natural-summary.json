@@ -1,0 +1,124 @@
+{
+  "scope": "standard rules seed 0 popularity fast; days 1-8, stopped at first day 9 observation; no objective completion",
+  "natural_days": [
+    {
+      "day": 4,
+      "logged_actions": {
+        "次へ / 全文表示": 10,
+        "次へ / 次へ": 9,
+        "迎える / 迎える": 1,
+        "autoplay fast popularity": 1
+      },
+      "logged_ui_callbacks": 20,
+      "direct_route_calls": 0,
+      "direct_start_autoplay": 1
+    },
+    {
+      "day": 5,
+      "logged_actions": {
+        "required route store_event": 2,
+        "次へ / 全文表示": 7,
+        "次へ / 次へ": 6,
+        "迎える / 修理": 1,
+        "autoplay fast popularity": 1
+      },
+      "logged_ui_callbacks": 14,
+      "direct_route_calls": 2,
+      "direct_start_autoplay": 1
+    },
+    {
+      "day": 8,
+      "logged_actions": {
+        "required route regular_introduction": 1,
+        "次へ / 全文表示": 10,
+        "次へ / 次へ": 9,
+        "見送る / 見送る": 1,
+        "autoplay fast popularity": 1
+      },
+      "logged_ui_callbacks": 20,
+      "direct_route_calls": 1,
+      "direct_start_autoplay": 1
+    }
+  ],
+  "commands": 352,
+  "errors": 0,
+  "events": [
+    {
+      "day": 1,
+      "kind": "new_game",
+      "choice": "popularity",
+      "event_id": "",
+      "error": ""
+    },
+    {
+      "day": 1,
+      "kind": "start_autoplay",
+      "choice": "",
+      "event_id": "",
+      "error": ""
+    },
+    {
+      "day": 4,
+      "kind": "blocked-run-end",
+      "requested": "step_autoplay"
+    },
+    {
+      "day": 4,
+      "kind": "resolve_intake",
+      "choice": "accept",
+      "event_id": "",
+      "error": ""
+    },
+    {
+      "day": 4,
+      "kind": "start_autoplay",
+      "choice": "",
+      "event_id": "",
+      "error": ""
+    },
+    {
+      "day": 5,
+      "kind": "blocked-run-end",
+      "requested": "step_autoplay"
+    },
+    {
+      "day": 5,
+      "kind": "resolve_store_event",
+      "choice": "repair",
+      "event_id": "equipment-trouble-5",
+      "error": ""
+    },
+    {
+      "day": 5,
+      "kind": "start_autoplay",
+      "choice": "",
+      "event_id": "",
+      "error": ""
+    },
+    {
+      "day": 8,
+      "kind": "blocked-run-end",
+      "requested": "step_autoplay"
+    },
+    {
+      "day": 8,
+      "kind": "resolve_regular_introduction",
+      "choice": "decline",
+      "event_id": "",
+      "error": ""
+    },
+    {
+      "day": 8,
+      "kind": "start_autoplay",
+      "choice": "",
+      "event_id": "",
+      "error": ""
+    }
+  ],
+  "limitations": [
+    "ui-actions omits fallback d.Next and direct list/method calls; UI callback counts are lower bounds, not physical clicks",
+    "requested step may become effective pause; old observer omits paused flag; cannot reconstruct every transient pause",
+    "no reading time measured",
+    "headless UI listeners do not establish rendered layout"
+  ]
+}

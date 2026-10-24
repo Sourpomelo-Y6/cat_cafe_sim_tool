@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-24",
+  "latest": "Logs/StandaloneBuild/Latest/CatCafeStandalone.exe",
+  "latest_bytes": 2082007384,
+  "latest_files": 156,
+  "build_replaced": false,
+  "natural_stop": "Stopped at day 9",
+  "read": "PASS 26; support introduction: 2 normal next operations -> 1 skip; condition, choice, confirmation and result retained",
+  "read_restart": "PASS 3",
+  "read_regressions": "trip=476 equipment=191 support=181",
+  "mixed": "PASS 67; manual mixed checkpoint ready",
+  "mixed_restart": "PASS 65; manual mixed checkpoint ready",
+  "failed_build": "Logs/StandaloneBuild/Runs/20261024-220658-578-4aa9603261fb45e1a7dddca8f5807811.log",
+  "build_failure": "pre-existing uncommitted Rin textures rejected by existing policy guard; settings not modified; instrumentation withdrawn",
+  "physical_successful_clicks": 19,
+  "physical_scope": "1024x768 mixed fixture; Suzuki result completion, Tanaka recover completion, Takahashi choice reached; final answer awaiting explicit approval after auto-review rejection",
+  "reading_time": "not measured",
+  "tests": "existing opt-in QA entrypoints; no product behavior changes"
+}

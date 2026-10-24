@@ -1,0 +1,32 @@
+[
+  {
+    "path": "Logs",
+    "bytes": 12380116891.0,
+    "files": 62646
+  },
+  {
+    "path": "Logs/StandaloneBuild",
+    "bytes": 2212938818.0,
+    "files": 421
+  },
+  {
+    "path": "Logs/StandaloneBuild/Latest",
+    "bytes": 2082007384.0,
+    "files": 156
+  },
+  {
+    "path": "Logs/StandaloneBuild/Runs",
+    "bytes": 130931434.0,
+    "files": 264
+  },
+  {
+    "path": "Logs/ConversationBurden",
+    "bytes": 10296652.0,
+    "files": 357
+  },
+  {
+    "path": "C:/Users/hi-wa/unity_workspase/CatCafeSim/Library",
+    "bytes": 4297615472.0,
+    "files": 32169
+  }
+]
