@@ -1,0 +1,1 @@
+PASS 36 checks: explicit-reaction boundary rotation; unchanged speech/action/narration/image hashes; actual actions under limited in-memory fixtures; old/new disk receipts; catalog-free read stability. old=5a7e11a7efe8952f3dfbe88915298ddeda302faea17975ff358656ad666e2ba6 new=e081ce08f03ce99e22131afb0a87134322c742822d2bdb88ffe049733e48f2c7

@@ -1,0 +1,175 @@
+{
+  "changed_conditions": 3,
+  "changed_variants": 6,
+  "unaffected_entries_and_drafts_identical": true,
+  "records": [
+    {
+      "before": {
+        "condition": {
+          "kind": "cat_response",
+          "subject_id": "cat-mike",
+          "mode": "teaser",
+          "action": "any",
+          "reaction": "neutral",
+          "scene_key": "teaser"
+        },
+        "variants": [
+          {
+            "id": "06cf8de65acb5dc285aaa393d0618562",
+            "slot": 1,
+            "text": "ミケはねこじゃらしを追いかけ、軽快な動きで跳ねた。"
+          },
+          {
+            "id": "f15dae67a4ff5f2398ca70aaa6ea0e4e",
+            "slot": 2,
+            "text": "ミケはねこじゃらしに反応し、興味深そうに頭を動かした。"
+          },
+          {
+            "id": "8e1634a61bed5856bf59c99b716367cb",
+            "slot": 3,
+            "text": "ミケはねこじゃらしを追い、楽しそうにその周りを跳ねた。"
+          }
+        ]
+      },
+      "after": {
+        "condition": {
+          "kind": "cat_response",
+          "subject_id": "cat-mike",
+          "mode": "teaser",
+          "action": "any",
+          "reaction": "neutral",
+          "scene_key": "teaser"
+        },
+        "variants": [
+          {
+            "id": "06cf8de65acb5dc285aaa393d0618562",
+            "slot": 1,
+            "text": "ミケはねこじゃらしに目を向け、穏やかな様子で動きを見ていた。"
+          },
+          {
+            "id": "f15dae67a4ff5f2398ca70aaa6ea0e4e",
+            "slot": 2,
+            "text": "ミケはねこじゃらしに反応し、興味深そうに頭を動かした。"
+          },
+          {
+            "id": "8e1634a61bed5856bf59c99b716367cb",
+            "slot": 3,
+            "text": "ミケはねこじゃらしの動きを、静かに目で追った。"
+          }
+        ]
+      }
+    },
+    {
+      "before": {
+        "condition": {
+          "kind": "cat_response",
+          "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+          "mode": "pause",
+          "action": "pause",
+          "reaction": "neutral",
+          "scene_key": "pause"
+        },
+        "variants": [
+          {
+            "id": "baef1f1fbdc25789ac574d44802db7af",
+            "slot": 1,
+            "text": "{cat}は動きを止めて静かに待った。"
+          },
+          {
+            "id": "cf7d78190cef56969ae1df801b562091",
+            "slot": 2,
+            "text": "{cat}は足を止め、姿勢を保ったまま待った。"
+          },
+          {
+            "id": "73b5665bc9a3500d82f0c0c5ffac7933",
+            "slot": 3,
+            "text": "{cat}は走りをやめ、しばらくの間その場で待った。"
+          }
+        ]
+      },
+      "after": {
+        "condition": {
+          "kind": "cat_response",
+          "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+          "mode": "pause",
+          "action": "pause",
+          "reaction": "neutral",
+          "scene_key": "pause"
+        },
+        "variants": [
+          {
+            "id": "baef1f1fbdc25789ac574d44802db7af",
+            "slot": 1,
+            "text": "{cat}は動きを止めて静かに待った。"
+          },
+          {
+            "id": "cf7d78190cef56969ae1df801b562091",
+            "slot": 2,
+            "text": "{cat}は足を止め、姿勢を保ったまま待った。"
+          },
+          {
+            "id": "73b5665bc9a3500d82f0c0c5ffac7933",
+            "slot": 3,
+            "text": "{cat}はしばらくの間、その場で静かに待った。"
+          }
+        ]
+      }
+    },
+    {
+      "before": {
+        "condition": {
+          "kind": "cat_response",
+          "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+          "mode": "pause",
+          "action": "pause",
+          "reaction": "listless",
+          "scene_key": "pause"
+        },
+        "variants": [
+          {
+            "id": "83a583c2204a56f8bfe91ebb49e1f28d",
+            "slot": 1,
+            "text": "{cat}は耳を垂れ、体をゆっくり揺らし、相手の手をそっと離した。"
+          },
+          {
+            "id": "743dd578abbf5746bc63103c3c66a789",
+            "slot": 2,
+            "text": "{cat}は静かに座り、身体をすべり落ちるようにして相手の手を遠ざけた。"
+          },
+          {
+            "id": "6c10385323fd5fe99491dfe69a5b84cb",
+            "slot": 3,
+            "text": "{cat}は小さく震え、体を丸めて相手の手から離れ、静かに待った。"
+          }
+        ]
+      },
+      "after": {
+        "condition": {
+          "kind": "cat_response",
+          "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+          "mode": "pause",
+          "action": "pause",
+          "reaction": "listless",
+          "scene_key": "pause"
+        },
+        "variants": [
+          {
+            "id": "83a583c2204a56f8bfe91ebb49e1f28d",
+            "slot": 1,
+            "text": "{cat}は疲れた様子で、静かに休んでいた。"
+          },
+          {
+            "id": "743dd578abbf5746bc63103c3c66a789",
+            "slot": 2,
+            "text": "{cat}は動きを控え、そっと休憩していた。"
+          },
+          {
+            "id": "6c10385323fd5fe99491dfe69a5b84cb",
+            "slot": 3,
+            "text": "{cat}はあまり動かず、自分のペースで休んでいた。"
+          }
+        ]
+      }
+    }
+  ]
+}

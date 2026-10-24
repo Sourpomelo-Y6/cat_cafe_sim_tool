@@ -1,0 +1,20 @@
+{
+  "unchanged_conditions": 248,
+  "changed_conditions": 3,
+  "changed_texts": 6,
+  "initial_guest_36_preserved": true,
+  "image_count": 428,
+  "image_bytes": 857219100,
+  "pack_bytes": 858359089,
+  "old_revision": "5a7e11a7efe8952f3dfbe88915298ddeda302faea17975ff358656ad666e2ba6",
+  "new_revision": "e081ce08f03ce99e22131afb0a87134322c742822d2bdb88ffe049733e48f2c7",
+  "unchanged_catalog_fields": [
+    "cat_bindings",
+    "people",
+    "image_bindings",
+    "action_texts",
+    "narration_texts",
+    "rest_narration"
+  ],
+  "pack_id": "51b88e2f3f974a83a197ff6a3cc5af8e"
+}
