@@ -1,0 +1,344 @@
+{
+  "before_conditions": 239,
+  "after_conditions": 251,
+  "old_entries_unchanged": true,
+  "old_drafts_unchanged": true,
+  "new_entries": [
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "guest-1",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "ball",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "4ec8892e7cc95864b164a47501ef2337",
+          "slot": 1,
+          "text": "ボールを少し動かしてみてもいいですか。"
+        },
+        {
+          "id": "80cc361afab85d129b6b2fce35f661e9",
+          "slot": 2,
+          "text": "{cat_call}、ボールはいかがですか。"
+        },
+        {
+          "id": "1b5740044ff9564dbecd1debe9d831e1",
+          "slot": 3,
+          "text": "よかったら、このボールで遊びませんか。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "guest-1",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "plush",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "f02be62fb62b52aca9ed940d16dd446b",
+          "slot": 1,
+          "text": "ぬいぐるみで遊んでみませんか。"
+        },
+        {
+          "id": "1dd35b96066d5e379307b84fed3fb55c",
+          "slot": 2,
+          "text": "{cat_call}、ぬいぐるみはいかがですか。"
+        },
+        {
+          "id": "98e1c15f8c2d5f28b87047c62db5525f",
+          "slot": 3,
+          "text": "このぬいぐるみを動かしてみますね。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "guest-1",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "tunnel",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "fb2cc9f32a4f594cbc41342895beec41",
+          "slot": 1,
+          "text": "トンネルで遊んでみてもいいですか。"
+        },
+        {
+          "id": "e192fe04baaa5ce9888b8c1925138274",
+          "slot": 2,
+          "text": "{cat_call}、トンネルはいかがですか。"
+        },
+        {
+          "id": "c9b4cfa3288a5cbc81d2ff112efbd116",
+          "slot": 3,
+          "text": "気が向いたら、トンネルで遊びませんか。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "guest-1",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "brush",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "ed283499fe915cd78674b0384c91a8d1",
+          "slot": 1,
+          "text": "ブラシを使ってみてもいいですか。"
+        },
+        {
+          "id": "1a1b744c6fb954e5ac24b137e61f4057",
+          "slot": 2,
+          "text": "{cat_call}、ブラッシングはいかがですか。"
+        },
+        {
+          "id": "361593543bcc5477ae08bed12398f7ba",
+          "slot": 3,
+          "text": "無理のない範囲で、ブラシをかけてみますね。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "guest-1",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "voice",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "20360da4334c5e75b83fb067a1e19f1d",
+          "slot": 1,
+          "text": "{cat_call}、少しお話ししてもいいですか。"
+        },
+        {
+          "id": "27b227d8bd885d929617f1dff2efb67b",
+          "slot": 2,
+          "text": "お返事は気にせず、聞いていてくださいね。"
+        },
+        {
+          "id": "d1d405f1c2005794be008034180ad1e3",
+          "slot": 3,
+          "text": "少しだけ、声をかけてみますね。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "guest-1",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "presence",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "8e9f073cfcbd52c29a293a660038afc3",
+          "slot": 1,
+          "text": "そっと、ここで様子を見ていましょう。"
+        },
+        {
+          "id": "cdde2ca8521455b3865c8a34846503ac",
+          "slot": 2,
+          "text": "{cat_call}のペースを大切にしたいですね。"
+        },
+        {
+          "id": "c181e5d1104550539713b7223d8b9c55",
+          "slot": 3,
+          "text": "急がず、静かに見守っていましょう。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "person-952c631405e649fdb50c390881804977",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "ball",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "b0265308f0555f65936dc88697e6b149",
+          "slot": 1,
+          "text": "{cat_call}、ボールで遊んでみませんか。"
+        },
+        {
+          "id": "dd9d442e9c155981a19d578a6ce550a5",
+          "slot": 2,
+          "text": "このボール、少し動かしてみますね。"
+        },
+        {
+          "id": "02bf23741c705aabbb7c5ff40205657d",
+          "slot": 3,
+          "text": "気が向いたら、ボール遊びもいいですね。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "person-952c631405e649fdb50c390881804977",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "plush",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "5bc33c66b3a15a29bd40a4ec3fe31ae1",
+          "slot": 1,
+          "text": "{cat_call}、ぬいぐるみで遊びませんか。"
+        },
+        {
+          "id": "ee50fa5f04df5280ae7aa812e2a0ea49",
+          "slot": 2,
+          "text": "このぬいぐるみ、動かしてみましょうか。"
+        },
+        {
+          "id": "e3c5c6cea80356eaae669f5b08d2ddeb",
+          "slot": 3,
+          "text": "ぬいぐるみ遊びも、よかったらどうですか。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "person-952c631405e649fdb50c390881804977",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "tunnel",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "41bb502b91245655a7eb68b54ec78933",
+          "slot": 1,
+          "text": "{cat_call}、トンネルで遊んでみませんか。"
+        },
+        {
+          "id": "5a2dab0697b559b5bdc344528e2844fd",
+          "slot": 2,
+          "text": "トンネル遊びも、よかったらどうですか。"
+        },
+        {
+          "id": "8f732800da335512b742162c624a6fd7",
+          "slot": 3,
+          "text": "気が向いたときに、トンネルで遊びましょう。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "person-952c631405e649fdb50c390881804977",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "brush",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "d96c702528cc5839bc8373b83cb900ca",
+          "slot": 1,
+          "text": "{cat_call}、ブラシをかけてもいいですか。"
+        },
+        {
+          "id": "6fede4f01067550bae441c4b8639b8af",
+          "slot": 2,
+          "text": "ブラッシングを少し試してみましょうか。"
+        },
+        {
+          "id": "69a7416a2396585b953abacf69d95cdb",
+          "slot": 3,
+          "text": "ブラシはどうですか。無理せずいきましょう。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "person-952c631405e649fdb50c390881804977",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "voice",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "fe4ea383e2715613b23ec8c02dcb8bb1",
+          "slot": 1,
+          "text": "{cat_call}、ちょっとお話ししましょうか。"
+        },
+        {
+          "id": "ebb48f43e00f512e83c2f3d8340af71e",
+          "slot": 2,
+          "text": "返事はなくても大丈夫ですよ。"
+        },
+        {
+          "id": "1d1bbda3f5b15d9ead08cade5a7d6e88",
+          "slot": 3,
+          "text": "少し声をかけてみますね。気楽にどうぞ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "person-952c631405e649fdb50c390881804977",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "presence",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "14863e99a63554feaa8c32cde3c0eeea",
+          "slot": 1,
+          "text": "ここでのんびり、様子を見ていましょう。"
+        },
+        {
+          "id": "f51d29aa17c659ed8661a4e7dd41589d",
+          "slot": 2,
+          "text": "{cat_call}のペースで過ごせるといいですね。"
+        },
+        {
+          "id": "6f3f331507ec561bba9c5714b188b61e",
+          "slot": 3,
+          "text": "急がずに、静かな時間を大切にしましょう。"
+        }
+      ]
+    }
+  ]
+}

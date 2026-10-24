@@ -1,0 +1,1 @@
+PASS: shipped Player Resources 251 pools; both guests disk restart exact text/candidate IDs/image refs; receipt viewing without catalog unchanged.

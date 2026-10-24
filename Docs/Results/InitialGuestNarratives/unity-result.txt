@@ -1,0 +1,1 @@
+PASS 236 bounded resolution/rotation/negative checks; 2 guests x17 actions x2 cats; legacy priority; actual service with explicit actor/mode fixture; disk save/load exact receipt IDs/text; no regeneration without catalog; two-resolution seat/latest/history captures. Not physical input or exhaustive natural service sampling.

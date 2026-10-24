@@ -1,0 +1,22 @@
+{
+  "cat_cafe_sim/config/cafe_playtest_cats.json": {
+    "bytes": 14174,
+    "sha256": "5ee896af8910440292c4192600859c42a91f3b3d6b1cb85821ac6c7d3dcdc659"
+  },
+  "cat_cafe_sim/saves/content_images/manifest.json": {
+    "bytes": 86252,
+    "sha256": "31b35205e46674748165ec99d888c266c12c10898a4f8b26c7e16e03b8413b85"
+  },
+  "cat_cafe_sim/saves/content_images/texts.json": {
+    "bytes": 749,
+    "sha256": "4843ff12d7dd71443f9fbf49ffaf6b08c1ad7b27c0fa34a6bbf927d09d6dcd61"
+  },
+  "cat_cafe_sim/saves/content_images/interaction_subjects.json": {
+    "bytes": 14315,
+    "sha256": "33ef390b5aeb1f3800c1960741d586d314e2f139d6fb0f3f848de47e2b8998c0"
+  },
+  "cat_cafe_sim/saves/content_images/interaction_texts.json": {
+    "bytes": 216350,
+    "sha256": "fb42e23ca84ac17b281515726272765d1b72ea034a4aaec708770eb2d25a88f6"
+  }
+}
