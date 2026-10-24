@@ -50,6 +50,9 @@ class SubjectManagerWindow:
         ttk.Button(buttons,text='対象と資料を保存',command=self.save).pack(side='left')
         ttk.Button(buttons,text='台帳を再読込',command=self.reload).pack(side='left',padx=8)
         ttk.Button(buttons,text='閉じる',command=self.close).pack(side='right')
+        portrait_buttons=ttk.Frame(frame);portrait_buttons.pack(fill='x',pady=4)
+        for label,command in [('人物画像を登録・差替…',self.register_portrait),('人物画像を確認',self.preview_portrait),('画像対応を解除',self.remove_portrait),('人物画像をUnity向けに書き出す…',self.export_portraits)]:
+            ttk.Button(portrait_buttons,text=label,command=command).pack(side='left',padx=2)
         self.notice=tk.StringVar(master=self.window)
         ttk.Label(frame,textvariable=self.notice,wraplength=800).pack(anchor='w',pady=(6,0))
         self.refresh();self.refresh_references();self.load(registry.get('cat-mike'))
@@ -149,3 +152,44 @@ class SubjectManagerWindow:
 
     def close(self):
         if self.confirm_leave():self.window.destroy()
+
+    def portraits(self):
+        from human_portraits import HumanPortraitStore
+        return HumanPortraitStore(self.registry.path.parent)
+
+    def register_portrait(self):
+        from tkinter import filedialog
+        try:
+            if not self.current or self.current['kind']!='speech':raise ValueError('人物を選んでください。')
+            if not self.save():return
+            source=filedialog.askopenfilename(parent=self.window,filetypes=[('PNG','*.png')])
+            if source:
+                self.portraits().register(self.current['id'],source)
+                self.notice.set('人物画像を登録しました。客ID：'+self.current['game_id'])
+                self.preview_portrait()
+        except (OSError,ValueError) as exc:self.notice.set(str(exc))
+
+    def preview_portrait(self):
+        import tkinter as tk
+        from PIL import Image,ImageTk
+        try:
+            row=next((r for r in self.portraits().read()['people'] if r['subject_id']==self.current['id']),None)
+            if not row:raise ValueError('人物画像は未登録です。共通人物記号を表示します。')
+            im=Image.open(self.registry.path.parent/row['image']);im.thumbnail((400,400))
+            win=tk.Toplevel(self.window);win.title(self.current['name']+' / '+row['game_id'])
+            photo=ImageTk.PhotoImage(im);label=tk.Label(win,image=photo);label.image=photo;label.pack()
+        except (OSError,ValueError) as exc:self.notice.set(str(exc))
+
+    def remove_portrait(self):
+        try:
+            if self.current:self.portraits().remove(self.current['id']);self.notice.set('画像対応を解除しました。素材ファイルは保持します。')
+        except (OSError,ValueError) as exc:self.notice.set(str(exc))
+
+    def export_portraits(self):
+        from tkinter import filedialog
+        try:
+            destination=filedialog.askdirectory(parent=self.window,title='人物用パックの書き出し先（Unityの通常取り込みで開けます）')
+            if destination:
+                folder,warnings=self.portraits().export(destination)
+                self.notice.set(str(folder)+(' / '+' / '.join(warnings) if warnings else '：書き出しました。'))
+        except (OSError,ValueError) as exc:self.notice.set(str(exc))

@@ -1,0 +1,82 @@
+# お客さん画像：最初の試作と人物専用の登録経路
+
+2026-10-25。佐藤さん（guest-1）を最初の対象とし、登録・表示基盤を追加した。**ユーザーがAを選択し、Aを基にした一人用画像を採用・登録した。A/Bは新しい外見案であり、既存設定の発見ではない。性別・年代・職業・来歴を既存設定として補完しない。** 鈴木さん・森さんの画像は未制作・未採用。
+
+## 試作と表示方針
+
+[佐藤さんのA/B試作](../../Docs/Prototypes/SatoPortrait-v1/sato-proposals-ab.png)。imagegenスキルの組み込みimage_genで生成した比較画像。最終ゲーム素材ではなく、文字付き二人比較シートのまま登録しない。
+
+A：短い暗褐色の髪、丸眼鏡、緑のカーディガン。若い成人・中性的な外見の提案。
+B：暗褐色のボブ、眼鏡なし、赤茶のカーディガン。成熟した成人女性的な外見の提案。
+
+既存のタマ画像と席UIを確認し、柔らかい褐色の線・淡い暖色・描き込みを抑えた衣服の胸上を提案。席の既存人物記号は34 logical pxで、1024表示ではさらに小さい。顔・髪型・眼鏡・服の大きな色面で区別する。A選択後、同じ顔・髪・眼鏡・衣服を基に一人だけの透過正方形PNGを制作した。1254×1254 RGBA、alpha最小0・最大255。Importerで1024pxへ縮小する。透明を選ぶ場合はalphaを維持。表情差分・立ち絵・CG・全24客へは拡大しない。
+
+## IDと保存
+
+- 佐藤さん：制作対象 `guest-1` → ゲーム客 `guest-1`。
+- 鈴木さん：制作対象 `person-952c631405e649fdb50c390881804977` → ゲーム客 `guest-2`。画像未登録。
+- 森さん：ゲーム客 `reservation-longhair`。画像未登録。人物台帳を登録する際にもこの客IDを明示する。
+
+台帳 `interaction_subjects.json` の人物（speech）とゲーム客IDの対応を読んで、別の `human_portraits.json` に `subject_id/game_id/image` を保存する。画像実体は `people/<SHA256>.png`。猫manifest・content_id・bundle.catsへ人物を偽装しない。表示名で検索しない。`temporary-sato` 等の別IDは同名でも共通記号になる。
+
+無効化・ゲームID変更後の古い対応は書き出しから除外して警告。未登録・破損・欠損画像も警告して画像を除外。ゲーム保存には画像参照を追加しないため、営業保存の客IDをそのまま表示解決に使う。外見の再採用・差し替えは過去の会話本文や行動結果を書き換えない。
+
+## Toolの操作
+
+既存の「制作対象の登録」の人物タブで対象を保存し、「人物画像を登録・差替…」からPNGを選ぶ。「人物画像を確認」で客ID付きプレビュー、「画像対応を解除」で共通記号に戻す。解除しても素材ファイルを削除しない。
+
+「人物画像をUnity向けに書き出す…」は人物専用パックを作る。内容から決まるパックIDのため、同じ内容の再書き出しは同じ場所を利用する。猫画像を含めない。通常の「Unity向けに書き出す…」でも同じ人物sidecarを同梱する。
+
+どちらも既存Unity素材取り込みメニューの `ContentPreviewSetup.Import` が入口。人物専用パックでは猫catalogを変更しない。人物画像は `Resources/CatCafeContent/People/<pack>/people/<hash>.png`、現在の対応は `Resources/CatCafeContent/human_portraits.json`。hashと一対一対応、同一パック内容の不変性を検証後に参照を切り替える。旧パックの整理・重複排除はしない。
+
+人物Importerはmax1024、mipmap/read-write無効、alpha保持、非圧縮。猫用BC7は適用しない。少人数の最初の経路として画質と透明を優先した暫定設定であり、全人物の容量最適化済みとはしない。
+
+## Unity表示先
+
+- 営業中の席の小人物アイコン、猫一覧の担当客記号：現在の `customer_id` で毎回更新する。客交代で以前の画像を引き継がず、空席は画像を消す。
+- 信頼回復ADV：実際の信頼案件の客ID。
+- 予約ADV：既存予約客の固定ID `reservation-longhair`。
+- 上記二種類のExtra：解放時に客IDを任意の表示情報へ保持して解決する。旧Extra記録の客IDなしは共通人物記号。旧記録から名前でIDを推定したり、解放条件を変えたりしない。
+- 名簿：現行の文字一覧を維持。
+- 猫中心の譲渡・加入などのADVと猫の画像参照：変更しない。
+
+共通人物resourceも欠損した場合は、コードで生成する人の頭と肩の記号へ戻る。人物経路から猫シルエットへ戻さない。
+
+## 作業分離と残件
+
+開始時、ツール・実Unityのリン関連差分、Python側の加入猫設定と人物台帳差分があった。これらは今回コミットに含めない。自動制作の日程・設定は変更しない。人物台帳の既存プロフィール・ID対応・口調は変更せず、別の人物画像台帳と佐藤さんPNG一枚を新規登録した。
+
+佐藤さん一人の登録・表示経路は確認済み。鈴木さん・森さんは同じ画風での外見案とユーザー確認が残る。年齢・性別・髪型等を勝手に確定しない。試作シートを採用素材扱いしない。
+
+
+## 採用画像・書き出し実績
+
+採用画像：[佐藤さんPNG](../../cat_cafe_sim/saves/content_images/people/7f80e3ded51f662510c53514f2f5a1e0440b04450eef9a448e8e9ea68799a8f5.png)。2,027,172 bytes。人物台帳の既存 guest-1 を `HumanPortraitStore.register` へ渡して登録し、通常の人物書き出し関数で `be5a0fcda4ecbc7da8f33775604e369e` を作成した。実Unityは既存 `ContentPreviewSetup.Import` から取り込んだ。猫パック・catalogは切り替えていない。選択済みパックは一組のみ。再取り込みで増殖しない。
+
+生成は組み込みimage_gen。最終プロンプトは「比較シート左Aだけの同一人物、丸眼鏡・短髪・緑カーディガン・象牙色シャツ・控えめな微笑み、頭肩から胸上、正方形で顔を大きく、真の透過背景、文字・他人物・猫・小物なし」。比較シートを参照し、顔・髪・服の色と画風を保持した。原文は共有 `Docs/Prototypes/SatoPortrait-v1/final-prompt.txt`。
+
+## 検証結果と限界
+
+- Python：人物画像11試験（継承による5件の重複実行を含む。固有のバックエンド5件＋GUI1件）、既存Unity書き出し6件、人物台帳3件、全件成功。`CAT_CAFE_TEST_GUI=1`。GUIは実Tkウィンドウのボタン処理を呼び、ファイル選択だけをfixtureへ差し替えた自動試験。実マウス入力とは区別する。透過・再読込・差替・解除・書き出し・同じ出力再利用・不明ID・猫/プレイヤー拒否・重複/不正パス拒否・素材欠損・対応変更時の除外・通常全体パックsidecarを確認。
+- Unity Editor：人物専用取り込み・同一内容再取り込み・猫catalog保持・客ID対応・未知/未登録/null・画像欠損・重複対応拒否・空席/交代の11項目成功。検証用の小さい合成人物パックは検証後に自分の追加分だけ取り除き、採用済み人物catalogへ復元した。旧パックを整理・削除していない。
+- 限定回帰：既存の信頼回復fixture 2,722項目、予約fixture 556項目成功。隔離セーブに対する加速試験であり自然発生や長期評価ではない。
+- 採用画像の実UI：席・信頼回復・Extraの実画面で、1280×800と1024×768を各一枚描画。専用のview・信頼イベント・Extra本文fixtureを使用。通常の人物取り込み、実際の席UIでの同名未知IDへの交代と空席、保存→別backendで読込→客ID保持、旧Extra客IDなしの人用共通記号、未登録予約客の共通記号、描画/Extra前後の営業状態一致を確認。
+- [席1024](Results/HumanPortraits/seat-1024.png)、[席1280](Results/HumanPortraits/seat-1280.png)、[信頼1024](Results/HumanPortraits/trust-1024.png)、[信頼1280](Results/HumanPortraits/trust-1280.png)、[Extra1024](Results/HumanPortraits/extra-1024.png)、[Extra1280](Results/HumanPortraits/extra-1280.png)。実寸目視で顔・髪・緑の衣服を保持。34px席では眼鏡の細線までは強い識別要素にせず、髪型・顔・服色の大きな違いを優先する。比較対象の鈴木さん・森さんはまだ未制作のため、三人間の識別性は未検証。
+- 配布ビルド：指定 `build_standalone.ps1 -ProjectPath ... -ExecuteMethod CatCafePreview.Editor.HumanPortraitVerification.VerifyAndBuild` を使用。最初のsandbox内起動はライセンス接続でexit199。通常環境で人物検証は成功したが、既存のリン27画像の猫texture policy不一致でビルドガードが拒否した。該当素材・metaは開始時からの並行作業であり、今回変更/ガード迂回はしない。直前の成功Latestは保持、Pendingなし。人物画像は実Unityプロジェクトへ収録済みだが、Latestへの収録・配布Player・実入力の確認は未完了。
+
+最終Editorは `Logs/HumanPortraits/selected-editor-resume.log` のexit0と `CAT_CAFE_HUMAN_SELECTED_OK`。採用確認 `Selected/result.txt`、共通検証 `Editor/result.txt`。失敗した検証コードの画面参照を直して再実行しており、途中の失敗ログは成功根拠としない。ビルド失敗は `Logs/StandaloneBuild/Runs/20261025-073206-872-da0d9e0569794c9f843c143ea9a43f5d.log`。
+
+## 再現入口
+
+人物基盤だけ：Editor `HumanPortraitVerification.Run`、環境変数 `CATCAFE_WORKSPACE_ROOT` と `CATCAFE_HUMAN_FIXTURE`（専用人物パック）。採用画像込み：`ImportSelectedAndVerify` と `CATCAFE_HUMAN_SELECTED`。通常のユーザー操作はToolの人物画像ボタン→人物パック書き出し→既存Unity素材取り込み。検証メソッドは本番画像登録の必須操作ではない。
+
+## 終了時容量
+
+| 対象 | 開始 bytes | 終了 bytes | 増減 |
+| --- | ---: | ---: | ---: |
+| Logs | 15042448642 | 15059304177 | 16855535 |
+| Latest | 3011167836 | 3011167836 | 0 |
+| content_images | 1127872127 | 1129899511 | 2027384 |
+| Library | 5263552778 | 5229655426 | -33897352 |
+
+Latestは156ファイル・3,011,167,836 bytesの一組のまま。StandaloneBuildの子フォルダはLatest/RunsのみでPendingなし。ビルドZIP・別Unityプロジェクト・Libraryは追加していない。Logs増加は今回のfixture保存・描画PNG・Editor/ビルドログが主因。採用元はPNG一枚と212-byte台帳だけ増加。Libraryは既存Editorが更新した結果で、手動削除していない。別途、共有Docsに2,332,935-byteのA/B試作とプロンプト、ツールDocsに6枚の描画記録、実Unityに採用PNG一枚とmeta・対応JSONを保存した。採用素材・セーブ・他作業成果物・旧パックは削除していない。

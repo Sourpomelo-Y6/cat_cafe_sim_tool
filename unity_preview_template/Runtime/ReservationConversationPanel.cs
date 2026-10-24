@@ -9,7 +9,7 @@ namespace CatCafePreview {
   CafeReservation Event=>Backend.Simulation.State.reservation;
   bool Result=>ReferenceEquals(progress,Row?.result);
   public GameObject Panel=>host;
-  protected override Texture2D PortraitTexture(string id)=>Resources.Load<Texture2D>("CatCafeStandalone/customer_icon");
+  protected override Texture2D PortraitTexture(string id)=>HumanPortraitResources.Resolve("reservation-longhair");
   protected override bool Ready=>base.Ready && !owner.Confirming;
   public void Apply(PythonCafeState value,PythonReservationPanel original) {
    owner=original;if(!Backend.ReservationSafe){if(host!=null)host.SetActive(false);Backend.ReservationConversationOpen=false;return;}

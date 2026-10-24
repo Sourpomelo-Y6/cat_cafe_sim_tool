@@ -8,6 +8,7 @@ namespace CatCafePreview.Standalone
     [Serializable] public sealed class CafeReplayEntry
     {
         public string conversation_id,branch_id,title,cat_id,cat_name,personality;
+        public string customer_id;
         public CafeConversationLine[] lines;
         public string Key=>conversation_id+"/"+branch_id;
     }
@@ -130,8 +131,8 @@ namespace CatCafePreview.Standalone
             }
             foreach(var row in save.coco_conversations??new CafeCocoConversation[0])add(row.progress,contentId(rules.visiting_cat.cat.id),rules.visiting_cat.cat.name,rules.visiting_cat.personality,b=>CafeCocoDialogue.Lines(row,b),row.progress.conversation_id==CafeCocoDialogue.AdmissionId);
             foreach(var row in save.equipment_conversations??new CafeEquipmentConversation[0])add(row.progress,"",CafeEquipmentDialogue.Title(row),row.day+"日目",b=>CafeEquipmentDialogue.Lines(row,b),true);
-            foreach(var row in save.reservation_conversations??new CafeReservationConversation[0]){add(row.response,"",row.name,"特別予約",b=>CafeReservationDialogue.Lines(row,false,b),true);add(row.result,"",row.name,"特別予約の接客結果",b=>CafeReservationDialogue.Lines(row,true,b),false);}
-            foreach(var row in save.trust_conversations??new CafeTrustConversation[0]){var ev=save.state.trust_events.Single(e=>e.id==row.event_id);string name=customerName(ev.customer_id);add(row.response,"",name,"顧客の信頼",b=>CafeTrustDialogue.Lines(false,b,name,rules.trust.popularity_loss),true);add(row.result,"",name,"接客結果",b=>CafeTrustDialogue.Lines(true,b,name,rules.trust.popularity_loss),false);}
+            foreach(var row in save.reservation_conversations??new CafeReservationConversation[0]){int start=result.Count;add(row.response,"",row.name,"特別予約",b=>CafeReservationDialogue.Lines(row,false,b),true);add(row.result,"",row.name,"特別予約の接客結果",b=>CafeReservationDialogue.Lines(row,true,b),false);for(int i=start;i<result.Count;i++)result[i].customer_id="reservation-longhair";}
+            foreach(var row in save.trust_conversations??new CafeTrustConversation[0]){int start=result.Count;var ev=save.state.trust_events.Single(e=>e.id==row.event_id);string name=customerName(ev.customer_id);add(row.response,"",name,"顧客の信頼",b=>CafeTrustDialogue.Lines(false,b,name,rules.trust.popularity_loss),true);add(row.result,"",name,"接客結果",b=>CafeTrustDialogue.Lines(true,b,name,rules.trust.popularity_loss),false);for(int i=start;i<result.Count;i++)result[i].customer_id=ev.customer_id;}
             foreach(var row in save.adoption_conversations??new CafeAdoptionConversation[0])
             {var ev=save.state.adoption.events.Single(e=>e.id==row.event_id);string name=catName(ev.cat_id);add(row.progress,contentId(ev.cat_id),name,customerName(ev.customer_id)+"からの譲渡申し出",b=>CafeAdoptionDialogue.Lines(b,name,customerName(ev.customer_id),ev),true);}
             foreach(var row in save.lodge_conversations??new CafeLodgeConversation[0])

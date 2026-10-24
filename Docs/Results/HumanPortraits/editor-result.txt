@@ -1,0 +1,1 @@
+PASS: 11 portrait checks; trust fixture=2754; reservation fixture=556. Images are synthetic fixtures; no appearance adopted.

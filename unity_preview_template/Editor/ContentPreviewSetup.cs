@@ -57,6 +57,8 @@ namespace CatCafePreview.Editor
         public static void Import(string folder)
         {
             folder = Path.GetFullPath(folder);
+            if(!File.Exists(Path.Combine(folder,"bundle.json")) && File.Exists(Path.Combine(folder,"human_portraits.json"))){HumanPortraitImport.Import(folder);return;}
+            if(File.Exists(Path.Combine(folder,"human_portraits.json")))HumanPortraitImport.Validate(folder);
             var json = File.ReadAllText(Path.Combine(folder, "bundle.json"));
             var bundle = JsonUtility.FromJson<ContentBundle>(json);
             ContentValidation.Validate(bundle);
@@ -130,6 +132,7 @@ namespace CatCafePreview.Editor
             else File.Move(temporary, catalogPath);
             AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
             CatTexturePolicy.ApplyPack(target);
+            if(File.Exists(Path.Combine(folder,"human_portraits.json")))HumanPortraitImport.Import(folder);
             Debug.Log("Imported cat cafe pack: " + bundle.pack_id);
         }
 

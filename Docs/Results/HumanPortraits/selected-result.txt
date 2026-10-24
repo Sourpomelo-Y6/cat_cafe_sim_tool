@@ -1,0 +1,1 @@
+PASS: selected Sato imported via standard importer; real seat/trust/Extra UI rendered with isolated event/view fixtures at 1280x800 and 1024x768. No physical input or natural trust occurrence claimed. Gameplay unchanged.

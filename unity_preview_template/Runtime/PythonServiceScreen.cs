@@ -75,7 +75,7 @@ namespace CatCafePreview
                 card.catName.text = "席 " + (i+1) + (occupied ? cat==null?"　担当待ち":"　接客中" : "　空席");
                 card.picture.texture = !occupied || cat == null ? null : CafeNarrativeResources.Texture(seat.narrative_image) ?? GetComponent<ContentPreview>().PythonCatTexture(cat);
                 card.picture.enabled = card.picture.texture != null;
-                card.customerIcon.SetActive(occupied); card.work.gameObject.SetActive(false); card.rest.gameObject.SetActive(false);
+                HumanPortraitResources.ApplyIcon(card.customerIcon,seat.customer_id); card.customerIcon.SetActive(occupied); card.work.gameObject.SetActive(false); card.rest.gameObject.SetActive(false);
                 card.state=cat;
                 card.stateText.text = occupied ? "お客さん："+seat.customer_name+"\n担当："+(cat == null ? "未配置" : cat.name)+ (cat==null ? "" : "\n体力 "+cat.stamina.ToString("0.#")+" / "+cat.max_stamina.ToString("0.#")+"・疲労 "+cat.fatigue.ToString("0.#")) : state.service_assignment?.waiting==true ? "担当待ちのお客さんがいます\n手動接客から配置してください" : "お客さんを待っています";
                 card.stateText.text += occupied ? "\n直近の行動："+(cat==null?"担当待ち":string.IsNullOrEmpty(seat.latest_action)?"行動の記録なし":seat.latest_action)+"\n猫の反応："+(cat==null?"—":seat.cat_reaction??"—") : "";

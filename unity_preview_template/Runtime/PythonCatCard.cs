@@ -19,6 +19,7 @@ namespace CatCafePreview
             picture.enabled = picture.texture != null;
             bool occupied = cafe.seats != null && Array.Exists(cafe.seats,
                 seat => seat.cat_id == cat.cat_id && !string.IsNullOrEmpty(seat.customer_id));
+            HumanPortraitResources.ApplyIcon(customerIcon,occupied ? Array.Find(cafe.seats,seat=>seat.cat_id==cat.cat_id && !string.IsNullOrEmpty(seat.customer_id)).customer_id : null);
             customerIcon.SetActive(occupied);
             string activity=Activity(cat,occupied);
             stateText.text=activity+" / "+Health(cat)+"\n体力 "+cat.stamina.ToString("0.#")+" / "+cat.max_stamina.ToString("0.#")+"\n疲労 "+cat.fatigue.ToString("0.#")+" / ストレス "+cat.stress.ToString("0.#");

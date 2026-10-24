@@ -69,6 +69,11 @@ def export_bundle(catalog, registry, texts, destination, *, profiles=None, inter
                 warnings.append(f'{name} / {label}：画像が未登録。画像なしで書き出します。')
             cat['scenes'].append({'key': key, 'label': label, 'text': text or fallback, 'image': image})
         cats.append(cat)
+    from human_portraits import HumanPortraitStore
+    people, people_blobs, people_warnings = HumanPortraitStore(registry.directory).export_data()
+    people['pack_id'] = pack_id
+    blobs.update(people_blobs)
+    warnings.extend(people_warnings)
     blobs.update(interaction_blobs)
     warnings.extend(interaction_report['image_warnings'])
     if interaction_report['missing_count']:
@@ -78,9 +83,10 @@ def export_bundle(catalog, registry, texts, destination, *, profiles=None, inter
     folder.mkdir(parents=True, exist_ok=False)
     try:
         (folder / 'images').mkdir()
+        (folder / 'people').mkdir()
         for relative, data in blobs.items():
             (folder / relative).write_bytes(data)
-        for filename, value in (('bundle.json', bundle), ('interaction_texts.json', interactions), ('validation.json', report)):
+        for filename, value in (('human_portraits.json', people), ('bundle.json', bundle), ('interaction_texts.json', interactions), ('validation.json', report)):
             (folder / filename).write_text(json.dumps(value, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     except Exception:
         # 自分で作成した新規パックだけを片付ける。既存の出力は触らない。
