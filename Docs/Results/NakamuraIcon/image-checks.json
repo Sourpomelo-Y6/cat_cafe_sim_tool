@@ -1,0 +1,212 @@
+{
+  "status": "PASS",
+  "images": [
+    {
+      "file": "manual-after-input-1024.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "bytes": 504687,
+      "sha256": "7a63b7f702c7e8fa4daa25ea7324e2f8866f958f4dcb82aa5b2afdd53023d5d2"
+    },
+    {
+      "file": "reservation-extra-mori-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "bytes": 110443,
+      "sha256": "b44078d81cd2270dea1a92403ed693bc649abbe323ea6e4cfc3d499b219f22d3"
+    },
+    {
+      "file": "reservation-extra-mori-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "bytes": 149734,
+      "sha256": "b504ecad0f87f174c58abf02da63266a2f27a70c06da1afaea6d53c00e843f72"
+    },
+    {
+      "file": "seat-guest-1-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "bytes": 220404,
+      "sha256": "923d06e01a07c9fc6cd21b2376dce44637344c4f45d4a0885743ecc4e90972be"
+    },
+    {
+      "file": "seat-guest-1-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "bytes": 246765,
+      "sha256": "a11e43cabc13eafd8d05ab443ab87770bc26498bbbcc1d0c8de45a7dcebb818c"
+    },
+    {
+      "file": "seat-guest-2-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "bytes": 220764,
+      "sha256": "2fa591892d1fcbb4d6bd26718a866a0643814b7e3d0ec386290745c677f1cbd4"
+    },
+    {
+      "file": "seat-guest-2-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "bytes": 247523,
+      "sha256": "543201d1170a860db101eb69514cec0dd5b47a5f04dc455dcbb3b1e787e1b871"
+    },
+    {
+      "file": "seat-guest-3-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "bytes": 220719,
+      "sha256": "fd21d4d437f04164885f6d48413b66ca45a3cd1cea305287b7328717d990ddf9"
+    },
+    {
+      "file": "seat-guest-3-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "bytes": 247505,
+      "sha256": "2080e69d8684dc1034c92f6cd1832ddf9a35cb888a7ac23a8a9ae147f9a9d73f"
+    },
+    {
+      "file": "seat-guest-4-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "bytes": 220527,
+      "sha256": "c9c14a7488e8b52e0d578a51892728e8180b6bf6a47e0c992a796ae70ac6432b"
+    },
+    {
+      "file": "seat-guest-4-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "bytes": 246936,
+      "sha256": "1e391ad07968f0f88991f4382835e3a29330d917ee0e9439b7706059131dd928"
+    },
+    {
+      "file": "seat-guest-5-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "bytes": 220648,
+      "sha256": "366e12ff7067a54838f6ff6e0d54d7269ebf65eabb004c93710d4482515509f1"
+    },
+    {
+      "file": "seat-guest-5-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "bytes": 247084,
+      "sha256": "6d4725804694109dde56dfcab4c23617a4392b10f50142ff2c3ead50d9eca55e"
+    },
+    {
+      "file": "seat-guest-6-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "bytes": 220687,
+      "sha256": "b868deabe4c7aecd85423be1a7cda111815677387a2a4de4ed3ebfd53fbbcd1b"
+    },
+    {
+      "file": "seat-guest-6-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "bytes": 247558,
+      "sha256": "6da16e248ba98292716d2395b02bb8279d7637a835791e09383eeaee2b9641a7"
+    },
+    {
+      "file": "seat-guest-7-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "bytes": 220525,
+      "sha256": "76deced482bc4d2420f2fa18bd680323c97c4400ad6289ea24c864ff64e9d13a"
+    },
+    {
+      "file": "seat-guest-7-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "bytes": 245721,
+      "sha256": "49315c1627b42ada922995ba729ee1b873b680a3852ba1ab53ff03bb5ff9f3f9"
+    },
+    {
+      "file": "seat-guest-8-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "bytes": 220693,
+      "sha256": "0daf644104ff425673c241ae6b93aba310cb01258ceb53eb4fc529d98c4c07b5"
+    },
+    {
+      "file": "seat-guest-8-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "bytes": 247454,
+      "sha256": "21fb4859fd2074d24f10cfbfd182f135dac091561024f6fa3abbb084058c4b53"
+    },
+    {
+      "file": "seat-reservation-longhair-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "bytes": 220466,
+      "sha256": "54cb23b04f0bcf48df6699a5d7a3e948a060400e13ac7ce82336b8c272ce7fc5"
+    },
+    {
+      "file": "seat-reservation-longhair-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "bytes": 247140,
+      "sha256": "4e9630c8f618433e22c6af6acae7f0e144538b05f2366bc57cefa59581c83aec"
+    },
+    {
+      "file": "trust-guest-8-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "bytes": 137264,
+      "sha256": "6e1b6b37a26e532e9ccfbb97995a87a4ee1b605b9cf516c380006e1103791fb9"
+    },
+    {
+      "file": "trust-guest-8-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "bytes": 182509,
+      "sha256": "10fdd3cb53f4f92eb5129b9a2aa134cb101fe8f65b5a3623a9757b14a2c0f1cf"
+    }
+  ]
+}

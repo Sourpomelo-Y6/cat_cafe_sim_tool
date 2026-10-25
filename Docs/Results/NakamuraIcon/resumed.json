@@ -1,0 +1,37 @@
+{
+  "day": 3,
+  "tick": 13,
+  "phase": "open",
+  "seats": [
+    {
+      "seat_id": "seat-1",
+      "customer_id": "guest-1",
+      "customer_name": "佐藤さん",
+      "cat_id": "cat-tama"
+    },
+    {
+      "seat_id": "seat-2",
+      "customer_id": "advanced-white",
+      "customer_name": "藤原さん",
+      "cat_id": "cat-sora"
+    },
+    {
+      "seat_id": "seat-3",
+      "customer_id": "advanced-quiet",
+      "customer_name": "福田さん",
+      "cat_id": "cat-kohaku"
+    },
+    {
+      "seat_id": "seat-4",
+      "customer_id": "guest-7",
+      "customer_name": "山本さん",
+      "cat_id": "cat-mike"
+    },
+    {
+      "seat_id": "seat-5",
+      "customer_id": "guest-8",
+      "customer_name": "中村さん",
+      "cat_id": "cat-mugi"
+    }
+  ]
+}
