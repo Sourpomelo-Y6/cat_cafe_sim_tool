@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "files": [
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool/Docs/AllCats.md",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool/Docs/CatImageSchedule.md",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool/Docs/CatImageTodo.md",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool/unity_preview_template/Resources/CatCafeStandalone/presentation.json",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool/unity_preview_template/Runtime/Standalone/CafeNarrativeCatalog.cs",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim/config/cafe_playtest_cats.json",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim/config/cafe_recruitment.json",
+    "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim/Assets/CatCafePreview/Resources/CatCafeStandalone/presentation.json",
+    "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim/Assets/CatCafePreview/Runtime/Standalone/CafeNarrativeCatalog.cs",
+    "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim/Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/bundle.json",
+    "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim/Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/interaction_texts.json",
+    "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim/Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/bundle.json",
+    "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim/Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/interaction_texts.json"
+  ],
+  "subject_registry": "all baseline rows preserved; only new Sakamoto row committed"
+}

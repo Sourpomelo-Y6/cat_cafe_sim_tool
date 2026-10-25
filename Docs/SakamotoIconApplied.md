@@ -54,3 +54,7 @@ Python `core/cafe_longhair_customer.py`、config/cafe_longhair_customer.json、U
 Latest成功物一組・Pendingなし。StandaloneBuild直下のディレクトリはLatest/Runsのみ。ビルドは複製せず置換。原本PNG一枚、登録素材一枚、15人人物専用パック一組を追加し、旧素材・旧パック・セーブは保持。Latest増加は旧パック保持に加わる15人のtexture収録、Libraryは約21.7MB減少し、既存プロジェクトの通常Importer／PlayerDataCache更新。別Unityプロジェクト・検証専用Library・ビルドZIPは作らない。
 
 開始HEAD：Tool c7dfa2a、Python e38e8b2、Unity 2e92abb、Docs a54478a。関連チャットidle・Unity/Player不在を確認して開始。開始未コミット差分はTool11行、Python3行、Unity118行（git status件数）をsnapshot保存。猫制作の日程・設定・素材・presentation／Narrative等を保持。共有人物台帳の全既存行と画像14人保持を照合。コミットは今回分だけ選択しpushしない。最終コミットIDは最終回答で報告する。
+
+最終保持照合：[先行差分一致](Results/SakamotoIcon/prior-differences-preserved.json)。既存の猫制作tracked差分は開始snapshotと一致。最終容量：[capacity-final.json](Results/SakamotoIcon/capacity-final.json)。Logs最終15,823,445,340 bytes、開始比+88,071,121 bytes。Latest 3,534,561,608 bytes（一組）、Library 5,753,449,698 bytes。
+
+今回コミット：Python `ee63bd1`、Unity `ea52c59`、共有Docs `aaa81ef`、Tool本体・検証資料 `2567ebd`。本追記と最終照合だけを後続コミットへ保存。pushなし。
