@@ -1,0 +1,194 @@
+{
+  "status": "PASS",
+  "images": [
+    {
+      "file": "manual-after-input-1024.png",
+      "size": [
+        1024,
+        768
+      ]
+    },
+    {
+      "file": "reservation-extra-mori-1024.png",
+      "size": [
+        1024,
+        768
+      ]
+    },
+    {
+      "file": "reservation-extra-mori-1280.png",
+      "size": [
+        1280,
+        800
+      ]
+    },
+    {
+      "file": "seat-guest-1-1024.png",
+      "size": [
+        1024,
+        768
+      ]
+    },
+    {
+      "file": "seat-guest-1-1280.png",
+      "size": [
+        1280,
+        800
+      ]
+    },
+    {
+      "file": "seat-guest-10-1024.png",
+      "size": [
+        1024,
+        768
+      ]
+    },
+    {
+      "file": "seat-guest-10-1280.png",
+      "size": [
+        1280,
+        800
+      ]
+    },
+    {
+      "file": "seat-guest-2-1024.png",
+      "size": [
+        1024,
+        768
+      ]
+    },
+    {
+      "file": "seat-guest-2-1280.png",
+      "size": [
+        1280,
+        800
+      ]
+    },
+    {
+      "file": "seat-guest-3-1024.png",
+      "size": [
+        1024,
+        768
+      ]
+    },
+    {
+      "file": "seat-guest-3-1280.png",
+      "size": [
+        1280,
+        800
+      ]
+    },
+    {
+      "file": "seat-guest-4-1024.png",
+      "size": [
+        1024,
+        768
+      ]
+    },
+    {
+      "file": "seat-guest-4-1280.png",
+      "size": [
+        1280,
+        800
+      ]
+    },
+    {
+      "file": "seat-guest-5-1024.png",
+      "size": [
+        1024,
+        768
+      ]
+    },
+    {
+      "file": "seat-guest-5-1280.png",
+      "size": [
+        1280,
+        800
+      ]
+    },
+    {
+      "file": "seat-guest-6-1024.png",
+      "size": [
+        1024,
+        768
+      ]
+    },
+    {
+      "file": "seat-guest-6-1280.png",
+      "size": [
+        1280,
+        800
+      ]
+    },
+    {
+      "file": "seat-guest-7-1024.png",
+      "size": [
+        1024,
+        768
+      ]
+    },
+    {
+      "file": "seat-guest-7-1280.png",
+      "size": [
+        1280,
+        800
+      ]
+    },
+    {
+      "file": "seat-guest-8-1024.png",
+      "size": [
+        1024,
+        768
+      ]
+    },
+    {
+      "file": "seat-guest-8-1280.png",
+      "size": [
+        1280,
+        800
+      ]
+    },
+    {
+      "file": "seat-guest-9-1024.png",
+      "size": [
+        1024,
+        768
+      ]
+    },
+    {
+      "file": "seat-guest-9-1280.png",
+      "size": [
+        1280,
+        800
+      ]
+    },
+    {
+      "file": "seat-reservation-longhair-1024.png",
+      "size": [
+        1024,
+        768
+      ]
+    },
+    {
+      "file": "seat-reservation-longhair-1280.png",
+      "size": [
+        1280,
+        800
+      ]
+    },
+    {
+      "file": "trust-guest-10-1024.png",
+      "size": [
+        1024,
+        768
+      ]
+    },
+    {
+      "file": "trust-guest-10-1280.png",
+      "size": [
+        1280,
+        800
+      ]
+    }
+  ]
+}
