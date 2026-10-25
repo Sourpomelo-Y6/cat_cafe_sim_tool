@@ -1,0 +1,10 @@
+test_gui_second_stage_labels_and_names (test_cafe_second_popular_customers.SecondPopularCustomerTests) ... skipped 'requires desktop'
+test_later_challenge_and_short_opening (test_cafe_second_popular_customers.SecondPopularCustomerTests) ... ok
+test_second_count_validation_and_legacy_first_stage_only (test_cafe_second_popular_customers.SecondPopularCustomerTests) ... ok
+test_second_stage_continuation_day_off_and_filters (test_cafe_second_popular_customers.SecondPopularCustomerTests) ... ok
+test_second_stage_preview_actual_arrivals_save_and_replay (test_cafe_second_popular_customers.SecondPopularCustomerTests) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 4.029s
+
+OK (skipped=1)

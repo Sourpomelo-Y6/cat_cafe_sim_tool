@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "people": 13,
+  "normal_guests": 12,
+  "reservation_guest": "reservation-longhair",
+  "pack_id": "c5126d3e23b5b0536bc25773994fd065",
+  "existing_speech_rows_preserved": true,
+  "protected_hashes_preserved": true,
+  "template_matches_unity": true,
+  "pending": false,
+  "scope": "Read-only data/hash audit; staged only Yamada subject addition against HEAD"
+}

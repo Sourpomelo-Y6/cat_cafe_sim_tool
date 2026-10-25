@@ -1,0 +1,102 @@
+{
+  "status": "PASS",
+  "pack_id": "c5126d3e23b5b0536bc25773994fd065",
+  "people": [
+    {
+      "subject_id": "guest-1",
+      "game_id": "guest-1",
+      "image": "people/0c815814fbaa02bf25092e99e7bc57ed858a9270e52bb679d97bd8117400b7f7.png",
+      "sha256": "0c815814fbaa02bf25092e99e7bc57ed858a9270e52bb679d97bd8117400b7f7",
+      "importer": "max1024 uncompressed alpha; mipmap/read-write off; no override"
+    },
+    {
+      "subject_id": "person-952c631405e649fdb50c390881804977",
+      "game_id": "guest-2",
+      "image": "people/ce47440c0d108d859835f07a5cac37a660acf4024e4dd2ea5ac4c90a08550852.png",
+      "sha256": "ce47440c0d108d859835f07a5cac37a660acf4024e4dd2ea5ac4c90a08550852",
+      "importer": "max1024 uncompressed alpha; mipmap/read-write off; no override"
+    },
+    {
+      "subject_id": "person-reservation-longhair",
+      "game_id": "reservation-longhair",
+      "image": "people/deabee0dcdeaa1a80d03369f10dc0251f57f57ba1e24921919c22d3d32a53306.png",
+      "sha256": "deabee0dcdeaa1a80d03369f10dc0251f57f57ba1e24921919c22d3d32a53306",
+      "importer": "max1024 uncompressed alpha; mipmap/read-write off; no override"
+    },
+    {
+      "subject_id": "person-guest-3",
+      "game_id": "guest-3",
+      "image": "people/3821a02fbe187442a3fb7d2843c1191fb8e71a3544a41d6fb0802a89d4d915e6.png",
+      "sha256": "3821a02fbe187442a3fb7d2843c1191fb8e71a3544a41d6fb0802a89d4d915e6",
+      "importer": "max1024 uncompressed alpha; mipmap/read-write off; no override"
+    },
+    {
+      "subject_id": "person-guest-4",
+      "game_id": "guest-4",
+      "image": "people/04b48ed19be7cca7490b47950ca4eba20cb8de4ec3e1b246f6aac2bf06a2cdfc.png",
+      "sha256": "04b48ed19be7cca7490b47950ca4eba20cb8de4ec3e1b246f6aac2bf06a2cdfc",
+      "importer": "max1024 uncompressed alpha; mipmap/read-write off; no override"
+    },
+    {
+      "subject_id": "person-guest-5",
+      "game_id": "guest-5",
+      "image": "people/2c72a486f9e703f6b1822670ccf5e0e5ea8e34ec4b4623978e9db88f229431f1.png",
+      "sha256": "2c72a486f9e703f6b1822670ccf5e0e5ea8e34ec4b4623978e9db88f229431f1",
+      "importer": "max1024 uncompressed alpha; mipmap/read-write off; no override"
+    },
+    {
+      "subject_id": "person-guest-6",
+      "game_id": "guest-6",
+      "image": "people/35267d0ee7f23dd2756a5cd942e215b66e07d1348e8fdbc9f5c2e6425ed4887b.png",
+      "sha256": "35267d0ee7f23dd2756a5cd942e215b66e07d1348e8fdbc9f5c2e6425ed4887b",
+      "importer": "max1024 uncompressed alpha; mipmap/read-write off; no override"
+    },
+    {
+      "subject_id": "person-guest-7",
+      "game_id": "guest-7",
+      "image": "people/77665685f662f477bfd65b030812e4347f918933a402cce795df8815d4ae97d1.png",
+      "sha256": "77665685f662f477bfd65b030812e4347f918933a402cce795df8815d4ae97d1",
+      "importer": "max1024 uncompressed alpha; mipmap/read-write off; no override"
+    },
+    {
+      "subject_id": "person-guest-8",
+      "game_id": "guest-8",
+      "image": "people/933103ca4b0b5258feee1edc393944e8bcb4d3e8cdf526da7568de5f4d723ef6.png",
+      "sha256": "933103ca4b0b5258feee1edc393944e8bcb4d3e8cdf526da7568de5f4d723ef6",
+      "importer": "max1024 uncompressed alpha; mipmap/read-write off; no override"
+    },
+    {
+      "subject_id": "person-guest-9",
+      "game_id": "guest-9",
+      "image": "people/56401e2a19d15a7419f1e2f09bd345198757a75da61108717807244bdad1f1e8.png",
+      "sha256": "56401e2a19d15a7419f1e2f09bd345198757a75da61108717807244bdad1f1e8",
+      "importer": "max1024 uncompressed alpha; mipmap/read-write off; no override"
+    },
+    {
+      "subject_id": "person-guest-10",
+      "game_id": "guest-10",
+      "image": "people/dc827908f8d40151e8339c971302e9be3723622b13ff9237297daa04bf5ce374.png",
+      "sha256": "dc827908f8d40151e8339c971302e9be3723622b13ff9237297daa04bf5ce374",
+      "importer": "max1024 uncompressed alpha; mipmap/read-write off; no override"
+    },
+    {
+      "subject_id": "person-guest-11",
+      "game_id": "guest-11",
+      "image": "people/3ddc4aba9164fab5e2a588ebbac95c3ad0a44bda299161ff4325a1cf1325d4c5.png",
+      "sha256": "3ddc4aba9164fab5e2a588ebbac95c3ad0a44bda299161ff4325a1cf1325d4c5",
+      "importer": "max1024 uncompressed alpha; mipmap/read-write off; no override"
+    },
+    {
+      "subject_id": "person-guest-12",
+      "game_id": "guest-12",
+      "image": "people/1313db1e0f1182300a8093c93313f4d8d8e40e9a0591664e33a7c207d39d56c9.png",
+      "sha256": "1313db1e0f1182300a8093c93313f4d8d8e40e9a0591664e33a7c207d39d56c9",
+      "importer": "max1024 uncompressed alpha; mipmap/read-write off; no override"
+    }
+  ],
+  "protected_sha256": {
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\interaction_texts.json": "c08a4f29bb4c5f33c5bc9073485ec898d9cef1720c46d8891d1d573245fa92d4",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\manifest.json": "7c7933c42e56bf805f03543b76b63f0bc6a608cafe1c54395bd4bb5515c7fc3e",
+    "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\catalog.json": "d2f88a6d256821a528c80ac3770764040053d210576237aab19ef5462dd1f107"
+  }
+}

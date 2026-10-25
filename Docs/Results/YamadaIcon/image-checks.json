@@ -1,0 +1,270 @@
+{
+  "status": "PASS",
+  "images": [
+    {
+      "file": "actual-seated-yamada-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "sha256": "fc7588dec92acd3a43ea64faf4343926cddcc412a4b470b5b9edb048d1a3849f"
+    },
+    {
+      "file": "actual-seated-yamada-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "sha256": "42fffd308047fd1bccc1a12d8d693c10ce538e21757e21e4603a75788e28a867"
+    },
+    {
+      "file": "manual-after-input-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "sha256": "54d90cf2479f29f79f552827249b5a4f469ac8ea3868fb562e1d26cf8a0df35a"
+    },
+    {
+      "file": "reservation-extra-mori-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "sha256": "b44078d81cd2270dea1a92403ed693bc649abbe323ea6e4cfc3d499b219f22d3"
+    },
+    {
+      "file": "reservation-extra-mori-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "sha256": "b504ecad0f87f174c58abf02da63266a2f27a70c06da1afaea6d53c00e843f72"
+    },
+    {
+      "file": "seat-guest-1-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "sha256": "0b6e12516727c627dd58970b6261aeb0d2872f03012ba61ec4be6f1e9224d346"
+    },
+    {
+      "file": "seat-guest-1-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "sha256": "0bd905525892f2d1bbf2900a4c3b747c4a5de224d13d19a4e8f1f9bc7f9fccb1"
+    },
+    {
+      "file": "seat-guest-10-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "sha256": "ad57cf9d5ce455b0abf316a11253cbdbfefa238679165b2fdf19aabffbe33a4a"
+    },
+    {
+      "file": "seat-guest-10-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "sha256": "e9aecc4592b0ce195a636836ed657ebe3c6fefc89c000ce574c56c1d53ebabf5"
+    },
+    {
+      "file": "seat-guest-11-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "sha256": "c5d83900562112123e7d910484c8859979964627be49ab87c7ffb4e105f15426"
+    },
+    {
+      "file": "seat-guest-11-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "sha256": "635205cee95635be92452a38c38c0895c3c676d102dce9e380f7ac75e41257d6"
+    },
+    {
+      "file": "seat-guest-12-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "sha256": "6d27e3ba34f8c4e09febb6e5aed32c2d53bd052802c72b4d7f6dd81008033d1a"
+    },
+    {
+      "file": "seat-guest-12-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "sha256": "c6314fc87bb18ecba0ba959f08eec3919db7457d3f3ca16360242ac4d3f9ab93"
+    },
+    {
+      "file": "seat-guest-2-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "sha256": "4ec774f644516fcd765211c03a4112ca8dfa911f5408e54a2f5eb1d73e1d57c2"
+    },
+    {
+      "file": "seat-guest-2-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "sha256": "41c485b98e7ee14e90b236d5077cd88b72a82c76c5b6521bba4d9d30cb0b12f2"
+    },
+    {
+      "file": "seat-guest-3-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "sha256": "660827bbbf73c5b32eb9d3856c5fa95ca63b47c6494e542bbec0e62ea56cb61c"
+    },
+    {
+      "file": "seat-guest-3-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "sha256": "4f64d62e0a8bc7f167cac2eb294d2b154d2491d22aaab6fbe2f35c993b972262"
+    },
+    {
+      "file": "seat-guest-4-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "sha256": "ff83c204c5ddd9fe7260b3a48b9165296c717276b37902c1c48993e07b73a102"
+    },
+    {
+      "file": "seat-guest-4-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "sha256": "a9470c3d9378d4a716699e21b3e60062677119b61fb73d787720806302d0cb86"
+    },
+    {
+      "file": "seat-guest-5-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "sha256": "abbb3df5b035b6a542e9b936aa2fdf86532d1d0169b27cfd31612e57b20487ac"
+    },
+    {
+      "file": "seat-guest-5-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "sha256": "813d83b0701f98ee331282f8cf2e65b0ced47159377fbf13e6e2ebaf9831116d"
+    },
+    {
+      "file": "seat-guest-6-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "sha256": "1f84c2570991619cc53cd4ccc43a5f40fd62ad93ef3253ed149c403e8c38709a"
+    },
+    {
+      "file": "seat-guest-6-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "sha256": "9dc818dc8936b1f025906cfa5a276417fdcc36437a2cfa62d4641f99708103fc"
+    },
+    {
+      "file": "seat-guest-7-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "sha256": "a79e388372a97d2381302464c2e269c6aa0ce77b8593a207ca6b41a8bdd1acb4"
+    },
+    {
+      "file": "seat-guest-7-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "sha256": "abf231e01f401cfdbaf76edff1ae9fb1cf0ba69a8425b96272cf8ce1f398ff9e"
+    },
+    {
+      "file": "seat-guest-8-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "sha256": "7ca6d2911441f8be8d05ab1a2bb1650f117d52d17b806ce2b44bef7e7dea2f76"
+    },
+    {
+      "file": "seat-guest-8-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "sha256": "1aa77ac2451e2a1ae0a91ab5a65fd8f46fa4f4a18218f5c44ffca453751e2837"
+    },
+    {
+      "file": "seat-guest-9-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "sha256": "6d6604f88ebaefec7dc7ef09f608ee80a55ad0931ea80723fd0facd6821526a6"
+    },
+    {
+      "file": "seat-guest-9-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "sha256": "78df7ebd650def489326b82842562bed5ef49516bec03f32068f3a17813b4ec7"
+    },
+    {
+      "file": "seat-reservation-longhair-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "sha256": "b78fcd0c85680c2712e7f7fb2bcbc014bda272bac3debf251e18b598102dcef1"
+    },
+    {
+      "file": "seat-reservation-longhair-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "sha256": "427b1db29d91db26c0f5dd13950759141ec5e9e1c8269eaeed2478c42010296f"
+    },
+    {
+      "file": "trust-guest-12-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "sha256": "4b070f1e227b7d63e4d4c3d078030c5cbde8539b5263730831bddaefb3b758c2"
+    },
+    {
+      "file": "trust-guest-12-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "sha256": "b8d8dfff395e0ebb6af972f343b8ad1559d2b3cc3da4ac36e5333558f0f0fdfc"
+    }
+  ],
+  "resume": "All seat fields and day/tick/funds identical across separate process"
+}
