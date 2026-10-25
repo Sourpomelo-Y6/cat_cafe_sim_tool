@@ -1,3 +1,5 @@
+2026-10-25追補：小林さん（`person-guest-9` → `guest-9`）一案を制作・登録。既存9人を保持する10人人物パックで通常Unity取り込み・固定Latestへ反映。Player84項目・別プロセス再開5項目・1024実入力を確認。[採用プロフィール・画像・検証区分・容量](KobayashiIconApplied.md)。
+
 2026-10-25追補：中村さん（`person-guest-8` → `guest-8`）のプロフィールと透過アイコン一案を制作・登録。既存8人を保持し9人人物パックで通常Unity取り込み。[採用設定・検証区分・容量](NakamuraIconApplied.md)。
 
 2026-10-25追補：山本さん（`person-guest-7` → `guest-7`）一案を制作・登録。既存7人を保持し8人人物パックでUnity/固定Latestへ反映。解放条件境界・解放済みfixture着席/保存再開とPlayer71項目を確認。自然な人気達成・実入力とは区別。[採用プロフィール・画像・検証・容量](YamamotoIconApplied.md)。

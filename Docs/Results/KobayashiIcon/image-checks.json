@@ -1,0 +1,205 @@
+{
+  "status": "PASS",
+  "images": [
+    {
+      "file": "manual-after-input-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "bytes": 173871
+    },
+    {
+      "file": "reservation-extra-mori-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "bytes": 110443
+    },
+    {
+      "file": "reservation-extra-mori-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "bytes": 149734
+    },
+    {
+      "file": "seat-guest-1-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "bytes": 173952
+    },
+    {
+      "file": "seat-guest-1-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "bytes": 202358
+    },
+    {
+      "file": "seat-guest-2-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "bytes": 174442
+    },
+    {
+      "file": "seat-guest-2-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "bytes": 202637
+    },
+    {
+      "file": "seat-guest-3-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "bytes": 174425
+    },
+    {
+      "file": "seat-guest-3-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "bytes": 202585
+    },
+    {
+      "file": "seat-guest-4-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "bytes": 174191
+    },
+    {
+      "file": "seat-guest-4-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "bytes": 202225
+    },
+    {
+      "file": "seat-guest-5-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "bytes": 174336
+    },
+    {
+      "file": "seat-guest-5-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "bytes": 202642
+    },
+    {
+      "file": "seat-guest-6-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "bytes": 174352
+    },
+    {
+      "file": "seat-guest-6-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "bytes": 202645
+    },
+    {
+      "file": "seat-guest-7-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "bytes": 174190
+    },
+    {
+      "file": "seat-guest-7-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "bytes": 200977
+    },
+    {
+      "file": "seat-guest-8-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "bytes": 174348
+    },
+    {
+      "file": "seat-guest-8-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "bytes": 202532
+    },
+    {
+      "file": "seat-guest-9-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "bytes": 174191
+    },
+    {
+      "file": "seat-guest-9-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "bytes": 202385
+    },
+    {
+      "file": "seat-reservation-longhair-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "bytes": 174139
+    },
+    {
+      "file": "seat-reservation-longhair-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "bytes": 202257
+    },
+    {
+      "file": "trust-guest-9-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "bytes": 123994
+    },
+    {
+      "file": "trust-guest-9-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "bytes": 163910
+    }
+  ]
+}
