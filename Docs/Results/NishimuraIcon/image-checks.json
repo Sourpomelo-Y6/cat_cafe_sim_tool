@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "all_seats_equal": true,
+  "images": {
+    "actual-seated-nishimura-1024.png": [
+      1024,
+      768
+    ],
+    "actual-seated-nishimura-1280.png": [
+      1280,
+      800
+    ],
+    "manual-after-input-1024.png": [
+      1024,
+      768
+    ],
+    "reservation-extra-mori-1024.png": [
+      1024,
+      768
+    ],
+    "reservation-extra-mori-1280.png": [
+      1280,
+      800
+    ],
+    "seat-advanced-play-1024.png": [
+      1024,
+      768
+    ],
+    "seat-advanced-play-1280.png": [
+      1280,
+      800
+    ],
+    "trust-advanced-play-1024.png": [
+      1024,
+      768
+    ],
+    "trust-advanced-play-1280.png": [
+      1280,
+      800
+    ]
+  }
+}

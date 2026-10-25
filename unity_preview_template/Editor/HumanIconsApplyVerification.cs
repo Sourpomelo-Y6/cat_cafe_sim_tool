@@ -5,6 +5,13 @@ using UnityEditor;
 using UnityEngine;
 namespace CatCafePreview.Editor {
  public static class HumanIconsApplyVerification {
+  public static void VerifyNishimuraAndBuild(){
+   ContentPreviewSetup.Import(Environment.GetEnvironmentVariable("CATCAFE_HUMAN_SELECTED"));
+   var textures=new[]{"guest-1","guest-2","reservation-longhair","guest-3","guest-4","guest-5","guest-6","guest-7","guest-8","guest-9","guest-10","guest-11","guest-12","advanced-white","advanced-longhair","advanced-quiet","advanced-play"}.Select(HumanPortraitResources.Resolve).ToArray();
+   if(textures.Any(t=>t==null || t==HumanPortraitResources.Placeholder()) || textures.Distinct().Count()!=17)throw new Exception("Seventeen customer icons did not resolve distinctly");
+   if(HumanPortraitResources.Resolve("unknown")!=HumanPortraitResources.Placeholder())throw new Exception("Unknown customer fallback");
+   Debug.Log("CAT_CAFE_NISHIMURA_IMPORTED");StandaloneScreenSetup.Build();
+  }
   public static void VerifyFukudaAndBuild(){
    ContentPreviewSetup.Import(Environment.GetEnvironmentVariable("CATCAFE_HUMAN_SELECTED"));
    var textures=new[]{"guest-1","guest-2","reservation-longhair","guest-3","guest-4","guest-5","guest-6","guest-7","guest-8","guest-9","guest-10","guest-11","guest-12","advanced-white","advanced-longhair","advanced-quiet"}.Select(HumanPortraitResources.Resolve).ToArray();

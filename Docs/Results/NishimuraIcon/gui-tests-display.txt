@@ -1,0 +1,16 @@
+test_actual_manager_buttons (test_human_portraits.HumanPortraitGuiTests) ... ok
+test_clear_preserves_source (test_human_portraits.HumanPortraitGuiTests) ... ok
+test_duplicate_path_and_wrong_kind (test_human_portraits.HumanPortraitGuiTests) ... ok
+test_full_export_sidecar_is_not_cat_content (test_human_portraits.HumanPortraitGuiTests) ... ok
+test_missing_stale_and_unknown (test_human_portraits.HumanPortraitGuiTests) ... ok
+test_register_reload_replace_export_and_alpha (test_human_portraits.HumanPortraitGuiTests) ... ok
+test_clear_preserves_source (test_human_portraits.HumanPortraitTests) ... ok
+test_duplicate_path_and_wrong_kind (test_human_portraits.HumanPortraitTests) ... ok
+test_full_export_sidecar_is_not_cat_content (test_human_portraits.HumanPortraitTests) ... ok
+test_missing_stale_and_unknown (test_human_portraits.HumanPortraitTests) ... ok
+test_register_reload_replace_export_and_alpha (test_human_portraits.HumanPortraitTests) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.691s
+
+OK

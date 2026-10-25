@@ -1,0 +1,36 @@
+{
+  "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Logs": {
+    "start": 15914135861,
+    "end": 16010292800,
+    "delta": 96156939
+  },
+  "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Logs\\StandaloneBuild\\Latest": {
+    "start": 3601683304,
+    "end": 3672998320,
+    "delta": 71315016
+  },
+  "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Docs\\Prototypes": {
+    "start": 533656436,
+    "end": 534976798,
+    "delta": 1320362
+  },
+  "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images": {
+    "start": 1209096006,
+    "end": 1210416499,
+    "delta": 1320493
+  },
+  "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Library": {
+    "start": 5926383000,
+    "end": 6008300025,
+    "delta": 81917025
+  },
+  "build_storage": {
+    "directories": [
+      "Latest",
+      "Runs"
+    ],
+    "successful_build_sets": 1,
+    "pending": false,
+    "build.lock": "existing shared storage lock file; not a build copy"
+  }
+}
