@@ -1,0 +1,17 @@
+using System;
+using System.IO;
+using System.Linq;
+using UnityEditor;
+using UnityEngine;
+namespace CatCafePreview.Editor {
+ public static class HumanIconsApplyVerification {
+  public static void VerifyAndBuild(){
+   string folder=Environment.GetEnvironmentVariable("CATCAFE_HUMAN_SELECTED");ContentPreviewSetup.Import(folder);var textures=new[]{"guest-1","guest-2","reservation-longhair"}.Select(HumanPortraitResources.Resolve).ToArray();
+   if(textures.Any(t=>t==null || t==HumanPortraitResources.Placeholder()) || textures.Distinct().Count()!=3)throw new Exception("Three customer icons did not resolve distinctly");
+   if(HumanPortraitResources.Resolve("temporary-sato")!=HumanPortraitResources.Placeholder())throw new Exception("Unknown customer did not fall back");
+   // Apply the existing policy to referenced cat textures (including historical packs) before the ordinary build guard.
+   CatTexturePolicy.ApplyAll();
+   Debug.Log("CAT_CAFE_THREE_ICONS_IMPORTED");StandaloneScreenSetup.Build();
+  }
+ }
+}

@@ -80,3 +80,6 @@ B：暗褐色のボブ、眼鏡なし、赤茶のカーディガン。成熟し�
 | Library | 5263552778 | 5229655426 | -33897352 |
 
 Latestは156ファイル・3,011,167,836 bytesの一組のまま。StandaloneBuildの子フォルダはLatest/RunsのみでPendingなし。ビルドZIP・別Unityプロジェクト・Libraryは追加していない。Logs増加は今回のfixture保存・描画PNG・Editor/ビルドログが主因。採用元はPNG一枚と212-byte台帳だけ増加。Libraryは既存Editorが更新した結果で、手動削除していない。別途、共有Docsに2,332,935-byteのA/B試作とプロンプト、ツールDocsに6枚の描画記録、実Unityに採用PNG一枚とmeta・対応JSONを保存した。採用素材・セーブ・他作業成果物・旧パックは削除していない。
+
+
+2026-10-25後続：ユーザー依頼で3人の簡略アイコンを採用・配布Latestへ反映。以前のビルド停止は設定整合で解消。[採用対応・配布Player確認・容量](HumanIconsApplied.md)。本書の詳細版佐藤さん・他2人未採用・Player未確認は前段時点の記録。

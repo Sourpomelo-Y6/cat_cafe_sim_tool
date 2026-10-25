@@ -1,0 +1,36 @@
+using System;
+using System.IO;
+using System.Linq;
+using System.Collections;
+using System.Reflection;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using CatCafePreview.Standalone;
+namespace CatCafePreview {
+ public sealed class StandaloneHumanIconsSmoke:MonoBehaviour {
+  string output;int checks;static readonly BindingFlags Hidden=BindingFlags.Instance|BindingFlags.NonPublic;
+  void Check(bool value,string label){checks++;if(!value)throw new Exception(label);}
+  [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]static void Install(){var a=Environment.GetCommandLineArgs();int i=Array.IndexOf(a,"--catcafe-human-icons");if(i<0)return;var q=new GameObject("Human icons QA").AddComponent<StandaloneHumanIconsSmoke>();DontDestroyOnLoad(q);q.output=Path.GetFullPath(a[i+1]);Directory.CreateDirectory(q.output);Application.runInBackground=true;q.StartCoroutine(q.Guard());}
+  IEnumerator Guard(){var work=Run();while(true){bool more;try{more=work.MoveNext();}catch(Exception e){File.WriteAllText(Path.Combine(output,"failure.txt"),e.ToString());Debug.LogException(e);Application.Quit(1);yield break;}if(!more)break;yield return work.Current;}File.WriteAllText(Path.Combine(output,"result.txt"),"PASS: "+checks+" checks. Actual Player UI with isolated view/event/replay fixtures; no natural event or physical input claim.");Application.Quit(0);}
+  void Apply(PythonStateClient client,PythonCafeState view){typeof(PythonStateClient).GetMethod("Accept",Hidden).Invoke(client,new object[]{view});Canvas.ForceUpdateCanvases();}
+  void Send(LocalCafeBackend b,string kind){var state=b.Simulation.State;CafeResponse response=null;var cmd=new PythonShiftCommand{kind=kind,request_id=Guid.NewGuid().ToString("N"),instance_id=state.instance_id,expected_revision=state.revision,save_id="1",save_slot=1,working_cats=new string[0]};var work=b.Request("/commands",JsonUtility.ToJson(cmd),r=>response=r);while(work.MoveNext()){}Check(response!=null && response.result==UnityEngine.Networking.UnityWebRequest.Result.Success,kind+": "+response?.error);}
+  IEnumerator Shot(string name){yield return new WaitForEndOfFrame();ScreenCapture.CaptureScreenshot(Path.Combine(output,name+".png"));yield return null;}
+  IEnumerator Run(){
+   var ids=new[]{"guest-1","guest-2","reservation-longhair"};var textures=ids.Select(HumanPortraitResources.Resolve).ToArray();Check(textures.All(t=>t!=null && t!=HumanPortraitResources.Placeholder()),"Missing customer icon");Check(textures.Distinct().Count()==3,"Customer identities share image");Check(HumanPortraitResources.Resolve("unknown")==HumanPortraitResources.Placeholder(),"Unknown customer");
+   var backend=new LocalCafeBackend(Path.Combine(output,"save"));CafeBackends.UseLocal(backend);backend.Simulation.Execute("start_business");for(int i=0;i<25 && !backend.View().seats.Any(s=>!string.IsNullOrEmpty(s.customer_id));i++)backend.Simulation.Execute("advance_business");Send(backend,"save_game");var resumed=new LocalCafeBackend(Path.Combine(output,"save"));Send(resumed,"load_game");Check(resumed.View().seats.Select(s=>s.customer_id).SequenceEqual(backend.View().seats.Select(s=>s.customer_id)),"Save/resume customer identities");
+   SceneManager.LoadScene("CatCafePythonState");yield return new WaitForSecondsRealtime(2);var client=FindObjectOfType<PythonStateClient>();var screen=client.GetComponent<PythonServiceScreen>();
+   foreach(int width in new[]{1280,1024}){
+    Screen.SetResolution(width,width==1280?800:768,false);yield return new WaitForSecondsRealtime(.4f);
+    foreach(var id in ids){var view=backend.View();var seat=view.seats.First(s=>!string.IsNullOrEmpty(s.customer_id));seat.customer_id=id;seat.customer_name=id=="guest-1"?"佐藤さん":id=="guest-2"?"鈴木さん":"森さん";Apply(client,view);screen.ShowSeats();yield return null;var card=screen.seatContent.GetComponentsInChildren<PythonCatCard>().First(c=>c.customerIcon.activeSelf);Check(card.customerIcon.GetComponentInChildren<RawImage>().texture==HumanPortraitResources.Resolve(id),"Actual seat "+id);yield return Shot("seat-"+id+"-"+width);seat.customer_id="unknown";screen.Apply(view);Check(card.customerIcon.GetComponentInChildren<RawImage>().texture==HumanPortraitResources.Placeholder(),"Seat replacement fallback");seat.customer_id=null;screen.Apply(view);Check(!card.customerIcon.activeSelf,"Empty seat");}
+   }
+   var trust=new LocalCafeBackend(Path.Combine(output,"trust"));trust.Simulation.State.trust_events.Add(new CafeTrustEvent{id="icon-fixture",customer_id="guest-2",status="waiting",day=1,suspensions=1});CafeBackends.UseLocal(trust);Apply(client,trust.View());var owner=client.GetComponent<PythonCustomerTrustPanel>();var ui=owner.Dialogue;ui.Apply(trust.View(),owner);Check(ui.OpenPending(),"Trust open");ui.Next();Check((Texture2D)typeof(TrustConversationPanel).GetMethod("PortraitTexture",Hidden).Invoke(ui,new object[]{""})==textures[1],"Trust customer binding");string before=JsonUtility.ToJson(trust.Simulation.State);
+   foreach(int width in new[]{1280,1024}){Screen.SetResolution(width,width==1280?800:768,false);yield return new WaitForSecondsRealtime(.4f);yield return Shot("trust-suzuki-"+width);}ui.Close();
+   var canvas=client.GetComponentInChildren<Canvas>();var host=new GameObject("Icon replay fixture",typeof(RectTransform),typeof(CanvasRenderer),typeof(Image));host.transform.SetParent(canvas.transform,false);var replay=client.gameObject.AddComponent<ReplayConversationPanel>();
+   foreach(int width in new[]{1280,1024}){Screen.SetResolution(width,width==1280?800:768,false);yield return new WaitForSecondsRealtime(.4f);replay.Play(new CafeReplayEntry{conversation_id=CafeReservationDialogue.Id+".response",branch_id="accepted",title="特別予約",customer_id="reservation-longhair",cat_name="森さん",personality="特別予約のお客さん",lines=new[]{new CafeConversationLine("森さん","予約の条件を確認させてください。")}},host,owner.title.font,()=>{});yield return null;replay.Next();Check((Texture2D)typeof(ReplayConversationPanel).GetMethod("PortraitTexture",Hidden).Invoke(replay,new object[]{""})==textures[2],"Reservation Extra identity");yield return Shot("reservation-extra-mori-"+width);replay.Close();}
+   Check(before==JsonUtility.ToJson(trust.Simulation.State),"Rendering/replay changed gameplay");
+   replay.Play(new CafeReplayEntry{conversation_id=CafeTrustDialogue.Id+".response",branch_id="recover",title="旧回想",cat_name="鈴木さん",lines=new[]{new CafeConversationLine("案内","旧記録")}},host,owner.title.font,()=>{});Check((Texture2D)typeof(ReplayConversationPanel).GetMethod("PortraitTexture",Hidden).Invoke(replay,new object[]{""})==HumanPortraitResources.Placeholder(),"Old replay guessed identity");
+   var reservation=client.GetComponent<ReservationConversationPanel>()??client.gameObject.AddComponent<ReservationConversationPanel>();Check((Texture2D)typeof(ReservationConversationPanel).GetMethod("PortraitTexture",Hidden).Invoke(reservation,new object[]{""})==textures[2],"Reservation portrait lookup");
+  }
+ }
+}
