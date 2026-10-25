@@ -1,0 +1,12 @@
+test_automatic_contact_rewards_and_popularity (test_cafe_longhair_customer.LonghairCustomerTests) ... ok
+test_day_off_has_no_visit_and_other_modes_or_old_saves_unchanged (test_cafe_longhair_customer.LonghairCustomerTests) ... ok
+test_invalid_config_and_corrupted_reward_rejected (test_cafe_longhair_customer.LonghairCustomerTests) ... ok
+test_match_contact_count_and_no_equipment_required (test_cafe_longhair_customer.LonghairCustomerTests) ... ok
+test_pending_interaction_save_resume_and_fixed_config (test_cafe_longhair_customer.LonghairCustomerTests) ... ok
+test_second_stage_only_and_deterministic_probability (test_cafe_longhair_customer.LonghairCustomerTests) ... ok
+test_directory_unlock_probability_and_result (test_cafe_longhair_customer.LonghairCustomerWindowTests) ... skipped 'requires a display'
+
+----------------------------------------------------------------------
+Ran 7 tests in 22.073s
+
+OK (skipped=1)

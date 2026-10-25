@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "protected_sha256": {
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\interaction_texts.json": "c08a4f29bb4c5f33c5bc9073485ec898d9cef1720c46d8891d1d573245fa92d4",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\manifest.json": "7c7933c42e56bf805f03543b76b63f0bc6a608cafe1c54395bd4bb5515c7fc3e",
+    "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\catalog.json": "d2f88a6d256821a528c80ac3770764040053d210576237aab19ef5462dd1f107"
+  },
+  "build_directories": [
+    "Latest",
+    "Runs"
+  ],
+  "latest_files": 156,
+  "source_image_bytes": 1322067
+}

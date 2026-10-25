@@ -5,6 +5,13 @@ using UnityEditor;
 using UnityEngine;
 namespace CatCafePreview.Editor {
  public static class HumanIconsApplyVerification {
+  public static void VerifySakamotoAndBuild(){
+   ContentPreviewSetup.Import(Environment.GetEnvironmentVariable("CATCAFE_HUMAN_SELECTED"));
+   var textures=new[]{"guest-1","guest-2","reservation-longhair","guest-3","guest-4","guest-5","guest-6","guest-7","guest-8","guest-9","guest-10","guest-11","guest-12","advanced-white","advanced-longhair"}.Select(HumanPortraitResources.Resolve).ToArray();
+   if(textures.Any(t=>t==null || t==HumanPortraitResources.Placeholder()) || textures.Distinct().Count()!=15)throw new Exception("Fifteen customer icons did not resolve distinctly");
+   if(HumanPortraitResources.Resolve("unknown")!=HumanPortraitResources.Placeholder())throw new Exception("Unknown customer fallback");
+   Debug.Log("CAT_CAFE_SAKAMOTO_IMPORTED");StandaloneScreenSetup.Build();
+  }
   public static void VerifyFujiwaraAndBuild(){
    ContentPreviewSetup.Import(Environment.GetEnvironmentVariable("CATCAFE_HUMAN_SELECTED"));
    var textures=new[]{"guest-1","guest-2","reservation-longhair","guest-3","guest-4","guest-5","guest-6","guest-7","guest-8","guest-9","guest-10","guest-11","guest-12","advanced-white"}.Select(HumanPortraitResources.Resolve).ToArray();

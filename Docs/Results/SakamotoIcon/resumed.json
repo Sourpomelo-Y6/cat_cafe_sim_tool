@@ -1,0 +1,1583 @@
+{
+    "version": 1,
+    "day": 4,
+    "tick": 1,
+    "instance_id": "1b978a0407024a84a7e3e6c6e077350b",
+    "rest_proposal": [
+        "cat-mugi",
+        "cat-sora",
+        "cat-tama"
+    ],
+    "revision": 0,
+    "can_set_shifts": false,
+    "closed": false,
+    "phase": "open",
+    "required_action": "",
+    "objective": "popularity",
+    "new_game_options": [
+        {
+            "choice": "bond",
+            "label": "猫6匹との好感度",
+            "detail": "好感度80以上の猫を6匹",
+            "conditions": "1日3セット・1セット10手。4日目の保護猫を迎えて6匹にできます。"
+        },
+        {
+            "choice": "patron",
+            "label": "有力者の満足度",
+            "detail": "3人の満足度をすべて達成",
+            "conditions": "派遣は2回の閉店で帰還。条件・加点は出発時に固定します。"
+        },
+        {
+            "choice": "popularity",
+            "label": "人気目標",
+            "detail": "段階目標・席数拡張・追加来客",
+            "conditions": "初期猫5匹 / 2席 / 資金1000 / 人気100。3段階の人気目標に挑戦します。猫の休養と設備を整え、専門のお客や特別予約を迎えましょう。"
+        },
+        {
+            "choice": "free",
+            "label": "自由営業",
+            "detail": "新規開始・出勤・自動接客・閉店・翌日・保存再開",
+            "conditions": "初期猫5匹 / 2席 / 資金1000。自由営業は3席まで。4席以降は段階人気目標の達成が必要。"
+        }
+    ],
+    "opening_ticks": 40,
+    "waiting_count": 2,
+    "completed_interactions": 0,
+    "revenue": 0.0,
+    "popularity": 650.0,
+    "popularity_gain": 0.0,
+    "customer_satisfaction": {
+        "satisfied": 0,
+        "normal": 0,
+        "dissatisfied": 0
+    },
+    "store_event_label": "イベントなし",
+    "store_event_notice": "",
+    "store_event_notice_kind": "",
+    "customer_progress": [
+        {
+            "customer_id": "guest-1",
+            "loyalty": 0.0,
+            "discontent": 0.0,
+            "regular_day": 0,
+            "extra_weekday": 1,
+            "suspended_until": 0,
+            "can_visit": true
+        },
+        {
+            "customer_id": "guest-2",
+            "loyalty": 0.0,
+            "discontent": 0.0,
+            "regular_day": 0,
+            "extra_weekday": 0,
+            "suspended_until": 0,
+            "can_visit": true
+        },
+        {
+            "customer_id": "guest-3",
+            "loyalty": 0.0,
+            "discontent": 0.0,
+            "regular_day": 0,
+            "extra_weekday": 1,
+            "suspended_until": 0,
+            "can_visit": true
+        },
+        {
+            "customer_id": "guest-4",
+            "loyalty": 0.0,
+            "discontent": 0.0,
+            "regular_day": 0,
+            "extra_weekday": 0,
+            "suspended_until": 0,
+            "can_visit": true
+        },
+        {
+            "customer_id": "guest-5",
+            "loyalty": 0.0,
+            "discontent": 0.0,
+            "regular_day": 0,
+            "extra_weekday": 1,
+            "suspended_until": 0,
+            "can_visit": true
+        },
+        {
+            "customer_id": "guest-6",
+            "loyalty": 0.0,
+            "discontent": 0.0,
+            "regular_day": 0,
+            "extra_weekday": 0,
+            "suspended_until": 0,
+            "can_visit": true
+        }
+    ],
+    "customer_schedule": [
+        {
+            "customer_id": "guest-2",
+            "tick": 6
+        },
+        {
+            "customer_id": "guest-4",
+            "tick": 18
+        },
+        {
+            "customer_id": "guest-6",
+            "tick": 30
+        },
+        {
+            "customer_id": "advanced-white",
+            "tick": 0
+        },
+        {
+            "customer_id": "guest-7",
+            "tick": 4
+        },
+        {
+            "customer_id": "guest-8",
+            "tick": 12
+        },
+        {
+            "customer_id": "guest-9",
+            "tick": 20
+        },
+        {
+            "customer_id": "guest-10",
+            "tick": 28
+        },
+        {
+            "customer_id": "guest-11",
+            "tick": 10
+        },
+        {
+            "customer_id": "guest-12",
+            "tick": 30
+        },
+        {
+            "customer_id": "advanced-play",
+            "tick": 0
+        },
+        {
+            "customer_id": "advanced-longhair",
+            "tick": 0
+        }
+    ],
+    "seats": [
+        {
+            "latest_action": "行動の記録なし",
+            "cat_reaction": "—",
+            "narrative_image": "",
+            "narrative": "文章の記録はまだありません。",
+            "seat_id": "seat-1",
+            "customer_id": "advanced-longhair",
+            "customer_name": "坂本さん",
+            "cat_id": "cat-kohaku",
+            "equipment_id": "",
+            "equipment_description": "設備なし",
+            "equipment_name": "",
+            "disabled": false
+        },
+        {
+            "latest_action": "行動の記録なし",
+            "cat_reaction": "—",
+            "narrative_image": "",
+            "narrative": "空席です。お客さんを待っています。",
+            "seat_id": "seat-2",
+            "customer_id": "",
+            "customer_name": "",
+            "cat_id": "",
+            "equipment_id": "",
+            "equipment_description": "設備なし",
+            "equipment_name": "",
+            "disabled": false
+        }
+    ],
+    "customers": [
+        {
+            "customer_id": "advanced-white",
+            "name": "藤原さん",
+            "status": "waiting",
+            "seat_id": ""
+        },
+        {
+            "customer_id": "advanced-play",
+            "name": "西村さん",
+            "status": "waiting",
+            "seat_id": ""
+        },
+        {
+            "customer_id": "advanced-longhair",
+            "name": "坂本さん",
+            "status": "seated",
+            "seat_id": "seat-1"
+        }
+    ],
+    "finance": {
+        "dispatch_trouble_expenses": 0.0,
+        "opening_funds": 820.0,
+        "total_income": 0.0,
+        "total_expenses": 0.0,
+        "net_cash_flow": 0.0,
+        "closing_funds": 820.0,
+        "pet_shop_expenses": 0.0,
+        "recruitment_expenses": 0.0,
+        "housing_expenses": 0.0,
+        "housing_cost": 0.0,
+        "item_expenses": 0.0,
+        "item_sales_income": 0.0,
+        "seat_equipment_expenses": 0.0,
+        "equipment_expenses": 0.0,
+        "waiting_area_expenses": 0.0,
+        "facility_cost": 0.0,
+        "dispatch_income": 0.0
+    },
+    "finance_history": {
+        "totals": "",
+        "notes": "",
+        "rows": []
+    },
+    "business_history": {
+        "totals": "",
+        "notes": "",
+        "rows": []
+    },
+    "pet_shop": {
+        "rows": [
+            {
+                "cat_id": "shop-1",
+                "content_cat_id": "shop-1",
+                "name": "チロ",
+                "reason": "用品は営業準備中に操作してください。",
+                "details": "名前 / 個性：チロ / 中立\n特徴：白猫・長毛 / のんびり屋\n価格：400 / 購入後の資金：420\n健康・体力全回復・休養予定。疲労・ストレス・好感度・経験は0で加入します。",
+                "cost": 400.0,
+                "funds_after": 420.0,
+                "accepted": false,
+                "can_purchase": false,
+                "accepted_day": 0
+            },
+            {
+                "cat_id": "shop-2",
+                "content_cat_id": "shop-2",
+                "name": "レオ",
+                "reason": "用品は営業準備中に操作してください。",
+                "details": "名前 / 個性：レオ / 穏やかな甘えん坊\n特徴：茶トラ・短毛 / 外出好き\n価格：450 / 購入後の資金：370\n健康・体力全回復・休養予定。疲労・ストレス・好感度・経験は0で加入します。",
+                "cost": 450.0,
+                "funds_after": 370.0,
+                "accepted": false,
+                "can_purchase": false,
+                "accepted_day": 0
+            },
+            {
+                "cat_id": "shop-3",
+                "content_cat_id": "shop-3",
+                "name": "ハナ",
+                "reason": "用品は営業準備中に操作してください。",
+                "details": "名前 / 個性：ハナ / 遊び好きで繊細な猫\n特徴：白黒・短毛 / 接客好き\n価格：500 / 購入後の資金：320\n健康・体力全回復・休養予定。疲労・ストレス・好感度・経験は0で加入します。",
+                "cost": 500.0,
+                "funds_after": 320.0,
+                "accepted": false,
+                "can_purchase": false,
+                "accepted_day": 0
+            }
+        ],
+        "housing": "在籍 5 / 上限 6",
+        "notes": "候補と価格は新規開始時の設定で固定されます。準備中に購入でき、同じ候補は再購入できません。"
+    },
+    "recruitment": {
+        "rows": [],
+        "housing": "在籍 5 / 上限 6",
+        "notes": "3日ごとに3匹を追加します。以前の候補も残ります。次の紹介：4日目（準備中）",
+        "reason": "用品は営業準備中に操作してください。",
+        "can_refresh": false,
+        "traits": [],
+        "coats": [],
+        "hairs": []
+    },
+    "objective_start": {
+        "rows": [
+            {
+                "choice": "popularity",
+                "label": "人気への挑戦",
+                "details": "人気250（20日間） → 人気450（20日間） → 人気650（25日間）\n現在の店・猫・資金・他の目標を維持します。開始日を含む期限で、休業も日数に含みます。開始費用はなく、取消・再挑戦はできません。\n開始日：1日目",
+                "reason": "人気挑戦は開始済みです。取消・再挑戦はできません。",
+                "summary": "開始済み",
+                "started": true,
+                "can_start": false
+            },
+            {
+                "choice": "bond",
+                "label": "猫との好感度目標",
+                "details": "好感度80以上の猫を6匹。既存の好感度を引き継ぎ、条件を満たしていれば開始時に達成します。\n期限なし。店・猫・資金・他の目標の進捗を維持します。開始費用はなく、取消・再開始はできません。",
+                "reason": "用品は営業準備中に操作してください。",
+                "summary": "未開始",
+                "started": false,
+                "can_start": false
+            },
+            {
+                "choice": "patron",
+                "label": "有力者の満足度目標",
+                "details": "3人それぞれの満足度目標へ挑戦します。満足度は0から開始し、導入後の派遣帰還確認で加算します。既存の通常派遣と育成は維持します。\n期限なし。店・猫・資金・他の目標の進捗を維持します。開始費用はなく、取消・再開始はできません。",
+                "reason": "用品は営業準備中に操作してください。",
+                "summary": "未開始",
+                "started": false,
+                "can_start": false
+            }
+        ],
+        "notes": "開始時のモードは変更しません。"
+    },
+    "dispatch_comparison": {
+        "cats": [],
+        "notes": ""
+    },
+    "service_assignment": {
+        "auto_assign": true,
+        "waiting": false,
+        "can_assign": false,
+        "reason": "自動割り当てをOFFにしてから、客・猫・空席を選んでください。",
+        "notes": "手動の担当待ちでは営業時計を止めます。割り当てだけでは時刻・資金・体力は進みません。接客は営業を進める操作で進行します。自動設定をONにしても接客中の担当は維持します。",
+        "customers": [
+            {
+                "customer_id": "advanced-white",
+                "name": "藤原さん",
+                "details": "待機 1tick / 猶予の残り 7tick",
+                "matches": [
+                    {
+                        "cat_id": "cat-kohaku",
+                        "details": "好み：white / 相性：不一致 / 親しみ：0"
+                    },
+                    {
+                        "cat_id": "cat-mike",
+                        "details": "好み：white / 相性：不一致 / 親しみ：0"
+                    },
+                    {
+                        "cat_id": "cat-mugi",
+                        "details": "好み：white / 相性：不一致 / 親しみ：0"
+                    },
+                    {
+                        "cat_id": "cat-sora",
+                        "details": "好み：white / 相性：一致 / 親しみ：0"
+                    },
+                    {
+                        "cat_id": "cat-tama",
+                        "details": "好み：white / 相性：不一致 / 親しみ：0"
+                    }
+                ]
+            },
+            {
+                "customer_id": "advanced-play",
+                "name": "西村さん",
+                "details": "待機 1tick / 猶予の残り 7tick",
+                "matches": [
+                    {
+                        "cat_id": "cat-kohaku",
+                        "details": "好み：calico / 相性：不一致 / 親しみ：0"
+                    },
+                    {
+                        "cat_id": "cat-mike",
+                        "details": "好み：calico / 相性：一致 / 親しみ：0"
+                    },
+                    {
+                        "cat_id": "cat-mugi",
+                        "details": "好み：calico / 相性：不一致 / 親しみ：0"
+                    },
+                    {
+                        "cat_id": "cat-sora",
+                        "details": "好み：calico / 相性：不一致 / 親しみ：0"
+                    },
+                    {
+                        "cat_id": "cat-tama",
+                        "details": "好み：calico / 相性：不一致 / 親しみ：0"
+                    }
+                ]
+            }
+        ],
+        "cats": [
+            {
+                "cat_id": "cat-kohaku",
+                "name": "コハク",
+                "reason": "別の席で接客中です。",
+                "details": "cafe / 出勤 / healthy / 体力 100 / 100・疲労 0",
+                "available": false
+            },
+            {
+                "cat_id": "cat-mike",
+                "name": "ミケ",
+                "reason": "",
+                "details": "cafe / 出勤 / healthy / 体力 100 / 100・疲労 0",
+                "available": true
+            },
+            {
+                "cat_id": "cat-mugi",
+                "name": "ムギ",
+                "reason": "",
+                "details": "cafe / 出勤 / healthy / 体力 100 / 100・疲労 0",
+                "available": true
+            },
+            {
+                "cat_id": "cat-sora",
+                "name": "ソラ",
+                "reason": "",
+                "details": "cafe / 出勤 / healthy / 体力 100 / 100・疲労 0",
+                "available": true
+            },
+            {
+                "cat_id": "cat-tama",
+                "name": "タマ",
+                "reason": "",
+                "details": "cafe / 出勤 / healthy / 体力 100 / 100・疲労 0",
+                "available": true
+            }
+        ],
+        "seats": [
+            {
+                "seat_id": "seat-1",
+                "label": "席 1",
+                "reason": "接客中または使用できない席です。",
+                "details": "接客中：坂本さん / コハク / 設備なし",
+                "available": false
+            },
+            {
+                "seat_id": "seat-2",
+                "label": "席 2",
+                "reason": "",
+                "details": "空席 / 設備なし",
+                "available": true
+            }
+        ]
+    },
+    "autoplay": {
+        "running": false,
+        "can_start": false,
+        "paused": false,
+        "reason": "挑戦中の目標が必要です。",
+        "notes": "基礎営業・安定経営・積極経営 / 1〜10日。成長は営業後に猫に合う内容で自動確定します。猫適性の選択は目標達成を保証しません。専門確定後は変更できません。手動で育成する場合は、おまかせを中止して通常営業後に選んでください。他の回答待ち・目標結果で停止します。保存すると一時停止し、読み込み後は明示的に再開します。中止後は元の割り当て設定へ戻ります。",
+        "objectives": [
+            {
+                "choice": "popularity",
+                "label": "人気",
+                "status": "cleared",
+                "can_start": false
+            }
+        ],
+        "modes": [
+            {
+                "choice": "basic",
+                "label": "基礎営業",
+                "status": "",
+                "can_start": false
+            },
+            {
+                "choice": "clear",
+                "label": "安定経営",
+                "status": "",
+                "can_start": false
+            },
+            {
+                "choice": "fast",
+                "label": "積極経営",
+                "status": "",
+                "can_start": false
+            }
+        ],
+        "report": {
+            "version": 0,
+            "limit": 0,
+            "days": 0,
+            "operations": 0,
+            "run_id": "",
+            "objective": "",
+            "mode": "",
+            "reason": "",
+            "message": "",
+            "summary": "",
+            "running": false,
+            "lines": [],
+            "decisions": []
+        }
+    },
+    "pending_results": {
+        "count": 0,
+        "reason": "",
+        "notes": "",
+        "rows": []
+    },
+    "intake_request": {
+        "cat_id": "request-cat-1",
+        "name": "ナナ",
+        "status": "declined",
+        "personality": "穏やかな甘えん坊",
+        "features": "白黒・長毛",
+        "trait": "のんびり屋",
+        "housing": "在籍 5 / 上限 6",
+        "response_reason": "営業準備中に、他の確認待ちを解決して回答してください。",
+        "accept_reason": "",
+        "day": 4,
+        "cost": 200.0,
+        "can_accept": false,
+        "can_decline": false
+    },
+    "visiting_cat": {
+        "cat_id": "visiting-cat-1",
+        "content_cat_id": "visiting-cat-1",
+        "name": "ココ",
+        "status": "visiting",
+        "personality": "距離を大切にする猫",
+        "features": "キジトラ・短毛",
+        "trait": "のんびり屋",
+        "housing": "在籍 5 / 上限 6",
+        "history": "",
+        "reason": "用品は営業準備中に操作してください。",
+        "daily_reason": "用品は営業準備中に操作してください。",
+        "accept_reason": "用品は営業準備中に操作してください。",
+        "progress": 0,
+        "required": 3,
+        "presented_day": 2,
+        "accepted_day": 0,
+        "cost": 200.0,
+        "funds_after": 620.0,
+        "can_interact": false,
+        "can_skip": false,
+        "can_accept": false
+    },
+    "regular_introduction": {
+        "cat_id": "regular-rescue-1",
+        "content_cat_id": "regular-rescue-1",
+        "name": "マロン",
+        "status": "untriggered",
+        "customer_id": "",
+        "customer_name": "",
+        "personality": "穏やかな甘えん坊",
+        "features": "茶トラ・短毛",
+        "trait": "のんびり屋",
+        "preferences": "",
+        "housing": "在籍 5 / 上限 6",
+        "response_reason": "営業準備中に、帰還・店舗イベントの確認待ちを解決してください。",
+        "accept_reason": "",
+        "presented_day": 0,
+        "resolved_day": 0,
+        "cost": 200.0,
+        "funds_after": 620.0,
+        "threshold": 100.0,
+        "can_accept": false,
+        "can_decline": false
+    },
+    "specialist_description": "人気第1段階達成翌日から解放。白猫客：白猫で心をつかむ 1回 / 追加料金 100\n静かな交流客（月・水・金）：静かな交流スペース＋声かけ・そばにいる計 3回 / 追加料金 150 / 人気 3\n遊び客（火・木・土）：キャットタワー＋遊び計 4回 / 追加料金 180 / 人気 4\n触れ合い客（日）：お手入れブラシ＋なでる・ブラッシング計 3回 / 追加料金 160 / 人気 3\n長毛専門客：人気第2段階達成翌日から営業日に 30％。長毛猫との通常の触れ合い 3回（設備不要） / 追加料金 120 / 人気 2\nVIP：人気最終段階達成翌日から1名。三毛猫で心をつかむ 1回・心を開く 1回・同時発動 1回 / 追加料金 400 / 人気 10",
+    "specialist_results": [],
+    "reservation": {
+        "event_id": "reservation-3",
+        "status": "declined",
+        "customer_id": "reservation-longhair",
+        "name": "長毛猫との時間を望む予約客",
+        "description": "担当猫の特徴と、接客中の「心を開く」の回数を指定する予約です。",
+        "result": "",
+        "reason": "回答待ちの予約はありません。",
+        "feature_label": "長毛",
+        "offered_day": 3,
+        "visit_day": 4,
+        "resolved_day": 3,
+        "open_up_count": 1,
+        "arrival_tick": 0,
+        "bonus": 200.0,
+        "popularity_bonus": 5.0,
+        "can_accept": false,
+        "can_decline": false
+    },
+    "customer_trust": {
+        "popularity_loss": 10.0,
+        "events": []
+    },
+    "growth_practice_choices": [],
+    "housing": {
+        "configured": true,
+        "can_expand": false,
+        "count": 5,
+        "capacity": 6,
+        "free": 1,
+        "stage": 0,
+        "next_capacity": 9,
+        "kind": "purchase_housing",
+        "reason": "飼育スペースの拡張は営業準備中に行ってください。",
+        "cost": 500.0,
+        "funds_after": 320.0,
+        "daily_cost": 0.0,
+        "next_daily_cost": 20.0,
+        "operating_cost": 60.0,
+        "next_operating_cost": 80.0
+    },
+    "goal_result": {
+        "status": "",
+        "reason": "",
+        "kind": "",
+        "title": "",
+        "details": "",
+        "summary": "",
+        "stage": 0,
+        "started_day": 0,
+        "deadline": 0,
+        "resolved_day": 0,
+        "target": 0.0,
+        "popularity": 0.0,
+        "funds": 0.0,
+        "can_continue": false,
+        "pending": false
+    },
+    "clear_results": {
+        "rows": [],
+        "notes": "達成した目標の結果を、ここで見返せます。"
+    },
+    "ending": {
+        "status": "",
+        "title": "",
+        "details": "",
+        "reason": "",
+        "pending": false,
+        "can_continue": false
+    },
+    "next_goal": {
+        "stage": 3,
+        "started_day": 4,
+        "deadline": 28,
+        "days": 25,
+        "target": 650.0,
+        "can_advance": false,
+        "reason": "次の目標は他の結果を確認し、準備中または閉店後に選んでください。"
+    },
+    "player_interaction": {
+        "narrative_image": "",
+        "stamina_guidance": "",
+        "session_id": "",
+        "cat_id": "",
+        "content_cat_id": "",
+        "scene_key": "",
+        "image_key": "",
+        "event_image_key": "",
+        "name": "",
+        "mode": "",
+        "history": "",
+        "reason": "",
+        "active": false,
+        "can_finish": false,
+        "remaining_ticks": 0,
+        "remaining_sets": 0,
+        "affinity_before": 0.0,
+        "affinity_after": 0.0,
+        "affinity_delta": 0.0,
+        "stamina_before": 0.0,
+        "stamina": 0.0,
+        "max_stamina": 0.0,
+        "engagement": 0.0,
+        "tension": 0.0,
+        "actions": [],
+        "targets": []
+    },
+    "bond_goal": {
+        "status": "",
+        "details": "",
+        "reason": "",
+        "pending": false,
+        "can_continue": false
+    },
+    "patron_goal": {
+        "status": "",
+        "details": "",
+        "reason": "",
+        "pending": false,
+        "can_continue": false
+    },
+    "patron_dispatch": {
+        "options": [],
+        "events": []
+    },
+    "general_dispatch": {
+        "options": [
+            {
+                "cat_id": "cat-kohaku",
+                "choice": "neighborhood_visit",
+                "label": "コハク / 近所のお店への訪問",
+                "detail": "疲労 60以下 / 出発費用なし / 必要特性：指定なし / 用品：ケア用品 / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 1,
+                "reward": 120.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-kohaku",
+                "choice": "shopping_street_event",
+                "label": "コハク / 商店街の交流会",
+                "detail": "疲労 40以下 / 出発費用なし / 必要特性：接客好き / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 2,
+                "reward": 260.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-kohaku",
+                "choice": "out_of_town_visit",
+                "label": "コハク / 郊外への出張訪問",
+                "detail": "疲労 30以下 / 出発費用なし / 必要特性：外出好き / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 3,
+                "reward": 450.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-kohaku",
+                "choice": "cat_exercise_class",
+                "label": "コハク / 猫の運動教室",
+                "detail": "疲労 40以下 / 出発費用なし / 必要特性：体力自慢 / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 2,
+                "reward": 300.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-kohaku",
+                "choice": "quiet_reading_salon",
+                "label": "コハク / 静かな読書サロン",
+                "detail": "疲労 40以下 / 出発費用なし / 必要特性：のんびり屋 / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 2,
+                "reward": 300.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-kohaku",
+                "choice": "cat_photo_studio",
+                "label": "コハク / 猫の撮影スタジオ",
+                "detail": "疲労 40以下 / 出発費用なし / 必要特性：接客好き / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 2,
+                "reward": 350.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-kohaku",
+                "choice": "cat_product_trial",
+                "label": "コハク / 猫用品の体験会",
+                "detail": "疲労 40以下 / 出発費用なし / 必要特性：働き者 / 用品：特製ケアセット / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 2,
+                "reward": 300.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-kohaku",
+                "choice": "small_art_museum",
+                "label": "コハク / 小さな美術館",
+                "detail": "疲労 40以下 / 出発費用なし / 必要特性：マイペース / 用品：ブラッシングセット / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 2,
+                "reward": 370.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-kohaku",
+                "choice": "mountain_lodge_visit",
+                "label": "コハク / 山あいの宿への訪問",
+                "detail": "家出確率 15％（出発時固定） / 捜索費 100 / 中断は報酬・派遣経験なし / 疲労 20以下 / 出発費用なし / 必要特性：外出好き / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 3,
+                "reward": 650.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-mike",
+                "choice": "neighborhood_visit",
+                "label": "ミケ / 近所のお店への訪問",
+                "detail": "疲労 60以下 / 出発費用なし / 必要特性：指定なし / 用品：ケア用品 / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 1,
+                "reward": 100.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-mike",
+                "choice": "shopping_street_event",
+                "label": "ミケ / 商店街の交流会",
+                "detail": "疲労 40以下 / 出発費用なし / 必要特性：接客好き / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 2,
+                "reward": 260.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-mike",
+                "choice": "out_of_town_visit",
+                "label": "ミケ / 郊外への出張訪問",
+                "detail": "疲労 30以下 / 出発費用なし / 必要特性：外出好き / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 3,
+                "reward": 450.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-mike",
+                "choice": "cat_exercise_class",
+                "label": "ミケ / 猫の運動教室",
+                "detail": "疲労 40以下 / 出発費用なし / 必要特性：体力自慢 / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 2,
+                "reward": 300.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-mike",
+                "choice": "quiet_reading_salon",
+                "label": "ミケ / 静かな読書サロン",
+                "detail": "疲労 40以下 / 出発費用なし / 必要特性：のんびり屋 / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 2,
+                "reward": 300.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-mike",
+                "choice": "cat_photo_studio",
+                "label": "ミケ / 猫の撮影スタジオ",
+                "detail": "疲労 40以下 / 出発費用なし / 必要特性：接客好き / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 2,
+                "reward": 350.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-mike",
+                "choice": "cat_product_trial",
+                "label": "ミケ / 猫用品の体験会",
+                "detail": "疲労 40以下 / 出発費用なし / 必要特性：働き者 / 用品：特製ケアセット / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 2,
+                "reward": 300.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-mike",
+                "choice": "small_art_museum",
+                "label": "ミケ / 小さな美術館",
+                "detail": "疲労 40以下 / 出発費用なし / 必要特性：マイペース / 用品：ブラッシングセット / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 2,
+                "reward": 350.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-mike",
+                "choice": "mountain_lodge_visit",
+                "label": "ミケ / 山あいの宿への訪問",
+                "detail": "家出確率 15％（出発時固定） / 捜索費 100 / 中断は報酬・派遣経験なし / 疲労 20以下 / 出発費用なし / 必要特性：外出好き / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 3,
+                "reward": 650.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-mugi",
+                "choice": "neighborhood_visit",
+                "label": "ムギ / 近所のお店への訪問",
+                "detail": "疲労 60以下 / 出発費用なし / 必要特性：指定なし / 用品：ケア用品 / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 1,
+                "reward": 100.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-mugi",
+                "choice": "shopping_street_event",
+                "label": "ムギ / 商店街の交流会",
+                "detail": "疲労 40以下 / 出発費用なし / 必要特性：接客好き / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 2,
+                "reward": 260.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-mugi",
+                "choice": "out_of_town_visit",
+                "label": "ムギ / 郊外への出張訪問",
+                "detail": "疲労 30以下 / 出発費用なし / 必要特性：外出好き / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 3,
+                "reward": 450.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-mugi",
+                "choice": "cat_exercise_class",
+                "label": "ムギ / 猫の運動教室",
+                "detail": "疲労 40以下 / 出発費用なし / 必要特性：体力自慢 / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 2,
+                "reward": 300.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-mugi",
+                "choice": "quiet_reading_salon",
+                "label": "ムギ / 静かな読書サロン",
+                "detail": "疲労 40以下 / 出発費用なし / 必要特性：のんびり屋 / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 2,
+                "reward": 300.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-mugi",
+                "choice": "cat_photo_studio",
+                "label": "ムギ / 猫の撮影スタジオ",
+                "detail": "疲労 40以下 / 出発費用なし / 必要特性：接客好き / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 2,
+                "reward": 350.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-mugi",
+                "choice": "cat_product_trial",
+                "label": "ムギ / 猫用品の体験会",
+                "detail": "疲労 40以下 / 出発費用なし / 必要特性：働き者 / 用品：特製ケアセット / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 2,
+                "reward": 300.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-mugi",
+                "choice": "small_art_museum",
+                "label": "ムギ / 小さな美術館",
+                "detail": "疲労 40以下 / 出発費用なし / 必要特性：マイペース / 用品：ブラッシングセット / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 2,
+                "reward": 350.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-mugi",
+                "choice": "mountain_lodge_visit",
+                "label": "ムギ / 山あいの宿への訪問",
+                "detail": "家出確率 15％（出発時固定） / 捜索費 100 / 中断は報酬・派遣経験なし / 疲労 20以下 / 出発費用なし / 必要特性：外出好き / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 3,
+                "reward": 650.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-sora",
+                "choice": "neighborhood_visit",
+                "label": "ソラ / 近所のお店への訪問",
+                "detail": "疲労 60以下 / 出発費用なし / 必要特性：指定なし / 用品：ケア用品 / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 1,
+                "reward": 120.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-sora",
+                "choice": "shopping_street_event",
+                "label": "ソラ / 商店街の交流会",
+                "detail": "疲労 40以下 / 出発費用なし / 必要特性：接客好き / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 2,
+                "reward": 260.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-sora",
+                "choice": "out_of_town_visit",
+                "label": "ソラ / 郊外への出張訪問",
+                "detail": "疲労 30以下 / 出発費用なし / 必要特性：外出好き / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 3,
+                "reward": 450.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-sora",
+                "choice": "cat_exercise_class",
+                "label": "ソラ / 猫の運動教室",
+                "detail": "疲労 40以下 / 出発費用なし / 必要特性：体力自慢 / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 2,
+                "reward": 300.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-sora",
+                "choice": "quiet_reading_salon",
+                "label": "ソラ / 静かな読書サロン",
+                "detail": "疲労 40以下 / 出発費用なし / 必要特性：のんびり屋 / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 2,
+                "reward": 300.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-sora",
+                "choice": "cat_photo_studio",
+                "label": "ソラ / 猫の撮影スタジオ",
+                "detail": "疲労 40以下 / 出発費用なし / 必要特性：接客好き / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 2,
+                "reward": 370.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-sora",
+                "choice": "cat_product_trial",
+                "label": "ソラ / 猫用品の体験会",
+                "detail": "疲労 40以下 / 出発費用なし / 必要特性：働き者 / 用品：特製ケアセット / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 2,
+                "reward": 300.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-sora",
+                "choice": "small_art_museum",
+                "label": "ソラ / 小さな美術館",
+                "detail": "疲労 40以下 / 出発費用なし / 必要特性：マイペース / 用品：ブラッシングセット / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 2,
+                "reward": 370.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-sora",
+                "choice": "mountain_lodge_visit",
+                "label": "ソラ / 山あいの宿への訪問",
+                "detail": "家出確率 15％（出発時固定） / 捜索費 100 / 中断は報酬・派遣経験なし / 疲労 20以下 / 出発費用なし / 必要特性：外出好き / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 3,
+                "reward": 650.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-tama",
+                "choice": "neighborhood_visit",
+                "label": "タマ / 近所のお店への訪問",
+                "detail": "疲労 60以下 / 出発費用なし / 必要特性：指定なし / 用品：ケア用品 / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 1,
+                "reward": 125.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-tama",
+                "choice": "shopping_street_event",
+                "label": "タマ / 商店街の交流会",
+                "detail": "疲労 40以下 / 出発費用なし / 必要特性：接客好き / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 2,
+                "reward": 325.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-tama",
+                "choice": "out_of_town_visit",
+                "label": "タマ / 郊外への出張訪問",
+                "detail": "疲労 30以下 / 出発費用なし / 必要特性：外出好き / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 3,
+                "reward": 562.5,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-tama",
+                "choice": "cat_exercise_class",
+                "label": "タマ / 猫の運動教室",
+                "detail": "疲労 40以下 / 出発費用なし / 必要特性：体力自慢 / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 2,
+                "reward": 375.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-tama",
+                "choice": "quiet_reading_salon",
+                "label": "タマ / 静かな読書サロン",
+                "detail": "疲労 40以下 / 出発費用なし / 必要特性：のんびり屋 / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 2,
+                "reward": 375.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-tama",
+                "choice": "cat_photo_studio",
+                "label": "タマ / 猫の撮影スタジオ",
+                "detail": "疲労 40以下 / 出発費用なし / 必要特性：接客好き / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 2,
+                "reward": 437.5,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-tama",
+                "choice": "cat_product_trial",
+                "label": "タマ / 猫用品の体験会",
+                "detail": "疲労 40以下 / 出発費用なし / 必要特性：働き者 / 用品：特製ケアセット / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 2,
+                "reward": 375.0,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-tama",
+                "choice": "small_art_museum",
+                "label": "タマ / 小さな美術館",
+                "detail": "疲労 40以下 / 出発費用なし / 必要特性：マイペース / 用品：ブラッシングセット / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 2,
+                "reward": 437.5,
+                "satisfaction": 0.0,
+                "can_select": false
+            },
+            {
+                "cat_id": "cat-tama",
+                "choice": "mountain_lodge_visit",
+                "label": "タマ / 山あいの宿への訪問",
+                "detail": "家出確率 15％（出発時固定） / 捜索費 100 / 中断は報酬・派遣経験なし / 疲労 20以下 / 出発費用なし / 必要特性：外出好き / 選択前の報酬見込み",
+                "reason": "用品は営業準備中に操作してください。",
+                "days": 3,
+                "reward": 812.5,
+                "satisfaction": 0.0,
+                "can_select": false
+            }
+        ],
+        "events": []
+    },
+    "dispatch_choices": [],
+    "dispatch_troubles": [],
+    "dispatch_introductions": [],
+    "items": {
+        "shop": [
+            {
+                "choice": "care_supplies",
+                "name": "ケア用品",
+                "effect": "ストレス −10",
+                "reason": "用品は営業準備中に操作してください。",
+                "count": 0,
+                "cost": 100.0,
+                "funds_after": 720.0,
+                "can_select": false,
+                "ends_game": false
+            },
+            {
+                "choice": "nutrition_snack",
+                "name": "栄養おやつ",
+                "effect": "疲労 −15",
+                "reason": "用品は営業準備中に操作してください。",
+                "count": 0,
+                "cost": 150.0,
+                "funds_after": 670.0,
+                "can_select": false,
+                "ends_game": false
+            },
+            {
+                "choice": "special_care_set",
+                "name": "特製ケアセット",
+                "effect": "疲労 −10 / ストレス −10",
+                "reason": "用品は営業準備中に操作してください。",
+                "count": 0,
+                "cost": 200.0,
+                "funds_after": 620.0,
+                "can_select": false,
+                "ends_game": false
+            }
+        ],
+        "owned": [],
+        "history": "",
+        "count": 0
+    },
+    "day_off": {
+        "can_select": false,
+        "ends_game": false,
+        "reason": "現在の営業段階では実行できません。\n営業を閉店まで進めてください。",
+        "details": "",
+        "day_after": 0,
+        "cost": 0.0,
+        "funds_after": 0.0
+    },
+    "expansion": {
+        "can_expand": false,
+        "has_next": true,
+        "reason": "用品は営業準備中に操作してください。",
+        "details": "増設した当日から席・運営費を反映。4席以降の増設客は購入翌日から来店。",
+        "seats": 2,
+        "next_seats": 3,
+        "max_seats": 8,
+        "cost": 500.0,
+        "funds_after": 320.0,
+        "operating_cost": 60.0,
+        "next_operating_cost": 70.0
+    },
+    "seat_equipment": {
+        "can_manage": false,
+        "reason": "接客設備は営業準備中に操作してください。",
+        "details": "営業準備中に購入・配置。同じ設備は1席だけに設置できます。取り外した設備は所持品に残ります。",
+        "seats": [
+            {
+                "seat_id": "seat-1",
+                "item_id": "",
+                "description": "設備なし"
+            },
+            {
+                "seat_id": "seat-2",
+                "item_id": "",
+                "description": "設備なし"
+            }
+        ],
+        "catalog": [
+            {
+                "kind_id": "toys",
+                "name": "おもちゃセット",
+                "effect": "通常行動：関心×1.2 / テンション×1",
+                "cost": 300.0,
+                "funds_after": 520.0,
+                "can_purchase": false
+            },
+            {
+                "kind_id": "cushion",
+                "name": "くつろぎクッション",
+                "effect": "通常行動：関心×1 / テンション×1.2",
+                "cost": 300.0,
+                "funds_after": 520.0,
+                "can_purchase": false
+            },
+            {
+                "kind_id": "cat_tower",
+                "name": "キャットタワー",
+                "effect": "遊び：関心×1.35 / テンション×1",
+                "cost": 450.0,
+                "funds_after": 370.0,
+                "can_purchase": false
+            },
+            {
+                "kind_id": "grooming_brush",
+                "name": "お手入れブラシ",
+                "effect": "触れ合い：関心×1.35 / テンション×1",
+                "cost": 450.0,
+                "funds_after": 370.0,
+                "can_purchase": false
+            },
+            {
+                "kind_id": "quiet_space",
+                "name": "静かな交流スペース",
+                "effect": "静かな交流：関心×1.35 / テンション×1",
+                "cost": 450.0,
+                "funds_after": 370.0,
+                "can_purchase": false
+            }
+        ],
+        "owned": []
+    },
+    "rest_space": {
+        "status": "未設置",
+        "details": "購入日：0 / 強化日：0 / 防音改修日：0 / 本日の設備費：0",
+        "notes": "在店して休養する猫の日末回復に加算します。強化は人気第1段階、防音は第2段階の達成翌日から。各操作は1回限りです。",
+        "recovery_bonus": 0.0,
+        "stress_recovery_bonus": 0.0,
+        "actions": [
+            {
+                "kind": "purchase_rest_space",
+                "label": "休養スペースを購入・設置",
+                "reason": "休養設備は営業準備中に操作してください。",
+                "can_execute": false,
+                "cost": 400.0,
+                "funds_after": 420.0,
+                "recovery_before": 0.0,
+                "recovery_after": 10.0,
+                "stress_before": 0.0,
+                "stress_after": 0.0
+            },
+            {
+                "kind": "upgrade_rest_space",
+                "label": "休養スペースを強化",
+                "reason": "休養設備は営業準備中に操作してください。",
+                "can_execute": false,
+                "cost": 800.0,
+                "funds_after": 20.0,
+                "recovery_before": 0.0,
+                "recovery_after": 20.0,
+                "stress_before": 0.0,
+                "stress_after": 0.0
+            },
+            {
+                "kind": "soundproof_rest_space",
+                "label": "休養スペースを防音改修",
+                "reason": "休養設備は営業準備中に操作してください。",
+                "can_execute": false,
+                "cost": 1000.0,
+                "funds_after": -180.0,
+                "recovery_before": 0.0,
+                "recovery_after": 0.0,
+                "stress_before": 0.0,
+                "stress_after": 10.0
+            }
+        ]
+    },
+    "waiting_area": {
+        "status": "未購入",
+        "details": "購入日：0 / 強化日：0 / 本日の購入・強化費：0 / 本日の精算済み維持費：0",
+        "notes": "購入・強化当日から待機上限と猶予へ適用します。維持費は当日から、休業日にも発生します。人気第1段階達成翌日から購入、第2段階達成翌日から強化。席数・飼育枠は増えません。各操作は1回限りです。",
+        "capacity": 4,
+        "max_wait_ticks": 8,
+        "daily_cost": 0.0,
+        "operating_cost": 60.0,
+        "actions": [
+            {
+                "kind": "purchase_waiting_area",
+                "label": "待合スペースを購入（1段階目）",
+                "reason": "待合スペースは営業準備中に操作してください。",
+                "can_execute": false,
+                "completed": false,
+                "cost": 800.0,
+                "funds_after": 20.0,
+                "capacity_before": 4.0,
+                "capacity_after": 5.0,
+                "wait_before": 8.0,
+                "wait_after": 10.0,
+                "daily_before": 0.0,
+                "daily_after": 10.0,
+                "operating_before": 60.0,
+                "operating_after": 70.0
+            },
+            {
+                "kind": "upgrade_waiting_area",
+                "label": "待合スペースを強化（2段階目）",
+                "reason": "待合スペースは営業準備中に操作してください。",
+                "can_execute": false,
+                "completed": false,
+                "cost": 1200.0,
+                "funds_after": -380.0,
+                "capacity_before": 4.0,
+                "capacity_after": 6.0,
+                "wait_before": 8.0,
+                "wait_after": 12.0,
+                "daily_before": 0.0,
+                "daily_after": 20.0,
+                "operating_before": 60.0,
+                "operating_after": 80.0
+            }
+        ]
+    },
+    "customer_directory": {
+        "today_label": "",
+        "tomorrow_label": "",
+        "notes": "",
+        "rows": []
+    },
+    "missing_cats": [],
+    "missing_rest": {
+        "can_rest": false,
+        "reason": "",
+        "cost": 0.0,
+        "funds_after": 0.0
+    },
+    "adoption": {
+        "enabled": false,
+        "can_configure": false,
+        "reason": "用品は営業準備中に操作してください。",
+        "events": []
+    },
+    "game_over": {
+        "reason": "",
+        "day": 0,
+        "popularity": 0.0
+    },
+    "objective_progress": {
+        "mode": "popularity",
+        "label": "人気目標",
+        "status": "cleared",
+        "summary": "第2段階　人気 650 / 450　残り18日（達成・継続中）",
+        "details": "第2段階　人気 650 / 450　残り18日\n期限：21日目の閉店まで（達成・継続中）"
+    },
+    "sidebar_progress": {
+        "mode": "",
+        "label": "",
+        "status": "",
+        "summary": "",
+        "details": ""
+    },
+    "store_event": {
+        "kind": "",
+        "title": "",
+        "day": 0,
+        "funds": 0.0,
+        "choices": []
+    },
+    "growth_choices": [],
+    "funds": 820.0,
+    "cats": [
+        {
+            "cat_id": "cat-kohaku",
+            "content_cat_id": "playtest-kohaku",
+            "name": "コハク",
+            "health_status": "healthy",
+            "activity": "cafe",
+            "health_label": "健康",
+            "activity_label": "在店",
+            "growth_details": "最大体力 100（基礎成長 0段階） / 経験：接客 0 / 休養 3 / 派遣 0 / 得意分野 未選択 / 得意分類  / 得意行動 ",
+            "profile_details": "プロフィール\n名前：コハク\n猫ID：cat-kohaku\n個性：遊び好きで繊細な猫\n\n特性と効果\n特性：のんびり屋\n接客疲労：通常の1.25倍\n休養時の疲労回復：通常の1.5倍\n\n特徴・外見\n特徴：茶トラ・長毛\n目の色：両目とも金色\n体格：中くらいの成猫。丸みのある体、ふわふわした胸と頬。\n模様の詳細：明るい橙色の茶トラ。額に濃い橙色のM字、頬に左右二本ずつの縞、脚と尻尾に輪状の縞。背中と脇は太めの濃い橙色の縞。口元・顎・胸・腹は淡いクリーム色。白い靴下模様はない。\n顔立ち：丸顔、ふっくらした頬、やや小さな丸みのある三角耳。鼻はサーモンピンク。\n尻尾：長くふさふさした橙色の尻尾。濃い橙色の輪状の縞、先端も濃い橙色。\n外見の補足：長毛。遊ぶ時は目を輝かせ、静かな場面では柔らかく慎重な表情。\n\n交流の好み\n好み：ねこじゃらし：1.8\n好み：ボール遊び：1.6\n好み：ぬいぐるみ遊び：1.4\n好み：トンネル遊び：1.2\n好み：なでる：0.9\n好み：ブラッシング：0.8\n好み：声をかける：1\n好み：そばで見守る：0.8\n強さの好み：穏やか：1.3\n強さの好み：普通：1\n強さの好み：活発：0.2\n飽きやすさ：0.15\n種類切り替えへの反応：0",
+            "shift_forecast": "前日接客：0行動\n出勤：疲労 / 発症 0 / 0.0% / ストレス 0\n休養：疲労 / 発症 0 / 0.0% / ストレス 0\n前日の接客0行動を基準にしています。当日の担当回数や交流時間によって、実際の疲労・発症確率・ストレスは変わります。",
+            "records": {
+                "events": "加入・譲渡の記録\n加入経路・加入日の記録はありません。\n\n保存済みの出来事を日付順に表示します。同日の行順は発生順を示しません。記録のない過去は補いません。\n家出の過去の発生日・対応は単独版の保存に含まれないため補いません。\n\n出来事の記録はありません。",
+                "relationships": "関係データに保存済みの値です。交流中・未保存の変化は含みません。\n\n坂本さん（advanced-longhair）\n確定済み親しみ：0 / 距離を探っている / 未交流\n\n西村さん（advanced-play）\n確定済み親しみ：0 / 距離を探っている / 未交流\n\n藤原さん（advanced-white）\n確定済み親しみ：0 / 距離を探っている / 未交流",
+                "history": "閉店済みの日次実績です。個々の行動履歴ではありません。体力消耗は回復を差し引いた値です。\n保存済みの日次記録を優先します。開始値がない日や旧セーブの欠落項目は補いません。\n\n日目：1\n営業区分：休業\n予定：休養\n接客件数：0\n接客行動数：0\n体力消耗：0\n疲労変化：0 → 0\n体調変化：健康維持 · 健康\n獲得経験：接客＋0・休養＋1・派遣＋0\n親しみ増減合計：0\n\n日目：2\n営業区分：休業\n予定：休養\n接客件数：0\n接客行動数：0\n体力消耗：0\n疲労変化：0 → 0\n体調変化：健康維持 · 健康\n獲得経験：接客＋0・休養＋1・派遣＋0\n親しみ増減合計：0\n\n日目：3\n営業区分：休業\n予定：休養\n接客件数：0\n接客行動数：0\n体力消耗：0\n疲労変化：0 → 0\n体調変化：健康維持 · 健康\n獲得経験：接客＋0・休養＋1・派遣＋0\n親しみ増減合計：0"
+            },
+            "stamina": 100.0,
+            "max_stamina": 100.0,
+            "fatigue": 0.0,
+            "stress": 0.0,
+            "affinity": 0.0,
+            "remaining_sets": 3,
+            "can_player_start": false,
+            "player_reason": "用品は営業準備中に操作してください。",
+            "working": true
+        },
+        {
+            "cat_id": "cat-mike",
+            "content_cat_id": "playtest-mike",
+            "name": "ミケ",
+            "health_status": "healthy",
+            "activity": "cafe",
+            "health_label": "健康",
+            "activity_label": "在店",
+            "growth_details": "最大体力 100（基礎成長 0段階） / 経験：接客 0 / 休養 3 / 派遣 0 / 得意分野 未選択 / 得意分類  / 得意行動 ",
+            "profile_details": "プロフィール\n名前：ミケ\n猫ID：cat-mike\n個性：穏やかな甘えん坊\n\n特性と効果\n特性：接客好き\n接客ストレス：通常の0.5倍\n接客疲労：通常の1.25倍\n\n特徴・外見\n特徴：三毛・短毛\n目の色：両目とも琥珀色\n体格：小柄な成猫。丸みのある標準体型、短めの脚。\n模様の詳細：白い額の中央の逆V字から鼻先・口元へ続く白い模様。猫自身の右耳と右目周りは橙色、左耳と左目周りは黒。胸・腹・四つの足先は白。背中は橙色と黒の大きな斑。\n顔立ち：丸顔、小さな三角耳、丸い目、短い鼻筋。鼻は薄いピンク。\n尻尾：中程度の長さ。橙色と黒の大きな斑が交互に入り、先端は黒。\n外見の補足：短毛。穏やかで親しみやすい表情。既存のミケ比較画像を基準とする。模様の左右は猫自身の左右。\n\n交流の好み\n好み：ねこじゃらし：0.8\n好み：ボール遊び：0.6\n好み：ぬいぐるみ遊び：1.2\n好み：トンネル遊び：0.5\n好み：なでる：1.8\n好み：ブラッシング：1.5\n好み：声をかける：1.2\n好み：そばで見守る：1.3\n強さの好み：穏やか：1.3\n強さの好み：普通：1\n強さの好み：活発：0.4\n飽きやすさ：0.08\n種類切り替えへの反応：-0.2",
+            "shift_forecast": "前日接客：0行動\n出勤：疲労 / 発症 0 / 0.0% / ストレス 0\n休養：疲労 / 発症 0 / 0.0% / ストレス 0\n前日の接客0行動を基準にしています。当日の担当回数や交流時間によって、実際の疲労・発症確率・ストレスは変わります。",
+            "records": {
+                "events": "加入・譲渡の記録\n加入経路・加入日の記録はありません。\n\n保存済みの出来事を日付順に表示します。同日の行順は発生順を示しません。記録のない過去は補いません。\n家出の過去の発生日・対応は単独版の保存に含まれないため補いません。\n\n出来事の記録はありません。",
+                "relationships": "関係データに保存済みの値です。交流中・未保存の変化は含みません。\n\n坂本さん（advanced-longhair）\n確定済み親しみ：0 / 距離を探っている / 未交流\n\n西村さん（advanced-play）\n確定済み親しみ：0 / 距離を探っている / 未交流\n\n藤原さん（advanced-white）\n確定済み親しみ：0 / 距離を探っている / 未交流",
+                "history": "閉店済みの日次実績です。個々の行動履歴ではありません。体力消耗は回復を差し引いた値です。\n保存済みの日次記録を優先します。開始値がない日や旧セーブの欠落項目は補いません。\n\n日目：1\n営業区分：休業\n予定：休養\n接客件数：0\n接客行動数：0\n体力消耗：0\n疲労変化：0 → 0\n体調変化：健康維持 · 健康\n獲得経験：接客＋0・休養＋1・派遣＋0\n親しみ増減合計：0\n\n日目：2\n営業区分：休業\n予定：休養\n接客件数：0\n接客行動数：0\n体力消耗：0\n疲労変化：0 → 0\n体調変化：健康維持 · 健康\n獲得経験：接客＋0・休養＋1・派遣＋0\n親しみ増減合計：0\n\n日目：3\n営業区分：休業\n予定：休養\n接客件数：0\n接客行動数：0\n体力消耗：0\n疲労変化：0 → 0\n体調変化：健康維持 · 健康\n獲得経験：接客＋0・休養＋1・派遣＋0\n親しみ増減合計：0"
+            },
+            "stamina": 100.0,
+            "max_stamina": 100.0,
+            "fatigue": 0.0,
+            "stress": 0.0,
+            "affinity": 0.0,
+            "remaining_sets": 3,
+            "can_player_start": false,
+            "player_reason": "用品は営業準備中に操作してください。",
+            "working": true
+        },
+        {
+            "cat_id": "cat-mugi",
+            "content_cat_id": "playtest-mugi",
+            "name": "ムギ",
+            "health_status": "healthy",
+            "activity": "cafe",
+            "health_label": "健康",
+            "activity_label": "在店",
+            "growth_details": "最大体力 100（基礎成長 0段階） / 経験：接客 0 / 休養 3 / 派遣 0 / 得意分野 未選択 / 得意分類  / 得意行動 ",
+            "profile_details": "プロフィール\n名前：ムギ\n猫ID：cat-mugi\n個性：中立\n\n特性と効果\n特性：なし\n\n特徴・外見\n特徴：キジトラ・短毛\n目の色：両目ともオリーブグリーン\n体格：中くらいの成猫。標準的で均整の取れた体型、脚の長さも標準。\n模様の詳細：暖かい茶褐色のキジトラ。額に黒褐色のM字、頬に左右二本ずつの縞、背骨に沿う濃い線、脇に細い縦縞。脚と尻尾に黒褐色の輪状の縞。口元・顎は薄いベージュ、腹は淡い茶色。白い斑はない。\n顔立ち：穏やかな丸顔、標準サイズの三角耳、自然なアーモンド形の目。鼻は茶色がかったピンク。\n尻尾：中程度の長さ。茶褐色に黒褐色の輪状の縞、先端は黒褐色。\n外見の補足：短毛。自然で落ち着いた表情。茶トラのコハクより暗い毛色で、細く明瞭な縞。\n\n交流の好み\n好み：ねこじゃらし：1\n好み：ボール遊び：1\n好み：ぬいぐるみ遊び：1\n好み：トンネル遊び：1\n好み：なでる：1\n好み：ブラッシング：1\n好み：声をかける：1\n好み：そばで見守る：1\n強さの好み：穏やか：1\n強さの好み：普通：1\n強さの好み：活発：1\n飽きやすさ：0.15\n種類切り替えへの反応：0",
+            "shift_forecast": "前日接客：0行動\n出勤：疲労 / 発症 0 / 0.0% / ストレス 0\n休養：疲労 / 発症 0 / 0.0% / ストレス 0\n前日の接客0行動を基準にしています。当日の担当回数や交流時間によって、実際の疲労・発症確率・ストレスは変わります。",
+            "records": {
+                "events": "加入・譲渡の記録\n加入経路・加入日の記録はありません。\n\n保存済みの出来事を日付順に表示します。同日の行順は発生順を示しません。記録のない過去は補いません。\n家出の過去の発生日・対応は単独版の保存に含まれないため補いません。\n\n出来事の記録はありません。",
+                "relationships": "関係データに保存済みの値です。交流中・未保存の変化は含みません。\n\n坂本さん（advanced-longhair）\n確定済み親しみ：0 / 距離を探っている / 未交流\n\n西村さん（advanced-play）\n確定済み親しみ：0 / 距離を探っている / 未交流\n\n藤原さん（advanced-white）\n確定済み親しみ：0 / 距離を探っている / 未交流",
+                "history": "閉店済みの日次実績です。個々の行動履歴ではありません。体力消耗は回復を差し引いた値です。\n保存済みの日次記録を優先します。開始値がない日や旧セーブの欠落項目は補いません。\n\n日目：1\n営業区分：休業\n予定：休養\n接客件数：0\n接客行動数：0\n体力消耗：0\n疲労変化：0 → 0\n体調変化：健康維持 · 健康\n獲得経験：接客＋0・休養＋1・派遣＋0\n親しみ増減合計：0\n\n日目：2\n営業区分：休業\n予定：休養\n接客件数：0\n接客行動数：0\n体力消耗：0\n疲労変化：0 → 0\n体調変化：健康維持 · 健康\n獲得経験：接客＋0・休養＋1・派遣＋0\n親しみ増減合計：0\n\n日目：3\n営業区分：休業\n予定：休養\n接客件数：0\n接客行動数：0\n体力消耗：0\n疲労変化：0 → 0\n体調変化：健康維持 · 健康\n獲得経験：接客＋0・休養＋1・派遣＋0\n親しみ増減合計：0"
+            },
+            "stamina": 100.0,
+            "max_stamina": 100.0,
+            "fatigue": 0.0,
+            "stress": 0.0,
+            "affinity": 0.0,
+            "remaining_sets": 3,
+            "can_player_start": false,
+            "player_reason": "用品は営業準備中に操作してください。",
+            "working": true
+        },
+        {
+            "cat_id": "cat-sora",
+            "content_cat_id": "playtest-sora",
+            "name": "ソラ",
+            "health_status": "healthy",
+            "activity": "cafe",
+            "health_label": "健康",
+            "activity_label": "在店",
+            "growth_details": "最大体力 100（基礎成長 0段階） / 経験：接客 0 / 休養 3 / 派遣 0 / 得意分野 未選択 / 得意分類  / 得意行動 ",
+            "profile_details": "プロフィール\n名前：ソラ\n猫ID：cat-sora\n個性：距離を大切にする猫\n\n特性と効果\n特性：なし\n\n特徴・外見\n特徴：白猫・長毛\n目の色：両目とも淡い青色\n体格：中くらいの成猫。骨格はほっそり、長い毛で柔らかな輪郭。\n模様の詳細：全身が白。顔・耳・背中・脚・尻尾に色の斑や縞はない。\n顔立ち：やや面長の小さな顔、すっきりした鼻筋、落ち着いた目。鼻と耳の内側は薄いピンク。\n尻尾：長く豊かな白い尻尾。ふさふさした羽根のような輪郭。\n外見の補足：長毛。胸元の飾り毛と耳周りの柔らかい毛。距離を保つ落ち着いた佇まい。\n\n交流の好み\n好み：ねこじゃらし：1.2\n好み：ボール遊び：1.3\n好み：ぬいぐるみ遊び：0.8\n好み：トンネル遊び：1.4\n好み：なでる：0.2\n好み：ブラッシング：0\n好み：声をかける：1.4\n好み：そばで見守る：1.8\n強さの好み：穏やか：1.2\n強さの好み：普通：0.8\n強さの好み：活発：0.5\n飽きやすさ：0.12\n種類切り替えへの反応：-0.1",
+            "shift_forecast": "前日接客：0行動\n出勤：疲労 / 発症 0 / 0.0% / ストレス 0\n休養：疲労 / 発症 0 / 0.0% / ストレス 0\n前日の接客0行動を基準にしています。当日の担当回数や交流時間によって、実際の疲労・発症確率・ストレスは変わります。",
+            "records": {
+                "events": "加入・譲渡の記録\n加入経路・加入日の記録はありません。\n\n保存済みの出来事を日付順に表示します。同日の行順は発生順を示しません。記録のない過去は補いません。\n家出の過去の発生日・対応は単独版の保存に含まれないため補いません。\n\n出来事の記録はありません。",
+                "relationships": "関係データに保存済みの値です。交流中・未保存の変化は含みません。\n\n坂本さん（advanced-longhair）\n確定済み親しみ：0 / 距離を探っている / 未交流\n\n西村さん（advanced-play）\n確定済み親しみ：0 / 距離を探っている / 未交流\n\n藤原さん（advanced-white）\n確定済み親しみ：0 / 距離を探っている / 未交流",
+                "history": "閉店済みの日次実績です。個々の行動履歴ではありません。体力消耗は回復を差し引いた値です。\n保存済みの日次記録を優先します。開始値がない日や旧セーブの欠落項目は補いません。\n\n日目：1\n営業区分：休業\n予定：休養\n接客件数：0\n接客行動数：0\n体力消耗：0\n疲労変化：0 → 0\n体調変化：健康維持 · 健康\n獲得経験：接客＋0・休養＋1・派遣＋0\n親しみ増減合計：0\n\n日目：2\n営業区分：休業\n予定：休養\n接客件数：0\n接客行動数：0\n体力消耗：0\n疲労変化：0 → 0\n体調変化：健康維持 · 健康\n獲得経験：接客＋0・休養＋1・派遣＋0\n親しみ増減合計：0\n\n日目：3\n営業区分：休業\n予定：休養\n接客件数：0\n接客行動数：0\n体力消耗：0\n疲労変化：0 → 0\n体調変化：健康維持 · 健康\n獲得経験：接客＋0・休養＋1・派遣＋0\n親しみ増減合計：0"
+            },
+            "stamina": 100.0,
+            "max_stamina": 100.0,
+            "fatigue": 0.0,
+            "stress": 0.0,
+            "affinity": 0.0,
+            "remaining_sets": 3,
+            "can_player_start": false,
+            "player_reason": "用品は営業準備中に操作してください。",
+            "working": true
+        },
+        {
+            "cat_id": "cat-tama",
+            "content_cat_id": "playtest-tama",
+            "name": "タマ",
+            "health_status": "healthy",
+            "activity": "cafe",
+            "health_label": "健康",
+            "activity_label": "在店",
+            "growth_details": "最大体力 100（基礎成長 0段階） / 経験：接客 0 / 休養 3 / 派遣 0 / 得意分野 未選択 / 得意分類  / 得意行動 ",
+            "profile_details": "プロフィール\n名前：タマ\n猫ID：cat-tama\n個性：活発な探検家\n\n特性と効果\n特性：外出好き\n派遣報酬：通常の1.25倍\n派遣帰還時のストレス：＋10（経営ルール有効時）\n\n特徴・外見\n特徴：白黒・短毛\n目の色：両目とも黄緑色\n体格：中くらいの成猫。引き締まった細身の体、やや長い脚。\n模様の詳細：白黒のタキシード柄。両耳・頭頂・背中・両脇は黒。鼻筋に細い白い筋、口元・顎・胸・腹・四つの足先は白。猫自身の左の鼻横に小さな黒い点。\n顔立ち：少し細めの丸顔、大きめの三角耳、ぱっちりした目。鼻はピンク。\n尻尾：長く細い黒い尻尾。先端も黒、白い斑はない。\n外見の補足：短毛。好奇心が強く、耳を立てた生き生きした表情。模様の左右は猫自身の左右。\n\n交流の好み\n好み：ねこじゃらし：1.5\n好み：ボール遊び：1.7\n好み：ぬいぐるみ遊び：0.8\n好み：トンネル遊び：1.8\n好み：なでる：0.7\n好み：ブラッシング：0.5\n好み：声をかける：0.8\n好み：そばで見守る：0.4\n強さの好み：穏やか：0.8\n強さの好み：普通：1\n強さの好み：活発：1.3\n飽きやすさ：0.2\n種類切り替えへの反応：0.2",
+            "shift_forecast": "前日接客：0行動\n出勤：疲労 / 発症 0 / 0.0% / ストレス 0\n休養：疲労 / 発症 0 / 0.0% / ストレス 0\n前日の接客0行動を基準にしています。当日の担当回数や交流時間によって、実際の疲労・発症確率・ストレスは変わります。",
+            "records": {
+                "events": "加入・譲渡の記録\n加入経路・加入日の記録はありません。\n\n保存済みの出来事を日付順に表示します。同日の行順は発生順を示しません。記録のない過去は補いません。\n家出の過去の発生日・対応は単独版の保存に含まれないため補いません。\n\n出来事の記録はありません。",
+                "relationships": "関係データに保存済みの値です。交流中・未保存の変化は含みません。\n\n坂本さん（advanced-longhair）\n確定済み親しみ：0 / 距離を探っている / 未交流\n\n西村さん（advanced-play）\n確定済み親しみ：0 / 距離を探っている / 未交流\n\n藤原さん（advanced-white）\n確定済み親しみ：0 / 距離を探っている / 未交流",
+                "history": "閉店済みの日次実績です。個々の行動履歴ではありません。体力消耗は回復を差し引いた値です。\n保存済みの日次記録を優先します。開始値がない日や旧セーブの欠落項目は補いません。\n\n日目：1\n営業区分：休業\n予定：休養\n接客件数：0\n接客行動数：0\n体力消耗：0\n疲労変化：0 → 0\n体調変化：健康維持 · 健康\n獲得経験：接客＋0・休養＋1・派遣＋0\n親しみ増減合計：0\n\n日目：2\n営業区分：休業\n予定：休養\n接客件数：0\n接客行動数：0\n体力消耗：0\n疲労変化：0 → 0\n体調変化：健康維持 · 健康\n獲得経験：接客＋0・休養＋1・派遣＋0\n親しみ増減合計：0\n\n日目：3\n営業区分：休業\n予定：休養\n接客件数：0\n接客行動数：0\n体力消耗：0\n疲労変化：0 → 0\n体調変化：健康維持 · 健康\n獲得経験：接客＋0・休養＋1・派遣＋0\n親しみ増減合計：0"
+            },
+            "stamina": 100.0,
+            "max_stamina": 100.0,
+            "fatigue": 0.0,
+            "stress": 0.0,
+            "affinity": 0.0,
+            "remaining_sets": 3,
+            "can_player_start": false,
+            "player_reason": "用品は営業準備中に操作してください。",
+            "working": true
+        }
+    ]
+}

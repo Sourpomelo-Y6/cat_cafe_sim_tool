@@ -1,0 +1,78 @@
+{
+  "status": "PASS",
+  "images": [
+    {
+      "file": "actual-seated-sakamoto-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "sha256": "010e9cf66122efd9d35b341b7a45f01b07acf1271ca0bda6ae72101636c1a304"
+    },
+    {
+      "file": "actual-seated-sakamoto-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "sha256": "9087753cb2f4cacaeb4e5793e0297c5fe2db286b3fb39582052d158671c40218"
+    },
+    {
+      "file": "manual-after-input-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "sha256": "624d14e79ecc3e886f9febe372020fc233c57c3fafd0a0cbd73b06afb2a6c039"
+    },
+    {
+      "file": "reservation-extra-mori-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "sha256": "b44078d81cd2270dea1a92403ed693bc649abbe323ea6e4cfc3d499b219f22d3"
+    },
+    {
+      "file": "reservation-extra-mori-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "sha256": "b504ecad0f87f174c58abf02da63266a2f27a70c06da1afaea6d53c00e843f72"
+    },
+    {
+      "file": "seat-advanced-longhair-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "sha256": "010e9cf66122efd9d35b341b7a45f01b07acf1271ca0bda6ae72101636c1a304"
+    },
+    {
+      "file": "seat-advanced-longhair-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "sha256": "ecf8622cf8353c09328284ae4c76b72041eed0ae7544bf20049e1e875b8da89b"
+    },
+    {
+      "file": "trust-advanced-longhair-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "sha256": "7519f53ea6670c01fff45dbe61a9375a93c01e845bad857f78944a8b70e0a1ea"
+    },
+    {
+      "file": "trust-advanced-longhair-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "sha256": "a8582a0bc0068c8ee514b7c3c42e535e5c21974105e47f9be5ae0a0de3109072"
+    }
+  ],
+  "resume": "all seat fields and day/tick/funds identical across processes"
+}
