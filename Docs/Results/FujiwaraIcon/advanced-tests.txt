@@ -1,0 +1,11 @@
+test_automatic_assignment_uses_required_white_cat (test_cafe_advanced_customers.AdvancedCustomerTests) ... ok
+test_invalid_rules_and_corrupt_unlock_history (test_cafe_advanced_customers.AdvancedCustomerTests) ... ok
+test_other_modes_legacy_and_expiry_do_not_unlock (test_cafe_advanced_customers.AdvancedCustomerTests) ... ok
+test_success_with_recruited_white_cat_single_and_multi_seat (test_cafe_advanced_customers.AdvancedCustomerTests) ... ok
+test_unlock_tomorrow_history_preview_day_off_and_replay (test_cafe_advanced_customers.AdvancedCustomerTests) ... ok
+test_unmet_conditions_and_unserved_no_extra_charge (test_cafe_advanced_customers.AdvancedCustomerTests) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 4.409s
+
+OK

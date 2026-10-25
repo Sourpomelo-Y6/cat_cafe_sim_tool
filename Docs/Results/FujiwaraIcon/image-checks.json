@@ -1,0 +1,78 @@
+{
+  "status": "PASS",
+  "images": [
+    {
+      "file": "actual-seated-fujiwara-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "sha256": "9ac885c52b8222285b150ad135fc02aa3d9adfac1d3847c1c49b46d6f1e917cc"
+    },
+    {
+      "file": "actual-seated-fujiwara-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "sha256": "dc5c9fdf76b28e18d7d0b53b8097127db887eb9ed3a1d23ee676fd528d07395d"
+    },
+    {
+      "file": "manual-after-input-1024.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "9bcaa1f35fd17908bc9d0986d48a6104a58f159d9f0d7400b961c28cd9870f24"
+    },
+    {
+      "file": "reservation-extra-mori-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "sha256": "b44078d81cd2270dea1a92403ed693bc649abbe323ea6e4cfc3d499b219f22d3"
+    },
+    {
+      "file": "reservation-extra-mori-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "sha256": "b504ecad0f87f174c58abf02da63266a2f27a70c06da1afaea6d53c00e843f72"
+    },
+    {
+      "file": "seat-advanced-white-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "sha256": "ae065d08391a351f79de92bc6ba2b18eb8e18e219f6f26b61844cd485fd198ef"
+    },
+    {
+      "file": "seat-advanced-white-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "sha256": "a8e055527c1f925c522721e777a9ecee2f03e0a8ce3a2c494f05e7dadb7048be"
+    },
+    {
+      "file": "trust-advanced-white-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "sha256": "7f2e71b0834e29809e8eec99c9f4d8eb551fb7ca00ab7d8e642a04ae7bed683b"
+    },
+    {
+      "file": "trust-advanced-white-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "sha256": "b6c6353175e777df7481f5441351e7b2772a8313e1193b23baeaa8a53b9a5f82"
+    }
+  ],
+  "resume": "All seat fields and day/tick/funds identical across separate process"
+}

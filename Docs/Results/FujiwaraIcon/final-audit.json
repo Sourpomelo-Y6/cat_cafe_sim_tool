@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "template_matches_unity": true,
+  "protected_sha256": {
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\manifest.json": "7c7933c42e56bf805f03543b76b63f0bc6a608cafe1c54395bd4bb5515c7fc3e",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\interaction_texts.json": "c08a4f29bb4c5f33c5bc9073485ec898d9cef1720c46d8891d1d573245fa92d4",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\config\\cafe_advanced_customers.json": "b40ddc0ebfcf6e87c2b2b8cd4894b623701ff129a76feb1989cd29f8d10ebc90",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\config\\cafe_playtest_cats.json": "168b660d18004cdce42c449845d34bd2766173d07dced12aa51ec94b9364e2b5",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\config\\cafe_recruitment.json": "4591da8613a504bf53310defdd3ecc75d744cf170314611cb84fd8d09acdd215",
+    "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\catalog.json": "d2f88a6d256821a528c80ac3770764040053d210576237aab19ef5462dd1f107"
+  },
+  "pending": false,
+  "people": 14,
+  "source_sha256": "ec1faf1dbf00bc767da66f9353d9f75a9f56e4a15b272ef85ed3fca098e41cc4"
+}
