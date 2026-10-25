@@ -5,6 +5,13 @@ using UnityEditor;
 using UnityEngine;
 namespace CatCafePreview.Editor {
  public static class HumanIconsApplyVerification {
+  public static void VerifyTanakaAndBuild(){
+   ContentPreviewSetup.Import(Environment.GetEnvironmentVariable("CATCAFE_HUMAN_SELECTED"));
+   var textures=new[]{"guest-1","guest-2","reservation-longhair","guest-3","guest-4"}.Select(HumanPortraitResources.Resolve).ToArray();
+   if(textures.Any(t=>t==null || t==HumanPortraitResources.Placeholder()) || textures.Distinct().Count()!=5)throw new Exception("Five customer icons did not resolve distinctly");
+   if(HumanPortraitResources.Resolve("unknown")!=HumanPortraitResources.Placeholder())throw new Exception("Unknown customer fallback");
+   Debug.Log("CAT_CAFE_TANAKA_IMPORTED");StandaloneScreenSetup.Build();
+  }
   public static void VerifyTakahashiAndBuild(){
    ContentPreviewSetup.Import(Environment.GetEnvironmentVariable("CATCAFE_HUMAN_SELECTED"));
    var textures=new[]{"guest-1","guest-2","reservation-longhair","guest-3"}.Select(HumanPortraitResources.Resolve).ToArray();
