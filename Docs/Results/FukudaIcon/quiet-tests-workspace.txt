@@ -1,0 +1,14 @@
+test_directory_conditions_latest_result_and_minimum_layout (test_cafe_quiet_customer.QuietCustomerGuiTests) ... skipped 'set CAT_CAFE_TEST_GUI=1 on a desktop'
+test_automatic_assignment_selects_equipped_free_seat_and_actual_service (test_cafe_quiet_customer.QuietCustomerTests) ... ok
+test_frozen_rules_and_corruption_rejection (test_cafe_quiet_customer.QuietCustomerTests) ... ok
+test_legacy_and_other_modes_do_not_introduce_customer (test_cafe_quiet_customer.QuietCustomerTests) ... ok
+test_missing_equipment_wrong_equipment_and_insufficient_count (test_cafe_quiet_customer.QuietCustomerTests) ... ok
+test_normal_actions_only_and_policy_prioritizes_quiet_over_mastery (test_cafe_quiet_customer.QuietCustomerTests) ... ok
+test_success_single_multi_seat_finance_save_and_equipment_movement (test_cafe_quiet_customer.QuietCustomerTests) ... ok
+test_unlock_preview_history_rest_and_replay (test_cafe_quiet_customer.QuietCustomerTests) ... ok
+test_unserved_and_save_failure_do_not_award_or_duplicate (test_cafe_quiet_customer.QuietCustomerTests) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 6.228s
+
+OK (skipped=1)

@@ -1,0 +1,78 @@
+{
+  "status": "PASS",
+  "images": [
+    {
+      "file": "actual-seated-fukuda-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "sha256": "fe480d49fafb1a79395aebbb88ceb38d516dbe3a9eefaaabef8db5d3eae605f3"
+    },
+    {
+      "file": "actual-seated-fukuda-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "sha256": "3081fe55b4e355d4d23a7452bea099d80a60daf20fee02c4e6698a6a1464d139"
+    },
+    {
+      "file": "manual-after-input-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "sha256": "f0a564a12652555204f4affaf709fb3b1e828c75379f119a92219a5e986c731b"
+    },
+    {
+      "file": "reservation-extra-mori-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "sha256": "b44078d81cd2270dea1a92403ed693bc649abbe323ea6e4cfc3d499b219f22d3"
+    },
+    {
+      "file": "reservation-extra-mori-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "sha256": "b504ecad0f87f174c58abf02da63266a2f27a70c06da1afaea6d53c00e843f72"
+    },
+    {
+      "file": "seat-advanced-quiet-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "sha256": "a64a344dba7a2c1b41064d591e665c50268bf7b8369bc90c5714d1c57fc5f05c"
+    },
+    {
+      "file": "seat-advanced-quiet-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "sha256": "29a426961baf230f64e5693cb0979da594c907b2e348a820c5c0c1ba5acc4046"
+    },
+    {
+      "file": "trust-advanced-quiet-1024.png",
+      "size": [
+        1024,
+        768
+      ],
+      "sha256": "1a096915e4069b5ceb53998751b01da4b461aa68e588dabb88a62d4bf57a3c2c"
+    },
+    {
+      "file": "trust-advanced-quiet-1280.png",
+      "size": [
+        1280,
+        800
+      ],
+      "sha256": "d4bcfc7114995d07683aeaddebc8cdd5e0e7b2bb0fb6ebaa90bcf091c9a181b1"
+    }
+  ],
+  "seats_and_day_tick_funds_equal": true
+}
