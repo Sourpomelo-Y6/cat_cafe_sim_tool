@@ -39,3 +39,5 @@
 開始時HEAD・全未コミットファイルhashはLogs/FukudaIcon/baseline.json。Tool21e57c5、Python ee63bd1、Unity ea52c59。関連チャットidle、Unity/Player不在を確認して開始。猫制作の日程・設定・素材・本文等の先行差分を保持：[照合](Results/FukudaIcon/prior-differences-preserved.json)。人物台帳はHEADに福田さん一行だけ加えた内容を選択コミットし、開始時の他行差分は作業ツリーに保持。pushなし。
 
 [開始・終了容量と増減bytes](Results/FukudaIcon/capacity-final.json)。原本PNG一枚・登録素材一枚・16人人物専用パック一組のみ追加。旧人物パックを保持するため、Latestには16人分の新パックが収録され増加する。成功物Latest一組、StandaloneBuild直下はLatest/Runsのみ、Pendingなし。ビルド複製・ZIP・別Unityプロジェクト・検証専用Libraryなし。素材・旧パック・セーブは削除しない。
+
+今回コミット：Python `4772145`、Unity `d2f07fe`、共有Docs `b0b57a0`、Tool本体 `a2bd9bf`。最終容量・本追記だけを後続Toolコミットへ保存。pushなし。
