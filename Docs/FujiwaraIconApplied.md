@@ -61,3 +61,5 @@ Latestは156ファイル・3,471,635,296 bytesの成功ビルド一組、Pending
 開始時はTool 00028a2、Python 7c2f4a1、Unity a24a094。共有Docs開始HEADはLogs/FujiwaraIcon/baseline-git.jsonへ記録。関連チャットはidle、Unity/Player実行なしを確認してから着手。共有台帳は既存全行を保持したまま一行追加し、コミットにはHEADへ今回行だけ追加した内容をstageする。猫制作の日程・設定・素材・presentation/Narrative等の差分を含めない。pushなし。
 
 今回コミット：Python `e38e8b2`、Unity `2e92abb`、Docs `a54478a`。ToolのコミットIDは最終報告に記す。
+
+終了再確認：[最終容量](Results/FujiwaraIcon/capacity-final.json)。Logsはコミット補助記録で終了snapshotから6,075 bytes増え、15,735,224,131 bytes。その他の対象容量は不変、Latest一組・Pendingなし。Tool本体・検証資料コミット `2197dc9`。本追記は容量とコミット参照だけの後続コミット。
