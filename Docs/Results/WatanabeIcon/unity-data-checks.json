@@ -1,0 +1,53 @@
+{
+  "status": "PASS",
+  "pack_id": "a02fd76a7285a62eb61d680fad28ace8",
+  "people": [
+    {
+      "game_id": "guest-1",
+      "subject_id": "guest-1",
+      "sha256": "0c815814fbaa02bf25092e99e7bc57ed858a9270e52bb679d97bd8117400b7f7",
+      "importer": "Default max1024 uncompressed; standalone override false; alpha retained; mipmap/read-write disabled"
+    },
+    {
+      "game_id": "guest-2",
+      "subject_id": "person-952c631405e649fdb50c390881804977",
+      "sha256": "ce47440c0d108d859835f07a5cac37a660acf4024e4dd2ea5ac4c90a08550852",
+      "importer": "Default max1024 uncompressed; standalone override false; alpha retained; mipmap/read-write disabled"
+    },
+    {
+      "game_id": "reservation-longhair",
+      "subject_id": "person-reservation-longhair",
+      "sha256": "deabee0dcdeaa1a80d03369f10dc0251f57f57ba1e24921919c22d3d32a53306",
+      "importer": "Default max1024 uncompressed; standalone override false; alpha retained; mipmap/read-write disabled"
+    },
+    {
+      "game_id": "guest-3",
+      "subject_id": "person-guest-3",
+      "sha256": "3821a02fbe187442a3fb7d2843c1191fb8e71a3544a41d6fb0802a89d4d915e6",
+      "importer": "Default max1024 uncompressed; standalone override false; alpha retained; mipmap/read-write disabled"
+    },
+    {
+      "game_id": "guest-4",
+      "subject_id": "person-guest-4",
+      "sha256": "04b48ed19be7cca7490b47950ca4eba20cb8de4ec3e1b246f6aac2bf06a2cdfc",
+      "importer": "Default max1024 uncompressed; standalone override false; alpha retained; mipmap/read-write disabled"
+    },
+    {
+      "game_id": "guest-5",
+      "subject_id": "person-guest-5",
+      "sha256": "2c72a486f9e703f6b1822670ccf5e0e5ea8e34ec4b4623978e9db88f229431f1",
+      "importer": "Default max1024 uncompressed; standalone override false; alpha retained; mipmap/read-write disabled"
+    },
+    {
+      "game_id": "guest-6",
+      "subject_id": "person-guest-6",
+      "sha256": "35267d0ee7f23dd2756a5cd942e215b66e07d1348e8fdbc9f5c2e6425ed4887b",
+      "importer": "Default max1024 uncompressed; standalone override false; alpha retained; mipmap/read-write disabled"
+    }
+  ],
+  "protected_sha256": {
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\interaction_texts.json": "c08a4f29bb4c5f33c5bc9073485ec898d9cef1720c46d8891d1d573245fa92d4",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\manifest.json": "31b35205e46674748165ec99d888c266c12c10898a4f8b26c7e16e03b8413b85",
+    "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\catalog.json": "d2f88a6d256821a528c80ac3770764040053d210576237aab19ef5462dd1f107"
+  }
+}

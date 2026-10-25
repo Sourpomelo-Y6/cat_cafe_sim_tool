@@ -1,0 +1,6 @@
+test_actual_manager_buttons (tests.test_human_portraits.HumanPortraitGuiTests) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.467s
+
+OK
