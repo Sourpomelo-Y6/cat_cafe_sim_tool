@@ -50,3 +50,5 @@
 Latestは156ファイル・3,412,903,856 bytesの成功ビルド一組、Pendingなし。StandaloneBuild直下はLatest/Runsとbuild.lock。ロックや他作業成果物を削除しない。追加Build・ZIP・Unityコピーなし。素材原本・旧パック・セーブを保持。
 
 山田さん由来だけを各リポジトリへコミット、pushなし。人物台帳はHEADへ山田さん一行を加えた内容だけstageし、catalog-2等の先行猫差分とcatalog-3/ユキ差分を作業ツリーに保持。リン・ユキの素材/取り込み/検証コード・猫制作予定・presentation/Narrativeの他作業差分は含めない。コミットIDは最終報告と共有Docs追補に記録する。
+
+引継ぎ終了：[容量snapshot](Results/YamadaIcon/handoff-capacity-end.json)。開始比Logsのみ監査スクリプト2,723 bytes増、他の測定対象は不変。Python `7c2f4a1`、Unity `a24a094`、共有Docs `dd223d6`。Tool本体は `467c4f3`、終了容量追記は後続コミット。
