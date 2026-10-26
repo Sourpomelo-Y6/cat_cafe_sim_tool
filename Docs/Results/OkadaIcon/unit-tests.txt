@@ -1,0 +1,3 @@
+PASS: test_human_portraits.py 11 tests (5 inherited duplicate cases; backend and Tk fixture, CAT_CAFE_TEST_GUI=1).
+PASS: test_cafe_four_seat_expansion.py 5 existing tests, isolated short-term fixtures.
+No physical GUI input claim for these tests.

@@ -1,0 +1,1 @@
+computer-use sky: selected unique visible CatCafeSim. Actual click at window (111,504) after separate-process load_game. Confirmed 岡田さん / 担当 コハク / 体力100/100 / 文章の記録はまだありません. Client 1024x768; outer screenshot 1026x800. 1280 input not tested.

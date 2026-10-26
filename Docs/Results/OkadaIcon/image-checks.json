@@ -1,0 +1,45 @@
+{
+  "status": "PASS",
+  "all_seats_equal": true,
+  "day": 4,
+  "tick": 1,
+  "funds": 590.0,
+  "images": {
+    "actual-seated-okada-1024.png": [
+      1024,
+      768
+    ],
+    "actual-seated-okada-1280.png": [
+      1280,
+      800
+    ],
+    "manual-after-input-1024.png": [
+      1024,
+      768
+    ],
+    "reservation-extra-mori-1024.png": [
+      1024,
+      768
+    ],
+    "reservation-extra-mori-1280.png": [
+      1280,
+      800
+    ],
+    "seat-expanded-guest-1024.png": [
+      1024,
+      768
+    ],
+    "seat-expanded-guest-1280.png": [
+      1280,
+      800
+    ],
+    "trust-expanded-guest-1024.png": [
+      1024,
+      768
+    ],
+    "trust-expanded-guest-1280.png": [
+      1280,
+      800
+    ]
+  }
+}
