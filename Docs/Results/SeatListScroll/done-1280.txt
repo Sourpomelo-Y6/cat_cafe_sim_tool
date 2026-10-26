@@ -1,0 +1,1 @@
+Physical mouse: seats 1/5/8 correct; wheel moved; bar reached lower clamp; details close retained bottom. Actual Screen=1280x800.

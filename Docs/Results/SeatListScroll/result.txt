@@ -1,0 +1,1 @@
+PASS 432 checks. View fixtures + UGUI raycast/scroll dispatch; physical input recorded separately.

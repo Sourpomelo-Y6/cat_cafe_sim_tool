@@ -1,0 +1,34 @@
+{
+  "Latest": {
+    "bytes": 4289680386,
+    "files": 156
+  },
+  "Runs": {
+    "bytes": 201431058,
+    "files": 365
+  },
+  "Logs": {
+    "bytes": 16893060843,
+    "files": 65274
+  },
+  "Library": {
+    "bytes": 6546993814,
+    "files": 32260
+  },
+  "content_images": {
+    "bytes": 1220723801,
+    "files": 637
+  },
+  "SeatListScrollLogs": {
+    "bytes": 23170456,
+    "files": 94
+  },
+  "ReportEvidence": {
+    "bytes": 1831405,
+    "files": 18
+  },
+  "buildDirectories": [
+    "Latest",
+    "Runs"
+  ]
+}

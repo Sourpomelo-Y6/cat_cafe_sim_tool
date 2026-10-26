@@ -19,6 +19,7 @@ namespace CatCafePreview
         private PythonCafeState state;
         private string phase;
         private bool showSeats;
+        private ScrollRect seatScroll;
         private readonly List<PythonCatCard> cards = new List<PythonCatCard>();
         public bool ShowingSeats { get { return showSeats; } }
         public int OccupiedCount { get { return cards.FindAll(card=>card.gameObject.activeSelf && card.customerIcon.activeSelf).Count; } }
@@ -64,12 +65,14 @@ namespace CatCafePreview
                 return;
             }
             if(cards.Count == 0) cards.AddRange(seatContent.GetComponentsInChildren<PythonCatCard>(true));
+            if(seatScroll == null) seatScroll = SeatListLayout.Configure(this);
             var seats = state.seats ?? new PythonSeatState[0];
+            SeatListLayout.SetHelp(this, seats.Length);
             while(cards.Count < seats.Length) cards.Add(Instantiate(cardPrefab,seatContent));
             for(int i=0;i<cards.Count;i++)
             {
                 var card = cards[i]; card.gameObject.SetActive(i<seats.Length); if(i>=seats.Length) continue;
-                StyleSeatCard(card);
+                SeatListLayout.StyleCard(card);
                 var seat = seats[i]; bool occupied = !string.IsNullOrEmpty(seat.customer_id);
                 var cat = Array.Find(state.cats,value=>value.cat_id == seat.cat_id);
                 card.catName.text = "席 " + (i+1) + (occupied ? cat==null?"　担当待ち":"　接客中" : "　空席");
@@ -100,18 +103,6 @@ namespace CatCafePreview
             text += "\n各席の設備\n";foreach(var seat in seats)text+=seat.seat_id+"："+(seat.equipment_description ?? "設備なし")+"\n\n";
             GetComponent<ContentPreview>().SetServiceDescription(text);
         }
-        // Seat cards have a separate, fixed reading area; roster cards retain their layout.
-        private void StyleSeatCard(PythonCatCard card)
-        {
-            var grid=seatContent.GetComponent<GridLayoutGroup>();if(grid!=null)grid.cellSize=new Vector2(230,350);
-            Place(card.stateText.rectTransform,10,146,210,164);
-            card.stateText.fontSize=15;card.stateText.resizeTextForBestFit=false;card.stateText.lineSpacing=1;
-            card.stateText.horizontalOverflow=HorizontalWrapMode.Wrap;card.stateText.verticalOverflow=VerticalWrapMode.Truncate;
-            card.stateText.supportRichText=false;
-            if(card.details!=null)Place(card.details.GetComponent<RectTransform>(),10,314,210,30);
-        }
-        private static void Place(RectTransform rect,float x,float y,float w,float h)
-        {rect.anchorMin=rect.anchorMax=rect.pivot=new Vector2(0,1);rect.anchoredPosition=new Vector2(x,-y);rect.sizeDelta=new Vector2(w,h);}
         public void RefreshControls()
         {
             var client=GetComponent<PythonStateClient>();

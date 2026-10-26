@@ -47,3 +47,6 @@ $env:CATCAFE_SEAT_OUTPUT='C:/Users/hi-wa/source/codex_repos/CatCafeSim/Logs/Seat
 開始時は `Logs/StandaloneBuild` 8,252,766,113 bytes、既存Unity `Library` 10,982,536,096 bytes。終了時はStandaloneBuild 8,254,397,740 bytes（＋1,631,627 bytes、約1.56 MiB）、Latest 8,247,456,140 bytes、Runs 6,941,600 bytes、今回の検証記録 8,570,365 bytes、Library 10,982,535,494 bytes（−602 bytes）。大きな増加はなく、追加容量は実行ログ・検証画像と管理コードが中心。Latestの1組のみ、Pending／Previousなし。詳細は [Verification.json](Results/SeatActionCards/Verification.json)。素材・ユーザーセーブ・既存の別作業パックは削除していない。
 
 変更はランタイム・専用検証入口・既存UIスモークの追加チェック・本資料に限定する。既存未コミットの猫資料、rules、presentation、画像パック／catalog、別リポジトリの変更をコミットに含めない。ルール・係数・行動選択・乱数・報酬処理は変更しない。
+
+
+2026-10-27追補：5席以降の下段に到達しにくい既存スクロールを改善し、基本生成・配置再生成も350高へ統一した。[席一覧のスクロール修正・両解像度の実クリック・容量](UnitySeatListScroll.md)を参照。行動・反応・画像の選択処理は維持。

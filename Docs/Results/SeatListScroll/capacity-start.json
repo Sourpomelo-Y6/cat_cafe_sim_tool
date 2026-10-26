@@ -1,0 +1,22 @@
+{
+  "Latest": {
+    "bytes": 4289663080,
+    "files": 156
+  },
+  "Runs": {
+    "bytes": 197409110,
+    "files": 359
+  },
+  "Logs": {
+    "bytes": 16865851133,
+    "files": 65174
+  },
+  "Library": {
+    "bytes": 6546974655,
+    "files": 32258
+  },
+  "content_images": {
+    "bytes": 1220723801,
+    "files": 637
+  }
+}
