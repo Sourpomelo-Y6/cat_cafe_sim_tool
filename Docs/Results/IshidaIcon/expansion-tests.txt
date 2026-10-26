@@ -1,0 +1,15 @@
+test_purchase_cancel_confirm_layout_history_and_operating_cost (test_cafe_seven_seat_expansion.SevenSeatExpansionGuiTests) ... ok
+test_active_dispatch_survives_expansion_and_business_blocks_purchase (test_cafe_seven_seat_expansion.SevenSeatExpansionTests) ... ok
+test_corrupt_record_goal_history_seats_income_and_invalid_cost_rejected (test_cafe_seven_seat_expansion.SevenSeatExpansionTests) ... ok
+test_cost_boundary_preparation_restrictions_and_legacy_purchase_limit (test_cafe_seven_seat_expansion.SevenSeatExpansionTests) ... ok
+test_different_day_purchase_charge_once_and_daily_finance (test_cafe_seven_seat_expansion.SevenSeatExpansionTests) ... ok
+test_dispatch_needs_eight_cats_and_housing_expansion (test_cafe_seven_seat_expansion.SevenSeatExpansionTests) ... ok
+test_failed_save_retries_and_old_six_seat_game_can_buy_explicitly (test_cafe_seven_seat_expansion.SevenSeatExpansionTests) ... ok
+test_purchase_immediate_seat_next_day_guest_history_and_replay (test_cafe_seven_seat_expansion.SevenSeatExpansionTests) ... ok
+test_seven_simultaneous_services_share_clock_and_resume (test_cafe_seven_seat_expansion.SevenSeatExpansionTests) ... ok
+test_seventh_seat_equipment_manual_and_automatic_assignment (test_cafe_seven_seat_expansion.SevenSeatExpansionTests) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 24.854s
+
+OK

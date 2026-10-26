@@ -1,0 +1,52 @@
+{
+  "status": "PASS",
+  "image_dimensions": {
+    "actual-seated-ishida-1024.png": [
+      1024,
+      768
+    ],
+    "actual-seated-ishida-1280.png": [
+      1280,
+      800
+    ],
+    "trust-expanded-guest-4-1024.png": [
+      1024,
+      768
+    ],
+    "trust-expanded-guest-4-1280.png": [
+      1280,
+      800
+    ],
+    "seat-expanded-guest-4-1024.png": [
+      1024,
+      768
+    ],
+    "seat-expanded-guest-4-1280.png": [
+      1280,
+      800
+    ],
+    "manual-after-input-1024.png": [
+      1024,
+      768
+    ]
+  },
+  "all_seat_identities_preserved": true,
+  "day": 15,
+  "tick": 22,
+  "funds": 6360.0,
+  "target_seat": "seat-4",
+  "arrival": 18,
+  "seated_at": 21,
+  "physical_input": {
+    "render": [
+      1024,
+      768
+    ],
+    "sky_window_screenshot_logical": [
+      514,
+      414
+    ],
+    "action": "sky click seat-4 details",
+    "scope": "1280 automated only"
+  }
+}

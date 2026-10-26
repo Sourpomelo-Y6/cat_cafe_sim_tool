@@ -1,0 +1,1402 @@
+[
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/AllCats.md",
+    "status": " M",
+    "sha256": "cde69f338e34b25f5fa2cf02e3af096fea76f4722a85533829ef2ae44a9e0e56",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/CatImageSchedule.md",
+    "status": " M",
+    "sha256": "a78314d5f79e4db9480f644d01a827483c2cd2762adb3e50e062f12b990e1840",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/CatImageTodo.md",
+    "status": " M",
+    "sha256": "04cc6da2bc57452b5a0f424549b57946e725fd44422ca59ce85e041752649050",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "unity_preview_template/Resources/CatCafeStandalone/presentation.json",
+    "status": " M",
+    "sha256": "36d5051122ba9de883be8b2cd5115c36c0555919f0651d367916a5f98f42dbc6",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "unity_preview_template/Runtime/Standalone/CafeNarrativeCatalog.cs",
+    "status": " M",
+    "sha256": "8b3012dea362fcd787debbadcae32f6ec19ccfd74f4dc564cb98546e42edbc59",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/RinImages/Status.md",
+    "status": "??",
+    "sha256": "03ac7548a87d012036d2eaab94ddbde17982a4ca10256105491961a7b1e76186",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/RinImages/Verification.json",
+    "status": "??",
+    "sha256": "09c503d7e55af35b679c25a9712022f4918a6258a96e42572996d42d4b3d9d61",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/RinImages/index.html",
+    "status": "??",
+    "sha256": "ee2f3ddea9140101aed15c34bb0a56a919541d0201627fd38b548949a70036b4",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/RinImages/manifest.json",
+    "status": "??",
+    "sha256": "2a4329f04f3cb86a44e1c4bd2160ba0fc8d6252328dd9edb6750ddfafb171738",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/RinImages/profile.json",
+    "status": "??",
+    "sha256": "5ff8d77222b6e881b24b66cba60af5e885dd1c6d17eaf51122b3868b0c7970f2",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/RinImages/prompts.json",
+    "status": "??",
+    "sha256": "a2f27a39caa79dbb5c847fe863dc1e66ad7d16ceaeebe761031a83917c544c62",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/RinImages/rin-ball.png",
+    "status": "??",
+    "sha256": "954a056f9728e410e5709d159ef595e1e48c21e80706f7cde290ebcb21151ee2",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/RinImages/rin-ball__open_up.png",
+    "status": "??",
+    "sha256": "472baba1ca247268f8824564503b7f1e86d07a6b11cc0c4922f4187653171bf9",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/RinImages/rin-ball__simultaneous.png",
+    "status": "??",
+    "sha256": "3b4780bcc70661e0976d092107c4bed9e8c22bcf806f32de30d3244d03375a06",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/RinImages/rin-brush.png",
+    "status": "??",
+    "sha256": "887a4f0717a74c04dcb38ec2cf8579d0a9072db77d7f6b1dda392a995d142674",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/RinImages/rin-brush__open_up.png",
+    "status": "??",
+    "sha256": "a749012aa98eb6815dc996a46a5a28498749599416d38aff46f581b5f931afdf",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/RinImages/rin-brush__simultaneous.png",
+    "status": "??",
+    "sha256": "28b396d348464307009672ab7b0ff4887e37cfa915f04e319f4752182b94af15",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/RinImages/rin-normal.png",
+    "status": "??",
+    "sha256": "acdbacfc7c9f27cdd5544ad41408ab44ed4fe3df191c779b8fd011ffec7ac947",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/RinImages/rin-pause.png",
+    "status": "??",
+    "sha256": "5df0256029c702b1c86d66a2ec0da3457dfb4e013df573b3ab5c64be4fc5501a",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/RinImages/rin-pet.png",
+    "status": "??",
+    "sha256": "4abb77117ee3d27d42671ee4cb1f52b9779936b3d0ca2d388d560ca164a377d7",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/RinImages/rin-pet__open_up.png",
+    "status": "??",
+    "sha256": "f8301db028e3d749668ceabcc30628ca9a4cda125771e694987e9b378c5589a8",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/RinImages/rin-pet__simultaneous.png",
+    "status": "??",
+    "sha256": "375ed599bc842b165e4b22250632b7c54edc2f3790bd3bd4535b31160fd67602",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/RinImages/rin-plush.png",
+    "status": "??",
+    "sha256": "214250b90217326ec6ba95a9786488b63461ad3187ae45ea80ebf4997b46c794",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/RinImages/rin-plush__open_up.png",
+    "status": "??",
+    "sha256": "33f0e80430a159d4e11fab0608650a150b6643d4a7ecddc0d3dfb3b8519bc457",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/RinImages/rin-plush__simultaneous.png",
+    "status": "??",
+    "sha256": "d25682617f97da5b65c2497e10c2fe4e18759d5ef71bd0e834958f32fec26af8",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/RinImages/rin-presence.png",
+    "status": "??",
+    "sha256": "adb48604a1d883eb950afbd6ccd00a2eb970792b2afee7185b5d087a19e676d5",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/RinImages/rin-presence__open_up.png",
+    "status": "??",
+    "sha256": "565adaa28de5cb1dbf607be6a404d08172b1c874d2115542785cd6b09d068fd3",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/RinImages/rin-presence__simultaneous.png",
+    "status": "??",
+    "sha256": "152dadc7521579774851d0d1b851e3d4f022f42728dfb04b2707bc27ca20f63c",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/RinImages/rin-sleep.png",
+    "status": "??",
+    "sha256": "f82d345047276f70df977e90e77fc3f4c0cdd043983aeb591ef39bda79421647",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/RinImages/rin-teaser.png",
+    "status": "??",
+    "sha256": "88c5487f3dbaf4d6e372f365f81d8bccc17d2119d9bafef8415ad8ebedbf81e7",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/RinImages/rin-teaser__open_up.png",
+    "status": "??",
+    "sha256": "acbf95074735d727efe70468cd4eda7dcc57b9f6e87f89b0e443773486b025a0",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/RinImages/rin-teaser__simultaneous.png",
+    "status": "??",
+    "sha256": "24cf1ccc5b9bc99ffaca4d170727252c0e90827d95988d2c1ce3764a6562e8b9",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/RinImages/rin-tunnel.png",
+    "status": "??",
+    "sha256": "d21d791ad9e7d17917244667556fae65b1abde3904b23334d378dd25148468f6",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/RinImages/rin-tunnel__open_up.png",
+    "status": "??",
+    "sha256": "1a128edbdd5db4dac6029344cfed03c617a47fc96634a1d27351a735d087360a",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/RinImages/rin-tunnel__simultaneous.png",
+    "status": "??",
+    "sha256": "eb88b50c3a68308d579c588fac634668a4056987c884ad21250a5bd93c5e78b7",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/RinImages/rin-voice.png",
+    "status": "??",
+    "sha256": "56ca500c5dcbdc2285a4d6eda83f698bd475a7db2b1de18d497bfbbb44c55d8e",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/RinImages/rin-voice__open_up.png",
+    "status": "??",
+    "sha256": "ce4380f10dfaf15dc2ff3670442940b748ee669a91c4a5dced9e4a8b9b818a41",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/RinImages/rin-voice__simultaneous.png",
+    "status": "??",
+    "sha256": "1bdec993a262a3a5e6999edee38df4141defced348f60113e5ac207f61be035a",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/Status.md",
+    "status": "??",
+    "sha256": "3375ae4e955eba99a2a6dedf824605cb610c0976c9c9772740f6867231d0562f",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/Verification.json",
+    "status": "??",
+    "sha256": "0021fb7199baf0c98e60d56e578c0a7f68e31242bdde5c37ee66ec1ae4c75c1d",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/index.html",
+    "status": "??",
+    "sha256": "dd593cc4301c60e8841981113c9a6d8e3f7b35cc9bfae4d39b78b062e168dec7",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/manifest.json",
+    "status": "??",
+    "sha256": "7a0e9d481856ec3ccbc638c37b9eeac4cf11c336c0a012c05b08b69462c6194e",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/profile.json",
+    "status": "??",
+    "sha256": "54ffcb02d4a6f1c048d81389be85dec1307b3ffcd65f1de367b345c57dc040de",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/prompts.json",
+    "status": "??",
+    "sha256": "015275af79cf0c909aec42a4f4078fc7137a464436bf44c663127a5e0cd5f683",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/rejected-candidates.json",
+    "status": "??",
+    "sha256": "5b7c5eb28f37484dede688c842bfae1ce8a2dd4513f05c6fffabdfc730102a99",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/yuki-ball.png",
+    "status": "??",
+    "sha256": "76dd582c5222fb3c505ebc52df21157853704334fd9b8db2acaca0803b6c6c63",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/yuki-ball__open_up.png",
+    "status": "??",
+    "sha256": "ca49837dffa021b38a9e413aef76b3ce899cbf2b3af81ab435496af87020f036",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/yuki-ball__simultaneous.png",
+    "status": "??",
+    "sha256": "2543b68c750def59895b72acca1dc938f4f24b65ba17016e521d693c535daa97",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/yuki-brush.png",
+    "status": "??",
+    "sha256": "cb0f16c9b9302a7a53be683f599c35dfbdd1f7506d6c99149c69c247f4bae6ca",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/yuki-brush__open_up.png",
+    "status": "??",
+    "sha256": "5f37773a3c3e4ace9aa588d1b0bfbe0188349c8db59b2007376d95bad4b2a87e",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/yuki-brush__simultaneous.png",
+    "status": "??",
+    "sha256": "c565c4393c21f7de4a28de00015b9aef2062b65281ed5d9b7e8905b074ba9c88",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/yuki-normal.png",
+    "status": "??",
+    "sha256": "5a647d3e97dca728bd3e24f2121c154d5be0faef39dd371b967dc88d406ba77d",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/yuki-pause.png",
+    "status": "??",
+    "sha256": "42936c967353a63702647a585641f15fdfa3239229c637ca1e2cd39abb4a020e",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/yuki-pet.png",
+    "status": "??",
+    "sha256": "29c2fe91c2c0c2f574b260c070832fb5b11b5ec2ba340779a80354ce86107843",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/yuki-pet__open_up.png",
+    "status": "??",
+    "sha256": "abe2eb0b2f13a63cc802fac4b982e8484e92297aa397f54c2d579e49068b6aa1",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/yuki-pet__simultaneous.png",
+    "status": "??",
+    "sha256": "f6e910be9457a35a2fa2754f2d90d01bb5055dcb2cd4ea9fa3565e1b2fc73b88",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/yuki-plush-v2.png",
+    "status": "??",
+    "sha256": "52d70b8410a4ef3db82704a2900a7ce9ae88a728baf855e7a030c90f703da6ee",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/yuki-plush.png",
+    "status": "??",
+    "sha256": "f8cc1484d270ee9fa83670f095cda879e5611d6fb3f788021a5a41ec896bc393",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/yuki-plush__open_up-v2.png",
+    "status": "??",
+    "sha256": "8fbb142ba82cc29bfdd74b5332edfc0626e0350a6f4e71135ab42d9ff53a2ac3",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/yuki-plush__open_up.png",
+    "status": "??",
+    "sha256": "3a31eef67b24e69ac2d6d9a2d4aca1d5da9cbf3fc2c272fd89f8b46826e9608c",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/yuki-plush__simultaneous.png",
+    "status": "??",
+    "sha256": "eac32f47b822a46413c7b83636db9ca41c512cfa0ba305395d5f536007cf721d",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/yuki-presence.png",
+    "status": "??",
+    "sha256": "d9c08cf04dec5b54048a68f2d6fc27d8e8e6af29e242fb32f15162eb8f0d3002",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/yuki-presence__open_up.png",
+    "status": "??",
+    "sha256": "7179eab9d18ecd833d0e611760a74e9821192903164fce8b6f4786f1d73fe171",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/yuki-presence__simultaneous.png",
+    "status": "??",
+    "sha256": "5f5958184e35dbc6f9aa8f56fa46d194f6a80dd4a56976b32dd98784567c2435",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/yuki-sleep.png",
+    "status": "??",
+    "sha256": "e479ae184eeb5988994da5f50543584ccf21079d60bf7374c3ac734398ad2f48",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/yuki-teaser.png",
+    "status": "??",
+    "sha256": "844ced23361550ca11aa52d6c5a714aa342f0bf1c80cbf748f466fa022b9c949",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/yuki-teaser__open_up.png",
+    "status": "??",
+    "sha256": "b4c6382fd37f591424bd12fbc68ff65f36e56417db3076395a6301accc369f9c",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/yuki-teaser__simultaneous.png",
+    "status": "??",
+    "sha256": "bfaea62c5d23262a8546e10e6d60d70634f66097626948ae58e0783deb2e4144",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/yuki-tunnel.png",
+    "status": "??",
+    "sha256": "7191c9672d6e6f80485cde19d6b321d68464e90876756c1c0eb8a658b528a7b4",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/yuki-tunnel__open_up.png",
+    "status": "??",
+    "sha256": "05a2f96e9fe675f93f0ab58704d210ecc5534be13e60b13fdde1212bd3c3b9c1",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/yuki-tunnel__simultaneous-v2.png",
+    "status": "??",
+    "sha256": "72efa6826b669be7ca9b6b2996092c248d4375036acd4380c80a80eb2e2927f3",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/yuki-tunnel__simultaneous.png",
+    "status": "??",
+    "sha256": "1b085f5a741c2b549e81dfb8a81a3a657e369c0dcebdfe3ccea53741085bc9ee",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/yuki-voice.png",
+    "status": "??",
+    "sha256": "c0ed3cd66440e09cce0cd38a0c84a34cdab33759f687b25a7bd182227b7adecf",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/yuki-voice__open_up.png",
+    "status": "??",
+    "sha256": "912fabde6d645e1bd6e8ce2908b7e41bf8a5afd52c51ac98e82ae1e8bc692f44",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "Docs/Results/YukiImages/yuki-voice__simultaneous.png",
+    "status": "??",
+    "sha256": "69aaf7a2789c9d91a531468f2d1926c3059315f956fb76209723238677359289",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "register_rin_images.py",
+    "status": "??",
+    "sha256": "405895adb42a00586ebff2c04d0fc73def1399ab05251fed320739e9cdbd94fa",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "register_yuki_images.py",
+    "status": "??",
+    "sha256": "830be17d4e0b3c4ed61eb0facbd8a863128ef923e95f736a12e48bef704dff3d",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "unity_preview_template/Editor/RinDailyImageVerification.cs",
+    "status": "??",
+    "sha256": "f8793f87dd6e4f5d70927578b0bfdd6744cb8b12761780531615a0668022dcd1",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool",
+    "path": "unity_preview_template/Editor/YukiDailyImageVerification.cs",
+    "status": "??",
+    "sha256": "184ae85711428c4aeb494e3a010a05c08975080eca8b53467ae17cd19c8e37f3",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim",
+    "path": "config/cafe_playtest_cats.json",
+    "status": " M",
+    "sha256": "168b660d18004cdce42c449845d34bd2766173d07dced12aa51ec94b9364e2b5",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim",
+    "path": "config/cafe_recruitment.json",
+    "status": " M",
+    "sha256": "4591da8613a504bf53310defdd3ecc75d744cf170314611cb84fd8d09acdd215",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim",
+    "path": "saves/content_images/interaction_subjects.json",
+    "status": " M",
+    "sha256": "bb58be6f4e40e18724db4a8a73a28cae1f2c858d6137ca77f337e980631b85bd",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/CatCafePreview/Resources/CatCafeStandalone/presentation.json",
+    "status": " M",
+    "sha256": "36d5051122ba9de883be8b2cd5115c36c0555919f0651d367916a5f98f42dbc6",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/CatCafePreview/Runtime/Standalone/CafeNarrativeCatalog.cs",
+    "status": " M",
+    "sha256": "8b3012dea362fcd787debbadcae32f6ec19ccfd74f4dc564cb98546e42edbc59",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/bundle.json",
+    "status": " M",
+    "sha256": "01c33402501f454642eb4b66d6200d98d2f33ea3c63c14a04c126a7e6d166c9a",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/interaction_texts.json",
+    "status": " M",
+    "sha256": "687f735637d350ec28ae5d0f5af3ece5063a84d1be83db54ecbc42f320772fee",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/bundle.json",
+    "status": " M",
+    "sha256": "057c5df62509a8973a3a3a2f8924ec23146362404e0bed04fe06f19077aac7c1",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/interaction_texts.json",
+    "status": " M",
+    "sha256": "4ae22261f2d8b9da3652b35bcf51928df8402dcd0a02adb2fe6498370838ff1a",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/CatCafePreview/Editor/RinDailyImageVerification.cs",
+    "status": "??",
+    "sha256": "f8793f87dd6e4f5d70927578b0bfdd6744cb8b12761780531615a0668022dcd1",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/CatCafePreview/Editor/RinDailyImageVerification.cs.meta",
+    "status": "??",
+    "sha256": "0c8e30b2896e60977fe4458685143338f21fa9b8a234722d9ea4137e412a9179",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/CatCafePreview/Editor/YukiDailyImageVerification.cs",
+    "status": "??",
+    "sha256": "184ae85711428c4aeb494e3a010a05c08975080eca8b53467ae17cd19c8e37f3",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/CatCafePreview/Editor/YukiDailyImageVerification.cs.meta",
+    "status": "??",
+    "sha256": "0fe50fb1c617922447303745af869a9592744f9a5966842832f0c1666d1da7a8",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/152dadc7521579774851d0d1b851e3d4f022f42728dfb04b2707bc27ca20f63c.png",
+    "status": "??",
+    "sha256": "152dadc7521579774851d0d1b851e3d4f022f42728dfb04b2707bc27ca20f63c",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/152dadc7521579774851d0d1b851e3d4f022f42728dfb04b2707bc27ca20f63c.png.meta",
+    "status": "??",
+    "sha256": "cb5cf2539c572ae3f1f73806284c71964c4b41a9a8848e436742b1b2c0e777a5",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/1a128edbdd5db4dac6029344cfed03c617a47fc96634a1d27351a735d087360a.png",
+    "status": "??",
+    "sha256": "1a128edbdd5db4dac6029344cfed03c617a47fc96634a1d27351a735d087360a",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/1a128edbdd5db4dac6029344cfed03c617a47fc96634a1d27351a735d087360a.png.meta",
+    "status": "??",
+    "sha256": "62082509d97a8237c0fd1107f2e70f914ac89917ab9249043a879068a4fcd8e5",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/1bdec993a262a3a5e6999edee38df4141defced348f60113e5ac207f61be035a.png",
+    "status": "??",
+    "sha256": "1bdec993a262a3a5e6999edee38df4141defced348f60113e5ac207f61be035a",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/1bdec993a262a3a5e6999edee38df4141defced348f60113e5ac207f61be035a.png.meta",
+    "status": "??",
+    "sha256": "22dcaaa590b8981b18e8459a06115ebee5c254c135499eec18075c738855657b",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/214250b90217326ec6ba95a9786488b63461ad3187ae45ea80ebf4997b46c794.png",
+    "status": "??",
+    "sha256": "214250b90217326ec6ba95a9786488b63461ad3187ae45ea80ebf4997b46c794",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/214250b90217326ec6ba95a9786488b63461ad3187ae45ea80ebf4997b46c794.png.meta",
+    "status": "??",
+    "sha256": "056d7ea1aec2dab2e414fb149914ba19252286e1d850a431daa504b5e2d0b980",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/24cf1ccc5b9bc99ffaca4d170727252c0e90827d95988d2c1ce3764a6562e8b9.png",
+    "status": "??",
+    "sha256": "24cf1ccc5b9bc99ffaca4d170727252c0e90827d95988d2c1ce3764a6562e8b9",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/24cf1ccc5b9bc99ffaca4d170727252c0e90827d95988d2c1ce3764a6562e8b9.png.meta",
+    "status": "??",
+    "sha256": "e30c5852f86b1e3c2c9188019fb1cb957cb0b40eaf69ccb07c03ce9d559a6dba",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/28b396d348464307009672ab7b0ff4887e37cfa915f04e319f4752182b94af15.png",
+    "status": "??",
+    "sha256": "28b396d348464307009672ab7b0ff4887e37cfa915f04e319f4752182b94af15",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/28b396d348464307009672ab7b0ff4887e37cfa915f04e319f4752182b94af15.png.meta",
+    "status": "??",
+    "sha256": "0ca968019de26dd835704773cebc9f0159a0541cd3861c2f1d9fea0922e525ba",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/33f0e80430a159d4e11fab0608650a150b6643d4a7ecddc0d3dfb3b8519bc457.png",
+    "status": "??",
+    "sha256": "33f0e80430a159d4e11fab0608650a150b6643d4a7ecddc0d3dfb3b8519bc457",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/33f0e80430a159d4e11fab0608650a150b6643d4a7ecddc0d3dfb3b8519bc457.png.meta",
+    "status": "??",
+    "sha256": "f1c41d8828835f0b6bd01ac4dd876a06e62ad858ae2b2e5d18bcde6c82cc3711",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/375ed599bc842b165e4b22250632b7c54edc2f3790bd3bd4535b31160fd67602.png",
+    "status": "??",
+    "sha256": "375ed599bc842b165e4b22250632b7c54edc2f3790bd3bd4535b31160fd67602",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/375ed599bc842b165e4b22250632b7c54edc2f3790bd3bd4535b31160fd67602.png.meta",
+    "status": "??",
+    "sha256": "66c2aa6590918815ede20000eb794d1a7cade2b14e87b0c90a2c14c16a0cb20c",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/3b4780bcc70661e0976d092107c4bed9e8c22bcf806f32de30d3244d03375a06.png",
+    "status": "??",
+    "sha256": "3b4780bcc70661e0976d092107c4bed9e8c22bcf806f32de30d3244d03375a06",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/3b4780bcc70661e0976d092107c4bed9e8c22bcf806f32de30d3244d03375a06.png.meta",
+    "status": "??",
+    "sha256": "b0fd9fbfea3dcf2ad0edf70234c4ba29066b86e4faf0e8b5fe1a3000f5760d8d",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/472baba1ca247268f8824564503b7f1e86d07a6b11cc0c4922f4187653171bf9.png",
+    "status": "??",
+    "sha256": "472baba1ca247268f8824564503b7f1e86d07a6b11cc0c4922f4187653171bf9",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/472baba1ca247268f8824564503b7f1e86d07a6b11cc0c4922f4187653171bf9.png.meta",
+    "status": "??",
+    "sha256": "531470433e41af3f945d2a35ae71a2cd5752f393de0209b28bdfaf644b4210ef",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/4abb77117ee3d27d42671ee4cb1f52b9779936b3d0ca2d388d560ca164a377d7.png",
+    "status": "??",
+    "sha256": "4abb77117ee3d27d42671ee4cb1f52b9779936b3d0ca2d388d560ca164a377d7",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/4abb77117ee3d27d42671ee4cb1f52b9779936b3d0ca2d388d560ca164a377d7.png.meta",
+    "status": "??",
+    "sha256": "486e99dbcae402a131d4fd883400e4d2729efd6743c137cf7452985c2937a2e9",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/565adaa28de5cb1dbf607be6a404d08172b1c874d2115542785cd6b09d068fd3.png",
+    "status": "??",
+    "sha256": "565adaa28de5cb1dbf607be6a404d08172b1c874d2115542785cd6b09d068fd3",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/565adaa28de5cb1dbf607be6a404d08172b1c874d2115542785cd6b09d068fd3.png.meta",
+    "status": "??",
+    "sha256": "625ec6f3bfaa4b5cb27b96190b65adbda56fdb9eca14a5be266a66be19af3969",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/56ca500c5dcbdc2285a4d6eda83f698bd475a7db2b1de18d497bfbbb44c55d8e.png",
+    "status": "??",
+    "sha256": "56ca500c5dcbdc2285a4d6eda83f698bd475a7db2b1de18d497bfbbb44c55d8e",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/56ca500c5dcbdc2285a4d6eda83f698bd475a7db2b1de18d497bfbbb44c55d8e.png.meta",
+    "status": "??",
+    "sha256": "336b25cd5fbad391323747a90f0f4dd53ff693d7ee09b0b50a4c24fce1860ee5",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/5df0256029c702b1c86d66a2ec0da3457dfb4e013df573b3ab5c64be4fc5501a.png",
+    "status": "??",
+    "sha256": "5df0256029c702b1c86d66a2ec0da3457dfb4e013df573b3ab5c64be4fc5501a",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/5df0256029c702b1c86d66a2ec0da3457dfb4e013df573b3ab5c64be4fc5501a.png.meta",
+    "status": "??",
+    "sha256": "a75aead91abaef6beaf02a5368f6275dc8cffd3bff0f123e6dfef7e681e30e31",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/887a4f0717a74c04dcb38ec2cf8579d0a9072db77d7f6b1dda392a995d142674.png",
+    "status": "??",
+    "sha256": "887a4f0717a74c04dcb38ec2cf8579d0a9072db77d7f6b1dda392a995d142674",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/887a4f0717a74c04dcb38ec2cf8579d0a9072db77d7f6b1dda392a995d142674.png.meta",
+    "status": "??",
+    "sha256": "778f5355fb33e2bfd8789d62e8676acf33857cc6425f3eec2f410e37cfabbaf9",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/88c5487f3dbaf4d6e372f365f81d8bccc17d2119d9bafef8415ad8ebedbf81e7.png",
+    "status": "??",
+    "sha256": "88c5487f3dbaf4d6e372f365f81d8bccc17d2119d9bafef8415ad8ebedbf81e7",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/88c5487f3dbaf4d6e372f365f81d8bccc17d2119d9bafef8415ad8ebedbf81e7.png.meta",
+    "status": "??",
+    "sha256": "cdf1e793c4db1dcbfdee9fc8ae75afd7f6e01d8e10f88c55c24e3cf85e416ca2",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/954a056f9728e410e5709d159ef595e1e48c21e80706f7cde290ebcb21151ee2.png",
+    "status": "??",
+    "sha256": "954a056f9728e410e5709d159ef595e1e48c21e80706f7cde290ebcb21151ee2",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/954a056f9728e410e5709d159ef595e1e48c21e80706f7cde290ebcb21151ee2.png.meta",
+    "status": "??",
+    "sha256": "c18bfb4fe2e8b17214756ca3adc94931284a4a677e422c1b79e45847ffc204cf",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/a749012aa98eb6815dc996a46a5a28498749599416d38aff46f581b5f931afdf.png",
+    "status": "??",
+    "sha256": "a749012aa98eb6815dc996a46a5a28498749599416d38aff46f581b5f931afdf",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/a749012aa98eb6815dc996a46a5a28498749599416d38aff46f581b5f931afdf.png.meta",
+    "status": "??",
+    "sha256": "b4c5c38f0aeac6451e62cba96fb5ff2099e54eaa831000d6a1751dd6e2fccb5a",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/acbf95074735d727efe70468cd4eda7dcc57b9f6e87f89b0e443773486b025a0.png",
+    "status": "??",
+    "sha256": "acbf95074735d727efe70468cd4eda7dcc57b9f6e87f89b0e443773486b025a0",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/acbf95074735d727efe70468cd4eda7dcc57b9f6e87f89b0e443773486b025a0.png.meta",
+    "status": "??",
+    "sha256": "76107f0311243a097dd40ef10d02d9a007af92250866ad3918035f1c1a35e0f4",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/acdbacfc7c9f27cdd5544ad41408ab44ed4fe3df191c779b8fd011ffec7ac947.png",
+    "status": "??",
+    "sha256": "acdbacfc7c9f27cdd5544ad41408ab44ed4fe3df191c779b8fd011ffec7ac947",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/acdbacfc7c9f27cdd5544ad41408ab44ed4fe3df191c779b8fd011ffec7ac947.png.meta",
+    "status": "??",
+    "sha256": "b3c2ffb92797e00ed16460536cf6f840a88d3b54185dab5b1cea8c438457c61f",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/adb48604a1d883eb950afbd6ccd00a2eb970792b2afee7185b5d087a19e676d5.png",
+    "status": "??",
+    "sha256": "adb48604a1d883eb950afbd6ccd00a2eb970792b2afee7185b5d087a19e676d5",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/adb48604a1d883eb950afbd6ccd00a2eb970792b2afee7185b5d087a19e676d5.png.meta",
+    "status": "??",
+    "sha256": "72a33e2ae5eeed2d7f73ef1fa1b5420aaffec848ed29730231bd733055326df2",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/ce4380f10dfaf15dc2ff3670442940b748ee669a91c4a5dced9e4a8b9b818a41.png",
+    "status": "??",
+    "sha256": "ce4380f10dfaf15dc2ff3670442940b748ee669a91c4a5dced9e4a8b9b818a41",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/ce4380f10dfaf15dc2ff3670442940b748ee669a91c4a5dced9e4a8b9b818a41.png.meta",
+    "status": "??",
+    "sha256": "d2b2ce261797ce1f09762e9bf36c4459cb8e76fa3d545a48949cc90326f35162",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/d21d791ad9e7d17917244667556fae65b1abde3904b23334d378dd25148468f6.png",
+    "status": "??",
+    "sha256": "d21d791ad9e7d17917244667556fae65b1abde3904b23334d378dd25148468f6",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/d21d791ad9e7d17917244667556fae65b1abde3904b23334d378dd25148468f6.png.meta",
+    "status": "??",
+    "sha256": "a86d0f6e67702070adbdeecc3ee98aa06bad2098e5ea2538a4639ba280ad120c",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/d25682617f97da5b65c2497e10c2fe4e18759d5ef71bd0e834958f32fec26af8.png",
+    "status": "??",
+    "sha256": "d25682617f97da5b65c2497e10c2fe4e18759d5ef71bd0e834958f32fec26af8",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/d25682617f97da5b65c2497e10c2fe4e18759d5ef71bd0e834958f32fec26af8.png.meta",
+    "status": "??",
+    "sha256": "29cc63838678c28c766fb574aa86ca81458eaac947f815cd253234567126e16f",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/eb88b50c3a68308d579c588fac634668a4056987c884ad21250a5bd93c5e78b7.png",
+    "status": "??",
+    "sha256": "eb88b50c3a68308d579c588fac634668a4056987c884ad21250a5bd93c5e78b7",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/eb88b50c3a68308d579c588fac634668a4056987c884ad21250a5bd93c5e78b7.png.meta",
+    "status": "??",
+    "sha256": "2486f56082e814949bd756332eaaac41bc9b4599ed87c98bd9ab1f842981bc9d",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/f82d345047276f70df977e90e77fc3f4c0cdd043983aeb591ef39bda79421647.png",
+    "status": "??",
+    "sha256": "f82d345047276f70df977e90e77fc3f4c0cdd043983aeb591ef39bda79421647",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/f82d345047276f70df977e90e77fc3f4c0cdd043983aeb591ef39bda79421647.png.meta",
+    "status": "??",
+    "sha256": "2ae56750ea46bd74633874d661ddb7266478582e51e7fe36e4d72e5252691c2d",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/f8301db028e3d749668ceabcc30628ca9a4cda125771e694987e9b378c5589a8.png",
+    "status": "??",
+    "sha256": "f8301db028e3d749668ceabcc30628ca9a4cda125771e694987e9b378c5589a8",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/f8301db028e3d749668ceabcc30628ca9a4cda125771e694987e9b378c5589a8.png.meta",
+    "status": "??",
+    "sha256": "fe178a3fb3ddb2614f593380900ae862f31e0ea977a86b237ddf2ecf7b212dfe",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/05a2f96e9fe675f93f0ab58704d210ecc5534be13e60b13fdde1212bd3c3b9c1.png",
+    "status": "??",
+    "sha256": "05a2f96e9fe675f93f0ab58704d210ecc5534be13e60b13fdde1212bd3c3b9c1",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/05a2f96e9fe675f93f0ab58704d210ecc5534be13e60b13fdde1212bd3c3b9c1.png.meta",
+    "status": "??",
+    "sha256": "1b31d324a46caadaabf78f29c169e21fd2fd5926391c9a0bc047014292464c39",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/2543b68c750def59895b72acca1dc938f4f24b65ba17016e521d693c535daa97.png",
+    "status": "??",
+    "sha256": "2543b68c750def59895b72acca1dc938f4f24b65ba17016e521d693c535daa97",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/2543b68c750def59895b72acca1dc938f4f24b65ba17016e521d693c535daa97.png.meta",
+    "status": "??",
+    "sha256": "fd3b76b67d89f5d18cc40370cab6270191a5a13a85ce5d086c796f10e53de43a",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/29c2fe91c2c0c2f574b260c070832fb5b11b5ec2ba340779a80354ce86107843.png",
+    "status": "??",
+    "sha256": "29c2fe91c2c0c2f574b260c070832fb5b11b5ec2ba340779a80354ce86107843",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/29c2fe91c2c0c2f574b260c070832fb5b11b5ec2ba340779a80354ce86107843.png.meta",
+    "status": "??",
+    "sha256": "1280e6ffca6f193b25b2878a312b1d2d9246c5252b3e3729c0df7ce064da7a79",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/42936c967353a63702647a585641f15fdfa3239229c637ca1e2cd39abb4a020e.png",
+    "status": "??",
+    "sha256": "42936c967353a63702647a585641f15fdfa3239229c637ca1e2cd39abb4a020e",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/42936c967353a63702647a585641f15fdfa3239229c637ca1e2cd39abb4a020e.png.meta",
+    "status": "??",
+    "sha256": "3b55a4e6c1ca5d00d6be38a23761f25a2723184640a1c9f09d8ed32565920574",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/52d70b8410a4ef3db82704a2900a7ce9ae88a728baf855e7a030c90f703da6ee.png",
+    "status": "??",
+    "sha256": "52d70b8410a4ef3db82704a2900a7ce9ae88a728baf855e7a030c90f703da6ee",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/52d70b8410a4ef3db82704a2900a7ce9ae88a728baf855e7a030c90f703da6ee.png.meta",
+    "status": "??",
+    "sha256": "e232d7ca8832eec2de7d8fe35d1ea7ab8ba84028a0e1636e805a1a477bed4719",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/5a647d3e97dca728bd3e24f2121c154d5be0faef39dd371b967dc88d406ba77d.png",
+    "status": "??",
+    "sha256": "5a647d3e97dca728bd3e24f2121c154d5be0faef39dd371b967dc88d406ba77d",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/5a647d3e97dca728bd3e24f2121c154d5be0faef39dd371b967dc88d406ba77d.png.meta",
+    "status": "??",
+    "sha256": "c4d36f52857d128bc05545e689d0a79ab97e8bf1c7528681f9eb3a71750be78e",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/5f37773a3c3e4ace9aa588d1b0bfbe0188349c8db59b2007376d95bad4b2a87e.png",
+    "status": "??",
+    "sha256": "5f37773a3c3e4ace9aa588d1b0bfbe0188349c8db59b2007376d95bad4b2a87e",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/5f37773a3c3e4ace9aa588d1b0bfbe0188349c8db59b2007376d95bad4b2a87e.png.meta",
+    "status": "??",
+    "sha256": "af5d7dfbc2f804eaebd9eda85ab463a8012187accb32dc753ebb7f3a3525be41",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/5f5958184e35dbc6f9aa8f56fa46d194f6a80dd4a56976b32dd98784567c2435.png",
+    "status": "??",
+    "sha256": "5f5958184e35dbc6f9aa8f56fa46d194f6a80dd4a56976b32dd98784567c2435",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/5f5958184e35dbc6f9aa8f56fa46d194f6a80dd4a56976b32dd98784567c2435.png.meta",
+    "status": "??",
+    "sha256": "cf35efb0a004e99d1f72813465cd93601dd55f98b825b1db82ce674d19ed729e",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/69aaf7a2789c9d91a531468f2d1926c3059315f956fb76209723238677359289.png",
+    "status": "??",
+    "sha256": "69aaf7a2789c9d91a531468f2d1926c3059315f956fb76209723238677359289",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/69aaf7a2789c9d91a531468f2d1926c3059315f956fb76209723238677359289.png.meta",
+    "status": "??",
+    "sha256": "579dfed6fd0b802188f9414cedd05753bd1592994bb0b47c5c827933c2214d0c",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/7179eab9d18ecd833d0e611760a74e9821192903164fce8b6f4786f1d73fe171.png",
+    "status": "??",
+    "sha256": "7179eab9d18ecd833d0e611760a74e9821192903164fce8b6f4786f1d73fe171",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/7179eab9d18ecd833d0e611760a74e9821192903164fce8b6f4786f1d73fe171.png.meta",
+    "status": "??",
+    "sha256": "48458bc0903f59fd3796995099faf18e95912c42f0c207527f979f218556bc56",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/7191c9672d6e6f80485cde19d6b321d68464e90876756c1c0eb8a658b528a7b4.png",
+    "status": "??",
+    "sha256": "7191c9672d6e6f80485cde19d6b321d68464e90876756c1c0eb8a658b528a7b4",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/7191c9672d6e6f80485cde19d6b321d68464e90876756c1c0eb8a658b528a7b4.png.meta",
+    "status": "??",
+    "sha256": "49851d24329c1ffd6b9f84de875a7582cd6abe5723b8a91a246ca64ff9e88042",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/72efa6826b669be7ca9b6b2996092c248d4375036acd4380c80a80eb2e2927f3.png",
+    "status": "??",
+    "sha256": "72efa6826b669be7ca9b6b2996092c248d4375036acd4380c80a80eb2e2927f3",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/72efa6826b669be7ca9b6b2996092c248d4375036acd4380c80a80eb2e2927f3.png.meta",
+    "status": "??",
+    "sha256": "5a6bfb1abc555021b71eb7bda5d300a5732ac254a8d4be969e65627b56e3268c",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/76dd582c5222fb3c505ebc52df21157853704334fd9b8db2acaca0803b6c6c63.png",
+    "status": "??",
+    "sha256": "76dd582c5222fb3c505ebc52df21157853704334fd9b8db2acaca0803b6c6c63",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/76dd582c5222fb3c505ebc52df21157853704334fd9b8db2acaca0803b6c6c63.png.meta",
+    "status": "??",
+    "sha256": "0f31a1da991453e52e256944e8c1ebc3b1640e5088a6ea2fc9d63331f153b769",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/844ced23361550ca11aa52d6c5a714aa342f0bf1c80cbf748f466fa022b9c949.png",
+    "status": "??",
+    "sha256": "844ced23361550ca11aa52d6c5a714aa342f0bf1c80cbf748f466fa022b9c949",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/844ced23361550ca11aa52d6c5a714aa342f0bf1c80cbf748f466fa022b9c949.png.meta",
+    "status": "??",
+    "sha256": "71bdb1d0ef49fb0ff32cfeda531a31b4c39b3a0cccd104ed947dfc4bc56af868",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/8fbb142ba82cc29bfdd74b5332edfc0626e0350a6f4e71135ab42d9ff53a2ac3.png",
+    "status": "??",
+    "sha256": "8fbb142ba82cc29bfdd74b5332edfc0626e0350a6f4e71135ab42d9ff53a2ac3",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/8fbb142ba82cc29bfdd74b5332edfc0626e0350a6f4e71135ab42d9ff53a2ac3.png.meta",
+    "status": "??",
+    "sha256": "3f616d7dad315b61106172be939eaf1282b8ecaae2f885b752c4fa3c2caddafb",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/912fabde6d645e1bd6e8ce2908b7e41bf8a5afd52c51ac98e82ae1e8bc692f44.png",
+    "status": "??",
+    "sha256": "912fabde6d645e1bd6e8ce2908b7e41bf8a5afd52c51ac98e82ae1e8bc692f44",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/912fabde6d645e1bd6e8ce2908b7e41bf8a5afd52c51ac98e82ae1e8bc692f44.png.meta",
+    "status": "??",
+    "sha256": "38d225caeb90aa433908a55351e7f9ad482e761886961c694fc01e29bf72945c",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/abe2eb0b2f13a63cc802fac4b982e8484e92297aa397f54c2d579e49068b6aa1.png",
+    "status": "??",
+    "sha256": "abe2eb0b2f13a63cc802fac4b982e8484e92297aa397f54c2d579e49068b6aa1",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/abe2eb0b2f13a63cc802fac4b982e8484e92297aa397f54c2d579e49068b6aa1.png.meta",
+    "status": "??",
+    "sha256": "784825c3a2598c03cbe388ef144d7f556e18e7a01119a5f2911d532f7c0fa4e3",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/b4c6382fd37f591424bd12fbc68ff65f36e56417db3076395a6301accc369f9c.png",
+    "status": "??",
+    "sha256": "b4c6382fd37f591424bd12fbc68ff65f36e56417db3076395a6301accc369f9c",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/b4c6382fd37f591424bd12fbc68ff65f36e56417db3076395a6301accc369f9c.png.meta",
+    "status": "??",
+    "sha256": "257f12bee4e6eec27a981188bb431ab1a3784458182eca0dc01f7b8b39d119ef",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/bfaea62c5d23262a8546e10e6d60d70634f66097626948ae58e0783deb2e4144.png",
+    "status": "??",
+    "sha256": "bfaea62c5d23262a8546e10e6d60d70634f66097626948ae58e0783deb2e4144",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/bfaea62c5d23262a8546e10e6d60d70634f66097626948ae58e0783deb2e4144.png.meta",
+    "status": "??",
+    "sha256": "c1a9eba9ecaf60ba38021b507e8e4eab8689da849e33f905d7d9490726caf6a4",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/c0ed3cd66440e09cce0cd38a0c84a34cdab33759f687b25a7bd182227b7adecf.png",
+    "status": "??",
+    "sha256": "c0ed3cd66440e09cce0cd38a0c84a34cdab33759f687b25a7bd182227b7adecf",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/c0ed3cd66440e09cce0cd38a0c84a34cdab33759f687b25a7bd182227b7adecf.png.meta",
+    "status": "??",
+    "sha256": "cf275f559373f268b0ec35a3b2c6f7e74c122fbea510d7ab65dd96dfc722316a",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/c565c4393c21f7de4a28de00015b9aef2062b65281ed5d9b7e8905b074ba9c88.png",
+    "status": "??",
+    "sha256": "c565c4393c21f7de4a28de00015b9aef2062b65281ed5d9b7e8905b074ba9c88",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/c565c4393c21f7de4a28de00015b9aef2062b65281ed5d9b7e8905b074ba9c88.png.meta",
+    "status": "??",
+    "sha256": "8e5ef53e840227233272161f4487d74f2b2db00bc7b1dd61f8d1bbdc207a77c6",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/ca49837dffa021b38a9e413aef76b3ce899cbf2b3af81ab435496af87020f036.png",
+    "status": "??",
+    "sha256": "ca49837dffa021b38a9e413aef76b3ce899cbf2b3af81ab435496af87020f036",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/ca49837dffa021b38a9e413aef76b3ce899cbf2b3af81ab435496af87020f036.png.meta",
+    "status": "??",
+    "sha256": "888153238020d57730f5295199b99a41748ddc28876a280f4203bacc2c099632",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/cb0f16c9b9302a7a53be683f599c35dfbdd1f7506d6c99149c69c247f4bae6ca.png",
+    "status": "??",
+    "sha256": "cb0f16c9b9302a7a53be683f599c35dfbdd1f7506d6c99149c69c247f4bae6ca",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/cb0f16c9b9302a7a53be683f599c35dfbdd1f7506d6c99149c69c247f4bae6ca.png.meta",
+    "status": "??",
+    "sha256": "3111d1c2438aa42493ff30232c6f03921072e81f247b930db422028a09148ac1",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/d9c08cf04dec5b54048a68f2d6fc27d8e8e6af29e242fb32f15162eb8f0d3002.png",
+    "status": "??",
+    "sha256": "d9c08cf04dec5b54048a68f2d6fc27d8e8e6af29e242fb32f15162eb8f0d3002",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/d9c08cf04dec5b54048a68f2d6fc27d8e8e6af29e242fb32f15162eb8f0d3002.png.meta",
+    "status": "??",
+    "sha256": "db535efe2ad6c1df7ddb8d3a91a2b6bda9e663d7ec0e6789dfe7bc2ea53bcdf1",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/e479ae184eeb5988994da5f50543584ccf21079d60bf7374c3ac734398ad2f48.png",
+    "status": "??",
+    "sha256": "e479ae184eeb5988994da5f50543584ccf21079d60bf7374c3ac734398ad2f48",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/e479ae184eeb5988994da5f50543584ccf21079d60bf7374c3ac734398ad2f48.png.meta",
+    "status": "??",
+    "sha256": "f13066eb759829cfeda3e37b859ae9f864b53ba23d4e71ca02668723fea30811",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/eac32f47b822a46413c7b83636db9ca41c512cfa0ba305395d5f536007cf721d.png",
+    "status": "??",
+    "sha256": "eac32f47b822a46413c7b83636db9ca41c512cfa0ba305395d5f536007cf721d",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/eac32f47b822a46413c7b83636db9ca41c512cfa0ba305395d5f536007cf721d.png.meta",
+    "status": "??",
+    "sha256": "62bad09818e5b317d7ee391dc410739a93e54c8e4b3d277b8fd95da5bad174a8",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/f6e910be9457a35a2fa2754f2d90d01bb5055dcb2cd4ea9fa3565e1b2fc73b88.png",
+    "status": "??",
+    "sha256": "f6e910be9457a35a2fa2754f2d90d01bb5055dcb2cd4ea9fa3565e1b2fc73b88",
+    "preserved": true
+  },
+  {
+    "repo": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/f6e910be9457a35a2fa2754f2d90d01bb5055dcb2cd4ea9fa3565e1b2fc73b88.png.meta",
+    "status": "??",
+    "sha256": "29e7369f76af5200afef2bbc6e685a9ee4c84a646daec4347227b9c4591ab1b4",
+    "preserved": true
+  }
+]
