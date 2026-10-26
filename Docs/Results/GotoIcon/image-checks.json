@@ -1,0 +1,46 @@
+{
+  "status": "PASS",
+  "all_seats_equal": true,
+  "day": 4,
+  "tick": 1,
+  "funds": 820.0,
+  "images": {
+    "actual-seated-goto-1024.png": [
+      1024,
+      768
+    ],
+    "actual-seated-goto-1280.png": [
+      1280,
+      800
+    ],
+    "manual-after-input-1024.png": [
+      1024,
+      768
+    ],
+    "reservation-extra-mori-1024.png": [
+      1024,
+      768
+    ],
+    "reservation-extra-mori-1280.png": [
+      1280,
+      800
+    ],
+    "seat-vip-calico-1024.png": [
+      1024,
+      768
+    ],
+    "seat-vip-calico-1280.png": [
+      1280,
+      800
+    ],
+    "trust-vip-calico-1024.png": [
+      1024,
+      768
+    ],
+    "trust-vip-calico-1280.png": [
+      1280,
+      800
+    ]
+  },
+  "actual_input": "One click on seat1 details after separate-process load; client1024x768, outer1026x800; 1280 automatic only"
+}

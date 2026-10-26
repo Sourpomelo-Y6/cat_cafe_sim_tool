@@ -1,0 +1,1 @@
+computer-use sky: selected unique visible CatCafeSim window. Observed seat1 Goto/Kohaku, clicked seat1 details at window-relative (111,503). Confirmed 後藤さん / 担当：コハク / 体力100/100 / 文章の記録はまだありません. Client rendering 1024x768; outer window screenshot 1026x800. One actual click after separate-process load_game; no gameplay advance. 1280 input not tested.

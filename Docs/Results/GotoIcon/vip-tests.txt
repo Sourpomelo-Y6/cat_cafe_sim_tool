@@ -1,0 +1,8 @@
+test_composite_success_adds_fee_and_popularity (test_cafe_vip_customer.VipCustomerTests) ... ok
+test_final_stage_unlock_tomorrow_directory_save_and_replay (test_cafe_vip_customer.VipCustomerTests) ... ok
+test_wrong_cat_fails_and_legacy_and_invalid_data (test_cafe_vip_customer.VipCustomerTests) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 5.224s
+
+OK
