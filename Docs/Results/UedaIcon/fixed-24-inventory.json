@@ -1,0 +1,250 @@
+{
+  "status": "Inventory complete; one existing profile-notes gap",
+  "count": 24,
+  "registered": 24,
+  "images": 24,
+  "nonempty_profile_notes": 23,
+  "scope": "Registration inventory only; temporary/event roles excluded; no all-events claim",
+  "people": [
+    {
+      "category": "通常客",
+      "game_id": "guest-1",
+      "subject_id": "guest-1",
+      "name": "佐藤さん",
+      "profile_notes": true,
+      "registered": true,
+      "image": "people/0c815814fbaa02bf25092e99e7bc57ed858a9270e52bb679d97bd8117400b7f7.png",
+      "image_sha256": "0c815814fbaa02bf25092e99e7bc57ed858a9270e52bb679d97bd8117400b7f7"
+    },
+    {
+      "category": "通常客",
+      "game_id": "guest-2",
+      "subject_id": "person-952c631405e649fdb50c390881804977",
+      "name": "鈴木さん",
+      "profile_notes": true,
+      "registered": true,
+      "image": "people/ce47440c0d108d859835f07a5cac37a660acf4024e4dd2ea5ac4c90a08550852.png",
+      "image_sha256": "ce47440c0d108d859835f07a5cac37a660acf4024e4dd2ea5ac4c90a08550852"
+    },
+    {
+      "category": "通常客",
+      "game_id": "guest-3",
+      "subject_id": "person-guest-3",
+      "name": "高橋さん",
+      "profile_notes": true,
+      "registered": true,
+      "image": "people/3821a02fbe187442a3fb7d2843c1191fb8e71a3544a41d6fb0802a89d4d915e6.png",
+      "image_sha256": "3821a02fbe187442a3fb7d2843c1191fb8e71a3544a41d6fb0802a89d4d915e6"
+    },
+    {
+      "category": "通常客",
+      "game_id": "guest-4",
+      "subject_id": "person-guest-4",
+      "name": "田中さん",
+      "profile_notes": true,
+      "registered": true,
+      "image": "people/04b48ed19be7cca7490b47950ca4eba20cb8de4ec3e1b246f6aac2bf06a2cdfc.png",
+      "image_sha256": "04b48ed19be7cca7490b47950ca4eba20cb8de4ec3e1b246f6aac2bf06a2cdfc"
+    },
+    {
+      "category": "通常客",
+      "game_id": "guest-5",
+      "subject_id": "person-guest-5",
+      "name": "伊藤さん",
+      "profile_notes": true,
+      "registered": true,
+      "image": "people/2c72a486f9e703f6b1822670ccf5e0e5ea8e34ec4b4623978e9db88f229431f1.png",
+      "image_sha256": "2c72a486f9e703f6b1822670ccf5e0e5ea8e34ec4b4623978e9db88f229431f1"
+    },
+    {
+      "category": "通常客",
+      "game_id": "guest-6",
+      "subject_id": "person-guest-6",
+      "name": "渡辺さん",
+      "profile_notes": true,
+      "registered": true,
+      "image": "people/35267d0ee7f23dd2756a5cd942e215b66e07d1348e8fdbc9f5c2e6425ed4887b.png",
+      "image_sha256": "35267d0ee7f23dd2756a5cd942e215b66e07d1348e8fdbc9f5c2e6425ed4887b"
+    },
+    {
+      "category": "通常客",
+      "game_id": "guest-7",
+      "subject_id": "person-guest-7",
+      "name": "山本さん",
+      "profile_notes": true,
+      "registered": true,
+      "image": "people/77665685f662f477bfd65b030812e4347f918933a402cce795df8815d4ae97d1.png",
+      "image_sha256": "77665685f662f477bfd65b030812e4347f918933a402cce795df8815d4ae97d1"
+    },
+    {
+      "category": "通常客",
+      "game_id": "guest-8",
+      "subject_id": "person-guest-8",
+      "name": "中村さん",
+      "profile_notes": true,
+      "registered": true,
+      "image": "people/933103ca4b0b5258feee1edc393944e8bcb4d3e8cdf526da7568de5f4d723ef6.png",
+      "image_sha256": "933103ca4b0b5258feee1edc393944e8bcb4d3e8cdf526da7568de5f4d723ef6"
+    },
+    {
+      "category": "通常客",
+      "game_id": "guest-9",
+      "subject_id": "person-guest-9",
+      "name": "小林さん",
+      "profile_notes": true,
+      "registered": true,
+      "image": "people/56401e2a19d15a7419f1e2f09bd345198757a75da61108717807244bdad1f1e8.png",
+      "image_sha256": "56401e2a19d15a7419f1e2f09bd345198757a75da61108717807244bdad1f1e8"
+    },
+    {
+      "category": "通常客",
+      "game_id": "guest-10",
+      "subject_id": "person-guest-10",
+      "name": "加藤さん",
+      "profile_notes": true,
+      "registered": true,
+      "image": "people/dc827908f8d40151e8339c971302e9be3723622b13ff9237297daa04bf5ce374.png",
+      "image_sha256": "dc827908f8d40151e8339c971302e9be3723622b13ff9237297daa04bf5ce374"
+    },
+    {
+      "category": "通常客",
+      "game_id": "guest-11",
+      "subject_id": "person-guest-11",
+      "name": "吉田さん",
+      "profile_notes": true,
+      "registered": true,
+      "image": "people/3ddc4aba9164fab5e2a588ebbac95c3ad0a44bda299161ff4325a1cf1325d4c5.png",
+      "image_sha256": "3ddc4aba9164fab5e2a588ebbac95c3ad0a44bda299161ff4325a1cf1325d4c5"
+    },
+    {
+      "category": "通常客",
+      "game_id": "guest-12",
+      "subject_id": "person-guest-12",
+      "name": "山田さん",
+      "profile_notes": true,
+      "registered": true,
+      "image": "people/1313db1e0f1182300a8093c93313f4d8d8e40e9a0591664e33a7c207d39d56c9.png",
+      "image_sha256": "1313db1e0f1182300a8093c93313f4d8d8e40e9a0591664e33a7c207d39d56c9"
+    },
+    {
+      "category": "条件付き客",
+      "game_id": "advanced-white",
+      "subject_id": "person-advanced-white",
+      "name": "藤原さん",
+      "profile_notes": true,
+      "registered": true,
+      "image": "people/ec1faf1dbf00bc767da66f9353d9f75a9f56e4a15b272ef85ed3fca098e41cc4.png",
+      "image_sha256": "ec1faf1dbf00bc767da66f9353d9f75a9f56e4a15b272ef85ed3fca098e41cc4"
+    },
+    {
+      "category": "条件付き客",
+      "game_id": "advanced-longhair",
+      "subject_id": "person-advanced-longhair",
+      "name": "坂本さん",
+      "profile_notes": true,
+      "registered": true,
+      "image": "people/171b8c79ef7d4490ce7bc726d589ad6534bbc3570f622ced8131c99c79f91d1d.png",
+      "image_sha256": "171b8c79ef7d4490ce7bc726d589ad6534bbc3570f622ced8131c99c79f91d1d"
+    },
+    {
+      "category": "条件付き客",
+      "game_id": "advanced-quiet",
+      "subject_id": "person-advanced-quiet",
+      "name": "福田さん",
+      "profile_notes": true,
+      "registered": true,
+      "image": "people/e22af873da839ecef3afd391dfddfa34b24f637f90d56127fc7c5f5b165b7496.png",
+      "image_sha256": "e22af873da839ecef3afd391dfddfa34b24f637f90d56127fc7c5f5b165b7496"
+    },
+    {
+      "category": "条件付き客",
+      "game_id": "advanced-play",
+      "subject_id": "person-advanced-play",
+      "name": "西村さん",
+      "profile_notes": true,
+      "registered": true,
+      "image": "people/4e6313908661f30c1435c735392934d052ea86eaa90f465d0b99305ae5d18990.png",
+      "image_sha256": "4e6313908661f30c1435c735392934d052ea86eaa90f465d0b99305ae5d18990"
+    },
+    {
+      "category": "条件付き客",
+      "game_id": "advanced-contact",
+      "subject_id": "person-advanced-contact",
+      "name": "青木さん",
+      "profile_notes": true,
+      "registered": true,
+      "image": "people/d724809a16adbfda49e673b883ad42222dfa58b843e75768ff50884a35893fa8.png",
+      "image_sha256": "d724809a16adbfda49e673b883ad42222dfa58b843e75768ff50884a35893fa8"
+    },
+    {
+      "category": "予約客",
+      "game_id": "reservation-longhair",
+      "subject_id": "person-reservation-longhair",
+      "name": "森さん",
+      "profile_notes": false,
+      "registered": true,
+      "image": "people/deabee0dcdeaa1a80d03369f10dc0251f57f57ba1e24921919c22d3d32a53306.png",
+      "image_sha256": "deabee0dcdeaa1a80d03369f10dc0251f57f57ba1e24921919c22d3d32a53306"
+    },
+    {
+      "category": "VIP",
+      "game_id": "vip-calico",
+      "subject_id": "person-vip-calico",
+      "name": "後藤さん",
+      "profile_notes": true,
+      "registered": true,
+      "image": "people/1b21b4c9acb5e6e26b4d1b0a15d439f225e563d902a9c3ad9a71baa906171ad3.png",
+      "image_sha256": "1b21b4c9acb5e6e26b4d1b0a15d439f225e563d902a9c3ad9a71baa906171ad3"
+    },
+    {
+      "category": "席拡張客",
+      "game_id": "expanded-guest",
+      "subject_id": "person-expanded-guest",
+      "name": "岡田さん",
+      "profile_notes": true,
+      "registered": true,
+      "image": "people/78e935372ba3fefc75cc2e8e51524eb847c914522c91fc0e88f8028ed9c964cf.png",
+      "image_sha256": "78e935372ba3fefc75cc2e8e51524eb847c914522c91fc0e88f8028ed9c964cf"
+    },
+    {
+      "category": "席拡張客",
+      "game_id": "expanded-guest-2",
+      "subject_id": "person-expanded-guest-2",
+      "name": "前田さん",
+      "profile_notes": true,
+      "registered": true,
+      "image": "people/5edbe0f62d457b16c30e55ed032c35e149d219aab9fb07889a00ad3d0b43dd93.png",
+      "image_sha256": "5edbe0f62d457b16c30e55ed032c35e149d219aab9fb07889a00ad3d0b43dd93"
+    },
+    {
+      "category": "席拡張客",
+      "game_id": "expanded-guest-3",
+      "subject_id": "person-expanded-guest-3",
+      "name": "藤田さん",
+      "profile_notes": true,
+      "registered": true,
+      "image": "people/d51f661bbf76ded66859aac2170e617f70811a0b8b9bec95c030e33d712e112e.png",
+      "image_sha256": "d51f661bbf76ded66859aac2170e617f70811a0b8b9bec95c030e33d712e112e"
+    },
+    {
+      "category": "席拡張客",
+      "game_id": "expanded-guest-4",
+      "subject_id": "person-expanded-guest-4",
+      "name": "石田さん",
+      "profile_notes": true,
+      "registered": true,
+      "image": "people/11855934a8ccadab0c649dc256d9d559b0e6aaff477d22df5936a30e8aa74def.png",
+      "image_sha256": "11855934a8ccadab0c649dc256d9d559b0e6aaff477d22df5936a30e8aa74def"
+    },
+    {
+      "category": "席拡張客",
+      "game_id": "expanded-guest-5",
+      "subject_id": "person-expanded-guest-5",
+      "name": "上田さん",
+      "profile_notes": true,
+      "registered": true,
+      "image": "people/e9fea2022a638bff6c8bfd34be03596e9712928e4f92d50a992528c1b2bf9388.png",
+      "image_sha256": "e9fea2022a638bff6c8bfd34be03596e9712928e4f92d50a992528c1b2bf9388"
+    }
+  ]
+}

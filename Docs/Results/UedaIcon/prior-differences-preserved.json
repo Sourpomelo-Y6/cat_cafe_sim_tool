@@ -1,0 +1,1002 @@
+[
+  {
+    "repo": "tool",
+    "path": "Docs/AllCats.md",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/CatImageSchedule.md",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/CatImageTodo.md",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "unity_preview_template/Resources/CatCafeStandalone/presentation.json",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "unity_preview_template/Runtime/Standalone/CafeNarrativeCatalog.cs",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/RinImages/Status.md",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/RinImages/Verification.json",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/RinImages/index.html",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/RinImages/manifest.json",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/RinImages/profile.json",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/RinImages/prompts.json",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/RinImages/rin-ball.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/RinImages/rin-ball__open_up.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/RinImages/rin-ball__simultaneous.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/RinImages/rin-brush.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/RinImages/rin-brush__open_up.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/RinImages/rin-brush__simultaneous.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/RinImages/rin-normal.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/RinImages/rin-pause.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/RinImages/rin-pet.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/RinImages/rin-pet__open_up.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/RinImages/rin-pet__simultaneous.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/RinImages/rin-plush.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/RinImages/rin-plush__open_up.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/RinImages/rin-plush__simultaneous.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/RinImages/rin-presence.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/RinImages/rin-presence__open_up.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/RinImages/rin-presence__simultaneous.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/RinImages/rin-sleep.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/RinImages/rin-teaser.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/RinImages/rin-teaser__open_up.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/RinImages/rin-teaser__simultaneous.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/RinImages/rin-tunnel.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/RinImages/rin-tunnel__open_up.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/RinImages/rin-tunnel__simultaneous.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/RinImages/rin-voice.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/RinImages/rin-voice__open_up.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/RinImages/rin-voice__simultaneous.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/Status.md",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/Verification.json",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/index.html",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/manifest.json",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/profile.json",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/prompts.json",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/rejected-candidates.json",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/yuki-ball.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/yuki-ball__open_up.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/yuki-ball__simultaneous.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/yuki-brush.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/yuki-brush__open_up.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/yuki-brush__simultaneous.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/yuki-normal.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/yuki-pause.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/yuki-pet.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/yuki-pet__open_up.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/yuki-pet__simultaneous.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/yuki-plush-v2.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/yuki-plush.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/yuki-plush__open_up-v2.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/yuki-plush__open_up.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/yuki-plush__simultaneous.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/yuki-presence.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/yuki-presence__open_up.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/yuki-presence__simultaneous.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/yuki-sleep.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/yuki-teaser.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/yuki-teaser__open_up.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/yuki-teaser__simultaneous.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/yuki-tunnel.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/yuki-tunnel__open_up.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/yuki-tunnel__simultaneous-v2.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/yuki-tunnel__simultaneous.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/yuki-voice.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/yuki-voice__open_up.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "Docs/Results/YukiImages/yuki-voice__simultaneous.png",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "register_rin_images.py",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "register_yuki_images.py",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "unity_preview_template/Editor/RinDailyImageVerification.cs",
+    "preserved": true
+  },
+  {
+    "repo": "tool",
+    "path": "unity_preview_template/Editor/YukiDailyImageVerification.cs",
+    "preserved": true
+  },
+  {
+    "repo": "python",
+    "path": "config/cafe_playtest_cats.json",
+    "preserved": true
+  },
+  {
+    "repo": "python",
+    "path": "config/cafe_recruitment.json",
+    "preserved": true
+  },
+  {
+    "repo": "python",
+    "path": "saves/content_images/interaction_subjects.json",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/CatCafePreview/Resources/CatCafeStandalone/presentation.json",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/CatCafePreview/Runtime/Standalone/CafeNarrativeCatalog.cs",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/bundle.json",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/interaction_texts.json",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/bundle.json",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/interaction_texts.json",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/CatCafePreview/Editor/RinDailyImageVerification.cs",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/CatCafePreview/Editor/RinDailyImageVerification.cs.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/CatCafePreview/Editor/YukiDailyImageVerification.cs",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/CatCafePreview/Editor/YukiDailyImageVerification.cs.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/152dadc7521579774851d0d1b851e3d4f022f42728dfb04b2707bc27ca20f63c.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/152dadc7521579774851d0d1b851e3d4f022f42728dfb04b2707bc27ca20f63c.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/1a128edbdd5db4dac6029344cfed03c617a47fc96634a1d27351a735d087360a.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/1a128edbdd5db4dac6029344cfed03c617a47fc96634a1d27351a735d087360a.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/1bdec993a262a3a5e6999edee38df4141defced348f60113e5ac207f61be035a.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/1bdec993a262a3a5e6999edee38df4141defced348f60113e5ac207f61be035a.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/214250b90217326ec6ba95a9786488b63461ad3187ae45ea80ebf4997b46c794.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/214250b90217326ec6ba95a9786488b63461ad3187ae45ea80ebf4997b46c794.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/24cf1ccc5b9bc99ffaca4d170727252c0e90827d95988d2c1ce3764a6562e8b9.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/24cf1ccc5b9bc99ffaca4d170727252c0e90827d95988d2c1ce3764a6562e8b9.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/28b396d348464307009672ab7b0ff4887e37cfa915f04e319f4752182b94af15.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/28b396d348464307009672ab7b0ff4887e37cfa915f04e319f4752182b94af15.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/33f0e80430a159d4e11fab0608650a150b6643d4a7ecddc0d3dfb3b8519bc457.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/33f0e80430a159d4e11fab0608650a150b6643d4a7ecddc0d3dfb3b8519bc457.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/375ed599bc842b165e4b22250632b7c54edc2f3790bd3bd4535b31160fd67602.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/375ed599bc842b165e4b22250632b7c54edc2f3790bd3bd4535b31160fd67602.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/3b4780bcc70661e0976d092107c4bed9e8c22bcf806f32de30d3244d03375a06.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/3b4780bcc70661e0976d092107c4bed9e8c22bcf806f32de30d3244d03375a06.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/472baba1ca247268f8824564503b7f1e86d07a6b11cc0c4922f4187653171bf9.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/472baba1ca247268f8824564503b7f1e86d07a6b11cc0c4922f4187653171bf9.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/4abb77117ee3d27d42671ee4cb1f52b9779936b3d0ca2d388d560ca164a377d7.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/4abb77117ee3d27d42671ee4cb1f52b9779936b3d0ca2d388d560ca164a377d7.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/565adaa28de5cb1dbf607be6a404d08172b1c874d2115542785cd6b09d068fd3.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/565adaa28de5cb1dbf607be6a404d08172b1c874d2115542785cd6b09d068fd3.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/56ca500c5dcbdc2285a4d6eda83f698bd475a7db2b1de18d497bfbbb44c55d8e.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/56ca500c5dcbdc2285a4d6eda83f698bd475a7db2b1de18d497bfbbb44c55d8e.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/5df0256029c702b1c86d66a2ec0da3457dfb4e013df573b3ab5c64be4fc5501a.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/5df0256029c702b1c86d66a2ec0da3457dfb4e013df573b3ab5c64be4fc5501a.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/887a4f0717a74c04dcb38ec2cf8579d0a9072db77d7f6b1dda392a995d142674.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/887a4f0717a74c04dcb38ec2cf8579d0a9072db77d7f6b1dda392a995d142674.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/88c5487f3dbaf4d6e372f365f81d8bccc17d2119d9bafef8415ad8ebedbf81e7.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/88c5487f3dbaf4d6e372f365f81d8bccc17d2119d9bafef8415ad8ebedbf81e7.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/954a056f9728e410e5709d159ef595e1e48c21e80706f7cde290ebcb21151ee2.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/954a056f9728e410e5709d159ef595e1e48c21e80706f7cde290ebcb21151ee2.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/a749012aa98eb6815dc996a46a5a28498749599416d38aff46f581b5f931afdf.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/a749012aa98eb6815dc996a46a5a28498749599416d38aff46f581b5f931afdf.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/acbf95074735d727efe70468cd4eda7dcc57b9f6e87f89b0e443773486b025a0.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/acbf95074735d727efe70468cd4eda7dcc57b9f6e87f89b0e443773486b025a0.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/acdbacfc7c9f27cdd5544ad41408ab44ed4fe3df191c779b8fd011ffec7ac947.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/acdbacfc7c9f27cdd5544ad41408ab44ed4fe3df191c779b8fd011ffec7ac947.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/adb48604a1d883eb950afbd6ccd00a2eb970792b2afee7185b5d087a19e676d5.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/adb48604a1d883eb950afbd6ccd00a2eb970792b2afee7185b5d087a19e676d5.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/ce4380f10dfaf15dc2ff3670442940b748ee669a91c4a5dced9e4a8b9b818a41.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/ce4380f10dfaf15dc2ff3670442940b748ee669a91c4a5dced9e4a8b9b818a41.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/d21d791ad9e7d17917244667556fae65b1abde3904b23334d378dd25148468f6.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/d21d791ad9e7d17917244667556fae65b1abde3904b23334d378dd25148468f6.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/d25682617f97da5b65c2497e10c2fe4e18759d5ef71bd0e834958f32fec26af8.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/d25682617f97da5b65c2497e10c2fe4e18759d5ef71bd0e834958f32fec26af8.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/eb88b50c3a68308d579c588fac634668a4056987c884ad21250a5bd93c5e78b7.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/eb88b50c3a68308d579c588fac634668a4056987c884ad21250a5bd93c5e78b7.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/f82d345047276f70df977e90e77fc3f4c0cdd043983aeb591ef39bda79421647.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/f82d345047276f70df977e90e77fc3f4c0cdd043983aeb591ef39bda79421647.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/f8301db028e3d749668ceabcc30628ca9a4cda125771e694987e9b378c5589a8.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/4762dd1bd978461bb07c041c59417281/images/f8301db028e3d749668ceabcc30628ca9a4cda125771e694987e9b378c5589a8.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/05a2f96e9fe675f93f0ab58704d210ecc5534be13e60b13fdde1212bd3c3b9c1.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/05a2f96e9fe675f93f0ab58704d210ecc5534be13e60b13fdde1212bd3c3b9c1.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/2543b68c750def59895b72acca1dc938f4f24b65ba17016e521d693c535daa97.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/2543b68c750def59895b72acca1dc938f4f24b65ba17016e521d693c535daa97.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/29c2fe91c2c0c2f574b260c070832fb5b11b5ec2ba340779a80354ce86107843.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/29c2fe91c2c0c2f574b260c070832fb5b11b5ec2ba340779a80354ce86107843.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/42936c967353a63702647a585641f15fdfa3239229c637ca1e2cd39abb4a020e.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/42936c967353a63702647a585641f15fdfa3239229c637ca1e2cd39abb4a020e.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/52d70b8410a4ef3db82704a2900a7ce9ae88a728baf855e7a030c90f703da6ee.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/52d70b8410a4ef3db82704a2900a7ce9ae88a728baf855e7a030c90f703da6ee.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/5a647d3e97dca728bd3e24f2121c154d5be0faef39dd371b967dc88d406ba77d.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/5a647d3e97dca728bd3e24f2121c154d5be0faef39dd371b967dc88d406ba77d.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/5f37773a3c3e4ace9aa588d1b0bfbe0188349c8db59b2007376d95bad4b2a87e.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/5f37773a3c3e4ace9aa588d1b0bfbe0188349c8db59b2007376d95bad4b2a87e.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/5f5958184e35dbc6f9aa8f56fa46d194f6a80dd4a56976b32dd98784567c2435.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/5f5958184e35dbc6f9aa8f56fa46d194f6a80dd4a56976b32dd98784567c2435.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/69aaf7a2789c9d91a531468f2d1926c3059315f956fb76209723238677359289.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/69aaf7a2789c9d91a531468f2d1926c3059315f956fb76209723238677359289.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/7179eab9d18ecd833d0e611760a74e9821192903164fce8b6f4786f1d73fe171.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/7179eab9d18ecd833d0e611760a74e9821192903164fce8b6f4786f1d73fe171.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/7191c9672d6e6f80485cde19d6b321d68464e90876756c1c0eb8a658b528a7b4.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/7191c9672d6e6f80485cde19d6b321d68464e90876756c1c0eb8a658b528a7b4.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/72efa6826b669be7ca9b6b2996092c248d4375036acd4380c80a80eb2e2927f3.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/72efa6826b669be7ca9b6b2996092c248d4375036acd4380c80a80eb2e2927f3.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/76dd582c5222fb3c505ebc52df21157853704334fd9b8db2acaca0803b6c6c63.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/76dd582c5222fb3c505ebc52df21157853704334fd9b8db2acaca0803b6c6c63.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/844ced23361550ca11aa52d6c5a714aa342f0bf1c80cbf748f466fa022b9c949.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/844ced23361550ca11aa52d6c5a714aa342f0bf1c80cbf748f466fa022b9c949.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/8fbb142ba82cc29bfdd74b5332edfc0626e0350a6f4e71135ab42d9ff53a2ac3.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/8fbb142ba82cc29bfdd74b5332edfc0626e0350a6f4e71135ab42d9ff53a2ac3.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/912fabde6d645e1bd6e8ce2908b7e41bf8a5afd52c51ac98e82ae1e8bc692f44.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/912fabde6d645e1bd6e8ce2908b7e41bf8a5afd52c51ac98e82ae1e8bc692f44.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/abe2eb0b2f13a63cc802fac4b982e8484e92297aa397f54c2d579e49068b6aa1.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/abe2eb0b2f13a63cc802fac4b982e8484e92297aa397f54c2d579e49068b6aa1.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/b4c6382fd37f591424bd12fbc68ff65f36e56417db3076395a6301accc369f9c.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/b4c6382fd37f591424bd12fbc68ff65f36e56417db3076395a6301accc369f9c.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/bfaea62c5d23262a8546e10e6d60d70634f66097626948ae58e0783deb2e4144.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/bfaea62c5d23262a8546e10e6d60d70634f66097626948ae58e0783deb2e4144.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/c0ed3cd66440e09cce0cd38a0c84a34cdab33759f687b25a7bd182227b7adecf.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/c0ed3cd66440e09cce0cd38a0c84a34cdab33759f687b25a7bd182227b7adecf.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/c565c4393c21f7de4a28de00015b9aef2062b65281ed5d9b7e8905b074ba9c88.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/c565c4393c21f7de4a28de00015b9aef2062b65281ed5d9b7e8905b074ba9c88.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/ca49837dffa021b38a9e413aef76b3ce899cbf2b3af81ab435496af87020f036.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/ca49837dffa021b38a9e413aef76b3ce899cbf2b3af81ab435496af87020f036.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/cb0f16c9b9302a7a53be683f599c35dfbdd1f7506d6c99149c69c247f4bae6ca.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/cb0f16c9b9302a7a53be683f599c35dfbdd1f7506d6c99149c69c247f4bae6ca.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/d9c08cf04dec5b54048a68f2d6fc27d8e8e6af29e242fb32f15162eb8f0d3002.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/d9c08cf04dec5b54048a68f2d6fc27d8e8e6af29e242fb32f15162eb8f0d3002.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/e479ae184eeb5988994da5f50543584ccf21079d60bf7374c3ac734398ad2f48.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/e479ae184eeb5988994da5f50543584ccf21079d60bf7374c3ac734398ad2f48.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/eac32f47b822a46413c7b83636db9ca41c512cfa0ba305395d5f536007cf721d.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/eac32f47b822a46413c7b83636db9ca41c512cfa0ba305395d5f536007cf721d.png.meta",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/f6e910be9457a35a2fa2754f2d90d01bb5055dcb2cd4ea9fa3565e1b2fc73b88.png",
+    "preserved": true
+  },
+  {
+    "repo": "unity",
+    "path": "Assets/Resources/CatCafeContent/Imports/51b88e2f3f974a83a197ff6a3cc5af8e/images/f6e910be9457a35a2fa2754f2d90d01bb5055dcb2cd4ea9fa3565e1b2fc73b88.png.meta",
+    "preserved": true
+  }
+]

@@ -1,0 +1,1 @@
+sky click seat-2 details: Ueda / Haru / stamina 95/100; separate process load_game; actual game render 1024x768; sky window screenshot 1026x800 including window chrome. 1280 automated only.

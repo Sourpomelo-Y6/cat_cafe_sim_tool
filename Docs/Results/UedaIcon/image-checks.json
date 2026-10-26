@@ -1,0 +1,60 @@
+{
+  "status": "PASS",
+  "image_dimensions": {
+    "actual-seated-ueda-1024.png": [
+      1024,
+      768
+    ],
+    "actual-seated-ueda-1280.png": [
+      1280,
+      800
+    ],
+    "manual-after-input-1024.png": [
+      1024,
+      768
+    ],
+    "reservation-extra-mori-1024.png": [
+      1024,
+      768
+    ],
+    "reservation-extra-mori-1280.png": [
+      1280,
+      800
+    ],
+    "seat-expanded-guest-5-1024.png": [
+      1024,
+      768
+    ],
+    "seat-expanded-guest-5-1280.png": [
+      1280,
+      800
+    ],
+    "trust-expanded-guest-5-1024.png": [
+      1024,
+      768
+    ],
+    "trust-expanded-guest-5-1280.png": [
+      1280,
+      800
+    ]
+  },
+  "all_seat_identities_and_past_text_preserved": true,
+  "day": 18,
+  "tick": 26,
+  "funds": 5220.0,
+  "target_seat": "seat-2",
+  "arrival": 24,
+  "seated_at": 25,
+  "physical_input": {
+    "render": [
+      1024,
+      768
+    ],
+    "sky_window_screenshot": [
+      1026,
+      800
+    ],
+    "action": "sky click seat-2 details; Ueda / Haru / stamina 95/100",
+    "scope": "1280 automated only"
+  }
+}
