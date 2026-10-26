@@ -1,0 +1,1 @@
+PASS: 166 checks. Actual Player UI with isolated view/event/replay fixtures; no natural event or physical input claim.

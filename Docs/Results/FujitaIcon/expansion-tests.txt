@@ -1,0 +1,14 @@
+test_unlock_purchase_confirmation_layout_and_operating_cost_display (test_cafe_six_seat_expansion.SixSeatExpansionGuiTests) ... ok
+test_corrupt_six_seat_record_goal_history_and_cost_are_rejected (test_cafe_six_seat_expansion.SixSeatExpansionTests) ... ok
+test_dispatch_requires_extra_cat_and_new_cat_remains_compatible (test_cafe_six_seat_expansion.SixSeatExpansionTests) ... ok
+test_failed_save_retries_without_duplicate_purchase_or_expense (test_cafe_six_seat_expansion.SixSeatExpansionTests) ... ok
+test_funds_boundary_save_failure_and_legacy_six_seat_limit (test_cafe_six_seat_expansion.SixSeatExpansionTests) ... ok
+test_old_rules_single_stage_and_other_modes_do_not_unlock_sixth (test_cafe_six_seat_expansion.SixSeatExpansionTests) ... ok
+test_six_simultaneous_interactions_share_clock_and_resume (test_cafe_six_seat_expansion.SixSeatExpansionTests) ... ok
+test_sixth_seat_equipment_service_automatic_assignment_and_history (test_cafe_six_seat_expansion.SixSeatExpansionTests) ... ok
+test_unlock_cost_history_next_day_arrival_save_and_replay (test_cafe_six_seat_expansion.SixSeatExpansionTests) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 23.220s
+
+OK

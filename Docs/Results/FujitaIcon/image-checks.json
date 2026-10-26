@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "image_dimensions": {
+    "actual-seated-fujita-1024.png": [
+      1024,
+      768
+    ],
+    "actual-seated-fujita-1280.png": [
+      1280,
+      800
+    ],
+    "trust-expanded-guest-3-1024.png": [
+      1024,
+      768
+    ],
+    "trust-expanded-guest-3-1280.png": [
+      1280,
+      800
+    ],
+    "seat-expanded-guest-3-1024.png": [
+      1024,
+      768
+    ],
+    "seat-expanded-guest-3-1280.png": [
+      1280,
+      800
+    ],
+    "manual-after-input-1024.png": [
+      1024,
+      768
+    ]
+  },
+  "all_seat_identities_preserved": true,
+  "day": 9,
+  "tick": 22,
+  "funds": 1830.0,
+  "target_seat": "seat-1",
+  "physical_input": {
+    "render": [
+      1024,
+      768
+    ],
+    "window": [
+      1026,
+      800
+    ],
+    "action": "sky mouse click seat-1 details",
+    "scope": "1280 automated only"
+  }
+}
