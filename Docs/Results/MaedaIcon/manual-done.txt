@@ -1,0 +1,1 @@
+Computer-use sky: visible separate-process load_game reviewed. Real scroll input inside seat list; lower fifth-seat card/button remains clipped, no target detail click claimed. Target icon and right visitor list identify Maeda at seat 5. Render 1024x768; outer screenshot 1026x800. 1280 automated only.

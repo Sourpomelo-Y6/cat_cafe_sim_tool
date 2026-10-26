@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "existing_people": 20,
+  "current_people": 21,
+  "existing_profiles_unchanged": true,
+  "existing_image_mappings_unchanged": true
+}

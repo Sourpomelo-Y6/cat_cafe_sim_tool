@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "image_dimensions": {
+    "actual-seated-maeda-1024.png": [
+      1024,
+      768
+    ],
+    "actual-seated-maeda-1280.png": [
+      1280,
+      800
+    ],
+    "trust-expanded-guest-2-1024.png": [
+      1024,
+      768
+    ]
+  },
+  "all_seat_identities_preserved": true,
+  "day": 6,
+  "tick": 8,
+  "funds": 2860.0
+}
