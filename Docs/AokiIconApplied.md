@@ -38,3 +38,6 @@
 原本PNG一枚・登録素材一枚・18人人物パック一組のみ追加。旧パック・素材・セーブは削除しない。Latest成功物一組、StandaloneBuild直下はLatest/Runsのみ・Pendingなし。ビルド複製・ZIP・追加Unityプロジェクト・検証専用Libraryなし。[開始容量](Results/AokiIcon/capacity-start.json)。[終了容量](Results/AokiIcon/capacity-final.json)：Latest 3,672,998,320→3,748,508,192 bytes（+75,509,872）、Logs 16,010,353,985→16,112,170,665（+101,816,680）、Library 6,008,300,025→6,094,421,882（+86,121,857）。原本PNGは1,402,070 bytes、登録素材も同容量。主因は旧パックを保持した18人人物パックの追加収録と通常のUnity取り込み／ビルドキャッシュ。LogsにはLatest増加を含む。Latest156ファイルの成功物一組・Pendingなし。
 
 コミット：Python `0817141`、Unity `bd86da6`、共有Docs `fd3d8b3`。Tool本体コミットは後続の最終参照記録へ記載。pushなし。
+
+
+最終参照：Tool本体 `7c8fabd`、Python `0817141`、Unity `bd86da6`、共有Docs `fd3d8b3`。後続の本記録では新規テキスト成果物の改行をLFへ整形。ゲーム・画像内容は同一。最終再照合で先行199ファイルと既存人物行を保持、Latest一組・Pendingなし。
