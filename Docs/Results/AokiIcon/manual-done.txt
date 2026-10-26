@@ -1,0 +1,1 @@
+computer-use sky real click seat 1 details; Aoki / Kohaku / stamina 100; no text records. Observed window 1026x800 including borders, rendered content 1024x768. Seat icon layout 24 logical px, 19.2px at 0.8 canvas scale. 1280 representative display verified by Player UI automation only.

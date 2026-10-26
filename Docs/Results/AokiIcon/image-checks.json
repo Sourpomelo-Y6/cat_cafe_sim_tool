@@ -1,0 +1,61 @@
+{
+  "status": "PASS",
+  "all_seats_equal": true,
+  "day": 7,
+  "tick": 1,
+  "funds": 640.0,
+  "images": {
+    "actual-seated-aoki-1024.png": [
+      1024,
+      768
+    ],
+    "actual-seated-aoki-1280.png": [
+      1280,
+      800
+    ],
+    "manual-after-input-1024.png": [
+      1024,
+      768
+    ],
+    "reservation-extra-mori-1024.png": [
+      1024,
+      768
+    ],
+    "reservation-extra-mori-1280.png": [
+      1280,
+      800
+    ],
+    "seat-advanced-contact-1024.png": [
+      1024,
+      768
+    ],
+    "seat-advanced-contact-1280.png": [
+      1280,
+      800
+    ],
+    "trust-advanced-contact-1024.png": [
+      1024,
+      768
+    ],
+    "trust-advanced-contact-1280.png": [
+      1280,
+      800
+    ]
+  },
+  "seat_icon_logical_px": 24,
+  "canvas_scale_1024": 0.8,
+  "rendered_icon_px_1024": 19.2,
+  "rendered_icon_px_1280": 24,
+  "manual_window_including_frame": [
+    1026,
+    800
+  ],
+  "manual_rendered_content": [
+    1024,
+    768
+  ],
+  "measurement_basis": "Current PythonServiceLayout, production prefab, and native Player captures; not old 34px prototype documentation.",
+  "seat_prefab": "Assets/CatCafePreview/Prefabs/PythonSeatCard.prefab",
+  "seat_prefab_guid": "887582ada12bd3947aa83fbd0764d749",
+  "separate_roster_prefab_icon_logical_px": 34
+}
