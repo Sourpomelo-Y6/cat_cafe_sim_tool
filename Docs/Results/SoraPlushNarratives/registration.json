@@ -1,0 +1,258 @@
+{
+  "entries": {
+    "neutral": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "plush"
+      },
+      "variants": [
+        {
+          "id": "e0125fca74e95265afb06b135fcd5d8c",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみの動きを見ながら、静かに応じた。"
+        },
+        {
+          "id": "bc30bbc46d6b59c9929c4ef457da847a",
+          "slot": 2,
+          "text": "{cat}は落ち着いた様子で、ぬいぐるみ遊びを見守った。"
+        },
+        {
+          "id": "72eae99ed01954d38a06d3a070c5196e",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "confused": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "plush"
+      },
+      "variants": [
+        {
+          "id": "6beac81ac6185ad98a63559b6b2489c1",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみの動きに少し戸惑い、様子をうかがった。"
+        },
+        {
+          "id": "876286524299504599c4b36020f34511",
+          "slot": 2,
+          "text": "{cat}はどう応じようか迷うように、ぬいぐるみに目を向けた。"
+        },
+        {
+          "id": "b5930d0bae5d571a8c2ec2764712e732",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "listless": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "plush"
+      },
+      "variants": [
+        {
+          "id": "23827926eb9e59d4bc65cd1e2adc43fe",
+          "slot": 1,
+          "text": "{cat}は疲れた様子で、ぬいぐるみ遊びへの反応もゆっくりだった。"
+        },
+        {
+          "id": "d35915bc173557e9b3b38a2390269f13",
+          "slot": 2,
+          "text": "{cat}はあまり動かず、疲れた様子で過ごしていた。"
+        },
+        {
+          "id": "a9b34e53264f510c9451c5becce9659a",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    }
+  },
+  "previews": [
+    {
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ちょっと揺らしてみようか？ ソラ」\nプレイヤーはぬいぐるみをソラの近くで動かした。\n\nソラはぬいぐるみの動きを見ながら、静かに応じた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8721ec6977409c134999b1e7c26e0eed765bb85d52116da48a1d694cc57a7157.png",
+      "resolved": "plush__direct"
+    },
+    {
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ちょっと揺らしてみようか？ ソラ」\nプレイヤーはぬいぐるみをソラの近くで動かした。\n\nソラは落ち着いた様子で、ぬいぐるみ遊びを見守った。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8721ec6977409c134999b1e7c26e0eed765bb85d52116da48a1d694cc57a7157.png",
+      "resolved": "plush__direct"
+    },
+    {
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ソラ、これで遊んでみようか」\nプレイヤーはソラの様子に合わせてぬいぐるみを動かした。\n\nソラはぬいぐるみの動きを見ながら、静かに応じた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8721ec6977409c134999b1e7c26e0eed765bb85d52116da48a1d694cc57a7157.png",
+      "resolved": "plush__adapt"
+    },
+    {
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ソラ、これで遊んでみようか」\nプレイヤーはソラの様子に合わせてぬいぐるみを動かした。\n\nソラは落ち着いた様子で、ぬいぐるみ遊びを見守った。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8721ec6977409c134999b1e7c26e0eed765bb85d52116da48a1d694cc57a7157.png",
+      "resolved": "plush__adapt"
+    },
+    {
+      "reaction": "neutral",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ソラ、ちょっとフェイントしてみようか？」\nプレイヤーはぬいぐるみを動かす向きや間合いを変えた。\n\nソラはぬいぐるみの動きを見ながら、静かに応じた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\2fa34373e1194a7a9cd0c2259a43619b.png",
+      "resolved": "plush"
+    },
+    {
+      "reaction": "neutral",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ソラ、ちょっとフェイントしてみようか？」\nプレイヤーはぬいぐるみを動かす向きや間合いを変えた。\n\nソラは落ち着いた様子で、ぬいぐるみ遊びを見守った。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\2fa34373e1194a7a9cd0c2259a43619b.png",
+      "resolved": "plush"
+    },
+    {
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ちょっと揺らしてみようか？ ソラ」\nプレイヤーはぬいぐるみをソラの近くで動かした。\n\nソラはぬいぐるみの動きに少し戸惑い、様子をうかがった。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8721ec6977409c134999b1e7c26e0eed765bb85d52116da48a1d694cc57a7157.png",
+      "resolved": "plush__direct"
+    },
+    {
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ちょっと揺らしてみようか？ ソラ」\nプレイヤーはぬいぐるみをソラの近くで動かした。\n\nソラはどう応じようか迷うように、ぬいぐるみに目を向けた。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8721ec6977409c134999b1e7c26e0eed765bb85d52116da48a1d694cc57a7157.png",
+      "resolved": "plush__direct"
+    },
+    {
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ソラ、これで遊んでみようか」\nプレイヤーはソラの様子に合わせてぬいぐるみを動かした。\n\nソラはぬいぐるみの動きに少し戸惑い、様子をうかがった。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8721ec6977409c134999b1e7c26e0eed765bb85d52116da48a1d694cc57a7157.png",
+      "resolved": "plush__adapt"
+    },
+    {
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ソラ、これで遊んでみようか」\nプレイヤーはソラの様子に合わせてぬいぐるみを動かした。\n\nソラはどう応じようか迷うように、ぬいぐるみに目を向けた。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8721ec6977409c134999b1e7c26e0eed765bb85d52116da48a1d694cc57a7157.png",
+      "resolved": "plush__adapt"
+    },
+    {
+      "reaction": "confused",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ソラ、ちょっとフェイントしてみようか？」\nプレイヤーはぬいぐるみを動かす向きや間合いを変えた。\n\nソラはぬいぐるみの動きに少し戸惑い、様子をうかがった。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\2fa34373e1194a7a9cd0c2259a43619b.png",
+      "resolved": "plush"
+    },
+    {
+      "reaction": "confused",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ソラ、ちょっとフェイントしてみようか？」\nプレイヤーはぬいぐるみを動かす向きや間合いを変えた。\n\nソラはどう応じようか迷うように、ぬいぐるみに目を向けた。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\2fa34373e1194a7a9cd0c2259a43619b.png",
+      "resolved": "plush"
+    },
+    {
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ちょっと揺らしてみようか？ ソラ」\nプレイヤーはぬいぐるみをソラの近くで動かした。\n\nソラは疲れた様子で、ぬいぐるみ遊びへの反応もゆっくりだった。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8721ec6977409c134999b1e7c26e0eed765bb85d52116da48a1d694cc57a7157.png",
+      "resolved": "plush__direct"
+    },
+    {
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ちょっと揺らしてみようか？ ソラ」\nプレイヤーはぬいぐるみをソラの近くで動かした。\n\nソラはあまり動かず、疲れた様子で過ごしていた。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8721ec6977409c134999b1e7c26e0eed765bb85d52116da48a1d694cc57a7157.png",
+      "resolved": "plush__direct"
+    },
+    {
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ソラ、これで遊んでみようか」\nプレイヤーはソラの様子に合わせてぬいぐるみを動かした。\n\nソラは疲れた様子で、ぬいぐるみ遊びへの反応もゆっくりだった。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8721ec6977409c134999b1e7c26e0eed765bb85d52116da48a1d694cc57a7157.png",
+      "resolved": "plush__adapt"
+    },
+    {
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ソラ、これで遊んでみようか」\nプレイヤーはソラの様子に合わせてぬいぐるみを動かした。\n\nソラはあまり動かず、疲れた様子で過ごしていた。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8721ec6977409c134999b1e7c26e0eed765bb85d52116da48a1d694cc57a7157.png",
+      "resolved": "plush__adapt"
+    },
+    {
+      "reaction": "listless",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ソラ、ちょっとフェイントしてみようか？」\nプレイヤーはぬいぐるみを動かす向きや間合いを変えた。\n\nソラは疲れた様子で、ぬいぐるみ遊びへの反応もゆっくりだった。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\2fa34373e1194a7a9cd0c2259a43619b.png",
+      "resolved": "plush"
+    },
+    {
+      "reaction": "listless",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ソラ、ちょっとフェイントしてみようか？」\nプレイヤーはぬいぐるみを動かす向きや間合いを変えた。\n\nソラはあまり動かず、疲れた様子で過ごしていた。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\2fa34373e1194a7a9cd0c2259a43619b.png",
+      "resolved": "plush"
+    }
+  ],
+  "before_count": 281,
+  "after_count": 284,
+  "draft_counts": [
+    297,
+    300
+  ],
+  "generated_count": 278,
+  "protected_unchanged": true,
+  "unity_imported": false
+}
