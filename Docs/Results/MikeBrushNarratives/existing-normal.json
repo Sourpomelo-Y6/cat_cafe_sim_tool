@@ -1,0 +1,1260 @@
+{
+  "published": [
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "107c96f03a3f579689845bc51806f8a9",
+          "slot": 1,
+          "text": "{cat}はブラッシングを受け、体をゆっくり揺らした。"
+        },
+        {
+          "id": "dffd5c050a6a5d95af04369ce334c662",
+          "slot": 2,
+          "text": "{cat}はブラッシングを受け、耳を軽く揺らした。"
+        },
+        {
+          "id": "7f19091caf0c5a2ea17a0d738aa68876",
+          "slot": 3,
+          "text": "{cat}はブラッシングを受け、尾をゆっくり揺らした。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "b30bdb709b49553098477e002a7d6e2c",
+          "slot": 1,
+          "text": "{cat}はブラッシングに合わせて、全身をゆらし、しっぽを揺らした。"
+        },
+        {
+          "id": "6b5d723350695bf3af07daeab04de025",
+          "slot": 2,
+          "text": "{cat}は毛をなでられると、背中を伸ばし、耳を動かした。"
+        },
+        {
+          "id": "7d77ed4ce0cb53c5bac76ee5dd8b25c0",
+          "slot": 3,
+          "text": "{cat}は手の動きを追い、柔らかな毛が光を受けて輝いた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "1a5e2db8aead5ebeac59c3b70e44ae54",
+          "slot": 1,
+          "text": "{cat}がブラシで毛を撫でられると、耳をピンと立て、静かに尾を絡めた。"
+        },
+        {
+          "id": "2f1624509b925628a704f2b3a1b373b7",
+          "slot": 2,
+          "text": "{cat}がブラシに触れた瞬間、背中の毛が立ち上がり、しっぽを軽く揺らした。"
+        },
+        {
+          "id": "4366280e1a085576a5e13912adf3cfc1",
+          "slot": 3,
+          "text": "{cat}がブラシの動きに合わせて、前足で優しく毛を揺らし、舌を少し伸ばした。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "turn_away",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "f556e0a792f854cfbae0bfa758b7927c",
+          "slot": 1,
+          "text": "{cat} はブラシを見て体をそらし、手を離した。"
+        },
+        {
+          "id": "7b102bfa6e275923af09d64d5ee335d7",
+          "slot": 2,
+          "text": "{cat} は刷毛に手を近づけるとすぐに後ろへ飛び退いた。"
+        },
+        {
+          "id": "e8d1bb200fb153708a82f8ae94dac3c6",
+          "slot": 3,
+          "text": "{cat} はブラシの動きに嫌がり、体を回して手から離れた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "d17e5feb831856108813d4673097a07c",
+          "slot": 1,
+          "text": "{cat}はブラシの動きを見て、少し戸惑ったように眉をひそめた。"
+        },
+        {
+          "id": "544b6f48010c5e90837e4bcdd1bfab7e",
+          "slot": 2,
+          "text": "{cat}は手がブラシを持つと、まるで何かを探すかのように周囲を見回した。"
+        },
+        {
+          "id": "edad1968a45b585fac92690ae5437a0e",
+          "slot": 3,
+          "text": "{cat}はブラシを受け取り、目を疑うように先を見つめた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "baad68e715fc58e7a0c82b69ce9c22e0",
+          "slot": 1,
+          "text": "{cat}はブラシの動作を止め、静かにゆっくり佇んだ。"
+        },
+        {
+          "id": "96fdab93f16b5b3ba950b7f088943b47",
+          "slot": 2,
+          "text": "{cat}はブラシの手を離し、ほとんど動かずに佇んだ。"
+        },
+        {
+          "id": "e61b7de3e38d517d92ee3c46b0885495",
+          "slot": 3,
+          "text": "{cat}はブラシに触れず、静かに体を横たえて佇んだ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "brush",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "915ed8380a98507582e03048c8106a38",
+          "slot": 1,
+          "text": "やさしくブラッシングしようか {cat_call}"
+        },
+        {
+          "id": "d208fea2d712536197cdb347c9219cdb",
+          "slot": 2,
+          "text": "毛をなめらかにしてみようか {cat_call}"
+        },
+        {
+          "id": "7a1937de9574505f99e716f9c181e7fd",
+          "slot": 3,
+          "text": "ブラシで柔らかくなでてみる？ {cat_call}"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "brush",
+        "action": "direct",
+        "reaction": "any",
+        "scene_key": "brush__direct",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "da2e906fdecc599a943494e7a2f7a2b2",
+          "slot": 1,
+          "text": "ブラシを滑らせてみよう {cat_call}。"
+        },
+        {
+          "id": "7f5507f986355b119a4698f8e68b43fa",
+          "slot": 2,
+          "text": "少しずつブラッシングしてみよう {cat_call}ね。"
+        },
+        {
+          "id": "c4decd3336115a3ba858b529fad1edc6",
+          "slot": 3,
+          "text": "リズムを合わせてブラシを動かしてみよう {cat_call}。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "brush",
+        "action": "adapt",
+        "reaction": "any",
+        "scene_key": "brush__adapt",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "da2d3bea1d2d50efaaab4a84fbaeff4a",
+          "slot": 1,
+          "text": "ねえ{cat_call}、ブラッシングしようか？"
+        },
+        {
+          "id": "ac097d8e5c155d5b83218cf934417edb",
+          "slot": 2,
+          "text": "やさしくブラッシングしようね{cat_call}。"
+        },
+        {
+          "id": "9c05e481580c53ed8a0a6ab650a5af22",
+          "slot": 3,
+          "text": "少しずつブラッシングしてみようか{cat_call}。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "guest-1",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "brush",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "ed283499fe915cd78674b0384c91a8d1",
+          "slot": 1,
+          "text": "ブラシを使ってみてもいいですか。"
+        },
+        {
+          "id": "1a1b744c6fb954e5ac24b137e61f4057",
+          "slot": 2,
+          "text": "{cat_call}、ブラッシングはいかがですか。"
+        },
+        {
+          "id": "361593543bcc5477ae08bed12398f7ba",
+          "slot": 3,
+          "text": "無理のない範囲で、ブラシをかけてみますね。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "person-952c631405e649fdb50c390881804977",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "brush",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "d96c702528cc5839bc8373b83cb900ca",
+          "slot": 1,
+          "text": "{cat_call}、ブラシをかけてもいいですか。"
+        },
+        {
+          "id": "6fede4f01067550bae441c4b8639b8af",
+          "slot": 2,
+          "text": "ブラッシングを少し試してみましょうか。"
+        },
+        {
+          "id": "69a7416a2396585b953abacf69d95cdb",
+          "slot": 3,
+          "text": "ブラシはどうですか。無理せずいきましょう。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "person-guest-3",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "brush",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "fc62bdab2cff53df9181eb51d275e8be",
+          "slot": 1,
+          "text": "{cat_call}、ブラシをかけてみようか。"
+        },
+        {
+          "id": "b783bb17f237513eaf96bc43e401481d",
+          "slot": 2,
+          "text": "ブラシの感触、どんなふうに感じるかな。"
+        },
+        {
+          "id": "2c857ff995c15532974f82af3793f61e",
+          "slot": 3,
+          "text": "毛並みを見ながら、ブラシを試そうか。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "turn_away",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "feaa61f843105712a56d16449166d74c",
+          "slot": 1,
+          "text": "{cat}はブラシから気持ちをそらし、今は距離を置きたそうだ。"
+        },
+        {
+          "id": "89304391b1c05ed98faa61d7598805d3",
+          "slot": 2,
+          "text": "{cat}はブラッシングの誘いを避けるように、そっと身を引いた。"
+        },
+        {
+          "id": "2e36e36fd7dd522eb50183c9673b159e",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "05d16e27f3685dd398128958e1190625",
+          "slot": 1,
+          "text": "{cat}はブラシの動きを確かめるように見つめ、ひとまず様子を見ていた。"
+        },
+        {
+          "id": "af2e83eb4503503ca6b16395cd850d17",
+          "slot": 2,
+          "text": "{cat}はブラシへ耳を向けた。気にはなるが、大きな反応は見せていない。"
+        },
+        {
+          "id": "142cc4ac310a5665be07f278ca229e32",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "9c513db085085c2fab062d5290170d1c",
+          "slot": 1,
+          "text": "{cat}はブラシと相手の顔を見比べた。どう応じればよいのか迷っているようだ。"
+        },
+        {
+          "id": "2993349297a75273a33c9e69a7aafbca",
+          "slot": 2,
+          "text": "{cat}はブラシに気を取られ、首をかしげた。遊びの誘いとは勝手が違うらしい。"
+        },
+        {
+          "id": "6ba4bfb72b9556648acc5afd5f1fae6b",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "84a58c971acd5a33ae991899c093d5c0",
+          "slot": 1,
+          "text": "{cat}は疲れているようで、ブラシを目で追うのもゆっくりだった。"
+        },
+        {
+          "id": "acd1465b8690593890816dbe00e55d43",
+          "slot": 2,
+          "text": "{cat}はけだるそうにブラシへ目をやったが、反応は小さいままだった。"
+        },
+        {
+          "id": "f5b154ab774959c7b459baa70129ff9a",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "04dab13afb355ffaae8fce03b62b9437",
+          "slot": 1,
+          "text": "{cat}はブラシの動きを静かに見ている。ふわふわの頬の表情は、まだ慎重だ。"
+        },
+        {
+          "id": "9191badcfeb85313ab68f7bf7031b654",
+          "slot": 2,
+          "text": "{cat}はブラッシングに控えめに応じた。気にしてはいるが、くつろぐほどではないらしい。"
+        },
+        {
+          "id": "727d167250655625b1371ca8d7c91f13",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "f4931addc4255b4d927870ba38b19edb",
+          "slot": 1,
+          "text": "{cat}はブラシと相手の顔を見比べた。遊びの時とは勝手が違うのか、少し戸惑っている。"
+        },
+        {
+          "id": "9350b21c91d95ef9a02254c9dd419c55",
+          "slot": 2,
+          "text": "{cat}はブラシを気にして耳を動かした。落ち着いて受け止めるには、まだ迷いがあるようだ。"
+        },
+        {
+          "id": "c21a65333f3d502ba18f45e9660cd08c",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "7efae6a565915811bb3808a087915993",
+          "slot": 1,
+          "text": "{cat}はブラシへゆっくり目をやった。ふわふわの頬にも、疲れた表情が浮かんでいる。"
+        },
+        {
+          "id": "929676db64695436a21320692dc342c8",
+          "slot": 2,
+          "text": "{cat}はブラッシングへの反応も小さい。気にする元気があまりないのか、けだるそうにしている。"
+        },
+        {
+          "id": "07900d9d2fb1506c91a9a88587207c15",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "608c203af7e65ac784a16c8f0d63fc2a",
+          "slot": 1,
+          "text": "{cat}はブラシの動きを静かに見ている。手入れの様子を、落ち着いた顔で受け止めた。"
+        },
+        {
+          "id": "24fe332710a65d4e97010bf033bff7ea",
+          "slot": 2,
+          "text": "{cat}はブラッシングに控えめに応じた。三角の耳が、時折ブラシの方を向く。"
+        },
+        {
+          "id": "90a2c6ea7a3752d09a5859306e5c89fa",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "9db8347fe5dc505893067682f59f10cb",
+          "slot": 1,
+          "text": "{cat}はブラッシングに心地よさそうな表情を見せた。丸い顔の目元が、ゆるやかに和らぐ。"
+        },
+        {
+          "id": "ed58e79899df5f86b8a709707a463166",
+          "slot": 2,
+          "text": "{cat}はブラシの動きに機嫌よく応じている。相手を見る目にも、くつろいだ様子がにじんだ。"
+        },
+        {
+          "id": "8ad5fe3d139756bca62143aa37656b78",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "55f481c536f15791bff1b393172eb9ed",
+          "slot": 1,
+          "text": "{cat}はブラシを気にして、耳を動かした。手入れの調子が合わず、落ち着きどころを探している。"
+        },
+        {
+          "id": "2bd7efd245ba507795347ea1aadc750f",
+          "slot": 2,
+          "text": "{cat}はブラシから相手へ目を移した。どう受け止めようかと、少し戸惑っているようだ。"
+        },
+        {
+          "id": "e3c5c503c0815ea89a1e6153ccdcea58",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "e17a1e237af15bd8b18962cbb0365ce1",
+          "slot": 1,
+          "text": "{cat}はブラシの方へゆっくり目をやった。疲れがあるのか、手入れへの反応も乏しい。"
+        },
+        {
+          "id": "3981400a2e0d56a5a57e75f5cca4ba97",
+          "slot": 2,
+          "text": "{cat}はブラッシングにもけだるそうだ。いつもの穏やかさに、反応の鈍さが重なっている。"
+        },
+        {
+          "id": "9cebe1b09183587ebe4d9ab426cbff7c",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    }
+  ],
+  "drafts": [
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "107c96f03a3f579689845bc51806f8a9",
+          "slot": 1,
+          "text": "{cat}はブラッシングを受け、体をゆっくり揺らした。"
+        },
+        {
+          "id": "dffd5c050a6a5d95af04369ce334c662",
+          "slot": 2,
+          "text": "{cat}はブラッシングを受け、耳を軽く揺らした。"
+        },
+        {
+          "id": "7f19091caf0c5a2ea17a0d738aa68876",
+          "slot": 3,
+          "text": "{cat}はブラッシングを受け、尾をゆっくり揺らした。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "b30bdb709b49553098477e002a7d6e2c",
+          "slot": 1,
+          "text": "{cat}はブラッシングに合わせて、全身をゆらし、しっぽを揺らした。"
+        },
+        {
+          "id": "6b5d723350695bf3af07daeab04de025",
+          "slot": 2,
+          "text": "{cat}は毛をなでられると、背中を伸ばし、耳を動かした。"
+        },
+        {
+          "id": "7d77ed4ce0cb53c5bac76ee5dd8b25c0",
+          "slot": 3,
+          "text": "{cat}は手の動きを追い、柔らかな毛が光を受けて輝いた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "1a5e2db8aead5ebeac59c3b70e44ae54",
+          "slot": 1,
+          "text": "{cat}がブラシで毛を撫でられると、耳をピンと立て、静かに尾を絡めた。"
+        },
+        {
+          "id": "2f1624509b925628a704f2b3a1b373b7",
+          "slot": 2,
+          "text": "{cat}がブラシに触れた瞬間、背中の毛が立ち上がり、しっぽを軽く揺らした。"
+        },
+        {
+          "id": "4366280e1a085576a5e13912adf3cfc1",
+          "slot": 3,
+          "text": "{cat}がブラシの動きに合わせて、前足で優しく毛を揺らし、舌を少し伸ばした。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "turn_away",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "f556e0a792f854cfbae0bfa758b7927c",
+          "slot": 1,
+          "text": "{cat} はブラシを見て体をそらし、手を離した。"
+        },
+        {
+          "id": "7b102bfa6e275923af09d64d5ee335d7",
+          "slot": 2,
+          "text": "{cat} は刷毛に手を近づけるとすぐに後ろへ飛び退いた。"
+        },
+        {
+          "id": "e8d1bb200fb153708a82f8ae94dac3c6",
+          "slot": 3,
+          "text": "{cat} はブラシの動きに嫌がり、体を回して手から離れた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "d17e5feb831856108813d4673097a07c",
+          "slot": 1,
+          "text": "{cat}はブラシの動きを見て、少し戸惑ったように眉をひそめた。"
+        },
+        {
+          "id": "544b6f48010c5e90837e4bcdd1bfab7e",
+          "slot": 2,
+          "text": "{cat}は手がブラシを持つと、まるで何かを探すかのように周囲を見回した。"
+        },
+        {
+          "id": "edad1968a45b585fac92690ae5437a0e",
+          "slot": 3,
+          "text": "{cat}はブラシを受け取り、目を疑うように先を見つめた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "baad68e715fc58e7a0c82b69ce9c22e0",
+          "slot": 1,
+          "text": "{cat}はブラシの動作を止め、静かにゆっくり佇んだ。"
+        },
+        {
+          "id": "96fdab93f16b5b3ba950b7f088943b47",
+          "slot": 2,
+          "text": "{cat}はブラシの手を離し、ほとんど動かずに佇んだ。"
+        },
+        {
+          "id": "e61b7de3e38d517d92ee3c46b0885495",
+          "slot": 3,
+          "text": "{cat}はブラシに触れず、静かに体を横たえて佇んだ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "brush",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "915ed8380a98507582e03048c8106a38",
+          "slot": 1,
+          "text": "やさしくブラッシングしようか {cat_call}"
+        },
+        {
+          "id": "d208fea2d712536197cdb347c9219cdb",
+          "slot": 2,
+          "text": "毛をなめらかにしてみようか {cat_call}"
+        },
+        {
+          "id": "7a1937de9574505f99e716f9c181e7fd",
+          "slot": 3,
+          "text": "ブラシで柔らかくなでてみる？ {cat_call}"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "brush",
+        "action": "direct",
+        "reaction": "any",
+        "scene_key": "brush__direct",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "da2e906fdecc599a943494e7a2f7a2b2",
+          "slot": 1,
+          "text": "ブラシを滑らせてみよう {cat_call}。"
+        },
+        {
+          "id": "7f5507f986355b119a4698f8e68b43fa",
+          "slot": 2,
+          "text": "少しずつブラッシングしてみよう {cat_call}ね。"
+        },
+        {
+          "id": "c4decd3336115a3ba858b529fad1edc6",
+          "slot": 3,
+          "text": "リズムを合わせてブラシを動かしてみよう {cat_call}。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "brush",
+        "action": "adapt",
+        "reaction": "any",
+        "scene_key": "brush__adapt",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "da2d3bea1d2d50efaaab4a84fbaeff4a",
+          "slot": 1,
+          "text": "ねえ{cat_call}、ブラッシングしようか？"
+        },
+        {
+          "id": "ac097d8e5c155d5b83218cf934417edb",
+          "slot": 2,
+          "text": "やさしくブラッシングしようね{cat_call}。"
+        },
+        {
+          "id": "9c05e481580c53ed8a0a6ab650a5af22",
+          "slot": 3,
+          "text": "少しずつブラッシングしてみようか{cat_call}。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "guest-1",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "brush",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "ed283499fe915cd78674b0384c91a8d1",
+          "slot": 1,
+          "text": "ブラシを使ってみてもいいですか。"
+        },
+        {
+          "id": "1a1b744c6fb954e5ac24b137e61f4057",
+          "slot": 2,
+          "text": "{cat_call}、ブラッシングはいかがですか。"
+        },
+        {
+          "id": "361593543bcc5477ae08bed12398f7ba",
+          "slot": 3,
+          "text": "無理のない範囲で、ブラシをかけてみますね。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "person-952c631405e649fdb50c390881804977",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "brush",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "d96c702528cc5839bc8373b83cb900ca",
+          "slot": 1,
+          "text": "{cat_call}、ブラシをかけてもいいですか。"
+        },
+        {
+          "id": "6fede4f01067550bae441c4b8639b8af",
+          "slot": 2,
+          "text": "ブラッシングを少し試してみましょうか。"
+        },
+        {
+          "id": "69a7416a2396585b953abacf69d95cdb",
+          "slot": 3,
+          "text": "ブラシはどうですか。無理せずいきましょう。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "person-guest-3",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "brush",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "fc62bdab2cff53df9181eb51d275e8be",
+          "slot": 1,
+          "text": "{cat_call}、ブラシをかけてみようか。"
+        },
+        {
+          "id": "b783bb17f237513eaf96bc43e401481d",
+          "slot": 2,
+          "text": "ブラシの感触、どんなふうに感じるかな。"
+        },
+        {
+          "id": "2c857ff995c15532974f82af3793f61e",
+          "slot": 3,
+          "text": "毛並みを見ながら、ブラシを試そうか。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "turn_away",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "feaa61f843105712a56d16449166d74c",
+          "slot": 1,
+          "text": "{cat}はブラシから気持ちをそらし、今は距離を置きたそうだ。"
+        },
+        {
+          "id": "89304391b1c05ed98faa61d7598805d3",
+          "slot": 2,
+          "text": "{cat}はブラッシングの誘いを避けるように、そっと身を引いた。"
+        },
+        {
+          "id": "2e36e36fd7dd522eb50183c9673b159e",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "05d16e27f3685dd398128958e1190625",
+          "slot": 1,
+          "text": "{cat}はブラシの動きを確かめるように見つめ、ひとまず様子を見ていた。"
+        },
+        {
+          "id": "af2e83eb4503503ca6b16395cd850d17",
+          "slot": 2,
+          "text": "{cat}はブラシへ耳を向けた。気にはなるが、大きな反応は見せていない。"
+        },
+        {
+          "id": "142cc4ac310a5665be07f278ca229e32",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "9c513db085085c2fab062d5290170d1c",
+          "slot": 1,
+          "text": "{cat}はブラシと相手の顔を見比べた。どう応じればよいのか迷っているようだ。"
+        },
+        {
+          "id": "2993349297a75273a33c9e69a7aafbca",
+          "slot": 2,
+          "text": "{cat}はブラシに気を取られ、首をかしげた。遊びの誘いとは勝手が違うらしい。"
+        },
+        {
+          "id": "6ba4bfb72b9556648acc5afd5f1fae6b",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "84a58c971acd5a33ae991899c093d5c0",
+          "slot": 1,
+          "text": "{cat}は疲れているようで、ブラシを目で追うのもゆっくりだった。"
+        },
+        {
+          "id": "acd1465b8690593890816dbe00e55d43",
+          "slot": 2,
+          "text": "{cat}はけだるそうにブラシへ目をやったが、反応は小さいままだった。"
+        },
+        {
+          "id": "f5b154ab774959c7b459baa70129ff9a",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "04dab13afb355ffaae8fce03b62b9437",
+          "slot": 1,
+          "text": "{cat}はブラシの動きを静かに見ている。ふわふわの頬の表情は、まだ慎重だ。"
+        },
+        {
+          "id": "9191badcfeb85313ab68f7bf7031b654",
+          "slot": 2,
+          "text": "{cat}はブラッシングに控えめに応じた。気にしてはいるが、くつろぐほどではないらしい。"
+        },
+        {
+          "id": "727d167250655625b1371ca8d7c91f13",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "f4931addc4255b4d927870ba38b19edb",
+          "slot": 1,
+          "text": "{cat}はブラシと相手の顔を見比べた。遊びの時とは勝手が違うのか、少し戸惑っている。"
+        },
+        {
+          "id": "9350b21c91d95ef9a02254c9dd419c55",
+          "slot": 2,
+          "text": "{cat}はブラシを気にして耳を動かした。落ち着いて受け止めるには、まだ迷いがあるようだ。"
+        },
+        {
+          "id": "c21a65333f3d502ba18f45e9660cd08c",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "7efae6a565915811bb3808a087915993",
+          "slot": 1,
+          "text": "{cat}はブラシへゆっくり目をやった。ふわふわの頬にも、疲れた表情が浮かんでいる。"
+        },
+        {
+          "id": "929676db64695436a21320692dc342c8",
+          "slot": 2,
+          "text": "{cat}はブラッシングへの反応も小さい。気にする元気があまりないのか、けだるそうにしている。"
+        },
+        {
+          "id": "07900d9d2fb1506c91a9a88587207c15",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "608c203af7e65ac784a16c8f0d63fc2a",
+          "slot": 1,
+          "text": "{cat}はブラシの動きを静かに見ている。手入れの様子を、落ち着いた顔で受け止めた。"
+        },
+        {
+          "id": "24fe332710a65d4e97010bf033bff7ea",
+          "slot": 2,
+          "text": "{cat}はブラッシングに控えめに応じた。三角の耳が、時折ブラシの方を向く。"
+        },
+        {
+          "id": "90a2c6ea7a3752d09a5859306e5c89fa",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "9db8347fe5dc505893067682f59f10cb",
+          "slot": 1,
+          "text": "{cat}はブラッシングに心地よさそうな表情を見せた。丸い顔の目元が、ゆるやかに和らぐ。"
+        },
+        {
+          "id": "ed58e79899df5f86b8a709707a463166",
+          "slot": 2,
+          "text": "{cat}はブラシの動きに機嫌よく応じている。相手を見る目にも、くつろいだ様子がにじんだ。"
+        },
+        {
+          "id": "8ad5fe3d139756bca62143aa37656b78",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "55f481c536f15791bff1b393172eb9ed",
+          "slot": 1,
+          "text": "{cat}はブラシを気にして、耳を動かした。手入れの調子が合わず、落ち着きどころを探している。"
+        },
+        {
+          "id": "2bd7efd245ba507795347ea1aadc750f",
+          "slot": 2,
+          "text": "{cat}はブラシから相手へ目を移した。どう受け止めようかと、少し戸惑っているようだ。"
+        },
+        {
+          "id": "e3c5c503c0815ea89a1e6153ccdcea58",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "e17a1e237af15bd8b18962cbb0365ce1",
+          "slot": 1,
+          "text": "{cat}はブラシの方へゆっくり目をやった。疲れがあるのか、手入れへの反応も乏しい。"
+        },
+        {
+          "id": "3981400a2e0d56a5a57e75f5cca4ba97",
+          "slot": 2,
+          "text": "{cat}はブラッシングにもけだるそうだ。いつもの穏やかさに、反応の鈍さが重なっている。"
+        },
+        {
+          "id": "9cebe1b09183587ebe4d9ab426cbff7c",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "previews": [
+    {
+      "scene": "switch",
+      "slot": 1,
+      "body": "プレイヤー「今度はブラシでお手入れしてみようか、ミケ。」\nプレイヤーは交流を「ブラッシング」へ切り替えた。\n\nミケはそばに出てきたブラシへ、ぱっと目を向けた。\n\n次の働きかけまで、少し間を置いた。",
+      "image_notice": "画像：brush → brush",
+      "source": "人：動作切替専用文：登録済み 専用 ／ 猫：動作切替専用文：登録済み 専用（専用操作を優先、なければ同じ反応の操作共通文）",
+      "image_source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\7ef61a7a3fec44a58041b4d5ee1e8997.png",
+      "image_sha256": "722b2e4944d31f0650eb3763cc62591aecc76e36cab460ac2eba8912c48101f5"
+    },
+    {
+      "scene": "switch",
+      "slot": 2,
+      "body": "プレイヤー「ブラシを持ってきたよ。ゆっくり始めようか。」\nプレイヤーは交流を「ブラッシング」へ切り替えた。\n\nミケはちょこんと座ったまま、ブラシを持つ手を見つめた。\n\n次の働きかけまで、少し間を置いた。",
+      "image_notice": "画像：brush → brush",
+      "source": "人：動作切替専用文：登録済み 専用 ／ 猫：動作切替専用文：登録済み 専用（専用操作を優先、なければ同じ反応の操作共通文）",
+      "image_source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\7ef61a7a3fec44a58041b4d5ee1e8997.png",
+      "image_sha256": "722b2e4944d31f0650eb3763cc62591aecc76e36cab460ac2eba8912c48101f5"
+    },
+    {
+      "scene": "connect",
+      "slot": 1,
+      "body": "プレイヤー「ブラシを近づける頃合い、わかってきた気がする。」\nプレイヤーはミケの様子を見ながら、特別な働きかけをした。\n\nミケはブラシを持つ手に注意を向け、お手入れの誘いに応じた。\n\n二人の間合いが、少し近づいた。",
+      "image_notice": "画像：brush → brush",
+      "source": "人：心をつかむ専用文：登録済み 専用 ／ 猫：心をつかむ専用文：登録済み 専用（専用操作を優先、なければ同じ反応の操作共通文）",
+      "image_source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\7ef61a7a3fec44a58041b4d5ee1e8997.png",
+      "image_sha256": "722b2e4944d31f0650eb3763cc62591aecc76e36cab460ac2eba8912c48101f5"
+    },
+    {
+      "scene": "connect",
+      "slot": 2,
+      "body": "プレイヤー「ミケ、お手入れにも誘う間合いがあるんだね。」\nプレイヤーはミケの様子を見ながら、特別な働きかけをした。\n\nミケは近くのブラシをとらえ、相手の働きかけを受け止めた。\n\n二人の間合いが、少し近づいた。",
+      "image_notice": "画像：brush → brush",
+      "source": "人：心をつかむ専用文：登録済み 専用 ／ 猫：心をつかむ専用文：登録済み 専用（専用操作を優先、なければ同じ反応の操作共通文）",
+      "image_source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\7ef61a7a3fec44a58041b4d5ee1e8997.png",
+      "image_sha256": "722b2e4944d31f0650eb3763cc62591aecc76e36cab460ac2eba8912c48101f5"
+    },
+    {
+      "scene": "open_up",
+      "slot": 1,
+      "body": "プレイヤー「お手入れの時間も、のんびりいこうね。」\nプレイヤーはミケの毛並みに沿ってブラシを動かした。\n\nミケはブラシのそばで目元をゆるめ、相手に親しみを見せた。\n\n静かな交流の時間が流れた。",
+      "image_notice": "画像：brush__open_up → brush__open_up",
+      "source": "人：心を開く専用文：登録済み 操作共通 ／ 猫：心を開く専用文：登録済み 操作共通（専用操作を優先、なければ同じ反応の操作共通文）",
+      "image_source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\45c9b0cada9545ae9139ec592c823a02.png",
+      "image_sha256": "6c0a5462e1a9d16da29753cf08d02f305f5ffa84ac314bf8deb36ac6a11cb8a9"
+    },
+    {
+      "scene": "open_up",
+      "slot": 2,
+      "body": "プレイヤー「ミケ、そんな顔を見せてくれると、うれしいな。」\nプレイヤーはミケの毛並みに沿ってブラシを動かした。\n\nミケは気を許したような表情で、お手入れのひとときを相手と過ごした。\n\n静かな交流の時間が流れた。",
+      "image_notice": "画像：brush__open_up → brush__open_up",
+      "source": "人：心を開く専用文：登録済み 操作共通 ／ 猫：心を開く専用文：登録済み 操作共通（専用操作を優先、なければ同じ反応の操作共通文）",
+      "image_source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\45c9b0cada9545ae9139ec592c823a02.png",
+      "image_sha256": "6c0a5462e1a9d16da29753cf08d02f305f5ffa84ac314bf8deb36ac6a11cb8a9"
+    },
+    {
+      "scene": "simultaneous",
+      "slot": 1,
+      "body": "プレイヤー「お手入れの間合いが合うと、ぐっと仲良くなれた気がする。」\nプレイヤーはミケの様子を見ながら、特別な働きかけをした。\n\nミケはブラシを持つ手の働きかけに応え、うれしそうに目を閉じた。\n\n二人の間合いが、少し近づいた。",
+      "image_notice": "画像：brush__simultaneous → brush__simultaneous",
+      "source": "人：同時成立専用文：登録済み 専用 ／ 猫：同時成立専用文：登録済み 専用（専用操作を優先、なければ同じ反応の操作共通文）",
+      "image_source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\455ba0fda7df4a0592a97ea705e2c9c4.png",
+      "image_sha256": "c4892b03a745491c5d351a74113ca75ec40f83a978b86c1ea28a83b25c926bc2"
+    },
+    {
+      "scene": "simultaneous",
+      "slot": 2,
+      "body": "プレイヤー「ミケ、ブラシ越しにも気持ちが伝わったかな。」\nプレイヤーはミケの様子を見ながら、特別な働きかけをした。\n\nミケはお手入れの誘いを受け止め、相手に気を許すように口元をほころばせた。\n\n二人の間合いが、少し近づいた。",
+      "image_notice": "画像：brush__simultaneous → brush__simultaneous",
+      "source": "人：同時成立専用文：登録済み 専用 ／ 猫：同時成立専用文：登録済み 専用（専用操作を優先、なければ同じ反応の操作共通文）",
+      "image_source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\455ba0fda7df4a0592a97ea705e2c9c4.png",
+      "image_sha256": "c4892b03a745491c5d351a74113ca75ec40f83a978b86c1ea28a83b25c926bc2"
+    }
+  ],
+  "independent_side_checks": [
+    {
+      "scene": "switch",
+      "keep": "speech",
+      "source": "人：動作切替専用文：登録済み 専用 ／ 猫：既存定型文（フォールバック） （専用操作を優先、なければ同じ反応の操作共通文）",
+      "body": "プレイヤー「ブラシを持ってきたよ。ゆっくり始めようか。」\nプレイヤーは交流を「ブラッシング」へ切り替えた。\n\nミケは人の手元を見つめた。\n\n次の働きかけまで、少し間を置いた。"
+    },
+    {
+      "scene": "switch",
+      "keep": "cat_response",
+      "source": "人：既存定型文（フォールバック）  ／ 猫：動作切替専用文：登録済み 専用（専用操作を優先、なければ同じ反応の操作共通文）",
+      "body": "プレイヤー「今度はこれにしよう。」\nプレイヤーは交流を「ブラッシング」へ切り替えた。\n\nミケはそばに出てきたブラシへ、ぱっと目を向けた。\n\n次の働きかけまで、少し間を置いた。"
+    },
+    {
+      "scene": "switch",
+      "keep": "none",
+      "source": "人：既存定型文（フォールバック）  ／ 猫：既存定型文（フォールバック） （専用操作を優先、なければ同じ反応の操作共通文）",
+      "body": "プレイヤー「今度はこれにしよう。」\nプレイヤーは交流を「ブラッシング」へ切り替えた。\n\nミケは人の手元を見つめた。\n\n次の働きかけまで、少し間を置いた。"
+    },
+    {
+      "scene": "connect",
+      "keep": "speech",
+      "source": "人：心をつかむ専用文：登録済み 専用 ／ 猫：既存定型文（フォールバック） （専用操作を優先、なければ同じ反応の操作共通文）",
+      "body": "プレイヤー「ミケ、お手入れにも誘う間合いがあるんだね。」\nプレイヤーはミケの様子を見ながら、特別な働きかけをした。\n\nミケはその働きかけを受け止めた。\n\n二人の間合いが、少し近づいた。"
+    },
+    {
+      "scene": "connect",
+      "keep": "cat_response",
+      "source": "人：既存定型文（フォールバック）  ／ 猫：心をつかむ専用文：登録済み 専用（専用操作を優先、なければ同じ反応の操作共通文）",
+      "body": "プレイヤー「ミケ、こっちを見て。」\nプレイヤーはミケの様子を見ながら、特別な働きかけをした。\n\nミケはブラシを持つ手に注意を向け、お手入れの誘いに応じた。\n\n二人の間合いが、少し近づいた。"
+    },
+    {
+      "scene": "connect",
+      "keep": "none",
+      "source": "人：既存定型文（フォールバック）  ／ 猫：既存定型文（フォールバック） （専用操作を優先、なければ同じ反応の操作共通文）",
+      "body": "プレイヤー「ミケ、こっちを見て。」\nプレイヤーはミケの様子を見ながら、特別な働きかけをした。\n\nミケはその働きかけを受け止めた。\n\n二人の間合いが、少し近づいた。"
+    },
+    {
+      "scene": "open_up",
+      "keep": "speech",
+      "source": "人：心を開く専用文：登録済み 操作共通 ／ 猫：通常文＋特別反応追記（フォールバック） 操作共通（専用操作を優先、なければ同じ反応の操作共通文）",
+      "body": "プレイヤー「ミケ、そんな顔を見せてくれると、うれしいな。」\nプレイヤーはミケの毛並みに沿ってブラシを動かした。\n\nミケはブラッシングを受け、耳を軽く揺らした。 ミケは心を開いた様子を見せた。\n\n静かな交流の時間が流れた。"
+    },
+    {
+      "scene": "open_up",
+      "keep": "cat_response",
+      "source": "人：通常文＋特別反応追記（フォールバック） 専用 ／ 猫：心を開く専用文：登録済み 操作共通（専用操作を優先、なければ同じ反応の操作共通文）",
+      "body": "プレイヤー「少しずつブラッシングしてみよう ミケね。」\nプレイヤーはミケの毛並みに沿ってブラシを動かした。\n\nミケは気を許したような表情で、お手入れのひとときを相手と過ごした。\n\n静かな交流の時間が流れた。"
+    },
+    {
+      "scene": "open_up",
+      "keep": "none",
+      "source": "人：通常文＋特別反応追記（フォールバック） 専用 ／ 猫：通常文＋特別反応追記（フォールバック） 操作共通（専用操作を優先、なければ同じ反応の操作共通文）",
+      "body": "プレイヤー「少しずつブラッシングしてみよう ミケね。」\nプレイヤーはミケの毛並みに沿ってブラシを動かした。\n\nミケはブラッシングを受け、耳を軽く揺らした。 ミケは心を開いた様子を見せた。\n\n静かな交流の時間が流れた。"
+    },
+    {
+      "scene": "simultaneous",
+      "keep": "speech",
+      "source": "人：同時成立専用文：登録済み 専用 ／ 猫：既存定型文（フォールバック） （専用操作を優先、なければ同じ反応の操作共通文）",
+      "body": "プレイヤー「ミケ、ブラシ越しにも気持ちが伝わったかな。」\nプレイヤーはミケの様子を見ながら、特別な働きかけをした。\n\nミケはその働きかけを受け止めた。 ミケは心を開いた様子を見せた。\n\n二人の間合いが、少し近づいた。"
+    },
+    {
+      "scene": "simultaneous",
+      "keep": "cat_response",
+      "source": "人：既存定型文（フォールバック）  ／ 猫：同時成立専用文：登録済み 専用（専用操作を優先、なければ同じ反応の操作共通文）",
+      "body": "プレイヤー「ミケ、こっちを見て。」\nプレイヤーはミケの様子を見ながら、特別な働きかけをした。\n\nミケはブラシを持つ手の働きかけに応え、うれしそうに目を閉じた。\n\n二人の間合いが、少し近づいた。"
+    },
+    {
+      "scene": "simultaneous",
+      "keep": "none",
+      "source": "人：既存定型文（フォールバック）  ／ 猫：既存定型文（フォールバック） （専用操作を優先、なければ同じ反応の操作共通文）",
+      "body": "プレイヤー「ミケ、こっちを見て。」\nプレイヤーはミケの様子を見ながら、特別な働きかけをした。\n\nミケはその働きかけを受け止めた。 ミケは心を開いた様子を見せた。\n\n二人の間合いが、少し近づいた。"
+    }
+  ],
+  "scope": "Tool preview and selection only; no Unity execution"
+}

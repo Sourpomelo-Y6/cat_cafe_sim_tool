@@ -1,0 +1,256 @@
+{
+  "entries": [
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "brush",
+        "action": "switch",
+        "reaction": "any",
+        "scene_key": "brush__switch",
+        "target_cat": "cat-mike",
+        "narrative_scene": "switch"
+      },
+      "variants": [
+        {
+          "id": "dd1c786b20325478ba3f55854db0ebae",
+          "slot": 1,
+          "text": "今度はブラシでお手入れしてみようか、{cat_call}。"
+        },
+        {
+          "id": "e88d7830cb5852a48d94736744b8eea2",
+          "slot": 2,
+          "text": "ブラシを持ってきたよ。ゆっくり始めようか。"
+        },
+        {
+          "id": "42781868ac9251eebe6e02d80298396f",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "brush",
+        "action": "switch",
+        "reaction": "any",
+        "scene_key": "brush__switch",
+        "narrative_scene": "switch"
+      },
+      "variants": [
+        {
+          "id": "3de69494c33f5ee2b52ac954a9b1327e",
+          "slot": 1,
+          "text": "{cat}はそばに出てきたブラシへ、ぱっと目を向けた。"
+        },
+        {
+          "id": "43c55e870276522981590105d67e8173",
+          "slot": 2,
+          "text": "{cat}はちょこんと座ったまま、ブラシを持つ手を見つめた。"
+        },
+        {
+          "id": "dcf9ede25d7b53f6a316b526398fdf98",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "brush",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "brush__connect",
+        "target_cat": "cat-mike",
+        "narrative_scene": "connect"
+      },
+      "variants": [
+        {
+          "id": "76a53cfe91a855fc89be06e8e81db6b8",
+          "slot": 1,
+          "text": "ブラシを近づける頃合い、わかってきた気がする。"
+        },
+        {
+          "id": "8f61984961795ed0b7eb351262ee1765",
+          "slot": 2,
+          "text": "{cat_call}、お手入れにも誘う間合いがあるんだね。"
+        },
+        {
+          "id": "5fb75638462c5b87be75c825610a802a",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "brush",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "brush__connect",
+        "narrative_scene": "connect"
+      },
+      "variants": [
+        {
+          "id": "6cabcd4c76c951238a71c26f87323e1d",
+          "slot": 1,
+          "text": "{cat}はブラシを持つ手に注意を向け、お手入れの誘いに応じた。"
+        },
+        {
+          "id": "b346e609eb69520aa87cabae095bcea6",
+          "slot": 2,
+          "text": "{cat}は近くのブラシをとらえ、相手の働きかけを受け止めた。"
+        },
+        {
+          "id": "08ccb374d0d357a68b139357bc6b2cd3",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "brush",
+        "target_cat": "cat-mike",
+        "narrative_scene": "open_up"
+      },
+      "variants": [
+        {
+          "id": "b1973d8fba945819b5c926a6ed91d624",
+          "slot": 1,
+          "text": "お手入れの時間も、のんびりいこうね。"
+        },
+        {
+          "id": "0c61c2eee958573984101a37d2d3150b",
+          "slot": 2,
+          "text": "{cat_call}、そんな顔を見せてくれると、うれしいな。"
+        },
+        {
+          "id": "826488392c73553cb25fcb5d2085de4a",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "brush",
+        "narrative_scene": "open_up"
+      },
+      "variants": [
+        {
+          "id": "b5ab687693f759a9bce445911d037dd0",
+          "slot": 1,
+          "text": "{cat}はブラシのそばで目元をゆるめ、相手に親しみを見せた。"
+        },
+        {
+          "id": "e5f3a20459d1586f9a2fb47774a5cddd",
+          "slot": 2,
+          "text": "{cat}は気を許したような表情で、お手入れのひとときを相手と過ごした。"
+        },
+        {
+          "id": "fadc4ef8ad635130a4465172cf43cd3c",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "brush",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "brush__connect",
+        "target_cat": "cat-mike",
+        "narrative_scene": "simultaneous"
+      },
+      "variants": [
+        {
+          "id": "5cc3a194a08953ef85da439622d4337c",
+          "slot": 1,
+          "text": "お手入れの間合いが合うと、ぐっと仲良くなれた気がする。"
+        },
+        {
+          "id": "42fbced428f659cb9b317095e8a9ecc7",
+          "slot": 2,
+          "text": "{cat_call}、ブラシ越しにも気持ちが伝わったかな。"
+        },
+        {
+          "id": "962b965c7d69595dad0781f4ee443f17",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "brush",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "brush__connect",
+        "narrative_scene": "simultaneous"
+      },
+      "variants": [
+        {
+          "id": "ea84fc17b1ca51d0b588925ecc373277",
+          "slot": 1,
+          "text": "{cat}はブラシを持つ手の働きかけに応え、うれしそうに目を閉じた。"
+        },
+        {
+          "id": "790cbfe5505e5f38a77e92a10bbd4f94",
+          "slot": 2,
+          "text": "{cat}はお手入れの誘いを受け止め、相手に気を許すように口元をほころばせた。"
+        },
+        {
+          "id": "fc8770e5db6855e6b42864000d34f441",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    }
+  ],
+  "profiles": [
+    {
+      "id": "player",
+      "kind": "speech",
+      "name": "プレイヤー",
+      "game_id": "player",
+      "content_id": "",
+      "notes": "役割：猫カフェで猫と個別に交流するプレイヤー。年齢・性別・職業・来歴は固定しない。口調：親しみのある、やわらかな常体。「〜しようか」「〜してみよう」「〜してもいいかな」「〜だね」を基本とする。猫への呼びかけは {cat_call} とし、人物に設定した呼び名を使う。一人称・二人称はできるだけ省略する。接し方：様子を見ながら誘い、無理に応じさせない。休憩は自然に提案し、拒否や低体力を責めない。冗談・幼児語・命令調・過剰な感嘆符・恋愛表現・飼い主としての断定は避ける。1案は1つの短いセリフだけ、目安10〜30字、長くても40字程度。かぎ括弧・話者名・行動文は付けない。猫の気持ちや成功を決めつけず、実際の行動結果を先取りしない。3案は語尾だけでなく誘い方や言葉の焦点を変え、人物像と行動の条件は同じにする。",
+      "call": "{cat}",
+      "enabled": true
+    },
+    {
+      "id": "cat-mike",
+      "kind": "cat_response",
+      "name": "ミケ",
+      "game_id": "cat-mike",
+      "content_id": "playtest-mike",
+      "notes": "三毛の毛並みが愛らしいミケは、カフェのムードメーカーです。短毛で動きが機敏、のんびりとした佇まいがたまらない癒やしを提供してくれます。",
+      "call": "{cat}",
+      "enabled": true
+    }
+  ],
+  "unity_imported": false,
+  "route": "existing Tk fields -> save_draft -> preview; manual authoring, no LLM request"
+}
