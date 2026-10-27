@@ -1,0 +1,8 @@
+{
+  "existing_tracked_diffs_unchanged_before_docs_addition": {
+    "Tool": true,
+    "Docs": true,
+    "Python": true,
+    "Unity": true
+  }
+}

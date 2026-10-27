@@ -1,0 +1,33 @@
+{
+  "start": {
+    "build": 5046668269,
+    "logs": 18358473210,
+    "generated": 3277372585,
+    "content_images": 1276729646,
+    "drafts": 312776,
+    "library": 7358000371
+  },
+  "end": {
+    "build": 5046668269,
+    "logs": 18358473210,
+    "generated": 3277372585,
+    "content_images": 1276759681,
+    "drafts": 342811,
+    "library": 7358000371
+  },
+  "delta": {
+    "build": 0,
+    "logs": 0,
+    "generated": 0,
+    "content_images": 30035,
+    "drafts": 30035,
+    "library": 0
+  },
+  "standalone_children": [
+    "build.lock",
+    "Latest",
+    "Runs"
+  ],
+  "production_files_bytes_excluding_capacity_record": 668733,
+  "production_files_count_excluding_capacity_record": 14
+}

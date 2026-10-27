@@ -1,0 +1,3000 @@
+{
+  "entries": {
+    "teaser/neutral": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "teaser",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "teaser"
+      },
+      "variants": [
+        {
+          "id": "cef7808736bb52578e4e25763c73a0d8",
+          "slot": 1,
+          "text": "{cat}はねこじゃらしの動きを眺めている。急いで応じず、自分の間合いで目を向けた。"
+        },
+        {
+          "id": "b573e0c412ec541e8056b8afea701cf1",
+          "slot": 2,
+          "text": "{cat}の三角の耳がねこじゃらしへ向いた。丸い顔の表情は穏やかなままだ。"
+        },
+        {
+          "id": "23777652d2ef5500862f7791184a3b1c",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "teaser/favorable": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "teaser",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "teaser"
+      },
+      "variants": [
+        {
+          "id": "914a33f425f85926b9f763a7001e1968",
+          "slot": 1,
+          "text": "{cat}はねこじゃらしを目で追い、楽しげな表情を見せた。ひと呼吸おいてから、誘いに応じている。"
+        },
+        {
+          "id": "733fe7dce4c059fd87452a039da7b529",
+          "slot": 2,
+          "text": "{cat}はねこじゃらしの動きを気に入ったようだ。縞のある尾の先が、軽く揺れた。"
+        },
+        {
+          "id": "ed69b9f388515aa39badd9ad4c24a434",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "teaser/enthusiastic": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "teaser",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "teaser"
+      },
+      "variants": [
+        {
+          "id": "a2c5dda068f05288b29cdfab13f3e237",
+          "slot": 1,
+          "text": "{cat}のオリーブグリーンの目が、ねこじゃらしに釘づけになった。次の動きを待つ顔に熱がこもる。"
+        },
+        {
+          "id": "f55e4bde939d517aab8520a7821c7eb2",
+          "slot": 2,
+          "text": "{cat}はねこじゃらし遊びにすっかり乗り気だ。さっきまでのゆったりした間が、短くなっている。"
+        },
+        {
+          "id": "03e3b9af14935ec3af33825ad4c678d4",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "teaser/confused": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "teaser",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "teaser"
+      },
+      "variants": [
+        {
+          "id": "f3821ba303c15d278fb6fb1ef816bd9b",
+          "slot": 1,
+          "text": "{cat}はねこじゃらしへ目を向けたところで、反応を止めた。誘いの調子をつかめずにいるようだ。"
+        },
+        {
+          "id": "756a0c5b28135a2c81c8d7a097506253",
+          "slot": 2,
+          "text": "{cat}の耳がねこじゃらしと相手の方を向き直った。どう応じるか、決めかねている。"
+        },
+        {
+          "id": "564e556c550d5ce6af5b1aa938ce5669",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "teaser/listless": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "teaser",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "teaser"
+      },
+      "variants": [
+        {
+          "id": "c7230ef43a585a54afa8c30fae148620",
+          "slot": 1,
+          "text": "{cat}はねこじゃらしを眺めているが、目で追う動きは重い。今は疲れが出ているようだ。"
+        },
+        {
+          "id": "c0c41dffb04c50ad8e065626f18e488a",
+          "slot": 2,
+          "text": "{cat}はねこじゃらしにわずかに耳を向けた。遊びに応じる勢いはなく、けだるそうだ。"
+        },
+        {
+          "id": "c9610a1de82759dfa72395f20885f5a6",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "pet/neutral": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "pet",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "pet"
+      },
+      "variants": [
+        {
+          "id": "5dce1a35a2785313b41742f4755f3af2",
+          "slot": 1,
+          "text": "{cat}はなでる手に気づき、静かに目を向けた。大きく甘えず、穏やかに受け止めている。"
+        },
+        {
+          "id": "4f0cd2cdbb865e8888c2725554b84c15",
+          "slot": 2,
+          "text": "{cat}はなでられる間、相手の様子を見ている。丸い顔には、まだはっきりした喜びは浮かばない。"
+        },
+        {
+          "id": "76bd11e4cb5f530f942bdd021d0f8cc6",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "pet/favorable": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "pet",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "pet"
+      },
+      "variants": [
+        {
+          "id": "e73e70ae5f0b58a1b68e23a6ae5a887f",
+          "slot": 1,
+          "text": "{cat}はなでる手に心地よさそうな顔をした。ゆっくりと目元が和らいでいく。"
+        },
+        {
+          "id": "05eafdfc7d5557beaca8448bf7198719",
+          "slot": 2,
+          "text": "{cat}はなでられることを気に入ったようだ。縞のある尾の先を、くつろいだ調子で動かした。"
+        },
+        {
+          "id": "c7191e99f2ad5297ba86e0368a4df3d5",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "pet/confused": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "pet",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "pet"
+      },
+      "variants": [
+        {
+          "id": "3484972c9ca15fe2a322a7d24a0071e6",
+          "slot": 1,
+          "text": "{cat}はなでる手を気にして、相手へ視線を戻した。いつもの落ち着いた顔に、迷いが見える。"
+        },
+        {
+          "id": "e7b1d0ff77455a8cb5c40ebebcc25d35",
+          "slot": 2,
+          "text": "{cat}はなでられることに戸惑った。耳を少し動かし、心地よい間合いを探しているようだ。"
+        },
+        {
+          "id": "a55b049a187f564e8181571cafcc9031",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "pet/listless": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "pet",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "pet"
+      },
+      "variants": [
+        {
+          "id": "29dbdbacee585ec48723b6571954718c",
+          "slot": 1,
+          "text": "{cat}はなでる手へ重たげに目を向けた。疲れているらしく、表情の変化も小さい。"
+        },
+        {
+          "id": "3734aba4d5b052fe98102397aa388de2",
+          "slot": 2,
+          "text": "{cat}はなでられても、けだるそうにしている。甘えるより、静かに過ごしたいようだ。"
+        },
+        {
+          "id": "d74a6aaf47935d2f8c8ed236286e745f",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "ball/neutral": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "ball"
+      },
+      "variants": [
+        {
+          "id": "3de6a6ec4c285488a59bd5a28440991e",
+          "slot": 1,
+          "text": "{cat}はボールに目を留めた。しばらく眺めてから、ゆっくりと顔を向けている。"
+        },
+        {
+          "id": "2b28bd74c4e25d0f8ac5f1322cb062b8",
+          "slot": 2,
+          "text": "{cat}はボール遊びに控えめに応じた。耳は向いているが、張り切るほどではないらしい。"
+        },
+        {
+          "id": "19cf83191b2255218f365c666b61f127",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "ball/favorable": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "ball"
+      },
+      "variants": [
+        {
+          "id": "9efb0d46d1c4599f8e1707957b9c870b",
+          "slot": 1,
+          "text": "{cat}はボールに楽しげな視線を送った。落ち着いた顔にも、遊びへの期待がのぞく。"
+        },
+        {
+          "id": "0d40e8e66fb05ac09ac81df0b120f90f",
+          "slot": 2,
+          "text": "{cat}はボール遊びの調子が合ってきたようだ。誘いへの反応が、少し軽やかになっている。"
+        },
+        {
+          "id": "2fc8ab080def5fdeb4cf7dd6cdb8c1aa",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "ball/enthusiastic": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "ball"
+      },
+      "variants": [
+        {
+          "id": "9ffebace32c859ddaba9106d54ad2a6a",
+          "slot": 1,
+          "text": "{cat}はボールから目が離せない様子だ。オリーブグリーンの目に、遊びの続きを待つ輝きがある。"
+        },
+        {
+          "id": "7b138dacde3b502ca9b17425859df5fa",
+          "slot": 2,
+          "text": "{cat}はボール遊びに夢中になった。ゆったりした顔つきにも、抑えきれない楽しさが表れている。"
+        },
+        {
+          "id": "b4f684c53f7454d189f8a77f2e5ee5cc",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "ball/confused": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "ball"
+      },
+      "variants": [
+        {
+          "id": "6915f468fe9554b49fa9583aaccf8c9a",
+          "slot": 1,
+          "text": "{cat}はボールを見てから、相手の顔をうかがった。遊ぶきっかけがつかめないようだ。"
+        },
+        {
+          "id": "91697a947a0e570fab018ca191d59e29",
+          "slot": 2,
+          "text": "{cat}はボールへの反応をためらった。耳を向け直し、誘いの調子を確かめている。"
+        },
+        {
+          "id": "059507df385c5717a2a69e35999710a4",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "ball/listless": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "ball"
+      },
+      "variants": [
+        {
+          "id": "f8eebbb4c1bb54108e010889be4418fd",
+          "slot": 1,
+          "text": "{cat}はボールをぼんやり見ている。目を動かすのもおっくうそうで、疲れがうかがえる。"
+        },
+        {
+          "id": "81a4d03ef8e656c8acac18bd654f3b38",
+          "slot": 2,
+          "text": "{cat}はボールに気づいても、反応が遅い。遊びへの期待より、けだるさが表に出ている。"
+        },
+        {
+          "id": "1ce952e5095a540aa937fdc6268ae1e3",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "plush/neutral": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "plush"
+      },
+      "variants": [
+        {
+          "id": "dc7ecc4804735307bf2ce08464182f74",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみへ静かに顔を向けた。遊びの誘いを、ひとまず眺めている。"
+        },
+        {
+          "id": "d292c8aca9ef514c91bd386f648913c5",
+          "slot": 2,
+          "text": "{cat}はぬいぐるみに耳を向けている。興味を大きく示すことなく、落ち着いて様子を見た。"
+        },
+        {
+          "id": "62a4399c91d155d896df1d60703ab01b",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "plush/favorable": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "plush"
+      },
+      "variants": [
+        {
+          "id": "3f77315e5cb859ebae9aefacd99f93e6",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみを見て、楽しそうな顔になった。ゆっくりした応じ方にも、遊ぶ気持ちがある。"
+        },
+        {
+          "id": "b44c27a27fd95fbf9429e0eebeccba6a",
+          "slot": 2,
+          "text": "{cat}はぬいぐるみ遊びに機嫌よく応じた。黒褐色の尾先が、小さく弾むように動いた。"
+        },
+        {
+          "id": "1236624ea57a5379820da90a72f06e47",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "plush/confused": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "plush"
+      },
+      "variants": [
+        {
+          "id": "4b148a1f8f3e56c1af369df572c355ac",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみを眺めたまま、首をわずかに傾けた。誘い方がしっくりこないようだ。"
+        },
+        {
+          "id": "05009e12ab5f56d88799fd70e5cd879d",
+          "slot": 2,
+          "text": "{cat}はぬいぐるみと相手を見比べている。遊びに乗るには、もう少し間が欲しそうだ。"
+        },
+        {
+          "id": "99fbd57948d05c54bab7f1917c0a0eb7",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "plush/listless": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "plush"
+      },
+      "variants": [
+        {
+          "id": "821ef713e85553f383600a5ccdb3cfb7",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみに重たげな視線を送った。遊びの誘いにも、疲れた様子が隠れない。"
+        },
+        {
+          "id": "c8beb6a5bff153d084fc0b67785eb1b1",
+          "slot": 2,
+          "text": "{cat}はぬいぐるみへの反応が薄い。耳の動きも鈍く、今は遊ぶ元気が少ないようだ。"
+        },
+        {
+          "id": "e79bf2fd36505c8db7ad339dc8be8207",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "tunnel/neutral": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "61e22afc45ce53d6b4b528c75eaf805b",
+          "slot": 1,
+          "text": "{cat}はトンネルへ目を向け、静かに眺めた。すぐには気持ちを決めず、様子を見ている。"
+        },
+        {
+          "id": "a318604b13e559499cc2fccdd0c8f883",
+          "slot": 2,
+          "text": "{cat}はトンネル遊びに穏やかな反応を返した。関心はあるが、まだ控えめだ。"
+        },
+        {
+          "id": "968e734dc6d05e8b86025a9488212aa4",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "tunnel/favorable": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "c8c17e8629aa544190735bd9d0dc59e3",
+          "slot": 1,
+          "text": "{cat}はトンネルへ楽しそうな顔を向けた。ゆったりした間合いの中にも、期待が見える。"
+        },
+        {
+          "id": "3538591d6db55367a44beaf774548101",
+          "slot": 2,
+          "text": "{cat}はトンネル遊びの誘いを気に入ったようだ。耳を向けたまま、いきいきと様子を見ている。"
+        },
+        {
+          "id": "b07fc80959c5583085c6fe864b78a63c",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "tunnel/enthusiastic": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "4e6b31a78d8d566ba05fcb03293a6b18",
+          "slot": 1,
+          "text": "{cat}はトンネル遊びにすっかり気を引かれている。丸い顔に、次も遊びたいという気持ちがあふれた。"
+        },
+        {
+          "id": "aa2c140e42b15426a9ecedf74f46f0ea",
+          "slot": 2,
+          "text": "{cat}はトンネルへ熱心な視線を注いだ。普段の静かな目にも、はずむような楽しさがある。"
+        },
+        {
+          "id": "e42f73c3d7e357adac1c473d0be4fc0c",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "tunnel/confused": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "1855208193b75fe8b5e69cab35d6c0fc",
+          "slot": 1,
+          "text": "{cat}はトンネルを気にしつつ、相手の様子をうかがった。遊びに応じる調子が合わないらしい。"
+        },
+        {
+          "id": "f480c12a03a15be78c034b478a78124f",
+          "slot": 2,
+          "text": "{cat}はトンネルへの反応をためらっている。三角の耳にも、少し迷いが表れた。"
+        },
+        {
+          "id": "4e13664e5b9151e79c57cbe97aac8c16",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "tunnel/listless": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "27b67c1f46e05ed2a5d57775519088e6",
+          "slot": 1,
+          "text": "{cat}はトンネルを眺める目にも力がない。疲れているらしく、誘いへの反応は小さい。"
+        },
+        {
+          "id": "fd95c8feab51590e8364bfe8388df5e1",
+          "slot": 2,
+          "text": "{cat}はトンネルへゆっくりと顔を向けた。遊びを始めるには、気だるさが勝っているようだ。"
+        },
+        {
+          "id": "1418bae78708545297e9e533b04fff9f",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "brush/neutral": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "608c203af7e65ac784a16c8f0d63fc2a",
+          "slot": 1,
+          "text": "{cat}はブラシの動きを静かに見ている。手入れの様子を、落ち着いた顔で受け止めた。"
+        },
+        {
+          "id": "24fe332710a65d4e97010bf033bff7ea",
+          "slot": 2,
+          "text": "{cat}はブラッシングに控えめに応じた。三角の耳が、時折ブラシの方を向く。"
+        },
+        {
+          "id": "90a2c6ea7a3752d09a5859306e5c89fa",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "brush/favorable": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "9db8347fe5dc505893067682f59f10cb",
+          "slot": 1,
+          "text": "{cat}はブラッシングに心地よさそうな表情を見せた。丸い顔の目元が、ゆるやかに和らぐ。"
+        },
+        {
+          "id": "ed58e79899df5f86b8a709707a463166",
+          "slot": 2,
+          "text": "{cat}はブラシの動きに機嫌よく応じている。相手を見る目にも、くつろいだ様子がにじんだ。"
+        },
+        {
+          "id": "8ad5fe3d139756bca62143aa37656b78",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "brush/confused": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "55f481c536f15791bff1b393172eb9ed",
+          "slot": 1,
+          "text": "{cat}はブラシを気にして、耳を動かした。手入れの調子が合わず、落ち着きどころを探している。"
+        },
+        {
+          "id": "2bd7efd245ba507795347ea1aadc750f",
+          "slot": 2,
+          "text": "{cat}はブラシから相手へ目を移した。どう受け止めようかと、少し戸惑っているようだ。"
+        },
+        {
+          "id": "e3c5c503c0815ea89a1e6153ccdcea58",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "brush/listless": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "e17a1e237af15bd8b18962cbb0365ce1",
+          "slot": 1,
+          "text": "{cat}はブラシの方へゆっくり目をやった。疲れがあるのか、手入れへの反応も乏しい。"
+        },
+        {
+          "id": "3981400a2e0d56a5a57e75f5cca4ba97",
+          "slot": 2,
+          "text": "{cat}はブラッシングにもけだるそうだ。いつもの穏やかさに、反応の鈍さが重なっている。"
+        },
+        {
+          "id": "9cebe1b09183587ebe4d9ab426cbff7c",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "voice/neutral": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "e84c5a0709c85ad8a9d1d750ac22300f",
+          "slot": 1,
+          "text": "{cat}は声を聞いて、ひと呼吸おいてから顔を向けた。落ち着いた目で相手を見ている。"
+        },
+        {
+          "id": "1cb7ceced27e526daf272b20f460e9d0",
+          "slot": 2,
+          "text": "{cat}の耳が声の方を向いた。呼びかけには気づいたが、表情は穏やかなままだ。"
+        },
+        {
+          "id": "a0587dbe12a35b2cbd22667e2d55f221",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "voice/confused": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "cefb660958a750568e2b956ab221c8ef",
+          "slot": 1,
+          "text": "{cat}は呼びかける相手を、不思議そうに見た。声の調子をどう受け取るか迷っているらしい。"
+        },
+        {
+          "id": "138313daeefe5fcc947543b520ae8dbe",
+          "slot": 2,
+          "text": "{cat}は声に耳を向けたものの、反応が定まらない。丸い顔に、小さな戸惑いが浮かんだ。"
+        },
+        {
+          "id": "0ebf0d78ca2f5cbb8b8425bfdab0ec31",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "voice/listless": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "11070973c9c459168f9f419c82c01c84",
+          "slot": 1,
+          "text": "{cat}は声の方へ重たげに目を向けた。疲れているらしく、応じるまでにも間がある。"
+        },
+        {
+          "id": "71b87273c7f95f2a8ecbe1d0b31eb3c3",
+          "slot": 2,
+          "text": "{cat}は呼びかけを聞いているようだが、耳の動きはわずかだ。けだるさが表情ににじんでいる。"
+        },
+        {
+          "id": "02684d64d8d357eab99cc0e210bcea25",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "presence/neutral": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "613cfd92594c5d2ba59e6359713918d5",
+          "slot": 1,
+          "text": "{cat}は見守る相手に一度目を向け、静かに過ごしている。この距離を穏やかに受け止めているようだ。"
+        },
+        {
+          "id": "acbc9204e29154c2915b7704c1cf2850",
+          "slot": 2,
+          "text": "{cat}はそばの気配に気づき、耳を向けた。急いで応じることなく、落ち着いている。"
+        },
+        {
+          "id": "4ba14f6049d3561e95685d7478d99803",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "presence/confused": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "f8a6947d4c585a92b5606af9701fee2b",
+          "slot": 1,
+          "text": "{cat}は見守る相手へ、確かめるような視線を送った。静かな間合いの取り方に迷っているようだ。"
+        },
+        {
+          "id": "28388509739f578e8e1839dff0644c53",
+          "slot": 2,
+          "text": "{cat}はそばの気配を気にしている。相手を見る顔には、少し落ち着かなさがある。"
+        },
+        {
+          "id": "1c36982d8ffc5a2da4f9ef3fa19d17bb",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "presence/listless": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "227f236cf0c75c24a235b227837dc7c7",
+          "slot": 1,
+          "text": "{cat}は見守る相手へゆっくり目を向けた。周りを気にする元気も少ないらしく、けだるそうだ。"
+        },
+        {
+          "id": "81d1a8b1bcb2551f9a11fa62299dc3ea",
+          "slot": 2,
+          "text": "{cat}はそばの気配への反応も鈍い。静かに過ごす顔に、疲れが見える。"
+        },
+        {
+          "id": "027b58ca0c3d54d3a500bc7a0f9c67db",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "pause/neutral": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "pause",
+        "action": "pause",
+        "reaction": "neutral",
+        "scene_key": "pause"
+      },
+      "variants": [
+        {
+          "id": "b0afd6b3ec1c5f968896088474eda1ea",
+          "slot": 1,
+          "text": "{cat}は休憩のひとときを過ごしている。穏やかな丸い顔で、周りの様子を眺めた。"
+        },
+        {
+          "id": "bf7c3a468c90533e90864215d6d05b44",
+          "slot": 2,
+          "text": "{cat}はひと息つき、ゆったりと耳を動かした。何かに急かされることなく、静かにしている。"
+        },
+        {
+          "id": "5d0661ec599e54e0b930b4b755df7920",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "pause/listless": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "pause",
+        "action": "pause",
+        "reaction": "listless",
+        "scene_key": "pause"
+      },
+      "variants": [
+        {
+          "id": "9a8967122c9a5e8e95c5f83a5e3ba9dd",
+          "slot": 1,
+          "text": "{cat}は疲れた様子で休んでいる。オリーブグリーンの目にも勢いはなく、反応はゆっくりだ。"
+        },
+        {
+          "id": "14b27c5a6dd658179d89c077ed53575e",
+          "slot": 2,
+          "text": "{cat}はけだるそうに休憩している。尾の先の動きも小さく、今は静かに過ごしたいようだ。"
+        },
+        {
+          "id": "d27bd9531592502da92405540368d427",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    }
+  },
+  "previews": [
+    {
+      "mode": "teaser",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ねこじゃらしで遊ぼうか ムギ」\nプレイヤーはねこじゃらしを床の近くで揺らした。\n\nムギはねこじゃらしの動きを眺めている。急いで応じず、自分の間合いで目を向けた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d6ec25bc0d9f4518a1a2d56e9c6f0373.png",
+      "resolved": "teaser__direct"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ねこじゃらしで遊ぼうか ムギ」\nプレイヤーはねこじゃらしを床の近くで揺らした。\n\nムギの三角の耳がねこじゃらしへ向いた。丸い顔の表情は穏やかなままだ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d6ec25bc0d9f4518a1a2d56e9c6f0373.png",
+      "resolved": "teaser__direct"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ねこじゃらし、ムギにしてみようか。」\nプレイヤーはムギの様子に合わせてねこじゃらしを動かした。\n\nムギはねこじゃらしの動きを眺めている。急いで応じず、自分の間合いで目を向けた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d6ec25bc0d9f4518a1a2d56e9c6f0373.png",
+      "resolved": "teaser__adapt"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ねこじゃらし、ムギにしてみようか。」\nプレイヤーはムギの様子に合わせてねこじゃらしを動かした。\n\nムギの三角の耳がねこじゃらしへ向いた。丸い顔の表情は穏やかなままだ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d6ec25bc0d9f4518a1a2d56e9c6f0373.png",
+      "resolved": "teaser__adapt"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "neutral",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ムギ、ちょっと揺らしてみようか。」\nプレイヤーはねこじゃらしを勢いよく動かした。\n\nムギはねこじゃらしの動きを眺めている。急いで応じず、自分の間合いで目を向けた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f019c4be71334b6abb48528cd618df90.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "neutral",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ムギ、ちょっと揺らしてみようか。」\nプレイヤーはねこじゃらしを勢いよく動かした。\n\nムギの三角の耳がねこじゃらしへ向いた。丸い顔の表情は穏やかなままだ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f019c4be71334b6abb48528cd618df90.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "neutral",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ムギ、フェイントしてみようか？」\nプレイヤーはねこじゃらしの動きに緩急をつけた。\n\nムギはねこじゃらしの動きを眺めている。急いで応じず、自分の間合いで目を向けた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f019c4be71334b6abb48528cd618df90.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "neutral",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ムギ、フェイントしてみようか？」\nプレイヤーはねこじゃらしの動きに緩急をつけた。\n\nムギの三角の耳がねこじゃらしへ向いた。丸い顔の表情は穏やかなままだ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f019c4be71334b6abb48528cd618df90.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "favorable",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ねこじゃらしで遊ぼうか ムギ」\nプレイヤーはねこじゃらしを床の近くで揺らした。\n\nムギはねこじゃらしを目で追い、楽しげな表情を見せた。ひと呼吸おいてから、誘いに応じている。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d6ec25bc0d9f4518a1a2d56e9c6f0373.png",
+      "resolved": "teaser__direct"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "favorable",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ねこじゃらしで遊ぼうか ムギ」\nプレイヤーはねこじゃらしを床の近くで揺らした。\n\nムギはねこじゃらしの動きを気に入ったようだ。縞のある尾の先が、軽く揺れた。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d6ec25bc0d9f4518a1a2d56e9c6f0373.png",
+      "resolved": "teaser__direct"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "favorable",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ねこじゃらし、ムギにしてみようか。」\nプレイヤーはムギの様子に合わせてねこじゃらしを動かした。\n\nムギはねこじゃらしを目で追い、楽しげな表情を見せた。ひと呼吸おいてから、誘いに応じている。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d6ec25bc0d9f4518a1a2d56e9c6f0373.png",
+      "resolved": "teaser__adapt"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "favorable",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ねこじゃらし、ムギにしてみようか。」\nプレイヤーはムギの様子に合わせてねこじゃらしを動かした。\n\nムギはねこじゃらしの動きを気に入ったようだ。縞のある尾の先が、軽く揺れた。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d6ec25bc0d9f4518a1a2d56e9c6f0373.png",
+      "resolved": "teaser__adapt"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "favorable",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ムギ、ちょっと揺らしてみようか。」\nプレイヤーはねこじゃらしを勢いよく動かした。\n\nムギはねこじゃらしを目で追い、楽しげな表情を見せた。ひと呼吸おいてから、誘いに応じている。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f019c4be71334b6abb48528cd618df90.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "favorable",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ムギ、ちょっと揺らしてみようか。」\nプレイヤーはねこじゃらしを勢いよく動かした。\n\nムギはねこじゃらしの動きを気に入ったようだ。縞のある尾の先が、軽く揺れた。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f019c4be71334b6abb48528cd618df90.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "favorable",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ムギ、フェイントしてみようか？」\nプレイヤーはねこじゃらしの動きに緩急をつけた。\n\nムギはねこじゃらしを目で追い、楽しげな表情を見せた。ひと呼吸おいてから、誘いに応じている。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f019c4be71334b6abb48528cd618df90.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "favorable",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ムギ、フェイントしてみようか？」\nプレイヤーはねこじゃらしの動きに緩急をつけた。\n\nムギはねこじゃらしの動きを気に入ったようだ。縞のある尾の先が、軽く揺れた。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f019c4be71334b6abb48528cd618df90.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "enthusiastic",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ねこじゃらしで遊ぼうか ムギ」\nプレイヤーはねこじゃらしを床の近くで揺らした。\n\nムギのオリーブグリーンの目が、ねこじゃらしに釘づけになった。次の動きを待つ顔に熱がこもる。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d6ec25bc0d9f4518a1a2d56e9c6f0373.png",
+      "resolved": "teaser__direct"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "enthusiastic",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ねこじゃらしで遊ぼうか ムギ」\nプレイヤーはねこじゃらしを床の近くで揺らした。\n\nムギはねこじゃらし遊びにすっかり乗り気だ。さっきまでのゆったりした間が、短くなっている。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d6ec25bc0d9f4518a1a2d56e9c6f0373.png",
+      "resolved": "teaser__direct"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "enthusiastic",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ねこじゃらし、ムギにしてみようか。」\nプレイヤーはムギの様子に合わせてねこじゃらしを動かした。\n\nムギのオリーブグリーンの目が、ねこじゃらしに釘づけになった。次の動きを待つ顔に熱がこもる。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d6ec25bc0d9f4518a1a2d56e9c6f0373.png",
+      "resolved": "teaser__adapt"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "enthusiastic",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ねこじゃらし、ムギにしてみようか。」\nプレイヤーはムギの様子に合わせてねこじゃらしを動かした。\n\nムギはねこじゃらし遊びにすっかり乗り気だ。さっきまでのゆったりした間が、短くなっている。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d6ec25bc0d9f4518a1a2d56e9c6f0373.png",
+      "resolved": "teaser__adapt"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "enthusiastic",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ムギ、ちょっと揺らしてみようか。」\nプレイヤーはねこじゃらしを勢いよく動かした。\n\nムギのオリーブグリーンの目が、ねこじゃらしに釘づけになった。次の動きを待つ顔に熱がこもる。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f019c4be71334b6abb48528cd618df90.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "enthusiastic",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ムギ、ちょっと揺らしてみようか。」\nプレイヤーはねこじゃらしを勢いよく動かした。\n\nムギはねこじゃらし遊びにすっかり乗り気だ。さっきまでのゆったりした間が、短くなっている。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f019c4be71334b6abb48528cd618df90.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "enthusiastic",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ムギ、フェイントしてみようか？」\nプレイヤーはねこじゃらしの動きに緩急をつけた。\n\nムギのオリーブグリーンの目が、ねこじゃらしに釘づけになった。次の動きを待つ顔に熱がこもる。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f019c4be71334b6abb48528cd618df90.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "enthusiastic",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ムギ、フェイントしてみようか？」\nプレイヤーはねこじゃらしの動きに緩急をつけた。\n\nムギはねこじゃらし遊びにすっかり乗り気だ。さっきまでのゆったりした間が、短くなっている。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f019c4be71334b6abb48528cd618df90.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ねこじゃらしで遊ぼうか ムギ」\nプレイヤーはねこじゃらしを床の近くで揺らした。\n\nムギはねこじゃらしへ目を向けたところで、反応を止めた。誘いの調子をつかめずにいるようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d6ec25bc0d9f4518a1a2d56e9c6f0373.png",
+      "resolved": "teaser__direct"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ねこじゃらしで遊ぼうか ムギ」\nプレイヤーはねこじゃらしを床の近くで揺らした。\n\nムギの耳がねこじゃらしと相手の方を向き直った。どう応じるか、決めかねている。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d6ec25bc0d9f4518a1a2d56e9c6f0373.png",
+      "resolved": "teaser__direct"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ねこじゃらし、ムギにしてみようか。」\nプレイヤーはムギの様子に合わせてねこじゃらしを動かした。\n\nムギはねこじゃらしへ目を向けたところで、反応を止めた。誘いの調子をつかめずにいるようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d6ec25bc0d9f4518a1a2d56e9c6f0373.png",
+      "resolved": "teaser__adapt"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ねこじゃらし、ムギにしてみようか。」\nプレイヤーはムギの様子に合わせてねこじゃらしを動かした。\n\nムギの耳がねこじゃらしと相手の方を向き直った。どう応じるか、決めかねている。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d6ec25bc0d9f4518a1a2d56e9c6f0373.png",
+      "resolved": "teaser__adapt"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "confused",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ムギ、ちょっと揺らしてみようか。」\nプレイヤーはねこじゃらしを勢いよく動かした。\n\nムギはねこじゃらしへ目を向けたところで、反応を止めた。誘いの調子をつかめずにいるようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f019c4be71334b6abb48528cd618df90.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "confused",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ムギ、ちょっと揺らしてみようか。」\nプレイヤーはねこじゃらしを勢いよく動かした。\n\nムギの耳がねこじゃらしと相手の方を向き直った。どう応じるか、決めかねている。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f019c4be71334b6abb48528cd618df90.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "confused",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ムギ、フェイントしてみようか？」\nプレイヤーはねこじゃらしの動きに緩急をつけた。\n\nムギはねこじゃらしへ目を向けたところで、反応を止めた。誘いの調子をつかめずにいるようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f019c4be71334b6abb48528cd618df90.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "confused",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ムギ、フェイントしてみようか？」\nプレイヤーはねこじゃらしの動きに緩急をつけた。\n\nムギの耳がねこじゃらしと相手の方を向き直った。どう応じるか、決めかねている。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f019c4be71334b6abb48528cd618df90.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ねこじゃらしで遊ぼうか ムギ」\nプレイヤーはねこじゃらしを床の近くで揺らした。\n\nムギはねこじゃらしを眺めているが、目で追う動きは重い。今は疲れが出ているようだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d6ec25bc0d9f4518a1a2d56e9c6f0373.png",
+      "resolved": "teaser__direct"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ねこじゃらしで遊ぼうか ムギ」\nプレイヤーはねこじゃらしを床の近くで揺らした。\n\nムギはねこじゃらしにわずかに耳を向けた。遊びに応じる勢いはなく、けだるそうだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d6ec25bc0d9f4518a1a2d56e9c6f0373.png",
+      "resolved": "teaser__direct"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ねこじゃらし、ムギにしてみようか。」\nプレイヤーはムギの様子に合わせてねこじゃらしを動かした。\n\nムギはねこじゃらしを眺めているが、目で追う動きは重い。今は疲れが出ているようだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d6ec25bc0d9f4518a1a2d56e9c6f0373.png",
+      "resolved": "teaser__adapt"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ねこじゃらし、ムギにしてみようか。」\nプレイヤーはムギの様子に合わせてねこじゃらしを動かした。\n\nムギはねこじゃらしにわずかに耳を向けた。遊びに応じる勢いはなく、けだるそうだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d6ec25bc0d9f4518a1a2d56e9c6f0373.png",
+      "resolved": "teaser__adapt"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "listless",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ムギ、ちょっと揺らしてみようか。」\nプレイヤーはねこじゃらしを勢いよく動かした。\n\nムギはねこじゃらしを眺めているが、目で追う動きは重い。今は疲れが出ているようだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f019c4be71334b6abb48528cd618df90.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "listless",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ムギ、ちょっと揺らしてみようか。」\nプレイヤーはねこじゃらしを勢いよく動かした。\n\nムギはねこじゃらしにわずかに耳を向けた。遊びに応じる勢いはなく、けだるそうだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f019c4be71334b6abb48528cd618df90.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "listless",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ムギ、フェイントしてみようか？」\nプレイヤーはねこじゃらしの動きに緩急をつけた。\n\nムギはねこじゃらしを眺めているが、目で追う動きは重い。今は疲れが出ているようだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f019c4be71334b6abb48528cd618df90.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "listless",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ムギ、フェイントしてみようか？」\nプレイヤーはねこじゃらしの動きに緩急をつけた。\n\nムギはねこじゃらしにわずかに耳を向けた。遊びに応じる勢いはなく、けだるそうだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f019c4be71334b6abb48528cd618df90.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "pet",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ねえムギ、少し撫でてみようか」\nプレイヤーはムギの頭をなでた。\n\nムギはなでる手に気づき、静かに目を向けた。大きく甘えず、穏やかに受け止めている。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\82836f3fd0df426c8acb0775d84aa2dc.png",
+      "resolved": "pet__direct"
+    },
+    {
+      "mode": "pet",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ねえムギ、少し撫でてみようか」\nプレイヤーはムギの頭をなでた。\n\nムギはなでられる間、相手の様子を見ている。丸い顔には、まだはっきりした喜びは浮かばない。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\82836f3fd0df426c8acb0775d84aa2dc.png",
+      "resolved": "pet__direct"
+    },
+    {
+      "mode": "pet",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「やさしく撫でてみよう、ムギ。」\nプレイヤーはムギの様子に合わせ、そっとなでた。\n\nムギはなでる手に気づき、静かに目を向けた。大きく甘えず、穏やかに受け止めている。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\82836f3fd0df426c8acb0775d84aa2dc.png",
+      "resolved": "pet__adapt"
+    },
+    {
+      "mode": "pet",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「やさしく撫でてみよう、ムギ。」\nプレイヤーはムギの様子に合わせ、そっとなでた。\n\nムギはなでられる間、相手の様子を見ている。丸い顔には、まだはっきりした喜びは浮かばない。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\82836f3fd0df426c8acb0775d84aa2dc.png",
+      "resolved": "pet__adapt"
+    },
+    {
+      "mode": "pet",
+      "reaction": "favorable",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ねえムギ、少し撫でてみようか」\nプレイヤーはムギの頭をなでた。\n\nムギはなでる手に心地よさそうな顔をした。ゆっくりと目元が和らいでいく。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\82836f3fd0df426c8acb0775d84aa2dc.png",
+      "resolved": "pet__direct"
+    },
+    {
+      "mode": "pet",
+      "reaction": "favorable",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ねえムギ、少し撫でてみようか」\nプレイヤーはムギの頭をなでた。\n\nムギはなでられることを気に入ったようだ。縞のある尾の先を、くつろいだ調子で動かした。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\82836f3fd0df426c8acb0775d84aa2dc.png",
+      "resolved": "pet__direct"
+    },
+    {
+      "mode": "pet",
+      "reaction": "favorable",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「やさしく撫でてみよう、ムギ。」\nプレイヤーはムギの様子に合わせ、そっとなでた。\n\nムギはなでる手に心地よさそうな顔をした。ゆっくりと目元が和らいでいく。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\82836f3fd0df426c8acb0775d84aa2dc.png",
+      "resolved": "pet__adapt"
+    },
+    {
+      "mode": "pet",
+      "reaction": "favorable",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「やさしく撫でてみよう、ムギ。」\nプレイヤーはムギの様子に合わせ、そっとなでた。\n\nムギはなでられることを気に入ったようだ。縞のある尾の先を、くつろいだ調子で動かした。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\82836f3fd0df426c8acb0775d84aa2dc.png",
+      "resolved": "pet__adapt"
+    },
+    {
+      "mode": "pet",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ねえムギ、少し撫でてみようか」\nプレイヤーはムギの頭をなでた。\n\nムギはなでる手を気にして、相手へ視線を戻した。いつもの落ち着いた顔に、迷いが見える。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\82836f3fd0df426c8acb0775d84aa2dc.png",
+      "resolved": "pet__direct"
+    },
+    {
+      "mode": "pet",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ねえムギ、少し撫でてみようか」\nプレイヤーはムギの頭をなでた。\n\nムギはなでられることに戸惑った。耳を少し動かし、心地よい間合いを探しているようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\82836f3fd0df426c8acb0775d84aa2dc.png",
+      "resolved": "pet__direct"
+    },
+    {
+      "mode": "pet",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「やさしく撫でてみよう、ムギ。」\nプレイヤーはムギの様子に合わせ、そっとなでた。\n\nムギはなでる手を気にして、相手へ視線を戻した。いつもの落ち着いた顔に、迷いが見える。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\82836f3fd0df426c8acb0775d84aa2dc.png",
+      "resolved": "pet__adapt"
+    },
+    {
+      "mode": "pet",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「やさしく撫でてみよう、ムギ。」\nプレイヤーはムギの様子に合わせ、そっとなでた。\n\nムギはなでられることに戸惑った。耳を少し動かし、心地よい間合いを探しているようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\82836f3fd0df426c8acb0775d84aa2dc.png",
+      "resolved": "pet__adapt"
+    },
+    {
+      "mode": "pet",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ねえムギ、少し撫でてみようか」\nプレイヤーはムギの頭をなでた。\n\nムギはなでる手へ重たげに目を向けた。疲れているらしく、表情の変化も小さい。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\82836f3fd0df426c8acb0775d84aa2dc.png",
+      "resolved": "pet__direct"
+    },
+    {
+      "mode": "pet",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ねえムギ、少し撫でてみようか」\nプレイヤーはムギの頭をなでた。\n\nムギはなでられても、けだるそうにしている。甘えるより、静かに過ごしたいようだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\82836f3fd0df426c8acb0775d84aa2dc.png",
+      "resolved": "pet__direct"
+    },
+    {
+      "mode": "pet",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「やさしく撫でてみよう、ムギ。」\nプレイヤーはムギの様子に合わせ、そっとなでた。\n\nムギはなでる手へ重たげに目を向けた。疲れているらしく、表情の変化も小さい。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\82836f3fd0df426c8acb0775d84aa2dc.png",
+      "resolved": "pet__adapt"
+    },
+    {
+      "mode": "pet",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「やさしく撫でてみよう、ムギ。」\nプレイヤーはムギの様子に合わせ、そっとなでた。\n\nムギはなでられても、けだるそうにしている。甘えるより、静かに過ごしたいようだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\82836f3fd0df426c8acb0775d84aa2dc.png",
+      "resolved": "pet__adapt"
+    },
+    {
+      "mode": "ball",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか ムギ」\nプレイヤーはボールを床の上で転がした。\n\nムギはボールに目を留めた。しばらく眺めてから、ゆっくりと顔を向けている。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\7b2e4f0f3d9911033be92b7b13b33946e0644e451b305cc701e4f109bc3bbfd5.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "mode": "ball",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか ムギ」\nプレイヤーはボールを床の上で転がした。\n\nムギはボール遊びに控えめに応じた。耳は向いているが、張り切るほどではないらしい。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\7b2e4f0f3d9911033be92b7b13b33946e0644e451b305cc701e4f109bc3bbfd5.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "mode": "ball",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか、ムギ」\nプレイヤーはムギの様子に合わせてボールを転がした。\n\nムギはボールに目を留めた。しばらく眺めてから、ゆっくりと顔を向けている。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\7b2e4f0f3d9911033be92b7b13b33946e0644e451b305cc701e4f109bc3bbfd5.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "mode": "ball",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか、ムギ」\nプレイヤーはムギの様子に合わせてボールを転がした。\n\nムギはボール遊びに控えめに応じた。耳は向いているが、張り切るほどではないらしい。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\7b2e4f0f3d9911033be92b7b13b33946e0644e451b305cc701e4f109bc3bbfd5.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "mode": "ball",
+      "reaction": "neutral",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか ムギ」\nプレイヤーはボールを勢いよく転がした。\n\nムギはボールに目を留めた。しばらく眺めてから、ゆっくりと顔を向けている。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\369876ea14ea4cc2b32a3ae044b4273b.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "neutral",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか ムギ」\nプレイヤーはボールを勢いよく転がした。\n\nムギはボール遊びに控えめに応じた。耳は向いているが、張り切るほどではないらしい。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\369876ea14ea4cc2b32a3ae044b4273b.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "neutral",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がして、ムギを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nムギはボールに目を留めた。しばらく眺めてから、ゆっくりと顔を向けている。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\369876ea14ea4cc2b32a3ae044b4273b.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "neutral",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がして、ムギを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nムギはボール遊びに控えめに応じた。耳は向いているが、張り切るほどではないらしい。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\369876ea14ea4cc2b32a3ae044b4273b.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "favorable",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか ムギ」\nプレイヤーはボールを床の上で転がした。\n\nムギはボールに楽しげな視線を送った。落ち着いた顔にも、遊びへの期待がのぞく。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\7b2e4f0f3d9911033be92b7b13b33946e0644e451b305cc701e4f109bc3bbfd5.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "mode": "ball",
+      "reaction": "favorable",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか ムギ」\nプレイヤーはボールを床の上で転がした。\n\nムギはボール遊びの調子が合ってきたようだ。誘いへの反応が、少し軽やかになっている。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\7b2e4f0f3d9911033be92b7b13b33946e0644e451b305cc701e4f109bc3bbfd5.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "mode": "ball",
+      "reaction": "favorable",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか、ムギ」\nプレイヤーはムギの様子に合わせてボールを転がした。\n\nムギはボールに楽しげな視線を送った。落ち着いた顔にも、遊びへの期待がのぞく。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\7b2e4f0f3d9911033be92b7b13b33946e0644e451b305cc701e4f109bc3bbfd5.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "mode": "ball",
+      "reaction": "favorable",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか、ムギ」\nプレイヤーはムギの様子に合わせてボールを転がした。\n\nムギはボール遊びの調子が合ってきたようだ。誘いへの反応が、少し軽やかになっている。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\7b2e4f0f3d9911033be92b7b13b33946e0644e451b305cc701e4f109bc3bbfd5.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "mode": "ball",
+      "reaction": "favorable",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか ムギ」\nプレイヤーはボールを勢いよく転がした。\n\nムギはボールに楽しげな視線を送った。落ち着いた顔にも、遊びへの期待がのぞく。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\369876ea14ea4cc2b32a3ae044b4273b.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "favorable",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか ムギ」\nプレイヤーはボールを勢いよく転がした。\n\nムギはボール遊びの調子が合ってきたようだ。誘いへの反応が、少し軽やかになっている。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\369876ea14ea4cc2b32a3ae044b4273b.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "favorable",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がして、ムギを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nムギはボールに楽しげな視線を送った。落ち着いた顔にも、遊びへの期待がのぞく。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\369876ea14ea4cc2b32a3ae044b4273b.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "favorable",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がして、ムギを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nムギはボール遊びの調子が合ってきたようだ。誘いへの反応が、少し軽やかになっている。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\369876ea14ea4cc2b32a3ae044b4273b.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "enthusiastic",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか ムギ」\nプレイヤーはボールを床の上で転がした。\n\nムギはボールから目が離せない様子だ。オリーブグリーンの目に、遊びの続きを待つ輝きがある。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\7b2e4f0f3d9911033be92b7b13b33946e0644e451b305cc701e4f109bc3bbfd5.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "mode": "ball",
+      "reaction": "enthusiastic",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか ムギ」\nプレイヤーはボールを床の上で転がした。\n\nムギはボール遊びに夢中になった。ゆったりした顔つきにも、抑えきれない楽しさが表れている。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\7b2e4f0f3d9911033be92b7b13b33946e0644e451b305cc701e4f109bc3bbfd5.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "mode": "ball",
+      "reaction": "enthusiastic",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか、ムギ」\nプレイヤーはムギの様子に合わせてボールを転がした。\n\nムギはボールから目が離せない様子だ。オリーブグリーンの目に、遊びの続きを待つ輝きがある。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\7b2e4f0f3d9911033be92b7b13b33946e0644e451b305cc701e4f109bc3bbfd5.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "mode": "ball",
+      "reaction": "enthusiastic",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか、ムギ」\nプレイヤーはムギの様子に合わせてボールを転がした。\n\nムギはボール遊びに夢中になった。ゆったりした顔つきにも、抑えきれない楽しさが表れている。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\7b2e4f0f3d9911033be92b7b13b33946e0644e451b305cc701e4f109bc3bbfd5.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "mode": "ball",
+      "reaction": "enthusiastic",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか ムギ」\nプレイヤーはボールを勢いよく転がした。\n\nムギはボールから目が離せない様子だ。オリーブグリーンの目に、遊びの続きを待つ輝きがある。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\369876ea14ea4cc2b32a3ae044b4273b.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "enthusiastic",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか ムギ」\nプレイヤーはボールを勢いよく転がした。\n\nムギはボール遊びに夢中になった。ゆったりした顔つきにも、抑えきれない楽しさが表れている。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\369876ea14ea4cc2b32a3ae044b4273b.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "enthusiastic",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がして、ムギを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nムギはボールから目が離せない様子だ。オリーブグリーンの目に、遊びの続きを待つ輝きがある。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\369876ea14ea4cc2b32a3ae044b4273b.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "enthusiastic",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がして、ムギを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nムギはボール遊びに夢中になった。ゆったりした顔つきにも、抑えきれない楽しさが表れている。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\369876ea14ea4cc2b32a3ae044b4273b.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか ムギ」\nプレイヤーはボールを床の上で転がした。\n\nムギはボールを見てから、相手の顔をうかがった。遊ぶきっかけがつかめないようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\7b2e4f0f3d9911033be92b7b13b33946e0644e451b305cc701e4f109bc3bbfd5.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "mode": "ball",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか ムギ」\nプレイヤーはボールを床の上で転がした。\n\nムギはボールへの反応をためらった。耳を向け直し、誘いの調子を確かめている。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\7b2e4f0f3d9911033be92b7b13b33946e0644e451b305cc701e4f109bc3bbfd5.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "mode": "ball",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか、ムギ」\nプレイヤーはムギの様子に合わせてボールを転がした。\n\nムギはボールを見てから、相手の顔をうかがった。遊ぶきっかけがつかめないようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\7b2e4f0f3d9911033be92b7b13b33946e0644e451b305cc701e4f109bc3bbfd5.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "mode": "ball",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか、ムギ」\nプレイヤーはムギの様子に合わせてボールを転がした。\n\nムギはボールへの反応をためらった。耳を向け直し、誘いの調子を確かめている。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\7b2e4f0f3d9911033be92b7b13b33946e0644e451b305cc701e4f109bc3bbfd5.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "mode": "ball",
+      "reaction": "confused",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか ムギ」\nプレイヤーはボールを勢いよく転がした。\n\nムギはボールを見てから、相手の顔をうかがった。遊ぶきっかけがつかめないようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\369876ea14ea4cc2b32a3ae044b4273b.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "confused",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか ムギ」\nプレイヤーはボールを勢いよく転がした。\n\nムギはボールへの反応をためらった。耳を向け直し、誘いの調子を確かめている。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\369876ea14ea4cc2b32a3ae044b4273b.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "confused",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がして、ムギを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nムギはボールを見てから、相手の顔をうかがった。遊ぶきっかけがつかめないようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\369876ea14ea4cc2b32a3ae044b4273b.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "confused",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がして、ムギを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nムギはボールへの反応をためらった。耳を向け直し、誘いの調子を確かめている。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\369876ea14ea4cc2b32a3ae044b4273b.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか ムギ」\nプレイヤーはボールを床の上で転がした。\n\nムギはボールをぼんやり見ている。目を動かすのもおっくうそうで、疲れがうかがえる。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\7b2e4f0f3d9911033be92b7b13b33946e0644e451b305cc701e4f109bc3bbfd5.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "mode": "ball",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか ムギ」\nプレイヤーはボールを床の上で転がした。\n\nムギはボールに気づいても、反応が遅い。遊びへの期待より、けだるさが表に出ている。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\7b2e4f0f3d9911033be92b7b13b33946e0644e451b305cc701e4f109bc3bbfd5.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "mode": "ball",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか、ムギ」\nプレイヤーはムギの様子に合わせてボールを転がした。\n\nムギはボールをぼんやり見ている。目を動かすのもおっくうそうで、疲れがうかがえる。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\7b2e4f0f3d9911033be92b7b13b33946e0644e451b305cc701e4f109bc3bbfd5.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "mode": "ball",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか、ムギ」\nプレイヤーはムギの様子に合わせてボールを転がした。\n\nムギはボールに気づいても、反応が遅い。遊びへの期待より、けだるさが表に出ている。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\7b2e4f0f3d9911033be92b7b13b33946e0644e451b305cc701e4f109bc3bbfd5.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "mode": "ball",
+      "reaction": "listless",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか ムギ」\nプレイヤーはボールを勢いよく転がした。\n\nムギはボールをぼんやり見ている。目を動かすのもおっくうそうで、疲れがうかがえる。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\369876ea14ea4cc2b32a3ae044b4273b.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "listless",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか ムギ」\nプレイヤーはボールを勢いよく転がした。\n\nムギはボールに気づいても、反応が遅い。遊びへの期待より、けだるさが表に出ている。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\369876ea14ea4cc2b32a3ae044b4273b.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "listless",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がして、ムギを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nムギはボールをぼんやり見ている。目を動かすのもおっくうそうで、疲れがうかがえる。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\369876ea14ea4cc2b32a3ae044b4273b.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "listless",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がして、ムギを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nムギはボールに気づいても、反応が遅い。遊びへの期待より、けだるさが表に出ている。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\369876ea14ea4cc2b32a3ae044b4273b.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "plush",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ちょっと揺らしてみようか？ ムギ」\nプレイヤーはぬいぐるみをムギの近くで動かした。\n\nムギはぬいぐるみへ静かに顔を向けた。遊びの誘いを、ひとまず眺めている。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b37d8809b38107e4b0ec48049cbbe264cb3ab3a3eba7a3c2af4052cb81027ade.png",
+      "resolved": "plush__direct"
+    },
+    {
+      "mode": "plush",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ちょっと揺らしてみようか？ ムギ」\nプレイヤーはぬいぐるみをムギの近くで動かした。\n\nムギはぬいぐるみに耳を向けている。興味を大きく示すことなく、落ち着いて様子を見た。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b37d8809b38107e4b0ec48049cbbe264cb3ab3a3eba7a3c2af4052cb81027ade.png",
+      "resolved": "plush__direct"
+    },
+    {
+      "mode": "plush",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ムギ、これで遊んでみようか」\nプレイヤーはムギの様子に合わせてぬいぐるみを動かした。\n\nムギはぬいぐるみへ静かに顔を向けた。遊びの誘いを、ひとまず眺めている。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b37d8809b38107e4b0ec48049cbbe264cb3ab3a3eba7a3c2af4052cb81027ade.png",
+      "resolved": "plush__adapt"
+    },
+    {
+      "mode": "plush",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ムギ、これで遊んでみようか」\nプレイヤーはムギの様子に合わせてぬいぐるみを動かした。\n\nムギはぬいぐるみに耳を向けている。興味を大きく示すことなく、落ち着いて様子を見た。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b37d8809b38107e4b0ec48049cbbe264cb3ab3a3eba7a3c2af4052cb81027ade.png",
+      "resolved": "plush__adapt"
+    },
+    {
+      "mode": "plush",
+      "reaction": "neutral",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ムギ、ちょっとフェイントしてみようか？」\nプレイヤーはぬいぐるみを動かす向きや間合いを変えた。\n\nムギはぬいぐるみへ静かに顔を向けた。遊びの誘いを、ひとまず眺めている。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\112f48e66958436289bd93ececcd27cf.png",
+      "resolved": "plush"
+    },
+    {
+      "mode": "plush",
+      "reaction": "neutral",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ムギ、ちょっとフェイントしてみようか？」\nプレイヤーはぬいぐるみを動かす向きや間合いを変えた。\n\nムギはぬいぐるみに耳を向けている。興味を大きく示すことなく、落ち着いて様子を見た。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\112f48e66958436289bd93ececcd27cf.png",
+      "resolved": "plush"
+    },
+    {
+      "mode": "plush",
+      "reaction": "favorable",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ちょっと揺らしてみようか？ ムギ」\nプレイヤーはぬいぐるみをムギの近くで動かした。\n\nムギはぬいぐるみを見て、楽しそうな顔になった。ゆっくりした応じ方にも、遊ぶ気持ちがある。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b37d8809b38107e4b0ec48049cbbe264cb3ab3a3eba7a3c2af4052cb81027ade.png",
+      "resolved": "plush__direct"
+    },
+    {
+      "mode": "plush",
+      "reaction": "favorable",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ちょっと揺らしてみようか？ ムギ」\nプレイヤーはぬいぐるみをムギの近くで動かした。\n\nムギはぬいぐるみ遊びに機嫌よく応じた。黒褐色の尾先が、小さく弾むように動いた。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b37d8809b38107e4b0ec48049cbbe264cb3ab3a3eba7a3c2af4052cb81027ade.png",
+      "resolved": "plush__direct"
+    },
+    {
+      "mode": "plush",
+      "reaction": "favorable",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ムギ、これで遊んでみようか」\nプレイヤーはムギの様子に合わせてぬいぐるみを動かした。\n\nムギはぬいぐるみを見て、楽しそうな顔になった。ゆっくりした応じ方にも、遊ぶ気持ちがある。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b37d8809b38107e4b0ec48049cbbe264cb3ab3a3eba7a3c2af4052cb81027ade.png",
+      "resolved": "plush__adapt"
+    },
+    {
+      "mode": "plush",
+      "reaction": "favorable",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ムギ、これで遊んでみようか」\nプレイヤーはムギの様子に合わせてぬいぐるみを動かした。\n\nムギはぬいぐるみ遊びに機嫌よく応じた。黒褐色の尾先が、小さく弾むように動いた。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b37d8809b38107e4b0ec48049cbbe264cb3ab3a3eba7a3c2af4052cb81027ade.png",
+      "resolved": "plush__adapt"
+    },
+    {
+      "mode": "plush",
+      "reaction": "favorable",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ムギ、ちょっとフェイントしてみようか？」\nプレイヤーはぬいぐるみを動かす向きや間合いを変えた。\n\nムギはぬいぐるみを見て、楽しそうな顔になった。ゆっくりした応じ方にも、遊ぶ気持ちがある。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\112f48e66958436289bd93ececcd27cf.png",
+      "resolved": "plush"
+    },
+    {
+      "mode": "plush",
+      "reaction": "favorable",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ムギ、ちょっとフェイントしてみようか？」\nプレイヤーはぬいぐるみを動かす向きや間合いを変えた。\n\nムギはぬいぐるみ遊びに機嫌よく応じた。黒褐色の尾先が、小さく弾むように動いた。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\112f48e66958436289bd93ececcd27cf.png",
+      "resolved": "plush"
+    },
+    {
+      "mode": "plush",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ちょっと揺らしてみようか？ ムギ」\nプレイヤーはぬいぐるみをムギの近くで動かした。\n\nムギはぬいぐるみを眺めたまま、首をわずかに傾けた。誘い方がしっくりこないようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b37d8809b38107e4b0ec48049cbbe264cb3ab3a3eba7a3c2af4052cb81027ade.png",
+      "resolved": "plush__direct"
+    },
+    {
+      "mode": "plush",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ちょっと揺らしてみようか？ ムギ」\nプレイヤーはぬいぐるみをムギの近くで動かした。\n\nムギはぬいぐるみと相手を見比べている。遊びに乗るには、もう少し間が欲しそうだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b37d8809b38107e4b0ec48049cbbe264cb3ab3a3eba7a3c2af4052cb81027ade.png",
+      "resolved": "plush__direct"
+    },
+    {
+      "mode": "plush",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ムギ、これで遊んでみようか」\nプレイヤーはムギの様子に合わせてぬいぐるみを動かした。\n\nムギはぬいぐるみを眺めたまま、首をわずかに傾けた。誘い方がしっくりこないようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b37d8809b38107e4b0ec48049cbbe264cb3ab3a3eba7a3c2af4052cb81027ade.png",
+      "resolved": "plush__adapt"
+    },
+    {
+      "mode": "plush",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ムギ、これで遊んでみようか」\nプレイヤーはムギの様子に合わせてぬいぐるみを動かした。\n\nムギはぬいぐるみと相手を見比べている。遊びに乗るには、もう少し間が欲しそうだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b37d8809b38107e4b0ec48049cbbe264cb3ab3a3eba7a3c2af4052cb81027ade.png",
+      "resolved": "plush__adapt"
+    },
+    {
+      "mode": "plush",
+      "reaction": "confused",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ムギ、ちょっとフェイントしてみようか？」\nプレイヤーはぬいぐるみを動かす向きや間合いを変えた。\n\nムギはぬいぐるみを眺めたまま、首をわずかに傾けた。誘い方がしっくりこないようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\112f48e66958436289bd93ececcd27cf.png",
+      "resolved": "plush"
+    },
+    {
+      "mode": "plush",
+      "reaction": "confused",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ムギ、ちょっとフェイントしてみようか？」\nプレイヤーはぬいぐるみを動かす向きや間合いを変えた。\n\nムギはぬいぐるみと相手を見比べている。遊びに乗るには、もう少し間が欲しそうだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\112f48e66958436289bd93ececcd27cf.png",
+      "resolved": "plush"
+    },
+    {
+      "mode": "plush",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ちょっと揺らしてみようか？ ムギ」\nプレイヤーはぬいぐるみをムギの近くで動かした。\n\nムギはぬいぐるみに重たげな視線を送った。遊びの誘いにも、疲れた様子が隠れない。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b37d8809b38107e4b0ec48049cbbe264cb3ab3a3eba7a3c2af4052cb81027ade.png",
+      "resolved": "plush__direct"
+    },
+    {
+      "mode": "plush",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ちょっと揺らしてみようか？ ムギ」\nプレイヤーはぬいぐるみをムギの近くで動かした。\n\nムギはぬいぐるみへの反応が薄い。耳の動きも鈍く、今は遊ぶ元気が少ないようだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b37d8809b38107e4b0ec48049cbbe264cb3ab3a3eba7a3c2af4052cb81027ade.png",
+      "resolved": "plush__direct"
+    },
+    {
+      "mode": "plush",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ムギ、これで遊んでみようか」\nプレイヤーはムギの様子に合わせてぬいぐるみを動かした。\n\nムギはぬいぐるみに重たげな視線を送った。遊びの誘いにも、疲れた様子が隠れない。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b37d8809b38107e4b0ec48049cbbe264cb3ab3a3eba7a3c2af4052cb81027ade.png",
+      "resolved": "plush__adapt"
+    },
+    {
+      "mode": "plush",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ムギ、これで遊んでみようか」\nプレイヤーはムギの様子に合わせてぬいぐるみを動かした。\n\nムギはぬいぐるみへの反応が薄い。耳の動きも鈍く、今は遊ぶ元気が少ないようだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b37d8809b38107e4b0ec48049cbbe264cb3ab3a3eba7a3c2af4052cb81027ade.png",
+      "resolved": "plush__adapt"
+    },
+    {
+      "mode": "plush",
+      "reaction": "listless",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ムギ、ちょっとフェイントしてみようか？」\nプレイヤーはぬいぐるみを動かす向きや間合いを変えた。\n\nムギはぬいぐるみに重たげな視線を送った。遊びの誘いにも、疲れた様子が隠れない。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\112f48e66958436289bd93ececcd27cf.png",
+      "resolved": "plush"
+    },
+    {
+      "mode": "plush",
+      "reaction": "listless",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ムギ、ちょっとフェイントしてみようか？」\nプレイヤーはぬいぐるみを動かす向きや間合いを変えた。\n\nムギはぬいぐるみへの反応が薄い。耳の動きも鈍く、今は遊ぶ元気が少ないようだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\112f48e66958436289bd93ececcd27cf.png",
+      "resolved": "plush"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「トンネルに入ってみようかムギ」\nプレイヤーはトンネルの入口でムギを遊びに誘った。\n\nムギはトンネルへ目を向け、静かに眺めた。すぐには気持ちを決めず、様子を見ている。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\5cd0ba103fd1468fab6b485628373b70.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「トンネルに入ってみようかムギ」\nプレイヤーはトンネルの入口でムギを遊びに誘った。\n\nムギはトンネル遊びに穏やかな反応を返した。関心はあるが、まだ控えめだ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\5cd0ba103fd1468fab6b485628373b70.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかムギ」\nプレイヤーはムギの様子に合わせてトンネル遊びに誘った。\n\nムギはトンネルへ目を向け、静かに眺めた。すぐには気持ちを決めず、様子を見ている。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\5cd0ba103fd1468fab6b485628373b70.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかムギ」\nプレイヤーはムギの様子に合わせてトンネル遊びに誘った。\n\nムギはトンネル遊びに穏やかな反応を返した。関心はあるが、まだ控えめだ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\5cd0ba103fd1468fab6b485628373b70.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "neutral",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ムギ、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでムギを遊びに誘った。\n\nムギはトンネルへ目を向け、静かに眺めた。すぐには気持ちを決めず、様子を見ている。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f85142b8d2f246ac816721e21021d504.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "neutral",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ムギ、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでムギを遊びに誘った。\n\nムギはトンネル遊びに穏やかな反応を返した。関心はあるが、まだ控えめだ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f85142b8d2f246ac816721e21021d504.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "neutral",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ムギ ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nムギはトンネルへ目を向け、静かに眺めた。すぐには気持ちを決めず、様子を見ている。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f85142b8d2f246ac816721e21021d504.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "neutral",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ムギ ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nムギはトンネル遊びに穏やかな反応を返した。関心はあるが、まだ控えめだ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f85142b8d2f246ac816721e21021d504.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "favorable",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「トンネルに入ってみようかムギ」\nプレイヤーはトンネルの入口でムギを遊びに誘った。\n\nムギはトンネルへ楽しそうな顔を向けた。ゆったりした間合いの中にも、期待が見える。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\5cd0ba103fd1468fab6b485628373b70.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "favorable",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「トンネルに入ってみようかムギ」\nプレイヤーはトンネルの入口でムギを遊びに誘った。\n\nムギはトンネル遊びの誘いを気に入ったようだ。耳を向けたまま、いきいきと様子を見ている。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\5cd0ba103fd1468fab6b485628373b70.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "favorable",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかムギ」\nプレイヤーはムギの様子に合わせてトンネル遊びに誘った。\n\nムギはトンネルへ楽しそうな顔を向けた。ゆったりした間合いの中にも、期待が見える。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\5cd0ba103fd1468fab6b485628373b70.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "favorable",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかムギ」\nプレイヤーはムギの様子に合わせてトンネル遊びに誘った。\n\nムギはトンネル遊びの誘いを気に入ったようだ。耳を向けたまま、いきいきと様子を見ている。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\5cd0ba103fd1468fab6b485628373b70.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "favorable",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ムギ、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでムギを遊びに誘った。\n\nムギはトンネルへ楽しそうな顔を向けた。ゆったりした間合いの中にも、期待が見える。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f85142b8d2f246ac816721e21021d504.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "favorable",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ムギ、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでムギを遊びに誘った。\n\nムギはトンネル遊びの誘いを気に入ったようだ。耳を向けたまま、いきいきと様子を見ている。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f85142b8d2f246ac816721e21021d504.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "favorable",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ムギ ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nムギはトンネルへ楽しそうな顔を向けた。ゆったりした間合いの中にも、期待が見える。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f85142b8d2f246ac816721e21021d504.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "favorable",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ムギ ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nムギはトンネル遊びの誘いを気に入ったようだ。耳を向けたまま、いきいきと様子を見ている。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f85142b8d2f246ac816721e21021d504.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "enthusiastic",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「トンネルに入ってみようかムギ」\nプレイヤーはトンネルの入口でムギを遊びに誘った。\n\nムギはトンネル遊びにすっかり気を引かれている。丸い顔に、次も遊びたいという気持ちがあふれた。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\5cd0ba103fd1468fab6b485628373b70.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "enthusiastic",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「トンネルに入ってみようかムギ」\nプレイヤーはトンネルの入口でムギを遊びに誘った。\n\nムギはトンネルへ熱心な視線を注いだ。普段の静かな目にも、はずむような楽しさがある。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\5cd0ba103fd1468fab6b485628373b70.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "enthusiastic",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかムギ」\nプレイヤーはムギの様子に合わせてトンネル遊びに誘った。\n\nムギはトンネル遊びにすっかり気を引かれている。丸い顔に、次も遊びたいという気持ちがあふれた。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\5cd0ba103fd1468fab6b485628373b70.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "enthusiastic",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかムギ」\nプレイヤーはムギの様子に合わせてトンネル遊びに誘った。\n\nムギはトンネルへ熱心な視線を注いだ。普段の静かな目にも、はずむような楽しさがある。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\5cd0ba103fd1468fab6b485628373b70.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "enthusiastic",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ムギ、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでムギを遊びに誘った。\n\nムギはトンネル遊びにすっかり気を引かれている。丸い顔に、次も遊びたいという気持ちがあふれた。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f85142b8d2f246ac816721e21021d504.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "enthusiastic",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ムギ、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでムギを遊びに誘った。\n\nムギはトンネルへ熱心な視線を注いだ。普段の静かな目にも、はずむような楽しさがある。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f85142b8d2f246ac816721e21021d504.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "enthusiastic",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ムギ ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nムギはトンネル遊びにすっかり気を引かれている。丸い顔に、次も遊びたいという気持ちがあふれた。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f85142b8d2f246ac816721e21021d504.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "enthusiastic",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ムギ ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nムギはトンネルへ熱心な視線を注いだ。普段の静かな目にも、はずむような楽しさがある。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f85142b8d2f246ac816721e21021d504.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「トンネルに入ってみようかムギ」\nプレイヤーはトンネルの入口でムギを遊びに誘った。\n\nムギはトンネルを気にしつつ、相手の様子をうかがった。遊びに応じる調子が合わないらしい。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\5cd0ba103fd1468fab6b485628373b70.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「トンネルに入ってみようかムギ」\nプレイヤーはトンネルの入口でムギを遊びに誘った。\n\nムギはトンネルへの反応をためらっている。三角の耳にも、少し迷いが表れた。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\5cd0ba103fd1468fab6b485628373b70.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかムギ」\nプレイヤーはムギの様子に合わせてトンネル遊びに誘った。\n\nムギはトンネルを気にしつつ、相手の様子をうかがった。遊びに応じる調子が合わないらしい。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\5cd0ba103fd1468fab6b485628373b70.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかムギ」\nプレイヤーはムギの様子に合わせてトンネル遊びに誘った。\n\nムギはトンネルへの反応をためらっている。三角の耳にも、少し迷いが表れた。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\5cd0ba103fd1468fab6b485628373b70.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "confused",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ムギ、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでムギを遊びに誘った。\n\nムギはトンネルを気にしつつ、相手の様子をうかがった。遊びに応じる調子が合わないらしい。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f85142b8d2f246ac816721e21021d504.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "confused",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ムギ、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでムギを遊びに誘った。\n\nムギはトンネルへの反応をためらっている。三角の耳にも、少し迷いが表れた。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f85142b8d2f246ac816721e21021d504.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "confused",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ムギ ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nムギはトンネルを気にしつつ、相手の様子をうかがった。遊びに応じる調子が合わないらしい。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f85142b8d2f246ac816721e21021d504.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "confused",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ムギ ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nムギはトンネルへの反応をためらっている。三角の耳にも、少し迷いが表れた。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f85142b8d2f246ac816721e21021d504.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「トンネルに入ってみようかムギ」\nプレイヤーはトンネルの入口でムギを遊びに誘った。\n\nムギはトンネルを眺める目にも力がない。疲れているらしく、誘いへの反応は小さい。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\5cd0ba103fd1468fab6b485628373b70.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「トンネルに入ってみようかムギ」\nプレイヤーはトンネルの入口でムギを遊びに誘った。\n\nムギはトンネルへゆっくりと顔を向けた。遊びを始めるには、気だるさが勝っているようだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\5cd0ba103fd1468fab6b485628373b70.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかムギ」\nプレイヤーはムギの様子に合わせてトンネル遊びに誘った。\n\nムギはトンネルを眺める目にも力がない。疲れているらしく、誘いへの反応は小さい。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\5cd0ba103fd1468fab6b485628373b70.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかムギ」\nプレイヤーはムギの様子に合わせてトンネル遊びに誘った。\n\nムギはトンネルへゆっくりと顔を向けた。遊びを始めるには、気だるさが勝っているようだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\5cd0ba103fd1468fab6b485628373b70.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "listless",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ムギ、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでムギを遊びに誘った。\n\nムギはトンネルを眺める目にも力がない。疲れているらしく、誘いへの反応は小さい。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f85142b8d2f246ac816721e21021d504.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "listless",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ムギ、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでムギを遊びに誘った。\n\nムギはトンネルへゆっくりと顔を向けた。遊びを始めるには、気だるさが勝っているようだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f85142b8d2f246ac816721e21021d504.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "listless",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ムギ ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nムギはトンネルを眺める目にも力がない。疲れているらしく、誘いへの反応は小さい。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f85142b8d2f246ac816721e21021d504.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "listless",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ムギ ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nムギはトンネルへゆっくりと顔を向けた。遊びを始めるには、気だるさが勝っているようだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\f85142b8d2f246ac816721e21021d504.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "brush",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ブラシを滑らせてみよう ムギ。」\nプレイヤーはムギの毛並みに沿ってブラシを動かした。\n\nムギはブラシの動きを静かに見ている。手入れの様子を、落ち着いた顔で受け止めた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\98a9ea196f7b45a9bff78589a970b0d2.png",
+      "resolved": "brush__direct"
+    },
+    {
+      "mode": "brush",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ブラシを滑らせてみよう ムギ。」\nプレイヤーはムギの毛並みに沿ってブラシを動かした。\n\nムギはブラッシングに控えめに応じた。三角の耳が、時折ブラシの方を向く。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\98a9ea196f7b45a9bff78589a970b0d2.png",
+      "resolved": "brush__direct"
+    },
+    {
+      "mode": "brush",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ねえムギ、ブラッシングしようか？」\nプレイヤーはムギの様子に合わせて、そっとブラシを動かした。\n\nムギはブラシの動きを静かに見ている。手入れの様子を、落ち着いた顔で受け止めた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\98a9ea196f7b45a9bff78589a970b0d2.png",
+      "resolved": "brush__adapt"
+    },
+    {
+      "mode": "brush",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ねえムギ、ブラッシングしようか？」\nプレイヤーはムギの様子に合わせて、そっとブラシを動かした。\n\nムギはブラッシングに控えめに応じた。三角の耳が、時折ブラシの方を向く。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\98a9ea196f7b45a9bff78589a970b0d2.png",
+      "resolved": "brush__adapt"
+    },
+    {
+      "mode": "brush",
+      "reaction": "favorable",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ブラシを滑らせてみよう ムギ。」\nプレイヤーはムギの毛並みに沿ってブラシを動かした。\n\nムギはブラッシングに心地よさそうな表情を見せた。丸い顔の目元が、ゆるやかに和らぐ。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\98a9ea196f7b45a9bff78589a970b0d2.png",
+      "resolved": "brush__direct"
+    },
+    {
+      "mode": "brush",
+      "reaction": "favorable",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ブラシを滑らせてみよう ムギ。」\nプレイヤーはムギの毛並みに沿ってブラシを動かした。\n\nムギはブラシの動きに機嫌よく応じている。相手を見る目にも、くつろいだ様子がにじんだ。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\98a9ea196f7b45a9bff78589a970b0d2.png",
+      "resolved": "brush__direct"
+    },
+    {
+      "mode": "brush",
+      "reaction": "favorable",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ねえムギ、ブラッシングしようか？」\nプレイヤーはムギの様子に合わせて、そっとブラシを動かした。\n\nムギはブラッシングに心地よさそうな表情を見せた。丸い顔の目元が、ゆるやかに和らぐ。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\98a9ea196f7b45a9bff78589a970b0d2.png",
+      "resolved": "brush__adapt"
+    },
+    {
+      "mode": "brush",
+      "reaction": "favorable",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ねえムギ、ブラッシングしようか？」\nプレイヤーはムギの様子に合わせて、そっとブラシを動かした。\n\nムギはブラシの動きに機嫌よく応じている。相手を見る目にも、くつろいだ様子がにじんだ。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\98a9ea196f7b45a9bff78589a970b0d2.png",
+      "resolved": "brush__adapt"
+    },
+    {
+      "mode": "brush",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ブラシを滑らせてみよう ムギ。」\nプレイヤーはムギの毛並みに沿ってブラシを動かした。\n\nムギはブラシを気にして、耳を動かした。手入れの調子が合わず、落ち着きどころを探している。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\98a9ea196f7b45a9bff78589a970b0d2.png",
+      "resolved": "brush__direct"
+    },
+    {
+      "mode": "brush",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ブラシを滑らせてみよう ムギ。」\nプレイヤーはムギの毛並みに沿ってブラシを動かした。\n\nムギはブラシから相手へ目を移した。どう受け止めようかと、少し戸惑っているようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\98a9ea196f7b45a9bff78589a970b0d2.png",
+      "resolved": "brush__direct"
+    },
+    {
+      "mode": "brush",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ねえムギ、ブラッシングしようか？」\nプレイヤーはムギの様子に合わせて、そっとブラシを動かした。\n\nムギはブラシを気にして、耳を動かした。手入れの調子が合わず、落ち着きどころを探している。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\98a9ea196f7b45a9bff78589a970b0d2.png",
+      "resolved": "brush__adapt"
+    },
+    {
+      "mode": "brush",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ねえムギ、ブラッシングしようか？」\nプレイヤーはムギの様子に合わせて、そっとブラシを動かした。\n\nムギはブラシから相手へ目を移した。どう受け止めようかと、少し戸惑っているようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\98a9ea196f7b45a9bff78589a970b0d2.png",
+      "resolved": "brush__adapt"
+    },
+    {
+      "mode": "brush",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ブラシを滑らせてみよう ムギ。」\nプレイヤーはムギの毛並みに沿ってブラシを動かした。\n\nムギはブラシの方へゆっくり目をやった。疲れがあるのか、手入れへの反応も乏しい。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\98a9ea196f7b45a9bff78589a970b0d2.png",
+      "resolved": "brush__direct"
+    },
+    {
+      "mode": "brush",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ブラシを滑らせてみよう ムギ。」\nプレイヤーはムギの毛並みに沿ってブラシを動かした。\n\nムギはブラッシングにもけだるそうだ。いつもの穏やかさに、反応の鈍さが重なっている。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\98a9ea196f7b45a9bff78589a970b0d2.png",
+      "resolved": "brush__direct"
+    },
+    {
+      "mode": "brush",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ねえムギ、ブラッシングしようか？」\nプレイヤーはムギの様子に合わせて、そっとブラシを動かした。\n\nムギはブラシの方へゆっくり目をやった。疲れがあるのか、手入れへの反応も乏しい。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\98a9ea196f7b45a9bff78589a970b0d2.png",
+      "resolved": "brush__adapt"
+    },
+    {
+      "mode": "brush",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ねえムギ、ブラッシングしようか？」\nプレイヤーはムギの様子に合わせて、そっとブラシを動かした。\n\nムギはブラッシングにもけだるそうだ。いつもの穏やかさに、反応の鈍さが重なっている。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\98a9ea196f7b45a9bff78589a970b0d2.png",
+      "resolved": "brush__adapt"
+    },
+    {
+      "mode": "voice",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「あれ、ムギ、ちょっと見てみようか？」\nプレイヤーはムギに穏やかに声をかけた。\n\nムギは声を聞いて、ひと呼吸おいてから顔を向けた。落ち着いた目で相手を見ている。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\e880fe1d061a44438c5f6cf1ead88522.png",
+      "resolved": "voice__direct"
+    },
+    {
+      "mode": "voice",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「あれ、ムギ、ちょっと見てみようか？」\nプレイヤーはムギに穏やかに声をかけた。\n\nムギの耳が声の方を向いた。呼びかけには気づいたが、表情は穏やかなままだ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\e880fe1d061a44438c5f6cf1ead88522.png",
+      "resolved": "voice__direct"
+    },
+    {
+      "mode": "voice",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「さあ、ちょっと休憩しようか ムギ」\nプレイヤーはムギの様子を見ながら、声の調子や間合いを合わせた。\n\nムギは声を聞いて、ひと呼吸おいてから顔を向けた。落ち着いた目で相手を見ている。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\e880fe1d061a44438c5f6cf1ead88522.png",
+      "resolved": "voice__adapt"
+    },
+    {
+      "mode": "voice",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「さあ、ちょっと休憩しようか ムギ」\nプレイヤーはムギの様子を見ながら、声の調子や間合いを合わせた。\n\nムギの耳が声の方を向いた。呼びかけには気づいたが、表情は穏やかなままだ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\e880fe1d061a44438c5f6cf1ead88522.png",
+      "resolved": "voice__adapt"
+    },
+    {
+      "mode": "voice",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「あれ、ムギ、ちょっと見てみようか？」\nプレイヤーはムギに穏やかに声をかけた。\n\nムギは呼びかける相手を、不思議そうに見た。声の調子をどう受け取るか迷っているらしい。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\e880fe1d061a44438c5f6cf1ead88522.png",
+      "resolved": "voice__direct"
+    },
+    {
+      "mode": "voice",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「あれ、ムギ、ちょっと見てみようか？」\nプレイヤーはムギに穏やかに声をかけた。\n\nムギは声に耳を向けたものの、反応が定まらない。丸い顔に、小さな戸惑いが浮かんだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\e880fe1d061a44438c5f6cf1ead88522.png",
+      "resolved": "voice__direct"
+    },
+    {
+      "mode": "voice",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「さあ、ちょっと休憩しようか ムギ」\nプレイヤーはムギの様子を見ながら、声の調子や間合いを合わせた。\n\nムギは呼びかける相手を、不思議そうに見た。声の調子をどう受け取るか迷っているらしい。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\e880fe1d061a44438c5f6cf1ead88522.png",
+      "resolved": "voice__adapt"
+    },
+    {
+      "mode": "voice",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「さあ、ちょっと休憩しようか ムギ」\nプレイヤーはムギの様子を見ながら、声の調子や間合いを合わせた。\n\nムギは声に耳を向けたものの、反応が定まらない。丸い顔に、小さな戸惑いが浮かんだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\e880fe1d061a44438c5f6cf1ead88522.png",
+      "resolved": "voice__adapt"
+    },
+    {
+      "mode": "voice",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「あれ、ムギ、ちょっと見てみようか？」\nプレイヤーはムギに穏やかに声をかけた。\n\nムギは声の方へ重たげに目を向けた。疲れているらしく、応じるまでにも間がある。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\e880fe1d061a44438c5f6cf1ead88522.png",
+      "resolved": "voice__direct"
+    },
+    {
+      "mode": "voice",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「あれ、ムギ、ちょっと見てみようか？」\nプレイヤーはムギに穏やかに声をかけた。\n\nムギは呼びかけを聞いているようだが、耳の動きはわずかだ。けだるさが表情ににじんでいる。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\e880fe1d061a44438c5f6cf1ead88522.png",
+      "resolved": "voice__direct"
+    },
+    {
+      "mode": "voice",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「さあ、ちょっと休憩しようか ムギ」\nプレイヤーはムギの様子を見ながら、声の調子や間合いを合わせた。\n\nムギは声の方へ重たげに目を向けた。疲れているらしく、応じるまでにも間がある。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\e880fe1d061a44438c5f6cf1ead88522.png",
+      "resolved": "voice__adapt"
+    },
+    {
+      "mode": "voice",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「さあ、ちょっと休憩しようか ムギ」\nプレイヤーはムギの様子を見ながら、声の調子や間合いを合わせた。\n\nムギは呼びかけを聞いているようだが、耳の動きはわずかだ。けだるさが表情ににじんでいる。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\e880fe1d061a44438c5f6cf1ead88522.png",
+      "resolved": "voice__adapt"
+    },
+    {
+      "mode": "presence",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ムギ ちょっと見守りましょうか？」\nプレイヤーはムギのそばで静かに様子を見守った。\n\nムギは見守る相手に一度目を向け、静かに過ごしている。この距離を穏やかに受け止めているようだ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\3a1342b916e44698a004419d3e25be74.png",
+      "resolved": "presence__direct"
+    },
+    {
+      "mode": "presence",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ムギ ちょっと見守りましょうか？」\nプレイヤーはムギのそばで静かに様子を見守った。\n\nムギはそばの気配に気づき、耳を向けた。急いで応じることなく、落ち着いている。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\3a1342b916e44698a004419d3e25be74.png",
+      "resolved": "presence__direct"
+    },
+    {
+      "mode": "presence",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「静かな雰囲気でムギに寄り添おうか。」\nプレイヤーはムギの様子に合わせて距離を保ち、静かに見守った。\n\nムギは見守る相手に一度目を向け、静かに過ごしている。この距離を穏やかに受け止めているようだ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\3a1342b916e44698a004419d3e25be74.png",
+      "resolved": "presence__adapt"
+    },
+    {
+      "mode": "presence",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「静かな雰囲気でムギに寄り添おうか。」\nプレイヤーはムギの様子に合わせて距離を保ち、静かに見守った。\n\nムギはそばの気配に気づき、耳を向けた。急いで応じることなく、落ち着いている。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\3a1342b916e44698a004419d3e25be74.png",
+      "resolved": "presence__adapt"
+    },
+    {
+      "mode": "presence",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ムギ ちょっと見守りましょうか？」\nプレイヤーはムギのそばで静かに様子を見守った。\n\nムギは見守る相手へ、確かめるような視線を送った。静かな間合いの取り方に迷っているようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\3a1342b916e44698a004419d3e25be74.png",
+      "resolved": "presence__direct"
+    },
+    {
+      "mode": "presence",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ムギ ちょっと見守りましょうか？」\nプレイヤーはムギのそばで静かに様子を見守った。\n\nムギはそばの気配を気にしている。相手を見る顔には、少し落ち着かなさがある。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\3a1342b916e44698a004419d3e25be74.png",
+      "resolved": "presence__direct"
+    },
+    {
+      "mode": "presence",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「静かな雰囲気でムギに寄り添おうか。」\nプレイヤーはムギの様子に合わせて距離を保ち、静かに見守った。\n\nムギは見守る相手へ、確かめるような視線を送った。静かな間合いの取り方に迷っているようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\3a1342b916e44698a004419d3e25be74.png",
+      "resolved": "presence__adapt"
+    },
+    {
+      "mode": "presence",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「静かな雰囲気でムギに寄り添おうか。」\nプレイヤーはムギの様子に合わせて距離を保ち、静かに見守った。\n\nムギはそばの気配を気にしている。相手を見る顔には、少し落ち着かなさがある。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\3a1342b916e44698a004419d3e25be74.png",
+      "resolved": "presence__adapt"
+    },
+    {
+      "mode": "presence",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ムギ ちょっと見守りましょうか？」\nプレイヤーはムギのそばで静かに様子を見守った。\n\nムギは見守る相手へゆっくり目を向けた。周りを気にする元気も少ないらしく、けだるそうだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\3a1342b916e44698a004419d3e25be74.png",
+      "resolved": "presence__direct"
+    },
+    {
+      "mode": "presence",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ムギ ちょっと見守りましょうか？」\nプレイヤーはムギのそばで静かに様子を見守った。\n\nムギはそばの気配への反応も鈍い。静かに過ごす顔に、疲れが見える。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\3a1342b916e44698a004419d3e25be74.png",
+      "resolved": "presence__direct"
+    },
+    {
+      "mode": "presence",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「静かな雰囲気でムギに寄り添おうか。」\nプレイヤーはムギの様子に合わせて距離を保ち、静かに見守った。\n\nムギは見守る相手へゆっくり目を向けた。周りを気にする元気も少ないらしく、けだるそうだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\3a1342b916e44698a004419d3e25be74.png",
+      "resolved": "presence__adapt"
+    },
+    {
+      "mode": "presence",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「静かな雰囲気でムギに寄り添おうか。」\nプレイヤーはムギの様子に合わせて距離を保ち、静かに見守った。\n\nムギはそばの気配への反応も鈍い。静かに過ごす顔に、疲れが見える。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\3a1342b916e44698a004419d3e25be74.png",
+      "resolved": "presence__adapt"
+    },
+    {
+      "mode": "pause",
+      "reaction": "neutral",
+      "action": "pause",
+      "slot": 1,
+      "body": "プレイヤー「一緒に休憩しようか、ムギ」\nプレイヤーは手を止め、ムギが落ち着くのを待った。\n\nムギは休憩のひとときを過ごしている。穏やかな丸い顔で、周りの様子を眺めた。\n\n急がず、静かな休憩の時間を過ごした。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 専用（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\6e0f85f312b4448195e87d641e368fd3.png",
+      "resolved": "pause"
+    },
+    {
+      "mode": "pause",
+      "reaction": "neutral",
+      "action": "pause",
+      "slot": 2,
+      "body": "プレイヤー「一緒に休憩しようか、ムギ」\nプレイヤーは手を止め、ムギが落ち着くのを待った。\n\nムギはひと息つき、ゆったりと耳を動かした。何かに急かされることなく、静かにしている。\n\n急がず、静かな休憩の時間を過ごした。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 専用（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\6e0f85f312b4448195e87d641e368fd3.png",
+      "resolved": "pause"
+    },
+    {
+      "mode": "pause",
+      "reaction": "listless",
+      "action": "pause",
+      "slot": 1,
+      "body": "プレイヤー「一緒に休憩しようか、ムギ」\nプレイヤーは手を止め、ムギが落ち着くのを待った。\n\nムギは疲れた様子で休んでいる。オリーブグリーンの目にも勢いはなく、反応はゆっくりだ。\n\n急がず、静かな休憩の時間を過ごした。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 専用（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\6e0f85f312b4448195e87d641e368fd3.png",
+      "resolved": "pause"
+    },
+    {
+      "mode": "pause",
+      "reaction": "listless",
+      "action": "pause",
+      "slot": 2,
+      "body": "プレイヤー「一緒に休憩しようか、ムギ」\nプレイヤーは手を止め、ムギが落ち着くのを待った。\n\nムギはけだるそうに休憩している。尾の先の動きも小さく、今は静かに過ごしたいようだ。\n\n急がず、静かな休憩の時間を過ごした。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 専用（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\6e0f85f312b4448195e87d641e368fd3.png",
+      "resolved": "pause"
+    }
+  ],
+  "before_count": 352,
+  "after_count": 387,
+  "draft_counts": [
+    368,
+    403
+  ],
+  "generated_count": 278,
+  "protected_unchanged": true,
+  "unity_imported": false
+}

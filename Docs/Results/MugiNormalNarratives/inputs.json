@@ -1,0 +1,80 @@
+{
+  "subject": {
+    "id": "cat-mugi",
+    "kind": "cat_response",
+    "name": "ムギ",
+    "game_id": "cat-mugi",
+    "content_id": "playtest-mugi",
+    "notes": "性格：中立\n外見資料：目の色：両目ともオリーブグリーン\n体格：中くらいの成猫。標準的で均整の取れた体型、脚の長さも標準。\n模様の詳細：暖かい茶褐色のキジトラ。額に黒褐色のM字、頬に左右二本ずつの縞、背骨に沿う濃い線、脇に細い縦縞。脚と尻尾に黒褐色の輪状の縞。口元・顎は薄いベージュ、腹は淡い茶色。白い斑はない。\n顔立ち：穏やかな丸顔、標準サイズの三角耳、自然なアーモンド形の目。鼻は茶色がかったピンク。\n尻尾：中程度の長さ。茶褐色に黒褐色の輪状の縞、先端は黒褐色。\n外見の補足：短毛。自然で落ち着いた表情。茶トラのコハクより暗い毛色で、細く明瞭な縞。",
+    "call": "{cat}",
+    "enabled": true
+  },
+  "images": {
+    "normal": "images/f85142b8d2f246ac816721e21021d504.png",
+    "play": "images/d6ec25bc0d9f4518a1a2d56e9c6f0373.png",
+    "pet": "images/f85142b8d2f246ac816721e21021d504.png",
+    "sleep": "images/5073a2b16a01494c95e6a93f9fd1a928.png",
+    "teaser": "images/f019c4be71334b6abb48528cd618df90.png",
+    "ball": "images/369876ea14ea4cc2b32a3ae044b4273b.png",
+    "plush": "images/112f48e66958436289bd93ececcd27cf.png",
+    "tunnel": "images/f85142b8d2f246ac816721e21021d504.png",
+    "brush": "images/f85142b8d2f246ac816721e21021d504.png",
+    "voice": "images/f85142b8d2f246ac816721e21021d504.png",
+    "presence": "images/f85142b8d2f246ac816721e21021d504.png",
+    "pause": "images/6e0f85f312b4448195e87d641e368fd3.png",
+    "teaser__open_up": "images/cf3e583620994f8db09de1e026ae69a5.png",
+    "teaser__simultaneous": "images/7586e35eb2ed40e2a021713d855a3cf7.png",
+    "ball__open_up": "images/10630a7d2f1344aa95b371e94fed2870.png",
+    "ball__simultaneous": "images/e5be138417c341dfa4c68b4788f12e18.png",
+    "plush__open_up": "images/d090616797d64232a12b08aca100e09b.png",
+    "plush__simultaneous": "images/9b470a729b3044cfa7c2c7a3ac7b249c.png",
+    "tunnel__open_up": "images/2c3b752c11c94618baf78cff2db2ff01.png",
+    "tunnel__simultaneous": "images/170acdd7d4884d0e8756d13016515312.png",
+    "pet__open_up": "images/af77f7a31fd34babbf7a473988ff714b.png",
+    "pet__simultaneous": "images/e4167e3fefd044eb8013f9dfc5ad82e7.png",
+    "brush__open_up": "images/35db3ff910be4dd19bb55ef935248a8e.png",
+    "brush__simultaneous": "images/3a128dc50d7c405fa8a6809359a33c23.png",
+    "voice__open_up": "images/260a554336f64e2fb2814c9b5acb0001.png",
+    "voice__simultaneous": "images/173d1b5728d14025bdb4e8500c4e1cea.png",
+    "presence__open_up": "images/8dbd06613b694ef0befa61e2682417ec.png",
+    "presence__simultaneous": "images/fd17d548a1ad4b1ba2c8505b655e328e.png",
+    "pet__switch": "images/f85142b8d2f246ac816721e21021d504.png",
+    "pet__direct": "images/82836f3fd0df426c8acb0775d84aa2dc.png",
+    "pet__adapt": "images/82836f3fd0df426c8acb0775d84aa2dc.png",
+    "teaser__switch": "images/f019c4be71334b6abb48528cd618df90.png",
+    "teaser__direct": "images/d6ec25bc0d9f4518a1a2d56e9c6f0373.png",
+    "teaser__adapt": "images/d6ec25bc0d9f4518a1a2d56e9c6f0373.png",
+    "ball__switch": "images/369876ea14ea4cc2b32a3ae044b4273b.png",
+    "ball__direct": "images/7b2e4f0f3d9911033be92b7b13b33946e0644e451b305cc701e4f109bc3bbfd5.png",
+    "ball__adapt": "images/7b2e4f0f3d9911033be92b7b13b33946e0644e451b305cc701e4f109bc3bbfd5.png",
+    "plush__switch": "images/112f48e66958436289bd93ececcd27cf.png",
+    "plush__direct": "images/b37d8809b38107e4b0ec48049cbbe264cb3ab3a3eba7a3c2af4052cb81027ade.png",
+    "plush__adapt": "images/b37d8809b38107e4b0ec48049cbbe264cb3ab3a3eba7a3c2af4052cb81027ade.png",
+    "tunnel__switch": "images/f85142b8d2f246ac816721e21021d504.png",
+    "tunnel__direct": "images/5cd0ba103fd1468fab6b485628373b70.png",
+    "tunnel__adapt": "images/5cd0ba103fd1468fab6b485628373b70.png",
+    "brush__switch": "images/f85142b8d2f246ac816721e21021d504.png",
+    "brush__direct": "images/98a9ea196f7b45a9bff78589a970b0d2.png",
+    "brush__adapt": "images/98a9ea196f7b45a9bff78589a970b0d2.png",
+    "voice__switch": "images/f85142b8d2f246ac816721e21021d504.png",
+    "voice__direct": "images/e880fe1d061a44438c5f6cf1ead88522.png",
+    "voice__adapt": "images/e880fe1d061a44438c5f6cf1ead88522.png",
+    "presence__switch": "images/f85142b8d2f246ac816721e21021d504.png",
+    "presence__direct": "images/3a1342b916e44698a004419d3e25be74.png",
+    "presence__adapt": "images/3a1342b916e44698a004419d3e25be74.png"
+  },
+  "inventory": {
+    "published": {
+      "total": 352,
+      "mugi": []
+    },
+    "drafts": {
+      "total": 368,
+      "mugi": []
+    },
+    "generated": {
+      "total": 278,
+      "mugi": []
+    }
+  }
+}
