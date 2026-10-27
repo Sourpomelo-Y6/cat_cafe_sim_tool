@@ -1,0 +1,33 @@
+{
+  "before": {
+    "Logs": 18359249122,
+    "generated": 3277372585,
+    "content_images": 1276766330,
+    "Latest": 4841096360,
+    "Library": 7358000371,
+    "drafts": 349460
+  },
+  "after": {
+    "Logs": 18360039244,
+    "generated": 3277372585,
+    "content_images": 1276773028,
+    "Latest": 4841096360,
+    "Library": 7358000371,
+    "drafts": 356158
+  },
+  "delta": {
+    "Logs": 790122,
+    "generated": 0,
+    "content_images": 6698,
+    "Latest": 0,
+    "Library": 0,
+    "drafts": 6698
+  },
+  "latest_success_sets": 1,
+  "pending_exists": false,
+  "build_directories": [
+    "Latest",
+    "Runs"
+  ],
+  "snapshot_bytes": 790122
+}

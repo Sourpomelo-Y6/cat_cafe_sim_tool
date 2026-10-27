@@ -1,0 +1,117 @@
+test_new_modes_batch_save_and_saved_condition_navigation (test_interaction_all_modes.AllModeGuiTests) ... ok
+test_all_modes_export_and_missing_only_plans_preserve_old_ids (test_interaction_all_modes.AllModeTests) ... ok
+test_condition_matrix_matches_real_game_operations (test_interaction_all_modes.AllModeTests) ... ok
+test_presence_and_voice_generation_prompts_keep_noncontact_constraints (test_interaction_all_modes.AllModeTests) ... ok
+test_cancel_waits_for_request_and_does_not_start_next (test_interaction_batch.BatchGuiTests) ... ok
+test_cat_window_routes_reactions_and_imports_after_retry (test_interaction_batch.BatchGuiTests) ... ok
+test_close_cancels_and_removes_poll (test_interaction_batch.BatchGuiTests) ... ok
+test_import_protects_dirty_editor_and_does_not_save (test_interaction_batch.BatchGuiTests) ... ok
+test_sequential_six_results_retry_without_regeneration_and_apply (test_interaction_batch.BatchGuiTests) ... ok
+test_cat_reactions_operations_and_missing_filter (test_interaction_batch.BatchPlanTests) ... ok
+test_six_conditions_and_preflight_missing_notes (test_interaction_batch.BatchPlanTests) ... ok
+test_specific_operations_and_skip_existing (test_interaction_batch.BatchPlanTests) ... ok
+test_bulk_conflict_and_invalid_entry_write_nothing (test_interaction_batch_workflow.AtomicSaveTests) ... ok
+test_bulk_rejects_concurrent_edit_without_partial_write (test_interaction_batch_workflow.WorkflowTests) ... ok
+test_bulk_save_review_register_and_exclusion (test_interaction_batch_workflow.WorkflowTests) ... can't invoke "event" command: application has been destroyed
+    while executing
+"event generate $w <<ThemeChanged>>"
+    (procedure "ttk::ThemeChanged" line 6)
+    invoked from within
+"ttk::ThemeChanged"
+ok
+test_failure_continues_and_survives_resume_then_retry (test_interaction_batch_workflow.WorkflowTests) ... ok
+test_footer_fits_minimum_size (test_interaction_batch_workflow.WorkflowTests) ... ERROR
+test_generic_default_and_editor_dirty_protection (test_interaction_batch_workflow.WorkflowTests) ... ok
+test_manual_skip_after_failure_continues_remaining (test_interaction_batch_workflow.WorkflowTests) ... ok
+test_async_window_close_ignores_late_result (test_interaction_llm.InteractionLlmGuiTests) ... can't invoke "event" command: application has been destroyed
+    while executing
+"event generate $w <<ThemeChanged>>"
+    (procedure "ttk::ThemeChanged" line 6)
+    invoked from within
+"ttk::ThemeChanged"
+can't invoke "event" command: application has been destroyed
+    while executing
+"event generate $w <<ThemeChanged>>"
+    (procedure "ttk::ThemeChanged" line 6)
+    invoked from within
+"ttk::ThemeChanged"
+can't invoke "event" command: application has been destroyed
+    while executing
+"event generate $w <<ThemeChanged>>"
+    (procedure "ttk::ThemeChanged" line 6)
+    invoked from within
+"ttk::ThemeChanged"
+can't invoke "event" command: application has been destroyed
+    while executing
+"event generate $w <<ThemeChanged>>"
+    (procedure "ttk::ThemeChanged" line 6)
+    invoked from within
+"ttk::ThemeChanged"
+ok
+test_duplicate_target_and_existing_duplicate_block_import (test_interaction_llm.InteractionLlmGuiTests) ... ok
+test_editor_changes_and_condition_changes_block_import (test_interaction_llm.InteractionLlmGuiTests) ... ok
+test_errors_do_not_replace_editor_and_window_fits (test_interaction_llm.InteractionLlmGuiTests) ... ok
+test_settings_saved_and_restored_without_publishing (test_interaction_llm.InteractionLlmGuiTests) ... ok
+test_subset_import_retains_other_slots_and_requires_review (test_interaction_llm.InteractionLlmGuiTests) ... ok
+test_invalid_inputs_responses_and_cancel_do_not_save (test_interaction_llm.InteractionLlmTests) ... ok
+test_settings_reopen_profile_scope_and_corrupt_file (test_interaction_llm.InteractionLlmTests) ... ok
+test_strict_json_and_three_unique_short_variants (test_interaction_llm.InteractionLlmTests) ... ok
+test_transport_conditions_and_generation_record (test_interaction_llm.InteractionLlmTests) ... ok
+test_bad_or_missing_images_fall_back_and_rest_does_not_assume_sleep (test_interaction_preview.PreviewDataTests) ... ok
+test_bad_registered_source_or_mapping_produces_no_output (test_interaction_preview.PreviewDataTests) ... ok
+test_draft_store_is_not_an_export_source (test_interaction_preview.PreviewDataTests) ... ok
+test_export_published_only_stable_ids_and_image_dedup (test_interaction_preview.PreviewDataTests) ... ok
+test_failed_sidecar_write_removes_only_the_new_pack (test_interaction_preview.PreviewDataTests) ... ok
+test_id_binding_is_explicit_and_never_guessed_from_name (test_interaction_preview.PreviewDataTests) ... ok
+test_missing_coverage_counts_actual_operations_with_common_fallback (test_interaction_preview.PreviewDataTests) ... ok
+test_revision_is_content_based_and_previous_pack_is_unchanged (test_interaction_preview.PreviewDataTests) ... ok
+test_specific_common_reaction_and_overlay_are_kept_separate (test_interaction_preview.PreviewDataTests) ... ok
+test_failed_reload_keeps_preview_and_does_not_overwrite_corrupt_file (test_interaction_preview.PreviewGuiTests) ... ok
+test_geometry_and_export_button_include_sidecar_and_missing_report (test_interaction_preview.PreviewGuiTests) ... ok
+test_id_mapping_can_be_selected_and_saved_without_modifying_texts (test_interaction_preview.PreviewGuiTests) ... ok
+test_missing_reactions_and_image_fallback_are_explicit (test_interaction_preview.PreviewGuiTests) ... ok
+test_overlay_is_labeled_and_never_published_by_reading (test_interaction_preview.PreviewGuiTests) ... ok
+test_bulk_navigation_preserves_other_dirty_condition (test_interaction_saved_navigation.SavedNavigationTests) ... ok
+test_bulk_save_moves_individual_editor_to_saved_selection (test_interaction_saved_navigation.SavedNavigationTests) ... ok
+test_open_saved_from_batch_reads_file_instead_of_unsaved_result (test_interaction_saved_navigation.SavedNavigationTests) ... ok
+test_saved_list_keeps_generic_and_legacy_distinct_and_draft_priority (test_interaction_saved_navigation.SavedNavigationTests) ... ok
+test_saved_list_refreshes_after_individual_save (test_interaction_saved_navigation.SavedNavigationTests) ... ok
+test_register_preview_partial_fill_and_resume (test_interaction_subjects.SubjectGuiTests) ... ok
+test_migration_bindings_names_and_atomic_conflicts (test_interaction_subjects.SubjectTests) ... ok
+test_selection_export_and_partial_plan (test_interaction_subjects.SubjectTests) ... ok
+test_close_cancel_and_reload_discard (test_interaction_texts.InteractionEditorTests) ... ok
+test_controls_fit_at_minimum_window_size (test_interaction_texts.InteractionEditorTests) ... ok
+test_corruption_during_edit_preserves_text (test_interaction_texts.InteractionEditorTests) ... ok
+test_parent_close_protects_unsaved_child (test_interaction_texts.InteractionEditorTests) ... ok
+test_parent_tool_button_opens_single_editor_and_scopes_output (test_interaction_texts.InteractionEditorTests) ... ok
+test_published_fallback_empty_rejected_and_other_editor_update_detected (test_interaction_texts.InteractionEditorTests) ... ok
+test_review_edit_register_and_reopen_keeps_latest (test_interaction_texts.InteractionEditorTests) ... ok
+test_selectors_restrict_actions_and_reset_review (test_interaction_texts.InteractionEditorTests) ... ok
+test_switch_cancel_save_and_reaction_isolation (test_interaction_texts.InteractionEditorTests) ... ok
+test_bad_slot_id_order_and_type_are_rejected (test_interaction_texts.InteractionTextTests) ... ok
+test_concurrent_conditions_merge_but_stale_same_condition_is_rejected (test_interaction_texts.InteractionTextTests) ... ok
+test_condition_isolation_and_reopen (test_interaction_texts.InteractionTextTests) ... ok
+test_corrupt_file_is_not_overwritten (test_interaction_texts.InteractionTextTests) ... ok
+test_failed_atomic_replace_preserves_file_and_removes_temp (test_interaction_texts.InteractionTextTests) ... ok
+test_invalid_conditions (test_interaction_texts.InteractionTextTests) ... ok
+test_published_requires_one_nonempty_candidate (test_interaction_texts.InteractionTextTests) ... ok
+test_three_slots_stable_ids_and_partial_draft (test_interaction_texts.InteractionTextTests) ... ok
+
+======================================================================
+ERROR: test_footer_fits_minimum_size (test_interaction_batch_workflow.WorkflowTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hi-wa\source\codex_repos\CatCafeSim\cat_cafe_sim_tool\tests\test_interaction_batch_workflow.py", line 41, in setUp
+    self.settings=settings_at(self.temp.name)
+  File "C:\Users\hi-wa\source\codex_repos\CatCafeSim\cat_cafe_sim_tool\tests\test_interaction_batch.py", line 26, in settings_at
+    settings.save(condition('cat_response','cat-mike',mode,action,reaction),
+  File "C:\Users\hi-wa\source\codex_repos\CatCafeSim\cat_cafe_sim_tool\interaction_llm.py", line 191, in save
+    temp.replace(self.path)
+  File "C:\Users\hi-wa\AppData\Local\Programs\Python\Python310\lib\pathlib.py", line 1247, in replace
+    self._accessor.replace(self, target)
+PermissionError: [WinError 5] �A�N�Z�X�����ۂ���܂����B: 'C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Logs\\MikeTunnelNarratives\\Temp\\tmpel4g49au\\settings-55f493793bfa457b93749b2c699899d8.tmp' -> 'C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Logs\\MikeTunnelNarratives\\Temp\\tmpel4g49au\\settings.json'
+
+----------------------------------------------------------------------
+Ran 68 tests in 46.039s
+
+FAILED (errors=1)

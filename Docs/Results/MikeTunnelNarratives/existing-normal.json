@@ -1,0 +1,1858 @@
+{
+  "published": [
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "de610542b9fb59a2b153adcf5304d347",
+          "slot": 1,
+          "text": "{cat}はトンネルの先を覗き、足を踏み出すかどうか分からず、静かに待っていた。"
+        },
+        {
+          "id": "7e59e5c278415124a775b453513b3215",
+          "slot": 2,
+          "text": "{cat}はトンネルに向かって歩み寄るが、入るかどうかは不確かで、足音を止めた。"
+        },
+        {
+          "id": "147f71635fa355e0b639a2e8086f792e",
+          "slot": 3,
+          "text": "{cat}はトンネルの周囲を確認し、踏み出すかどうかは未確認で、ゆっくりと姿勢を変えた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "3dcc83cceabb593c83c2a7421d67fb0d",
+          "slot": 1,
+          "text": "{cat}はトンネルの中でしっぽを揺らしながら遊んだように見せた。"
+        },
+        {
+          "id": "4096afff64d75453ab02585b71e7c429",
+          "slot": 2,
+          "text": "{cat}はトンネルの隙間をくぐり、軽やかに遊んでいるように見た。"
+        },
+        {
+          "id": "e39ac7c578d65a678b11914cef3b0437",
+          "slot": 3,
+          "text": "{cat}はトンネルでしっぽをくるくる回し、楽しそうにしたようだった。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "a36e90fa2e235efca9b757ec5a2fbd87",
+          "slot": 1,
+          "text": "{cat}はトンネルに入ったようで、尾を勢いよく振りながら興奮したようだった"
+        },
+        {
+          "id": "2d85e20e2d0f57448479093177fcc4df",
+          "slot": 2,
+          "text": "{cat}はトンネルを通り抜けたかもしれないようで、目を輝かせながら尾をピクピクさせたようだった"
+        },
+        {
+          "id": "afb36db4419a5eb889e95e65ab78b4d5",
+          "slot": 3,
+          "text": "{cat}はトンネルに入った様子で、体を低くして尾をバタバタさせ、興奮を隠せなかったようだった"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "turn_away",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "bcb8cb179fd25389b6f488a9072e3b0c",
+          "slot": 1,
+          "text": "{cat}はトンネルへ近づいたが、すぐに方向を変えた。"
+        },
+        {
+          "id": "35568db160af5a1db7469a522d5aa499",
+          "slot": 2,
+          "text": "{cat}はトンネル前で足を止め、そっちへ向きを変えた。"
+        },
+        {
+          "id": "87dc670076475fe18012d0e623d15b31",
+          "slot": 3,
+          "text": "{cat}はトンネルの入口で立ち止まり、すぐに別の方向へ走った。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "4068d4f837bb5a999885dce5d84f5043",
+          "slot": 1,
+          "text": "{cat}はトンネルの端で足を止め、少し見慣れない姿勢に戸惑った。"
+        },
+        {
+          "id": "983247beffbf50f1b29a494f747b3001",
+          "slot": 2,
+          "text": "{cat}はトンネルの奥へ進もうとしたが、顔を上げて迷ったまま立ち止まった。"
+        },
+        {
+          "id": "f6a957cd86e2569e909d9f0533e38a67",
+          "slot": 3,
+          "text": "{cat}はトンネルの入り口で足を踏み替え、しばらく視線を揺らしながら戸惑った。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "79538028039c5afe98ff3ae4ac399a78",
+          "slot": 1,
+          "text": "{cat}はトンネルを通ろうとしたが、足が重く、すぐに止まった。"
+        },
+        {
+          "id": "4f8b9005848d555990d4eee0e8041b33",
+          "slot": 2,
+          "text": "{cat}はトンネルの前で相手の手を見つめ、動きを止めた。"
+        },
+        {
+          "id": "845652b8556d5865a116a892da1a3cb7",
+          "slot": 3,
+          "text": "{cat}はトンネルに入ったように見えたが、すぐに足を止め、動きが鈍かった。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "tunnel",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "16386165c6775819b2c83f08fe0644ae",
+          "slot": 1,
+          "text": "ねえ{cat_call}、トンネル遊びしようか"
+        },
+        {
+          "id": "4804bb343593524f9522f129d1fbef2a",
+          "slot": 2,
+          "text": "トンネルを通ってみようよ{cat_call}"
+        },
+        {
+          "id": "e33618d6d3625769953f83707976485e",
+          "slot": 3,
+          "text": "走り回るのは楽しいね{cat_call}、さあトンネルへ"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "tunnel",
+        "action": "direct",
+        "reaction": "any",
+        "scene_key": "tunnel__direct",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "8753a5502e22581b80ea77b9d6410ea8",
+          "slot": 1,
+          "text": "トンネルに入ってみようか{cat_call}"
+        },
+        {
+          "id": "58a177cf83b45f4caa485ae5224a8849",
+          "slot": 2,
+          "text": "ゆっくり通り抜けてみるね{cat_call}"
+        },
+        {
+          "id": "7ec4d873767f5d6b88c161b9b79ebf2f",
+          "slot": 3,
+          "text": "さあ、トンネルで遊ぼう{cat_call}"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "tunnel",
+        "action": "adapt",
+        "reaction": "any",
+        "scene_key": "tunnel__adapt",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "6258ad6fca345cc3857195911c4b8722",
+          "slot": 1,
+          "text": "トンネルを一緒に通ってみようか{cat_call}"
+        },
+        {
+          "id": "625f85139fde52beaaf31c62ed698375",
+          "slot": 2,
+          "text": "少しずつ入ってみるのはどうかな{cat_call}"
+        },
+        {
+          "id": "919e7e43c7aa50338cd7ea0b5811a434",
+          "slot": 3,
+          "text": "ゆっくりと通り抜けるのもいいね{cat_call}"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "tunnel",
+        "action": "intense",
+        "reaction": "any",
+        "scene_key": "tunnel__intense",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "30341fd457f259f78c4d56f26d33903d",
+          "slot": 1,
+          "text": "{cat_call}、トンネルをくぐってみようか？"
+        },
+        {
+          "id": "7db514791b135ee4819760d8bf4646b7",
+          "slot": 2,
+          "text": "{cat_call}、激しくトンネルを通ってみようよ。"
+        },
+        {
+          "id": "8e065e1ebaae54b99bcb12cb4569db5a",
+          "slot": 3,
+          "text": "{cat_call}、しっかりトンネルで遊んでみようか。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "tunnel",
+        "action": "feint",
+        "reaction": "any",
+        "scene_key": "tunnel__feint",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "dad4bb22e4605201851e1c95e18314f8",
+          "slot": 1,
+          "text": "{cat_call} ちょっとトンネルに入ってみようか"
+        },
+        {
+          "id": "7a8cd0c042a35cd79ca2afa9b2ddb726",
+          "slot": 2,
+          "text": "{cat_call} ちょっとトンネルをフェイントしようか"
+        },
+        {
+          "id": "82ea205f240057ae93de35f7e13247e9",
+          "slot": 3,
+          "text": "{cat_call} トンネルの隙間を見て、フェイントしようか"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "guest-1",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "tunnel",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "fb2cc9f32a4f594cbc41342895beec41",
+          "slot": 1,
+          "text": "トンネルで遊んでみてもいいですか。"
+        },
+        {
+          "id": "e192fe04baaa5ce9888b8c1925138274",
+          "slot": 2,
+          "text": "{cat_call}、トンネルはいかがですか。"
+        },
+        {
+          "id": "c9b4cfa3288a5cbc81d2ff112efbd116",
+          "slot": 3,
+          "text": "気が向いたら、トンネルで遊びませんか。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "person-952c631405e649fdb50c390881804977",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "tunnel",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "41bb502b91245655a7eb68b54ec78933",
+          "slot": 1,
+          "text": "{cat_call}、トンネルで遊んでみませんか。"
+        },
+        {
+          "id": "5a2dab0697b559b5bdc344528e2844fd",
+          "slot": 2,
+          "text": "トンネル遊びも、よかったらどうですか。"
+        },
+        {
+          "id": "8f732800da335512b742162c624a6fd7",
+          "slot": 3,
+          "text": "気が向いたときに、トンネルで遊びましょう。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "person-guest-3",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "tunnel",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "895efd7cb4525a4e90bcd023b02e3256",
+          "slot": 1,
+          "text": "{cat_call}、トンネルの向こうは気になるかな。"
+        },
+        {
+          "id": "427b97f5f6e259d7988b06cce6349d81",
+          "slot": 2,
+          "text": "入口と出口で、見え方が違うね。"
+        },
+        {
+          "id": "fe5fe78be4545a0dad98fc76bd4535ba",
+          "slot": 3,
+          "text": "入らなくても、トンネル遊びはどうかな。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "0be7e2c192a653febc8a96a54b892621",
+          "slot": 1,
+          "text": "{cat}はトンネル遊びの誘いに、静かな様子で応じた。"
+        },
+        {
+          "id": "9fbe9ee2f3a8518aa38054e22a2e645d",
+          "slot": 2,
+          "text": "{cat}はトンネルへ目を向け、しばらく様子を見ていた。"
+        },
+        {
+          "id": "d66ec5e6d86b5ebcb7b76c72402f031b",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "751b8e08b9fe5950872165894e81300f",
+          "slot": 1,
+          "text": "{cat}はトンネル遊びに興味を示し、穏やかに応じた。"
+        },
+        {
+          "id": "45af6ef9b40a5ce2ab264bcd6a3fccef",
+          "slot": 2,
+          "text": "{cat}はトンネルに注意を向け、遊びの誘いを受け止めた。"
+        },
+        {
+          "id": "0921b57656765000808192138dcfc8fc",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "ca9ab8104ad0501589e344a6013af859",
+          "slot": 1,
+          "text": "{cat}はトンネル遊びに強い関心を示し、熱心に応じた。"
+        },
+        {
+          "id": "4fe21c2254db53c29a2d82a2ac50b7a9",
+          "slot": 2,
+          "text": "{cat}は遊びの誘いに気持ちを向け、いつもより積極的に応じた。"
+        },
+        {
+          "id": "c7d8d3f66ffa5caeb0912f893728e266",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "48c98cd5c400514eb8ed2ce30676a111",
+          "slot": 1,
+          "text": "{cat}はトンネル遊びの誘いに戸惑い、様子をうかがった。"
+        },
+        {
+          "id": "26e720acb7db552f9c5fed866f4ab8f9",
+          "slot": 2,
+          "text": "{cat}はどうしたものか迷うように、トンネルへ目を向けた。"
+        },
+        {
+          "id": "e11a005e581950dd8ef780095c97b85e",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "c950a4c2348f59aea3ed50b7efd2ab26",
+          "slot": 1,
+          "text": "{cat}は疲れた様子で、トンネル遊びへの反応が鈍かった。"
+        },
+        {
+          "id": "89937f2665795ee8abf465c54dc40c48",
+          "slot": 2,
+          "text": "{cat}は遊びの誘いにゆっくりと反応し、疲れを見せた。"
+        },
+        {
+          "id": "95e606efb0c4555ba7c699fd853ebb7d",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "c1e81d9ec9125c8bb455333449e6afb5",
+          "slot": 1,
+          "text": "{cat}はトンネルへ注意を向け、遊びの様子を見定めていた。"
+        },
+        {
+          "id": "4b1ecdba50ff5c248d070342aec79612",
+          "slot": 2,
+          "text": "{cat}はトンネルを気にしながら、首を少し傾けて様子をうかがった。"
+        },
+        {
+          "id": "2e7d60b6fd8b55da93bd83ad499f6a0f",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "31060c29e81e57238bd57783700d3c6b",
+          "slot": 1,
+          "text": "{cat}はトンネルに興味を示し、耳を立てた。探検の誘いを楽しんでいるようだ。"
+        },
+        {
+          "id": "943d8dac19d25df19cf6e62302d81a27",
+          "slot": 2,
+          "text": "{cat}はトンネルへ弾むように顔を向け、遊びに好奇心をのぞかせた。"
+        },
+        {
+          "id": "466c4b77b4335481aec92aadce38e571",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "3af29ce74db75517b552c4033e778936",
+          "slot": 1,
+          "text": "{cat}の目がトンネルに釘づけになった。何が見つかるのかと、熱心に様子を探っている。"
+        },
+        {
+          "id": "47b05e3d7fb15682bcb6e046f61068ef",
+          "slot": 2,
+          "text": "{cat}はトンネル遊びの誘いに素早く応じた。新しい発見を待ちきれないような顔だ。"
+        },
+        {
+          "id": "85574f212c165a588824b152f22ecc72",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "575b48ff473f5011a68af655589ee67d",
+          "slot": 1,
+          "text": "{cat}はトンネルを気にしているが、どう応じようか迷うように動きをためらった。"
+        },
+        {
+          "id": "7302871142ee5240a7beaec92f308bf2",
+          "slot": 2,
+          "text": "{cat}はトンネルと相手に視線を行き来させた。探検気分には、まだなれないようだ。"
+        },
+        {
+          "id": "6833d413cee95a4bad1d0b36b198bbc5",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "48f79574b16c575fbce8f92959425b0f",
+          "slot": 1,
+          "text": "{cat}はトンネルへ目をやった。探検するよりも休みたいのか、反応は鈍い。"
+        },
+        {
+          "id": "2214b8f90e2a53a28dc12e3a8e908e4f",
+          "slot": 2,
+          "text": "{cat}は疲れた様子で、トンネル遊びの誘いにもゆっくりと反応した。"
+        },
+        {
+          "id": "aa029d99d2db5fa3a64d74bf970f6099",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "2959fd5a514c5929a4532bd92fd835d6",
+          "slot": 1,
+          "text": "{cat}はトンネルの様子を慎重にうかがった。遊びへの興味はあるが、反応は控えめだ。"
+        },
+        {
+          "id": "0c9308561b765853a652a2a72e16454b",
+          "slot": 2,
+          "text": "{cat}はトンネルへ目を向けている。丸い耳にも、様子を確かめるような用心深さがある。"
+        },
+        {
+          "id": "25fe2f3668cb5a5789811f748a0c8fd4",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "5977a9e1665351bca1697ee59db326b3",
+          "slot": 1,
+          "text": "{cat}はトンネル遊びに楽しそうに応じた。慎重な表情の中にも、期待が見える。"
+        },
+        {
+          "id": "ae6fa9aad5225890ae03b2a30c76d029",
+          "slot": 2,
+          "text": "{cat}はトンネルへいきいきと顔を向けた。遊びの誘いを気に入ったようだ。"
+        },
+        {
+          "id": "9c023711a45d5dae8b8be671c634e386",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "ba0eb037e6f851af91c455c02d0d22c6",
+          "slot": 1,
+          "text": "{cat}はトンネル遊びに心を弾ませた。金色の目は、遊びの様子に釘づけになっている。"
+        },
+        {
+          "id": "92228490f63852bb9021f27d99bfcb2b",
+          "slot": 2,
+          "text": "{cat}はトンネルへ熱のこもった反応を返した。丸い顔に、もっと遊びたいという期待があふれる。"
+        },
+        {
+          "id": "45d5cf0ce739594f861e8d3405e514af",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "ad55bd1771da5c3ca7a90787ba11a0d8",
+          "slot": 1,
+          "text": "{cat}はトンネルの様子に気を取られつつ、応じるのを迷っている。気持ちよく遊ぶ調子が合わないようだ。"
+        },
+        {
+          "id": "090b00799b745d268f69e85403433b08",
+          "slot": 2,
+          "text": "{cat}はトンネルと相手を見比べた。遊びに誘われても、少し用心しているらしい。"
+        },
+        {
+          "id": "18d8a175312c57748c8d2aebd5b7abe2",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "2aab88e002d156be82557378e43f87aa",
+          "slot": 1,
+          "text": "{cat}はトンネルへ重たげな視線を向けた。遊びの誘いに応じる元気が、今は少ないようだ。"
+        },
+        {
+          "id": "a521762a16205a9c8c3ebd3adf438420",
+          "slot": 2,
+          "text": "{cat}はトンネル遊びにもけだるそうだ。目の輝きも控えめで、疲れがうかがえる。"
+        },
+        {
+          "id": "3c990530c4a751d595de4571192f5caa",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "61e22afc45ce53d6b4b528c75eaf805b",
+          "slot": 1,
+          "text": "{cat}はトンネルへ目を向け、静かに眺めた。すぐには気持ちを決めず、様子を見ている。"
+        },
+        {
+          "id": "a318604b13e559499cc2fccdd0c8f883",
+          "slot": 2,
+          "text": "{cat}はトンネル遊びに穏やかな反応を返した。関心はあるが、まだ控えめだ。"
+        },
+        {
+          "id": "968e734dc6d05e8b86025a9488212aa4",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "c8c17e8629aa544190735bd9d0dc59e3",
+          "slot": 1,
+          "text": "{cat}はトンネルへ楽しそうな顔を向けた。ゆったりした間合いの中にも、期待が見える。"
+        },
+        {
+          "id": "3538591d6db55367a44beaf774548101",
+          "slot": 2,
+          "text": "{cat}はトンネル遊びの誘いを気に入ったようだ。耳を向けたまま、いきいきと様子を見ている。"
+        },
+        {
+          "id": "b07fc80959c5583085c6fe864b78a63c",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "4e6b31a78d8d566ba05fcb03293a6b18",
+          "slot": 1,
+          "text": "{cat}はトンネル遊びにすっかり気を引かれている。丸い顔に、次も遊びたいという気持ちがあふれた。"
+        },
+        {
+          "id": "aa2c140e42b15426a9ecedf74f46f0ea",
+          "slot": 2,
+          "text": "{cat}はトンネルへ熱心な視線を注いだ。普段の静かな目にも、はずむような楽しさがある。"
+        },
+        {
+          "id": "e42f73c3d7e357adac1c473d0be4fc0c",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "1855208193b75fe8b5e69cab35d6c0fc",
+          "slot": 1,
+          "text": "{cat}はトンネルを気にしつつ、相手の様子をうかがった。遊びに応じる調子が合わないらしい。"
+        },
+        {
+          "id": "f480c12a03a15be78c034b478a78124f",
+          "slot": 2,
+          "text": "{cat}はトンネルへの反応をためらっている。三角の耳にも、少し迷いが表れた。"
+        },
+        {
+          "id": "4e13664e5b9151e79c57cbe97aac8c16",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "27b67c1f46e05ed2a5d57775519088e6",
+          "slot": 1,
+          "text": "{cat}はトンネルを眺める目にも力がない。疲れているらしく、誘いへの反応は小さい。"
+        },
+        {
+          "id": "fd95c8feab51590e8364bfe8388df5e1",
+          "slot": 2,
+          "text": "{cat}はトンネルへゆっくりと顔を向けた。遊びを始めるには、気だるさが勝っているようだ。"
+        },
+        {
+          "id": "1418bae78708545297e9e533b04fff9f",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    }
+  ],
+  "drafts": [
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "de610542b9fb59a2b153adcf5304d347",
+          "slot": 1,
+          "text": "{cat}はトンネルの先を覗き、足を踏み出すかどうか分からず、静かに待っていた。"
+        },
+        {
+          "id": "7e59e5c278415124a775b453513b3215",
+          "slot": 2,
+          "text": "{cat}はトンネルに向かって歩み寄るが、入るかどうかは不確かで、足音を止めた。"
+        },
+        {
+          "id": "147f71635fa355e0b639a2e8086f792e",
+          "slot": 3,
+          "text": "{cat}はトンネルの周囲を確認し、踏み出すかどうかは未確認で、ゆっくりと姿勢を変えた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "3dcc83cceabb593c83c2a7421d67fb0d",
+          "slot": 1,
+          "text": "{cat}はトンネルの中でしっぽを揺らしながら遊んだように見せた。"
+        },
+        {
+          "id": "4096afff64d75453ab02585b71e7c429",
+          "slot": 2,
+          "text": "{cat}はトンネルの隙間をくぐり、軽やかに遊んでいるように見た。"
+        },
+        {
+          "id": "e39ac7c578d65a678b11914cef3b0437",
+          "slot": 3,
+          "text": "{cat}はトンネルでしっぽをくるくる回し、楽しそうにしたようだった。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "a36e90fa2e235efca9b757ec5a2fbd87",
+          "slot": 1,
+          "text": "{cat}はトンネルに入ったようで、尾を勢いよく振りながら興奮したようだった"
+        },
+        {
+          "id": "2d85e20e2d0f57448479093177fcc4df",
+          "slot": 2,
+          "text": "{cat}はトンネルを通り抜けたかもしれないようで、目を輝かせながら尾をピクピクさせたようだった"
+        },
+        {
+          "id": "afb36db4419a5eb889e95e65ab78b4d5",
+          "slot": 3,
+          "text": "{cat}はトンネルに入った様子で、体を低くして尾をバタバタさせ、興奮を隠せなかったようだった"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "turn_away",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "bcb8cb179fd25389b6f488a9072e3b0c",
+          "slot": 1,
+          "text": "{cat}はトンネルへ近づいたが、すぐに方向を変えた。"
+        },
+        {
+          "id": "35568db160af5a1db7469a522d5aa499",
+          "slot": 2,
+          "text": "{cat}はトンネル前で足を止め、そっちへ向きを変えた。"
+        },
+        {
+          "id": "87dc670076475fe18012d0e623d15b31",
+          "slot": 3,
+          "text": "{cat}はトンネルの入口で立ち止まり、すぐに別の方向へ走った。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "4068d4f837bb5a999885dce5d84f5043",
+          "slot": 1,
+          "text": "{cat}はトンネルの端で足を止め、少し見慣れない姿勢に戸惑った。"
+        },
+        {
+          "id": "983247beffbf50f1b29a494f747b3001",
+          "slot": 2,
+          "text": "{cat}はトンネルの奥へ進もうとしたが、顔を上げて迷ったまま立ち止まった。"
+        },
+        {
+          "id": "f6a957cd86e2569e909d9f0533e38a67",
+          "slot": 3,
+          "text": "{cat}はトンネルの入り口で足を踏み替え、しばらく視線を揺らしながら戸惑った。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "79538028039c5afe98ff3ae4ac399a78",
+          "slot": 1,
+          "text": "{cat}はトンネルを通ろうとしたが、足が重く、すぐに止まった。"
+        },
+        {
+          "id": "4f8b9005848d555990d4eee0e8041b33",
+          "slot": 2,
+          "text": "{cat}はトンネルの前で相手の手を見つめ、動きを止めた。"
+        },
+        {
+          "id": "845652b8556d5865a116a892da1a3cb7",
+          "slot": 3,
+          "text": "{cat}はトンネルに入ったように見えたが、すぐに足を止め、動きが鈍かった。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "tunnel",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "16386165c6775819b2c83f08fe0644ae",
+          "slot": 1,
+          "text": "ねえ{cat_call}、トンネル遊びしようか"
+        },
+        {
+          "id": "4804bb343593524f9522f129d1fbef2a",
+          "slot": 2,
+          "text": "トンネルを通ってみようよ{cat_call}"
+        },
+        {
+          "id": "e33618d6d3625769953f83707976485e",
+          "slot": 3,
+          "text": "走り回るのは楽しいね{cat_call}、さあトンネルへ"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "tunnel",
+        "action": "direct",
+        "reaction": "any",
+        "scene_key": "tunnel__direct",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "8753a5502e22581b80ea77b9d6410ea8",
+          "slot": 1,
+          "text": "トンネルに入ってみようか{cat_call}"
+        },
+        {
+          "id": "58a177cf83b45f4caa485ae5224a8849",
+          "slot": 2,
+          "text": "ゆっくり通り抜けてみるね{cat_call}"
+        },
+        {
+          "id": "7ec4d873767f5d6b88c161b9b79ebf2f",
+          "slot": 3,
+          "text": "さあ、トンネルで遊ぼう{cat_call}"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "tunnel",
+        "action": "adapt",
+        "reaction": "any",
+        "scene_key": "tunnel__adapt",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "6258ad6fca345cc3857195911c4b8722",
+          "slot": 1,
+          "text": "トンネルを一緒に通ってみようか{cat_call}"
+        },
+        {
+          "id": "625f85139fde52beaaf31c62ed698375",
+          "slot": 2,
+          "text": "少しずつ入ってみるのはどうかな{cat_call}"
+        },
+        {
+          "id": "919e7e43c7aa50338cd7ea0b5811a434",
+          "slot": 3,
+          "text": "ゆっくりと通り抜けるのもいいね{cat_call}"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "tunnel",
+        "action": "intense",
+        "reaction": "any",
+        "scene_key": "tunnel__intense",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "30341fd457f259f78c4d56f26d33903d",
+          "slot": 1,
+          "text": "{cat_call}、トンネルをくぐってみようか？"
+        },
+        {
+          "id": "7db514791b135ee4819760d8bf4646b7",
+          "slot": 2,
+          "text": "{cat_call}、激しくトンネルを通ってみようよ。"
+        },
+        {
+          "id": "8e065e1ebaae54b99bcb12cb4569db5a",
+          "slot": 3,
+          "text": "{cat_call}、しっかりトンネルで遊んでみようか。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "tunnel",
+        "action": "feint",
+        "reaction": "any",
+        "scene_key": "tunnel__feint",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "dad4bb22e4605201851e1c95e18314f8",
+          "slot": 1,
+          "text": "{cat_call} ちょっとトンネルに入ってみようか"
+        },
+        {
+          "id": "7a8cd0c042a35cd79ca2afa9b2ddb726",
+          "slot": 2,
+          "text": "{cat_call} ちょっとトンネルをフェイントしようか"
+        },
+        {
+          "id": "82ea205f240057ae93de35f7e13247e9",
+          "slot": 3,
+          "text": "{cat_call} トンネルの隙間を見て、フェイントしようか"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "guest-1",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "tunnel",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "fb2cc9f32a4f594cbc41342895beec41",
+          "slot": 1,
+          "text": "トンネルで遊んでみてもいいですか。"
+        },
+        {
+          "id": "e192fe04baaa5ce9888b8c1925138274",
+          "slot": 2,
+          "text": "{cat_call}、トンネルはいかがですか。"
+        },
+        {
+          "id": "c9b4cfa3288a5cbc81d2ff112efbd116",
+          "slot": 3,
+          "text": "気が向いたら、トンネルで遊びませんか。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "person-952c631405e649fdb50c390881804977",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "tunnel",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "41bb502b91245655a7eb68b54ec78933",
+          "slot": 1,
+          "text": "{cat_call}、トンネルで遊んでみませんか。"
+        },
+        {
+          "id": "5a2dab0697b559b5bdc344528e2844fd",
+          "slot": 2,
+          "text": "トンネル遊びも、よかったらどうですか。"
+        },
+        {
+          "id": "8f732800da335512b742162c624a6fd7",
+          "slot": 3,
+          "text": "気が向いたときに、トンネルで遊びましょう。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "person-guest-3",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "tunnel",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "895efd7cb4525a4e90bcd023b02e3256",
+          "slot": 1,
+          "text": "{cat_call}、トンネルの向こうは気になるかな。"
+        },
+        {
+          "id": "427b97f5f6e259d7988b06cce6349d81",
+          "slot": 2,
+          "text": "入口と出口で、見え方が違うね。"
+        },
+        {
+          "id": "fe5fe78be4545a0dad98fc76bd4535ba",
+          "slot": 3,
+          "text": "入らなくても、トンネル遊びはどうかな。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "0be7e2c192a653febc8a96a54b892621",
+          "slot": 1,
+          "text": "{cat}はトンネル遊びの誘いに、静かな様子で応じた。"
+        },
+        {
+          "id": "9fbe9ee2f3a8518aa38054e22a2e645d",
+          "slot": 2,
+          "text": "{cat}はトンネルへ目を向け、しばらく様子を見ていた。"
+        },
+        {
+          "id": "d66ec5e6d86b5ebcb7b76c72402f031b",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "751b8e08b9fe5950872165894e81300f",
+          "slot": 1,
+          "text": "{cat}はトンネル遊びに興味を示し、穏やかに応じた。"
+        },
+        {
+          "id": "45af6ef9b40a5ce2ab264bcd6a3fccef",
+          "slot": 2,
+          "text": "{cat}はトンネルに注意を向け、遊びの誘いを受け止めた。"
+        },
+        {
+          "id": "0921b57656765000808192138dcfc8fc",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "ca9ab8104ad0501589e344a6013af859",
+          "slot": 1,
+          "text": "{cat}はトンネル遊びに強い関心を示し、熱心に応じた。"
+        },
+        {
+          "id": "4fe21c2254db53c29a2d82a2ac50b7a9",
+          "slot": 2,
+          "text": "{cat}は遊びの誘いに気持ちを向け、いつもより積極的に応じた。"
+        },
+        {
+          "id": "c7d8d3f66ffa5caeb0912f893728e266",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "48c98cd5c400514eb8ed2ce30676a111",
+          "slot": 1,
+          "text": "{cat}はトンネル遊びの誘いに戸惑い、様子をうかがった。"
+        },
+        {
+          "id": "26e720acb7db552f9c5fed866f4ab8f9",
+          "slot": 2,
+          "text": "{cat}はどうしたものか迷うように、トンネルへ目を向けた。"
+        },
+        {
+          "id": "e11a005e581950dd8ef780095c97b85e",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "c950a4c2348f59aea3ed50b7efd2ab26",
+          "slot": 1,
+          "text": "{cat}は疲れた様子で、トンネル遊びへの反応が鈍かった。"
+        },
+        {
+          "id": "89937f2665795ee8abf465c54dc40c48",
+          "slot": 2,
+          "text": "{cat}は遊びの誘いにゆっくりと反応し、疲れを見せた。"
+        },
+        {
+          "id": "95e606efb0c4555ba7c699fd853ebb7d",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "c1e81d9ec9125c8bb455333449e6afb5",
+          "slot": 1,
+          "text": "{cat}はトンネルへ注意を向け、遊びの様子を見定めていた。"
+        },
+        {
+          "id": "4b1ecdba50ff5c248d070342aec79612",
+          "slot": 2,
+          "text": "{cat}はトンネルを気にしながら、首を少し傾けて様子をうかがった。"
+        },
+        {
+          "id": "2e7d60b6fd8b55da93bd83ad499f6a0f",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "31060c29e81e57238bd57783700d3c6b",
+          "slot": 1,
+          "text": "{cat}はトンネルに興味を示し、耳を立てた。探検の誘いを楽しんでいるようだ。"
+        },
+        {
+          "id": "943d8dac19d25df19cf6e62302d81a27",
+          "slot": 2,
+          "text": "{cat}はトンネルへ弾むように顔を向け、遊びに好奇心をのぞかせた。"
+        },
+        {
+          "id": "466c4b77b4335481aec92aadce38e571",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "3af29ce74db75517b552c4033e778936",
+          "slot": 1,
+          "text": "{cat}の目がトンネルに釘づけになった。何が見つかるのかと、熱心に様子を探っている。"
+        },
+        {
+          "id": "47b05e3d7fb15682bcb6e046f61068ef",
+          "slot": 2,
+          "text": "{cat}はトンネル遊びの誘いに素早く応じた。新しい発見を待ちきれないような顔だ。"
+        },
+        {
+          "id": "85574f212c165a588824b152f22ecc72",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "575b48ff473f5011a68af655589ee67d",
+          "slot": 1,
+          "text": "{cat}はトンネルを気にしているが、どう応じようか迷うように動きをためらった。"
+        },
+        {
+          "id": "7302871142ee5240a7beaec92f308bf2",
+          "slot": 2,
+          "text": "{cat}はトンネルと相手に視線を行き来させた。探検気分には、まだなれないようだ。"
+        },
+        {
+          "id": "6833d413cee95a4bad1d0b36b198bbc5",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "48f79574b16c575fbce8f92959425b0f",
+          "slot": 1,
+          "text": "{cat}はトンネルへ目をやった。探検するよりも休みたいのか、反応は鈍い。"
+        },
+        {
+          "id": "2214b8f90e2a53a28dc12e3a8e908e4f",
+          "slot": 2,
+          "text": "{cat}は疲れた様子で、トンネル遊びの誘いにもゆっくりと反応した。"
+        },
+        {
+          "id": "aa029d99d2db5fa3a64d74bf970f6099",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "2959fd5a514c5929a4532bd92fd835d6",
+          "slot": 1,
+          "text": "{cat}はトンネルの様子を慎重にうかがった。遊びへの興味はあるが、反応は控えめだ。"
+        },
+        {
+          "id": "0c9308561b765853a652a2a72e16454b",
+          "slot": 2,
+          "text": "{cat}はトンネルへ目を向けている。丸い耳にも、様子を確かめるような用心深さがある。"
+        },
+        {
+          "id": "25fe2f3668cb5a5789811f748a0c8fd4",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "5977a9e1665351bca1697ee59db326b3",
+          "slot": 1,
+          "text": "{cat}はトンネル遊びに楽しそうに応じた。慎重な表情の中にも、期待が見える。"
+        },
+        {
+          "id": "ae6fa9aad5225890ae03b2a30c76d029",
+          "slot": 2,
+          "text": "{cat}はトンネルへいきいきと顔を向けた。遊びの誘いを気に入ったようだ。"
+        },
+        {
+          "id": "9c023711a45d5dae8b8be671c634e386",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "ba0eb037e6f851af91c455c02d0d22c6",
+          "slot": 1,
+          "text": "{cat}はトンネル遊びに心を弾ませた。金色の目は、遊びの様子に釘づけになっている。"
+        },
+        {
+          "id": "92228490f63852bb9021f27d99bfcb2b",
+          "slot": 2,
+          "text": "{cat}はトンネルへ熱のこもった反応を返した。丸い顔に、もっと遊びたいという期待があふれる。"
+        },
+        {
+          "id": "45d5cf0ce739594f861e8d3405e514af",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "ad55bd1771da5c3ca7a90787ba11a0d8",
+          "slot": 1,
+          "text": "{cat}はトンネルの様子に気を取られつつ、応じるのを迷っている。気持ちよく遊ぶ調子が合わないようだ。"
+        },
+        {
+          "id": "090b00799b745d268f69e85403433b08",
+          "slot": 2,
+          "text": "{cat}はトンネルと相手を見比べた。遊びに誘われても、少し用心しているらしい。"
+        },
+        {
+          "id": "18d8a175312c57748c8d2aebd5b7abe2",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "2aab88e002d156be82557378e43f87aa",
+          "slot": 1,
+          "text": "{cat}はトンネルへ重たげな視線を向けた。遊びの誘いに応じる元気が、今は少ないようだ。"
+        },
+        {
+          "id": "a521762a16205a9c8c3ebd3adf438420",
+          "slot": 2,
+          "text": "{cat}はトンネル遊びにもけだるそうだ。目の輝きも控えめで、疲れがうかがえる。"
+        },
+        {
+          "id": "3c990530c4a751d595de4571192f5caa",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "61e22afc45ce53d6b4b528c75eaf805b",
+          "slot": 1,
+          "text": "{cat}はトンネルへ目を向け、静かに眺めた。すぐには気持ちを決めず、様子を見ている。"
+        },
+        {
+          "id": "a318604b13e559499cc2fccdd0c8f883",
+          "slot": 2,
+          "text": "{cat}はトンネル遊びに穏やかな反応を返した。関心はあるが、まだ控えめだ。"
+        },
+        {
+          "id": "968e734dc6d05e8b86025a9488212aa4",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "c8c17e8629aa544190735bd9d0dc59e3",
+          "slot": 1,
+          "text": "{cat}はトンネルへ楽しそうな顔を向けた。ゆったりした間合いの中にも、期待が見える。"
+        },
+        {
+          "id": "3538591d6db55367a44beaf774548101",
+          "slot": 2,
+          "text": "{cat}はトンネル遊びの誘いを気に入ったようだ。耳を向けたまま、いきいきと様子を見ている。"
+        },
+        {
+          "id": "b07fc80959c5583085c6fe864b78a63c",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "4e6b31a78d8d566ba05fcb03293a6b18",
+          "slot": 1,
+          "text": "{cat}はトンネル遊びにすっかり気を引かれている。丸い顔に、次も遊びたいという気持ちがあふれた。"
+        },
+        {
+          "id": "aa2c140e42b15426a9ecedf74f46f0ea",
+          "slot": 2,
+          "text": "{cat}はトンネルへ熱心な視線を注いだ。普段の静かな目にも、はずむような楽しさがある。"
+        },
+        {
+          "id": "e42f73c3d7e357adac1c473d0be4fc0c",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "1855208193b75fe8b5e69cab35d6c0fc",
+          "slot": 1,
+          "text": "{cat}はトンネルを気にしつつ、相手の様子をうかがった。遊びに応じる調子が合わないらしい。"
+        },
+        {
+          "id": "f480c12a03a15be78c034b478a78124f",
+          "slot": 2,
+          "text": "{cat}はトンネルへの反応をためらっている。三角の耳にも、少し迷いが表れた。"
+        },
+        {
+          "id": "4e13664e5b9151e79c57cbe97aac8c16",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "27b67c1f46e05ed2a5d57775519088e6",
+          "slot": 1,
+          "text": "{cat}はトンネルを眺める目にも力がない。疲れているらしく、誘いへの反応は小さい。"
+        },
+        {
+          "id": "fd95c8feab51590e8364bfe8388df5e1",
+          "slot": 2,
+          "text": "{cat}はトンネルへゆっくりと顔を向けた。遊びを始めるには、気だるさが勝っているようだ。"
+        },
+        {
+          "id": "1418bae78708545297e9e533b04fff9f",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    }
+  ]
+}

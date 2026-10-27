@@ -1,0 +1,9 @@
+test_footer_fits_minimum_size (test_interaction_batch_workflow.WorkflowTests) ... ok
+test_import_protects_dirty_editor_and_does_not_save (test_interaction_batch.BatchGuiTests) ... ok
+test_sequential_six_results_retry_without_regeneration_and_apply (test_interaction_batch.BatchGuiTests) ... ok
+test_bulk_save_moves_individual_editor_to_saved_selection (test_interaction_saved_navigation.SavedNavigationTests) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 6.082s
+
+OK
