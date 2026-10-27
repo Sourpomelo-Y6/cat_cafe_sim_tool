@@ -10,7 +10,7 @@
   "after": {
     "Logs": 18360843674,
     "generated": 3277372585,
-    "content_images": 1276773028,
+    "content_images": 1276779522,
     "Latest": 4841096360,
     "Library": 7358000371,
     "drafts": 362652
@@ -18,7 +18,7 @@
   "delta": {
     "Logs": 804430,
     "generated": 0,
-    "content_images": 0,
+    "content_images": 6494,
     "Latest": 0,
     "Library": 0,
     "drafts": 6494

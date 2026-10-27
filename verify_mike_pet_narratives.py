@@ -50,7 +50,7 @@ def main():
     for path,sha in before['protected'].items():assert digest(Path(path))==sha
     root.destroy()
     save_record('verification.json' if registered else 'draft-verification.json',dict(registered=registered,paired_combinations=paired,independent_fallback=fallback,
-        test_results='See tests-special.log; normal suite deliberately not repeated (prior transient settings replace errors; no normal logic change)',
+        test_results='See tests-special.log (initial transient failure), tests-special-workspace-temp.log (3 passed), tests-special-gui.log (1 passed); normal suite deliberately not repeated',
         visual_review='Windows Computer Use: 4 scenes x 2 paired slots, inspected image/text; target-only registration recorded separately; see registered flag',
         unchanged_existing_entries=len(before['published']['entries']),generated_reviewed=before['generated_files_reviewed'],
         runtime_fixture_executed=(OUT/('runtime-check.log' if registered else 'runtime-draft-check.log')).exists() and 'PASS 56' in (OUT/('runtime-check.log' if registered else 'runtime-draft-check.log')).read_text(encoding='utf8'), runtime_fixture_scope='Existing C# assembly; Compose plus ApplyCatalog in memory; no StepExchange',unity_imported=False,unity_screen_verified=False,distribution_verified=False,
