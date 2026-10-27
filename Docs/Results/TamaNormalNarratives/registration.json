@@ -1,0 +1,1969 @@
+{
+  "entries": {
+    "ball/neutral": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "ball"
+      },
+      "variants": [
+        {
+          "id": "fbce743e33ff5ecc871ee1f9f8b2c286",
+          "slot": 1,
+          "text": "{cat}はボールに目を留め、次の動きを確かめるように見ていた。"
+        },
+        {
+          "id": "9be883d7f99c5c5eb3d3da39ebf2a335",
+          "slot": 2,
+          "text": "{cat}はボールへ耳を向けた。遊びへの反応はまだ控えめだ。"
+        },
+        {
+          "id": "0e59bc10d0125fb99acaf1e978e10d96",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "ball/favorable": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "ball"
+      },
+      "variants": [
+        {
+          "id": "fde81ff21c285e699e41608e198c750e",
+          "slot": 1,
+          "text": "{cat}はボールの動きにぱっと顔を向け、楽しそうに目で追った。"
+        },
+        {
+          "id": "b2ca5f64781d596fbfc1430223bbe2d9",
+          "slot": 2,
+          "text": "{cat}はボールに興味を引かれたようだ。耳を立て、遊びの様子をよく見ている。"
+        },
+        {
+          "id": "b1af71599e6b5da7a9660a81fe1fcfac",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "ball/enthusiastic": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "ball"
+      },
+      "variants": [
+        {
+          "id": "0f7b8e4fa84c5178ba759844b425028b",
+          "slot": 1,
+          "text": "{cat}はボールに目を輝かせ、次はどちらへ動くのかと熱心に見つめた。"
+        },
+        {
+          "id": "b4096c386b3a57a6a7ea1c485a385866",
+          "slot": 2,
+          "text": "{cat}の注意はボールに釘づけだ。遊びの誘いに、すぐさま反応している。"
+        },
+        {
+          "id": "4d3b7255ccb751c58948f0ab48ed69f5",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "ball/confused": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "ball"
+      },
+      "variants": [
+        {
+          "id": "b2ed9d62feba539a845095effa7ae956",
+          "slot": 1,
+          "text": "{cat}はボールを気にしつつも、どう応じようか迷うように首をかしげた。"
+        },
+        {
+          "id": "0efc338d6791524cb911d7d7f0966d02",
+          "slot": 2,
+          "text": "{cat}の視線がボールと相手の間を行き来した。遊びの調子をつかみかねているようだ。"
+        },
+        {
+          "id": "d136b395f3915784adbd201aeaf1dd33",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "ball/listless": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "ball"
+      },
+      "variants": [
+        {
+          "id": "3fb12fb638b659ec884345d64f42cce2",
+          "slot": 1,
+          "text": "{cat}はボールへ目をやったが、疲れているのか反応はゆっくりだった。"
+        },
+        {
+          "id": "3377b2fb492f598c910cdd69f097d147",
+          "slot": 2,
+          "text": "{cat}はけだるそうにボールを眺めた。次の動きを探す元気も、今は少ないようだ。"
+        },
+        {
+          "id": "b6ce48700da25214bfdd5766877815c9",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "plush/neutral": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "plush"
+      },
+      "variants": [
+        {
+          "id": "f56e8fd7f8fb5b009bf35b2bc8a52a91",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみの様子を探るように、首の角度を少し変えた。"
+        },
+        {
+          "id": "775a81743cd654bb95be3248c2da32bc",
+          "slot": 2,
+          "text": "{cat}はぬいぐるみに目を向けたまま、遊びの様子を確かめていた。"
+        },
+        {
+          "id": "c29208e36cdd5d61a531316d82b76ddb",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "plush/favorable": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "plush"
+      },
+      "variants": [
+        {
+          "id": "e85fee237bb355fea9bf4c190b93ea38",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみに興味を示し、耳を立てて遊びに応じた。"
+        },
+        {
+          "id": "b848af6f896f5fbdb0006fffc006572b",
+          "slot": 2,
+          "text": "{cat}はぬいぐるみへいきいきと顔を向けた。どんな遊びになるのか楽しみなようだ。"
+        },
+        {
+          "id": "0e4664506078527a9debfd375af2c75e",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "plush/confused": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "plush"
+      },
+      "variants": [
+        {
+          "id": "844612246b1d573abba4b2f3ed83834d",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみに注意を向けたが、どう遊ぼうか迷っているようだ。"
+        },
+        {
+          "id": "4d1619d50958590c9b3bfc02c8f75d8f",
+          "slot": 2,
+          "text": "{cat}はぬいぐるみと相手を交互に見た。好奇心はあっても、遊びには乗りきれないらしい。"
+        },
+        {
+          "id": "44fbbec2220b58c18818caf5a5f36a8e",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "plush/listless": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "plush"
+      },
+      "variants": [
+        {
+          "id": "9948c06f27875738af7e6130f43cdddd",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみにゆっくり目を向けた。遊びを確かめるにも、少し疲れているようだ。"
+        },
+        {
+          "id": "f644a48da97257d1bbb2ba81b2074b21",
+          "slot": 2,
+          "text": "{cat}はけだるそうで、ぬいぐるみへの反応にも勢いがなかった。"
+        },
+        {
+          "id": "675a3d6e90de5f47a696b4f3713e2f45",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "tunnel/neutral": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "c1e81d9ec9125c8bb455333449e6afb5",
+          "slot": 1,
+          "text": "{cat}はトンネルへ注意を向け、遊びの様子を見定めていた。"
+        },
+        {
+          "id": "4b1ecdba50ff5c248d070342aec79612",
+          "slot": 2,
+          "text": "{cat}はトンネルを気にしながら、首を少し傾けて様子をうかがった。"
+        },
+        {
+          "id": "2e7d60b6fd8b55da93bd83ad499f6a0f",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "tunnel/favorable": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "31060c29e81e57238bd57783700d3c6b",
+          "slot": 1,
+          "text": "{cat}はトンネルに興味を示し、耳を立てた。探検の誘いを楽しんでいるようだ。"
+        },
+        {
+          "id": "943d8dac19d25df19cf6e62302d81a27",
+          "slot": 2,
+          "text": "{cat}はトンネルへ弾むように顔を向け、遊びに好奇心をのぞかせた。"
+        },
+        {
+          "id": "466c4b77b4335481aec92aadce38e571",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "tunnel/enthusiastic": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "3af29ce74db75517b552c4033e778936",
+          "slot": 1,
+          "text": "{cat}の目がトンネルに釘づけになった。何が見つかるのかと、熱心に様子を探っている。"
+        },
+        {
+          "id": "47b05e3d7fb15682bcb6e046f61068ef",
+          "slot": 2,
+          "text": "{cat}はトンネル遊びの誘いに素早く応じた。新しい発見を待ちきれないような顔だ。"
+        },
+        {
+          "id": "85574f212c165a588824b152f22ecc72",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "tunnel/confused": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "575b48ff473f5011a68af655589ee67d",
+          "slot": 1,
+          "text": "{cat}はトンネルを気にしているが、どう応じようか迷うように動きをためらった。"
+        },
+        {
+          "id": "7302871142ee5240a7beaec92f308bf2",
+          "slot": 2,
+          "text": "{cat}はトンネルと相手に視線を行き来させた。探検気分には、まだなれないようだ。"
+        },
+        {
+          "id": "6833d413cee95a4bad1d0b36b198bbc5",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "tunnel/listless": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "48f79574b16c575fbce8f92959425b0f",
+          "slot": 1,
+          "text": "{cat}はトンネルへ目をやった。探検するよりも休みたいのか、反応は鈍い。"
+        },
+        {
+          "id": "2214b8f90e2a53a28dc12e3a8e908e4f",
+          "slot": 2,
+          "text": "{cat}は疲れた様子で、トンネル遊びの誘いにもゆっくりと反応した。"
+        },
+        {
+          "id": "aa029d99d2db5fa3a64d74bf970f6099",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "brush/neutral": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "05d16e27f3685dd398128958e1190625",
+          "slot": 1,
+          "text": "{cat}はブラシの動きを確かめるように見つめ、ひとまず様子を見ていた。"
+        },
+        {
+          "id": "af2e83eb4503503ca6b16395cd850d17",
+          "slot": 2,
+          "text": "{cat}はブラシへ耳を向けた。気にはなるが、大きな反応は見せていない。"
+        },
+        {
+          "id": "142cc4ac310a5665be07f278ca229e32",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "brush/confused": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "9c513db085085c2fab062d5290170d1c",
+          "slot": 1,
+          "text": "{cat}はブラシと相手の顔を見比べた。どう応じればよいのか迷っているようだ。"
+        },
+        {
+          "id": "2993349297a75273a33c9e69a7aafbca",
+          "slot": 2,
+          "text": "{cat}はブラシに気を取られ、首をかしげた。遊びの誘いとは勝手が違うらしい。"
+        },
+        {
+          "id": "6ba4bfb72b9556648acc5afd5f1fae6b",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "brush/listless": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "84a58c971acd5a33ae991899c093d5c0",
+          "slot": 1,
+          "text": "{cat}は疲れているようで、ブラシを目で追うのもゆっくりだった。"
+        },
+        {
+          "id": "acd1465b8690593890816dbe00e55d43",
+          "slot": 2,
+          "text": "{cat}はけだるそうにブラシへ目をやったが、反応は小さいままだった。"
+        },
+        {
+          "id": "f5b154ab774959c7b459baa70129ff9a",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "voice/neutral": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "71c5fc4b7ee358cf8d0dcd9cc6945715",
+          "slot": 1,
+          "text": "{cat}は声の方へ耳を向け、何だろうという顔で聞いていた。"
+        },
+        {
+          "id": "01f825f7fd065f5b8511824ac317af53",
+          "slot": 2,
+          "text": "{cat}はかけられた声に気づき、相手の様子を確かめるように見た。"
+        },
+        {
+          "id": "ee299d18e9985d4889b15f6b8b93097f",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "voice/confused": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "180346bd889b53ac8c7970f57417cc7d",
+          "slot": 1,
+          "text": "{cat}は声の方へ首をかしげた。気になるものの、どう応じようか迷っているようだ。"
+        },
+        {
+          "id": "e05fbefa6a3055d1acc57719c8d30848",
+          "slot": 2,
+          "text": "{cat}の耳が声に反応した。相手を見つめる顔には、少し戸惑いが残っている。"
+        },
+        {
+          "id": "ed6471dd74cb51ff9a03e6f41982d560",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "voice/listless": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "b23a3e05af34525e99ce82853608e86c",
+          "slot": 1,
+          "text": "{cat}は声に気づいたようだが、疲れているのか顔を向けるのもゆっくりだった。"
+        },
+        {
+          "id": "67cd60e1dedb5cb5b619252966fbbedc",
+          "slot": 2,
+          "text": "{cat}はけだるそうに呼びかけを聞いていた。いつものきびきびした反応は控えめだ。"
+        },
+        {
+          "id": "84d85a484a8a568e92332ec114f41f7c",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "presence/confused": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "3ab7381ef1b15f5eae6b8356819f7e9b",
+          "slot": 1,
+          "text": "{cat}はそばの気配を気にして、相手と周りを見比べた。どう過ごそうか迷っているようだ。"
+        },
+        {
+          "id": "dd950f535638529f8ff0c08b10dff6d8",
+          "slot": 2,
+          "text": "{cat}は見守る相手の様子をうかがった。何か始まるのかと、少し戸惑っているらしい。"
+        },
+        {
+          "id": "fd7b794156d858bdb174e5c93104d913",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "presence/listless": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "af5c27eb89cf54b5a88becae00e68ba9",
+          "slot": 1,
+          "text": "{cat}はそばの気配にゆっくりと目を向けた。周りを探る元気も少なく、疲れた様子だ。"
+        },
+        {
+          "id": "1cf8b131556c5860bfb168d404e29cc2",
+          "slot": 2,
+          "text": "{cat}は静かに見守られながら、けだるそうに過ごしていた。好奇心ものんびり休んでいるようだ。"
+        },
+        {
+          "id": "eb6b04e90373579496170ac56c5ab757",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    }
+  },
+  "previews": [
+    {
+      "mode": "ball",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか タマ」\nプレイヤーはボールを床の上で転がした。\n\nタマはボールに目を留め、次の動きを確かめるように見ていた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d8755f55970b49148408928939a5d90f.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "mode": "ball",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか タマ」\nプレイヤーはボールを床の上で転がした。\n\nタマはボールへ耳を向けた。遊びへの反応はまだ控えめだ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d8755f55970b49148408928939a5d90f.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "mode": "ball",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか、タマ」\nプレイヤーはタマの様子に合わせてボールを転がした。\n\nタマはボールに目を留め、次の動きを確かめるように見ていた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d8755f55970b49148408928939a5d90f.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "mode": "ball",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか、タマ」\nプレイヤーはタマの様子に合わせてボールを転がした。\n\nタマはボールへ耳を向けた。遊びへの反応はまだ控えめだ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d8755f55970b49148408928939a5d90f.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "mode": "ball",
+      "reaction": "neutral",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか タマ」\nプレイヤーはボールを勢いよく転がした。\n\nタマはボールに目を留め、次の動きを確かめるように見ていた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "neutral",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか タマ」\nプレイヤーはボールを勢いよく転がした。\n\nタマはボールへ耳を向けた。遊びへの反応はまだ控えめだ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "neutral",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がして、タマを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nタマはボールに目を留め、次の動きを確かめるように見ていた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "neutral",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がして、タマを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nタマはボールへ耳を向けた。遊びへの反応はまだ控えめだ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "favorable",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか タマ」\nプレイヤーはボールを床の上で転がした。\n\nタマはボールの動きにぱっと顔を向け、楽しそうに目で追った。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d8755f55970b49148408928939a5d90f.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "mode": "ball",
+      "reaction": "favorable",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか タマ」\nプレイヤーはボールを床の上で転がした。\n\nタマはボールに興味を引かれたようだ。耳を立て、遊びの様子をよく見ている。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d8755f55970b49148408928939a5d90f.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "mode": "ball",
+      "reaction": "favorable",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか、タマ」\nプレイヤーはタマの様子に合わせてボールを転がした。\n\nタマはボールの動きにぱっと顔を向け、楽しそうに目で追った。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d8755f55970b49148408928939a5d90f.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "mode": "ball",
+      "reaction": "favorable",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか、タマ」\nプレイヤーはタマの様子に合わせてボールを転がした。\n\nタマはボールに興味を引かれたようだ。耳を立て、遊びの様子をよく見ている。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d8755f55970b49148408928939a5d90f.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "mode": "ball",
+      "reaction": "favorable",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか タマ」\nプレイヤーはボールを勢いよく転がした。\n\nタマはボールの動きにぱっと顔を向け、楽しそうに目で追った。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "favorable",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか タマ」\nプレイヤーはボールを勢いよく転がした。\n\nタマはボールに興味を引かれたようだ。耳を立て、遊びの様子をよく見ている。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "favorable",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がして、タマを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nタマはボールの動きにぱっと顔を向け、楽しそうに目で追った。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "favorable",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がして、タマを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nタマはボールに興味を引かれたようだ。耳を立て、遊びの様子をよく見ている。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "enthusiastic",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか タマ」\nプレイヤーはボールを床の上で転がした。\n\nタマはボールに目を輝かせ、次はどちらへ動くのかと熱心に見つめた。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d8755f55970b49148408928939a5d90f.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "mode": "ball",
+      "reaction": "enthusiastic",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか タマ」\nプレイヤーはボールを床の上で転がした。\n\nタマの注意はボールに釘づけだ。遊びの誘いに、すぐさま反応している。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d8755f55970b49148408928939a5d90f.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "mode": "ball",
+      "reaction": "enthusiastic",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか、タマ」\nプレイヤーはタマの様子に合わせてボールを転がした。\n\nタマはボールに目を輝かせ、次はどちらへ動くのかと熱心に見つめた。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d8755f55970b49148408928939a5d90f.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "mode": "ball",
+      "reaction": "enthusiastic",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか、タマ」\nプレイヤーはタマの様子に合わせてボールを転がした。\n\nタマの注意はボールに釘づけだ。遊びの誘いに、すぐさま反応している。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d8755f55970b49148408928939a5d90f.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "mode": "ball",
+      "reaction": "enthusiastic",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか タマ」\nプレイヤーはボールを勢いよく転がした。\n\nタマはボールに目を輝かせ、次はどちらへ動くのかと熱心に見つめた。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "enthusiastic",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか タマ」\nプレイヤーはボールを勢いよく転がした。\n\nタマの注意はボールに釘づけだ。遊びの誘いに、すぐさま反応している。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "enthusiastic",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がして、タマを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nタマはボールに目を輝かせ、次はどちらへ動くのかと熱心に見つめた。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "enthusiastic",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がして、タマを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nタマの注意はボールに釘づけだ。遊びの誘いに、すぐさま反応している。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか タマ」\nプレイヤーはボールを床の上で転がした。\n\nタマはボールを気にしつつも、どう応じようか迷うように首をかしげた。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d8755f55970b49148408928939a5d90f.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "mode": "ball",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか タマ」\nプレイヤーはボールを床の上で転がした。\n\nタマの視線がボールと相手の間を行き来した。遊びの調子をつかみかねているようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d8755f55970b49148408928939a5d90f.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "mode": "ball",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか、タマ」\nプレイヤーはタマの様子に合わせてボールを転がした。\n\nタマはボールを気にしつつも、どう応じようか迷うように首をかしげた。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d8755f55970b49148408928939a5d90f.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "mode": "ball",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか、タマ」\nプレイヤーはタマの様子に合わせてボールを転がした。\n\nタマの視線がボールと相手の間を行き来した。遊びの調子をつかみかねているようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d8755f55970b49148408928939a5d90f.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "mode": "ball",
+      "reaction": "confused",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか タマ」\nプレイヤーはボールを勢いよく転がした。\n\nタマはボールを気にしつつも、どう応じようか迷うように首をかしげた。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "confused",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか タマ」\nプレイヤーはボールを勢いよく転がした。\n\nタマの視線がボールと相手の間を行き来した。遊びの調子をつかみかねているようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "confused",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がして、タマを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nタマはボールを気にしつつも、どう応じようか迷うように首をかしげた。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "confused",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がして、タマを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nタマの視線がボールと相手の間を行き来した。遊びの調子をつかみかねているようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか タマ」\nプレイヤーはボールを床の上で転がした。\n\nタマはボールへ目をやったが、疲れているのか反応はゆっくりだった。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d8755f55970b49148408928939a5d90f.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "mode": "ball",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか タマ」\nプレイヤーはボールを床の上で転がした。\n\nタマはけだるそうにボールを眺めた。次の動きを探す元気も、今は少ないようだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d8755f55970b49148408928939a5d90f.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "mode": "ball",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか、タマ」\nプレイヤーはタマの様子に合わせてボールを転がした。\n\nタマはボールへ目をやったが、疲れているのか反応はゆっくりだった。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d8755f55970b49148408928939a5d90f.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "mode": "ball",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか、タマ」\nプレイヤーはタマの様子に合わせてボールを転がした。\n\nタマはけだるそうにボールを眺めた。次の動きを探す元気も、今は少ないようだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d8755f55970b49148408928939a5d90f.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "mode": "ball",
+      "reaction": "listless",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか タマ」\nプレイヤーはボールを勢いよく転がした。\n\nタマはボールへ目をやったが、疲れているのか反応はゆっくりだった。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "listless",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか タマ」\nプレイヤーはボールを勢いよく転がした。\n\nタマはけだるそうにボールを眺めた。次の動きを探す元気も、今は少ないようだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "listless",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がして、タマを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nタマはボールへ目をやったが、疲れているのか反応はゆっくりだった。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "listless",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がして、タマを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nタマはけだるそうにボールを眺めた。次の動きを探す元気も、今は少ないようだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "plush",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ちょっと揺らしてみようか？ タマ」\nプレイヤーはぬいぐるみをタマの近くで動かした。\n\nタマはぬいぐるみの様子を探るように、首の角度を少し変えた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c67b4461070945c5826a976b76dd407e.png",
+      "resolved": "plush__direct"
+    },
+    {
+      "mode": "plush",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ちょっと揺らしてみようか？ タマ」\nプレイヤーはぬいぐるみをタマの近くで動かした。\n\nタマはぬいぐるみに目を向けたまま、遊びの様子を確かめていた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c67b4461070945c5826a976b76dd407e.png",
+      "resolved": "plush__direct"
+    },
+    {
+      "mode": "plush",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「タマ、これで遊んでみようか」\nプレイヤーはタマの様子に合わせてぬいぐるみを動かした。\n\nタマはぬいぐるみの様子を探るように、首の角度を少し変えた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c67b4461070945c5826a976b76dd407e.png",
+      "resolved": "plush__adapt"
+    },
+    {
+      "mode": "plush",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「タマ、これで遊んでみようか」\nプレイヤーはタマの様子に合わせてぬいぐるみを動かした。\n\nタマはぬいぐるみに目を向けたまま、遊びの様子を確かめていた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c67b4461070945c5826a976b76dd407e.png",
+      "resolved": "plush__adapt"
+    },
+    {
+      "mode": "plush",
+      "reaction": "neutral",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「タマ、ちょっとフェイントしてみようか？」\nプレイヤーはぬいぐるみを動かす向きや間合いを変えた。\n\nタマはぬいぐるみの様子を探るように、首の角度を少し変えた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "plush"
+    },
+    {
+      "mode": "plush",
+      "reaction": "neutral",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「タマ、ちょっとフェイントしてみようか？」\nプレイヤーはぬいぐるみを動かす向きや間合いを変えた。\n\nタマはぬいぐるみに目を向けたまま、遊びの様子を確かめていた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "plush"
+    },
+    {
+      "mode": "plush",
+      "reaction": "favorable",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ちょっと揺らしてみようか？ タマ」\nプレイヤーはぬいぐるみをタマの近くで動かした。\n\nタマはぬいぐるみに興味を示し、耳を立てて遊びに応じた。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c67b4461070945c5826a976b76dd407e.png",
+      "resolved": "plush__direct"
+    },
+    {
+      "mode": "plush",
+      "reaction": "favorable",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ちょっと揺らしてみようか？ タマ」\nプレイヤーはぬいぐるみをタマの近くで動かした。\n\nタマはぬいぐるみへいきいきと顔を向けた。どんな遊びになるのか楽しみなようだ。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c67b4461070945c5826a976b76dd407e.png",
+      "resolved": "plush__direct"
+    },
+    {
+      "mode": "plush",
+      "reaction": "favorable",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「タマ、これで遊んでみようか」\nプレイヤーはタマの様子に合わせてぬいぐるみを動かした。\n\nタマはぬいぐるみに興味を示し、耳を立てて遊びに応じた。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c67b4461070945c5826a976b76dd407e.png",
+      "resolved": "plush__adapt"
+    },
+    {
+      "mode": "plush",
+      "reaction": "favorable",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「タマ、これで遊んでみようか」\nプレイヤーはタマの様子に合わせてぬいぐるみを動かした。\n\nタマはぬいぐるみへいきいきと顔を向けた。どんな遊びになるのか楽しみなようだ。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c67b4461070945c5826a976b76dd407e.png",
+      "resolved": "plush__adapt"
+    },
+    {
+      "mode": "plush",
+      "reaction": "favorable",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「タマ、ちょっとフェイントしてみようか？」\nプレイヤーはぬいぐるみを動かす向きや間合いを変えた。\n\nタマはぬいぐるみに興味を示し、耳を立てて遊びに応じた。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "plush"
+    },
+    {
+      "mode": "plush",
+      "reaction": "favorable",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「タマ、ちょっとフェイントしてみようか？」\nプレイヤーはぬいぐるみを動かす向きや間合いを変えた。\n\nタマはぬいぐるみへいきいきと顔を向けた。どんな遊びになるのか楽しみなようだ。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "plush"
+    },
+    {
+      "mode": "plush",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ちょっと揺らしてみようか？ タマ」\nプレイヤーはぬいぐるみをタマの近くで動かした。\n\nタマはぬいぐるみに注意を向けたが、どう遊ぼうか迷っているようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c67b4461070945c5826a976b76dd407e.png",
+      "resolved": "plush__direct"
+    },
+    {
+      "mode": "plush",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ちょっと揺らしてみようか？ タマ」\nプレイヤーはぬいぐるみをタマの近くで動かした。\n\nタマはぬいぐるみと相手を交互に見た。好奇心はあっても、遊びには乗りきれないらしい。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c67b4461070945c5826a976b76dd407e.png",
+      "resolved": "plush__direct"
+    },
+    {
+      "mode": "plush",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「タマ、これで遊んでみようか」\nプレイヤーはタマの様子に合わせてぬいぐるみを動かした。\n\nタマはぬいぐるみに注意を向けたが、どう遊ぼうか迷っているようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c67b4461070945c5826a976b76dd407e.png",
+      "resolved": "plush__adapt"
+    },
+    {
+      "mode": "plush",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「タマ、これで遊んでみようか」\nプレイヤーはタマの様子に合わせてぬいぐるみを動かした。\n\nタマはぬいぐるみと相手を交互に見た。好奇心はあっても、遊びには乗りきれないらしい。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c67b4461070945c5826a976b76dd407e.png",
+      "resolved": "plush__adapt"
+    },
+    {
+      "mode": "plush",
+      "reaction": "confused",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「タマ、ちょっとフェイントしてみようか？」\nプレイヤーはぬいぐるみを動かす向きや間合いを変えた。\n\nタマはぬいぐるみに注意を向けたが、どう遊ぼうか迷っているようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "plush"
+    },
+    {
+      "mode": "plush",
+      "reaction": "confused",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「タマ、ちょっとフェイントしてみようか？」\nプレイヤーはぬいぐるみを動かす向きや間合いを変えた。\n\nタマはぬいぐるみと相手を交互に見た。好奇心はあっても、遊びには乗りきれないらしい。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "plush"
+    },
+    {
+      "mode": "plush",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ちょっと揺らしてみようか？ タマ」\nプレイヤーはぬいぐるみをタマの近くで動かした。\n\nタマはぬいぐるみにゆっくり目を向けた。遊びを確かめるにも、少し疲れているようだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c67b4461070945c5826a976b76dd407e.png",
+      "resolved": "plush__direct"
+    },
+    {
+      "mode": "plush",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ちょっと揺らしてみようか？ タマ」\nプレイヤーはぬいぐるみをタマの近くで動かした。\n\nタマはけだるそうで、ぬいぐるみへの反応にも勢いがなかった。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c67b4461070945c5826a976b76dd407e.png",
+      "resolved": "plush__direct"
+    },
+    {
+      "mode": "plush",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「タマ、これで遊んでみようか」\nプレイヤーはタマの様子に合わせてぬいぐるみを動かした。\n\nタマはぬいぐるみにゆっくり目を向けた。遊びを確かめるにも、少し疲れているようだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c67b4461070945c5826a976b76dd407e.png",
+      "resolved": "plush__adapt"
+    },
+    {
+      "mode": "plush",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「タマ、これで遊んでみようか」\nプレイヤーはタマの様子に合わせてぬいぐるみを動かした。\n\nタマはけだるそうで、ぬいぐるみへの反応にも勢いがなかった。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c67b4461070945c5826a976b76dd407e.png",
+      "resolved": "plush__adapt"
+    },
+    {
+      "mode": "plush",
+      "reaction": "listless",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「タマ、ちょっとフェイントしてみようか？」\nプレイヤーはぬいぐるみを動かす向きや間合いを変えた。\n\nタマはぬいぐるみにゆっくり目を向けた。遊びを確かめるにも、少し疲れているようだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "plush"
+    },
+    {
+      "mode": "plush",
+      "reaction": "listless",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「タマ、ちょっとフェイントしてみようか？」\nプレイヤーはぬいぐるみを動かす向きや間合いを変えた。\n\nタマはけだるそうで、ぬいぐるみへの反応にも勢いがなかった。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "plush"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「トンネルに入ってみようかタマ」\nプレイヤーはトンネルの入口でタマを遊びに誘った。\n\nタマはトンネルへ注意を向け、遊びの様子を見定めていた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b281ace221b8401c9747bbc86b0cfb23.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「トンネルに入ってみようかタマ」\nプレイヤーはトンネルの入口でタマを遊びに誘った。\n\nタマはトンネルを気にしながら、首を少し傾けて様子をうかがった。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b281ace221b8401c9747bbc86b0cfb23.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかタマ」\nプレイヤーはタマの様子に合わせてトンネル遊びに誘った。\n\nタマはトンネルへ注意を向け、遊びの様子を見定めていた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b281ace221b8401c9747bbc86b0cfb23.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかタマ」\nプレイヤーはタマの様子に合わせてトンネル遊びに誘った。\n\nタマはトンネルを気にしながら、首を少し傾けて様子をうかがった。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b281ace221b8401c9747bbc86b0cfb23.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "neutral",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「タマ、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでタマを遊びに誘った。\n\nタマはトンネルへ注意を向け、遊びの様子を見定めていた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "neutral",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「タマ、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでタマを遊びに誘った。\n\nタマはトンネルを気にしながら、首を少し傾けて様子をうかがった。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "neutral",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「タマ ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nタマはトンネルへ注意を向け、遊びの様子を見定めていた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "neutral",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「タマ ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nタマはトンネルを気にしながら、首を少し傾けて様子をうかがった。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "favorable",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「トンネルに入ってみようかタマ」\nプレイヤーはトンネルの入口でタマを遊びに誘った。\n\nタマはトンネルに興味を示し、耳を立てた。探検の誘いを楽しんでいるようだ。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b281ace221b8401c9747bbc86b0cfb23.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "favorable",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「トンネルに入ってみようかタマ」\nプレイヤーはトンネルの入口でタマを遊びに誘った。\n\nタマはトンネルへ弾むように顔を向け、遊びに好奇心をのぞかせた。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b281ace221b8401c9747bbc86b0cfb23.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "favorable",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかタマ」\nプレイヤーはタマの様子に合わせてトンネル遊びに誘った。\n\nタマはトンネルに興味を示し、耳を立てた。探検の誘いを楽しんでいるようだ。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b281ace221b8401c9747bbc86b0cfb23.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "favorable",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかタマ」\nプレイヤーはタマの様子に合わせてトンネル遊びに誘った。\n\nタマはトンネルへ弾むように顔を向け、遊びに好奇心をのぞかせた。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b281ace221b8401c9747bbc86b0cfb23.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "favorable",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「タマ、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでタマを遊びに誘った。\n\nタマはトンネルに興味を示し、耳を立てた。探検の誘いを楽しんでいるようだ。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "favorable",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「タマ、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでタマを遊びに誘った。\n\nタマはトンネルへ弾むように顔を向け、遊びに好奇心をのぞかせた。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "favorable",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「タマ ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nタマはトンネルに興味を示し、耳を立てた。探検の誘いを楽しんでいるようだ。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "favorable",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「タマ ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nタマはトンネルへ弾むように顔を向け、遊びに好奇心をのぞかせた。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "enthusiastic",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「トンネルに入ってみようかタマ」\nプレイヤーはトンネルの入口でタマを遊びに誘った。\n\nタマの目がトンネルに釘づけになった。何が見つかるのかと、熱心に様子を探っている。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b281ace221b8401c9747bbc86b0cfb23.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "enthusiastic",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「トンネルに入ってみようかタマ」\nプレイヤーはトンネルの入口でタマを遊びに誘った。\n\nタマはトンネル遊びの誘いに素早く応じた。新しい発見を待ちきれないような顔だ。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b281ace221b8401c9747bbc86b0cfb23.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "enthusiastic",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかタマ」\nプレイヤーはタマの様子に合わせてトンネル遊びに誘った。\n\nタマの目がトンネルに釘づけになった。何が見つかるのかと、熱心に様子を探っている。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b281ace221b8401c9747bbc86b0cfb23.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "enthusiastic",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかタマ」\nプレイヤーはタマの様子に合わせてトンネル遊びに誘った。\n\nタマはトンネル遊びの誘いに素早く応じた。新しい発見を待ちきれないような顔だ。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b281ace221b8401c9747bbc86b0cfb23.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "enthusiastic",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「タマ、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでタマを遊びに誘った。\n\nタマの目がトンネルに釘づけになった。何が見つかるのかと、熱心に様子を探っている。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "enthusiastic",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「タマ、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでタマを遊びに誘った。\n\nタマはトンネル遊びの誘いに素早く応じた。新しい発見を待ちきれないような顔だ。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "enthusiastic",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「タマ ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nタマの目がトンネルに釘づけになった。何が見つかるのかと、熱心に様子を探っている。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "enthusiastic",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「タマ ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nタマはトンネル遊びの誘いに素早く応じた。新しい発見を待ちきれないような顔だ。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「トンネルに入ってみようかタマ」\nプレイヤーはトンネルの入口でタマを遊びに誘った。\n\nタマはトンネルを気にしているが、どう応じようか迷うように動きをためらった。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b281ace221b8401c9747bbc86b0cfb23.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「トンネルに入ってみようかタマ」\nプレイヤーはトンネルの入口でタマを遊びに誘った。\n\nタマはトンネルと相手に視線を行き来させた。探検気分には、まだなれないようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b281ace221b8401c9747bbc86b0cfb23.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかタマ」\nプレイヤーはタマの様子に合わせてトンネル遊びに誘った。\n\nタマはトンネルを気にしているが、どう応じようか迷うように動きをためらった。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b281ace221b8401c9747bbc86b0cfb23.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかタマ」\nプレイヤーはタマの様子に合わせてトンネル遊びに誘った。\n\nタマはトンネルと相手に視線を行き来させた。探検気分には、まだなれないようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b281ace221b8401c9747bbc86b0cfb23.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "confused",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「タマ、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでタマを遊びに誘った。\n\nタマはトンネルを気にしているが、どう応じようか迷うように動きをためらった。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "confused",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「タマ、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでタマを遊びに誘った。\n\nタマはトンネルと相手に視線を行き来させた。探検気分には、まだなれないようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "confused",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「タマ ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nタマはトンネルを気にしているが、どう応じようか迷うように動きをためらった。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "confused",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「タマ ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nタマはトンネルと相手に視線を行き来させた。探検気分には、まだなれないようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「トンネルに入ってみようかタマ」\nプレイヤーはトンネルの入口でタマを遊びに誘った。\n\nタマはトンネルへ目をやった。探検するよりも休みたいのか、反応は鈍い。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b281ace221b8401c9747bbc86b0cfb23.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「トンネルに入ってみようかタマ」\nプレイヤーはトンネルの入口でタマを遊びに誘った。\n\nタマは疲れた様子で、トンネル遊びの誘いにもゆっくりと反応した。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b281ace221b8401c9747bbc86b0cfb23.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかタマ」\nプレイヤーはタマの様子に合わせてトンネル遊びに誘った。\n\nタマはトンネルへ目をやった。探検するよりも休みたいのか、反応は鈍い。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b281ace221b8401c9747bbc86b0cfb23.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかタマ」\nプレイヤーはタマの様子に合わせてトンネル遊びに誘った。\n\nタマは疲れた様子で、トンネル遊びの誘いにもゆっくりと反応した。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b281ace221b8401c9747bbc86b0cfb23.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "listless",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「タマ、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでタマを遊びに誘った。\n\nタマはトンネルへ目をやった。探検するよりも休みたいのか、反応は鈍い。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "listless",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「タマ、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでタマを遊びに誘った。\n\nタマは疲れた様子で、トンネル遊びの誘いにもゆっくりと反応した。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "listless",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「タマ ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nタマはトンネルへ目をやった。探検するよりも休みたいのか、反応は鈍い。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "listless",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「タマ ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nタマは疲れた様子で、トンネル遊びの誘いにもゆっくりと反応した。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8f5730bc576e40dc93a588bf385106d3.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "brush",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ブラシを滑らせてみよう タマ。」\nプレイヤーはタマの毛並みに沿ってブラシを動かした。\n\nタマはブラシの動きを確かめるように見つめ、ひとまず様子を見ていた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\0704607cbb61452c9e29752b6e6131b2.png",
+      "resolved": "brush__direct"
+    },
+    {
+      "mode": "brush",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ブラシを滑らせてみよう タマ。」\nプレイヤーはタマの毛並みに沿ってブラシを動かした。\n\nタマはブラシへ耳を向けた。気にはなるが、大きな反応は見せていない。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\0704607cbb61452c9e29752b6e6131b2.png",
+      "resolved": "brush__direct"
+    },
+    {
+      "mode": "brush",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ねえタマ、ブラッシングしようか？」\nプレイヤーはタマの様子に合わせて、そっとブラシを動かした。\n\nタマはブラシの動きを確かめるように見つめ、ひとまず様子を見ていた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\0704607cbb61452c9e29752b6e6131b2.png",
+      "resolved": "brush__adapt"
+    },
+    {
+      "mode": "brush",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ねえタマ、ブラッシングしようか？」\nプレイヤーはタマの様子に合わせて、そっとブラシを動かした。\n\nタマはブラシへ耳を向けた。気にはなるが、大きな反応は見せていない。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\0704607cbb61452c9e29752b6e6131b2.png",
+      "resolved": "brush__adapt"
+    },
+    {
+      "mode": "brush",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ブラシを滑らせてみよう タマ。」\nプレイヤーはタマの毛並みに沿ってブラシを動かした。\n\nタマはブラシと相手の顔を見比べた。どう応じればよいのか迷っているようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\0704607cbb61452c9e29752b6e6131b2.png",
+      "resolved": "brush__direct"
+    },
+    {
+      "mode": "brush",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ブラシを滑らせてみよう タマ。」\nプレイヤーはタマの毛並みに沿ってブラシを動かした。\n\nタマはブラシに気を取られ、首をかしげた。遊びの誘いとは勝手が違うらしい。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\0704607cbb61452c9e29752b6e6131b2.png",
+      "resolved": "brush__direct"
+    },
+    {
+      "mode": "brush",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ねえタマ、ブラッシングしようか？」\nプレイヤーはタマの様子に合わせて、そっとブラシを動かした。\n\nタマはブラシと相手の顔を見比べた。どう応じればよいのか迷っているようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\0704607cbb61452c9e29752b6e6131b2.png",
+      "resolved": "brush__adapt"
+    },
+    {
+      "mode": "brush",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ねえタマ、ブラッシングしようか？」\nプレイヤーはタマの様子に合わせて、そっとブラシを動かした。\n\nタマはブラシに気を取られ、首をかしげた。遊びの誘いとは勝手が違うらしい。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\0704607cbb61452c9e29752b6e6131b2.png",
+      "resolved": "brush__adapt"
+    },
+    {
+      "mode": "brush",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ブラシを滑らせてみよう タマ。」\nプレイヤーはタマの毛並みに沿ってブラシを動かした。\n\nタマは疲れているようで、ブラシを目で追うのもゆっくりだった。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\0704607cbb61452c9e29752b6e6131b2.png",
+      "resolved": "brush__direct"
+    },
+    {
+      "mode": "brush",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ブラシを滑らせてみよう タマ。」\nプレイヤーはタマの毛並みに沿ってブラシを動かした。\n\nタマはけだるそうにブラシへ目をやったが、反応は小さいままだった。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\0704607cbb61452c9e29752b6e6131b2.png",
+      "resolved": "brush__direct"
+    },
+    {
+      "mode": "brush",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ねえタマ、ブラッシングしようか？」\nプレイヤーはタマの様子に合わせて、そっとブラシを動かした。\n\nタマは疲れているようで、ブラシを目で追うのもゆっくりだった。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\0704607cbb61452c9e29752b6e6131b2.png",
+      "resolved": "brush__adapt"
+    },
+    {
+      "mode": "brush",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ねえタマ、ブラッシングしようか？」\nプレイヤーはタマの様子に合わせて、そっとブラシを動かした。\n\nタマはけだるそうにブラシへ目をやったが、反応は小さいままだった。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\0704607cbb61452c9e29752b6e6131b2.png",
+      "resolved": "brush__adapt"
+    },
+    {
+      "mode": "voice",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「あれ、タマ、ちょっと見てみようか？」\nプレイヤーはタマに穏やかに声をかけた。\n\nタマは声の方へ耳を向け、何だろうという顔で聞いていた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\eb59a9bed5754b4ca34f0371c79648d3.png",
+      "resolved": "voice__direct"
+    },
+    {
+      "mode": "voice",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「あれ、タマ、ちょっと見てみようか？」\nプレイヤーはタマに穏やかに声をかけた。\n\nタマはかけられた声に気づき、相手の様子を確かめるように見た。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\eb59a9bed5754b4ca34f0371c79648d3.png",
+      "resolved": "voice__direct"
+    },
+    {
+      "mode": "voice",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「さあ、ちょっと休憩しようか タマ」\nプレイヤーはタマの様子を見ながら、声の調子や間合いを合わせた。\n\nタマは声の方へ耳を向け、何だろうという顔で聞いていた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\eb59a9bed5754b4ca34f0371c79648d3.png",
+      "resolved": "voice__adapt"
+    },
+    {
+      "mode": "voice",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「さあ、ちょっと休憩しようか タマ」\nプレイヤーはタマの様子を見ながら、声の調子や間合いを合わせた。\n\nタマはかけられた声に気づき、相手の様子を確かめるように見た。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\eb59a9bed5754b4ca34f0371c79648d3.png",
+      "resolved": "voice__adapt"
+    },
+    {
+      "mode": "voice",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「あれ、タマ、ちょっと見てみようか？」\nプレイヤーはタマに穏やかに声をかけた。\n\nタマは声の方へ首をかしげた。気になるものの、どう応じようか迷っているようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\eb59a9bed5754b4ca34f0371c79648d3.png",
+      "resolved": "voice__direct"
+    },
+    {
+      "mode": "voice",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「あれ、タマ、ちょっと見てみようか？」\nプレイヤーはタマに穏やかに声をかけた。\n\nタマの耳が声に反応した。相手を見つめる顔には、少し戸惑いが残っている。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\eb59a9bed5754b4ca34f0371c79648d3.png",
+      "resolved": "voice__direct"
+    },
+    {
+      "mode": "voice",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「さあ、ちょっと休憩しようか タマ」\nプレイヤーはタマの様子を見ながら、声の調子や間合いを合わせた。\n\nタマは声の方へ首をかしげた。気になるものの、どう応じようか迷っているようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\eb59a9bed5754b4ca34f0371c79648d3.png",
+      "resolved": "voice__adapt"
+    },
+    {
+      "mode": "voice",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「さあ、ちょっと休憩しようか タマ」\nプレイヤーはタマの様子を見ながら、声の調子や間合いを合わせた。\n\nタマの耳が声に反応した。相手を見つめる顔には、少し戸惑いが残っている。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\eb59a9bed5754b4ca34f0371c79648d3.png",
+      "resolved": "voice__adapt"
+    },
+    {
+      "mode": "voice",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「あれ、タマ、ちょっと見てみようか？」\nプレイヤーはタマに穏やかに声をかけた。\n\nタマは声に気づいたようだが、疲れているのか顔を向けるのもゆっくりだった。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\eb59a9bed5754b4ca34f0371c79648d3.png",
+      "resolved": "voice__direct"
+    },
+    {
+      "mode": "voice",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「あれ、タマ、ちょっと見てみようか？」\nプレイヤーはタマに穏やかに声をかけた。\n\nタマはけだるそうに呼びかけを聞いていた。いつものきびきびした反応は控えめだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\eb59a9bed5754b4ca34f0371c79648d3.png",
+      "resolved": "voice__direct"
+    },
+    {
+      "mode": "voice",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「さあ、ちょっと休憩しようか タマ」\nプレイヤーはタマの様子を見ながら、声の調子や間合いを合わせた。\n\nタマは声に気づいたようだが、疲れているのか顔を向けるのもゆっくりだった。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\eb59a9bed5754b4ca34f0371c79648d3.png",
+      "resolved": "voice__adapt"
+    },
+    {
+      "mode": "voice",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「さあ、ちょっと休憩しようか タマ」\nプレイヤーはタマの様子を見ながら、声の調子や間合いを合わせた。\n\nタマはけだるそうに呼びかけを聞いていた。いつものきびきびした反応は控えめだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\eb59a9bed5754b4ca34f0371c79648d3.png",
+      "resolved": "voice__adapt"
+    },
+    {
+      "mode": "presence",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「タマ ちょっと見守りましょうか？」\nプレイヤーはタマのそばで静かに様子を見守った。\n\nタマはそばの気配を気にして、相手と周りを見比べた。どう過ごそうか迷っているようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\873cebc522fa4e1fb36c9e5862294539.png",
+      "resolved": "presence__direct"
+    },
+    {
+      "mode": "presence",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「タマ ちょっと見守りましょうか？」\nプレイヤーはタマのそばで静かに様子を見守った。\n\nタマは見守る相手の様子をうかがった。何か始まるのかと、少し戸惑っているらしい。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\873cebc522fa4e1fb36c9e5862294539.png",
+      "resolved": "presence__direct"
+    },
+    {
+      "mode": "presence",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「静かな雰囲気でタマに寄り添おうか。」\nプレイヤーはタマの様子に合わせて距離を保ち、静かに見守った。\n\nタマはそばの気配を気にして、相手と周りを見比べた。どう過ごそうか迷っているようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\873cebc522fa4e1fb36c9e5862294539.png",
+      "resolved": "presence__adapt"
+    },
+    {
+      "mode": "presence",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「静かな雰囲気でタマに寄り添おうか。」\nプレイヤーはタマの様子に合わせて距離を保ち、静かに見守った。\n\nタマは見守る相手の様子をうかがった。何か始まるのかと、少し戸惑っているらしい。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\873cebc522fa4e1fb36c9e5862294539.png",
+      "resolved": "presence__adapt"
+    },
+    {
+      "mode": "presence",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「タマ ちょっと見守りましょうか？」\nプレイヤーはタマのそばで静かに様子を見守った。\n\nタマはそばの気配にゆっくりと目を向けた。周りを探る元気も少なく、疲れた様子だ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\873cebc522fa4e1fb36c9e5862294539.png",
+      "resolved": "presence__direct"
+    },
+    {
+      "mode": "presence",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「タマ ちょっと見守りましょうか？」\nプレイヤーはタマのそばで静かに様子を見守った。\n\nタマは静かに見守られながら、けだるそうに過ごしていた。好奇心ものんびり休んでいるようだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\873cebc522fa4e1fb36c9e5862294539.png",
+      "resolved": "presence__direct"
+    },
+    {
+      "mode": "presence",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「静かな雰囲気でタマに寄り添おうか。」\nプレイヤーはタマの様子に合わせて距離を保ち、静かに見守った。\n\nタマはそばの気配にゆっくりと目を向けた。周りを探る元気も少なく、疲れた様子だ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\873cebc522fa4e1fb36c9e5862294539.png",
+      "resolved": "presence__adapt"
+    },
+    {
+      "mode": "presence",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「静かな雰囲気でタマに寄り添おうか。」\nプレイヤーはタマの様子に合わせて距離を保ち、静かに見守った。\n\nタマは静かに見守られながら、けだるそうに過ごしていた。好奇心ものんびり休んでいるようだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\873cebc522fa4e1fb36c9e5862294539.png",
+      "resolved": "presence__adapt"
+    }
+  ],
+  "before_count": 296,
+  "after_count": 318,
+  "draft_counts": [
+    312,
+    334
+  ],
+  "generated_count": 278,
+  "protected_unchanged": true,
+  "unity_imported": false
+}
