@@ -1,0 +1,10 @@
+{
+  "existing_published_entries_unchanged": 427,
+  "unrelated_drafts_unchanged": 443,
+  "protected_hashes_unchanged": 280,
+  "generated_reviewed": 278,
+  "matching_generated": [],
+  "workspace_files_unchanged": 349,
+  "workspace_note": "349 preexisting files unchanged; workspace-before also contains this task capacity-start.json, whose line endings were normalized without changing measured values",
+  "reviewed_entries_equal_registered": true
+}

@@ -1,0 +1,256 @@
+{
+  "entries": [
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "presence",
+        "action": "switch",
+        "reaction": "any",
+        "scene_key": "presence__switch",
+        "target_cat": "cat-mike",
+        "narrative_scene": "switch"
+      },
+      "variants": [
+        {
+          "id": "ee361b9139f358f28c38206ab68f5d31",
+          "slot": 1,
+          "text": "今度は、そばでゆっくり過ごそうか。"
+        },
+        {
+          "id": "7d26d899b7de58b6bdc023713f18f830",
+          "slot": 2,
+          "text": "{cat_call}の様子を、少し見守っていようかな。"
+        },
+        {
+          "id": "fb85185853e75a51af2b69f8e87084f9",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "presence",
+        "action": "switch",
+        "reaction": "any",
+        "scene_key": "presence__switch",
+        "narrative_scene": "switch"
+      },
+      "variants": [
+        {
+          "id": "8cf2dc66b5f857c2b87436110259ffca",
+          "slot": 1,
+          "text": "{cat}はそばにいる相手へ、ぱっと目を向けた。"
+        },
+        {
+          "id": "f0928df1858151a7a6b98bf38c7dff1d",
+          "slot": 2,
+          "text": "{cat}はちょこんと座ったまま、相手の気配をうかがった。"
+        },
+        {
+          "id": "355e4bf81afb54eeaf501577616cd04f",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "presence",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "presence__connect",
+        "target_cat": "cat-mike",
+        "narrative_scene": "connect"
+      },
+      "variants": [
+        {
+          "id": "f02e949c954f5d4d841dd3b4dba9ee8c",
+          "slot": 1,
+          "text": "この距離だと、目が合うね。"
+        },
+        {
+          "id": "62b6f3d479e157409357b929b69d0704",
+          "slot": 2,
+          "text": "そばにいると、{cat_call}も気になるのかな。"
+        },
+        {
+          "id": "ecd4c185577b5369b794626289611898",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "presence",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "presence__connect",
+        "narrative_scene": "connect"
+      },
+      "variants": [
+        {
+          "id": "e8cb52f534f15cdab90519c30f446f62",
+          "slot": 1,
+          "text": "{cat}は見守る相手に目を向け、じっとその様子を見つめた。"
+        },
+        {
+          "id": "f4d3408a18be5a689aff30c5188442e0",
+          "slot": 2,
+          "text": "そばの気配を追うように、{cat}の注意が相手へ向いた。"
+        },
+        {
+          "id": "8660fc962b765d0fab98a45714d67656",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "presence",
+        "target_cat": "cat-mike",
+        "narrative_scene": "open_up"
+      },
+      "variants": [
+        {
+          "id": "48afb692983150f1adcbad4d03c17afe",
+          "slot": 1,
+          "text": "こうしてそばにいられるの、うれしいな。"
+        },
+        {
+          "id": "40047d0ae9d45b3298ca5ed4213b408f",
+          "slot": 2,
+          "text": "{cat_call}と過ごす時間は、ほっとするね。"
+        },
+        {
+          "id": "f7811c77622b554389503353d5c31c1e",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "presence",
+        "narrative_scene": "open_up"
+      },
+      "variants": [
+        {
+          "id": "e26c4632d0945c4c837dc34966d54dcc",
+          "slot": 1,
+          "text": "{cat}はしっぽを立て、気を許したような顔で相手へ歩み寄った。"
+        },
+        {
+          "id": "6fc61cb7fc8e520fbc14c03cfd6a5cc4",
+          "slot": 2,
+          "text": "そばの相手へ、{cat}は親しげなまなざしを向けた。"
+        },
+        {
+          "id": "d6d1fbeb06395be8a5433a85e93ea77b",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "presence",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "presence__connect",
+        "target_cat": "cat-mike",
+        "narrative_scene": "simultaneous"
+      },
+      "variants": [
+        {
+          "id": "f6ed3b8a7ec9536e855c7c3be3f2b8b3",
+          "slot": 1,
+          "text": "見守っていたら、{cat_call}がぐっと身近に感じられたよ。"
+        },
+        {
+          "id": "44fa714d9af35031bc61bbfe53de7430",
+          "slot": 2,
+          "text": "そばでこんな顔を見られると、うれしくなるね。"
+        },
+        {
+          "id": "c56ab59144625b2cb54472d62ed11c98",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "presence",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "presence__connect",
+        "narrative_scene": "simultaneous"
+      },
+      "variants": [
+        {
+          "id": "411851e0e06152bcb86e2436e329fd39",
+          "slot": 1,
+          "text": "{cat}は見守る相手へ顔を向け、気を許すように目を細めた。"
+        },
+        {
+          "id": "56884c116ce754f0b0a4e3b34f846e1b",
+          "slot": 2,
+          "text": "相手の気配に注意を向けた{cat}は、うれしそうに口元をゆるめた。"
+        },
+        {
+          "id": "3b3cd70f59935eec929395e7e766006b",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    }
+  ],
+  "profiles": [
+    {
+      "id": "player",
+      "kind": "speech",
+      "name": "プレイヤー",
+      "game_id": "player",
+      "content_id": "",
+      "notes": "役割：猫カフェで猫と個別に交流するプレイヤー。年齢・性別・職業・来歴は固定しない。口調：親しみのある、やわらかな常体。「〜しようか」「〜してみよう」「〜してもいいかな」「〜だね」を基本とする。猫への呼びかけは {cat_call} とし、人物に設定した呼び名を使う。一人称・二人称はできるだけ省略する。接し方：様子を見ながら誘い、無理に応じさせない。休憩は自然に提案し、拒否や低体力を責めない。冗談・幼児語・命令調・過剰な感嘆符・恋愛表現・飼い主としての断定は避ける。1案は1つの短いセリフだけ、目安10〜30字、長くても40字程度。かぎ括弧・話者名・行動文は付けない。猫の気持ちや成功を決めつけず、実際の行動結果を先取りしない。3案は語尾だけでなく誘い方や言葉の焦点を変え、人物像と行動の条件は同じにする。",
+      "call": "{cat}",
+      "enabled": true
+    },
+    {
+      "id": "cat-mike",
+      "kind": "cat_response",
+      "name": "ミケ",
+      "game_id": "cat-mike",
+      "content_id": "playtest-mike",
+      "notes": "三毛の毛並みが愛らしいミケは、カフェのムードメーカーです。短毛で動きが機敏、のんびりとした佇まいがたまらない癒やしを提供してくれます。",
+      "call": "{cat}",
+      "enabled": true
+    }
+  ],
+  "unity_imported": false,
+  "route": "existing Tk fields -> save_draft -> preview; manual authoring, no LLM request"
+}

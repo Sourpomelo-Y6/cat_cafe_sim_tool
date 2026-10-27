@@ -1,0 +1,41 @@
+{
+  "Logs": {
+    "start": 18362532258,
+    "end": 18363385760,
+    "delta": 853502
+  },
+  "generated": {
+    "start": 3277372585,
+    "end": 3277372585,
+    "delta": 0
+  },
+  "content_images": {
+    "start": 1276792688,
+    "end": 1276799229,
+    "delta": 6541
+  },
+  "Latest": {
+    "start": 4841096360,
+    "end": 4841096360,
+    "delta": 0
+  },
+  "Library": {
+    "start": 7358000371,
+    "end": 7358000371,
+    "delta": 0
+  },
+  "drafts": {
+    "start": 375818,
+    "end": 382359,
+    "delta": 6541
+  },
+  "storage_check": {
+    "children": [
+      "Latest",
+      "Runs",
+      "build.lock"
+    ],
+    "latest_exe": true,
+    "pending_exists": false
+  }
+}

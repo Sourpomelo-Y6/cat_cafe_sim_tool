@@ -1,0 +1,4100 @@
+{
+  "adopted_conditions": 435,
+  "adopted_texts": 1123,
+  "initial_cats": [
+    {
+      "game_id": "cat-mike",
+      "subject_id": "cat-mike",
+      "normal_conditions": 84,
+      "texts": 252
+    },
+    {
+      "game_id": "cat-sora",
+      "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+      "normal_conditions": 66,
+      "texts": 179
+    },
+    {
+      "game_id": "cat-tama",
+      "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+      "normal_conditions": 68,
+      "texts": 182
+    },
+    {
+      "game_id": "cat-kohaku",
+      "subject_id": "cat-kohaku",
+      "normal_conditions": 34,
+      "texts": 68
+    },
+    {
+      "game_id": "cat-mugi",
+      "subject_id": "cat-mugi",
+      "normal_conditions": 35,
+      "texts": 70
+    }
+  ],
+  "player_mike_special": [
+    {
+      "mode": "teaser",
+      "conditions": 8,
+      "texts": 8
+    },
+    {
+      "mode": "ball",
+      "conditions": 8,
+      "texts": 16
+    },
+    {
+      "mode": "plush",
+      "conditions": 8,
+      "texts": 16
+    },
+    {
+      "mode": "tunnel",
+      "conditions": 8,
+      "texts": 16
+    },
+    {
+      "mode": "pet",
+      "conditions": 8,
+      "texts": 16
+    },
+    {
+      "mode": "brush",
+      "conditions": 8,
+      "texts": 16
+    },
+    {
+      "mode": "voice",
+      "conditions": 8,
+      "texts": 16
+    },
+    {
+      "mode": "presence",
+      "conditions": 8,
+      "texts": 16
+    }
+  ],
+  "unity_active_pack": "d4594a5f9a7f483ca16ddfca4ea48486",
+  "unity_conditions": 259,
+  "unity_texts": 761,
+  "pending_conditions": 176,
+  "pending_texts": 362,
+  "pending": [
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "person-guest-3",
+        "mode": "teaser",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "teaser",
+        "target_cat": "*"
+      },
+      "missing_variants": [
+        {
+          "id": "867ef5d5a3095be085795fdfd339e8a3",
+          "slot": 1,
+          "text": "{cat_call}、このねこじゃらしは気になるかな。"
+        },
+        {
+          "id": "024ce657086b5c94b6278d8c98ec178f",
+          "slot": 2,
+          "text": "ねこじゃらしの動き、どんなふうに見るかな。"
+        },
+        {
+          "id": "d8eacc2d40185043a0a080bebd099f60",
+          "slot": 3,
+          "text": "ねこじゃらしで誘ってみようか。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "person-guest-3",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "ball",
+        "target_cat": "*"
+      },
+      "missing_variants": [
+        {
+          "id": "fbfa1db4360a5c9cb3843ec7bafaacda",
+          "slot": 1,
+          "text": "{cat_call}、転がるボールはどうかな。"
+        },
+        {
+          "id": "47db92620df55bc4815db101a5f63e2b",
+          "slot": 2,
+          "text": "ボールの行き先、一緒に眺めようか。"
+        },
+        {
+          "id": "13f77d38d7ff5064a77247f5869038cf",
+          "slot": 3,
+          "text": "丸いものの動きは、ちょっと面白いね。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "person-guest-3",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "plush",
+        "target_cat": "*"
+      },
+      "missing_variants": [
+        {
+          "id": "8e5d2d645dee54109cfc070dd6613b07",
+          "slot": 1,
+          "text": "{cat_call}、このぬいぐるみはどうかな。"
+        },
+        {
+          "id": "c4c570607b6459d1aa76b7e440036acb",
+          "slot": 2,
+          "text": "ぬいぐるみの動き、気になるところはあるかな。"
+        },
+        {
+          "id": "def060b346e95c15810a15c2a03e7973",
+          "slot": 3,
+          "text": "ぬいぐるみと遊んでみようか。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "person-guest-3",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "tunnel",
+        "target_cat": "*"
+      },
+      "missing_variants": [
+        {
+          "id": "895efd7cb4525a4e90bcd023b02e3256",
+          "slot": 1,
+          "text": "{cat_call}、トンネルの向こうは気になるかな。"
+        },
+        {
+          "id": "427b97f5f6e259d7988b06cce6349d81",
+          "slot": 2,
+          "text": "入口と出口で、見え方が違うね。"
+        },
+        {
+          "id": "fe5fe78be4545a0dad98fc76bd4535ba",
+          "slot": 3,
+          "text": "入らなくても、トンネル遊びはどうかな。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "person-guest-3",
+        "mode": "pet",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "pet",
+        "target_cat": "*"
+      },
+      "missing_variants": [
+        {
+          "id": "f8802c3edceb5ecfb2ddb9395cf04f29",
+          "slot": 1,
+          "text": "{cat_call}、なでてみてもいいかな。"
+        },
+        {
+          "id": "3c766e01e7b95a2787b7e125eb385f45",
+          "slot": 2,
+          "text": "触れ方ひとつでも、様子は違うのかな。"
+        },
+        {
+          "id": "3161234126535dababd991f512082195",
+          "slot": 3,
+          "text": "なでるのは、気が向いたときでいいからね。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "person-guest-3",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "brush",
+        "target_cat": "*"
+      },
+      "missing_variants": [
+        {
+          "id": "fc62bdab2cff53df9181eb51d275e8be",
+          "slot": 1,
+          "text": "{cat_call}、ブラシをかけてみようか。"
+        },
+        {
+          "id": "b783bb17f237513eaf96bc43e401481d",
+          "slot": 2,
+          "text": "ブラシの感触、どんなふうに感じるかな。"
+        },
+        {
+          "id": "2c857ff995c15532974f82af3793f61e",
+          "slot": 3,
+          "text": "毛並みを見ながら、ブラシを試そうか。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "person-guest-3",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "voice",
+        "target_cat": "*"
+      },
+      "missing_variants": [
+        {
+          "id": "48f63b2185645048b0291ae05a607c4a",
+          "slot": 1,
+          "text": "{cat_call}、少し話しかけてもいいかな。"
+        },
+        {
+          "id": "3eeaa62e38be5908b453fc17f123c302",
+          "slot": 2,
+          "text": "どんな声の調子が聞きやすいのかな。"
+        },
+        {
+          "id": "53e88a896ddf5004886b4808e665ab98",
+          "slot": 3,
+          "text": "返事がなくても、こうして話す時間はいいね。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "person-guest-3",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "presence",
+        "target_cat": "*"
+      },
+      "missing_variants": [
+        {
+          "id": "6ae99345f8975b8996fb0a68363b7cfc",
+          "slot": 1,
+          "text": "{cat_call}の小さな変化も、見逃したくないな。"
+        },
+        {
+          "id": "ee6a4dd69974508cb038b9d04efc5ad0",
+          "slot": 2,
+          "text": "何もしないで眺める時間も、いいものだね。"
+        },
+        {
+          "id": "a96c235b41a55b8da21e46e4bd81792e",
+          "slot": 3,
+          "text": "この距離から、そっと様子を見ていよう。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "person-guest-3",
+        "mode": "pause",
+        "action": "pause",
+        "reaction": "any",
+        "scene_key": "pause",
+        "target_cat": "*"
+      },
+      "missing_variants": [
+        {
+          "id": "9a6995481f255acfbf98165893216098",
+          "slot": 1,
+          "text": "{cat_call}、ここでひと休みしようか。"
+        },
+        {
+          "id": "b86e0243747e529480258ecf743c175a",
+          "slot": 2,
+          "text": "何かするばかりでなく、休む時間も大事だね。"
+        },
+        {
+          "id": "d054c00905db5726bf3b9a4431d9cd0f",
+          "slot": 3,
+          "text": "手を止めると、気づくこともありそうだね。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "ball",
+        "action": "switch",
+        "reaction": "any",
+        "scene_key": "ball__switch",
+        "target_cat": "cat-mike",
+        "narrative_scene": "switch"
+      },
+      "missing_variants": [
+        {
+          "id": "1570af0bbb445303997ee32eda75dd9c",
+          "slot": 1,
+          "text": "今度はボールで遊んでみようか、{cat_call}。"
+        },
+        {
+          "id": "693d5625daff5e15a23d1fc567cb7e9c",
+          "slot": 2,
+          "text": "ボールに替えたよ。丸いおもちゃはどうかな。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "ball",
+        "action": "switch",
+        "reaction": "any",
+        "scene_key": "ball__switch",
+        "narrative_scene": "switch"
+      },
+      "missing_variants": [
+        {
+          "id": "88758706f566585f8a851cc1c04c58d6",
+          "slot": 1,
+          "text": "{cat}は足元に出てきたボールを、首をかしげて見つめた。"
+        },
+        {
+          "id": "2b3f8398c1925faebef73c5499b915d2",
+          "slot": 2,
+          "text": "{cat}は新しく出てきたボールへ、丸い目を向けた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "ball",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "ball__connect",
+        "target_cat": "cat-mike",
+        "narrative_scene": "connect"
+      },
+      "missing_variants": [
+        {
+          "id": "6d7cadde90c25388961ce2f11ed945bd",
+          "slot": 1,
+          "text": "{cat_call}、ボール越しに通じた感じがするね。"
+        },
+        {
+          "id": "137870c676a85fa58dfda84cc1e779a8",
+          "slot": 2,
+          "text": "ボール遊びの間合い、少しつかめたかな。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "ball",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "ball__connect",
+        "narrative_scene": "connect"
+      },
+      "missing_variants": [
+        {
+          "id": "edc9873996115a00b65326ad641e9b7b",
+          "slot": 1,
+          "text": "{cat}はボールを前に、相手の働きかけをじっと受け止めた。"
+        },
+        {
+          "id": "40fc03c8aa6c56d5b956b38be7d4729c",
+          "slot": 2,
+          "text": "{cat}はボールのそばで相手へ注意を向け、誘いに応じた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "ball",
+        "target_cat": "cat-mike",
+        "narrative_scene": "open_up"
+      },
+      "missing_variants": [
+        {
+          "id": "5325a504b9955b33a3bbb441d797e7b3",
+          "slot": 1,
+          "text": "ボールと一緒に、親しみも増えた気がするね。"
+        },
+        {
+          "id": "a4366c04b9b85714981180ef1be394f2",
+          "slot": 2,
+          "text": "{cat_call}、一緒に遊ぶ時間になじんできたかな。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "ball",
+        "narrative_scene": "open_up"
+      },
+      "missing_variants": [
+        {
+          "id": "34ea83483d475c31b357e9a4d0b6184f",
+          "slot": 1,
+          "text": "{cat}はボールのそばで、首をかしげたまま穏やかな目を向けた。"
+        },
+        {
+          "id": "e9781298ac285418b65b00de9dd61aee",
+          "slot": 2,
+          "text": "{cat}はボールのそばで表情をやわらげ、親しみのあるまなざしを見せた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "ball",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "ball__connect",
+        "target_cat": "cat-mike",
+        "narrative_scene": "simultaneous"
+      },
+      "missing_variants": [
+        {
+          "id": "131b3d5eb4635d23937ff7947dc1a6ed",
+          "slot": 1,
+          "text": "誘いが届いて、ぐっと近く感じるね、{cat_call}。"
+        },
+        {
+          "id": "c6d393944b9d539691fecbfbe1216187",
+          "slot": 2,
+          "text": "ボール遊びで、息も気持ちも合ってきたかな。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "ball",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "ball__connect",
+        "narrative_scene": "simultaneous"
+      },
+      "missing_variants": [
+        {
+          "id": "5572920ae69f51e58445e7b86be6d946",
+          "slot": 1,
+          "text": "{cat}はボールを前に誘いを受け止めると、目を細めて親しげな表情を見せた。"
+        },
+        {
+          "id": "aab64f5a94055ebc8b6a6ff625cbb322",
+          "slot": 2,
+          "text": "{cat}は働きかけに応じ、ボールのそばで口元をゆるめた。細めた目に親しみがにじんだ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "pause",
+        "action": "pause",
+        "reaction": "listless",
+        "scene_key": "pause"
+      },
+      "missing_variants": [
+        {
+          "id": "e1294066bd295216938771aca9937c18",
+          "slot": 1,
+          "text": "ミケは疲れた様子で、静かに佇んだ。"
+        },
+        {
+          "id": "361c2045db6759e2a90028fbd8918c28",
+          "slot": 2,
+          "text": "ミケはどこか遠くを見るようにじっとした。"
+        },
+        {
+          "id": "14e25980e0465533bcff03a35c5e1137",
+          "slot": 3,
+          "text": "ミケは動きを控え、ゆったりと休んでいた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "ball"
+      },
+      "missing_variants": [
+        {
+          "id": "a161d48b9fb85accbcb5f981d6c3cc2d",
+          "slot": 1,
+          "text": "{cat}はボール遊びの様子を見ながら、静かに応じた。"
+        },
+        {
+          "id": "a2ab147d945b5535bb4b4326fd85a9c6",
+          "slot": 2,
+          "text": "{cat}は落ち着いた様子で、ボールの動きに目を向けた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "ball"
+      },
+      "missing_variants": [
+        {
+          "id": "d61a6422f7915c2ca7148a9d6ad7b8c1",
+          "slot": 1,
+          "text": "{cat}はボール遊びに関心を向け、穏やかに応じた。"
+        },
+        {
+          "id": "692ae877f7bc5a4f817908c881e5f38d",
+          "slot": 2,
+          "text": "{cat}はボールの動きを見つめ、遊びに応じる様子を見せた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "ball"
+      },
+      "missing_variants": [
+        {
+          "id": "6f57811fe4a356e9966972af5aa11eba",
+          "slot": 1,
+          "text": "{cat}はボールの動きに少し戸惑い、様子をうかがった。"
+        },
+        {
+          "id": "1f19d975587f5e6a9ba3e76e1de72e51",
+          "slot": 2,
+          "text": "{cat}はどう応じようか迷うように、しばらく動きを見ていた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "ball"
+      },
+      "missing_variants": [
+        {
+          "id": "d14c54b92af750efa29e194ac4c8c0f4",
+          "slot": 1,
+          "text": "{cat}は疲れた様子で、ボール遊びへの反応もゆっくりだった。"
+        },
+        {
+          "id": "31aa89cc220953a7a59ea0fd07ee8bc3",
+          "slot": 2,
+          "text": "{cat}はあまり動かず、疲れた様子で過ごしていた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "plush"
+      },
+      "missing_variants": [
+        {
+          "id": "e0125fca74e95265afb06b135fcd5d8c",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみの動きを見ながら、静かに応じた。"
+        },
+        {
+          "id": "bc30bbc46d6b59c9929c4ef457da847a",
+          "slot": 2,
+          "text": "{cat}は落ち着いた様子で、ぬいぐるみ遊びを見守った。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "plush"
+      },
+      "missing_variants": [
+        {
+          "id": "6beac81ac6185ad98a63559b6b2489c1",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみの動きに少し戸惑い、様子をうかがった。"
+        },
+        {
+          "id": "876286524299504599c4b36020f34511",
+          "slot": 2,
+          "text": "{cat}はどう応じようか迷うように、ぬいぐるみに目を向けた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "plush"
+      },
+      "missing_variants": [
+        {
+          "id": "23827926eb9e59d4bc65cd1e2adc43fe",
+          "slot": 1,
+          "text": "{cat}は疲れた様子で、ぬいぐるみ遊びへの反応もゆっくりだった。"
+        },
+        {
+          "id": "d35915bc173557e9b3b38a2390269f13",
+          "slot": 2,
+          "text": "{cat}はあまり動かず、疲れた様子で過ごしていた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "tunnel"
+      },
+      "missing_variants": [
+        {
+          "id": "0be7e2c192a653febc8a96a54b892621",
+          "slot": 1,
+          "text": "{cat}はトンネル遊びの誘いに、静かな様子で応じた。"
+        },
+        {
+          "id": "9fbe9ee2f3a8518aa38054e22a2e645d",
+          "slot": 2,
+          "text": "{cat}はトンネルへ目を向け、しばらく様子を見ていた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "tunnel"
+      },
+      "missing_variants": [
+        {
+          "id": "751b8e08b9fe5950872165894e81300f",
+          "slot": 1,
+          "text": "{cat}はトンネル遊びに興味を示し、穏やかに応じた。"
+        },
+        {
+          "id": "45af6ef9b40a5ce2ab264bcd6a3fccef",
+          "slot": 2,
+          "text": "{cat}はトンネルに注意を向け、遊びの誘いを受け止めた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "tunnel"
+      },
+      "missing_variants": [
+        {
+          "id": "ca9ab8104ad0501589e344a6013af859",
+          "slot": 1,
+          "text": "{cat}はトンネル遊びに強い関心を示し、熱心に応じた。"
+        },
+        {
+          "id": "4fe21c2254db53c29a2d82a2ac50b7a9",
+          "slot": 2,
+          "text": "{cat}は遊びの誘いに気持ちを向け、いつもより積極的に応じた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "tunnel"
+      },
+      "missing_variants": [
+        {
+          "id": "48c98cd5c400514eb8ed2ce30676a111",
+          "slot": 1,
+          "text": "{cat}はトンネル遊びの誘いに戸惑い、様子をうかがった。"
+        },
+        {
+          "id": "26e720acb7db552f9c5fed866f4ab8f9",
+          "slot": 2,
+          "text": "{cat}はどうしたものか迷うように、トンネルへ目を向けた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "tunnel"
+      },
+      "missing_variants": [
+        {
+          "id": "c950a4c2348f59aea3ed50b7efd2ab26",
+          "slot": 1,
+          "text": "{cat}は疲れた様子で、トンネル遊びへの反応が鈍かった。"
+        },
+        {
+          "id": "89937f2665795ee8abf465c54dc40c48",
+          "slot": 2,
+          "text": "{cat}は遊びの誘いにゆっくりと反応し、疲れを見せた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "turn_away",
+        "scene_key": "brush"
+      },
+      "missing_variants": [
+        {
+          "id": "feaa61f843105712a56d16449166d74c",
+          "slot": 1,
+          "text": "{cat}はブラシから気持ちをそらし、今は距離を置きたそうだ。"
+        },
+        {
+          "id": "89304391b1c05ed98faa61d7598805d3",
+          "slot": 2,
+          "text": "{cat}はブラッシングの誘いを避けるように、そっと身を引いた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "voice"
+      },
+      "missing_variants": [
+        {
+          "id": "9f3e16ea49035692a670bc1f16379b89",
+          "slot": 1,
+          "text": "{cat}は声かけに気づき、静かに耳を向けた。"
+        },
+        {
+          "id": "50a91ca22c2050ac9885022d622f58bf",
+          "slot": 2,
+          "text": "{cat}は落ち着いた様子で、かけられた声を聞いていた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "voice"
+      },
+      "missing_variants": [
+        {
+          "id": "490b956354f951a292710ad9e5547f22",
+          "slot": 1,
+          "text": "{cat}は声に少し戸惑ったように、相手の様子をうかがった。"
+        },
+        {
+          "id": "981bc08ce7b8537ba2ac257c0eb2ed06",
+          "slot": 2,
+          "text": "{cat}は声の方へ注意を向けたまま、どう応じるか迷っているようだ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "voice"
+      },
+      "missing_variants": [
+        {
+          "id": "ddb9b6d47c775af093512da6d2bad8b4",
+          "slot": 1,
+          "text": "{cat}は疲れた様子で、声への反応も控えめだった。"
+        },
+        {
+          "id": "1915b8e1bb2e5ac4b91d7cec06eff9ac",
+          "slot": 2,
+          "text": "{cat}は呼びかけを聞きながら、けだるそうに過ごしていた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "presence"
+      },
+      "missing_variants": [
+        {
+          "id": "ff379b2500fd5eb284b46fb1b3e2f004",
+          "slot": 1,
+          "text": "{cat}は見守られながら、落ち着いた時間を過ごした。"
+        },
+        {
+          "id": "b7647d0bf1f954ce8b748612bc629942",
+          "slot": 2,
+          "text": "{cat}はそばの気配を感じつつ、自分のペースで過ごしていた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "presence"
+      },
+      "missing_variants": [
+        {
+          "id": "990538943860590692826dc03f3989a3",
+          "slot": 1,
+          "text": "{cat}はそばの気配に少し戸惑い、様子をうかがった。"
+        },
+        {
+          "id": "c955bad1479d586e81b6ad82cc72488f",
+          "slot": 2,
+          "text": "{cat}は見守られる中で、どう過ごそうか迷うようにしていた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "presence"
+      },
+      "missing_variants": [
+        {
+          "id": "dc0bfc3788c95b87bdcde098c8114ede",
+          "slot": 1,
+          "text": "{cat}は疲れた様子で、静かに見守られていた。"
+        },
+        {
+          "id": "0cb82487e40c5b1eb555c0841f3bba86",
+          "slot": 2,
+          "text": "{cat}はそばに人がいる中、けだるそうに過ごしていた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "ball"
+      },
+      "missing_variants": [
+        {
+          "id": "fbce743e33ff5ecc871ee1f9f8b2c286",
+          "slot": 1,
+          "text": "{cat}はボールに目を留め、次の動きを確かめるように見ていた。"
+        },
+        {
+          "id": "9be883d7f99c5c5eb3d3da39ebf2a335",
+          "slot": 2,
+          "text": "{cat}はボールへ耳を向けた。遊びへの反応はまだ控えめだ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "ball"
+      },
+      "missing_variants": [
+        {
+          "id": "fde81ff21c285e699e41608e198c750e",
+          "slot": 1,
+          "text": "{cat}はボールの動きにぱっと顔を向け、楽しそうに目で追った。"
+        },
+        {
+          "id": "b2ca5f64781d596fbfc1430223bbe2d9",
+          "slot": 2,
+          "text": "{cat}はボールに興味を引かれたようだ。耳を立て、遊びの様子をよく見ている。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "ball"
+      },
+      "missing_variants": [
+        {
+          "id": "0f7b8e4fa84c5178ba759844b425028b",
+          "slot": 1,
+          "text": "{cat}はボールに目を輝かせ、次はどちらへ動くのかと熱心に見つめた。"
+        },
+        {
+          "id": "b4096c386b3a57a6a7ea1c485a385866",
+          "slot": 2,
+          "text": "{cat}の注意はボールに釘づけだ。遊びの誘いに、すぐさま反応している。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "ball"
+      },
+      "missing_variants": [
+        {
+          "id": "b2ed9d62feba539a845095effa7ae956",
+          "slot": 1,
+          "text": "{cat}はボールを気にしつつも、どう応じようか迷うように首をかしげた。"
+        },
+        {
+          "id": "0efc338d6791524cb911d7d7f0966d02",
+          "slot": 2,
+          "text": "{cat}の視線がボールと相手の間を行き来した。遊びの調子をつかみかねているようだ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "ball"
+      },
+      "missing_variants": [
+        {
+          "id": "3fb12fb638b659ec884345d64f42cce2",
+          "slot": 1,
+          "text": "{cat}はボールへ目をやったが、疲れているのか反応はゆっくりだった。"
+        },
+        {
+          "id": "3377b2fb492f598c910cdd69f097d147",
+          "slot": 2,
+          "text": "{cat}はけだるそうにボールを眺めた。次の動きを探す元気も、今は少ないようだ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "plush"
+      },
+      "missing_variants": [
+        {
+          "id": "f56e8fd7f8fb5b009bf35b2bc8a52a91",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみの様子を探るように、首の角度を少し変えた。"
+        },
+        {
+          "id": "775a81743cd654bb95be3248c2da32bc",
+          "slot": 2,
+          "text": "{cat}はぬいぐるみに目を向けたまま、遊びの様子を確かめていた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "plush"
+      },
+      "missing_variants": [
+        {
+          "id": "e85fee237bb355fea9bf4c190b93ea38",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみに興味を示し、耳を立てて遊びに応じた。"
+        },
+        {
+          "id": "b848af6f896f5fbdb0006fffc006572b",
+          "slot": 2,
+          "text": "{cat}はぬいぐるみへいきいきと顔を向けた。どんな遊びになるのか楽しみなようだ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "plush"
+      },
+      "missing_variants": [
+        {
+          "id": "844612246b1d573abba4b2f3ed83834d",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみに注意を向けたが、どう遊ぼうか迷っているようだ。"
+        },
+        {
+          "id": "4d1619d50958590c9b3bfc02c8f75d8f",
+          "slot": 2,
+          "text": "{cat}はぬいぐるみと相手を交互に見た。好奇心はあっても、遊びには乗りきれないらしい。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "plush"
+      },
+      "missing_variants": [
+        {
+          "id": "9948c06f27875738af7e6130f43cdddd",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみにゆっくり目を向けた。遊びを確かめるにも、少し疲れているようだ。"
+        },
+        {
+          "id": "f644a48da97257d1bbb2ba81b2074b21",
+          "slot": 2,
+          "text": "{cat}はけだるそうで、ぬいぐるみへの反応にも勢いがなかった。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "tunnel"
+      },
+      "missing_variants": [
+        {
+          "id": "c1e81d9ec9125c8bb455333449e6afb5",
+          "slot": 1,
+          "text": "{cat}はトンネルへ注意を向け、遊びの様子を見定めていた。"
+        },
+        {
+          "id": "4b1ecdba50ff5c248d070342aec79612",
+          "slot": 2,
+          "text": "{cat}はトンネルを気にしながら、首を少し傾けて様子をうかがった。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "tunnel"
+      },
+      "missing_variants": [
+        {
+          "id": "31060c29e81e57238bd57783700d3c6b",
+          "slot": 1,
+          "text": "{cat}はトンネルに興味を示し、耳を立てた。探検の誘いを楽しんでいるようだ。"
+        },
+        {
+          "id": "943d8dac19d25df19cf6e62302d81a27",
+          "slot": 2,
+          "text": "{cat}はトンネルへ弾むように顔を向け、遊びに好奇心をのぞかせた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "tunnel"
+      },
+      "missing_variants": [
+        {
+          "id": "3af29ce74db75517b552c4033e778936",
+          "slot": 1,
+          "text": "{cat}の目がトンネルに釘づけになった。何が見つかるのかと、熱心に様子を探っている。"
+        },
+        {
+          "id": "47b05e3d7fb15682bcb6e046f61068ef",
+          "slot": 2,
+          "text": "{cat}はトンネル遊びの誘いに素早く応じた。新しい発見を待ちきれないような顔だ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "tunnel"
+      },
+      "missing_variants": [
+        {
+          "id": "575b48ff473f5011a68af655589ee67d",
+          "slot": 1,
+          "text": "{cat}はトンネルを気にしているが、どう応じようか迷うように動きをためらった。"
+        },
+        {
+          "id": "7302871142ee5240a7beaec92f308bf2",
+          "slot": 2,
+          "text": "{cat}はトンネルと相手に視線を行き来させた。探検気分には、まだなれないようだ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "tunnel"
+      },
+      "missing_variants": [
+        {
+          "id": "48f79574b16c575fbce8f92959425b0f",
+          "slot": 1,
+          "text": "{cat}はトンネルへ目をやった。探検するよりも休みたいのか、反応は鈍い。"
+        },
+        {
+          "id": "2214b8f90e2a53a28dc12e3a8e908e4f",
+          "slot": 2,
+          "text": "{cat}は疲れた様子で、トンネル遊びの誘いにもゆっくりと反応した。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "brush"
+      },
+      "missing_variants": [
+        {
+          "id": "05d16e27f3685dd398128958e1190625",
+          "slot": 1,
+          "text": "{cat}はブラシの動きを確かめるように見つめ、ひとまず様子を見ていた。"
+        },
+        {
+          "id": "af2e83eb4503503ca6b16395cd850d17",
+          "slot": 2,
+          "text": "{cat}はブラシへ耳を向けた。気にはなるが、大きな反応は見せていない。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "brush"
+      },
+      "missing_variants": [
+        {
+          "id": "9c513db085085c2fab062d5290170d1c",
+          "slot": 1,
+          "text": "{cat}はブラシと相手の顔を見比べた。どう応じればよいのか迷っているようだ。"
+        },
+        {
+          "id": "2993349297a75273a33c9e69a7aafbca",
+          "slot": 2,
+          "text": "{cat}はブラシに気を取られ、首をかしげた。遊びの誘いとは勝手が違うらしい。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "brush"
+      },
+      "missing_variants": [
+        {
+          "id": "84a58c971acd5a33ae991899c093d5c0",
+          "slot": 1,
+          "text": "{cat}は疲れているようで、ブラシを目で追うのもゆっくりだった。"
+        },
+        {
+          "id": "acd1465b8690593890816dbe00e55d43",
+          "slot": 2,
+          "text": "{cat}はけだるそうにブラシへ目をやったが、反応は小さいままだった。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "voice"
+      },
+      "missing_variants": [
+        {
+          "id": "71c5fc4b7ee358cf8d0dcd9cc6945715",
+          "slot": 1,
+          "text": "{cat}は声の方へ耳を向け、何だろうという顔で聞いていた。"
+        },
+        {
+          "id": "01f825f7fd065f5b8511824ac317af53",
+          "slot": 2,
+          "text": "{cat}はかけられた声に気づき、相手の様子を確かめるように見た。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "voice"
+      },
+      "missing_variants": [
+        {
+          "id": "180346bd889b53ac8c7970f57417cc7d",
+          "slot": 1,
+          "text": "{cat}は声の方へ首をかしげた。気になるものの、どう応じようか迷っているようだ。"
+        },
+        {
+          "id": "e05fbefa6a3055d1acc57719c8d30848",
+          "slot": 2,
+          "text": "{cat}の耳が声に反応した。相手を見つめる顔には、少し戸惑いが残っている。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "voice"
+      },
+      "missing_variants": [
+        {
+          "id": "b23a3e05af34525e99ce82853608e86c",
+          "slot": 1,
+          "text": "{cat}は声に気づいたようだが、疲れているのか顔を向けるのもゆっくりだった。"
+        },
+        {
+          "id": "67cd60e1dedb5cb5b619252966fbbedc",
+          "slot": 2,
+          "text": "{cat}はけだるそうに呼びかけを聞いていた。いつものきびきびした反応は控えめだ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "presence"
+      },
+      "missing_variants": [
+        {
+          "id": "3ab7381ef1b15f5eae6b8356819f7e9b",
+          "slot": 1,
+          "text": "{cat}はそばの気配を気にして、相手と周りを見比べた。どう過ごそうか迷っているようだ。"
+        },
+        {
+          "id": "dd950f535638529f8ff0c08b10dff6d8",
+          "slot": 2,
+          "text": "{cat}は見守る相手の様子をうかがった。何か始まるのかと、少し戸惑っているらしい。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "presence"
+      },
+      "missing_variants": [
+        {
+          "id": "af5c27eb89cf54b5a88becae00e68ba9",
+          "slot": 1,
+          "text": "{cat}はそばの気配にゆっくりと目を向けた。周りを探る元気も少なく、疲れた様子だ。"
+        },
+        {
+          "id": "1cf8b131556c5860bfb168d404e29cc2",
+          "slot": 2,
+          "text": "{cat}は静かに見守られながら、けだるそうに過ごしていた。好奇心ものんびり休んでいるようだ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "teaser",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "teaser"
+      },
+      "missing_variants": [
+        {
+          "id": "66ec2a7426d45c2b9822cbdc92ac8381",
+          "slot": 1,
+          "text": "{cat}はねこじゃらしをじっと見た。遊び心をのぞかせつつ、誘いの調子を確かめている。"
+        },
+        {
+          "id": "ae8b124f9755570090dbcf9156af5ecb",
+          "slot": 2,
+          "text": "{cat}の丸い耳がねこじゃらしへ向いた。まだ大きく応じず、動きを見ている。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "teaser",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "teaser"
+      },
+      "missing_variants": [
+        {
+          "id": "52e35e07757052a6b549f7a3371e9deb",
+          "slot": 1,
+          "text": "{cat}はねこじゃらしを楽しそうに目で追った。慎重な顔にも、遊びたい気持ちがにじむ。"
+        },
+        {
+          "id": "c7b43edcabfc58b891e0949ae44bc19d",
+          "slot": 2,
+          "text": "{cat}はねこじゃらしに気を引かれ、ふさふさの尾の先を小さく動かした。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "teaser",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "teaser"
+      },
+      "missing_variants": [
+        {
+          "id": "189b8bd4c477569c8213416cf27fdd21",
+          "slot": 1,
+          "text": "{cat}は金色の目をきらきらさせ、ねこじゃらしに夢中になっている。"
+        },
+        {
+          "id": "7948a58d1a5d53989f185d6a57ea2c8f",
+          "slot": 2,
+          "text": "{cat}はねこじゃらしの誘いに意気込んだ。ふっくらした顔いっぱいに、遊ぶ喜びが表れている。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "teaser",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "teaser"
+      },
+      "missing_variants": [
+        {
+          "id": "4dbf65e8982258bcbf6fefbf7f7a48e5",
+          "slot": 1,
+          "text": "{cat}はねこじゃらしへ目を向けたものの、ためらった。遊びたいのに調子が合わないようだ。"
+        },
+        {
+          "id": "92369506a59957d4b412cefd8ce3eb79",
+          "slot": 2,
+          "text": "{cat}の視線がねこじゃらしと相手の顔を行き来する。誘いをどう受け取るか迷っている。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "teaser",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "teaser"
+      },
+      "missing_variants": [
+        {
+          "id": "a76e2a4892185344aec925ecac8fd024",
+          "slot": 1,
+          "text": "{cat}はねこじゃらしへ目を向けたが、疲れているらしく、視線の動きもゆっくりだ。"
+        },
+        {
+          "id": "26b686dbe5435b4daa0217ff6c693db8",
+          "slot": 2,
+          "text": "{cat}はねこじゃらしをぼんやり眺めている。遊び好きの目にも、今は勢いがない。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "pet",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "pet"
+      },
+      "missing_variants": [
+        {
+          "id": "6eb5d2b89ff75fa8a6e118449758ae11",
+          "slot": 1,
+          "text": "{cat}はなでる手の様子をうかがっている。ふっくらした頬の表情は、まだ控えめだ。"
+        },
+        {
+          "id": "4c7b5280e91e5b25ad9e6071d5a2d9d4",
+          "slot": 2,
+          "text": "{cat}はなでられることに静かに応じた。甘えるでもなく、慎重な顔で相手を見ている。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "pet",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "pet"
+      },
+      "missing_variants": [
+        {
+          "id": "5a830e48a1815e7d98907b8a46cd97ae",
+          "slot": 1,
+          "text": "{cat}はなでる手にやわらかな目を向けた。ふわふわの頬にも、くつろいだ表情が浮かぶ。"
+        },
+        {
+          "id": "76f7c39966ff53c8a113751d083f4149",
+          "slot": 2,
+          "text": "{cat}はなでられながら、気持ちよさそうに目を細めた。遊ぶ時とは違う、穏やかな顔だ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "pet",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "pet"
+      },
+      "missing_variants": [
+        {
+          "id": "9bddb660328b5ea69384feaf81e99f2d",
+          "slot": 1,
+          "text": "{cat}はなでる手を気にして、相手の顔をちらりと見た。落ち着く間合いを探しているようだ。"
+        },
+        {
+          "id": "a887da9a95d95d78835f764c64958fec",
+          "slot": 2,
+          "text": "{cat}はなでられることに戸惑いを見せた。丸い耳にも、少し迷いが表れている。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "pet",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "pet"
+      },
+      "missing_variants": [
+        {
+          "id": "f8c26b401aa857d9bb6cd66293635c5b",
+          "slot": 1,
+          "text": "{cat}はなでる手にゆっくりと目を向けた。疲れているようで、甘える反応も小さい。"
+        },
+        {
+          "id": "e37f40ab45d05d04a0897c8a62f24962",
+          "slot": 2,
+          "text": "{cat}はなでられても、けだるそうな様子だ。ふっくらした顔に眠たげな表情を浮かべている。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "ball"
+      },
+      "missing_variants": [
+        {
+          "id": "a1c28352f9305ccc83605eb036eaf31a",
+          "slot": 1,
+          "text": "{cat}はボールの動きを見ている。遊びに乗る前に、少し確かめておきたいようだ。"
+        },
+        {
+          "id": "53b153322fdb509a84c518f54648abbf",
+          "slot": 2,
+          "text": "{cat}はボールを気にしながらも、控えめに応じた。金色の目は注意深いままだ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "ball"
+      },
+      "missing_variants": [
+        {
+          "id": "171a465c7e5d5262af95a68abd7c1a35",
+          "slot": 1,
+          "text": "{cat}はボールを楽しそうに見つめた。ふさふさの尾の先にも、遊び心がのぞく。"
+        },
+        {
+          "id": "18247d7ff1c25c0fbbe1397aebb9f46b",
+          "slot": 2,
+          "text": "{cat}はボールの動きに気持ちが弾んだようだ。丸い顔を向け、いきいきと応じている。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "ball"
+      },
+      "missing_variants": [
+        {
+          "id": "06c944b89155563da9b3fa7312bc8877",
+          "slot": 1,
+          "text": "{cat}はボールにすっかり夢中だ。金色の目に、遊びの続きを待つ輝きがある。"
+        },
+        {
+          "id": "67d9b98f6d595128a61a16f53c2fa2f7",
+          "slot": 2,
+          "text": "{cat}はボール遊びの誘いに張り切った。ふだんの慎重さも忘れたような、熱のこもった反応だ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "ball"
+      },
+      "missing_variants": [
+        {
+          "id": "993a48d0fb3e5819bd447fea1d03df42",
+          "slot": 1,
+          "text": "{cat}はボールを見つめたまま、応じるのをためらった。遊びの調子がつかめないらしい。"
+        },
+        {
+          "id": "fde54686b9265a7da9a72253dc4cfa32",
+          "slot": 2,
+          "text": "{cat}はボールから相手へ目を移した。遊ぶ気持ちと戸惑いが、丸い顔に同居している。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "ball"
+      },
+      "missing_variants": [
+        {
+          "id": "ef8fb10837e35305b7dd99a0b7d37ba7",
+          "slot": 1,
+          "text": "{cat}はボールを目で追うのもおっくうそうだ。遊びへの関心より、疲れが勝っているように見える。"
+        },
+        {
+          "id": "9f7036f0aa215f48b0b266f32ef7a50a",
+          "slot": 2,
+          "text": "{cat}はボールへゆっくり顔を向けた。いつもの遊びたがりな表情は、今は控えめだ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "plush"
+      },
+      "missing_variants": [
+        {
+          "id": "e4b24be2d58b5ab49d0120125fe6105c",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみの様子を注意深く見ている。遊び相手として、ひとまず気に留めたようだ。"
+        },
+        {
+          "id": "45c3b4ff1f865d1f96356ced26ea431f",
+          "slot": 2,
+          "text": "{cat}はぬいぐるみに控えめな反応を返した。丸い耳は向いているが、まだ様子見らしい。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "plush"
+      },
+      "missing_variants": [
+        {
+          "id": "9480b0b0d2525eab932c8e64d1112e41",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみに楽しげな顔を向けた。慎重に見ていた目にも、遊び心がのぞく。"
+        },
+        {
+          "id": "6cdcd397d8235d06971c50cff2c98b1a",
+          "slot": 2,
+          "text": "{cat}はぬいぐるみ遊びの誘いに機嫌よく応じた。ふさふさの尾の先が、小さく揺れる。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "plush"
+      },
+      "missing_variants": [
+        {
+          "id": "6192a68cf8b0560dbc049b81ee331054",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみに夢中になっている。金色の目が輝き、遊びへの期待を隠しきれない。"
+        },
+        {
+          "id": "00cc8ac117f25fb7a84c1e810a6c768e",
+          "slot": 2,
+          "text": "{cat}はぬいぐるみ遊びにすっかり気を良くした。丸い顔から、次も遊びたい気持ちが伝わってくる。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "plush"
+      },
+      "missing_variants": [
+        {
+          "id": "5a628b48dc435fe5a5fc89ac8362ba95",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみを気にしながら、ためらうような顔をした。遊び方がしっくりこないらしい。"
+        },
+        {
+          "id": "0e9db862fb2458ee9e4ee97738656671",
+          "slot": 2,
+          "text": "{cat}はぬいぐるみと相手の顔を交互に見た。楽しみたいのに、どう応じるか迷っているようだ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "plush"
+      },
+      "missing_variants": [
+        {
+          "id": "b21aba3d017a5442af29bfb1f66ea561",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみにぼんやり目を向けた。遊びの誘いにも、疲れた様子がにじむ。"
+        },
+        {
+          "id": "e89965ed0e645eafbfd7a59b96136ebb",
+          "slot": 2,
+          "text": "{cat}はぬいぐるみへの反応が鈍い。ふっくらした顔もけだるそうで、遊びに身が入らないらしい。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "tunnel"
+      },
+      "missing_variants": [
+        {
+          "id": "2959fd5a514c5929a4532bd92fd835d6",
+          "slot": 1,
+          "text": "{cat}はトンネルの様子を慎重にうかがった。遊びへの興味はあるが、反応は控えめだ。"
+        },
+        {
+          "id": "0c9308561b765853a652a2a72e16454b",
+          "slot": 2,
+          "text": "{cat}はトンネルへ目を向けている。丸い耳にも、様子を確かめるような用心深さがある。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "tunnel"
+      },
+      "missing_variants": [
+        {
+          "id": "5977a9e1665351bca1697ee59db326b3",
+          "slot": 1,
+          "text": "{cat}はトンネル遊びに楽しそうに応じた。慎重な表情の中にも、期待が見える。"
+        },
+        {
+          "id": "ae6fa9aad5225890ae03b2a30c76d029",
+          "slot": 2,
+          "text": "{cat}はトンネルへいきいきと顔を向けた。遊びの誘いを気に入ったようだ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "tunnel"
+      },
+      "missing_variants": [
+        {
+          "id": "ba0eb037e6f851af91c455c02d0d22c6",
+          "slot": 1,
+          "text": "{cat}はトンネル遊びに心を弾ませた。金色の目は、遊びの様子に釘づけになっている。"
+        },
+        {
+          "id": "92228490f63852bb9021f27d99bfcb2b",
+          "slot": 2,
+          "text": "{cat}はトンネルへ熱のこもった反応を返した。丸い顔に、もっと遊びたいという期待があふれる。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "tunnel"
+      },
+      "missing_variants": [
+        {
+          "id": "ad55bd1771da5c3ca7a90787ba11a0d8",
+          "slot": 1,
+          "text": "{cat}はトンネルの様子に気を取られつつ、応じるのを迷っている。気持ちよく遊ぶ調子が合わないようだ。"
+        },
+        {
+          "id": "090b00799b745d268f69e85403433b08",
+          "slot": 2,
+          "text": "{cat}はトンネルと相手を見比べた。遊びに誘われても、少し用心しているらしい。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "tunnel"
+      },
+      "missing_variants": [
+        {
+          "id": "2aab88e002d156be82557378e43f87aa",
+          "slot": 1,
+          "text": "{cat}はトンネルへ重たげな視線を向けた。遊びの誘いに応じる元気が、今は少ないようだ。"
+        },
+        {
+          "id": "a521762a16205a9c8c3ebd3adf438420",
+          "slot": 2,
+          "text": "{cat}はトンネル遊びにもけだるそうだ。目の輝きも控えめで、疲れがうかがえる。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "brush"
+      },
+      "missing_variants": [
+        {
+          "id": "04dab13afb355ffaae8fce03b62b9437",
+          "slot": 1,
+          "text": "{cat}はブラシの動きを静かに見ている。ふわふわの頬の表情は、まだ慎重だ。"
+        },
+        {
+          "id": "9191badcfeb85313ab68f7bf7031b654",
+          "slot": 2,
+          "text": "{cat}はブラッシングに控えめに応じた。気にしてはいるが、くつろぐほどではないらしい。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "brush"
+      },
+      "missing_variants": [
+        {
+          "id": "f4931addc4255b4d927870ba38b19edb",
+          "slot": 1,
+          "text": "{cat}はブラシと相手の顔を見比べた。遊びの時とは勝手が違うのか、少し戸惑っている。"
+        },
+        {
+          "id": "9350b21c91d95ef9a02254c9dd419c55",
+          "slot": 2,
+          "text": "{cat}はブラシを気にして耳を動かした。落ち着いて受け止めるには、まだ迷いがあるようだ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "brush"
+      },
+      "missing_variants": [
+        {
+          "id": "7efae6a565915811bb3808a087915993",
+          "slot": 1,
+          "text": "{cat}はブラシへゆっくり目をやった。ふわふわの頬にも、疲れた表情が浮かんでいる。"
+        },
+        {
+          "id": "929676db64695436a21320692dc342c8",
+          "slot": 2,
+          "text": "{cat}はブラッシングへの反応も小さい。気にする元気があまりないのか、けだるそうにしている。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "voice"
+      },
+      "missing_variants": [
+        {
+          "id": "4bb9ee3f35b454d59888415b026a3253",
+          "slot": 1,
+          "text": "{cat}は声の方へ丸い耳を向けた。何か始まるのかと、静かに様子をうかがっている。"
+        },
+        {
+          "id": "a282c3ff44d051ce815d3e71060ebf2d",
+          "slot": 2,
+          "text": "{cat}は呼びかけに気づき、相手を見た。金色の目に、控えめな関心がのぞく。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "voice"
+      },
+      "missing_variants": [
+        {
+          "id": "5544ccaeb4f15b1fbbe1de684c6c14e1",
+          "slot": 1,
+          "text": "{cat}は声に耳を傾けながら、不思議そうな顔をした。どう応じればよいか迷っているらしい。"
+        },
+        {
+          "id": "1aee77f1534f5004b13cca07202ca01d",
+          "slot": 2,
+          "text": "{cat}は呼びかける相手を慎重に見つめた。気にはなるが、反応のきっかけをつかめないようだ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "voice"
+      },
+      "missing_variants": [
+        {
+          "id": "cff4aeaa51e058309051d197f0871a0a",
+          "slot": 1,
+          "text": "{cat}は声の方へゆっくり目を向けた。疲れがあるのか、応じる様子は乏しい。"
+        },
+        {
+          "id": "4874611d494258ccb0a78e4f819292eb",
+          "slot": 2,
+          "text": "{cat}は呼びかけを聞いているようだが、けだるそうだ。丸い耳の反応も、ごく小さい。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "presence"
+      },
+      "missing_variants": [
+        {
+          "id": "60a43af901885098b0d81bdb13ce8746",
+          "slot": 1,
+          "text": "{cat}はそばの気配を意識して、相手の様子をうかがった。この距離でどう過ごすか迷っているようだ。"
+        },
+        {
+          "id": "f2091ac0ec6454258d75c4e8f6c43a1a",
+          "slot": 2,
+          "text": "{cat}は見守る相手へ、ためらいがちな視線を向けた。静かな間合いに、まだなじみきれないらしい。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "presence"
+      },
+      "missing_variants": [
+        {
+          "id": "52a9216523795f81b2553bdce67c7af6",
+          "slot": 1,
+          "text": "{cat}はそばの気配へゆっくりと目をやった。相手との距離を気にするより、今は休みたいようだ。"
+        },
+        {
+          "id": "a7600d8c9cbf560d8f924b218f6610ad",
+          "slot": 2,
+          "text": "{cat}は見守られながら、けだるそうに過ごしている。周りへの反応も控えめだ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "pause",
+        "action": "pause",
+        "reaction": "neutral",
+        "scene_key": "pause"
+      },
+      "missing_variants": [
+        {
+          "id": "3882c8e6f79156ffb44150ad2518f0df",
+          "slot": 1,
+          "text": "{cat}はひと息ついている。遊ぶ時の張り切った顔とは違い、やわらかな表情だ。"
+        },
+        {
+          "id": "c85a01e3cdf25d5e9bd1885cf9bc04ee",
+          "slot": 2,
+          "text": "{cat}は休憩のひとときを静かに過ごしている。ふっくらした顔にも、落ち着きが見える。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "pause",
+        "action": "pause",
+        "reaction": "listless",
+        "scene_key": "pause"
+      },
+      "missing_variants": [
+        {
+          "id": "d486d911f8df57b9b97cd1d4d66ab9c6",
+          "slot": 1,
+          "text": "{cat}は疲れた様子で休んでいる。金色の目にも勢いはなく、今は静かにしていたいようだ。"
+        },
+        {
+          "id": "70657f3744105033b1bc6e0ebf55176f",
+          "slot": 2,
+          "text": "{cat}はけだるそうに休憩している。遊び好きの表情もひと休みして、反応は小さい。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "teaser",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "teaser"
+      },
+      "missing_variants": [
+        {
+          "id": "cef7808736bb52578e4e25763c73a0d8",
+          "slot": 1,
+          "text": "{cat}はねこじゃらしの動きを眺めている。急いで応じず、自分の間合いで目を向けた。"
+        },
+        {
+          "id": "b573e0c412ec541e8056b8afea701cf1",
+          "slot": 2,
+          "text": "{cat}の三角の耳がねこじゃらしへ向いた。丸い顔の表情は穏やかなままだ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "teaser",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "teaser"
+      },
+      "missing_variants": [
+        {
+          "id": "914a33f425f85926b9f763a7001e1968",
+          "slot": 1,
+          "text": "{cat}はねこじゃらしを目で追い、楽しげな表情を見せた。ひと呼吸おいてから、誘いに応じている。"
+        },
+        {
+          "id": "733fe7dce4c059fd87452a039da7b529",
+          "slot": 2,
+          "text": "{cat}はねこじゃらしの動きを気に入ったようだ。縞のある尾の先が、軽く揺れた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "teaser",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "teaser"
+      },
+      "missing_variants": [
+        {
+          "id": "a2c5dda068f05288b29cdfab13f3e237",
+          "slot": 1,
+          "text": "{cat}のオリーブグリーンの目が、ねこじゃらしに釘づけになった。次の動きを待つ顔に熱がこもる。"
+        },
+        {
+          "id": "f55e4bde939d517aab8520a7821c7eb2",
+          "slot": 2,
+          "text": "{cat}はねこじゃらし遊びにすっかり乗り気だ。さっきまでのゆったりした間が、短くなっている。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "teaser",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "teaser"
+      },
+      "missing_variants": [
+        {
+          "id": "f3821ba303c15d278fb6fb1ef816bd9b",
+          "slot": 1,
+          "text": "{cat}はねこじゃらしへ目を向けたところで、反応を止めた。誘いの調子をつかめずにいるようだ。"
+        },
+        {
+          "id": "756a0c5b28135a2c81c8d7a097506253",
+          "slot": 2,
+          "text": "{cat}の耳がねこじゃらしと相手の方を向き直った。どう応じるか、決めかねている。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "teaser",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "teaser"
+      },
+      "missing_variants": [
+        {
+          "id": "c7230ef43a585a54afa8c30fae148620",
+          "slot": 1,
+          "text": "{cat}はねこじゃらしを眺めているが、目で追う動きは重い。今は疲れが出ているようだ。"
+        },
+        {
+          "id": "c0c41dffb04c50ad8e065626f18e488a",
+          "slot": 2,
+          "text": "{cat}はねこじゃらしにわずかに耳を向けた。遊びに応じる勢いはなく、けだるそうだ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "pet",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "pet"
+      },
+      "missing_variants": [
+        {
+          "id": "5dce1a35a2785313b41742f4755f3af2",
+          "slot": 1,
+          "text": "{cat}はなでる手に気づき、静かに目を向けた。大きく甘えず、穏やかに受け止めている。"
+        },
+        {
+          "id": "4f0cd2cdbb865e8888c2725554b84c15",
+          "slot": 2,
+          "text": "{cat}はなでられる間、相手の様子を見ている。丸い顔には、まだはっきりした喜びは浮かばない。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "pet",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "pet"
+      },
+      "missing_variants": [
+        {
+          "id": "e73e70ae5f0b58a1b68e23a6ae5a887f",
+          "slot": 1,
+          "text": "{cat}はなでる手に心地よさそうな顔をした。ゆっくりと目元が和らいでいく。"
+        },
+        {
+          "id": "05eafdfc7d5557beaca8448bf7198719",
+          "slot": 2,
+          "text": "{cat}はなでられることを気に入ったようだ。縞のある尾の先を、くつろいだ調子で動かした。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "pet",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "pet"
+      },
+      "missing_variants": [
+        {
+          "id": "3484972c9ca15fe2a322a7d24a0071e6",
+          "slot": 1,
+          "text": "{cat}はなでる手を気にして、相手へ視線を戻した。いつもの落ち着いた顔に、迷いが見える。"
+        },
+        {
+          "id": "e7b1d0ff77455a8cb5c40ebebcc25d35",
+          "slot": 2,
+          "text": "{cat}はなでられることに戸惑った。耳を少し動かし、心地よい間合いを探しているようだ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "pet",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "pet"
+      },
+      "missing_variants": [
+        {
+          "id": "29dbdbacee585ec48723b6571954718c",
+          "slot": 1,
+          "text": "{cat}はなでる手へ重たげに目を向けた。疲れているらしく、表情の変化も小さい。"
+        },
+        {
+          "id": "3734aba4d5b052fe98102397aa388de2",
+          "slot": 2,
+          "text": "{cat}はなでられても、けだるそうにしている。甘えるより、静かに過ごしたいようだ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "ball"
+      },
+      "missing_variants": [
+        {
+          "id": "3de6a6ec4c285488a59bd5a28440991e",
+          "slot": 1,
+          "text": "{cat}はボールに目を留めた。しばらく眺めてから、ゆっくりと顔を向けている。"
+        },
+        {
+          "id": "2b28bd74c4e25d0f8ac5f1322cb062b8",
+          "slot": 2,
+          "text": "{cat}はボール遊びに控えめに応じた。耳は向いているが、張り切るほどではないらしい。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "ball"
+      },
+      "missing_variants": [
+        {
+          "id": "9efb0d46d1c4599f8e1707957b9c870b",
+          "slot": 1,
+          "text": "{cat}はボールに楽しげな視線を送った。落ち着いた顔にも、遊びへの期待がのぞく。"
+        },
+        {
+          "id": "0d40e8e66fb05ac09ac81df0b120f90f",
+          "slot": 2,
+          "text": "{cat}はボール遊びの調子が合ってきたようだ。誘いへの反応が、少し軽やかになっている。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "ball"
+      },
+      "missing_variants": [
+        {
+          "id": "9ffebace32c859ddaba9106d54ad2a6a",
+          "slot": 1,
+          "text": "{cat}はボールから目が離せない様子だ。オリーブグリーンの目に、遊びの続きを待つ輝きがある。"
+        },
+        {
+          "id": "7b138dacde3b502ca9b17425859df5fa",
+          "slot": 2,
+          "text": "{cat}はボール遊びに夢中になった。ゆったりした顔つきにも、抑えきれない楽しさが表れている。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "ball"
+      },
+      "missing_variants": [
+        {
+          "id": "6915f468fe9554b49fa9583aaccf8c9a",
+          "slot": 1,
+          "text": "{cat}はボールを見てから、相手の顔をうかがった。遊ぶきっかけがつかめないようだ。"
+        },
+        {
+          "id": "91697a947a0e570fab018ca191d59e29",
+          "slot": 2,
+          "text": "{cat}はボールへの反応をためらった。耳を向け直し、誘いの調子を確かめている。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "ball"
+      },
+      "missing_variants": [
+        {
+          "id": "f8eebbb4c1bb54108e010889be4418fd",
+          "slot": 1,
+          "text": "{cat}はボールをぼんやり見ている。目を動かすのもおっくうそうで、疲れがうかがえる。"
+        },
+        {
+          "id": "81a4d03ef8e656c8acac18bd654f3b38",
+          "slot": 2,
+          "text": "{cat}はボールに気づいても、反応が遅い。遊びへの期待より、けだるさが表に出ている。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "plush"
+      },
+      "missing_variants": [
+        {
+          "id": "dc7ecc4804735307bf2ce08464182f74",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみへ静かに顔を向けた。遊びの誘いを、ひとまず眺めている。"
+        },
+        {
+          "id": "d292c8aca9ef514c91bd386f648913c5",
+          "slot": 2,
+          "text": "{cat}はぬいぐるみに耳を向けている。興味を大きく示すことなく、落ち着いて様子を見た。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "plush"
+      },
+      "missing_variants": [
+        {
+          "id": "3f77315e5cb859ebae9aefacd99f93e6",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみを見て、楽しそうな顔になった。ゆっくりした応じ方にも、遊ぶ気持ちがある。"
+        },
+        {
+          "id": "b44c27a27fd95fbf9429e0eebeccba6a",
+          "slot": 2,
+          "text": "{cat}はぬいぐるみ遊びに機嫌よく応じた。黒褐色の尾先が、小さく弾むように動いた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "plush"
+      },
+      "missing_variants": [
+        {
+          "id": "4b148a1f8f3e56c1af369df572c355ac",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみを眺めたまま、首をわずかに傾けた。誘い方がしっくりこないようだ。"
+        },
+        {
+          "id": "05009e12ab5f56d88799fd70e5cd879d",
+          "slot": 2,
+          "text": "{cat}はぬいぐるみと相手を見比べている。遊びに乗るには、もう少し間が欲しそうだ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "plush"
+      },
+      "missing_variants": [
+        {
+          "id": "821ef713e85553f383600a5ccdb3cfb7",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみに重たげな視線を送った。遊びの誘いにも、疲れた様子が隠れない。"
+        },
+        {
+          "id": "c8beb6a5bff153d084fc0b67785eb1b1",
+          "slot": 2,
+          "text": "{cat}はぬいぐるみへの反応が薄い。耳の動きも鈍く、今は遊ぶ元気が少ないようだ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "tunnel"
+      },
+      "missing_variants": [
+        {
+          "id": "61e22afc45ce53d6b4b528c75eaf805b",
+          "slot": 1,
+          "text": "{cat}はトンネルへ目を向け、静かに眺めた。すぐには気持ちを決めず、様子を見ている。"
+        },
+        {
+          "id": "a318604b13e559499cc2fccdd0c8f883",
+          "slot": 2,
+          "text": "{cat}はトンネル遊びに穏やかな反応を返した。関心はあるが、まだ控えめだ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "tunnel"
+      },
+      "missing_variants": [
+        {
+          "id": "c8c17e8629aa544190735bd9d0dc59e3",
+          "slot": 1,
+          "text": "{cat}はトンネルへ楽しそうな顔を向けた。ゆったりした間合いの中にも、期待が見える。"
+        },
+        {
+          "id": "3538591d6db55367a44beaf774548101",
+          "slot": 2,
+          "text": "{cat}はトンネル遊びの誘いを気に入ったようだ。耳を向けたまま、いきいきと様子を見ている。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "tunnel"
+      },
+      "missing_variants": [
+        {
+          "id": "4e6b31a78d8d566ba05fcb03293a6b18",
+          "slot": 1,
+          "text": "{cat}はトンネル遊びにすっかり気を引かれている。丸い顔に、次も遊びたいという気持ちがあふれた。"
+        },
+        {
+          "id": "aa2c140e42b15426a9ecedf74f46f0ea",
+          "slot": 2,
+          "text": "{cat}はトンネルへ熱心な視線を注いだ。普段の静かな目にも、はずむような楽しさがある。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "tunnel"
+      },
+      "missing_variants": [
+        {
+          "id": "1855208193b75fe8b5e69cab35d6c0fc",
+          "slot": 1,
+          "text": "{cat}はトンネルを気にしつつ、相手の様子をうかがった。遊びに応じる調子が合わないらしい。"
+        },
+        {
+          "id": "f480c12a03a15be78c034b478a78124f",
+          "slot": 2,
+          "text": "{cat}はトンネルへの反応をためらっている。三角の耳にも、少し迷いが表れた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "tunnel"
+      },
+      "missing_variants": [
+        {
+          "id": "27b67c1f46e05ed2a5d57775519088e6",
+          "slot": 1,
+          "text": "{cat}はトンネルを眺める目にも力がない。疲れているらしく、誘いへの反応は小さい。"
+        },
+        {
+          "id": "fd95c8feab51590e8364bfe8388df5e1",
+          "slot": 2,
+          "text": "{cat}はトンネルへゆっくりと顔を向けた。遊びを始めるには、気だるさが勝っているようだ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "brush"
+      },
+      "missing_variants": [
+        {
+          "id": "608c203af7e65ac784a16c8f0d63fc2a",
+          "slot": 1,
+          "text": "{cat}はブラシの動きを静かに見ている。手入れの様子を、落ち着いた顔で受け止めた。"
+        },
+        {
+          "id": "24fe332710a65d4e97010bf033bff7ea",
+          "slot": 2,
+          "text": "{cat}はブラッシングに控えめに応じた。三角の耳が、時折ブラシの方を向く。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "brush"
+      },
+      "missing_variants": [
+        {
+          "id": "9db8347fe5dc505893067682f59f10cb",
+          "slot": 1,
+          "text": "{cat}はブラッシングに心地よさそうな表情を見せた。丸い顔の目元が、ゆるやかに和らぐ。"
+        },
+        {
+          "id": "ed58e79899df5f86b8a709707a463166",
+          "slot": 2,
+          "text": "{cat}はブラシの動きに機嫌よく応じている。相手を見る目にも、くつろいだ様子がにじんだ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "brush"
+      },
+      "missing_variants": [
+        {
+          "id": "55f481c536f15791bff1b393172eb9ed",
+          "slot": 1,
+          "text": "{cat}はブラシを気にして、耳を動かした。手入れの調子が合わず、落ち着きどころを探している。"
+        },
+        {
+          "id": "2bd7efd245ba507795347ea1aadc750f",
+          "slot": 2,
+          "text": "{cat}はブラシから相手へ目を移した。どう受け止めようかと、少し戸惑っているようだ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "brush"
+      },
+      "missing_variants": [
+        {
+          "id": "e17a1e237af15bd8b18962cbb0365ce1",
+          "slot": 1,
+          "text": "{cat}はブラシの方へゆっくり目をやった。疲れがあるのか、手入れへの反応も乏しい。"
+        },
+        {
+          "id": "3981400a2e0d56a5a57e75f5cca4ba97",
+          "slot": 2,
+          "text": "{cat}はブラッシングにもけだるそうだ。いつもの穏やかさに、反応の鈍さが重なっている。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "voice"
+      },
+      "missing_variants": [
+        {
+          "id": "e84c5a0709c85ad8a9d1d750ac22300f",
+          "slot": 1,
+          "text": "{cat}は声を聞いて、ひと呼吸おいてから顔を向けた。落ち着いた目で相手を見ている。"
+        },
+        {
+          "id": "1cb7ceced27e526daf272b20f460e9d0",
+          "slot": 2,
+          "text": "{cat}の耳が声の方を向いた。呼びかけには気づいたが、表情は穏やかなままだ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "voice"
+      },
+      "missing_variants": [
+        {
+          "id": "cefb660958a750568e2b956ab221c8ef",
+          "slot": 1,
+          "text": "{cat}は呼びかける相手を、不思議そうに見た。声の調子をどう受け取るか迷っているらしい。"
+        },
+        {
+          "id": "138313daeefe5fcc947543b520ae8dbe",
+          "slot": 2,
+          "text": "{cat}は声に耳を向けたものの、反応が定まらない。丸い顔に、小さな戸惑いが浮かんだ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "voice"
+      },
+      "missing_variants": [
+        {
+          "id": "11070973c9c459168f9f419c82c01c84",
+          "slot": 1,
+          "text": "{cat}は声の方へ重たげに目を向けた。疲れているらしく、応じるまでにも間がある。"
+        },
+        {
+          "id": "71b87273c7f95f2a8ecbe1d0b31eb3c3",
+          "slot": 2,
+          "text": "{cat}は呼びかけを聞いているようだが、耳の動きはわずかだ。けだるさが表情ににじんでいる。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "presence"
+      },
+      "missing_variants": [
+        {
+          "id": "613cfd92594c5d2ba59e6359713918d5",
+          "slot": 1,
+          "text": "{cat}は見守る相手に一度目を向け、静かに過ごしている。この距離を穏やかに受け止めているようだ。"
+        },
+        {
+          "id": "acbc9204e29154c2915b7704c1cf2850",
+          "slot": 2,
+          "text": "{cat}はそばの気配に気づき、耳を向けた。急いで応じることなく、落ち着いている。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "presence"
+      },
+      "missing_variants": [
+        {
+          "id": "f8a6947d4c585a92b5606af9701fee2b",
+          "slot": 1,
+          "text": "{cat}は見守る相手へ、確かめるような視線を送った。静かな間合いの取り方に迷っているようだ。"
+        },
+        {
+          "id": "28388509739f578e8e1839dff0644c53",
+          "slot": 2,
+          "text": "{cat}はそばの気配を気にしている。相手を見る顔には、少し落ち着かなさがある。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "presence"
+      },
+      "missing_variants": [
+        {
+          "id": "227f236cf0c75c24a235b227837dc7c7",
+          "slot": 1,
+          "text": "{cat}は見守る相手へゆっくり目を向けた。周りを気にする元気も少ないらしく、けだるそうだ。"
+        },
+        {
+          "id": "81d1a8b1bcb2551f9a11fa62299dc3ea",
+          "slot": 2,
+          "text": "{cat}はそばの気配への反応も鈍い。静かに過ごす顔に、疲れが見える。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "pause",
+        "action": "pause",
+        "reaction": "neutral",
+        "scene_key": "pause"
+      },
+      "missing_variants": [
+        {
+          "id": "b0afd6b3ec1c5f968896088474eda1ea",
+          "slot": 1,
+          "text": "{cat}は休憩のひとときを過ごしている。穏やかな丸い顔で、周りの様子を眺めた。"
+        },
+        {
+          "id": "bf7c3a468c90533e90864215d6d05b44",
+          "slot": 2,
+          "text": "{cat}はひと息つき、ゆったりと耳を動かした。何かに急かされることなく、静かにしている。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "pause",
+        "action": "pause",
+        "reaction": "listless",
+        "scene_key": "pause"
+      },
+      "missing_variants": [
+        {
+          "id": "9a8967122c9a5e8e95c5f83a5e3ba9dd",
+          "slot": 1,
+          "text": "{cat}は疲れた様子で休んでいる。オリーブグリーンの目にも勢いはなく、反応はゆっくりだ。"
+        },
+        {
+          "id": "14b27c5a6dd658179d89c077ed53575e",
+          "slot": 2,
+          "text": "{cat}はけだるそうに休憩している。尾の先の動きも小さく、今は静かに過ごしたいようだ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "plush",
+        "action": "switch",
+        "reaction": "any",
+        "scene_key": "plush__switch",
+        "target_cat": "cat-mike",
+        "narrative_scene": "switch"
+      },
+      "missing_variants": [
+        {
+          "id": "dacb5e591fe752d1a529e5f08a526fc9",
+          "slot": 1,
+          "text": "今度はぬいぐるみで遊ぼうか、{cat_call}。"
+        },
+        {
+          "id": "d9fff382089958738ee3fd1fa52a92ef",
+          "slot": 2,
+          "text": "小さなねずみを連れてきたよ。気になるかな。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "plush",
+        "action": "switch",
+        "reaction": "any",
+        "scene_key": "plush__switch",
+        "narrative_scene": "switch"
+      },
+      "missing_variants": [
+        {
+          "id": "9aa7bd67cd215e16bda7cd69ad16f394",
+          "slot": 1,
+          "text": "{cat}は新しく出てきたねずみのぬいぐるみに、丸い目を向けた。"
+        },
+        {
+          "id": "df37c44b8d1c5d118b8e600a6a78cc41",
+          "slot": 2,
+          "text": "{cat}はぬいぐるみを前に首をかしげ、どんなおもちゃかと見つめた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "plush",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "plush__connect",
+        "target_cat": "cat-mike",
+        "narrative_scene": "connect"
+      },
+      "missing_variants": [
+        {
+          "id": "3c67024c758b5eac8c44ba3a64173a09",
+          "slot": 1,
+          "text": "{cat_call}、このねずみとの遊び方、通じたかな。"
+        },
+        {
+          "id": "3f4eef11a24c54b9bf37ef6ade718c2a",
+          "slot": 2,
+          "text": "ぬいぐるみ越しに、息が合った感じがするね。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "plush",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "plush__connect",
+        "narrative_scene": "connect"
+      },
+      "missing_variants": [
+        {
+          "id": "7eaaa9eb3ed256a9a7144a350cacc379",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみへの誘いに注意を向け、相手の働きかけに応じた。"
+        },
+        {
+          "id": "83fbaa98080a5a359cc4178a1c34ab52",
+          "slot": 2,
+          "text": "{cat}はぬいぐるみを前に、遊びの誘いをまっすぐ受け止めた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "plush",
+        "target_cat": "cat-mike",
+        "narrative_scene": "open_up"
+      },
+      "missing_variants": [
+        {
+          "id": "f476e62b435251588b186c05cc4b7e9e",
+          "slot": 1,
+          "text": "{cat_call}、ねずみと一緒だと、なんだか和むね。"
+        },
+        {
+          "id": "b4f9c4d509e550ae82484438aaea4465",
+          "slot": 2,
+          "text": "ぬいぐるみのある時間も、なじんできたかな。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "plush",
+        "narrative_scene": "open_up"
+      },
+      "missing_variants": [
+        {
+          "id": "d0098b4f29985d6597576749b2088305",
+          "slot": 1,
+          "text": "{cat}はねずみのぬいぐるみのそばで、穏やかなまなざしを相手へ向けた。"
+        },
+        {
+          "id": "17896ce1d57f576db665f42d83b50391",
+          "slot": 2,
+          "text": "{cat}はぬいぐるみと過ごしながら表情をゆるめ、親しげな目を見せた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "plush",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "plush__connect",
+        "target_cat": "cat-mike",
+        "narrative_scene": "simultaneous"
+      },
+      "missing_variants": [
+        {
+          "id": "1b257591d0d25c00a30ae7e5b083728c",
+          "slot": 1,
+          "text": "ねずみとの遊びで、気持ちも近づいたかな。"
+        },
+        {
+          "id": "b22d425dd6095a9392bf1555f8aa54a4",
+          "slot": 2,
+          "text": "誘いが通じて、ほっとするね、{cat_call}。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "plush",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "plush__connect",
+        "narrative_scene": "simultaneous"
+      },
+      "missing_variants": [
+        {
+          "id": "ef0829de446b5f0187c4e1850b149668",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみへの誘いに応じ、目を細めて親しみをにじませた。"
+        },
+        {
+          "id": "594d3f159d4650569cd6b938375481de",
+          "slot": 2,
+          "text": "{cat}は相手の働きかけを受け止めると、ぬいぐるみのそばで口元までやわらげた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "tunnel",
+        "action": "switch",
+        "reaction": "any",
+        "scene_key": "tunnel__switch",
+        "target_cat": "cat-mike",
+        "narrative_scene": "switch"
+      },
+      "missing_variants": [
+        {
+          "id": "c471c4d6077a57468d4d182f7e24a0b4",
+          "slot": 1,
+          "text": "今度はトンネルで遊ぼうか、{cat_call}。"
+        },
+        {
+          "id": "bb16fb9e1e4750ea9eb3910e218bc3c9",
+          "slot": 2,
+          "text": "丸い入口があるよ。どんな遊びにしようか。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "tunnel",
+        "action": "switch",
+        "reaction": "any",
+        "scene_key": "tunnel__switch",
+        "narrative_scene": "switch"
+      },
+      "missing_variants": [
+        {
+          "id": "5261301cf95d5772a532d6e3cb6718c4",
+          "slot": 1,
+          "text": "{cat}はトンネルの丸い入口へ、興味をひかれたように目を向けた。"
+        },
+        {
+          "id": "fa6e293fb800588c993a05aa8b3bf971",
+          "slot": 2,
+          "text": "{cat}は新しく出てきたトンネルのそばで、じっと様子をうかがった。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "tunnel",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "tunnel__connect",
+        "target_cat": "cat-mike",
+        "narrative_scene": "connect"
+      },
+      "missing_variants": [
+        {
+          "id": "3eb65bb7ddf6533ba9dbce5b485b22a3",
+          "slot": 1,
+          "text": "{cat_call}、入口で誘う間合い、つかめてきたかな。"
+        },
+        {
+          "id": "af5280eff7005cef854493140e8cb1ee",
+          "slot": 2,
+          "text": "トンネル遊びの誘い、うまく届いたみたいだね。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "tunnel",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "tunnel__connect",
+        "narrative_scene": "connect"
+      },
+      "missing_variants": [
+        {
+          "id": "745f01b446305429ad4fe058077f46fc",
+          "slot": 1,
+          "text": "{cat}はトンネルの入口に注意を向けながら、相手の誘いに応じた。"
+        },
+        {
+          "id": "a36062b0d6965d429067bb6a4ce5b015",
+          "slot": 2,
+          "text": "{cat}はトンネルを前に、相手の働きかけを遊びの合図として受け止めた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "tunnel",
+        "target_cat": "cat-mike",
+        "narrative_scene": "open_up"
+      },
+      "missing_variants": [
+        {
+          "id": "50adada41bd65cb3941056aaf31ffee9",
+          "slot": 1,
+          "text": "{cat_call}、トンネルのそばで過ごすのもいいね。"
+        },
+        {
+          "id": "97dcfff20ee95f82baa8fd8fd497a923",
+          "slot": 2,
+          "text": "入口のそばにいると、のんびりしたくなるね。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "tunnel",
+        "narrative_scene": "open_up"
+      },
+      "missing_variants": [
+        {
+          "id": "b8212d6279445e4ea91e04ff3eab6808",
+          "slot": 1,
+          "text": "{cat}はトンネルのそばでまなざしを和らげ、相手へ親しみを見せた。"
+        },
+        {
+          "id": "d11cc7fc923c590ea0ce3e88a19da9fa",
+          "slot": 2,
+          "text": "{cat}はトンネルと過ごすひとときに表情をゆるめ、穏やかな目を相手へ向けた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "tunnel",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "tunnel__connect",
+        "target_cat": "cat-mike",
+        "narrative_scene": "simultaneous"
+      },
+      "missing_variants": [
+        {
+          "id": "60a21f558e045673ae3face57bcf7407",
+          "slot": 1,
+          "text": "トンネルで息が合って、距離も縮まった気がするね。"
+        },
+        {
+          "id": "502ac548523b55588685245131b3cba1",
+          "slot": 2,
+          "text": "{cat_call}、入口での誘いが通じて、うれしいね。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "tunnel",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "tunnel__connect",
+        "narrative_scene": "simultaneous"
+      },
+      "missing_variants": [
+        {
+          "id": "f23a455c9d205c6490d0c2a40ee9e8d2",
+          "slot": 1,
+          "text": "{cat}はトンネル遊びの誘いに応じると、目を細めて親しげな表情を見せた。"
+        },
+        {
+          "id": "40c2f5ae2a255efb8c1e4f23834899c0",
+          "slot": 2,
+          "text": "{cat}はトンネルを前に相手の合図を受け止め、口元までやわらげた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "pet",
+        "action": "switch",
+        "reaction": "any",
+        "scene_key": "pet__switch",
+        "target_cat": "cat-mike",
+        "narrative_scene": "switch"
+      },
+      "missing_variants": [
+        {
+          "id": "8937cd31dbc35a6fb741e03127dd6050",
+          "slot": 1,
+          "text": "今度はなでてみようか、{cat_call}。"
+        },
+        {
+          "id": "ec6c16c065dd5e87a80a37fe54174f2c",
+          "slot": 2,
+          "text": "そっと手を近づけてもいいかな。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "pet",
+        "action": "switch",
+        "reaction": "any",
+        "scene_key": "pet__switch",
+        "narrative_scene": "switch"
+      },
+      "missing_variants": [
+        {
+          "id": "578ed31978425364aabe35bb27bbb265",
+          "slot": 1,
+          "text": "{cat}は差し出された手へ、ぱっと目を向けた。"
+        },
+        {
+          "id": "2971458f794753f49b88d49ac91030f3",
+          "slot": 2,
+          "text": "{cat}は落ち着いた佇まいのまま、頭上の手の様子をうかがった。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "pet",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "pet__connect",
+        "target_cat": "cat-mike",
+        "narrative_scene": "connect"
+      },
+      "missing_variants": [
+        {
+          "id": "590d12addeb25a17b21a3d85f36d586a",
+          "slot": 1,
+          "text": "手を近づける間合い、つかめてきたかな。"
+        },
+        {
+          "id": "85ee798b9bdb54069fe314ee9fc8f649",
+          "slot": 2,
+          "text": "{cat_call}、そっと誘うと伝わるんだね。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "pet",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "pet__connect",
+        "narrative_scene": "connect"
+      },
+      "missing_variants": [
+        {
+          "id": "93df76c976b95af391af3f000b9d569d",
+          "slot": 1,
+          "text": "{cat}は差し出された手に注意を向け、その働きかけに応じた。"
+        },
+        {
+          "id": "9738b6c5a2b5535c81bc372d1c0e7cf3",
+          "slot": 2,
+          "text": "{cat}は相手の手の動きをとらえ、なでる誘いを受け止めた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "pet",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "pet",
+        "target_cat": "cat-mike",
+        "narrative_scene": "open_up"
+      },
+      "missing_variants": [
+        {
+          "id": "529899bdde07551089de4ab351e05459",
+          "slot": 1,
+          "text": "{cat_call}、そばでゆっくり過ごそうか。"
+        },
+        {
+          "id": "24bc28e1820856c3b3eeb8ca7b2b4dee",
+          "slot": 2,
+          "text": "こうして向き合っていると、ほっとするね。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "pet",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "pet",
+        "narrative_scene": "open_up"
+      },
+      "missing_variants": [
+        {
+          "id": "aa257d819fba559e9a80c60e2377a21b",
+          "slot": 1,
+          "text": "{cat}は目元をやわらげ、そばの相手へ親しみを見せた。"
+        },
+        {
+          "id": "d58e52f99ac95f1aa4a1caf359340aa7",
+          "slot": 2,
+          "text": "{cat}はのんびりした表情になり、相手とのひとときにくつろいだ様子を見せた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "pet",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "pet__connect",
+        "target_cat": "cat-mike",
+        "narrative_scene": "simultaneous"
+      },
+      "missing_variants": [
+        {
+          "id": "edc69df656715e059ea1dd114c198a26",
+          "slot": 1,
+          "text": "なでる間合いが合うと、ぐっと近く感じるね。"
+        },
+        {
+          "id": "722cb6f2d9f051f4a74abea7adfc4d96",
+          "slot": 2,
+          "text": "{cat_call}、手から気持ちも伝わったかな。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "pet",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "pet__connect",
+        "narrative_scene": "simultaneous"
+      },
+      "missing_variants": [
+        {
+          "id": "5767d7a96f5155ddb0b25a108a756234",
+          "slot": 1,
+          "text": "{cat}は相手の手の働きかけに応じ、気を許したように目を細めた。"
+        },
+        {
+          "id": "64a4ebd6bb6b5fd7ac2c7fb8aea01f3d",
+          "slot": 2,
+          "text": "{cat}はなでる誘いを受け止めると、口元をゆるめて親しげな表情を見せた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "brush",
+        "action": "switch",
+        "reaction": "any",
+        "scene_key": "brush__switch",
+        "target_cat": "cat-mike",
+        "narrative_scene": "switch"
+      },
+      "missing_variants": [
+        {
+          "id": "dd1c786b20325478ba3f55854db0ebae",
+          "slot": 1,
+          "text": "今度はブラシでお手入れしてみようか、{cat_call}。"
+        },
+        {
+          "id": "e88d7830cb5852a48d94736744b8eea2",
+          "slot": 2,
+          "text": "ブラシを持ってきたよ。ゆっくり始めようか。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "brush",
+        "action": "switch",
+        "reaction": "any",
+        "scene_key": "brush__switch",
+        "narrative_scene": "switch"
+      },
+      "missing_variants": [
+        {
+          "id": "3de69494c33f5ee2b52ac954a9b1327e",
+          "slot": 1,
+          "text": "{cat}はそばに出てきたブラシへ、ぱっと目を向けた。"
+        },
+        {
+          "id": "43c55e870276522981590105d67e8173",
+          "slot": 2,
+          "text": "{cat}はちょこんと座ったまま、ブラシを持つ手を見つめた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "brush",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "brush__connect",
+        "target_cat": "cat-mike",
+        "narrative_scene": "connect"
+      },
+      "missing_variants": [
+        {
+          "id": "76a53cfe91a855fc89be06e8e81db6b8",
+          "slot": 1,
+          "text": "ブラシを近づける頃合い、わかってきた気がする。"
+        },
+        {
+          "id": "8f61984961795ed0b7eb351262ee1765",
+          "slot": 2,
+          "text": "{cat_call}、お手入れにも誘う間合いがあるんだね。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "brush",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "brush__connect",
+        "narrative_scene": "connect"
+      },
+      "missing_variants": [
+        {
+          "id": "6cabcd4c76c951238a71c26f87323e1d",
+          "slot": 1,
+          "text": "{cat}はブラシを持つ手に注意を向け、お手入れの誘いに応じた。"
+        },
+        {
+          "id": "b346e609eb69520aa87cabae095bcea6",
+          "slot": 2,
+          "text": "{cat}は近くのブラシをとらえ、相手の働きかけを受け止めた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "brush",
+        "target_cat": "cat-mike",
+        "narrative_scene": "open_up"
+      },
+      "missing_variants": [
+        {
+          "id": "b1973d8fba945819b5c926a6ed91d624",
+          "slot": 1,
+          "text": "お手入れの時間も、のんびりいこうね。"
+        },
+        {
+          "id": "0c61c2eee958573984101a37d2d3150b",
+          "slot": 2,
+          "text": "{cat_call}、そんな顔を見せてくれると、うれしいな。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "brush",
+        "narrative_scene": "open_up"
+      },
+      "missing_variants": [
+        {
+          "id": "b5ab687693f759a9bce445911d037dd0",
+          "slot": 1,
+          "text": "{cat}はブラシのそばで目元をゆるめ、相手に親しみを見せた。"
+        },
+        {
+          "id": "e5f3a20459d1586f9a2fb47774a5cddd",
+          "slot": 2,
+          "text": "{cat}は気を許したような表情で、お手入れのひとときを相手と過ごした。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "brush",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "brush__connect",
+        "target_cat": "cat-mike",
+        "narrative_scene": "simultaneous"
+      },
+      "missing_variants": [
+        {
+          "id": "5cc3a194a08953ef85da439622d4337c",
+          "slot": 1,
+          "text": "お手入れの間合いが合うと、ぐっと仲良くなれた気がする。"
+        },
+        {
+          "id": "42fbced428f659cb9b317095e8a9ecc7",
+          "slot": 2,
+          "text": "{cat_call}、ブラシ越しにも気持ちが伝わったかな。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "brush",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "brush__connect",
+        "narrative_scene": "simultaneous"
+      },
+      "missing_variants": [
+        {
+          "id": "ea84fc17b1ca51d0b588925ecc373277",
+          "slot": 1,
+          "text": "{cat}はブラシを持つ手の働きかけに応え、うれしそうに目を閉じた。"
+        },
+        {
+          "id": "790cbfe5505e5f38a77e92a10bbd4f94",
+          "slot": 2,
+          "text": "{cat}はお手入れの誘いを受け止め、相手に気を許すように口元をほころばせた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "voice",
+        "action": "switch",
+        "reaction": "any",
+        "scene_key": "voice__switch",
+        "target_cat": "cat-mike",
+        "narrative_scene": "switch"
+      },
+      "missing_variants": [
+        {
+          "id": "67c5716d0f525fde8a0c96d2a1b39e65",
+          "slot": 1,
+          "text": "今度は声をかけてみようか、{cat_call}。"
+        },
+        {
+          "id": "13e9efa1def05c109881fa3d0fec6a32",
+          "slot": 2,
+          "text": "{cat_call}、少しお話ししようか。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "voice",
+        "action": "switch",
+        "reaction": "any",
+        "scene_key": "voice__switch",
+        "narrative_scene": "switch"
+      },
+      "missing_variants": [
+        {
+          "id": "611091294d4558b688e6d95377a78e7a",
+          "slot": 1,
+          "text": "声がすると、{cat}はぱっと耳をそちらへ向けた。"
+        },
+        {
+          "id": "03387d50908e54e18636c0fef5018b5d",
+          "slot": 2,
+          "text": "{cat}はちょこんと座ったまま、呼びかける相手に目を向けた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "voice",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "voice__connect",
+        "target_cat": "cat-mike",
+        "narrative_scene": "connect"
+      },
+      "missing_variants": [
+        {
+          "id": "073f7ab691bb572eb0e450ea0342e594",
+          "slot": 1,
+          "text": "このくらいの声が、気になるのかな。"
+        },
+        {
+          "id": "e704c35aebef59f1bd1ee8445760751f",
+          "slot": 2,
+          "text": "声をかける間が、ちょうどよかったみたいだね。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "voice",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "voice__connect",
+        "narrative_scene": "connect"
+      },
+      "missing_variants": [
+        {
+          "id": "4c668bc5ee9057119bb61cad253c6403",
+          "slot": 1,
+          "text": "声をかける相手へ、{cat}の注意がまっすぐ向いた。"
+        },
+        {
+          "id": "f3a648ff94c051229d99460e61df3296",
+          "slot": 2,
+          "text": "{cat}は耳をそばだて、声のするほうをじっと見つめた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "voice",
+        "target_cat": "cat-mike",
+        "narrative_scene": "open_up"
+      },
+      "missing_variants": [
+        {
+          "id": "5e81b31c9b9557628a62ea3beb28ddc7",
+          "slot": 1,
+          "text": "言葉のない間も、いっしょにいられるといいね。"
+        },
+        {
+          "id": "a42b24e3573158de9b388b7db5ade04d",
+          "slot": 2,
+          "text": "{cat_call}、近くでのんびりしてくれるとうれしいな。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "voice",
+        "narrative_scene": "open_up"
+      },
+      "missing_variants": [
+        {
+          "id": "2aa51ccef3295171abaefa8b5f4253a6",
+          "slot": 1,
+          "text": "{cat}はしっぽを立て、親しげな表情で相手へ歩み寄った。"
+        },
+        {
+          "id": "952d7d81daae52c1a29692fce5c40abd",
+          "slot": 2,
+          "text": "そばにいる相手に、{cat}は気を許したようなまなざしを向けた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "voice",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "voice__connect",
+        "target_cat": "cat-mike",
+        "narrative_scene": "simultaneous"
+      },
+      "missing_variants": [
+        {
+          "id": "16394f24f5b35fbf97b4742f69478c0c",
+          "slot": 1,
+          "text": "声をかけたら、{cat_call}がぐっと身近に感じられたよ。"
+        },
+        {
+          "id": "ab0dca5902875c6c8e914faa7c97847f",
+          "slot": 2,
+          "text": "そんな顔を見せてくれると、声まで弾むね。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "voice",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "voice__connect",
+        "narrative_scene": "simultaneous"
+      },
+      "missing_variants": [
+        {
+          "id": "56a222a7937a51938c55ae122c8beb3c",
+          "slot": 1,
+          "text": "{cat}は呼びかけに注意を向け、うれしそうに目を細めた。"
+        },
+        {
+          "id": "27ea7d53c03453528302d0b124b6155f",
+          "slot": 2,
+          "text": "{cat}は声のするほうに顔を向け、気を許すように口元をゆるめた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "presence",
+        "action": "switch",
+        "reaction": "any",
+        "scene_key": "presence__switch",
+        "target_cat": "cat-mike",
+        "narrative_scene": "switch"
+      },
+      "missing_variants": [
+        {
+          "id": "ee361b9139f358f28c38206ab68f5d31",
+          "slot": 1,
+          "text": "今度は、そばでゆっくり過ごそうか。"
+        },
+        {
+          "id": "7d26d899b7de58b6bdc023713f18f830",
+          "slot": 2,
+          "text": "{cat_call}の様子を、少し見守っていようかな。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "presence",
+        "action": "switch",
+        "reaction": "any",
+        "scene_key": "presence__switch",
+        "narrative_scene": "switch"
+      },
+      "missing_variants": [
+        {
+          "id": "8cf2dc66b5f857c2b87436110259ffca",
+          "slot": 1,
+          "text": "{cat}はそばにいる相手へ、ぱっと目を向けた。"
+        },
+        {
+          "id": "f0928df1858151a7a6b98bf38c7dff1d",
+          "slot": 2,
+          "text": "{cat}はちょこんと座ったまま、相手の気配をうかがった。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "presence",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "presence__connect",
+        "target_cat": "cat-mike",
+        "narrative_scene": "connect"
+      },
+      "missing_variants": [
+        {
+          "id": "f02e949c954f5d4d841dd3b4dba9ee8c",
+          "slot": 1,
+          "text": "この距離だと、目が合うね。"
+        },
+        {
+          "id": "62b6f3d479e157409357b929b69d0704",
+          "slot": 2,
+          "text": "そばにいると、{cat_call}も気になるのかな。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "presence",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "presence__connect",
+        "narrative_scene": "connect"
+      },
+      "missing_variants": [
+        {
+          "id": "e8cb52f534f15cdab90519c30f446f62",
+          "slot": 1,
+          "text": "{cat}は見守る相手に目を向け、じっとその様子を見つめた。"
+        },
+        {
+          "id": "f4d3408a18be5a689aff30c5188442e0",
+          "slot": 2,
+          "text": "そばの気配を追うように、{cat}の注意が相手へ向いた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "presence",
+        "target_cat": "cat-mike",
+        "narrative_scene": "open_up"
+      },
+      "missing_variants": [
+        {
+          "id": "48afb692983150f1adcbad4d03c17afe",
+          "slot": 1,
+          "text": "こうしてそばにいられるの、うれしいな。"
+        },
+        {
+          "id": "40047d0ae9d45b3298ca5ed4213b408f",
+          "slot": 2,
+          "text": "{cat_call}と過ごす時間は、ほっとするね。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "presence",
+        "narrative_scene": "open_up"
+      },
+      "missing_variants": [
+        {
+          "id": "e26c4632d0945c4c837dc34966d54dcc",
+          "slot": 1,
+          "text": "{cat}はしっぽを立て、気を許したような顔で相手へ歩み寄った。"
+        },
+        {
+          "id": "6fc61cb7fc8e520fbc14c03cfd6a5cc4",
+          "slot": 2,
+          "text": "そばの相手へ、{cat}は親しげなまなざしを向けた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "presence",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "presence__connect",
+        "target_cat": "cat-mike",
+        "narrative_scene": "simultaneous"
+      },
+      "missing_variants": [
+        {
+          "id": "f6ed3b8a7ec9536e855c7c3be3f2b8b3",
+          "slot": 1,
+          "text": "見守っていたら、{cat_call}がぐっと身近に感じられたよ。"
+        },
+        {
+          "id": "44fa714d9af35031bc61bbfe53de7430",
+          "slot": 2,
+          "text": "そばでこんな顔を見られると、うれしくなるね。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "presence",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "presence__connect",
+        "narrative_scene": "simultaneous"
+      },
+      "missing_variants": [
+        {
+          "id": "411851e0e06152bcb86e2436e329fd39",
+          "slot": 1,
+          "text": "{cat}は見守る相手へ顔を向け、気を許すように目を細めた。"
+        },
+        {
+          "id": "56884c116ce754f0b0a4e3b34f846e1b",
+          "slot": 2,
+          "text": "相手の気配に注意を向けた{cat}は、うれしそうに口元をゆるめた。"
+        }
+      ]
+    }
+  ]
+}

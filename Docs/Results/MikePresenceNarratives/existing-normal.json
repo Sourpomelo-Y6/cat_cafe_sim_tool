@@ -1,0 +1,1206 @@
+{
+  "published": [
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "0893b7062e6852239a85bf2022e15635",
+          "slot": 1,
+          "text": "{cat} は相手の足元を静かに観察し、体を横に伸ばした。"
+        },
+        {
+          "id": "96d6d4a4004f5da7ab789f1c037df02f",
+          "slot": 2,
+          "text": "{cat} は相手の動きを見て、目を細めて佇んだ。"
+        },
+        {
+          "id": "302b77db70a35133a9be19ac7f2443f3",
+          "slot": 3,
+          "text": "{cat} は相手の姿を見て、静かに呼吸を整えた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "ec4840d57cdb5945876d23156c3d2756",
+          "slot": 1,
+          "text": "{cat} は相手の足元をじっと見て、優しく顔を押し当てた。"
+        },
+        {
+          "id": "55345bd55582508c85b8244ef1d7d5c5",
+          "slot": 2,
+          "text": "{cat} は静かに相手を観察し、柔らかな体を揺らした。"
+        },
+        {
+          "id": "a5eda7a3f6f053e289c79032941b012a",
+          "slot": 3,
+          "text": "{cat} は相手の存在を感じ取り、ゆっくりと体を寄せた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "edf4897b3f8559f090dca335f91b189c",
+          "slot": 1,
+          "text": "{cat}は静かに前足を揺らし、遠くをじっと見つめた。"
+        },
+        {
+          "id": "8dea34cb9de455cd8c374afbd5122056",
+          "slot": 2,
+          "text": "{cat}は尾をゆっくり回し、空気を嗅ぎながら微笑んでいた。"
+        },
+        {
+          "id": "137872bfc4d556baac6e86d142a61020",
+          "slot": 3,
+          "text": "{cat}は肩をすくめ、しっぽを軽く振りながら周囲を観察した。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "turn_away",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "53d6058e38055f7bb2d4890c9fccee5a",
+          "slot": 1,
+          "text": "{cat}は相手を見て少し背を向けた。"
+        },
+        {
+          "id": "84b3467553825b4ba6e287b0cfc0dff8",
+          "slot": 2,
+          "text": "{cat}は相手を振り返り、少し足を引いた。"
+        },
+        {
+          "id": "c19837c978b45d57a0211daea14898b7",
+          "slot": 3,
+          "text": "{cat}は相手の動きを見て、軽く体を横に回した。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "5e0a17cd61d15ab9a8228630d166b7b7",
+          "slot": 1,
+          "text": "{cat}は相手の静かな姿を見て、少し戸惑った。"
+        },
+        {
+          "id": "864049b25c5758e5902cb27e0808e578",
+          "slot": 2,
+          "text": "{cat}は相手の足元を確認し、戸惑った。"
+        },
+        {
+          "id": "dd73f3b8ce0654e4882bfd4732f964eb",
+          "slot": 3,
+          "text": "{cat}は相手が静かに座っていると、戸惑いながらも少し距離を取った。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "8361baff9afb548f92b99e61416c0846",
+          "slot": 1,
+          "text": "{cat}は静かに横を向き、相手の足元を見つめながらゆっくりと呼吸をした。"
+        },
+        {
+          "id": "2d35bb8dff0651eb89dd6e20f4e012e8",
+          "slot": 2,
+          "text": "{cat}は足を上げて相手の足元に寄り、静かに体をぬくめた。"
+        },
+        {
+          "id": "2857020753495842842aa0c8c886c6a9",
+          "slot": 3,
+          "text": "{cat}は相手の手に合わせてゆっくりと体を揺らした、静かに目を閉じた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "presence",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "3f4e3074fa355c4d88ab06be9cfbffc8",
+          "slot": 1,
+          "text": "{cat_call}、今日は何してみようか？"
+        },
+        {
+          "id": "56aeddf44d4d53089c7e329d69b3a7a8",
+          "slot": 2,
+          "text": "{cat_call}、ゆっくり観察してみようか。"
+        },
+        {
+          "id": "1728c100d9ca5be28fc53d85718c810f",
+          "slot": 3,
+          "text": "{cat_call}、少し休憩してみようか？"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "presence",
+        "action": "direct",
+        "reaction": "any",
+        "scene_key": "presence__direct",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "6bbecf6590975f99a49955d0962e3753",
+          "slot": 1,
+          "text": "{cat_call} ちょっと見守りましょうか？"
+        },
+        {
+          "id": "cb9ed04a4a275dba8cace48de63ee948",
+          "slot": 2,
+          "text": "{cat_call} してみよう、そばで静かに見守るだけでいいかな"
+        },
+        {
+          "id": "d81dc026ecec5eb098f8d9ef4465d2fa",
+          "slot": 3,
+          "text": "{cat_call} してもいいかな、静かにそばにいるだけでいいね"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "presence",
+        "action": "adapt",
+        "reaction": "any",
+        "scene_key": "presence__adapt",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "d3e0b4372b445a34be3aaaa65955740f",
+          "slot": 1,
+          "text": "静かな雰囲気で{cat_call}に寄り添おうか。"
+        },
+        {
+          "id": "c19de04b479453d19b6b8cdb78868795",
+          "slot": 2,
+          "text": "ゆっくりと一緒に{cat_call}を観察しようか。"
+        },
+        {
+          "id": "274215cc5f4c56448fce0a63e03437f9",
+          "slot": 3,
+          "text": "そっと距離を保ちながら{cat_call}を見守ろうか。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "guest-1",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "presence",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "8e9f073cfcbd52c29a293a660038afc3",
+          "slot": 1,
+          "text": "そっと、ここで様子を見ていましょう。"
+        },
+        {
+          "id": "cdde2ca8521455b3865c8a34846503ac",
+          "slot": 2,
+          "text": "{cat_call}のペースを大切にしたいですね。"
+        },
+        {
+          "id": "c181e5d1104550539713b7223d8b9c55",
+          "slot": 3,
+          "text": "急がず、静かに見守っていましょう。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "person-952c631405e649fdb50c390881804977",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "presence",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "14863e99a63554feaa8c32cde3c0eeea",
+          "slot": 1,
+          "text": "ここでのんびり、様子を見ていましょう。"
+        },
+        {
+          "id": "f51d29aa17c659ed8661a4e7dd41589d",
+          "slot": 2,
+          "text": "{cat_call}のペースで過ごせるといいですね。"
+        },
+        {
+          "id": "6f3f331507ec561bba9c5714b188b61e",
+          "slot": 3,
+          "text": "急がずに、静かな時間を大切にしましょう。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "person-guest-3",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "presence",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "6ae99345f8975b8996fb0a68363b7cfc",
+          "slot": 1,
+          "text": "{cat_call}の小さな変化も、見逃したくないな。"
+        },
+        {
+          "id": "ee6a4dd69974508cb038b9d04efc5ad0",
+          "slot": 2,
+          "text": "何もしないで眺める時間も、いいものだね。"
+        },
+        {
+          "id": "a96c235b41a55b8da21e46e4bd81792e",
+          "slot": 3,
+          "text": "この距離から、そっと様子を見ていよう。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "ff379b2500fd5eb284b46fb1b3e2f004",
+          "slot": 1,
+          "text": "{cat}は見守られながら、落ち着いた時間を過ごした。"
+        },
+        {
+          "id": "b7647d0bf1f954ce8b748612bc629942",
+          "slot": 2,
+          "text": "{cat}はそばの気配を感じつつ、自分のペースで過ごしていた。"
+        },
+        {
+          "id": "938462a866495f0f8f1d3fb22f798fcc",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "990538943860590692826dc03f3989a3",
+          "slot": 1,
+          "text": "{cat}はそばの気配に少し戸惑い、様子をうかがった。"
+        },
+        {
+          "id": "c955bad1479d586e81b6ad82cc72488f",
+          "slot": 2,
+          "text": "{cat}は見守られる中で、どう過ごそうか迷うようにしていた。"
+        },
+        {
+          "id": "1e69b3a9775b57e19c2d12a185737f7f",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "dc0bfc3788c95b87bdcde098c8114ede",
+          "slot": 1,
+          "text": "{cat}は疲れた様子で、静かに見守られていた。"
+        },
+        {
+          "id": "0cb82487e40c5b1eb555c0841f3bba86",
+          "slot": 2,
+          "text": "{cat}はそばに人がいる中、けだるそうに過ごしていた。"
+        },
+        {
+          "id": "6f91e4b69b5750928912364e62cacf1c",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "3ab7381ef1b15f5eae6b8356819f7e9b",
+          "slot": 1,
+          "text": "{cat}はそばの気配を気にして、相手と周りを見比べた。どう過ごそうか迷っているようだ。"
+        },
+        {
+          "id": "dd950f535638529f8ff0c08b10dff6d8",
+          "slot": 2,
+          "text": "{cat}は見守る相手の様子をうかがった。何か始まるのかと、少し戸惑っているらしい。"
+        },
+        {
+          "id": "fd7b794156d858bdb174e5c93104d913",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "af5c27eb89cf54b5a88becae00e68ba9",
+          "slot": 1,
+          "text": "{cat}はそばの気配にゆっくりと目を向けた。周りを探る元気も少なく、疲れた様子だ。"
+        },
+        {
+          "id": "1cf8b131556c5860bfb168d404e29cc2",
+          "slot": 2,
+          "text": "{cat}は静かに見守られながら、けだるそうに過ごしていた。好奇心ものんびり休んでいるようだ。"
+        },
+        {
+          "id": "eb6b04e90373579496170ac56c5ab757",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "60a43af901885098b0d81bdb13ce8746",
+          "slot": 1,
+          "text": "{cat}はそばの気配を意識して、相手の様子をうかがった。この距離でどう過ごすか迷っているようだ。"
+        },
+        {
+          "id": "f2091ac0ec6454258d75c4e8f6c43a1a",
+          "slot": 2,
+          "text": "{cat}は見守る相手へ、ためらいがちな視線を向けた。静かな間合いに、まだなじみきれないらしい。"
+        },
+        {
+          "id": "ddd12fbfe9735a33988b9a5cd82be701",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "52a9216523795f81b2553bdce67c7af6",
+          "slot": 1,
+          "text": "{cat}はそばの気配へゆっくりと目をやった。相手との距離を気にするより、今は休みたいようだ。"
+        },
+        {
+          "id": "a7600d8c9cbf560d8f924b218f6610ad",
+          "slot": 2,
+          "text": "{cat}は見守られながら、けだるそうに過ごしている。周りへの反応も控えめだ。"
+        },
+        {
+          "id": "e9b4223413e555739d35096d78041659",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "613cfd92594c5d2ba59e6359713918d5",
+          "slot": 1,
+          "text": "{cat}は見守る相手に一度目を向け、静かに過ごしている。この距離を穏やかに受け止めているようだ。"
+        },
+        {
+          "id": "acbc9204e29154c2915b7704c1cf2850",
+          "slot": 2,
+          "text": "{cat}はそばの気配に気づき、耳を向けた。急いで応じることなく、落ち着いている。"
+        },
+        {
+          "id": "4ba14f6049d3561e95685d7478d99803",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "f8a6947d4c585a92b5606af9701fee2b",
+          "slot": 1,
+          "text": "{cat}は見守る相手へ、確かめるような視線を送った。静かな間合いの取り方に迷っているようだ。"
+        },
+        {
+          "id": "28388509739f578e8e1839dff0644c53",
+          "slot": 2,
+          "text": "{cat}はそばの気配を気にしている。相手を見る顔には、少し落ち着かなさがある。"
+        },
+        {
+          "id": "1c36982d8ffc5a2da4f9ef3fa19d17bb",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "227f236cf0c75c24a235b227837dc7c7",
+          "slot": 1,
+          "text": "{cat}は見守る相手へゆっくり目を向けた。周りを気にする元気も少ないらしく、けだるそうだ。"
+        },
+        {
+          "id": "81d1a8b1bcb2551f9a11fa62299dc3ea",
+          "slot": 2,
+          "text": "{cat}はそばの気配への反応も鈍い。静かに過ごす顔に、疲れが見える。"
+        },
+        {
+          "id": "027b58ca0c3d54d3a500bc7a0f9c67db",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    }
+  ],
+  "drafts": [
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "0893b7062e6852239a85bf2022e15635",
+          "slot": 1,
+          "text": "{cat} は相手の足元を静かに観察し、体を横に伸ばした。"
+        },
+        {
+          "id": "96d6d4a4004f5da7ab789f1c037df02f",
+          "slot": 2,
+          "text": "{cat} は相手の動きを見て、目を細めて佇んだ。"
+        },
+        {
+          "id": "302b77db70a35133a9be19ac7f2443f3",
+          "slot": 3,
+          "text": "{cat} は相手の姿を見て、静かに呼吸を整えた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "ec4840d57cdb5945876d23156c3d2756",
+          "slot": 1,
+          "text": "{cat} は相手の足元をじっと見て、優しく顔を押し当てた。"
+        },
+        {
+          "id": "55345bd55582508c85b8244ef1d7d5c5",
+          "slot": 2,
+          "text": "{cat} は静かに相手を観察し、柔らかな体を揺らした。"
+        },
+        {
+          "id": "a5eda7a3f6f053e289c79032941b012a",
+          "slot": 3,
+          "text": "{cat} は相手の存在を感じ取り、ゆっくりと体を寄せた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "edf4897b3f8559f090dca335f91b189c",
+          "slot": 1,
+          "text": "{cat}は静かに前足を揺らし、遠くをじっと見つめた。"
+        },
+        {
+          "id": "8dea34cb9de455cd8c374afbd5122056",
+          "slot": 2,
+          "text": "{cat}は尾をゆっくり回し、空気を嗅ぎながら微笑んでいた。"
+        },
+        {
+          "id": "137872bfc4d556baac6e86d142a61020",
+          "slot": 3,
+          "text": "{cat}は肩をすくめ、しっぽを軽く振りながら周囲を観察した。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "turn_away",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "53d6058e38055f7bb2d4890c9fccee5a",
+          "slot": 1,
+          "text": "{cat}は相手を見て少し背を向けた。"
+        },
+        {
+          "id": "84b3467553825b4ba6e287b0cfc0dff8",
+          "slot": 2,
+          "text": "{cat}は相手を振り返り、少し足を引いた。"
+        },
+        {
+          "id": "c19837c978b45d57a0211daea14898b7",
+          "slot": 3,
+          "text": "{cat}は相手の動きを見て、軽く体を横に回した。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "5e0a17cd61d15ab9a8228630d166b7b7",
+          "slot": 1,
+          "text": "{cat}は相手の静かな姿を見て、少し戸惑った。"
+        },
+        {
+          "id": "864049b25c5758e5902cb27e0808e578",
+          "slot": 2,
+          "text": "{cat}は相手の足元を確認し、戸惑った。"
+        },
+        {
+          "id": "dd73f3b8ce0654e4882bfd4732f964eb",
+          "slot": 3,
+          "text": "{cat}は相手が静かに座っていると、戸惑いながらも少し距離を取った。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "8361baff9afb548f92b99e61416c0846",
+          "slot": 1,
+          "text": "{cat}は静かに横を向き、相手の足元を見つめながらゆっくりと呼吸をした。"
+        },
+        {
+          "id": "2d35bb8dff0651eb89dd6e20f4e012e8",
+          "slot": 2,
+          "text": "{cat}は足を上げて相手の足元に寄り、静かに体をぬくめた。"
+        },
+        {
+          "id": "2857020753495842842aa0c8c886c6a9",
+          "slot": 3,
+          "text": "{cat}は相手の手に合わせてゆっくりと体を揺らした、静かに目を閉じた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "presence",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "3f4e3074fa355c4d88ab06be9cfbffc8",
+          "slot": 1,
+          "text": "{cat_call}、今日は何してみようか？"
+        },
+        {
+          "id": "56aeddf44d4d53089c7e329d69b3a7a8",
+          "slot": 2,
+          "text": "{cat_call}、ゆっくり観察してみようか。"
+        },
+        {
+          "id": "1728c100d9ca5be28fc53d85718c810f",
+          "slot": 3,
+          "text": "{cat_call}、少し休憩してみようか？"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "presence",
+        "action": "direct",
+        "reaction": "any",
+        "scene_key": "presence__direct",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "6bbecf6590975f99a49955d0962e3753",
+          "slot": 1,
+          "text": "{cat_call} ちょっと見守りましょうか？"
+        },
+        {
+          "id": "cb9ed04a4a275dba8cace48de63ee948",
+          "slot": 2,
+          "text": "{cat_call} してみよう、そばで静かに見守るだけでいいかな"
+        },
+        {
+          "id": "d81dc026ecec5eb098f8d9ef4465d2fa",
+          "slot": 3,
+          "text": "{cat_call} してもいいかな、静かにそばにいるだけでいいね"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "presence",
+        "action": "adapt",
+        "reaction": "any",
+        "scene_key": "presence__adapt",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "d3e0b4372b445a34be3aaaa65955740f",
+          "slot": 1,
+          "text": "静かな雰囲気で{cat_call}に寄り添おうか。"
+        },
+        {
+          "id": "c19de04b479453d19b6b8cdb78868795",
+          "slot": 2,
+          "text": "ゆっくりと一緒に{cat_call}を観察しようか。"
+        },
+        {
+          "id": "274215cc5f4c56448fce0a63e03437f9",
+          "slot": 3,
+          "text": "そっと距離を保ちながら{cat_call}を見守ろうか。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "guest-1",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "presence",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "8e9f073cfcbd52c29a293a660038afc3",
+          "slot": 1,
+          "text": "そっと、ここで様子を見ていましょう。"
+        },
+        {
+          "id": "cdde2ca8521455b3865c8a34846503ac",
+          "slot": 2,
+          "text": "{cat_call}のペースを大切にしたいですね。"
+        },
+        {
+          "id": "c181e5d1104550539713b7223d8b9c55",
+          "slot": 3,
+          "text": "急がず、静かに見守っていましょう。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "person-952c631405e649fdb50c390881804977",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "presence",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "14863e99a63554feaa8c32cde3c0eeea",
+          "slot": 1,
+          "text": "ここでのんびり、様子を見ていましょう。"
+        },
+        {
+          "id": "f51d29aa17c659ed8661a4e7dd41589d",
+          "slot": 2,
+          "text": "{cat_call}のペースで過ごせるといいですね。"
+        },
+        {
+          "id": "6f3f331507ec561bba9c5714b188b61e",
+          "slot": 3,
+          "text": "急がずに、静かな時間を大切にしましょう。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "person-guest-3",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "presence",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "6ae99345f8975b8996fb0a68363b7cfc",
+          "slot": 1,
+          "text": "{cat_call}の小さな変化も、見逃したくないな。"
+        },
+        {
+          "id": "ee6a4dd69974508cb038b9d04efc5ad0",
+          "slot": 2,
+          "text": "何もしないで眺める時間も、いいものだね。"
+        },
+        {
+          "id": "a96c235b41a55b8da21e46e4bd81792e",
+          "slot": 3,
+          "text": "この距離から、そっと様子を見ていよう。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "ff379b2500fd5eb284b46fb1b3e2f004",
+          "slot": 1,
+          "text": "{cat}は見守られながら、落ち着いた時間を過ごした。"
+        },
+        {
+          "id": "b7647d0bf1f954ce8b748612bc629942",
+          "slot": 2,
+          "text": "{cat}はそばの気配を感じつつ、自分のペースで過ごしていた。"
+        },
+        {
+          "id": "938462a866495f0f8f1d3fb22f798fcc",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "990538943860590692826dc03f3989a3",
+          "slot": 1,
+          "text": "{cat}はそばの気配に少し戸惑い、様子をうかがった。"
+        },
+        {
+          "id": "c955bad1479d586e81b6ad82cc72488f",
+          "slot": 2,
+          "text": "{cat}は見守られる中で、どう過ごそうか迷うようにしていた。"
+        },
+        {
+          "id": "1e69b3a9775b57e19c2d12a185737f7f",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "dc0bfc3788c95b87bdcde098c8114ede",
+          "slot": 1,
+          "text": "{cat}は疲れた様子で、静かに見守られていた。"
+        },
+        {
+          "id": "0cb82487e40c5b1eb555c0841f3bba86",
+          "slot": 2,
+          "text": "{cat}はそばに人がいる中、けだるそうに過ごしていた。"
+        },
+        {
+          "id": "6f91e4b69b5750928912364e62cacf1c",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "3ab7381ef1b15f5eae6b8356819f7e9b",
+          "slot": 1,
+          "text": "{cat}はそばの気配を気にして、相手と周りを見比べた。どう過ごそうか迷っているようだ。"
+        },
+        {
+          "id": "dd950f535638529f8ff0c08b10dff6d8",
+          "slot": 2,
+          "text": "{cat}は見守る相手の様子をうかがった。何か始まるのかと、少し戸惑っているらしい。"
+        },
+        {
+          "id": "fd7b794156d858bdb174e5c93104d913",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "af5c27eb89cf54b5a88becae00e68ba9",
+          "slot": 1,
+          "text": "{cat}はそばの気配にゆっくりと目を向けた。周りを探る元気も少なく、疲れた様子だ。"
+        },
+        {
+          "id": "1cf8b131556c5860bfb168d404e29cc2",
+          "slot": 2,
+          "text": "{cat}は静かに見守られながら、けだるそうに過ごしていた。好奇心ものんびり休んでいるようだ。"
+        },
+        {
+          "id": "eb6b04e90373579496170ac56c5ab757",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "60a43af901885098b0d81bdb13ce8746",
+          "slot": 1,
+          "text": "{cat}はそばの気配を意識して、相手の様子をうかがった。この距離でどう過ごすか迷っているようだ。"
+        },
+        {
+          "id": "f2091ac0ec6454258d75c4e8f6c43a1a",
+          "slot": 2,
+          "text": "{cat}は見守る相手へ、ためらいがちな視線を向けた。静かな間合いに、まだなじみきれないらしい。"
+        },
+        {
+          "id": "ddd12fbfe9735a33988b9a5cd82be701",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "52a9216523795f81b2553bdce67c7af6",
+          "slot": 1,
+          "text": "{cat}はそばの気配へゆっくりと目をやった。相手との距離を気にするより、今は休みたいようだ。"
+        },
+        {
+          "id": "a7600d8c9cbf560d8f924b218f6610ad",
+          "slot": 2,
+          "text": "{cat}は見守られながら、けだるそうに過ごしている。周りへの反応も控えめだ。"
+        },
+        {
+          "id": "e9b4223413e555739d35096d78041659",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "613cfd92594c5d2ba59e6359713918d5",
+          "slot": 1,
+          "text": "{cat}は見守る相手に一度目を向け、静かに過ごしている。この距離を穏やかに受け止めているようだ。"
+        },
+        {
+          "id": "acbc9204e29154c2915b7704c1cf2850",
+          "slot": 2,
+          "text": "{cat}はそばの気配に気づき、耳を向けた。急いで応じることなく、落ち着いている。"
+        },
+        {
+          "id": "4ba14f6049d3561e95685d7478d99803",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "f8a6947d4c585a92b5606af9701fee2b",
+          "slot": 1,
+          "text": "{cat}は見守る相手へ、確かめるような視線を送った。静かな間合いの取り方に迷っているようだ。"
+        },
+        {
+          "id": "28388509739f578e8e1839dff0644c53",
+          "slot": 2,
+          "text": "{cat}はそばの気配を気にしている。相手を見る顔には、少し落ち着かなさがある。"
+        },
+        {
+          "id": "1c36982d8ffc5a2da4f9ef3fa19d17bb",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "227f236cf0c75c24a235b227837dc7c7",
+          "slot": 1,
+          "text": "{cat}は見守る相手へゆっくり目を向けた。周りを気にする元気も少ないらしく、けだるそうだ。"
+        },
+        {
+          "id": "81d1a8b1bcb2551f9a11fa62299dc3ea",
+          "slot": 2,
+          "text": "{cat}はそばの気配への反応も鈍い。静かに過ごす顔に、疲れが見える。"
+        },
+        {
+          "id": "027b58ca0c3d54d3a500bc7a0f9c67db",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    }
+  ]
+}
