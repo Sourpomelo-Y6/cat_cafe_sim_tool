@@ -1,0 +1,557 @@
+{
+  "registered_at": "2026-10-27T13:22:11.186429+00:00",
+  "entries": [
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "plush",
+        "action": "switch",
+        "reaction": "any",
+        "scene_key": "plush__switch",
+        "target_cat": "cat-mike",
+        "narrative_scene": "switch"
+      },
+      "variants": [
+        {
+          "id": "dacb5e591fe752d1a529e5f08a526fc9",
+          "slot": 1,
+          "text": "今度はぬいぐるみで遊ぼうか、{cat_call}。"
+        },
+        {
+          "id": "d9fff382089958738ee3fd1fa52a92ef",
+          "slot": 2,
+          "text": "小さなねずみを連れてきたよ。気になるかな。"
+        },
+        {
+          "id": "cf04b76b9a855f1187b48e5809cf0594",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "plush",
+        "action": "switch",
+        "reaction": "any",
+        "scene_key": "plush__switch",
+        "narrative_scene": "switch"
+      },
+      "variants": [
+        {
+          "id": "9aa7bd67cd215e16bda7cd69ad16f394",
+          "slot": 1,
+          "text": "{cat}は新しく出てきたねずみのぬいぐるみに、丸い目を向けた。"
+        },
+        {
+          "id": "df37c44b8d1c5d118b8e600a6a78cc41",
+          "slot": 2,
+          "text": "{cat}はぬいぐるみを前に首をかしげ、どんなおもちゃかと見つめた。"
+        },
+        {
+          "id": "0bc8be8ecf4f512cbdb4c583fe00eed4",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "plush",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "plush__connect",
+        "target_cat": "cat-mike",
+        "narrative_scene": "connect"
+      },
+      "variants": [
+        {
+          "id": "3c67024c758b5eac8c44ba3a64173a09",
+          "slot": 1,
+          "text": "{cat_call}、このねずみとの遊び方、通じたかな。"
+        },
+        {
+          "id": "3f4eef11a24c54b9bf37ef6ade718c2a",
+          "slot": 2,
+          "text": "ぬいぐるみ越しに、息が合った感じがするね。"
+        },
+        {
+          "id": "6ad07f97bf07510c95e6ad322b059eb8",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "plush",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "plush__connect",
+        "narrative_scene": "connect"
+      },
+      "variants": [
+        {
+          "id": "7eaaa9eb3ed256a9a7144a350cacc379",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみへの誘いに注意を向け、相手の働きかけに応じた。"
+        },
+        {
+          "id": "83fbaa98080a5a359cc4178a1c34ab52",
+          "slot": 2,
+          "text": "{cat}はぬいぐるみを前に、遊びの誘いをまっすぐ受け止めた。"
+        },
+        {
+          "id": "0b74df6dfa9850a984dd140668f0067d",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "plush",
+        "target_cat": "cat-mike",
+        "narrative_scene": "open_up"
+      },
+      "variants": [
+        {
+          "id": "f476e62b435251588b186c05cc4b7e9e",
+          "slot": 1,
+          "text": "{cat_call}、ねずみと一緒だと、なんだか和むね。"
+        },
+        {
+          "id": "b4f9c4d509e550ae82484438aaea4465",
+          "slot": 2,
+          "text": "ぬいぐるみのある時間も、なじんできたかな。"
+        },
+        {
+          "id": "b10b979eeece57d688d617c54464a691",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "plush",
+        "narrative_scene": "open_up"
+      },
+      "variants": [
+        {
+          "id": "d0098b4f29985d6597576749b2088305",
+          "slot": 1,
+          "text": "{cat}はねずみのぬいぐるみのそばで、穏やかなまなざしを相手へ向けた。"
+        },
+        {
+          "id": "17896ce1d57f576db665f42d83b50391",
+          "slot": 2,
+          "text": "{cat}はぬいぐるみと過ごしながら表情をゆるめ、親しげな目を見せた。"
+        },
+        {
+          "id": "e24946189eeb5564b93aa506e3d32d9f",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "plush",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "plush__connect",
+        "target_cat": "cat-mike",
+        "narrative_scene": "simultaneous"
+      },
+      "variants": [
+        {
+          "id": "1b257591d0d25c00a30ae7e5b083728c",
+          "slot": 1,
+          "text": "ねずみとの遊びで、気持ちも近づいたかな。"
+        },
+        {
+          "id": "b22d425dd6095a9392bf1555f8aa54a4",
+          "slot": 2,
+          "text": "誘いが通じて、ほっとするね、{cat_call}。"
+        },
+        {
+          "id": "6eb218acab6e59f8a9f1482600aee317",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "plush",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "plush__connect",
+        "narrative_scene": "simultaneous"
+      },
+      "variants": [
+        {
+          "id": "ef0829de446b5f0187c4e1850b149668",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみへの誘いに応じ、目を細めて親しみをにじませた。"
+        },
+        {
+          "id": "594d3f159d4650569cd6b938375481de",
+          "slot": 2,
+          "text": "{cat}は相手の働きかけを受け止めると、ぬいぐるみのそばで口元までやわらげた。"
+        },
+        {
+          "id": "d6edc6486a83504abdce4a18ca89e4df",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    }
+  ],
+  "condition_keys": [
+    "speech/player/plush/switch/any/plush__switch/cat-mike/scene=switch",
+    "cat_response/cat-mike/plush/switch/any/plush__switch/scene=switch",
+    "speech/player/plush/connect/any/plush__connect/cat-mike/scene=connect",
+    "cat_response/cat-mike/plush/connect/any/plush__connect/scene=connect",
+    "speech/player/plush/any/any/plush/cat-mike/scene=open_up",
+    "cat_response/cat-mike/plush/any/any/plush/scene=open_up",
+    "speech/player/plush/connect/any/plush__connect/cat-mike/scene=simultaneous",
+    "cat_response/cat-mike/plush/connect/any/plush__connect/scene=simultaneous"
+  ],
+  "before_count": 387,
+  "after_count": 395,
+  "protected_hashes": {
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\interaction_subjects.json": "738b1cf3e946e794c285d9e2f504daecc5d0301d1a44970603566cdddf703f9d",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\manifest.json": "ee9966a3d4df2cbc25dd588c5f2c7e8e2be38cd764f9c4f814d0eab7a5b9abf4",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\0147a60645834a3abc9fd697f9b321e9.json": "4d55328246c3f29d5e7931b7392fe318a640fd7d9ff45145f382a4bb09d61baf",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\0398c79da4b84516b04bbae55809c712.json": "3e38dce4de12d253a0a1af7067055b8116bf8b64775ae0687b22c6b0118a3e27",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\04eaf378317349c0b162dd804eb93cdb.json": "b77deedb64e8d69e94044326b6a630a3b4fabf0e2e21899e558d3aeb9e3191c0",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\053fc0a892754683a00c584c6b2a8f55.json": "02bdf569740c3a7e47da3e8d8ac83301ee4b241b7aedc9482013301534e4853b",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\059690c847b0428b9cb8b67b2f1f4c26.json": "550225277f57a1668e25cab5ce1f1683628b851036801655748a56f48c02594c",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\06d23a121c424b52bc76efa6fab938b6.json": "e501caa9bcaccb8221256facbffa51e4005afd9d7ae06b3e39870986dfc3952b",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\074536877efc42839d7a6e83b1e895f4.json": "066237e330fefb5aabf1e2dda69d8b273dfc0af28cec49b7cb37f70aeac51b37",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\09705579755b4cfaa02d0fb726f01413.json": "238faa41b9f7e8fa8e46b0a353aff954fe362716c3a3553c6380920d4f654437",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\0b3daa5d75df4b72ae56545cdd959d5f.json": "ba6ab5842a7b0694df8aaf58e1259e7143bcc125667c1e593cafdc3939731d72",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\0cb08760f47147fe82af6eee784509e3.json": "e2188485004bb5cf7e25c1044cca1ebc51dc576ad383bcdf1dd65247cb5ef133",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\0cba232eddcb42468431a4a2886b0660.json": "094214f7b6c885fac0814806386648eda1eb6abb8264564c2df0012494c489b4",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\0ef43000439140eabb79507587c3ddf0.json": "267a94ed8186bd96c05236ae2144bb1c2106d8cbc273a5c5c5cf8ef6e19c0209",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\102a8f216c7744f8838b64d8f62cc7b2.json": "6186fc84bcd9e56c0f8170d9b50b1bbb52ac92ae7c50df493d64d7204707adff",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\10d09fbd94fd4a3891b346a09a440da4.json": "774053a18e816fae8d525751fe357e161ed2752d5b46e27c3255dc172d5dcbfc",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\13f6bb9224ae427db9189fdc4d6eecd4.json": "fbd11808f5d9094a9253245fc81d83b64aa707de459cf19f050ef4096a0dc8d7",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\14a172c9514b4e8682f421c48ad575ed.json": "0e4d99a14e572bc8ac903ad29b220df0db993e319b537ccd0147638642d5f202",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\161ef93149994b20bdc021addbc65afd.json": "ac02acc0e919f5bb3214639915bb143e1d28545a3bf6d7ab16f43a4297dd2437",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\17d4f019710f4a08beee3f7904f89519.json": "04f2eb35844bceedf884d5f902aa7c35fa854d08250f063dabf79d8e8ec82507",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\198ebbe9600a43eba7a1edec65395335.json": "5867cf751653b24e2d247ea362e7283ce75ae57687d4c33195288d42e33ab3cc",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\1b1a4be4c55e47a78b561cbaf229623b.json": "d245fe9320df8bda287552ea2f4947021f6b2a12c6bb90916674b808a592a3f3",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\1bc394353a51487f969ddf32a9617b79.json": "92c0b7dc17b8f4ce8711ef3092810955c9332ef962e3a1f4c119f2b530b97d43",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\1c2dd2305cfa4438a53de0c3492d9dab.json": "54033ec819d976be0b16422cd5dec16073902e22bba6fb4f36e18ac1174a95f2",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\1d8911ae9b8148059c4a942260cac3af.json": "21c25fb3f6a7f1922bc0a8dacfac799a16946d2d7af9257aaf79ae7c0fdf3146",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\1e3b73abd52c46b7b1a03d34a3f01bab.json": "c5eb6a95c6328d98f40fb29dbb18641e8438225e40c32b7a94668e13b7ca3bf3",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\1fc6463b25ff44fd94eb5a2509bfc04f.json": "706cecfd230d001d0b7eabc2f5e303f49381b9102506833cf1e5f8470ec81309",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\205a98e270b04197b40cbd4077d30d46.json": "65f5e28d13da0859fc613fa8b23caae8a9bf05c9d8e2c7b035d15384dd4d1eb6",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\2127bdd0c5174fc6b9ab71d20c2c5d2e.json": "2cc80293f59e62189802c450961f8a6ce2cdb723e7befcb34c259ae647a012da",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\21e14e1675af42279c8fd1da62c9b6b9.json": "d29ad50424d0dd7e97280dd387b39dd4bc5d944c74810439488a3fda0bc2c870",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\23492a97607144e085fffe544620e331.json": "81f17d4d2f4e4dd47f3fb543fe52a56eaed5f3f6fc7e865dadcfe1507258e262",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\23cee75cf9f642f994552ca3b9b8ee81.json": "7b7f9a5d6340352ed567497eaac88b9e91ef6e10c3127d25f697bea33d133ec9",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\2533c8ae9e374864911357e643739992.json": "f472c53eb9c549a8041f964c954397fc23f70a8fcf02f105188fff68c976edd1",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\253e9cd8afc54f8cb4d69c281f3367d8.json": "9547146d80f7d8cd44eb04e5c91dec60f2b05b7b397fea357a9ac9eade1787e1",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\280ab66eb5234c828aecf72876f8ec61.json": "1b2ec526f00ba2dff9a899c044f858708a63129bcf3e1393bdee3ea51c57862e",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\282f944780a547f6b0af7937bcd2f805.json": "4b13f6284dac4a0d5263032622b06f58ee72ae222084142d741fd8d6deae15ce",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\285ea0f9004d4ae28fd81593a63925fd.json": "2e6c60e8b6bbc7ceacb67d9e457b879d730fcf79647a6856838c53e4fd9bd6ee",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\28c229e2f5284f288ebb102b1e75d05c.json": "09c1af17b5525a9d9d85a4927256d8874470133cb4052a6745ad1ae9c464ae86",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\28da226d0cb94e51a1797431d6c5cf3e.json": "5d602b9ac0ba35f468b0216d3fdde6a4451def4b24406a7d79131dd288480835",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\28fdb7b458fd4515a8786a95b3490d53.json": "d5bb2a2bab5349b3063336983028390bde147c48d7f76312f6a90a5d63b7f800",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\294e1137686d4dab813ec57c7346156d.json": "59f4e7646946c35d9d210e957e8b41c9e56c3e402d0ed7c8cfe0e84c830beefd",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\2b70eb7349504c18ba237a9219597840.json": "680c1f5a2d7d91b7f5d72289a7eeb8e9557caf7660c300798e53dcecb7618471",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\2ba0abfc34584170a4e07e841cd859f5.json": "c94c5aa99e074d55f909338f26557d745111cf789df9449471b3bc68c64f29f2",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\2d38668dab834525a4be8fdeb4826b69.json": "406b98040c7315a1e8d246b509be43b692b3bc715b5414392ac459f982fdedad",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\2e8f214afd96491f8e335de586f12be1.json": "2f528d723c20d1a1e6e7305840a179123442cc08a554076df8a2d8462a00ac3e",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\2ea63309e62a4a7a98b1b2981168d63d.json": "49f3b7ad031b1e2c2b36ddb329cb555ccd750a5778e47c52e8ef2fd2f9144fc0",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\2eeffdd433d047c4a02c10d9b36021fd.json": "2d6d3bcf257cc93960890132033f35c01d784a24013e47701827c3f7ddda044d",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\3015778c7137441bbd87a6449188a317.json": "3eaedb7bc6b566e88d4276892a2bfcaedca3f81b48e4992913461f4cf5218379",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\30e34b1aa7aa4f07a6ec446a15ba6817.json": "35dd3af39e466128ef2a7736020c5c3f912657458b0eae92bdc3acbc0f5ee6e1",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\30e90607bb064d2a9d6aeb83a4cf3051.json": "8a50cca741c00879a62e6aea7ac9515f0b279aa4a392d6e28d61ef70e482d512",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\314beb31403d48668b5b644c7a3cd62f.json": "7752e75fce60c80f2d557308006ffe8418b4837397a579acdd540ceb0696dbc0",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\321e1299d48949119c28c2740c5ef06b.json": "5a03a2a17b5482c9b406851046ed23cd61d793f143e452d7138860dab01e9e36",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\33ed4213dfde48eeab6f6784ade00b26.json": "6ae2508974cbd5d3dc2a039a3b0e106f2d5feef0aaa88371941dfaa18100850b",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\344f6d111df74ccd8ad190965f8b7051.json": "9ddd7f57ef1c87a7af35f677e36ce1cea5ba453d296fc3f53eb3de5ce401f63f",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\355d6fc50c5344c594c0c3e2ee700d35.json": "4f9e65c64f41b4f7e505d6a93a4ea15f15cfe9771aa6fccb2d1d6f2cdd987cdf",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\376fb3c72c2f4c5188db897588eefe2e.json": "3e4c681fd5b5aaf4f200bd6b83f32fd02671607ea95a6527b29b7bd6177ce790",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\388772bff22743278c48345a22602ee4.json": "f760047657ada480a12c2185c14e81b543b567711c94a7999f99c98f012c325e",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\38e25e1e431d484e876093500036e4a8.json": "0afbcf4cc73526995469dd6051a291d044675b7602428c3a46f0bb2b31d3764c",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\396394f59e9149b58feae83c89c62237.json": "62a26d26fa9c6e6e05f53bc62c4e51bece84f43af9c3c2dde468a3f2a89a9f80",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\3b3b4634a68740eab0d5cb0f08d74979.json": "6969e86315b7588a477ea0a80f771cc745c7ce67a2b60ca839039752c5acc2c9",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\3cb6f4d99c3b45279789ad963652cb52.json": "b7cc3591bf2dfd40d1123451fa5993bc1c74c2c334bd3ada6ff62527944ebc99",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\3d404d63b3494553a19a2e8d6b7568aa.json": "305a06f31c7acc81e31724c325490c30dd4da115a43183f68bc9bbd7d19d2a0d",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\3ed22acc29a14e8a8916e2090e298817.json": "947cc13f9d85d216a9ed20acb4b42580781801865fd25d4c9d0c43f05d7733eb",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\3fd822f791944b7199e00b11949d2e6c.json": "585d010e2a8010113c035afcc8af1db6918c7053225151b013f1752bd6adf228",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\4020f0b0dda447fc8178a7df307a3552.json": "2b187abfba3dd077782491d08c7ebaecf14c2c26a1d8280f03325ee87afe41fc",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\41275466f3394adab8fcaf0eef2183c5.json": "678aca17887270a48886e125abe7fe2a8257edd2ef4ed325589a6d7099b4c24e",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\420a764662f84935948cee1a6607498f.json": "0e22e50d4e06cdbd00feb7cc4a8ce7698165fba63e51aba8e4c2758aefa6c1d3",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\4360a0da14ad42c1a34ebb23f0bc1bbe.json": "42b2b8a97d5c601600ebd5538013e13c1260cb04d35945a1aede3181b3195fe3",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\43d86defea0b4c0a85d8d7734ede8ebe.json": "7fec7c55afb6f49641fb432d4d231ddf011417666ac83e1da4a15b35465b3002",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\43ecbef1ff9d406a95115e97da46af61.json": "ac22fc99a12b2fb88286ec7f257a3ff732976ce39ba99c91409d2b96b2863b69",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\44731773989648b99791eada380d665d.json": "75da8b6aaa7203de2e670f59a56da30fcd89ec1869c552c9d3b64e59b8fc8ace",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\45ef8141c007450eb5a54a844fd76225.json": "ef5dbbbcdd9d8fa5f18531ae57de734efe40ca1a42c8cc9220a8067ace9dbe4e",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\47500dd212604361806862ed7cee507c.json": "97a0e23031ae2e31a9c38d4d3239f71f33b8145e12e41c4851e08c4d0122898b",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\479665f4f0b3439e9b1f78bbde317266.json": "4c7bafea52209ae039f8a22cb674be3886ae34184a8190c47272f9070d5ae682",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\499ce95db6954dcd9ebfba273305744b.json": "7d7c818ad3fe6f5bf56aad0bcd7966a3b5ae4fcb2ef98aa6b3a76d4e04267596",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\4b4ca265fcb34b0dba0ad23b18a0617b.json": "cd09b4a3d69dd4e08b96fc395a36327fad3f39673ba2aabd6cc5ba35a03a246f",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\4b67d1a0197b48c4b6e59581d5ea86a7.json": "56998bc793ec180cb0fcf4cc880c515008426a6337d02542732cd2e145d7c1f0",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\4bbcd2bafb8344a898a0aa6d3a1671ac.json": "4568551df48bf74ae4d99c092dc6489252948f52a81d0d63499169f7b7d71ba4",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\4c8c697dd8374068b5a0475adce55f2f.json": "3ba746feafe204a75e62b2c20347337eb09bcf4ee66b725a935ea0a9d5fed474",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\4f0716b1a65748c88601af04f57cc777.json": "0ac28a5ff1f375302b0a2ac617c106cab29e8ca83f7a3e2e043830342ef20ac0",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\4f772e5609324ae0aac1e05aabc5ca7d.json": "fddb4e29378cc63ade7de8a30e7e90ac05ae6aa5a5185dea060ce21a05f48f99",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\5012ed500cb744bb9f4de9abae6ac79e.json": "f4629e18d911a8f75b3e17f8b0fc0e4113b04935f450a0dade4a1a4002d15b5c",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\506099d8551b4f1189be54261d8b20e5.json": "3e9bcd5d47615ee5644b438f310fd1d83a3af312b9325fff5744f3de5ebf6cf5",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\509e912acb0841e598eb2d2e70297b45.json": "9bd7f1f7398134c8fbbdb8a60f7a1ddd08ec8032f4674e7707fe7f3ba6fb72b0",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\52378e3d40654b67bbd332781a398a18.json": "cd6dc762986c15b99c0f7875f6c97eed71e02a47b10f968476d9287b4ffd6f53",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\530fcf93548b4f74ae9ea38fe06d51d9.json": "4062c5e074efabba7a8a19dbebf7c2e46e89f1c8d0976026569af1622e6c6028",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\55a39290eec241afb4ea5ce7c52e860a.json": "252934462acaae9984930b7247c01467797cb2931d9910aa115ef8e589b4fc25",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\56a6f43b0d194b578dd8a19085f2d044.json": "03a984b348310b532094367b24b4b31dfdf6f1e65832cdcfdce47c790030729e",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\57c066297dc744a2aa42b6b50bc421a0.json": "5c9f752b7ca569078827984473d6d81f57e7550aa69c372c354dca5c8d001cf6",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\583e0ac2f0674ec499ea87a124abc56a.json": "8ea932ea1f7d14a3a286a42da0381807b5e6eb444abd393f0ffadcfa2923793a",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\5a1a863e8ed546d5b3ad890c781f06d9.json": "416bee98e1c2320ec85921cd58a5e93c3a8075a3a52ed7d27b024179c797d7fa",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\5b674803cda144ccbbafe877db1c7120.json": "10570059293104f273cb146a8bdc37842330c42f612a9d7255ff94c7381e516d",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\5bd9623202eb48c4969e2f2aeb68f641.json": "55e299125e6a53c81dd4dd42124c32b69bc9eb05a8bc3687266696ce5b37899d",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\5cbba48835744b31b0c18a7a754e2dbb.json": "85a787876e5cd651b40f8d5a611a4ed3ad0ddf169b20241123f300d87100175f",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\5d1b6ed1a9684f369cd370ea2a75b3b0.json": "1d0e3812b9be092916f031d78482eeae0abda199cac32d622702b4d11c4aaf7b",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\5d670ee73667493ca30af171e8e154ec.json": "5714e078ced7cb1e63d149b38df17fca4cc4e606e6722e039337f3572515fd31",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\5dfecb21e2ea48b1a5d0008785e33e5d.json": "8c4dfd6cf9d01dc4dff59708d516eafd49cecb3e62a8e551135542e2ca840057",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\5f03780a82d949c2890eac1a9ebeb172.json": "ff8487cdae746eb054cca73893df3c703a87d9f2c7f102de1735dd258e28c3d8",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\604d79f06ea34e268938adba0bd9196b.json": "2605968425db77aa2f0a6d80219666c50410b0a9f24b1259731db5e964b92b36",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\607e0d35ddd44536823ef934ee8a200e.json": "adf61fdd36b41edfa677b1c846b72c22e87c059175eeaa354cfc2fc1f9937201",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\60a458dfb05848a087eb4ae090e004bf.json": "639cf6d5ef424dc1c0be714d35d3dc3e175031d575fde2a64699f009ac04cbaa",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\6338c171bce2423d9afebb5bbbb8a628.json": "dc36fa9d864a09078a511769699057de4ba57662165560661effe1b2e18a2b53",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\6438cc8156ca4ccf8833aba0d4bb3138.json": "c28680db928a699e6fa94dd5285c156d71321228604ac146be21d17ecd409530",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\666f8cffbd7c4e3397ebe9640991b244.json": "89ab9f1d587886ee02f7545a8ee3778245fc5caf4fa4a9bd43aa74d8f361994f",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\66848028ed2342a68a4a540a914d372a.json": "d06bf5518ec5391776d769e0965df1b4919a851f70645aa34a2accbca3f6fbfa",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\67fa8fd727174f3bb46d90e7cdce8b1d.json": "6bdb50ac75ad997b0d44d171ca5454229f60153933f4a6cd3e5f266e7f9eef82",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\681523a5196b486b9c130e907d52dcdc.json": "1ab0dfa719d9f86905f690b86e25ae9048c86ce0ac53ae99064b30d228b7f9e0",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\69045c771893418993ee0c7f79435486.json": "68276430192ffddb61c22e230a8042757175a889126a82c5057981371cf28ca6",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\6ad93c2f30d74124aab944d3ad818f72.json": "52e97dd5d2ea1ba8c7517e52de11d4155e0174e577f66c2cc4a5fd39a8b3a639",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\6b57c0845f9f4a66817e70ccd5e003cc.json": "c76ce186bec3e64b918e68ddd25882f5546640592219e2ef7a8ea083738b1466",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\6c0c021c4833439c837b20bf026a967e.json": "782c63ba153c9a64f2f133388734531f9886bfe02c76378aeea7a7e93f692c90",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\6c9378d664a94cd99a4722f1d53de70e.json": "452b903dd4690c48dc0f9ab69561c0cba2b7329f2f352f1a16a513fb649b1716",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\6ca7e0b7a8384c7eae54f579b88e0aaf.json": "394fee83a03fb17428d1e074e344a9138281d0e1d1561327ec034f5fedf59d67",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\6d50389ab9d0467ebab331fe9dbb6f07.json": "d7d37b0611d56cf51e43b51d1edcc069250c2a3c63fe94f5ee655a5065d632cf",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\6df7c040a3d04628b6eddb6b897bdfa5.json": "7fb7253f4a3b132ba6f07baea9d04063b958f7f02eaf9dfbc6d18d4d2bc9ac7a",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\6e3513111544461889eeb17754607508.json": "6469b500c8085453eef65c5cfeb18d08a4c998459a058d8995f396c030c43584",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\6ed14167582e4b9fa2b3888dae651d7c.json": "c005764b2a1ac74a3c4c616bc38e3fedafdf8380d69a7d30b9ec9442e5cf279c",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\70c304858d0f479f956255c17bb227ab.json": "3e1b1051818b3b9556a11cd3a0eb87a01ac5bd21278bbf8ee86692cc21e65b26",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\72f3b8f5f60945b0934869537ffc40c2.json": "c4bc67b5460700fbebcc4ceb7cc397dc7da3346e356e3336b02608d58b826d4c",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\757d4cb607ca41a68e85f61ca8c39ef4.json": "cb504c7d7610c790f7613f52b479c6549a217f7311405ad2f1b0441f647563a4",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\75e02ce6b7394b6c88d874c27e9ebb30.json": "0b5f8a7000b3de6f274a857ff3cd96ea41f8f7f5451adc55a936eb9ff8d321ac",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\770b4a55e2be48ad8b842ae1f4d6275e.json": "a0c7f9a7dac5a193290adad30ec55b01d23c89b490f256eb87786b32995139f9",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\77dfefae72724ad59ee2ecba28f039dd.json": "6de917d23f3b2f81e681da56c73f0c1ef049aac9d89d1f8727efe8e8d2ec9137",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\78f6880ce7d24ad48f305e250a739079.json": "0986f76c8ed55abcc670c051d8a2c0c3265ef010b9dfe735e040e970da6d799c",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\79295cad213f4080b54d348bd049111b.json": "2869de4a7964cad4d31279b219555d941f3176b0106deb650748177280dd6202",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\7989266305944cc08aa57d04b5aa41d1.json": "3269867ba756e9f98904401daaedb5228ec9133711f48afe274d272f554a48b8",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\79baa2c9a92d41e8afb2f0537cdaab8d.json": "bc88784af6b52f76478f43ac6e54a83b875fe4cc3d30ad15d8f43ef80f551ea6",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\7a5eb44aedc545cd8a4980fcad05244f.json": "2cb4fb71c052fda96e8de9b7a87e69d65a317e458c44f86d1062556a3e11c721",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\7c5f841069ec4973acc4ee9127cf5565.json": "eba2d0e08218b708bdbab28dd5499e862b17dd1282a4d25d790295c28046b006",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\7ded8f6c865744caa10e6618b96640df.json": "a1129236929a679c66016c29f66fc7eb00b1367bae5c1288e1634886c75f4f8d",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\7f84188bcecb417f9462df9947d118a2.json": "a6ae938658935360d8690c88cf36cdb9bf54068d1a894252b862dbd008e045d1",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\7fe777ac2aa94c508d47849bcd160b0a.json": "77d967a9ef776981b55c9eae0509f80606c1627874e5a22f5fbed0b5e4e742aa",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\80105680e52545c195a41daaefd1f7e4.json": "69395e0150d974171cc994e129d4c8b619572be68011133eb08c70260f25925a",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\802cb46030fb45e2b3caee3f9d79535d.json": "63720c978172dbbb47416bf5d8800d1518d546a93a393a2185e96d9978d74b2b",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\8094233cd72f436f9dab07051cfc9488.json": "3b4792e9f09e68a5d9f6b43cdc40f14733843713e3641494a68993c613666583",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\809cf3abe8204bc39b4ae49b5d5ddc28.json": "3733172ab4e7d7910fc9875c39488c9b84b0ddffedebd34ce888cff0d17da93d",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\81897079486b4cef832bc5ae5e37a16e.json": "4e78187ce793004106895660e0e024da47c146a24f0738b67373cad3368d52a2",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\821ac5c6b9d14df982b7461a53ed98bc.json": "0f03bcbac93366171464680cdd0c7d670d65be7f6b63e71fbcf16d64cfa4dcc6",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\82597fefc8b9481f8a64188789345fda.json": "465ddbd4858ed067ff6ca5ed876a8140f6f345eac5c3867d05b93eb1e6ff6d5e",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\82ee91393e6c4081a40501619d0c9d0d.json": "53814a396c9d0076b5163ffc15cd5f2c38f8a06390fa9ef4cad296d0fed40c45",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\83a3e1b4766346329370e7b348b2724a.json": "65e7542ab875f07f9e881743b6ec50fc61600e627686c46f0265e22b4d31073b",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\83e97a86e1ec42549fe3b3d83b7a6fc9.json": "0d5777313f908726fe1acfed8b7bffd2fc0fa72205656154b91a4120f5d4147e",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\841a63ddeda74aa6a87c14f45ad6e425.json": "eff6631a5566945f1ab0ba639a9ec82f8d3851817594d53d44b63bbc04d52fd6",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\85e5a136aa6a49838d933e19efebfbbf.json": "43e8286fcbbab56016c78f5124cc307cf99174633c01833d11c499b1659c0fab",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\85eb34bb222241a3add41b19eb6e732b.json": "2a4f2674ea4b8a19322e528b2c551a6ac3079c29fe006fc5f45b6b841500c011",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\85f579e0c3c2438c90ebd8f278a0cdbe.json": "c0fa4638bf6c88dbfcf4324e0c637b2805b93dfc80d1cb6cbb567c6b48ab0b99",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\8656973a6cab4220a3cc7271dec287e6.json": "c63ddb16aff5f14e626fa9a672867296dab1cabd30658e274190a3be1df40770",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\8803bfec4cee457ea9798534bc383835.json": "26f3befaef771fc487ebf938510348f2d3d5cc53af42742119229eb4c0e9c175",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\897c01ea9022440c8140342f0cbea48e.json": "7afd8965d6469e6fa797940cbbba0943e00f7b3616151396fafe63e4be14f6ce",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\89be12186de54e8884aa3acc332e78d7.json": "71f66d2c40ecb74a0ee7117822f937ea510bb294207f9ba6a2b69b2854cc5338",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\8d5405d01e874e34a225f87e2ab3814e.json": "30aa59588f43c0a05b499ff432f2e6de457e9c8c4aaf02d582b66cb95da2b2d2",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\8e0c914e6a3943709353c5b2ff0cb781.json": "355affab868c32bdd815e8604436e38e07e24047efb742fd570940af27b25a28",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\8ed63c3a123142bf8786cb254cdccd1c.json": "727faecb1675c8de3b34df667c812cfa2e7f33e082073aa714086cbe188400a8",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\9099576606fe4097b759231f16b010cc.json": "8c0415017aac5a3d606c9494b5cb50b690d5146a3b3b1f068ca9381da80f48aa",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\92c74ee55b044b02ba174d968fee8347.json": "c31b74f8601e725258e9b8c2017c4adff456f2bb6a879f985420997f6d6d8d75",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\94eace27cd884d57b834ceb5925c9ca3.json": "2a3425fb43244335d6bcf8d2388bd911e4a51e43c3e183517a8be29712b93590",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\95dc2e7b2c6649b4a53af872cbe8f8d3.json": "9624a5878b7c16138c5418ff4bb4f533986088e933875bdbe8fae398a4e9359f",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\974e45b7ce08471faeb661fc4f586a34.json": "fd2b9fddd70540ecde227c2c9874814c9aacf74aa30304d71af81469d66295bc",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\987f6ff779ab4820bc17b531bff81915.json": "3a8e2bb77158d55e2a516016ead8114384d6333662d87630b4cc8c7d49505e71",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\99426f35d9234b4ea98ec98cff505532.json": "38809e61a6458d5c0c975f88a14a7a5c4c20274622632ba9dfe44cf40c1a4864",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\994f9e80e8c544ed875244ac5d6c862c.json": "c66c8fb527ec4f23138a269e61f29444dce4a452aa1482080466d7b2f3a4ef34",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\9997fac5585146009513cdf58c27faed.json": "41b46aeac0394d99870b9f41b54fd86eaf6440eca9f01ed398a851ddc39728f0",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\9a1a7aea74d545d189be359510d902bd.json": "91be1e61e809986fe69d1cd127120d66d6d1b0fb9598b88266cb17db395a3a64",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\9afbc9064ab944359299965239ca035f.json": "eadc75c5da71253524182467cc1a27eda76b5f54ece2c8339298b1bb82431bd9",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\9bac4140dd30415381dac065f7b31a24.json": "cc5eaceedeefa043fb7f6b8c635019b2889e5df3b253ab62709c6f83b4d4871d",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\9c963203391349b59c24954ec07c698d.json": "42cffb1ae98d97c83bfc56e7b6f4ddccc9aca15c4ec45c0db9a9433cf3c8e36a",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\9d94796b2fa94df1b9c7bb49d6b210cd.json": "e6750e2fc4151e2d013a7419d00d1207445d1e3fdcb7453240a0296b619e7a84",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\9df8a79d37734461b1c4bbba5739f67a.json": "f5ba3cd5c0914f64fdbb9dba7e4697f78f36192072f96ad9dfd7d88481a2d46a",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\9e4a79638385441bba662b8d66087680.json": "57df5b83c498171a2578d7a0cfccbe6aea940e84dadff7dd9b4a0e53b061a133",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\9ee9c5bcc0e841b1ae53a4c74e775555.json": "503d7f03872b732d1886f4148b984b1097bc205cba589afc20ca9f0b24b74369",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\9f41f09a13c546779c68ef98ac02d69e.json": "d5da91ce9bf3f129d096c4cc3509fb471e74012555ab283600a885022464dd16",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\a0157e5bd6b74188b6a7e4e82db011f4.json": "8b14788813a59f86a2333879d0e96a4172ea1bde6e025ec11d8ccfc3274870de",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\a2bea03c3d3440dcbdb62e3774412b63.json": "654cc5d7c694806149bbe85f4acb892e4a0f51953c95da5a696b60cd86553765",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\a5c161798bd94e43a5ffb6c0072839b6.json": "90756032289a51b85078039848ce0be514875bc24ac2ddadf4d512d56740ad83",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\a620cfc17b9c41cd971a3cfabea97327.json": "15c1bb7ae7a7550205e949524292e0e0f5d945651261c6f7af4c773d6f0860b4",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\a681b7fe6bc94fccbd22e64ec3c780c7.json": "e547ae540b5104bdcbb92c319365c20de2bb30b0fda2eea822b3cef32fc7d8b0",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\a7d2b532b63a4078beb1109f6c1dea1f.json": "22187956dba7ae3f74d0fe7c8f07234770fbde2e60a42030e19de4e90471d240",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\aade78d5270b4ded9408e66067faa49b.json": "79f96f51a34fc6491dc6422e494d7e8b0807e1a5abc19c908af2aa6fd47e8927",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\ab261dabec2b4b15be0e055e3c28b80d.json": "994f7492126b226f0990892eb13726d080ea4de9065b99540d75428e3c9b2531",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\acdb2dbafb9046128de53e698105dd0f.json": "563f4e05c383426217f4953a6c386805e3e689754a419d107cda7419963f25bc",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\ad1e59cfa7b94b08802d103b661f20bd.json": "2dbce35b864f000db466cfd4d360a578a21b753c7e5dd3fe0112e99d0054210a",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\ada9372de6ab49688fccd4a3f9632392.json": "70920ea474eb7cd589c9311e3a3d9969da441d7baecfbda6f5521aa5e28d28e8",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\ae70133669ad48fda05031d05b3b42a4.json": "c652e0f965d3d121a64a27a6bccdc5d403f58d08475cd7a22b0bef5f8e888588",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\afd1d83702144c92bca8f16bbfbed128.json": "76710acea0eb3a311d1d3ffb94b0ba01421df901ab73e6eccfdabced324e783e",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\b12aa56513684abeae73bd08369bc980.json": "532426ec3a082849f8c6ed866a96cf0df7c5dbdff9e910906d9bfe1dceabc5d3",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\b441f9b0c49e4b3d8b748e37bc03861e.json": "964a63ee3a487992ec9805b68490fce251bc2aefa36dc71bcc5b510fdd24bf2d",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\b4b792027f7749ebb302e1207907ba53.json": "60adc527a21560a015bd7a8e7b4b970b0f0972a900ed5fe5f67c081a17c86294",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\b795e25d543a47658f17caa667054e97.json": "2f9f400913d1193c922bc696ccb9b56d96b092169d8fb33d1ce025e7571928ed",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\b85df1a870044502a2288344496db7e7.json": "f857bf5609e25e3ff07563a80b8ce46148254746422d1940a1ced4bde31146bf",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\b962db4653fe44da9c08bf56ade535cf.json": "f46fbeb5f098883fdf374016cb1880b25741b107642494fca0ee72e4392f1064",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\bae12bc09f314f278fce0317eeeaac9d.json": "5de9747c2f0fbf31fa2a46d85883ac0f99822acd5e174c900a297d9a6a24c3cd",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\batch-cat_response.json": "32805e718bf46bc6f37fc33184e288985a58cdaf2900510efffe394b03413a16",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\batch-speech.json": "82a22bf3ebe3dba427c5d127b79d85cd355e389e1f5fdd5710c5b62293ad06d4",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\bc56ed0f252041f5b5082ea1f625e918.json": "9710f51830f828c0d943a4fd71580d733d072a377c079acc876d0f080f2797e4",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\bdb9769c7b054e1591decec6ab3877ce.json": "74d1e44416d4bd857278aa686bc279b645c7847746428b3fbe682d6660c61eba",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\bde69e4dda86427eb0a2ebdc24b8fabb.json": "53eca419735c5d6151563a41f354c0c3ed0e3c671b8a6adda24fc8e9ce37c7dd",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\be77b3f540694ae58514075db2820262.json": "04fe6bde1021305081b1e35a2ff78d480c20bdb6fc24c15abf8be70711e45705",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\c00436696c85481b8b3a753bf45de68f.json": "a73de3f77eada9eb88b5fed49c2f054f47f1871b7a3d5f4d3d068f55d25e30f6",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\c0780789a662415180004f3cd8a3c5b8.json": "2c1b088cd392b911a70884df5544448bd9e9daf882102a52ebab5503cd5ef16a",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\c10d471fd3c941caa2df3c817c866993.json": "2cd6dd62429a0ef7f2919aa1dd950c4bb5fdcd99de4d92a7c95bfafa410aab01",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\c1c9d306dbbd4323967138883ee0419e.json": "8657bf7d1feb4f33fb607ef283c4d3070c0e5fcb5757bc45ac5386c01fa4a26e",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\c36343ae7d644a53ab59af2fbaec43fe.json": "2e700eeb07544fd8ca01f2b60378a1a62ec6e82f5882e43379fa945c268db8e2",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\c3654de274f34e8fb28b0343777d7672.json": "c9f10a045eeef21c285ca463d5defd27a95cfbc9614b0a3efaa2b208b07c86f8",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\c417052eb38641b88719931c5095a4ca.json": "89ff022bac45a3d7b32833f60b5d465a290ba2caf61f0f096dab9d40aa77f795",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\c42c7878a6e647e6a2d57ee9264dc815.json": "36c5628af06c62ecefed57bf4bb6a3c3d33f158f3ac86d55a6cec8d67025ea1d",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\c46b150d57914790a0b01c9ec0f97cb4.json": "f1fdfa18a5967657efdf7b8cdd56eca844aec549b5ff40d925ec7d86127a9d79",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\c48b58d863b44a64af90a3afcce5ef66.json": "1c4f75616d15b71ef1a7e7f5fd311f122941c535645f7a13f410b6a0387a4e46",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\c75efe1bdd3e4c098c8b50bd95d38e00.json": "802b205bfcc32a5664c61a769f7d1e688347d49f11e81ac77a570f63f2e03f61",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\c8208b0b2d734711b8c7c7bd5662728f.json": "5e4dbcee1bf6c00725b9a3f9fe573889e0b4ce050b5c93bbe2519cc47b9efee9",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\c86841d755be4529811a9a6c68a524ba.json": "1691929f2a8750e7a66e1a6382280bb7a6727a592b237045af6fc57697fbcf2a",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\c86f7039cb1b4f1288a803a2b8764a4a.json": "44fc71e5198cdfc3ea24e123a3204c8190b7dc8f0f3ab13fed47f6c8af16adf5",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\c96518d3769f45e0a6eb1cb908d0d011.json": "1cfdaef105f0b3b9a44214d7a5cc38c626b4c9588fc3f4ebeb02cd3368876b86",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\ca9560020cb04337ad6c969bd8938c16.json": "0defca6aae764306b929f18a343cb7b29fcaec03444cd917cfc1b1f8c001c31f",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\cc3b1c41549540d39aaea8ff0ad675aa.json": "a06865de7481165a83cbd7e8979cd2ba41199ff705a77154a28dd78969d18274",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\ccc4637364c3478cb4c814f2a860c44d.json": "59323e2ac38e709aacf74b105ff2922b0e46a909f4e83e4b54608ee75a593aad",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\ccd0a1f33bc14c5bb8bb0d95583d5697.json": "f0a2195d2c22adbd395e280552a9f57b53e2e284ab14341f27b7f51096860c79",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\ce5d00f0583e4229b8917c5b96663867.json": "ef54492599d7b45680f49450ca54c7a1128eff2d99f0b14793aae2aba05cc56c",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\cf9271de18e845d99f18f2cc19b1cea8.json": "07d2de1b042108045974011778b6f0dd8fa33d307f8d1e8e5cb575430b3a220a",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\d0073f48f2624f7bbe1685af6acb6845.json": "9a935948c30ea66505ab297d3e03cecc91f8b36cdf72c1e48e95e851d67c42af",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\d1d280029ba24c3486376b763ca1c99d.json": "ccc851778d39349b8fb831845ccc3eb2e7324717915f433126775915bf61a3f7",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\d1dbe60df53841a6b0e01c43cb7dbe8f.json": "04358e7ad9c2069294b5779e1390ba2e6f51eeebc7a62666eb5ace7a1ca192e3",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\d3924da7339540e882397752977761eb.json": "0982c3307be5c65823039d8202f30b684ce7d8fa3f4fa92708419c9886e82b97",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\d3e2387b94d64d8785c4e17d2b716874.json": "d7eae3b39e448081e9c10e3788a67fb7612eb81e5ce9e8ac76ff3824f15b2797",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\d462deeb67674db0ad07c44e84c9c6ca.json": "6cb7214f44f8bf3878c0d9df8740494b388fc7a0aa223d124496700573af9468",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\d66a35544e784062bcb168b9f46b97e3.json": "c59af3898acb78e16248b35156b43e9913aab873af76643ad9fd11efcaaa211b",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\d751ef262dd846268e7562e695b3611d.json": "afa73ae57f519e53a074cb7d5fb47ff93ae9e53d3dc490ce3515bcbe36b9c26f",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\d7de47a250404579ad4f3fac424c391e.json": "5d1fc69ba0cb143b66b8b70ad317d55acd7c349f7643a077ed8c2c498804ae30",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\d7f25eaf24e14820a32dbe17a9acec8c.json": "ee68eabfef1ae4d1a841dcbc88b17d12dff329e476361ba6847618f5f02c0c6d",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\d8286221d4104556a32d7674ccd012fe.json": "b14e6acea1397ecff603a88d967d38bc15de6c4b3c8a8e00754e9926f3879468",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\d83dd43442b34c77b89acc58d60853f9.json": "eae82438887c4491788ba9c47ac1ecba5099c354603f47dfaef45026597d3db9",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\d85c524925504dffa5f2bc4080864d06.json": "c61ec6303a84107b8ed9372864e669e2ca1fb3988645142fb3372aa289c261a4",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\d97ca485c1154f999295ee21b46b3550.json": "398f7a0d934c49953b649e1601165d8e36b0574c8299404894a98e4d9f32490f",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\dbbf8ae1cbb44547bab17019db835b83.json": "a779fb47eeee1242f94f1b100aeb23389b2102e979ade429f95aceb6513b9a11",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\dbc0fa538fed410c86654ec49f8af161.json": "6832bdef43f1124794bd0a2235bf76d9944cfa4ab29e0c04fb644bbfa5256036",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\dc13562f8faa4c9ebe61a41c94b203a3.json": "d5d6a3c070cec5c20d2197476451b7a75d4d83049ce713ef2e98584e1f915902",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\dc3b9e6137b24f2f86d74e3d29ee6bc2.json": "47e3a39b47bd17d7de024a25b9da077f37c2a5469d9a02dbaa99871f0788670c",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\dcb3ed5072f14522b5d4a98ab1f14195.json": "f9c134f6f4ab0e1d923e7c363ca266971034d7b3e51b2ac69050da380796ffcd",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\de9a18468c344798916a8c8d765bfdb6.json": "dfbd1d3801ea7ec0b54e33418bc6ee1579de4fb88e3ea568f47f539d04d6b8cc",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\dfa0276dc4764849852d7398c53e1a26.json": "47814f0db9bf5a5ecc94862a9cb856bb2ac8aef51c15a3f157f09d537d1e746b",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\e0cbd0fa581045fb82283630052f0072.json": "7ca539b2fafecd4ecc9b46c5471b9736a5ac8ab775cdc682d089b1d7ac9e8042",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\e1a79648370d40e3b9c2c2e88bf21a04.json": "724d9931a4554f52a6bf37a65fcde0d5f0a38dc4bc512af4859873db2c2cfb69",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\e21ea933e08a41a5ae93c85e55eb3bfa.json": "39c63230e9eafc84debeb0ded99eccaaa6135c3cd0e97df911b559879867906a",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\e278a1f8f24244c6b4666e797adebbc4.json": "c8dca39ac24a056072decb28291f31d60d29362b1eb385451d5de5797e9b3cea",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\e4c0ba3564ea4c6599bab2b4d7078393.json": "1db484f0b20dd8eb6c7db2f626c2467e4788d6111113e10ab1ac22b0c79b85b0",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\e5382c3440d24d15a3c7814f221c32b2.json": "157bf3d0f3bf27e5519e4ce8a0ee520274e109e8eb952d04b9726007cf11438c",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\e5d2481132b4404fa505ab3aeffb3327.json": "bb031686b5b135c8b534c3ab1e2dd49d2bd9c7b714b4a0866e755bff08b7526b",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\e6156a95901040839002d256b6f56dca.json": "6b3d5e8eba9cb20ffc744ef2d68377664121a83e2da0c205c3a090704802cfbd",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\e717e808253f4915b049c22d5e19d093.json": "ba7b039b92f3c87eada01b84a56babfa299f14cafa4051e99172088aa659d93e",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\e7806b9ec270492882e018820e53bf9e.json": "285ff6aca15b02a6c5fd6805905bb93684fbd9804370c30e6b159f5c4e4c12de",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\e7927f152079437cb6a940998e4a4723.json": "0876cdda9bd4209aa8c886f5bcf07a9b2a14b7ec18aa7416f81acb9f8719e510",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\e7a028875409494186aef2f990a2df5c.json": "6424cd4e8ef1f52b96437ea87b8bda64389d8e24b65149e49036847283247960",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\e820ac4dce9b4b40905bee97b34a819c.json": "6965665318f653c6621ef385bc229cca3d115c35a02222f881da4bd4c853f712",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\e87b85b609af43bd99617624ae8526f3.json": "7f1398323623091c71c00b3348b7aebe6b9de5305c3d90be070afe0b5357f311",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\e98384763b494c579a9269bf696c9a72.json": "29a95be4df4125d692a40489c939b1c9267f50d34e86042f72e5f505de12c70e",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\e9af0c39ae6445d5a0cdf7d8f3449af8.json": "363aacccc8f6b3b6cae40ae851bf0a8d098830c5c73cdbf81322f33c97b0a54b",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\eaf830cb7d414b7d88f35425e7d0ec47.json": "87aa4c585728c9a0428a5d266ace38b241aa5c646df6967c06f1bc464240163c",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\eb295c93ed3f4a2f8b5d252258e899fb.json": "f7d837baab2f2daf5f8b5fce18cdfdd0add0ffbfe742a1b59dfa4809a2ab1a1a",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\ec18a70370e24343932c6f33c484f4ef.json": "60121dc6144ede08fe974040085c75e9c6d5112da894069086a15fe81161eff1",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\ec24e0d74c7343fd87a89a5c7ec8c53a.json": "1a5893514bcc7dc5bcfbace0b93732d6991e030e6c493b248287f18c55940930",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\ecc93e122873447f8599e9d78eeabc7e.json": "8a45128b34ba7209429e5de83a81fc25e21d8ec48cc3d9558573e8975f9d1a78",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\ed37465d52114a83a24e4551ad543966.json": "22dbf6d73972ace1f35831c0c8a75ac5814ae0331455c6efd6869634f86906c2",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\ef46e99802e34e70a81fedce4c17d1ad.json": "324e786a0eec9a0cceb5c2cbb311b53c168cfb4c63ab0813157bf064c7ce0962",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\f213e418d1d0427abcb8d94a2f78e4b5.json": "4c51d4f12193aea2bfe6fe31e0cb28a18e58e3349eb6e6def6ce3e83e94ace35",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\f248653dfb004ff09effb80330dbea92.json": "617da43eae113be47ae52b79cce3fc24561286b950e28931e434ae55911379cc",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\f24f4acac3874100b45b0f7552f4d3d1.json": "a69399fea075ba70692fd52044126cc1e280b11db84ff4b709588620e583fa6c",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\f3acdfe514094938b871a4b27f918c08.json": "ac38782cd425a493c5cd31aa0b28e18bd345ef8450ad48b5b5087289388b7250",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\f4ae9dc7dc2d40e8ac0c87409dc45291.json": "a594c048f37f9295d0f5f318afa40ead75bbf5e273b6c7341aae6e06948c7555",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\f53e0b3b09c140dda7f988eafd66a5aa.json": "97c6e53c6dd5f3ea9f96b69681fd513cbbb1fc1a6737a71258b1a9742eadaa33",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\f57abfb8b200429e961f3ed41860491b.json": "3b005ea6399898cd185ca7652dbdd14f2effecacd14112d38b45b70584a21eed",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\f5d0f8542c3f4c018a233ead7437f096.json": "2e85aedb7ee6f786768035dc83face771835fc389a51c9000e238da88c569092",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\f6f772fb6b204ec38f0dd022f9a92e88.json": "7023b28f88a51ee73c7c6be495d5841f521a67f79d6ca7deaae536510bce9596",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\f7a1fa6e632a46eb8c8cbb0297542808.json": "31019b941e7316d66eee248271b394627d8cc8670f1337094aacbe6fcbf1ee4d",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\f8a05ce87970430390a4b293b545133d.json": "034afba222c859ceda6cbcae3a3f1c663143bb4ff6fbc74c4d4f71f5cbbdac4f",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\fa18b93712ec4961bf74c1234017d547.json": "ef5c2ae89733f34fd7eabf4cdc3781126dce6f6d5cc1f2a959c7b97a61f2df6a",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\fc1fd7c7c8244cf1b05648d56782dad9.json": "49831d9ac7ab7abc33230c6a7e49746a94e919a2b53ed883c6254f9d530d6b78",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\fcc1f330edd543aab2b115b54cac71a6.json": "5de348b8ae689bacd6a76de5e00b9c09aa65f558f1687e9423729f14a29a9aca",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\fe2ff410e7f34311a0e70ca7976583a3.json": "3a854125c34abb011e1adac4e13177d5bfbf469ebc30989fe35b393fdcb2c0af",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\fe4fe9a1df3d4d61ad8fec0dbaf7deb7.json": "d96c98653f57a437c8f789578324ab7a92d74e34eee1b594335fbefa76d2c07e",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\fe5d7e2a1d974fb7be802419f9050e18.json": "9647c5c29e843cd03029d17dae6096694d7e24273624e346da4e1b29419bb95a",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\ff9f115feb3d4d3cb7264af44b27a3ce.json": "c394854d5c3115dc6d41bdec57e1102282640795932e6b95f3aa0b447ea08643"
+  },
+  "unrelated_entries_and_drafts_unchanged": true,
+  "adopted_profiles": [
+    {
+      "id": "player",
+      "kind": "speech",
+      "name": "プレイヤー",
+      "game_id": "player",
+      "content_id": "",
+      "notes": "役割：猫カフェで猫と個別に交流するプレイヤー。年齢・性別・職業・来歴は固定しない。口調：親しみのある、やわらかな常体。「〜しようか」「〜してみよう」「〜してもいいかな」「〜だね」を基本とする。猫への呼びかけは {cat_call} とし、人物に設定した呼び名を使う。一人称・二人称はできるだけ省略する。接し方：様子を見ながら誘い、無理に応じさせない。休憩は自然に提案し、拒否や低体力を責めない。冗談・幼児語・命令調・過剰な感嘆符・恋愛表現・飼い主としての断定は避ける。1案は1つの短いセリフだけ、目安10〜30字、長くても40字程度。かぎ括弧・話者名・行動文は付けない。猫の気持ちや成功を決めつけず、実際の行動結果を先取りしない。3案は語尾だけでなく誘い方や言葉の焦点を変え、人物像と行動の条件は同じにする。",
+      "call": "{cat}",
+      "enabled": true
+    },
+    {
+      "id": "cat-mike",
+      "kind": "cat_response",
+      "name": "ミケ",
+      "game_id": "cat-mike",
+      "content_id": "playtest-mike",
+      "notes": "三毛の毛並みが愛らしいミケは、カフェのムードメーカーです。短毛で動きが機敏、のんびりとした佇まいがたまらない癒やしを提供してくれます。",
+      "call": "{cat}",
+      "enabled": true
+    }
+  ],
+  "generated_files_reviewed": 278,
+  "matching_generated": [],
+  "route": "Tk hand entry -> save_draft -> review -> image preview -> register -> reload -> new editor",
+  "llm": "Manual authoring through existing Tool; no model request or settings change",
+  "unity_imported": false,
+  "exported": false,
+  "built": false
+}

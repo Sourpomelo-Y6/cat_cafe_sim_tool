@@ -1,0 +1,256 @@
+{
+  "entries": [
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "plush",
+        "action": "switch",
+        "reaction": "any",
+        "scene_key": "plush__switch",
+        "target_cat": "cat-mike",
+        "narrative_scene": "switch"
+      },
+      "variants": [
+        {
+          "id": "dacb5e591fe752d1a529e5f08a526fc9",
+          "slot": 1,
+          "text": "今度はぬいぐるみで遊ぼうか、{cat_call}。"
+        },
+        {
+          "id": "d9fff382089958738ee3fd1fa52a92ef",
+          "slot": 2,
+          "text": "小さなねずみを連れてきたよ。気になるかな。"
+        },
+        {
+          "id": "cf04b76b9a855f1187b48e5809cf0594",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "plush",
+        "action": "switch",
+        "reaction": "any",
+        "scene_key": "plush__switch",
+        "narrative_scene": "switch"
+      },
+      "variants": [
+        {
+          "id": "9aa7bd67cd215e16bda7cd69ad16f394",
+          "slot": 1,
+          "text": "{cat}は新しく出てきたねずみのぬいぐるみに、丸い目を向けた。"
+        },
+        {
+          "id": "df37c44b8d1c5d118b8e600a6a78cc41",
+          "slot": 2,
+          "text": "{cat}はぬいぐるみを前に首をかしげ、どんなおもちゃかと見つめた。"
+        },
+        {
+          "id": "0bc8be8ecf4f512cbdb4c583fe00eed4",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "plush",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "plush__connect",
+        "target_cat": "cat-mike",
+        "narrative_scene": "connect"
+      },
+      "variants": [
+        {
+          "id": "3c67024c758b5eac8c44ba3a64173a09",
+          "slot": 1,
+          "text": "{cat_call}、このねずみとの遊び方、通じたかな。"
+        },
+        {
+          "id": "3f4eef11a24c54b9bf37ef6ade718c2a",
+          "slot": 2,
+          "text": "ぬいぐるみ越しに、息が合った感じがするね。"
+        },
+        {
+          "id": "6ad07f97bf07510c95e6ad322b059eb8",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "plush",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "plush__connect",
+        "narrative_scene": "connect"
+      },
+      "variants": [
+        {
+          "id": "7eaaa9eb3ed256a9a7144a350cacc379",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみへの誘いに注意を向け、相手の働きかけに応じた。"
+        },
+        {
+          "id": "83fbaa98080a5a359cc4178a1c34ab52",
+          "slot": 2,
+          "text": "{cat}はぬいぐるみを前に、遊びの誘いをまっすぐ受け止めた。"
+        },
+        {
+          "id": "0b74df6dfa9850a984dd140668f0067d",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "plush",
+        "target_cat": "cat-mike",
+        "narrative_scene": "open_up"
+      },
+      "variants": [
+        {
+          "id": "f476e62b435251588b186c05cc4b7e9e",
+          "slot": 1,
+          "text": "{cat_call}、ねずみと一緒だと、なんだか和むね。"
+        },
+        {
+          "id": "b4f9c4d509e550ae82484438aaea4465",
+          "slot": 2,
+          "text": "ぬいぐるみのある時間も、なじんできたかな。"
+        },
+        {
+          "id": "b10b979eeece57d688d617c54464a691",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "plush",
+        "narrative_scene": "open_up"
+      },
+      "variants": [
+        {
+          "id": "d0098b4f29985d6597576749b2088305",
+          "slot": 1,
+          "text": "{cat}はねずみのぬいぐるみのそばで、穏やかなまなざしを相手へ向けた。"
+        },
+        {
+          "id": "17896ce1d57f576db665f42d83b50391",
+          "slot": 2,
+          "text": "{cat}はぬいぐるみと過ごしながら表情をゆるめ、親しげな目を見せた。"
+        },
+        {
+          "id": "e24946189eeb5564b93aa506e3d32d9f",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "plush",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "plush__connect",
+        "target_cat": "cat-mike",
+        "narrative_scene": "simultaneous"
+      },
+      "variants": [
+        {
+          "id": "1b257591d0d25c00a30ae7e5b083728c",
+          "slot": 1,
+          "text": "ねずみとの遊びで、気持ちも近づいたかな。"
+        },
+        {
+          "id": "b22d425dd6095a9392bf1555f8aa54a4",
+          "slot": 2,
+          "text": "誘いが通じて、ほっとするね、{cat_call}。"
+        },
+        {
+          "id": "6eb218acab6e59f8a9f1482600aee317",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "plush",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "plush__connect",
+        "narrative_scene": "simultaneous"
+      },
+      "variants": [
+        {
+          "id": "ef0829de446b5f0187c4e1850b149668",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみへの誘いに応じ、目を細めて親しみをにじませた。"
+        },
+        {
+          "id": "594d3f159d4650569cd6b938375481de",
+          "slot": 2,
+          "text": "{cat}は相手の働きかけを受け止めると、ぬいぐるみのそばで口元までやわらげた。"
+        },
+        {
+          "id": "d6edc6486a83504abdce4a18ca89e4df",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    }
+  ],
+  "profiles": [
+    {
+      "id": "player",
+      "kind": "speech",
+      "name": "プレイヤー",
+      "game_id": "player",
+      "content_id": "",
+      "notes": "役割：猫カフェで猫と個別に交流するプレイヤー。年齢・性別・職業・来歴は固定しない。口調：親しみのある、やわらかな常体。「〜しようか」「〜してみよう」「〜してもいいかな」「〜だね」を基本とする。猫への呼びかけは {cat_call} とし、人物に設定した呼び名を使う。一人称・二人称はできるだけ省略する。接し方：様子を見ながら誘い、無理に応じさせない。休憩は自然に提案し、拒否や低体力を責めない。冗談・幼児語・命令調・過剰な感嘆符・恋愛表現・飼い主としての断定は避ける。1案は1つの短いセリフだけ、目安10〜30字、長くても40字程度。かぎ括弧・話者名・行動文は付けない。猫の気持ちや成功を決めつけず、実際の行動結果を先取りしない。3案は語尾だけでなく誘い方や言葉の焦点を変え、人物像と行動の条件は同じにする。",
+      "call": "{cat}",
+      "enabled": true
+    },
+    {
+      "id": "cat-mike",
+      "kind": "cat_response",
+      "name": "ミケ",
+      "game_id": "cat-mike",
+      "content_id": "playtest-mike",
+      "notes": "三毛の毛並みが愛らしいミケは、カフェのムードメーカーです。短毛で動きが機敏、のんびりとした佇まいがたまらない癒やしを提供してくれます。",
+      "call": "{cat}",
+      "enabled": true
+    }
+  ],
+  "unity_imported": false,
+  "route": "existing Tk fields -> save_draft -> preview; manual authoring, no LLM request"
+}

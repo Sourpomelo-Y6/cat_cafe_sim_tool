@@ -1,0 +1,276 @@
+[
+  {
+    "condition": {
+      "kind": "cat_response",
+      "subject_id": "cat-mike",
+      "mode": "plush",
+      "action": "any",
+      "reaction": "neutral",
+      "scene_key": "plush"
+    },
+    "variants": [
+      {
+        "id": "b904e3f9a31652249b5413980b273a5f",
+        "slot": 1,
+        "text": "{cat}はぬいぐるみを軽く叩き、ふわふわの音を出した。"
+      },
+      {
+        "id": "bcb70ba84d4a50949fc2ad7d10492f25",
+        "slot": 2,
+        "text": "{cat}はぬいぐるみを抱え、ふわりと転がした。"
+      },
+      {
+        "id": "a5523c9a4528572fb9bc7d8c45526235",
+        "slot": 3,
+        "text": "{cat}はぬいぐるみを軽く噛み、柔らかな鳴き声をあげた。"
+      }
+    ]
+  },
+  {
+    "condition": {
+      "kind": "cat_response",
+      "subject_id": "cat-mike",
+      "mode": "plush",
+      "action": "any",
+      "reaction": "favorable",
+      "scene_key": "plush"
+    },
+    "variants": [
+      {
+        "id": "034e0b2f12675099bcf0d088b3a43889",
+        "slot": 1,
+        "text": "{cat}はぬいぐるみを転がして遊んだ。"
+      },
+      {
+        "id": "79cd7e150f4d580185fec38463ef6a0e",
+        "slot": 2,
+        "text": "{cat}はぬいぐるみを軽く抱えて揺らした。"
+      },
+      {
+        "id": "b40c4337524f53fbaec2d7bc7e7f7f47",
+        "slot": 3,
+        "text": "{cat}はぬいぐるみを優しく舐めて笑った。"
+      }
+    ]
+  },
+  {
+    "condition": {
+      "kind": "cat_response",
+      "subject_id": "cat-mike",
+      "mode": "plush",
+      "action": "any",
+      "reaction": "enthusiastic",
+      "scene_key": "plush"
+    },
+    "variants": [
+      {
+        "id": "a8328c1a82d75f3685d4c041184cd228",
+        "slot": 1,
+        "text": "{cat} はぬいぐるみを掴み、手が揺れるたびに尾をピンと立てた。"
+      },
+      {
+        "id": "7044c31aaf225de687b52727adcac7e3",
+        "slot": 2,
+        "text": "{cat} はぬいぐるみをくわえて、相手の手に向かって軽く転がした。"
+      },
+      {
+        "id": "0c712622f8805cb791ea9ae152611964",
+        "slot": 3,
+        "text": "{cat} はぬいぐるみを頭に乗せ、手が動くとすぐに跳ね上がった。"
+      }
+    ]
+  },
+  {
+    "condition": {
+      "kind": "cat_response",
+      "subject_id": "cat-mike",
+      "mode": "plush",
+      "action": "any",
+      "reaction": "turn_away",
+      "scene_key": "plush"
+    },
+    "variants": [
+      {
+        "id": "7b14f6b2c1105ce09fa65fdeefd5e85f",
+        "slot": 1,
+        "text": "{cat}はぬいぐるみを見て、顔をそらし、遠ざかった。"
+      },
+      {
+        "id": "c61d9d17dd4e5d64bf1039ea41de1880",
+        "slot": 2,
+        "text": "{cat}はぬいぐるみを見て、目をそらし、そっぽ返した。"
+      },
+      {
+        "id": "af5d77c171aa599d96a2e69ec3ccb0da",
+        "slot": 3,
+        "text": "{cat}はぬいぐるみを見て、顔を伏せて、離れた。"
+      }
+    ]
+  },
+  {
+    "condition": {
+      "kind": "cat_response",
+      "subject_id": "cat-mike",
+      "mode": "plush",
+      "action": "any",
+      "reaction": "confused",
+      "scene_key": "plush"
+    },
+    "variants": [
+      {
+        "id": "909b515689855839b5318bf9189f8ff8",
+        "slot": 1,
+        "text": "{cat}はぬいぐるみを見て、目を大きくして戸惑った。"
+      },
+      {
+        "id": "a16e673084af5def9abdee3b14398e08",
+        "slot": 2,
+        "text": "{cat}はぬいぐるみを持つ手に顔を近づけ、困惑した表情を見せた。"
+      },
+      {
+        "id": "5059bfe534965450a733b551a5a8ceb3",
+        "slot": 3,
+        "text": "{cat}は手が持つぬいぐるみを見て、首をかしげて戸惑った。"
+      }
+    ]
+  },
+  {
+    "condition": {
+      "kind": "cat_response",
+      "subject_id": "cat-mike",
+      "mode": "plush",
+      "action": "any",
+      "reaction": "listless",
+      "scene_key": "plush"
+    },
+    "variants": [
+      {
+        "id": "0b56a653c6d45e6dbde023a97763a147",
+        "slot": 1,
+        "text": "{cat}は相手の手に置かれたぬいぐるみをゆっくりと掴み、体を横に伸ばした。"
+      },
+      {
+        "id": "553cbbf68fae5152939b1d15aff54b84",
+        "slot": 2,
+        "text": "{cat}は相手の手にあるぬいぐるみを静かに見つめ、体をゆっくりと横に流した。"
+      },
+      {
+        "id": "e419851a2f6758e2b3691c5d8a680a22",
+        "slot": 3,
+        "text": "{cat}は相手の手のぬいぐるみをそっと舐め、しばらくその場で静止した。"
+      }
+    ]
+  },
+  {
+    "condition": {
+      "kind": "speech",
+      "subject_id": "player",
+      "mode": "plush",
+      "action": "any",
+      "reaction": "any",
+      "scene_key": "plush",
+      "target_cat": "*"
+    },
+    "variants": [
+      {
+        "id": "25ae5149d56a548ea05e96dc1a4c507c",
+        "slot": 1,
+        "text": "{cat_call}、今日はぬいぐるみで遊んでみようか"
+      },
+      {
+        "id": "e25a53ca60525eb4834db6cb35b6b3a2",
+        "slot": 2,
+        "text": "{cat_call}、この毛布みたいなぬいぐるみ、抱っこしてもいいかな"
+      },
+      {
+        "id": "75360f0366f75632a74429ad0af96d17",
+        "slot": 3,
+        "text": "{cat_call}、ふわふわのぬいぐるみで、おしゃべりしようかね"
+      }
+    ]
+  },
+  {
+    "condition": {
+      "kind": "speech",
+      "subject_id": "player",
+      "mode": "plush",
+      "action": "direct",
+      "reaction": "any",
+      "scene_key": "plush__direct",
+      "target_cat": "*"
+    },
+    "variants": [
+      {
+        "id": "6fe94265303459488ce4eaa5f19e6a93",
+        "slot": 1,
+        "text": "ちょっと揺らしてみようか？ {cat_call}"
+      },
+      {
+        "id": "97eba23837de5bb88420f8198c0dbed8",
+        "slot": 2,
+        "text": "ゆらゆら揺らしてみようか？ {cat_call}"
+      },
+      {
+        "id": "3cfd08dd4c175e868d57d7b4afedc919",
+        "slot": 3,
+        "text": "そっと揺らしてみる？ {cat_call}"
+      }
+    ]
+  },
+  {
+    "condition": {
+      "kind": "speech",
+      "subject_id": "player",
+      "mode": "plush",
+      "action": "adapt",
+      "reaction": "any",
+      "scene_key": "plush__adapt",
+      "target_cat": "*"
+    },
+    "variants": [
+      {
+        "id": "c70e6d06af585a1db34bdb68951a5780",
+        "slot": 1,
+        "text": "{cat_call}、これで遊んでみようか"
+      },
+      {
+        "id": "05b2e62a85c95f2d8e146f338d6f0118",
+        "slot": 2,
+        "text": "ちょっと {cat_call}、抱っこしてみる？"
+      },
+      {
+        "id": "d7491761ae7e5095acd6e5649ea48533",
+        "slot": 3,
+        "text": "ほら {cat_call}、ぬいぐるみで遊んでみて。"
+      }
+    ]
+  },
+  {
+    "condition": {
+      "kind": "speech",
+      "subject_id": "player",
+      "mode": "plush",
+      "action": "feint",
+      "reaction": "any",
+      "scene_key": "plush__feint",
+      "target_cat": "*"
+    },
+    "variants": [
+      {
+        "id": "93a47e3ccd62589e8b103f5fc0930758",
+        "slot": 1,
+        "text": "{cat_call}、ちょっとフェイントしてみようか？"
+      },
+      {
+        "id": "1d0756bbd08050c2b22023843805ee86",
+        "slot": 2,
+        "text": "やわらかに{cat_call}を揺らしてみるね。"
+      },
+      {
+        "id": "ea86e96c6bd0595d9624d7f7fa52e68b",
+        "slot": 3,
+        "text": "少しだけ{cat_call}の前でフリフリしてみようかな。"
+      }
+    ]
+  }
+]

@@ -1,0 +1,151 @@
+{
+  "previews": [
+    {
+      "scene": "switch",
+      "slot": 1,
+      "body": "プレイヤー「今度はぬいぐるみで遊ぼうか、ミケ。」\nプレイヤーは交流を「ぬいぐるみ遊び」へ切り替えた。\n\nミケは新しく出てきたねずみのぬいぐるみに、丸い目を向けた。\n\n次の働きかけまで、少し間を置いた。",
+      "image_notice": "画像：plush → plush",
+      "source": "人：動作切替専用文：登録済み 専用 ／ 猫：動作切替専用文：登録済み 専用（専用操作を優先、なければ同じ反応の操作共通文）",
+      "image_source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\1d1c0d21094c4f08a5fc5b3999904cd7.png",
+      "image_sha256": "8b87da617648ad5fb1971a381b48b830cee1cc3324f4100c656f64b105221fb6"
+    },
+    {
+      "scene": "switch",
+      "slot": 2,
+      "body": "プレイヤー「小さなねずみを連れてきたよ。気になるかな。」\nプレイヤーは交流を「ぬいぐるみ遊び」へ切り替えた。\n\nミケはぬいぐるみを前に首をかしげ、どんなおもちゃかと見つめた。\n\n次の働きかけまで、少し間を置いた。",
+      "image_notice": "画像：plush → plush",
+      "source": "人：動作切替専用文：登録済み 専用 ／ 猫：動作切替専用文：登録済み 専用（専用操作を優先、なければ同じ反応の操作共通文）",
+      "image_source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\1d1c0d21094c4f08a5fc5b3999904cd7.png",
+      "image_sha256": "8b87da617648ad5fb1971a381b48b830cee1cc3324f4100c656f64b105221fb6"
+    },
+    {
+      "scene": "connect",
+      "slot": 1,
+      "body": "プレイヤー「ミケ、このねずみとの遊び方、通じたかな。」\nプレイヤーはミケの様子を見ながら、特別な働きかけをした。\n\nミケはぬいぐるみへの誘いに注意を向け、相手の働きかけに応じた。\n\n二人の間合いが、少し近づいた。",
+      "image_notice": "画像：plush → plush",
+      "source": "人：心をつかむ専用文：登録済み 専用 ／ 猫：心をつかむ専用文：登録済み 専用（専用操作を優先、なければ同じ反応の操作共通文）",
+      "image_source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\1d1c0d21094c4f08a5fc5b3999904cd7.png",
+      "image_sha256": "8b87da617648ad5fb1971a381b48b830cee1cc3324f4100c656f64b105221fb6"
+    },
+    {
+      "scene": "connect",
+      "slot": 2,
+      "body": "プレイヤー「ぬいぐるみ越しに、息が合った感じがするね。」\nプレイヤーはミケの様子を見ながら、特別な働きかけをした。\n\nミケはぬいぐるみを前に、遊びの誘いをまっすぐ受け止めた。\n\n二人の間合いが、少し近づいた。",
+      "image_notice": "画像：plush → plush",
+      "source": "人：心をつかむ専用文：登録済み 専用 ／ 猫：心をつかむ専用文：登録済み 専用（専用操作を優先、なければ同じ反応の操作共通文）",
+      "image_source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\1d1c0d21094c4f08a5fc5b3999904cd7.png",
+      "image_sha256": "8b87da617648ad5fb1971a381b48b830cee1cc3324f4100c656f64b105221fb6"
+    },
+    {
+      "scene": "open_up",
+      "slot": 1,
+      "body": "プレイヤー「ミケ、ねずみと一緒だと、なんだか和むね。」\nプレイヤーはぬいぐるみをミケの近くで動かした。\n\nミケはねずみのぬいぐるみのそばで、穏やかなまなざしを相手へ向けた。\n\n静かな交流の時間が流れた。",
+      "image_notice": "画像：plush__open_up → plush__open_up",
+      "source": "人：心を開く専用文：登録済み 操作共通 ／ 猫：心を開く専用文：登録済み 操作共通（専用操作を優先、なければ同じ反応の操作共通文）",
+      "image_source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\cdd6cf8eb4dc4b4e9240f447335c763c.png",
+      "image_sha256": "5b6d07f28292b416f956dee8f0fb7d990f76ce7f33b27d1fe0362eee324afeaa"
+    },
+    {
+      "scene": "open_up",
+      "slot": 2,
+      "body": "プレイヤー「ぬいぐるみのある時間も、なじんできたかな。」\nプレイヤーはぬいぐるみをミケの近くで動かした。\n\nミケはぬいぐるみと過ごしながら表情をゆるめ、親しげな目を見せた。\n\n静かな交流の時間が流れた。",
+      "image_notice": "画像：plush__open_up → plush__open_up",
+      "source": "人：心を開く専用文：登録済み 操作共通 ／ 猫：心を開く専用文：登録済み 操作共通（専用操作を優先、なければ同じ反応の操作共通文）",
+      "image_source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\cdd6cf8eb4dc4b4e9240f447335c763c.png",
+      "image_sha256": "5b6d07f28292b416f956dee8f0fb7d990f76ce7f33b27d1fe0362eee324afeaa"
+    },
+    {
+      "scene": "simultaneous",
+      "slot": 1,
+      "body": "プレイヤー「ねずみとの遊びで、気持ちも近づいたかな。」\nプレイヤーはミケの様子を見ながら、特別な働きかけをした。\n\nミケはぬいぐるみへの誘いに応じ、目を細めて親しみをにじませた。\n\n二人の間合いが、少し近づいた。",
+      "image_notice": "画像：plush__simultaneous → plush__simultaneous",
+      "source": "人：同時成立専用文：登録済み 専用 ／ 猫：同時成立専用文：登録済み 専用（専用操作を優先、なければ同じ反応の操作共通文）",
+      "image_source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\1ac678a853974e469b7a76a8387f458a.png",
+      "image_sha256": "a1fff2558cc6146b3d7bedfe965fdb5b5e3ba21aaeab969f611a710885c03ba4"
+    },
+    {
+      "scene": "simultaneous",
+      "slot": 2,
+      "body": "プレイヤー「誘いが通じて、ほっとするね、ミケ。」\nプレイヤーはミケの様子を見ながら、特別な働きかけをした。\n\nミケは相手の働きかけを受け止めると、ぬいぐるみのそばで口元までやわらげた。\n\n二人の間合いが、少し近づいた。",
+      "image_notice": "画像：plush__simultaneous → plush__simultaneous",
+      "source": "人：同時成立専用文：登録済み 専用 ／ 猫：同時成立専用文：登録済み 専用（専用操作を優先、なければ同じ反応の操作共通文）",
+      "image_source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\1ac678a853974e469b7a76a8387f458a.png",
+      "image_sha256": "a1fff2558cc6146b3d7bedfe965fdb5b5e3ba21aaeab969f611a710885c03ba4"
+    }
+  ],
+  "independent_side_checks": [
+    {
+      "scene": "switch",
+      "keep": "speech",
+      "source": "人：動作切替専用文：登録済み 専用 ／ 猫：既存定型文（フォールバック） （専用操作を優先、なければ同じ反応の操作共通文）",
+      "body": "プレイヤー「小さなねずみを連れてきたよ。気になるかな。」\nプレイヤーは交流を「ぬいぐるみ遊び」へ切り替えた。\n\nミケは人の手元を見つめた。\n\n次の働きかけまで、少し間を置いた。"
+    },
+    {
+      "scene": "switch",
+      "keep": "cat_response",
+      "source": "人：既存定型文（フォールバック）  ／ 猫：動作切替専用文：登録済み 専用（専用操作を優先、なければ同じ反応の操作共通文）",
+      "body": "プレイヤー「今度はこれにしよう。」\nプレイヤーは交流を「ぬいぐるみ遊び」へ切り替えた。\n\nミケは新しく出てきたねずみのぬいぐるみに、丸い目を向けた。\n\n次の働きかけまで、少し間を置いた。"
+    },
+    {
+      "scene": "switch",
+      "keep": "none",
+      "source": "人：既存定型文（フォールバック）  ／ 猫：既存定型文（フォールバック） （専用操作を優先、なければ同じ反応の操作共通文）",
+      "body": "プレイヤー「今度はこれにしよう。」\nプレイヤーは交流を「ぬいぐるみ遊び」へ切り替えた。\n\nミケは人の手元を見つめた。\n\n次の働きかけまで、少し間を置いた。"
+    },
+    {
+      "scene": "connect",
+      "keep": "speech",
+      "source": "人：心をつかむ専用文：登録済み 専用 ／ 猫：既存定型文（フォールバック） （専用操作を優先、なければ同じ反応の操作共通文）",
+      "body": "プレイヤー「ぬいぐるみ越しに、息が合った感じがするね。」\nプレイヤーはミケの様子を見ながら、特別な働きかけをした。\n\nミケはその働きかけを受け止めた。\n\n二人の間合いが、少し近づいた。"
+    },
+    {
+      "scene": "connect",
+      "keep": "cat_response",
+      "source": "人：既存定型文（フォールバック）  ／ 猫：心をつかむ専用文：登録済み 専用（専用操作を優先、なければ同じ反応の操作共通文）",
+      "body": "プレイヤー「ミケ、こっちを見て。」\nプレイヤーはミケの様子を見ながら、特別な働きかけをした。\n\nミケはぬいぐるみへの誘いに注意を向け、相手の働きかけに応じた。\n\n二人の間合いが、少し近づいた。"
+    },
+    {
+      "scene": "connect",
+      "keep": "none",
+      "source": "人：既存定型文（フォールバック）  ／ 猫：既存定型文（フォールバック） （専用操作を優先、なければ同じ反応の操作共通文）",
+      "body": "プレイヤー「ミケ、こっちを見て。」\nプレイヤーはミケの様子を見ながら、特別な働きかけをした。\n\nミケはその働きかけを受け止めた。\n\n二人の間合いが、少し近づいた。"
+    },
+    {
+      "scene": "open_up",
+      "keep": "speech",
+      "source": "人：心を開く専用文：登録済み 操作共通 ／ 猫：通常文＋特別反応追記（フォールバック） 操作共通（専用操作を優先、なければ同じ反応の操作共通文）",
+      "body": "プレイヤー「ぬいぐるみのある時間も、なじんできたかな。」\nプレイヤーはぬいぐるみをミケの近くで動かした。\n\nミケはぬいぐるみを抱え、ふわりと転がした。 ミケは心を開いた様子を見せた。\n\n静かな交流の時間が流れた。"
+    },
+    {
+      "scene": "open_up",
+      "keep": "cat_response",
+      "source": "人：通常文＋特別反応追記（フォールバック） 専用 ／ 猫：心を開く専用文：登録済み 操作共通（専用操作を優先、なければ同じ反応の操作共通文）",
+      "body": "プレイヤー「ゆらゆら揺らしてみようか？ ミケ」\nプレイヤーはぬいぐるみをミケの近くで動かした。\n\nミケはぬいぐるみと過ごしながら表情をゆるめ、親しげな目を見せた。\n\n静かな交流の時間が流れた。"
+    },
+    {
+      "scene": "open_up",
+      "keep": "none",
+      "source": "人：通常文＋特別反応追記（フォールバック） 専用 ／ 猫：通常文＋特別反応追記（フォールバック） 操作共通（専用操作を優先、なければ同じ反応の操作共通文）",
+      "body": "プレイヤー「ゆらゆら揺らしてみようか？ ミケ」\nプレイヤーはぬいぐるみをミケの近くで動かした。\n\nミケはぬいぐるみを抱え、ふわりと転がした。 ミケは心を開いた様子を見せた。\n\n静かな交流の時間が流れた。"
+    },
+    {
+      "scene": "simultaneous",
+      "keep": "speech",
+      "source": "人：同時成立専用文：登録済み 専用 ／ 猫：既存定型文（フォールバック） （専用操作を優先、なければ同じ反応の操作共通文）",
+      "body": "プレイヤー「誘いが通じて、ほっとするね、ミケ。」\nプレイヤーはミケの様子を見ながら、特別な働きかけをした。\n\nミケはその働きかけを受け止めた。 ミケは心を開いた様子を見せた。\n\n二人の間合いが、少し近づいた。"
+    },
+    {
+      "scene": "simultaneous",
+      "keep": "cat_response",
+      "source": "人：既存定型文（フォールバック）  ／ 猫：同時成立専用文：登録済み 専用（専用操作を優先、なければ同じ反応の操作共通文）",
+      "body": "プレイヤー「ミケ、こっちを見て。」\nプレイヤーはミケの様子を見ながら、特別な働きかけをした。\n\nミケはぬいぐるみへの誘いに応じ、目を細めて親しみをにじませた。\n\n二人の間合いが、少し近づいた。"
+    },
+    {
+      "scene": "simultaneous",
+      "keep": "none",
+      "source": "人：既存定型文（フォールバック）  ／ 猫：既存定型文（フォールバック） （専用操作を優先、なければ同じ反応の操作共通文）",
+      "body": "プレイヤー「ミケ、こっちを見て。」\nプレイヤーはミケの様子を見ながら、特別な働きかけをした。\n\nミケはその働きかけを受け止めた。 ミケは心を開いた様子を見せた。\n\n二人の間合いが、少し近づいた。"
+    }
+  ],
+  "scope": "Tool preview and selection only; no Unity execution"
+}

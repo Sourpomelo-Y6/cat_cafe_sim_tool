@@ -1,0 +1,35 @@
+{
+  "before": {
+    "Logs": 18358473210,
+    "generated": 3277372585,
+    "content_images": 1276759681,
+    "Latest": 4841096360,
+    "Library": 7358000371,
+    "drafts": 342811
+  },
+  "after": {
+    "Logs": 18359249122,
+    "generated": 3277372585,
+    "content_images": 1276766330,
+    "Latest": 4841096360,
+    "Library": 7358000371,
+    "drafts": 349460
+  },
+  "delta": {
+    "Logs": 775912,
+    "generated": 0,
+    "content_images": 6649,
+    "Latest": 0,
+    "Library": 0,
+    "drafts": 6649
+  },
+  "latest_only": true,
+  "pending_exists": false,
+  "build_dirs": [
+    "build.lock",
+    "Latest",
+    "Runs"
+  ],
+  "scope": "No build, export, import, image generation or deletion; concurrent work may affect shared directory totals",
+  "task_snapshot_bytes": 775912
+}
