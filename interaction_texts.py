@@ -17,6 +17,22 @@ REACTIONS = {'neutral': '通常', 'favorable': '好意的', 'enthusiastic': '熱
 CONDITION_FIELDS = ('kind', 'subject_id', 'mode', 'action', 'reaction', 'scene_key')
 MAX_LENGTH = 200
 _UNSET = object()
+NARRATIVE_SCENES = {'normal': '通常', 'switch': '動作切替', 'connect': '心をつかむ',
+                    'open_up': '心を開く', 'simultaneous': '同時成立'}
+
+
+def scene_actions(mode, scene='normal'):
+    if scene not in NARRATIVE_SCENES or scene != 'normal' and mode == 'pause':
+        return ()
+    if scene in ('switch', 'connect', 'simultaneous'):
+        return (('switch',) if scene == 'switch' else ('connect',))
+    if scene == 'open_up':
+        return actions(mode) + ('pause', 'switch')
+    return actions(mode)
+
+
+def scene_reactions(kind, mode, scene='normal'):
+    return ('any',) if scene != 'normal' else reactions(kind, mode)
 
 
 def actions(mode):
@@ -32,16 +48,17 @@ def reactions(kind, mode):
     return ('neutral', 'listless') if mode == 'pause' else tuple(REACTIONS)
 
 
-def condition(kind='speech', subject_id='player', mode='teaser', action='any', reaction='any', *, subjects=None, target_cat=None):
+def condition(kind='speech', subject_id='player', mode='teaser', action='any', reaction='any', *, subjects=None, target_cat=None, narrative_scene='normal'):
     result = dict(kind=kind, subject_id=subject_id, mode=mode, action=action, reaction=reaction,
                   scene_key=mode if action in ('any', 'pause') else mode + '__' + action)
     if target_cat is not None: result['target_cat'] = target_cat
+    if narrative_scene != 'normal': result['narrative_scene'] = narrative_scene
     validate_condition(result, subjects=subjects)
     return result
 
 
 def validate_condition(value, *, subjects=None, structural=False):
-    if not isinstance(value, dict) or set(value) not in (set(CONDITION_FIELDS), set(CONDITION_FIELDS) | {'target_cat'}):
+    if not isinstance(value, dict) or not set(CONDITION_FIELDS) <= set(value) or set(value) - set(CONDITION_FIELDS) - {'target_cat', 'narrative_scene'}:
         raise ValueError('文章条件の形式が不正です。')
     if any(not isinstance(v, str) for v in value.values()):
         raise ValueError('文章条件は文字列で指定してください。')
@@ -54,7 +71,8 @@ def validate_condition(value, *, subjects=None, structural=False):
         raise ValueError('セリフの対象猫が不正です。')
     if not structural and value.get('target_cat', '*')!='*' and value['target_cat'] not in labels['cat_response']:
         raise ValueError('対象猫が台帳にありません。')
-    if action not in actions(mode) or reaction not in reactions(kind, mode):
+    narrative_scene = value.get('narrative_scene', 'normal')
+    if narrative_scene not in NARRATIVE_SCENES or action not in scene_actions(mode, narrative_scene) or reaction not in scene_reactions(kind, mode, narrative_scene):
         raise ValueError('この行動では選べない操作・反応です。')
     expected = mode if action in ('any', 'pause') else mode + '__' + action
     if scene != expected:
@@ -64,7 +82,7 @@ def validate_condition(value, *, subjects=None, structural=False):
 def key(value):
     validate_condition(value, structural=True)
     base = '/'.join(value[k] for k in CONDITION_FIELDS)
-    return base + ('/' + value['target_cat'] if 'target_cat' in value else '')
+    return base + ('/' + value['target_cat'] if 'target_cat' in value else '') + ('/scene=' + value['narrative_scene'] if value.get('narrative_scene', 'normal') != 'normal' else '')
 
 
 def make_entry(value, texts):
@@ -119,13 +137,15 @@ class InteractionTextStore:
             return {'version': 1, 'entries': []}
         data = json.loads(self.path.read_text(encoding='utf-8'))
         if (not isinstance(data, dict) or set(data) != {'version', 'entries'}
-                or type(data['version']) is not int or data['version'] not in ((1, 2) if self.subject_registry else (1,))
+                or type(data['version']) is not int or data['version'] not in ((1, 2, 3) if self.subject_registry else (1, 3))
                 or not isinstance(data['entries'], list) or len(data['entries']) > 10000):
             raise ValueError('交流文章ファイルの形式が不正です。')
         labels=self.labels()
         seen = set()
         for entry in data['entries']:
             validate_entry(entry, published=self.published)
+            if entry['condition'].get('narrative_scene', 'normal') != 'normal' and data['version'] < 3:
+                raise ValueError('特別場面の文章には保存形式version 3が必要です。')
             validate_condition(entry['condition'], subjects=labels)
             identity = key(entry['condition'])
             if identity in seen:
@@ -172,6 +192,7 @@ class InteractionTextStore:
         if len(set(old)|identities)>10000:raise ValueError('保存できる条件数を超えています。')
         if self.subject_registry:data['version']=2
         data['entries']=[e for e in data['entries'] if key(e['condition']) not in identities]+entries
+        if any(e['condition'].get('narrative_scene', 'normal') != 'normal' for e in data['entries']):data['version']=3
         self.path.parent.mkdir(parents=True, exist_ok=True)
         temp = self.path.with_name(self.path.stem + '-' + uuid.uuid4().hex + '.tmp')
         try:

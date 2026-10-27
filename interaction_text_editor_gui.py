@@ -3,6 +3,7 @@ import copy
 
 from interaction_texts import (KINDS, SUBJECTS, MODES, REACTIONS, MAX_LENGTH,
                                actions, reactions, condition, make_entry)
+from interaction_texts import NARRATIVE_SCENES, scene_actions, scene_reactions
 from interaction_scenes import ACTION_LABELS
 
 ACTION_NAMES = dict(ACTION_LABELS, any='動作共通')
@@ -45,7 +46,7 @@ class InteractionTextEditorWindow:
         self.choices, self.selectors = {}, {}
         for i, (name, label) in enumerate((('kind', '文章の種類'), ('subject_id', '人物・猫'),
                                             ('mode', '行動・絵の種類'), ('action', '操作・強さ'),
-                                            ('reaction', '猫の反応条件'))):
+                                            ('reaction', '猫の反応条件'), ('narrative_scene', '確定場面'))):
             column, row = i % 2, (i // 2) * 2
             grid.columnconfigure(column, weight=1)
             ttk.Label(grid, text=label).grid(row=row, column=column, sticky='w', padx=(0, 8))
@@ -55,7 +56,7 @@ class InteractionTextEditorWindow:
             combo.bind('<<ComboboxSelected>>', self.selection_changed)
             self.choices[name], self.selectors[name] = var, combo
         self.generation_button = ttk.Button(grid, text='ローカルLLMで3案生成…', command=self.open_generation)
-        self.generation_button.grid(row=5, column=1, sticky='ew', padx=(0, 8), pady=(0, 4))
+        self.generation_button.grid(row=9, column=1, sticky='ew', padx=(0, 8), pady=(0, 4))
         ttk.Button(grid, text='画像付きで組み合わせを確認…', command=self.open_preview).grid(
             row=6, column=0, sticky='ew', padx=(0, 8), pady=(2, 0))
         self.batch_button = ttk.Button(grid, text='人物のセリフを連続生成…', command=self.open_batch_generation)
@@ -98,12 +99,13 @@ class InteractionTextEditorWindow:
     def _set_selectors(self, value):
         self.target_selector.configure(values=list(self.target_options),state='readonly' if value['kind']=='speech' else 'disabled')
         self.batch_button.configure(text='猫の反応を連続生成…' if value['kind'] == 'cat_response' else '人物のセリフを連続生成…')
-        maps = {'kind': KINDS, 'subject_id': self.subjects[value['kind']], 'mode': MODES,
-                'action': {k: ACTION_NAMES[k] for k in actions(value['mode'])},
-                'reaction': {k: REACTION_NAMES[k] for k in reactions(value['kind'], value['mode'])}}
+        maps = {'kind': KINDS, 'subject_id': self.subjects[value['kind']], 'mode': MODES if value.get('narrative_scene','normal')=='normal' else {k:v for k,v in MODES.items() if k!='pause'},
+                'narrative_scene': NARRATIVE_SCENES,
+                'action': {k: ACTION_NAMES[k] for k in scene_actions(value['mode'],value.get('narrative_scene','normal'))},
+                'reaction': {k: REACTION_NAMES[k] for k in scene_reactions(value['kind'], value['mode'],value.get('narrative_scene','normal'))}}
         for name, labels in maps.items():
             self.selectors[name].configure(values=list(labels.values()))
-            self.choices[name].set(labels[value[name]])
+            self.choices[name].set(labels[value.get(name,'normal')])
         if 'target_cat' in value:
             self.target_cat.set(next((label for label,id in self.target_options.items() if id==value['target_cat']), 'どの猫でも使う（{cat_call}）'))
         else:self.target_cat.set('従来のミケ専用' if value['kind']=='speech' else 'どの猫でも使う（{cat_call}）')
@@ -126,7 +128,7 @@ class InteractionTextEditorWindow:
             choices={}
             for identity in sorted(set(drafts)|set(published)):
                 entry=drafts.get(identity) or published[identity];c=entry['condition']
-                parts=[KINDS[c['kind']]+'：'+self.subjects[c['kind']][c['subject_id']],MODES[c['mode']],ACTION_NAMES[c['action']]]
+                parts=[NARRATIVE_SCENES[c.get('narrative_scene','normal')],KINDS[c['kind']]+'：'+self.subjects[c['kind']][c['subject_id']],MODES[c['mode']],ACTION_NAMES[c['action']]]
                 if c['kind']=='cat_response':parts.append(REACTION_NAMES[c['reaction']])
                 else:parts.append('猫共通' if c.get('target_cat')=='*' else '従来のミケ専用' if 'target_cat' not in c else self.subjects['cat_response'].get(c['target_cat'],'指定猫')+'専用')
                 count=lambda e:sum(bool(v['text']) for v in e['variants']) if e else 0
@@ -207,12 +209,15 @@ class InteractionTextEditorWindow:
         kind = selected('kind', KINDS, 'speech')
         subject = selected('subject_id', self.subjects[kind], next(iter(self.subjects[kind])))
         mode = selected('mode', MODES, 'teaser')
-        action = selected('action', {k: ACTION_NAMES[k] for k in actions(mode)}, actions(mode)[0])
-        reaction = selected('reaction', {k: REACTION_NAMES[k] for k in reactions(kind, mode)},
-                            reactions(kind, mode)[0])
+        scene=selected('narrative_scene',NARRATIVE_SCENES,'normal')
+        if mode=='pause' and scene!='normal':mode='teaser'
+        available=scene_actions(mode,scene)
+        action = selected('action', {k: ACTION_NAMES[k] for k in available}, available[0])
+        reaction = selected('reaction', {k: REACTION_NAMES[k] for k in scene_reactions(kind, mode, scene)},
+                            scene_reactions(kind, mode, scene)[0])
         target=self.target_options.get(self.target_cat.get()) if kind=='speech' else None
         if kind=='speech' and subject not in ('player','guest-1') and target is None:target='*'
-        self.load_condition(condition(kind, subject, mode, action, reaction, subjects=self.subjects, target_cat=target))
+        self.load_condition(condition(kind, subject, mode, action, reaction, subjects=self.subjects, target_cat=target,narrative_scene=scene))
 
     def reload(self):
         return self.load_condition(self._condition)
@@ -249,7 +254,7 @@ class InteractionTextEditorWindow:
             entry = self.values()
             validate_entry(entry, published=True)
             value = entry['condition']
-            text = [KINDS[value['kind']] + '：' + self.subjects[value['kind']][value['subject_id']],
+            text = [NARRATIVE_SCENES[value.get('narrative_scene','normal')], KINDS[value['kind']] + '：' + self.subjects[value['kind']][value['subject_id']],
                     MODES[value['mode']] + ' ／ ' + ACTION_NAMES[value['action']] + ' ／ '
                     + REACTION_NAMES[value['reaction']], '画像の場面キー：' + value['scene_key']]
             text.extend(f"案{r['slot']}：{r['text'] or '（未制作・登録候補なし）'}" for r in entry['variants'])

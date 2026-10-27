@@ -8,6 +8,7 @@ from pathlib import Path
 
 from interaction_texts import (SUBJECTS, MODES, REACTIONS, actions, reactions, condition,
                                key, validate_entry, InteractionTextStore)
+from interaction_texts import NARRATIVE_SCENES, scene_actions, scene_reactions
 
 CAT_ID = 'cat-mike'
 DEFAULT_CONTENT_ID = 'playtest-mike'  # ゲームの既存presentation.jsonと同じ明示的対応。
@@ -87,7 +88,7 @@ def select_entry(entries, value, *, overlay=None, prefer_overlay=False):
     cat_id = value.get('target_cat', 'cat-mike')
     if prefer_overlay and overlay is not None:
         c=overlay['condition']
-        if (all(c[k]==value[k] for k in ('kind','subject_id','mode','reaction'))
+        if (c.get('narrative_scene','normal')==value.get('narrative_scene','normal') and all(c[k]==value[k] for k in ('kind','subject_id','mode','reaction'))
                 and c['action'] in (value['action'],'any')
                 and (c['kind']!='speech' or c.get('target_cat','cat-mike') in (cat_id,'*'))):
             candidates=[v for v in overlay['variants'] if v['text']]
@@ -98,7 +99,7 @@ def select_entry(entries, value, *, overlay=None, prefer_overlay=False):
         for action in dict.fromkeys([value['action'], 'any']):
             for row, source in rows:
                 c=row['condition']
-                if (all(c[k]==value[k] for k in ('kind','subject_id','mode','reaction'))
+                if (c.get('narrative_scene','normal')==value.get('narrative_scene','normal') and all(c[k]==value[k] for k in ('kind','subject_id','mode','reaction'))
                         and c['action']==action and (c['kind']!='speech' or c.get('target_cat','cat-mike')==scope)):
                     candidates=[v for v in row['variants'] if v['text']]
                     if candidates:return dict(candidates=candidates,source=source,
@@ -106,20 +107,20 @@ def select_entry(entries, value, *, overlay=None, prefer_overlay=False):
     return dict(candidates=[], source='未制作', match='', condition=value)
 
 
-def expected_conditions(subjects=None, target_cat=None):
+def expected_conditions(subjects=None, target_cat=None, narrative_scene='normal'):
     for kind, members in (subjects or SUBJECTS).items():
         for subject in members:
             for mode in MODES:
-                for action in actions(mode):
+                for action in scene_actions(mode, narrative_scene):
                     if action == 'any':
                         continue
-                    for reaction in reactions(kind, mode):
-                        yield condition(kind, subject, mode, action, reaction, subjects=subjects,target_cat=target_cat if kind=="speech" else None)
+                    for reaction in scene_reactions(kind, mode, narrative_scene):
+                        yield condition(kind, subject, mode, action, reaction, subjects=subjects,target_cat=target_cat if kind=="speech" else None,narrative_scene=narrative_scene)
 
 
-def coverage(entries, subjects=None, target_cat=None):
+def coverage(entries, subjects=None, target_cat=None, narrative_scene='normal'):
     missing, covered, common = [], 0, 0
-    for value in expected_conditions(subjects,target_cat):
+    for value in expected_conditions(subjects,target_cat,narrative_scene):
         found = select_entry(entries, value)
         if not found['candidates']:
             missing.append(value)
@@ -134,7 +135,7 @@ def condition_label(value, subjects=None):
     from interaction_scenes import ACTION_LABELS
     return ('人物：' if value['kind'] == 'speech' else '猫：') + (subjects or SUBJECTS)[value['kind']][value['subject_id']] \
         + ' ／ ' + MODES[value['mode']] + ' ／ ' + ACTION_LABELS.get(value['action'], '操作共通') \
-        + ' ／ ' + REACTIONS.get(value['reaction'], '反応指定なし')
+        + ' ／ ' + REACTIONS.get(value['reaction'], '反応指定なし') + ' ／ ' + NARRATIVE_SCENES[value.get('narrative_scene','normal')]
 
 
 ACTION_TEXTS = [dict(mode=mode, action=action, text=text) for mode, action, text in [
@@ -169,11 +170,34 @@ NARRATION_TEXTS = [dict(reaction=reaction, text=text) for reaction, text in [
 REST_NARRATION = '急がず、静かな休憩の時間を過ごした。'
 
 
-def compose_preview(human, mode, action, reaction, speech, cat_response, cat_name="ミケ", call="{cat}"):
+def compose_preview(human, mode, action, reaction, speech, cat_response, cat_name="ミケ", call="{cat}", narrative_scene='normal'):
     from interaction_subjects import expand
     speech, cat_response = expand(speech, cat_name, call), expand(cat_response, cat_name, call)
-    move = next(r['text'] for r in ACTION_TEXTS if r['mode'] == mode and r['action'] == action)
+    if narrative_scene in ('switch','connect','simultaneous'):
+        switch=narrative_scene=='switch'
+        speech=speech or ('今度はこれにしよう。' if switch else cat_name+'、こっちを見て。')
+        cat_response=cat_response or (cat_name+'は人の手元を見つめた。' if switch else cat_name+'はその働きかけを受け止めた。'+(' '+cat_name+'は心を開いた様子を見せた。' if narrative_scene=='simultaneous' else ''))
+        move=human+('は交流を「'+MODES[mode]+'」へ切り替えた。' if switch else 'は'+cat_name+'の様子を見ながら、特別な働きかけをした。')
+        return human+'「'+speech+'」\n'+move+'\n\n'+cat_response+'\n\n'+('次の働きかけまで、少し間を置いた。' if switch else '二人の間合いが、少し近づいた。')
+    if narrative_scene=='open_up':
+        reaction='neutral' if reaction=='any' else reaction
+        default_speech=('少し休もうか。' if action=='pause' else '今度はこれにしよう。' if action=='switch' else cat_name+('、遊ぼうか。' if mode=='teaser' else '、なでてもいいかな。' if mode=='pet' else '、付き合ってくれるかな。'))
+        speech=speech or default_speech
+        if not cat_response:
+            if action=='switch':body='は人の手元を見つめた。'
+            elif action=='pause':body='は体を丸め、ゆっくり息を整えた。' if reaction=='listless' else 'は前足をそろえ、静かに座った。'
+            elif reaction=='turn_away':body='は顔を背け、手の届かない方へ身を引いた。'
+            elif reaction=='listless':body='はまぶたを重そうに下げ、動こうとしなかった。'
+            elif reaction=='confused':body='は耳を動かし、どう応じるか迷っているようだった。'
+            elif reaction=='enthusiastic':body='は穂先を追い、勢いよく前足を伸ばした。' if mode=='teaser' else 'は目を細め、手に頬を寄せた。' if mode in ('pet','brush') else 'は相手へ耳を向け、声に熱心に応じた。' if mode=='voice' else 'は落ち着いた様子で、相手の気配を熱心にうかがった。' if mode=='presence' else 'は身を乗り出し、熱心に応じた。'
+            elif reaction=='favorable':body='は穂先を見つめ、前足でそっと触れた。' if mode=='teaser' else 'は力を抜き、気持ちよさそうに目を細めた。' if mode in ('pet','brush') else 'は穏やかな様子で、相手へ注意を向けた。' if mode in ('voice','presence') else 'は穏やかに応じた。'
+            else:body='は様子を見ながら、静かに応じた。'
+            cat_response=cat_name+body+' '+cat_name+'は心を開いた様子を見せた。'
+    move = next((r['text'] for r in ACTION_TEXTS if r['mode'] == mode and r['action'] == action),
+                '{human}は交流を「'+MODES[mode]+'」へ切り替えた。' if action=='switch' else '{human}は手を止め、{cat}が落ち着くのを待った。')
     narration = REST_NARRATION if mode == 'pause' else next(r['text'] for r in NARRATION_TEXTS if r['reaction'] == reaction)
+    if narrative_scene=='open_up' and action in ('pause','switch'):
+        narration=REST_NARRATION if action=='pause' else '次の働きかけまで、少し間を置いた。'
     return (human + '「' + speech + '」' if speech else '（未制作：人物のセリフ）') + '\n' \
         + move.format(human=human, cat=cat_name) + '\n\n' \
         + (cat_response or '（未制作：'+cat_name+'の反応）') + '\n\n' + narration
@@ -205,7 +229,8 @@ def build_registered_catalog(catalog, registry, store, entries, *, rows):
     cats=[r for r in rows if r['kind']=='cat_response']
     people=[r for r in rows if r['kind']=='speech']
     ids={r['id'] for r in rows}; cat_ids={r['id'] for r in cats}
-    result=dict(version=3,cat_bindings=[dict(cat_id=r['game_id'],content_cat_id=r['content_id'],subject_id=r['id'],name=r['name']) for r in cats],
+    special=any(e['condition'].get('narrative_scene','normal')!='normal' for e in entries)
+    result=dict(version=4 if special else 3,cat_bindings=[dict(cat_id=r['game_id'],content_cat_id=r['content_id'],subject_id=r['id'],name=r['name']) for r in cats],
         people=[dict(id=r['id'],name=r['name'],game_id=r['game_id'],call=r['call']) for r in people],
         entries=[],image_bindings=[],action_texts=copy.deepcopy(ACTION_TEXTS),narration_texts=copy.deepcopy(NARRATION_TEXTS),rest_narration=REST_NARRATION)
     for entry in sorted(entries,key=lambda r:key(r['condition'])):
@@ -217,6 +242,8 @@ def build_registered_catalog(catalog, registry, store, entries, *, rows):
             if (c['kind']=='cat_response' and cat['id']==c['subject_id'] or c['kind']=='speech' and target in ('*',cat['id'])):
                 for v in entry['variants']:expand(v['text'],cat['name'],person['call'] if person else '{cat}')
         result['entries'].append(dict(c,target_cat=target,pool_key=key(c),variants=[copy.deepcopy(v) for v in entry['variants'] if v['text']]))
+        if special:result['entries'][-1]['narrative_scene']=c.get('narrative_scene','normal')
+        else:result['entries'][-1].pop('narrative_scene',None)
     blobs,warnings={},[]
     for cat in cats:
         for mode in MODES:
@@ -227,6 +254,7 @@ def build_registered_catalog(catalog, registry, store, entries, *, rows):
                 if image['data'] is not None:blobs[image['image']]=image['data']
     labels={kind:{r['id']:r['name'] for r in rows if r['kind']==kind} for kind in SUBJECTS}
     report=coverage(entries,labels)
+    report['optional_special_scenes']={s:coverage(entries,labels,narrative_scene=s) for s in NARRATIVE_SCENES if s!='normal'}
     report.update(entry_count=len(result['entries']),candidate_count=sum(len(e['variants']) for e in result['entries']),image_warnings=warnings,
         excluded_entry_count=len(entries)-len(result['entries']),excluded_subjects=[dict(id=r['id'],name=r['name'],reason='利用対象外' if not r['enabled'] else 'ゲームID未対応') for r in all_rows if not r['enabled'] or not r['game_id']])
     result['revision']=hashlib.sha256(json.dumps(result,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode('utf-8')).hexdigest()

@@ -1,0 +1,89 @@
+{
+  "date": "2026-10-27",
+  "pack_id": "d4594a5f9a7f483ca16ddfca4ea48486",
+  "revision": "cf81652f0743025ec559ddf62d12f0d4c77794e03172757a433a4026f6d39687",
+  "version": 4,
+  "entries": 259,
+  "candidates": 761,
+  "normal_entries": 251,
+  "special_entries": 8,
+  "cat_bindings": 15,
+  "people": 3,
+  "python_tests": {
+    "normal_gui": 68,
+    "special": 4
+  },
+  "csharp_assertions": {
+    "special": 111,
+    "resume": 13,
+    "normal": 609,
+    "actual_pre_task_save": 7
+  },
+  "player": {
+    "result": "PASS: shipped Player v4 Resources; four confirmed fixture scenes / independent receipts; exact save text, IDs, revision and images; read-only; both rendered dimensions. Fixture rules only, production rules untouched.",
+    "resume": "PASS: shipped Player v4 Resources; four confirmed fixture scenes / independent receipts; exact save text, IDs, revision and images; read-only; both rendered dimensions. Fixture rules only, production rules untouched.",
+    "dimensions": "switch requested 1280x800 rendered 1280x800\nswitch requested 1024x768 rendered 1024x768\nconnect requested 1280x800 rendered 1280x800\nconnect requested 1024x768 rendered 1024x768\nopen_up requested 1280x800 rendered 1280x800\nopen_up requested 1024x768 rendered 1024x768\nsimultaneous requested 1280x800 rendered 1280x800\nsimultaneous requested 1024x768 rendered 1024x768\n"
+  },
+  "native_input": {
+    "surface": "shipped Latest Player, fixture-resumed simultaneous",
+    "renderedWidth": 1024,
+    "renderedHeight": 768,
+    "windowScreenshotWidth": 1026,
+    "windowScreenshotHeight": 800,
+    "actions": [
+      "history button",
+      "wheel and drag attempts",
+      "history scrollbar lower page",
+      "return to latest"
+    ],
+    "before": {
+      "remainingTurns": 18,
+      "stamina": 95,
+      "turn": 2
+    },
+    "after": {
+      "remainingTurns": 18,
+      "stamina": 95,
+      "turn": 2
+    },
+    "note": "Scrollbar successfully revealed saved stamina and prior history. Native inputs only; no action execution."
+  },
+  "protected_source_unchanged": {
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\interaction_subjects.json": true,
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\manifest.json": true
+  },
+  "capacity_before": {
+    "Logs": 16893140253,
+    "generated": 3277372585,
+    "content_images": 1220733128,
+    "Latest": 4289680386,
+    "Library": 6546993814
+  },
+  "capacity_after": {
+    "Logs": 18352648682,
+    "generated": 3277372585,
+    "content_images": 1220739226,
+    "Latest": 4841096360,
+    "Library": 7100713760
+  },
+  "capacity_delta": {
+    "Logs": 1459508429,
+    "generated": 0,
+    "content_images": 6098,
+    "Latest": 551415974,
+    "Library": 553719946
+  },
+  "latest_only": [
+    "Latest",
+    "Runs"
+  ],
+  "final_build_log": "Logs/StandaloneBuild/Runs/20261027-093910-795-9bd085bfe3ff401bb270ce243211e50e.log",
+  "scope": "Committed f0f4dc7 bundle/identities snapshot; normal export_bundle; original 251 entries checked field-by-field; excludes Takahashi 27 texts and concurrent replacement cat images",
+  "limits": [
+    "Manual authored 8 examples; model payload mocked, no live LLM request",
+    "Player scene occurrence uses in-memory fixture rules; native inputs cover viewing only",
+    "All-character prose and full-goal long-term evaluation excluded",
+    "Ancient 2026-10-14 save rejected by existing state validation; recent old fixture requires its original probability=0 rules (default Player correctly rejected mismatched store-event draw). No state migration added."
+  ],
+  "cleanup": "Only provisional imports/people and export 374645eff3914186818bd6fe208e6e8c created by this task were removed after scope correction. All pre-task packs, images, saves retained; fixed Latest replaced by move."
+}

@@ -14,7 +14,8 @@ namespace CatCafePreview.Standalone
     [Serializable] public class NarrativeVariant { public string id, text; public int slot; }
     [Serializable] public class NarrativeEntry
     {
-        public string kind, subject_id, mode, action, reaction, scene_key, target_cat, pool_key;
+        public string kind, subject_id, mode, action, reaction, scene_key, target_cat, pool_key, narrative_scene;
+        public string NarrativeScene=>string.IsNullOrEmpty(narrative_scene)?"normal":narrative_scene;
         public NarrativeVariant[] variants;
         public string Key()=>pool_key??string.Join("/",kind,subject_id,mode,action,reaction,scene_key);
     }
@@ -85,7 +86,7 @@ namespace CatCafePreview.Standalone
         }
         public void Validate()
         {
-            if((version!=1 && version!=2 && version!=3) || !Hex(pack_id,32) || !Hex(revision,64) || cat_bindings==null || cat_bindings.Length>500
+            if((version!=1 && version!=2 && version!=3 && version!=4) || !Hex(pack_id,32) || !Hex(revision,64) || cat_bindings==null || cat_bindings.Length>500
                 || people==null || people.Length>500
                 || entries==null || entries.Length>50000 || image_bindings==null || image_bindings.Length!=CatalogModes.Sum(m=>Actions(m).Length)*cat_bindings.Length
                 || action_texts==null || narration_texts==null || !Text(rest_narration,500))throw new ArgumentException("交流文カタログの見出し・版・対応が不正です。");
@@ -98,8 +99,9 @@ namespace CatCafePreview.Standalone
             foreach(var e in entries)
             {
                 if(e==null || e.kind!="speech" && e.kind!="cat_response" || (e.kind=="speech"?!persons.Contains(e.subject_id):!cats.Contains(e.subject_id))
-                    || !CatalogModes.Contains(e.mode) || !Actions(e.mode).Contains(e.action) || e.scene_key!=Scene(e.mode,e.action)
-                    || (e.kind=="speech"?e.reaction!="any":!Reactions.Contains(e.reaction) || e.mode=="pause" && e.reaction!="neutral" && e.reaction!="listless")
+                    || !CatalogModes.Contains(e.mode) || !EntryActions(e.mode,e.NarrativeScene).Contains(e.action) || e.scene_key!=Scene(e.mode,e.action)
+                    || (e.kind=="speech" || e.NarrativeScene!="normal"?e.reaction!="any":!Reactions.Contains(e.reaction) || e.mode=="pause" && e.reaction!="neutral" && e.reaction!="listless")
+                    || version<4 && e.NarrativeScene!="normal" || version>=4 && !new[]{"normal","switch","connect","open_up","simultaneous"}.Contains(e.NarrativeScene)
                     || version>=2 && !PoolValid(e,cats)
                     || !keys.Add(e.Key()) || e.variants==null || e.variants.Length<1 || e.variants.Length>3)throw new ArgumentException("交流文の条件・候補が不正です。");
                 int previous=0;var texts=new HashSet<string>();
@@ -127,21 +129,30 @@ namespace CatCafePreview.Standalone
         private static bool PoolValid(NarrativeEntry e,HashSet<string> cats)
         {
             string basis=string.Join("/",e.kind,e.subject_id,e.mode,e.action,e.reaction,e.scene_key);
-            if(e.kind=="cat_response")return e.target_cat=="" && e.pool_key==basis;
+            string suffix=e.NarrativeScene=="normal"?"":"/scene="+e.NarrativeScene;
+            if(e.kind=="cat_response")return e.target_cat=="" && e.pool_key==basis+suffix;
             return (e.target_cat=="*" || cats.Contains(e.target_cat)) &&
-                (e.pool_key==basis+"/"+e.target_cat || e.target_cat=="cat-mike" && e.pool_key==basis);
+                (e.pool_key==basis+"/"+e.target_cat+suffix || e.target_cat=="cat-mike" && e.pool_key==basis+suffix);
+        }
+        public static string[] EntryActions(string mode,string scene)
+        {
+            if(scene=="normal")return Actions(mode);
+            if(mode=="pause")return new string[0];
+            if(scene=="switch")return new[]{"switch"};
+            if(scene=="connect" || scene=="simultaneous")return new[]{"connect"};
+            return scene=="open_up"?Actions(mode).Concat(new[]{"pause","switch"}).ToArray():new string[0];
         }
         public static bool Id(string s)=>s!=null && Regex.IsMatch(s,"^[a-z][a-z0-9_-]{0,99}$");
         private static bool Template(string s,bool person)=>s!=null && !s.Replace("{cat}","").Replace(person?"{cat_call}":"{cat}","").Any(c=>c=='{' || c=='}');
         public bool SupportsCat(string id)=>cat_bindings.Any(c=>c.cat_id==id);
         public string CatName(string id)=>cat_bindings.FirstOrDefault(c=>c.cat_id==id)?.name;
         public string Expand(string text,string person,string cat)=>text.Replace("{cat_call}",(people.FirstOrDefault(p=>(version==1?p.id:p.game_id)==person)?.call??"{cat}").Replace("{cat}",cat)).Replace("{cat}",cat);
-        public NarrativeEntry Find(string kind,string subject,string mode,string action,string reaction,string catId="cat-mike")
+        public NarrativeEntry Find(string kind,string subject,string mode,string action,string reaction,string catId="cat-mike",string narrativeScene="normal")
         {
             string cat=version==1?catId:cat_bindings.FirstOrDefault(c=>c.cat_id==catId)?.subject_id;
             if(version>=2)subject=kind=="speech"?people.FirstOrDefault(p=>p.game_id==subject)?.id:cat;
             foreach(var scope in new[]{cat,"*"})foreach(var operation in new[]{action,"any"})
-            {var found=entries.FirstOrDefault(e=>e.kind==kind && e.subject_id==subject && e.mode==mode && e.action==operation && e.reaction==reaction && (kind!="speech" || (version==1?"cat-mike":e.target_cat)==scope));if(found!=null)return found;}
+            {var found=entries.FirstOrDefault(e=>e.NarrativeScene==narrativeScene && e.kind==kind && e.subject_id==subject && e.mode==mode && e.action==operation && e.reaction==reaction && (kind!="speech" || (version==1?"cat-mike":e.target_cat)==scope));if(found!=null)return found;}
             return null;
         }
         public string ContentId(string fallback,string catId="cat-mike")=>cat_bindings.FirstOrDefault(c=>c.cat_id==catId)?.content_cat_id is string id && id!=""?id:fallback;
@@ -159,7 +170,8 @@ namespace CatCafePreview.Standalone
             if(value==null){b.Append("null");return;}if(value is string s){Quoted(b,s);return;}if(value is int n){b.Append(n.ToString(CultureInfo.InvariantCulture));return;}
             if(value is Array rows){b.Append('[');bool comma=false;foreach(var row in rows){if(comma)b.Append(',');comma=true;Canonical(b,row,false,format);}b.Append(']');return;}
             b.Append('{');bool first=true;foreach(var f in value.GetType().GetFields(BindingFlags.Instance|BindingFlags.Public).OrderBy(f=>f.Name,StringComparer.Ordinal))
-            {if(root && (f.Name=="revision" || f.Name=="pack_id"))continue;
+            {if(format<4 && value is NarrativeEntry && f.Name=="narrative_scene")continue;
+            if(root && (f.Name=="revision" || f.Name=="pack_id"))continue;
             if(format==1 && ((value is NarrativeCatBinding && (f.Name=="subject_id" || f.Name=="name")) || (value is NarrativePerson && (f.Name=="game_id" || f.Name=="call")) || (value is NarrativeEntry && (f.Name=="target_cat" || f.Name=="pool_key"))))continue;if(!first)b.Append(',');first=false;Quoted(b,f.Name);b.Append(':');Canonical(b,f.GetValue(value),false,format);}b.Append('}');
         }
     }

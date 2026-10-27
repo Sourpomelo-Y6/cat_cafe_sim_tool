@@ -7,6 +7,7 @@ from llm_generation_gui import LlmGenerationWindow
 from interaction_llm import InteractionLlmClient, InteractionLlmSettings, DEFAULT_OUTPUT, validate_inputs
 from interaction_texts import KINDS, SUBJECTS, MODES, REACTIONS
 from interaction_scenes import ACTION_LABELS
+from interaction_texts import NARRATIVE_SCENES
 
 
 class InteractionLlmWindow(LlmGenerationWindow):
@@ -29,7 +30,7 @@ class InteractionLlmWindow(LlmGenerationWindow):
         self.window.bind('<Destroy>', self.destroyed)
         frame = ttk.Frame(self.window, padding=12)
         frame.pack(fill='both', expand=True)
-        self.target = (KINDS[value['kind']] + ' ／ ' + self.subjects[value['kind']][value['subject_id']]
+        self.target = (NARRATIVE_SCENES[value.get('narrative_scene','normal')] + ' ／ ' + KINDS[value['kind']] + ' ／ ' + self.subjects[value['kind']][value['subject_id']]
                        + ' ／ ' + MODES[value['mode']] + ' ／ '
                        + ACTION_LABELS.get(value['action'], '動作共通') + ' ／ '
                        + REACTIONS.get(value['reaction'], '人物のセリフ・結果指定なし')

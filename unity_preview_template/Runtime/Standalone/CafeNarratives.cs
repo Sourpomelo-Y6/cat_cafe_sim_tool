@@ -8,6 +8,7 @@ namespace CatCafePreview.Standalone
         public int version=1,day,turn,seat;
         public string session,cat_id,customer_id,mode,action,reaction,text;
         public string special_reaction;
+        public string narrative_scene;
         public string speech,human_action,cat_response,narration;
         public string catalog_revision,speech_id,cat_text_id,speech_pool,cat_pool,image_resource,image_scene_key;
     }
@@ -32,6 +33,7 @@ namespace CatCafePreview.Standalone
             if(session==null)return;
             var row=Compose(player?"プレイヤー":CustomerName(e.customer_id),mode,action,e.previous_reaction,before,e.stamina,e.open_up_count>opened,action=="connect",sim.Definition(e.cat_id).name);
             row.cat_id=e.cat_id;
+            row.narrative_scene=e.open_up_count>opened?(action=="connect"?"simultaneous":"open_up"):action=="connect"?"connect":action=="switch"?"switch":"normal";
             row.special_reaction=e.open_up_count>opened?(action=="connect"?"simultaneous":"open_up"):action=="connect"?"connect":null;
             if(catalog!=null)ApplyCatalog(row,player?"player":e.customer_id,player?"プレイヤー":CustomerName(e.customer_id),before,e.stamina,e.open_up_count>opened);
             if(row.special_reaction=="open_up" || row.special_reaction=="simultaneous")
@@ -71,7 +73,7 @@ namespace CatCafePreview.Standalone
         private static string Format(CafeNarrativeRow row,string human,double before,double after)=>human+"「"+row.speech+"」\n"+row.human_action+"\n\n"+row.cat_response+"\n\n"+row.narration+"\n体力 "+CafeDetailPresentation.Number(before)+" → "+CafeDetailPresentation.Number(after);
         private void ApplyCatalog(CafeNarrativeRow row,string person,string human,double before,double after,bool opened)
         {
-            string mode=row.action=="pause"?"pause":row.mode;
+            string mode=row.action=="pause" && row.narrative_scene=="normal"?"pause":row.mode;
             string imageCatId=sim.ContentImageId(row.cat_id);
             if(row.action=="switch" || row.action=="connect")
             {
@@ -79,11 +81,23 @@ namespace CatCafePreview.Standalone
                 if(preparation!=null && !string.IsNullOrEmpty(preparation.image))
                 {row.image_resource="CatCafeContent/Imports/"+catalog.pack_id+"/"+preparation.image.Substring(0,preparation.image.Length-4);row.image_scene_key=preparation.resolved_scene_key;}
             }
-            if(!CafeNarrativeCatalog.Modes.Contains(mode) || row.action=="any" || !CafeNarrativeCatalog.Actions(mode).Contains(row.action))return;
+            if(!CafeNarrativeCatalog.Modes.Contains(mode) || row.action=="any")return;
+            string narrativeScene=row.narrative_scene??"normal";
+            if(!CafeNarrativeCatalog.EntryActions(mode,narrativeScene).Contains(row.action))return;
             string catName=sim.Definition(row.cat_id).name;
             row.catalog_revision=catalog.revision;
-            var speech=catalog.Find("speech",person,mode,row.action,"any",row.cat_id);
-            var cat=catalog.Find("cat_response",row.cat_id,mode,row.action,row.reaction,row.cat_id);
+            var speech=catalog.Find("speech",person,mode,row.action,"any",row.cat_id,narrativeScene);
+            var cat=catalog.Find("cat_response",row.cat_id,mode,row.action,narrativeScene=="normal"?row.reaction:"any",row.cat_id,narrativeScene);
+            bool dedicatedCat=cat!=null && narrativeScene!="normal";
+            if(narrativeScene=="open_up")
+            {
+                string fallbackMode=row.action=="pause"?"pause":mode;
+                if(CafeNarrativeCatalog.Actions(fallbackMode).Contains(row.action))
+                {
+                    speech=speech??catalog.Find("speech",person,fallbackMode,row.action,"any",row.cat_id);
+                    cat=cat??catalog.Find("cat_response",row.cat_id,fallbackMode,row.action,row.reaction,row.cat_id);
+                }
+            }
             if(speech!=null)
             {
                 var previous=Rows.LastOrDefault(r=>r.speech_pool==speech.Key());var chosen=Next(speech,previous?.speech_id,Rows.LastOrDefault(r=>r.customer_id==person)?.speech);
@@ -92,12 +106,13 @@ namespace CatCafePreview.Standalone
             if(cat!=null)
             {
                 var previous=Rows.LastOrDefault(r=>r.cat_pool==cat.Key());var chosen=Next(cat,previous?.cat_text_id,Rows.LastOrDefault(r=>r.cat_id==row.cat_id)?.cat_response);
-                row.cat_response=catalog.Expand(chosen.text,person,catName)+(opened?" "+catName+"は心を開いた様子を見せた。":"");row.cat_text_id=chosen.id;row.cat_pool=cat.Key();
+                row.cat_response=catalog.Expand(chosen.text,person,catName)+(opened && !dedicatedCat?" "+catName+"は心を開いた様子を見せた。":"");row.cat_text_id=chosen.id;row.cat_pool=cat.Key();
             }
-            var move=catalog.action_texts.FirstOrDefault(r=>r.mode==mode && r.action==row.action);
+            var move=catalog.action_texts.FirstOrDefault(r=>r.mode==(row.action=="pause"?"pause":mode) && r.action==row.action);
             if(move!=null)row.human_action=move.text.Replace("{human}",human).Replace("{cat}",catName);
-            string scene=mode=="pause"?catalog.rest_narration:catalog.narration_texts.FirstOrDefault(r=>r.reaction==row.reaction)?.text;
-            if(scene!=null)row.narration=scene+(mode=="pause" && after>before?" 体力が少し戻った。":"")+(after==0?" 体力が尽き、交流を切り上げた。":"");
+            string presentationMode=row.action=="pause"?"pause":mode;
+            string scene=presentationMode=="pause"?catalog.rest_narration:catalog.narration_texts.FirstOrDefault(r=>r.reaction==row.reaction)?.text;
+            if(scene!=null && CafeNarrativeCatalog.Actions(presentationMode).Contains(row.action) && (narrativeScene=="normal" || narrativeScene=="open_up"))row.narration=scene+(presentationMode=="pause" && after>before?" 体力が少し戻った。":"")+(after==0?" 体力が尽き、交流を切り上げた。":"");
             string imageScene=CafeNarrativeCatalog.UsePreparationImage(row.cat_id,row.action,row.reaction)?mode:CafeNarrativeCatalog.Scene(mode,row.action);
             var image=catalog.image_bindings.FirstOrDefault(i=>i.cat_id==imageCatId && i.scene_key==imageScene);
             // Existing special-event images keep priority when this action also opens up.
@@ -120,6 +135,7 @@ namespace CatCafePreview.Standalone
             var rows=save.narratives??new CafeNarrativeRow[0];if(rows.Length>100000)throw new ArgumentException("Too many narrative receipts");var keys=new HashSet<string>();
             foreach(var r in rows)
             {
+                if(r!=null && !string.IsNullOrEmpty(r.narrative_scene) && !new[]{"normal","switch","connect","open_up","simultaneous"}.Contains(r.narrative_scene))throw new ArgumentException("Invalid narrative scene receipt");
                 if(r!=null && !string.IsNullOrEmpty(r.special_reaction) && !new[]{"connect","open_up","simultaneous"}.Contains(r.special_reaction))throw new ArgumentException("Invalid special reaction receipt");
                 if(r==null || r.version!=1 || r.day<1 || r.day>save.state.day || !CafeNarrativeCatalog.Id(r.cat_id) || string.IsNullOrEmpty(r.session) || r.turn<1 || string.IsNullOrEmpty(r.text) || r.text.Length>3000 || !keys.Add(r.session+"/"+r.turn))throw new ArgumentException("Invalid narrative receipt");
                 if(!string.IsNullOrEmpty(r.catalog_revision) && !CafeNarrativeCatalog.Hex(r.catalog_revision,64)

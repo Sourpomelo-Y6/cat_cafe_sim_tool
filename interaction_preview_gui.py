@@ -1,3 +1,4 @@
+from interaction_texts import NARRATIVE_SCENES, scene_actions, scene_reactions
 """ゲームを進めず、画像・採用済み文章・編集中の案を組み合わせて確認する。"""
 from interaction_texts import SUBJECTS, MODES, REACTIONS, actions, reactions, condition, validate_entry
 from interaction_scenes import ACTION_LABELS
@@ -37,12 +38,12 @@ class InteractionPreviewWindow:
         initial = editing_entry['condition'] if editing_entry else condition()
         defaults = dict(human=initial['subject_id'] if initial['kind'] == 'speech' else 'player',
                         mode=initial['mode'], action=initial['action'],
-                        reaction=initial['reaction'] if initial['kind'] == 'cat_response' else 'neutral')
+                        reaction=initial['reaction'] if initial['kind'] == 'cat_response' else 'neutral',narrative_scene=initial.get('narrative_scene','normal'))
         self.variables, self.selectors = {}, {}
         grid = ttk.Frame(frame)
         grid.pack(fill='x', pady=6)
         for i, (name, label) in enumerate([('human', '人の話者'), ('mode', '行動'), ('action', '実行する操作'),
-                                          ('reaction', '猫の反応条件'), ('speech', 'セリフの候補'), ('cat', '猫の反応の候補')]):
+                                          ('reaction', '猫の反応条件'), ('speech', 'セリフの候補'), ('cat', '猫の反応の候補'), ('narrative_scene','確定場面')]):
             col, row = i % 3, (i // 3) * 2
             grid.columnconfigure(col, weight=1)
             ttk.Label(grid, text=label).grid(row=row, column=col, sticky='w')
@@ -52,7 +53,7 @@ class InteractionPreviewWindow:
             combo.bind('<<ComboboxSelected>>', lambda event: self.render())
             self.variables[name], self.selectors[name] = var, combo
         for name, labels in [('human', self.subjects['speech']), ('mode', MODES),
-                             ('action', dict(ACTION_LABELS, any='操作共通')), ('reaction', REACTIONS)]:
+                             ('action', dict(ACTION_LABELS, any='操作共通')), ('reaction',dict(REACTIONS,any='確定場面の反応')), ('narrative_scene',NARRATIVE_SCENES)]:
             self.variables[name].set(labels[defaults[name]])
         line = ttk.Frame(frame)
         line.pack(fill='x', pady=6)
@@ -149,14 +150,22 @@ class InteractionPreviewWindow:
             if self.subject_registry:
                 self.saved_content_id=self.subject_registry.get(cat_id)['content_id']
                 self.content.set(next((label for label,id in self.image_ids.items() if id==self.saved_content_id),'未設定'))
-        mode = choice('mode', MODES)
-        action = choice('action', {k: ACTION_LABELS[k] for k in actions(mode) if k != 'any'})
-        reaction = choice('reaction', {k: REACTIONS[k] for k in reactions('cat_response', mode)})
+        scene=choice('narrative_scene',NARRATIVE_SCENES)
+        mode = choice('mode', MODES if scene=='normal' else {k:v for k,v in MODES.items() if k!='pause'})
+        action = choice('action', {k: ACTION_LABELS[k] for k in scene_actions(mode,scene) if k != 'any'})
+        reaction = choice('reaction', REACTIONS if scene=='open_up' else {k: dict(REACTIONS,any='確定場面の反応')[k] for k in scene_reactions('cat_response', mode,scene)})
         selections, texts = [], []
         for name, kind, subject, outcome in [('speech', 'speech', human, 'any'),
                                               ('cat', 'cat_response', cat_id, reaction)]:
-            found = select_entry(self.entries, condition(kind, subject, mode, action, outcome, subjects=self.subjects, target_cat=cat_id if kind=='speech' else None),
+            found = select_entry(self.entries, condition(kind, subject, mode, action, 'any' if scene!='normal' else outcome, subjects=self.subjects, target_cat=cat_id if kind=='speech' else None,narrative_scene=scene),
                                  overlay=self.overlay if self.use_edit.get() else None,prefer_overlay=True)
+            if found['candidates'] and scene!='normal':found['source']=NARRATIVE_SCENES[scene]+'専用文：'+found['source']
+            if not found['candidates'] and scene=='open_up':
+                normal_mode='pause' if action=='pause' else mode
+                found=select_entry(self.entries,condition(kind,subject,normal_mode,action,'any' if kind=='speech' else reaction,subjects=self.subjects,target_cat=cat_id if kind=='speech' else None)) if action!='switch' else dict(candidates=[],source='既存定型文',match='')
+                found['source']='通常文＋特別反応追記（フォールバック）'
+                if kind=='cat_response':found=dict(found,candidates=[dict(v,text=v['text']+' {cat}は心を開いた様子を見せた。') for v in found['candidates']])
+            if not found['candidates'] and scene!='normal':found['source']='既存定型文（フォールバック）'
             labels = {str(i): '案' + str(v['slot']) for i, v in enumerate(found['candidates'])}
             if labels:
                 index = int(choice(name, labels))
@@ -167,12 +176,12 @@ class InteractionPreviewWindow:
                 texts.append('')
             selections.append(('人：' if name == 'speech' else '猫：') + found['source'] + ' ' + found['match'])
         self.source_notice.set(' ／ '.join(selections) + ('（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）' if self.use_edit.get() else '（専用操作を優先、なければ同じ反応の操作共通文）'))
-        self.write(self.body, compose_preview(self.subjects['speech'][human], mode, action, reaction, *texts, cat_name=self.subjects['cat_response'][cat_id],call=self.subject_registry.get(human)['call'] if self.subject_registry else '{cat}'))
+        self.write(self.body, compose_preview(self.subjects['speech'][human], mode, action, reaction, *texts, cat_name=self.subjects['cat_response'][cat_id],call=self.subject_registry.get(human)['call'] if self.subject_registry else '{cat}',narrative_scene=scene))
         self.image = None
         self.picture.configure(image='', text='画像なし')
         try:
             content_id = self.image_ids.get(self.content.get(), '')
-            image = resolve_image(self.registry, content_id, mode, action)
+            image = resolve_image(self.registry, content_id, mode,scene if scene in ('open_up','simultaneous') else 'any' if scene in ('switch','connect') else action)
             notes = ['画像：' + image['requested_scene_key'] + ' → ' + (image['resolved_scene_key'] or 'なし')]
             notes.extend(image['warnings'])
             if content_id != self.saved_content_id:
@@ -187,6 +196,8 @@ class InteractionPreviewWindow:
         self.write(self.missing_text, f"登録済みで対応：{report['covered_count']} / {report['expected_count']}条件"
                    + f"（操作共通文を利用：{report['common_count']}）\n未制作：{report['missing_count']}条件\n\n"
                    + '\n'.join(condition_label(v,self.subjects) for v in report['missing_conditions']))
+        special=coverage(self.entries,dict(speech=self.subjects['speech'],cat_response={cat_id:self.subjects['cat_response'][cat_id]}),cat_id,narrative_scene=scene) if scene!='normal' else None
+        if special:self.write(self.missing_text,self.missing_text.get('1.0','end-1c')+'\n\n── 任意の特別文（通常文不足へ含めない）──\n'+str(special['missing_count'])+'条件未制作\n'+'\n'.join(condition_label(v,self.subjects) for v in special['missing_conditions']))
         if self.drafts:
             from interaction_texts import key
             from interaction_presentation import expected_conditions

@@ -7,11 +7,12 @@ from pathlib import Path
 
 from interaction_llm import InteractionLlmClient, InteractionLlmSettings, DEFAULT_OUTPUT, validate_inputs
 from interaction_texts import SUBJECTS, MODES, REACTIONS, condition, make_entry, key, actions, reactions
+from interaction_texts import NARRATIVE_SCENES, scene_actions, scene_reactions
 from interaction_scenes import ACTION_LABELS
 from llm_client import GenerationCancelled
 
 
-def prepare_jobs(settings, subjects, modes, *, scope='common', has_text=None, kind='speech', selected_reactions=None, subject_registry=None, target_cat=None, get_entry=None, fill_partial=False):
+def prepare_jobs(settings, subjects, modes, *, scope='common', has_text=None, kind='speech', selected_reactions=None, subject_registry=None, target_cat=None, get_entry=None, fill_partial=False, narrative_scene='normal'):
     """開始前に全資料を検証し、実行中の設定変更から切り離す。"""
     registry=subject_registry or getattr(settings,'subject_registry',None)
     labels=registry.labels() if registry else SUBJECTS
@@ -20,7 +21,7 @@ def prepare_jobs(settings, subjects, modes, *, scope='common', has_text=None, ki
     if kind not in SUBJECTS:
         raise ValueError('文章の種類が不正です。')
     chosen_reactions = list(REACTIONS) if selected_reactions is None else list(selected_reactions)
-    if kind == 'cat_response' and (not chosen_reactions or any(r not in REACTIONS for r in chosen_reactions)):
+    if kind == 'cat_response' and narrative_scene=='normal' and (not chosen_reactions or any(r not in REACTIONS for r in chosen_reactions)):
         raise ValueError('猫の反応を1つ以上選んでください。')
     jobs = []
     for subject in subjects:
@@ -29,14 +30,14 @@ def prepare_jobs(settings, subjects, modes, *, scope='common', has_text=None, ki
         for mode in modes:
             if mode not in MODES:
                 raise ValueError('行動が不正です。')
-            for action in actions(mode):
-                common = action in ('any', 'pause')
+            for action in scene_actions(mode,narrative_scene):
+                common = action in ('any', 'pause') or narrative_scene in ('switch','connect','simultaneous')
                 if scope == 'common' and not common or scope == 'specific' and common:
                     continue
-                for reaction in reactions(kind, mode):
-                    if kind == 'cat_response' and reaction not in chosen_reactions:
+                for reaction in scene_reactions(kind, mode,narrative_scene):
+                    if kind == 'cat_response' and narrative_scene=='normal' and reaction not in chosen_reactions:
                         continue
-                    value = condition(kind, subject, mode, action, reaction, subjects=labels, target_cat=target_cat if kind=='speech' else None)
+                    value = condition(kind, subject, mode, action, reaction, subjects=labels, target_cat=target_cat if kind=='speech' else None,narrative_scene=narrative_scene)
                     base=get_entry(value) if get_entry else None
                     if fill_partial:
                         if base and all(v['text'] for v in base['variants']):continue
@@ -94,6 +95,7 @@ class InteractionBatchWindow:
         choices.pack(fill='x')
         labels=self.labels[kind]
         self.subjects, self.modes, self.option_widgets = {}, {}, []
+        self.mode_widgets={}
         subjects_frame=ttk.Frame(choices)
         subjects_frame.grid(row=0,column=0,columnspan=3,sticky='ew')
         canvas=tk.Canvas(subjects_frame,height=58,highlightthickness=0)
@@ -113,6 +115,7 @@ class InteractionBatchWindow:
             widget=ttk.Checkbutton(modes_frame,text=label,variable=var)
             widget.grid(row=i//3,column=i%3,sticky='w',padx=10)
             self.option_widgets.append(widget);self.modes[name]=var
+            self.mode_widgets[name]=widget
         self.scopes = {'動作共通のみ': 'common', '操作別のみ': 'specific', '共通＋操作別': 'all'}
         self.scope = tk.StringVar(master=self.window, value='共通＋操作別' if has_text and not cat else '動作共通のみ')
         scope_selector = ttk.Combobox(choices, textvariable=self.scope, values=list(self.scopes), state='readonly', width=18)
@@ -133,6 +136,10 @@ class InteractionBatchWindow:
         if not cat:
             scope_label='どの猫でも使う' if self.target_cat=='*' else self.labels['cat_response'].get(self.target_cat or 'cat-mike','猫専用')+'専用'
             ttk.Label(choices,text='猫への適用：'+scope_label).grid(row=4,column=0,columnspan=3,sticky='w',padx=10)
+        self.narrative_scene=tk.StringVar(master=self.window,value=NARRATIVE_SCENES['normal'])
+        scene_selector=ttk.Combobox(choices,textvariable=self.narrative_scene,values=list(NARRATIVE_SCENES.values()),state='readonly')
+        scene_selector.grid(row=5,column=0,columnspan=3,sticky='ew',padx=10)
+        self.option_widgets.append(scene_selector)
         self.reaction_choices = {}
         if cat:
             reaction_frame = ttk.LabelFrame(frame, text='生成する反応（全動作の共通50条件・150案／猫、入力済みは除外）', padding=6)
@@ -143,6 +150,18 @@ class InteractionBatchWindow:
                 widget.grid(row=i//3, column=i%3, sticky='w', padx=10)
                 self.reaction_choices[name] = var
                 self.option_widgets.append(widget)
+        def scene_changed(*args):
+            scene=next(k for k,v in NARRATIVE_SCENES.items() if v==self.narrative_scene.get())
+            special=scene!='normal'
+            self.mode_widgets['pause'].state(['disabled'] if special else ['!disabled'])
+            if special:self.modes['pause'].set(False)
+            scopes=list(self.scopes) if scene in ('normal','open_up') else ['動作共通のみ','共通＋操作別']
+            scope_selector.configure(values=scopes)
+            if self.scope.get() not in scopes:self.scope.set(scopes[0])
+            if cat:
+                for widget in reaction_frame.winfo_children():widget.state(['disabled'] if special else ['!disabled'])
+        self.refresh_scene_options=scene_changed
+        self.narrative_scene.trace_add('write',scene_changed)
         connection = ttk.Frame(frame)
         connection.pack(fill='x', pady=8)
         self.url = tk.StringVar(master=self.window, value=saved['url'])
@@ -210,7 +229,7 @@ class InteractionBatchWindow:
                 jobs = prepare_jobs(self.settings, [k for k, v in self.subjects.items() if v.get()],
                     [k for k, v in self.modes.items() if v.get()], scope=self.scopes[self.scope.get()],
                     has_text=self.has_text if self.only_missing.get() else None, kind=self.kind,
-                    selected_reactions=[k for k, v in self.reaction_choices.items() if v.get()] if self.kind == 'cat_response' else None, subject_registry=self.subject_registry, target_cat=self.target_cat, get_entry=self.get_entry, fill_partial=self.partial.get())
+                    selected_reactions=[k for k, v in self.reaction_choices.items() if v.get()] if self.kind == 'cat_response' else None, subject_registry=self.subject_registry, target_cat=self.target_cat, get_entry=self.get_entry, fill_partial=self.partial.get(),narrative_scene=next(k for k,v in NARRATIVE_SCENES.items() if v==self.narrative_scene.get()))
                 for value, notes in jobs:
                     if self.drafts:notes['draft_snapshot']=self.drafts.get(value)
                     if self.published:notes['published_snapshot']=self.published.get(value)
@@ -273,8 +292,8 @@ class InteractionBatchWindow:
     @staticmethod
     def label(value, labels=None):
         return ((labels or SUBJECTS)[value['kind']][value['subject_id']] + '／' + MODES[value['mode']]
-                + '／' + ACTION_LABELS.get(value['action'], '動作共通')
-                + ('／' + REACTIONS[value['reaction']] if value['kind'] == 'cat_response' else '／猫共通' if value.get('target_cat')=='*' else '／'+(labels or SUBJECTS)['cat_response'].get(value.get('target_cat','cat-mike'),'指定猫')+'専用'))
+                + '／' + NARRATIVE_SCENES[value.get('narrative_scene','normal')] + '／' + ACTION_LABELS.get(value['action'], '動作共通')
+                + ('／' + REACTIONS.get(value['reaction'],'確定場面') if value['kind'] == 'cat_response' else '／猫共通' if value.get('target_cat')=='*' else '／'+(labels or SUBJECTS)['cat_response'].get(value.get('target_cat','cat-mike'),'指定猫')+'専用'))
 
     def poll(self):
         self.timer = None
