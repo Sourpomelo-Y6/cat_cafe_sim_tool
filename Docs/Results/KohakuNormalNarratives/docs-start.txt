@@ -1,0 +1,3 @@
+ee2abd4 Record standard narrative scope selection
+7a911ca Document narrative completion scope options
+d89ece3 Record Mike ball special prose registration awaiting Unity import

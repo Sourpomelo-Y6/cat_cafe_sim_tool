@@ -1,0 +1,1428 @@
+{
+  "checks": [
+    {
+      "mode": "teaser",
+      "action": "direct",
+      "reaction": "neutral",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "66ec2a7426d45c2b9822cbdc92ac8381",
+        "ae8b124f9755570090dbcf9156af5ecb"
+      ]
+    },
+    {
+      "mode": "teaser",
+      "action": "adapt",
+      "reaction": "neutral",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "66ec2a7426d45c2b9822cbdc92ac8381",
+        "ae8b124f9755570090dbcf9156af5ecb"
+      ]
+    },
+    {
+      "mode": "teaser",
+      "action": "intense",
+      "reaction": "neutral",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "66ec2a7426d45c2b9822cbdc92ac8381",
+        "ae8b124f9755570090dbcf9156af5ecb"
+      ]
+    },
+    {
+      "mode": "teaser",
+      "action": "feint",
+      "reaction": "neutral",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "66ec2a7426d45c2b9822cbdc92ac8381",
+        "ae8b124f9755570090dbcf9156af5ecb"
+      ]
+    },
+    {
+      "mode": "teaser",
+      "action": "direct",
+      "reaction": "favorable",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "52e35e07757052a6b549f7a3371e9deb",
+        "c7b43edcabfc58b891e0949ae44bc19d"
+      ]
+    },
+    {
+      "mode": "teaser",
+      "action": "adapt",
+      "reaction": "favorable",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "52e35e07757052a6b549f7a3371e9deb",
+        "c7b43edcabfc58b891e0949ae44bc19d"
+      ]
+    },
+    {
+      "mode": "teaser",
+      "action": "intense",
+      "reaction": "favorable",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "52e35e07757052a6b549f7a3371e9deb",
+        "c7b43edcabfc58b891e0949ae44bc19d"
+      ]
+    },
+    {
+      "mode": "teaser",
+      "action": "feint",
+      "reaction": "favorable",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "52e35e07757052a6b549f7a3371e9deb",
+        "c7b43edcabfc58b891e0949ae44bc19d"
+      ]
+    },
+    {
+      "mode": "teaser",
+      "action": "direct",
+      "reaction": "enthusiastic",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "189b8bd4c477569c8213416cf27fdd21",
+        "7948a58d1a5d53989f185d6a57ea2c8f"
+      ]
+    },
+    {
+      "mode": "teaser",
+      "action": "adapt",
+      "reaction": "enthusiastic",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "189b8bd4c477569c8213416cf27fdd21",
+        "7948a58d1a5d53989f185d6a57ea2c8f"
+      ]
+    },
+    {
+      "mode": "teaser",
+      "action": "intense",
+      "reaction": "enthusiastic",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "189b8bd4c477569c8213416cf27fdd21",
+        "7948a58d1a5d53989f185d6a57ea2c8f"
+      ]
+    },
+    {
+      "mode": "teaser",
+      "action": "feint",
+      "reaction": "enthusiastic",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "189b8bd4c477569c8213416cf27fdd21",
+        "7948a58d1a5d53989f185d6a57ea2c8f"
+      ]
+    },
+    {
+      "mode": "teaser",
+      "action": "direct",
+      "reaction": "turn_away",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "teaser",
+      "action": "adapt",
+      "reaction": "turn_away",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "teaser",
+      "action": "intense",
+      "reaction": "turn_away",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "teaser",
+      "action": "feint",
+      "reaction": "turn_away",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "teaser",
+      "action": "direct",
+      "reaction": "confused",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "4dbf65e8982258bcbf6fefbf7f7a48e5",
+        "92369506a59957d4b412cefd8ce3eb79"
+      ]
+    },
+    {
+      "mode": "teaser",
+      "action": "adapt",
+      "reaction": "confused",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "4dbf65e8982258bcbf6fefbf7f7a48e5",
+        "92369506a59957d4b412cefd8ce3eb79"
+      ]
+    },
+    {
+      "mode": "teaser",
+      "action": "intense",
+      "reaction": "confused",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "4dbf65e8982258bcbf6fefbf7f7a48e5",
+        "92369506a59957d4b412cefd8ce3eb79"
+      ]
+    },
+    {
+      "mode": "teaser",
+      "action": "feint",
+      "reaction": "confused",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "4dbf65e8982258bcbf6fefbf7f7a48e5",
+        "92369506a59957d4b412cefd8ce3eb79"
+      ]
+    },
+    {
+      "mode": "teaser",
+      "action": "direct",
+      "reaction": "listless",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "a76e2a4892185344aec925ecac8fd024",
+        "26b686dbe5435b4daa0217ff6c693db8"
+      ]
+    },
+    {
+      "mode": "teaser",
+      "action": "adapt",
+      "reaction": "listless",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "a76e2a4892185344aec925ecac8fd024",
+        "26b686dbe5435b4daa0217ff6c693db8"
+      ]
+    },
+    {
+      "mode": "teaser",
+      "action": "intense",
+      "reaction": "listless",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "a76e2a4892185344aec925ecac8fd024",
+        "26b686dbe5435b4daa0217ff6c693db8"
+      ]
+    },
+    {
+      "mode": "teaser",
+      "action": "feint",
+      "reaction": "listless",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "a76e2a4892185344aec925ecac8fd024",
+        "26b686dbe5435b4daa0217ff6c693db8"
+      ]
+    },
+    {
+      "mode": "pet",
+      "action": "direct",
+      "reaction": "neutral",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "6eb5d2b89ff75fa8a6e118449758ae11",
+        "4c7b5280e91e5b25ad9e6071d5a2d9d4"
+      ]
+    },
+    {
+      "mode": "pet",
+      "action": "adapt",
+      "reaction": "neutral",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "6eb5d2b89ff75fa8a6e118449758ae11",
+        "4c7b5280e91e5b25ad9e6071d5a2d9d4"
+      ]
+    },
+    {
+      "mode": "pet",
+      "action": "direct",
+      "reaction": "favorable",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "5a830e48a1815e7d98907b8a46cd97ae",
+        "76f7c39966ff53c8a113751d083f4149"
+      ]
+    },
+    {
+      "mode": "pet",
+      "action": "adapt",
+      "reaction": "favorable",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "5a830e48a1815e7d98907b8a46cd97ae",
+        "76f7c39966ff53c8a113751d083f4149"
+      ]
+    },
+    {
+      "mode": "pet",
+      "action": "direct",
+      "reaction": "enthusiastic",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "pet",
+      "action": "adapt",
+      "reaction": "enthusiastic",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "pet",
+      "action": "direct",
+      "reaction": "turn_away",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "pet",
+      "action": "adapt",
+      "reaction": "turn_away",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "pet",
+      "action": "direct",
+      "reaction": "confused",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "9bddb660328b5ea69384feaf81e99f2d",
+        "a887da9a95d95d78835f764c64958fec"
+      ]
+    },
+    {
+      "mode": "pet",
+      "action": "adapt",
+      "reaction": "confused",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "9bddb660328b5ea69384feaf81e99f2d",
+        "a887da9a95d95d78835f764c64958fec"
+      ]
+    },
+    {
+      "mode": "pet",
+      "action": "direct",
+      "reaction": "listless",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "f8c26b401aa857d9bb6cd66293635c5b",
+        "e37f40ab45d05d04a0897c8a62f24962"
+      ]
+    },
+    {
+      "mode": "pet",
+      "action": "adapt",
+      "reaction": "listless",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "f8c26b401aa857d9bb6cd66293635c5b",
+        "e37f40ab45d05d04a0897c8a62f24962"
+      ]
+    },
+    {
+      "mode": "ball",
+      "action": "direct",
+      "reaction": "neutral",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "a1c28352f9305ccc83605eb036eaf31a",
+        "53b153322fdb509a84c518f54648abbf"
+      ]
+    },
+    {
+      "mode": "ball",
+      "action": "adapt",
+      "reaction": "neutral",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "a1c28352f9305ccc83605eb036eaf31a",
+        "53b153322fdb509a84c518f54648abbf"
+      ]
+    },
+    {
+      "mode": "ball",
+      "action": "intense",
+      "reaction": "neutral",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "a1c28352f9305ccc83605eb036eaf31a",
+        "53b153322fdb509a84c518f54648abbf"
+      ]
+    },
+    {
+      "mode": "ball",
+      "action": "feint",
+      "reaction": "neutral",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "a1c28352f9305ccc83605eb036eaf31a",
+        "53b153322fdb509a84c518f54648abbf"
+      ]
+    },
+    {
+      "mode": "ball",
+      "action": "direct",
+      "reaction": "favorable",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "171a465c7e5d5262af95a68abd7c1a35",
+        "18247d7ff1c25c0fbbe1397aebb9f46b"
+      ]
+    },
+    {
+      "mode": "ball",
+      "action": "adapt",
+      "reaction": "favorable",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "171a465c7e5d5262af95a68abd7c1a35",
+        "18247d7ff1c25c0fbbe1397aebb9f46b"
+      ]
+    },
+    {
+      "mode": "ball",
+      "action": "intense",
+      "reaction": "favorable",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "171a465c7e5d5262af95a68abd7c1a35",
+        "18247d7ff1c25c0fbbe1397aebb9f46b"
+      ]
+    },
+    {
+      "mode": "ball",
+      "action": "feint",
+      "reaction": "favorable",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "171a465c7e5d5262af95a68abd7c1a35",
+        "18247d7ff1c25c0fbbe1397aebb9f46b"
+      ]
+    },
+    {
+      "mode": "ball",
+      "action": "direct",
+      "reaction": "enthusiastic",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "06c944b89155563da9b3fa7312bc8877",
+        "67d9b98f6d595128a61a16f53c2fa2f7"
+      ]
+    },
+    {
+      "mode": "ball",
+      "action": "adapt",
+      "reaction": "enthusiastic",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "06c944b89155563da9b3fa7312bc8877",
+        "67d9b98f6d595128a61a16f53c2fa2f7"
+      ]
+    },
+    {
+      "mode": "ball",
+      "action": "intense",
+      "reaction": "enthusiastic",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "06c944b89155563da9b3fa7312bc8877",
+        "67d9b98f6d595128a61a16f53c2fa2f7"
+      ]
+    },
+    {
+      "mode": "ball",
+      "action": "feint",
+      "reaction": "enthusiastic",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "06c944b89155563da9b3fa7312bc8877",
+        "67d9b98f6d595128a61a16f53c2fa2f7"
+      ]
+    },
+    {
+      "mode": "ball",
+      "action": "direct",
+      "reaction": "turn_away",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "ball",
+      "action": "adapt",
+      "reaction": "turn_away",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "ball",
+      "action": "intense",
+      "reaction": "turn_away",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "ball",
+      "action": "feint",
+      "reaction": "turn_away",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "ball",
+      "action": "direct",
+      "reaction": "confused",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "993a48d0fb3e5819bd447fea1d03df42",
+        "fde54686b9265a7da9a72253dc4cfa32"
+      ]
+    },
+    {
+      "mode": "ball",
+      "action": "adapt",
+      "reaction": "confused",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "993a48d0fb3e5819bd447fea1d03df42",
+        "fde54686b9265a7da9a72253dc4cfa32"
+      ]
+    },
+    {
+      "mode": "ball",
+      "action": "intense",
+      "reaction": "confused",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "993a48d0fb3e5819bd447fea1d03df42",
+        "fde54686b9265a7da9a72253dc4cfa32"
+      ]
+    },
+    {
+      "mode": "ball",
+      "action": "feint",
+      "reaction": "confused",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "993a48d0fb3e5819bd447fea1d03df42",
+        "fde54686b9265a7da9a72253dc4cfa32"
+      ]
+    },
+    {
+      "mode": "ball",
+      "action": "direct",
+      "reaction": "listless",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "ef8fb10837e35305b7dd99a0b7d37ba7",
+        "9f7036f0aa215f48b0b266f32ef7a50a"
+      ]
+    },
+    {
+      "mode": "ball",
+      "action": "adapt",
+      "reaction": "listless",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "ef8fb10837e35305b7dd99a0b7d37ba7",
+        "9f7036f0aa215f48b0b266f32ef7a50a"
+      ]
+    },
+    {
+      "mode": "ball",
+      "action": "intense",
+      "reaction": "listless",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "ef8fb10837e35305b7dd99a0b7d37ba7",
+        "9f7036f0aa215f48b0b266f32ef7a50a"
+      ]
+    },
+    {
+      "mode": "ball",
+      "action": "feint",
+      "reaction": "listless",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "ef8fb10837e35305b7dd99a0b7d37ba7",
+        "9f7036f0aa215f48b0b266f32ef7a50a"
+      ]
+    },
+    {
+      "mode": "plush",
+      "action": "direct",
+      "reaction": "neutral",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "e4b24be2d58b5ab49d0120125fe6105c",
+        "45c3b4ff1f865d1f96356ced26ea431f"
+      ]
+    },
+    {
+      "mode": "plush",
+      "action": "adapt",
+      "reaction": "neutral",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "e4b24be2d58b5ab49d0120125fe6105c",
+        "45c3b4ff1f865d1f96356ced26ea431f"
+      ]
+    },
+    {
+      "mode": "plush",
+      "action": "feint",
+      "reaction": "neutral",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "e4b24be2d58b5ab49d0120125fe6105c",
+        "45c3b4ff1f865d1f96356ced26ea431f"
+      ]
+    },
+    {
+      "mode": "plush",
+      "action": "direct",
+      "reaction": "favorable",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "9480b0b0d2525eab932c8e64d1112e41",
+        "6cdcd397d8235d06971c50cff2c98b1a"
+      ]
+    },
+    {
+      "mode": "plush",
+      "action": "adapt",
+      "reaction": "favorable",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "9480b0b0d2525eab932c8e64d1112e41",
+        "6cdcd397d8235d06971c50cff2c98b1a"
+      ]
+    },
+    {
+      "mode": "plush",
+      "action": "feint",
+      "reaction": "favorable",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "9480b0b0d2525eab932c8e64d1112e41",
+        "6cdcd397d8235d06971c50cff2c98b1a"
+      ]
+    },
+    {
+      "mode": "plush",
+      "action": "direct",
+      "reaction": "enthusiastic",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "6192a68cf8b0560dbc049b81ee331054",
+        "00cc8ac117f25fb7a84c1e810a6c768e"
+      ]
+    },
+    {
+      "mode": "plush",
+      "action": "adapt",
+      "reaction": "enthusiastic",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "6192a68cf8b0560dbc049b81ee331054",
+        "00cc8ac117f25fb7a84c1e810a6c768e"
+      ]
+    },
+    {
+      "mode": "plush",
+      "action": "feint",
+      "reaction": "enthusiastic",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "6192a68cf8b0560dbc049b81ee331054",
+        "00cc8ac117f25fb7a84c1e810a6c768e"
+      ]
+    },
+    {
+      "mode": "plush",
+      "action": "direct",
+      "reaction": "turn_away",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "plush",
+      "action": "adapt",
+      "reaction": "turn_away",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "plush",
+      "action": "feint",
+      "reaction": "turn_away",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "plush",
+      "action": "direct",
+      "reaction": "confused",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "5a628b48dc435fe5a5fc89ac8362ba95",
+        "0e9db862fb2458ee9e4ee97738656671"
+      ]
+    },
+    {
+      "mode": "plush",
+      "action": "adapt",
+      "reaction": "confused",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "5a628b48dc435fe5a5fc89ac8362ba95",
+        "0e9db862fb2458ee9e4ee97738656671"
+      ]
+    },
+    {
+      "mode": "plush",
+      "action": "feint",
+      "reaction": "confused",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "5a628b48dc435fe5a5fc89ac8362ba95",
+        "0e9db862fb2458ee9e4ee97738656671"
+      ]
+    },
+    {
+      "mode": "plush",
+      "action": "direct",
+      "reaction": "listless",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "b21aba3d017a5442af29bfb1f66ea561",
+        "e89965ed0e645eafbfd7a59b96136ebb"
+      ]
+    },
+    {
+      "mode": "plush",
+      "action": "adapt",
+      "reaction": "listless",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "b21aba3d017a5442af29bfb1f66ea561",
+        "e89965ed0e645eafbfd7a59b96136ebb"
+      ]
+    },
+    {
+      "mode": "plush",
+      "action": "feint",
+      "reaction": "listless",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "b21aba3d017a5442af29bfb1f66ea561",
+        "e89965ed0e645eafbfd7a59b96136ebb"
+      ]
+    },
+    {
+      "mode": "tunnel",
+      "action": "direct",
+      "reaction": "neutral",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "2959fd5a514c5929a4532bd92fd835d6",
+        "0c9308561b765853a652a2a72e16454b"
+      ]
+    },
+    {
+      "mode": "tunnel",
+      "action": "adapt",
+      "reaction": "neutral",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "2959fd5a514c5929a4532bd92fd835d6",
+        "0c9308561b765853a652a2a72e16454b"
+      ]
+    },
+    {
+      "mode": "tunnel",
+      "action": "intense",
+      "reaction": "neutral",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "2959fd5a514c5929a4532bd92fd835d6",
+        "0c9308561b765853a652a2a72e16454b"
+      ]
+    },
+    {
+      "mode": "tunnel",
+      "action": "feint",
+      "reaction": "neutral",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "2959fd5a514c5929a4532bd92fd835d6",
+        "0c9308561b765853a652a2a72e16454b"
+      ]
+    },
+    {
+      "mode": "tunnel",
+      "action": "direct",
+      "reaction": "favorable",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "5977a9e1665351bca1697ee59db326b3",
+        "ae6fa9aad5225890ae03b2a30c76d029"
+      ]
+    },
+    {
+      "mode": "tunnel",
+      "action": "adapt",
+      "reaction": "favorable",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "5977a9e1665351bca1697ee59db326b3",
+        "ae6fa9aad5225890ae03b2a30c76d029"
+      ]
+    },
+    {
+      "mode": "tunnel",
+      "action": "intense",
+      "reaction": "favorable",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "5977a9e1665351bca1697ee59db326b3",
+        "ae6fa9aad5225890ae03b2a30c76d029"
+      ]
+    },
+    {
+      "mode": "tunnel",
+      "action": "feint",
+      "reaction": "favorable",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "5977a9e1665351bca1697ee59db326b3",
+        "ae6fa9aad5225890ae03b2a30c76d029"
+      ]
+    },
+    {
+      "mode": "tunnel",
+      "action": "direct",
+      "reaction": "enthusiastic",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "ba0eb037e6f851af91c455c02d0d22c6",
+        "92228490f63852bb9021f27d99bfcb2b"
+      ]
+    },
+    {
+      "mode": "tunnel",
+      "action": "adapt",
+      "reaction": "enthusiastic",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "ba0eb037e6f851af91c455c02d0d22c6",
+        "92228490f63852bb9021f27d99bfcb2b"
+      ]
+    },
+    {
+      "mode": "tunnel",
+      "action": "intense",
+      "reaction": "enthusiastic",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "ba0eb037e6f851af91c455c02d0d22c6",
+        "92228490f63852bb9021f27d99bfcb2b"
+      ]
+    },
+    {
+      "mode": "tunnel",
+      "action": "feint",
+      "reaction": "enthusiastic",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "ba0eb037e6f851af91c455c02d0d22c6",
+        "92228490f63852bb9021f27d99bfcb2b"
+      ]
+    },
+    {
+      "mode": "tunnel",
+      "action": "direct",
+      "reaction": "turn_away",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "tunnel",
+      "action": "adapt",
+      "reaction": "turn_away",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "tunnel",
+      "action": "intense",
+      "reaction": "turn_away",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "tunnel",
+      "action": "feint",
+      "reaction": "turn_away",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "tunnel",
+      "action": "direct",
+      "reaction": "confused",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "ad55bd1771da5c3ca7a90787ba11a0d8",
+        "090b00799b745d268f69e85403433b08"
+      ]
+    },
+    {
+      "mode": "tunnel",
+      "action": "adapt",
+      "reaction": "confused",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "ad55bd1771da5c3ca7a90787ba11a0d8",
+        "090b00799b745d268f69e85403433b08"
+      ]
+    },
+    {
+      "mode": "tunnel",
+      "action": "intense",
+      "reaction": "confused",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "ad55bd1771da5c3ca7a90787ba11a0d8",
+        "090b00799b745d268f69e85403433b08"
+      ]
+    },
+    {
+      "mode": "tunnel",
+      "action": "feint",
+      "reaction": "confused",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "ad55bd1771da5c3ca7a90787ba11a0d8",
+        "090b00799b745d268f69e85403433b08"
+      ]
+    },
+    {
+      "mode": "tunnel",
+      "action": "direct",
+      "reaction": "listless",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "2aab88e002d156be82557378e43f87aa",
+        "a521762a16205a9c8c3ebd3adf438420"
+      ]
+    },
+    {
+      "mode": "tunnel",
+      "action": "adapt",
+      "reaction": "listless",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "2aab88e002d156be82557378e43f87aa",
+        "a521762a16205a9c8c3ebd3adf438420"
+      ]
+    },
+    {
+      "mode": "tunnel",
+      "action": "intense",
+      "reaction": "listless",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "2aab88e002d156be82557378e43f87aa",
+        "a521762a16205a9c8c3ebd3adf438420"
+      ]
+    },
+    {
+      "mode": "tunnel",
+      "action": "feint",
+      "reaction": "listless",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "2aab88e002d156be82557378e43f87aa",
+        "a521762a16205a9c8c3ebd3adf438420"
+      ]
+    },
+    {
+      "mode": "brush",
+      "action": "direct",
+      "reaction": "neutral",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "04dab13afb355ffaae8fce03b62b9437",
+        "9191badcfeb85313ab68f7bf7031b654"
+      ]
+    },
+    {
+      "mode": "brush",
+      "action": "adapt",
+      "reaction": "neutral",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "04dab13afb355ffaae8fce03b62b9437",
+        "9191badcfeb85313ab68f7bf7031b654"
+      ]
+    },
+    {
+      "mode": "brush",
+      "action": "direct",
+      "reaction": "favorable",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "brush",
+      "action": "adapt",
+      "reaction": "favorable",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "brush",
+      "action": "direct",
+      "reaction": "enthusiastic",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "brush",
+      "action": "adapt",
+      "reaction": "enthusiastic",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "brush",
+      "action": "direct",
+      "reaction": "turn_away",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "brush",
+      "action": "adapt",
+      "reaction": "turn_away",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "brush",
+      "action": "direct",
+      "reaction": "confused",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "f4931addc4255b4d927870ba38b19edb",
+        "9350b21c91d95ef9a02254c9dd419c55"
+      ]
+    },
+    {
+      "mode": "brush",
+      "action": "adapt",
+      "reaction": "confused",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "f4931addc4255b4d927870ba38b19edb",
+        "9350b21c91d95ef9a02254c9dd419c55"
+      ]
+    },
+    {
+      "mode": "brush",
+      "action": "direct",
+      "reaction": "listless",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "7efae6a565915811bb3808a087915993",
+        "929676db64695436a21320692dc342c8"
+      ]
+    },
+    {
+      "mode": "brush",
+      "action": "adapt",
+      "reaction": "listless",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "7efae6a565915811bb3808a087915993",
+        "929676db64695436a21320692dc342c8"
+      ]
+    },
+    {
+      "mode": "voice",
+      "action": "direct",
+      "reaction": "neutral",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "4bb9ee3f35b454d59888415b026a3253",
+        "a282c3ff44d051ce815d3e71060ebf2d"
+      ]
+    },
+    {
+      "mode": "voice",
+      "action": "adapt",
+      "reaction": "neutral",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "4bb9ee3f35b454d59888415b026a3253",
+        "a282c3ff44d051ce815d3e71060ebf2d"
+      ]
+    },
+    {
+      "mode": "voice",
+      "action": "direct",
+      "reaction": "favorable",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "voice",
+      "action": "adapt",
+      "reaction": "favorable",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "voice",
+      "action": "direct",
+      "reaction": "enthusiastic",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "voice",
+      "action": "adapt",
+      "reaction": "enthusiastic",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "voice",
+      "action": "direct",
+      "reaction": "turn_away",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "voice",
+      "action": "adapt",
+      "reaction": "turn_away",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "voice",
+      "action": "direct",
+      "reaction": "confused",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "5544ccaeb4f15b1fbbe1de684c6c14e1",
+        "1aee77f1534f5004b13cca07202ca01d"
+      ]
+    },
+    {
+      "mode": "voice",
+      "action": "adapt",
+      "reaction": "confused",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "5544ccaeb4f15b1fbbe1de684c6c14e1",
+        "1aee77f1534f5004b13cca07202ca01d"
+      ]
+    },
+    {
+      "mode": "voice",
+      "action": "direct",
+      "reaction": "listless",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "cff4aeaa51e058309051d197f0871a0a",
+        "4874611d494258ccb0a78e4f819292eb"
+      ]
+    },
+    {
+      "mode": "voice",
+      "action": "adapt",
+      "reaction": "listless",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "cff4aeaa51e058309051d197f0871a0a",
+        "4874611d494258ccb0a78e4f819292eb"
+      ]
+    },
+    {
+      "mode": "presence",
+      "action": "direct",
+      "reaction": "neutral",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "presence",
+      "action": "adapt",
+      "reaction": "neutral",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "presence",
+      "action": "direct",
+      "reaction": "favorable",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "presence",
+      "action": "adapt",
+      "reaction": "favorable",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "presence",
+      "action": "direct",
+      "reaction": "enthusiastic",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "presence",
+      "action": "adapt",
+      "reaction": "enthusiastic",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "presence",
+      "action": "direct",
+      "reaction": "turn_away",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "presence",
+      "action": "adapt",
+      "reaction": "turn_away",
+      "source": "未制作",
+      "match": "",
+      "candidate_ids": []
+    },
+    {
+      "mode": "presence",
+      "action": "direct",
+      "reaction": "confused",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "60a43af901885098b0d81bdb13ce8746",
+        "f2091ac0ec6454258d75c4e8f6c43a1a"
+      ]
+    },
+    {
+      "mode": "presence",
+      "action": "adapt",
+      "reaction": "confused",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "60a43af901885098b0d81bdb13ce8746",
+        "f2091ac0ec6454258d75c4e8f6c43a1a"
+      ]
+    },
+    {
+      "mode": "presence",
+      "action": "direct",
+      "reaction": "listless",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "52a9216523795f81b2553bdce67c7af6",
+        "a7600d8c9cbf560d8f924b218f6610ad"
+      ]
+    },
+    {
+      "mode": "presence",
+      "action": "adapt",
+      "reaction": "listless",
+      "source": "登録済み",
+      "match": "操作共通",
+      "candidate_ids": [
+        "52a9216523795f81b2553bdce67c7af6",
+        "a7600d8c9cbf560d8f924b218f6610ad"
+      ]
+    },
+    {
+      "mode": "pause",
+      "action": "pause",
+      "reaction": "neutral",
+      "source": "登録済み",
+      "match": "専用",
+      "candidate_ids": [
+        "3882c8e6f79156ffb44150ad2518f0df",
+        "c85a01e3cdf25d5e9bd1885cf9bc04ee"
+      ]
+    },
+    {
+      "mode": "pause",
+      "action": "pause",
+      "reaction": "listless",
+      "source": "登録済み",
+      "match": "専用",
+      "candidate_ids": [
+        "d486d911f8df57b9b97cd1d4d66ab9c6",
+        "70657f3744105033b1bc6e0ebf55176f"
+      ]
+    }
+  ],
+  "passed": 140
+}

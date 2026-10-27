@@ -1,0 +1,71 @@
+{
+  "subject": {
+    "id": "cat-kohaku",
+    "kind": "cat_response",
+    "name": "コハク",
+    "game_id": "cat-kohaku",
+    "content_id": "playtest-kohaku",
+    "notes": "性格：遊び好きで繊細な猫\n外見資料：目の色：両目とも金色\n体格：中くらいの成猫。丸みのある体、ふわふわした胸と頬。\n模様の詳細：明るい橙色の茶トラ。額に濃い橙色のM字、頬に左右二本ずつの縞、脚と尻尾に輪状の縞。背中と脇は太めの濃い橙色の縞。口元・顎・胸・腹は淡いクリーム色。白い靴下模様はない。\n顔立ち：丸顔、ふっくらした頬、やや小さな丸みのある三角耳。鼻はサーモンピンク。\n尻尾：長くふさふさした橙色の尻尾。濃い橙色の輪状の縞、先端も濃い橙色。\n外見の補足：長毛。遊ぶ時は目を輝かせ、静かな場面では柔らかく慎重な表情。",
+    "call": "{cat}",
+    "enabled": true
+  },
+  "hashes": {
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\config\\human_cat_types.json": "407f84e30ccc512e5ec4152731d5bf7e8c84fc7e36fbf8cbfce2813af41b2521",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\config\\cat_personalities.json": "77997baa2809708a0d71b1a938c76d0cad6c7b1a2e279dd860ee4afaea089f3c",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\unity_preview_template\\Resources\\CatCafeStandalone\\rules.json": "f36ee4f42ce1370e0f900aacd3f0d8ec315bb1dc9dcf12fde2c57a66402d2edf",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\interaction_subjects.json": "738b1cf3e946e794c285d9e2f504daecc5d0301d1a44970603566cdddf703f9d",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\manifest.json": "ee9966a3d4df2cbc25dd588c5f2c7e8e2be38cd764f9c4f814d0eab7a5b9abf4",
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\interaction_image_bindings.json": null
+  },
+  "existing_target_at_registration_start": {
+    "published": 0,
+    "drafts": 0,
+    "generated": 0
+  },
+  "actions": {
+    "teaser": [
+      "direct",
+      "adapt",
+      "intense",
+      "feint"
+    ],
+    "pet": [
+      "direct",
+      "adapt"
+    ],
+    "ball": [
+      "direct",
+      "adapt",
+      "intense",
+      "feint"
+    ],
+    "plush": [
+      "direct",
+      "adapt",
+      "feint"
+    ],
+    "tunnel": [
+      "direct",
+      "adapt",
+      "intense",
+      "feint"
+    ],
+    "brush": [
+      "direct",
+      "adapt"
+    ],
+    "voice": [
+      "direct",
+      "adapt"
+    ],
+    "presence": [
+      "direct",
+      "adapt"
+    ],
+    "pause": [
+      "pause"
+    ]
+  },
+  "text_count": 68,
+  "notes": "画像・判定・プロフィールは読取のみ。採用・下書きは既存Toolの単一条件保存・確認登録処理を利用。旧ミケ専用image_bindingsは存在せず、コハクの画像対応は台帳content_idを使用。"
+}

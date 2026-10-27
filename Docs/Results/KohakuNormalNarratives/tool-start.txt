@@ -1,0 +1,18 @@
+d286eae Author Tama normal reactions for six actions in Tool
+ab6f84e Author remaining Sora normal reactions in Tool
+495e50e Author Sora plush normal reactions in Tool
+ M Docs/AllCats.md
+ M Docs/CatImageSchedule.md
+ M Docs/CatImageTodo.md
+ M unity_preview_template/Resources/CatCafeStandalone/presentation.json
+ M unity_preview_template/Runtime/Standalone/CafeNarrativeCatalog.cs
+?? Docs/Results/AkiImages/
+?? Docs/Results/KohakuNormalNarratives/
+?? Docs/Results/RinImages/
+?? Docs/Results/YukiImages/
+?? register_aki_images.py
+?? register_rin_images.py
+?? register_yuki_images.py
+?? unity_preview_template/Editor/AkiDailyImageVerification.cs
+?? unity_preview_template/Editor/RinDailyImageVerification.cs
+?? unity_preview_template/Editor/YukiDailyImageVerification.cs

@@ -1,0 +1,35 @@
+{
+  "start_bytes": {
+    "build": 5046668269,
+    "logs": 18358473210,
+    "generated": 3277372585,
+    "content_images": 1276700516,
+    "drafts": 283646,
+    "library": 7358000371
+  },
+  "end_bytes": {
+    "build": 5046668269,
+    "logs": 18358473210,
+    "generated": 3277372585,
+    "content_images": 1276729646,
+    "drafts": 312776,
+    "library": 7358000371
+  },
+  "delta_bytes": {
+    "build": 0,
+    "logs": 0,
+    "generated": 0,
+    "content_images": 29130,
+    "drafts": 29130,
+    "library": 0
+  },
+  "standalone_children": [
+    "build.lock",
+    "Latest",
+    "Runs"
+  ],
+  "pending": false,
+  "input_hashes_unchanged": true,
+  "no_build_or_unity_import": true,
+  "record_and_script_bytes_excluding_capacity_self": 725476
+}

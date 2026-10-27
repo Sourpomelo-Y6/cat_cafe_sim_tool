@@ -1,0 +1,2953 @@
+{
+  "entries": {
+    "teaser/neutral": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "teaser",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "teaser"
+      },
+      "variants": [
+        {
+          "id": "66ec2a7426d45c2b9822cbdc92ac8381",
+          "slot": 1,
+          "text": "{cat}はねこじゃらしをじっと見た。遊び心をのぞかせつつ、誘いの調子を確かめている。"
+        },
+        {
+          "id": "ae8b124f9755570090dbcf9156af5ecb",
+          "slot": 2,
+          "text": "{cat}の丸い耳がねこじゃらしへ向いた。まだ大きく応じず、動きを見ている。"
+        },
+        {
+          "id": "4beebbdfae7659e581c5f782e4b55528",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "teaser/favorable": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "teaser",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "teaser"
+      },
+      "variants": [
+        {
+          "id": "52e35e07757052a6b549f7a3371e9deb",
+          "slot": 1,
+          "text": "{cat}はねこじゃらしを楽しそうに目で追った。慎重な顔にも、遊びたい気持ちがにじむ。"
+        },
+        {
+          "id": "c7b43edcabfc58b891e0949ae44bc19d",
+          "slot": 2,
+          "text": "{cat}はねこじゃらしに気を引かれ、ふさふさの尾の先を小さく動かした。"
+        },
+        {
+          "id": "368932886d7b5db68598850e3cb7ba61",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "teaser/enthusiastic": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "teaser",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "teaser"
+      },
+      "variants": [
+        {
+          "id": "189b8bd4c477569c8213416cf27fdd21",
+          "slot": 1,
+          "text": "{cat}は金色の目をきらきらさせ、ねこじゃらしに夢中になっている。"
+        },
+        {
+          "id": "7948a58d1a5d53989f185d6a57ea2c8f",
+          "slot": 2,
+          "text": "{cat}はねこじゃらしの誘いに意気込んだ。ふっくらした顔いっぱいに、遊ぶ喜びが表れている。"
+        },
+        {
+          "id": "efb5a1a7cdc65702868778edb44ed2c8",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "teaser/confused": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "teaser",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "teaser"
+      },
+      "variants": [
+        {
+          "id": "4dbf65e8982258bcbf6fefbf7f7a48e5",
+          "slot": 1,
+          "text": "{cat}はねこじゃらしへ目を向けたものの、ためらった。遊びたいのに調子が合わないようだ。"
+        },
+        {
+          "id": "92369506a59957d4b412cefd8ce3eb79",
+          "slot": 2,
+          "text": "{cat}の視線がねこじゃらしと相手の顔を行き来する。誘いをどう受け取るか迷っている。"
+        },
+        {
+          "id": "b4aacb5ba8b5534980945d025608bd9e",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "teaser/listless": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "teaser",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "teaser"
+      },
+      "variants": [
+        {
+          "id": "a76e2a4892185344aec925ecac8fd024",
+          "slot": 1,
+          "text": "{cat}はねこじゃらしへ目を向けたが、疲れているらしく、視線の動きもゆっくりだ。"
+        },
+        {
+          "id": "26b686dbe5435b4daa0217ff6c693db8",
+          "slot": 2,
+          "text": "{cat}はねこじゃらしをぼんやり眺めている。遊び好きの目にも、今は勢いがない。"
+        },
+        {
+          "id": "14520f407f3a5c45895cec8c8aaf1340",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "pet/neutral": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "pet",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "pet"
+      },
+      "variants": [
+        {
+          "id": "6eb5d2b89ff75fa8a6e118449758ae11",
+          "slot": 1,
+          "text": "{cat}はなでる手の様子をうかがっている。ふっくらした頬の表情は、まだ控えめだ。"
+        },
+        {
+          "id": "4c7b5280e91e5b25ad9e6071d5a2d9d4",
+          "slot": 2,
+          "text": "{cat}はなでられることに静かに応じた。甘えるでもなく、慎重な顔で相手を見ている。"
+        },
+        {
+          "id": "6b0de68930b7535e97c97a13650f695c",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "pet/favorable": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "pet",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "pet"
+      },
+      "variants": [
+        {
+          "id": "5a830e48a1815e7d98907b8a46cd97ae",
+          "slot": 1,
+          "text": "{cat}はなでる手にやわらかな目を向けた。ふわふわの頬にも、くつろいだ表情が浮かぶ。"
+        },
+        {
+          "id": "76f7c39966ff53c8a113751d083f4149",
+          "slot": 2,
+          "text": "{cat}はなでられながら、気持ちよさそうに目を細めた。遊ぶ時とは違う、穏やかな顔だ。"
+        },
+        {
+          "id": "a7005ce0eb7f50f580ca41b49917436f",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "pet/confused": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "pet",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "pet"
+      },
+      "variants": [
+        {
+          "id": "9bddb660328b5ea69384feaf81e99f2d",
+          "slot": 1,
+          "text": "{cat}はなでる手を気にして、相手の顔をちらりと見た。落ち着く間合いを探しているようだ。"
+        },
+        {
+          "id": "a887da9a95d95d78835f764c64958fec",
+          "slot": 2,
+          "text": "{cat}はなでられることに戸惑いを見せた。丸い耳にも、少し迷いが表れている。"
+        },
+        {
+          "id": "1bb83d7117c553bebb66227f2e25807b",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "pet/listless": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "pet",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "pet"
+      },
+      "variants": [
+        {
+          "id": "f8c26b401aa857d9bb6cd66293635c5b",
+          "slot": 1,
+          "text": "{cat}はなでる手にゆっくりと目を向けた。疲れているようで、甘える反応も小さい。"
+        },
+        {
+          "id": "e37f40ab45d05d04a0897c8a62f24962",
+          "slot": 2,
+          "text": "{cat}はなでられても、けだるそうな様子だ。ふっくらした顔に眠たげな表情を浮かべている。"
+        },
+        {
+          "id": "a3d4160a8b9f53b1bab971afb7f45d27",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "ball/neutral": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "ball"
+      },
+      "variants": [
+        {
+          "id": "a1c28352f9305ccc83605eb036eaf31a",
+          "slot": 1,
+          "text": "{cat}はボールの動きを見ている。遊びに乗る前に、少し確かめておきたいようだ。"
+        },
+        {
+          "id": "53b153322fdb509a84c518f54648abbf",
+          "slot": 2,
+          "text": "{cat}はボールを気にしながらも、控えめに応じた。金色の目は注意深いままだ。"
+        },
+        {
+          "id": "f5c94f00b046514783ab256ae48b283a",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "ball/favorable": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "ball"
+      },
+      "variants": [
+        {
+          "id": "171a465c7e5d5262af95a68abd7c1a35",
+          "slot": 1,
+          "text": "{cat}はボールを楽しそうに見つめた。ふさふさの尾の先にも、遊び心がのぞく。"
+        },
+        {
+          "id": "18247d7ff1c25c0fbbe1397aebb9f46b",
+          "slot": 2,
+          "text": "{cat}はボールの動きに気持ちが弾んだようだ。丸い顔を向け、いきいきと応じている。"
+        },
+        {
+          "id": "e69b2de8778859389db29880bcfd02af",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "ball/enthusiastic": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "ball"
+      },
+      "variants": [
+        {
+          "id": "06c944b89155563da9b3fa7312bc8877",
+          "slot": 1,
+          "text": "{cat}はボールにすっかり夢中だ。金色の目に、遊びの続きを待つ輝きがある。"
+        },
+        {
+          "id": "67d9b98f6d595128a61a16f53c2fa2f7",
+          "slot": 2,
+          "text": "{cat}はボール遊びの誘いに張り切った。ふだんの慎重さも忘れたような、熱のこもった反応だ。"
+        },
+        {
+          "id": "8c516986f2865c22bebc2114d9894af0",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "ball/confused": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "ball"
+      },
+      "variants": [
+        {
+          "id": "993a48d0fb3e5819bd447fea1d03df42",
+          "slot": 1,
+          "text": "{cat}はボールを見つめたまま、応じるのをためらった。遊びの調子がつかめないらしい。"
+        },
+        {
+          "id": "fde54686b9265a7da9a72253dc4cfa32",
+          "slot": 2,
+          "text": "{cat}はボールから相手へ目を移した。遊ぶ気持ちと戸惑いが、丸い顔に同居している。"
+        },
+        {
+          "id": "48a1b1bd9e1e5fdd88d24eeb869986d1",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "ball/listless": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "ball"
+      },
+      "variants": [
+        {
+          "id": "ef8fb10837e35305b7dd99a0b7d37ba7",
+          "slot": 1,
+          "text": "{cat}はボールを目で追うのもおっくうそうだ。遊びへの関心より、疲れが勝っているように見える。"
+        },
+        {
+          "id": "9f7036f0aa215f48b0b266f32ef7a50a",
+          "slot": 2,
+          "text": "{cat}はボールへゆっくり顔を向けた。いつもの遊びたがりな表情は、今は控えめだ。"
+        },
+        {
+          "id": "1737ccabd202558d937c4ea24b72fd33",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "plush/neutral": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "plush"
+      },
+      "variants": [
+        {
+          "id": "e4b24be2d58b5ab49d0120125fe6105c",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみの様子を注意深く見ている。遊び相手として、ひとまず気に留めたようだ。"
+        },
+        {
+          "id": "45c3b4ff1f865d1f96356ced26ea431f",
+          "slot": 2,
+          "text": "{cat}はぬいぐるみに控えめな反応を返した。丸い耳は向いているが、まだ様子見らしい。"
+        },
+        {
+          "id": "dc5373bcae9754349be4b204edda9044",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "plush/favorable": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "plush"
+      },
+      "variants": [
+        {
+          "id": "9480b0b0d2525eab932c8e64d1112e41",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみに楽しげな顔を向けた。慎重に見ていた目にも、遊び心がのぞく。"
+        },
+        {
+          "id": "6cdcd397d8235d06971c50cff2c98b1a",
+          "slot": 2,
+          "text": "{cat}はぬいぐるみ遊びの誘いに機嫌よく応じた。ふさふさの尾の先が、小さく揺れる。"
+        },
+        {
+          "id": "e70414284a235e2db8d9babbefede69d",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "plush/enthusiastic": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "plush"
+      },
+      "variants": [
+        {
+          "id": "6192a68cf8b0560dbc049b81ee331054",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみに夢中になっている。金色の目が輝き、遊びへの期待を隠しきれない。"
+        },
+        {
+          "id": "00cc8ac117f25fb7a84c1e810a6c768e",
+          "slot": 2,
+          "text": "{cat}はぬいぐるみ遊びにすっかり気を良くした。丸い顔から、次も遊びたい気持ちが伝わってくる。"
+        },
+        {
+          "id": "5d09e19176fa50a99df14008983c5c41",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "plush/confused": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "plush"
+      },
+      "variants": [
+        {
+          "id": "5a628b48dc435fe5a5fc89ac8362ba95",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみを気にしながら、ためらうような顔をした。遊び方がしっくりこないらしい。"
+        },
+        {
+          "id": "0e9db862fb2458ee9e4ee97738656671",
+          "slot": 2,
+          "text": "{cat}はぬいぐるみと相手の顔を交互に見た。楽しみたいのに、どう応じるか迷っているようだ。"
+        },
+        {
+          "id": "260588c23f4059118d7e6494bacc5dea",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "plush/listless": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "plush",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "plush"
+      },
+      "variants": [
+        {
+          "id": "b21aba3d017a5442af29bfb1f66ea561",
+          "slot": 1,
+          "text": "{cat}はぬいぐるみにぼんやり目を向けた。遊びの誘いにも、疲れた様子がにじむ。"
+        },
+        {
+          "id": "e89965ed0e645eafbfd7a59b96136ebb",
+          "slot": 2,
+          "text": "{cat}はぬいぐるみへの反応が鈍い。ふっくらした顔もけだるそうで、遊びに身が入らないらしい。"
+        },
+        {
+          "id": "1d9ad2dde01258bb837b8bc45b1c9584",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "tunnel/neutral": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "2959fd5a514c5929a4532bd92fd835d6",
+          "slot": 1,
+          "text": "{cat}はトンネルの様子を慎重にうかがった。遊びへの興味はあるが、反応は控えめだ。"
+        },
+        {
+          "id": "0c9308561b765853a652a2a72e16454b",
+          "slot": 2,
+          "text": "{cat}はトンネルへ目を向けている。丸い耳にも、様子を確かめるような用心深さがある。"
+        },
+        {
+          "id": "25fe2f3668cb5a5789811f748a0c8fd4",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "tunnel/favorable": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "5977a9e1665351bca1697ee59db326b3",
+          "slot": 1,
+          "text": "{cat}はトンネル遊びに楽しそうに応じた。慎重な表情の中にも、期待が見える。"
+        },
+        {
+          "id": "ae6fa9aad5225890ae03b2a30c76d029",
+          "slot": 2,
+          "text": "{cat}はトンネルへいきいきと顔を向けた。遊びの誘いを気に入ったようだ。"
+        },
+        {
+          "id": "9c023711a45d5dae8b8be671c634e386",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "tunnel/enthusiastic": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "ba0eb037e6f851af91c455c02d0d22c6",
+          "slot": 1,
+          "text": "{cat}はトンネル遊びに心を弾ませた。金色の目は、遊びの様子に釘づけになっている。"
+        },
+        {
+          "id": "92228490f63852bb9021f27d99bfcb2b",
+          "slot": 2,
+          "text": "{cat}はトンネルへ熱のこもった反応を返した。丸い顔に、もっと遊びたいという期待があふれる。"
+        },
+        {
+          "id": "45d5cf0ce739594f861e8d3405e514af",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "tunnel/confused": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "ad55bd1771da5c3ca7a90787ba11a0d8",
+          "slot": 1,
+          "text": "{cat}はトンネルの様子に気を取られつつ、応じるのを迷っている。気持ちよく遊ぶ調子が合わないようだ。"
+        },
+        {
+          "id": "090b00799b745d268f69e85403433b08",
+          "slot": 2,
+          "text": "{cat}はトンネルと相手を見比べた。遊びに誘われても、少し用心しているらしい。"
+        },
+        {
+          "id": "18d8a175312c57748c8d2aebd5b7abe2",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "tunnel/listless": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "2aab88e002d156be82557378e43f87aa",
+          "slot": 1,
+          "text": "{cat}はトンネルへ重たげな視線を向けた。遊びの誘いに応じる元気が、今は少ないようだ。"
+        },
+        {
+          "id": "a521762a16205a9c8c3ebd3adf438420",
+          "slot": 2,
+          "text": "{cat}はトンネル遊びにもけだるそうだ。目の輝きも控えめで、疲れがうかがえる。"
+        },
+        {
+          "id": "3c990530c4a751d595de4571192f5caa",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "brush/neutral": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "04dab13afb355ffaae8fce03b62b9437",
+          "slot": 1,
+          "text": "{cat}はブラシの動きを静かに見ている。ふわふわの頬の表情は、まだ慎重だ。"
+        },
+        {
+          "id": "9191badcfeb85313ab68f7bf7031b654",
+          "slot": 2,
+          "text": "{cat}はブラッシングに控えめに応じた。気にしてはいるが、くつろぐほどではないらしい。"
+        },
+        {
+          "id": "727d167250655625b1371ca8d7c91f13",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "brush/confused": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "f4931addc4255b4d927870ba38b19edb",
+          "slot": 1,
+          "text": "{cat}はブラシと相手の顔を見比べた。遊びの時とは勝手が違うのか、少し戸惑っている。"
+        },
+        {
+          "id": "9350b21c91d95ef9a02254c9dd419c55",
+          "slot": 2,
+          "text": "{cat}はブラシを気にして耳を動かした。落ち着いて受け止めるには、まだ迷いがあるようだ。"
+        },
+        {
+          "id": "c21a65333f3d502ba18f45e9660cd08c",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "brush/listless": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "7efae6a565915811bb3808a087915993",
+          "slot": 1,
+          "text": "{cat}はブラシへゆっくり目をやった。ふわふわの頬にも、疲れた表情が浮かんでいる。"
+        },
+        {
+          "id": "929676db64695436a21320692dc342c8",
+          "slot": 2,
+          "text": "{cat}はブラッシングへの反応も小さい。気にする元気があまりないのか、けだるそうにしている。"
+        },
+        {
+          "id": "07900d9d2fb1506c91a9a88587207c15",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "voice/neutral": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "4bb9ee3f35b454d59888415b026a3253",
+          "slot": 1,
+          "text": "{cat}は声の方へ丸い耳を向けた。何か始まるのかと、静かに様子をうかがっている。"
+        },
+        {
+          "id": "a282c3ff44d051ce815d3e71060ebf2d",
+          "slot": 2,
+          "text": "{cat}は呼びかけに気づき、相手を見た。金色の目に、控えめな関心がのぞく。"
+        },
+        {
+          "id": "40ef9161dcb150e79f0209813d1615dc",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "voice/confused": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "5544ccaeb4f15b1fbbe1de684c6c14e1",
+          "slot": 1,
+          "text": "{cat}は声に耳を傾けながら、不思議そうな顔をした。どう応じればよいか迷っているらしい。"
+        },
+        {
+          "id": "1aee77f1534f5004b13cca07202ca01d",
+          "slot": 2,
+          "text": "{cat}は呼びかける相手を慎重に見つめた。気にはなるが、反応のきっかけをつかめないようだ。"
+        },
+        {
+          "id": "07ba99b1f86d513e9f5727ae90454b8b",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "voice/listless": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "cff4aeaa51e058309051d197f0871a0a",
+          "slot": 1,
+          "text": "{cat}は声の方へゆっくり目を向けた。疲れがあるのか、応じる様子は乏しい。"
+        },
+        {
+          "id": "4874611d494258ccb0a78e4f819292eb",
+          "slot": 2,
+          "text": "{cat}は呼びかけを聞いているようだが、けだるそうだ。丸い耳の反応も、ごく小さい。"
+        },
+        {
+          "id": "cf54667b9b8a5aff8032d3c69e15a9d5",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "presence/confused": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "60a43af901885098b0d81bdb13ce8746",
+          "slot": 1,
+          "text": "{cat}はそばの気配を意識して、相手の様子をうかがった。この距離でどう過ごすか迷っているようだ。"
+        },
+        {
+          "id": "f2091ac0ec6454258d75c4e8f6c43a1a",
+          "slot": 2,
+          "text": "{cat}は見守る相手へ、ためらいがちな視線を向けた。静かな間合いに、まだなじみきれないらしい。"
+        },
+        {
+          "id": "ddd12fbfe9735a33988b9a5cd82be701",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "presence/listless": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "52a9216523795f81b2553bdce67c7af6",
+          "slot": 1,
+          "text": "{cat}はそばの気配へゆっくりと目をやった。相手との距離を気にするより、今は休みたいようだ。"
+        },
+        {
+          "id": "a7600d8c9cbf560d8f924b218f6610ad",
+          "slot": 2,
+          "text": "{cat}は見守られながら、けだるそうに過ごしている。周りへの反応も控えめだ。"
+        },
+        {
+          "id": "e9b4223413e555739d35096d78041659",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "pause/neutral": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "pause",
+        "action": "pause",
+        "reaction": "neutral",
+        "scene_key": "pause"
+      },
+      "variants": [
+        {
+          "id": "3882c8e6f79156ffb44150ad2518f0df",
+          "slot": 1,
+          "text": "{cat}はひと息ついている。遊ぶ時の張り切った顔とは違い、やわらかな表情だ。"
+        },
+        {
+          "id": "c85a01e3cdf25d5e9bd1885cf9bc04ee",
+          "slot": 2,
+          "text": "{cat}は休憩のひとときを静かに過ごしている。ふっくらした顔にも、落ち着きが見える。"
+        },
+        {
+          "id": "9ed8f2efa4365fa2884ff0794d6bfb46",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "pause/listless": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "pause",
+        "action": "pause",
+        "reaction": "listless",
+        "scene_key": "pause"
+      },
+      "variants": [
+        {
+          "id": "d486d911f8df57b9b97cd1d4d66ab9c6",
+          "slot": 1,
+          "text": "{cat}は疲れた様子で休んでいる。金色の目にも勢いはなく、今は静かにしていたいようだ。"
+        },
+        {
+          "id": "70657f3744105033b1bc6e0ebf55176f",
+          "slot": 2,
+          "text": "{cat}はけだるそうに休憩している。遊び好きの表情もひと休みして、反応は小さい。"
+        },
+        {
+          "id": "b979573aba095236b399c2a939688cf2",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    }
+  },
+  "previews": [
+    {
+      "mode": "teaser",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ねこじゃらしで遊ぼうか コハク」\nプレイヤーはねこじゃらしを床の近くで揺らした。\n\nコハクはねこじゃらしをじっと見た。遊び心をのぞかせつつ、誘いの調子を確かめている。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\eb4edccd5b0146b5899ac1b0b52b9c01.png",
+      "resolved": "teaser__direct"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ねこじゃらしで遊ぼうか コハク」\nプレイヤーはねこじゃらしを床の近くで揺らした。\n\nコハクの丸い耳がねこじゃらしへ向いた。まだ大きく応じず、動きを見ている。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\eb4edccd5b0146b5899ac1b0b52b9c01.png",
+      "resolved": "teaser__direct"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ねこじゃらし、コハクにしてみようか。」\nプレイヤーはコハクの様子に合わせてねこじゃらしを動かした。\n\nコハクはねこじゃらしをじっと見た。遊び心をのぞかせつつ、誘いの調子を確かめている。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\eb4edccd5b0146b5899ac1b0b52b9c01.png",
+      "resolved": "teaser__adapt"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ねこじゃらし、コハクにしてみようか。」\nプレイヤーはコハクの様子に合わせてねこじゃらしを動かした。\n\nコハクの丸い耳がねこじゃらしへ向いた。まだ大きく応じず、動きを見ている。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\eb4edccd5b0146b5899ac1b0b52b9c01.png",
+      "resolved": "teaser__adapt"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "neutral",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「コハク、ちょっと揺らしてみようか。」\nプレイヤーはねこじゃらしを勢いよく動かした。\n\nコハクはねこじゃらしをじっと見た。遊び心をのぞかせつつ、誘いの調子を確かめている。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\e28583380f83457c9998dd6d011c5226.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "neutral",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「コハク、ちょっと揺らしてみようか。」\nプレイヤーはねこじゃらしを勢いよく動かした。\n\nコハクの丸い耳がねこじゃらしへ向いた。まだ大きく応じず、動きを見ている。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\e28583380f83457c9998dd6d011c5226.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "neutral",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「コハク、フェイントしてみようか？」\nプレイヤーはねこじゃらしの動きに緩急をつけた。\n\nコハクはねこじゃらしをじっと見た。遊び心をのぞかせつつ、誘いの調子を確かめている。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\e28583380f83457c9998dd6d011c5226.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "neutral",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「コハク、フェイントしてみようか？」\nプレイヤーはねこじゃらしの動きに緩急をつけた。\n\nコハクの丸い耳がねこじゃらしへ向いた。まだ大きく応じず、動きを見ている。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\e28583380f83457c9998dd6d011c5226.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "favorable",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ねこじゃらしで遊ぼうか コハク」\nプレイヤーはねこじゃらしを床の近くで揺らした。\n\nコハクはねこじゃらしを楽しそうに目で追った。慎重な顔にも、遊びたい気持ちがにじむ。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\eb4edccd5b0146b5899ac1b0b52b9c01.png",
+      "resolved": "teaser__direct"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "favorable",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ねこじゃらしで遊ぼうか コハク」\nプレイヤーはねこじゃらしを床の近くで揺らした。\n\nコハクはねこじゃらしに気を引かれ、ふさふさの尾の先を小さく動かした。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\eb4edccd5b0146b5899ac1b0b52b9c01.png",
+      "resolved": "teaser__direct"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "favorable",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ねこじゃらし、コハクにしてみようか。」\nプレイヤーはコハクの様子に合わせてねこじゃらしを動かした。\n\nコハクはねこじゃらしを楽しそうに目で追った。慎重な顔にも、遊びたい気持ちがにじむ。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\eb4edccd5b0146b5899ac1b0b52b9c01.png",
+      "resolved": "teaser__adapt"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "favorable",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ねこじゃらし、コハクにしてみようか。」\nプレイヤーはコハクの様子に合わせてねこじゃらしを動かした。\n\nコハクはねこじゃらしに気を引かれ、ふさふさの尾の先を小さく動かした。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\eb4edccd5b0146b5899ac1b0b52b9c01.png",
+      "resolved": "teaser__adapt"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "favorable",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「コハク、ちょっと揺らしてみようか。」\nプレイヤーはねこじゃらしを勢いよく動かした。\n\nコハクはねこじゃらしを楽しそうに目で追った。慎重な顔にも、遊びたい気持ちがにじむ。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\e28583380f83457c9998dd6d011c5226.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "favorable",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「コハク、ちょっと揺らしてみようか。」\nプレイヤーはねこじゃらしを勢いよく動かした。\n\nコハクはねこじゃらしに気を引かれ、ふさふさの尾の先を小さく動かした。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\e28583380f83457c9998dd6d011c5226.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "favorable",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「コハク、フェイントしてみようか？」\nプレイヤーはねこじゃらしの動きに緩急をつけた。\n\nコハクはねこじゃらしを楽しそうに目で追った。慎重な顔にも、遊びたい気持ちがにじむ。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\e28583380f83457c9998dd6d011c5226.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "favorable",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「コハク、フェイントしてみようか？」\nプレイヤーはねこじゃらしの動きに緩急をつけた。\n\nコハクはねこじゃらしに気を引かれ、ふさふさの尾の先を小さく動かした。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\e28583380f83457c9998dd6d011c5226.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "enthusiastic",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ねこじゃらしで遊ぼうか コハク」\nプレイヤーはねこじゃらしを床の近くで揺らした。\n\nコハクは金色の目をきらきらさせ、ねこじゃらしに夢中になっている。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\eb4edccd5b0146b5899ac1b0b52b9c01.png",
+      "resolved": "teaser__direct"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "enthusiastic",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ねこじゃらしで遊ぼうか コハク」\nプレイヤーはねこじゃらしを床の近くで揺らした。\n\nコハクはねこじゃらしの誘いに意気込んだ。ふっくらした顔いっぱいに、遊ぶ喜びが表れている。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\eb4edccd5b0146b5899ac1b0b52b9c01.png",
+      "resolved": "teaser__direct"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "enthusiastic",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ねこじゃらし、コハクにしてみようか。」\nプレイヤーはコハクの様子に合わせてねこじゃらしを動かした。\n\nコハクは金色の目をきらきらさせ、ねこじゃらしに夢中になっている。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\eb4edccd5b0146b5899ac1b0b52b9c01.png",
+      "resolved": "teaser__adapt"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "enthusiastic",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ねこじゃらし、コハクにしてみようか。」\nプレイヤーはコハクの様子に合わせてねこじゃらしを動かした。\n\nコハクはねこじゃらしの誘いに意気込んだ。ふっくらした顔いっぱいに、遊ぶ喜びが表れている。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\eb4edccd5b0146b5899ac1b0b52b9c01.png",
+      "resolved": "teaser__adapt"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "enthusiastic",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「コハク、ちょっと揺らしてみようか。」\nプレイヤーはねこじゃらしを勢いよく動かした。\n\nコハクは金色の目をきらきらさせ、ねこじゃらしに夢中になっている。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\e28583380f83457c9998dd6d011c5226.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "enthusiastic",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「コハク、ちょっと揺らしてみようか。」\nプレイヤーはねこじゃらしを勢いよく動かした。\n\nコハクはねこじゃらしの誘いに意気込んだ。ふっくらした顔いっぱいに、遊ぶ喜びが表れている。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\e28583380f83457c9998dd6d011c5226.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "enthusiastic",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「コハク、フェイントしてみようか？」\nプレイヤーはねこじゃらしの動きに緩急をつけた。\n\nコハクは金色の目をきらきらさせ、ねこじゃらしに夢中になっている。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\e28583380f83457c9998dd6d011c5226.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "enthusiastic",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「コハク、フェイントしてみようか？」\nプレイヤーはねこじゃらしの動きに緩急をつけた。\n\nコハクはねこじゃらしの誘いに意気込んだ。ふっくらした顔いっぱいに、遊ぶ喜びが表れている。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\e28583380f83457c9998dd6d011c5226.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ねこじゃらしで遊ぼうか コハク」\nプレイヤーはねこじゃらしを床の近くで揺らした。\n\nコハクはねこじゃらしへ目を向けたものの、ためらった。遊びたいのに調子が合わないようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\eb4edccd5b0146b5899ac1b0b52b9c01.png",
+      "resolved": "teaser__direct"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ねこじゃらしで遊ぼうか コハク」\nプレイヤーはねこじゃらしを床の近くで揺らした。\n\nコハクの視線がねこじゃらしと相手の顔を行き来する。誘いをどう受け取るか迷っている。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\eb4edccd5b0146b5899ac1b0b52b9c01.png",
+      "resolved": "teaser__direct"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ねこじゃらし、コハクにしてみようか。」\nプレイヤーはコハクの様子に合わせてねこじゃらしを動かした。\n\nコハクはねこじゃらしへ目を向けたものの、ためらった。遊びたいのに調子が合わないようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\eb4edccd5b0146b5899ac1b0b52b9c01.png",
+      "resolved": "teaser__adapt"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ねこじゃらし、コハクにしてみようか。」\nプレイヤーはコハクの様子に合わせてねこじゃらしを動かした。\n\nコハクの視線がねこじゃらしと相手の顔を行き来する。誘いをどう受け取るか迷っている。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\eb4edccd5b0146b5899ac1b0b52b9c01.png",
+      "resolved": "teaser__adapt"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "confused",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「コハク、ちょっと揺らしてみようか。」\nプレイヤーはねこじゃらしを勢いよく動かした。\n\nコハクはねこじゃらしへ目を向けたものの、ためらった。遊びたいのに調子が合わないようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\e28583380f83457c9998dd6d011c5226.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "confused",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「コハク、ちょっと揺らしてみようか。」\nプレイヤーはねこじゃらしを勢いよく動かした。\n\nコハクの視線がねこじゃらしと相手の顔を行き来する。誘いをどう受け取るか迷っている。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\e28583380f83457c9998dd6d011c5226.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "confused",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「コハク、フェイントしてみようか？」\nプレイヤーはねこじゃらしの動きに緩急をつけた。\n\nコハクはねこじゃらしへ目を向けたものの、ためらった。遊びたいのに調子が合わないようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\e28583380f83457c9998dd6d011c5226.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "confused",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「コハク、フェイントしてみようか？」\nプレイヤーはねこじゃらしの動きに緩急をつけた。\n\nコハクの視線がねこじゃらしと相手の顔を行き来する。誘いをどう受け取るか迷っている。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\e28583380f83457c9998dd6d011c5226.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ねこじゃらしで遊ぼうか コハク」\nプレイヤーはねこじゃらしを床の近くで揺らした。\n\nコハクはねこじゃらしへ目を向けたが、疲れているらしく、視線の動きもゆっくりだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\eb4edccd5b0146b5899ac1b0b52b9c01.png",
+      "resolved": "teaser__direct"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ねこじゃらしで遊ぼうか コハク」\nプレイヤーはねこじゃらしを床の近くで揺らした。\n\nコハクはねこじゃらしをぼんやり眺めている。遊び好きの目にも、今は勢いがない。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\eb4edccd5b0146b5899ac1b0b52b9c01.png",
+      "resolved": "teaser__direct"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ねこじゃらし、コハクにしてみようか。」\nプレイヤーはコハクの様子に合わせてねこじゃらしを動かした。\n\nコハクはねこじゃらしへ目を向けたが、疲れているらしく、視線の動きもゆっくりだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\eb4edccd5b0146b5899ac1b0b52b9c01.png",
+      "resolved": "teaser__adapt"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ねこじゃらし、コハクにしてみようか。」\nプレイヤーはコハクの様子に合わせてねこじゃらしを動かした。\n\nコハクはねこじゃらしをぼんやり眺めている。遊び好きの目にも、今は勢いがない。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\eb4edccd5b0146b5899ac1b0b52b9c01.png",
+      "resolved": "teaser__adapt"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "listless",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「コハク、ちょっと揺らしてみようか。」\nプレイヤーはねこじゃらしを勢いよく動かした。\n\nコハクはねこじゃらしへ目を向けたが、疲れているらしく、視線の動きもゆっくりだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\e28583380f83457c9998dd6d011c5226.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "listless",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「コハク、ちょっと揺らしてみようか。」\nプレイヤーはねこじゃらしを勢いよく動かした。\n\nコハクはねこじゃらしをぼんやり眺めている。遊び好きの目にも、今は勢いがない。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\e28583380f83457c9998dd6d011c5226.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "listless",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「コハク、フェイントしてみようか？」\nプレイヤーはねこじゃらしの動きに緩急をつけた。\n\nコハクはねこじゃらしへ目を向けたが、疲れているらしく、視線の動きもゆっくりだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\e28583380f83457c9998dd6d011c5226.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "teaser",
+      "reaction": "listless",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「コハク、フェイントしてみようか？」\nプレイヤーはねこじゃらしの動きに緩急をつけた。\n\nコハクはねこじゃらしをぼんやり眺めている。遊び好きの目にも、今は勢いがない。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\e28583380f83457c9998dd6d011c5226.png",
+      "resolved": "teaser"
+    },
+    {
+      "mode": "pet",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ねえコハク、少し撫でてみようか」\nプレイヤーはコハクの頭をなでた。\n\nコハクはなでる手の様子をうかがっている。ふっくらした頬の表情は、まだ控えめだ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\40d99cf152424c0a855e198b506ed1a9.png",
+      "resolved": "pet__direct"
+    },
+    {
+      "mode": "pet",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ねえコハク、少し撫でてみようか」\nプレイヤーはコハクの頭をなでた。\n\nコハクはなでられることに静かに応じた。甘えるでもなく、慎重な顔で相手を見ている。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\40d99cf152424c0a855e198b506ed1a9.png",
+      "resolved": "pet__direct"
+    },
+    {
+      "mode": "pet",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「やさしく撫でてみよう、コハク。」\nプレイヤーはコハクの様子に合わせ、そっとなでた。\n\nコハクはなでる手の様子をうかがっている。ふっくらした頬の表情は、まだ控えめだ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\40d99cf152424c0a855e198b506ed1a9.png",
+      "resolved": "pet__adapt"
+    },
+    {
+      "mode": "pet",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「やさしく撫でてみよう、コハク。」\nプレイヤーはコハクの様子に合わせ、そっとなでた。\n\nコハクはなでられることに静かに応じた。甘えるでもなく、慎重な顔で相手を見ている。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\40d99cf152424c0a855e198b506ed1a9.png",
+      "resolved": "pet__adapt"
+    },
+    {
+      "mode": "pet",
+      "reaction": "favorable",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ねえコハク、少し撫でてみようか」\nプレイヤーはコハクの頭をなでた。\n\nコハクはなでる手にやわらかな目を向けた。ふわふわの頬にも、くつろいだ表情が浮かぶ。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\40d99cf152424c0a855e198b506ed1a9.png",
+      "resolved": "pet__direct"
+    },
+    {
+      "mode": "pet",
+      "reaction": "favorable",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ねえコハク、少し撫でてみようか」\nプレイヤーはコハクの頭をなでた。\n\nコハクはなでられながら、気持ちよさそうに目を細めた。遊ぶ時とは違う、穏やかな顔だ。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\40d99cf152424c0a855e198b506ed1a9.png",
+      "resolved": "pet__direct"
+    },
+    {
+      "mode": "pet",
+      "reaction": "favorable",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「やさしく撫でてみよう、コハク。」\nプレイヤーはコハクの様子に合わせ、そっとなでた。\n\nコハクはなでる手にやわらかな目を向けた。ふわふわの頬にも、くつろいだ表情が浮かぶ。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\40d99cf152424c0a855e198b506ed1a9.png",
+      "resolved": "pet__adapt"
+    },
+    {
+      "mode": "pet",
+      "reaction": "favorable",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「やさしく撫でてみよう、コハク。」\nプレイヤーはコハクの様子に合わせ、そっとなでた。\n\nコハクはなでられながら、気持ちよさそうに目を細めた。遊ぶ時とは違う、穏やかな顔だ。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\40d99cf152424c0a855e198b506ed1a9.png",
+      "resolved": "pet__adapt"
+    },
+    {
+      "mode": "pet",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ねえコハク、少し撫でてみようか」\nプレイヤーはコハクの頭をなでた。\n\nコハクはなでる手を気にして、相手の顔をちらりと見た。落ち着く間合いを探しているようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\40d99cf152424c0a855e198b506ed1a9.png",
+      "resolved": "pet__direct"
+    },
+    {
+      "mode": "pet",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ねえコハク、少し撫でてみようか」\nプレイヤーはコハクの頭をなでた。\n\nコハクはなでられることに戸惑いを見せた。丸い耳にも、少し迷いが表れている。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\40d99cf152424c0a855e198b506ed1a9.png",
+      "resolved": "pet__direct"
+    },
+    {
+      "mode": "pet",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「やさしく撫でてみよう、コハク。」\nプレイヤーはコハクの様子に合わせ、そっとなでた。\n\nコハクはなでる手を気にして、相手の顔をちらりと見た。落ち着く間合いを探しているようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\40d99cf152424c0a855e198b506ed1a9.png",
+      "resolved": "pet__adapt"
+    },
+    {
+      "mode": "pet",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「やさしく撫でてみよう、コハク。」\nプレイヤーはコハクの様子に合わせ、そっとなでた。\n\nコハクはなでられることに戸惑いを見せた。丸い耳にも、少し迷いが表れている。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\40d99cf152424c0a855e198b506ed1a9.png",
+      "resolved": "pet__adapt"
+    },
+    {
+      "mode": "pet",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ねえコハク、少し撫でてみようか」\nプレイヤーはコハクの頭をなでた。\n\nコハクはなでる手にゆっくりと目を向けた。疲れているようで、甘える反応も小さい。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\40d99cf152424c0a855e198b506ed1a9.png",
+      "resolved": "pet__direct"
+    },
+    {
+      "mode": "pet",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ねえコハク、少し撫でてみようか」\nプレイヤーはコハクの頭をなでた。\n\nコハクはなでられても、けだるそうな様子だ。ふっくらした顔に眠たげな表情を浮かべている。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\40d99cf152424c0a855e198b506ed1a9.png",
+      "resolved": "pet__direct"
+    },
+    {
+      "mode": "pet",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「やさしく撫でてみよう、コハク。」\nプレイヤーはコハクの様子に合わせ、そっとなでた。\n\nコハクはなでる手にゆっくりと目を向けた。疲れているようで、甘える反応も小さい。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\40d99cf152424c0a855e198b506ed1a9.png",
+      "resolved": "pet__adapt"
+    },
+    {
+      "mode": "pet",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「やさしく撫でてみよう、コハク。」\nプレイヤーはコハクの様子に合わせ、そっとなでた。\n\nコハクはなでられても、けだるそうな様子だ。ふっくらした顔に眠たげな表情を浮かべている。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\40d99cf152424c0a855e198b506ed1a9.png",
+      "resolved": "pet__adapt"
+    },
+    {
+      "mode": "ball",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか コハク」\nプレイヤーはボールを床の上で転がした。\n\nコハクはボールの動きを見ている。遊びに乗る前に、少し確かめておきたいようだ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8d0c6026880fe2e9f985aa0fa7fa330d49e4f4bb84bd3b88378f92fda679ec5a.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "mode": "ball",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか コハク」\nプレイヤーはボールを床の上で転がした。\n\nコハクはボールを気にしながらも、控えめに応じた。金色の目は注意深いままだ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8d0c6026880fe2e9f985aa0fa7fa330d49e4f4bb84bd3b88378f92fda679ec5a.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "mode": "ball",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか、コハク」\nプレイヤーはコハクの様子に合わせてボールを転がした。\n\nコハクはボールの動きを見ている。遊びに乗る前に、少し確かめておきたいようだ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8d0c6026880fe2e9f985aa0fa7fa330d49e4f4bb84bd3b88378f92fda679ec5a.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "mode": "ball",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか、コハク」\nプレイヤーはコハクの様子に合わせてボールを転がした。\n\nコハクはボールを気にしながらも、控えめに応じた。金色の目は注意深いままだ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8d0c6026880fe2e9f985aa0fa7fa330d49e4f4bb84bd3b88378f92fda679ec5a.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "mode": "ball",
+      "reaction": "neutral",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか コハク」\nプレイヤーはボールを勢いよく転がした。\n\nコハクはボールの動きを見ている。遊びに乗る前に、少し確かめておきたいようだ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c76e8c76e4a34ad79fc77d292781e8b8.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "neutral",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか コハク」\nプレイヤーはボールを勢いよく転がした。\n\nコハクはボールを気にしながらも、控えめに応じた。金色の目は注意深いままだ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c76e8c76e4a34ad79fc77d292781e8b8.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "neutral",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がして、コハクを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nコハクはボールの動きを見ている。遊びに乗る前に、少し確かめておきたいようだ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c76e8c76e4a34ad79fc77d292781e8b8.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "neutral",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がして、コハクを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nコハクはボールを気にしながらも、控えめに応じた。金色の目は注意深いままだ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c76e8c76e4a34ad79fc77d292781e8b8.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "favorable",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか コハク」\nプレイヤーはボールを床の上で転がした。\n\nコハクはボールを楽しそうに見つめた。ふさふさの尾の先にも、遊び心がのぞく。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8d0c6026880fe2e9f985aa0fa7fa330d49e4f4bb84bd3b88378f92fda679ec5a.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "mode": "ball",
+      "reaction": "favorable",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか コハク」\nプレイヤーはボールを床の上で転がした。\n\nコハクはボールの動きに気持ちが弾んだようだ。丸い顔を向け、いきいきと応じている。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8d0c6026880fe2e9f985aa0fa7fa330d49e4f4bb84bd3b88378f92fda679ec5a.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "mode": "ball",
+      "reaction": "favorable",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか、コハク」\nプレイヤーはコハクの様子に合わせてボールを転がした。\n\nコハクはボールを楽しそうに見つめた。ふさふさの尾の先にも、遊び心がのぞく。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8d0c6026880fe2e9f985aa0fa7fa330d49e4f4bb84bd3b88378f92fda679ec5a.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "mode": "ball",
+      "reaction": "favorable",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか、コハク」\nプレイヤーはコハクの様子に合わせてボールを転がした。\n\nコハクはボールの動きに気持ちが弾んだようだ。丸い顔を向け、いきいきと応じている。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8d0c6026880fe2e9f985aa0fa7fa330d49e4f4bb84bd3b88378f92fda679ec5a.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "mode": "ball",
+      "reaction": "favorable",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか コハク」\nプレイヤーはボールを勢いよく転がした。\n\nコハクはボールを楽しそうに見つめた。ふさふさの尾の先にも、遊び心がのぞく。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c76e8c76e4a34ad79fc77d292781e8b8.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "favorable",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか コハク」\nプレイヤーはボールを勢いよく転がした。\n\nコハクはボールの動きに気持ちが弾んだようだ。丸い顔を向け、いきいきと応じている。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c76e8c76e4a34ad79fc77d292781e8b8.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "favorable",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がして、コハクを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nコハクはボールを楽しそうに見つめた。ふさふさの尾の先にも、遊び心がのぞく。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c76e8c76e4a34ad79fc77d292781e8b8.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "favorable",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がして、コハクを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nコハクはボールの動きに気持ちが弾んだようだ。丸い顔を向け、いきいきと応じている。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c76e8c76e4a34ad79fc77d292781e8b8.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "enthusiastic",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか コハク」\nプレイヤーはボールを床の上で転がした。\n\nコハクはボールにすっかり夢中だ。金色の目に、遊びの続きを待つ輝きがある。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8d0c6026880fe2e9f985aa0fa7fa330d49e4f4bb84bd3b88378f92fda679ec5a.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "mode": "ball",
+      "reaction": "enthusiastic",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか コハク」\nプレイヤーはボールを床の上で転がした。\n\nコハクはボール遊びの誘いに張り切った。ふだんの慎重さも忘れたような、熱のこもった反応だ。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8d0c6026880fe2e9f985aa0fa7fa330d49e4f4bb84bd3b88378f92fda679ec5a.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "mode": "ball",
+      "reaction": "enthusiastic",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか、コハク」\nプレイヤーはコハクの様子に合わせてボールを転がした。\n\nコハクはボールにすっかり夢中だ。金色の目に、遊びの続きを待つ輝きがある。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8d0c6026880fe2e9f985aa0fa7fa330d49e4f4bb84bd3b88378f92fda679ec5a.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "mode": "ball",
+      "reaction": "enthusiastic",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか、コハク」\nプレイヤーはコハクの様子に合わせてボールを転がした。\n\nコハクはボール遊びの誘いに張り切った。ふだんの慎重さも忘れたような、熱のこもった反応だ。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8d0c6026880fe2e9f985aa0fa7fa330d49e4f4bb84bd3b88378f92fda679ec5a.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "mode": "ball",
+      "reaction": "enthusiastic",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか コハク」\nプレイヤーはボールを勢いよく転がした。\n\nコハクはボールにすっかり夢中だ。金色の目に、遊びの続きを待つ輝きがある。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c76e8c76e4a34ad79fc77d292781e8b8.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "enthusiastic",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか コハク」\nプレイヤーはボールを勢いよく転がした。\n\nコハクはボール遊びの誘いに張り切った。ふだんの慎重さも忘れたような、熱のこもった反応だ。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c76e8c76e4a34ad79fc77d292781e8b8.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "enthusiastic",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がして、コハクを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nコハクはボールにすっかり夢中だ。金色の目に、遊びの続きを待つ輝きがある。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c76e8c76e4a34ad79fc77d292781e8b8.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "enthusiastic",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がして、コハクを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nコハクはボール遊びの誘いに張り切った。ふだんの慎重さも忘れたような、熱のこもった反応だ。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c76e8c76e4a34ad79fc77d292781e8b8.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか コハク」\nプレイヤーはボールを床の上で転がした。\n\nコハクはボールを見つめたまま、応じるのをためらった。遊びの調子がつかめないらしい。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8d0c6026880fe2e9f985aa0fa7fa330d49e4f4bb84bd3b88378f92fda679ec5a.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "mode": "ball",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか コハク」\nプレイヤーはボールを床の上で転がした。\n\nコハクはボールから相手へ目を移した。遊ぶ気持ちと戸惑いが、丸い顔に同居している。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8d0c6026880fe2e9f985aa0fa7fa330d49e4f4bb84bd3b88378f92fda679ec5a.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "mode": "ball",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか、コハク」\nプレイヤーはコハクの様子に合わせてボールを転がした。\n\nコハクはボールを見つめたまま、応じるのをためらった。遊びの調子がつかめないらしい。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8d0c6026880fe2e9f985aa0fa7fa330d49e4f4bb84bd3b88378f92fda679ec5a.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "mode": "ball",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか、コハク」\nプレイヤーはコハクの様子に合わせてボールを転がした。\n\nコハクはボールから相手へ目を移した。遊ぶ気持ちと戸惑いが、丸い顔に同居している。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8d0c6026880fe2e9f985aa0fa7fa330d49e4f4bb84bd3b88378f92fda679ec5a.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "mode": "ball",
+      "reaction": "confused",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか コハク」\nプレイヤーはボールを勢いよく転がした。\n\nコハクはボールを見つめたまま、応じるのをためらった。遊びの調子がつかめないらしい。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c76e8c76e4a34ad79fc77d292781e8b8.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "confused",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか コハク」\nプレイヤーはボールを勢いよく転がした。\n\nコハクはボールから相手へ目を移した。遊ぶ気持ちと戸惑いが、丸い顔に同居している。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c76e8c76e4a34ad79fc77d292781e8b8.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "confused",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がして、コハクを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nコハクはボールを見つめたまま、応じるのをためらった。遊びの調子がつかめないらしい。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c76e8c76e4a34ad79fc77d292781e8b8.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "confused",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がして、コハクを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nコハクはボールから相手へ目を移した。遊ぶ気持ちと戸惑いが、丸い顔に同居している。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c76e8c76e4a34ad79fc77d292781e8b8.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか コハク」\nプレイヤーはボールを床の上で転がした。\n\nコハクはボールを目で追うのもおっくうそうだ。遊びへの関心より、疲れが勝っているように見える。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8d0c6026880fe2e9f985aa0fa7fa330d49e4f4bb84bd3b88378f92fda679ec5a.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "mode": "ball",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか コハク」\nプレイヤーはボールを床の上で転がした。\n\nコハクはボールへゆっくり顔を向けた。いつもの遊びたがりな表情は、今は控えめだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8d0c6026880fe2e9f985aa0fa7fa330d49e4f4bb84bd3b88378f92fda679ec5a.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "mode": "ball",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか、コハク」\nプレイヤーはコハクの様子に合わせてボールを転がした。\n\nコハクはボールを目で追うのもおっくうそうだ。遊びへの関心より、疲れが勝っているように見える。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8d0c6026880fe2e9f985aa0fa7fa330d49e4f4bb84bd3b88378f92fda679ec5a.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "mode": "ball",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか、コハク」\nプレイヤーはコハクの様子に合わせてボールを転がした。\n\nコハクはボールへゆっくり顔を向けた。いつもの遊びたがりな表情は、今は控えめだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\8d0c6026880fe2e9f985aa0fa7fa330d49e4f4bb84bd3b88378f92fda679ec5a.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "mode": "ball",
+      "reaction": "listless",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか コハク」\nプレイヤーはボールを勢いよく転がした。\n\nコハクはボールを目で追うのもおっくうそうだ。遊びへの関心より、疲れが勝っているように見える。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c76e8c76e4a34ad79fc77d292781e8b8.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "listless",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか コハク」\nプレイヤーはボールを勢いよく転がした。\n\nコハクはボールへゆっくり顔を向けた。いつもの遊びたがりな表情は、今は控えめだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c76e8c76e4a34ad79fc77d292781e8b8.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "listless",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がして、コハクを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nコハクはボールを目で追うのもおっくうそうだ。遊びへの関心より、疲れが勝っているように見える。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c76e8c76e4a34ad79fc77d292781e8b8.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "ball",
+      "reaction": "listless",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がして、コハクを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nコハクはボールへゆっくり顔を向けた。いつもの遊びたがりな表情は、今は控えめだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c76e8c76e4a34ad79fc77d292781e8b8.png",
+      "resolved": "ball"
+    },
+    {
+      "mode": "plush",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ちょっと揺らしてみようか？ コハク」\nプレイヤーはぬいぐるみをコハクの近くで動かした。\n\nコハクはぬいぐるみの様子を注意深く見ている。遊び相手として、ひとまず気に留めたようだ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\ef2b859e6260b4c7c88746b26a9fe6b5f007ab41398d225ff601d8183f329581.png",
+      "resolved": "plush__direct"
+    },
+    {
+      "mode": "plush",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ちょっと揺らしてみようか？ コハク」\nプレイヤーはぬいぐるみをコハクの近くで動かした。\n\nコハクはぬいぐるみに控えめな反応を返した。丸い耳は向いているが、まだ様子見らしい。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\ef2b859e6260b4c7c88746b26a9fe6b5f007ab41398d225ff601d8183f329581.png",
+      "resolved": "plush__direct"
+    },
+    {
+      "mode": "plush",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「コハク、これで遊んでみようか」\nプレイヤーはコハクの様子に合わせてぬいぐるみを動かした。\n\nコハクはぬいぐるみの様子を注意深く見ている。遊び相手として、ひとまず気に留めたようだ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\ef2b859e6260b4c7c88746b26a9fe6b5f007ab41398d225ff601d8183f329581.png",
+      "resolved": "plush__adapt"
+    },
+    {
+      "mode": "plush",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「コハク、これで遊んでみようか」\nプレイヤーはコハクの様子に合わせてぬいぐるみを動かした。\n\nコハクはぬいぐるみに控えめな反応を返した。丸い耳は向いているが、まだ様子見らしい。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\ef2b859e6260b4c7c88746b26a9fe6b5f007ab41398d225ff601d8183f329581.png",
+      "resolved": "plush__adapt"
+    },
+    {
+      "mode": "plush",
+      "reaction": "neutral",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「コハク、ちょっとフェイントしてみようか？」\nプレイヤーはぬいぐるみを動かす向きや間合いを変えた。\n\nコハクはぬいぐるみの様子を注意深く見ている。遊び相手として、ひとまず気に留めたようだ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b08249b7b78e4703be896b23a9d6393f.png",
+      "resolved": "plush"
+    },
+    {
+      "mode": "plush",
+      "reaction": "neutral",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「コハク、ちょっとフェイントしてみようか？」\nプレイヤーはぬいぐるみを動かす向きや間合いを変えた。\n\nコハクはぬいぐるみに控えめな反応を返した。丸い耳は向いているが、まだ様子見らしい。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b08249b7b78e4703be896b23a9d6393f.png",
+      "resolved": "plush"
+    },
+    {
+      "mode": "plush",
+      "reaction": "favorable",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ちょっと揺らしてみようか？ コハク」\nプレイヤーはぬいぐるみをコハクの近くで動かした。\n\nコハクはぬいぐるみに楽しげな顔を向けた。慎重に見ていた目にも、遊び心がのぞく。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\ef2b859e6260b4c7c88746b26a9fe6b5f007ab41398d225ff601d8183f329581.png",
+      "resolved": "plush__direct"
+    },
+    {
+      "mode": "plush",
+      "reaction": "favorable",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ちょっと揺らしてみようか？ コハク」\nプレイヤーはぬいぐるみをコハクの近くで動かした。\n\nコハクはぬいぐるみ遊びの誘いに機嫌よく応じた。ふさふさの尾の先が、小さく揺れる。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\ef2b859e6260b4c7c88746b26a9fe6b5f007ab41398d225ff601d8183f329581.png",
+      "resolved": "plush__direct"
+    },
+    {
+      "mode": "plush",
+      "reaction": "favorable",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「コハク、これで遊んでみようか」\nプレイヤーはコハクの様子に合わせてぬいぐるみを動かした。\n\nコハクはぬいぐるみに楽しげな顔を向けた。慎重に見ていた目にも、遊び心がのぞく。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\ef2b859e6260b4c7c88746b26a9fe6b5f007ab41398d225ff601d8183f329581.png",
+      "resolved": "plush__adapt"
+    },
+    {
+      "mode": "plush",
+      "reaction": "favorable",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「コハク、これで遊んでみようか」\nプレイヤーはコハクの様子に合わせてぬいぐるみを動かした。\n\nコハクはぬいぐるみ遊びの誘いに機嫌よく応じた。ふさふさの尾の先が、小さく揺れる。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\ef2b859e6260b4c7c88746b26a9fe6b5f007ab41398d225ff601d8183f329581.png",
+      "resolved": "plush__adapt"
+    },
+    {
+      "mode": "plush",
+      "reaction": "favorable",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「コハク、ちょっとフェイントしてみようか？」\nプレイヤーはぬいぐるみを動かす向きや間合いを変えた。\n\nコハクはぬいぐるみに楽しげな顔を向けた。慎重に見ていた目にも、遊び心がのぞく。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b08249b7b78e4703be896b23a9d6393f.png",
+      "resolved": "plush"
+    },
+    {
+      "mode": "plush",
+      "reaction": "favorable",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「コハク、ちょっとフェイントしてみようか？」\nプレイヤーはぬいぐるみを動かす向きや間合いを変えた。\n\nコハクはぬいぐるみ遊びの誘いに機嫌よく応じた。ふさふさの尾の先が、小さく揺れる。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b08249b7b78e4703be896b23a9d6393f.png",
+      "resolved": "plush"
+    },
+    {
+      "mode": "plush",
+      "reaction": "enthusiastic",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ちょっと揺らしてみようか？ コハク」\nプレイヤーはぬいぐるみをコハクの近くで動かした。\n\nコハクはぬいぐるみに夢中になっている。金色の目が輝き、遊びへの期待を隠しきれない。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\ef2b859e6260b4c7c88746b26a9fe6b5f007ab41398d225ff601d8183f329581.png",
+      "resolved": "plush__direct"
+    },
+    {
+      "mode": "plush",
+      "reaction": "enthusiastic",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ちょっと揺らしてみようか？ コハク」\nプレイヤーはぬいぐるみをコハクの近くで動かした。\n\nコハクはぬいぐるみ遊びにすっかり気を良くした。丸い顔から、次も遊びたい気持ちが伝わってくる。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\ef2b859e6260b4c7c88746b26a9fe6b5f007ab41398d225ff601d8183f329581.png",
+      "resolved": "plush__direct"
+    },
+    {
+      "mode": "plush",
+      "reaction": "enthusiastic",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「コハク、これで遊んでみようか」\nプレイヤーはコハクの様子に合わせてぬいぐるみを動かした。\n\nコハクはぬいぐるみに夢中になっている。金色の目が輝き、遊びへの期待を隠しきれない。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\ef2b859e6260b4c7c88746b26a9fe6b5f007ab41398d225ff601d8183f329581.png",
+      "resolved": "plush__adapt"
+    },
+    {
+      "mode": "plush",
+      "reaction": "enthusiastic",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「コハク、これで遊んでみようか」\nプレイヤーはコハクの様子に合わせてぬいぐるみを動かした。\n\nコハクはぬいぐるみ遊びにすっかり気を良くした。丸い顔から、次も遊びたい気持ちが伝わってくる。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\ef2b859e6260b4c7c88746b26a9fe6b5f007ab41398d225ff601d8183f329581.png",
+      "resolved": "plush__adapt"
+    },
+    {
+      "mode": "plush",
+      "reaction": "enthusiastic",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「コハク、ちょっとフェイントしてみようか？」\nプレイヤーはぬいぐるみを動かす向きや間合いを変えた。\n\nコハクはぬいぐるみに夢中になっている。金色の目が輝き、遊びへの期待を隠しきれない。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b08249b7b78e4703be896b23a9d6393f.png",
+      "resolved": "plush"
+    },
+    {
+      "mode": "plush",
+      "reaction": "enthusiastic",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「コハク、ちょっとフェイントしてみようか？」\nプレイヤーはぬいぐるみを動かす向きや間合いを変えた。\n\nコハクはぬいぐるみ遊びにすっかり気を良くした。丸い顔から、次も遊びたい気持ちが伝わってくる。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b08249b7b78e4703be896b23a9d6393f.png",
+      "resolved": "plush"
+    },
+    {
+      "mode": "plush",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ちょっと揺らしてみようか？ コハク」\nプレイヤーはぬいぐるみをコハクの近くで動かした。\n\nコハクはぬいぐるみを気にしながら、ためらうような顔をした。遊び方がしっくりこないらしい。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\ef2b859e6260b4c7c88746b26a9fe6b5f007ab41398d225ff601d8183f329581.png",
+      "resolved": "plush__direct"
+    },
+    {
+      "mode": "plush",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ちょっと揺らしてみようか？ コハク」\nプレイヤーはぬいぐるみをコハクの近くで動かした。\n\nコハクはぬいぐるみと相手の顔を交互に見た。楽しみたいのに、どう応じるか迷っているようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\ef2b859e6260b4c7c88746b26a9fe6b5f007ab41398d225ff601d8183f329581.png",
+      "resolved": "plush__direct"
+    },
+    {
+      "mode": "plush",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「コハク、これで遊んでみようか」\nプレイヤーはコハクの様子に合わせてぬいぐるみを動かした。\n\nコハクはぬいぐるみを気にしながら、ためらうような顔をした。遊び方がしっくりこないらしい。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\ef2b859e6260b4c7c88746b26a9fe6b5f007ab41398d225ff601d8183f329581.png",
+      "resolved": "plush__adapt"
+    },
+    {
+      "mode": "plush",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「コハク、これで遊んでみようか」\nプレイヤーはコハクの様子に合わせてぬいぐるみを動かした。\n\nコハクはぬいぐるみと相手の顔を交互に見た。楽しみたいのに、どう応じるか迷っているようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\ef2b859e6260b4c7c88746b26a9fe6b5f007ab41398d225ff601d8183f329581.png",
+      "resolved": "plush__adapt"
+    },
+    {
+      "mode": "plush",
+      "reaction": "confused",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「コハク、ちょっとフェイントしてみようか？」\nプレイヤーはぬいぐるみを動かす向きや間合いを変えた。\n\nコハクはぬいぐるみを気にしながら、ためらうような顔をした。遊び方がしっくりこないらしい。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b08249b7b78e4703be896b23a9d6393f.png",
+      "resolved": "plush"
+    },
+    {
+      "mode": "plush",
+      "reaction": "confused",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「コハク、ちょっとフェイントしてみようか？」\nプレイヤーはぬいぐるみを動かす向きや間合いを変えた。\n\nコハクはぬいぐるみと相手の顔を交互に見た。楽しみたいのに、どう応じるか迷っているようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b08249b7b78e4703be896b23a9d6393f.png",
+      "resolved": "plush"
+    },
+    {
+      "mode": "plush",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ちょっと揺らしてみようか？ コハク」\nプレイヤーはぬいぐるみをコハクの近くで動かした。\n\nコハクはぬいぐるみにぼんやり目を向けた。遊びの誘いにも、疲れた様子がにじむ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\ef2b859e6260b4c7c88746b26a9fe6b5f007ab41398d225ff601d8183f329581.png",
+      "resolved": "plush__direct"
+    },
+    {
+      "mode": "plush",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ちょっと揺らしてみようか？ コハク」\nプレイヤーはぬいぐるみをコハクの近くで動かした。\n\nコハクはぬいぐるみへの反応が鈍い。ふっくらした顔もけだるそうで、遊びに身が入らないらしい。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\ef2b859e6260b4c7c88746b26a9fe6b5f007ab41398d225ff601d8183f329581.png",
+      "resolved": "plush__direct"
+    },
+    {
+      "mode": "plush",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「コハク、これで遊んでみようか」\nプレイヤーはコハクの様子に合わせてぬいぐるみを動かした。\n\nコハクはぬいぐるみにぼんやり目を向けた。遊びの誘いにも、疲れた様子がにじむ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\ef2b859e6260b4c7c88746b26a9fe6b5f007ab41398d225ff601d8183f329581.png",
+      "resolved": "plush__adapt"
+    },
+    {
+      "mode": "plush",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「コハク、これで遊んでみようか」\nプレイヤーはコハクの様子に合わせてぬいぐるみを動かした。\n\nコハクはぬいぐるみへの反応が鈍い。ふっくらした顔もけだるそうで、遊びに身が入らないらしい。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\ef2b859e6260b4c7c88746b26a9fe6b5f007ab41398d225ff601d8183f329581.png",
+      "resolved": "plush__adapt"
+    },
+    {
+      "mode": "plush",
+      "reaction": "listless",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「コハク、ちょっとフェイントしてみようか？」\nプレイヤーはぬいぐるみを動かす向きや間合いを変えた。\n\nコハクはぬいぐるみにぼんやり目を向けた。遊びの誘いにも、疲れた様子がにじむ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b08249b7b78e4703be896b23a9d6393f.png",
+      "resolved": "plush"
+    },
+    {
+      "mode": "plush",
+      "reaction": "listless",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「コハク、ちょっとフェイントしてみようか？」\nプレイヤーはぬいぐるみを動かす向きや間合いを変えた。\n\nコハクはぬいぐるみへの反応が鈍い。ふっくらした顔もけだるそうで、遊びに身が入らないらしい。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b08249b7b78e4703be896b23a9d6393f.png",
+      "resolved": "plush"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「トンネルに入ってみようかコハク」\nプレイヤーはトンネルの入口でコハクを遊びに誘った。\n\nコハクはトンネルの様子を慎重にうかがった。遊びへの興味はあるが、反応は控えめだ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\9b920b1812724b3c87f40920afb4395c.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「トンネルに入ってみようかコハク」\nプレイヤーはトンネルの入口でコハクを遊びに誘った。\n\nコハクはトンネルへ目を向けている。丸い耳にも、様子を確かめるような用心深さがある。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\9b920b1812724b3c87f40920afb4395c.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかコハク」\nプレイヤーはコハクの様子に合わせてトンネル遊びに誘った。\n\nコハクはトンネルの様子を慎重にうかがった。遊びへの興味はあるが、反応は控えめだ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\9b920b1812724b3c87f40920afb4395c.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかコハク」\nプレイヤーはコハクの様子に合わせてトンネル遊びに誘った。\n\nコハクはトンネルへ目を向けている。丸い耳にも、様子を確かめるような用心深さがある。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\9b920b1812724b3c87f40920afb4395c.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "neutral",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「コハク、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでコハクを遊びに誘った。\n\nコハクはトンネルの様子を慎重にうかがった。遊びへの興味はあるが、反応は控えめだ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\72193c2ffdb04ca3aa53e66503408214.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "neutral",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「コハク、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでコハクを遊びに誘った。\n\nコハクはトンネルへ目を向けている。丸い耳にも、様子を確かめるような用心深さがある。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\72193c2ffdb04ca3aa53e66503408214.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "neutral",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「コハク ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nコハクはトンネルの様子を慎重にうかがった。遊びへの興味はあるが、反応は控えめだ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\72193c2ffdb04ca3aa53e66503408214.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "neutral",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「コハク ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nコハクはトンネルへ目を向けている。丸い耳にも、様子を確かめるような用心深さがある。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\72193c2ffdb04ca3aa53e66503408214.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "favorable",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「トンネルに入ってみようかコハク」\nプレイヤーはトンネルの入口でコハクを遊びに誘った。\n\nコハクはトンネル遊びに楽しそうに応じた。慎重な表情の中にも、期待が見える。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\9b920b1812724b3c87f40920afb4395c.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "favorable",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「トンネルに入ってみようかコハク」\nプレイヤーはトンネルの入口でコハクを遊びに誘った。\n\nコハクはトンネルへいきいきと顔を向けた。遊びの誘いを気に入ったようだ。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\9b920b1812724b3c87f40920afb4395c.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "favorable",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかコハク」\nプレイヤーはコハクの様子に合わせてトンネル遊びに誘った。\n\nコハクはトンネル遊びに楽しそうに応じた。慎重な表情の中にも、期待が見える。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\9b920b1812724b3c87f40920afb4395c.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "favorable",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかコハク」\nプレイヤーはコハクの様子に合わせてトンネル遊びに誘った。\n\nコハクはトンネルへいきいきと顔を向けた。遊びの誘いを気に入ったようだ。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\9b920b1812724b3c87f40920afb4395c.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "favorable",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「コハク、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでコハクを遊びに誘った。\n\nコハクはトンネル遊びに楽しそうに応じた。慎重な表情の中にも、期待が見える。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\72193c2ffdb04ca3aa53e66503408214.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "favorable",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「コハク、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでコハクを遊びに誘った。\n\nコハクはトンネルへいきいきと顔を向けた。遊びの誘いを気に入ったようだ。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\72193c2ffdb04ca3aa53e66503408214.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "favorable",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「コハク ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nコハクはトンネル遊びに楽しそうに応じた。慎重な表情の中にも、期待が見える。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\72193c2ffdb04ca3aa53e66503408214.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "favorable",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「コハク ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nコハクはトンネルへいきいきと顔を向けた。遊びの誘いを気に入ったようだ。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\72193c2ffdb04ca3aa53e66503408214.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "enthusiastic",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「トンネルに入ってみようかコハク」\nプレイヤーはトンネルの入口でコハクを遊びに誘った。\n\nコハクはトンネル遊びに心を弾ませた。金色の目は、遊びの様子に釘づけになっている。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\9b920b1812724b3c87f40920afb4395c.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "enthusiastic",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「トンネルに入ってみようかコハク」\nプレイヤーはトンネルの入口でコハクを遊びに誘った。\n\nコハクはトンネルへ熱のこもった反応を返した。丸い顔に、もっと遊びたいという期待があふれる。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\9b920b1812724b3c87f40920afb4395c.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "enthusiastic",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかコハク」\nプレイヤーはコハクの様子に合わせてトンネル遊びに誘った。\n\nコハクはトンネル遊びに心を弾ませた。金色の目は、遊びの様子に釘づけになっている。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\9b920b1812724b3c87f40920afb4395c.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "enthusiastic",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかコハク」\nプレイヤーはコハクの様子に合わせてトンネル遊びに誘った。\n\nコハクはトンネルへ熱のこもった反応を返した。丸い顔に、もっと遊びたいという期待があふれる。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\9b920b1812724b3c87f40920afb4395c.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "enthusiastic",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「コハク、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでコハクを遊びに誘った。\n\nコハクはトンネル遊びに心を弾ませた。金色の目は、遊びの様子に釘づけになっている。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\72193c2ffdb04ca3aa53e66503408214.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "enthusiastic",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「コハク、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでコハクを遊びに誘った。\n\nコハクはトンネルへ熱のこもった反応を返した。丸い顔に、もっと遊びたいという期待があふれる。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\72193c2ffdb04ca3aa53e66503408214.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "enthusiastic",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「コハク ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nコハクはトンネル遊びに心を弾ませた。金色の目は、遊びの様子に釘づけになっている。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\72193c2ffdb04ca3aa53e66503408214.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "enthusiastic",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「コハク ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nコハクはトンネルへ熱のこもった反応を返した。丸い顔に、もっと遊びたいという期待があふれる。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\72193c2ffdb04ca3aa53e66503408214.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「トンネルに入ってみようかコハク」\nプレイヤーはトンネルの入口でコハクを遊びに誘った。\n\nコハクはトンネルの様子に気を取られつつ、応じるのを迷っている。気持ちよく遊ぶ調子が合わないようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\9b920b1812724b3c87f40920afb4395c.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「トンネルに入ってみようかコハク」\nプレイヤーはトンネルの入口でコハクを遊びに誘った。\n\nコハクはトンネルと相手を見比べた。遊びに誘われても、少し用心しているらしい。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\9b920b1812724b3c87f40920afb4395c.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかコハク」\nプレイヤーはコハクの様子に合わせてトンネル遊びに誘った。\n\nコハクはトンネルの様子に気を取られつつ、応じるのを迷っている。気持ちよく遊ぶ調子が合わないようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\9b920b1812724b3c87f40920afb4395c.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかコハク」\nプレイヤーはコハクの様子に合わせてトンネル遊びに誘った。\n\nコハクはトンネルと相手を見比べた。遊びに誘われても、少し用心しているらしい。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\9b920b1812724b3c87f40920afb4395c.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "confused",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「コハク、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでコハクを遊びに誘った。\n\nコハクはトンネルの様子に気を取られつつ、応じるのを迷っている。気持ちよく遊ぶ調子が合わないようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\72193c2ffdb04ca3aa53e66503408214.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "confused",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「コハク、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでコハクを遊びに誘った。\n\nコハクはトンネルと相手を見比べた。遊びに誘われても、少し用心しているらしい。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\72193c2ffdb04ca3aa53e66503408214.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "confused",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「コハク ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nコハクはトンネルの様子に気を取られつつ、応じるのを迷っている。気持ちよく遊ぶ調子が合わないようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\72193c2ffdb04ca3aa53e66503408214.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "confused",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「コハク ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nコハクはトンネルと相手を見比べた。遊びに誘われても、少し用心しているらしい。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\72193c2ffdb04ca3aa53e66503408214.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「トンネルに入ってみようかコハク」\nプレイヤーはトンネルの入口でコハクを遊びに誘った。\n\nコハクはトンネルへ重たげな視線を向けた。遊びの誘いに応じる元気が、今は少ないようだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\9b920b1812724b3c87f40920afb4395c.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「トンネルに入ってみようかコハク」\nプレイヤーはトンネルの入口でコハクを遊びに誘った。\n\nコハクはトンネル遊びにもけだるそうだ。目の輝きも控えめで、疲れがうかがえる。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\9b920b1812724b3c87f40920afb4395c.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかコハク」\nプレイヤーはコハクの様子に合わせてトンネル遊びに誘った。\n\nコハクはトンネルへ重たげな視線を向けた。遊びの誘いに応じる元気が、今は少ないようだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\9b920b1812724b3c87f40920afb4395c.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかコハク」\nプレイヤーはコハクの様子に合わせてトンネル遊びに誘った。\n\nコハクはトンネル遊びにもけだるそうだ。目の輝きも控えめで、疲れがうかがえる。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\9b920b1812724b3c87f40920afb4395c.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "listless",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「コハク、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでコハクを遊びに誘った。\n\nコハクはトンネルへ重たげな視線を向けた。遊びの誘いに応じる元気が、今は少ないようだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\72193c2ffdb04ca3aa53e66503408214.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "listless",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「コハク、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでコハクを遊びに誘った。\n\nコハクはトンネル遊びにもけだるそうだ。目の輝きも控えめで、疲れがうかがえる。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\72193c2ffdb04ca3aa53e66503408214.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "listless",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「コハク ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nコハクはトンネルへ重たげな視線を向けた。遊びの誘いに応じる元気が、今は少ないようだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\72193c2ffdb04ca3aa53e66503408214.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "listless",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「コハク ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nコハクはトンネル遊びにもけだるそうだ。目の輝きも控えめで、疲れがうかがえる。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\72193c2ffdb04ca3aa53e66503408214.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "brush",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ブラシを滑らせてみよう コハク。」\nプレイヤーはコハクの毛並みに沿ってブラシを動かした。\n\nコハクはブラシの動きを静かに見ている。ふわふわの頬の表情は、まだ慎重だ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a353a0e0e53b456e9c9ee40a47078925.png",
+      "resolved": "brush__direct"
+    },
+    {
+      "mode": "brush",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ブラシを滑らせてみよう コハク。」\nプレイヤーはコハクの毛並みに沿ってブラシを動かした。\n\nコハクはブラッシングに控えめに応じた。気にしてはいるが、くつろぐほどではないらしい。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a353a0e0e53b456e9c9ee40a47078925.png",
+      "resolved": "brush__direct"
+    },
+    {
+      "mode": "brush",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ねえコハク、ブラッシングしようか？」\nプレイヤーはコハクの様子に合わせて、そっとブラシを動かした。\n\nコハクはブラシの動きを静かに見ている。ふわふわの頬の表情は、まだ慎重だ。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a353a0e0e53b456e9c9ee40a47078925.png",
+      "resolved": "brush__adapt"
+    },
+    {
+      "mode": "brush",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ねえコハク、ブラッシングしようか？」\nプレイヤーはコハクの様子に合わせて、そっとブラシを動かした。\n\nコハクはブラッシングに控えめに応じた。気にしてはいるが、くつろぐほどではないらしい。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a353a0e0e53b456e9c9ee40a47078925.png",
+      "resolved": "brush__adapt"
+    },
+    {
+      "mode": "brush",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ブラシを滑らせてみよう コハク。」\nプレイヤーはコハクの毛並みに沿ってブラシを動かした。\n\nコハクはブラシと相手の顔を見比べた。遊びの時とは勝手が違うのか、少し戸惑っている。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a353a0e0e53b456e9c9ee40a47078925.png",
+      "resolved": "brush__direct"
+    },
+    {
+      "mode": "brush",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ブラシを滑らせてみよう コハク。」\nプレイヤーはコハクの毛並みに沿ってブラシを動かした。\n\nコハクはブラシを気にして耳を動かした。落ち着いて受け止めるには、まだ迷いがあるようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a353a0e0e53b456e9c9ee40a47078925.png",
+      "resolved": "brush__direct"
+    },
+    {
+      "mode": "brush",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ねえコハク、ブラッシングしようか？」\nプレイヤーはコハクの様子に合わせて、そっとブラシを動かした。\n\nコハクはブラシと相手の顔を見比べた。遊びの時とは勝手が違うのか、少し戸惑っている。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a353a0e0e53b456e9c9ee40a47078925.png",
+      "resolved": "brush__adapt"
+    },
+    {
+      "mode": "brush",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ねえコハク、ブラッシングしようか？」\nプレイヤーはコハクの様子に合わせて、そっとブラシを動かした。\n\nコハクはブラシを気にして耳を動かした。落ち着いて受け止めるには、まだ迷いがあるようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a353a0e0e53b456e9c9ee40a47078925.png",
+      "resolved": "brush__adapt"
+    },
+    {
+      "mode": "brush",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ブラシを滑らせてみよう コハク。」\nプレイヤーはコハクの毛並みに沿ってブラシを動かした。\n\nコハクはブラシへゆっくり目をやった。ふわふわの頬にも、疲れた表情が浮かんでいる。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a353a0e0e53b456e9c9ee40a47078925.png",
+      "resolved": "brush__direct"
+    },
+    {
+      "mode": "brush",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ブラシを滑らせてみよう コハク。」\nプレイヤーはコハクの毛並みに沿ってブラシを動かした。\n\nコハクはブラッシングへの反応も小さい。気にする元気があまりないのか、けだるそうにしている。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a353a0e0e53b456e9c9ee40a47078925.png",
+      "resolved": "brush__direct"
+    },
+    {
+      "mode": "brush",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ねえコハク、ブラッシングしようか？」\nプレイヤーはコハクの様子に合わせて、そっとブラシを動かした。\n\nコハクはブラシへゆっくり目をやった。ふわふわの頬にも、疲れた表情が浮かんでいる。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a353a0e0e53b456e9c9ee40a47078925.png",
+      "resolved": "brush__adapt"
+    },
+    {
+      "mode": "brush",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ねえコハク、ブラッシングしようか？」\nプレイヤーはコハクの様子に合わせて、そっとブラシを動かした。\n\nコハクはブラッシングへの反応も小さい。気にする元気があまりないのか、けだるそうにしている。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a353a0e0e53b456e9c9ee40a47078925.png",
+      "resolved": "brush__adapt"
+    },
+    {
+      "mode": "voice",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「あれ、コハク、ちょっと見てみようか？」\nプレイヤーはコハクに穏やかに声をかけた。\n\nコハクは声の方へ丸い耳を向けた。何か始まるのかと、静かに様子をうかがっている。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\018ef1918d23452984f34fb7b943f972.png",
+      "resolved": "voice__direct"
+    },
+    {
+      "mode": "voice",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「あれ、コハク、ちょっと見てみようか？」\nプレイヤーはコハクに穏やかに声をかけた。\n\nコハクは呼びかけに気づき、相手を見た。金色の目に、控えめな関心がのぞく。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\018ef1918d23452984f34fb7b943f972.png",
+      "resolved": "voice__direct"
+    },
+    {
+      "mode": "voice",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「さあ、ちょっと休憩しようか コハク」\nプレイヤーはコハクの様子を見ながら、声の調子や間合いを合わせた。\n\nコハクは声の方へ丸い耳を向けた。何か始まるのかと、静かに様子をうかがっている。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\018ef1918d23452984f34fb7b943f972.png",
+      "resolved": "voice__adapt"
+    },
+    {
+      "mode": "voice",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「さあ、ちょっと休憩しようか コハク」\nプレイヤーはコハクの様子を見ながら、声の調子や間合いを合わせた。\n\nコハクは呼びかけに気づき、相手を見た。金色の目に、控えめな関心がのぞく。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\018ef1918d23452984f34fb7b943f972.png",
+      "resolved": "voice__adapt"
+    },
+    {
+      "mode": "voice",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「あれ、コハク、ちょっと見てみようか？」\nプレイヤーはコハクに穏やかに声をかけた。\n\nコハクは声に耳を傾けながら、不思議そうな顔をした。どう応じればよいか迷っているらしい。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\018ef1918d23452984f34fb7b943f972.png",
+      "resolved": "voice__direct"
+    },
+    {
+      "mode": "voice",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「あれ、コハク、ちょっと見てみようか？」\nプレイヤーはコハクに穏やかに声をかけた。\n\nコハクは呼びかける相手を慎重に見つめた。気にはなるが、反応のきっかけをつかめないようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\018ef1918d23452984f34fb7b943f972.png",
+      "resolved": "voice__direct"
+    },
+    {
+      "mode": "voice",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「さあ、ちょっと休憩しようか コハク」\nプレイヤーはコハクの様子を見ながら、声の調子や間合いを合わせた。\n\nコハクは声に耳を傾けながら、不思議そうな顔をした。どう応じればよいか迷っているらしい。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\018ef1918d23452984f34fb7b943f972.png",
+      "resolved": "voice__adapt"
+    },
+    {
+      "mode": "voice",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「さあ、ちょっと休憩しようか コハク」\nプレイヤーはコハクの様子を見ながら、声の調子や間合いを合わせた。\n\nコハクは呼びかける相手を慎重に見つめた。気にはなるが、反応のきっかけをつかめないようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\018ef1918d23452984f34fb7b943f972.png",
+      "resolved": "voice__adapt"
+    },
+    {
+      "mode": "voice",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「あれ、コハク、ちょっと見てみようか？」\nプレイヤーはコハクに穏やかに声をかけた。\n\nコハクは声の方へゆっくり目を向けた。疲れがあるのか、応じる様子は乏しい。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\018ef1918d23452984f34fb7b943f972.png",
+      "resolved": "voice__direct"
+    },
+    {
+      "mode": "voice",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「あれ、コハク、ちょっと見てみようか？」\nプレイヤーはコハクに穏やかに声をかけた。\n\nコハクは呼びかけを聞いているようだが、けだるそうだ。丸い耳の反応も、ごく小さい。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\018ef1918d23452984f34fb7b943f972.png",
+      "resolved": "voice__direct"
+    },
+    {
+      "mode": "voice",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「さあ、ちょっと休憩しようか コハク」\nプレイヤーはコハクの様子を見ながら、声の調子や間合いを合わせた。\n\nコハクは声の方へゆっくり目を向けた。疲れがあるのか、応じる様子は乏しい。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\018ef1918d23452984f34fb7b943f972.png",
+      "resolved": "voice__adapt"
+    },
+    {
+      "mode": "voice",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「さあ、ちょっと休憩しようか コハク」\nプレイヤーはコハクの様子を見ながら、声の調子や間合いを合わせた。\n\nコハクは呼びかけを聞いているようだが、けだるそうだ。丸い耳の反応も、ごく小さい。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\018ef1918d23452984f34fb7b943f972.png",
+      "resolved": "voice__adapt"
+    },
+    {
+      "mode": "presence",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「コハク ちょっと見守りましょうか？」\nプレイヤーはコハクのそばで静かに様子を見守った。\n\nコハクはそばの気配を意識して、相手の様子をうかがった。この距離でどう過ごすか迷っているようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4c148c5f6be4fcabba4e51127971e97.png",
+      "resolved": "presence__direct"
+    },
+    {
+      "mode": "presence",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「コハク ちょっと見守りましょうか？」\nプレイヤーはコハクのそばで静かに様子を見守った。\n\nコハクは見守る相手へ、ためらいがちな視線を向けた。静かな間合いに、まだなじみきれないらしい。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4c148c5f6be4fcabba4e51127971e97.png",
+      "resolved": "presence__direct"
+    },
+    {
+      "mode": "presence",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「静かな雰囲気でコハクに寄り添おうか。」\nプレイヤーはコハクの様子に合わせて距離を保ち、静かに見守った。\n\nコハクはそばの気配を意識して、相手の様子をうかがった。この距離でどう過ごすか迷っているようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4c148c5f6be4fcabba4e51127971e97.png",
+      "resolved": "presence__adapt"
+    },
+    {
+      "mode": "presence",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「静かな雰囲気でコハクに寄り添おうか。」\nプレイヤーはコハクの様子に合わせて距離を保ち、静かに見守った。\n\nコハクは見守る相手へ、ためらいがちな視線を向けた。静かな間合いに、まだなじみきれないらしい。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4c148c5f6be4fcabba4e51127971e97.png",
+      "resolved": "presence__adapt"
+    },
+    {
+      "mode": "presence",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「コハク ちょっと見守りましょうか？」\nプレイヤーはコハクのそばで静かに様子を見守った。\n\nコハクはそばの気配へゆっくりと目をやった。相手との距離を気にするより、今は休みたいようだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4c148c5f6be4fcabba4e51127971e97.png",
+      "resolved": "presence__direct"
+    },
+    {
+      "mode": "presence",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「コハク ちょっと見守りましょうか？」\nプレイヤーはコハクのそばで静かに様子を見守った。\n\nコハクは見守られながら、けだるそうに過ごしている。周りへの反応も控えめだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4c148c5f6be4fcabba4e51127971e97.png",
+      "resolved": "presence__direct"
+    },
+    {
+      "mode": "presence",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「静かな雰囲気でコハクに寄り添おうか。」\nプレイヤーはコハクの様子に合わせて距離を保ち、静かに見守った。\n\nコハクはそばの気配へゆっくりと目をやった。相手との距離を気にするより、今は休みたいようだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4c148c5f6be4fcabba4e51127971e97.png",
+      "resolved": "presence__adapt"
+    },
+    {
+      "mode": "presence",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「静かな雰囲気でコハクに寄り添おうか。」\nプレイヤーはコハクの様子に合わせて距離を保ち、静かに見守った。\n\nコハクは見守られながら、けだるそうに過ごしている。周りへの反応も控えめだ。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4c148c5f6be4fcabba4e51127971e97.png",
+      "resolved": "presence__adapt"
+    },
+    {
+      "mode": "pause",
+      "reaction": "neutral",
+      "action": "pause",
+      "slot": 1,
+      "body": "プレイヤー「一緒に休憩しようか、コハク」\nプレイヤーは手を止め、コハクが落ち着くのを待った。\n\nコハクはひと息ついている。遊ぶ時の張り切った顔とは違い、やわらかな表情だ。\n\n急がず、静かな休憩の時間を過ごした。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 専用（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\338190e5d3184d939b780a1262e89e88.png",
+      "resolved": "pause"
+    },
+    {
+      "mode": "pause",
+      "reaction": "neutral",
+      "action": "pause",
+      "slot": 2,
+      "body": "プレイヤー「一緒に休憩しようか、コハク」\nプレイヤーは手を止め、コハクが落ち着くのを待った。\n\nコハクは休憩のひとときを静かに過ごしている。ふっくらした顔にも、落ち着きが見える。\n\n急がず、静かな休憩の時間を過ごした。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 専用（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\338190e5d3184d939b780a1262e89e88.png",
+      "resolved": "pause"
+    },
+    {
+      "mode": "pause",
+      "reaction": "listless",
+      "action": "pause",
+      "slot": 1,
+      "body": "プレイヤー「一緒に休憩しようか、コハク」\nプレイヤーは手を止め、コハクが落ち着くのを待った。\n\nコハクは疲れた様子で休んでいる。金色の目にも勢いはなく、今は静かにしていたいようだ。\n\n急がず、静かな休憩の時間を過ごした。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 専用（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\338190e5d3184d939b780a1262e89e88.png",
+      "resolved": "pause"
+    },
+    {
+      "mode": "pause",
+      "reaction": "listless",
+      "action": "pause",
+      "slot": 2,
+      "body": "プレイヤー「一緒に休憩しようか、コハク」\nプレイヤーは手を止め、コハクが落ち着くのを待った。\n\nコハクはけだるそうに休憩している。遊び好きの表情もひと休みして、反応は小さい。\n\n急がず、静かな休憩の時間を過ごした。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 専用（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\338190e5d3184d939b780a1262e89e88.png",
+      "resolved": "pause"
+    }
+  ],
+  "before_count": 318,
+  "after_count": 352,
+  "draft_counts": [
+    334,
+    368
+  ],
+  "generated_count": 278,
+  "protected_unchanged": true,
+  "unity_imported": false
+}

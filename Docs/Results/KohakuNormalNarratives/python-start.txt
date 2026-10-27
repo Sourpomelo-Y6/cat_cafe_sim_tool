@@ -1,0 +1,6 @@
+5df6a70 Fill Mori reservation guest profile and cat address
+af0d2e9 Register Ueda expanded-guest-5 profile and adopted portrait
+250ebcd Register Ishida expanded-guest-4 profile and adopted portrait
+ M config/cafe_playtest_cats.json
+ M config/cafe_recruitment.json
+ M saves/content_images/interaction_subjects.json
