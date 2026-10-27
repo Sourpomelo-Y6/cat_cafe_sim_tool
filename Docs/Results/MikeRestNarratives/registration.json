@@ -1,0 +1,155 @@
+{
+  "registered_at": "2026-10-27T05:24:50.002708+00:00",
+  "condition": {
+    "kind": "cat_response",
+    "subject_id": "cat-mike",
+    "mode": "pause",
+    "action": "pause",
+    "reaction": "listless",
+    "scene_key": "pause"
+  },
+  "condition_key": "cat_response/cat-mike/pause/pause/listless/pause",
+  "before": {
+    "condition": {
+      "kind": "cat_response",
+      "subject_id": "cat-mike",
+      "mode": "pause",
+      "action": "pause",
+      "reaction": "listless",
+      "scene_key": "pause"
+    },
+    "variants": [
+      {
+        "id": "e1294066bd295216938771aca9937c18",
+        "slot": 1,
+        "text": "ミケは動きを止めて静かに佇んだ。"
+      },
+      {
+        "id": "361c2045db6759e2a90028fbd8918c28",
+        "slot": 2,
+        "text": "ミケはどこか遠くを見るようにじっとした。"
+      },
+      {
+        "id": "14e25980e0465533bcff03a35c5e1137",
+        "slot": 3,
+        "text": "ミケは体力を温存するように動きを最小限にした。"
+      }
+    ]
+  },
+  "after": {
+    "condition": {
+      "kind": "cat_response",
+      "subject_id": "cat-mike",
+      "mode": "pause",
+      "action": "pause",
+      "reaction": "listless",
+      "scene_key": "pause"
+    },
+    "variants": [
+      {
+        "id": "e1294066bd295216938771aca9937c18",
+        "slot": 1,
+        "text": "ミケは疲れた様子で、静かに佇んだ。"
+      },
+      {
+        "id": "361c2045db6759e2a90028fbd8918c28",
+        "slot": 2,
+        "text": "ミケはどこか遠くを見るようにじっとした。"
+      },
+      {
+        "id": "14e25980e0465533bcff03a35c5e1137",
+        "slot": 3,
+        "text": "ミケは動きを控え、ゆったりと休んでいた。"
+      }
+    ]
+  },
+  "previous_published": null,
+  "published_counts": [
+    276,
+    277
+  ],
+  "draft_counts": [
+    293,
+    293
+  ],
+  "generated_files": 278,
+  "matching_generated": [
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated\\interaction_texts\\821ac5c6b9d14df982b7461a53ed98bc.json"
+  ],
+  "profile": {
+    "id": "cat-mike",
+    "kind": "cat_response",
+    "name": "ミケ",
+    "game_id": "cat-mike",
+    "content_id": "playtest-mike",
+    "notes": "三毛の毛並みが愛らしいミケは、カフェのムードメーカーです。短毛で動きが機敏、のんびりとした佇まいがたまらない癒やしを提供してくれます。",
+    "call": "{cat}",
+    "enabled": true
+  },
+  "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\d02eabdcfd8140c1ab1bb7bff02bc615.png",
+  "image_sha256": "420a736a5bda9975101edc548e50448272954d632dbe7f7b8cbdbf15be9dcd2b",
+  "previews": [
+    {
+      "slot": 1,
+      "body": "プレイヤー「少しお休みしてみようか。」\nプレイヤーは手を止め、ミケが落ち着くのを待った。\n\nミケは疲れた様子で、静かに佇んだ。\n\n急がず、静かな休憩の時間を過ごした。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 専用（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image_notice": "画像：pause → pause"
+    },
+    {
+      "slot": 2,
+      "body": "プレイヤー「少しお休みしてみようか。」\nプレイヤーは手を止め、ミケが落ち着くのを待った。\n\nミケはどこか遠くを見るようにじっとした。\n\n急がず、静かな休憩の時間を過ごした。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 専用（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image_notice": "画像：pause → pause"
+    },
+    {
+      "slot": 3,
+      "body": "プレイヤー「少しお休みしてみようか。」\nプレイヤーは手を止め、ミケが落ち着くのを待った。\n\nミケは動きを控え、ゆったりと休んでいた。\n\n急がず、静かな休憩の時間を過ごした。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 専用（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image_notice": "画像：pause → pause"
+    }
+  ],
+  "selection_before": {
+    "candidates": [],
+    "source": "未制作",
+    "match": "",
+    "condition": {
+      "kind": "cat_response",
+      "subject_id": "cat-mike",
+      "mode": "pause",
+      "action": "pause",
+      "reaction": "listless",
+      "scene_key": "pause"
+    }
+  },
+  "selection_after": {
+    "candidates": [
+      {
+        "id": "e1294066bd295216938771aca9937c18",
+        "slot": 1,
+        "text": "ミケは疲れた様子で、静かに佇んだ。"
+      },
+      {
+        "id": "361c2045db6759e2a90028fbd8918c28",
+        "slot": 2,
+        "text": "ミケはどこか遠くを見るようにじっとした。"
+      },
+      {
+        "id": "14e25980e0465533bcff03a35c5e1137",
+        "slot": 3,
+        "text": "ミケは動きを控え、ゆったりと休んでいた。"
+      }
+    ],
+    "source": "登録済み",
+    "match": "専用",
+    "condition": {
+      "kind": "cat_response",
+      "subject_id": "cat-mike",
+      "mode": "pause",
+      "action": "pause",
+      "reaction": "listless",
+      "scene_key": "pause"
+    }
+  },
+  "unrelated_entries_drafts_and_protected_hashes_unchanged": true,
+  "unity_imported": false
+}
