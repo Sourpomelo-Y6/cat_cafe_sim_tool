@@ -1,0 +1,1019 @@
+{
+  "entries": {
+    "tunnel/neutral": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "0be7e2c192a653febc8a96a54b892621",
+          "slot": 1,
+          "text": "{cat}はトンネル遊びの誘いに、静かな様子で応じた。"
+        },
+        {
+          "id": "9fbe9ee2f3a8518aa38054e22a2e645d",
+          "slot": 2,
+          "text": "{cat}はトンネルへ目を向け、しばらく様子を見ていた。"
+        },
+        {
+          "id": "d66ec5e6d86b5ebcb7b76c72402f031b",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "tunnel/favorable": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "751b8e08b9fe5950872165894e81300f",
+          "slot": 1,
+          "text": "{cat}はトンネル遊びに興味を示し、穏やかに応じた。"
+        },
+        {
+          "id": "45af6ef9b40a5ce2ab264bcd6a3fccef",
+          "slot": 2,
+          "text": "{cat}はトンネルに注意を向け、遊びの誘いを受け止めた。"
+        },
+        {
+          "id": "0921b57656765000808192138dcfc8fc",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "tunnel/enthusiastic": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "ca9ab8104ad0501589e344a6013af859",
+          "slot": 1,
+          "text": "{cat}はトンネル遊びに強い関心を示し、熱心に応じた。"
+        },
+        {
+          "id": "4fe21c2254db53c29a2d82a2ac50b7a9",
+          "slot": 2,
+          "text": "{cat}は遊びの誘いに気持ちを向け、いつもより積極的に応じた。"
+        },
+        {
+          "id": "c7d8d3f66ffa5caeb0912f893728e266",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "tunnel/confused": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "48c98cd5c400514eb8ed2ce30676a111",
+          "slot": 1,
+          "text": "{cat}はトンネル遊びの誘いに戸惑い、様子をうかがった。"
+        },
+        {
+          "id": "26e720acb7db552f9c5fed866f4ab8f9",
+          "slot": 2,
+          "text": "{cat}はどうしたものか迷うように、トンネルへ目を向けた。"
+        },
+        {
+          "id": "e11a005e581950dd8ef780095c97b85e",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "tunnel/listless": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "tunnel",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "tunnel"
+      },
+      "variants": [
+        {
+          "id": "c950a4c2348f59aea3ed50b7efd2ab26",
+          "slot": 1,
+          "text": "{cat}は疲れた様子で、トンネル遊びへの反応が鈍かった。"
+        },
+        {
+          "id": "89937f2665795ee8abf465c54dc40c48",
+          "slot": 2,
+          "text": "{cat}は遊びの誘いにゆっくりと反応し、疲れを見せた。"
+        },
+        {
+          "id": "95e606efb0c4555ba7c699fd853ebb7d",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "brush/turn_away": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "brush",
+        "action": "any",
+        "reaction": "turn_away",
+        "scene_key": "brush"
+      },
+      "variants": [
+        {
+          "id": "feaa61f843105712a56d16449166d74c",
+          "slot": 1,
+          "text": "{cat}はブラシから気持ちをそらし、今は距離を置きたそうだ。"
+        },
+        {
+          "id": "89304391b1c05ed98faa61d7598805d3",
+          "slot": 2,
+          "text": "{cat}はブラッシングの誘いを避けるように、そっと身を引いた。"
+        },
+        {
+          "id": "2e36e36fd7dd522eb50183c9673b159e",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "voice/neutral": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "9f3e16ea49035692a670bc1f16379b89",
+          "slot": 1,
+          "text": "{cat}は声かけに気づき、静かに耳を向けた。"
+        },
+        {
+          "id": "50a91ca22c2050ac9885022d622f58bf",
+          "slot": 2,
+          "text": "{cat}は落ち着いた様子で、かけられた声を聞いていた。"
+        },
+        {
+          "id": "41aba3cc113150e69f43df2171dd1fde",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "voice/confused": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "490b956354f951a292710ad9e5547f22",
+          "slot": 1,
+          "text": "{cat}は声に少し戸惑ったように、相手の様子をうかがった。"
+        },
+        {
+          "id": "981bc08ce7b8537ba2ac257c0eb2ed06",
+          "slot": 2,
+          "text": "{cat}は声の方へ注意を向けたまま、どう応じるか迷っているようだ。"
+        },
+        {
+          "id": "3cb6feb5e4b65506a4993b6f315de980",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "voice/listless": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "ddb9b6d47c775af093512da6d2bad8b4",
+          "slot": 1,
+          "text": "{cat}は疲れた様子で、声への反応も控えめだった。"
+        },
+        {
+          "id": "1915b8e1bb2e5ac4b91d7cec06eff9ac",
+          "slot": 2,
+          "text": "{cat}は呼びかけを聞きながら、けだるそうに過ごしていた。"
+        },
+        {
+          "id": "1ca07450f7e0568d843d34b5a489feae",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "presence/neutral": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "ff379b2500fd5eb284b46fb1b3e2f004",
+          "slot": 1,
+          "text": "{cat}は見守られながら、落ち着いた時間を過ごした。"
+        },
+        {
+          "id": "b7647d0bf1f954ce8b748612bc629942",
+          "slot": 2,
+          "text": "{cat}はそばの気配を感じつつ、自分のペースで過ごしていた。"
+        },
+        {
+          "id": "938462a866495f0f8f1d3fb22f798fcc",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "presence/confused": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "990538943860590692826dc03f3989a3",
+          "slot": 1,
+          "text": "{cat}はそばの気配に少し戸惑い、様子をうかがった。"
+        },
+        {
+          "id": "c955bad1479d586e81b6ad82cc72488f",
+          "slot": 2,
+          "text": "{cat}は見守られる中で、どう過ごそうか迷うようにしていた。"
+        },
+        {
+          "id": "1e69b3a9775b57e19c2d12a185737f7f",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "presence/listless": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "presence",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "presence"
+      },
+      "variants": [
+        {
+          "id": "dc0bfc3788c95b87bdcde098c8114ede",
+          "slot": 1,
+          "text": "{cat}は疲れた様子で、静かに見守られていた。"
+        },
+        {
+          "id": "0cb82487e40c5b1eb555c0841f3bba86",
+          "slot": 2,
+          "text": "{cat}はそばに人がいる中、けだるそうに過ごしていた。"
+        },
+        {
+          "id": "6f91e4b69b5750928912364e62cacf1c",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    }
+  },
+  "previews": [
+    {
+      "mode": "tunnel",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「トンネルに入ってみようかソラ」\nプレイヤーはトンネルの入口でソラを遊びに誘った。\n\nソラはトンネル遊びの誘いに、静かな様子で応じた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\31d5cd507307406daefa79b143be0288.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「トンネルに入ってみようかソラ」\nプレイヤーはトンネルの入口でソラを遊びに誘った。\n\nソラはトンネルへ目を向け、しばらく様子を見ていた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\31d5cd507307406daefa79b143be0288.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかソラ」\nプレイヤーはソラの様子に合わせてトンネル遊びに誘った。\n\nソラはトンネル遊びの誘いに、静かな様子で応じた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\31d5cd507307406daefa79b143be0288.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかソラ」\nプレイヤーはソラの様子に合わせてトンネル遊びに誘った。\n\nソラはトンネルへ目を向け、しばらく様子を見ていた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\31d5cd507307406daefa79b143be0288.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "neutral",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ソラ、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでソラを遊びに誘った。\n\nソラはトンネル遊びの誘いに、静かな様子で応じた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "neutral",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ソラ、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでソラを遊びに誘った。\n\nソラはトンネルへ目を向け、しばらく様子を見ていた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "neutral",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ソラ ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nソラはトンネル遊びの誘いに、静かな様子で応じた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "neutral",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ソラ ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nソラはトンネルへ目を向け、しばらく様子を見ていた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "favorable",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「トンネルに入ってみようかソラ」\nプレイヤーはトンネルの入口でソラを遊びに誘った。\n\nソラはトンネル遊びに興味を示し、穏やかに応じた。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\31d5cd507307406daefa79b143be0288.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "favorable",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「トンネルに入ってみようかソラ」\nプレイヤーはトンネルの入口でソラを遊びに誘った。\n\nソラはトンネルに注意を向け、遊びの誘いを受け止めた。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\31d5cd507307406daefa79b143be0288.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "favorable",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかソラ」\nプレイヤーはソラの様子に合わせてトンネル遊びに誘った。\n\nソラはトンネル遊びに興味を示し、穏やかに応じた。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\31d5cd507307406daefa79b143be0288.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "favorable",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかソラ」\nプレイヤーはソラの様子に合わせてトンネル遊びに誘った。\n\nソラはトンネルに注意を向け、遊びの誘いを受け止めた。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\31d5cd507307406daefa79b143be0288.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "favorable",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ソラ、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでソラを遊びに誘った。\n\nソラはトンネル遊びに興味を示し、穏やかに応じた。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "favorable",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ソラ、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでソラを遊びに誘った。\n\nソラはトンネルに注意を向け、遊びの誘いを受け止めた。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "favorable",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ソラ ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nソラはトンネル遊びに興味を示し、穏やかに応じた。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "favorable",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ソラ ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nソラはトンネルに注意を向け、遊びの誘いを受け止めた。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "enthusiastic",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「トンネルに入ってみようかソラ」\nプレイヤーはトンネルの入口でソラを遊びに誘った。\n\nソラはトンネル遊びに強い関心を示し、熱心に応じた。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\31d5cd507307406daefa79b143be0288.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "enthusiastic",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「トンネルに入ってみようかソラ」\nプレイヤーはトンネルの入口でソラを遊びに誘った。\n\nソラは遊びの誘いに気持ちを向け、いつもより積極的に応じた。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\31d5cd507307406daefa79b143be0288.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "enthusiastic",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかソラ」\nプレイヤーはソラの様子に合わせてトンネル遊びに誘った。\n\nソラはトンネル遊びに強い関心を示し、熱心に応じた。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\31d5cd507307406daefa79b143be0288.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "enthusiastic",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかソラ」\nプレイヤーはソラの様子に合わせてトンネル遊びに誘った。\n\nソラは遊びの誘いに気持ちを向け、いつもより積極的に応じた。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\31d5cd507307406daefa79b143be0288.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "enthusiastic",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ソラ、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでソラを遊びに誘った。\n\nソラはトンネル遊びに強い関心を示し、熱心に応じた。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "enthusiastic",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ソラ、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでソラを遊びに誘った。\n\nソラは遊びの誘いに気持ちを向け、いつもより積極的に応じた。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "enthusiastic",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ソラ ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nソラはトンネル遊びに強い関心を示し、熱心に応じた。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "enthusiastic",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ソラ ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nソラは遊びの誘いに気持ちを向け、いつもより積極的に応じた。\n\n交流の時間に、明るい空気が広がった。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「トンネルに入ってみようかソラ」\nプレイヤーはトンネルの入口でソラを遊びに誘った。\n\nソラはトンネル遊びの誘いに戸惑い、様子をうかがった。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\31d5cd507307406daefa79b143be0288.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「トンネルに入ってみようかソラ」\nプレイヤーはトンネルの入口でソラを遊びに誘った。\n\nソラはどうしたものか迷うように、トンネルへ目を向けた。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\31d5cd507307406daefa79b143be0288.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかソラ」\nプレイヤーはソラの様子に合わせてトンネル遊びに誘った。\n\nソラはトンネル遊びの誘いに戸惑い、様子をうかがった。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\31d5cd507307406daefa79b143be0288.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかソラ」\nプレイヤーはソラの様子に合わせてトンネル遊びに誘った。\n\nソラはどうしたものか迷うように、トンネルへ目を向けた。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\31d5cd507307406daefa79b143be0288.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "confused",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ソラ、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでソラを遊びに誘った。\n\nソラはトンネル遊びの誘いに戸惑い、様子をうかがった。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "confused",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ソラ、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでソラを遊びに誘った。\n\nソラはどうしたものか迷うように、トンネルへ目を向けた。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "confused",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ソラ ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nソラはトンネル遊びの誘いに戸惑い、様子をうかがった。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "confused",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ソラ ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nソラはどうしたものか迷うように、トンネルへ目を向けた。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「トンネルに入ってみようかソラ」\nプレイヤーはトンネルの入口でソラを遊びに誘った。\n\nソラは疲れた様子で、トンネル遊びへの反応が鈍かった。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\31d5cd507307406daefa79b143be0288.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「トンネルに入ってみようかソラ」\nプレイヤーはトンネルの入口でソラを遊びに誘った。\n\nソラは遊びの誘いにゆっくりと反応し、疲れを見せた。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\31d5cd507307406daefa79b143be0288.png",
+      "resolved": "tunnel__direct"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかソラ」\nプレイヤーはソラの様子に合わせてトンネル遊びに誘った。\n\nソラは疲れた様子で、トンネル遊びへの反応が鈍かった。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\31d5cd507307406daefa79b143be0288.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「トンネルを一緒に通ってみようかソラ」\nプレイヤーはソラの様子に合わせてトンネル遊びに誘った。\n\nソラは遊びの誘いにゆっくりと反応し、疲れを見せた。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\31d5cd507307406daefa79b143be0288.png",
+      "resolved": "tunnel__adapt"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "listless",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ソラ、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでソラを遊びに誘った。\n\nソラは疲れた様子で、トンネル遊びへの反応が鈍かった。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "listless",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ソラ、トンネルをくぐってみようか？」\nプレイヤーはトンネル越しに、勢いのある動きでソラを遊びに誘った。\n\nソラは遊びの誘いにゆっくりと反応し、疲れを見せた。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "listless",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ソラ ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nソラは疲れた様子で、トンネル遊びへの反応が鈍かった。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "tunnel",
+      "reaction": "listless",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ソラ ちょっとトンネルに入ってみようか」\nプレイヤーはトンネルの入口で動きに緩急をつけた。\n\nソラは遊びの誘いにゆっくりと反応し、疲れを見せた。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "tunnel"
+    },
+    {
+      "mode": "brush",
+      "reaction": "turn_away",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ブラシを滑らせてみよう ソラ。」\nプレイヤーはソラの毛並みに沿ってブラシを動かした。\n\nソラはブラシから気持ちをそらし、今は距離を置きたそうだ。\n\n今は少し距離を置きたいようだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\bb2ccc568d25423d85efd364d4b827c3.png",
+      "resolved": "brush__direct"
+    },
+    {
+      "mode": "brush",
+      "reaction": "turn_away",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ブラシを滑らせてみよう ソラ。」\nプレイヤーはソラの毛並みに沿ってブラシを動かした。\n\nソラはブラッシングの誘いを避けるように、そっと身を引いた。\n\n今は少し距離を置きたいようだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\bb2ccc568d25423d85efd364d4b827c3.png",
+      "resolved": "brush__direct"
+    },
+    {
+      "mode": "brush",
+      "reaction": "turn_away",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ねえソラ、ブラッシングしようか？」\nプレイヤーはソラの様子に合わせて、そっとブラシを動かした。\n\nソラはブラシから気持ちをそらし、今は距離を置きたそうだ。\n\n今は少し距離を置きたいようだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\bb2ccc568d25423d85efd364d4b827c3.png",
+      "resolved": "brush__adapt"
+    },
+    {
+      "mode": "brush",
+      "reaction": "turn_away",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ねえソラ、ブラッシングしようか？」\nプレイヤーはソラの様子に合わせて、そっとブラシを動かした。\n\nソラはブラッシングの誘いを避けるように、そっと身を引いた。\n\n今は少し距離を置きたいようだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\bb2ccc568d25423d85efd364d4b827c3.png",
+      "resolved": "brush__adapt"
+    },
+    {
+      "mode": "voice",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「あれ、ソラ、ちょっと見てみようか？」\nプレイヤーはソラに穏やかに声をかけた。\n\nソラは声かけに気づき、静かに耳を向けた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b1e6c63357f04050b06df73edbecf700.png",
+      "resolved": "voice__direct"
+    },
+    {
+      "mode": "voice",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「あれ、ソラ、ちょっと見てみようか？」\nプレイヤーはソラに穏やかに声をかけた。\n\nソラは落ち着いた様子で、かけられた声を聞いていた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b1e6c63357f04050b06df73edbecf700.png",
+      "resolved": "voice__direct"
+    },
+    {
+      "mode": "voice",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「さあ、ちょっと休憩しようか ソラ」\nプレイヤーはソラの様子を見ながら、声の調子や間合いを合わせた。\n\nソラは声かけに気づき、静かに耳を向けた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b1e6c63357f04050b06df73edbecf700.png",
+      "resolved": "voice__adapt"
+    },
+    {
+      "mode": "voice",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「さあ、ちょっと休憩しようか ソラ」\nプレイヤーはソラの様子を見ながら、声の調子や間合いを合わせた。\n\nソラは落ち着いた様子で、かけられた声を聞いていた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b1e6c63357f04050b06df73edbecf700.png",
+      "resolved": "voice__adapt"
+    },
+    {
+      "mode": "voice",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「あれ、ソラ、ちょっと見てみようか？」\nプレイヤーはソラに穏やかに声をかけた。\n\nソラは声に少し戸惑ったように、相手の様子をうかがった。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b1e6c63357f04050b06df73edbecf700.png",
+      "resolved": "voice__direct"
+    },
+    {
+      "mode": "voice",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「あれ、ソラ、ちょっと見てみようか？」\nプレイヤーはソラに穏やかに声をかけた。\n\nソラは声の方へ注意を向けたまま、どう応じるか迷っているようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b1e6c63357f04050b06df73edbecf700.png",
+      "resolved": "voice__direct"
+    },
+    {
+      "mode": "voice",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「さあ、ちょっと休憩しようか ソラ」\nプレイヤーはソラの様子を見ながら、声の調子や間合いを合わせた。\n\nソラは声に少し戸惑ったように、相手の様子をうかがった。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b1e6c63357f04050b06df73edbecf700.png",
+      "resolved": "voice__adapt"
+    },
+    {
+      "mode": "voice",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「さあ、ちょっと休憩しようか ソラ」\nプレイヤーはソラの様子を見ながら、声の調子や間合いを合わせた。\n\nソラは声の方へ注意を向けたまま、どう応じるか迷っているようだ。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b1e6c63357f04050b06df73edbecf700.png",
+      "resolved": "voice__adapt"
+    },
+    {
+      "mode": "voice",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「あれ、ソラ、ちょっと見てみようか？」\nプレイヤーはソラに穏やかに声をかけた。\n\nソラは疲れた様子で、声への反応も控えめだった。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b1e6c63357f04050b06df73edbecf700.png",
+      "resolved": "voice__direct"
+    },
+    {
+      "mode": "voice",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「あれ、ソラ、ちょっと見てみようか？」\nプレイヤーはソラに穏やかに声をかけた。\n\nソラは呼びかけを聞きながら、けだるそうに過ごしていた。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b1e6c63357f04050b06df73edbecf700.png",
+      "resolved": "voice__direct"
+    },
+    {
+      "mode": "voice",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「さあ、ちょっと休憩しようか ソラ」\nプレイヤーはソラの様子を見ながら、声の調子や間合いを合わせた。\n\nソラは疲れた様子で、声への反応も控えめだった。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b1e6c63357f04050b06df73edbecf700.png",
+      "resolved": "voice__adapt"
+    },
+    {
+      "mode": "voice",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「さあ、ちょっと休憩しようか ソラ」\nプレイヤーはソラの様子を見ながら、声の調子や間合いを合わせた。\n\nソラは呼びかけを聞きながら、けだるそうに過ごしていた。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\b1e6c63357f04050b06df73edbecf700.png",
+      "resolved": "voice__adapt"
+    },
+    {
+      "mode": "presence",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ソラ ちょっと見守りましょうか？」\nプレイヤーはソラのそばで静かに様子を見守った。\n\nソラは見守られながら、落ち着いた時間を過ごした。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c052796175e34a54a43a62b1a11a940d.png",
+      "resolved": "presence__direct"
+    },
+    {
+      "mode": "presence",
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ソラ ちょっと見守りましょうか？」\nプレイヤーはソラのそばで静かに様子を見守った。\n\nソラはそばの気配を感じつつ、自分のペースで過ごしていた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c052796175e34a54a43a62b1a11a940d.png",
+      "resolved": "presence__direct"
+    },
+    {
+      "mode": "presence",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「静かな雰囲気でソラに寄り添おうか。」\nプレイヤーはソラの様子に合わせて距離を保ち、静かに見守った。\n\nソラは見守られながら、落ち着いた時間を過ごした。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c052796175e34a54a43a62b1a11a940d.png",
+      "resolved": "presence__adapt"
+    },
+    {
+      "mode": "presence",
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「静かな雰囲気でソラに寄り添おうか。」\nプレイヤーはソラの様子に合わせて距離を保ち、静かに見守った。\n\nソラはそばの気配を感じつつ、自分のペースで過ごしていた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c052796175e34a54a43a62b1a11a940d.png",
+      "resolved": "presence__adapt"
+    },
+    {
+      "mode": "presence",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ソラ ちょっと見守りましょうか？」\nプレイヤーはソラのそばで静かに様子を見守った。\n\nソラはそばの気配に少し戸惑い、様子をうかがった。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c052796175e34a54a43a62b1a11a940d.png",
+      "resolved": "presence__direct"
+    },
+    {
+      "mode": "presence",
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ソラ ちょっと見守りましょうか？」\nプレイヤーはソラのそばで静かに様子を見守った。\n\nソラは見守られる中で、どう過ごそうか迷うようにしていた。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c052796175e34a54a43a62b1a11a940d.png",
+      "resolved": "presence__direct"
+    },
+    {
+      "mode": "presence",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「静かな雰囲気でソラに寄り添おうか。」\nプレイヤーはソラの様子に合わせて距離を保ち、静かに見守った。\n\nソラはそばの気配に少し戸惑い、様子をうかがった。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c052796175e34a54a43a62b1a11a940d.png",
+      "resolved": "presence__adapt"
+    },
+    {
+      "mode": "presence",
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「静かな雰囲気でソラに寄り添おうか。」\nプレイヤーはソラの様子に合わせて距離を保ち、静かに見守った。\n\nソラは見守られる中で、どう過ごそうか迷うようにしていた。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c052796175e34a54a43a62b1a11a940d.png",
+      "resolved": "presence__adapt"
+    },
+    {
+      "mode": "presence",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ソラ ちょっと見守りましょうか？」\nプレイヤーはソラのそばで静かに様子を見守った。\n\nソラは疲れた様子で、静かに見守られていた。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c052796175e34a54a43a62b1a11a940d.png",
+      "resolved": "presence__direct"
+    },
+    {
+      "mode": "presence",
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ソラ ちょっと見守りましょうか？」\nプレイヤーはソラのそばで静かに様子を見守った。\n\nソラはそばに人がいる中、けだるそうに過ごしていた。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c052796175e34a54a43a62b1a11a940d.png",
+      "resolved": "presence__direct"
+    },
+    {
+      "mode": "presence",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「静かな雰囲気でソラに寄り添おうか。」\nプレイヤーはソラの様子に合わせて距離を保ち、静かに見守った。\n\nソラは疲れた様子で、静かに見守られていた。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c052796175e34a54a43a62b1a11a940d.png",
+      "resolved": "presence__adapt"
+    },
+    {
+      "mode": "presence",
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「静かな雰囲気でソラに寄り添おうか。」\nプレイヤーはソラの様子に合わせて距離を保ち、静かに見守った。\n\nソラはそばに人がいる中、けだるそうに過ごしていた。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\c052796175e34a54a43a62b1a11a940d.png",
+      "resolved": "presence__adapt"
+    }
+  ],
+  "before_count": 284,
+  "after_count": 296,
+  "draft_counts": [
+    300,
+    312
+  ],
+  "generated_count": 278,
+  "protected_unchanged": true,
+  "unity_imported": false
+}
