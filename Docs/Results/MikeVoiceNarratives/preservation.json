@@ -1,0 +1,10 @@
+{
+  "existing_published_entries_unchanged": 419,
+  "unrelated_drafts_unchanged": 435,
+  "protected_manifest_profiles_bindings_generated_hashes_unchanged": 280,
+  "generated_files_reviewed": 278,
+  "matching_generated": [],
+  "preexisting_workspace_files_unchanged": 349,
+  "workspace_snapshot": "workspace-before.json",
+  "reviewed_entries_equal_registered": true
+}

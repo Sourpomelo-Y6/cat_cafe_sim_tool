@@ -1,0 +1,32 @@
+{
+  "before": {
+    "Logs": 18361697542,
+    "generated": 3277372585,
+    "content_images": 1276786174,
+    "Latest": 4841096360,
+    "Library": 7358000371,
+    "drafts": 369304
+  },
+  "after": {
+    "Logs": 18362530088,
+    "generated": 3277372585,
+    "content_images": 1276792688,
+    "Latest": 4841096360,
+    "Library": 7358000371,
+    "drafts": 375818
+  },
+  "delta": {
+    "Logs": 832546,
+    "generated": 0,
+    "content_images": 6514,
+    "Latest": 0,
+    "Library": 0,
+    "drafts": 6514
+  },
+  "standalone_folders": [
+    "Latest",
+    "Runs"
+  ],
+  "pending_exists": false,
+  "scope": "Measured Logs, generated, content_images, Latest, Unity Library and draft file; documentation and git objects excluded"
+}

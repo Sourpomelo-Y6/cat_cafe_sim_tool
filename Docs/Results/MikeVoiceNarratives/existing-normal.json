@@ -1,0 +1,1314 @@
+{
+  "published": [
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "f50f858f546d598691c0f4dbe2463d63",
+          "slot": 1,
+          "text": "{cat}は耳をピンと立てた。"
+        },
+        {
+          "id": "64543c42d27b56c097187f8d4e32d9d8",
+          "slot": 2,
+          "text": "{cat}は目を細めて静かに見守った。"
+        },
+        {
+          "id": "55dc08928dde54a19aa5570c561db32e",
+          "slot": 3,
+          "text": "{cat}は軽く舌を出して鼻を擦り付けた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "9aed9b32ac875069b0bd05e88190a960",
+          "slot": 1,
+          "text": "{cat} は耳をピクピクさせて頬を軽く撫でた。"
+        },
+        {
+          "id": "d871e2aabcea5b60a3412af6a04c5ac8",
+          "slot": 2,
+          "text": "{cat} は前足で軽く舌を触れ、目を細めた。"
+        },
+        {
+          "id": "dcdea28aa7c75978bc154a10ae5bb1d0",
+          "slot": 3,
+          "text": "{cat} は背中を丸めてしっぽを振りながら足元を見た。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "cff8dbb12aed533d965a750035524c07",
+          "slot": 1,
+          "text": "{cat}は相手の声に耳を向け、尾を軽く揺らした。"
+        },
+        {
+          "id": "57338a4aa97f57a6a4f1d4b99e7a37c0",
+          "slot": 2,
+          "text": "{cat}は相手の声に耳をすませ、目をぱっちりと開けた。"
+        },
+        {
+          "id": "4e5a2b1105f1588796412c70e6c020b3",
+          "slot": 3,
+          "text": "{cat}は相手の声を聞き、肩をピクピクさせて興奮した。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "turn_away",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "fd6f1a8444045d50be2b9c6922436c29",
+          "slot": 1,
+          "text": "静かに{cat}は相手に背を向けて、拒否した。"
+        },
+        {
+          "id": "35a13e0440c25e8ab0e5d64cf89926e1",
+          "slot": 2,
+          "text": "相手の声に{cat}はすぐに背を向け、拒否した。"
+        },
+        {
+          "id": "960f762b01a554cf9249ae5750048b66",
+          "slot": 3,
+          "text": "相手の手を振ると、{cat}は背を向けて拒否した。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "8aa39f3dfc3b5691870fbb533df9c408",
+          "slot": 1,
+          "text": "声を聞くと、{cat}は戸惑い顔で首をかしげ、しっぽを揺らして眉をひそめた。"
+        },
+        {
+          "id": "ed7b0bc6159b5e29b16b06c8933a61ca",
+          "slot": 2,
+          "text": "声をかけると、{cat}は首を少しかしげて、目を大きく開いた。"
+        },
+        {
+          "id": "360584f6fdc4519399f48d98b3b91b01",
+          "slot": 3,
+          "text": "声を聞いた瞬間、{cat}は戸惑い表情で首を横にかしげ、鼻をすかす。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "1916017625305caa8ce8c6373fcbeb36",
+          "slot": 1,
+          "text": "{cat}は声を聞いても体を動かさず、ゆっくりと横になった。"
+        },
+        {
+          "id": "47d21685516558e78d79463411994e7d",
+          "slot": 2,
+          "text": "{cat}は声を聞き、目を閉じて静かに体を横たえた。"
+        },
+        {
+          "id": "672608bf832f50dd8ab844f4c8640aef",
+          "slot": 3,
+          "text": "{cat}は声に耳を傾け、ゆっくりと腰を下ろして休んだ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "voice",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "9307043d8a6155b791817591b49e82b2",
+          "slot": 1,
+          "text": "ねえ{cat_call}、ちょっと一緒にお昼寝しようか？"
+        },
+        {
+          "id": "16dde15a0409518782dc95fc3f5f11f3",
+          "slot": 2,
+          "text": "さあ{cat_call}、優しく手を伸ばしてみようかね。"
+        },
+        {
+          "id": "9039ad1940745b7b80f48d43d9c04c19",
+          "slot": 3,
+          "text": "お互いにリラックスしよう{cat_call}、少し休憩しない？"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "voice",
+        "action": "direct",
+        "reaction": "any",
+        "scene_key": "voice__direct",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "9f08bd219bc05eba80ca80cd91df1e5f",
+          "slot": 1,
+          "text": "あれ、{cat_call}、ちょっと見てみようか？"
+        },
+        {
+          "id": "b3565c2c8d6d56e2a7edf833ccb4c989",
+          "slot": 2,
+          "text": "ねえ、{cat_call}、一緒に休憩しようか？"
+        },
+        {
+          "id": "e1faa71807ca57aa9686cfc87bdb6d66",
+          "slot": 3,
+          "text": "やあ、{cat_call}、今日も楽しく過ごそうか？"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "voice",
+        "action": "adapt",
+        "reaction": "any",
+        "scene_key": "voice__adapt",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "60576629d9a1552191dc76e1e4621661",
+          "slot": 1,
+          "text": "さあ、ちょっと休憩しようか {cat_call}"
+        },
+        {
+          "id": "33a17834da2753b59f1f45e2e550ceb0",
+          "slot": 2,
+          "text": "今度はお散歩してみようか {cat_call}"
+        },
+        {
+          "id": "34acf2a4b9325aacbc575c416b8a3c36",
+          "slot": 3,
+          "text": "やさしく撫でてみようか {cat_call}"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "guest-1",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "voice",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "20360da4334c5e75b83fb067a1e19f1d",
+          "slot": 1,
+          "text": "{cat_call}、少しお話ししてもいいですか。"
+        },
+        {
+          "id": "27b227d8bd885d929617f1dff2efb67b",
+          "slot": 2,
+          "text": "お返事は気にせず、聞いていてくださいね。"
+        },
+        {
+          "id": "d1d405f1c2005794be008034180ad1e3",
+          "slot": 3,
+          "text": "少しだけ、声をかけてみますね。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "person-952c631405e649fdb50c390881804977",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "voice",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "fe4ea383e2715613b23ec8c02dcb8bb1",
+          "slot": 1,
+          "text": "{cat_call}、ちょっとお話ししましょうか。"
+        },
+        {
+          "id": "ebb48f43e00f512e83c2f3d8340af71e",
+          "slot": 2,
+          "text": "返事はなくても大丈夫ですよ。"
+        },
+        {
+          "id": "1d1bbda3f5b15d9ead08cade5a7d6e88",
+          "slot": 3,
+          "text": "少し声をかけてみますね。気楽にどうぞ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "person-guest-3",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "voice",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "48f63b2185645048b0291ae05a607c4a",
+          "slot": 1,
+          "text": "{cat_call}、少し話しかけてもいいかな。"
+        },
+        {
+          "id": "3eeaa62e38be5908b453fc17f123c302",
+          "slot": 2,
+          "text": "どんな声の調子が聞きやすいのかな。"
+        },
+        {
+          "id": "53e88a896ddf5004886b4808e665ab98",
+          "slot": 3,
+          "text": "返事がなくても、こうして話す時間はいいね。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "9f3e16ea49035692a670bc1f16379b89",
+          "slot": 1,
+          "text": "{cat}は声かけに気づき、静かに耳を向けた。"
+        },
+        {
+          "id": "50a91ca22c2050ac9885022d622f58bf",
+          "slot": 2,
+          "text": "{cat}は落ち着いた様子で、かけられた声を聞いていた。"
+        },
+        {
+          "id": "41aba3cc113150e69f43df2171dd1fde",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "490b956354f951a292710ad9e5547f22",
+          "slot": 1,
+          "text": "{cat}は声に少し戸惑ったように、相手の様子をうかがった。"
+        },
+        {
+          "id": "981bc08ce7b8537ba2ac257c0eb2ed06",
+          "slot": 2,
+          "text": "{cat}は声の方へ注意を向けたまま、どう応じるか迷っているようだ。"
+        },
+        {
+          "id": "3cb6feb5e4b65506a4993b6f315de980",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "ddb9b6d47c775af093512da6d2bad8b4",
+          "slot": 1,
+          "text": "{cat}は疲れた様子で、声への反応も控えめだった。"
+        },
+        {
+          "id": "1915b8e1bb2e5ac4b91d7cec06eff9ac",
+          "slot": 2,
+          "text": "{cat}は呼びかけを聞きながら、けだるそうに過ごしていた。"
+        },
+        {
+          "id": "1ca07450f7e0568d843d34b5a489feae",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "71c5fc4b7ee358cf8d0dcd9cc6945715",
+          "slot": 1,
+          "text": "{cat}は声の方へ耳を向け、何だろうという顔で聞いていた。"
+        },
+        {
+          "id": "01f825f7fd065f5b8511824ac317af53",
+          "slot": 2,
+          "text": "{cat}はかけられた声に気づき、相手の様子を確かめるように見た。"
+        },
+        {
+          "id": "ee299d18e9985d4889b15f6b8b93097f",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "180346bd889b53ac8c7970f57417cc7d",
+          "slot": 1,
+          "text": "{cat}は声の方へ首をかしげた。気になるものの、どう応じようか迷っているようだ。"
+        },
+        {
+          "id": "e05fbefa6a3055d1acc57719c8d30848",
+          "slot": 2,
+          "text": "{cat}の耳が声に反応した。相手を見つめる顔には、少し戸惑いが残っている。"
+        },
+        {
+          "id": "ed6471dd74cb51ff9a03e6f41982d560",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "b23a3e05af34525e99ce82853608e86c",
+          "slot": 1,
+          "text": "{cat}は声に気づいたようだが、疲れているのか顔を向けるのもゆっくりだった。"
+        },
+        {
+          "id": "67cd60e1dedb5cb5b619252966fbbedc",
+          "slot": 2,
+          "text": "{cat}はけだるそうに呼びかけを聞いていた。いつものきびきびした反応は控えめだ。"
+        },
+        {
+          "id": "84d85a484a8a568e92332ec114f41f7c",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "4bb9ee3f35b454d59888415b026a3253",
+          "slot": 1,
+          "text": "{cat}は声の方へ丸い耳を向けた。何か始まるのかと、静かに様子をうかがっている。"
+        },
+        {
+          "id": "a282c3ff44d051ce815d3e71060ebf2d",
+          "slot": 2,
+          "text": "{cat}は呼びかけに気づき、相手を見た。金色の目に、控えめな関心がのぞく。"
+        },
+        {
+          "id": "40ef9161dcb150e79f0209813d1615dc",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "5544ccaeb4f15b1fbbe1de684c6c14e1",
+          "slot": 1,
+          "text": "{cat}は声に耳を傾けながら、不思議そうな顔をした。どう応じればよいか迷っているらしい。"
+        },
+        {
+          "id": "1aee77f1534f5004b13cca07202ca01d",
+          "slot": 2,
+          "text": "{cat}は呼びかける相手を慎重に見つめた。気にはなるが、反応のきっかけをつかめないようだ。"
+        },
+        {
+          "id": "07ba99b1f86d513e9f5727ae90454b8b",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "cff4aeaa51e058309051d197f0871a0a",
+          "slot": 1,
+          "text": "{cat}は声の方へゆっくり目を向けた。疲れがあるのか、応じる様子は乏しい。"
+        },
+        {
+          "id": "4874611d494258ccb0a78e4f819292eb",
+          "slot": 2,
+          "text": "{cat}は呼びかけを聞いているようだが、けだるそうだ。丸い耳の反応も、ごく小さい。"
+        },
+        {
+          "id": "cf54667b9b8a5aff8032d3c69e15a9d5",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "e84c5a0709c85ad8a9d1d750ac22300f",
+          "slot": 1,
+          "text": "{cat}は声を聞いて、ひと呼吸おいてから顔を向けた。落ち着いた目で相手を見ている。"
+        },
+        {
+          "id": "1cb7ceced27e526daf272b20f460e9d0",
+          "slot": 2,
+          "text": "{cat}の耳が声の方を向いた。呼びかけには気づいたが、表情は穏やかなままだ。"
+        },
+        {
+          "id": "a0587dbe12a35b2cbd22667e2d55f221",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "cefb660958a750568e2b956ab221c8ef",
+          "slot": 1,
+          "text": "{cat}は呼びかける相手を、不思議そうに見た。声の調子をどう受け取るか迷っているらしい。"
+        },
+        {
+          "id": "138313daeefe5fcc947543b520ae8dbe",
+          "slot": 2,
+          "text": "{cat}は声に耳を向けたものの、反応が定まらない。丸い顔に、小さな戸惑いが浮かんだ。"
+        },
+        {
+          "id": "0ebf0d78ca2f5cbb8b8425bfdab0ec31",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "11070973c9c459168f9f419c82c01c84",
+          "slot": 1,
+          "text": "{cat}は声の方へ重たげに目を向けた。疲れているらしく、応じるまでにも間がある。"
+        },
+        {
+          "id": "71b87273c7f95f2a8ecbe1d0b31eb3c3",
+          "slot": 2,
+          "text": "{cat}は呼びかけを聞いているようだが、耳の動きはわずかだ。けだるさが表情ににじんでいる。"
+        },
+        {
+          "id": "02684d64d8d357eab99cc0e210bcea25",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    }
+  ],
+  "drafts": [
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "f50f858f546d598691c0f4dbe2463d63",
+          "slot": 1,
+          "text": "{cat}は耳をピンと立てた。"
+        },
+        {
+          "id": "64543c42d27b56c097187f8d4e32d9d8",
+          "slot": 2,
+          "text": "{cat}は目を細めて静かに見守った。"
+        },
+        {
+          "id": "55dc08928dde54a19aa5570c561db32e",
+          "slot": 3,
+          "text": "{cat}は軽く舌を出して鼻を擦り付けた。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "9aed9b32ac875069b0bd05e88190a960",
+          "slot": 1,
+          "text": "{cat} は耳をピクピクさせて頬を軽く撫でた。"
+        },
+        {
+          "id": "d871e2aabcea5b60a3412af6a04c5ac8",
+          "slot": 2,
+          "text": "{cat} は前足で軽く舌を触れ、目を細めた。"
+        },
+        {
+          "id": "dcdea28aa7c75978bc154a10ae5bb1d0",
+          "slot": 3,
+          "text": "{cat} は背中を丸めてしっぽを振りながら足元を見た。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "enthusiastic",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "cff8dbb12aed533d965a750035524c07",
+          "slot": 1,
+          "text": "{cat}は相手の声に耳を向け、尾を軽く揺らした。"
+        },
+        {
+          "id": "57338a4aa97f57a6a4f1d4b99e7a37c0",
+          "slot": 2,
+          "text": "{cat}は相手の声に耳をすませ、目をぱっちりと開けた。"
+        },
+        {
+          "id": "4e5a2b1105f1588796412c70e6c020b3",
+          "slot": 3,
+          "text": "{cat}は相手の声を聞き、肩をピクピクさせて興奮した。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "turn_away",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "fd6f1a8444045d50be2b9c6922436c29",
+          "slot": 1,
+          "text": "静かに{cat}は相手に背を向けて、拒否した。"
+        },
+        {
+          "id": "35a13e0440c25e8ab0e5d64cf89926e1",
+          "slot": 2,
+          "text": "相手の声に{cat}はすぐに背を向け、拒否した。"
+        },
+        {
+          "id": "960f762b01a554cf9249ae5750048b66",
+          "slot": 3,
+          "text": "相手の手を振ると、{cat}は背を向けて拒否した。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "8aa39f3dfc3b5691870fbb533df9c408",
+          "slot": 1,
+          "text": "声を聞くと、{cat}は戸惑い顔で首をかしげ、しっぽを揺らして眉をひそめた。"
+        },
+        {
+          "id": "ed7b0bc6159b5e29b16b06c8933a61ca",
+          "slot": 2,
+          "text": "声をかけると、{cat}は首を少しかしげて、目を大きく開いた。"
+        },
+        {
+          "id": "360584f6fdc4519399f48d98b3b91b01",
+          "slot": 3,
+          "text": "声を聞いた瞬間、{cat}は戸惑い表情で首を横にかしげ、鼻をすかす。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "1916017625305caa8ce8c6373fcbeb36",
+          "slot": 1,
+          "text": "{cat}は声を聞いても体を動かさず、ゆっくりと横になった。"
+        },
+        {
+          "id": "47d21685516558e78d79463411994e7d",
+          "slot": 2,
+          "text": "{cat}は声を聞き、目を閉じて静かに体を横たえた。"
+        },
+        {
+          "id": "672608bf832f50dd8ab844f4c8640aef",
+          "slot": 3,
+          "text": "{cat}は声に耳を傾け、ゆっくりと腰を下ろして休んだ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "voice",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "9307043d8a6155b791817591b49e82b2",
+          "slot": 1,
+          "text": "ねえ{cat_call}、ちょっと一緒にお昼寝しようか？"
+        },
+        {
+          "id": "16dde15a0409518782dc95fc3f5f11f3",
+          "slot": 2,
+          "text": "さあ{cat_call}、優しく手を伸ばしてみようかね。"
+        },
+        {
+          "id": "9039ad1940745b7b80f48d43d9c04c19",
+          "slot": 3,
+          "text": "お互いにリラックスしよう{cat_call}、少し休憩しない？"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "voice",
+        "action": "direct",
+        "reaction": "any",
+        "scene_key": "voice__direct",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "9f08bd219bc05eba80ca80cd91df1e5f",
+          "slot": 1,
+          "text": "あれ、{cat_call}、ちょっと見てみようか？"
+        },
+        {
+          "id": "b3565c2c8d6d56e2a7edf833ccb4c989",
+          "slot": 2,
+          "text": "ねえ、{cat_call}、一緒に休憩しようか？"
+        },
+        {
+          "id": "e1faa71807ca57aa9686cfc87bdb6d66",
+          "slot": 3,
+          "text": "やあ、{cat_call}、今日も楽しく過ごそうか？"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "voice",
+        "action": "adapt",
+        "reaction": "any",
+        "scene_key": "voice__adapt",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "60576629d9a1552191dc76e1e4621661",
+          "slot": 1,
+          "text": "さあ、ちょっと休憩しようか {cat_call}"
+        },
+        {
+          "id": "33a17834da2753b59f1f45e2e550ceb0",
+          "slot": 2,
+          "text": "今度はお散歩してみようか {cat_call}"
+        },
+        {
+          "id": "34acf2a4b9325aacbc575c416b8a3c36",
+          "slot": 3,
+          "text": "やさしく撫でてみようか {cat_call}"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "guest-1",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "voice",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "20360da4334c5e75b83fb067a1e19f1d",
+          "slot": 1,
+          "text": "{cat_call}、少しお話ししてもいいですか。"
+        },
+        {
+          "id": "27b227d8bd885d929617f1dff2efb67b",
+          "slot": 2,
+          "text": "お返事は気にせず、聞いていてくださいね。"
+        },
+        {
+          "id": "d1d405f1c2005794be008034180ad1e3",
+          "slot": 3,
+          "text": "少しだけ、声をかけてみますね。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "person-952c631405e649fdb50c390881804977",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "voice",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "fe4ea383e2715613b23ec8c02dcb8bb1",
+          "slot": 1,
+          "text": "{cat_call}、ちょっとお話ししましょうか。"
+        },
+        {
+          "id": "ebb48f43e00f512e83c2f3d8340af71e",
+          "slot": 2,
+          "text": "返事はなくても大丈夫ですよ。"
+        },
+        {
+          "id": "1d1bbda3f5b15d9ead08cade5a7d6e88",
+          "slot": 3,
+          "text": "少し声をかけてみますね。気楽にどうぞ。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "person-guest-3",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "voice",
+        "target_cat": "*"
+      },
+      "variants": [
+        {
+          "id": "48f63b2185645048b0291ae05a607c4a",
+          "slot": 1,
+          "text": "{cat_call}、少し話しかけてもいいかな。"
+        },
+        {
+          "id": "3eeaa62e38be5908b453fc17f123c302",
+          "slot": 2,
+          "text": "どんな声の調子が聞きやすいのかな。"
+        },
+        {
+          "id": "53e88a896ddf5004886b4808e665ab98",
+          "slot": 3,
+          "text": "返事がなくても、こうして話す時間はいいね。"
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "9f3e16ea49035692a670bc1f16379b89",
+          "slot": 1,
+          "text": "{cat}は声かけに気づき、静かに耳を向けた。"
+        },
+        {
+          "id": "50a91ca22c2050ac9885022d622f58bf",
+          "slot": 2,
+          "text": "{cat}は落ち着いた様子で、かけられた声を聞いていた。"
+        },
+        {
+          "id": "41aba3cc113150e69f43df2171dd1fde",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "490b956354f951a292710ad9e5547f22",
+          "slot": 1,
+          "text": "{cat}は声に少し戸惑ったように、相手の様子をうかがった。"
+        },
+        {
+          "id": "981bc08ce7b8537ba2ac257c0eb2ed06",
+          "slot": 2,
+          "text": "{cat}は声の方へ注意を向けたまま、どう応じるか迷っているようだ。"
+        },
+        {
+          "id": "3cb6feb5e4b65506a4993b6f315de980",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "ddb9b6d47c775af093512da6d2bad8b4",
+          "slot": 1,
+          "text": "{cat}は疲れた様子で、声への反応も控えめだった。"
+        },
+        {
+          "id": "1915b8e1bb2e5ac4b91d7cec06eff9ac",
+          "slot": 2,
+          "text": "{cat}は呼びかけを聞きながら、けだるそうに過ごしていた。"
+        },
+        {
+          "id": "1ca07450f7e0568d843d34b5a489feae",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "71c5fc4b7ee358cf8d0dcd9cc6945715",
+          "slot": 1,
+          "text": "{cat}は声の方へ耳を向け、何だろうという顔で聞いていた。"
+        },
+        {
+          "id": "01f825f7fd065f5b8511824ac317af53",
+          "slot": 2,
+          "text": "{cat}はかけられた声に気づき、相手の様子を確かめるように見た。"
+        },
+        {
+          "id": "ee299d18e9985d4889b15f6b8b93097f",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "180346bd889b53ac8c7970f57417cc7d",
+          "slot": 1,
+          "text": "{cat}は声の方へ首をかしげた。気になるものの、どう応じようか迷っているようだ。"
+        },
+        {
+          "id": "e05fbefa6a3055d1acc57719c8d30848",
+          "slot": 2,
+          "text": "{cat}の耳が声に反応した。相手を見つめる顔には、少し戸惑いが残っている。"
+        },
+        {
+          "id": "ed6471dd74cb51ff9a03e6f41982d560",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-63894eff20794809aa5255290c1ae81e",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "b23a3e05af34525e99ce82853608e86c",
+          "slot": 1,
+          "text": "{cat}は声に気づいたようだが、疲れているのか顔を向けるのもゆっくりだった。"
+        },
+        {
+          "id": "67cd60e1dedb5cb5b619252966fbbedc",
+          "slot": 2,
+          "text": "{cat}はけだるそうに呼びかけを聞いていた。いつものきびきびした反応は控えめだ。"
+        },
+        {
+          "id": "84d85a484a8a568e92332ec114f41f7c",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "4bb9ee3f35b454d59888415b026a3253",
+          "slot": 1,
+          "text": "{cat}は声の方へ丸い耳を向けた。何か始まるのかと、静かに様子をうかがっている。"
+        },
+        {
+          "id": "a282c3ff44d051ce815d3e71060ebf2d",
+          "slot": 2,
+          "text": "{cat}は呼びかけに気づき、相手を見た。金色の目に、控えめな関心がのぞく。"
+        },
+        {
+          "id": "40ef9161dcb150e79f0209813d1615dc",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "5544ccaeb4f15b1fbbe1de684c6c14e1",
+          "slot": 1,
+          "text": "{cat}は声に耳を傾けながら、不思議そうな顔をした。どう応じればよいか迷っているらしい。"
+        },
+        {
+          "id": "1aee77f1534f5004b13cca07202ca01d",
+          "slot": 2,
+          "text": "{cat}は呼びかける相手を慎重に見つめた。気にはなるが、反応のきっかけをつかめないようだ。"
+        },
+        {
+          "id": "07ba99b1f86d513e9f5727ae90454b8b",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-kohaku",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "cff4aeaa51e058309051d197f0871a0a",
+          "slot": 1,
+          "text": "{cat}は声の方へゆっくり目を向けた。疲れがあるのか、応じる様子は乏しい。"
+        },
+        {
+          "id": "4874611d494258ccb0a78e4f819292eb",
+          "slot": 2,
+          "text": "{cat}は呼びかけを聞いているようだが、けだるそうだ。丸い耳の反応も、ごく小さい。"
+        },
+        {
+          "id": "cf54667b9b8a5aff8032d3c69e15a9d5",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "e84c5a0709c85ad8a9d1d750ac22300f",
+          "slot": 1,
+          "text": "{cat}は声を聞いて、ひと呼吸おいてから顔を向けた。落ち着いた目で相手を見ている。"
+        },
+        {
+          "id": "1cb7ceced27e526daf272b20f460e9d0",
+          "slot": 2,
+          "text": "{cat}の耳が声の方を向いた。呼びかけには気づいたが、表情は穏やかなままだ。"
+        },
+        {
+          "id": "a0587dbe12a35b2cbd22667e2d55f221",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "cefb660958a750568e2b956ab221c8ef",
+          "slot": 1,
+          "text": "{cat}は呼びかける相手を、不思議そうに見た。声の調子をどう受け取るか迷っているらしい。"
+        },
+        {
+          "id": "138313daeefe5fcc947543b520ae8dbe",
+          "slot": 2,
+          "text": "{cat}は声に耳を向けたものの、反応が定まらない。丸い顔に、小さな戸惑いが浮かんだ。"
+        },
+        {
+          "id": "0ebf0d78ca2f5cbb8b8425bfdab0ec31",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mugi",
+        "mode": "voice",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "voice"
+      },
+      "variants": [
+        {
+          "id": "11070973c9c459168f9f419c82c01c84",
+          "slot": 1,
+          "text": "{cat}は声の方へ重たげに目を向けた。疲れているらしく、応じるまでにも間がある。"
+        },
+        {
+          "id": "71b87273c7f95f2a8ecbe1d0b31eb3c3",
+          "slot": 2,
+          "text": "{cat}は呼びかけを聞いているようだが、耳の動きはわずかだ。けだるさが表情ににじんでいる。"
+        },
+        {
+          "id": "02684d64d8d357eab99cc0e210bcea25",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    }
+  ]
+}
