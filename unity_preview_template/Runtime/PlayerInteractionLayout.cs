@@ -52,6 +52,10 @@ namespace CatCafePreview
             p.historyToggle.gameObject.SetActive(true);p.historyToggle.interactable=true;Place(p.historyToggle,542,564,270,32);p.historyToggle.GetComponentInChildren<Text>().fontSize=16;
             Place(p.historyScroll,20,604,792,144);
             Place(p.historyScroll.viewport,8,6,760,132);p.history.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,760);
+            // This viewport must receive wheel/drag events even over non-raycast text.
+            var historySurface=p.historyScroll.viewport.GetComponent<Image>();
+            if(historySurface!=null)historySurface.raycastTarget=true;
+            p.historyScroll.scrollSensitivity=24;
             var bar=p.historyScroll.verticalScrollbar;if(bar!=null)Place(bar,774,6,12,132);
         }
     }

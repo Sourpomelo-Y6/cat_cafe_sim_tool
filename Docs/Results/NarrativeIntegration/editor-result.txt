@@ -1,0 +1,1 @@
+PASS: actual Resources, full selection audit, 54 bounded action cases (3 partial memory catalogs), disk reload exact receipts/images, representative Canvas at 1280/1024. Not natural-play coverage.

@@ -1,0 +1,15 @@
+{
+  "png_dimensions": {
+    "editor/initial": 41,
+    "player/initial": 40,
+    "player/resume-": 40
+  },
+  "final_build_log": "20261028-065047-643-95d3d10390e74b29b27b65d09ec41bb8.log",
+  "latest_bytes": 5506514294,
+  "pending_exists": false,
+  "build_exe_count": 1,
+  "editor_checks": 4498,
+  "player_checks": 4498,
+  "bounded_cases": 54,
+  "actual_input": "history button + scrollbar click/drag; wheel/body drag unconfirmed"
+}

@@ -1,0 +1,1 @@
+PASS: actual Resources 435 pools / 1123 texts; 54 bounded observed-action cases (3 use memory-only partial catalogs); isolated disk saves; exact receipt IDs/text/revision/image references; no regeneration without catalog; representative rendered UI. Fixture rules/state, not natural-play reachability.
