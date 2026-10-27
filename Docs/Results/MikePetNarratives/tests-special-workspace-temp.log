@@ -1,0 +1,9 @@
+test_conditions_keys_store_and_scope (test_special_narratives.SpecialNarratives) ... ok
+test_editor_preview_and_batch_reopen (test_special_narratives.SpecialNarratives) ... skipped 'requires display'
+test_generation_profile_scene_and_frozen_batch (test_special_narratives.SpecialNarratives) ... ok
+test_priority_and_independent_sides (test_special_narratives.SpecialNarratives) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.712s
+
+OK (skipped=1)

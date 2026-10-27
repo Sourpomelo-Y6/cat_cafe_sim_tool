@@ -1,0 +1,256 @@
+{
+  "entries": [
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "pet",
+        "action": "switch",
+        "reaction": "any",
+        "scene_key": "pet__switch",
+        "target_cat": "cat-mike",
+        "narrative_scene": "switch"
+      },
+      "variants": [
+        {
+          "id": "8937cd31dbc35a6fb741e03127dd6050",
+          "slot": 1,
+          "text": "今度はなでてみようか、{cat_call}。"
+        },
+        {
+          "id": "ec6c16c065dd5e87a80a37fe54174f2c",
+          "slot": 2,
+          "text": "そっと手を近づけてもいいかな。"
+        },
+        {
+          "id": "e6f2e0be10bc5cefb6ac19acaa8efa70",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "pet",
+        "action": "switch",
+        "reaction": "any",
+        "scene_key": "pet__switch",
+        "narrative_scene": "switch"
+      },
+      "variants": [
+        {
+          "id": "578ed31978425364aabe35bb27bbb265",
+          "slot": 1,
+          "text": "{cat}は差し出された手へ、ぱっと目を向けた。"
+        },
+        {
+          "id": "2971458f794753f49b88d49ac91030f3",
+          "slot": 2,
+          "text": "{cat}は落ち着いた佇まいのまま、頭上の手の様子をうかがった。"
+        },
+        {
+          "id": "b3cb3f1d8b7e5f40a837ee056a66f60b",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "pet",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "pet__connect",
+        "target_cat": "cat-mike",
+        "narrative_scene": "connect"
+      },
+      "variants": [
+        {
+          "id": "590d12addeb25a17b21a3d85f36d586a",
+          "slot": 1,
+          "text": "手を近づける間合い、つかめてきたかな。"
+        },
+        {
+          "id": "85ee798b9bdb54069fe314ee9fc8f649",
+          "slot": 2,
+          "text": "{cat_call}、そっと誘うと伝わるんだね。"
+        },
+        {
+          "id": "d43c2827ff3f54e484766750d990c170",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "pet",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "pet__connect",
+        "narrative_scene": "connect"
+      },
+      "variants": [
+        {
+          "id": "93df76c976b95af391af3f000b9d569d",
+          "slot": 1,
+          "text": "{cat}は差し出された手に注意を向け、その働きかけに応じた。"
+        },
+        {
+          "id": "9738b6c5a2b5535c81bc372d1c0e7cf3",
+          "slot": 2,
+          "text": "{cat}は相手の手の動きをとらえ、なでる誘いを受け止めた。"
+        },
+        {
+          "id": "d9e4518a5bc85d2fa7865292191446df",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "pet",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "pet",
+        "target_cat": "cat-mike",
+        "narrative_scene": "open_up"
+      },
+      "variants": [
+        {
+          "id": "529899bdde07551089de4ab351e05459",
+          "slot": 1,
+          "text": "{cat_call}、そばでゆっくり過ごそうか。"
+        },
+        {
+          "id": "24bc28e1820856c3b3eeb8ca7b2b4dee",
+          "slot": 2,
+          "text": "こうして向き合っていると、ほっとするね。"
+        },
+        {
+          "id": "b326b90c6ba9589d8f3301208fa5bd56",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "pet",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "pet",
+        "narrative_scene": "open_up"
+      },
+      "variants": [
+        {
+          "id": "aa257d819fba559e9a80c60e2377a21b",
+          "slot": 1,
+          "text": "{cat}は目元をやわらげ、そばの相手へ親しみを見せた。"
+        },
+        {
+          "id": "d58e52f99ac95f1aa4a1caf359340aa7",
+          "slot": 2,
+          "text": "{cat}はのんびりした表情になり、相手とのひとときにくつろいだ様子を見せた。"
+        },
+        {
+          "id": "fb67925a1d9f54f385dd761366748662",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "pet",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "pet__connect",
+        "target_cat": "cat-mike",
+        "narrative_scene": "simultaneous"
+      },
+      "variants": [
+        {
+          "id": "edc69df656715e059ea1dd114c198a26",
+          "slot": 1,
+          "text": "なでる間合いが合うと、ぐっと近く感じるね。"
+        },
+        {
+          "id": "722cb6f2d9f051f4a74abea7adfc4d96",
+          "slot": 2,
+          "text": "{cat_call}、手から気持ちも伝わったかな。"
+        },
+        {
+          "id": "923aa8e2f7335578875b8b159481d710",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "pet",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "pet__connect",
+        "narrative_scene": "simultaneous"
+      },
+      "variants": [
+        {
+          "id": "5767d7a96f5155ddb0b25a108a756234",
+          "slot": 1,
+          "text": "{cat}は相手の手の働きかけに応じ、気を許したように目を細めた。"
+        },
+        {
+          "id": "64a4ebd6bb6b5fd7ac2c7fb8aea01f3d",
+          "slot": 2,
+          "text": "{cat}はなでる誘いを受け止めると、口元をゆるめて親しげな表情を見せた。"
+        },
+        {
+          "id": "af172977fb0f52b794624cf56b28ff97",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    }
+  ],
+  "profiles": [
+    {
+      "id": "player",
+      "kind": "speech",
+      "name": "プレイヤー",
+      "game_id": "player",
+      "content_id": "",
+      "notes": "役割：猫カフェで猫と個別に交流するプレイヤー。年齢・性別・職業・来歴は固定しない。口調：親しみのある、やわらかな常体。「〜しようか」「〜してみよう」「〜してもいいかな」「〜だね」を基本とする。猫への呼びかけは {cat_call} とし、人物に設定した呼び名を使う。一人称・二人称はできるだけ省略する。接し方：様子を見ながら誘い、無理に応じさせない。休憩は自然に提案し、拒否や低体力を責めない。冗談・幼児語・命令調・過剰な感嘆符・恋愛表現・飼い主としての断定は避ける。1案は1つの短いセリフだけ、目安10〜30字、長くても40字程度。かぎ括弧・話者名・行動文は付けない。猫の気持ちや成功を決めつけず、実際の行動結果を先取りしない。3案は語尾だけでなく誘い方や言葉の焦点を変え、人物像と行動の条件は同じにする。",
+      "call": "{cat}",
+      "enabled": true
+    },
+    {
+      "id": "cat-mike",
+      "kind": "cat_response",
+      "name": "ミケ",
+      "game_id": "cat-mike",
+      "content_id": "playtest-mike",
+      "notes": "三毛の毛並みが愛らしいミケは、カフェのムードメーカーです。短毛で動きが機敏、のんびりとした佇まいがたまらない癒やしを提供してくれます。",
+      "call": "{cat}",
+      "enabled": true
+    }
+  ],
+  "unity_imported": false,
+  "route": "existing Tk fields -> save_draft -> preview; manual authoring, no LLM request"
+}

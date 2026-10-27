@@ -1,0 +1,23 @@
+test_conditions_keys_store_and_scope (test_special_narratives.SpecialNarratives) ... ERROR
+test_editor_preview_and_batch_reopen (test_special_narratives.SpecialNarratives) ... skipped 'requires display'
+test_generation_profile_scene_and_frozen_batch (test_special_narratives.SpecialNarratives) ... ok
+test_priority_and_independent_sides (test_special_narratives.SpecialNarratives) ... ok
+
+======================================================================
+ERROR: test_conditions_keys_store_and_scope (test_special_narratives.SpecialNarratives)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\hi-wa\source\codex_repos\CatCafeSim\cat_cafe_sim_tool\tests\test_special_narratives.py", line 23, in test_conditions_keys_store_and_scope
+    store.save(old)
+  File "C:\Users\hi-wa\source\codex_repos\CatCafeSim\cat_cafe_sim_tool\interaction_texts.py", line 174, in save
+    self.save_many([entry], expected=snapshots)
+  File "C:\Users\hi-wa\source\codex_repos\CatCafeSim\cat_cafe_sim_tool\interaction_texts.py", line 200, in save_many
+    temp.replace(self.path)
+  File "C:\Users\hi-wa\AppData\Local\Programs\Python\Python310\lib\pathlib.py", line 1247, in replace
+    self._accessor.replace(self, target)
+PermissionError: [WinError 5] アクセスが拒否されました。: 'C:\\Users\\hi-wa\\AppData\\Local\\Packages\\sandbox.{0f82788d-27d5-4a3c-8671-7dcb7057c0e8}\\AC\\Temp\\tmpoojgh8q7\\draft-55bd1f8d6994403faa0de0f41efb8140.tmp' -> 'C:\\Users\\hi-wa\\AppData\\Local\\Packages\\sandbox.{0f82788d-27d5-4a3c-8671-7dcb7057c0e8}\\AC\\Temp\\tmpoojgh8q7\\draft.json'
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.010s
+
+FAILED (errors=1, skipped=1)
