@@ -1,5 +1,7 @@
 # 特別場面の文章制作・Unity選択・保存
 
+2026-10-27追補：ミケ＋プレイヤー・ボール遊びの4場面8欄に各2案、計16本文をTool確認登録。Unity未取り込み。[制作本文・候補ID・校正・限定確認](MikeBallSpecialNarratives.md)。以下のねこじゃらし代表例・配布版確認の範囲とは別。
+
 2026-10-27。対象は `switch / connect / open_up / simultaneous` の制作枠と、プレイヤー＋ミケ・ねこじゃらしの代表8欄。全人物・全猫の本文充足は対象外。[採用計画](../../Docs/SpecialInteractionNarrativePlan.md)／[通常文](AllNormalInteractionNarratives.md)。
 
 ## Toolでの操作

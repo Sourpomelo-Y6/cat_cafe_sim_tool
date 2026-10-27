@@ -1,0 +1,36 @@
+{
+  "before": {
+    "Logs": 18352648682,
+    "generated": 3277372585,
+    "content_images": 1220739226,
+    "Latest": 4841096360,
+    "Library": 7100713760
+  },
+  "after": {
+    "Logs": 18353211582,
+    "generated": 3277372585,
+    "content_images": 1220745826,
+    "Latest": 4841096360,
+    "Library": 7100713760
+  },
+  "delta": {
+    "Logs": 562900,
+    "generated": 0,
+    "content_images": 6600,
+    "Latest": 0,
+    "Library": 0
+  },
+  "latest_only": true,
+  "pending_exists": false,
+  "build_dirs": [
+    "build.lock",
+    "Latest",
+    "Runs"
+  ],
+  "scope": "No build, import, export, model generation or deletion; Logs delta is local before snapshot",
+  "draft_bytes": {
+    "before": 243127,
+    "after": 249727,
+    "delta": 6600
+  }
+}

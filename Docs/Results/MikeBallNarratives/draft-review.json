@@ -1,0 +1,256 @@
+{
+  "entries": [
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "ball",
+        "action": "switch",
+        "reaction": "any",
+        "scene_key": "ball__switch",
+        "target_cat": "cat-mike",
+        "narrative_scene": "switch"
+      },
+      "variants": [
+        {
+          "id": "1570af0bbb445303997ee32eda75dd9c",
+          "slot": 1,
+          "text": "今度はボールで遊んでみようか、{cat_call}。"
+        },
+        {
+          "id": "693d5625daff5e15a23d1fc567cb7e9c",
+          "slot": 2,
+          "text": "ボールに替えたよ。丸いおもちゃはどうかな。"
+        },
+        {
+          "id": "30691eb252a65fbd95dd839f221e70e6",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "ball",
+        "action": "switch",
+        "reaction": "any",
+        "scene_key": "ball__switch",
+        "narrative_scene": "switch"
+      },
+      "variants": [
+        {
+          "id": "88758706f566585f8a851cc1c04c58d6",
+          "slot": 1,
+          "text": "{cat}は足元に出てきたボールを、首をかしげて見つめた。"
+        },
+        {
+          "id": "2b3f8398c1925faebef73c5499b915d2",
+          "slot": 2,
+          "text": "{cat}は新しく出てきたボールへ、丸い目を向けた。"
+        },
+        {
+          "id": "5b73d5e645705be8980ac83b1b3d6fd0",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "ball",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "ball__connect",
+        "target_cat": "cat-mike",
+        "narrative_scene": "connect"
+      },
+      "variants": [
+        {
+          "id": "6d7cadde90c25388961ce2f11ed945bd",
+          "slot": 1,
+          "text": "{cat_call}、ボール越しに通じた感じがするね。"
+        },
+        {
+          "id": "137870c676a85fa58dfda84cc1e779a8",
+          "slot": 2,
+          "text": "ボール遊びの間合い、少しつかめたかな。"
+        },
+        {
+          "id": "2838a7929c525ce2b6d85804f9e4dcc9",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "ball",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "ball__connect",
+        "narrative_scene": "connect"
+      },
+      "variants": [
+        {
+          "id": "edc9873996115a00b65326ad641e9b7b",
+          "slot": 1,
+          "text": "{cat}はボールを前に、相手の働きかけをじっと受け止めた。"
+        },
+        {
+          "id": "40fc03c8aa6c56d5b956b38be7d4729c",
+          "slot": 2,
+          "text": "{cat}はボールのそばで相手へ注意を向け、誘いに応じた。"
+        },
+        {
+          "id": "1b3cde5cb83359a4b15dfb17be64a362",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "ball",
+        "target_cat": "cat-mike",
+        "narrative_scene": "open_up"
+      },
+      "variants": [
+        {
+          "id": "5325a504b9955b33a3bbb441d797e7b3",
+          "slot": 1,
+          "text": "ボールと一緒に、親しみも増えた気がするね。"
+        },
+        {
+          "id": "a4366c04b9b85714981180ef1be394f2",
+          "slot": 2,
+          "text": "{cat_call}、一緒に遊ぶ時間になじんできたかな。"
+        },
+        {
+          "id": "4e3ea7c1979751d792c83a8cc541f9b3",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "any",
+        "scene_key": "ball",
+        "narrative_scene": "open_up"
+      },
+      "variants": [
+        {
+          "id": "34ea83483d475c31b357e9a4d0b6184f",
+          "slot": 1,
+          "text": "{cat}はボールのそばで、首をかしげたまま穏やかな目を向けた。"
+        },
+        {
+          "id": "e9781298ac285418b65b00de9dd61aee",
+          "slot": 2,
+          "text": "{cat}はボールのそばで表情をやわらげ、親しみのあるまなざしを見せた。"
+        },
+        {
+          "id": "75f8a448c00a548cb9fe02abaab63733",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "speech",
+        "subject_id": "player",
+        "mode": "ball",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "ball__connect",
+        "target_cat": "cat-mike",
+        "narrative_scene": "simultaneous"
+      },
+      "variants": [
+        {
+          "id": "131b3d5eb4635d23937ff7947dc1a6ed",
+          "slot": 1,
+          "text": "誘いが届いて、ぐっと近く感じるね、{cat_call}。"
+        },
+        {
+          "id": "c6d393944b9d539691fecbfbe1216187",
+          "slot": 2,
+          "text": "ボール遊びで、息も気持ちも合ってきたかな。"
+        },
+        {
+          "id": "7d460e369be250208c2b69eaa5682446",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-mike",
+        "mode": "ball",
+        "action": "connect",
+        "reaction": "any",
+        "scene_key": "ball__connect",
+        "narrative_scene": "simultaneous"
+      },
+      "variants": [
+        {
+          "id": "5572920ae69f51e58445e7b86be6d946",
+          "slot": 1,
+          "text": "{cat}はボールを前に誘いを受け止めると、目を細めて親しげな表情を見せた。"
+        },
+        {
+          "id": "aab64f5a94055ebc8b6a6ff625cbb322",
+          "slot": 2,
+          "text": "{cat}は働きかけに応じ、ボールのそばで口元をゆるめた。細めた目に親しみがにじんだ。"
+        },
+        {
+          "id": "8a826e5e636b5346ae96d8f64a4d6ea4",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    }
+  ],
+  "profiles": [
+    {
+      "id": "player",
+      "kind": "speech",
+      "name": "プレイヤー",
+      "game_id": "player",
+      "content_id": "",
+      "notes": "役割：猫カフェで猫と個別に交流するプレイヤー。年齢・性別・職業・来歴は固定しない。口調：親しみのある、やわらかな常体。「〜しようか」「〜してみよう」「〜してもいいかな」「〜だね」を基本とする。猫への呼びかけは {cat_call} とし、人物に設定した呼び名を使う。一人称・二人称はできるだけ省略する。接し方：様子を見ながら誘い、無理に応じさせない。休憩は自然に提案し、拒否や低体力を責めない。冗談・幼児語・命令調・過剰な感嘆符・恋愛表現・飼い主としての断定は避ける。1案は1つの短いセリフだけ、目安10〜30字、長くても40字程度。かぎ括弧・話者名・行動文は付けない。猫の気持ちや成功を決めつけず、実際の行動結果を先取りしない。3案は語尾だけでなく誘い方や言葉の焦点を変え、人物像と行動の条件は同じにする。",
+      "call": "{cat}",
+      "enabled": true
+    },
+    {
+      "id": "cat-mike",
+      "kind": "cat_response",
+      "name": "ミケ",
+      "game_id": "cat-mike",
+      "content_id": "playtest-mike",
+      "notes": "三毛の毛並みが愛らしいミケは、カフェのムードメーカーです。短毛で動きが機敏、のんびりとした佇まいがたまらない癒やしを提供してくれます。",
+      "call": "{cat}",
+      "enabled": true
+    }
+  ],
+  "unity_imported": false,
+  "route": "existing Tk fields -> save_draft -> preview; manual authoring, no LLM request"
+}

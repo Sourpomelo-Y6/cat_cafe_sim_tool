@@ -1,0 +1,23 @@
+{
+  "special_tests": {
+    "command": "CAT_CAFE_TEST_GUI=1 python -m unittest discover -s tests -p test_special_narratives.py",
+    "passed": 4
+  },
+  "normal_regression": {
+    "command": "CAT_CAFE_TEST_GUI=1 python -m unittest discover -s tests -p test_interaction*.py",
+    "passed": 68,
+    "seconds": 44.361,
+    "stderr": "Tk ThemeChanged callbacks logged after destroyed test roots; unittest OK, no failed assertions"
+  },
+  "temporary_directory": "cat_cafe_sim_tool/Logs/MikeBallNarratives/Temp",
+  "initial_attempt": "Sandbox TEMP atomic replace denied WinError 5; rerun within workspace succeeded",
+  "visual_review": {
+    "native_window": "Mike ball unpublished draft image preview",
+    "scene_and_slot_pairs": 8,
+    "candidate_selection": "Windows Computer Use: native candidate comboboxes, actual input; screenshot inspected",
+    "registration": "After all eight paired previews, clicked current task eight-condition registration button",
+    "screenshots_saved": false
+  },
+  "unity_imported": false,
+  "built": false
+}
