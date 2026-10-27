@@ -1,0 +1,411 @@
+{
+  "entries": {
+    "neutral": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "neutral",
+        "scene_key": "ball"
+      },
+      "variants": [
+        {
+          "id": "a161d48b9fb85accbcb5f981d6c3cc2d",
+          "slot": 1,
+          "text": "{cat}はボール遊びの様子を見ながら、静かに応じた。"
+        },
+        {
+          "id": "a2ab147d945b5535bb4b4326fd85a9c6",
+          "slot": 2,
+          "text": "{cat}は落ち着いた様子で、ボールの動きに目を向けた。"
+        },
+        {
+          "id": "243ba6cf27085c3ca76e522663642ac4",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "favorable": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "favorable",
+        "scene_key": "ball"
+      },
+      "variants": [
+        {
+          "id": "d61a6422f7915c2ca7148a9d6ad7b8c1",
+          "slot": 1,
+          "text": "{cat}はボール遊びに関心を向け、穏やかに応じた。"
+        },
+        {
+          "id": "692ae877f7bc5a4f817908c881e5f38d",
+          "slot": 2,
+          "text": "{cat}はボールの動きを見つめ、遊びに応じる様子を見せた。"
+        },
+        {
+          "id": "3c34f7f6be3651ecb24662480b5256b1",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "confused": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "confused",
+        "scene_key": "ball"
+      },
+      "variants": [
+        {
+          "id": "6f57811fe4a356e9966972af5aa11eba",
+          "slot": 1,
+          "text": "{cat}はボールの動きに少し戸惑い、様子をうかがった。"
+        },
+        {
+          "id": "1f19d975587f5e6a9ba3e76e1de72e51",
+          "slot": 2,
+          "text": "{cat}はどう応じようか迷うように、しばらく動きを見ていた。"
+        },
+        {
+          "id": "d72bbd845e9653ae87836b3a02c387a8",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    },
+    "listless": {
+      "condition": {
+        "kind": "cat_response",
+        "subject_id": "cat-52bb33a93ad94bb582a5304f64a75000",
+        "mode": "ball",
+        "action": "any",
+        "reaction": "listless",
+        "scene_key": "ball"
+      },
+      "variants": [
+        {
+          "id": "d14c54b92af750efa29e194ac4c8c0f4",
+          "slot": 1,
+          "text": "{cat}は疲れた様子で、ボール遊びへの反応もゆっくりだった。"
+        },
+        {
+          "id": "31aa89cc220953a7a59ea0fd07ee8bc3",
+          "slot": 2,
+          "text": "{cat}はあまり動かず、疲れた様子で過ごしていた。"
+        },
+        {
+          "id": "63668564e0f852f78f1c8c0424d60ffa",
+          "slot": 3,
+          "text": ""
+        }
+      ]
+    }
+  },
+  "previews": [
+    {
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか ソラ」\nプレイヤーはボールを床の上で転がした。\n\nソラはボール遊びの様子を見ながら、静かに応じた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\bf2f5a581ec2412891d9633f979a0922.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "reaction": "neutral",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか ソラ」\nプレイヤーはボールを床の上で転がした。\n\nソラは落ち着いた様子で、ボールの動きに目を向けた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\bf2f5a581ec2412891d9633f979a0922.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか、ソラ」\nプレイヤーはソラの様子に合わせてボールを転がした。\n\nソラはボール遊びの様子を見ながら、静かに応じた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\bf2f5a581ec2412891d9633f979a0922.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "reaction": "neutral",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか、ソラ」\nプレイヤーはソラの様子に合わせてボールを転がした。\n\nソラは落ち着いた様子で、ボールの動きに目を向けた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\bf2f5a581ec2412891d9633f979a0922.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "reaction": "neutral",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか ソラ」\nプレイヤーはボールを勢いよく転がした。\n\nソラはボール遊びの様子を見ながら、静かに応じた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "ball"
+    },
+    {
+      "reaction": "neutral",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか ソラ」\nプレイヤーはボールを勢いよく転がした。\n\nソラは落ち着いた様子で、ボールの動きに目を向けた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "ball"
+    },
+    {
+      "reaction": "neutral",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がして、ソラを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nソラはボール遊びの様子を見ながら、静かに応じた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "ball"
+    },
+    {
+      "reaction": "neutral",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がして、ソラを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nソラは落ち着いた様子で、ボールの動きに目を向けた。\n\n静かな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "ball"
+    },
+    {
+      "reaction": "favorable",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか ソラ」\nプレイヤーはボールを床の上で転がした。\n\nソラはボール遊びに関心を向け、穏やかに応じた。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\bf2f5a581ec2412891d9633f979a0922.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "reaction": "favorable",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか ソラ」\nプレイヤーはボールを床の上で転がした。\n\nソラはボールの動きを見つめ、遊びに応じる様子を見せた。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\bf2f5a581ec2412891d9633f979a0922.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "reaction": "favorable",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか、ソラ」\nプレイヤーはソラの様子に合わせてボールを転がした。\n\nソラはボール遊びに関心を向け、穏やかに応じた。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\bf2f5a581ec2412891d9633f979a0922.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "reaction": "favorable",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか、ソラ」\nプレイヤーはソラの様子に合わせてボールを転がした。\n\nソラはボールの動きを見つめ、遊びに応じる様子を見せた。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\bf2f5a581ec2412891d9633f979a0922.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "reaction": "favorable",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか ソラ」\nプレイヤーはボールを勢いよく転がした。\n\nソラはボール遊びに関心を向け、穏やかに応じた。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "ball"
+    },
+    {
+      "reaction": "favorable",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか ソラ」\nプレイヤーはボールを勢いよく転がした。\n\nソラはボールの動きを見つめ、遊びに応じる様子を見せた。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "ball"
+    },
+    {
+      "reaction": "favorable",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がして、ソラを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nソラはボール遊びに関心を向け、穏やかに応じた。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "ball"
+    },
+    {
+      "reaction": "favorable",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がして、ソラを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nソラはボールの動きを見つめ、遊びに応じる様子を見せた。\n\n穏やかな交流の時間が流れた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "ball"
+    },
+    {
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか ソラ」\nプレイヤーはボールを床の上で転がした。\n\nソラはボールの動きに少し戸惑い、様子をうかがった。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\bf2f5a581ec2412891d9633f979a0922.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "reaction": "confused",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか ソラ」\nプレイヤーはボールを床の上で転がした。\n\nソラはどう応じようか迷うように、しばらく動きを見ていた。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\bf2f5a581ec2412891d9633f979a0922.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか、ソラ」\nプレイヤーはソラの様子に合わせてボールを転がした。\n\nソラはボールの動きに少し戸惑い、様子をうかがった。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\bf2f5a581ec2412891d9633f979a0922.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "reaction": "confused",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか、ソラ」\nプレイヤーはソラの様子に合わせてボールを転がした。\n\nソラはどう応じようか迷うように、しばらく動きを見ていた。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\bf2f5a581ec2412891d9633f979a0922.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "reaction": "confused",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか ソラ」\nプレイヤーはボールを勢いよく転がした。\n\nソラはボールの動きに少し戸惑い、様子をうかがった。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "ball"
+    },
+    {
+      "reaction": "confused",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか ソラ」\nプレイヤーはボールを勢いよく転がした。\n\nソラはどう応じようか迷うように、しばらく動きを見ていた。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "ball"
+    },
+    {
+      "reaction": "confused",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がして、ソラを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nソラはボールの動きに少し戸惑い、様子をうかがった。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "ball"
+    },
+    {
+      "reaction": "confused",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がして、ソラを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nソラはどう応じようか迷うように、しばらく動きを見ていた。\n\n働きかけと反応の間に、小さな間が空いた。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "ball"
+    },
+    {
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか ソラ」\nプレイヤーはボールを床の上で転がした。\n\nソラは疲れた様子で、ボール遊びへの反応もゆっくりだった。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\bf2f5a581ec2412891d9633f979a0922.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "reaction": "listless",
+      "action": "direct",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか ソラ」\nプレイヤーはボールを床の上で転がした。\n\nソラはあまり動かず、疲れた様子で過ごしていた。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\bf2f5a581ec2412891d9633f979a0922.png",
+      "resolved": "ball__direct"
+    },
+    {
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか、ソラ」\nプレイヤーはソラの様子に合わせてボールを転がした。\n\nソラは疲れた様子で、ボール遊びへの反応もゆっくりだった。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\bf2f5a581ec2412891d9633f979a0922.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "reaction": "listless",
+      "action": "adapt",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか、ソラ」\nプレイヤーはソラの様子に合わせてボールを転がした。\n\nソラはあまり動かず、疲れた様子で過ごしていた。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\bf2f5a581ec2412891d9633f979a0922.png",
+      "resolved": "ball__adapt"
+    },
+    {
+      "reaction": "listless",
+      "action": "intense",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がしてみようか ソラ」\nプレイヤーはボールを勢いよく転がした。\n\nソラは疲れた様子で、ボール遊びへの反応もゆっくりだった。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "ball"
+    },
+    {
+      "reaction": "listless",
+      "action": "intense",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がしてみようか ソラ」\nプレイヤーはボールを勢いよく転がした。\n\nソラはあまり動かず、疲れた様子で過ごしていた。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "ball"
+    },
+    {
+      "reaction": "listless",
+      "action": "feint",
+      "slot": 1,
+      "body": "プレイヤー「ボールを転がして、ソラを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nソラは疲れた様子で、ボール遊びへの反応もゆっくりだった。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "ball"
+    },
+    {
+      "reaction": "listless",
+      "action": "feint",
+      "slot": 2,
+      "body": "プレイヤー「ボールを転がして、ソラを引き寄せようか？」\nプレイヤーはボールを転がす向きや間合いを変えた。\n\nソラはあまり動かず、疲れた様子で過ごしていた。\n\n今は休む時間が必要そうだ。",
+      "source": "人：登録済み 専用 ／ 猫：編集中・未登録 操作共通（編集中の案を優先して確認中。ゲームでは猫専用文・専用操作が優先されます）",
+      "image": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim\\saves\\content_images\\images\\a4d9cab08fc14368a83312423a14ec77.png",
+      "resolved": "ball"
+    }
+  ],
+  "before_count": 277,
+  "after_count": 281,
+  "draft_counts": [
+    293,
+    297
+  ],
+  "generated_count": 278,
+  "protected_unchanged": true,
+  "unity_imported": false
+}
