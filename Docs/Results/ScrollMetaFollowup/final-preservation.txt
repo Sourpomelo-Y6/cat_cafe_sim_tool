@@ -1,0 +1,1 @@
+PASS: all original 349 files preserved except authorized 54 meta; 295 byte-identical. All content PNG/JSON unchanged. Actual save hashes unchanged; original mtime before task. ProjectVersion restored exactly. Template/runtime source identical.

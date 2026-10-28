@@ -1,0 +1,500 @@
+3 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+565 text=132 position=0.3239 anchored=(0.00, 24.00) content=167.5 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+694 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+1183 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(349.00, 108.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+1184 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+1565 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(548.00, 225.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+1566 text=519 position=1.0000 anchored=(0.00, 0.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+1867 text=519 position=1.0000 anchored=(0.00, 0.00) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(349.00, 188.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+1868 text=519 position=1.0000 anchored=(0.00, 0.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+2211 text=519 position=0.9763 anchored=(0.00, 24.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+2297 text=519 position=0.9526 anchored=(0.00, 48.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+2430 text=519 position=0.9289 anchored=(0.00, 72.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+2564 text=519 position=0.9052 anchored=(0.00, 96.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+2696 text=519 position=0.8815 anchored=(0.00, 120.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+2830 text=519 position=0.8578 anchored=(0.00, 144.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+2963 text=519 position=0.8342 anchored=(0.00, 168.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+3097 text=519 position=0.8105 anchored=(0.00, 192.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+3230 text=519 position=0.7868 anchored=(0.00, 216.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+3364 text=519 position=0.7631 anchored=(0.00, 240.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+3498 text=519 position=0.7394 anchored=(0.00, 264.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+3631 text=519 position=0.7157 anchored=(0.00, 288.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+3765 text=519 position=0.6920 anchored=(0.00, 312.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+3898 text=519 position=0.6683 anchored=(0.00, 336.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+4029 text=519 position=0.6446 anchored=(0.00, 360.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+4163 text=519 position=0.6209 anchored=(0.00, 384.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+4296 text=519 position=0.5972 anchored=(0.00, 408.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+4429 text=519 position=0.5735 anchored=(0.00, 432.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+4562 text=519 position=0.5499 anchored=(0.00, 456.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+4695 text=519 position=0.5262 anchored=(0.00, 480.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+4828 text=519 position=0.5025 anchored=(0.00, 504.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+4961 text=519 position=0.4788 anchored=(0.00, 528.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+5094 text=519 position=0.4551 anchored=(0.00, 552.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+5227 text=519 position=0.4314 anchored=(0.00, 576.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+6020 text=519 position=0.4077 anchored=(0.00, 600.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+6034 text=519 position=0.3840 anchored=(0.00, 624.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+6168 text=519 position=0.3603 anchored=(0.00, 648.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+6301 text=519 position=0.3366 anchored=(0.00, 672.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+6433 text=519 position=0.3129 anchored=(0.00, 696.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+6566 text=519 position=0.2892 anchored=(0.00, 720.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+6699 text=519 position=0.2655 anchored=(0.00, 744.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+6832 text=519 position=0.2419 anchored=(0.00, 768.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+6965 text=519 position=0.2182 anchored=(0.00, 792.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+7099 text=519 position=0.1945 anchored=(0.00, 816.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+7232 text=519 position=0.1708 anchored=(0.00, 840.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+7365 text=519 position=0.1471 anchored=(0.00, 864.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+7498 text=519 position=0.1234 anchored=(0.00, 888.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+7632 text=519 position=0.0997 anchored=(0.00, 912.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+7766 text=519 position=0.0760 anchored=(0.00, 936.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+7900 text=519 position=0.0523 anchored=(0.00, 960.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+8034 text=519 position=0.0286 anchored=(0.00, 984.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+8168 text=519 position=0.0049 anchored=(0.00, 1008.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+8301 text=519 position=0.0000 anchored=(0.00, 1013.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+10968 text=519 position=0.0000 anchored=(0.00, 1013.00) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(752.00, 486.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+10969 text=519 position=0.0000 anchored=(0.00, 1013.00) content=1145 viewport=132 revision=1 rows=4 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+10970 text=683 position=1.0000 anchored=(0.00, 0.00) content=1490 viewport=132 revision=1 rows=4 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+3 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+3 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5039 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(18.00, 332.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5048 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5109 text=132 position=0.3239 anchored=(0.00, 24.00) content=167.5 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+5111 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, -1.00) mouseHeld=False
+5150 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(244.00, 137.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5155 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(244.00, 140.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5156 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(241.00, 149.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5157 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(240.00, 160.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5158 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(238.00, 174.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5159 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(237.00, 186.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5160 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(236.00, 191.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5161 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(236.00, 195.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5162 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(236.00, 197.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5170 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(236.00, 198.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5171 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(237.00, 197.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5172 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(240.00, 191.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5173 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(241.00, 186.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5174 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(244.00, 179.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5175 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(245.00, 173.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5176 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(246.00, 169.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5177 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(246.00, 166.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5178 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(247.00, 163.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5179 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(249.00, 159.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5181 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5199 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(254.00, 158.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5209 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(254.00, 156.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5210 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(254.00, 150.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5211 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(254.00, 145.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5212 text=132 position=0.2465 anchored=(0.00, 26.75) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(254.00, 138.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5213 text=132 position=0.4225 anchored=(0.00, 20.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(254.00, 133.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5214 text=132 position=0.6690 anchored=(0.00, 11.75) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(253.00, 126.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5215 text=132 position=0.8803 anchored=(0.00, 4.25) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(252.00, 120.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5216 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(251.00, 116.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5217 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(251.00, 115.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5219 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(251.00, 113.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5221 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(251.00, 112.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5223 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(251.00, 109.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5227 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(251.00, 107.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5228 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(251.00, 106.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5230 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(251.00, 105.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5231 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(251.00, 104.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5232 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(251.00, 103.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5233 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(251.00, 102.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5241 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(251.00, 105.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5242 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(251.00, 114.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5243 text=132 position=0.7042 anchored=(0.00, 10.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(251.00, 125.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5244 text=132 position=0.1761 anchored=(0.00, 29.25) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(251.00, 140.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5245 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(249.00, 155.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5246 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(249.00, 171.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5247 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(249.00, 186.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5248 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(247.00, 198.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5249 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(247.00, 208.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5250 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(247.00, 216.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5251 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(247.00, 226.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5252 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(247.00, 232.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5253 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(247.00, 235.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5254 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(247.00, 237.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5255 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(247.00, 238.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5263 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(247.00, 232.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5264 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(247.00, 222.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5265 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(247.00, 204.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5266 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(247.00, 180.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5267 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(247.00, 158.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5268 text=132 position=0.2817 anchored=(0.00, 25.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(247.00, 137.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5269 text=132 position=0.9155 anchored=(0.00, 3.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(247.00, 119.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5270 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(247.00, 106.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5271 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(247.00, 99.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5272 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(247.00, 93.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5273 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(247.00, 91.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5274 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(247.00, 90.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5275 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(247.00, 89.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5286 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(247.00, 87.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5287 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(247.00, 86.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5293 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(247.00, 94.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5294 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(247.00, 109.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5295 text=132 position=0.5634 anchored=(0.00, 15.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(247.00, 129.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5296 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(247.00, 149.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5297 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(248.00, 167.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5298 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(248.00, 181.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5299 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(251.00, 194.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5300 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(251.00, 197.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5306 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(252.00, 198.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5307 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(253.00, 198.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5308 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(254.00, 198.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5309 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(257.00, 190.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5310 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(260.00, 181.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5311 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(264.00, 163.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5312 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(265.00, 148.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5313 text=132 position=0.4225 anchored=(0.00, 20.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(268.00, 133.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5314 text=132 position=0.9507 anchored=(0.00, 1.75) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(268.00, 118.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5315 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(268.00, 109.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5316 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(268.00, 104.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5317 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(268.00, 103.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5318 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(268.00, 102.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5320 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(268.00, 101.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5322 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(268.00, 100.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5328 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(268.00, 103.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5329 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(269.00, 115.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5330 text=132 position=0.5282 anchored=(0.00, 16.75) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(271.00, 130.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5331 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(274.00, 145.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5332 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(278.00, 162.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5333 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(280.00, 172.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5334 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(281.00, 180.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5335 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(284.00, 188.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5339 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(285.00, 188.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5340 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(289.00, 186.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5341 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(295.00, 177.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5342 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(298.00, 167.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5343 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(302.00, 153.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5344 text=132 position=0.2465 anchored=(0.00, 26.75) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(306.00, 138.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5345 text=132 position=0.7746 anchored=(0.00, 8.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(310.00, 123.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5346 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(311.00, 113.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5347 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(313.00, 103.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5348 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(313.00, 101.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5356 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(315.00, 106.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5357 text=132 position=0.8803 anchored=(0.00, 4.25) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(318.00, 120.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5358 text=132 position=0.2465 anchored=(0.00, 26.75) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(323.00, 138.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5359 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(331.00, 155.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5360 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(333.00, 160.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5361 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(334.00, 161.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5365 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(335.00, 161.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5366 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(336.00, 161.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5367 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(340.00, 153.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5368 text=132 position=0.1761 anchored=(0.00, 29.25) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(343.00, 140.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5369 text=132 position=0.7394 anchored=(0.00, 9.25) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(347.00, 124.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5370 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(351.00, 102.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5371 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(351.00, 73.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5372 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(351.00, 58.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5373 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(351.00, 50.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5374 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(351.00, 46.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5377 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(351.00, 45.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5381 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(351.00, 55.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5382 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(351.00, 70.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5383 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(357.00, 97.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5384 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(363.00, 116.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5385 text=132 position=0.4225 anchored=(0.00, 20.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(368.00, 133.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5386 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(372.00, 151.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5387 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(375.00, 160.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5388 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(376.00, 163.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5389 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(376.00, 164.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5392 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(377.00, 164.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5393 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(378.00, 164.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5394 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(381.00, 157.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5395 text=132 position=0.1761 anchored=(0.00, 29.25) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(385.00, 140.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5396 text=132 position=0.6690 anchored=(0.00, 11.75) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(386.00, 126.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5397 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(389.00, 113.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5398 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(389.00, 99.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5399 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(389.00, 88.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5400 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(389.00, 74.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5401 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(389.00, 67.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5402 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(389.00, 64.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5403 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(389.00, 62.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5410 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(389.00, 68.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5411 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(391.00, 79.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5412 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(395.00, 93.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5413 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(397.00, 108.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5414 text=132 position=0.9507 anchored=(0.00, 1.75) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(400.00, 118.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5415 text=132 position=0.7042 anchored=(0.00, 10.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(403.00, 125.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5416 text=132 position=0.4930 anchored=(0.00, 18.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(404.00, 131.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5417 text=132 position=0.3169 anchored=(0.00, 24.25) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(406.00, 136.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5418 text=132 position=0.0704 anchored=(0.00, 33.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(408.00, 143.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5419 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(410.00, 149.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5420 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(411.00, 150.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5425 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(413.00, 149.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5426 text=132 position=0.2465 anchored=(0.00, 26.75) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(416.00, 138.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5427 text=132 position=0.9155 anchored=(0.00, 3.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(420.00, 119.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5428 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(422.00, 98.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5429 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(425.00, 78.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5430 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(425.00, 63.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5431 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(425.00, 47.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5432 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(426.00, 39.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5433 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(427.00, 30.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5434 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(427.00, 24.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5435 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(427.00, 17.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5436 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(427.00, 10.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5437 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(429.00, 4.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5438 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(430.00, 1.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5439 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(430.00, -2.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5440 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(430.00, -5.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5441 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(431.00, -9.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5442 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(431.00, -10.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5443 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(431.00, -12.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5451 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(431.00, -4.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5452 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(433.00, 8.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5453 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(435.00, 23.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5454 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(438.00, 43.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5455 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(441.00, 68.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5456 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(443.00, 80.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5457 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(445.00, 92.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5458 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(446.00, 100.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5459 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(448.00, 106.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5460 text=132 position=1.0000 anchored=(0.00, 0.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(449.00, 112.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5461 text=132 position=0.9507 anchored=(0.00, 1.75) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(450.00, 118.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5462 text=132 position=0.7746 anchored=(0.00, 8.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(452.00, 123.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5463 text=132 position=0.6338 anchored=(0.00, 13.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(452.00, 127.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5464 text=132 position=0.4577 anchored=(0.00, 19.25) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(454.00, 132.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5465 text=132 position=0.3521 anchored=(0.00, 23.00) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(454.00, 135.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5466 text=132 position=0.1761 anchored=(0.00, 29.25) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(455.00, 140.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5467 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(455.00, 148.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5468 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(455.00, 153.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5469 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(455.00, 157.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5470 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(456.00, 161.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5471 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(456.00, 166.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5472 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(457.00, 170.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5473 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(457.00, 175.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5474 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(457.00, 180.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5475 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(457.00, 181.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5476 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(457.00, 184.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5479 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(457.00, 185.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5480 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(457.00, 186.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5481 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(457.00, 187.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5482 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(457.00, 190.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5483 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(459.00, 193.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5484 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(459.00, 197.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5485 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(459.00, 200.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5486 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(459.00, 204.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5487 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(459.00, 209.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5488 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(459.00, 211.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5489 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(459.00, 214.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5490 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(460.00, 216.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5491 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(461.00, 217.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5493 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5526 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(531.00, 214.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5534 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5567 text=132 position=0.0000 anchored=(0.00, 35.50) content=167.5 viewport=132 revision=0 rows=3 held=True pointer=(535.00, 225.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5574 text=519 position=1.0000 anchored=(0.00, 0.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5602 text=519 position=1.0000 anchored=(0.00, 0.00) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(471.00, 168.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5608 text=519 position=1.0000 anchored=(0.00, 0.00) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(470.00, 168.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5609 text=519 position=1.0000 anchored=(0.00, 0.00) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(470.00, 162.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5610 text=519 position=1.0000 anchored=(0.00, 0.00) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(470.00, 155.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5611 text=519 position=1.0000 anchored=(0.00, 0.00) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(470.00, 146.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5612 text=519 position=1.0000 anchored=(0.00, 0.00) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(470.00, 140.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5613 text=519 position=1.0000 anchored=(0.00, 0.00) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(470.00, 134.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5614 text=519 position=1.0000 anchored=(0.00, 0.00) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(470.00, 130.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5615 text=519 position=1.0000 anchored=(0.00, 0.00) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(470.00, 128.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5616 text=519 position=1.0000 anchored=(0.00, 0.00) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(470.00, 125.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5617 text=519 position=1.0000 anchored=(0.00, 0.00) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(470.00, 124.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5629 text=519 position=1.0000 anchored=(0.00, 0.00) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(469.00, 129.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5630 text=519 position=1.0000 anchored=(0.00, 0.00) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(469.00, 135.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5631 text=519 position=1.0000 anchored=(0.00, 0.00) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(469.00, 139.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5632 text=519 position=1.0000 anchored=(0.00, 0.00) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(469.00, 146.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5633 text=519 position=1.0000 anchored=(0.00, 0.00) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(467.00, 155.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5634 text=519 position=0.9877 anchored=(0.00, 12.50) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(465.00, 165.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5635 text=519 position=0.9654 anchored=(0.00, 35.00) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(462.00, 183.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5636 text=519 position=0.9531 anchored=(0.00, 47.50) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(461.00, 193.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5637 text=519 position=0.9420 anchored=(0.00, 58.75) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(460.00, 202.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5638 text=519 position=0.9297 anchored=(0.00, 71.25) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(458.00, 212.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5639 text=519 position=0.9223 anchored=(0.00, 78.75) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(458.00, 218.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5640 text=519 position=0.9186 anchored=(0.00, 82.50) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(457.00, 221.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5641 text=519 position=0.9136 anchored=(0.00, 87.50) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(456.00, 225.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5643 text=519 position=0.9124 anchored=(0.00, 88.75) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(456.00, 226.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5644 text=519 position=0.9112 anchored=(0.00, 90.00) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(456.00, 227.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5655 text=519 position=0.9112 anchored=(0.00, 90.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5656 text=519 position=0.9105 anchored=(0.00, 90.69) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5657 text=519 position=0.9098 anchored=(0.00, 91.36) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5658 text=519 position=0.9092 anchored=(0.00, 92.01) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5659 text=519 position=0.9086 anchored=(0.00, 92.64) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5660 text=519 position=0.9080 anchored=(0.00, 93.24) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5661 text=519 position=0.9074 anchored=(0.00, 93.83) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5662 text=519 position=0.9068 anchored=(0.00, 94.40) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5663 text=519 position=0.9063 anchored=(0.00, 94.95) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5664 text=519 position=0.9057 anchored=(0.00, 95.48) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5665 text=519 position=0.9052 anchored=(0.00, 95.99) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5666 text=519 position=0.9048 anchored=(0.00, 96.49) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5667 text=519 position=0.9043 anchored=(0.00, 96.97) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5668 text=519 position=0.9038 anchored=(0.00, 97.43) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5669 text=519 position=0.9034 anchored=(0.00, 97.88) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5670 text=519 position=0.9029 anchored=(0.00, 98.31) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5671 text=519 position=0.9025 anchored=(0.00, 98.74) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5672 text=519 position=0.9021 anchored=(0.00, 99.14) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5673 text=519 position=0.9017 anchored=(0.00, 99.53) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5674 text=519 position=0.9014 anchored=(0.00, 99.91) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5675 text=519 position=0.9010 anchored=(0.00, 100.28) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5676 text=519 position=0.9007 anchored=(0.00, 100.64) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5677 text=519 position=0.9003 anchored=(0.00, 100.98) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5678 text=519 position=0.9000 anchored=(0.00, 101.31) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5679 text=519 position=0.8997 anchored=(0.00, 101.64) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(407.00, 154.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5685 text=519 position=0.8997 anchored=(0.00, 101.64) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(407.00, 155.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5686 text=519 position=0.8997 anchored=(0.00, 101.64) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(405.00, 164.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5687 text=519 position=0.8898 anchored=(0.00, 111.64) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(404.00, 172.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5688 text=519 position=0.8762 anchored=(0.00, 125.39) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(403.00, 183.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5689 text=519 position=0.8626 anchored=(0.00, 139.14) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(402.00, 194.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5690 text=519 position=0.8478 anchored=(0.00, 154.14) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(401.00, 206.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5691 text=519 position=0.8318 anchored=(0.00, 170.39) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(401.00, 219.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5692 text=519 position=0.8207 anchored=(0.00, 181.64) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(401.00, 228.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5693 text=519 position=0.8145 anchored=(0.00, 187.89) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(401.00, 233.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5694 text=519 position=0.8084 anchored=(0.00, 194.14) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(401.00, 238.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5695 text=519 position=0.8071 anchored=(0.00, 195.39) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(401.00, 239.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5701 text=519 position=0.8182 anchored=(0.00, 184.14) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(401.00, 230.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5702 text=519 position=0.8182 anchored=(0.00, 184.14) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5703 text=519 position=0.8178 anchored=(0.00, 184.59) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5704 text=519 position=0.8174 anchored=(0.00, 185.02) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5705 text=519 position=0.8169 anchored=(0.00, 185.45) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5706 text=519 position=0.8165 anchored=(0.00, 185.85) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5707 text=519 position=0.8161 anchored=(0.00, 186.25) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5708 text=519 position=0.8158 anchored=(0.00, 186.63) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5709 text=519 position=0.8154 anchored=(0.00, 187.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5710 text=519 position=0.8150 anchored=(0.00, 187.36) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5711 text=519 position=0.8147 anchored=(0.00, 187.70) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5712 text=519 position=0.8144 anchored=(0.00, 188.04) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5713 text=519 position=0.8141 anchored=(0.00, 188.36) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5714 text=519 position=0.8138 anchored=(0.00, 188.67) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5715 text=519 position=0.8135 anchored=(0.00, 188.97) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5716 text=519 position=0.8132 anchored=(0.00, 189.27) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(377.00, 136.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5722 text=519 position=0.8132 anchored=(0.00, 189.27) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(377.00, 139.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5723 text=519 position=0.8132 anchored=(0.00, 189.27) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(377.00, 149.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5724 text=519 position=0.7984 anchored=(0.00, 204.27) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(377.00, 161.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5725 text=519 position=0.7823 anchored=(0.00, 220.52) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(377.00, 174.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5726 text=519 position=0.7675 anchored=(0.00, 235.52) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(377.00, 186.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5727 text=519 position=0.7527 anchored=(0.00, 250.52) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(377.00, 198.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5728 text=519 position=0.7416 anchored=(0.00, 261.77) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(377.00, 207.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5729 text=519 position=0.7305 anchored=(0.00, 273.02) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(377.00, 216.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5730 text=519 position=0.7256 anchored=(0.00, 278.02) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(377.00, 220.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5731 text=519 position=0.7219 anchored=(0.00, 281.77) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(377.00, 223.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5735 text=519 position=0.7219 anchored=(0.00, 281.77) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5736 text=519 position=0.7177 anchored=(0.00, 285.97) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5737 text=519 position=0.7137 anchored=(0.00, 290.05) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5738 text=519 position=0.7098 anchored=(0.00, 293.98) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5739 text=519 position=0.7060 anchored=(0.00, 297.79) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5740 text=519 position=0.7024 anchored=(0.00, 301.47) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5741 text=519 position=0.6989 anchored=(0.00, 305.04) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5742 text=519 position=0.6955 anchored=(0.00, 308.48) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5743 text=519 position=0.6922 anchored=(0.00, 311.82) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5744 text=519 position=0.6890 anchored=(0.00, 315.04) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5745 text=519 position=0.6859 anchored=(0.00, 318.16) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5746 text=519 position=0.6830 anchored=(0.00, 321.17) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5747 text=519 position=0.6801 anchored=(0.00, 324.09) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5748 text=519 position=0.6773 anchored=(0.00, 326.91) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(364.00, 105.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5750 text=519 position=0.6773 anchored=(0.00, 326.91) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(364.00, 104.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5751 text=519 position=0.6773 anchored=(0.00, 326.91) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(363.00, 104.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5752 text=519 position=0.6773 anchored=(0.00, 326.91) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(363.00, 107.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5753 text=519 position=0.6773 anchored=(0.00, 326.91) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(363.00, 110.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5754 text=519 position=0.6773 anchored=(0.00, 326.91) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(361.00, 114.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5755 text=519 position=0.6773 anchored=(0.00, 326.91) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(359.00, 125.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5756 text=519 position=0.6662 anchored=(0.00, 338.16) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(356.00, 134.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5757 text=519 position=0.6563 anchored=(0.00, 348.16) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(355.00, 142.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5758 text=519 position=0.6403 anchored=(0.00, 364.41) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(351.00, 155.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5759 text=519 position=0.6218 anchored=(0.00, 383.16) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(350.00, 170.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5760 text=519 position=0.6057 anchored=(0.00, 399.41) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(347.00, 183.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5761 text=519 position=0.5909 anchored=(0.00, 414.41) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(346.00, 195.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5762 text=519 position=0.5749 anchored=(0.00, 430.66) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(346.00, 208.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5763 text=519 position=0.5564 anchored=(0.00, 449.41) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(346.00, 223.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5764 text=519 position=0.5428 anchored=(0.00, 463.16) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(346.00, 234.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5765 text=519 position=0.5329 anchored=(0.00, 473.16) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(346.00, 242.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5766 text=519 position=0.5267 anchored=(0.00, 479.41) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(346.00, 247.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5767 text=519 position=0.5218 anchored=(0.00, 484.41) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(346.00, 251.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5771 text=519 position=0.5218 anchored=(0.00, 484.41) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5772 text=519 position=0.5162 anchored=(0.00, 490.08) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5773 text=519 position=0.5108 anchored=(0.00, 495.58) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5774 text=519 position=0.5055 anchored=(0.00, 500.88) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5775 text=519 position=0.5005 anchored=(0.00, 506.03) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5776 text=519 position=0.4956 anchored=(0.00, 510.99) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5777 text=519 position=0.4908 anchored=(0.00, 515.80) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5778 text=519 position=0.4862 anchored=(0.00, 520.45) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5779 text=519 position=0.4818 anchored=(0.00, 524.95) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5780 text=519 position=0.4775 anchored=(0.00, 529.29) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5781 text=519 position=0.4733 anchored=(0.00, 533.50) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5782 text=519 position=0.4693 anchored=(0.00, 537.56) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(345.00, 119.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5790 text=519 position=0.4693 anchored=(0.00, 537.56) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(345.00, 125.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5791 text=519 position=0.4693 anchored=(0.00, 537.56) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(343.00, 136.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5792 text=519 position=0.4422 anchored=(0.00, 565.06) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(342.00, 158.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5793 text=519 position=0.4224 anchored=(0.00, 585.06) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(342.00, 174.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5794 text=519 position=0.3978 anchored=(0.00, 610.06) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(342.00, 194.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5795 text=519 position=0.3780 anchored=(0.00, 630.06) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(342.00, 210.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5796 text=519 position=0.3583 anchored=(0.00, 650.06) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(342.00, 226.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5797 text=519 position=0.3385 anchored=(0.00, 670.06) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(344.00, 242.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5798 text=519 position=0.3274 anchored=(0.00, 681.31) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(347.00, 251.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5799 text=519 position=0.3225 anchored=(0.00, 686.31) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(347.00, 255.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5800 text=519 position=0.3213 anchored=(0.00, 687.56) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(348.00, 256.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5804 text=519 position=0.3250 anchored=(0.00, 683.81) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(349.00, 253.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5805 text=519 position=0.3361 anchored=(0.00, 672.56) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(351.00, 244.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5806 text=519 position=0.3361 anchored=(0.00, 672.56) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5807 text=519 position=0.3343 anchored=(0.00, 674.32) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5808 text=519 position=0.3327 anchored=(0.00, 676.01) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5809 text=519 position=0.3310 anchored=(0.00, 677.66) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5810 text=519 position=0.3295 anchored=(0.00, 679.24) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5811 text=519 position=0.3280 anchored=(0.00, 680.78) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5812 text=519 position=0.3265 anchored=(0.00, 682.26) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5813 text=519 position=0.3251 anchored=(0.00, 683.70) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5814 text=519 position=0.3237 anchored=(0.00, 685.08) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5815 text=519 position=0.3224 anchored=(0.00, 686.43) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5816 text=519 position=0.3211 anchored=(0.00, 687.73) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5817 text=519 position=0.3199 anchored=(0.00, 688.98) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5818 text=519 position=0.3187 anchored=(0.00, 690.20) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5819 text=519 position=0.3175 anchored=(0.00, 691.37) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(347.00, 124.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5824 text=519 position=0.3175 anchored=(0.00, 691.37) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(347.00, 125.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5825 text=519 position=0.3175 anchored=(0.00, 691.37) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(347.00, 131.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5826 text=519 position=0.3175 anchored=(0.00, 691.37) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(347.00, 140.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5827 text=519 position=0.3015 anchored=(0.00, 707.62) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(347.00, 153.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5828 text=519 position=0.2768 anchored=(0.00, 732.62) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(347.00, 173.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5829 text=519 position=0.2595 anchored=(0.00, 750.12) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(347.00, 187.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5830 text=519 position=0.2398 anchored=(0.00, 770.12) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(347.00, 203.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5831 text=519 position=0.2237 anchored=(0.00, 786.37) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(347.00, 216.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5832 text=519 position=0.2089 anchored=(0.00, 801.37) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(348.00, 228.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5833 text=519 position=0.2015 anchored=(0.00, 808.87) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(349.00, 234.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5834 text=519 position=0.1978 anchored=(0.00, 812.62) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(351.00, 237.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5835 text=519 position=0.1966 anchored=(0.00, 813.87) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(351.00, 238.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5840 text=519 position=0.1978 anchored=(0.00, 812.62) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(354.00, 237.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5841 text=519 position=0.2040 anchored=(0.00, 806.37) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(356.00, 232.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5842 text=519 position=0.2151 anchored=(0.00, 795.12) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(358.00, 223.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5843 text=519 position=0.2151 anchored=(0.00, 795.12) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5844 text=519 position=0.2156 anchored=(0.00, 794.61) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5845 text=519 position=0.2161 anchored=(0.00, 794.12) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5846 text=519 position=0.2165 anchored=(0.00, 793.64) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5847 text=519 position=0.2170 anchored=(0.00, 793.18) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5848 text=519 position=0.2174 anchored=(0.00, 792.74) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5849 text=519 position=0.2179 anchored=(0.00, 792.31) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5850 text=519 position=0.2183 anchored=(0.00, 791.89) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5851 text=519 position=0.2187 anchored=(0.00, 791.49) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5852 text=519 position=0.2191 anchored=(0.00, 791.10) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5853 text=519 position=0.2194 anchored=(0.00, 790.72) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5854 text=519 position=0.2198 anchored=(0.00, 790.35) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5855 text=519 position=0.2201 anchored=(0.00, 790.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5856 text=519 position=0.2205 anchored=(0.00, 789.66) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5857 text=519 position=0.2208 anchored=(0.00, 789.33) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5858 text=519 position=0.2211 anchored=(0.00, 789.01) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5859 text=519 position=0.2214 anchored=(0.00, 788.70) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5860 text=519 position=0.2217 anchored=(0.00, 788.40) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5861 text=519 position=0.2220 anchored=(0.00, 788.11) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5862 text=519 position=0.2223 anchored=(0.00, 787.83) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5863 text=519 position=0.2225 anchored=(0.00, 787.56) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5864 text=519 position=0.2228 anchored=(0.00, 787.30) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5865 text=519 position=0.2231 anchored=(0.00, 787.05) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5866 text=519 position=0.2233 anchored=(0.00, 786.80) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5867 text=519 position=0.2235 anchored=(0.00, 786.57) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5868 text=519 position=0.2238 anchored=(0.00, 786.34) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5869 text=519 position=0.2240 anchored=(0.00, 786.12) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(349.00, 130.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5872 text=519 position=0.2240 anchored=(0.00, 786.12) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(350.00, 130.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5873 text=519 position=0.2240 anchored=(0.00, 786.12) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(350.00, 135.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5874 text=519 position=0.2240 anchored=(0.00, 786.12) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(350.00, 141.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5875 text=519 position=0.2018 anchored=(0.00, 808.62) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(350.00, 159.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5876 text=519 position=0.1808 anchored=(0.00, 829.87) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(350.00, 176.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5877 text=519 position=0.1536 anchored=(0.00, 857.37) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(354.00, 198.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5878 text=519 position=0.1216 anchored=(0.00, 889.87) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(358.00, 224.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5879 text=519 position=0.0944 anchored=(0.00, 917.37) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(365.00, 246.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5880 text=519 position=0.0771 anchored=(0.00, 934.87) content=1145 viewport=132 revision=0 rows=3 held=True pointer=(371.00, 260.00, 0.00) wheel=(0.00, 0.00) mouseHeld=True
+5881 text=519 position=0.0771 anchored=(0.00, 934.87) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5882 text=519 position=0.0615 anchored=(0.00, 950.68) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5883 text=519 position=0.0464 anchored=(0.00, 966.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5884 text=519 position=0.0318 anchored=(0.00, 980.79) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5885 text=519 position=0.0176 anchored=(0.00, 995.12) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5886 text=519 position=0.0040 anchored=(0.00, 1008.96) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False
+5887 text=519 position=0.0000 anchored=(0.00, 1013.00) content=1145 viewport=132 revision=0 rows=3 held=False pointer=released wheel=(0.00, 0.00) mouseHeld=False

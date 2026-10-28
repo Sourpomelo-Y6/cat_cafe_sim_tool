@@ -1,0 +1,38 @@
+{
+  "1280": {
+    "132": {
+      "min_position": 0.0,
+      "max_position": 1.0,
+      "held_samples": 304,
+      "state_rows": [
+        "revision=0 rows=3"
+      ]
+    },
+    "519": {
+      "min_position": 0.0,
+      "max_position": 1.0,
+      "held_samples": 193,
+      "state_rows": [
+        "revision=0 rows=3"
+      ]
+    }
+  },
+  "1024": {
+    "132": {
+      "min_position": 0.0,
+      "max_position": 1.0,
+      "held_samples": 219,
+      "state_rows": [
+        "revision=0 rows=3"
+      ]
+    },
+    "519": {
+      "min_position": 0.0,
+      "max_position": 1.0,
+      "held_samples": 109,
+      "state_rows": [
+        "revision=0 rows=3"
+      ]
+    }
+  }
+}

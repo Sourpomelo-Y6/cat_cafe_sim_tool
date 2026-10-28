@@ -1,0 +1,30 @@
+{
+  "cat_cafe_sim_tool/generated": {
+    "files": 6782,
+    "bytes": 3277372585.0
+  },
+  "Logs": {
+    "files": 66976,
+    "bytes": 20087474178.0
+  },
+  "C:/Users/hi-wa/unity_workspase/CatCafeSim/Library": {
+    "files": 32356,
+    "bytes": 8057188296.0
+  },
+  "Logs/StandaloneBuild/Latest": {
+    "files": 156,
+    "bytes": 5506514294.0
+  },
+  "C:/Users/hi-wa/unity_workspase/CatCafeSim/Assets/Resources/CatCafeContent": {
+    "files": 8458,
+    "bytes": 7962384026.0
+  },
+  "Logs/StandaloneBuild/Runs": {
+    "files": 374,
+    "bytes": 208708977.0
+  },
+  "cat_cafe_sim/saves/content_images": {
+    "files": 664,
+    "bytes": 1276799229
+  }
+}

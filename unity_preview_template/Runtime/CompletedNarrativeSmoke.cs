@@ -128,9 +128,48 @@ namespace CatCafePreview {
   [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]static void Install() {
    var args=Environment.GetCommandLineArgs();int i=Array.IndexOf(args,"--catcafe-completed-narratives");if(i<0)return;var go=new GameObject("Completed narrative QA");DontDestroyOnLoad(go);go.AddComponent<CompletedNarrativeSmoke>().StartCoroutine(go.GetComponent<CompletedNarrativeSmoke>().Run(Path.GetFullPath(args[i+1]),args.Contains("--resume"),args.Contains("--stay")));
   }
+  // Programmatic UI-event fixture; never counted as an OS mouse drag.
+  static void VerifyScrollRouting(ContentPreview preview,string output) {
+   var p=preview.GetComponent<PythonPlayerPanel>();var b=(LocalCafeBackend)CafeBackends.Local;
+   var lines=new List<string>();
+   foreach(bool history in new[]{false,true}) {
+    if(history)p.ToggleHistory();Canvas.ForceUpdateCanvases();p.historyScroll.verticalNormalizedPosition=1;
+    var corners=new Vector3[4];p.historyScroll.viewport.GetWorldCorners(corners);
+    Vector2 start=RectTransformUtility.WorldToScreenPoint(null,Vector3.Lerp(corners[0],corners[2],.75f));
+    var data=new UnityEngine.EventSystems.PointerEventData(UnityEngine.EventSystems.EventSystem.current){button=UnityEngine.EventSystems.PointerEventData.InputButton.Left,position=start,pressPosition=start};
+    var hits=new List<UnityEngine.EventSystems.RaycastResult>();UnityEngine.EventSystems.EventSystem.current.RaycastAll(data,hits);
+    var hit=hits.FirstOrDefault();var handler=UnityEngine.EventSystems.ExecuteEvents.GetEventHandler<UnityEngine.EventSystems.IDragHandler>(hit.gameObject);
+    Check(handler==p.historyScroll.gameObject,"Body drag routing: "+hit.gameObject+" -> "+handler);data.pointerPressRaycast=hit;
+    int revision=b.Simulation.State.revision,rows=b.Narratives.Rows.Count;
+    p.historyScroll.OnInitializePotentialDrag(data);p.historyScroll.OnBeginDrag(data);
+    data.position=start+Vector2.up*3000;p.historyScroll.OnDrag(data);p.historyScroll.OnEndDrag(data);Canvas.ForceUpdateCanvases();
+    float bottom=p.historyScroll.verticalNormalizedPosition;Check(bottom<.001f,"Fixture drag did not reach bottom "+bottom);
+    data.position=start;p.historyScroll.OnBeginDrag(data);data.position=start+Vector2.down*3000;p.historyScroll.OnDrag(data);p.historyScroll.OnEndDrag(data);Canvas.ForceUpdateCanvases();
+    Check(p.historyScroll.verticalNormalizedPosition>.999f&&b.Simulation.State.revision==revision&&b.Narratives.Rows.Count==rows,"Fixture return/state failed");
+    lines.Add(Screen.width+" history="+history+" hit="+hit.gameObject.name+" handler="+handler.name+" position=1 -> "+bottom+" -> 1; state/rows unchanged");
+    if(history)p.ToggleHistory();
+   }
+   File.WriteAllLines(Path.Combine(output,"scroll-routing.txt"),lines);
+  }
+  ContentPreview scrollPreview;string scrollOutput;string lastScrollSample;
+  void LateUpdate() {
+   if(scrollPreview==null)return;
+   var p=scrollPreview.GetComponent<PythonPlayerPanel>();if(!p.panel.activeSelf)return;
+   var b=(LocalCafeBackend)CafeBackends.Local;
+   string sample="text="+p.history.text.Length+" position="+p.historyScroll.verticalNormalizedPosition.ToString("F4")+" anchored="+p.history.rectTransform.anchoredPosition+" content="+p.history.rectTransform.rect.height+" viewport="+p.historyScroll.viewport.rect.height+" revision="+b.Simulation.State.revision+" rows="+b.Narratives.Rows.Count+" held="+Input.GetMouseButton(0)+" pointer="+(Input.GetMouseButton(0)?Input.mousePosition.ToString():"released");
+   if(sample!=lastScrollSample){File.AppendAllText(Path.Combine(scrollOutput,"input-scroll.txt"),Time.frameCount+" "+sample+" wheel="+Input.mouseScrollDelta+" mouseHeld="+Input.GetMouseButton(0)+"\n");lastScrollSample=sample;}
+  }
   IEnumerator Run(string output,bool resume,bool stay) {
    yield return null;if(UnityEngine.Object.FindObjectOfType<ContentPreview>()==null){UnityEngine.SceneManagement.SceneManager.LoadScene("CatCafePythonState");yield return null;}
    var p=UnityEngine.Object.FindObjectOfType<ContentPreview>();p.Initialize();
+   if(Environment.GetCommandLineArgs().Contains("--scroll-only")) {
+    var c=Cases().First(x=>x.id=="presence-simultaneous");
+    Show(p,BuildCase(c,output,true),c);
+    int width=Environment.GetCommandLineArgs().Contains("--scroll-1280")?1280:1024;
+    Screen.SetResolution(width,width==1280?800:768,false);yield return null;
+    try{VerifyScrollRouting(p,output);}catch(Exception e){File.WriteAllText(Path.Combine(output,"scroll-failure.txt"),e.ToString());Application.Quit(1);yield break;}
+    scrollPreview=p;scrollOutput=output;yield break;
+   }
    try{Audit(output);}catch(Exception e){File.WriteAllText(Path.Combine(output,"failure.txt"),e.ToString());Application.Quit(1);yield break;}
    foreach(var c in Cases()) {
     LocalCafeBackend b=null;try{b=BuildCase(c,output,resume);if(c.capture)Show(p,b,c);}catch(Exception e){File.WriteAllText(Path.Combine(output,"failure.txt"),c.id+"\n"+e);Application.Quit(1);yield break;}

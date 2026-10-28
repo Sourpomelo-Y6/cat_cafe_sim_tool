@@ -1,0 +1,1 @@
+PASS: exact historical image reference restored in separate process

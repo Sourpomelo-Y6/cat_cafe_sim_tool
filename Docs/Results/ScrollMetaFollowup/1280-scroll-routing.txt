@@ -1,0 +1,2 @@
+1280 history=False hit=Viewport handler=History Scroll position=1 -> 0 -> 1; state/rows unchanged
+1280 history=True hit=Viewport handler=History Scroll position=1 -> 0 -> 1; state/rows unchanged

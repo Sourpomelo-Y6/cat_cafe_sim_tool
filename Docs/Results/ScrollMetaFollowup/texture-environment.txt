@@ -1,0 +1,4 @@
+NVIDIA GeForce RTX 5070
+Direct3D11
+BC7 supported=True
+Windows 11  (10.0.26300) 64bit
