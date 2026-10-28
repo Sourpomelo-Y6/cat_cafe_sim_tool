@@ -150,3 +150,62 @@ class WorkflowTests(unittest.TestCase):
                     dialog.assert_not_called()
         finally:
             root.destroy()
+
+    def test_missing_navigation_diff_and_binding_editor(self):
+        import tkinter as tk
+        from image_tool_gui import ContentImageToolWindow
+        from content_images import ImageRegistry
+        from content_texts import TextStore
+        root=tk.Tk(); root.withdraw()
+        try:
+            with tempfile.TemporaryDirectory() as directory:
+                base=Path(directory)
+                tool=ContentImageToolWindow(root, lambda:{'playtest-mike':'ミケ'},
+                    registry=ImageRegistry(base/'images'), text_drafts=TextStore(base/'textdraft.json'),
+                    interaction_drafts=InteractionTextStore(base/'drafts.json'))
+                tool.subject_registry.save(tool.subject_registry.get('cat-mike'))
+                original=tool.subject_registry.path.read_bytes()
+                tool.open_review_preview(); preview=tool.review_window
+                self.assertEqual(str(preview.content_selector['state']), 'disabled')
+                special=next(k for k,v in __import__('interaction_texts').NARRATIVE_SCENES.items() if k=='switch')
+                preview.variables['narrative_scene'].set(__import__('interaction_texts').NARRATIVE_SCENES[special])
+                preview.render()
+                label=next(k for k,v in preview.missing_conditions.items() if v.get('narrative_scene')=='switch' and v['kind']=='speech')
+                preview.missing_choice.set(label)
+                expected=preview.missing_conditions[label]
+                self.assertTrue(preview.edit_missing())
+                editor=tool.interaction_text_editor
+                self.assertEqual(editor._condition, expected)
+                self.assertEqual(expected['target_cat'], 'cat-mike')
+                editor.fields[0].insert('end','新しい候補')
+                other=next(k for k,v in preview.missing_conditions.items() if v['kind']=='cat_response')
+                preview.missing_choice.set(other)
+                with patch('tkinter.messagebox.askyesnocancel', return_value=None):
+                    self.assertFalse(preview.edit_missing())
+                self.assertEqual(editor._condition, expected)
+                editor.preview()
+                review=editor.preview_text.get('1.0','end')
+                self.assertIn('追加', review)
+                self.assertIn('今回採用：新しい候補', review)
+                self.assertTrue(editor.register())
+                editor.fields[0].delete('1.0','end'); editor.fields[1].insert('end','別の候補')
+                editor.preview()
+                review=editor.preview_text.get('1.0','end')
+                self.assertIn('削除',review); self.assertIn('採用済み：新しい候補',review)
+                tool.interaction_published.save(make_entry(expected, ['別操作の更新','','']))
+                editor.preview()
+                self.assertIsNone(editor.reviewed)
+                self.assertIn('更新', editor.notice.get())
+                self.assertFalse(editor.register())
+                preview.open_binding_editor()
+                manager=preview.binding_editor
+                self.assertEqual(manager.current['id'],'cat-mike')
+                self.assertEqual(tool.subject_registry.path.read_bytes(), original)
+                manager.variables['content_id'].set('new-image-id')
+                with patch('tkinter.messagebox.askyesnocancel', return_value=None):
+                    self.assertFalse(preview.confirm_leave())
+                self.assertTrue(manager.save())
+                self.assertEqual(tool.subject_registry.get('cat-mike')['content_id'],'new-image-id')
+                self.assertEqual(preview.saved_content_id,'new-image-id')
+        finally:
+            root.destroy()

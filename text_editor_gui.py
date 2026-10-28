@@ -59,12 +59,19 @@ class TextEditorWindow:
         self.reviewed = None
         try:
             record = self.values()
-            text = ['紹介文：' + (record['introduction'] or '（定型文）')]
-            text.extend(label + '：' + (record['scenes'][key] or '（定型文）') for key, label in SCENES)
+            previous = self.published.get(self.cat_id)
+            self.reviewed_published = previous
+            old = previous or {'introduction':'', 'scenes':{}}
+            text = ['更新範囲：この猫の紹介文と全4場面。空欄は定型文に戻ります。']
+            for key, label in (('introduction', '紹介文'),) + SCENES:
+                before = old['introduction'] if key=='introduction' else old['scenes'].get(key, '')
+                after = record['introduction'] if key=='introduction' else record['scenes'][key]
+                status = '変更なし' if before==after else '追加' if not before else '削除' if not after else '変更'
+                text.extend(['\n'+label+'（'+status+'）', '採用済み：'+(before or '（定型文）'), '今回採用：'+(after or '（定型文）')])
             self.set_preview('\n'.join(text))
             self.reviewed = record
             self.notice.set('内容を確認し、よければ「確認した文章を登録」を押してください。')
-        except ValueError as exc:
+        except (OSError, ValueError) as exc:
             self.set_preview('')
             self.notice.set(f'確認できません：{exc}')
 
@@ -79,6 +86,8 @@ class TextEditorWindow:
             record = self.values()
             if self.reviewed is None or record != self.reviewed:
                 raise ValueError('「登録内容を確認」を押して、現在の文章を確認してください。')
+            if self.published.get(self.cat_id) != self.reviewed_published:
+                raise ValueError('採用済み文章が更新されています。登録内容をもう一度確認してください。')
             self.published.save(self.cat_id, record)
             self.notice.set('文章を登録しました。ゲームの「猫の画像…」へ反映されます。下書きは別途保存できます。古い下書きがあると、次回はそちらを優先して開きます。')
         except (OSError, ValueError) as exc:

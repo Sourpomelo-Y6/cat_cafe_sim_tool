@@ -250,6 +250,9 @@ class InteractionTextEditorWindow:
             return True
 
     def confirm_leave(self):
+        preview = getattr(self, 'preview_window', None)
+        if preview and preview.window.winfo_exists() and not preview.confirm_leave():
+            return False
         notes = getattr(self, 'notes_window', None)
         if notes and notes.window.winfo_exists() and not notes.confirm_leave():
             return False
@@ -356,11 +359,21 @@ class InteractionTextEditorWindow:
             text = [NARRATIVE_SCENES[value.get('narrative_scene','normal')], KINDS[value['kind']] + '：' + self.subjects[value['kind']][value['subject_id']],
                     MODES[value['mode']] + ' ／ ' + ACTION_NAMES[value['action']] + ' ／ '
                     + REACTION_NAMES[value['reaction']], '画像の場面キー：' + value['scene_key']]
-            text.extend(f"案{r['slot']}：{r['text'] or '（未制作・登録候補なし）'}" for r in entry['variants'])
+            if self.published.get(value) != self._published_snapshot:
+                raise ValueError('採用済み本文が別の操作で更新されています。下書きを保存してから再読込してください。')
+            scope = value.get('target_cat', 'cat-mike') if value['kind']=='speech' else None
+            if scope is not None:
+                text.append('適用範囲：' + ('どの猫でも使う' if scope=='*' else self.subjects['cat_response'].get(scope, scope)+'専用'))
+            text.append('更新範囲：この条件の案1〜3。空欄にした案は採用候補から外れます。')
+            previous = self._published_snapshot
+            for index, row in enumerate(entry['variants']):
+                before = previous['variants'][index]['text'] if previous else ''
+                status = '変更なし' if before==row['text'] else '追加' if not before else '削除' if not row['text'] else '変更'
+                text.extend([f"\n案{row['slot']}（{status}）", '採用済み：'+(before or '（空欄）'), '今回採用：'+(row['text'] or '（空欄・候補から除外）')])
             self.set_preview('\n'.join(text))
             self.reviewed = copy.deepcopy(entry)
             self.notice.set('対象・条件・本文を確認し、よければ「確認した文章を登録」を押してください。')
-        except ValueError as exc:
+        except (OSError, ValueError) as exc:
             self.set_preview('')
             self.notice.set(f'確認できません：{exc}')
 
@@ -387,6 +400,12 @@ class InteractionTextEditorWindow:
         if self.confirm_leave():
             self.window.destroy()
 
+    def open_condition_from_preview(self, value):
+        if not self.load_condition(value):
+            return False
+        self.window.lift()
+        return True
+
     def open_preview(self):
         from interaction_preview_gui import InteractionPreviewWindow
         try:
@@ -395,9 +414,11 @@ class InteractionTextEditorWindow:
             entry = self.values()
             existing = getattr(self, 'preview_window', None)
             if existing is not None and existing.window.winfo_exists():
+                if not existing.confirm_leave():
+                    return
                 existing.window.destroy()
             self.preview_window = InteractionPreviewWindow(self.window, self.catalog_provider(),
-                                     self.image_registry, self.published, editing_entry=entry, drafts=self.drafts)
+                                     self.image_registry, self.published, editing_entry=entry, drafts=self.drafts, on_edit_condition=self.open_condition_from_preview)
         except (OSError, ValueError) as exc:
             self.notice.set(f'プレビューを開けません：{exc}')
 

@@ -7,7 +7,7 @@ from interaction_presentation import (InteractionImageBindings, resolve_image, s
 
 
 class InteractionPreviewWindow:
-    def __init__(self, parent, catalog, registry, published, *, editing_entry=None, bindings=None, drafts=None):
+    def __init__(self, parent, catalog, registry, published, *, editing_entry=None, bindings=None, drafts=None, on_edit_condition=None):
         import tkinter as tk
         from tkinter import ttk
         from tkinter.scrolledtext import ScrolledText
@@ -20,6 +20,7 @@ class InteractionPreviewWindow:
         self.selected_cat=None
         self.overlay, self.image = editing_entry, None
         self.drafts=drafts
+        self.on_edit_condition = on_edit_condition
         self.bindings = bindings or InteractionImageBindings(registry.directory / 'interaction_image_bindings.json')
         binding_error = ''
         try:
@@ -28,6 +29,7 @@ class InteractionPreviewWindow:
             content_id, binding_error = '', str(exc)
         self.saved_content_id = content_id
         self.window = tk.Toplevel(parent)
+        self.window.protocol('WM_DELETE_WINDOW', self.close)
         self.window.title('日常交流の画像付きプレビュー — ゲームは進行しません')
         self.window.geometry('1000x760')
         self.window.minsize(840, 680)
@@ -69,7 +71,11 @@ class InteractionPreviewWindow:
         self.content_selector = ttk.Combobox(line, textvariable=self.content, values=list(self.image_ids), state='readonly', width=32)
         self.content_selector.pack(side='left')
         self.content_selector.bind('<<ComboboxSelected>>', lambda event: self.render())
-        ttk.Button(line, text='画像ID対応を保存', command=self.save_binding).pack(side='left', padx=8)
+        if self.subject_registry:
+            self.content_selector.configure(state='disabled')
+            ttk.Button(line, text='資料で画像IDを編集…', command=self.open_binding_editor).pack(side='left', padx=8)
+        else:
+            ttk.Button(line, text='画像ID対応を保存', command=self.save_binding).pack(side='left', padx=8)
         self.use_edit = tk.BooleanVar(master=self.window, value=editing_entry is not None)
         edit = ttk.Checkbutton(frame, text='編集中の案を一時的に重ねる（未登録・書き出し対象外）',
                                variable=self.use_edit, command=self.render)
@@ -92,6 +98,17 @@ class InteractionPreviewWindow:
         ttk.Label(left, textvariable=self.image_notice, wraplength=310).pack(anchor='w')
         self.body = ScrolledText(view, width=40, height=12, wrap='word', state='disabled')
         self.body.grid(row=0, column=1, sticky='nsew')
+        navigation = ttk.Frame(missing)
+        navigation.pack(fill='x', pady=(0, 6))
+        self.missing_choice = tk.StringVar(master=self.window)
+        self.missing_conditions = {}
+        self.missing_selector = ttk.Combobox(navigation, textvariable=self.missing_choice, state='readonly')
+        self.missing_selector.pack(side='left', fill='x', expand=True)
+        self.edit_missing_button = ttk.Button(navigation, text='この条件を編集…', command=self.edit_missing)
+        self.edit_missing_button.pack(side='left', padx=8)
+        if on_edit_condition is None:
+            self.edit_missing_button.state(['disabled'])
+        ttk.Label(missing, text='未制作は制作必須という意味ではありません。人物文は選択中の猫専用条件として開きます。', wraplength=760).pack(anchor='w')
         self.missing_text = ScrolledText(missing, height=12, wrap='word', state='disabled')
         self.missing_text.pack(fill='both', expand=True)
         self.source_notice = tk.StringVar(master=self.window)
@@ -102,10 +119,49 @@ class InteractionPreviewWindow:
         controls.pack(fill='x', pady=4)
         ttk.Button(controls, text='登録済み素材を再読込', command=self.reload).pack(side='left')
         ttk.Button(controls, text='画像・組み合わせを更新', command=self.render).pack(side='left', padx=8)
-        ttk.Button(controls, text='閉じる', command=self.window.destroy).pack(side='right')
+        ttk.Button(controls, text='閉じる', command=self.close).pack(side='right')
         self.notice = tk.StringVar(master=self.window, value=binding_error)
         ttk.Label(frame, textvariable=self.notice, wraplength=800).pack(anchor='w')
         self.render()
+
+    def confirm_leave(self):
+        editor = getattr(self, 'binding_editor', None)
+        return not (editor and editor.window.winfo_exists()) or editor.confirm_leave()
+
+    def close(self):
+        if self.confirm_leave():
+            self.window.destroy()
+
+    def edit_missing(self):
+        value = self.missing_conditions.get(self.missing_choice.get())
+        if value is None or self.on_edit_condition is None:
+            return False
+        import copy
+        if self.on_edit_condition(copy.deepcopy(value)):
+            self.notice.set('選択した条件を編集画面で開きました。採用後は登録済み素材を再読込してください。')
+            return True
+        self.notice.set('画面移動を中止しました。編集中の内容を保持しています。')
+        return False
+
+    def open_binding_editor(self):
+        if not self.subject_registry:
+            return
+        from interaction_subject_gui import SubjectManagerWindow
+        existing = getattr(self, 'binding_editor', None)
+        if existing and existing.window.winfo_exists():
+            if not existing.confirm_leave():
+                return
+            existing.load(self.subject_registry.get(self.selected_cat))
+            existing.tabs.select(0)
+            existing.window.lift()
+            return
+        def saved():
+            self.selected_cat = None
+            self.render()
+        self.binding_editor = SubjectManagerWindow(self.window, self.subject_registry,
+            catalog=self.catalog, drafts=self.drafts, published=self.published, on_saved=saved)
+        self.binding_editor.load(self.subject_registry.get(self.selected_cat))
+        self.binding_editor.tabs.select(0)
 
     @staticmethod
     def write(widget, text):
@@ -123,11 +179,12 @@ class InteractionPreviewWindow:
             self.notice.set(f'再読込できません。前回の表示内容を保持します：{exc}')
 
     def save_binding(self):
+        if self.subject_registry:
+            self.open_binding_editor()
+            return
         try:
             content_id = self.image_ids[self.content.get()]
-            if self.subject_registry:
-                row=self.subject_registry.get(self.selected_cat);row['content_id']=content_id;self.subject_registry.save(row)
-            else:self.bindings.save(content_id, self.catalog)
+            self.bindings.save(content_id, self.catalog)
             self.saved_content_id = content_id
             self.notice.set('対象猫と制作画像IDの対応を保存しました。文章・ゲームのセーブは変更していません。')
             self.render()
@@ -145,10 +202,12 @@ class InteractionPreviewWindow:
             return next(k for k, label in labels.items() if label == self.variables[name].get())
         human = choice('human', self.subjects['speech'])
         cat_id=next(k for k,v in self.subjects['cat_response'].items() if v==self.cat_subject.get())
-        if self.selected_cat!=cat_id:
+        if self.subject_registry or self.selected_cat!=cat_id:
             self.selected_cat=cat_id
             if self.subject_registry:
                 self.saved_content_id=self.subject_registry.get(cat_id)['content_id']
+                if self.saved_content_id and self.saved_content_id not in self.image_ids.values():
+                    self.image_ids['未登録画像ID：'+self.saved_content_id] = self.saved_content_id
                 self.content.set(next((label for label,id in self.image_ids.items() if id==self.saved_content_id),'未設定'))
         scene=choice('narrative_scene',NARRATIVE_SCENES)
         mode = choice('mode', MODES if scene=='normal' else {k:v for k,v in MODES.items() if k!='pause'})
@@ -198,6 +257,12 @@ class InteractionPreviewWindow:
                    + '\n'.join(condition_label(v,self.subjects) for v in report['missing_conditions']))
         special=coverage(self.entries,dict(speech=self.subjects['speech'],cat_response={cat_id:self.subjects['cat_response'][cat_id]}),cat_id,narrative_scene=scene) if scene!='normal' else None
         if special:self.write(self.missing_text,self.missing_text.get('1.0','end-1c')+'\n\n── 任意の特別文（通常文不足へ含めない）──\n'+str(special['missing_count'])+'条件未制作\n'+'\n'.join(condition_label(v,self.subjects) for v in special['missing_conditions']))
+        choices = report['missing_conditions'] + (special['missing_conditions'] if special else [])
+        previous = self.missing_choice.get()
+        self.missing_conditions = {condition_label(v, self.subjects): v for v in choices}
+        self.missing_selector.configure(values=list(self.missing_conditions))
+        self.missing_choice.set(previous if previous in self.missing_conditions else next(iter(self.missing_conditions), ''))
+        self.edit_missing_button.state(['!disabled'] if choices and self.on_edit_condition else ['disabled'])
         if self.drafts:
             from interaction_texts import key
             from interaction_presentation import expected_conditions

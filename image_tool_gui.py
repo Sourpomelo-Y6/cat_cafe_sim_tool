@@ -249,16 +249,36 @@ class ContentImageToolWindow:
         from interaction_preview_gui import InteractionPreviewWindow
         from interaction_texts import condition, make_entry
         try:
+            existing = getattr(self, 'review_window', None)
+            if existing and existing.window.winfo_exists():
+                if not existing.confirm_leave():
+                    return
+                existing.window.destroy()
             row = self.active_subject
             value = condition(target_cat='*') if not row else condition(row['kind'], row['id'],
                 reaction='neutral' if row['kind']=='cat_response' else 'any',
                 subjects=self.subject_registry.labels(include_disabled=True), target_cat='*' if row['kind']=='speech' else None)
             self.review_window = InteractionPreviewWindow(self.window, self.catalog_provider(), self.registry,
-                self.interaction_published, editing_entry=make_entry(value, ['', '', '']), drafts=self.interaction_drafts)
+                self.interaction_published, editing_entry=make_entry(value, ['', '', '']), drafts=self.interaction_drafts, on_edit_condition=self.edit_review_condition)
             self.review_window.use_edit.set(False)
             self.review_window.render()
         except (OSError, ValueError) as exc:
             self.notice.set(f'確認画面を開けません：{exc}')
+
+    def edit_review_condition(self, value):
+        from interaction_text_editor_gui import InteractionTextEditorWindow
+        try:
+            editor = getattr(self, 'interaction_text_editor', None)
+            if editor and editor.window.winfo_exists():
+                return editor.open_condition_from_preview(value)
+            self.interaction_text_editor = InteractionTextEditorWindow(self.window,
+                self.interaction_drafts, self.interaction_published, image_registry=self.registry,
+                catalog_provider=self.catalog_provider, subject_registry=self.subject_registry,
+                initial_condition=value)
+            return True
+        except (OSError, ValueError) as exc:
+            self.notice.set(f'条件を開けません：{exc}')
+            return False
 
     def export_people(self):
         from tkinter import filedialog, messagebox
@@ -276,6 +296,9 @@ class ContentImageToolWindow:
             self.notice.set(f'人物画像を書き出せません：{exc}')
 
     def close(self):
+        preview = getattr(self, 'review_window', None)
+        if preview and preview.window.winfo_exists() and not preview.confirm_leave():
+            return
         editor = getattr(self, 'interaction_text_editor', None)
         if editor is not None and editor.window.winfo_exists() and not editor.confirm_leave():
             return
