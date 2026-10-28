@@ -41,12 +41,24 @@ class ContentImageToolWindow:
         ttk.Label(frame, text='対象を選ぶ → 画像・文章を制作 → 確認してUnityへ書き出す').pack(anchor='w', pady=(4, 12))
         target = ttk.Frame(frame)
         target.pack(fill='x', pady=(0, 12))
-        ttk.Label(target, text='対象の猫').pack(side='left', padx=(0, 12))
+        ttk.Label(target, text='猫画像の対象').pack(side='left', padx=(0, 12))
         self.cat = tk.StringVar(master=self.window)
         self.scene = tk.StringVar(master=self.window, value='通常')
         self.cat_selector = ttk.Combobox(target, textvariable=self.cat, state='readonly', width=40)
         self.cat_selector.pack(side='left', fill='x', expand=True)
         ttk.Button(target, text='猫一覧を更新', command=self.reload_cats).pack(side='left', padx=(12, 0))
+        subjects = ttk.Frame(frame)
+        subjects.pack(fill='x', pady=(0, 8))
+        ttk.Label(subjects, text='制作対象を検索').pack(side='left')
+        self.subject_search = tk.StringVar(master=self.window)
+        ttk.Entry(subjects, textvariable=self.subject_search, width=16).pack(side='left', padx=8)
+        self.subject_choice = tk.StringVar(master=self.window)
+        self.subject_selector = ttk.Combobox(subjects, textvariable=self.subject_choice, state='readonly')
+        self.subject_selector.pack(side='left', fill='x', expand=True)
+        self.subject_selector.bind('<<ComboboxSelected>>', self.select_subject)
+        self.subject_search.trace_add('write', lambda *args: self.filter_subjects())
+        self.subject_rows = {}
+        self.active_subject = None
         self.tabs = ttk.Notebook(frame)
         self.tabs.pack(fill='both', expand=True)
         self.pages = {}
@@ -74,7 +86,7 @@ class ContentImageToolWindow:
                                             values=['動作の共通画像'])
         self.action_selector.grid(row=1, column=1, sticky='ew', padx=(12, 0))
         self.action_selector.bind('<<ComboboxSelected>>', lambda event: self.refresh())
-        self.cat_selector.bind('<<ComboboxSelected>>', lambda event: self.refresh())
+        self.cat_selector.bind('<<ComboboxSelected>>', self.select_image_cat)
         self.scene_selector.bind('<<ComboboxSelected>>', lambda event: self.refresh())
         controls = ttk.LabelFrame(image_page, text='2. 画像を用意する → 確認して登録', padding=10)
         controls.pack(fill='x', pady=10)
@@ -102,10 +114,12 @@ class ContentImageToolWindow:
         for title, description, label, command in (
             ('猫の紹介・場面の描写', '選択した猫の紹介文と、通常・遊ぶ・撫でられる・眠る場面の文章を制作します。',
              '紹介文・行動描写の編集…', self.open_text_editor),
-            ('交流の文章（通常・特別場面）', '選択した猫の反応から編集を開始します。人物のセリフへの切り替え、資料・採用文の比較、画像付き確認に対応しています。',
-             '日常交流の文章を編集…', self.open_interaction_text_editor)):
-            group = ttk.LabelFrame(text_page, text=title, padding=14)
-            group.pack(fill='x', pady=(0, 16))
+            ('交流の文章（通常・特別場面）', '選択した猫・人物の通常文を開きます。資料・採用文・画像を比較し、確認して登録します。',
+             '通常交流の文章を編集…', self.open_interaction_text_editor),
+            ('特別場面の文章', '動作切替・心をつかむ・心を開く・同時成立の文章を制作します。',
+             '特別場面の文章を編集…', lambda: self.open_interaction_text_editor('switch'))):
+            group = ttk.LabelFrame(text_page, text=title, padding=8)
+            group.pack(fill='x', pady=(0, 8))
             ttk.Label(group, text=description, wraplength=780).pack(anchor='w', pady=(0, 10))
             ttk.Button(group, text=label, command=command).pack(anchor='w')
         ttk.Label(text_page, text='下書き保存 → 内容を確認 → 確認した文章を登録 → Unity向けに書き出す', wraplength=780).pack(anchor='w')
@@ -119,7 +133,7 @@ class ContentImageToolWindow:
             ('モデルへの追加設定', 'デザイン・ポーズ用LoRAと適用する強さを設定します。',
              'デザイン・ポーズLoRAの設定…', self.open_lora_editor)):
             group = ttk.LabelFrame(settings, text=title, padding=14)
-            group.pack(fill='x', pady=(0, 16))
+            group.pack(fill='x', pady=(0, 8))
             ttk.Label(group, text=description, wraplength=780).pack(anchor='w', pady=(0, 10))
             ttk.Button(group, text=label, command=command).pack(anchor='w')
         self.notice = tk.StringVar(master=self.window)
@@ -131,9 +145,41 @@ class ContentImageToolWindow:
         ttk.Button(footer, text='閉じる', command=self.close).pack(side='right')
         ttk.Button(footer, text='Unity向けに書き出す…', command=self.export_unity).pack(side='right', padx=12)
         self.reload_cats()
+        self.filter_subjects()
+        self.select_image_cat()
         if cat_id is not None:
             self.cat.set(next((label for label, key in self.cats.items() if key == cat_id), self.cat.get()))
+            self.select_image_cat()
+
+    def filter_subjects(self):
+        query = self.subject_search.get().casefold()
+        rows = self.subject_registry.read()['subjects']
+        self.subject_rows = {('猫：' if row['kind']=='cat_response' else '人物：') + row['name'] + '（' + row['id'] + '）': row for row in rows}
+        self.subject_selector.configure(values=[label for label in self.subject_rows if query in label.casefold()])
+
+    def select_image_cat(self, event=None):
+        content_id = self.cats.get(self.cat.get())
+        self.active_subject = next((r for r in self.subject_rows.values() if r['kind']=='cat_response' and r['content_id']==content_id), None)
+        self.subject_choice.set(next((label for label,r in self.subject_rows.items() if r==self.active_subject), '画像対象のみ（資料未登録）'))
+        for name in ('画像', '生成設定'):
+            self.tabs.tab(self.pages[name], state='normal')
+        self.refresh()
+
+    def select_subject(self, event=None):
+        row = self.subject_rows.get(self.subject_choice.get())
+        if not row:
+            return
+        self.active_subject = row
+        if row['kind']=='cat_response':
+            for name in ('画像', '生成設定'):
+                self.tabs.tab(self.pages[name], state='normal')
+            self.cat.set(next((label for label,id in self.cats.items() if id==row['content_id']), ''))
             self.refresh()
+        else:
+            self.tabs.select(self.pages['文章'])
+            for name in ('画像', '生成設定'):
+                self.tabs.tab(self.pages[name], state='disabled')
+            self.notice.set('人物の文章・資料を制作します。上の猫欄は猫画像用です。')
 
     def close(self):
         editor = getattr(self, 'interaction_text_editor', None)
@@ -146,14 +192,23 @@ class ContentImageToolWindow:
     def open_subject_manager(self):
         from interaction_subject_gui import SubjectManagerWindow
         existing=getattr(self,'subject_manager',None)
-        if existing is not None and existing.window.winfo_exists():existing.window.lift();return
+        if existing is not None and existing.window.winfo_exists():
+            if self.active_subject and existing.current != self.active_subject and existing.confirm_leave():
+                existing.load(self.subject_registry.get(self.active_subject['id']))
+                existing.tabs.select(0 if self.active_subject['kind']=='cat_response' else 1)
+            existing.window.lift()
+            return
         def saved():
             self.cats={f'{name}（{id}）':id for id,name in self.catalog_provider().items()}
             self.cat_selector.configure(values=list(self.cats))
             editor=getattr(self,'interaction_text_editor',None)
             if editor is not None and editor.window.winfo_exists():editor.refresh_subjects()
+            self.filter_subjects()
         try:
             self.subject_manager=SubjectManagerWindow(self.window,self.subject_registry,catalog=self.catalog_provider(),drafts=self.interaction_drafts,published=self.interaction_published,on_saved=saved)
+            if self.active_subject:
+                self.subject_manager.load(self.active_subject)
+                self.subject_manager.tabs.select(0 if self.active_subject['kind']=='cat_response' else 1)
         except (OSError,ValueError) as exc:self.notice.set(f'対象台帳を開けません：{exc}')
 
     def reload_cats(self):
@@ -334,6 +389,9 @@ class ContentImageToolWindow:
             self.notice.set(f'LoRA設定を開けません：{exc}')
 
     def open_text_editor(self):
+        if self.active_subject and self.active_subject['kind']=='speech':
+            self.notice.set('紹介文・4場面は猫用です。人物は交流の文章を開いてください。')
+            return
         from text_editor_gui import TextEditorWindow
         existing = getattr(self, 'text_editor', None)
         if existing is not None and existing.window.winfo_exists():
@@ -347,22 +405,32 @@ class ContentImageToolWindow:
         except (OSError, ValueError) as exc:
             self.notice.set(f'文章編集画面を開けません：{exc}')
 
-    def open_interaction_text_editor(self):
+    def open_interaction_text_editor(self, narrative_scene='normal'):
         from interaction_text_editor_gui import InteractionTextEditorWindow
-        existing = getattr(self, 'interaction_text_editor', None)
-        if existing is not None and existing.window.winfo_exists():
-            existing.window.lift()
-            return
+        from interaction_texts import condition
         try:
-            from interaction_texts import condition
-            content_id, _ = self.selection()
-            subject = next((r for r in self.subject_registry.read()['subjects'] if r['kind']=='cat_response' and r['content_id']==content_id), None)
-            initial = condition('cat_response', subject['id'], reaction='neutral', subjects=self.subject_registry.labels(include_disabled=True)) if subject else None
+            subject = self.active_subject
+            initial = condition(action='any' if narrative_scene=='normal' else 'switch', target_cat='*', narrative_scene=narrative_scene)
+            if subject:
+                kind = subject['kind']
+                initial = condition(kind, subject['id'],
+                    action='any' if narrative_scene=='normal' else 'switch',
+                    reaction='neutral' if kind=='cat_response' and narrative_scene=='normal' else 'any',
+                    subjects=self.subject_registry.labels(include_disabled=True),
+                    target_cat='*' if kind=='speech' else None, narrative_scene=narrative_scene)
+            existing = getattr(self, 'interaction_text_editor', None)
+            if existing is not None and existing.window.winfo_exists():
+                current = existing._condition
+                if current['subject_id'] != initial['subject_id'] or current.get('narrative_scene', 'normal') != narrative_scene:
+                    existing.load_condition(initial)
+                existing.window.lift()
+                return
             self.interaction_text_editor = InteractionTextEditorWindow(
                 self.window, self.interaction_drafts, self.interaction_published,
-                image_registry=self.registry, catalog_provider=self.catalog_provider, subject_registry=self.subject_registry, initial_condition=initial)
+                image_registry=self.registry, catalog_provider=self.catalog_provider,
+                subject_registry=self.subject_registry, initial_condition=initial)
         except (OSError, ValueError) as exc:
-            self.notice.set(f'日常交流の文章を開けません：{exc}')
+            self.notice.set(f'交流文を開けません：{exc}')
 
     def export_unity(self):
         from tkinter import filedialog

@@ -1,3 +1,5 @@
+2026-10-28：制作対象の検索、通常／特別文の入口、資料・採用文・画像の比較を追加。[現在の操作・検証](Docs/ToolWorkflowStage1.md)。主画面は対象管理・画像・文章・生成設定の4タブ。以下の3タブ説明等は過去段階の記録です。
+
 # コンテンツ制作ツール
 
 検証ビルドは [保存ルール](Docs/BuildStorage.md) に従い、`build_standalone.ps1` から固定の `Logs/StandaloneBuild/Latest` に出力します。検証ごとのビルド複製は作りません。

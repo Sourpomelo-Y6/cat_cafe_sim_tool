@@ -239,7 +239,7 @@ class InteractionEditorTests(unittest.TestCase):
                 yield child
                 yield from descendants(child)
         button = next(w for w in descendants(tool.window)
-                      if w.winfo_class() == 'TButton' and w.cget('text') == '日常交流の文章を編集…')
+                      if w.winfo_class() == 'TButton' and w.cget('text') == '通常交流の文章を編集…')
         button.invoke()
         first = tool.interaction_text_editor
         button.invoke()

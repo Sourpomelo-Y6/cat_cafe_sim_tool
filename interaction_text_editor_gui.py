@@ -42,7 +42,7 @@ class InteractionTextEditorWindow:
         self.comparison = ScrolledText(outer, width=28, wrap='word', state='disabled')
         self.comparison.pack(side='right', fill='both', padx=8, pady=12)
         self.window.bind('<Configure>', self.resize_comparison)
-        ttk.Label(frame, text='日常交流の文章', font=('', 14, 'bold')).pack(anchor='w')
+        ttk.Label(frame, text='交流の文章（通常・特別場面）', font=('', 14, 'bold')).pack(anchor='w')
         ttk.Label(frame, text='人物のセリフと猫の反応を別々に制作します。1〜3案、各200文字まで。\n'
                   '下書き保存 → 内容を確認 → 確認した文章を登録。画像付きで確認し、Unity向けに書き出します。',
                   wraplength=760).pack(anchor='w', pady=(4, 8))
@@ -114,6 +114,9 @@ class InteractionTextEditorWindow:
         body = ScrolledText(window, width=60, height=24, wrap='word')
         body.pack(fill='both', expand=True)
         body.insert('1.0', self.comparison.get('1.0', 'end-1c'))
+        if self.comparison_image:
+            body.image_create('end', image=self.comparison_image)
+            body.comparison_image = self.comparison_image
         body.configure(state='disabled')
 
     def open_subject_notes(self):
@@ -147,14 +150,41 @@ class InteractionTextEditorWindow:
             row = self.subject_registry.get(self._condition['subject_id']) if self.subject_registry else None
             adopted = self._published_snapshot
             texts = [v['text'] for v in adopted['variants']] if adopted else []
-            state = '未保存の変更あり' if self.dirty() else '保存済み'
+            state = '未保存の変更あり' if self.dirty() else '下書きあり' if self._draft_snapshot else '採用済み' if adopted else '未制作'
+            if adopted and self.values() != adopted:
+                state += '／採用文との差分あり'
             self.window.title('交流の文章 — ' + self.subjects[self._condition['kind']][self._condition['subject_id']] + ' — ' + state)
             content = state + '\nUnity収録：未確認\n\n資料\n' + (row.get('notes', '') if row else '資料なし')
             content += '\n\n採用済みの本文\n' + ('\n\n'.join(texts) if texts else '未採用')
-            content += '\n\n画像と組合せは「画像付きで組み合わせを確認…」から確認できます。'
+            content += '\n\n画像の比較（登録済み）\n'
+            self.comparison_image = None
+            self.comparison_image_result = None
+            if self.image_registry and self.subject_registry:
+                from interaction_presentation import resolve_image
+                from content_images import load_display_image
+                c = self._condition
+                cat_id = c['subject_id'] if c['kind']=='cat_response' else c.get('target_cat', 'cat-mike')
+                if cat_id == '*':
+                    content += '共通セリフです。画像付き組合せで比較する猫を選んでください。'
+                else:
+                    cat = self.subject_registry.get(cat_id)
+                    if cat:
+                        scene = c.get('narrative_scene', 'normal')
+                        action = scene if scene in ('open_up','simultaneous') else 'any' if scene in ('switch','connect') else c['action']
+                        result = resolve_image(self.image_registry, cat['content_id'], c['mode'], action)
+                        self.comparison_image_result = result
+                        content += cat['name'] + '\n' + '\n'.join(result['warnings'])
+                        if result['source_path']:
+                            self.comparison_image = load_display_image(self.window, result['source_path'], 260, 180)
+                    else:
+                        content += '画像対象の対応なし'
+
             self.comparison.configure(state='normal')
             self.comparison.delete('1.0', 'end')
             self.comparison.insert('1.0', content)
+            if self.comparison_image:
+                self.comparison.insert('end', '\n')
+                self.comparison.image_create('end', image=self.comparison_image)
             self.comparison.configure(state='disabled')
         except (OSError, ValueError) as exc:
             self.notice.set(f'比較資料を読み込めません：{exc}')

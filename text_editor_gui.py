@@ -38,7 +38,7 @@ class TextEditorWindow:
         ttk.Button(controls, text='確認した文章を登録', command=self.register).pack(side='left')
         self.preview_text = ScrolledText(frame, width=64, height=6, wrap='word', state='disabled')
         self.preview_text.pack(fill='x')
-        self.notice = tk.StringVar(master=self.window, value='下書きがあれば下書き、なければ登録済み文章を読み込みます。')
+        self.notice = tk.StringVar(master=self.window, value=('下書きを読み込みました。採用済み文章とは別です。' if drafts.get(cat_id) is not None else '採用済み文章または空欄を読み込みました。'))
         ttk.Label(frame, textvariable=self.notice, wraplength=600).pack(anchor='w', pady=6)
         ttk.Button(frame, text='閉じる', command=self.window.destroy).pack(anchor='e')
 
@@ -80,7 +80,7 @@ class TextEditorWindow:
             if self.reviewed is None or record != self.reviewed:
                 raise ValueError('「登録内容を確認」を押して、現在の文章を確認してください。')
             self.published.save(self.cat_id, record)
-            self.notice.set('文章を登録しました。ゲームの「猫の画像…」へ反映されます。下書きは別途保存できます。')
+            self.notice.set('文章を登録しました。ゲームの「猫の画像…」へ反映されます。下書きは別途保存できます。古い下書きがあると、次回はそちらを優先して開きます。')
         except (OSError, ValueError) as exc:
             self.notice.set(f'登録できません：{exc}')
 
