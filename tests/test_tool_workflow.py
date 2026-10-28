@@ -120,11 +120,17 @@ class WorkflowTests(unittest.TestCase):
                 self.assertEqual(panel.store.read()['people'], [])
                 self.assertTrue(panel.adopt())
                 adopted=panel.store.read()['people'][0]
-                self.assertTrue(tool.refresh_export_summary())
                 root.deiconify()
                 tool.window.geometry('900x700')
-                tool.show_export_page()
+                tool.tabs.select(tool.pages['確認・書き出し'])
                 root.update()
+                self.assertIn('書き出し可能な人物画像：1人', tool.export_summary.get('1.0', 'end'))
+                tool.tabs.select(tool.pages['画像'])
+                root.update()
+                tool.interaction_published.save(make_entry(condition('cat_response', 'cat-mike', reaction='neutral'), ['検証文', '', '']))
+                tool.tabs.select(tool.pages['確認・書き出し'])
+                root.update()
+                self.assertIn('採用交流文：1条件', tool.export_summary.get('1.0', 'end'))
                 def descendants(widget):
                     for child in widget.winfo_children():
                         yield child

@@ -173,6 +173,11 @@ class ContentImageToolWindow:
         if cat_id is not None:
             self.cat.set(next((label for label, key in self.cats.items() if key == cat_id), self.cat.get()))
             self.select_image_cat()
+        self.tabs.bind('<<NotebookTabChanged>>', self.on_tab_changed)
+
+    def on_tab_changed(self, event=None):
+        if self.tabs.select() == str(self.pages['確認・書き出し']):
+            self.refresh_export_summary()
 
     def filter_subjects(self):
         query = self.subject_search.get().casefold()
