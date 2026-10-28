@@ -11,7 +11,7 @@ class ContentImageToolWindow:
         import tkinter as tk
         from tkinter import ttk
         self.window = tk.Toplevel(parent)
-        self.window.title('猫の素材制作')
+        self.window.title('CatCafeSim 素材制作')
         self.window.protocol('WM_DELETE_WINDOW', self.close)
         self.base_catalog_provider = catalog_provider
         self.registry = registry or ImageRegistry()
@@ -37,7 +37,7 @@ class ContentImageToolWindow:
         self.window.minsize(900, 700)
         frame = ttk.Frame(self.window, padding=16)
         frame.pack(fill='both', expand=True)
-        ttk.Label(frame, text='猫の素材制作', font=('', 16, 'bold')).pack(anchor='w')
+        ttk.Label(frame, text='CatCafeSim 素材制作', font=('', 16, 'bold')).pack(anchor='w')
         ttk.Label(frame, text='対象を選ぶ → 画像・文章を制作 → 確認してUnityへ書き出す').pack(anchor='w', pady=(4, 12))
         target = ttk.Frame(frame)
         target.pack(fill='x', pady=(0, 12))
@@ -62,7 +62,7 @@ class ContentImageToolWindow:
         self.tabs = ttk.Notebook(frame)
         self.tabs.pack(fill='both', expand=True)
         self.pages = {}
-        for name in ('対象管理', '画像', '文章', '生成設定'):
+        for name in ('対象管理', '文章', '画像', '確認・書き出し'):
             page = ttk.Frame(self.tabs, padding=12)
             self.tabs.add(page, text=name)
             self.pages[name] = page
@@ -71,7 +71,11 @@ class ContentImageToolWindow:
         ttk.Button(subjects_page,text='猫・人物の登録と資料…',command=self.open_subject_manager).pack(anchor='w')
         ttk.Label(subjects_page,text='登録した対象は文章編集・連続生成で選べます。ゲームIDが空欄の対象は制作専用です。',wraplength=780).pack(anchor='w',pady=12)
         self.tabs.select(self.pages['画像'])
-        image_page = self.pages['画像']
+        image_page = ttk.Frame(self.pages['画像'])
+        image_page.pack(fill='both', expand=True)
+        self.cat_image_panel = image_page
+        from portrait_panel import PortraitPanel
+        self.portrait_panel = PortraitPanel(self.pages['画像'], self.registry.directory)
         selection = ttk.LabelFrame(image_page, text='1. 場面・行動を選ぶ', padding=10)
         selection.pack(fill='x')
         for col in (0, 1):
@@ -123,7 +127,16 @@ class ContentImageToolWindow:
             ttk.Label(group, text=description, wraplength=780).pack(anchor='w', pady=(0, 10))
             ttk.Button(group, text=label, command=command).pack(anchor='w')
         ttk.Label(text_page, text='下書き保存 → 内容を確認 → 確認した文章を登録 → Unity向けに書き出す', wraplength=780).pack(anchor='w')
-        settings = self.pages['生成設定']
+        self.settings_window = tk.Toplevel(self.window)
+        self.settings_window.title('画像生成の設定')
+        self.settings_window.geometry('800x450')
+        self.settings_window.withdraw()
+        self.settings_window.protocol('WM_DELETE_WINDOW', self.settings_window.withdraw)
+        settings = ttk.Frame(self.settings_window, padding=12)
+        settings.pack(fill='both', expand=True)
+        self.pages['生成設定'] = settings
+        self.settings_button = ttk.Button(subjects, text='生成設定…', command=self.settings_window.deiconify)
+        self.settings_button.pack(side='right', padx=8)
         ttk.Label(settings, text='画像生成の準備', font=('', 12, 'bold')).pack(anchor='w', pady=(0, 12))
         self.settings_target = tk.StringVar(master=self.window)
         ttk.Label(settings, textvariable=self.settings_target, wraplength=780).pack(anchor='w', pady=(0, 16))
@@ -136,14 +149,24 @@ class ContentImageToolWindow:
             group.pack(fill='x', pady=(0, 8))
             ttk.Label(group, text=description, wraplength=780).pack(anchor='w', pady=(0, 10))
             ttk.Button(group, text=label, command=command).pack(anchor='w')
+        review = self.pages['確認・書き出し']
+        ttk.Label(review, text='全素材には猫画像・紹介文・交流文・人物画像が含まれます。下書きと生成候補は含みません。', wraplength=760).pack(anchor='w', pady=8)
+        ttk.Button(review, text='選択対象の文章・画像を確認…', command=self.open_review_preview).pack(anchor='w', pady=4)
+        ttk.Button(review, text='登録状況を更新', command=self.refresh_export_summary).pack(anchor='w', pady=4)
+        from tkinter.scrolledtext import ScrolledText
+        self.export_summary = ScrolledText(review, height=8, wrap='word', state='disabled')
+        self.export_summary.pack(fill='both', expand=True, pady=8)
+        ttk.Button(review, text='全素材をUnity向けに書き出す…', command=self.export_unity).pack(anchor='w', pady=4)
+        ttk.Button(review, text='人物画像だけを書き出す…', command=self.export_people).pack(anchor='w', pady=4)
+        ttk.Label(review, text='書き出し後、Unityの「Cat Cafe → 素材 → 素材パックを取り込む…」で取り込みます。Unity収録状態：未確認', wraplength=760).pack(anchor='w', pady=8)
         self.notice = tk.StringVar(master=self.window)
         ttk.Separator(frame).pack(fill='x', pady=(12, 8))
         ttk.Label(frame, textvariable=self.notice, wraplength=840).pack(anchor='w')
         footer = ttk.Frame(frame)
         footer.pack(fill='x', pady=(8, 0))
-        ttk.Label(footer, text='書き出し対象：登録済みの全猫・画像・文章').pack(side='left')
+        ttk.Label(footer, text='書き出し対象：全登録素材（人物画像を含む）').pack(side='left')
         ttk.Button(footer, text='閉じる', command=self.close).pack(side='right')
-        ttk.Button(footer, text='Unity向けに書き出す…', command=self.export_unity).pack(side='right', padx=12)
+        ttk.Button(footer, text='確認・書き出しへ', command=self.show_export_page).pack(side='right', padx=12)
         self.reload_cats()
         self.filter_subjects()
         self.select_image_cat()
@@ -161,8 +184,10 @@ class ContentImageToolWindow:
         content_id = self.cats.get(self.cat.get())
         self.active_subject = next((r for r in self.subject_rows.values() if r['kind']=='cat_response' and r['content_id']==content_id), None)
         self.subject_choice.set(next((label for label,r in self.subject_rows.items() if r==self.active_subject), '画像対象のみ（資料未登録）'))
-        for name in ('画像', '生成設定'):
+        for name in ('画像',):
             self.tabs.tab(self.pages[name], state='normal')
+        self.settings_button.state(['!disabled'])
+        self.show_image_panel()
         self.refresh()
 
     def select_subject(self, event=None):
@@ -171,15 +196,84 @@ class ContentImageToolWindow:
             return
         self.active_subject = row
         if row['kind']=='cat_response':
-            for name in ('画像', '生成設定'):
+            for name in ('画像',):
                 self.tabs.tab(self.pages[name], state='normal')
             self.cat.set(next((label for label,id in self.cats.items() if id==row['content_id']), ''))
+            self.settings_button.state(['!disabled'])
+            self.show_image_panel()
             self.refresh()
         else:
-            self.tabs.select(self.pages['文章'])
-            for name in ('画像', '生成設定'):
-                self.tabs.tab(self.pages[name], state='disabled')
-            self.notice.set('人物の文章・資料を制作します。上の猫欄は猫画像用です。')
+            self.show_image_panel()
+            self.settings_button.state(['disabled'])
+            self.settings_window.withdraw()
+            self.notice.set('人物の資料・文章・画像を制作できます。')
+
+    def show_image_panel(self):
+        self.tabs.tab(self.pages['画像'], state='normal')
+        if self.active_subject and self.active_subject['kind']=='speech':
+            self.cat_image_panel.pack_forget()
+            self.portrait_panel.frame.pack(fill='both', expand=True)
+            self.portrait_panel.select(self.subject_registry.get(self.active_subject['id']))
+        else:
+            self.portrait_panel.frame.pack_forget()
+            self.cat_image_panel.pack(fill='both', expand=True)
+
+    def show_export_page(self):
+        self.tabs.select(self.pages['確認・書き出し'])
+        self.refresh_export_summary()
+
+    def refresh_export_summary(self):
+        try:
+            from human_portraits import HumanPortraitStore
+            people, _, warnings = HumanPortraitStore(self.registry.directory).export_data()
+            entries = self.interaction_published.read()['entries']
+            rows = self.subject_registry.read()['subjects']
+            excluded = [r['name'] for r in rows if not r['enabled'] or not r['game_id']]
+            text = ('全素材パック：猫画像・紹介文・交流文・人物画像\n'
+                    + f"猫画像対象：{len(self.catalog_provider())} ／ 採用交流文：{len(entries)}条件\n"
+                    + f"書き出し可能な人物画像：{len(people['people'])}人\n"
+                    + '制作専用・利用対象外：' + ('、'.join(excluded) or 'なし')
+                    + '\n人物画像の注意：' + ('\n'.join(warnings) or 'なし')
+                    + '\nこれは登録状況の概要です。本文の不足・画像の代替は組合せ確認、出力時の詳細は結果とvalidation.jsonで確認してください。'
+                    + '\n書き出しは全登録範囲が対象です。未保存の編集・下書きは含みません。')
+            self.export_summary.configure(state='normal')
+            self.export_summary.delete('1.0', 'end')
+            self.export_summary.insert('1.0', text)
+            self.export_summary.configure(state='disabled')
+            return True
+        except (OSError, ValueError) as exc:
+            self.notice.set(f'登録状況を読み込めません：{exc}')
+            return False
+
+    def open_review_preview(self):
+        from interaction_preview_gui import InteractionPreviewWindow
+        from interaction_texts import condition, make_entry
+        try:
+            row = self.active_subject
+            value = condition(target_cat='*') if not row else condition(row['kind'], row['id'],
+                reaction='neutral' if row['kind']=='cat_response' else 'any',
+                subjects=self.subject_registry.labels(include_disabled=True), target_cat='*' if row['kind']=='speech' else None)
+            self.review_window = InteractionPreviewWindow(self.window, self.catalog_provider(), self.registry,
+                self.interaction_published, editing_entry=make_entry(value, ['', '', '']), drafts=self.interaction_drafts)
+            self.review_window.use_edit.set(False)
+            self.review_window.render()
+        except (OSError, ValueError) as exc:
+            self.notice.set(f'確認画面を開けません：{exc}')
+
+    def export_people(self):
+        from tkinter import filedialog, messagebox
+        from human_portraits import HumanPortraitStore
+        try:
+            store = HumanPortraitStore(self.registry.directory)
+            data, _, warnings = store.export_data()
+            if not data['people'] and not messagebox.askyesno('人物画像が0件', '空の人物パックを取り込むと人物画像の対応が解除されます。書き出しますか？', parent=self.window):
+                return
+            destination = filedialog.askdirectory(parent=self.window, title='人物画像パックの保存先')
+            if destination:
+                folder, warnings = store.export(destination)
+                self.notice.set('人物画像を書き出しました：'+str(folder)+'\n'+' ／ '.join(warnings))
+        except (OSError, ValueError) as exc:
+            self.notice.set(f'人物画像を書き出せません：{exc}')
 
     def close(self):
         editor = getattr(self, 'interaction_text_editor', None)

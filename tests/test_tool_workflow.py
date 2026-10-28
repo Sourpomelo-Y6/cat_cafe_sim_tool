@@ -62,7 +62,7 @@ class WorkflowTests(unittest.TestCase):
                 self.assertTrue(tool.subject_selector['values'])
                 label = next(k for k,r in tool.subject_rows.items() if r['id']=='player')
                 tool.subject_choice.set(label); tool.select_subject()
-                self.assertEqual(tool.tabs.tab(tool.pages['画像'], 'state'), 'disabled')
+                self.assertEqual(tool.tabs.tab(tool.pages['画像'], 'state'), 'normal')
                 tool.open_interaction_text_editor('switch')
                 editor = tool.interaction_text_editor
                 self.assertEqual(editor._condition['subject_id'], 'player')
@@ -88,5 +88,65 @@ class WorkflowTests(unittest.TestCase):
                 self.assertIsNotNone(editor.comparison_image)
                 self.assertEqual(editor.comparison_image_result['resolved_scene_key'], 'teaser')
                 self.assertTrue(editor.comparison.image_names())
+        finally:
+            root.destroy()
+
+    def test_portrait_candidate_adoption_and_both_export_routes(self):
+        import tkinter as tk
+        import json
+        from PIL import Image
+        from image_tool_gui import ContentImageToolWindow
+        from content_images import ImageRegistry
+        from content_texts import TextStore
+        root = tk.Tk(); root.withdraw()
+        try:
+            with tempfile.TemporaryDirectory() as directory:
+                base = Path(directory)
+                tool = ContentImageToolWindow(root, lambda: {'playtest-mike':'ミケ'},
+                    registry=ImageRegistry(base/'images'), text_drafts=TextStore(base/'textdraft.json'),
+                    interaction_drafts=InteractionTextStore(base/'draft.json'))
+                tool.subject_registry.save(tool.subject_registry.get('guest-1'))
+                tool.filter_subjects()
+                tool.subject_choice.set(next(k for k,r in tool.subject_rows.items() if r['id']=='guest-1'))
+                tool.select_subject()
+                self.assertTrue(tool.portrait_panel.frame.winfo_manager())
+                self.assertFalse(tool.cat_image_panel.winfo_manager())
+                source=base/'portrait.png'; Image.new('RGBA',(32,32),(30,40,50,100)).save(source)
+                panel=tool.portrait_panel
+                panel.select_file(source)
+                panel.select(tool.subject_registry.get('player'))
+                panel.select(tool.subject_registry.get('guest-1'))
+                self.assertEqual(panel.pending, source)
+                self.assertEqual(panel.store.read()['people'], [])
+                self.assertTrue(panel.adopt())
+                adopted=panel.store.read()['people'][0]
+                self.assertTrue(tool.refresh_export_summary())
+                root.deiconify()
+                tool.window.geometry('900x700')
+                tool.show_export_page()
+                root.update()
+                def descendants(widget):
+                    for child in widget.winfo_children():
+                        yield child
+                        yield from descendants(child)
+                buttons = [w for w in descendants(tool.pages['確認・書き出し']) if w.winfo_class()=='TButton']
+                for button in buttons:
+                    self.assertTrue(button.winfo_ismapped())
+                    self.assertLessEqual(button.winfo_rooty()+button.winfo_height(), tool.window.winfo_rooty()+tool.window.winfo_height())
+
+                with patch('tkinter.filedialog.askdirectory', return_value=str(base/'all')):
+                    tool.export_unity()
+                full=next((base/'all').glob('*/human_portraits.json'))
+                self.assertEqual(json.loads(full.read_text(encoding='utf-8'))['people'], [adopted])
+                with patch('tkinter.filedialog.askdirectory', return_value=str(base/'people')):
+                    tool.export_people()
+                self.assertTrue(list((base/'people').glob('*/human_portraits.json')))
+                with patch('tkinter.messagebox.askyesno', return_value=True):
+                    panel.remove()
+                self.assertEqual(panel.store.read()['people'], [])
+                self.assertTrue((panel.store.directory/adopted['image']).exists())
+                with patch('tkinter.messagebox.askyesno', return_value=False), patch('tkinter.filedialog.askdirectory') as dialog:
+                    tool.export_people()
+                    dialog.assert_not_called()
         finally:
             root.destroy()
