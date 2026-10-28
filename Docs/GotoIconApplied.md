@@ -16,7 +16,7 @@
 
 ## ID・登録・既存ルール
 
-`register_goto.py` は既存のSubjectRegistry / HumanPortraitStoreを使用し、プロフィール保存・別インスタンス再読込・画像登録・人物専用書き出しを行う。人物画像登録機能を再実装しない。人物専用パック `f68910394f6d4347dd62471992fb2487` 一組を出力し、同内容の再出力は同じ場所となる。猫画像・猫catalogは再書き出ししない。
+`scripts/production/register_goto.py` は既存のSubjectRegistry / HumanPortraitStoreを使用し、プロフィール保存・別インスタンス再読込・画像登録・人物専用書き出しを行う。人物画像登録機能を再実装しない。人物専用パック `f68910394f6d4347dd62471992fb2487` 一組を出力し、同内容の再出力は同じ場所となる。猫画像・猫catalogは再書き出ししない。
 
 既存確定設定は後藤さんの名前・VIP接客・三毛猫への好み。Python `cafe_vip_customer.py` / `cafe_vip_customer.json`、Unity `CafeCustomers` / `CafeSpecialists`を照合。新規段階式人気モードで最終第3段階達成の翌日以降、営業開始刻0に一名登場。三毛猫を担当にし、心をつかむ・心を開くを各1回以上、同時発動を1回以上で追加料金400・追加人気10。これらの条件と数値は変更しない。
 

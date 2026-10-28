@@ -27,7 +27,7 @@
 
 ## 登録と版
 
-`proofread_existing_narratives.py` は既存 `make_entry` と `InteractionTextStore.save_many(expected=旧エントリ)` で対象条件のみ下書き・採用を同期。条件キー・slot・候補IDは保持する編集仕様に従う。資料の[registration.json](Results/NarrativeProofreading/registration.json)に条件、変更前後、全IDを記録。ストアのversion=2、パックのversion=3は形式版であり本文改訂で独自に増やさない。新規パックIDと内容ハッシュrevisionで本文版を識別する。
+`scripts/production/proofread_existing_narratives.py` は既存 `make_entry` と `InteractionTextStore.save_many(expected=旧エントリ)` で対象条件のみ下書き・採用を同期。条件キー・slot・候補IDは保持する編集仕様に従う。資料の[registration.json](Results/NarrativeProofreading/registration.json)に条件、変更前後、全IDを記録。ストアのversion=2、パックのversion=3は形式版であり本文改訂で独自に増やさない。新規パックIDと内容ハッシュrevisionで本文版を識別する。
 
 旧revision `5a7e11a7efe8952f3dfbe88915298ddeda302faea17975ff358656ad666e2ba6` → 新 `e081ce08f03ce99e22131afb0a87134322c742822d2bdb88ffe049733e48f2c7`。新パック `51b88e2f3f974a83a197ff6a3cc5af8e`。通常の `unity_export.export_bundle` と `ContentPreviewSetup.Import` を使用。パックJSONの手編集なし。画像台帳を通常readで検証したスナップショットを再利用する既存の書き出し手順に従った。
 

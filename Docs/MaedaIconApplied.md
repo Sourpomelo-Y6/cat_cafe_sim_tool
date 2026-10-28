@@ -12,7 +12,7 @@
 
 ## 登録と維持した条件
 
-`register_maeda.py` で既存SubjectRegistry / HumanPortraitStoreを使い、保存・別インスタンス再読込・画像登録・人物専用書き出し。実台帳のGUI手入力とは区別する。既存20人のプロフィール・画像対応を保持。人物専用パック `1d084998314939d9e1b84db4e5835b1d` 一組。猫画像・猫catalogは再書き出ししない。同内容の再出力は同一パス。
+`scripts/production/register_maeda.py` で既存SubjectRegistry / HumanPortraitStoreを使い、保存・別インスタンス再読込・画像登録・人物専用書き出し。実台帳のGUI手入力とは区別する。既存20人のプロフィール・画像対応を保持。人物専用パック `1d084998314939d9e1b84db4e5835b1d` 一組。猫画像・猫catalogは再書き出ししない。同内容の再出力は同一パス。
 
 Python `cafe_customers.py` のID/名前、`core/cafe_expansion.py` のFIFTH_CUSTOMER_ID・extra_schedule、`config/cafe_expansion.json` とUnity側実装を照合。2→3席500、3→4席1000、4→5席1000。5席は人気第1段階達成後、購入費より多い所持金が必要。5席購入日には来ず、購入翌日以降の営業で刻6に追加。3席・4席の段階では生成しない。6席以降の追加客は別ID。条件・数値・本文・セーブ形式は変更しない。
 

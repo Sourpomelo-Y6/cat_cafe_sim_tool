@@ -58,7 +58,7 @@
 $env:CAT_CAFE_TEST_GUI='1'
 $env:PYTHONUTF8='1'
 python -m unittest discover -s tests -p test_interaction_llm.py -v
-python verify_interaction_llm.py --output ../Logs/InteractionLlm/live-check
+python scripts/verification/verify_interaction_llm.py --output ../Logs/InteractionLlm/live-check
 ```
 
 実接続には起動済みローカルサーバーとTk画面が必要。検証プログラムは指定したフォルダにのみ設定・下書き・検証用登録・生成記録を保存する。今回の最終実接続結果は `Logs/InteractionLlm/live-final`。制限環境でローカル接続が拒否されたため、通常環境で接続して確認した。単体テストの一時ファイルはワークスペース内の `Logs/InteractionLlm/temp` を `TEMP`／`TMP` に指定した。

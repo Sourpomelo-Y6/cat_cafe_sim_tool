@@ -18,7 +18,7 @@
 
 開始時Tool `b154bd6`、Python `b22744e`、実Unity `d3204a6`、共有Docs `3026f9c`。AGENTS・指定資料・最新履歴/差分を確認。人物関連チャットはidle、Unity/Playerプロセスなし。リンの画像・猫設定・制作日程・人物台帳catalog-2の先行差分は保持。
 
-`register_kobayashi.py` が既存SubjectRegistry.save / HumanPortraitStore.register/exportを使用。実台帳の保存と別インスタンス再読込、既存全行・9画像対応を保持し、10人の人物専用パック `bd9f097f1eae61553f7b3f6ab745c6d5` 一組を書き出し。同内容再出力は同じフォルダ。[登録結果](Results/KobayashiIcon/registration.json)。実台帳をGUI手入力で登録したとの主張ではない。
+`scripts/production/register_kobayashi.py` が既存SubjectRegistry.save / HumanPortraitStore.register/exportを使用。実台帳の保存と別インスタンス再読込、既存全行・9画像対応を保持し、10人の人物専用パック `bd9f097f1eae61553f7b3f6ab745c6d5` 一組を書き出し。同内容再出力は同じフォルダ。[登録結果](Results/KobayashiIcon/registration.json)。実台帳をGUI手入力で登録したとの主張ではない。
 
 通常ContentPreviewSetup.ImportでUnityへ取り込み。10件の明示ID・画像hash・既存人物Importer（max1024、非圧縮、alpha保持、mipmap/read-write無効、Standalone overrideなし）を[検査](Results/KobayashiIcon/unity-data-checks.json)。猫用BC7なし。猫画像・猫catalogの再書き出しなし。猫manifest・登録済み本文・実Unity猫catalogの開始hash一致。素材・旧パック・セーブの整理削除なし。
 

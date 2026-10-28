@@ -14,7 +14,7 @@
 
 ## Tool・Unity登録
 
-既存SubjectRegistry / HumanPortraitStoreによる保存・別インスタンス再読込・人物専用書き出し。通常操作の既存APIを使う `register_fukuda.py`、[登録結果](Results/FukudaIcon/registration.json)。名前ではなくpresentation.special_namesのID対応も照合。既存全プロフィール行・15画像保持：[保持照合](Results/FukudaIcon/preservation.json)。人物専用パック `ce25379edf1b80fb820bbd0257fade9b` 一組、同じ内容の再出力は同じ場所。猫画像・猫catalogを再書き出しせず、旧パック・素材・セーブを保持。
+既存SubjectRegistry / HumanPortraitStoreによる保存・別インスタンス再読込・人物専用書き出し。通常操作の既存APIを使う `scripts/production/register_fukuda.py`、[登録結果](Results/FukudaIcon/registration.json)。名前ではなくpresentation.special_namesのID対応も照合。既存全プロフィール行・15画像保持：[保持照合](Results/FukudaIcon/preservation.json)。人物専用パック `ce25379edf1b80fb820bbd0257fade9b` 一組、同じ内容の再出力は同じ場所。猫画像・猫catalogを再書き出しせず、旧パック・素材・セーブを保持。
 
 通常ContentPreviewSetup.Importから実Unityへ取り込み。[16画像hash・Importer照合](Results/FukudaIcon/unity-data-checks.json)：人物用max1024、非圧縮、alpha保持、mipmap/read-write無効、Standalone overrideなし。猫用BC7を適用しない。猫manifest・採用済み本文・猫catalogのhashは開始時と一致。
 

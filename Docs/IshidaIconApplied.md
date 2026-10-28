@@ -12,7 +12,7 @@
 
 ## 登録・取り込み・保持した条件
 
-`register_ishida.py` で既存SubjectRegistry / HumanPortraitStoreを使用。プロフィール保存→別インスタンス再読込、透過PNG登録→再読込、既存22人のプロフィール・画像対応保持を確認。[登録記録](Results/IshidaIcon/registration.json)。実台帳GUIへの手入力とは区別する。23人人物専用パック `7dbaa0652ce89a2551608be921c03712` 一組。同内容の再出力は同一場所。猫画像・猫catalogの再書き出しなし。
+`scripts/production/register_ishida.py` で既存SubjectRegistry / HumanPortraitStoreを使用。プロフィール保存→別インスタンス再読込、透過PNG登録→再読込、既存22人のプロフィール・画像対応保持を確認。[登録記録](Results/IshidaIcon/registration.json)。実台帳GUIへの手入力とは区別する。23人人物専用パック `7dbaa0652ce89a2551608be921c03712` 一組。同内容の再出力は同一場所。猫画像・猫catalogの再書き出しなし。
 
 通常 `ContentPreviewSetup.Import` → HumanPortraitImportでUnityへ取り込み。[23行のID/hash/Importer照合](Results/IshidaIcon/unity-data-checks.json)成功。実効max1024、非圧縮、alpha保持、mipmap/read-write無効。Standalone設定欄は自動作成されるが overridden=0 でDefaultTexturePlatformの設定を使う。猫用BC7を人物へ適用しない。
 

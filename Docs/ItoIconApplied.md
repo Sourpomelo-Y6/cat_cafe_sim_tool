@@ -17,7 +17,7 @@
 
 ## 登録・書き出し・取り込み
 
-`register_ito.py` は既存 `SubjectRegistry.save` と `HumanPortraitStore.register/export` を使用。プロフィール・明示ID対応・画像の保存再読込、既存全人物行と5画像対応保持、同じ内容の再書き出し先再利用、採用本文・猫manifest・実Unity猫catalogのSHA-256保持を検査。[登録結果](Results/ItoIcon/registration.json)。実台帳を手入力したGUI登録とは区別する。
+`scripts/production/register_ito.py` は既存 `SubjectRegistry.save` と `HumanPortraitStore.register/export` を使用。プロフィール・明示ID対応・画像の保存再読込、既存全人物行と5画像対応保持、同じ内容の再書き出し先再利用、採用本文・猫manifest・実Unity猫catalogのSHA-256保持を検査。[登録結果](Results/ItoIcon/registration.json)。実台帳を手入力したGUI登録とは区別する。
 
 人物専用パック `fcfa5755294680d11157181fe893a726` 一組に既存5人と伊藤さんの6人を収録。猫bundleなし。通常 `ContentPreviewSetup.Import` → 既存HumanPortraitImportで取り込み。人物Importerは1024上限・非圧縮・alpha保持・mipmap/read-write無効。人物に猫BC7を適用せず、猫catalogを変更しない。旧人物パック・素材・セーブを保持。
 

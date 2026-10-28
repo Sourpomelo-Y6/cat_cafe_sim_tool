@@ -16,7 +16,7 @@
 
 ## 登録・取り込み・保護
 
-`register_yamamoto.py` は既存 `SubjectRegistry.save` / `HumanPortraitStore.register/export` を使用。保存・別インスタンス再読込、既存全人物行と7画像対応の保持、人物専用8人パック、同内容の出力先再利用を確認。[登録結果](Results/YamamotoIcon/registration.json)。GUI手入力で実登録したとの主張ではない。
+`scripts/production/register_yamamoto.py` は既存 `SubjectRegistry.save` / `HumanPortraitStore.register/export` を使用。保存・別インスタンス再読込、既存全人物行と7画像対応の保持、人物専用8人パック、同内容の出力先再利用を確認。[登録結果](Results/YamamotoIcon/registration.json)。GUI手入力で実登録したとの主張ではない。
 
 人物パック `7e78731fb131307f6b5aa55a220cef42` 一組。通常 `ContentPreviewSetup.Import` → 既存HumanPortraitImportで取り込み。8画像hash・明示ID・既存Importer（Default max1024・非圧縮・alpha保持・mipmap/read-write無効・Standalone overrideなし）を[検査](Results/YamamotoIcon/unity-data-checks.json)。猫BC7を適用せず、猫bundle/catalogを再書き出ししない。既存本文・猫manifest・実Unity猫catalogの開始hash一致。素材・旧パック・ユーザー保存を削除/更新しない。
 

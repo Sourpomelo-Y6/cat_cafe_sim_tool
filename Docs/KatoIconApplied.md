@@ -19,7 +19,7 @@
 
 開始時Tool f77ec85、Python 1baa6c4、実Unity 85016ef、共有Docs a82a31a。AGENTS・指定資料・最新履歴/差分と小林さんまでの制作記録を確認。関連人物チャットはidle、開始時Unity/Playerプロセスなし。猫制作差分・日程・設定、人物台帳catalog-2先行差分を保持。
 
-`register_kato.py` が既存SubjectRegistry.save / HumanPortraitStore.register/exportを利用。別インスタンス再読込と、既存全人物行・10画像対応の保持を確認。[登録結果](Results/KatoIcon/registration.json)。実台帳のGUI手入力登録とは主張しない。11人の人物専用パック `88b9d40a6140bb9bac08690a6a2840ac` を一組だけ書き出し、同内容再出力は同じ場所を利用。猫画像・猫catalog再書き出しなし。
+`scripts/production/register_kato.py` が既存SubjectRegistry.save / HumanPortraitStore.register/exportを利用。別インスタンス再読込と、既存全人物行・10画像対応の保持を確認。[登録結果](Results/KatoIcon/registration.json)。実台帳のGUI手入力登録とは主張しない。11人の人物専用パック `88b9d40a6140bb9bac08690a6a2840ac` を一組だけ書き出し、同内容再出力は同じ場所を利用。猫画像・猫catalog再書き出しなし。
 
 通常ContentPreviewSetup.Importで取り込み。11件の明示ID・画像hash・既存人物Importerを[照合](Results/KatoIcon/unity-data-checks.json)。max1024・非圧縮・alpha保持・mipmap/read-write無効・Standalone overrideなし。猫用BC7なし。猫manifest・登録済み本文・実Unity猫catalogの開始hash一致。旧パック・素材・セーブは削除しない。
 

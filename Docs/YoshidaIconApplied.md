@@ -19,7 +19,7 @@
 
 開始時Tool `576bba4`、Python `79fe477`、実Unity `37c0d0e`、共有Docs `ec7d6e0`。AGENTS、指定資料、最新Git履歴・未コミット差分、小林・加藤までの制作資料と採用PNGを確認。人物関連チャットはidle、Unity/Playerプロセスなし。猫制作差分・日程・設定と人物台帳catalog-2の先行差分を保持。
 
-`register_yoshida.py` が既存SubjectRegistry.save / HumanPortraitStore.register/exportを使用。別インスタンスで再読込し既存全人物行・11画像対応を保持。[登録結果](Results/YoshidaIcon/registration.json)。実台帳のGUI手入力とは区別する。人物専用12人パック `e33ffb55daee067807b70dcb480906b5` を一組書き出し、同内容再出力は同じ場所を利用。猫画像・猫catalogは再書き出ししない。
+`scripts/production/register_yoshida.py` が既存SubjectRegistry.save / HumanPortraitStore.register/exportを使用。別インスタンスで再読込し既存全人物行・11画像対応を保持。[登録結果](Results/YoshidaIcon/registration.json)。実台帳のGUI手入力とは区別する。人物専用12人パック `e33ffb55daee067807b70dcb480906b5` を一組書き出し、同内容再出力は同じ場所を利用。猫画像・猫catalogは再書き出ししない。
 
 通常ContentPreviewSetup.Importで取り込み、12件の明示ID・画像hash・人物Importerを[照合](Results/YoshidaIcon/unity-data-checks.json)。max1024・非圧縮・alpha保持・mipmap/read-write無効・Standalone overrideなし。猫用BC7なし。猫manifest・登録済み本文・実Unity猫catalogは開始hashと一致。旧パック・素材・セーブは削除しない。
 

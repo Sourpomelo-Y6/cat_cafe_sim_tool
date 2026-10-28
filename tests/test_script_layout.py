@@ -34,10 +34,11 @@ for old,new in mapping.items():
         if isinstance(value,Path):
             if name=='ROOT':assert value==root.parent,(new,name,value)
             if name=='BASE':assert value==root.parent/'cat_cafe_sim/saves/content_images',(new,name,value)
-            if name in ('OUT','SOURCE'):assert value.is_relative_to(root/'Docs/Results'),(new,name,value)
+            if name in ('OUT','SOURCE'):assert any(value.is_relative_to(base) for base in (root/'Docs',root.parent/'Docs',root.parent/'Logs')),(new,name,value)
 print('Validated',len(mapping),'relocations without writes')
 '''
         result=subprocess.run([sys.executable,'-B','-c',code,str(ROOT)],cwd=ROOT.parent,
                               capture_output=True,text=True,encoding='utf-8')
         self.assertEqual(result.returncode,0,result.stdout+result.stderr)
-        self.assertIn('Validated 36',result.stdout)
+        count = len(json.loads((ROOT/'scripts/relocations.json').read_text(encoding='utf-8')))
+        self.assertIn(f'Validated {count}',result.stdout)

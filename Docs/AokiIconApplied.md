@@ -16,7 +16,7 @@
 
 ## 登録・Unity・限定検証
 
-- `register_aoki.py` は既存SubjectRegistry / HumanPortraitStoreを使用。保存・別インスタンス再読込・明示ID・人物専用書き出しを確認。[登録結果](Results/AokiIcon/registration.json)。人物パック `43fcb613be29b79299cc0ccc9fff9f3a` 一組、同内容の再出力は同じ場所。猫画像・猫catalogは再書き出ししない。
+- `scripts/production/register_aoki.py` は既存SubjectRegistry / HumanPortraitStoreを使用。保存・別インスタンス再読込・明示ID・人物専用書き出しを確認。[登録結果](Results/AokiIcon/registration.json)。人物パック `43fcb613be29b79299cc0ccc9fff9f3a` 一組、同内容の再出力は同じ場所。猫画像・猫catalogは再書き出ししない。
 - 既存17画像・全プロフィール行を保持。[保持照合](Results/AokiIcon/preservation.json)。開始時の猫制作等199ファイルのhashが一致：[先行差分照合](Results/AokiIcon/prior-differences-preserved.json)。今回意図して更新した人物台帳は行比較で既存全行一致。開始Tool `aac36dc`（本体`713ae4b`）、Python `5229377`、Unity `cef95f0`、共有Docs `6c8cb6d`。関連人物チャットidle、Unity/Player不在を確認して開始。
 - 通常ContentPreviewSetup.Importで実Unityへ取り込み。[18画像hash・Importer確認](Results/AokiIcon/unity-data-checks.json)：max1024・非圧縮・alpha保持・mipmap/read-write無効・Standalone overrideなし。猫用BC7は適用しない。猫manifest・既存本文・猫catalogのhashは開始時と一致。
 - Tool人物画像11試験成功（固有backend5＋Tkボタン1＋継承重複5）。隔離台帳とファイル選択差替えのUI自動試験。実台帳への登録はストアAPIで、GUI手入力とは区別。[Tool結果](Results/AokiIcon/gui-tests.txt)。触れ合い客の既存テスト11成功・GUI1skip。通常触れ合い分類、回数不足・設備なし・成功報酬・保存・重複報酬防止等を短期fixtureで確認。[接客テスト](Results/AokiIcon/contact-tests.txt)。

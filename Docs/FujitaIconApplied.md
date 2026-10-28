@@ -8,13 +8,13 @@
 
 元は印刷会社の営業。出張土産に集めた盤上遊戯をきっかけに独立。趣味は古い双六の収集と詰め将棋。ふくよかな頬、短い銀灰色の巻き髪、額を見せる横分け、眼鏡・帽子なし。珊瑚色のカーディガン、生成りのブラウスと紺の小さなスカーフ。斜め上向きの顔、丸みのある開眼、高く丸く上がる両眉、歯を見せない感嘆の開き口で「思いつかなかった一手への感心」を表す。
 
-年齢・性別・職業・来歴・性格・外見・話し方は今回採用した創作で、既存ゲームの確定事実とは区別する。古い消極的な指針より今回のユーザー方針を優先。例文は人物資料のみで、ゲーム本文に追加しない。全プロフィールは `register_fujita.py` のNOTESと人物台帳へ保存。
+年齢・性別・職業・来歴・性格・外見・話し方は今回採用した創作で、既存ゲームの確定事実とは区別する。古い消極的な指針より今回のユーザー方針を優先。例文は人物資料のみで、ゲーム本文に追加しない。全プロフィールは `scripts/production/register_fujita.py` のNOTESと人物台帳へ保存。
 
 [採用PNG](../../Docs/Prototypes/FujitaIcon-v1/fujita-icon.png)／[生成プロンプト全文](../../Docs/Prototypes/FujitaIcon-v1/prompt.txt)。組み込みimage_gen一回、1254×1254 RGBA、alpha 0〜255。画像加工なし。岡田さん・前田さんの採用画像を実際に見て画風・線・暖色調・構図を参照した。目・眉・口・顔向きを先に設計。指示の小さい開眼・右向きに対し採用像は丸みのある開眼と斜め上向きで、記録を原本に合わせた。微笑み、前田さんの半眼・寄せた眉・閉じ口、岡田さんの歯を見せる大笑いを繰り返さない。巻き髪の輪郭・珊瑚色の面・紺スカーフは小表示の補助手掛かり。比較案・表情差分・立ち絵なし。
 
 ## 登録・取り込み・維持した条件
 
-`register_fujita.py` で既存SubjectRegistry / HumanPortraitStoreの保存・別インスタンス再読込・PNG登録・人物専用書き出しを実施。実台帳のGUI手入力とは区別する。既存21人のプロフィール・画像対応を保持。22人人物専用パック `03fb64219aa00953b392bb49774aa5c6` 一組。同内容の再出力は同一場所。猫画像・猫catalogの再書き出しなし。通常 `ContentPreviewSetup.Import` で取り込む。22行のID/hashと人物Importerを照合。実効max1024・非圧縮・alpha保持・mipmap/read-write無効・Standalone overrideなし。猫用BC7なし。
+`scripts/production/register_fujita.py` で既存SubjectRegistry / HumanPortraitStoreの保存・別インスタンス再読込・PNG登録・人物専用書き出しを実施。実台帳のGUI手入力とは区別する。既存21人のプロフィール・画像対応を保持。22人人物専用パック `03fb64219aa00953b392bb49774aa5c6` 一組。同内容の再出力は同一場所。猫画像・猫catalogの再書き出しなし。通常 `ContentPreviewSetup.Import` で取り込む。22行のID/hashと人物Importerを照合。実効max1024・非圧縮・alpha保持・mipmap/read-write無効・Standalone overrideなし。猫用BC7なし。
 
 Python `cafe_customers.py` のID/名前、`core/cafe_expansion.py` のSIXTH_CUSTOMER_ID / extra_schedule、`config/cafe_expansion.json`、既存6席試験とUnity `CafeCustomers.CustomerSchedule` / `CafeExpansion` を照合。2→3席500、3→4席1000、4→5席1000、5→6席1500。6席以降は人気第2段階達成後で、保存上の購入日は達成翌日以降、購入後にも資金を残す必要がある。購入当日は不在、翌営業日以降に刻12で追加。3〜5席では生成せず、7席以降の追加客は別ID。休業日に来店なし。条件・数値・本文・セーブ形式は変更しない。
 

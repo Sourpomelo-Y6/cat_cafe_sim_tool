@@ -79,6 +79,6 @@ Windows実入力は[個別記録](Results/InitialGuestNarratives/physical-input.
 
 ### 変更ファイルと保存方針
 
-制作ツール：本資料、Results/InitialGuestNarrativesの登録一覧・検査記録・代表2画面、`register_initial_guest_narratives.py`、Editor検証入口、フラグ付きPlayer検証入口。全体Docs：DevelopmentStatusのリンクと完了状態。Unity：新パック4e511312c48b4cee96882c669d5ea5cf、通常参照catalog、新検証入口とmetaのみ。
+制作ツール：本資料、Results/InitialGuestNarrativesの登録一覧・検査記録・代表2画面、`scripts/production/register_initial_guest_narratives.py`、Editor検証入口、フラグ付きPlayer検証入口。全体Docs：DevelopmentStatusのリンクと完了状態。Unity：新パック4e511312c48b4cee96882c669d5ea5cf、通常参照catalog、新検証入口とmetaのみ。
 
 採用JSONとローカル下書きは既存のGit除外方針を維持し、今回の12条件の条件キー・全36本文・全候補IDをResults/registration.jsonと登録スクリプトで版管理する。Pythonゲーム側の追跡済み差分は全て開始時からの別作業であり、今回のコミットを作らない。リン関連の既存差分は各リポジトリにそのまま残す。pushしない。

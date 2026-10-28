@@ -1,3 +1,36 @@
+# 制作・検証スクリプトの配置
+
+2026-10-28後続：人物別の登録、共通文章の登録・校正、特定制作分の統合出力、検証・容量調査を追加整理。今回32件、前回と合わせて68件。
+
+| 保存先 | 現在の件数・用途 |
+|---|---|
+| scripts/production/ | 49件。猫・人物の登録、制作済み文章の校正・統合出力 |
+| scripts/verification/ | 16件。表示・登録・LLM・サーバー検証、容量調査 |
+| Docs/ProductionData/ | 3件。猫の登録元本文 |
+
+通常起動のrun.py、通常出力のunity_export.py、UI・保存処理・モデル接続の共通モジュールは直下に維持。export_standalone_rules.py／export_standalone_presentation.py／convert_python_save.pyも既存の通常運用入口として維持。
+
+register_cat_execution_images.pyは並行制作4件が現在もimportしている共通処理のため、引き続き直下に保持。未コミットのリン・ユキ・アキ・モモの登録スクリプト、資料、Editor検証には触れていない。実Unity／metaも変更なし。
+
+## 新しい呼び出し方
+
+Toolフォルダで `python -X utf8 scripts/production/register_takahashi.py`、または `python -X utf8 -m scripts.production.register_takahashi`。絶対パスの直接実行にも対応する。登録・統合スクリプトは制作時点の前提を持ち、採用データへ書き込むため、整理確認のために一括実行するものではない。
+
+旧パスの互換ファイルは作らず、クリーンな操作資料を新しいパスへ更新。未コミットの日程表などは保持した。素材・画像・記録・Unity参照先は従来どおり。
+
+## 今回の検証
+
+追加32件は移動前Git版とのAST比較により、パス・import・実行入口以外の処理と埋め込みプロフィール／本文が同一。初期客文登録と既存文校正の2本は読み込み時の実行を避けるためmain関数＋直接実行ガードで囲んだ。
+
+累計68件を新しいモジュール名と直接ファイル読込で検証。書込・mkdir・削除・rename・子プロセス・通信を拒否する監査フック下で成功。参照先も検証。`python -B -m unittest discover -s tests -p test_script_layout.py`。Python本体・Toolの追跡済みソースから、移動した旧ファイル名の操作参照が残っていないことも検索した。
+
+登録・出力・検証サーバー・LLMは起動していない。採用データ・ゲーム処理の実行確認ではなく配置の検証。
+
+開始時Logs 20,107,349,955 bytes、generated 3,277,372,585 bytes、Latest 5,506,516,854 bytes。前回終了時よりLogsが2,587,265 bytes増えていたが、今回の作業開始前からの増加。終了時も上記3容量は同値（今回増減0）、Latest成功1組・Pendingなし。ビルド・素材生成・容量整理なし。
+
+---
+以下は前回の猫別整理時点の記録。現在の件数・対象範囲は上記を参照。
+
 # 猫別の制作・検証スクリプト
 
 2026-10-28。Tool直下に蓄積していたコミット済み猫別ファイル36件を用途別に移動。
@@ -30,7 +63,8 @@ Toolフォルダからは、例えば `python -X utf8 scripts/verification/verif
 
 開始・終了のLogsは20,104,762,690 bytes。ビルド・素材生成・Unity取り込み・容量整理なし。固定Latestは成功1組、Pendingなし。
 
-## 移動対応表
+
+## 移動対応表（累計）
 
 機械可読の正本は [relocations.json](relocations.json)。
 
@@ -72,3 +106,35 @@ Toolフォルダからは、例えば `python -X utf8 scripts/verification/verif
 | `verify_mike_voice_narratives.py` | `scripts/verification/verify_mike_voice_narratives.py` |
 | `verify_mugi_registered.py` | `scripts/verification/verify_mugi_registered.py` |
 | `verify_tama_registered.py` | `scripts/verification/verify_tama_registered.py` |
+| `audit_image_storage.py` | `scripts/verification/audit_image_storage.py` |
+| `export_completed_narratives.py` | `scripts/production/export_completed_narratives.py` |
+| `export_special_narratives.py` | `scripts/production/export_special_narratives.py` |
+| `proofread_existing_narratives.py` | `scripts/production/proofread_existing_narratives.py` |
+| `register_aoki.py` | `scripts/production/register_aoki.py` |
+| `register_fujita.py` | `scripts/production/register_fujita.py` |
+| `register_fujiwara.py` | `scripts/production/register_fujiwara.py` |
+| `register_fukuda.py` | `scripts/production/register_fukuda.py` |
+| `register_goto.py` | `scripts/production/register_goto.py` |
+| `register_initial_guest_narratives.py` | `scripts/production/register_initial_guest_narratives.py` |
+| `register_ishida.py` | `scripts/production/register_ishida.py` |
+| `register_ito.py` | `scripts/production/register_ito.py` |
+| `register_kato.py` | `scripts/production/register_kato.py` |
+| `register_kobayashi.py` | `scripts/production/register_kobayashi.py` |
+| `register_maeda.py` | `scripts/production/register_maeda.py` |
+| `register_mori_profile.py` | `scripts/production/register_mori_profile.py` |
+| `register_nakamura.py` | `scripts/production/register_nakamura.py` |
+| `register_nishimura.py` | `scripts/production/register_nishimura.py` |
+| `register_okada.py` | `scripts/production/register_okada.py` |
+| `register_sakamoto.py` | `scripts/production/register_sakamoto.py` |
+| `register_special_narratives.py` | `scripts/production/register_special_narratives.py` |
+| `register_takahashi.py` | `scripts/production/register_takahashi.py` |
+| `register_takahashi_narratives.py` | `scripts/production/register_takahashi_narratives.py` |
+| `register_tanaka.py` | `scripts/production/register_tanaka.py` |
+| `register_ueda.py` | `scripts/production/register_ueda.py` |
+| `register_watanabe.py` | `scripts/production/register_watanabe.py` |
+| `register_yamada.py` | `scripts/production/register_yamada.py` |
+| `register_yamamoto.py` | `scripts/production/register_yamamoto.py` |
+| `register_yoshida.py` | `scripts/production/register_yoshida.py` |
+| `verify_completed_narrative_import.py` | `scripts/verification/verify_completed_narrative_import.py` |
+| `verify_interaction_llm.py` | `scripts/verification/verify_interaction_llm.py` |
+| `verify_unity_flow_server.py` | `scripts/verification/verify_unity_flow_server.py` |

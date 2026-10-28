@@ -12,7 +12,7 @@
 
 ## 登録・通常取り込み・条件維持
 
-`register_ueda.py` で既存SubjectRegistry / HumanPortraitStoreを使用。プロフィール保存→別インスタンス再読み込み、PNG登録→再読み込み、既存23人の資料と画像対応保持を照合。[登録記録](Results/UedaIcon/registration.json)。これは既存ToolのStore API経由で、実台帳GUIへの手入力とは区別する。
+`scripts/production/register_ueda.py` で既存SubjectRegistry / HumanPortraitStoreを使用。プロフィール保存→別インスタンス再読み込み、PNG登録→再読み込み、既存23人の資料と画像対応保持を照合。[登録記録](Results/UedaIcon/registration.json)。これは既存ToolのStore API経由で、実台帳GUIへの手入力とは区別する。
 
 24人人物専用パック `3fe7b8e14fcb1665a18c19f8153d9168` を一組だけ書き出し。同内容再出力は同じ場所を利用。通常 `ContentPreviewSetup.Import` → HumanPortraitImportで取り込み。[Unity24行のID/hash/Importer照合](Results/UedaIcon/unity-data-checks.json)成功。DefaultTexturePlatformはmax1024・非圧縮、alpha保持、mipmap/read-write無効。Standalone欄は overridden=0 でDefaultを使う。人物へ猫用BC7を適用しない。
 

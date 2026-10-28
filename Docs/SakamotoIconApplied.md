@@ -14,7 +14,7 @@
 
 ## 登録・保護・条件照合
 
-`register_sakamoto.py` は既存ストアの保存、別インスタンス再読込、人物専用書き出しを利用。[登録結果](Results/SakamotoIcon/registration.json)／[開始14人・終了15人の保持照合](Results/SakamotoIcon/preservation.json)。パック `7ecb8f766e46aec8cba9a3a895fa4374` 一組、同内容再出力は同じ場所を使用。猫画像・猫catalog再書き出しなし。通常のContentPreviewSetup.Importで実Unityへ取り込む。[画像hashとImporter検査](Results/SakamotoIcon/unity-data-checks.json)：max1024・非圧縮・alpha保持・mipmap/read-write無効、Standalone overrideなし。猫BC7を人物に適用しない。猫manifest・採用本文・猫catalogは開始hashと一致。
+`scripts/production/register_sakamoto.py` は既存ストアの保存、別インスタンス再読込、人物専用書き出しを利用。[登録結果](Results/SakamotoIcon/registration.json)／[開始14人・終了15人の保持照合](Results/SakamotoIcon/preservation.json)。パック `7ecb8f766e46aec8cba9a3a895fa4374` 一組、同内容再出力は同じ場所を使用。猫画像・猫catalog再書き出しなし。通常のContentPreviewSetup.Importで実Unityへ取り込む。[画像hashとImporter検査](Results/SakamotoIcon/unity-data-checks.json)：max1024・非圧縮・alpha保持・mipmap/read-write無効、Standalone overrideなし。猫BC7を人物に適用しない。猫manifest・採用本文・猫catalogは開始hashと一致。
 
 Python `core/cafe_longhair_customer.py`、config/cafe_longhair_customer.json、Unity CafeSpecialists / CafeCustomersを照合。通常なでる・ブラッシングのcontact群を数え、休憩・切替・特別交流は含めない。常連はCafeCustomersのID共通の忠誠度閾値から成立し、翌日以降のExtraWeekdayに追加来店し得る。長毛客の保存検証にも常連曜日の例外が既存実装にある。確率来店と常連追加来店を混同せず、変更しない。信頼はIDで除外されず、既存の累積不満・来店停止条件で坂本さんも対象になり得る。新しいイベントを作らない。
 

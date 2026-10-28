@@ -14,7 +14,7 @@
 
 ## 登録・取り込み・限定検証
 
-- `register_nishimura.py` が既存SubjectRegistry / HumanPortraitStoreで保存・別インスタンス再読込・明示ID登録・人物専用書き出しを実行。[登録結果](Results/NishimuraIcon/registration.json)。人物専用パック `a744f5811c5c4eec0f95f4a6e4df3ebf` 一組、同内容再出力は同じ場所。既存プロフィール全行・16画像対応を保持：[照合](Results/NishimuraIcon/preservation.json)。猫画像・猫catalogは再書き出ししない。
+- `scripts/production/register_nishimura.py` が既存SubjectRegistry / HumanPortraitStoreで保存・別インスタンス再読込・明示ID登録・人物専用書き出しを実行。[登録結果](Results/NishimuraIcon/registration.json)。人物専用パック `a744f5811c5c4eec0f95f4a6e4df3ebf` 一組、同内容再出力は同じ場所。既存プロフィール全行・16画像対応を保持：[照合](Results/NishimuraIcon/preservation.json)。猫画像・猫catalogは再書き出ししない。
 - 通常ContentPreviewSetup.Importで実Unityへ取り込み。17画像hash・人物Importer max1024/非圧縮/alpha/mipmapとread-write無効を確認。猫BC7は適用しない。[データ検査](Results/NishimuraIcon/unity-data-checks.json)。開始時の猫manifest・既存本文・猫catalog hash一致。
 - 人物Tool11試験成功（固有backend5＋Tkボタン1、継承重複5）。隔離台帳とダイアログ差し替えによるUI自動試験。実台帳GUI手入力ではなく実登録はストアAPI。遊び客既存回帰は11件成功・GUI1件skip。短期目標等の既存fixtureを含む。初回はcp932読込で8件失敗し、PYTHONUTF8=1で成功。本番データ不具合とは扱わない。[Tool](Results/NishimuraIcon/gui-tests-display.txt)／[遊び客](Results/NishimuraIcon/play-tests-utf8.txt)。
 - 指定build_standalone.ps1、VerifyNishimuraAndBuild、共有StandaloneBuildStorage、固定Latestを使用。初回sandboxはライセンス接続でexit199、通常環境でexit0。成功ログ `Logs/StandaloneBuild/Runs/20261026-063048-804-1bea8529356b4380818b0055bd95516c.log`、CAT_CAFE_NISHIMURA_IMPORTED・CAT_CAFE_STANDALONE_BUILD_OK。ビルド後ソースは内容不変のLF整形のみ。

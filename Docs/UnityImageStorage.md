@@ -88,7 +88,7 @@ Editorでは通常の交流コマンドで作った現行envelopeに過去パッ
 読み取り専用の容量棚卸し：
 
 ```powershell
-python -X utf8 cat_cafe_sim_tool/audit_image_storage.py --project C:/Users/hi-wa/unity_workspase/CatCafeSim --build Logs/StandaloneBuild/Latest --output Logs/ImageStorage/inventory.json
+python -X utf8 cat_cafe_sim_tool/scripts/verification/audit_image_storage.py --project C:/Users/hi-wa/unity_workspase/CatCafeSim --build Logs/StandaloneBuild/Latest --output Logs/ImageStorage/inventory.json
 ```
 
 画質比較は `Editor/ContentTextureComparison.cs` を既存UnityプロジェクトのEditorへコピーし、`CATCAFE_TEXTURE_OUTPUT` に新しいログ先を指定して `CatCafePreview.Editor.ContentTextureComparison.Run` を実行する。`ContentTextureAudit.Run` は実際のImporterと現行ルールの旧画像fixture・Canvasをログ先へ出力する。どちらも圧縮設定を変更せず、Editor専用で、標準インストーラーや通常ビルドには組み込まない。今回の検証コピー2本は既存プロジェクトの `Assets/CatCafePreview/Editor` にある。

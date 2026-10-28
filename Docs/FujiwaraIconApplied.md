@@ -14,7 +14,7 @@
 
 ## 登録と保護
 
-`register_fujiwara.py` は既存SubjectRegistry / HumanPortraitStoreの保存・別インスタンス再読込・人物専用書き出しを使用。[登録結果](Results/FujiwaraIcon/registration.json)。通常客候補のgame_subjectsには特殊客が含まれないため、実presentation.special_namesの明示IDと固定名を照合して登録。Toolの候補機能・生成機能は変更しない。
+`scripts/production/register_fujiwara.py` は既存SubjectRegistry / HumanPortraitStoreの保存・別インスタンス再読込・人物専用書き出しを使用。[登録結果](Results/FujiwaraIcon/registration.json)。通常客候補のgame_subjectsには特殊客が含まれないため、実presentation.special_namesの明示IDと固定名を照合して登録。Toolの候補機能・生成機能は変更しない。
 
 人物パック `c61623ada8cf79395b9e9995c531dba2` は通常客guest-1〜12と森さんを保持する14人。既存全プロフィール行・画像対応を保持した[照合記録](Results/FujiwaraIcon/preservation.json)。同内容再出力は同じ場所を使う。猫画像・猫catalogの再書き出しなし。素材・旧パック・セーブを削除しない。
 

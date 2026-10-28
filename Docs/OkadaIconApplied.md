@@ -12,7 +12,7 @@
 
 ## 登録と既存ルール
 
-`register_okada.py` は既存SubjectRegistry / HumanPortraitStoreで保存・別インスタンス再読込・PNG登録・人物専用書出しを行う。既存19人の画像行および他プロフィール全行を保持。人物専用パック `5bfc510c6b96bb2fe2e02444ec03fb51` 一組のみを追加し、再出力は同じ場所になる。猫画像・猫catalogは再出力しない。通常 `ContentPreviewSetup.Import` を使用。
+`scripts/production/register_okada.py` は既存SubjectRegistry / HumanPortraitStoreで保存・別インスタンス再読込・PNG登録・人物専用書出しを行う。既存19人の画像行および他プロフィール全行を保持。人物専用パック `5bfc510c6b96bb2fe2e02444ec03fb51` 一組のみを追加し、再出力は同じ場所になる。猫画像・猫catalogは再出力しない。通常 `ContentPreviewSetup.Import` を使用。
 
 既存確定設定は岡田さんという表示名、`expanded-guest` と4席増設の対応。Python `core/cafe_expansion.py` の `EXTRA_CUSTOMER_ID` / `extra_schedule`、config `cafe_expansion.json`、Unity `CafeCustomers.CustomerSchedule` / `CafeExpansion` を照合。3席500、4席1000。4席は人気第1段階達成後、購入日より後の営業から到着刻0。3席だけでは追加せず、4席購入当日にも追加しない。5席以降は別ID。休業日に来店なし。条件・数値・会話本文・ゲーム定義は変更しない。
 

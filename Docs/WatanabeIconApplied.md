@@ -16,7 +16,7 @@
 
 ## 登録・取り込み
 
-`register_watanabe.py` が既存 `SubjectRegistry.save` と `HumanPortraitStore.register/export` を使用。実台帳へのプロフィール保存・再読込、既存全人物行と6画像対応の保持、人物専用書き出し・再書き出し先再利用を確認。[登録結果](Results/WatanabeIcon/registration.json)。GUI手入力で登録したとの主張ではない。
+`scripts/production/register_watanabe.py` が既存 `SubjectRegistry.save` と `HumanPortraitStore.register/export` を使用。実台帳へのプロフィール保存・再読込、既存全人物行と6画像対応の保持、人物専用書き出し・再書き出し先再利用を確認。[登録結果](Results/WatanabeIcon/registration.json)。GUI手入力で登録したとの主張ではない。
 
 人物パック `a02fd76a7285a62eb61d680fad28ace8` 一組、既存6人＋渡辺さんの7人。猫bundle・猫catalog再書き出しなし。通常 `ContentPreviewSetup.Import` → 既存HumanPortraitImportで取り込み。人物Importerは既存max1024・非圧縮・alpha保持・mipmap/read-write無効、Standalone固有overrideなし。猫BC7を人物へ適用しない。[7画像hash/Importer・保護対象hash検査](Results/WatanabeIcon/unity-data-checks.json)。採用本文・猫manifest・実Unity猫catalogの開始hash一致。
 

@@ -15,7 +15,7 @@
 
 ## 登録・取り込み・配布
 
-開始HEAD：Tool `2c38b4b`、Python `a8a8846`、Unity `3227f54`、共有Docs `994813e`。AGENTSと吉田さんまでの資料、履歴・差分を確認。`register_yamada.py` が既存SubjectRegistry / HumanPortraitStoreを使い保存・別インスタンス再読込・人物専用書き出しを実施。[登録記録](Results/YamadaIcon/registration.json)。実台帳のGUI手入力とは区別する。
+開始HEAD：Tool `2c38b4b`、Python `a8a8846`、Unity `3227f54`、共有Docs `994813e`。AGENTSと吉田さんまでの資料、履歴・差分を確認。`scripts/production/register_yamada.py` が既存SubjectRegistry / HumanPortraitStoreを使い保存・別インスタンス再読込・人物専用書き出しを実施。[登録記録](Results/YamadaIcon/registration.json)。実台帳のGUI手入力とは区別する。
 
 人物パック `c5126d3e23b5b0536bc25773994fd065` は通常客guest-1〜12と予約客の森さん `reservation-longhair` の13人。既存12人の人物設定・画像対応を保持。同内容再出力は同じ場所を利用。猫画像・猫catalogは再書き出ししない。[Unity照合](Results/YamadaIcon/unity-data-checks.json)：明示ID・画像hash・max1024・非圧縮・alpha保持・mipmap/read-write無効・Standalone overrideなし。人物へ猫用BC7は適用しない。
 

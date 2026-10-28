@@ -17,7 +17,7 @@
 
 標準案だけでは167条件335本文。初期5猫の到達性除外62条件は制作・追加していない。ねこじゃらしの既存特別8条件8本文を保持し、特別8動作全体で64条件120本文が収録された。
 
-開始時の有効画像パックは資料の15猫から**17猫**へ増え、ユキ・アキを含む並行画像作業が反映されていた。`export_completed_narratives.py` は現在の有効bundle・画像ファイル・紹介文・外見・特徴・場面描写を読み、既存 `unity_export.export_bundle` を呼ぶ。通常の書き出しでユキ・アキの場面順と表示ラベルは正規の日本語へ戻るが、場面キー・本文・画像ハッシュは全件同一。古いコミットの画像へ戻さない。書き出しは今回1パックだけを再利用した。
+開始時の有効画像パックは資料の15猫から**17猫**へ増え、ユキ・アキを含む並行画像作業が反映されていた。`scripts/production/export_completed_narratives.py` は現在の有効bundle・画像ファイル・紹介文・外見・特徴・場面描写を読み、既存 `unity_export.export_bundle` を呼ぶ。通常の書き出しでユキ・アキの場面順と表示ラベルは正規の日本語へ戻るが、場面キー・本文・画像ハッシュは全件同一。古いコミットの画像へ戻さない。書き出しは今回1パックだけを再利用した。
 
 Unityは既存 `ContentPreviewSetup.Import` で検証・配置・参照切替した。パックJSONの手編集なし。有効パックは `cbe0df94e7a5401a8f466406c105b493`、文章revisionは `b3f0eabe6316a8bdab694485e6e4ccd9a19bb7c16c3c652d390afe9690f5c92b`。
 
@@ -59,7 +59,7 @@ fixtureは選択と表示の限定確認で、自然プレイで全条件に到�
 
 ## 再確認
 
-Toolルートで `python -X utf8 verify_completed_narrative_import.py`。書き出しは `export_completed_narratives.py` が行い、既存 `Logs/NarrativeIntegration/pack.txt` があれば重複作成を拒否する。統合後に古い書き出し入口をそのまま再実行して新パックを増やさない。
+Toolルートで `python -X utf8 scripts/verification/verify_completed_narrative_import.py`。書き出しは `scripts/production/export_completed_narratives.py` が行い、既存 `Logs/NarrativeIntegration/pack.txt` があれば重複作成を拒否する。統合後に古い書き出し入口をそのまま再実行して新パックを増やさない。
 
 Unity Editor入口は `CatCafePreview.Editor.CompletedNarrativeVerification.VerifyAndBuild`。`CATCAFE_IMPORT_PACK` に記録済みパック、`CATCAFE_COMPLETED_OUTPUT` に今回Editor検証フォルダを指定し、指定ビルドスクリプトの `-ExecuteMethod` で実行する。既にEditor検査済みでビルドだけの場合は `.BuildLatest` を使える。
 

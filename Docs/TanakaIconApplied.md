@@ -18,7 +18,7 @@
 
 ## 登録と検証の区分
 
-`register_tanaka.py` は既存SubjectRegistryとHumanPortraitStoreを使用。プロフィール・客ID対応・画像の保存再読込、既存全人物行と既存4画像対応の保持、人物専用書き出し、採用本文・猫manifest・Unity猫catalogのhash保持を検査。[登録結果](Results/TanakaIcon/registration.json)。実台帳の手入力によるGUI登録とは区別する。
+`scripts/production/register_tanaka.py` は既存SubjectRegistryとHumanPortraitStoreを使用。プロフィール・客ID対応・画像の保存再読込、既存全人物行と既存4画像対応の保持、人物専用書き出し、採用本文・猫manifest・Unity猫catalogのhash保持を検査。[登録結果](Results/TanakaIcon/registration.json)。実台帳の手入力によるGUI登録とは区別する。
 
 人物専用パック `ea0ffe4403dfe9a790b2b70425c252fc` 一組に5人を収録。猫bundleなし。通常 `ContentPreviewSetup.Import` の人物取り込みを使用。人物Importerは既存の1024上限・非圧縮・alpha保持・mipmap/read-write無効。猫BC7を適用せず、旧パックを保持する。
 

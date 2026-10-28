@@ -13,7 +13,7 @@
 
 ## 登録・取り込み
 
-`register_takahashi.py` が既存 `SubjectRegistry.save` と `HumanPortraitStore.register/export` を使用。プロフィール・ゲームID対応・画像の保存再読込、既存全人物行と既存3画像対応保持、人物だけの書き出し、採用本文・猫manifest・Unity猫catalogのSHA-256保持を検査した。[結果](Results/TakahashiIcon/registration.json)。実GUIの手入力による登録とは区別する。
+`scripts/production/register_takahashi.py` が既存 `SubjectRegistry.save` と `HumanPortraitStore.register/export` を使用。プロフィール・ゲームID対応・画像の保存再読込、既存全人物行と既存3画像対応保持、人物だけの書き出し、採用本文・猫manifest・Unity猫catalogのSHA-256保持を検査した。[結果](Results/TakahashiIcon/registration.json)。実GUIの手入力による登録とは区別する。
 
 人物専用パック `7f5d49c1d9b4f2a5c5980b872aaed35c` 一組に4人を収録。`ContentPreviewSetup.Import`→既存HumanPortraitImportで実Unityへ取り込んだ。人物Importerは1024上限・非圧縮・alpha保持・mipmap/read-write無効。猫BC7を適用しない。旧人物パックは保持。人物専用パックに猫bundleはなく、猫catalogは開始時hashと一致。
 

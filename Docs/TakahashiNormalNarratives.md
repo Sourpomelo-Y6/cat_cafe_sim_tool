@@ -57,7 +57,7 @@ AGENTS.md、DevelopmentStatus、ContentProductionScopeProposal、InteractionHuma
 
 ## 保存場所と再現
 
-採用データ `cat_cafe_sim/saves/content_images/interaction_texts.json`、下書き `cat_cafe_sim_tool/user_data/interaction_text_drafts.json` は既存Git除外。独自JSON書換えはせずTool APIの保存のみを使用。[再現用制作スクリプト](../register_takahashi_narratives.py)と[全条件・ID・本文・登録時点・検証出力](Results/TakahashiNarratives/registration.json)をGit管理。スクリプトは既存対象を検出した場合に停止して上書きを防ぐ。新規環境の空の対象条件に対して `python register_takahashi_narratives.py` で同一IDを再現する。今回の27本文はUnity用書き出し・取り込み待ち。素材パック、Unity取り込み、ビルド、配布版表示確認は未実施。
+採用データ `cat_cafe_sim/saves/content_images/interaction_texts.json`、下書き `cat_cafe_sim_tool/user_data/interaction_text_drafts.json` は既存Git除外。独自JSON書換えはせずTool APIの保存のみを使用。[再現用制作スクリプト](../scripts/production/register_takahashi_narratives.py)と[全条件・ID・本文・登録時点・検証出力](Results/TakahashiNarratives/registration.json)をGit管理。スクリプトは既存対象を検出した場合に停止して上書きを防ぐ。新規環境の空の対象条件に対して `python scripts/production/register_takahashi_narratives.py` で同一IDを再現する。今回の27本文はUnity用書き出し・取り込み待ち。素材パック、Unity取り込み、ビルド、配布版表示確認は未実施。
 
 ## 容量
 

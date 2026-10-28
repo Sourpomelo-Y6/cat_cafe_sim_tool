@@ -16,7 +16,7 @@
 
 ## 保存と検証範囲
 
-[実行スクリプト](../register_mori_profile.py)は人物編集GUIと同じ `SubjectRegistry.save(row, expected=...)` を使用。既存ToolのStore APIによる保存であり、GUI手入力ではない。別インスタンスで再読込し、全文・呼称・IDを照合。他23人を含む森さん以外の全台帳行は同値。画像台帳・全画像hash・本文等のcontent_images内の他ファイルも不変。
+[実行スクリプト](../scripts/production/register_mori_profile.py)は人物編集GUIと同じ `SubjectRegistry.save(row, expected=...)` を使用。既存ToolのStore APIによる保存であり、GUI手入力ではない。別インスタンスで再読込し、全文・呼称・IDを照合。他23人を含む森さん以外の全台帳行は同値。画像台帳・全画像hash・本文等のcontent_images内の他ファイルも不変。
 
 `InteractionLlmSettings.get` は台帳がある場合に対象行のnotesを読み、旧settings.profilesより優先する。共通猫指定で、ねこじゃらし5条件・なでる3条件・休憩1条件の9入力を既存conditionとvalidate_inputsで確認。初回確認スクリプトは未対応の操作名と対象labels指定不足で停止したが、保存・再読込・他データ保持の照合は通過済み。実装のany/directと台帳labelsに修正後、同じ採用内容で再実行した。外部LLM送信・本文生成・登録なし。開いている生成画面は閉じて開き直すと資料を読み込む。
 

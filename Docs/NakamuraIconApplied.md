@@ -18,7 +18,7 @@
 
 開始時Tool `aab3e45`、Python `031a449`、実Unity `5e60fc1`、共有Docs `91c87b8`。AGENTSと指定資料・最新履歴・未コミット差分を確認。人物制作関連チャットはidle、Unity/Playerプロセスなし。既存リン制作・日程・猫設定・素材・人物台帳のcatalog-2差分を保持。共有作業の並行実行は見られなかった。
 
-`register_nakamura.py` は既存SubjectRegistry.save / HumanPortraitStore.register/exportを利用。実台帳の保存と別インスタンス再読込、既存全人物行と8画像対応の完全保持を確認。[登録結果](Results/NakamuraIcon/registration.json)。人物専用9人パック `047ea83cdbe061bc3e639be8f4c7a62e` を一組だけ書き出し、再書き出しは同じ出力を利用。猫画像・猫catalogは再書き出ししない。通常ContentPreviewSetup.Importを使用し、9画像のhash・明示ID・既存Importerを[検査](Results/NakamuraIcon/unity-data-checks.json)。Default max1024・非圧縮・alpha保持・mipmap/read-write無効、Standalone overrideなし。猫BC7は適用しない。
+`scripts/production/register_nakamura.py` は既存SubjectRegistry.save / HumanPortraitStore.register/exportを利用。実台帳の保存と別インスタンス再読込、既存全人物行と8画像対応の完全保持を確認。[登録結果](Results/NakamuraIcon/registration.json)。人物専用9人パック `047ea83cdbe061bc3e639be8f4c7a62e` を一組だけ書き出し、再書き出しは同じ出力を利用。猫画像・猫catalogは再書き出ししない。通常ContentPreviewSetup.Importを使用し、9画像のhash・明示ID・既存Importerを[検査](Results/NakamuraIcon/unity-data-checks.json)。Default max1024・非圧縮・alpha保持・mipmap/read-write無効、Standalone overrideなし。猫BC7は適用しない。
 
 登録前後の猫manifest・登録済み本文・実Unity猫catalogのSHA256一致。旧パック・素材・ユーザーセーブは削除/更新しない。今回の人物台帳コミットはHEADへ中村さん一行だけを加え、catalog-2の先行差分を作業ツリーに残す。
 
