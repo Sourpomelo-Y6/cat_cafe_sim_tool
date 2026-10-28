@@ -57,7 +57,7 @@ class InteractionPreviewWindow:
             self.variables[name].set(labels[defaults[name]])
         line = ttk.Frame(frame)
         line.pack(fill='x', pady=6)
-        self.cat_subject=tk.StringVar(master=self.window,value=self.subjects['cat_response'].get(initial['subject_id'],next(iter(self.subjects['cat_response'].values()))))
+        self.cat_subject=tk.StringVar(master=self.window,value=self.subjects['cat_response'].get(initial['subject_id'] if initial['kind']=='cat_response' else initial.get('target_cat'),next(iter(self.subjects['cat_response'].values()))))
         ttk.Label(line,text='対象猫：').pack(side='left')
         self.cat_selector=ttk.Combobox(line,textvariable=self.cat_subject,values=list(self.subjects['cat_response'].values()),state='readonly',width=12)
         self.cat_selector.pack(side='left')

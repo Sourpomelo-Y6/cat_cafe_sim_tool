@@ -12,7 +12,7 @@ REACTION_NAMES = dict(REACTIONS, any='指定なし（人物のセリフ）')
 
 class InteractionTextEditorWindow:
     def __init__(self, parent, drafts, published, *, generation_settings=None, generation_output=None,
-                 image_registry=None, catalog_provider=None, subject_registry=None):
+                 image_registry=None, catalog_provider=None, subject_registry=None, initial_condition=None):
         import tkinter as tk
         from tkinter import ttk
         from tkinter.scrolledtext import ScrolledText
@@ -32,11 +32,16 @@ class InteractionTextEditorWindow:
         self.reviewed = None
         self.window = tk.Toplevel(parent)
         self.window.title('日常交流の文章 — 編集・生成・確認登録')
-        self.window.geometry('940x780')
+        self.window.geometry('1200x780')
         self.window.minsize(720, 700)
         self.window.protocol('WM_DELETE_WINDOW', self.close)
-        frame = ttk.Frame(self.window, padding=12)
-        frame.pack(fill='both', expand=True)
+        outer = ttk.Frame(self.window)
+        outer.pack(fill='both', expand=True)
+        frame = ttk.Frame(outer, padding=12)
+        frame.pack(side='left', fill='both', expand=True)
+        self.comparison = ScrolledText(outer, width=28, wrap='word', state='disabled')
+        self.comparison.pack(side='right', fill='both', padx=8, pady=12)
+        self.window.bind('<Configure>', self.resize_comparison)
         ttk.Label(frame, text='日常交流の文章', font=('', 14, 'bold')).pack(anchor='w')
         ttk.Label(frame, text='人物のセリフと猫の反応を別々に制作します。1〜3案、各200文字まで。\n'
                   '下書き保存 → 内容を確認 → 確認した文章を登録。画像付きで確認し、Unity向けに書き出します。',
@@ -46,7 +51,7 @@ class InteractionTextEditorWindow:
         self.choices, self.selectors = {}, {}
         for i, (name, label) in enumerate((('kind', '文章の種類'), ('subject_id', '人物・猫'),
                                             ('mode', '行動・絵の種類'), ('action', '操作・強さ'),
-                                            ('reaction', '猫の反応条件'), ('narrative_scene', '確定場面'))):
+                                            ('reaction', '猫の反応条件'), ('narrative_scene', '通常／特別場面'))):
             column, row = i % 2, (i // 2) * 2
             grid.columnconfigure(column, weight=1)
             ttk.Label(grid, text=label).grid(row=row, column=column, sticky='w', padx=(0, 8))
@@ -75,6 +80,10 @@ class InteractionTextEditorWindow:
         self.saved_selector.bind('<<ComboboxSelected>>',self.open_saved_condition)
         self.scope = tk.StringVar(master=self.window)
         ttk.Label(frame, textvariable=self.scope, wraplength=760).pack(anchor='w', pady=4)
+        links = ttk.Frame(frame)
+        links.pack(fill='x')
+        ttk.Button(links, text='資料・採用文を比較…', command=self.open_comparison).pack(side='left')
+        ttk.Button(links, text='この対象の資料を編集…', command=self.open_subject_notes).pack(side='left', padx=8)
         self.fields = []
         for i in range(3):
             ttk.Label(frame, text=f'案{i + 1}（空欄は未制作）').pack(anchor='w')
@@ -94,7 +103,61 @@ class InteractionTextEditorWindow:
         ttk.Button(frame, text='閉じる', command=self.close).pack(anchor='e')
         self._condition = None
         self._baseline = None
-        self.load_condition(condition(target_cat='*'))
+        self.load_condition(initial_condition or condition(target_cat='*'))
+
+    def open_comparison(self):
+        import tkinter as tk
+        from tkinter.scrolledtext import ScrolledText
+        self.refresh_comparison()
+        window = tk.Toplevel(self.window)
+        window.title('資料・採用文 — ' + self.subjects[self._condition['kind']][self._condition['subject_id']])
+        body = ScrolledText(window, width=60, height=24, wrap='word')
+        body.pack(fill='both', expand=True)
+        body.insert('1.0', self.comparison.get('1.0', 'end-1c'))
+        body.configure(state='disabled')
+
+    def open_subject_notes(self):
+        if not self.subject_registry:
+            self.notice.set('対象台帳がありません。制作画面から開いてください。')
+            return
+        from interaction_subject_gui import SubjectManagerWindow
+        existing = getattr(self, 'notes_window', None)
+        if existing and existing.window.winfo_exists():
+            existing.window.lift()
+            return
+        self.notes_window = SubjectManagerWindow(self.window, self.subject_registry,
+            catalog=self.catalog_provider() if self.catalog_provider else {},
+            drafts=self.drafts, published=self.published, on_saved=self.refresh_comparison)
+        row = self.subject_registry.get(self._condition['subject_id'])
+        self.notes_window.load(row)
+        self.notes_window.tabs.select(0 if row['kind']=='cat_response' else 1)
+
+    def resize_comparison(self, event):
+        if event.widget != self.window:
+            return
+        if event.width < 1100:
+            self.comparison.pack_forget()
+        elif not self.comparison.frame.winfo_manager():
+            self.comparison.pack(side='right', fill='both', padx=8, pady=12)
+
+    def refresh_comparison(self):
+        if not self._condition:
+            return
+        try:
+            row = self.subject_registry.get(self._condition['subject_id']) if self.subject_registry else None
+            adopted = self._published_snapshot
+            texts = [v['text'] for v in adopted['variants']] if adopted else []
+            state = '未保存の変更あり' if self.dirty() else '保存済み'
+            self.window.title('交流の文章 — ' + self.subjects[self._condition['kind']][self._condition['subject_id']] + ' — ' + state)
+            content = state + '\nUnity収録：未確認\n\n資料\n' + (row.get('notes', '') if row else '資料なし')
+            content += '\n\n採用済みの本文\n' + ('\n\n'.join(texts) if texts else '未採用')
+            content += '\n\n画像と組合せは「画像付きで組み合わせを確認…」から確認できます。'
+            self.comparison.configure(state='normal')
+            self.comparison.delete('1.0', 'end')
+            self.comparison.insert('1.0', content)
+            self.comparison.configure(state='disabled')
+        except (OSError, ValueError) as exc:
+            self.notice.set(f'比較資料を読み込めません：{exc}')
 
     def _set_selectors(self, value):
         self.target_selector.configure(values=list(self.target_options),state='readonly' if value['kind']=='speech' else 'disabled')
@@ -157,6 +220,9 @@ class InteractionTextEditorWindow:
             return True
 
     def confirm_leave(self):
+        notes = getattr(self, 'notes_window', None)
+        if notes and notes.window.winfo_exists() and not notes.confirm_leave():
+            return False
         from tkinter import messagebox
         if not self.dirty():
             return True
@@ -201,6 +267,7 @@ class InteractionTextEditorWindow:
         source = '下書き' if draft is not None else '登録済み素材' if published is not None else '空欄'
         self.notice.set(source + 'を読み込みました。人物のセリフは発話本文だけ、猫の反応は描写だけを入力してください。')
         self.refresh_saved_conditions()
+        self.refresh_comparison()
         return True
 
     def selection_changed(self, event=None):
@@ -227,6 +294,7 @@ class InteractionTextEditorWindow:
             self.reviewed = None
             self.set_preview('')
             event.widget.edit_modified(False)
+            self.refresh_comparison()
 
     def set_preview(self, text):
         self.preview_text.configure(state='normal')
@@ -241,6 +309,7 @@ class InteractionTextEditorWindow:
             self._draft_snapshot = copy.deepcopy(entry)
             self._baseline = copy.deepcopy(entry)
             self.refresh_saved_conditions()
+            self.refresh_comparison()
             self.notice.set('この条件の下書きを保存しました。登録済み素材は変更していません。')
             return True
         except (OSError, ValueError) as exc:
@@ -277,6 +346,7 @@ class InteractionTextEditorWindow:
             self._published_snapshot = copy.deepcopy(entry)
             self._baseline = copy.deepcopy(entry)
             self.refresh_saved_conditions()
+            self.refresh_comparison()
             self.notice.set('この条件の制作素材を登録しました。Unityへ反映するには素材を書き出して取り込んでください。')
             return True
         except (OSError, ValueError) as exc:

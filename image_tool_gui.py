@@ -102,7 +102,7 @@ class ContentImageToolWindow:
         for title, description, label, command in (
             ('猫の紹介・場面の描写', '選択した猫の紹介文と、通常・遊ぶ・撫でられる・眠る場面の文章を制作します。',
              '紹介文・行動描写の編集…', self.open_text_editor),
-            ('日常交流の文章', 'プレイヤー・お客さんのセリフと猫の反応を、全ての通常動作の条件別に制作します。手入力・ローカルLLM生成・画像付き確認に対応しています。対象は編集画面で選びます。',
+            ('交流の文章（通常・特別場面）', '選択した猫の反応から編集を開始します。人物のセリフへの切り替え、資料・採用文の比較、画像付き確認に対応しています。',
              '日常交流の文章を編集…', self.open_interaction_text_editor)):
             group = ttk.LabelFrame(text_page, text=title, padding=14)
             group.pack(fill='x', pady=(0, 16))
@@ -354,9 +354,13 @@ class ContentImageToolWindow:
             existing.window.lift()
             return
         try:
+            from interaction_texts import condition
+            content_id, _ = self.selection()
+            subject = next((r for r in self.subject_registry.read()['subjects'] if r['kind']=='cat_response' and r['content_id']==content_id), None)
+            initial = condition('cat_response', subject['id'], reaction='neutral', subjects=self.subject_registry.labels(include_disabled=True)) if subject else None
             self.interaction_text_editor = InteractionTextEditorWindow(
                 self.window, self.interaction_drafts, self.interaction_published,
-                image_registry=self.registry, catalog_provider=self.catalog_provider, subject_registry=self.subject_registry)
+                image_registry=self.registry, catalog_provider=self.catalog_provider, subject_registry=self.subject_registry, initial_condition=initial)
         except (OSError, ValueError) as exc:
             self.notice.set(f'日常交流の文章を開けません：{exc}')
 
