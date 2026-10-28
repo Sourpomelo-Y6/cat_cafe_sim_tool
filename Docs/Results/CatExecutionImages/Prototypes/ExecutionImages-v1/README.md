@@ -55,7 +55,7 @@
 8モードは `pet / teaser / ball / plush / tunnel / brush / voice / presence`。各猫・各モードについて共通 `<mode>` と `<mode>__switch` を準備候補へ、`<mode>__direct` と `<mode>__adapt` を実行候補へ登録する案。画像とキーの全対応はInventory.jsonと猫別manifestの `keys` に記録。同一PNGは内容ハッシュで共有し、キーごとに画像を複製しない。新しい `__execute` キーは不要。
 
 1. `cat_cafe_sim_tool/interaction_scenes.py` の既存キー、`content_images.py` の `ImageRegistry` と `cat_cafe_sim/saves/content_images/manifest.json` を確認し、上記のゲームID／表示ID双方に明示対応する。IDが同一のナナ・マロン・ココに架空のplaytest IDを作らない。旧configureスクリプトを無条件に再実行しない。
-2. `cat_cafe_sim_tool/register_mike_execution_images.py` はミケ専用。今回の画像をそのまま登録できる汎用スクリプトではない。後日の対応では、既存の他猫・特殊反応・保存済み参照を保持しつつ必要な対応だけ追加する。
+2. `cat_cafe_sim_tool/scripts/production/register_mike_execution_images.py` はミケ専用。今回の画像をそのまま登録できる汎用スクリプトではない。後日の対応では、既存の他猫・特殊反応・保存済み参照を保持しつつ必要な対応だけ追加する。
 3. Unity `C:/Users/hi-wa/unity_workspase/CatCafeSim/Assets/Resources/CatCafeContent/catalog.json` が指定する有効パックの `bundle.json` と `interaction_texts.json` の `cat_bindings` / `image_bindings` を更新し、revisionを整合させる。パックIDを推測して固定しない。
 4. `Assets/CatCafePreview/Runtime/Standalone/CafeNarrativeCatalog.cs` の `UsePreparationImage` は現在 `cat-mike` 限定。ほかの7匹の通常／穏やかな実行にも、拒否 `turn_away`・戸惑い `confused`・疲労 `listless` で準備へ戻る判定を適用する必要がある。`CafeNarratives.cs` のreceiptと `LocalCafePlayer.cs` のフォールバック、Pythonの `cat_cafe_sim/cat_cafe_sim/unity_state_server.py`、制作ツール側の同等処理、`cat_cafe_sim_tool/unity_preview_template` を合わせて確認する。
 5. `PythonPlayerPanel.cs` は保存済み `narrative_image` を優先する。画像キー追加だけでは表示が変わらない場合があるため、今後確定するreceiptと画像bindingを検証する。過去の履歴・保存済み画像参照を勝手に書き換えない。

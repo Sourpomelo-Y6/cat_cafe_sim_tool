@@ -2,7 +2,7 @@
 
 2026-10-18完了。内蔵 image_gen により基準1枚、基本9枚、特殊16枚、睡眠1枚の計27枚を制作。白・長毛・中立・費用400・shop-1を維持し、金色の目、丸い顔、がっしりした体を外見6項目として記録した。既存ソラの画像は画風・背景の参照だけに使用した。
 
-[全27枚の画像一覧](index.html)、[生成プロンプト](prompts.json)、[外見設定](profile.json)、[登録対応](manifest.json)、[検証・容量](Verification.json)。画像正本はこのフォルダー。再登録は `python -X utf8 cat_cafe_sim_tool/register_chiro_images.py`。
+[全27枚の画像一覧](index.html)、[生成プロンプト](prompts.json)、[外見設定](profile.json)、[登録対応](manifest.json)、[検証・容量](Verification.json)。画像正本はこのフォルダー。再登録は `python -X utf8 cat_cafe_sim_tool/scripts/production/register_chiro_images.py`。
 
 ゲーム画像manifestと実Unityの有効パックへ52場面を登録し、交流画像binding32件を追加。基本8行動とswitchは基準画像を準備に使い、direct/adaptは各行動画像を使用する。playはねこじゃらし画像を共用。特殊16場面、睡眠、待機は専用画像を使用。既存8匹の場面と本文は保持。ショップ外見を検証・候補保存し、加入時の関係プロフィールと営業保存へ保持する。既存セーブへ外見を自動補完しない。
 

@@ -4,7 +4,7 @@
 
 2026-10-28。**Tool確認登録済み・16本文すべてUnity取り込み待ち**。対象4場面8条件×2案＝16本文を追加し、採用411→419条件。対象の既存特別文・下書き・生成候補がなかったため全8条件を制作。除外・保留なし、案3は空欄。
 
-[全文・条件キー・候補ID](Results/MikeBrushNarratives/registration.json)／[画像付きプレビュー](Results/MikeBrushNarratives/preview-checks.json)／[混合候補・片側フォールバック](Results/MikeBrushNarratives/verification.json)／[保持確認](Results/MikeBrushNarratives/preservation.json)／[容量](Results/MikeBrushNarratives/capacity.json)／[制作スクリプト](../register_mike_brush_narratives.py)／[限定検証](../verify_mike_brush_narratives.py)。
+[全文・条件キー・候補ID](Results/MikeBrushNarratives/registration.json)／[画像付きプレビュー](Results/MikeBrushNarratives/preview-checks.json)／[混合候補・片側フォールバック](Results/MikeBrushNarratives/verification.json)／[保持確認](Results/MikeBrushNarratives/preservation.json)／[容量](Results/MikeBrushNarratives/capacity.json)／[制作スクリプト](../scripts/production/register_mike_brush_narratives.py)／[限定検証](../scripts/verification/verify_mike_brush_narratives.py)。
 
 ## 現物照合・保存経路
 
@@ -16,7 +16,7 @@
 
 既存Tk本文欄入力→save_draft→登録内容確認→両欄の画像付きプレビュー→画面の「今回の8条件だけ登録」→register→reload→新ストア・新編集画面で再読込。保存JSONの直接編集・独自保存形式・実モデル要求なし。computer-useスキルで4場面×2案の実画面を目視。プレビュー合成の採用元ラベルは実装上「登録済み」になるが、タイトルと注意書きで未登録下書きと明記し、採用ストアへの保存と区別した。今回の対象限定ボタンによる登録後、プレビューで確認した本文・候補IDと全件一致。対象外下書きの一括登録なし。
 
-再現用スクリプトは対象採用済みなら上書きせず停止する。`--resume-reviewed-drafts` は登録前下書きのみの再開用であり、現在の採用状態では使用しない。再確認はToolルートで `python verify_mike_brush_narratives.py`、`pwsh -NoProfile -File Docs/Results/MikeBrushNarratives/runtime-check.ps1`。
+再現用スクリプトは対象採用済みなら上書きせず停止する。`--resume-reviewed-drafts` は登録前下書きのみの再開用であり、現在の採用状態では使用しない。再確認はToolルートで `python scripts/verification/verify_mike_brush_narratives.py`、`pwsh -NoProfile -File Docs/Results/MikeBrushNarratives/runtime-check.ps1`。
 
 ## 成立条件・優先順位・画像
 

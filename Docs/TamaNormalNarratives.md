@@ -19,7 +19,7 @@ Pythonの個性はfrozen dataclassで、台帳から交流設定へ復元する�
 |voice|neutral、confused、listless|turn_away：同上。favorable／enthusiastic：上限12×0.7×0.8×1.2＝8.064＜10。|
 |presence|confused、listless|turn_away：同上。neutral／favorable／enthusiastic：上限12×0.5×0.4×1.2＝2.88＜6。|
 
-22条件の短い実step到達例を[reachability.json](Results/TamaNormalNarratives/reachability.json)へ保存。[再現スクリプト](../check_tama_reachability.py)はルール・個性・状態を直接書き換えず、初期体力100／35／15から合法操作を進め、対象反応が通常場面であることを確認する。
+22条件の短い実step到達例を[reachability.json](Results/TamaNormalNarratives/reachability.json)へ保存。[再現スクリプト](../scripts/verification/check_tama_reachability.py)はルール・個性・状態を直接書き換えず、初期体力100／35／15から合法操作を進め、対象反応が通常場面であることを確認する。
 
 - ball：初回direct 20.4で熱心、初回adapt 17で好意、direct4回目8.16で通常。体力35からdirect3回→pause→adaptで戸惑い4.352。
 - plush：初回direct 8.64で通常、adapt2回目5.76で戸惑い。voice direct→plushへ切替→directは10.368で好意。
@@ -42,7 +42,7 @@ pauseは開始時体力で低体力反応を決め、その後2回復する。�
 
 ## 保存・再現と限定検証
 
-本文の入力は[本文モジュール](../tama_normal_texts.py)、既存Tool編集画面への入力・個別確認登録は[登録スクリプト](../register_tama_normal_narratives.py)。保存JSONを独自形式で直接編集しない。既存対象条件があれば停止し、未登録データで `python register_tama_normal_narratives.py --review` を実行すると保存なしの画像付き校正（F8次条件、F9次候補）が可能。登録は同スクリプトの引数なしで実施する。
+本文の入力は[本文モジュール](../Docs/ProductionData/tama_normal_texts.py)、既存Tool編集画面への入力・個別確認登録は[登録スクリプト](../scripts/production/register_tama_normal_narratives.py)。保存JSONを独自形式で直接編集しない。既存対象条件があれば停止し、未登録データで `python scripts/production/register_tama_normal_narratives.py --review` を実行すると保存なしの画像付き校正（F8次条件、F9次候補）が可能。登録は同スクリプトの引数なしで実施する。
 
 採用JSONはGit管理外 `C:/Users/hi-wa/source/codex_repos/CatCafeSim/cat_cafe_sim/saves/content_images/interaction_texts.json`、下書きはGit管理外 `C:/Users/hi-wa/source/codex_repos/CatCafeSim/cat_cafe_sim_tool/user_data/interaction_text_drafts.json`。本文・条件・候補IDを本資料と[登録記録](Results/TamaNormalNarratives/registration.json)に残す。3欄目は空で、採用候補数に加えない。
 
@@ -54,7 +54,7 @@ pauseは開始時体力で低体力反応を決め、その後2回復する。�
 - 各条件の下書き保存→登録内容確認→確認登録→編集画面の再読み込み→新規ストア再読み込みに成功。対象条件は操作別を含め既存採用・下書き・生成候補に存在せず、新規制作した。
 - 既存採用296条件・下書き312条件の全エントリを前後比較して保持。猫台帳、画像manifest、生成候補278 JSONのSHA256は前後一致。ソラ・ミケ・人物・特別場面も一括登録していない。
 - 画像付きプレビュー136組で本文展開・画像読込成功。[登録記録](Results/TamaNormalNarratives/registration.json)に本文・候補ID・画像元・場面キー・プレビュー表示元を保存。
-- [登録後の限定照合](../verify_tama_registered.py)で、102組のTool再読み込み・表示元・候補選択を確認。68組は「登録済み／操作共通」で各2候補、未登録34組は「未制作」で候補なし。[照合記録](Results/TamaNormalNarratives/tool-reload.json)。
+- [登録後の限定照合](../scripts/verification/verify_tama_registered.py)で、102組のTool再読み込み・表示元・候補選択を確認。68組は「登録済み／操作共通」で各2候補、未登録34組は「未制作」で候補なし。[照合記録](Results/TamaNormalNarratives/tool-reload.json)。
 - [実行時限定fixture](Results/TamaNormalNarratives/runtime-check.ps1)で、既存.NETアセンブリの実 `StepExchange` に22到達列を入力し同じ通常反応になることを確認。Unity有効カタログのメモリ上コピーに今回分だけ加え、204件の候補ID・本文・pool選択／定型フォールバック、6件の操作別優先を確認。未登録時は候補ID・poolなしで、従来の `Compose` 定型本文を保持。[結果](Results/TamaNormalNarratives/runtime-result.txt)。アセンブリSHA256 `E77E4DF261B456159F93C65A69677BED98FFEA4FE4675A9116B68026A64D1629`。新規コンパイル・ビルドなし。
 - 上記.NET fixtureは反応とカタログをメモリ上で扱う限定検証であり、Unity Editor画面・自然プレイ頻度・配布版での表示確認ではない。初期の追加照合でreflectionの検索対象をNonPublicだけにしたためpublicメソッドを取得できなかったが、Publicを含めて修正し全件成功。既存の成功済み全動作4テストは再実行していない。
 

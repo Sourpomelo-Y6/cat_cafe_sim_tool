@@ -18,7 +18,7 @@
 
 ## 接続箇所
 
-- `register_mike_execution_images.py`：制作ツールの `cat-mike`／`playtest-mike` に共通・切り替え・通常・穏やかの計32キーを明示登録。元の画像は変更しない。同じPNGは登録キー間で共有する。
+- `scripts/production/register_mike_execution_images.py`：制作ツールの `cat-mike`／`playtest-mike` に共通・切り替え・通常・穏やかの計32キーを明示登録。元の画像は変更しない。同じPNGは登録キー間で共有する。
 - 現在有効なUnityパック `4762dd1bd978461bb07c041c59417281` のミケの `bundle.json` 場面と、`interaction_texts.json` の画像bindingsを更新。カタログのrevisionを再計算。パックの複製・参照先の切り替えは行わない。画像は内容ハッシュで保存し、既存の同じ画像を再利用する。
 - `Standalone/CafeNarratives.cs`：新たに確定した反応に合わせ、実行用または準備用の画像参照をreceiptへ保存する。
 - `Standalone/CafeNarrativeCatalog.cs`：ミケの通常・穏やかな実行で、拒否・戸惑い・疲労なら準備画像を使う判定。
@@ -30,7 +30,7 @@
 登録の再実行：
 
 ```powershell
-python cat_cafe_sim_tool/register_mike_execution_images.py --project-path C:/Users/hi-wa/unity_workspase/CatCafeSim
+python cat_cafe_sim_tool/scripts/production/register_mike_execution_images.py --project-path C:/Users/hi-wa/unity_workspase/CatCafeSim
 ```
 
 制作画像・参照元・プロンプトは `Docs/Prototypes/MikePetExecution-v1` と `MikeActionExecution-v1`。今回の全キー・生成画像参照・更新前JSONバックアップ先は後者の `Registration.json`。他の猫・特殊反応・採用済み文章が不変であることを照合した。

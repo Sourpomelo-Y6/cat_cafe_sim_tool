@@ -90,7 +90,7 @@
 
 Logsは8,903,733 bytes、Latestは20,303 bytes、Libraryは260,603 bytes増加。主因は専用セーブ・画面証跡・ビルド実行ログとスクリプトの更新で、大幅な増加はない。計測後の容量JSON・記録追記で小差がある。StandaloneBuild直下はLatestとRunsだけでPendingなし、成功ビルドは一組。最終検証Playerは終了した。素材・通常セーブ・別作業の成果物やキャッシュは削除していない。
 
-作業ルートの `Docs` はGit管理外なので、進捗・計画・索引・履歴の今回更新を [WorkspaceOpeningUpdates.patch](WorkspaceOpeningUpdates.patch) としてこのリポジトリにも収録する。実際の `Docs/DevelopmentStatus.md` 等も更新済み。パッチは作業ルートから `git apply --ignore-space-change cat_cafe_sim_tool/Docs/WorkspaceOpeningUpdates.patch` で適用できる（適用済みの現在は逆適用のcheckで照合した）。既存の未コミットAllCats・CatImageSchedule・CatImageTodo・ChiroImages・register_chiro_images.py・ChiroDailyImageVerification・CafeNarrativeCatalog・rules／presentationと、別 `cat_cafe_sim` の未コミット変更はコミット対象外。Unity側の既存素材は保持したまま再利用する。
+作業ルートの `Docs` はGit管理外なので、進捗・計画・索引・履歴の今回更新を [WorkspaceOpeningUpdates.patch](WorkspaceOpeningUpdates.patch) としてこのリポジトリにも収録する。実際の `Docs/DevelopmentStatus.md` 等も更新済み。パッチは作業ルートから `git apply --ignore-space-change cat_cafe_sim_tool/Docs/WorkspaceOpeningUpdates.patch` で適用できる（適用済みの現在は逆適用のcheckで照合した）。既存の未コミットAllCats・CatImageSchedule・CatImageTodo・ChiroImages・scripts/production/register_chiro_images.py・ChiroDailyImageVerification・CafeNarrativeCatalog・rules／presentationと、別 `cat_cafe_sim` の未コミット変更はコミット対象外。Unity側の既存素材は保持したまま再利用する。
 
 ## 残る課題
 

@@ -4,7 +4,7 @@
 
 2026-10-28。**Tool確認登録済み・全16本文はUnity取り込み待ち**。プレイヤー＋ミケの声かけ（voice）4場面8条件×2案＝16本文を追加し、採用419→427条件。対象の既存特別文・下書き・生成候補は0のため全8条件を制作。除外・保留なし。案3は空欄。
 
-[全文・条件キー・候補ID](Results/MikeVoiceNarratives/registration.json)／[画像付きプレビュー](Results/MikeVoiceNarratives/preview-checks.json)／[混合候補・片側フォールバック](Results/MikeVoiceNarratives/verification.json)／[保持確認](Results/MikeVoiceNarratives/preservation.json)／[容量](Results/MikeVoiceNarratives/capacity.json)／[制作スクリプト](../register_mike_voice_narratives.py)／[限定検証](../verify_mike_voice_narratives.py)。
+[全文・条件キー・候補ID](Results/MikeVoiceNarratives/registration.json)／[画像付きプレビュー](Results/MikeVoiceNarratives/preview-checks.json)／[混合候補・片側フォールバック](Results/MikeVoiceNarratives/verification.json)／[保持確認](Results/MikeVoiceNarratives/preservation.json)／[容量](Results/MikeVoiceNarratives/capacity.json)／[制作スクリプト](../scripts/production/register_mike_voice_narratives.py)／[限定検証](../scripts/verification/verify_mike_voice_narratives.py)。
 
 ## 現物照合とTool保存経路
 
@@ -16,7 +16,7 @@
 
 既存Tk本文欄への入力→save_draft→登録内容確認→画像付き両欄プレビュー→画面の「今回の8条件だけ登録」→register→reload→新ストア・新編集画面で再読み込み。保存JSONの直接編集、独自形式、実LLM要求は使用していない。computer-useスキルを使い、4場面×2案のTool実画面で画像・本文・呼称展開を目視した。プレビュー用メモリ合成の採用元ラベルは実装上「登録済み」だが、ウィンドウタイトルと注意書きで未登録下書きと表示し、採用保存と区別。目視後に対象限定ボタンを操作し、登録前レビューと登録後の本文・候補IDは全件一致。対象外下書きの一括登録なし。
 
-再現用制作スクリプトは対象採用済みなら停止し、上書きしない。`--resume-reviewed-drafts` は登録前の完全一致する下書きのみの再開用で、現在は使用しない。再確認はToolルートで `python verify_mike_voice_narratives.py` と `pwsh -NoProfile -File Docs/Results/MikeVoiceNarratives/runtime-check.ps1`。
+再現用制作スクリプトは対象採用済みなら停止し、上書きしない。`--resume-reviewed-drafts` は登録前の完全一致する下書きのみの再開用で、現在は使用しない。再確認はToolルートで `python scripts/verification/verify_mike_voice_narratives.py` と `pwsh -NoProfile -File Docs/Results/MikeVoiceNarratives/runtime-check.ps1`。
 
 ## 成立条件・操作・画像
 

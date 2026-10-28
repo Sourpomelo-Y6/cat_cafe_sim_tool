@@ -48,7 +48,7 @@
 
 台帳は距離を大切にする白い長毛の猫。4動作の共通／準備側は通常姿勢、direct・adaptはトンネルの入口、ブラシ、声かけ、見守る人の脚がそれぞれ見える画像を確認。tunnelのintense・feintは共通画像へ補完。実行時の否定反応では準備画像が優先されるため、Toolプレビューの単純な操作画像解決と区別する。
 
-設定済みローカルLLMへの接続はソケット権限で拒否されたためTool手入力を使用。[スクリプト](../register_sora_remaining_narratives.py)は既存条件があれば停止し、画像付きプレビュー68組の後、条件ごとに下書き保存・登録内容確認・登録・再読込。採用・下書きの既存全エントリ、台帳・manifest・生成候補のハッシュを保持。条件内・今回全体の本文と候補ID重複なし、プレースホルダーを確認。[登録記録](Results/SoraRemainingNarratives/registration.json)。
+設定済みローカルLLMへの接続はソケット権限で拒否されたためTool手入力を使用。[スクリプト](../scripts/production/register_sora_remaining_narratives.py)は既存条件があれば停止し、画像付きプレビュー68組の後、条件ごとに下書き保存・登録内容確認・登録・再読込。採用・下書きの既存全エントリ、台帳・manifest・生成候補のハッシュを保持。条件内・今回全体の本文と候補ID重複なし、プレースホルダーを確認。[登録記録](Results/SoraRemainingNarratives/registration.json)。
 
 既存 .NET アセンブリとUnity有効カタログのメモリ上コピーに今回分を加え、全4動作・各操作・6反応の選択／定型120件と、操作別優先4件を限定確認。[検証](Results/SoraRemainingNarratives/runtime-check.ps1)、[結果](Results/SoraRemainingNarratives/runtime-result.txt)。反応を指定したfixtureであり、Unity画面・自然プレイ・配布版の確認ではない。
 

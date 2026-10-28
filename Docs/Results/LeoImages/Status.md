@@ -2,7 +2,7 @@
 
 2026-10-19完了。内蔵 image_gen で基準1枚、交流基本9枚、特殊16枚、睡眠1枚の計27枚を採用。声かけの信頼表情は通常との差を明確にするため再制作し、初期候補1枚も素材として保持した。基準画像の画風・背景のみマロンを参照し、行動差分はレオの基準画像を参照した。
 
-[画像一覧](index.html)、[全生成プロンプトと参照元](prompts.json)、[外見6項目](profile.json)、[登録対応](manifest.json)、[検証と容量](Verification.json)。再登録は `python -X utf8 cat_cafe_sim_tool/register_leo_images.py`。
+[画像一覧](index.html)、[全生成プロンプトと参照元](prompts.json)、[外見6項目](profile.json)、[登録対応](manifest.json)、[検証と容量](Verification.json)。再登録は `python -X utf8 cat_cafe_sim_tool/scripts/production/register_leo_images.py`。
 
 茶トラ・短毛、穏やかな甘えん坊、特性outgoing、費用450、shop-2は維持。琥珀色の目、やや角張った顔、細身の体、細い濃橙色の縞を制作設定として追加し、緑の目のマロンと区別する。ゲームの標準ショップ定義とUnity表示資料にも外見を反映。新規加入時の関係プロフィールと営業セーブへ保存し、既存セーブを自動変更しない。
 

@@ -4,7 +4,7 @@
 
 2026-10-27。**Tool確認登録済み・16本文すべてUnity取り込み待ち**。プレイヤー＋ミケの4場面8条件に各2案。対象の採用・下書き・生成候補はいずれも0件で、不足8条件だけを新規制作した。案3は空欄。除外・保留なし。
 
-[登録条件・候補ID・プロフィール](Results/MikePlushNarratives/registration.json)／[Toolプレビュー・片側フォールバック](Results/MikePlushNarratives/preview-checks.json)／[追加限定確認](Results/MikePlushNarratives/verification.json)／[容量](Results/MikePlushNarratives/capacity.json)／[再現用制作スクリプト](../register_mike_plush_narratives.py)／[読取限定検証](../verify_mike_plush_narratives.py)
+[登録条件・候補ID・プロフィール](Results/MikePlushNarratives/registration.json)／[Toolプレビュー・片側フォールバック](Results/MikePlushNarratives/preview-checks.json)／[追加限定確認](Results/MikePlushNarratives/verification.json)／[容量](Results/MikePlushNarratives/capacity.json)／[再現用制作スクリプト](../scripts/production/register_mike_plush_narratives.py)／[読取限定検証](../scripts/verification/verify_mike_plush_narratives.py)
 
 ## 照合と保存経路
 

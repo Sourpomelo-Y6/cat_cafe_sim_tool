@@ -14,7 +14,7 @@
 
 ## 到達性と制作条件
 
-Python実ルール `TypesInteraction.step` と採用プリセット「遊び好きで繊細な猫」を使用。現行ToolのUnity用rulesの猫個性・全exchange数値・全8動作定義と一致することをassertで照合した。[到達性スクリプト](../check_kohaku_reachability.py)と[実記録](Results/KohakuNormalNarratives/reachability.json)に34到達列、初期体力・全操作列・確定反応・得点・判定前後状態、別途8動作の低体力からの休憩後adapt列を残す。
+Python実ルール `TypesInteraction.step` と採用プリセット「遊び好きで繊細な猫」を使用。現行ToolのUnity用rulesの猫個性・全exchange数値・全8動作定義と一致することをassertで照合した。[到達性スクリプト](../scripts/verification/check_kohaku_reachability.py)と[実記録](Results/KohakuNormalNarratives/reachability.json)に34到達列、初期体力・全操作列・確定反応・得点・判定前後状態、別途8動作の低体力からの休憩後adapt列を残す。
 
 |動作|制作する反応|条件数|除外|
 |---|---|---:|---|
@@ -62,7 +62,7 @@ Python実ルール `TypesInteraction.step` と採用プリセット「遊び好�
 
 ## 保存と再現
 
-本文は[kohaku_normal_texts.py](../kohaku_normal_texts.py)。[登録スクリプト](../register_kohaku_normal_narratives.py)は既存 `InteractionTextEditorWindow` の入力欄へ本文を入れ、単一条件ずつ `save_draft → preview（登録内容確認）→ register → reload` を実行する。保存JSONを独自形式で書き換えない。未登録データで `python register_kohaku_normal_narratives.py --review` は保存なし校正、引数なしは確認登録。対象の既存採用・下書き・生成候補があれば停止し、再実行で上書きしない。
+本文は[Docs/ProductionData/kohaku_normal_texts.py](../Docs/ProductionData/kohaku_normal_texts.py)。[登録スクリプト](../scripts/production/register_kohaku_normal_narratives.py)は既存 `InteractionTextEditorWindow` の入力欄へ本文を入れ、単一条件ずつ `save_draft → preview（登録内容確認）→ register → reload` を実行する。保存JSONを独自形式で書き換えない。未登録データで `python scripts/production/register_kohaku_normal_narratives.py --review` は保存なし校正、引数なしは確認登録。対象の既存採用・下書き・生成候補があれば停止し、再実行で上書きしない。
 
 採用データはGit管理外 `C:/Users/hi-wa/source/codex_repos/CatCafeSim/cat_cafe_sim/saves/content_images/interaction_texts.json`、下書きはGit管理外 `C:/Users/hi-wa/source/codex_repos/CatCafeSim/cat_cafe_sim_tool/user_data/interaction_text_drafts.json`。条件・本文・候補IDは[登録記録](Results/KohakuNormalNarratives/registration.json)と下表に保存し再現可能にした。案3は空で採用本文数に含めない。
 
@@ -73,7 +73,7 @@ Python実ルール `TypesInteraction.step` と採用プリセット「遊び好�
 - 採用318→352条件、下書き334→368条件。コハク34条件68本文だけを追加。各条件の下書き保存・登録内容確認・確認登録・編集画面再読み込み・新規ストア再読み込みが成功。候補ID・本文の重複なし、プレースホルダーは `{cat}` のみで、全本文のコハクへの展開を確認。
 - 既存採用318条件・下書き334条件の全エントリを前後比較して保持。台帳・画像manifest・生成候補278 JSONのSHA256は登録前後で一致。本文・候補ID・プレビュー表示元・画像元・解決画像キーを[登録記録](Results/KohakuNormalNarratives/registration.json)に保存。
 - 全68本文×有効操作、計202組の画像付きプレビューで本文展開と画像読込に成功。intense／feint等の専用画像がない箇所は動作共通画像への既存フォールバックをそのまま使用し、解決先を記録。
-- [登録後照合](../verify_kohaku_registered.py)で新規ストアから140組を照合。101組は登録済み候補2案（操作共通99組、休憩専用2組）、39組は未制作・候補なし。[Tool再読込結果](Results/KohakuNormalNarratives/tool-reload.json)。登録前に一度実行した中間照合は、未登録なので候補一致assertで停止。本登録後の再実行で140組すべて成功した。
+- [登録後照合](../scripts/verification/verify_kohaku_registered.py)で新規ストアから140組を照合。101組は登録済み候補2案（操作共通99組、休憩専用2組）、39組は未制作・候補なし。[Tool再読込結果](Results/KohakuNormalNarratives/tool-reload.json)。登録前に一度実行した中間照合は、未登録なので候補一致assertで停止。本登録後の再実行で140組すべて成功した。
 - [実行時fixture](Results/KohakuNormalNarratives/runtime-check.ps1)は既存.NETアセンブリの実 `StepExchange` に34到達列と8休憩後列を入力し、Pythonと同じ反応・休憩後体力を確認。Unity有効カタログのメモリ上コピーに今回分だけを追加し、280件の候補ID・本文・pool選択／定型フォールバック、8動作の操作別優先を確認。未登録は候補ID・poolなしで既存 `Compose` の本文を保持。[実行結果](Results/KohakuNormalNarratives/runtime-result.txt)。アセンブリSHA256 `E77E4DF261B456159F93C65A69677BED98FFEA4FE4675A9116B68026A64D1629`。新規コンパイルなし。
 - fixtureは反応判定と文章選択の限定確認で、Unity Editor画面・自然プレイ頻度・配布版での今回本文表示は未確認。68本文すべてUnity取り込み待ち。素材パック書き出し・Unity取り込み・ビルド・長期評価を実施していない。既存の取り込み待ち本文も保持。
 

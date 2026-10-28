@@ -103,17 +103,17 @@ simultaneous：人物は「見守るうちに感じた身近さ／そばで見�
 
 ## Tool経路・保存と限定検証
 
-[制作スクリプト](../register_mike_presence_narratives.py)は既存Tk本文欄への入力→save_draft→登録内容確認→画像付き両欄プレビューを使用。computer-useで4場面×2案を実画面で目視後、画面の「今回の8条件だけ登録」を操作し、既存register→reload→新ストア・新編集画面で再読み込みした。保存JSONを独自形式で直接編集しない。対象外下書きの一括登録なし。プレビューのメモリ合成では採用元表示が「登録済み」になるが、タイトルと注意欄で未登録下書きと明示し、登録結果と区別した。
+[制作スクリプト](../scripts/production/register_mike_presence_narratives.py)は既存Tk本文欄への入力→save_draft→登録内容確認→画像付き両欄プレビューを使用。computer-useで4場面×2案を実画面で目視後、画面の「今回の8条件だけ登録」を操作し、既存register→reload→新ストア・新編集画面で再読み込みした。保存JSONを独自形式で直接編集しない。対象外下書きの一括登録なし。プレビューのメモリ合成では採用元表示が「登録済み」になるが、タイトルと注意欄で未登録下書きと明示し、登録結果と区別した。
 
 - 保存再読み込みで8条件16本文・候補ID・空き案3の選択除外・呼称展開・場面別選択が一致。登録前画像付き8組、片側／両側欠落の実描画12組を確認。
-- [読取限定検証](../verify_mike_presence_narratives.py)：混合候補16組、片側／両側欠落21組成功。欠落はメモリ上だけで再現し保存しない。専用文のある片側は維持し、switch／connect／simultaneousは欠落欄を定型へ戻す。open_upは通常文、pauseは休憩、switchは切替定型へ戻り、猫欄に心を開いた追記。専用猫文への二重追記なし。
+- [読取限定検証](../scripts/verification/verify_mike_presence_narratives.py)：混合候補16組、片側／両側欠落21組成功。欠落はメモリ上だけで再現し保存しない。専用文のある片側は維持し、switch／connect／simultaneousは欠落欄を定型へ戻す。open_upは通常文、pauseは休憩、switchは切替定型へ戻り、猫欄に心を開いた追記。専用猫文への二重追記なし。
 - [C#実行ログ](Results/MikePresenceNarratives/runtime-check.log)：既存 `Logs/MikeRestRuntime/bin/Debug/net8.0/Test.dll` を再利用し、Compose＋ApplyCatalogに登録本文をメモリ内で追加。4場面・open_up4操作・両欄／人物のみ／猫のみ／なし×2巡、**56件成功**。アセンブリSHA256もログへ保存。再コンパイル・StepExchange・Unity画面の確認ではない。
 - [既存特別文テスト](Results/MikePresenceNarratives/tests-special.log)：GUI有効化、TEMP／TMPを今回Logs下へ限定し、**4/4成功（1.934秒）**。通常ロジックを変更しておらず、通常全件・総合一式・長期評価は繰り返さない。
 - 開始時採用427条件と対象外下書き443条件の全フィールド・本文・候補ID、プロフィール・manifest・画像対応・生成278 JSON・採用画像SHA256、並行差分349ファイルを保持。
 
 採用JSONはGit管理外 `C:/Users/hi-wa/source/codex_repos/CatCafeSim/cat_cafe_sim/saves/content_images/interaction_texts.json`、下書きはGit管理外 `C:/Users/hi-wa/source/codex_repos/CatCafeSim/cat_cafe_sim_tool/user_data/interaction_text_drafts.json`。開始時全文は `Logs/MikePresenceNarratives/before.json`。Tool Gitに本文・条件・候補ID・再現用スクリプトと確認記録を保存。制作スクリプトは対象採用済みなら上書きせず停止する。`--resume-reviewed-drafts` は登録前の完全一致下書きのみを再開するためのもので、現在は使わない。
 
-再確認：Toolルートで `python verify_mike_presence_narratives.py` と `pwsh -NoProfile -File Docs/Results/MikePresenceNarratives/runtime-check.ps1`。
+再確認：Toolルートで `python scripts/verification/verify_mike_presence_narratives.py` と `pwsh -NoProfile -File Docs/Results/MikePresenceNarratives/runtime-check.ps1`。
 
 ## 標準案の最終照合・Unityへの引き渡し
 

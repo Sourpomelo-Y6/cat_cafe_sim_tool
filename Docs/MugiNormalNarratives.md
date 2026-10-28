@@ -14,7 +14,7 @@
 
 ## 到達性と制作条件
 
-[到達性スクリプト](../check_mugi_reachability.py)はPython実ルール `TypesInteraction.step` と採用プリセット「中立」を使う。Unity用rulesのムギの個性・全exchange数値・全8動作定義との一致をassertで照合。[結果](Results/MugiNormalNarratives/reachability.json)に35条件の初期体力・全操作列・確定反応・得点・判定前後状態と、8動作の休憩後adapt列、得点上限・除外理由を記録。探索で見つからないことだけを除外理由にしない。
+[到達性スクリプト](../scripts/verification/check_mugi_reachability.py)はPython実ルール `TypesInteraction.step` と採用プリセット「中立」を使う。Unity用rulesのムギの個性・全exchange数値・全8動作定義との一致をassertで照合。[結果](Results/MugiNormalNarratives/reachability.json)に35条件の初期体力・全操作列・確定反応・得点・判定前後状態と、8動作の休憩後adapt列、得点上限・除外理由を記録。探索で見つからないことだけを除外理由にしない。
 
 |動作|制作反応|条件数|除外|
 |---|---|---:|---|
@@ -53,13 +53,13 @@
 
 ## 保存・再現と限定検証
 
-本文は[mugi_normal_texts.py](../mugi_normal_texts.py)。[登録スクリプト](../register_mugi_normal_narratives.py)は既存 `InteractionTextEditorWindow` の入力欄に渡し、単一条件ずつ `save_draft → preview（登録内容確認）→ register → reload` を使う。保存JSONの独自形式への直接書換えは行わない。`--review` は保存なしの画像付き校正、引数なしは確認登録。既存の対象採用・下書き・生成候補があれば停止するため、登録後に再実行しても上書きしない。プレビューのmanifestは正規ImageRegistry.readで検証したスナップショットを再利用し、製品Toolコードは変更しない。
+本文は[Docs/ProductionData/mugi_normal_texts.py](../Docs/ProductionData/mugi_normal_texts.py)。[登録スクリプト](../scripts/production/register_mugi_normal_narratives.py)は既存 `InteractionTextEditorWindow` の入力欄に渡し、単一条件ずつ `save_draft → preview（登録内容確認）→ register → reload` を使う。保存JSONの独自形式への直接書換えは行わない。`--review` は保存なしの画像付き校正、引数なしは確認登録。既存の対象採用・下書き・生成候補があれば停止するため、登録後に再実行しても上書きしない。プレビューのmanifestは正規ImageRegistry.readで検証したスナップショットを再利用し、製品Toolコードは変更しない。
 
 採用データはGit管理外 `C:/Users/hi-wa/source/codex_repos/CatCafeSim/cat_cafe_sim/saves/content_images/interaction_texts.json`、下書きはGit管理外 `C:/Users/hi-wa/source/codex_repos/CatCafeSim/cat_cafe_sim_tool/user_data/interaction_text_drafts.json`。再現可能な本文・条件・候補IDを制作ソースと[登録記録](Results/MugiNormalNarratives/registration.json)に保存。
 
 - 採用352→387条件、下書き368→403条件。35条件・各2本文、案3は空。条件ごとの保存・登録内容確認・確認登録・編集画面再読込・新規ストア読込に成功。既存採用352・下書き368の全entryを前後比較して保持。台帳・画像manifest・生成候補278 JSONのSHA256も不変。
 - 70本文・候補IDに重複なし。差し込みは `{cat}` だけで全候補のムギへの展開を確認。全候補×有効操作204組のTool画像付きプレビューで本文・画像読込・表示元・解決画像キーを照合し、登録記録に保存。専用操作画像がない場合の動作共通画像への補完は既存仕様を使用。
-- [登録後照合](../verify_mugi_registered.py)で140組を新規ストアから確認。102組が登録済み2案（操作共通100組・休憩専用2組）、38組が未制作・候補なし。[再読込結果](Results/MugiNormalNarratives/tool-reload.json)。
+- [登録後照合](../scripts/verification/verify_mugi_registered.py)で140組を新規ストアから確認。102組が登録済み2案（操作共通100組・休憩専用2組）、38組が未制作・候補なし。[再読込結果](Results/MugiNormalNarratives/tool-reload.json)。
 - [実行時fixture](Results/MugiNormalNarratives/runtime-check.ps1)は既存.NETアセンブリの実 `StepExchange` に35到達列・8休憩後列を入力し、Pythonと同じ反応・休憩後体力を確認。Unity有効カタログのメモリ上コピーへ今回分だけを追加し、280件の候補ID・展開本文・pool選択／未登録条件の定型保持と8動作の操作別優先を確認。[実結果](Results/MugiNormalNarratives/runtime-result.txt)。アセンブリSHA256 `E77E4DF261B456159F93C65A69677BED98FFEA4FE4675A9116B68026A64D1629`。新規コンパイルなし。
 - Tool登録・画像付き校正と実行時fixtureの限定確認を完了。Unity Editor画面・自然プレイでの今回本文表示・配布版表示は未確認。70本文すべてUnity取り込み待ち。書き出し・Unity取り込み・ビルド・長期評価・総合確認は実施していない。
 

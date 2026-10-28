@@ -47,7 +47,7 @@ Logsは約134.95MB、Libraryは約127.32MB増。Latestは前回成功版から�
 
 新規画像生成・新しいビルド保存先・ZIP・Unityプロジェクト／Library複製はない。StandaloneBuild直下のフォルダはLatestとRunsだけでPendingなし、成功ビルドは一組。自分の検証Playerは終了。素材・通常セーブ・別作業のキャッシュや成果物は削除していない。
 
-今回の実装・検証・記録だけをコミットし、pushしない。既存の未コミットAllCats・CatImageSchedule・CatImageTodo・ChiroImages・register_chiro_images.py・ChiroDailyImageVerification・CafeNarrativeCatalog・rules／presentationは含めない。
+今回の実装・検証・記録だけをコミットし、pushしない。既存の未コミットAllCats・CatImageSchedule・CatImageTodo・ChiroImages・scripts/production/register_chiro_images.py・ChiroDailyImageVerification・CafeNarrativeCatalog・rules／presentationは含めない。
 
 ## 後続
 

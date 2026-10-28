@@ -4,7 +4,7 @@
 
 2026-10-27 14:09 JST確認登録。**Tool登録済み・Unity取り込み待ち**。プレイヤー＋ミケ、ボール遊びの4場面8欄に各2案、計16本文を手入力で制作。案3は空欄（登録候補に含めない）。最大数を埋めることを目的とせず、場面差と自然な別表現を優先した。
 
-[特別場面の仕様](SpecialInteractionNarratives.md)／[登録記録・条件キー・候補ID](Results/MikeBallNarratives/registration.json)／[プレビューと片側フォールバック](Results/MikeBallNarratives/preview-checks.json)／[再現用制作スクリプト](../register_mike_ball_narratives.py)
+[特別場面の仕様](SpecialInteractionNarratives.md)／[登録記録・条件キー・候補ID](Results/MikeBallNarratives/registration.json)／[プレビューと片側フォールバック](Results/MikeBallNarratives/preview-checks.json)／[再現用制作スクリプト](../scripts/production/register_mike_ball_narratives.py)
 
 ## 照合と制作経路
 

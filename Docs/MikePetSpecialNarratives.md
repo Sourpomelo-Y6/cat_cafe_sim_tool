@@ -4,7 +4,7 @@
 
 2026-10-27。**Tool確認登録済み・16本文すべてUnity取り込み待ち**。対象4場面8条件×2案＝16本文を追加し、採用403→411条件。除外・保留なし。案3は空欄。
 
-[全文・条件キー・候補ID](Results/MikePetNarratives/registration.json)／[画像付きプレビュー](Results/MikePetNarratives/preview-checks.json)／[混合候補・片側フォールバック](Results/MikePetNarratives/verification.json)／[保持確認](Results/MikePetNarratives/preservation.json)／[容量](Results/MikePetNarratives/capacity.json)／[制作スクリプト](../register_mike_pet_narratives.py)／[限定検証](../verify_mike_pet_narratives.py)。
+[全文・条件キー・候補ID](Results/MikePetNarratives/registration.json)／[画像付きプレビュー](Results/MikePetNarratives/preview-checks.json)／[混合候補・片側フォールバック](Results/MikePetNarratives/verification.json)／[保持確認](Results/MikePetNarratives/preservation.json)／[容量](Results/MikePetNarratives/capacity.json)／[制作スクリプト](../scripts/production/register_mike_pet_narratives.py)／[限定検証](../scripts/verification/verify_mike_pet_narratives.py)。
 
 ## 現物照合と保存経路
 
@@ -18,7 +18,7 @@ Toolの既存Tk本文欄入力→save_draft→登録内容確認→両欄の画�
 
 初回の登録クリックは自動承認審査により拒否され、下書き・検証記録をTool `255e223`／Docs `f7df783`へ保存した。その後ユーザーが「今回の8条件・16本文を登録する」と直接承認し、開いていた確認画面の対象限定登録ボタンから登録完了。Toolの既存register→reload→新ストア・新編集画面で8条件の本文・ID一致を確認。対象外下書きの一括登録なし。登録前の画像付き校正で確認した候補ID・本文と、採用内容が全件一致。
 
-[登録結果](Results/MikePetNarratives/registration.json)に8条件・候補ID・本文・採用前後件数・プロフィール・保護ハッシュを保存。登録済みの再確認は `pwsh -NoProfile -File Docs/Results/MikePetNarratives/runtime-check.ps1` と `python verify_mike_pet_narratives.py`。制作スクリプトは対象採用済みなら上書きせず停止する。`--resume-reviewed-drafts` は登録前下書きのみの再開用で、現在の採用状態では不要。
+[登録結果](Results/MikePetNarratives/registration.json)に8条件・候補ID・本文・採用前後件数・プロフィール・保護ハッシュを保存。登録済みの再確認は `pwsh -NoProfile -File Docs/Results/MikePetNarratives/runtime-check.ps1` と `python scripts/verification/verify_mike_pet_narratives.py`。制作スクリプトは対象採用済みなら上書きせず停止する。`--resume-reviewed-drafts` は登録前下書きのみの再開用で、現在の採用状態では不要。
 
 ## 条件・成立順序・画像
 

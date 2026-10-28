@@ -23,7 +23,7 @@
 
 ## 登録・検証
 
-設定済みローカルLLMへの接続は環境のソケット権限で拒否されたため、既存Toolの手入力欄を使用。[再現スクリプト](../register_sora_plush_narratives.py)は対象が既存なら停止し、画像付きプレビュー18組を表示・検証後、各条件を個別に下書き保存、確認、登録、再読込する。採用281→284条件、下書き297→300条件。対象外の採用・下書き、台帳、画像manifest、生成候補の保持を確認。[登録記録](Results/SoraPlushNarratives/registration.json)に全候補ID・プレビューを記録。候補本文とIDの条件内重複はなく、`{cat}`のソラへの展開を確認。
+設定済みローカルLLMへの接続は環境のソケット権限で拒否されたため、既存Toolの手入力欄を使用。[再現スクリプト](../scripts/production/register_sora_plush_narratives.py)は対象が既存なら停止し、画像付きプレビュー18組を表示・検証後、各条件を個別に下書き保存、確認、登録、再読込する。採用281→284条件、下書き297→300条件。対象外の採用・下書き、台帳、画像manifest、生成候補の保持を確認。[登録記録](Results/SoraPlushNarratives/registration.json)に全候補ID・プレビューを記録。候補本文とIDの条件内重複はなく、`{cat}`のソラへの展開を確認。
 
 既存 .NET アセンブリを用い、Unity有効カタログのメモリ上コピーへ追加した限定fixtureで3反応×3操作×2案のID・本文・共通pool、未登録3反応×3操作×2回の候補IDなし定型を確認。メモリ内の操作別条件が共通に優先することも確認。[検証](Results/SoraPlushNarratives/runtime-check.ps1)、[結果](Results/SoraPlushNarratives/runtime-result.txt)。反応を指定した選択確認であり、自然プレイ・Unity画面・配布版の表示確認ではない。
 

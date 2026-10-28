@@ -4,7 +4,7 @@
 
 2026-10-27。**Tool確認登録済み・16本文すべてUnity取り込み待ち**。プレイヤー＋ミケの4場面8条件に各2案。対象の採用・下書き・生成候補は0件で、不足8条件のみ制作。案3は空欄。除外・保留なし。
 
-[登録全文・条件キー・候補ID・プロフィール](Results/MikeTunnelNarratives/registration.json)／[既存通常文照合](Results/MikeTunnelNarratives/existing-normal.json)／[画像付きプレビュー](Results/MikeTunnelNarratives/preview-checks.json)／[追加検証](Results/MikeTunnelNarratives/verification.json)／[容量](Results/MikeTunnelNarratives/capacity.json)／[再現用制作スクリプト](../register_mike_tunnel_narratives.py)／[読取限定検証](../verify_mike_tunnel_narratives.py)。
+[登録全文・条件キー・候補ID・プロフィール](Results/MikeTunnelNarratives/registration.json)／[既存通常文照合](Results/MikeTunnelNarratives/existing-normal.json)／[画像付きプレビュー](Results/MikeTunnelNarratives/preview-checks.json)／[追加検証](Results/MikeTunnelNarratives/verification.json)／[容量](Results/MikeTunnelNarratives/capacity.json)／[再現用制作スクリプト](../scripts/production/register_mike_tunnel_narratives.py)／[読取限定検証](../scripts/verification/verify_mike_tunnel_narratives.py)。
 
 ## 照合と保存経路
 
