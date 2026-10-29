@@ -35,13 +35,28 @@ namespace CatCafePreview
             finally{if(File.Exists(temp))try{File.Delete(temp);}catch(IOException){}}
         }
     }
+    // Storage-only override: normal opening, rules and UI remain unchanged.
+    public static class CafeProfile
+    {
+        public static string Root
+        {
+            get
+            {
+                var args=Environment.GetCommandLineArgs();int i=Array.IndexOf(args,"--catcafe-profile");
+                if(i<0)return Application.persistentDataPath;
+                if(i+1>=args.Length || args[i+1].StartsWith("--") || !System.IO.Path.IsPathRooted(args[i+1]))
+                    throw new ArgumentException("--catcafe-profile requires an absolute profile directory.");
+                return System.IO.Path.GetFullPath(args[i+1]);
+            }
+        }
+    }
     public static class CafeOptions
     {
         public static CafeOptionsData Current {get;private set;}=new CafeOptionsData();
         public static CafeOptionsStore Store {get;private set;}
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]static void Initialize()
         {
-            string path=System.IO.Path.Combine(Application.persistentDataPath,"options-v1.json");var args=Environment.GetCommandLineArgs();int i=Array.IndexOf(args,"--catcafe-options-check");if(i<0)i=Array.IndexOf(args,"--catcafe-opening-check");if(i>=0 && i+1<args.Length)path=System.IO.Path.Combine(System.IO.Path.GetFullPath(args[i+1]),"profile/options-v1.json");
+            string path=System.IO.Path.Combine(CafeProfile.Root,"options-v1.json");var args=Environment.GetCommandLineArgs();int i=Array.IndexOf(args,"--catcafe-options-check");if(i<0)i=Array.IndexOf(args,"--catcafe-opening-check");if(i>=0 && i+1<args.Length)path=System.IO.Path.Combine(System.IO.Path.GetFullPath(args[i+1]),"profile/options-v1.json");
             int playtest=Array.IndexOf(args,"--catcafe-playtest");if(playtest>=0 && playtest+1<args.Length)path=System.IO.Path.Combine(System.IO.Path.GetFullPath(args[playtest+1]),"options-v1.json");
             Store=new CafeOptionsStore(path);Current=Store.Load();if(File.Exists(path) || Store.Recovered)ApplyScreen();
         }
