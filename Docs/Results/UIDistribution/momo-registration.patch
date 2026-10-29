@@ -1,0 +1,11 @@
+--- a/unity_preview_template/Editor/MomoDailyImageVerification.cs
++++ b/unity_preview_template/Editor/MomoDailyImageVerification.cs
+@@ -16,7 +16,7 @@
+         {
+             string output=Environment.GetEnvironmentVariable("CATCAFE_IMAGE_OUTPUT");
+             Directory.CreateDirectory(output);
+-            AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
++            CatTexturePolicy.CompleteActivePackRegistration();
+             var catalog=CafeNarrativeResources.Load();catalog.Validate();
+             EditorSceneManager.OpenScene("Assets/Scenes/CatCafePythonState.unity");
+             var preview=UnityEngine.Object.FindObjectOfType<ContentPreview>();preview.Initialize();

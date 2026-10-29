@@ -1,0 +1,23 @@
+{
+  "before": {
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Logs": 20122378256,
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Logs\\StandaloneBuild\\Latest": 5506516854,
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Logs\\StandaloneBuild\\Runs": 213489416,
+    "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Library": 7891773893,
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated": 3277372585
+  },
+  "after": {
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Logs": 20170182591,
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Logs\\StandaloneBuild\\Latest": 5535003690,
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Logs\\StandaloneBuild\\Runs": 216070089,
+    "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Library": 7859010357,
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated": 3277372585
+  },
+  "delta": {
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Logs": 47804335,
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Logs\\StandaloneBuild\\Latest": 28486836,
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Logs\\StandaloneBuild\\Runs": 2580673,
+    "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Library": -32763536,
+    "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\cat_cafe_sim_tool\\generated": 0
+  }
+}

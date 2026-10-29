@@ -65,6 +65,15 @@ namespace CatCafePreview.Editor
             importer.mipmapEnabled = false; importer.isReadable = false;
         }
         // Called explicitly by the pack registration path, never by a build.
+        [MenuItem("Cat Cafe/Images/Complete active pack registration")]
+        public static void CompleteActivePackRegistration()
+        {
+            AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
+            var catalog = JsonUtility.FromJson<ContentCatalog>(Resources.Load<TextAsset>("CatCafeContent/catalog").text);
+            ApplyPack(Path.GetDirectoryName("Assets/Resources/" + catalog.bundleResource + ".json"));
+            Validate();
+            Debug.Log("CAT_CAFE_ACTIVE_PACK_REGISTRATION_OK");
+        }
         public static void ApplyPack(string folder)
         {
             RefreshReferences();

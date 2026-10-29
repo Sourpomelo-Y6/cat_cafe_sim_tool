@@ -1,5 +1,7 @@
 # 本文スクロールと旧54画像metaの追補
 
+2026-10-29後続：本書の旧54meta対応は保持。別件のモモ27metaと猫詳細UIの配布反映を完了。本書の本文面ドラッグの実マウス確認と、今回の猫詳細のOS入力確認は別の検証。 [配布反映追補・確認区分・依存・容量](UIDistributionFollowup.md)。
+
 2026-10-28。[文章統合](NarrativeUnityIntegration.md)と[画像取り込み方針](UnityImageImportPolicy.md)の後続。本文・画像制作、数値・保存形式の変更なし。
 
 ## 現物と変更範囲

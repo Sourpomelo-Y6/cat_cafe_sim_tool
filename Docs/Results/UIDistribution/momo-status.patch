@@ -1,0 +1,10 @@
+--- a/Docs/Results/MomoImages/Status.md
++++ b/Docs/Results/MomoImages/Status.md
+@@ -15,3 +15,7 @@
+ 容量：採用PNG 56,955,009 bytes（54.3 MiB）、Python登録先とUnity登録先にもそれぞれ同量。制作フォルダは不採用候補2枚込みPNG計61,332,140 bytes。既定生成先の原本も保持。増加は猫画像素材で、既存素材やセーブは削除していない。
+ 
+ Latestは開始時・終了時とも5,506,516,854 bytes、Runsは213,357,506 bytes、tool/generatedは3,277,372,585 bytesで変化なし。exeは再ビルドしていないため既存Latestには今回の画像は未反映。実Unityプロジェクトで検証済み。ビルドとUnityプロジェクトのコピーを増やしていない。Latest一組とRunsのみ、Pendingなし。
++
++## 2026-10-29 配布反映追補
++
++27画像のStandalone設定を既存ポリシーへ恒久整合し通常入口の固定Latestへ収録。PNG・GUID・52場面対応・本文を保持。全件Importer監査とUIの限定検証を実施。27枚全配布画面の目視や自然募集は再実施していない。制作一式は未コミットで、metaだけでは素材全体を再現しない。[原因・保存範囲・検証](../../UIDistributionFollowup.md)。

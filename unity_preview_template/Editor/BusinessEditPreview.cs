@@ -29,7 +29,11 @@ namespace CatCafePreview.Editor {
    var details=p.GetComponent<PythonCatDetailsPanel>();details.ResetSelection();
    PlayerInteractionLayout.Apply(p.GetComponent<PythonPlayerPanel>());
    if(profile){details.Open("cat-mike");details.Profile();}
-   Canvas.ForceUpdateCanvases();EditorSceneManager.MarkSceneDirty(p.gameObject.scene);SceneView.RepaintAll();
+   Canvas.ForceUpdateCanvases();
+   // Script changes to inherited prefab properties need explicit overrides to survive reload.
+   foreach(var component in p.GetComponentsInChildren<Component>(true))
+    if(component!=null && PrefabUtility.IsPartOfPrefabInstance(component))PrefabUtility.RecordPrefabInstancePropertyModifications(component);
+   EditorSceneManager.MarkSceneDirty(p.gameObject.scene);SceneView.RepaintAll();
    return p;
   }
   public static void VerifyAndSave() {
@@ -43,7 +47,15 @@ namespace CatCafePreview.Editor {
    Apply(true,false);var d=p.GetComponent<PythonCatDetailsPanel>();if(!d.details.text.Contains("プロフィール") || d.scroll.GetComponent<RectTransform>().sizeDelta!=new Vector2(488,236))throw new Exception("Detail preview differs from current layout");
    typeof(NarrativeVerification).GetMethod("Capture",BindingFlags.Static|BindingFlags.NonPublic).Invoke(null,new object[]{p,Path.Combine(output,"profile-1280.png"),1280,800});
    // Save only the default preparation layout. The profile remains an explicit menu preview.
-   EditorSceneManager.OpenScene(ScenePath);File.WriteAllText(Path.Combine(output,"result.txt"),"PASS: editor preparation uses runtime View/Accept, header visibility, sidebar, detail bounds, 1280/1024 captures. No game commands or real save IO; no build.");Debug.Log("CAT_CAFE_EDIT_PREVIEW_OK");
+   EditorSceneManager.OpenScene(ScenePath);VerifySaved();File.WriteAllText(Path.Combine(output,"result.txt"),"PASS: editor preparation uses runtime View/Accept, header visibility, sidebar, detail bounds, 1280/1024 captures; prefab overrides persist after scene reload. No game commands or real save IO; no build.");Debug.Log("CAT_CAFE_EDIT_PREVIEW_OK");
+  }
+  public static void VerifySaved() {
+   EditorSceneManager.OpenScene(ScenePath);
+   var p=UnityEngine.Object.FindObjectOfType<ContentPreview>();
+   var header=p.GetComponent<PythonBusinessHeader>();var service=p.GetComponent<PythonServiceScreen>();
+   if(header.auto.toggle.gameObject.activeSelf || !header.preparation.gameObject.activeSelf || !header.summary.text.Contains("営業準備") || service.detailText.text.Contains("三毛の毛並み") || !service.rosterPanel.activeSelf)
+    throw new Exception("Saved editor preparation did not survive scene reload");
+   Debug.Log("CAT_CAFE_SAVED_EDIT_PREVIEW_OK");
   }
  }
 }
