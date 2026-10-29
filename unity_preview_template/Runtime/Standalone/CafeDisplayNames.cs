@@ -7,7 +7,8 @@ namespace CatCafePreview {
  public static class CafeDisplayNames {
   static readonly string[][] Keys={new[]{"teaser","ball","plush","tunnel","pet","brush","voice","presence","pause"},new[]{"direct","adapt","intense","feint","pause","switch","connect"},new[]{"neutral","favorable","enthusiastic","turn_away","confused","listless","connect","open_up","simultaneous","received"}};
   public static void Validate(ContentDisplayLabels data) {
-   if(data==null)return;if(data.version!=1)throw new ArgumentException("Unsupported display label version");
+   // JsonUtility creates an empty nested object for an absent field in legacy packs.
+   if(data==null || (data.version==0 && data.modes==null && data.actions==null && data.reactions==null))return;if(data.version!=1)throw new ArgumentException("Unsupported display label version");
    var groups=new[]{data.modes,data.actions,data.reactions};
    for(int i=0;i<groups.Length;i++) {
     var ids=new HashSet<string>();var names=new HashSet<string>();

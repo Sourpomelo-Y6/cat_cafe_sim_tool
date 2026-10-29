@@ -8,6 +8,17 @@ namespace CatCafePreview.Editor {
   public static void Verify() {
    string output=Path.Combine(Environment.GetEnvironmentVariable("CATCAFE_WORKSPACE_ROOT"),"Logs/DisplayLabels");
    ContentDisplayNames.Install();
+   var pointer=JsonUtility.FromJson<ContentCatalog>(Resources.Load<TextAsset>("CatCafeContent/catalog").text);
+   var legacy=JsonUtility.FromJson<ContentBundle>(Resources.Load<TextAsset>(pointer.bundleResource).text);
+   ContentValidation.Validate(legacy);
+   string root=pointer.bundleResource.Substring(0,pointer.bundleResource.Length-"bundle".Length);
+   int images=0;
+   foreach(var cat in legacy.cats)foreach(var scene in cat.scenes)if(!string.IsNullOrEmpty(scene.image)) {
+    if(Resources.Load<Texture2D>(root+scene.image.Substring(0,scene.image.Length-4))==null)throw new Exception("Missing image: "+cat.cat_id+"/"+scene.key);
+    images++;
+   }
+   Debug.Log("CAT_CAFE_LEGACY_IMAGES_OK: "+images);
+   var absent=JsonUtility.FromJson<ContentBundle>("{}");ContentDisplayNames.Validate(absent.display_labels);
    var bundle=JsonUtility.FromJson<ContentBundle>(File.ReadAllText(Path.Combine(output,"labels-fixture.json")));
    ContentDisplayNames.Validate(bundle.display_labels);
    if(ContentDisplayNames.Resolve(bundle.display_labels,"modes","voice","old")!="おしゃべり" || ContentDisplayNames.Resolve(bundle.display_labels,"reactions","confused","old")!="きょとん" || ContentDisplayNames.Resolve(bundle.display_labels,"modes","missing","fallback")!="fallback")throw new Exception("Exported labels mismatch");

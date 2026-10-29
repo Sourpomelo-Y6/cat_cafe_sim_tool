@@ -28,3 +28,9 @@ Unityは行動種類・操作・通常反応の表示入口、席の行動／反
 Unity依存を読込アダプターへ分離し、既存StandaloneChecksの.NETビルドも成功。--display-labelsによる7検査で行動・操作・通常／特別反応の上書き、未変更名、内部ID維持、表示設定復元を確認した。
 
 最終関連テストは47件成功（Tk破棄後のThemeChanged警告は出るが失敗なし）。容量bytes：{"before": {"Logs": 20177738949, "Latest": 5535004202, "Library": 7980733765, "Generated": 3277372585}, "after": {"Logs": 20178257274, "Latest": 5535004202, "Library": 7853278033, "Generated": 3277372585}, "delta": {"Logs": 518325, "Latest": 0, "Library": -127455732, "Generated": 0}}。Latest／generated増減0、成功ビルド1組・Pendingなし。Libraryの増減はUnity自身のコンパイルキャッシュで、別Library作成・手動削除なし。ProjectVersionは開始時のf2へ戻した。
+
+## 旧素材パックの互換修正（2026-10-30）
+
+Unity JsonUtilityは、旧パックにdisplay_labelsが存在しない場合でもversion=0の空オブジェクトを生成する。これを未設定として扱い、標準名を使用するよう修正した。従来のnullのみの検証では素材パック全体が読み込み失敗し、全画像が表示されなくなっていた。
+
+実際のResources内の旧パックをUnityでデシリアライズし、全体検証と画像988参照のTexture2D読み込みに成功。表示名の変更・不正値拒否の既存検証も成功（Logs/DisplayLabels/legacy-fix.log）。素材・セーブ・ビルドは変更なし。
