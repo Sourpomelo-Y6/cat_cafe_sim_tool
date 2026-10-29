@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-24",
+  "cat_id": "catalog-2",
+  "name": "リン",
+  "status": "completed",
+  "tool": "built-in image_gen",
+  "selected_png_count": 27,
+  "retained_candidate_png_count": 0,
+  "scene_keys": 52,
+  "narrative_bindings": 32,
+  "python_tests": {
+    "total": 28,
+    "passed": 28,
+    "skipped": 0
+  },
+  "actual_recruitment_appearance_cost_features_trait_save_reload": true,
+  "preparation_fallbacks": 6,
+  "haru_mapping_distinct": true,
+  "unity_reaction_cases": 40,
+  "unity_normal_sleep_roster": true,
+  "unity_special_resources": true,
+  "unity_admission_save_reload": true,
+  "unity_log": "Logs/CatDailyImages/20261024/unity.log",
+  "visual_qa": "All 27 selected images and four Unity screenshots reviewed; yellow eyes, solid black short coat, black nose/paws, long curved tail, anatomy and action composition confirmed",
+  "selected_png_bytes": 54914880,
+  "registered_png_bytes_each": 54914880,
+  "build_performed": false,
+  "capacity_before": {
+    "latest_bytes": 2082007384,
+    "runs_bytes": 130895074,
+    "generated_bytes": 3277372585
+  },
+  "capacity_after": {
+    "latest_bytes": 2082007384,
+    "runs_bytes": 130895074,
+    "generated_bytes": 3277372585
+  },
+  "runtime_id_resolution": {
+    "content_id": "catalog-2",
+    "rule": "Resolve actual rescue-N through standard saved recruitment batch and catalog position; validate original candidate fields"
+  }
+}

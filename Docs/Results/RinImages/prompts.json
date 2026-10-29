@@ -1,0 +1,218 @@
+[
+  {
+    "scene": "normal",
+    "file": "rin-normal.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-c85b20e0-e1ff-4dc8-97a2-09e8ceb5e7c2.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim identity illustration of NEW cat RIN. HARU reference is ONLY style and room; a different cat. Adult solid BLACK SHORTHAIR, athletic lean medium-small body, long sturdy legs, softly wedge shaped face, large upright triangular ears, both eyes bright LEMON YELLOW, charcoal black nose and dark paw pads. Smooth close short rich black coat with subtle soft charcoal highlights showing fur detail. Entire face muzzle chest belly legs paws and tail are BLACK; NO WHITE PATCHES, no stripes, no collar, no longhair. Long slender black tail rises in a loose question-mark curve. Alert curious adventurous expression, attentive ears. Entire seated cat and entire tail with margins. Same fine soft painted storybook fur, cream wall honey wood floor sage green mat warm diffuse light. One anatomically correct adult cat; no text UI watermark people props.",
+    "reference": "../HaruImages/haru-normal.png",
+    "reference_role": "style_and_room"
+  },
+  {
+    "scene": "teaser",
+    "file": "rin-teaser.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-1840df1d-cd3d-420a-bc42-0215cc21b366.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is RIN exact identity and style. Adult solid BLACK SHORTHAIR, athletic lean medium-small body long sturdy legs, softly wedge shaped face large upright triangular ears. BOTH eyes bright LEMON YELLOW, charcoal black nose and dark paw pads. Smooth close short rich BLACK coat with charcoal highlights showing detail. ALL muzzle chest belly legs paws and tail BLACK; NO white patches NO stripes NO longhair. Long slender black tail question-mark curve. Alert curious adventurous cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat correct limbs, no text UI watermark human face. Basic attentive play: one hand at edge holds feather teaser near cat. Cat reaches one forepaw toward feather, lemon yellow eyes open, gentle calm engagement.",
+    "reference": "rin-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball",
+    "file": "rin-ball.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-fccf93d5-b1c0-4f76-9a3b-ea7b0efc8d77.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is RIN exact identity and style. Adult solid BLACK SHORTHAIR, athletic lean medium-small body long sturdy legs, softly wedge shaped face large upright triangular ears. BOTH eyes bright LEMON YELLOW, charcoal black nose and dark paw pads. Smooth close short rich BLACK coat with charcoal highlights showing detail. ALL muzzle chest belly legs paws and tail BLACK; NO white patches NO stripes NO longhair. Long slender black tail question-mark curve. Alert curious adventurous cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat correct limbs, no text UI watermark human face. Basic play: crouches and gently touches small blue toy ball on mat with one paw, attentive open lemon yellow eyes. No humans or other toys.",
+    "reference": "rin-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush",
+    "file": "rin-plush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-d7af0656-2f76-4e65-851e-0081897dfcdd.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is RIN exact identity and style. Adult solid BLACK SHORTHAIR, athletic lean medium-small body long sturdy legs, softly wedge shaped face large upright triangular ears. BOTH eyes bright LEMON YELLOW, charcoal black nose and dark paw pads. Smooth close short rich BLACK coat with charcoal highlights showing detail. ALL muzzle chest belly legs paws and tail BLACK; NO white patches NO stripes NO longhair. Long slender black tail question-mark curve. Alert curious adventurous cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat correct limbs, no text UI watermark human face. Basic play: holds small plain beige fabric mouse toy between front paws, calmly sniffing, lemon yellow eyes open. No humans or other toys.",
+    "reference": "rin-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel",
+    "file": "rin-tunnel.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-b02bc5c2-8bca-4b7a-b12c-b43272031982.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is RIN exact identity and style. Adult solid BLACK SHORTHAIR, athletic lean medium-small body long sturdy legs, softly wedge shaped face large upright triangular ears. BOTH eyes bright LEMON YELLOW, charcoal black nose and dark paw pads. Smooth close short rich BLACK coat with charcoal highlights showing detail. ALL muzzle chest belly legs paws and tail BLACK; NO white patches NO stripes NO longhair. Long slender black tail question-mark curve. Alert curious adventurous cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat correct limbs, no text UI watermark human face. Basic play: crouches just inside short beige fabric cat tunnel, head front paws and tail fully visible at entrance, eyes open curious gentle expression. No humans or other toys.",
+    "reference": "rin-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet",
+    "file": "rin-pet.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-387d0cfc-838d-45fd-8cc9-69de84acb709.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is RIN exact identity and style. Adult solid BLACK SHORTHAIR, athletic lean medium-small body long sturdy legs, softly wedge shaped face large upright triangular ears. BOTH eyes bright LEMON YELLOW, charcoal black nose and dark paw pads. Smooth close short rich BLACK coat with charcoal highlights showing detail. ALL muzzle chest belly legs paws and tail BLACK; NO white patches NO stripes NO longhair. Long slender black tail question-mark curve. Alert curious adventurous cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat correct limbs, no text UI watermark human face. Basic petting: one human hand gently strokes forehead, cat relaxed and attentive, lemon yellow eyes open. No toys.",
+    "reference": "rin-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush",
+    "file": "rin-brush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-dcf4f7d1-3563-4ad3-b204-6e627987ee08.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is RIN exact identity and style. Adult solid BLACK SHORTHAIR, athletic lean medium-small body long sturdy legs, softly wedge shaped face large upright triangular ears. BOTH eyes bright LEMON YELLOW, charcoal black nose and dark paw pads. Smooth close short rich BLACK coat with charcoal highlights showing detail. ALL muzzle chest belly legs paws and tail BLACK; NO white patches NO stripes NO longhair. Long slender black tail question-mark curve. Alert curious adventurous cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat correct limbs, no text UI watermark human face. Basic brushing: one human hand uses wooden pet brush on shoulder, bristles contact SHORT fur, cat calmly stands with eyes open. No other props.",
+    "reference": "rin-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice",
+    "file": "rin-voice.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-2249ae97-4e6d-45c5-a5fb-46893f84e53d.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is RIN exact identity and style. Adult solid BLACK SHORTHAIR, athletic lean medium-small body long sturdy legs, softly wedge shaped face large upright triangular ears. BOTH eyes bright LEMON YELLOW, charcoal black nose and dark paw pads. Smooth close short rich BLACK coat with charcoal highlights showing detail. ALL muzzle chest belly legs paws and tail BLACK; NO white patches NO stripes NO longhair. Long slender black tail question-mark curve. Alert curious adventurous cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat correct limbs, no text UI watermark human face. Basic voice interaction: sits calmly, ears turn toward viewer listening, lemon yellow eyes open, mouth closed. No human hands knees speech bubbles or props.",
+    "reference": "rin-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence",
+    "file": "rin-presence.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-4365469d-cf45-474a-a737-816fbf2c600c.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is RIN exact identity and style. Adult solid BLACK SHORTHAIR, athletic lean medium-small body long sturdy legs, softly wedge shaped face large upright triangular ears. BOTH eyes bright LEMON YELLOW, charcoal black nose and dark paw pads. Smooth close short rich BLACK coat with charcoal highlights showing detail. ALL muzzle chest belly legs paws and tail BLACK; NO white patches NO stripes NO longhair. Long slender black tail question-mark curve. Alert curious adventurous cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat correct limbs, no text UI watermark human face. Basic companionship: cat loafs calmly, lemon yellow eyes open, only part of blue clothed knee at lower edge. No hands or toys.",
+    "reference": "rin-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pause",
+    "file": "rin-pause.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-02f262bc-019a-44a9-ad97-add25648e132.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is RIN exact identity and style. Adult solid BLACK SHORTHAIR, athletic lean medium-small body long sturdy legs, softly wedge shaped face large upright triangular ears. BOTH eyes bright LEMON YELLOW, charcoal black nose and dark paw pads. Smooth close short rich BLACK coat with charcoal highlights showing detail. ALL muzzle chest belly legs paws and tail BLACK; NO white patches NO stripes NO longhair. Long slender black tail question-mark curve. Alert curious adventurous cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat correct limbs, no text UI watermark human face. Pause/wait: cat calmly sits, forepaws planted, eyes open, feather teaser lies completely still on mat at safe distance. No hands.",
+    "reference": "rin-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "sleep",
+    "file": "rin-sleep.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-fb5c9789-84fc-41d1-8c54-ce23d38849e2.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is RIN exact identity and style. Adult solid BLACK SHORTHAIR, athletic lean medium-small body long sturdy legs, softly wedge shaped face large upright triangular ears. BOTH eyes bright LEMON YELLOW, charcoal black nose and dark paw pads. Smooth close short rich BLACK coat with charcoal highlights showing detail. ALL muzzle chest belly legs paws and tail BLACK; NO white patches NO stripes NO longhair. Long slender black tail question-mark curve. Alert curious adventurous cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat correct limbs, no text UI watermark human face. Sleep: cat curled into a relaxed ball sleeping, eyes closed, head on front paws, slim striped tail around body. No humans or toys.",
+    "reference": "rin-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "teaser__open_up",
+    "file": "rin-teaser__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-25935dd1-e026-48df-b71e-5a43bccff6d5.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is RIN exact identity and style. Adult solid BLACK SHORTHAIR, athletic lean medium-small body long sturdy legs, softly wedge shaped face large upright triangular ears. BOTH eyes bright LEMON YELLOW, charcoal black nose and dark paw pads. Smooth close short rich BLACK coat with charcoal highlights showing detail. ALL muzzle chest belly legs paws and tail BLACK; NO white patches NO stripes NO longhair. Long slender black tail question-mark curve. Alert curious adventurous cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat correct limbs, no text UI watermark human face. Special deep trust playing with feather teaser: one hand holds feather close; cat leans toward viewer, eyes soft half closed, paw reaches gently. Relaxed ears.",
+    "reference": "rin-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "teaser__simultaneous",
+    "file": "rin-teaser__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-84b41cc6-3653-4de5-957d-e7983079dce5.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is RIN exact identity and style. Adult solid BLACK SHORTHAIR, athletic lean medium-small body long sturdy legs, softly wedge shaped face large upright triangular ears. BOTH eyes bright LEMON YELLOW, charcoal black nose and dark paw pads. Smooth close short rich BLACK coat with charcoal highlights showing detail. ALL muzzle chest belly legs paws and tail BLACK; NO white patches NO stripes NO longhair. Long slender black tail question-mark curve. Alert curious adventurous cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat correct limbs, no text UI watermark human face. Special excited and deeply trusting play: joyfully bats feather teaser held by one edge hand, ears forward bright lemon yellow eyes, lifted paw, confident happy posture. No aggressive expression.",
+    "reference": "rin-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball__open_up",
+    "file": "rin-ball__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-fdbd94fc-50d8-4b17-a47a-863c4b1457f7.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is RIN exact identity and style. Adult solid BLACK SHORTHAIR, athletic lean medium-small body long sturdy legs, softly wedge shaped face large upright triangular ears. BOTH eyes bright LEMON YELLOW, charcoal black nose and dark paw pads. Smooth close short rich BLACK coat with charcoal highlights showing detail. ALL muzzle chest belly legs paws and tail BLACK; NO white patches NO stripes NO longhair. Long slender black tail question-mark curve. Alert curious adventurous cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat correct limbs, no text UI watermark human face. Special deep trust: relaxed on side beside small blue ball, paw resting on ball, head tipped affectionately toward viewer, soft half closed eyes. No humans.",
+    "reference": "rin-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball__simultaneous",
+    "file": "rin-ball__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-4df98982-d0dd-409d-9035-00e2f4e9e464.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is RIN exact identity and style. Adult solid BLACK SHORTHAIR, athletic lean medium-small body long sturdy legs, softly wedge shaped face large upright triangular ears. BOTH eyes bright LEMON YELLOW, charcoal black nose and dark paw pads. Smooth close short rich BLACK coat with charcoal highlights showing detail. ALL muzzle chest belly legs paws and tail BLACK; NO white patches NO stripes NO longhair. Long slender black tail question-mark curve. Alert curious adventurous cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat correct limbs, no text UI watermark human face. Special excited and trusting: playfully hugs small blue ball between forepaws, crouched with confident happy energy, bright lemon yellow eyes. No humans or other toys.",
+    "reference": "rin-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush__open_up",
+    "file": "rin-plush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-4dc01d54-4bfb-46fe-b464-a94eb1672707.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is RIN exact identity and style. Adult solid BLACK SHORTHAIR, athletic lean medium-small body long sturdy legs, softly wedge shaped face large upright triangular ears. BOTH eyes bright LEMON YELLOW, charcoal black nose and dark paw pads. Smooth close short rich BLACK coat with charcoal highlights showing detail. ALL muzzle chest belly legs paws and tail BLACK; NO white patches NO stripes NO longhair. Long slender black tail question-mark curve. Alert curious adventurous cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat correct limbs, no text UI watermark human face. Special deep trust: hugs small beige mouse plush and rests cheek on toy, soft half closed lemon yellow eyes, affectionate expression toward viewer. No humans.",
+    "reference": "rin-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush__simultaneous",
+    "file": "rin-plush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-3b02d6b5-a9bc-483f-9b92-14bd6c63163c.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is RIN exact identity and style. Adult solid BLACK SHORTHAIR, athletic lean medium-small body long sturdy legs, softly wedge shaped face large upright triangular ears. BOTH eyes bright LEMON YELLOW, charcoal black nose and dark paw pads. Smooth close short rich BLACK coat with charcoal highlights showing detail. ALL muzzle chest belly legs paws and tail BLACK; NO white patches NO stripes NO longhair. Long slender black tail question-mark curve. Alert curious adventurous cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat correct limbs, no text UI watermark human face. Special excited and trusting: joyfully rolls slightly on side hugging small beige mouse plush with front paws, bright lemon yellow eyes, relaxed ears and happy posture. No humans.",
+    "reference": "rin-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel__open_up",
+    "file": "rin-tunnel__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-5124bd26-bc01-46cb-ad1e-80bdbaa2e184.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is RIN exact identity and style. Adult solid BLACK SHORTHAIR, athletic lean medium-small body long sturdy legs, softly wedge shaped face large upright triangular ears. BOTH eyes bright LEMON YELLOW, charcoal black nose and dark paw pads. Smooth close short rich BLACK coat with charcoal highlights showing detail. ALL muzzle chest belly legs paws and tail BLACK; NO white patches NO stripes NO longhair. Long slender black tail question-mark curve. Alert curious adventurous cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat correct limbs, no text UI watermark human face. Special deep trust: relaxed at short beige fabric tunnel entrance, chin on rim, soft half closed lemon yellow eyes toward viewer, tail visible outside. No humans.",
+    "reference": "rin-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel__simultaneous",
+    "file": "rin-tunnel__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-39de91b8-bfc1-49f3-af2b-09fa9dae7ac4.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is RIN exact identity and style. Adult solid BLACK SHORTHAIR, athletic lean medium-small body long sturdy legs, softly wedge shaped face large upright triangular ears. BOTH eyes bright LEMON YELLOW, charcoal black nose and dark paw pads. Smooth close short rich BLACK coat with charcoal highlights showing detail. ALL muzzle chest belly legs paws and tail BLACK; NO white patches NO stripes NO longhair. Long slender black tail question-mark curve. Alert curious adventurous cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat correct limbs, no text UI watermark human face. Special excited and trusting: playfully peeks out of short beige fabric tunnel, front paws reaching forward, bright lemon yellow eyes, forward ears friendly confident expression, tail visible. No humans.",
+    "reference": "rin-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet__open_up",
+    "file": "rin-pet__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-0b8b680b-33e2-4802-a4c3-ef89aff15e78.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is RIN exact identity and style. Adult solid BLACK SHORTHAIR, athletic lean medium-small body long sturdy legs, softly wedge shaped face large upright triangular ears. BOTH eyes bright LEMON YELLOW, charcoal black nose and dark paw pads. Smooth close short rich BLACK coat with charcoal highlights showing detail. ALL muzzle chest belly legs paws and tail BLACK; NO white patches NO stripes NO longhair. Long slender black tail question-mark curve. Alert curious adventurous cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat correct limbs, no text UI watermark human face. Special deep trust petting: one hand strokes cheek, cat leans cheek into palm, eyes almost closed, affectionate relaxed expression. No toys.",
+    "reference": "rin-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet__simultaneous",
+    "file": "rin-pet__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-36150b70-bd8d-4435-9a79-2c018f77085c.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is RIN exact identity and style. Adult solid BLACK SHORTHAIR, athletic lean medium-small body long sturdy legs, softly wedge shaped face large upright triangular ears. BOTH eyes bright LEMON YELLOW, charcoal black nose and dark paw pads. Smooth close short rich BLACK coat with charcoal highlights showing detail. ALL muzzle chest belly legs paws and tail BLACK; NO white patches NO stripes NO longhair. Long slender black tail question-mark curve. Alert curious adventurous cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat correct limbs, no text UI watermark human face. Special delighted and trusting petting: one hand rubs under chin, cat lifts chin joyfully, content closed eyes and relaxed ears. No toys.",
+    "reference": "rin-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush__open_up",
+    "file": "rin-brush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-e89b7b3a-7294-4457-b830-1cf3cc5f6a2d.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is RIN exact identity and style. Adult solid BLACK SHORTHAIR, athletic lean medium-small body long sturdy legs, softly wedge shaped face large upright triangular ears. BOTH eyes bright LEMON YELLOW, charcoal black nose and dark paw pads. Smooth close short rich BLACK coat with charcoal highlights showing detail. ALL muzzle chest belly legs paws and tail BLACK; NO white patches NO stripes NO longhair. Long slender black tail question-mark curve. Alert curious adventurous cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat correct limbs, no text UI watermark human face. Special deep trust brushing: one hand gently brushes short chest fur with wooden pet brush, cat leans toward brush, half closed eyes relaxed affectionate posture.",
+    "reference": "rin-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush__simultaneous",
+    "file": "rin-brush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-5f03498f-11f9-4b40-aba6-eeb6e579dc7d.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is RIN exact identity and style. Adult solid BLACK SHORTHAIR, athletic lean medium-small body long sturdy legs, softly wedge shaped face large upright triangular ears. BOTH eyes bright LEMON YELLOW, charcoal black nose and dark paw pads. Smooth close short rich BLACK coat with charcoal highlights showing detail. ALL muzzle chest belly legs paws and tail BLACK; NO white patches NO stripes NO longhair. Long slender black tail question-mark curve. Alert curious adventurous cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat correct limbs, no text UI watermark human face. Special delighted and trusting brushing: one hand brushes shoulder with wooden brush, cat stretches neck and raises chin slightly, blissfully closed eyes, happy relaxed posture.",
+    "reference": "rin-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice__open_up",
+    "file": "rin-voice__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-3890ae2d-664e-4c0e-88e6-7bfb62f4dcdf.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is RIN exact identity and style. Adult solid BLACK SHORTHAIR, athletic lean medium-small body long sturdy legs, softly wedge shaped face large upright triangular ears. BOTH eyes bright LEMON YELLOW, charcoal black nose and dark paw pads. Smooth close short rich BLACK coat with charcoal highlights showing detail. ALL muzzle chest belly legs paws and tail BLACK; NO white patches NO stripes NO longhair. Long slender black tail question-mark curve. Alert curious adventurous cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat correct limbs, no text UI watermark human face. Special deep trust response to a familiar voice. Cat leans its head and upper body slightly toward viewer, neck gently extended, EYES VISIBLY NARROWED TO SOFT HALF-CLOSED SLITS in a relaxed slow blink (not wide open), gentle affectionate expression, relaxed forward ears, mouth closed. Both front paws remain on mat. No hands, humans, knees, speech bubbles, toys or other props. Make the facial trust reaction clearly distinct from the open-eyed normal reference.",
+    "reference": "rin-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice__simultaneous",
+    "file": "rin-voice__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-421a2b36-5c7b-4798-9d16-f7f73882debc.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is RIN exact identity and style. Adult solid BLACK SHORTHAIR, athletic lean medium-small body long sturdy legs, softly wedge shaped face large upright triangular ears. BOTH eyes bright LEMON YELLOW, charcoal black nose and dark paw pads. Smooth close short rich BLACK coat with charcoal highlights showing detail. ALL muzzle chest belly legs paws and tail BLACK; NO white patches NO stripes NO longhair. Long slender black tail question-mark curve. Alert curious adventurous cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat correct limbs, no text UI watermark human face. Special delighted trusting response to voice: stands taking one friendly step toward viewer, bright welcoming lemon yellow eyes and forward ears, low relaxed tail, mouth closed. No human or props.",
+    "reference": "rin-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence__open_up",
+    "file": "rin-presence__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-b267e616-8ffe-47d0-b610-7470252462f8.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is RIN exact identity and style. Adult solid BLACK SHORTHAIR, athletic lean medium-small body long sturdy legs, softly wedge shaped face large upright triangular ears. BOTH eyes bright LEMON YELLOW, charcoal black nose and dark paw pads. Smooth close short rich BLACK coat with charcoal highlights showing detail. ALL muzzle chest belly legs paws and tail BLACK; NO white patches NO stripes NO longhair. Long slender black tail question-mark curve. Alert curious adventurous cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat correct limbs, no text UI watermark human face. Special deep trust companionship: lies comfortably on side beside blue clothed knee edge, soft half closed eyes relaxed head. No hands touching, no toys.",
+    "reference": "rin-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence__simultaneous",
+    "file": "rin-presence__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-ee2b2d51-54ba-4988-954b-13fef5e584ab.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is RIN exact identity and style. Adult solid BLACK SHORTHAIR, athletic lean medium-small body long sturdy legs, softly wedge shaped face large upright triangular ears. BOTH eyes bright LEMON YELLOW, charcoal black nose and dark paw pads. Smooth close short rich BLACK coat with charcoal highlights showing detail. ALL muzzle chest belly legs paws and tail BLACK; NO white patches NO stripes NO longhair. Long slender black tail question-mark curve. Alert curious adventurous cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat correct limbs, no text UI watermark human face. Special delighted trusting companionship: sits close beside blue clothed knee edge, flank gently leaning against knee, blissfully half closed eyes. No hands touching, no toys.",
+    "reference": "rin-normal.png",
+    "reference_role": "identity_and_style"
+  }
+]

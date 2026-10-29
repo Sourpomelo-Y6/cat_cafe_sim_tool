@@ -1,0 +1,26 @@
+[
+  {
+    "scene": "plush",
+    "file": "yuki-plush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-935763b3-8463-44bc-9bf1-3c2b7c1334d1.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is YUKI exact identity and style. Adult LONGHAIR CALICO medium balanced body, fluffy white chest ruff, both eyes pale OLIVE GREEN, soft round face small tufted triangular ears pink nose. Fixed markings: cat's RIGHT ear and upper face BLACK (viewer left); cat's LEFT ear and upper face RUST ORANGE (viewer right); broad WHITE central blaze nose muzzle chest belly and ALL four legs paws. Back large black and rust patches. Long fluffy plume tail black and rust patches WHITE TIP. Calm reserved gentle cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat correct limbs, no text UI watermark human face. Basic play: holds small plain beige fabric mouse toy between front paws, calmly sniffing, pale olive green eyes open. No humans or other toys.",
+    "reference": "yuki-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush__open_up",
+    "file": "yuki-plush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-a88b5849-5b89-4d88-8c19-cb99ef9786ae.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is YUKI exact identity and style. Adult LONGHAIR CALICO medium balanced body, fluffy white chest ruff, both eyes pale OLIVE GREEN, soft round face small tufted triangular ears pink nose. Fixed markings: cat's RIGHT ear and upper face BLACK (viewer left); cat's LEFT ear and upper face RUST ORANGE (viewer right); broad WHITE central blaze nose muzzle chest belly and ALL four legs paws. Back large black and rust patches. Long fluffy plume tail black and rust patches WHITE TIP. Calm reserved gentle cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat correct limbs, no text UI watermark human face. Special deep trust: hugs small beige mouse plush and rests cheek on toy, soft half closed pale olive green eyes, affectionate expression toward viewer. No humans.",
+    "reference": "yuki-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel__simultaneous",
+    "file": "yuki-tunnel__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-1a717d73-d689-4ed2-9f00-c830c79a7193.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is YUKI exact identity and style. Adult LONGHAIR CALICO medium balanced body, fluffy white chest ruff, both eyes pale OLIVE GREEN, soft round face small tufted triangular ears pink nose. Fixed markings: cat's RIGHT ear and upper face BLACK (viewer left); cat's LEFT ear and upper face RUST ORANGE (viewer right); broad WHITE central blaze nose muzzle chest belly and ALL four legs paws. Back large black and rust patches. Long fluffy plume tail black and rust patches WHITE TIP. Calm reserved gentle cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING tail visible with margins. One cat correct limbs, no text UI watermark human face. Special excited and trusting: playfully peeks out of short beige fabric tunnel, front paws reaching forward, bright pale olive green eyes, forward ears friendly confident expression, tail visible. No humans.",
+    "reference": "yuki-normal.png",
+    "reference_role": "identity_and_style"
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "scene": "normal",
+    "file": "aki-normal.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-6e323d5c-a9d4-4578-aab6-fde6738fddce.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim identity illustration NEW cat AKI. LEO reference ONLY style and room; DIFFERENT cat. Adult pale HONEY GINGER SHORT HAIRED tabby, compact rounded medium-small body SHORT sturdy legs, ROUND face short muzzle, small gently rounded triangular ears, large ROUND bright COPPER ORANGE eyes, rose pink nose. Thin dark rust mackerel stripes, forehead M and two thin cheek stripes. Cream muzzle and chin ONLY, no white patches or socks. Medium length slightly thick ring striped ginger tail dark rust tip, low curved alongside body. Playful sensitive attentive gentle expression. Seated with anatomically correct FOUR paws only. Entire cat and entire tail with generous margins. Same fine soft painted storybook fur cream wall honey wood floor sage green mat warm diffuse light. One adult cat, no text UI watermark humans or props, no long fur.",
+    "reference": "../LeoImages/leo-normal.png",
+    "reference_role": "style_and_room"
+  }
+]

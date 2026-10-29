@@ -1,0 +1,18 @@
+[
+  {
+    "scene": "teaser__open_up",
+    "file": "momo-teaser__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-81f06cb7-9dfe-43b8-be61-34e0b332cc45.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is MOMO exact identity and style. Adult BLACK AND WHITE LONGHAIR elegant slender medium body long legs. Soft OVAL face tall tufted triangular ears, EMERALD GREEN eyes, pale pink nose. Mostly WHITE: black ears and small black crown cap STOPS ABOVE EYES; forehead and eye surrounds entire face cheeks nose muzzle chin chest belly and ALL FOUR legs WHITE. NO black eye mask, no face spots, no tuxedo blaze. Large black patches across back and cat's LEFT flank. Long fluffy BLACK plume tail final one fifth WHITE. No orange brown or stripes. Gentle affectionate calm cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat including full tail visible with generous margins, EXACTLY FOUR LIMBS TOTAL, no extra paws, no text UI watermark human face. Special deep trust playing with feather teaser: one hand holds feather close; cat leans toward viewer, eyes soft half closed, paw reaches gently. Relaxed ears.",
+    "reference": "momo-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence__open_up",
+    "file": "momo-presence__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-b09195c9-c449-4119-9b62-124e0599e57b.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is MOMO exact identity and style. Adult BLACK AND WHITE LONGHAIR elegant slender medium body long legs. Soft OVAL face tall tufted triangular ears, EMERALD GREEN eyes, pale pink nose. Mostly WHITE: black ears and small black crown cap STOPS ABOVE EYES; forehead and eye surrounds entire face cheeks nose muzzle chin chest belly and ALL FOUR legs WHITE. NO black eye mask, no face spots, no tuxedo blaze. Large black patches across back and cat's LEFT flank. Long fluffy BLACK plume tail final one fifth WHITE. No orange brown or stripes. Gentle affectionate calm cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat including full tail visible with generous margins, EXACTLY FOUR LIMBS TOTAL, no extra paws, no text UI watermark human face. Special deep trust companionship: lies comfortably on side beside blue clothed knee edge, soft half closed eyes relaxed head. No hands touching, no toys.",
+    "reference": "momo-normal.png",
+    "reference_role": "identity_and_style"
+  }
+]

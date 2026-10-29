@@ -1,0 +1,218 @@
+[
+  {
+    "scene": "normal",
+    "file": "aki-normal-v2.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-971fb527-ad73-45de-b4ed-3cf69d77ad82.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim identity illustration NEW cat AKI. LEO reference ONLY style and room; DIFFERENT cat. Adult pale HONEY GINGER SHORT HAIRED tabby, compact rounded medium-small body SHORT sturdy legs, ROUND face short muzzle, small gently rounded triangular ears, large ROUND bright COPPER ORANGE eyes, rose pink nose. Thin dark rust mackerel stripes, forehead M and two thin cheek stripes. Cream muzzle and chin ONLY, no white patches or socks. Medium length slightly thick ring striped ginger tail dark rust tip, low curved alongside body. Playful sensitive attentive gentle expression. Seated with anatomically correct FOUR paws only. Entire cat and entire tail with generous margins. Same fine soft painted storybook fur cream wall honey wood floor sage green mat warm diffuse light. One adult cat, no text UI watermark humans or props, no long fur. Crucial identity distinction: make AKI noticeably STOCKIER, LOWER and more compact than the reference cat. Broad round cheeks, small rounded ears, short thick forelegs only HALF the reference foreleg length, low rounded shoulders, wide barrel torso, compact paws. Do not copy the tall slim Leo silhouette. Cat is adult, not kitten or munchkin. Keep copper orange round eyes. Full body including thick medium tail.",
+    "reference": "../LeoImages/leo-normal.png",
+    "reference_role": "style_and_room"
+  },
+  {
+    "scene": "teaser",
+    "file": "aki-teaser.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-82fdaede-1097-4448-839d-9fe3f3f0122d.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is AKI exact identity and style. Adult HONEY GINGER SHORTHAIR tabby compact STOCKY rounded medium-small body, SHORT sturdy legs, broad ROUND face short muzzle small rounded triangular ears. BOTH eyes bright COPPER ORANGE, ROUND shape, rose pink nose. Thin dark rust mackerel stripes, forehead M and two thin cheek stripes. Cream muzzle and chin ONLY, NO white patches or socks, all legs ginger. Medium length slightly thick ring-striped tail dark rust tip. Playful sensitive gentle attentive cat. Preserve stocky short-legged silhouette; do not elongate legs. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail with generous margins. FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Basic attentive play: one hand at edge holds feather teaser near cat. Cat reaches one forepaw toward feather, copper orange eyes open, gentle calm engagement.",
+    "reference": "aki-normal-v2.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball",
+    "file": "aki-ball.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-a4b2ecfd-765c-4575-ac7c-4996b78e72ce.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is AKI exact identity and style. Adult HONEY GINGER SHORTHAIR tabby compact STOCKY rounded medium-small body, SHORT sturdy legs, broad ROUND face short muzzle small rounded triangular ears. BOTH eyes bright COPPER ORANGE, ROUND shape, rose pink nose. Thin dark rust mackerel stripes, forehead M and two thin cheek stripes. Cream muzzle and chin ONLY, NO white patches or socks, all legs ginger. Medium length slightly thick ring-striped tail dark rust tip. Playful sensitive gentle attentive cat. Preserve stocky short-legged silhouette; do not elongate legs. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail with generous margins. FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Basic play: crouches and gently touches small blue toy ball on mat with one paw, attentive open copper orange eyes. No humans or other toys.",
+    "reference": "aki-normal-v2.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush",
+    "file": "aki-plush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-cd6cf372-d9dc-4f18-94de-5bbc0df2ac28.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is AKI exact identity and style. Adult HONEY GINGER SHORTHAIR tabby compact STOCKY rounded medium-small body, SHORT sturdy legs, broad ROUND face short muzzle small rounded triangular ears. BOTH eyes bright COPPER ORANGE, ROUND shape, rose pink nose. Thin dark rust mackerel stripes, forehead M and two thin cheek stripes. Cream muzzle and chin ONLY, NO white patches or socks, all legs ginger. Medium length slightly thick ring-striped tail dark rust tip. Playful sensitive gentle attentive cat. Preserve stocky short-legged silhouette; do not elongate legs. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail with generous margins. FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Basic play: cat lies naturally belly-down on mat with TWO forepaws resting on either side of a SMALL beige mouse plush ON THE FLOOR; sniffs mouse, eyes open. Hind legs tucked behind body. EXACTLY FOUR LIMBS TOTAL. No seated upright hugging pose, no extra paws. Tail curves beside body fully inside frame.",
+    "reference": "aki-normal-v2.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel",
+    "file": "aki-tunnel.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-20c4807c-6822-4329-beae-c8d482b698ec.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is AKI exact identity and style. Adult HONEY GINGER SHORTHAIR tabby compact STOCKY rounded medium-small body, SHORT sturdy legs, broad ROUND face short muzzle small rounded triangular ears. BOTH eyes bright COPPER ORANGE, ROUND shape, rose pink nose. Thin dark rust mackerel stripes, forehead M and two thin cheek stripes. Cream muzzle and chin ONLY, NO white patches or socks, all legs ginger. Medium length slightly thick ring-striped tail dark rust tip. Playful sensitive gentle attentive cat. Preserve stocky short-legged silhouette; do not elongate legs. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail with generous margins. FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Basic play: crouches just inside short beige fabric cat tunnel, head front paws and tail fully visible at entrance, eyes open curious gentle expression. No humans or other toys.",
+    "reference": "aki-normal-v2.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet",
+    "file": "aki-pet.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-26dacb3c-8916-49ca-9c4b-3a022c8dfce6.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is AKI exact identity and style. Adult HONEY GINGER SHORTHAIR tabby compact STOCKY rounded medium-small body, SHORT sturdy legs, broad ROUND face short muzzle small rounded triangular ears. BOTH eyes bright COPPER ORANGE, ROUND shape, rose pink nose. Thin dark rust mackerel stripes, forehead M and two thin cheek stripes. Cream muzzle and chin ONLY, NO white patches or socks, all legs ginger. Medium length slightly thick ring-striped tail dark rust tip. Playful sensitive gentle attentive cat. Preserve stocky short-legged silhouette; do not elongate legs. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail with generous margins. FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Basic petting: one human hand gently strokes forehead, cat relaxed and attentive, copper orange eyes open. No toys.",
+    "reference": "aki-normal-v2.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush",
+    "file": "aki-brush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-28366e9b-2646-4e54-968a-0b9d8ac51336.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is AKI exact identity and style. Adult HONEY GINGER SHORTHAIR tabby compact STOCKY rounded medium-small body, SHORT sturdy legs, broad ROUND face short muzzle small rounded triangular ears. BOTH eyes bright COPPER ORANGE, ROUND shape, rose pink nose. Thin dark rust mackerel stripes, forehead M and two thin cheek stripes. Cream muzzle and chin ONLY, NO white patches or socks, all legs ginger. Medium length slightly thick ring-striped tail dark rust tip. Playful sensitive gentle attentive cat. Preserve stocky short-legged silhouette; do not elongate legs. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail with generous margins. FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Basic brushing: one human hand uses wooden pet brush on shoulder, bristles contact SHORT fur, cat calmly stands with eyes open. No other props.",
+    "reference": "aki-normal-v2.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice",
+    "file": "aki-voice.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-ae21623d-600b-4ea6-a6a4-bda68809b63a.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is AKI exact identity and style. Adult HONEY GINGER SHORTHAIR tabby compact STOCKY rounded medium-small body, SHORT sturdy legs, broad ROUND face short muzzle small rounded triangular ears. BOTH eyes bright COPPER ORANGE, ROUND shape, rose pink nose. Thin dark rust mackerel stripes, forehead M and two thin cheek stripes. Cream muzzle and chin ONLY, NO white patches or socks, all legs ginger. Medium length slightly thick ring-striped tail dark rust tip. Playful sensitive gentle attentive cat. Preserve stocky short-legged silhouette; do not elongate legs. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail with generous margins. FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Basic voice interaction: sits calmly, ears turn toward viewer listening, copper orange eyes open, mouth closed. No human hands knees speech bubbles or props.",
+    "reference": "aki-normal-v2.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence",
+    "file": "aki-presence.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-d598a742-3f91-498c-bb16-b96a7549fa64.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is AKI exact identity and style. Adult HONEY GINGER SHORTHAIR tabby compact STOCKY rounded medium-small body, SHORT sturdy legs, broad ROUND face short muzzle small rounded triangular ears. BOTH eyes bright COPPER ORANGE, ROUND shape, rose pink nose. Thin dark rust mackerel stripes, forehead M and two thin cheek stripes. Cream muzzle and chin ONLY, NO white patches or socks, all legs ginger. Medium length slightly thick ring-striped tail dark rust tip. Playful sensitive gentle attentive cat. Preserve stocky short-legged silhouette; do not elongate legs. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail with generous margins. FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Basic companionship: cat loafs calmly, copper orange eyes open, only part of blue clothed knee at lower edge. No hands or toys.",
+    "reference": "aki-normal-v2.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pause",
+    "file": "aki-pause.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-385d5fc3-9c34-4fc4-bc83-5f84ebbd479b.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is AKI exact identity and style. Adult HONEY GINGER SHORTHAIR tabby compact STOCKY rounded medium-small body, SHORT sturdy legs, broad ROUND face short muzzle small rounded triangular ears. BOTH eyes bright COPPER ORANGE, ROUND shape, rose pink nose. Thin dark rust mackerel stripes, forehead M and two thin cheek stripes. Cream muzzle and chin ONLY, NO white patches or socks, all legs ginger. Medium length slightly thick ring-striped tail dark rust tip. Playful sensitive gentle attentive cat. Preserve stocky short-legged silhouette; do not elongate legs. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail with generous margins. FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Pause/wait: cat calmly sits, forepaws planted, eyes open, feather teaser lies completely still on mat at safe distance. No hands.",
+    "reference": "aki-normal-v2.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "sleep",
+    "file": "aki-sleep.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-7935a988-8cd4-4177-bff5-6d9b0edbe2f0.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is AKI exact identity and style. Adult HONEY GINGER SHORTHAIR tabby compact STOCKY rounded medium-small body, SHORT sturdy legs, broad ROUND face short muzzle small rounded triangular ears. BOTH eyes bright COPPER ORANGE, ROUND shape, rose pink nose. Thin dark rust mackerel stripes, forehead M and two thin cheek stripes. Cream muzzle and chin ONLY, NO white patches or socks, all legs ginger. Medium length slightly thick ring-striped tail dark rust tip. Playful sensitive gentle attentive cat. Preserve stocky short-legged silhouette; do not elongate legs. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail with generous margins. FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Sleep: cat curled into a relaxed ball sleeping, eyes closed, head on front paws, short-haired ring-striped ginger tail with dark rust tip around body. No humans or toys.",
+    "reference": "aki-normal-v2.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "teaser__open_up",
+    "file": "aki-teaser__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-86414bd9-585a-4749-945e-a2acbc9459b0.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is AKI exact identity and style. Adult HONEY GINGER SHORTHAIR tabby compact STOCKY rounded medium-small body, SHORT sturdy legs, broad ROUND face short muzzle small rounded triangular ears. BOTH eyes bright COPPER ORANGE, ROUND shape, rose pink nose. Thin dark rust mackerel stripes, forehead M and two thin cheek stripes. Cream muzzle and chin ONLY, NO white patches or socks, all legs ginger. Medium length slightly thick ring-striped tail dark rust tip. Playful sensitive gentle attentive cat. Preserve stocky short-legged silhouette; do not elongate legs. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail with generous margins. FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Special deep trust playing with feather teaser: one hand holds feather close; cat leans toward viewer, eyes soft half closed, paw reaches gently. Relaxed ears.",
+    "reference": "aki-normal-v2.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "teaser__simultaneous",
+    "file": "aki-teaser__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-0cc2ae42-1b95-4159-a157-eebcfe5acdf6.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is AKI exact identity and style. Adult HONEY GINGER SHORTHAIR tabby compact STOCKY rounded medium-small body, SHORT sturdy legs, broad ROUND face short muzzle small rounded triangular ears. BOTH eyes bright COPPER ORANGE, ROUND shape, rose pink nose. Thin dark rust mackerel stripes, forehead M and two thin cheek stripes. Cream muzzle and chin ONLY, NO white patches or socks, all legs ginger. Medium length slightly thick ring-striped tail dark rust tip. Playful sensitive gentle attentive cat. Preserve stocky short-legged silhouette; do not elongate legs. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail with generous margins. FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Special excited and deeply trusting play: joyfully bats feather teaser held by one edge hand, ears forward bright copper orange eyes, lifted paw, confident happy posture. No aggressive expression.",
+    "reference": "aki-normal-v2.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball__open_up",
+    "file": "aki-ball__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-70408c96-004f-4e41-98cf-8085c4b2c31a.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is AKI exact identity and style. Adult HONEY GINGER SHORTHAIR tabby compact STOCKY rounded medium-small body, SHORT sturdy legs, broad ROUND face short muzzle small rounded triangular ears. BOTH eyes bright COPPER ORANGE, ROUND shape, rose pink nose. Thin dark rust mackerel stripes, forehead M and two thin cheek stripes. Cream muzzle and chin ONLY, NO white patches or socks, all legs ginger. Medium length slightly thick ring-striped tail dark rust tip. Playful sensitive gentle attentive cat. Preserve stocky short-legged silhouette; do not elongate legs. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail with generous margins. FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Special deep trust: relaxed on side beside small blue ball, paw resting on ball, head tipped affectionately toward viewer, soft half closed eyes. No humans.",
+    "reference": "aki-normal-v2.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball__simultaneous",
+    "file": "aki-ball__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-47db0d36-8407-4a08-b1b8-b6dc25e5e6d4.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is AKI exact identity and style. Adult HONEY GINGER SHORTHAIR tabby compact STOCKY rounded medium-small body, SHORT sturdy legs, broad ROUND face short muzzle small rounded triangular ears. BOTH eyes bright COPPER ORANGE, ROUND shape, rose pink nose. Thin dark rust mackerel stripes, forehead M and two thin cheek stripes. Cream muzzle and chin ONLY, NO white patches or socks, all legs ginger. Medium length slightly thick ring-striped tail dark rust tip. Playful sensitive gentle attentive cat. Preserve stocky short-legged silhouette; do not elongate legs. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail with generous margins. FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Special excited and trusting: playfully hugs small blue ball between forepaws, crouched with confident happy energy, bright copper orange eyes. No humans or other toys.",
+    "reference": "aki-normal-v2.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush__open_up",
+    "file": "aki-plush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-ecddad87-c043-494b-bed6-23e7554dd260.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is AKI exact identity and style. Adult HONEY GINGER SHORTHAIR tabby compact STOCKY rounded medium-small body, SHORT sturdy legs, broad ROUND face short muzzle small rounded triangular ears. BOTH eyes bright COPPER ORANGE, ROUND shape, rose pink nose. Thin dark rust mackerel stripes, forehead M and two thin cheek stripes. Cream muzzle and chin ONLY, NO white patches or socks, all legs ginger. Medium length slightly thick ring-striped tail dark rust tip. Playful sensitive gentle attentive cat. Preserve stocky short-legged silhouette; do not elongate legs. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail with generous margins. FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Special deep trust: cat lies naturally on side, TWO forepaws gently wrap around SMALL beige mouse plush ON MAT, cheek resting on toy, soft HALF CLOSED copper orange eyes toward viewer. Two hind legs rest behind with haunches. EXACTLY FOUR LIMBS TOTAL, no upright seated pose, no extra paws. Tail fully visible curving beside body.",
+    "reference": "aki-normal-v2.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush__simultaneous",
+    "file": "aki-plush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-cb6b1c48-76f6-4a76-a1af-53a7895ed389.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is AKI exact identity and style. Adult HONEY GINGER SHORTHAIR tabby compact STOCKY rounded medium-small body, SHORT sturdy legs, broad ROUND face short muzzle small rounded triangular ears. BOTH eyes bright COPPER ORANGE, ROUND shape, rose pink nose. Thin dark rust mackerel stripes, forehead M and two thin cheek stripes. Cream muzzle and chin ONLY, NO white patches or socks, all legs ginger. Medium length slightly thick ring-striped tail dark rust tip. Playful sensitive gentle attentive cat. Preserve stocky short-legged silhouette; do not elongate legs. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail with generous margins. FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Special excited and trusting: joyfully rolls slightly on side hugging small beige mouse plush with front paws, bright copper orange eyes, relaxed ears and happy posture. No humans.",
+    "reference": "aki-normal-v2.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel__open_up",
+    "file": "aki-tunnel__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-0bffad29-0b80-426b-8363-19ef1266542d.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is AKI exact identity and style. Adult HONEY GINGER SHORTHAIR tabby compact STOCKY rounded medium-small body, SHORT sturdy legs, broad ROUND face short muzzle small rounded triangular ears. BOTH eyes bright COPPER ORANGE, ROUND shape, rose pink nose. Thin dark rust mackerel stripes, forehead M and two thin cheek stripes. Cream muzzle and chin ONLY, NO white patches or socks, all legs ginger. Medium length slightly thick ring-striped tail dark rust tip. Playful sensitive gentle attentive cat. Preserve stocky short-legged silhouette; do not elongate legs. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail with generous margins. FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Special deep trust: relaxed at short beige fabric tunnel entrance, chin on rim, soft half closed copper orange eyes toward viewer, tail visible outside. No humans.",
+    "reference": "aki-normal-v2.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel__simultaneous",
+    "file": "aki-tunnel__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-d9f65887-97f0-4a57-91b8-469d67806f7d.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is AKI exact identity and style. Adult HONEY GINGER SHORTHAIR tabby compact STOCKY rounded medium-small body, SHORT sturdy legs, broad ROUND face short muzzle small rounded triangular ears. BOTH eyes bright COPPER ORANGE, ROUND shape, rose pink nose. Thin dark rust mackerel stripes, forehead M and two thin cheek stripes. Cream muzzle and chin ONLY, NO white patches or socks, all legs ginger. Medium length slightly thick ring-striped tail dark rust tip. Playful sensitive gentle attentive cat. Preserve stocky short-legged silhouette; do not elongate legs. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail with generous margins. FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Special excited and trusting: cat playfully emerges from short beige fabric tunnel with TWO front paws reaching forward, bright copper orange eyes friendly confident face and forward ears. Hindquarters still inside tunnel. Ring-striped short-haired tail curls LOW along floor beside tunnel, DARK RUST TIP fully visible with generous empty margin all around. No part of tail outside frame; no upright high tail. No humans.",
+    "reference": "aki-normal-v2.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet__open_up",
+    "file": "aki-pet__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-f01a19e6-d9af-41ab-be2f-245af81414a6.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is AKI exact identity and style. Adult HONEY GINGER SHORTHAIR tabby compact STOCKY rounded medium-small body, SHORT sturdy legs, broad ROUND face short muzzle small rounded triangular ears. BOTH eyes bright COPPER ORANGE, ROUND shape, rose pink nose. Thin dark rust mackerel stripes, forehead M and two thin cheek stripes. Cream muzzle and chin ONLY, NO white patches or socks, all legs ginger. Medium length slightly thick ring-striped tail dark rust tip. Playful sensitive gentle attentive cat. Preserve stocky short-legged silhouette; do not elongate legs. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail with generous margins. FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Special deep trust petting: one hand strokes cheek, cat leans cheek into palm, eyes almost closed, affectionate relaxed expression. No toys.",
+    "reference": "aki-normal-v2.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet__simultaneous",
+    "file": "aki-pet__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-72ff3dcf-241d-48c9-a7ff-d9dfb29eb4af.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is AKI exact identity and style. Adult HONEY GINGER SHORTHAIR tabby compact STOCKY rounded medium-small body, SHORT sturdy legs, broad ROUND face short muzzle small rounded triangular ears. BOTH eyes bright COPPER ORANGE, ROUND shape, rose pink nose. Thin dark rust mackerel stripes, forehead M and two thin cheek stripes. Cream muzzle and chin ONLY, NO white patches or socks, all legs ginger. Medium length slightly thick ring-striped tail dark rust tip. Playful sensitive gentle attentive cat. Preserve stocky short-legged silhouette; do not elongate legs. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail with generous margins. FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Special delighted and trusting petting: one hand rubs under chin, cat lifts chin joyfully, content closed eyes and relaxed ears. No toys.",
+    "reference": "aki-normal-v2.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush__open_up",
+    "file": "aki-brush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-7e9e6821-e5c8-4f97-88f9-1bf02ad5e07f.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is AKI exact identity and style. Adult HONEY GINGER SHORTHAIR tabby compact STOCKY rounded medium-small body, SHORT sturdy legs, broad ROUND face short muzzle small rounded triangular ears. BOTH eyes bright COPPER ORANGE, ROUND shape, rose pink nose. Thin dark rust mackerel stripes, forehead M and two thin cheek stripes. Cream muzzle and chin ONLY, NO white patches or socks, all legs ginger. Medium length slightly thick ring-striped tail dark rust tip. Playful sensitive gentle attentive cat. Preserve stocky short-legged silhouette; do not elongate legs. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail with generous margins. FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Special deep trust brushing: one hand gently brushes short chest fur with wooden pet brush, cat leans toward brush, half closed eyes relaxed affectionate posture.",
+    "reference": "aki-normal-v2.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush__simultaneous",
+    "file": "aki-brush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-e1cb91be-8486-4899-a5c3-1a49d674a9b9.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is AKI exact identity and style. Adult HONEY GINGER SHORTHAIR tabby compact STOCKY rounded medium-small body, SHORT sturdy legs, broad ROUND face short muzzle small rounded triangular ears. BOTH eyes bright COPPER ORANGE, ROUND shape, rose pink nose. Thin dark rust mackerel stripes, forehead M and two thin cheek stripes. Cream muzzle and chin ONLY, NO white patches or socks, all legs ginger. Medium length slightly thick ring-striped tail dark rust tip. Playful sensitive gentle attentive cat. Preserve stocky short-legged silhouette; do not elongate legs. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail with generous margins. FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Special delighted and trusting brushing: one hand brushes shoulder with wooden brush, cat stretches neck and raises chin slightly, blissfully closed eyes, happy relaxed posture.",
+    "reference": "aki-normal-v2.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice__open_up",
+    "file": "aki-voice__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-9f0f2439-d303-438b-a637-07a7928184ae.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is AKI exact identity and style. Adult HONEY GINGER SHORTHAIR tabby compact STOCKY rounded medium-small body, SHORT sturdy legs, broad ROUND face short muzzle small rounded triangular ears. BOTH eyes bright COPPER ORANGE, ROUND shape, rose pink nose. Thin dark rust mackerel stripes, forehead M and two thin cheek stripes. Cream muzzle and chin ONLY, NO white patches or socks, all legs ginger. Medium length slightly thick ring-striped tail dark rust tip. Playful sensitive gentle attentive cat. Preserve stocky short-legged silhouette; do not elongate legs. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail with generous margins. FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Special deep trust response to a familiar voice. Cat leans its head and upper body slightly toward viewer, neck gently extended, EYES VISIBLY NARROWED TO SOFT HALF-CLOSED SLITS in a relaxed slow blink (not wide open), gentle affectionate expression, relaxed forward ears, mouth closed. Both front paws remain on mat. No hands, humans, knees, speech bubbles, toys or other props. Make the facial trust reaction clearly distinct from the open-eyed normal reference.",
+    "reference": "aki-normal-v2.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice__simultaneous",
+    "file": "aki-voice__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-415b2625-9102-4885-a7d1-f01063a8d9a2.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is AKI exact identity and style. Adult HONEY GINGER SHORTHAIR tabby compact STOCKY rounded medium-small body, SHORT sturdy legs, broad ROUND face short muzzle small rounded triangular ears. BOTH eyes bright COPPER ORANGE, ROUND shape, rose pink nose. Thin dark rust mackerel stripes, forehead M and two thin cheek stripes. Cream muzzle and chin ONLY, NO white patches or socks, all legs ginger. Medium length slightly thick ring-striped tail dark rust tip. Playful sensitive gentle attentive cat. Preserve stocky short-legged silhouette; do not elongate legs. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail with generous margins. FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Special delighted trusting response to voice: stands taking one friendly step toward viewer, bright welcoming copper orange eyes and forward ears, low relaxed tail, mouth closed. No human or props.",
+    "reference": "aki-normal-v2.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence__open_up",
+    "file": "aki-presence__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-8cb7f85d-22e3-4f9c-89c9-32a4d2cf6518.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is AKI exact identity and style. Adult HONEY GINGER SHORTHAIR tabby compact STOCKY rounded medium-small body, SHORT sturdy legs, broad ROUND face short muzzle small rounded triangular ears. BOTH eyes bright COPPER ORANGE, ROUND shape, rose pink nose. Thin dark rust mackerel stripes, forehead M and two thin cheek stripes. Cream muzzle and chin ONLY, NO white patches or socks, all legs ginger. Medium length slightly thick ring-striped tail dark rust tip. Playful sensitive gentle attentive cat. Preserve stocky short-legged silhouette; do not elongate legs. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail with generous margins. FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Special deep trust companionship: lies comfortably on side beside blue clothed knee edge, soft half closed eyes relaxed head. No hands touching, no toys.",
+    "reference": "aki-normal-v2.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence__simultaneous",
+    "file": "aki-presence__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-eb6c475e-c1e0-4026-8230-eafb20b4e9a2.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is AKI exact identity and style. Adult HONEY GINGER SHORTHAIR tabby compact STOCKY rounded medium-small body, SHORT sturdy legs, broad ROUND face short muzzle small rounded triangular ears. BOTH eyes bright COPPER ORANGE, ROUND shape, rose pink nose. Thin dark rust mackerel stripes, forehead M and two thin cheek stripes. Cream muzzle and chin ONLY, NO white patches or socks, all legs ginger. Medium length slightly thick ring-striped tail dark rust tip. Playful sensitive gentle attentive cat. Preserve stocky short-legged silhouette; do not elongate legs. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail with generous margins. FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Special delighted trusting companionship: sits close beside blue clothed knee edge, flank gently leaning against knee, blissfully half closed eyes. No hands touching, no toys.",
+    "reference": "aki-normal-v2.png",
+    "reference_role": "identity_and_style"
+  }
+]

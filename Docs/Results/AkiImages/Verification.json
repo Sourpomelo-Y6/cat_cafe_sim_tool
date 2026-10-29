@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-27",
+  "cat_id": "catalog-4",
+  "name": "アキ",
+  "status": "completed",
+  "tool": "built-in image_gen",
+  "selected_png_count": 27,
+  "retained_candidate_png_count": 1,
+  "scene_keys": 52,
+  "narrative_bindings": 32,
+  "python_tests": {
+    "total": 28,
+    "passed": 28,
+    "skipped": 0
+  },
+  "actual_recruitment_appearance_cost_features_trait_save_reload": true,
+  "recruitment_batch": 2,
+  "actual_test_id": "rescue-4",
+  "preparation_fallbacks": 6,
+  "other_catalog_ids_distinct": true,
+  "unity_reaction_cases": 40,
+  "unity_normal_sleep_roster": true,
+  "unity_special_resources": true,
+  "unity_admission_save_reload": true,
+  "unity_log": "Logs/CatDailyImages/20261027/unity.log",
+  "visual_qa": "All 27 selected images and four Unity screenshots reviewed: copper round eyes, compact stocky body, round face, short legs, ginger short fur, striped tail dark tip; no extra limbs or cropped tail. Reference v2 adopted to distinguish Leo.",
+  "selected_png_bytes": 55914723,
+  "retained_candidate_png_bytes": 1969408,
+  "registered_png_bytes_each": 55914723,
+  "carried_yuki_png_bytes": 58213424,
+  "active_pack": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\Imports\\d4594a5f9a7f483ca16ddfca4ea48486",
+  "interaction_catalog_version": 4,
+  "existing_authored_entries": 259,
+  "all_existing_v4_text_fields_preserved": true,
+  "active_cats_after": 17,
+  "build_performed": false,
+  "capacity_before": {
+    "latest_bytes": 4841096360,
+    "runs_bytes": 205571909,
+    "generated_bytes": 3277372585
+  },
+  "capacity_after": {
+    "latest_bytes": 4841096360,
+    "runs_bytes": 205571909,
+    "generated_bytes": 3277372585
+  },
+  "runtime_id_resolution": {
+    "content_id": "catalog-4",
+    "rule": "Resolve actual rescue-N through standard saved recruitment batch and catalog position; validate original candidate fields"
+  }
+}

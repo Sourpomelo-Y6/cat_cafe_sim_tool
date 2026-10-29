@@ -1,0 +1,177 @@
+{
+  "cat_id": "catalog-4",
+  "name": "アキ",
+  "date": "2026-10-27",
+  "tool": "built-in image_gen",
+  "images": [
+    {
+      "scene": "normal",
+      "file": "aki-normal-v2.png"
+    },
+    {
+      "scene": "sleep",
+      "file": "aki-sleep.png"
+    },
+    {
+      "scene": "pause",
+      "file": "aki-pause.png"
+    },
+    {
+      "scene": "teaser",
+      "file": "aki-teaser.png"
+    },
+    {
+      "scene": "ball",
+      "file": "aki-ball.png"
+    },
+    {
+      "scene": "plush",
+      "file": "aki-plush.png"
+    },
+    {
+      "scene": "tunnel",
+      "file": "aki-tunnel.png"
+    },
+    {
+      "scene": "pet",
+      "file": "aki-pet.png"
+    },
+    {
+      "scene": "brush",
+      "file": "aki-brush.png"
+    },
+    {
+      "scene": "voice",
+      "file": "aki-voice.png"
+    },
+    {
+      "scene": "presence",
+      "file": "aki-presence.png"
+    },
+    {
+      "scene": "teaser__open_up",
+      "file": "aki-teaser__open_up.png"
+    },
+    {
+      "scene": "teaser__simultaneous",
+      "file": "aki-teaser__simultaneous.png"
+    },
+    {
+      "scene": "ball__open_up",
+      "file": "aki-ball__open_up.png"
+    },
+    {
+      "scene": "ball__simultaneous",
+      "file": "aki-ball__simultaneous.png"
+    },
+    {
+      "scene": "plush__open_up",
+      "file": "aki-plush__open_up.png"
+    },
+    {
+      "scene": "plush__simultaneous",
+      "file": "aki-plush__simultaneous.png"
+    },
+    {
+      "scene": "tunnel__open_up",
+      "file": "aki-tunnel__open_up.png"
+    },
+    {
+      "scene": "tunnel__simultaneous",
+      "file": "aki-tunnel__simultaneous.png"
+    },
+    {
+      "scene": "pet__open_up",
+      "file": "aki-pet__open_up.png"
+    },
+    {
+      "scene": "pet__simultaneous",
+      "file": "aki-pet__simultaneous.png"
+    },
+    {
+      "scene": "brush__open_up",
+      "file": "aki-brush__open_up.png"
+    },
+    {
+      "scene": "brush__simultaneous",
+      "file": "aki-brush__simultaneous.png"
+    },
+    {
+      "scene": "voice__open_up",
+      "file": "aki-voice__open_up.png"
+    },
+    {
+      "scene": "voice__simultaneous",
+      "file": "aki-voice__simultaneous.png"
+    },
+    {
+      "scene": "presence__open_up",
+      "file": "aki-presence__open_up.png"
+    },
+    {
+      "scene": "presence__simultaneous",
+      "file": "aki-presence__simultaneous.png"
+    }
+  ],
+  "scenes": {
+    "normal": "images/4767394d3f697c556a7e24ccd17e6b9a06b87f2dffb79e01ee70e5a7df9ffd68.png",
+    "sleep": "images/e6e4f7a447375b33a2aaba328603a2fc0ff775fcb8d9654ec2b219e3ff01b78e.png",
+    "play": "images/cfbaf22005e0c5e2db0dd48c25a41870a07cd51d075ed9482e48d7cde54d4269.png",
+    "pause": "images/3d92912edd514b2530fca618e8cbfdabb28fe2f223891a20667701f7093e305b.png",
+    "teaser": "images/4767394d3f697c556a7e24ccd17e6b9a06b87f2dffb79e01ee70e5a7df9ffd68.png",
+    "teaser__switch": "images/4767394d3f697c556a7e24ccd17e6b9a06b87f2dffb79e01ee70e5a7df9ffd68.png",
+    "teaser__direct": "images/cfbaf22005e0c5e2db0dd48c25a41870a07cd51d075ed9482e48d7cde54d4269.png",
+    "teaser__adapt": "images/cfbaf22005e0c5e2db0dd48c25a41870a07cd51d075ed9482e48d7cde54d4269.png",
+    "teaser__open_up": "images/451018bf64bf4673480eed1f5d4e7779ab229a5ae5c96cf8eb3f2e0e430e5ff1.png",
+    "teaser__simultaneous": "images/7bf4bca0552c23618de744bb739e8923cda8037a7ecc392513a56dd6e314bb9f.png",
+    "ball": "images/4767394d3f697c556a7e24ccd17e6b9a06b87f2dffb79e01ee70e5a7df9ffd68.png",
+    "ball__switch": "images/4767394d3f697c556a7e24ccd17e6b9a06b87f2dffb79e01ee70e5a7df9ffd68.png",
+    "ball__direct": "images/d482f245bc85a183cf90dcb61a4889ae4e5ef3ce96d3f6fe9b7f512bf635ae77.png",
+    "ball__adapt": "images/d482f245bc85a183cf90dcb61a4889ae4e5ef3ce96d3f6fe9b7f512bf635ae77.png",
+    "ball__open_up": "images/17da0fdc2d4545b77156b270a1f5cdb19099387795eda302dcec1e8db42819ab.png",
+    "ball__simultaneous": "images/4716cc744d0d8fefe681f17db479eebccba5e7fa466d4df6685b194a5e56b8c3.png",
+    "plush": "images/4767394d3f697c556a7e24ccd17e6b9a06b87f2dffb79e01ee70e5a7df9ffd68.png",
+    "plush__switch": "images/4767394d3f697c556a7e24ccd17e6b9a06b87f2dffb79e01ee70e5a7df9ffd68.png",
+    "plush__direct": "images/da3a6bfd36b336a91d36edd157cdaa997b00bc2f7d62cb778fdcce8c32ed66bb.png",
+    "plush__adapt": "images/da3a6bfd36b336a91d36edd157cdaa997b00bc2f7d62cb778fdcce8c32ed66bb.png",
+    "plush__open_up": "images/0cf3be8c8be50bcf0ea96522391ee07db82a6ccf8e66dfa9ad700339fc346dd7.png",
+    "plush__simultaneous": "images/1785b72e9c02e2d8876740a525819d01f717744ca05bf7d74087c6d153433f4f.png",
+    "tunnel": "images/4767394d3f697c556a7e24ccd17e6b9a06b87f2dffb79e01ee70e5a7df9ffd68.png",
+    "tunnel__switch": "images/4767394d3f697c556a7e24ccd17e6b9a06b87f2dffb79e01ee70e5a7df9ffd68.png",
+    "tunnel__direct": "images/3f6598a5242f944c371b2629b0ce0a8f766f38180d1dffb1a57bfcd2380efb47.png",
+    "tunnel__adapt": "images/3f6598a5242f944c371b2629b0ce0a8f766f38180d1dffb1a57bfcd2380efb47.png",
+    "tunnel__open_up": "images/5267cfe92a4875716d27959c95cf5199846ff7869987a8cb34cb2ebc220cc665.png",
+    "tunnel__simultaneous": "images/134cda7b8b0c1996dad2ae4ca2cce5138a81559544783d43164c0f06ade78c0c.png",
+    "pet": "images/4767394d3f697c556a7e24ccd17e6b9a06b87f2dffb79e01ee70e5a7df9ffd68.png",
+    "pet__switch": "images/4767394d3f697c556a7e24ccd17e6b9a06b87f2dffb79e01ee70e5a7df9ffd68.png",
+    "pet__direct": "images/15ec5ef9857954d19a8c815cb62a740da12ec5ac10e5aee3d59d0e7d44706143.png",
+    "pet__adapt": "images/15ec5ef9857954d19a8c815cb62a740da12ec5ac10e5aee3d59d0e7d44706143.png",
+    "pet__open_up": "images/dd34575613259580453ed2eb0b1ae3801e3d549ea2d779a564dd23fc139c89b2.png",
+    "pet__simultaneous": "images/bdcf7a83ae52070fc37c8d2a9097fef2087a41e4fcaf995e3852475de0d6c692.png",
+    "brush": "images/4767394d3f697c556a7e24ccd17e6b9a06b87f2dffb79e01ee70e5a7df9ffd68.png",
+    "brush__switch": "images/4767394d3f697c556a7e24ccd17e6b9a06b87f2dffb79e01ee70e5a7df9ffd68.png",
+    "brush__direct": "images/514fd40274616498fdc8028c9ca6c7b4ac270da649dd2da78f6c5f16cd509725.png",
+    "brush__adapt": "images/514fd40274616498fdc8028c9ca6c7b4ac270da649dd2da78f6c5f16cd509725.png",
+    "brush__open_up": "images/d7b666d880ca00cf9640fd6068b59f8968f722048f57dc5224a27433c894e2aa.png",
+    "brush__simultaneous": "images/a38e5b8aff5ee3fd5f51f67e195cebd116bd238e0326fbd5473d7d308dd3a3db.png",
+    "voice": "images/4767394d3f697c556a7e24ccd17e6b9a06b87f2dffb79e01ee70e5a7df9ffd68.png",
+    "voice__switch": "images/4767394d3f697c556a7e24ccd17e6b9a06b87f2dffb79e01ee70e5a7df9ffd68.png",
+    "voice__direct": "images/2355129e3f0c162b76fb3b5040c148c0ae54e904875a4d0ee2343dd49d18fa81.png",
+    "voice__adapt": "images/2355129e3f0c162b76fb3b5040c148c0ae54e904875a4d0ee2343dd49d18fa81.png",
+    "voice__open_up": "images/5a94cdeac99d04dcf5f77201f383d5035fbd01d5197f6add1159e3d41834c75f.png",
+    "voice__simultaneous": "images/c54a708f922425ff9fc36cdf03e8676e658f15f2c833fdd90ff7adfd75281635.png",
+    "presence": "images/4767394d3f697c556a7e24ccd17e6b9a06b87f2dffb79e01ee70e5a7df9ffd68.png",
+    "presence__switch": "images/4767394d3f697c556a7e24ccd17e6b9a06b87f2dffb79e01ee70e5a7df9ffd68.png",
+    "presence__direct": "images/8e5290e53a8d265328f0899f3029512c9d5aa5da07ee732ad01676cbe4656be6.png",
+    "presence__adapt": "images/8e5290e53a8d265328f0899f3029512c9d5aa5da07ee732ad01676cbe4656be6.png",
+    "presence__open_up": "images/435c31eaa6e77c9ce968ea52d616ff63237c82dd9f2cdf06aa497d96fc326eba.png",
+    "presence__simultaneous": "images/4ce50ac53169ac48a6678eaf39a053937d837eb75d32479758cb2cc02d40ef52.png"
+  },
+  "active_pack": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\Imports\\d4594a5f9a7f483ca16ddfca4ea48486",
+  "runtime_id_resolution": {
+    "content_id": "catalog-4",
+    "rule": "Resolve actual rescue-N through standard saved recruitment batch and catalog position; validate original candidate fields"
+  },
+  "authored_entries_unchanged": true,
+  "existing_cats_unchanged": true
+}

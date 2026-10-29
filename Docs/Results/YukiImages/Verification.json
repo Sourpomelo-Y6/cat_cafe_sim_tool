@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-25",
+  "cat_id": "catalog-3",
+  "name": "ユキ",
+  "status": "completed",
+  "tool": "built-in image_gen",
+  "selected_png_count": 27,
+  "retained_candidate_png_count": 3,
+  "scene_keys": 52,
+  "narrative_bindings": 32,
+  "python_tests": {
+    "total": 28,
+    "passed": 28,
+    "skipped": 0
+  },
+  "actual_recruitment_appearance_cost_features_trait_save_reload": true,
+  "preparation_fallbacks": 6,
+  "other_catalog_ids_distinct": true,
+  "unity_reaction_cases": 40,
+  "unity_normal_sleep_roster": true,
+  "unity_special_resources": true,
+  "unity_admission_save_reload": true,
+  "unity_log": "Logs/CatDailyImages/20261025/unity.log",
+  "visual_qa": "All 27 selected images and four Unity screenshots reviewed. Calico long fur, olive eyes, fixed black/right and rust/left face, white muzzle blaze legs and tail tip consistent. Two plush poses revised to remove extra limbs; tunnel simultaneous revised to retain entire tail.",
+  "selected_png_bytes": 58213424,
+  "retained_candidate_png_bytes": 6553382,
+  "registered_png_bytes_each": 58213424,
+  "active_pack": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\Imports\\51b88e2f3f974a83a197ff6a3cc5af8e",
+  "build_performed": false,
+  "capacity_before": {
+    "latest_bytes": 3330006800,
+    "runs_bytes": 167429572,
+    "generated_bytes": 3277372585
+  },
+  "capacity_after": {
+    "latest_bytes": 3330006800,
+    "runs_bytes": 167429572,
+    "generated_bytes": 3277372585
+  },
+  "runtime_id_resolution": {
+    "content_id": "catalog-3",
+    "rule": "Resolve actual rescue-N through standard saved recruitment batch and catalog position; validate original candidate fields"
+  }
+}

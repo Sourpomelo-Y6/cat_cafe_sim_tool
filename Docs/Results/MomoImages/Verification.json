@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-28",
+  "cat_id": "catalog-5",
+  "name": "モモ",
+  "status": "completed",
+  "tool": "built-in image_gen",
+  "selected_png_count": 27,
+  "retained_candidate_png_count": 2,
+  "scene_keys": 52,
+  "narrative_bindings": 32,
+  "python_tests": {
+    "total": 28,
+    "passed": 28,
+    "skipped": 0
+  },
+  "actual_recruitment_appearance_cost_features_trait_save_reload": true,
+  "recruitment_batch": 2,
+  "actual_test_id": "rescue-5",
+  "preparation_fallbacks": 6,
+  "other_catalog_ids_distinct": true,
+  "unity_reaction_cases": 40,
+  "unity_normal_sleep_roster": true,
+  "unity_special_resources": true,
+  "unity_admission_save_reload": true,
+  "unity_log": "Logs/CatDailyImages/20261028/unity.log",
+  "visual_qa": "All 27 selected images and four Unity screenshots reviewed: green eyes, white face/chest/legs, black ears/crown/back patches, long fur and white tail tip. Two framing revisions adopted for teaser open_up and presence open_up to keep entire tail visible. Correct limbs/action composition.",
+  "selected_png_bytes": 56955009,
+  "retained_candidate_png_bytes": 4377131,
+  "registered_png_bytes_each": 56955009,
+  "active_pack": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\Imports\\cbe0df94e7a5401a8f466406c105b493",
+  "interaction_catalog_version": 4,
+  "existing_authored_entries": 435,
+  "all_existing_v4_text_fields_preserved": true,
+  "active_cats_after": 18,
+  "build_performed": false,
+  "capacity_before": {
+    "latest_bytes": 5506516854,
+    "runs_bytes": 213357506,
+    "generated_bytes": 3277372585
+  },
+  "capacity_after": {
+    "latest_bytes": 5506516854,
+    "runs_bytes": 213357506,
+    "generated_bytes": 3277372585
+  },
+  "runtime_id_resolution": {
+    "content_id": "catalog-5",
+    "rule": "Resolve actual rescue-N through standard saved recruitment batch and catalog position; validate original candidate fields"
+  }
+}
