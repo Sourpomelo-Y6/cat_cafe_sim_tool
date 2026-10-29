@@ -67,6 +67,10 @@ namespace CatCafePreview.Editor
             UnityEventTools.AddPersistentListener(panel.finish.onClick,panel.Finish);
             var close=Button(card.transform,"Close","閉じる（途中状態を保持）",480,550,436);UnityEventTools.AddPersistentListener(close.onClick,panel.Close);
             var detail=preview.GetComponent<PythonCatDetailsPanel>();var detailCard=detail.panel.transform.Find("Details Card");
+            // The legacy single-column detail card needs these controls.
+            // Split detail cards already own their controls and scroll bounds.
+            if(detail.stateDetails==null)
+            {
             foreach(string name in new[]{"Start Player Interaction","Previous Player Interaction","Interaction Notice"})
             { var previous=detailCard.Find(name);if(previous!=null)UnityEngine.Object.DestroyImmediate(previous.gameObject); }
             detail.scroll.GetComponent<RectTransform>().sizeDelta=new Vector2(812,426);
@@ -76,7 +80,9 @@ namespace CatCafePreview.Editor
             detail.interactionNotice=Label(detailCard,"Interaction Notice",24,506,812,40,16);
             UnityEventTools.AddPersistentListener(detail.interact.onClick,detail.Interact);
             UnityEventTools.AddPersistentListener(detail.previousInteraction.onClick,detail.PreviousInteraction);
-            detail.interact.interactable=detail.previousInteraction.interactable=false;overlay.SetActive(false);
+            detail.interact.interactable=detail.previousInteraction.interactable=false;
+            }
+            overlay.SetActive(false);
             EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);
             PythonPlayerLayout.Build();
             Debug.Log("CAT_CAFE_PLAYER_UI_OK");
