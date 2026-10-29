@@ -8,6 +8,17 @@ namespace CatCafePreview.Editor {
   public static void Verify() {
    string output=Path.Combine(Environment.GetEnvironmentVariable("CATCAFE_WORKSPACE_ROOT"),"Logs/DisplayLabels");
    ContentDisplayNames.Install();
+   UnityEditor.SceneManagement.EditorSceneManager.OpenScene("Assets/Scenes/CatCafePythonState.unity");
+   var header=UnityEngine.Object.FindObjectOfType<PythonBusinessHeader>();
+   var eventText=header.GetComponent<PythonEventListPanel>().open.GetComponentInChildren<UnityEngine.UI.Text>();
+   var align=typeof(PythonBusinessHeader).GetMethod("AlignCommands",BindingFlags.Instance|BindingFlags.NonPublic);
+   foreach(int count in new[]{0,1,12,0}) {
+    eventText.text=count==0?"イベント一覧":"イベント一覧\n要確認 "+count+"件";
+    eventText.fontSize=count==0?17:14;eventText.resizeTextForBestFit=count>0;eventText.resizeTextMinSize=10;eventText.resizeTextMaxSize=14;
+    for(int frame=0;frame<120;frame++)align.Invoke(header,null);
+    if(eventText.fontSize!=(count==0?17:14) || eventText.resizeTextForBestFit!=(count>0))throw new Exception("Header overwrote event typography");
+   }
+   Debug.Log("CAT_CAFE_EVENT_HEADER_STYLE_OK");
    var pointer=JsonUtility.FromJson<ContentCatalog>(Resources.Load<TextAsset>("CatCafeContent/catalog").text);
    var legacy=JsonUtility.FromJson<ContentBundle>(Resources.Load<TextAsset>(pointer.bundleResource).text);
    ContentValidation.Validate(legacy);

@@ -42,7 +42,11 @@ namespace CatCafePreview
             {
                 if(buttons[i]==null)continue;var r=buttons[i].GetComponent<RectTransform>();
                 r.anchorMin=r.anchorMax=r.pivot=new Vector2(0,1);r.anchoredPosition=new Vector2(804+i%3*152,-(4+i/3*40));r.sizeDelta=new Vector2(148,38);
-                var t=buttons[i].GetComponentInChildren<Text>();t.fontSize=i==4?14:16;t.resizeTextForBestFit=i==4;t.resizeTextMinSize=10;t.resizeTextMaxSize=14;t.horizontalOverflow=HorizontalWrapMode.Wrap;t.verticalOverflow=VerticalWrapMode.Truncate;
+                // Event-list typography belongs to PythonEventListPanel (pending count).
+                // Do not reset it on every header refresh.
+                var t=buttons[i].GetComponentInChildren<Text>();
+                if(i!=4){t.fontSize=16;t.resizeTextForBestFit=false;}
+                t.horizontalOverflow=HorizontalWrapMode.Wrap;t.verticalOverflow=VerticalWrapMode.Truncate;
                 t.rectTransform.anchorMin=Vector2.zero;t.rectTransform.anchorMax=Vector2.one;t.rectTransform.offsetMin=new Vector2(4,0);t.rectTransform.offsetMax=new Vector2(-4,0);
             }
         }

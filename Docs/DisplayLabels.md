@@ -34,3 +34,7 @@ Unity依存を読込アダプターへ分離し、既存StandaloneChecksの.NET�
 Unity JsonUtilityは、旧パックにdisplay_labelsが存在しない場合でもversion=0の空オブジェクトを生成する。これを未設定として扱い、標準名を使用するよう修正した。従来のnullのみの検証では素材パック全体が読み込み失敗し、全画像が表示されなくなっていた。
 
 実際のResources内の旧パックをUnityでデシリアライズし、全体検証と画像988参照のTexture2D読み込みに成功。表示名の変更・不正値拒否の既存検証も成功（Logs/DisplayLabels/legacy-fix.log）。素材・セーブ・ビルドは変更なし。
+
+## イベント一覧ボタンの表示競合修正（2026-10-30）
+
+PythonBusinessHeader.AlignCommandsが毎回文字サイズ14・自動縮小ONに戻し、PythonEventListPanelが未確認0件時に17・自動縮小OFFを設定していた。イベント一覧の文字サイズ管理をイベント側に統一し、ヘッダー側は位置・余白のみ更新する。Unity実シーンで0・1・12・0件それぞれ120回のヘッダー更新後も文字設定が保持されることを検証済み（Logs/DisplayLabels/event-header-fix.log）。シーン保存・ビルド・セーブ更新なし。
