@@ -17,11 +17,14 @@ SCENES = (
 )
 
 
-def export_bundle(catalog, registry, texts, destination, *, profiles=None, interaction_texts=None, interaction_bindings=None):
+def export_bundle(catalog, registry, texts, destination, *, profiles=None, interaction_texts=None, interaction_bindings=None, display_labels=None):
     if (not isinstance(catalog, dict) or not catalog or any(
             not isinstance(key, str) or not key or not isinstance(name, str) or not name
             for key, name in catalog.items())):
         raise ValueError('有効な猫一覧が必要です。')
+    from display_labels import DisplayLabelStore
+    label_store = display_labels or DisplayLabelStore()
+    exported_labels = label_store.export_data()
     images = registry.read()
     from cat_appearance import catalog_profiles, validate_appearance
     profiles = catalog_profiles() if profiles is None else profiles
@@ -78,7 +81,7 @@ def export_bundle(catalog, registry, texts, destination, *, profiles=None, inter
     warnings.extend(interaction_report['image_warnings'])
     if interaction_report['missing_count']:
         warnings.append(f"交流文：{interaction_report['missing_count']}条件が未制作です。validation.jsonを確認してください。")
-    bundle = {'version': 1, 'pack_id': pack_id, 'cats': cats}
+    bundle = {'version': 1, 'pack_id': pack_id, 'cats': cats, 'display_labels': exported_labels}
     report = {'version': 1, 'cat_count': len(cats), 'image_count': len(blobs), 'warnings': warnings, 'interactions': interaction_report}
     folder.mkdir(parents=True, exist_ok=False)
     try:

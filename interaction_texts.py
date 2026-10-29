@@ -14,11 +14,15 @@ MODES = {'teaser': 'ねこじゃらし', 'ball': 'ボール遊び', 'plush': '�
          'pet': 'なでる', 'brush': 'ブラッシング', 'voice': '声をかける', 'presence': 'そばで見守る', 'pause': '休憩'}
 REACTIONS = {'neutral': '通常', 'favorable': '好意的', 'enthusiastic': '熱心',
              'turn_away': '拒否', 'confused': '戸惑い', 'listless': '低体力'}
+from display_labels import label as display_label
+MODES = {key: display_label('modes', key, value) for key, value in MODES.items()}
+REACTIONS = {key: display_label('reactions', key, value) for key, value in REACTIONS.items()}
 CONDITION_FIELDS = ('kind', 'subject_id', 'mode', 'action', 'reaction', 'scene_key')
 MAX_LENGTH = 200
 _UNSET = object()
 NARRATIVE_SCENES = {'normal': '通常', 'switch': '動作切替', 'connect': '心をつかむ',
                     'open_up': '心を開く', 'simultaneous': '同時成立'}
+NARRATIVE_SCENES = {key: display_label('reactions', key, value) if key in ('connect', 'open_up', 'simultaneous') else value for key, value in NARRATIVE_SCENES.items()}
 
 
 def scene_actions(mode, scene='normal'):

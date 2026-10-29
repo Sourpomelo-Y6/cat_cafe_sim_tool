@@ -3,10 +3,16 @@ from pathlib import Path
 from content_images import ImageRegistry, load_display_image
 
 from interaction_scenes import INTERACTION_SCENES, MODE_ACTIONS, ACTION_LABELS, SPECIAL_ACTIONS
+from display_labels import label as display_label
 SCENES = (('normal', '通常'), ('play', '遊ぶ'), ('pet', '撫でられる'), ('sleep', '眠る')) + INTERACTION_SCENES
+SCENES = tuple((key, display_label('modes', key, value)) for key, value in SCENES)
 
 
 class ContentImageToolWindow:
+    def open_display_labels(self):
+        from display_labels_gui import DisplayLabelsWindow
+        DisplayLabelsWindow(self.window)
+
     def __init__(self, parent, catalog_provider, *, registry=None, cat_id=None, presets=None, references=None, lora_settings=None, text_drafts=None, interaction_drafts=None):
         import tkinter as tk
         from tkinter import ttk
@@ -70,6 +76,7 @@ class ContentImageToolWindow:
         ttk.Label(subjects_page,text='猫・人物・お客さんを追加し、生成用の資料とゲーム・画像IDの対応を管理します。',wraplength=780).pack(anchor='w',pady=12)
         ttk.Button(subjects_page,text='猫・人物の登録と資料…',command=self.open_subject_manager).pack(anchor='w')
         ttk.Label(subjects_page,text='登録した対象は文章編集・連続生成で選べます。ゲームIDが空欄の対象は制作専用です。',wraplength=780).pack(anchor='w',pady=12)
+        ttk.Button(subjects_page, text='行動・反応の表示名…', command=self.open_display_labels).pack(anchor='w', pady=8)
         self.tabs.select(self.pages['画像'])
         image_page = ttk.Frame(self.pages['画像'])
         image_page.pack(fill='both', expand=True)

@@ -128,8 +128,8 @@ namespace CatCafePreview.Standalone
         public string Read(string session){Sync();var rows=Rows.Where(r=>r.session==session).ToArray();if(rows.Length==0)return "文章の記録はまだありません。";return "最新のやり取り（"+rows.Last().turn+"手目）\n\n"+rows.Last().text+"\n\n── 履歴（新しい順） ──\n\n"+string.Join("\n\n",rows.Reverse().Skip(1).Select(r=>r.turn+"手目\n"+r.text));}
         public string Seat(CafeExchange e){if(e==null)return "空席です。お客さんを待っています。";Sync();var v=sim.State.visits.Single(r=>r.id==e.customer_id);return Read("service-"+sim.State.day+"-"+e.customer_id+"-"+e.cat_id+"-"+v.seated_at);}
         public static string ActionLabel(CafeNarrativeRow row)=>row==null?"行動の記録なし":
-            row.action=="pause"?"動きを止めて待つ":CafeSimulation.PlayerTypeName(row.mode)+" / "+CafeSimulation.PlayerActionName(row.action);
-        public static string ReactionLabel(CafeNarrativeRow row)=>row==null?"—":row.special_reaction=="simultaneous"?"心をつかむ・心を開く（同時）":row.special_reaction=="open_up"?"心を開いた":row.special_reaction=="connect"?"心をつかんだ":row.action=="switch"?"次の働きかけを待っている":CafeSimulation.PlayerReactionName(row.reaction);
+            row.action=="pause"?CafeSimulation.PlayerActionName("pause"):CafeSimulation.PlayerTypeName(row.mode)+" / "+CafeSimulation.PlayerActionName(row.action);
+        public static string ReactionLabel(CafeNarrativeRow row)=>row==null?"—":CafeDisplayNames.Label("reactions",row.special_reaction=="simultaneous" || row.special_reaction=="open_up" || row.special_reaction=="connect"?row.special_reaction:row.action=="switch"?null:row.reaction,(row==null?"—":row.special_reaction=="simultaneous"?"心をつかむ・心を開く（同時）":row.special_reaction=="open_up"?"心を開いた":row.special_reaction=="connect"?"心をつかんだ":row.action=="switch"?"次の働きかけを待っている":CafeSimulation.PlayerReactionName(row.reaction)));
         public static void Validate(CafeSaveEnvelope save)
         {
             var rows=save.narratives??new CafeNarrativeRow[0];if(rows.Length>100000)throw new ArgumentException("Too many narrative receipts");var keys=new HashSet<string>();

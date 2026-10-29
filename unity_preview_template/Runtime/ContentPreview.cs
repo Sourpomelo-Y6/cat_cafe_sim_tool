@@ -45,6 +45,7 @@ namespace CatCafePreview
         }
         public void Initialize()
         {
+            ContentDisplayNames.Install();
             if(Application.isPlaying && CafeBackends.Standalone && GetComponent<PythonStateClient>()!=null){if(GetComponent<ViewedCatImages>()==null)gameObject.AddComponent<ViewedCatImages>();GameOptionsPanel.Attach(this);}
             if (!HasUIBindings)
             {

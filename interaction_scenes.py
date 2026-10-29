@@ -1,4 +1,6 @@
 """交流画像の場面。既存の4場面は互換性のため維持する。"""
+from display_labels import label as display_label
+
 INTERACTION_SCENES = (('teaser', 'ねこじゃらし'), ('ball', 'ボール遊び'), ('plush', 'ぬいぐるみ遊び'), ('tunnel', 'トンネル遊び'), ('brush', 'ブラッシング'), ('voice', '声をかける'), ('presence', 'そばで見守る'), ('pause', '動きを止めて待つ'))
 ACTION_PROMPTS = {'teaser': 'playing with a feather wand, no human face, no human body', 'ball': 'chasing a small ball, no human face, no human body', 'plush': 'playing with a plush toy, no human face, no human body', 'tunnel': 'playing inside a cat tunnel, no human face, no human body', 'brush': 'being gently brushed by one generic adult hand, no human face, no human body', 'voice': 'looking attentively toward an offscreen person, no human face, no human body', 'presence': 'relaxing beside an offscreen person, no human face, no human body', 'pause': 'watching a motionless toy calmly, no human face, no human body'}
 
@@ -6,6 +8,9 @@ ACTION_PROMPTS = {'teaser': 'playing with a feather wand, no human face, no huma
 MODE_LABELS = dict(INTERACTION_SCENES[:-1], pet='なでる')
 ACTION_LABELS = dict(direct='素直に動かす', adapt='相手に合わせる', intense='激しく動かす',
                      feint='フェイントを入れる', pause='動きを止めて待つ', switch='動作を切り替える', connect='心をつかむ')
+INTERACTION_SCENES = tuple((key, display_label('modes', key, value)) for key, value in INTERACTION_SCENES)
+MODE_LABELS = {key: display_label('modes', key, value) for key, value in MODE_LABELS.items()}
+ACTION_LABELS = {key: display_label('actions', key, value) for key, value in ACTION_LABELS.items()}
 MODE_ACTIONS = {mode: ('direct', 'adapt') +
                 (('intense',) if mode in ('teaser', 'ball', 'tunnel') else ()) +
                 (('feint',) if mode in ('teaser', 'ball', 'plush', 'tunnel') else ()) +
@@ -27,6 +32,7 @@ ACTION_PROMPTS.update({mode + '__' + action: (PAUSE_PROMPTS[mode] if action == '
 
 # 各動作で共有する特殊行動は2種類だけ。通常行動ごとには増やさない。
 SPECIAL_ACTIONS = (('open_up', '（なにか）+心を開く'), ('simultaneous', '心をつかむ+心を開く'))
+SPECIAL_ACTIONS = tuple((key, display_label('reactions', key, value)) for key, value in SPECIAL_ACTIONS)
 SPECIAL_SCENES = tuple((mode + '__' + action, label + ' × ' + title)
                        for mode, label in MODE_LABELS.items() for action, title in SPECIAL_ACTIONS)
 SPECIAL_PROMPTS = dict(open_up='cat opening up, relaxed trusting expression, affectionate body language',

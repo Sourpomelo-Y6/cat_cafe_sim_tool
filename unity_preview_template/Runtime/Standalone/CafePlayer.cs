@@ -54,9 +54,9 @@ namespace CatCafePreview.Standalone
             var before=ReplayPlayer(State,previous);var after=ReplayPlayer(State,new CafePlayerSession {max_stamina=session.max_stamina,stamina_rule_version=session.stamina_rule_version,set_ticks=session.set_ticks,cat_id=session.cat_id,initial_stamina=session.initial_stamina,initial_affinity=session.initial_affinity,actions=session.actions});
             return after.open_up_count==before.open_up_count?"":after.mode+"__"+(after.connect_count>before.connect_count?"simultaneous":"open_up");
         }
-        public static string PlayerActionName(string action)=>action=="direct"?"素直に動かす":action=="adapt"?"相手に合わせる":action=="intense"?"激しく動かす":action=="feint"?"フェイントを入れる":action=="pause"?"動きを止めて待つ":action=="connect"?"心をつかむ":"動作を切り替える";
-        public static string PlayerTypeName(string mode)=>mode=="teaser"?"ねこじゃらし":mode=="ball"?"ボール遊び":mode=="plush"?"ぬいぐるみ遊び":mode=="tunnel"?"トンネル遊び":mode=="pet"?"なでる":mode=="brush"?"ブラッシング":mode=="voice"?"声をかける":"そばで見守る";
-        public static string PlayerReactionName(string reaction)=>reaction=="turn_away"?"そっぽを向く":reaction=="listless"?"けだるそうにする":reaction=="confused"?"戸惑う":reaction=="enthusiastic"?"熱心に応じる":reaction=="favorable"?"好意的に応じる":reaction=="open_up"?"心を開く":reaction=="received"?"特別な働きかけを受け止める":"普通に応じる";
+        public static string PlayerActionName(string action)=>CafeDisplayNames.Label("actions",action,action=="direct"?"素直に動かす":action=="adapt"?"相手に合わせる":action=="intense"?"激しく動かす":action=="feint"?"フェイントを入れる":action=="pause"?"動きを止めて待つ":action=="connect"?"心をつかむ":"動作を切り替える");
+        public static string PlayerTypeName(string mode)=>CafeDisplayNames.Label("modes",mode,mode=="teaser"?"ねこじゃらし":mode=="ball"?"ボール遊び":mode=="plush"?"ぬいぐるみ遊び":mode=="tunnel"?"トンネル遊び":mode=="pet"?"なでる":mode=="brush"?"ブラッシング":mode=="voice"?"声をかける":"そばで見守る");
+        public static string PlayerReactionName(string reaction)=>CafeDisplayNames.Label("reactions",reaction,reaction=="turn_away"?"そっぽを向く":reaction=="listless"?"けだるそうにする":reaction=="confused"?"戸惑う":reaction=="enthusiastic"?"熱心に応じる":reaction=="favorable"?"好意的に応じる":reaction=="open_up"?"心を開く":reaction=="received"?"特別な働きかけを受け止める":"普通に応じる");
         public static string PlayerEndName(string reason)=>reason=="manual"?"自分で切り上げました":reason=="exhausted"?"体力がなくなり、交流終了":reason=="success"?"交流成功！":reason=="time_limit"?"交流時間が終了しました":reason=="timeout"?"時間になり、交流終了":"";
         public CafePlayerSession ActivePlayer=>State.player_sessions.LastOrDefault(e=>e.exchange.end_reason==null);
         public bool PlayerActive=>ActivePlayer!=null;

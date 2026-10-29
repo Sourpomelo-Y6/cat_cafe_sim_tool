@@ -20,7 +20,7 @@ namespace CatCafePreview.Standalone
         public CafeDetailPresentation(CafeSimulation simulation,CafePresentationCatalog data){sim=simulation;catalog=data;if(data==null || data.version!=1 || data.rules_id!=sim.Rules.rules_id)throw new ArgumentException("表示定義とゲームルールが一致しません。");}
         private CafeSnapshot S=>sim.State;
         public static string Number(double value)=>value.ToString("G6",CultureInfo.InvariantCulture).Replace("E","e");
-        private string Label(DisplayLabel[] rows,string id,string fallback)=>rows.FirstOrDefault(r=>r.id==id)?.label ?? fallback;
+        private string Label(DisplayLabel[] rows,string id,string fallback) { var value=rows.FirstOrDefault(r=>r.id==id)?.label ?? fallback; return ReferenceEquals(rows,catalog.types)?CafeDisplayNames.Label("modes",id,value):value; }
         public string ContentId(string id){string key=sim.ContentImageId(id);return Label(catalog.content_ids,key,key);}
         public string CustomerName(string id)
         {
