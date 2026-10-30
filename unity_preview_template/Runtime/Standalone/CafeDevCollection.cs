@@ -11,7 +11,7 @@ namespace CatCafePreview.Standalone
     }
     public sealed partial class CafeDevAcquisition
     {
-        static DevCollectionRoute[] CreateRoutes(CafeRules rules,DevAcquisitionPlan plan)
+        public static DevCollectionRoute[] CreateRoutes(CafeRules rules,DevAcquisitionPlan plan)
         {
             var list=plan.objectives.Select(o=>new DevCollectionRoute{id=o,objective=o}).ToList();
             if(!plan.collection_routes)return list.ToArray();
@@ -49,10 +49,10 @@ namespace CatCafePreview.Standalone
             var got=new HashSet<string>(Targets().Where(t=>t.status=="acquired").Select(t=>t.category+"/"+t.id));
             return routes[route].targets.All(got.Contains);
         }
-        CafeAutoOperation PlanCollection()
+        public static CafeAutoOperation CollectionOperation(CafeSimulation sim,DevCollectionRoute currentRoute)
         {
-            var sim=Simulation;var s=sim.State;var assigned=new HashSet<string>(routes[route].targets);
-            var got=new HashSet<string>(Targets().Where(t=>t.status=="acquired").Select(t=>t.category+"/"+t.id));
+            var rules=sim.Rules;var s=sim.State;var assigned=new HashSet<string>(currentRoute.targets);
+            var got=new HashSet<string>(TargetsFor(sim,currentRoute).Where(t=>t.status=="acquired").Select(t=>t.category+"/"+t.id));
             double reserve=Math.Max(600,3*sim.OperatingCostEstimate);
             bool Need(string kind,string id)=>assigned.Contains(kind+"/"+id) && !got.Contains(kind+"/"+id);
             // Expand before filling slots; each route reserves room only for its own admissions.

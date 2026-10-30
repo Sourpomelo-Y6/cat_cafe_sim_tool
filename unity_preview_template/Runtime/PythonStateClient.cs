@@ -460,7 +460,7 @@ namespace CatCafePreview
             if(kind=="purchase_seat_equipment")return Array.Find(current.seat_equipment.catalog,r=>r.kind_id==choice)?.can_purchase==true;
             return kind=="equip_seat" && (choice=="" || Array.Find(current.seat_equipment.owned,r=>r.item_id==choice)!=null);
         }
-        public void SeatEquipment(string kind,string seat,string choice){if(CanSeatEquipment(kind,seat,choice))QueuePlayer(kind,"",choice,seat);}
+        public void SeatEquipment(string kind,string seat,string choice){if(CanSeatEquipment(kind,seat,choice)){QueuePlayer(kind,"",choice,"");pending.seat_id=seat;}}
         public bool CanRestSpace(string kind){return CanManageSaves && current.game_over==null && Array.Find(current.rest_space?.actions ?? new PythonRestSpaceAction[0],r=>r.kind==kind)?.can_execute==true;}
         public void RestSpace(string kind){if(CanRestSpace(kind))QueuePlayer(kind,"","","");}
         public bool CanWaitingArea(string kind){return CanManageSaves && current.game_over==null && Array.Find(current.waiting_area?.actions ?? new PythonWaitingAreaAction[0],r=>r.kind==kind)?.can_execute==true;}

@@ -33,6 +33,8 @@ namespace CatCafePreview
         public bool PlaybackChoosing=>progress!=null && Choosing;
         public bool PlaybackTextReady=>revealed>=pageText.Length;
         public GameObject PlaybackHost=>panel;
+        public string PlaybackAcceptCaption=>AcceptCaption;
+        public string PlaybackDeclineCaption=>DeclineCaption;
         protected virtual bool Ready=>Client.CanManageSaves;
         protected virtual bool AutoRunning=>Client.AutoPlayExecuting;
         protected virtual bool ThreeLinePages=>false;

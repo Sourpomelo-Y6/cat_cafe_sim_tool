@@ -16,6 +16,8 @@ namespace CatCafePreview
         private PythonCafeState current;
         private string identity,instance,seatId,kindId,itemId,chosenKind,chosenSeat,chosenItem;
         private bool online;
+        public string SelectedSeatId=>seatId;
+        public string SelectedKindId=>kindId;
         private PythonSeatEquipment Data => current?.seat_equipment;
         private PythonEquipmentSeat Seat => Data?.seats?.FirstOrDefault(r=>r.seat_id==seatId);
         private PythonEquipmentKind Kind => Data?.catalog?.FirstOrDefault(r=>r.kind_id==kindId);
