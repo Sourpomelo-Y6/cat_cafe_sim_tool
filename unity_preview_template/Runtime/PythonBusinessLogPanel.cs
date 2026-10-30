@@ -49,7 +49,7 @@ namespace CatCafePreview
         public static string WriteExport(string json,string folder=null)
         {
             if(string.IsNullOrEmpty(json))throw new ArgumentException("出力する営業ログがありません。");
-            folder=folder ?? Path.Combine(Application.persistentDataPath,"BusinessLogs");Directory.CreateDirectory(folder);string file=Path.Combine(folder,"cafe-log-"+DateTime.Now.ToString("yyyyMMdd-HHmmss")+"-"+Guid.NewGuid().ToString("N")+".json");
+            folder=folder ?? Path.Combine(CafeProfile.Root,"BusinessLogs");Directory.CreateDirectory(folder);string file=Path.Combine(folder,"cafe-log-"+DateTime.Now.ToString("yyyyMMdd-HHmmss")+"-"+Guid.NewGuid().ToString("N")+".json");
             using(var stream=new FileStream(file,FileMode.CreateNew,FileAccess.Write))using(var writer=new StreamWriter(stream,new UTF8Encoding(false)))writer.Write(json);return file;
         }
         public void AcceptView(PythonBusinessLogView row)

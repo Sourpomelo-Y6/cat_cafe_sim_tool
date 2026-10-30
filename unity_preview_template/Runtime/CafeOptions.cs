@@ -42,6 +42,15 @@ namespace CatCafePreview
         {
             get
             {
+                var launchArgs=Environment.GetCommandLineArgs();
+                if(Array.IndexOf(launchArgs,"--catcafe-dev-acquisition")>=0)
+                {
+#if CATCAFE_DEV_ACQUISITION
+                    return System.IO.Path.Combine(DevAcquisitionSession.Output(launchArgs),"profile");
+#else
+                    throw new InvalidOperationException("Development acquisition is not included in this player.");
+#endif
+                }
                 var args=Environment.GetCommandLineArgs();int i=Array.IndexOf(args,"--catcafe-profile");
                 if(i<0)return Application.persistentDataPath;
                 if(i+1>=args.Length || args[i+1].StartsWith("--") || !System.IO.Path.IsPathRooted(args[i+1]))

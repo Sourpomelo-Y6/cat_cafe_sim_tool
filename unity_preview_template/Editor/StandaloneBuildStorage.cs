@@ -9,7 +9,7 @@ namespace CatCafePreview.Editor
     // All verification entry points share one output, even with legacy environment variables.
     public static class StandaloneBuildStorage
     {
-        public static void Build(string[] scenes)
+        public static void Build(string[] scenes, string[] extraScriptingDefines = null)
         {
             string workspace = Environment.GetEnvironmentVariable("CATCAFE_WORKSPACE_ROOT");
             string legacy = Environment.GetEnvironmentVariable("CATCAFE_STANDALONE_BUILD");
@@ -43,7 +43,7 @@ namespace CatCafePreview.Editor
                 try
                 {
                     Directory.CreateDirectory(pending);
-                    var report = BuildPipeline.BuildPlayer(scenes, Path.Combine(pending, "CatCafeStandalone.exe"), BuildTarget.StandaloneWindows64, BuildOptions.None);
+                    var report = BuildPipeline.BuildPlayer(new BuildPlayerOptions { scenes=scenes, locationPathName=Path.Combine(pending, "CatCafeStandalone.exe"), target=BuildTarget.StandaloneWindows64, options=BuildOptions.None, extraScriptingDefines=extraScriptingDefines??new string[0] });
                     if (report.summary.result != BuildResult.Succeeded)
                         throw new Exception("Standalone build failed: " + report.summary.result);
                     if (!File.Exists(Path.Combine(pending, "CatCafeStandalone.exe")))
