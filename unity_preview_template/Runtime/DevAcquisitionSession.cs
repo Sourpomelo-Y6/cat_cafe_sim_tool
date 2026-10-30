@@ -75,7 +75,7 @@ namespace CatCafePreview
         {
             GUI.Box(new Rect(10,10,720,220),"開発専用・通常条件収集検証（内部コマンド検証）");
             if(run==null){GUI.Label(new Rect(25,45,690,150),failure??"初期化中");return;}
-            GUI.Label(new Rect(25,45,690,70),run.Objective+" / "+run.Status+" / day="+run.Simulation.State.day+" / operations="+run.Operations+"\n"+run.Reason);
+            GUI.Label(new Rect(25,45,690,70),run.RouteId+" ("+run.Objective+") / "+run.Status+" / day="+run.Simulation.State.day+" / operations="+run.Operations+"\n"+run.Reason);
             if(!run.Finished && GUI.Button(new Rect(25,120,190,40),run.Status=="running"?"一時停止して保存":"明示的に実行・再開"))
             {if(run.Status=="running")run.Pause();else run.Start();}
             if(GUI.Button(new Rect(235,120,190,40),"保存して終了")){if(run.Status=="running")run.Pause("user_exit");Application.Quit();}

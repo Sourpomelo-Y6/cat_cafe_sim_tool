@@ -12,6 +12,7 @@ namespace CatCafePreview.Standalone
     {
         public int version=1,seed=0,max_days=150,max_operations=100000,max_seconds=7200,free_days=30,checkpoint_operations=200;
         public long max_log_bytes=268435456;
+        public bool collection_routes;
         public string[] objectives={"popularity","patron","bond","free"};
         public string[] source_versions=new string[0];
         public void Validate()
@@ -23,12 +24,13 @@ namespace CatCafePreview.Standalone
     [Serializable] public sealed class DevAcquisitionTarget
     {
         public string category,id,status="unreached",reason="not_observed";
-        public bool currently_owned;
+        public bool currently_owned,assigned;
         public string[] evidence_routes=new string[0];
     }
     [Serializable] public sealed class DevAcquisitionResult
     {
-        public string mode="normal-acquisition",layer="internal-commands",objective,status,reason,state_digest;
+        public string mode="normal-acquisition",layer="internal-commands",objective,route_id,status,reason,state_digest;
+        public string[] assigned_targets=new string[0];
         public string completion_scope="selected_objective_or_free_duration; not_all_collection_targets";
         public int seed,day,operations;
         public DevAcquisitionTarget[] targets;
@@ -42,7 +44,7 @@ namespace CatCafePreview.Standalone
     }
     [Serializable] public sealed class DevAcquisitionEvent
     {
-        public string session,objective,before_digest,after_digest,error;
+        public string session,objective,route_id,before_digest,after_digest,error;
         public int sequence,day,tick;
         public CafeAutoOperation operation;
     }
@@ -55,10 +57,11 @@ namespace CatCafePreview.Standalone
     }
     // This runner owns a separate simulation. It never edits the player's backend or its profile.
     // All progression below uses ordinary Execute/PlanAutoplay, never grants money/XP/flags.
-    public sealed class CafeDevAcquisition : IDisposable
+    public sealed partial class CafeDevAcquisition : IDisposable
     {
-        public const string RunnerVersion="1";
+        public const string RunnerVersion="2";
         readonly CafeRules rules;
+        readonly DevCollectionRoute[] routes;
         readonly Func<object,string> encode;
         readonly Func<string,CafeSaveEnvelope> decodeSave;
         readonly Func<string,DevAcquisitionCheckpoint> decodeCheckpoint;
@@ -77,9 +80,11 @@ namespace CatCafePreview.Standalone
         public string Status {get;private set;}="paused";
         public string Reason {get;private set;}="awaiting_explicit_start";
         public bool Finished=>Status=="completed" || Status=="incomplete" || Status=="error";
-        public string Objective=>Plan.objectives[route];
+        public string Objective=>routes[route].objective;
+        public string RouteId=>routes[route].id;
+        bool Collecting=>routes[route].targets.Length>0;
         public int Operations=>operations;
-        string RouteRoot=>Path.Combine(root,"routes",Objective);
+        string RouteRoot=>Path.Combine(root,"routes",RouteId);
         public static string Hash(byte[] bytes){using(var h=SHA256.Create())return string.Concat(h.ComputeHash(bytes).Select(b=>b.ToString("x2")));}
         public static void RejectLinks(string path)
         {
@@ -90,7 +95,7 @@ namespace CatCafePreview.Standalone
             Func<object,string> encode,Func<string,CafeSaveEnvelope> decodeSave,Func<string,DevAcquisitionCheckpoint> decodeCheckpoint,Func<string,DevAcquisitionResult> decodeResult,bool resume=false)
         {
             plan.Validate();if(!Path.IsPathRooted(output))throw new ArgumentException("Absolute development output required");
-            this.root=Path.GetFullPath(output);RejectLinks(root);this.rules=rules;Plan=plan;this.encode=encode;this.decodeSave=decodeSave;this.decodeCheckpoint=decodeCheckpoint;this.decodeResult=decodeResult;
+            this.root=Path.GetFullPath(output);RejectLinks(root);this.rules=rules;Plan=plan;this.encode=encode;this.decodeSave=decodeSave;this.decodeCheckpoint=decodeCheckpoint;this.decodeResult=decodeResult;routes=CreateRoutes(rules,plan);
             string assembly=typeof(CafeDevAcquisition).Assembly.Location;
             string binaryIdentity=File.Exists(assembly)?Hash(File.ReadAllBytes(assembly)):RunnerVersion;
             identity=Hash(Encoding.UTF8.GetBytes(RunnerVersion+"\n"+binaryIdentity+"\n"+encode(rules)+"\n"+encode(plan)+"\n"+contentIdentity));
@@ -103,9 +108,9 @@ namespace CatCafePreview.Standalone
                 {
                     if(File.ReadAllText(Path.Combine(root,"manifest.txt"))!=identity)throw new ArgumentException("Rules, content, runner or plan changed");
                     var cp=decodeCheckpoint(File.ReadAllText(Path.Combine(root,"checkpoint.json")));
-                    if(cp==null || cp.version!=1 || cp.identity!=identity || cp.route<0 || cp.route>=Plan.objectives.Length || cp.operations<0 || (cp.slot!=1 && cp.slot!=2) || cp.elapsed_seconds<0)throw new ArgumentException("Invalid checkpoint");
+                    if(cp==null || cp.version!=1 || cp.identity!=identity || cp.route<0 || cp.route>=routes.Length || cp.operations<0 || (cp.slot!=1 && cp.slot!=2) || cp.elapsed_seconds<0)throw new ArgumentException("Invalid checkpoint");
                     route=cp.route;operations=cp.operations;slot=cp.slot;prepared=cp.prepared;previousSeconds=cp.elapsed_seconds;
-                    for(int i=0;i<route;i++)results.Add(decodeResult(File.ReadAllText(Path.Combine(root,"routes",Plan.objectives[i],"result.json"))));
+                    for(int i=0;i<route;i++)results.Add(decodeResult(File.ReadAllText(Path.Combine(root,"routes",routes[i].id,"result.json"))));
                     NewSimulation();string file=Path.Combine(RouteRoot,"saves","slot-"+slot+".json");
                     if(Hash(File.ReadAllBytes(file))!=cp.save_sha256)throw new IOException("Checkpoint save hash mismatch");
                     var save=Store().Load(slot);Simulation.Restore(save.state);statistics.Restore(save.interaction_statistics);
@@ -144,14 +149,16 @@ namespace CatCafePreview.Standalone
             {
                 var s=Simulation.State;
                 if(s.game_over!=null){EndRoute("unreached","game_over/"+s.game_over);return;}
-                if(Objective!="free" && Simulation.AutoTargetStatus(Objective)=="cleared" && (Objective!="popularity" || s.goal.Count==rules.goal_stages.Length)){EndRoute("acquired","objective_completed");return;}
-                if(Objective=="free" && s.day>Plan.free_days){EndRoute("acquired","free_duration_completed");return;}
+                string impossible=CollectionImpossible();if(impossible!=null){EndRoute("unreached",impossible);return;}
+                if(Collecting && AssignedComplete()){EndRoute("acquired","assigned_collection_completed");return;}
+                if(!Collecting && Objective!="free" && Simulation.AutoTargetStatus(Objective)=="cleared" && (Objective!="popularity" || s.goal.Count==rules.goal_stages.Length)){EndRoute("acquired","objective_completed");return;}
+                if(!Collecting && Objective=="free" && s.day>Plan.free_days){EndRoute("acquired","free_duration_completed");return;}
                 if(s.goal.Any(g=>g.status=="expired")){EndRoute("unreached","objective_expired");return;}
                 if(s.day>Plan.max_days || operations>=Plan.max_operations || Elapsed>=Plan.max_seconds){EndRoute("unreached","limit");return;}
                 string log=Path.Combine(RouteRoot,"events.jsonl");
                 if(logBytes+4096>Plan.max_log_bytes){EndRoute("unreached","log_limit");return;}
                 var op=NextOperation();if(op==null){EndRoute("unreached","unknown_prompt_or_stalled");return;}
-                var row=new DevAcquisitionEvent{session=session,sequence=operations+1,objective=Objective,day=s.day,tick=s.tick,operation=op,before_digest=CafeReplayJournal.Digest(s)};
+                var row=new DevAcquisitionEvent{session=session,sequence=operations+1,objective=Objective,route_id=RouteId,day=s.day,tick=s.tick,operation=op,before_digest=CafeReplayJournal.Digest(s)};
                 try {Simulation.Execute(op.kind,op.working,op.cat_id,op.choice,op.source,op.seat_id);}
                 catch(Exception e){row.error=e.Message;AppendEvent(log,row);throw;}
                 operations++;row.after_digest=CafeReplayJournal.Digest(Simulation.State);AppendEvent(log,row);
@@ -187,15 +194,16 @@ namespace CatCafePreview.Standalone
             if(sim.PatronWaiting)return Op("continue_patron");if(sim.BondWaiting)return Op("continue_bond_goal");
             if(sim.StoreEventWaiting)return Op("resolve_store_event",choice:sim.CurrentStoreEvent.type=="trouble"?(s.funds>rules.store_events.trouble_cost+300?"repair":"patch"):"decline");
             if(sim.CustomerTrustWaiting)return Op("resolve_customer_trust",choice:"recover",source:s.trust_events.First(e=>e.status=="waiting").id);
-            if(sim.DispatchIntroductionWaiting){var e=s.dispatches.First(x=>x.introduction?.status=="waiting");return Op("resolve_dispatch_introduction",choice:sim.DispatchIntroductionAcceptReason(e.id)==""?"accept":"decline",source:e.id);}
-            if(sim.IntakeWaiting)return Op("resolve_intake",choice:sim.IntakeAcceptReason==""?"accept":"decline");
-            if(sim.RegularIntroductionWaiting)return Op("resolve_regular_introduction",choice:sim.RegularIntroductionAcceptReason==""?"accept":"decline");
+            if(sim.DispatchIntroductionWaiting){var e=s.dispatches.First(x=>x.introduction?.status=="waiting");return Op("resolve_dispatch_introduction",choice:sim.DispatchIntroductionAcceptReason(e.id)=="" && WantCat("intro-"+e.destination)?"accept":"decline",source:e.id);}
+            if(sim.IntakeWaiting)return Op("resolve_intake",choice:sim.IntakeAcceptReason=="" && WantCat(rules.intake.cat.id)?"accept":"decline");
+            if(sim.RegularIntroductionWaiting)return Op("resolve_regular_introduction",choice:sim.RegularIntroductionAcceptReason=="" && WantCat(rules.regular_introduction.cat.id)?"accept":"decline");
             if(s.phase=="preparation" && sim.ItemsReason()=="")
             {
-                if(sim.VisitingAdmissionReason()=="")return Op("resolve_visiting_cat",choice:"accept");
-                if(s.visiting_cat?.status=="visiting" && sim.VisitingDailyReason()=="")return Op("resolve_visiting_cat",choice:"interact");
-                // Collection purchases are deliberately limited to the free route in v1.
-                if(Objective=="free" && s.funds>2500)
+                if(WantCat(rules.visiting_cat.cat.id) && sim.VisitingAdmissionReason()=="")return Op("resolve_visiting_cat",choice:"accept");
+                if(WantCat(rules.visiting_cat.cat.id) && s.visiting_cat?.status=="visiting" && sim.VisitingDailyReason()=="")return Op("resolve_visiting_cat",choice:"interact");
+                if(Collecting){var collection=PlanCollection();if(collection!=null)return collection;}
+                // Keep the original four-route policy unchanged when collection is disabled.
+                if(!Collecting && Objective=="free" && s.funds>2500)
                 {
                     foreach(var item in rules.item_shop)if(!s.item_purchases.Any(p=>p.item_id==item.item.id) && sim.ItemPurchaseReason(item.item.id)=="")return Op("purchase_item",choice:item.item.id);
                     foreach(var e in rules.equipment)if(!s.equipment_purchases.Any(p=>p.kind==e.id) && sim.EquipmentPurchaseReason(e.id)=="")return Op("purchase_seat_equipment",choice:e.id,seat:"seat-1");
@@ -212,7 +220,7 @@ namespace CatCafePreview.Standalone
                     return workers.Length>0?Op("start_business"):Op("day_off");
                 }
                 if(!prepared){prepared=true;if(!s.auto_assignment)return Op("set_auto_assignment",choice:"automatic");}
-                if(Objective=="free" && s.day>=3 && !s.dispatches.Any(e=>e.destination=="neighborhood_visit"))
+                if(!Collecting && Objective=="free" && s.day>=3 && !s.dispatches.Any(e=>e.destination=="neighborhood_visit"))
                 {var cat=s.cats.FirstOrDefault(c=>sim.DispatchReason(c.id,"neighborhood_visit")=="");if(cat!=null)return Op("dispatch_general",cat.id,"neighborhood_visit");}
             }
             return sim.PlanAutoplay(Objective=="free"?"popularity":Objective,"fast");
@@ -220,13 +228,13 @@ namespace CatCafePreview.Standalone
         void EndRoute(string status,string reason)
         {
             Simulation.Validate(Simulation.State);var result=Result(status,reason);Atomic(Path.Combine(RouteRoot,"result.json"),encode(result));results.Add(result);Checkpoint(reason);
-            if(route+1<Plan.objectives.Length)
+            if(route+1<routes.Length)
             {
                 route++;operations=0;slot=0;prepared=false;previousSeconds=0;watch.Restart();NewSimulation();Checkpoint("next_route");WriteSummary();return;
             }
             Status=results.All(r=>r.status=="acquired")?"completed":"incomplete";Reason=reason;WriteSummary();
         }
-        public DevAcquisitionResult Result(string status=null,string reason=null)=>new DevAcquisitionResult{objective=Objective,status=status??Status,reason=reason??Reason,seed=Plan.seed,day=Simulation.State.day,operations=operations,state_digest=CafeReplayJournal.Digest(Simulation.State),targets=Targets()};
+        public DevAcquisitionResult Result(string status=null,string reason=null)=>new DevAcquisitionResult{objective=Objective,route_id=RouteId,assigned_targets=routes[route].targets,completion_scope=Collecting?"assigned_collection_targets":"selected_objective_or_free_duration; not_all_collection_targets",status=status??Status,reason=reason??Reason,seed=Plan.seed,day=Simulation.State.day,operations=operations,state_digest=CafeReplayJournal.Digest(Simulation.State),targets=Targets()};
         DevAcquisitionTarget[] Targets()
         {
             var s=Simulation.State;var list=new List<DevAcquisitionTarget>();
@@ -262,20 +270,21 @@ namespace CatCafePreview.Standalone
             foreach(var type in rules.types)add("mastery_type",type.id,s.growth.Any(g=>CafeSimulation.LearnedTypes(g).Contains(type.id)),false,"not_learned");
             foreach(var d in CafeReplayCatalog.All)list.Add(new DevAcquisitionTarget{category="replay",id=d.Key,status="excluded",reason="internal_runner_does_not_observe_dialogue_reading"});
             list.Add(new DevAcquisitionTarget{category="image",id="rendered-gallery",status="excluded",reason="internal_runner_does_not_render_images"});
+            foreach(var target in list)target.assigned=routes[route].targets.Contains(target.category+"/"+target.id);
             return list.ToArray();
         }
         public void WriteSummary()
         {
-            var rows=results.ToList();if(!rows.Any(r=>r.objective==Objective))rows.Add(Result());
+            var rows=results.ToList();if(!rows.Any(r=>r.route_id==RouteId))rows.Add(Result());
             var union=rows.SelectMany(r=>r.targets).GroupBy(t=>t.category+"/"+t.id).Select(g=>
             {
                 var best=g.FirstOrDefault(t=>t.status=="acquired")??g.FirstOrDefault(t=>t.status!="excluded")??g.First();
-                return new DevAcquisitionTarget{category=best.category,id=best.id,status=best.status,reason=best.reason,evidence_routes=rows.Where(r=>r.targets.Any(t=>t.category==best.category && t.id==best.id && t.status=="acquired")).Select(r=>r.objective).ToArray()};
+                return new DevAcquisitionTarget{category=best.category,id=best.id,status=best.status,reason=best.reason,assigned=g.Any(t=>t.assigned),evidence_routes=rows.Where(r=>r.targets.Any(t=>t.category==best.category && t.id==best.id && t.status=="acquired")).Select(r=>r.route_id).ToArray()};
             }).ToArray();
-            Atomic(Path.Combine(root,"summary.json"),encode(new DevAcquisitionSummary{status=Status,reason=Reason,routes=rows.ToArray(),union=union,pending_objectives=Plan.objectives.Except(rows.Select(r=>r.objective)).ToArray()}));
-            var csv=new StringBuilder("scope,category,id,status,reason,currently_owned,evidence_routes\n");
-            Action<string,DevAcquisitionTarget> line=(scope,t)=>csv.AppendLine(string.Join(",",new[]{scope,t.category,t.id,t.status,t.reason,t.currently_owned.ToString(),string.Join(";",t.evidence_routes)}.Select(v=>"\""+(v??"").Replace("\"","\"\"")+"\"")));
-            foreach(var row in rows)foreach(var target in row.targets)line(row.objective,target);
+            Atomic(Path.Combine(root,"summary.json"),encode(new DevAcquisitionSummary{status=Status,reason=Reason,routes=rows.ToArray(),union=union,pending_objectives=routes.Select(r=>r.id).Except(rows.Select(r=>r.route_id)).ToArray()}));
+            var csv=new StringBuilder("scope,category,id,status,reason,currently_owned,assigned,evidence_routes\n");
+            Action<string,DevAcquisitionTarget> line=(scope,t)=>csv.AppendLine(string.Join(",",new[]{scope,t.category,t.id,t.status,t.reason,t.currently_owned.ToString(),t.assigned.ToString(),string.Join(";",t.evidence_routes)}.Select(v=>"\""+(v??"").Replace("\"","\"\"")+"\"")));
+            foreach(var row in rows)foreach(var target in row.targets)line(row.route_id,target);
             foreach(var target in union)line("union",target);
             Atomic(Path.Combine(root,"coverage.csv"),csv.ToString());
         }

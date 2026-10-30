@@ -29,7 +29,7 @@ if($ResumeDirectory){
             $dirty=[bool](git -C $path status --porcelain)
             $versions+="$repo=$revision dirty=$dirty"
         }
-        @{version=1;seed=0;max_days=150;max_operations=100000;max_seconds=7200;free_days=30;checkpoint_operations=200;max_log_bytes=268435456;objectives=@('popularity','patron','bond','free');source_versions=$versions}|ConvertTo-Json -Depth 5|Set-Content -LiteralPath $PlanPath -Encoding UTF8
+        @{version=1;seed=0;max_days=150;max_operations=100000;max_seconds=7200;free_days=30;checkpoint_operations=200;max_log_bytes=268435456;objectives=@('popularity','patron','bond','free');collection_routes=$true;source_versions=$versions}|ConvertTo-Json -Depth 5|Set-Content -LiteralPath $PlanPath -Encoding UTF8
     }
 }
 $PlanPath=(Resolve-Path -LiteralPath $PlanPath).Path

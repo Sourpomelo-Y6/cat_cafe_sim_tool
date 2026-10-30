@@ -15,6 +15,24 @@ static class Program
         try
         {
             string rulesPath=Path.GetFullPath(args[0]),output=Path.GetFullPath(args[1]);Directory.CreateDirectory(output);
+            if(args.Length>2 && new[]{"collect","collect-pause","collect-resume"}.Contains(args[2]))
+            {
+                bool resume=args[2]=="collect-resume";
+                using var run=Open(Path.Combine(output,"collection"),Rules(rulesPath),new(){collection_routes=true},resume);
+                if(resume)Check(run.Status=="paused" && run.RouteId=="collect-catalog-2","collection resume restores distinct route and waits");
+                run.Start();while(!run.Finished)
+                {
+                    run.Step();
+                    if(args[2]=="collect-pause" && run.RouteId=="collect-catalog-2" && run.Operations>=75){run.Pause();Check(run.Status=="paused","pause within second catalog cohort");return 0;}
+                }
+                Console.WriteLine(run.Status+" "+run.Reason);Check(run.Status=="completed","assigned collection routes complete");
+                var summary=Decode<DevAcquisitionSummary>(File.ReadAllText(Path.Combine(output,"collection","summary.json")));
+                Check(summary.routes.Length==9 && summary.routes.Select(r=>r.route_id).Distinct().Count()==9,"nine distinct independent routes");
+                foreach(var r in summary.routes.Where(r=>r.assigned_targets.Length>0))Check(r.assigned_targets.All(id=>r.targets.Any(t=>t.category+"/"+t.id==id && t.status=="acquired")),"assigned targets acquired: "+r.route_id);
+                foreach(var c in new[]{("cat",31),("equipment",5),("facility",13),("supply",4),("dispatch",12)})Check(summary.union.Count(t=>t.category==c.Item1 && t.status=="acquired")==c.Item2,"complete union: "+c.Item1);
+                Check(summary.routes.All(r=>r.targets.Count(t=>t.category=="cat" && t.currently_owned)<=12),"single route never claims all 31 cats simultaneously");
+                Check(summary.union.Where(t=>t.status=="acquired").All(t=>t.evidence_routes.Length>0),"union retains route evidence");return 0;
+            }
             if(args.Length>2 && args[2]=="routes")
             {
                 using var run=Open(Path.Combine(output,"normal-routes"),Rules(rulesPath),new());run.Start();while(!run.Finished)run.Step();
