@@ -43,6 +43,14 @@ namespace CatCafePreview
             get
             {
                 var launchArgs=Environment.GetCommandLineArgs();
+                if(Array.IndexOf(launchArgs,"--catcafe-dev-watch")>=0)
+                {
+#if CATCAFE_DEV_ACQUISITION
+                    return System.IO.Path.Combine(DevWatchSession.Output(launchArgs),"profile");
+#else
+                    throw new InvalidOperationException("Development watch mode is not included in this player.");
+#endif
+                }
                 if(Array.IndexOf(launchArgs,"--catcafe-dev-acquisition")>=0)
                 {
 #if CATCAFE_DEV_ACQUISITION

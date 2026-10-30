@@ -20,7 +20,7 @@ namespace CatCafePreview
         {
             int i=Array.IndexOf(args,"--catcafe-dev-acquisition");if(i<0)return null;
             if(i+1>=args.Length || !Path.IsPathRooted(args[i+1]))throw new ArgumentException("Development acquisition requires an absolute run directory");
-            if(args.Any(a=>a=="--catcafe-playtest" || a=="--catcafe-route" || a=="--catcafe-http" || a=="--catcafe-profile" || a.EndsWith("-check",StringComparison.Ordinal) || a=="-catCafeSmoke"))throw new ArgumentException("Development acquisition cannot share another QA/profile entry");
+            if(args.Any(a=>a=="--catcafe-dev-watch" || a=="--catcafe-playtest" || a=="--catcafe-route" || a=="--catcafe-http" || a=="--catcafe-profile" || a.EndsWith("-check",StringComparison.Ordinal) || a=="-catCafeSmoke"))throw new ArgumentException("Development acquisition cannot share another QA/profile entry");
             string root=Path.GetFullPath(args[i+1]);CafeDevAcquisition.RejectLinks(root);
             string normal=Path.GetFullPath(Application.persistentDataPath).TrimEnd(Path.DirectorySeparatorChar,Path.AltDirectorySeparatorChar);
             if(Within(root,normal) || Within(normal,root))throw new ArgumentException("Development output must be separate from the normal player profile");

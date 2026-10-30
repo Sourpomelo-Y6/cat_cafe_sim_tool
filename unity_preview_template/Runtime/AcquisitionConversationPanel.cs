@@ -29,6 +29,10 @@ namespace CatCafePreview
         protected LocalCafeBackend Backend=>CafeBackends.Local as LocalCafeBackend;
         protected PythonStateClient Client=>GetComponent<PythonStateClient>();
         public bool Showing=>!OriginalShowing && panel!=null && panel.activeSelf && progress!=null && !progress.completed;
+        public string PlaybackKey=>progress==null?"":progress.conversation_id+"/"+progress.branch_id+"/"+progress.node+"/"+progress.page_offset;
+        public bool PlaybackChoosing=>progress!=null && Choosing;
+        public bool PlaybackTextReady=>revealed>=pageText.Length;
+        public GameObject PlaybackHost=>panel;
         protected virtual bool Ready=>Client.CanManageSaves;
         protected virtual bool AutoRunning=>Client.AutoPlayExecuting;
         protected virtual bool ThreeLinePages=>false;
