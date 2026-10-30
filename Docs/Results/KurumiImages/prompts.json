@@ -1,0 +1,218 @@
+[
+  {
+    "scene": "normal",
+    "file": "kurumi-normal.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-7ec67fcf-88c0-4d2a-9198-5ba0e583496d.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim identity illustration NEW cat KURUMI. MUGI reference ONLY soft painting style and room; DIFFERENT cat. Adult COOL GRAY BROWN TABBY SHORTHAIR, medium STOCKY sturdy body BROAD chest and SHORT strong legs. Broad ROUND face short muzzle SMALL rounded triangular ears. Large ROUND bright GOLDEN YELLOW eyes, DARK BRICK RED nose. Cool walnut-gray brown base coat, BOLD thick DARK BLACK BROWN mackerel vertical stripes on back and flanks, forehead M, THREE cheek stripes each side, TWO dark chest bands, ring-striped legs. Pale beige muzzle/chin ONLY; no white patches socks or white chest. SHORTER THICK ring-striped tail rounded BLACK tip, short smooth fur, curled low beside body. Calm neutral attentive adult, not kitten, no long fur no orange ginger. Entire seated cat and full tail inside frame with generous margins, FOUR limbs only. Same fine soft painted storybook fur cream wall honey wood floor sage green mat warm diffuse light. No text UI watermark people props.",
+    "reference": "../CatExecutionImages/Prototypes/CatAppearance-v1/mugi-normal.png",
+    "reference_role": "style_and_room"
+  },
+  {
+    "scene": "teaser",
+    "file": "kurumi-teaser.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-11a89e1e-556a-4856-ac39-4e104620a915.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is KURUMI exact identity and style. Adult cool GRAY BROWN TABBY SHORTHAIR medium STOCKY sturdy body BROAD chest SHORT strong legs. Broad ROUND face short muzzle SMALL rounded triangular ears, large ROUND bright GOLDEN YELLOW eyes, DARK BRICK RED nose. Cool walnut-gray brown coat BOLD thick DARK BLACK BROWN mackerel vertical stripes back and flanks, forehead M, THREE cheek stripes each side, TWO dark chest bands, ring-striped legs. Pale beige muzzle/chin only NO white patches socks chest, NO orange ginger or longhair. SHORTER THICK ring-striped tail rounded BLACK tip smooth SHORT fur. Calm neutral attentive cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail inside frame with generous margins. EXACTLY FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Basic attentive play: one hand at edge holds feather teaser near cat. Cat reaches one forepaw toward feather, golden yellow eyes open, gentle calm engagement.",
+    "reference": "kurumi-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball",
+    "file": "kurumi-ball.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-68925a8c-011c-4f83-ac95-0c953b68a9c6.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is KURUMI exact identity and style. Adult cool GRAY BROWN TABBY SHORTHAIR medium STOCKY sturdy body BROAD chest SHORT strong legs. Broad ROUND face short muzzle SMALL rounded triangular ears, large ROUND bright GOLDEN YELLOW eyes, DARK BRICK RED nose. Cool walnut-gray brown coat BOLD thick DARK BLACK BROWN mackerel vertical stripes back and flanks, forehead M, THREE cheek stripes each side, TWO dark chest bands, ring-striped legs. Pale beige muzzle/chin only NO white patches socks chest, NO orange ginger or longhair. SHORTER THICK ring-striped tail rounded BLACK tip smooth SHORT fur. Calm neutral attentive cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail inside frame with generous margins. EXACTLY FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Basic play: crouches and gently touches small blue toy ball on mat with one paw, attentive open golden yellow eyes. No humans or other toys.",
+    "reference": "kurumi-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush",
+    "file": "kurumi-plush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-fd0f7e6e-01bf-484e-8927-32506acabc5f.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is KURUMI exact identity and style. Adult cool GRAY BROWN TABBY SHORTHAIR medium STOCKY sturdy body BROAD chest SHORT strong legs. Broad ROUND face short muzzle SMALL rounded triangular ears, large ROUND bright GOLDEN YELLOW eyes, DARK BRICK RED nose. Cool walnut-gray brown coat BOLD thick DARK BLACK BROWN mackerel vertical stripes back and flanks, forehead M, THREE cheek stripes each side, TWO dark chest bands, ring-striped legs. Pale beige muzzle/chin only NO white patches socks chest, NO orange ginger or longhair. SHORTER THICK ring-striped tail rounded BLACK tip smooth SHORT fur. Calm neutral attentive cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail inside frame with generous margins. EXACTLY FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Basic play: cat lies naturally belly-down on mat with TWO forepaws resting on either side of a SMALL beige mouse plush ON THE FLOOR; sniffs mouse, eyes open. Hind legs tucked behind body. EXACTLY FOUR LIMBS TOTAL. No seated upright hugging pose, no extra paws. Tail curves beside body fully inside frame.",
+    "reference": "kurumi-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel",
+    "file": "kurumi-tunnel.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-af15da5e-daba-4ae5-9f7d-6eed2d1b4520.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is KURUMI exact identity and style. Adult cool GRAY BROWN TABBY SHORTHAIR medium STOCKY sturdy body BROAD chest SHORT strong legs. Broad ROUND face short muzzle SMALL rounded triangular ears, large ROUND bright GOLDEN YELLOW eyes, DARK BRICK RED nose. Cool walnut-gray brown coat BOLD thick DARK BLACK BROWN mackerel vertical stripes back and flanks, forehead M, THREE cheek stripes each side, TWO dark chest bands, ring-striped legs. Pale beige muzzle/chin only NO white patches socks chest, NO orange ginger or longhair. SHORTER THICK ring-striped tail rounded BLACK tip smooth SHORT fur. Calm neutral attentive cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail inside frame with generous margins. EXACTLY FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Basic play: crouches just inside short beige fabric cat tunnel, head front paws and tail fully visible at entrance, eyes open curious gentle expression. No humans or other toys.",
+    "reference": "kurumi-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet",
+    "file": "kurumi-pet.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-2c3339a5-cfa5-4636-bef1-cf5c7fbb9559.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is KURUMI exact identity and style. Adult cool GRAY BROWN TABBY SHORTHAIR medium STOCKY sturdy body BROAD chest SHORT strong legs. Broad ROUND face short muzzle SMALL rounded triangular ears, large ROUND bright GOLDEN YELLOW eyes, DARK BRICK RED nose. Cool walnut-gray brown coat BOLD thick DARK BLACK BROWN mackerel vertical stripes back and flanks, forehead M, THREE cheek stripes each side, TWO dark chest bands, ring-striped legs. Pale beige muzzle/chin only NO white patches socks chest, NO orange ginger or longhair. SHORTER THICK ring-striped tail rounded BLACK tip smooth SHORT fur. Calm neutral attentive cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail inside frame with generous margins. EXACTLY FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Basic petting: one human hand gently strokes forehead, cat relaxed and attentive, golden yellow eyes open. No toys.",
+    "reference": "kurumi-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush",
+    "file": "kurumi-brush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-d5da8eb7-6da1-4254-9c2e-e7a52839d4f3.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is KURUMI exact identity and style. Adult cool GRAY BROWN TABBY SHORTHAIR medium STOCKY sturdy body BROAD chest SHORT strong legs. Broad ROUND face short muzzle SMALL rounded triangular ears, large ROUND bright GOLDEN YELLOW eyes, DARK BRICK RED nose. Cool walnut-gray brown coat BOLD thick DARK BLACK BROWN mackerel vertical stripes back and flanks, forehead M, THREE cheek stripes each side, TWO dark chest bands, ring-striped legs. Pale beige muzzle/chin only NO white patches socks chest, NO orange ginger or longhair. SHORTER THICK ring-striped tail rounded BLACK tip smooth SHORT fur. Calm neutral attentive cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail inside frame with generous margins. EXACTLY FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Basic brushing: one human hand uses wooden pet brush on shoulder, bristles contact SHORT fur, cat calmly stands with eyes open. No other props.",
+    "reference": "kurumi-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice",
+    "file": "kurumi-voice.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-4ee0f794-0859-41fb-9714-9f37a04447ff.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is KURUMI exact identity and style. Adult cool GRAY BROWN TABBY SHORTHAIR medium STOCKY sturdy body BROAD chest SHORT strong legs. Broad ROUND face short muzzle SMALL rounded triangular ears, large ROUND bright GOLDEN YELLOW eyes, DARK BRICK RED nose. Cool walnut-gray brown coat BOLD thick DARK BLACK BROWN mackerel vertical stripes back and flanks, forehead M, THREE cheek stripes each side, TWO dark chest bands, ring-striped legs. Pale beige muzzle/chin only NO white patches socks chest, NO orange ginger or longhair. SHORTER THICK ring-striped tail rounded BLACK tip smooth SHORT fur. Calm neutral attentive cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail inside frame with generous margins. EXACTLY FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Basic voice interaction: sits calmly, ears turn toward viewer listening, golden yellow eyes open, mouth closed. No human hands knees speech bubbles or props.",
+    "reference": "kurumi-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence",
+    "file": "kurumi-presence.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-7c3be0d8-113e-4df1-afcd-eb4584a21034.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is KURUMI exact identity and style. Adult cool GRAY BROWN TABBY SHORTHAIR medium STOCKY sturdy body BROAD chest SHORT strong legs. Broad ROUND face short muzzle SMALL rounded triangular ears, large ROUND bright GOLDEN YELLOW eyes, DARK BRICK RED nose. Cool walnut-gray brown coat BOLD thick DARK BLACK BROWN mackerel vertical stripes back and flanks, forehead M, THREE cheek stripes each side, TWO dark chest bands, ring-striped legs. Pale beige muzzle/chin only NO white patches socks chest, NO orange ginger or longhair. SHORTER THICK ring-striped tail rounded BLACK tip smooth SHORT fur. Calm neutral attentive cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail inside frame with generous margins. EXACTLY FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Basic companionship: cat loafs calmly, golden yellow eyes open, only part of blue clothed knee at lower edge. No hands or toys.",
+    "reference": "kurumi-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pause",
+    "file": "kurumi-pause.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-ee619411-d9dd-46f8-8b98-a439f4b2b03d.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is KURUMI exact identity and style. Adult cool GRAY BROWN TABBY SHORTHAIR medium STOCKY sturdy body BROAD chest SHORT strong legs. Broad ROUND face short muzzle SMALL rounded triangular ears, large ROUND bright GOLDEN YELLOW eyes, DARK BRICK RED nose. Cool walnut-gray brown coat BOLD thick DARK BLACK BROWN mackerel vertical stripes back and flanks, forehead M, THREE cheek stripes each side, TWO dark chest bands, ring-striped legs. Pale beige muzzle/chin only NO white patches socks chest, NO orange ginger or longhair. SHORTER THICK ring-striped tail rounded BLACK tip smooth SHORT fur. Calm neutral attentive cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail inside frame with generous margins. EXACTLY FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Pause/wait: cat calmly sits, forepaws planted, eyes open, feather teaser lies completely still on mat at safe distance. No hands.",
+    "reference": "kurumi-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "sleep",
+    "file": "kurumi-sleep.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-fc4d4d0f-0cf7-4068-8e3e-9e095b3d9eb4.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is KURUMI exact identity and style. Adult cool GRAY BROWN TABBY SHORTHAIR medium STOCKY sturdy body BROAD chest SHORT strong legs. Broad ROUND face short muzzle SMALL rounded triangular ears, large ROUND bright GOLDEN YELLOW eyes, DARK BRICK RED nose. Cool walnut-gray brown coat BOLD thick DARK BLACK BROWN mackerel vertical stripes back and flanks, forehead M, THREE cheek stripes each side, TWO dark chest bands, ring-striped legs. Pale beige muzzle/chin only NO white patches socks chest, NO orange ginger or longhair. SHORTER THICK ring-striped tail rounded BLACK tip smooth SHORT fur. Calm neutral attentive cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail inside frame with generous margins. EXACTLY FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Sleep: cat curled into a relaxed ball sleeping, eyes closed, head on front paws, short-haired short thick ring-striped brown tail with black tip around body. No humans or toys.",
+    "reference": "kurumi-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "teaser__open_up",
+    "file": "kurumi-teaser__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-e0bf2656-130b-4469-8482-3067d9745f9e.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is KURUMI exact identity and style. Adult cool GRAY BROWN TABBY SHORTHAIR medium STOCKY sturdy body BROAD chest SHORT strong legs. Broad ROUND face short muzzle SMALL rounded triangular ears, large ROUND bright GOLDEN YELLOW eyes, DARK BRICK RED nose. Cool walnut-gray brown coat BOLD thick DARK BLACK BROWN mackerel vertical stripes back and flanks, forehead M, THREE cheek stripes each side, TWO dark chest bands, ring-striped legs. Pale beige muzzle/chin only NO white patches socks chest, NO orange ginger or longhair. SHORTER THICK ring-striped tail rounded BLACK tip smooth SHORT fur. Calm neutral attentive cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail inside frame with generous margins. EXACTLY FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Special deep trust playing with feather teaser: one hand holds feather close; cat leans toward viewer, eyes soft half closed, paw reaches gently. Relaxed ears.",
+    "reference": "kurumi-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "teaser__simultaneous",
+    "file": "kurumi-teaser__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-2c7da2cb-4eb8-4407-812c-0b01bc9d7b48.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is KURUMI exact identity and style. Adult cool GRAY BROWN TABBY SHORTHAIR medium STOCKY sturdy body BROAD chest SHORT strong legs. Broad ROUND face short muzzle SMALL rounded triangular ears, large ROUND bright GOLDEN YELLOW eyes, DARK BRICK RED nose. Cool walnut-gray brown coat BOLD thick DARK BLACK BROWN mackerel vertical stripes back and flanks, forehead M, THREE cheek stripes each side, TWO dark chest bands, ring-striped legs. Pale beige muzzle/chin only NO white patches socks chest, NO orange ginger or longhair. SHORTER THICK ring-striped tail rounded BLACK tip smooth SHORT fur. Calm neutral attentive cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail inside frame with generous margins. EXACTLY FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Special excited and deeply trusting play: joyfully bats feather teaser held by one edge hand, ears forward bright golden yellow eyes, lifted paw, confident happy posture. No aggressive expression.",
+    "reference": "kurumi-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball__open_up",
+    "file": "kurumi-ball__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-fded895c-43eb-46d7-adb6-770a20983676.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is KURUMI exact identity and style. Adult cool GRAY BROWN TABBY SHORTHAIR medium STOCKY sturdy body BROAD chest SHORT strong legs. Broad ROUND face short muzzle SMALL rounded triangular ears, large ROUND bright GOLDEN YELLOW eyes, DARK BRICK RED nose. Cool walnut-gray brown coat BOLD thick DARK BLACK BROWN mackerel vertical stripes back and flanks, forehead M, THREE cheek stripes each side, TWO dark chest bands, ring-striped legs. Pale beige muzzle/chin only NO white patches socks chest, NO orange ginger or longhair. SHORTER THICK ring-striped tail rounded BLACK tip smooth SHORT fur. Calm neutral attentive cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail inside frame with generous margins. EXACTLY FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Special deep trust: relaxed on side beside small blue ball, paw resting on ball, head tipped affectionately toward viewer, soft half closed eyes. No humans.",
+    "reference": "kurumi-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball__simultaneous",
+    "file": "kurumi-ball__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-61757dc7-7780-4094-96e4-99ab2c1e96eb.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is KURUMI exact identity and style. Adult cool GRAY BROWN TABBY SHORTHAIR medium STOCKY sturdy body BROAD chest SHORT strong legs. Broad ROUND face short muzzle SMALL rounded triangular ears, large ROUND bright GOLDEN YELLOW eyes, DARK BRICK RED nose. Cool walnut-gray brown coat BOLD thick DARK BLACK BROWN mackerel vertical stripes back and flanks, forehead M, THREE cheek stripes each side, TWO dark chest bands, ring-striped legs. Pale beige muzzle/chin only NO white patches socks chest, NO orange ginger or longhair. SHORTER THICK ring-striped tail rounded BLACK tip smooth SHORT fur. Calm neutral attentive cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail inside frame with generous margins. EXACTLY FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Special excited and trusting: playfully hugs small blue ball between forepaws, crouched with confident happy energy, bright golden yellow eyes. No humans or other toys.",
+    "reference": "kurumi-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush__open_up",
+    "file": "kurumi-plush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-e34c7ecc-7c36-4c1f-87c8-7a657894d9fc.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is KURUMI exact identity and style. Adult cool GRAY BROWN TABBY SHORTHAIR medium STOCKY sturdy body BROAD chest SHORT strong legs. Broad ROUND face short muzzle SMALL rounded triangular ears, large ROUND bright GOLDEN YELLOW eyes, DARK BRICK RED nose. Cool walnut-gray brown coat BOLD thick DARK BLACK BROWN mackerel vertical stripes back and flanks, forehead M, THREE cheek stripes each side, TWO dark chest bands, ring-striped legs. Pale beige muzzle/chin only NO white patches socks chest, NO orange ginger or longhair. SHORTER THICK ring-striped tail rounded BLACK tip smooth SHORT fur. Calm neutral attentive cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail inside frame with generous margins. EXACTLY FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Special deep trust: cat lies naturally on side, TWO forepaws gently wrap around SMALL beige mouse plush ON MAT, cheek resting on toy, soft HALF CLOSED golden yellow eyes toward viewer. Two hind legs rest behind with haunches. EXACTLY FOUR LIMBS TOTAL, no upright seated pose, no extra paws. Tail fully visible curving beside body.",
+    "reference": "kurumi-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush__simultaneous",
+    "file": "kurumi-plush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-f2c49f66-888d-4ca0-aa36-86f43787addc.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is KURUMI exact identity and style. Adult cool GRAY BROWN TABBY SHORTHAIR medium STOCKY sturdy body BROAD chest SHORT strong legs. Broad ROUND face short muzzle SMALL rounded triangular ears, large ROUND bright GOLDEN YELLOW eyes, DARK BRICK RED nose. Cool walnut-gray brown coat BOLD thick DARK BLACK BROWN mackerel vertical stripes back and flanks, forehead M, THREE cheek stripes each side, TWO dark chest bands, ring-striped legs. Pale beige muzzle/chin only NO white patches socks chest, NO orange ginger or longhair. SHORTER THICK ring-striped tail rounded BLACK tip smooth SHORT fur. Calm neutral attentive cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail inside frame with generous margins. EXACTLY FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Special excited and trusting: joyfully rolls slightly on side hugging small beige mouse plush with front paws, bright golden yellow eyes, relaxed ears and happy posture. No humans.",
+    "reference": "kurumi-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel__open_up",
+    "file": "kurumi-tunnel__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-3153a7e9-1c50-4614-aaff-3ff168bf7013.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is KURUMI exact identity and style. Adult cool GRAY BROWN TABBY SHORTHAIR medium STOCKY sturdy body BROAD chest SHORT strong legs. Broad ROUND face short muzzle SMALL rounded triangular ears, large ROUND bright GOLDEN YELLOW eyes, DARK BRICK RED nose. Cool walnut-gray brown coat BOLD thick DARK BLACK BROWN mackerel vertical stripes back and flanks, forehead M, THREE cheek stripes each side, TWO dark chest bands, ring-striped legs. Pale beige muzzle/chin only NO white patches socks chest, NO orange ginger or longhair. SHORTER THICK ring-striped tail rounded BLACK tip smooth SHORT fur. Calm neutral attentive cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail inside frame with generous margins. EXACTLY FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Special deep trust: relaxed at short beige fabric tunnel entrance, chin on rim, soft half closed golden yellow eyes toward viewer, tail visible outside. No humans.",
+    "reference": "kurumi-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel__simultaneous",
+    "file": "kurumi-tunnel__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-d3949fe2-5728-47f9-ac77-c3d5b52b0627.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is KURUMI exact identity and style. Adult cool GRAY BROWN TABBY SHORTHAIR medium STOCKY sturdy body BROAD chest SHORT strong legs. Broad ROUND face short muzzle SMALL rounded triangular ears, large ROUND bright GOLDEN YELLOW eyes, DARK BRICK RED nose. Cool walnut-gray brown coat BOLD thick DARK BLACK BROWN mackerel vertical stripes back and flanks, forehead M, THREE cheek stripes each side, TWO dark chest bands, ring-striped legs. Pale beige muzzle/chin only NO white patches socks chest, NO orange ginger or longhair. SHORTER THICK ring-striped tail rounded BLACK tip smooth SHORT fur. Calm neutral attentive cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail inside frame with generous margins. EXACTLY FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Special excited and trusting: cat playfully emerges from short beige fabric tunnel with TWO front paws reaching forward, bright golden yellow eyes friendly confident face and forward ears. Hindquarters still inside tunnel. Ring-striped short-haired tail curls LOW along floor beside tunnel, BLACK TIP fully visible with generous empty margin all around. No part of tail outside frame; no upright high tail. No humans.",
+    "reference": "kurumi-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet__open_up",
+    "file": "kurumi-pet__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-f13d3e20-fc21-4ae8-91da-377af40c298c.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is KURUMI exact identity and style. Adult cool GRAY BROWN TABBY SHORTHAIR medium STOCKY sturdy body BROAD chest SHORT strong legs. Broad ROUND face short muzzle SMALL rounded triangular ears, large ROUND bright GOLDEN YELLOW eyes, DARK BRICK RED nose. Cool walnut-gray brown coat BOLD thick DARK BLACK BROWN mackerel vertical stripes back and flanks, forehead M, THREE cheek stripes each side, TWO dark chest bands, ring-striped legs. Pale beige muzzle/chin only NO white patches socks chest, NO orange ginger or longhair. SHORTER THICK ring-striped tail rounded BLACK tip smooth SHORT fur. Calm neutral attentive cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail inside frame with generous margins. EXACTLY FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Special deep trust petting: one hand strokes cheek, cat leans cheek into palm, eyes almost closed, affectionate relaxed expression. No toys.",
+    "reference": "kurumi-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet__simultaneous",
+    "file": "kurumi-pet__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-569ff556-e7ab-4355-b4e7-08727fbaf6c3.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is KURUMI exact identity and style. Adult cool GRAY BROWN TABBY SHORTHAIR medium STOCKY sturdy body BROAD chest SHORT strong legs. Broad ROUND face short muzzle SMALL rounded triangular ears, large ROUND bright GOLDEN YELLOW eyes, DARK BRICK RED nose. Cool walnut-gray brown coat BOLD thick DARK BLACK BROWN mackerel vertical stripes back and flanks, forehead M, THREE cheek stripes each side, TWO dark chest bands, ring-striped legs. Pale beige muzzle/chin only NO white patches socks chest, NO orange ginger or longhair. SHORTER THICK ring-striped tail rounded BLACK tip smooth SHORT fur. Calm neutral attentive cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail inside frame with generous margins. EXACTLY FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Special delighted and trusting petting: one hand rubs under chin, cat lifts chin joyfully, content closed eyes and relaxed ears. No toys.",
+    "reference": "kurumi-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush__open_up",
+    "file": "kurumi-brush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-54b11a68-b609-4a61-be93-d3e2a46ad194.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is KURUMI exact identity and style. Adult cool GRAY BROWN TABBY SHORTHAIR medium STOCKY sturdy body BROAD chest SHORT strong legs. Broad ROUND face short muzzle SMALL rounded triangular ears, large ROUND bright GOLDEN YELLOW eyes, DARK BRICK RED nose. Cool walnut-gray brown coat BOLD thick DARK BLACK BROWN mackerel vertical stripes back and flanks, forehead M, THREE cheek stripes each side, TWO dark chest bands, ring-striped legs. Pale beige muzzle/chin only NO white patches socks chest, NO orange ginger or longhair. SHORTER THICK ring-striped tail rounded BLACK tip smooth SHORT fur. Calm neutral attentive cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail inside frame with generous margins. EXACTLY FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Special deep trust brushing: one hand gently brushes short chest fur with wooden pet brush, cat leans toward brush, half closed eyes relaxed affectionate posture.",
+    "reference": "kurumi-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush__simultaneous",
+    "file": "kurumi-brush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-3ea522fc-510b-466e-9bf6-d7265bcdf580.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is KURUMI exact identity and style. Adult cool GRAY BROWN TABBY SHORTHAIR medium STOCKY sturdy body BROAD chest SHORT strong legs. Broad ROUND face short muzzle SMALL rounded triangular ears, large ROUND bright GOLDEN YELLOW eyes, DARK BRICK RED nose. Cool walnut-gray brown coat BOLD thick DARK BLACK BROWN mackerel vertical stripes back and flanks, forehead M, THREE cheek stripes each side, TWO dark chest bands, ring-striped legs. Pale beige muzzle/chin only NO white patches socks chest, NO orange ginger or longhair. SHORTER THICK ring-striped tail rounded BLACK tip smooth SHORT fur. Calm neutral attentive cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail inside frame with generous margins. EXACTLY FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Special delighted and trusting brushing: one hand brushes shoulder with wooden brush, cat stretches neck and raises chin slightly, blissfully closed eyes, happy relaxed posture.",
+    "reference": "kurumi-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice__open_up",
+    "file": "kurumi-voice__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-8c3135ad-38fb-42bb-8708-6f2feedf786f.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is KURUMI exact identity and style. Adult cool GRAY BROWN TABBY SHORTHAIR medium STOCKY sturdy body BROAD chest SHORT strong legs. Broad ROUND face short muzzle SMALL rounded triangular ears, large ROUND bright GOLDEN YELLOW eyes, DARK BRICK RED nose. Cool walnut-gray brown coat BOLD thick DARK BLACK BROWN mackerel vertical stripes back and flanks, forehead M, THREE cheek stripes each side, TWO dark chest bands, ring-striped legs. Pale beige muzzle/chin only NO white patches socks chest, NO orange ginger or longhair. SHORTER THICK ring-striped tail rounded BLACK tip smooth SHORT fur. Calm neutral attentive cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail inside frame with generous margins. EXACTLY FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Special deep trust response to a familiar voice. Cat leans its head and upper body slightly toward viewer, neck gently extended, EYES VISIBLY NARROWED TO SOFT HALF-CLOSED SLITS in a relaxed slow blink (not wide open), gentle affectionate expression, relaxed forward ears, mouth closed. Both front paws remain on mat. No hands, humans, knees, speech bubbles, toys or other props. Make the facial trust reaction clearly distinct from the open-eyed normal reference.",
+    "reference": "kurumi-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice__simultaneous",
+    "file": "kurumi-voice__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-c68b40d0-7677-4262-b87e-0768c1297eb8.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is KURUMI exact identity and style. Adult cool GRAY BROWN TABBY SHORTHAIR medium STOCKY sturdy body BROAD chest SHORT strong legs. Broad ROUND face short muzzle SMALL rounded triangular ears, large ROUND bright GOLDEN YELLOW eyes, DARK BRICK RED nose. Cool walnut-gray brown coat BOLD thick DARK BLACK BROWN mackerel vertical stripes back and flanks, forehead M, THREE cheek stripes each side, TWO dark chest bands, ring-striped legs. Pale beige muzzle/chin only NO white patches socks chest, NO orange ginger or longhair. SHORTER THICK ring-striped tail rounded BLACK tip smooth SHORT fur. Calm neutral attentive cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail inside frame with generous margins. EXACTLY FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Special delighted trusting response to voice: stands taking one friendly step toward viewer, bright welcoming golden yellow eyes and forward ears, low relaxed tail, mouth closed. No human or props.",
+    "reference": "kurumi-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence__open_up",
+    "file": "kurumi-presence__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-8e759d85-e9aa-4673-b7f3-9140226ef9b8.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is KURUMI exact identity and style. Adult cool GRAY BROWN TABBY SHORTHAIR medium STOCKY sturdy body BROAD chest SHORT strong legs. Broad ROUND face short muzzle SMALL rounded triangular ears, large ROUND bright GOLDEN YELLOW eyes, DARK BRICK RED nose. Cool walnut-gray brown coat BOLD thick DARK BLACK BROWN mackerel vertical stripes back and flanks, forehead M, THREE cheek stripes each side, TWO dark chest bands, ring-striped legs. Pale beige muzzle/chin only NO white patches socks chest, NO orange ginger or longhair. SHORTER THICK ring-striped tail rounded BLACK tip smooth SHORT fur. Calm neutral attentive cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail inside frame with generous margins. EXACTLY FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Special deep trust companionship: lies comfortably on side beside blue clothed knee edge, soft half closed eyes relaxed head. No hands touching, no toys.",
+    "reference": "kurumi-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence__simultaneous",
+    "file": "kurumi-presence__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-844fa822-fa2d-4792-aca0-db86ac9efb4b.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is KURUMI exact identity and style. Adult cool GRAY BROWN TABBY SHORTHAIR medium STOCKY sturdy body BROAD chest SHORT strong legs. Broad ROUND face short muzzle SMALL rounded triangular ears, large ROUND bright GOLDEN YELLOW eyes, DARK BRICK RED nose. Cool walnut-gray brown coat BOLD thick DARK BLACK BROWN mackerel vertical stripes back and flanks, forehead M, THREE cheek stripes each side, TWO dark chest bands, ring-striped legs. Pale beige muzzle/chin only NO white patches socks chest, NO orange ginger or longhair. SHORTER THICK ring-striped tail rounded BLACK tip smooth SHORT fur. Calm neutral attentive cat. Same fine soft painted storybook style cream wall honey wood floor sage green mat warm light. Entire cat INCLUDING entire tail inside frame with generous margins. EXACTLY FOUR LIMBS TOTAL, no extra paws, one cat, no text UI watermark human face. Special delighted trusting companionship: sits close beside blue clothed knee edge, flank gently leaning against knee, blissfully half closed eyes. No hands touching, no toys.",
+    "reference": "kurumi-normal.png",
+    "reference_role": "identity_and_style"
+  }
+]

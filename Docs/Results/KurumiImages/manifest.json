@@ -1,0 +1,177 @@
+{
+  "cat_id": "catalog-6",
+  "name": "クルミ",
+  "date": "2026-10-29",
+  "tool": "built-in image_gen",
+  "images": [
+    {
+      "scene": "normal",
+      "file": "kurumi-normal.png"
+    },
+    {
+      "scene": "sleep",
+      "file": "kurumi-sleep.png"
+    },
+    {
+      "scene": "pause",
+      "file": "kurumi-pause.png"
+    },
+    {
+      "scene": "teaser",
+      "file": "kurumi-teaser.png"
+    },
+    {
+      "scene": "ball",
+      "file": "kurumi-ball.png"
+    },
+    {
+      "scene": "plush",
+      "file": "kurumi-plush.png"
+    },
+    {
+      "scene": "tunnel",
+      "file": "kurumi-tunnel.png"
+    },
+    {
+      "scene": "pet",
+      "file": "kurumi-pet.png"
+    },
+    {
+      "scene": "brush",
+      "file": "kurumi-brush.png"
+    },
+    {
+      "scene": "voice",
+      "file": "kurumi-voice.png"
+    },
+    {
+      "scene": "presence",
+      "file": "kurumi-presence.png"
+    },
+    {
+      "scene": "teaser__open_up",
+      "file": "kurumi-teaser__open_up.png"
+    },
+    {
+      "scene": "teaser__simultaneous",
+      "file": "kurumi-teaser__simultaneous.png"
+    },
+    {
+      "scene": "ball__open_up",
+      "file": "kurumi-ball__open_up.png"
+    },
+    {
+      "scene": "ball__simultaneous",
+      "file": "kurumi-ball__simultaneous.png"
+    },
+    {
+      "scene": "plush__open_up",
+      "file": "kurumi-plush__open_up.png"
+    },
+    {
+      "scene": "plush__simultaneous",
+      "file": "kurumi-plush__simultaneous.png"
+    },
+    {
+      "scene": "tunnel__open_up",
+      "file": "kurumi-tunnel__open_up.png"
+    },
+    {
+      "scene": "tunnel__simultaneous",
+      "file": "kurumi-tunnel__simultaneous.png"
+    },
+    {
+      "scene": "pet__open_up",
+      "file": "kurumi-pet__open_up.png"
+    },
+    {
+      "scene": "pet__simultaneous",
+      "file": "kurumi-pet__simultaneous.png"
+    },
+    {
+      "scene": "brush__open_up",
+      "file": "kurumi-brush__open_up.png"
+    },
+    {
+      "scene": "brush__simultaneous",
+      "file": "kurumi-brush__simultaneous.png"
+    },
+    {
+      "scene": "voice__open_up",
+      "file": "kurumi-voice__open_up.png"
+    },
+    {
+      "scene": "voice__simultaneous",
+      "file": "kurumi-voice__simultaneous.png"
+    },
+    {
+      "scene": "presence__open_up",
+      "file": "kurumi-presence__open_up.png"
+    },
+    {
+      "scene": "presence__simultaneous",
+      "file": "kurumi-presence__simultaneous.png"
+    }
+  ],
+  "scenes": {
+    "normal": "images/b0434861f86ee6431cb0339c9e78df5325e81ad02defdc4fa48ae73a32cae3e4.png",
+    "sleep": "images/60b916cd4b7f0b7fccf71fc2b5993085bfcdad7a377418c92b6cfa7e041b4dbd.png",
+    "play": "images/6d694aedee8f370b05e1b5dd66d47a98088e7b2590f54ea6603576fdf194e5e8.png",
+    "pause": "images/eab580f660d521dd082d71db2036f8ba80b8696a0dc75d09333f8d04bda1a2c7.png",
+    "teaser": "images/b0434861f86ee6431cb0339c9e78df5325e81ad02defdc4fa48ae73a32cae3e4.png",
+    "teaser__switch": "images/b0434861f86ee6431cb0339c9e78df5325e81ad02defdc4fa48ae73a32cae3e4.png",
+    "teaser__direct": "images/6d694aedee8f370b05e1b5dd66d47a98088e7b2590f54ea6603576fdf194e5e8.png",
+    "teaser__adapt": "images/6d694aedee8f370b05e1b5dd66d47a98088e7b2590f54ea6603576fdf194e5e8.png",
+    "teaser__open_up": "images/0d0afab9c4832d1af22e4f929a58f471ed89f9a45df79d868d0ae7181419dbb5.png",
+    "teaser__simultaneous": "images/d521f557e3055ed216ea74798c812dd2abb9baca281a3cf7eca6b383fb48800e.png",
+    "ball": "images/b0434861f86ee6431cb0339c9e78df5325e81ad02defdc4fa48ae73a32cae3e4.png",
+    "ball__switch": "images/b0434861f86ee6431cb0339c9e78df5325e81ad02defdc4fa48ae73a32cae3e4.png",
+    "ball__direct": "images/b1fd5e8cee32f00d1acc0c462b716738bb43a47478d56fcf1e1ddfb9f5d24e61.png",
+    "ball__adapt": "images/b1fd5e8cee32f00d1acc0c462b716738bb43a47478d56fcf1e1ddfb9f5d24e61.png",
+    "ball__open_up": "images/5590674019be53e68d062f5fe5df0866096cdf2053a77ca9d4793257900aa333.png",
+    "ball__simultaneous": "images/bcb943ba160b06e9b596c5613b0acb7b3b018070504b97df316d9e2256a095c8.png",
+    "plush": "images/b0434861f86ee6431cb0339c9e78df5325e81ad02defdc4fa48ae73a32cae3e4.png",
+    "plush__switch": "images/b0434861f86ee6431cb0339c9e78df5325e81ad02defdc4fa48ae73a32cae3e4.png",
+    "plush__direct": "images/cf93422d05c6e609fde71eafe9406c1c1c5fbf7f0f92feb574770406d555d390.png",
+    "plush__adapt": "images/cf93422d05c6e609fde71eafe9406c1c1c5fbf7f0f92feb574770406d555d390.png",
+    "plush__open_up": "images/b5e5f579db79b112683853dd206c81a4d8789e4cc937abca927c96a71eb65e0f.png",
+    "plush__simultaneous": "images/a27763ea1526c4d4953121850f3e91e533562a063ef9b21ab81c5bb44e2fdd74.png",
+    "tunnel": "images/b0434861f86ee6431cb0339c9e78df5325e81ad02defdc4fa48ae73a32cae3e4.png",
+    "tunnel__switch": "images/b0434861f86ee6431cb0339c9e78df5325e81ad02defdc4fa48ae73a32cae3e4.png",
+    "tunnel__direct": "images/0c333020a53aa93ee4449372270ad405c6908588ea2a105ead9526e03e6f843e.png",
+    "tunnel__adapt": "images/0c333020a53aa93ee4449372270ad405c6908588ea2a105ead9526e03e6f843e.png",
+    "tunnel__open_up": "images/5a38ce27eebe119e403b8a8ef546114828e273a64bd495b12ee6e7a95940d7cd.png",
+    "tunnel__simultaneous": "images/62c0e3e06b54efb800022e42f96e4524ab491ebd964890d12827b91caee93abb.png",
+    "pet": "images/b0434861f86ee6431cb0339c9e78df5325e81ad02defdc4fa48ae73a32cae3e4.png",
+    "pet__switch": "images/b0434861f86ee6431cb0339c9e78df5325e81ad02defdc4fa48ae73a32cae3e4.png",
+    "pet__direct": "images/8d46f3468fc67505e7daac9a3c4a4b439e9a380b4f15fac30e4d7219af157e2e.png",
+    "pet__adapt": "images/8d46f3468fc67505e7daac9a3c4a4b439e9a380b4f15fac30e4d7219af157e2e.png",
+    "pet__open_up": "images/091c5e3908edd53bfee2027706a343ad0dcdd9abf40d30c694b896314f1b1782.png",
+    "pet__simultaneous": "images/28eabb04d6878ccaae3572a8f3b41fd2412fccebc124c52c018f9314c6f45330.png",
+    "brush": "images/b0434861f86ee6431cb0339c9e78df5325e81ad02defdc4fa48ae73a32cae3e4.png",
+    "brush__switch": "images/b0434861f86ee6431cb0339c9e78df5325e81ad02defdc4fa48ae73a32cae3e4.png",
+    "brush__direct": "images/a369bbe05bef437851088cd9b9455a598a6e013d768cfd3d59e8d19badc2ad02.png",
+    "brush__adapt": "images/a369bbe05bef437851088cd9b9455a598a6e013d768cfd3d59e8d19badc2ad02.png",
+    "brush__open_up": "images/6b4310e0a0b0c05ad34479d344591f2a32f42390b13583a00d5c20bbe8e864a3.png",
+    "brush__simultaneous": "images/efc15bbbba886fab6f4de519b0ab457cd0abec648c2664127f904d082da3b63c.png",
+    "voice": "images/b0434861f86ee6431cb0339c9e78df5325e81ad02defdc4fa48ae73a32cae3e4.png",
+    "voice__switch": "images/b0434861f86ee6431cb0339c9e78df5325e81ad02defdc4fa48ae73a32cae3e4.png",
+    "voice__direct": "images/5091844363344b38732d515fdb271f3a14bf23732a9e7ea814c061ee43ddde95.png",
+    "voice__adapt": "images/5091844363344b38732d515fdb271f3a14bf23732a9e7ea814c061ee43ddde95.png",
+    "voice__open_up": "images/35dcbd63d527e96dc9ec530e686712edf777e9150728295f7a8b13cfcf0e8499.png",
+    "voice__simultaneous": "images/08d14887b1c6fdf6f791e87eb4caaae3b3c17344a17a1c5f3a5557375fb083c9.png",
+    "presence": "images/b0434861f86ee6431cb0339c9e78df5325e81ad02defdc4fa48ae73a32cae3e4.png",
+    "presence__switch": "images/b0434861f86ee6431cb0339c9e78df5325e81ad02defdc4fa48ae73a32cae3e4.png",
+    "presence__direct": "images/3f80e83c9c48d713bf5616d9263edc6f177f546befb9919a022385bcff53b880.png",
+    "presence__adapt": "images/3f80e83c9c48d713bf5616d9263edc6f177f546befb9919a022385bcff53b880.png",
+    "presence__open_up": "images/9dd63dbd55228ced1d53eedf499d37a62e27cc574e2b73f21b38648c87b2ca5d.png",
+    "presence__simultaneous": "images/6b4c5c1fedeaa978d7756e3dd56ce505a73a55e5d9a44ddaa14c661cdb167e78.png"
+  },
+  "active_pack": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\Imports\\cbe0df94e7a5401a8f466406c105b493",
+  "runtime_id_resolution": {
+    "content_id": "catalog-6",
+    "rule": "Resolve actual rescue-N through standard saved recruitment batch and catalog position; validate original candidate fields"
+  },
+  "authored_entries_unchanged": true,
+  "existing_cats_unchanged": true
+}

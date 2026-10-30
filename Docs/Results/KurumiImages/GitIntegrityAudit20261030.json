@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-30",
+  "type": "read-only integrity audit; no Unity/Python gameplay rerun",
+  "selected_png_count": 27,
+  "scene_count": 52,
+  "image_bindings": 32,
+  "unique_meta_guids": 27,
+  "sha256_matches_all_three_copies": true,
+  "existing_18_cats_unchanged": true,
+  "existing_435_text_entries_unchanged": true,
+  "profile_presentation_recruitment_consistent": true,
+  "active_pack": "cbe0df94e7a5401a8f466406c105b493",
+  "active_cats": 19,
+  "completed_fixed_slots": 19,
+  "remaining_fixed_slots": 12,
+  "build_performed": false
+}
