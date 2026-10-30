@@ -115,7 +115,7 @@ namespace CatCafePreview.Standalone
         private static bool Range(double v, double min, double max) => Finite(v) && v >= min && v <= max;
         private static double Clamp(double v, double max) => Math.Max(0, Math.Min(max, v));
         public void Execute(string kind,string[] working=null,string catId=null,string choice=null,string source=null,string seatId=null,string customerId=null)
-        {TraceImported(new CafeReplayOperation {kind=kind,working=working,cat_id=catId,choice=choice,source=source,seat_id=seatId,customer_id=customerId},()=>{ExecuteCore(kind,working,catId,choice,source,seatId,customerId);UpdateDispatchUnlocks();});DailyStateObserved?.Invoke();}
+        {InteractionCommand(()=>{TraceImported(new CafeReplayOperation {kind=kind,working=working,cat_id=catId,choice=choice,source=source,seat_id=seatId,customer_id=customerId},()=>{ExecuteCore(kind,working,catId,choice,source,seatId,customerId);UpdateDispatchUnlocks();});DailyStateObserved?.Invoke();return true;},kind=="advance_business" || kind=="player_step");}
         private void ExecuteCore(string kind, string[] working = null, string catId = null, string choice = null, string source = null, string seatId = null,string customerId=null)
         {
             var s = State;
@@ -255,7 +255,9 @@ namespace CatCafePreview.Standalone
             foreach (var e in s.exchanges.OrderBy(e => e.seat).ToArray())
             {
                 var cat = s.cats.Find(c => c.id == e.cat_id); var definition = Definition(cat.id);
+                string statisticsMode=e.mode;var statisticsVisit=s.visits.Single(v=>v.id==e.customer_id);
                 Choose(e, out string action, out string target); string replayBefore=ReplayBefore(e);int replayOpened=e.open_up_count; double narrativeBefore=e.stamina;string narrativeMode=action=="switch"?target:e.mode; StepExchange(e, definition, action, target); ExchangeObserved?.Invoke(e,narrativeMode,action,narrativeBefore,replayOpened); RecordReplayAction(e,action,target,replayBefore,replayOpened);
+                ObserveInteraction(e,statisticsMode,action,target,replayOpened,statisticsVisit.seated_ticks+1,CafeInteractionStatistics.ServiceSession(s,statisticsVisit));
                 cat.stamina = e.stamina; cat.service_ticks++; var visit = s.visits.Find(v => v.id == e.customer_id); visit.seated_ticks++;
                 if (e.end_reason != null)
                 {

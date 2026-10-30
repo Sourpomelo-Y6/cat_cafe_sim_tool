@@ -27,7 +27,7 @@ namespace CatCafePreview
         }
         private void Record(string command,string error)
         {
-            var s=backend.Simulation.State;var envelope=new CafeSaveEnvelope{state=s,double_bits=CafeDoublePrecision.Capture(s),daily_baselines=backend.DailyRecords.Baselines.ToArray(),daily_records=backend.DailyRecords.Records.ToArray()};
+            var s=backend.Simulation.State;var envelope=new CafeSaveEnvelope{state=s,interaction_statistics=backend.InteractionStatistics.Data,double_bits=CafeDoublePrecision.Capture(s),daily_baselines=backend.DailyRecords.Baselines.ToArray(),daily_records=backend.DailyRecords.Records.ToArray()};
             File.WriteAllText(Path.Combine(folder,"latest.json"),JsonUtility.ToJson(envelope,true));
             File.AppendAllText(Path.Combine(folder,"commands.jsonl"),JsonUtility.ToJson(new Observation{utc=DateTime.UtcNow.ToString("o"),command=command,error=error,day=s.day,tick=s.tick,revision=s.revision,phase=s.phase,objective=s.objective,funds=s.funds,popularity=s.popularity,goal=backend.Simulation.AutoTargetStatus(s.objective),autoplay=s.autoplay?.reason,commands=commands,errors=errors})+"\n");
         }

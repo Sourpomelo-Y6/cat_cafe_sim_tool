@@ -69,6 +69,7 @@ namespace CatCafePreview
             if(cat == null) { Close(); return; }
             panel.SetActive(true);
             if(!showingCare || GetComponent<PythonItemsPanel>()?.panel.activeSelf!=true){showingCare=false;panel.transform.SetAsLastSibling();}
+            InteractionStatisticsPanel.EnsureEntry(this,panel.transform.Find("Details Card"),title,interact,()=>selectedId,null);
             title.text=cat.name+"の詳細";
             string health="体調と予定\n"+"体力："+cat.stamina.ToString("0.#")+" / "+cat.max_stamina.ToString("0.#")
                 +"\n疲労："+cat.fatigue.ToString("0.#")+" / ストレス："+cat.stress.ToString("0.#")

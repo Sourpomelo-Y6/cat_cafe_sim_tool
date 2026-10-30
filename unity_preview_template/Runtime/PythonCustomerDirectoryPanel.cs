@@ -24,6 +24,7 @@ namespace CatCafePreview
         private bool online,showTomorrow,showAdopted;
         private PythonCustomerDirectory Data => current?.customer_directory;
         public string SelectedCustomer => selected;
+        public string[] KnownCustomerIds => (Data?.rows ?? new PythonDirectoryCustomer[0]).Select(r=>r.customer_id).ToArray();
         public void Open(){if(Data==null || !GetComponent<PythonStateClient>().CanManageSaves)return;panel.SetActive(true);panel.transform.SetAsLastSibling();Render();}
         public void Close(){panel.SetActive(false);}
         private bool Available=>online && Data!=null && GetComponent<PythonStateClient>().CanManageSaves;
@@ -43,6 +44,7 @@ namespace CatCafePreview
         }
         private void Render()
         {
+            InteractionStatisticsPanel.EnsureEntry(this,close.transform.parent,title,close,null,()=>selected);
             title.text="お客さんの名簿・来店予定";
             today.GetComponentInChildren<Text>().text="今日："+(Data?.today_label ?? "—");tomorrow.GetComponentInChildren<Text>().text="翌日："+(Data?.tomorrow_label ?? "—");
             string previous=selected;var all=Data?.rows ?? new PythonDirectoryCustomer[0];

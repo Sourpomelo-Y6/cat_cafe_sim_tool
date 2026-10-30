@@ -173,6 +173,7 @@ static partial class Program
     }
     static void Main(string[] args)
     {
+        if(args.Length>0 && args[0]=="--interaction-statistics"){InteractionStatisticsChecks(args[1],args[2]);return;}
         if(args.Length>0 && args[0]=="--display-labels"){DisplayNameChecks(args[1]);return;}
         if(args.Length>0 && args[0]=="--special-legacy"){SpecialLegacySave(args[1],args[2],args[3]);return;}
         if(args.Length>0 && args[0]=="--special-narratives"){SpecialNarrativeChecks(args[1],args[2],args[3],args.Contains("--resume"));return;}

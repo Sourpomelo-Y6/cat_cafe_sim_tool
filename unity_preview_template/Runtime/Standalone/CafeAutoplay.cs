@@ -27,7 +27,7 @@ namespace CatCafePreview.Standalone
         public void PauseAutoplay()=>TraceImported(new CafeReplayOperation {kind="pause_autoplay"},PauseAutoplayCore);
         public void ResumeAutoplay()=>TraceImported(new CafeReplayOperation {kind="resume_autoplay"},ResumeAutoplayCore);
         public void CancelAutoplay()=>TraceImported(new CafeReplayOperation {kind="stop_autoplay"},CancelAutoplayCore);
-        public CafeAutoOperation StepAutoplay()=>TraceImported(new CafeReplayOperation {kind="step_autoplay"},StepAutoplayCore);
+        public CafeAutoOperation StepAutoplay()=>InteractionCommand(()=>TraceImported(new CafeReplayOperation {kind="step_autoplay"},StepAutoplayCore));
         public string AutoTargetStatus(string target)=>target=="popularity"?State.goal.LastOrDefault()?.status:target=="bond"?State.bond_goal?.status:target=="patron"?State.patron?.status:null;
         public string AutoStartReason()
         {

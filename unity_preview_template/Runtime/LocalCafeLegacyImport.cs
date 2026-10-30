@@ -29,7 +29,7 @@ namespace CatCafePreview
             if(slot<1 || slot>10 || SlotExists(slot))throw new ArgumentException("未使用の保存スロットを指定してください。既存保存は上書きしません。");
             string target=Path.GetFullPath(Path.Combine(saveDirectory,"slot-"+slot+".json"));if(string.Equals(target,Path.GetFullPath(path),StringComparison.OrdinalIgnoreCase))throw new ArgumentException("取込元と保存先は別ファイルにしてください。");
             var bundle=ReadLegacyBundle(path);var state=bundle.state;string baseJson=EncodeSave(new CafeSaveEnvelope {state=state});state.import_history=new CafeImportHistory {base_json=baseJson,base_digest=bundle.state_digest,source_hash=bundle.source_hash};
-            Simulation.Validate(state);saves.SaveNew(slot,state);Simulation.Restore(state);ResetJournal();
+            Simulation.Validate(state);saves.SaveNew(slot,state);Simulation.Restore(state);InteractionStatistics.Reset(false);ResetJournal();
         }
     }
 }
