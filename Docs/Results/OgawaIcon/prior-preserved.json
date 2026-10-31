@@ -1,0 +1,18 @@
+{
+  "tool": {
+    "protected_files": 44,
+    "unexpected_changes": []
+  },
+  "python": {
+    "protected_files": 3,
+    "unexpected_changes": []
+  },
+  "unity": {
+    "protected_files": 60,
+    "unexpected_changes": []
+  },
+  "docs": {
+    "protected_files": 0,
+    "unexpected_changes": []
+  }
+}

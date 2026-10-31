@@ -1,0 +1,1 @@
+PASS: 26 checks. Isolated view/trust fixtures; no natural occurrence or physical input claim.

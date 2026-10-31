@@ -1,0 +1,20 @@
+{
+  "source": "C:\\Users\\hi-wa\\source\\codex_repos\\CatCafeSim\\Logs\\DeveloperWatch\\Runs\\20261031-083029-1392b6f3a8d743d586f615ffba68d80c\\routes\\patron\\profile\\standalone-v1\\slot-9.json",
+  "sha256": "b09444ef713df95bebe63c5b759ac199ef10037b2b7e17bb6102c50807a37ce3",
+  "ids": [
+    "event-guest-41"
+  ],
+  "count": 20,
+  "first": {
+    "day": 41,
+    "turn": 1,
+    "customer_id": "event-guest-41",
+    "text": "小川さん「タマ、遊ぼうか。」\n小川さんはねこじゃらしを床の近くで揺らした。\n\nタマ はねこじゃらしを勢いよく掴み取った。\n\n交流の時間に、明るい空気が広がった。\n体力 120 → 115"
+  },
+  "last": {
+    "day": 41,
+    "turn": 20,
+    "customer_id": "event-guest-41",
+    "text": "小川さん「タマ、遊ぼうか。」\n小川さんはねこじゃらしを床の近くで揺らした。\n\nねこじゃらしに興味を示し、タマは素直に手の動きを追った。\n\n静かな交流の時間が流れた。\n体力 30 → 25"
+  }
+}
