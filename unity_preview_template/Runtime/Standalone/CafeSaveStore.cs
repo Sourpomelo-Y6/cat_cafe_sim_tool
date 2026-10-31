@@ -47,8 +47,9 @@ namespace CatCafePreview.Standalone
         private readonly Func<CafeSaveEnvelope, string> encode;
         private readonly Func<string, CafeSaveEnvelope> decode;
         private readonly Action<CafeSnapshot> validate;
-        public CafeSaveStore(string directory, Func<CafeSaveEnvelope, string> encode, Func<string, CafeSaveEnvelope> decode, Action<CafeSnapshot> validate)
-        { this.directory = directory; this.encode = encode; this.decode = decode; this.validate = validate; }
+        private readonly Action<CafeSaveEnvelope> migrate;
+        public CafeSaveStore(string directory, Func<CafeSaveEnvelope, string> encode, Func<string, CafeSaveEnvelope> decode, Action<CafeSnapshot> validate, Action<CafeSaveEnvelope> migrate = null)
+        { this.directory = directory; this.encode = encode; this.decode = decode; this.validate = validate; this.migrate=migrate; }
         private string PathFor(int slot)
         {
             if (slot < 1 || slot > 10) throw new ArgumentOutOfRangeException(nameof(slot));
@@ -58,6 +59,7 @@ namespace CatCafePreview.Standalone
         {
             var value = decode(File.ReadAllText(PathFor(slot), Encoding.UTF8));
             if (value == null || value.version != 1 || value.slot != slot || !DateTimeOffset.TryParse(value.created_at, out _)) throw new ArgumentException("Unsupported save envelope");
+            migrate?.Invoke(value);
             validate(value.state); CafeInteractionStatistics.Validate(value.interaction_statistics,value.state); return value;
         }
         public void SaveNew(int slot,CafeSnapshot state)

@@ -10,12 +10,23 @@ namespace CatCafePreview
         public RectTransform content;
         public PythonCatCard cardPrefab;
         private readonly List<PythonCatCard> cards = new List<PythonCatCard>();
+        private void EnsureScrollNavigation()
+        {
+            var scroll=content.GetComponentInParent<ScrollRect>();if(scroll==null)return;
+            scroll.scrollSensitivity=28;
+            if(scroll.verticalScrollbar!=null)return;
+            var bar=DefaultControls.CreateScrollbar(new DefaultControls.Resources());bar.name="Cat Roster Scrollbar";bar.transform.SetParent(scroll.transform,false);
+            var rect=bar.GetComponent<RectTransform>();rect.anchorMin=new Vector2(1,0);rect.anchorMax=new Vector2(1,1);rect.offsetMin=new Vector2(4,0);rect.offsetMax=new Vector2(18,0);
+            var control=bar.GetComponent<Scrollbar>();control.direction=Scrollbar.Direction.BottomToTop;bar.GetComponent<Image>().color=new Color(.91f,.90f,.84f);control.targetGraphic.color=new Color(.58f,.64f,.51f);
+            scroll.verticalScrollbar=control;scroll.verticalScrollbarVisibility=ScrollRect.ScrollbarVisibility.AutoHide;
+        }
         public int Count { get { return cards.FindAll(card=>card.gameObject.activeSelf).Count; } }
         public int CustomerCount { get { return cards.FindAll(card => card.gameObject.activeSelf && card.customerIcon.activeSelf).Count; } }
         public PythonCatCard GetCard(int index) { return cards.FindAll(card=>card.gameObject.activeSelf)[index]; }
         public void Apply(PythonCafeState state)
         {
             if (content == null || cardPrefab == null) return;
+            EnsureScrollNavigation();
             if (cards.Count == 0)
                 cards.AddRange(content.GetComponentsInChildren<PythonCatCard>(true));
             var rows=GetComponent<PythonCatVisibility>()?.Filter(state.cats) ?? state.cats;

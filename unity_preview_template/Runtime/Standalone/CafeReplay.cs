@@ -58,6 +58,7 @@ namespace CatCafePreview.Standalone
                 if(field.Name=="growth_policy_version" && value is CafeReplayOperation && (int)field.GetValue(value)==0)continue;
                 if(field.Name=="stamina_policy_version" && (value is CafeReplayOperation || value is CafeGrowthOperation) && (int)field.GetValue(value)==0)continue;
                 if(field.Name=="stamina_rules" && value is CafeReplayOperation && field.GetValue(value)==null)continue;
+                if(value is CafeHousing && field.Name=="extensions" && (((CafeHousing)value).extensions==null || ((CafeHousing)value).extensions.Length==0))continue;
                 if(field.Name=="growth_selections" && value is CafeSnapshot  && (((CafeSnapshot)value).growth_selections==null || ((CafeSnapshot)value).growth_selections.Count==0))continue;
                 if(field.Name=="decision_reason" && value is CafeGrowthOperation && string.IsNullOrEmpty((string)field.GetValue(value)))continue;
                 if(field.Name=="stamina_growth" && value is CafeSnapshot && field.GetValue(value)==null)continue;
@@ -83,7 +84,7 @@ namespace CatCafePreview.Standalone
         private static string N(double value)=>value.ToString("G17",CultureInfo.InvariantCulture);
         public static string Describe(CafeReplayOperation op)=>Label(op.kind)+" / "+op.cat_id+" / "+op.customer_id+" / "+op.seat_id+" / "+op.choice+" / "+op.source+" / "+string.Join(",",op.working??new string[0])+" / "+op.objective+" / "+op.mode+" / "+op.days;
         public static string Label(string kind)
-        {switch(kind){case "start_business":return "営業開始";case "advance_business":return "営業を進行";case "set_shifts":return "出勤・休養の設定";case "next_day":return "翌日へ";case "day_off":return "休業";case "assign_service":return "接客の手動配置";case "player_begin":return "プレイヤー交流開始";case "player_step":return "プレイヤー交流の行動";case "player_finish":return "プレイヤー交流終了";case "start_autoplay":return "おまかせ開始";case "step_autoplay":return "おまかせ進行";case "stop_autoplay":return "おまかせ中止";case "pause_autoplay":return "おまかせ一時停止";case "resume_autoplay":return "おまかせ再開";case "save_game":return "営業保存";default:return kind;}}
+        {switch(kind){case "purchase_housing":return "飼育スペースの初回拡張";case "upgrade_housing":return "飼育スペースの2段階目拡張";case "extend_housing":return "飼育スペースの追加拡張";case "start_business":return "営業開始";case "advance_business":return "営業を進行";case "set_shifts":return "出勤・休養の設定";case "next_day":return "翌日へ";case "day_off":return "休業";case "assign_service":return "接客の手動配置";case "player_begin":return "プレイヤー交流開始";case "player_step":return "プレイヤー交流の行動";case "player_finish":return "プレイヤー交流終了";case "start_autoplay":return "おまかせ開始";case "step_autoplay":return "おまかせ進行";case "stop_autoplay":return "おまかせ中止";case "pause_autoplay":return "おまかせ一時停止";case "resume_autoplay":return "おまかせ再開";case "save_game":return "営業保存";default:return kind;}}
         public static CafeAutoOperation Apply(CafeSimulation sim,CafeReplayOperation op)
         {
             if(op!=null && op.growth_policy_version!=0 && op.growth_policy_version!=1)throw new ArgumentException("Invalid growth policy");

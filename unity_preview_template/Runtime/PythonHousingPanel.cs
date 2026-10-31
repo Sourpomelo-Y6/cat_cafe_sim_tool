@@ -35,7 +35,7 @@ namespace CatCafePreview
             if(!h.configured)details.text+="\n上限なし（従来ルール）";
             else
             {
-                details.text+="\n上限："+h.capacity+"匹 / 空き："+h.free+"匹\n拡張段階："+h.stage+" / 2\n現在の飼育維持費："+N(h.daily_cost)+" / 日";
+                details.text+="\n上限："+h.capacity+"匹 / 空き："+h.free+"匹"+(h.max_capacity>0?" / 最大："+h.max_capacity+"匹":"")+"\n拡張段階："+h.stage+" / "+(h.max_stage>0?h.max_stage:2)+"\n現在の飼育維持費："+N(h.daily_cost)+" / 日";
                 details.text+=string.IsNullOrEmpty(h.kind)?"\n\n追加の拡張はありません。":"\n\n次の拡張と費用\n上限："+h.capacity+" → "+h.next_capacity+"匹\n費用："+N(h.cost)+"\n資金："+N(state.funds)+" → "+N(h.funds_after)+"\n飼育維持費："+N(h.daily_cost)+" → "+N(h.next_daily_cost)+" / 日\n日次運営費合計："+N(h.operating_cost)+" → "+N(h.next_operating_cost);
             }
             details.text+="\n\n拡張条件\n"+(h.can_expand?"拡張できます。各段階は1回ずつ利用できます。":"拡張できない理由："+h.reason)+"\n\n維持費は拡張当日から、休業日も精算します。\n派遣中・家出中の猫も在籍に含み、譲渡済みは除きます。\n接客席数は変わりません。";

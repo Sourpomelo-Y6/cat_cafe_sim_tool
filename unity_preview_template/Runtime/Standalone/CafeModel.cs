@@ -34,6 +34,7 @@ namespace CatCafePreview.Standalone
         public TrustRules trust;
         public GrowthRules growth;
         public HousingRules housing, housing_upgrade;
+        public HousingRules[] housing_extensions;
         public ItemShopRule[] item_shop;public ItemSaleRule[] item_sale_prices;
         public SpecialistRules advanced_customer, reservation, vip_customer; public LonghairRules longhair_customer;
         public ServiceCustomerRules quiet_customer,play_customer,contact_customer; public EquipmentRule[] equipment;

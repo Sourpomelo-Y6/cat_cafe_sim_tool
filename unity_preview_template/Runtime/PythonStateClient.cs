@@ -117,7 +117,7 @@ namespace CatCafePreview
     [Serializable] public class PythonHousingState
     {
         public bool configured, can_expand;
-        public int count, capacity, free, stage, next_capacity;
+        public int count, capacity, free, stage, next_capacity, max_stage, max_capacity;
         public string kind, reason;
         public float cost, funds_after, daily_cost, next_daily_cost, operating_cost, next_operating_cost;
     }

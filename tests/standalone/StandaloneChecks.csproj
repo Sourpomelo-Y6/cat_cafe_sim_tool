@@ -23,6 +23,7 @@
     <Compile Include="AutoplayChecks.cs" />
     <Compile Include="IntakeChecks.cs" />
     <Compile Include="HousingChecks.cs" />
+    <Compile Include="Housing32Checks.cs" />
     <Compile Include="TrustChecks.cs" />
     <Compile Include="RegularIntroductionChecks.cs" />
     <Compile Include="../../unity_preview_template/Runtime/Standalone/*.cs" />

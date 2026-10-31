@@ -1,0 +1,6 @@
+[
+  {"capacity_bonus": 5, "cost": 1500, "daily_cost": 70},
+  {"capacity_bonus": 5, "cost": 2000, "daily_cost": 100},
+  {"capacity_bonus": 5, "cost": 2500, "daily_cost": 130},
+  {"capacity_bonus": 5, "cost": 3000, "daily_cost": 160}
+]

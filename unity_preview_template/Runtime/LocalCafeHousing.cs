@@ -4,14 +4,15 @@ namespace CatCafePreview
     {
         private PythonHousingState HousingView()
         {
-            var s = Simulation.State; var r = Simulation.Rules; int stage = s.housing.upgraded_day > 0 ? 2 : s.housing.purchased_day > 0 ? 1 : 0;
-            string kind = stage == 0 ? "purchase_housing" : "upgrade_housing"; var next = stage == 0 ? r.housing : r.housing_upgrade;
+            var s = Simulation.State; int stage = Simulation.HousingStage(s,s.day);
+            string kind = Simulation.NextHousingKind; var next = Simulation.NextHousingRules;
             double daily = Simulation.HousingDailyCost(s,s.day); int capacity = Simulation.HousingCapacity(s,s.day);
             return new PythonHousingState { configured = true, count = Simulation.ActiveCatCount(s), capacity = capacity, free = capacity-Simulation.ActiveCatCount(s), stage = stage, kind = kind,
-                can_expand = Simulation.HousingReason(kind) == "", reason = Simulation.HousingReason(kind), cost = (float)next.cost,
-                funds_after = (float)(s.funds-next.cost), daily_cost = (float)daily, next_daily_cost = (float)next.daily_cost,
-                next_capacity = stage == 2 ? capacity : capacity+next.capacity_bonus,
-                operating_cost = (float)(Simulation.OperatingCostEstimate), next_operating_cost = (float)(Simulation.OperatingCostEstimate-daily+next.daily_cost) };
+                max_stage = Simulation.HousingMaxStage, max_capacity = Simulation.Rules.housing.initial_capacity+Simulation.Rules.housing.capacity_bonus+Simulation.Rules.housing_upgrade.capacity_bonus+System.Linq.Enumerable.Sum(Simulation.Rules.housing_extensions ?? new CatCafePreview.Standalone.HousingRules[0],e=>e.capacity_bonus),
+                can_expand = next!=null && Simulation.HousingReason(kind) == "", reason = next==null ? "飼育スペースは最大まで拡張済みです。" : Simulation.HousingReason(kind), cost = (float)(next?.cost ?? 0),
+                funds_after = (float)(s.funds-(next?.cost ?? 0)), daily_cost = (float)daily, next_daily_cost = (float)(next?.daily_cost ?? daily),
+                next_capacity = capacity+(next?.capacity_bonus ?? 0),
+                operating_cost = (float)(Simulation.OperatingCostEstimate), next_operating_cost = (float)(Simulation.OperatingCostEstimate-daily+(next?.daily_cost ?? daily)) };
         }
     }
 }

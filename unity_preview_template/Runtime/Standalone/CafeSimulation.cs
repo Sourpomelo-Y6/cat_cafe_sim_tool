@@ -142,7 +142,7 @@ namespace CatCafePreview.Standalone
             if(kind=="continue_bond_goal"){ContinueBond();return;}
             if(kind=="continue_patron"){ContinuePatron();return;}
             if (kind == "continue_goal" || kind == "advance_goal") { RespondGoal(kind); return; }
-            if (kind == "purchase_housing" || kind == "upgrade_housing") { ExpandHousing(kind); return; }
+            if (kind == "purchase_housing" || kind == "upgrade_housing" || kind == "extend_housing") { ExpandHousing(kind); return; }
             if (kind.StartsWith("resolve_growth", StringComparison.Ordinal)) { ResolveGrowth(kind, catId, choice); return; }
             if (kind == "resolve_customer_trust") { ResolveCustomerTrust(source, choice); return; }
             if (kind == "recruit_cat") { RecruitCat(catId); return; }

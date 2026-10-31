@@ -24,6 +24,7 @@ namespace CatCafePreview
                 try
                 {
                     var save=DecodeSave(File.ReadAllText(file));if(save==null || save.version!=1 || save.slot!=slot || !DateTimeOffset.TryParse(save.created_at,out _))throw new ArgumentException();
+                    migrateHousingSave?.Invoke(save);
                     var probe=new CafeSimulation(Simulation.Rules);probe.Restore(save.state);
                     var catalog=JsonUtility.FromJson<CafePresentationCatalog>(Resources.Load<TextAsset>("CatCafeStandalone/presentation").text);var detail=new CafeDetailPresentation(probe,catalog);
                     if(!Replays.Merge(CafeReplayCatalog.FromSave(save,Simulation.Rules,id=>probe.Definition(id).name,detail.CustomerName,detail.ContentId)))issue=Replays.Error;

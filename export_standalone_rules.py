@@ -160,6 +160,9 @@ def exported_rules():
                      boredom_decay=p['boredom_decay'], switch_affinity=p['switch_affinity'],
                      **{k:trait.get(k,1) for k in ('service_stress','service_fatigue','rest_fatigue','dispatch_reward')},
                      return_stress=trait.get('return_stress',0)))))
+    result['housing_extensions'] = json.loads((ROOT/'cat_cafe_sim_tool/housing_extensions.json').read_text(encoding='utf-8'))
+    if result['housing']['initial_capacity'] + result['housing']['capacity_bonus'] + result['housing_upgrade']['capacity_bonus'] + sum(r['capacity_bonus'] for r in result['housing_extensions']) != 32:
+        raise ValueError('Housing maximum must be 32')
     result['rules_id'] = hashlib.sha256(json.dumps(result, sort_keys=True, ensure_ascii=True).encode()).hexdigest()
     return result
 
