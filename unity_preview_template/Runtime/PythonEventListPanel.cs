@@ -179,7 +179,7 @@ namespace CatCafePreview
                 case 3:target=GetComponent<PythonGrowthPanel>().panel;break;
                 case 4:var m=GetComponent<PythonMissingPanel>();m.Open(CafeBackends.Standalone && (CafeBackends.Local as LocalCafeBackend).MissingResultPending?(CafeBackends.Local as LocalCafeBackend).Simulation.State.missing_cases.First(e=>e.result!=null && !e.result.completed).cat_id:current.missing_cats.FirstOrDefault(r=>r.status=="waiting")?.cat_id ?? current.missing_cats[0].cat_id);target=m.panel;break;
                 case 5:var a=GetComponent<PythonAdoptionPanel>();a.Open(current.adoption.events?.FirstOrDefault(r=>r.status=="waiting")?.cat_id ?? "");target=a.panel;break;
-                case 6:var d=GetComponent<PythonDispatchPanel>();d.Open(current.patron_dispatch.events?.FirstOrDefault(r=>r.status=="waiting")?.cat_id ?? current.patron_dispatch.options?.FirstOrDefault()?.cat_id ?? current.patron_dispatch.events?.FirstOrDefault()?.cat_id);target=d.panel;break;
+                case 6:var d=GetComponent<PythonDispatchPanel>();d.Open(current.patron_dispatch.events?.FirstOrDefault(r=>r.status=="waiting")?.cat_id ?? current.patron_dispatch.options?.FirstOrDefault()?.cat_id ?? current.patron_dispatch.events?.FirstOrDefault()?.cat_id);if(d.Dialogue.Showing){GetComponent<PythonMenuPanel>()?.Close();Close();return;}target=d.panel;break;
             }
             if(target!=null){GetComponent<PythonMenuPanel>()?.Close();GetComponent<PythonRecruitmentPanel>()?.Close();Close();target.SetActive(true);GetComponent<ContentPreview>().RefreshPythonControls();target.transform.SetAsLastSibling();if(fromList && i<14)Track(i,target);}
         }
