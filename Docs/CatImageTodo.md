@@ -10,7 +10,7 @@
 
 ## 対象23枠
 
-2026-10-18にチロの外見・画像27枚・52場面登録・Unity検証を完了（[実施記録](Results/ChiroImages/Status.md)）。2026-10-19にレオも完了（[実施記録](Results/LeoImages/Status.md)）。2026-10-20にハナも完了（[実施記録](Results/HanaImages/Status.md)）。2026-10-21にセナも完了（[実施記録](Results/SenaImages/Status.md)）。2026-10-22にルカも完了（[実施記録](Results/LukaImages/Status.md)）。2026-10-23にハルも完了（[実施記録](Results/HaruImages/Status.md)）。2026-10-24にリンも完了（[実施記録](Results/RinImages/Status.md)）。2026-10-25にユキも完了（[実施記録](Results/YukiImages/Status.md)）。2026-10-27にアキも完了（[実施記録](Results/AkiImages/Status.md)）。2026-10-28にモモも完了（[実施記録](Results/MomoImages/Status.md)）。2026-10-29にクルミも完了（[実施記録](Results/KurumiImages/Status.md)）。残り12枠。以下の画像登録数・照合内容は初回調査時点の記録。ユーザー指定によりショップ3匹→派遣紹介2匹→募集18匹の順で、上から1日1匹を制作する。[日程表](CatImageSchedule.md)を参照。
+2026-10-18にチロの外見・画像27枚・52場面登録・Unity検証を完了（[実施記録](Results/ChiroImages/Status.md)）。2026-10-19にレオも完了（[実施記録](Results/LeoImages/Status.md)）。2026-10-20にハナも完了（[実施記録](Results/HanaImages/Status.md)）。2026-10-21にセナも完了（[実施記録](Results/SenaImages/Status.md)）。2026-10-22にルカも完了（[実施記録](Results/LukaImages/Status.md)）。2026-10-23にハルも完了（[実施記録](Results/HaruImages/Status.md)）。2026-10-24にリンも完了（[実施記録](Results/RinImages/Status.md)）。2026-10-25にユキも完了（[実施記録](Results/YukiImages/Status.md)）。2026-10-27にアキも完了（[実施記録](Results/AkiImages/Status.md)）。2026-10-28にモモも完了（[実施記録](Results/MomoImages/Status.md)）。2026-10-29にクルミも完了（[実施記録](Results/KurumiImages/Status.md)）。2026-10-31にシロも完了（[実施記録](Results/ShiroImages/Status.md)）。残り11枠。以下の画像登録数・照合内容は初回調査時点の記録。ユーザー指定によりショップ3匹→派遣紹介2匹→募集18匹の順で、上から1日1匹を制作する。[日程表](CatImageSchedule.md)を参照。
 
 | 完了 | 名前 | 定義・資料ID | 性格 | 毛色・毛の長さ |
 | --- | --- | --- | --- | --- |
@@ -25,7 +25,7 @@
 | [x] | アキ | `catalog-4` | 遊び好きで繊細な猫 | 茶トラ・短毛 |
 | [x] | モモ | `catalog-5` | 穏やかな甘えん坊 | 白黒・長毛 |
 | [x] | クルミ | `catalog-6` | 中立 | キジトラ・短毛 |
-| [ ] | シロ | `catalog-7` | 活発な探検家 | 白猫・長毛 |
+| [x] | シロ | `catalog-7` | 活発な探検家 | 白猫・長毛 |
 | [ ] | スズ | `catalog-8` | 距離を大切にする猫 | 黒猫・長毛 |
 | [ ] | マメ | `catalog-9` | 中立 | 三毛・短毛 |
 | [ ] | アンズ | `catalog-10` | 穏やかな甘えん坊 | 茶トラ・長毛 |
@@ -76,3 +76,7 @@
 2026-10-29：クルミ27枚・52場面・32交流画像枠の登録と実Unity検証完了。残り12匹、次は10月30日20時のシロ。
 
 2026-10-30保全照合：クルミまで制作・登録・既存検証完了、計19/31（追加11/23）、残12。関連成果をリポジトリ別にGit保存。クルミ素材は10月30日の固定Latestに収録済み。過去の未コミット／未収録記述は当時の履歴。[状態と検証範囲](Results/KurumiImages/Status.md)。日程・自動実行設定は変更なし。
+
+2026-10-31：シロ27枚・52場面・32交流画像枠の登録と実Unity検証・画面確認を完了。残り11匹。中断からの再開で後続を1日繰下げ、次は11月1日20時のスズ。
+
+2026-10-31訂正（ユーザー指定）：シロの再開完了は例外で、後続は繰り下げない。本日10月31日20時にスズを制作し、全完了予定は11月10日。直前の繰下げ記述より本訂正を優先する。

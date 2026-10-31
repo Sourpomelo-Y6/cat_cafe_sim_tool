@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-31",
+  "type": "static Git selection audit; no gameplay, suite rerun or build",
+  "selected_png_count": 27,
+  "retained_candidate_png_count": 3,
+  "scene_count": 52,
+  "image_bindings": 32,
+  "png_sha256_source_python_unity_match": true,
+  "new_png_meta_pairs": 27,
+  "new_meta_guids_unique": true,
+  "existing_19_cats_and_435_entries_and_all_text_fields_preserved": true,
+  "existing_45_subjects_preserved": true,
+  "template_unity_parity": true,
+  "profile_recruitment_presentation_consistent": true,
+  "content_id": "catalog-7",
+  "runtime_id": "rescue-7",
+  "active_pack": "cbe0df94e7a5401a8f466406c105b493",
+  "storage_policy": "Python manifest/images remain ignored under saves/, matching previous cats. Tracked Tool originals, mapping and register_shiro_images.py reproduce image registration; Unity PNG/meta tracked. No force-add.",
+  "build_performed": false,
+  "latest_bytes": 5696644413
+}

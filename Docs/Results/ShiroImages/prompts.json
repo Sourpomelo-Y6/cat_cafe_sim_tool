@@ -1,0 +1,218 @@
+[
+  {
+    "scene": "normal",
+    "file": "shiro-normal.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-40b02bf7-2da2-4a64-8379-b48414e7573f.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim identity illustration new cat SHIRO. Reference CHIRO is STYLE AND ROOM ONLY, create DIFFERENT adult cat. SHIRO: pure solid WHITE LONGHAIR adult medium large, LONG LEGS and athletic strong graceful body, broad chest, thick chest ruff and toe tufts. Broad inverted triangular face, pronounced cheeks and longer muzzle, LARGE tall triangular ears with white tufts, pink nose and inner ears. BOTH EYES bright YELLOW GREEN, large slightly almond shaped eyes, curious alert active explorer expression. Entire fur WHITE with NO patches stripes brown black or gray pigment. LONG very full feathery WHITE tail white to tip. Seated poised ready to explore, entire cat FOUR LIMBS and ENTIRE tail inside frame with generous margin. Same fine soft painted storybook illustration as reference, cream wall, honey wood floor, sage green mat, warm diffuse light. No text UI watermark props people. Distinguish from round gold-eyed short-legged Chiro.",
+    "reference": "../ChiroImages/chiro-normal.png",
+    "reference_role": "style_and_room"
+  },
+  {
+    "scene": "teaser",
+    "file": "shiro-teaser.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-7152bbe0-8312-4ff0-b26f-c601afa5cdf3.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is SHIRO exact identity and fine soft painted storybook style and room. Adult pure WHITE LONGHAIR medium large athletic cat LONG LEGS broad strong chest thick ruff toe tufts. Broad inverted triangular face pronounced cheeks and longer muzzle LARGE tall triangular ears white tufts pink nose and inner ears. BOTH EYES bright YELLOW GREEN large slightly almond shaped. Entire fur pure WHITE NO patches stripes gray brown black pigment. LONG very FULL FEATHERY WHITE TAIL white to tip. Curious active explorer personality. Cream wall honey wooden floor sage green mat warm diffuse light. ENTIRE CAT and ENTIRE LONG TAIL inside frame with generous blank margins all sides. EXACTLY FOUR LIMBS TOTAL only one cat no extra paws. No text UI watermark human face. Basic attentive play: one hand at edge holds feather teaser near cat. Cat reaches one forepaw toward feather, yellow green eyes open, gentle calm engagement.",
+    "reference": "shiro-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball",
+    "file": "shiro-ball.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-6149bbde-b03c-41f8-91c8-09c769af56f7.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is SHIRO exact identity and fine soft painted storybook style and room. Adult pure WHITE LONGHAIR medium large athletic cat LONG LEGS broad strong chest thick ruff toe tufts. Broad inverted triangular face pronounced cheeks and longer muzzle LARGE tall triangular ears white tufts pink nose and inner ears. BOTH EYES bright YELLOW GREEN large slightly almond shaped. Entire fur pure WHITE NO patches stripes gray brown black pigment. LONG very FULL FEATHERY WHITE TAIL white to tip. Curious active explorer personality. Cream wall honey wooden floor sage green mat warm diffuse light. ENTIRE CAT and ENTIRE LONG TAIL inside frame with generous blank margins all sides. EXACTLY FOUR LIMBS TOTAL only one cat no extra paws. No text UI watermark human face. Basic play: crouches and gently touches small blue toy ball on mat with one paw, attentive open yellow green eyes. No humans or other toys.",
+    "reference": "shiro-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel",
+    "file": "shiro-tunnel.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-8bf98b8c-0977-427d-987d-435c05810f84.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is SHIRO exact identity and fine soft painted storybook style and room. Adult pure WHITE LONGHAIR medium large athletic cat LONG LEGS broad strong chest thick ruff toe tufts. Broad inverted triangular face pronounced cheeks and longer muzzle LARGE tall triangular ears white tufts pink nose and inner ears. BOTH EYES bright YELLOW GREEN large slightly almond shaped. Entire fur pure WHITE NO patches stripes gray brown black pigment. LONG very FULL FEATHERY WHITE TAIL white to tip. Curious active explorer personality. Cream wall honey wooden floor sage green mat warm diffuse light. ENTIRE CAT and ENTIRE LONG TAIL inside frame with generous blank margins all sides. EXACTLY FOUR LIMBS TOTAL only one cat no extra paws. No text UI watermark human face. Basic play: crouches just inside short beige fabric cat tunnel, head front paws and tail fully visible at entrance, eyes open curious gentle expression. No humans or other toys.",
+    "reference": "shiro-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet",
+    "file": "shiro-pet.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-549d6f35-5f3d-4548-a229-748885a40acc.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is SHIRO exact identity and fine soft painted storybook style and room. Adult pure WHITE LONGHAIR medium large athletic cat LONG LEGS broad strong chest thick ruff toe tufts. Broad inverted triangular face pronounced cheeks and longer muzzle LARGE tall triangular ears white tufts pink nose and inner ears. BOTH EYES bright YELLOW GREEN large slightly almond shaped. Entire fur pure WHITE NO patches stripes gray brown black pigment. LONG very FULL FEATHERY WHITE TAIL white to tip. Curious active explorer personality. Cream wall honey wooden floor sage green mat warm diffuse light. ENTIRE CAT and ENTIRE LONG TAIL inside frame with generous blank margins all sides. EXACTLY FOUR LIMBS TOTAL only one cat no extra paws. No text UI watermark human face. Basic petting: one human hand gently strokes forehead, cat relaxed and attentive, yellow green eyes open. No toys.",
+    "reference": "shiro-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush",
+    "file": "shiro-brush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-e69153fd-28ad-4766-8317-fabc831a0dcd.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is SHIRO exact identity and fine soft painted storybook style and room. Adult pure WHITE LONGHAIR medium large athletic cat LONG LEGS broad strong chest thick ruff toe tufts. Broad inverted triangular face pronounced cheeks and longer muzzle LARGE tall triangular ears white tufts pink nose and inner ears. BOTH EYES bright YELLOW GREEN large slightly almond shaped. Entire fur pure WHITE NO patches stripes gray brown black pigment. LONG very FULL FEATHERY WHITE TAIL white to tip. Curious active explorer personality. Cream wall honey wooden floor sage green mat warm diffuse light. ENTIRE CAT and ENTIRE LONG TAIL inside frame with generous blank margins all sides. EXACTLY FOUR LIMBS TOTAL only one cat no extra paws. No text UI watermark human face. Basic brushing: one human hand uses wooden pet brush on shoulder, bristles contact LONG fur, cat calmly stands with eyes open. No other props.",
+    "reference": "shiro-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice",
+    "file": "shiro-voice.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-5efdd978-82ab-453f-9281-26742d65c36b.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is SHIRO exact identity and fine soft painted storybook style and room. Adult pure WHITE LONGHAIR medium large athletic cat LONG LEGS broad strong chest thick ruff toe tufts. Broad inverted triangular face pronounced cheeks and longer muzzle LARGE tall triangular ears white tufts pink nose and inner ears. BOTH EYES bright YELLOW GREEN large slightly almond shaped. Entire fur pure WHITE NO patches stripes gray brown black pigment. LONG very FULL FEATHERY WHITE TAIL white to tip. Curious active explorer personality. Cream wall honey wooden floor sage green mat warm diffuse light. ENTIRE CAT and ENTIRE LONG TAIL inside frame with generous blank margins all sides. EXACTLY FOUR LIMBS TOTAL only one cat no extra paws. No text UI watermark human face. Basic voice interaction: sits calmly, ears turn toward viewer listening, yellow green eyes open, mouth closed. No human hands knees speech bubbles or props.",
+    "reference": "shiro-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence",
+    "file": "shiro-presence.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-2d12dcd0-ccf2-44e4-b90b-85fb396b3cfa.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is SHIRO exact identity and fine soft painted storybook style and room. Adult pure WHITE LONGHAIR medium large athletic cat LONG LEGS broad strong chest thick ruff toe tufts. Broad inverted triangular face pronounced cheeks and longer muzzle LARGE tall triangular ears white tufts pink nose and inner ears. BOTH EYES bright YELLOW GREEN large slightly almond shaped. Entire fur pure WHITE NO patches stripes gray brown black pigment. LONG very FULL FEATHERY WHITE TAIL white to tip. Curious active explorer personality. Cream wall honey wooden floor sage green mat warm diffuse light. ENTIRE CAT and ENTIRE LONG TAIL inside frame with generous blank margins all sides. EXACTLY FOUR LIMBS TOTAL only one cat no extra paws. No text UI watermark human face. Basic companionship: cat loafs calmly, yellow green eyes open, only part of blue clothed knee at lower edge. No hands or toys.",
+    "reference": "shiro-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pause",
+    "file": "shiro-pause.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-2626a076-bdb9-4231-9c03-2ea719cc567e.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is SHIRO exact identity and fine soft painted storybook style and room. Adult pure WHITE LONGHAIR medium large athletic cat LONG LEGS broad strong chest thick ruff toe tufts. Broad inverted triangular face pronounced cheeks and longer muzzle LARGE tall triangular ears white tufts pink nose and inner ears. BOTH EYES bright YELLOW GREEN large slightly almond shaped. Entire fur pure WHITE NO patches stripes gray brown black pigment. LONG very FULL FEATHERY WHITE TAIL white to tip. Curious active explorer personality. Cream wall honey wooden floor sage green mat warm diffuse light. ENTIRE CAT and ENTIRE LONG TAIL inside frame with generous blank margins all sides. EXACTLY FOUR LIMBS TOTAL only one cat no extra paws. No text UI watermark human face. Pause/wait: cat calmly sits, forepaws planted, eyes open, feather teaser lies completely still on mat at safe distance. No hands.",
+    "reference": "shiro-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "sleep",
+    "file": "shiro-sleep.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-6de22ec2-8bbf-44c8-83da-01e223cb0775.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is SHIRO exact identity and fine soft painted storybook style and room. Adult pure WHITE LONGHAIR medium large athletic cat LONG LEGS broad strong chest thick ruff toe tufts. Broad inverted triangular face pronounced cheeks and longer muzzle LARGE tall triangular ears white tufts pink nose and inner ears. BOTH EYES bright YELLOW GREEN large slightly almond shaped. Entire fur pure WHITE NO patches stripes gray brown black pigment. LONG very FULL FEATHERY WHITE TAIL white to tip. Curious active explorer personality. Cream wall honey wooden floor sage green mat warm diffuse light. ENTIRE CAT and ENTIRE LONG TAIL inside frame with generous blank margins all sides. EXACTLY FOUR LIMBS TOTAL only one cat no extra paws. No text UI watermark human face. Sleep: cat curled into a relaxed ball sleeping, eyes closed, head on front paws, long fluffy pure white tail around body. No humans or toys.",
+    "reference": "shiro-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "teaser__open_up",
+    "file": "shiro-teaser__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-e036a603-e341-4930-a2da-dd21a5f347d9.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is SHIRO exact identity and fine soft painted storybook style and room. Adult pure WHITE LONGHAIR medium large athletic cat LONG LEGS broad strong chest thick ruff toe tufts. Broad inverted triangular face pronounced cheeks and longer muzzle LARGE tall triangular ears white tufts pink nose and inner ears. BOTH EYES bright YELLOW GREEN large slightly almond shaped. Entire fur pure WHITE NO patches stripes gray brown black pigment. LONG very FULL FEATHERY WHITE TAIL white to tip. Curious active explorer personality. Cream wall honey wooden floor sage green mat warm diffuse light. ENTIRE CAT and ENTIRE LONG TAIL inside frame with generous blank margins all sides. EXACTLY FOUR LIMBS TOTAL only one cat no extra paws. No text UI watermark human face. Special deep trust playing with feather teaser: one hand holds feather close; cat leans toward viewer, eyes soft half closed, paw reaches gently. Relaxed ears.",
+    "reference": "shiro-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "teaser__simultaneous",
+    "file": "shiro-teaser__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-f4a29c09-fdd3-4124-aac6-fd48ebc3c303.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is SHIRO exact identity and fine soft painted storybook style and room. Adult pure WHITE LONGHAIR medium large athletic cat LONG LEGS broad strong chest thick ruff toe tufts. Broad inverted triangular face pronounced cheeks and longer muzzle LARGE tall triangular ears white tufts pink nose and inner ears. BOTH EYES bright YELLOW GREEN large slightly almond shaped. Entire fur pure WHITE NO patches stripes gray brown black pigment. LONG very FULL FEATHERY WHITE TAIL white to tip. Curious active explorer personality. Cream wall honey wooden floor sage green mat warm diffuse light. ENTIRE CAT and ENTIRE LONG TAIL inside frame with generous blank margins all sides. EXACTLY FOUR LIMBS TOTAL only one cat no extra paws. No text UI watermark human face. Special excited and deeply trusting play: joyfully bats feather teaser held by one edge hand, ears forward bright yellow green eyes, lifted paw, confident happy posture. No aggressive expression.",
+    "reference": "shiro-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball__simultaneous",
+    "file": "shiro-ball__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-407ccad0-a731-40fc-8684-7969720dcc8e.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is SHIRO exact identity and fine soft painted storybook style and room. Adult pure WHITE LONGHAIR medium large athletic cat LONG LEGS broad strong chest thick ruff toe tufts. Broad inverted triangular face pronounced cheeks and longer muzzle LARGE tall triangular ears white tufts pink nose and inner ears. BOTH EYES bright YELLOW GREEN large slightly almond shaped. Entire fur pure WHITE NO patches stripes gray brown black pigment. LONG very FULL FEATHERY WHITE TAIL white to tip. Curious active explorer personality. Cream wall honey wooden floor sage green mat warm diffuse light. ENTIRE CAT and ENTIRE LONG TAIL inside frame with generous blank margins all sides. EXACTLY FOUR LIMBS TOTAL only one cat no extra paws. No text UI watermark human face. Special excited and trusting: playfully hugs small blue ball between forepaws, crouched with confident happy energy, bright yellow green eyes. No humans or other toys.",
+    "reference": "shiro-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush__simultaneous",
+    "file": "shiro-plush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-e96c409d-ed95-45dc-bcf0-054f0d859aca.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is SHIRO exact identity and fine soft painted storybook style and room. Adult pure WHITE LONGHAIR medium large athletic cat LONG LEGS broad strong chest thick ruff toe tufts. Broad inverted triangular face pronounced cheeks and longer muzzle LARGE tall triangular ears white tufts pink nose and inner ears. BOTH EYES bright YELLOW GREEN large slightly almond shaped. Entire fur pure WHITE NO patches stripes gray brown black pigment. LONG very FULL FEATHERY WHITE TAIL white to tip. Curious active explorer personality. Cream wall honey wooden floor sage green mat warm diffuse light. ENTIRE CAT and ENTIRE LONG TAIL inside frame with generous blank margins all sides. EXACTLY FOUR LIMBS TOTAL only one cat no extra paws. No text UI watermark human face. Special excited and trusting: joyfully rolls slightly on side hugging small beige mouse plush with front paws, bright yellow green eyes, relaxed ears and happy posture. No humans.",
+    "reference": "shiro-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel__open_up",
+    "file": "shiro-tunnel__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-a1c9cc78-239c-4b25-a3ae-8e1943be2244.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is SHIRO exact identity and fine soft painted storybook style and room. Adult pure WHITE LONGHAIR medium large athletic cat LONG LEGS broad strong chest thick ruff toe tufts. Broad inverted triangular face pronounced cheeks and longer muzzle LARGE tall triangular ears white tufts pink nose and inner ears. BOTH EYES bright YELLOW GREEN large slightly almond shaped. Entire fur pure WHITE NO patches stripes gray brown black pigment. LONG very FULL FEATHERY WHITE TAIL white to tip. Curious active explorer personality. Cream wall honey wooden floor sage green mat warm diffuse light. ENTIRE CAT and ENTIRE LONG TAIL inside frame with generous blank margins all sides. EXACTLY FOUR LIMBS TOTAL only one cat no extra paws. No text UI watermark human face. Special deep trust: relaxed at short beige fabric tunnel entrance, chin on rim, soft half closed yellow green eyes toward viewer, tail visible outside. No humans.",
+    "reference": "shiro-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel__simultaneous",
+    "file": "shiro-tunnel__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-3c50c4f3-7e2a-4fc2-961f-d63e65a69177.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is SHIRO exact identity and fine soft painted storybook style and room. Adult pure WHITE LONGHAIR medium large athletic cat LONG LEGS broad strong chest thick ruff toe tufts. Broad inverted triangular face pronounced cheeks and longer muzzle LARGE tall triangular ears white tufts pink nose and inner ears. BOTH EYES bright YELLOW GREEN large slightly almond shaped. Entire fur pure WHITE NO patches stripes gray brown black pigment. LONG very FULL FEATHERY WHITE TAIL white to tip. Curious active explorer personality. Cream wall honey wooden floor sage green mat warm diffuse light. ENTIRE CAT and ENTIRE LONG TAIL inside frame with generous blank margins all sides. EXACTLY FOUR LIMBS TOTAL only one cat no extra paws. No text UI watermark human face. Special excited and trusting: cat playfully emerges from short beige fabric tunnel with TWO front paws reaching forward, bright yellow green eyes friendly confident face and forward ears. Hindquarters still inside tunnel. Long fluffy white tail curls LOW along floor beside tunnel, WHITE TIP fully visible with generous empty margin all around. No part of tail outside frame; no upright high tail. No humans.",
+    "reference": "shiro-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet__open_up",
+    "file": "shiro-pet__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-0578fd2f-6f2f-4305-b24a-581114d1c966.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is SHIRO exact identity and fine soft painted storybook style and room. Adult pure WHITE LONGHAIR medium large athletic cat LONG LEGS broad strong chest thick ruff toe tufts. Broad inverted triangular face pronounced cheeks and longer muzzle LARGE tall triangular ears white tufts pink nose and inner ears. BOTH EYES bright YELLOW GREEN large slightly almond shaped. Entire fur pure WHITE NO patches stripes gray brown black pigment. LONG very FULL FEATHERY WHITE TAIL white to tip. Curious active explorer personality. Cream wall honey wooden floor sage green mat warm diffuse light. ENTIRE CAT and ENTIRE LONG TAIL inside frame with generous blank margins all sides. EXACTLY FOUR LIMBS TOTAL only one cat no extra paws. No text UI watermark human face. Special deep trust petting: one hand strokes cheek, cat leans cheek into palm, eyes almost closed, affectionate relaxed expression. No toys.",
+    "reference": "shiro-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet__simultaneous",
+    "file": "shiro-pet__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-3edb2d8e-c116-443f-a6ee-bfdb02309f55.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is SHIRO exact identity and fine soft painted storybook style and room. Adult pure WHITE LONGHAIR medium large athletic cat LONG LEGS broad strong chest thick ruff toe tufts. Broad inverted triangular face pronounced cheeks and longer muzzle LARGE tall triangular ears white tufts pink nose and inner ears. BOTH EYES bright YELLOW GREEN large slightly almond shaped. Entire fur pure WHITE NO patches stripes gray brown black pigment. LONG very FULL FEATHERY WHITE TAIL white to tip. Curious active explorer personality. Cream wall honey wooden floor sage green mat warm diffuse light. ENTIRE CAT and ENTIRE LONG TAIL inside frame with generous blank margins all sides. EXACTLY FOUR LIMBS TOTAL only one cat no extra paws. No text UI watermark human face. Special delighted and trusting petting: one hand rubs under chin, cat lifts chin joyfully, content closed eyes and relaxed ears. No toys.",
+    "reference": "shiro-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush__open_up",
+    "file": "shiro-brush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-533dcde1-3307-4d6d-adfe-18eebb515481.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is SHIRO exact identity and fine soft painted storybook style and room. Adult pure WHITE LONGHAIR medium large athletic cat LONG LEGS broad strong chest thick ruff toe tufts. Broad inverted triangular face pronounced cheeks and longer muzzle LARGE tall triangular ears white tufts pink nose and inner ears. BOTH EYES bright YELLOW GREEN large slightly almond shaped. Entire fur pure WHITE NO patches stripes gray brown black pigment. LONG very FULL FEATHERY WHITE TAIL white to tip. Curious active explorer personality. Cream wall honey wooden floor sage green mat warm diffuse light. ENTIRE CAT and ENTIRE LONG TAIL inside frame with generous blank margins all sides. EXACTLY FOUR LIMBS TOTAL only one cat no extra paws. No text UI watermark human face. Special deep trust brushing: one hand gently brushes long chest ruff with wooden pet brush, cat leans toward brush, half closed eyes relaxed affectionate posture.",
+    "reference": "shiro-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush__simultaneous",
+    "file": "shiro-brush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-e0e579f7-8371-43a7-9477-5e3e86fa88b7.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is SHIRO exact identity and fine soft painted storybook style and room. Adult pure WHITE LONGHAIR medium large athletic cat LONG LEGS broad strong chest thick ruff toe tufts. Broad inverted triangular face pronounced cheeks and longer muzzle LARGE tall triangular ears white tufts pink nose and inner ears. BOTH EYES bright YELLOW GREEN large slightly almond shaped. Entire fur pure WHITE NO patches stripes gray brown black pigment. LONG very FULL FEATHERY WHITE TAIL white to tip. Curious active explorer personality. Cream wall honey wooden floor sage green mat warm diffuse light. ENTIRE CAT and ENTIRE LONG TAIL inside frame with generous blank margins all sides. EXACTLY FOUR LIMBS TOTAL only one cat no extra paws. No text UI watermark human face. Special delighted and trusting brushing: one hand brushes shoulder with wooden brush, cat stretches neck and raises chin slightly, blissfully closed eyes, happy relaxed posture.",
+    "reference": "shiro-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice__open_up",
+    "file": "shiro-voice__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-c3c6cc05-883d-476c-8514-c861601168c6.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is SHIRO exact identity and fine soft painted storybook style and room. Adult pure WHITE LONGHAIR medium large athletic cat LONG LEGS broad strong chest thick ruff toe tufts. Broad inverted triangular face pronounced cheeks and longer muzzle LARGE tall triangular ears white tufts pink nose and inner ears. BOTH EYES bright YELLOW GREEN large slightly almond shaped. Entire fur pure WHITE NO patches stripes gray brown black pigment. LONG very FULL FEATHERY WHITE TAIL white to tip. Curious active explorer personality. Cream wall honey wooden floor sage green mat warm diffuse light. ENTIRE CAT and ENTIRE LONG TAIL inside frame with generous blank margins all sides. EXACTLY FOUR LIMBS TOTAL only one cat no extra paws. No text UI watermark human face. Special deep trust response to a familiar voice. Cat leans its head and upper body slightly toward viewer, neck gently extended, EYES VISIBLY NARROWED TO SOFT HALF-CLOSED SLITS in a relaxed slow blink (not wide open), gentle affectionate expression, relaxed forward ears, mouth closed. Both front paws remain on mat. No hands, humans, knees, speech bubbles, toys or other props. Make the facial trust reaction clearly distinct from the open-eyed normal reference.",
+    "reference": "shiro-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice__simultaneous",
+    "file": "shiro-voice__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-67a0a4ac-ab33-4bb4-9c4b-de80addd61d2.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is SHIRO exact identity and fine soft painted storybook style and room. Adult pure WHITE LONGHAIR medium large athletic cat LONG LEGS broad strong chest thick ruff toe tufts. Broad inverted triangular face pronounced cheeks and longer muzzle LARGE tall triangular ears white tufts pink nose and inner ears. BOTH EYES bright YELLOW GREEN large slightly almond shaped. Entire fur pure WHITE NO patches stripes gray brown black pigment. LONG very FULL FEATHERY WHITE TAIL white to tip. Curious active explorer personality. Cream wall honey wooden floor sage green mat warm diffuse light. ENTIRE CAT and ENTIRE LONG TAIL inside frame with generous blank margins all sides. EXACTLY FOUR LIMBS TOTAL only one cat no extra paws. No text UI watermark human face. Special delighted trusting response to voice: stands taking one friendly step toward viewer, bright welcoming yellow green eyes and forward ears, low relaxed tail, mouth closed. No human or props.",
+    "reference": "shiro-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence__open_up",
+    "file": "shiro-presence__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-6930c255-9e91-49d6-9f8e-0e0a9011c198.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is SHIRO exact identity and fine soft painted storybook style and room. Adult pure WHITE LONGHAIR medium large athletic cat LONG LEGS broad strong chest thick ruff toe tufts. Broad inverted triangular face pronounced cheeks and longer muzzle LARGE tall triangular ears white tufts pink nose and inner ears. BOTH EYES bright YELLOW GREEN large slightly almond shaped. Entire fur pure WHITE NO patches stripes gray brown black pigment. LONG very FULL FEATHERY WHITE TAIL white to tip. Curious active explorer personality. Cream wall honey wooden floor sage green mat warm diffuse light. ENTIRE CAT and ENTIRE LONG TAIL inside frame with generous blank margins all sides. EXACTLY FOUR LIMBS TOTAL only one cat no extra paws. No text UI watermark human face. Special deep trust companionship: lies comfortably on side beside blue clothed knee edge, soft half closed eyes relaxed head. No hands touching, no toys. COMPOSITION PRIORITY: ZOOM OUT. Cat plus entire fluffy tail occupy only central 65 percent of square. At least 12 percent EMPTY background on ALL sides. Curve entire tail LOW along mat beside torso, keep full outer contour and white tip comfortably away from frame edges. NO cropped fur, no upright tail. FOUR limbs total.",
+    "reference": "shiro-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence__simultaneous",
+    "file": "shiro-presence__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-77c6d6d6-c7bc-4d3d-b4d6-d21846ef7265.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is SHIRO exact identity and fine soft painted storybook style and room. Adult pure WHITE LONGHAIR medium large athletic cat LONG LEGS broad strong chest thick ruff toe tufts. Broad inverted triangular face pronounced cheeks and longer muzzle LARGE tall triangular ears white tufts pink nose and inner ears. BOTH EYES bright YELLOW GREEN large slightly almond shaped. Entire fur pure WHITE NO patches stripes gray brown black pigment. LONG very FULL FEATHERY WHITE TAIL white to tip. Curious active explorer personality. Cream wall honey wooden floor sage green mat warm diffuse light. ENTIRE CAT and ENTIRE LONG TAIL inside frame with generous blank margins all sides. EXACTLY FOUR LIMBS TOTAL only one cat no extra paws. No text UI watermark human face. Special delighted trusting companionship: sits close beside blue clothed knee edge, flank gently leaning against knee, blissfully half closed eyes. No hands touching, no toys. COMPOSITION PRIORITY: ZOOM OUT. Cat plus entire fluffy tail occupy only central 65 percent of square. At least 12 percent EMPTY background on ALL sides. Curve entire tail LOW along mat beside torso, keep full outer contour and white tip comfortably away from frame edges. NO cropped fur, no upright tail. FOUR limbs total.",
+    "reference": "shiro-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush",
+    "file": "shiro-plush-v2.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-e8c2e01b-60d8-4948-a612-f4027812dc67.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is SHIRO exact identity and fine soft painted storybook style and room. Adult pure WHITE LONGHAIR medium large athletic cat LONG LEGS broad strong chest thick ruff toe tufts. Broad inverted triangular face pronounced cheeks and longer muzzle LARGE tall triangular ears white tufts pink nose and inner ears. BOTH EYES bright YELLOW GREEN large slightly almond shaped. Entire fur pure WHITE NO patches stripes gray brown black pigment. LONG very FULL FEATHERY WHITE TAIL white to tip. Curious active explorer personality. Cream wall honey wooden floor sage green mat warm diffuse light. ENTIRE CAT and ENTIRE LONG TAIL inside frame with generous blank margins all sides. EXACTLY FOUR LIMBS TOTAL only one cat no extra paws. No text UI watermark human face. Basic play: cat lies belly down sniffing SMALL beige mouse plush ON MAT between exactly TWO FRONT PAWS, one paw each side. Two rear legs tucked behind torso, no other paws near head. Alert open yellow green eyes. COMPOSITION PRIORITY: ZOOM OUT. Cat plus entire fluffy tail occupy only central 65 percent of square. At least 12 percent EMPTY background on ALL sides. Curve entire tail LOW along mat beside torso, keep full outer contour and white tip comfortably away from frame edges. NO cropped fur, no upright tail. FOUR limbs total.",
+    "reference": "shiro-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball__open_up",
+    "file": "shiro-ball__open_up-v2.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-0871cd91-d3df-4699-aed9-4ddff07e99f2.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is SHIRO exact identity and fine soft painted storybook style and room. Adult pure WHITE LONGHAIR medium large athletic cat LONG LEGS broad strong chest thick ruff toe tufts. Broad inverted triangular face pronounced cheeks and longer muzzle LARGE tall triangular ears white tufts pink nose and inner ears. BOTH EYES bright YELLOW GREEN large slightly almond shaped. Entire fur pure WHITE NO patches stripes gray brown black pigment. LONG very FULL FEATHERY WHITE TAIL white to tip. Curious active explorer personality. Cream wall honey wooden floor sage green mat warm diffuse light. ENTIRE CAT and ENTIRE LONG TAIL inside frame with generous blank margins all sides. EXACTLY FOUR LIMBS TOTAL only one cat no extra paws. No text UI watermark human face. Special deep trust: lies comfortably on side beside small blue ball, ONE front paw rests on ball other front paw rests on mat, TWO rear legs rest behind torso. Head affectionately tipped toward viewer soft half closed yellow green eyes. COMPOSITION PRIORITY: ZOOM OUT. Cat plus entire fluffy tail occupy only central 65 percent of square. At least 12 percent EMPTY background on ALL sides. Curve entire tail LOW along mat beside torso, keep full outer contour and white tip comfortably away from frame edges. NO cropped fur, no upright tail. FOUR limbs total.",
+    "reference": "shiro-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush__open_up",
+    "file": "shiro-plush__open_up-v2.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-bbd64d4e-b311-4832-8a54-66f7519f09ac.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is SHIRO exact identity and fine soft painted storybook style and room. Adult pure WHITE LONGHAIR medium large athletic cat LONG LEGS broad strong chest thick ruff toe tufts. Broad inverted triangular face pronounced cheeks and longer muzzle LARGE tall triangular ears white tufts pink nose and inner ears. BOTH EYES bright YELLOW GREEN large slightly almond shaped. Entire fur pure WHITE NO patches stripes gray brown black pigment. LONG very FULL FEATHERY WHITE TAIL white to tip. Curious active explorer personality. Cream wall honey wooden floor sage green mat warm diffuse light. ENTIRE CAT and ENTIRE LONG TAIL inside frame with generous blank margins all sides. EXACTLY FOUR LIMBS TOTAL only one cat no extra paws. No text UI watermark human face. Special deep trust: lies belly down with head resting on SMALL beige mouse plush ON MAT. Exactly TWO FRONT PAWS, one resting each side of toy. Rear legs completely tucked under rear haunches. NO hugging toy, NO paws near cheek, NO extra paws. Soft HALF CLOSED yellow green eyes affectionate relaxed face. COMPOSITION PRIORITY: ZOOM OUT. Cat plus entire fluffy tail occupy only central 65 percent of square. At least 12 percent EMPTY background on ALL sides. Curve entire tail LOW along mat beside torso, keep full outer contour and white tip comfortably away from frame edges. NO cropped fur, no upright tail. FOUR limbs total.",
+    "reference": "shiro-normal.png",
+    "reference_role": "identity_and_style"
+  }
+]

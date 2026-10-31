@@ -1,0 +1,29 @@
+[
+  {
+    "scene": "plush",
+    "file": "shiro-plush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-b0c011f7-5ab5-4254-affe-f6a21f0e217e.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is SHIRO exact identity and fine soft painted storybook style and room. Adult pure WHITE LONGHAIR medium large athletic cat LONG LEGS broad strong chest thick ruff toe tufts. Broad inverted triangular face pronounced cheeks and longer muzzle LARGE tall triangular ears white tufts pink nose and inner ears. BOTH EYES bright YELLOW GREEN large slightly almond shaped. Entire fur pure WHITE NO patches stripes gray brown black pigment. LONG very FULL FEATHERY WHITE TAIL white to tip. Curious active explorer personality. Cream wall honey wooden floor sage green mat warm diffuse light. ENTIRE CAT and ENTIRE LONG TAIL inside frame with generous blank margins all sides. EXACTLY FOUR LIMBS TOTAL only one cat no extra paws. No text UI watermark human face. Basic play: cat lies naturally belly-down on mat with TWO forepaws resting on either side of a SMALL beige mouse plush ON THE FLOOR; sniffs mouse, eyes open. Hind legs tucked behind body. EXACTLY FOUR LIMBS TOTAL. No seated upright hugging pose, no extra paws. Tail curves beside body fully inside frame.",
+    "reference": "shiro-normal.png",
+    "reference_role": "identity_and_style",
+    "reason": "Improve tail framing or limb anatomy"
+  },
+  {
+    "scene": "ball__open_up",
+    "file": "shiro-ball__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-da0cf9d9-c2b4-4cef-8541-a2dcb01a2e30.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is SHIRO exact identity and fine soft painted storybook style and room. Adult pure WHITE LONGHAIR medium large athletic cat LONG LEGS broad strong chest thick ruff toe tufts. Broad inverted triangular face pronounced cheeks and longer muzzle LARGE tall triangular ears white tufts pink nose and inner ears. BOTH EYES bright YELLOW GREEN large slightly almond shaped. Entire fur pure WHITE NO patches stripes gray brown black pigment. LONG very FULL FEATHERY WHITE TAIL white to tip. Curious active explorer personality. Cream wall honey wooden floor sage green mat warm diffuse light. ENTIRE CAT and ENTIRE LONG TAIL inside frame with generous blank margins all sides. EXACTLY FOUR LIMBS TOTAL only one cat no extra paws. No text UI watermark human face. Special deep trust: relaxed on side beside small blue ball, paw resting on ball, head tipped affectionately toward viewer, soft half closed eyes. No humans.",
+    "reference": "shiro-normal.png",
+    "reference_role": "identity_and_style",
+    "reason": "Improve tail framing or limb anatomy"
+  },
+  {
+    "scene": "plush__open_up",
+    "file": "shiro-plush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-697ea0cf-8d9d-4b93-b7c0-001cd259129a.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim illustration. Reference is SHIRO exact identity and fine soft painted storybook style and room. Adult pure WHITE LONGHAIR medium large athletic cat LONG LEGS broad strong chest thick ruff toe tufts. Broad inverted triangular face pronounced cheeks and longer muzzle LARGE tall triangular ears white tufts pink nose and inner ears. BOTH EYES bright YELLOW GREEN large slightly almond shaped. Entire fur pure WHITE NO patches stripes gray brown black pigment. LONG very FULL FEATHERY WHITE TAIL white to tip. Curious active explorer personality. Cream wall honey wooden floor sage green mat warm diffuse light. ENTIRE CAT and ENTIRE LONG TAIL inside frame with generous blank margins all sides. EXACTLY FOUR LIMBS TOTAL only one cat no extra paws. No text UI watermark human face. Special deep trust: cat lies naturally on side, TWO forepaws gently wrap around SMALL beige mouse plush ON MAT, cheek resting on toy, soft HALF CLOSED yellow green eyes toward viewer. Two hind legs rest behind with haunches. EXACTLY FOUR LIMBS TOTAL, no upright seated pose, no extra paws. Tail fully visible curving beside body.",
+    "reference": "shiro-normal.png",
+    "reference_role": "identity_and_style",
+    "reason": "Improve tail framing or limb anatomy"
+  }
+]
