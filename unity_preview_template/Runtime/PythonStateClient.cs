@@ -172,6 +172,7 @@ namespace CatCafePreview
         private bool online;
         private ContentPreview preview;
         private bool automatic, fast, pendingAutomatic, sendingCommand;
+        private bool refreshingState=true;
         private bool batchAutomatic,batchStopRequested;
         public bool BatchAutomatic => batchAutomatic;
         public bool BatchStopping => batchStopRequested;
@@ -179,6 +180,8 @@ namespace CatCafePreview
         public bool AutoPlayPaused => AutoPlayRunning && current.autoplay.paused;
         public bool AutoPlayExecuting => AutoPlayRunning && !AutoPlayPaused;
         public bool CanSendCommands => online && pending==null && current!=null && !GameOptionsPanel.IsOpen;
+        // Automation must also wait for /state, /saves and the final button refresh.
+        public bool UIStateReady => CanSendCommands && !sendingCommand && !refreshingState;
         private float nextAutomaticTick;
         public bool Automatic { get { return automatic; } }
         public bool Fast { get { return fast; } }
@@ -558,6 +561,7 @@ namespace CatCafePreview
             preview.PythonConnectionError("接続しています。");
             while (true)
             {
+                refreshingState=true;
                 string notice = "";
                 if (pending != null)
                 {
@@ -655,6 +659,7 @@ namespace CatCafePreview
                 if(automatic) ResetAutomaticTimer();
                 preview.RefreshPythonControls();
                 // Local requests can complete synchronously; give input and rendering a frame.
+                refreshingState=false;
                 yield return null;
                 while (pending == null && Time.realtimeSinceStartup < until)
                 {

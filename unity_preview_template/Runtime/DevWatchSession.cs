@@ -17,16 +17,18 @@ namespace CatCafePreview
         [Serializable] public sealed class Checkpoint {public int version=2,commands,ui_actions,route_index;public bool route_finished;public string identity,save_sha256,dialogue,state_digest;}
         [Serializable] sealed class Status
         {
-            public string layer="ui-handlers",status,action,dialogue,phase,error,state_digest,route_id,objective;public string[] assigned_targets;public int assigned_acquired;
+            public string layer="ui-handlers",status,action,dialogue,phase,error,state_digest,route_id,objective,save_status,save_error;public string[] assigned_targets;public int assigned_acquired;
             public int day,tick,commands,ui_actions;public float speed;public bool paused,short_dialogue,physical_input_verified=false;
             public string[] viewed_replay_keys,viewed_image_keys;
         }
         [Serializable] sealed class CommandRecord {public int sequence,day,tick;public string command,error,state_digest;}
         [Serializable] sealed class UIRecord {public int sequence;public string action,dialogue;}
+        [Serializable] sealed class FailureRecord {public string error,dialogue;public int day,tick,commands;}
         [Serializable] sealed class ContentReference {public string bundleResource,interactionResource;}
         Plan plan;Checkpoint checkpoint;LocalCafeBackend backend;FileStream ownership;
         string root,next="実行を押すと、タイトルから通常画面を操作します。",error="",pendingKey="",lastKey="";
         Action pending;float due,lastChange,speed=1;int commands,uiActions,preparedDay;
+        float saveStarted;string saveError="";
         bool paused=true,single,started,resume,loaded,saveRequested,saving,saved,quitAfterSave,completeAfterSave,complete,shortDialogue,exitOnComplete;
         Rect window=new Rect(-1,12,650,156);Font font;bool compact;Texture2D toolbarBackground;GUIStyle toolbarStyle,reasonStyle;
         PythonStateClient Client=>FindObjectOfType<PythonStateClient>();
@@ -91,17 +93,19 @@ namespace CatCafePreview
         void Publish()
         {
             if(backend==null)return;var s=backend.Simulation.State;
-            Write("watch-status.json",JsonUtility.ToJson(new Status{route_id=CurrentRoute?.id,objective=CurrentRoute?.objective,assigned_targets=CurrentRoute?.targets,assigned_acquired=AssignedAcquired(),status=error!=""?"error":complete?"completed":paused?"paused":"running",action=next,error=error,dialogue=Dialog?.PlaybackKey??"",phase=s.phase,day=s.day,tick=s.tick,commands=commands,ui_actions=uiActions,speed=speed,paused=paused,short_dialogue=shortDialogue,state_digest=CafeReplayJournal.Digest(s),viewed_replay_keys=backend.Replays.Load().entries.Select(e=>e.Key).ToArray(),viewed_image_keys=backend.Gallery.Load().viewed},true));
+            Write("watch-status.json",JsonUtility.ToJson(new Status{save_status=saveError!=""?"failed":saving?"saving":saveRequested?"waiting":saved?"saved":"not_requested",save_error=saveError,route_id=CurrentRoute?.id,objective=CurrentRoute?.objective,assigned_targets=CurrentRoute?.targets,assigned_acquired=AssignedAcquired(),status=error!=""?"error":complete?"completed":paused?"paused":"running",action=next,error=error,dialogue=Dialog?.PlaybackKey??"",phase=s.phase,day=s.day,tick=s.tick,commands=commands,ui_actions=uiActions,speed=speed,paused=paused,short_dialogue=shortDialogue,state_digest=CafeReplayJournal.Digest(s),viewed_replay_keys=backend.Replays.Load().entries.Select(e=>e.Key).ToArray(),viewed_image_keys=backend.Gallery.Load().viewed},true));
         }
         void Observe(string json,CafeResponse response)
         {
             commands++;var cmd=JsonUtility.FromJson<PythonShiftCommand>(json);var s=backend.Simulation.State;
             File.AppendAllText(Path.Combine(root,"watch-commands.jsonl"),JsonUtility.ToJson(new CommandRecord{sequence=commands,day=s.day,tick=s.tick,command=json,error=response.error,state_digest=CafeReplayJournal.Digest(s)})+"\n");
-            if(response.result!=UnityWebRequest.Result.Success){Fail(cmd.kind+": "+response.error);return;}
+            if(response.result!=UnityWebRequest.Result.Success){if(cmd.kind=="save_game")SaveFailed(response.error);else Fail(cmd.kind+": "+response.error);return;}
             if(cmd.kind=="save_game")
             {
-                checkpoint=new Checkpoint{route_index=routeIndex,route_finished=completeAfterSave,ui_actions=uiActions,identity=plan.identity,commands=commands,save_sha256=CafeDevAcquisition.Hash(File.ReadAllBytes(SaveFile)),dialogue=Dialog?.PlaybackKey??"",state_digest=CafeReplayJournal.Digest(s)};
-                Write("watch-checkpoint.json",JsonUtility.ToJson(checkpoint,true));saved=true;
+                try {
+                    var candidate=new Checkpoint{route_index=routeIndex,route_finished=completeAfterSave,ui_actions=uiActions,identity=plan.identity,commands=commands,save_sha256=CafeDevAcquisition.Hash(File.ReadAllBytes(SaveFile)),dialogue=Dialog?.PlaybackKey??"",state_digest=CafeReplayJournal.Digest(s)};
+                    Write("watch-checkpoint.json",JsonUtility.ToJson(candidate,true));checkpoint=candidate;saved=true;
+                }catch(Exception e){SaveFailed("チェックポイント記録："+e.Message);return;}
             }
             if(cmd.kind=="load_game")
             {
@@ -110,19 +114,33 @@ namespace CatCafePreview
             }
             Publish();
         }
-        void Fail(string message){error=message;paused=true;pending=null;next="停止しました。記録を確認してください。";Publish();if(exitOnComplete)Application.Quit(3);}
+        void Fail(string message)
+        {
+            bool first=error=="";if(first)error=message;paused=true;single=false;pending=null;completeAfterSave=false;
+            if(first)Write("watch-failure.json",JsonUtility.ToJson(new FailureRecord{error=error,dialogue=Dialog?.PlaybackKey??"",day=backend.Simulation.State.day,tick=backend.Simulation.State.tick,commands=commands},true));
+            next=resume && !loaded?"読み込みに失敗したため停止しました。直前の保存は上書きしません。":"エラーで停止しました。「保存して終了」で現在位置を保存できます。";Publish();
+            if(first && exitOnComplete){if(Client!=null && (!resume || loaded))RequestSave(true);else Application.Quit(3);}
+        }
+        void SaveFailed(string message)
+        {
+            saveError=message;saving=false;saveRequested=false;saved=false;quitAfterSave=false;paused=true;pending=null;completeAfterSave=false;
+            if(error=="")error="保存処理に失敗しました。";
+            next="保存できませんでした（終了せず停止中）。"+message;Publish();
+        }
         void Schedule(string message,Action action,bool dialogue=false)
         {
             next=message;pending=action;pendingKey=Key();due=Time.realtimeSinceStartup+(dialogue?(shortDialogue?.25f:1.6f):.8f)/speed;Publish();
         }
         void Update()
         {
-            if(backend==null || error!="" || complete)return;
+            if(backend==null || complete)return;
             try
             {
                 if(File.Exists(Path.Combine(root,"pause.request"))){File.Delete(Path.Combine(root,"pause.request"));RequestSave(false);}
-                if(saving){if(saved){saving=false;if(completeAfterSave && plan.collection){FinishCollectionRoute();return;}complete=completeAfterSave;next=complete?"観戦ルートを完走し、検証専用スロットへ保存しました。":"保存しました。実行で続行できます。";Publish();if(quitAfterSave || complete && exitOnComplete)Application.Quit(0);}return;}
-                if(saveRequested){var c=Client;if(c!=null && c.CanSaveNow){saveRequested=false;saving=true;saved=false;next="通常の保存処理で会話位置と営業を保存しています。";c.SaveToSlot(9);}return;}
+                if((saving || saveRequested) && Time.realtimeSinceStartup-saveStarted>30){SaveFailed("保存の待機時間が30秒を超えました。接続や確認待ちの状態を確認してください。");return;}
+                if(saving){if(saved){saving=false;if(error!=""){next="エラーで停止した現在位置を保存しました。停止理由は記録に残しています。";Publish();if(quitAfterSave)Application.Quit(3);return;}if(completeAfterSave && plan.collection){FinishCollectionRoute();return;}complete=completeAfterSave;next=complete?"観戦ルートを完走し、検証専用スロットへ保存しました。":"保存しました。実行で続行できます。";Publish();if(quitAfterSave || complete && exitOnComplete)Application.Quit(0);}return;}
+                if(saveRequested){var c=Client;if(c!=null && c.UIStateReady && c.CanSaveNow){saveRequested=false;saving=true;saved=false;next="通常の保存処理で会話位置と営業を保存しています。";c.SaveToSlot(9);}return;}
+                if(error!="")return;
                 if(resume && !loaded && !started)
                 {
                     var title=FindObjectOfType<PythonTitleScreen>();if(title!=null && title.CanManageSaves){started=true;title.ShowSaves();title.ResumeSaved("9");next="保存した営業と会話を読み込みました。実行で続行できます。";}return;
@@ -136,6 +154,7 @@ namespace CatCafePreview
                 string key=Key();if(lastKey!=key){lastKey=key;lastChange=Time.realtimeSinceStartup;}
                 if(Time.realtimeSinceStartup-lastChange>120 || commands>(plan.collection?100000:10000)){Fail("進行待ちの上限に達しました。" );return;}
                 if(pending!=null && key!=pendingKey)pending=null;
+                if(Client!=null && !Client.UIStateReady)return;
                 if(pending==null){if(nextRoutePending)Schedule("このルートは完了です。次は「"+watchRoutes[routeIndex+1].id+"」を別のセーブで始めます。",AdvanceWatchRoute,true);else Choose();return;}
                 if(!single && Time.realtimeSinceStartup<due)return;
                 var operation=pending;pending=null;single=false;uiActions++;
@@ -160,6 +179,7 @@ namespace CatCafePreview
             var c=Client;if(c==null || c.CurrentState==null)return;
             if(!started)started=true;
             if(resume && !loaded)return;
+            if(!c.UIStateReady)return;
             if(c.Automatic){Schedule("観戦の速度で1操作ずつ進めるため、自動進行を止めます。",c.PauseAutomaticForSave);return;}
             if(c.AutoPlayRunning){Schedule("通常のおまかせを止め、観戦操作へ戻します。",c.StopAutoPlay);return;}
             var reservation=c.GetComponent<PythonReservationPanel>();if(reservation.Confirming){Click(reservation.confirm,"予約の回答内容を確認して確定します。");return;}
@@ -221,7 +241,7 @@ namespace CatCafePreview
             }
             var events=c.GetComponent<PythonEventListPanel>();if(events.PendingCount>0){Schedule("まだ読んでいない結果会話を開きます。",()=>{events.Open();var entry=events.entries.FirstOrDefault(b=>b.gameObject.activeInHierarchy && b.IsInteractable());if(entry!=null)entry.onClick.Invoke();});return;}
         }
-        void RequestSave(bool quit){if(Client==null)return;paused=true;single=false;pending=null;quitAfterSave=quit;saveRequested=true;next="進行を止め、検証専用セーブへ保存します。";Publish();}
+        void RequestSave(bool quit){if(resume && !loaded){saveError="読み込み未完了のため、直前の保存を上書きしません。";next=saveError;Publish();return;}if(Client==null)return;if(saving || saveRequested){quitAfterSave|=quit;return;}paused=true;single=false;pending=null;quitAfterSave=quit;saveRequested=true;saved=false;saveError="";saveStarted=Time.realtimeSinceStartup;next="進行を止め、検証専用セーブへ保存します。";Publish();}
         void OnGUI()
         {
             if(font==null)font=FindObjectsOfType<Text>().Select(t=>t.font).FirstOrDefault(f=>f!=null);if(font!=null)GUI.skin.font=font;
@@ -244,8 +264,8 @@ namespace CatCafePreview
                 if(GUI.Button(new Rect(287,70,66,30),"2倍")){speed=2;pending=null;Publish();}
                 if(GUI.Button(new Rect(361,70,66,30),"4倍")){speed=4;pending=null;Publish();}
                 if(GUI.Button(new Rect(435,70,195,30),"会話短縮："+(shortDialogue?"入":"切"))){shortDialogue=!shortDialogue;pending=null;Publish();}
-                GUI.enabled=backend!=null && Client!=null && !saving && !saveRequested;
-                if(GUI.Button(new Rect(12,108,140,30),complete?"終了":"保存して終了")){if(complete)Application.Quit(0);else RequestSave(true);}
+                bool unrestored=resume && !loaded;GUI.enabled=backend!=null && (Client!=null || unrestored) && !saving && !saveRequested;
+                if(GUI.Button(new Rect(12,108,140,30),complete?"終了":unrestored?"終了（保存なし）":"保存して終了")){if(complete || unrestored)Application.Quit(error!=""?3:0);else RequestSave(true);}
                 GUI.enabled=true;var s=backend?.Simulation.State;GUI.Label(new Rect(165,109,465,30),(complete?"完走":paused?"停止中":"観戦中")+" / "+s?.day+"日目 "+s?.tick+"刻 / 操作 "+commands+" / "+speed+"倍");
                 GUI.DragWindow(new Rect(0,0,650,20));
             },"開発専用・観戦自動プレイ "+(plan?.collection==true?CurrentRoute?.id:"")+"（ドラッグで移動）",toolbarStyle);
