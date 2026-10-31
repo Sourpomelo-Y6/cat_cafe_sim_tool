@@ -15,6 +15,7 @@ $previewFiles += @('Runtime/Standalone/CafePlayerStaminaGuidance.cs', 'Runtime/S
 $previewFiles += @('Editor/CatTexturePolicy.cs', 'Runtime/StandaloneTexturePolicySmoke.cs')
 $previewFiles += @('Runtime/StandaloneRoundTripConversationSmoke.cs','Editor/RoundTripConversationVerification.cs')
 $previewFiles += @('Runtime/StandaloneEquipmentConversationSmoke.cs','Editor/EquipmentConversationVerification.cs','Runtime/EquipmentConversationPanel.cs','Runtime/LocalCafeEquipmentConversation.cs','Runtime/Standalone/CafeEquipmentDialogue.cs')
+$previewFiles += @('Editor/FacilityTroublePortraitVerification.cs')
 $previewFiles += @('Runtime/PythonStateClient.cs', 'Runtime/PythonCatCard.cs', 'Runtime/PythonCatRoster.cs', 'Editor/PythonStateSetup.cs', 'Editor/PythonShiftVerification.cs', 'Editor/PythonRosterSetup.cs')
 $previewFiles += @('Runtime/PythonServiceScreen.cs', 'Editor/PythonServiceSetup.cs', 'Editor/PythonServiceLayout.cs')
 $previewFiles += @('Runtime/PythonSavePanel.cs', 'Editor/PythonSaveSetup.cs', 'Editor/PythonSaveVerification.cs')

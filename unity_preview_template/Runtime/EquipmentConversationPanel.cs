@@ -5,6 +5,7 @@ namespace CatCafePreview {
   GameObject host;PythonStoreEventPanel owner;
   CafeEquipmentConversation Row=>Backend.EquipmentConversation;
   bool Support=>Row!=null && CafeEquipmentDialogue.IsSupport(Row);
+  protected override bool ShowPortrait=>Support;
   public void Apply(PythonCafeState value,PythonStoreEventPanel original){owner=original;Backend.PrepareEquipmentConversation();if(host==null){host=new GameObject("Equipment Conversation",typeof(RectTransform),typeof(UnityEngine.UI.Image));host.transform.SetParent(owner.panel.transform.parent,false);host.SetActive(false);}Bind(value,host,owner.title.font);if(Showing)owner.panel.SetActive(false);}
   public bool OpenPending(){Apply(Client.CurrentState,GetComponent<PythonStoreEventPanel>());if(Row==null || Row.progress.completed)return false;Open();return true;}
   protected override CafeConversationProgress ResolveProgress()=>Row?.progress;

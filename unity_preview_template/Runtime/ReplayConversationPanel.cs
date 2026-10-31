@@ -16,6 +16,7 @@ namespace CatCafePreview
             Bind(new PythonCafeState{instance_id=Guid.NewGuid().ToString("N")},surface,font);Open();
         }
         protected override bool TrackRead=>false;
+        protected override bool ShowPortrait=>entry?.conversation_id!=CafeEquipmentDialogue.Id;
         protected override bool Ready=>true;
         protected override bool AutoRunning=>false;
         protected override bool SaveControls=>false;

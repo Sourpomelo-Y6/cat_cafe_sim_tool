@@ -43,6 +43,7 @@ namespace CatCafePreview
         protected virtual string EndText=>"通常画面へ戻りましょう。営業・自動進行は手動で再開してください。";
         protected virtual string BusyNotice=>!Client.CanSendCommands?"処理中です。完了をお待ちください。":Notice;
         protected virtual Texture2D PortraitTexture(string id)=>GetComponent<ContentPreview>().CandidateCatTexture(id);
+        protected virtual bool ShowPortrait=>true;
         protected virtual void PauseProgress(){if(Client.Automatic)Client.PauseAutomaticForSave();}
         protected virtual void AfterClose(){GetComponent<ContentPreview>().RefreshPythonControls();}
         protected virtual void RecordCompletion(){Backend.RememberViewedConversations();}
@@ -127,7 +128,8 @@ namespace CatCafePreview
             if(third!=null){third.gameObject.SetActive(choosing && !history);third.interactable=ready && CanThird;third.GetComponentInChildren<Text>().text=ThirdCaption;thirdEffect.text=ThirdEffect;}
             acceptEffect.text=AcceptEffect;declineEffect.text=DeclineEffect;
             hint.text=Backend?.ReadHistory?.Error??BusyNotice;hint.gameObject.SetActive(!ThreeLinePages);
-            portrait.texture=PortraitTexture(q.cat_id)??ContentPreview.CatPlaceholderTexture();portrait.enabled=portrait.texture!=null;
+            portrait.transform.parent.parent.gameObject.SetActive(ShowPortrait);
+            portrait.texture=ShowPortrait?(PortraitTexture(q.cat_id)??ContentPreview.CatPlaceholderTexture()):null;portrait.enabled=portrait.texture!=null;
             if(portrait.texture!=null)portrait.GetComponent<AspectRatioFitter>().aspectRatio=(float)portrait.texture.width/portrait.texture.height;
         }
         string Page(string full)
