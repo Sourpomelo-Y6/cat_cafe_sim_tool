@@ -175,6 +175,7 @@ namespace CatCafePreview
             var menu=GetComponent<PythonNewGamePanel>();if(menu!=null) menu.Apply(state);
             var detail = GetComponent<PythonCatDetailsPanel>();
             if(detail != null) detail.Apply(state);
+            if(CafeBackends.Standalone)GetComponent<OptionalEventConversationPanel>()?.Apply(state);
             var growth = GetComponent<PythonGrowthPanel>();
             if (growth != null) growth.Apply(state);
             var player=GetComponent<PythonPlayerPanel>();if(player!=null)player.Apply(state);

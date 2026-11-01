@@ -42,6 +42,7 @@ namespace CatCafePreview
         protected override void AfterClose(){closed?.Invoke();}
         protected override Texture2D PortraitTexture(string id)
         {
+            if(entry?.conversation_id==CafeOptionalEvents.MikeId+".v1")return string.IsNullOrEmpty(entry.image_resource)?null:Resources.Load<Texture2D>(entry.image_resource);
             if(entry?.conversation_id?.StartsWith(CafeReservationDialogue.Id)==true || entry?.conversation_id?.StartsWith(CafeTrustDialogue.Id)==true)return HumanPortraitResources.Resolve(entry.customer_id);
             if(!portraitLoaded){portraitLoaded=true;cachedPortrait=LoadPortrait(id);}
             return cachedPortrait;

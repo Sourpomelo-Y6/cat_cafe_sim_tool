@@ -7,8 +7,8 @@ using CatCafePreview.Standalone;
 namespace CatCafePreview {
  public partial class PythonEventListPanel {
   public sealed class PendingCase {
-   public int group; public string id,title,subject,reason; public bool result; public Action resume;
-   public string Caption=>(result?"【回答済み・結果会話未完了】":"【回答・確認待ち】")+"\n"+title+" / "+subject+" / "+id+"\n"+(string.IsNullOrEmpty(reason)?"続きへ（選択した案件を開く）":"先に必要："+reason);
+   public int group; public string id,title,subject,reason; public bool result; public bool optional; public Action resume;
+   public string Caption=>(optional?"【任意・猫イベント】":result?"【回答済み・結果会話未完了】":"【回答・確認待ち】")+"\n"+title+" / "+subject+(optional?"":" / "+id)+"\n"+(string.IsNullOrEmpty(reason)?"続きへ（選択した案件を開く）":"先に必要："+reason);
   }
   public bool HoldConversations {get;set;}
   readonly List<Button> caseButtons=new List<Button>(); Button continueButton;
@@ -54,6 +54,7 @@ namespace CatCafePreview {
    }
    var keys=new Dictionary<int,string>{{1,"intake_request"},{2,"store_event"},{3,"growth"},{4,"missing_return"},{5,"adoption"},{6,"dispatch_return"},{7,"regular_introduction"},{8,"reservation"},{9,"customer_trust"},{10,"dispatch_return"},{11,"dispatch_choice"},{12,"dispatch_trouble"},{13,"dispatch_introduction"}};
    foreach(var row in rows)if(!row.result && string.IsNullOrEmpty(row.reason) && !string.IsNullOrEmpty(current.required_action) && keys[row.group]!=current.required_action && !(row.group==12 && current.required_action=="dispatch_return"))row.reason=ActionLabel(current.required_action)+"を先に確認してください。";
+   if(b.OptionalEventListed)rows.Add(new PendingCase{group=14,id=CafeOptionalEvents.MikeId,title=b.OptionalEvent?.title??CafeOptionalEvents.MikeTitle,subject=b.OptionalEvent?.cat_name??cat("cat-mike"),optional=true,reason=b.OptionalEventReason,resume=()=>{var view=GetComponent<OptionalEventConversationPanel>()??gameObject.AddComponent<OptionalEventConversationPanel>();view.OpenEvent();}});
    return rows;
   }
   static string ActionLabel(string action){switch(action){case "adoption":return "譲渡の申し出";case "player":return "プレイヤー交流";case "dispatch_trouble":return "宿のトラブル";case "dispatch_choice":return "派遣中の選択";case "dispatch_return":return "派遣の帰還";case "missing_return":return "猫の帰還";case "reservation":return "特別予約";case "dispatch_introduction":return "派遣先からの猫紹介";case "intake_request":return "保護猫の受け入れ";case "regular_introduction":return "常連からの猫紹介";case "customer_trust":return "顧客の信頼回復";case "store_event":return "店舗イベント";case "growth":return "猫の成長";case "service_assignment":return "接客の割り当て";default:return "目標・営業の結果";}}
@@ -72,7 +73,7 @@ namespace CatCafePreview {
    if(continueButton==null){continueButton=Instantiate(close,close.transform.parent);continueButton.name="Continue Business";continueButton.onClick=new Button.ButtonClickedEvent();var rect=continueButton.GetComponent<RectTransform>();rect.anchoredPosition=new Vector2(24,rect.anchoredPosition.y);rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,436);continueButton.onClick.AddListener(ContinueBusiness);}
    var client=GetComponent<PythonStateClient>();string caption=client.AutoPlayRunning?client.AutoPlayPaused?"おまかせを再開":"おまかせ実行中":current.closed?"翌日へ":current.can_set_shifts?"営業開始":"自動進行を再開";
    continueButton.GetComponentInChildren<Text>().text=caption;continueButton.interactable=CanContinue;
-   notice.text=rows.Count+"件（回答・確認待ち "+rows.Count(r=>!r.result)+" / 結果会話 "+rows.Count(r=>r.result)+"）。"+RunStatus+"\n"+(CanContinue?"下の「"+caption+"」から進められます。":!string.IsNullOrEmpty(current.required_action)?"先に必要："+ActionLabel(current.required_action):rows.Count>0?"選んだ案件から続きを確認してください。":"営業準備・出勤・接客の割り当て、または目標結果を確認してください。");
+   notice.text=rows.Count+"件（回答・確認待ち "+rows.Count(r=>!r.result && !r.optional)+" / 結果会話 "+rows.Count(r=>r.result)+" / 任意 "+rows.Count(r=>r.optional)+"）。"+RunStatus+"\n"+(CanContinue?"下の「"+caption+"」から進められます。":!string.IsNullOrEmpty(current.required_action)?"先に必要："+ActionLabel(current.required_action):rows.Count>0?"選んだ案件から続きを確認してください。":"営業準備・出勤・接客の割り当て、または目標結果を確認してください。");
   }
   string RunStatus {get{var c=GetComponent<PythonStateClient>();return c.AutoPlayRunning?c.AutoPlayPaused?"おまかせ：一時停止中":"おまかせ：実行中":c.Automatic?"通常自動進行：実行中":current.autoplay?.report?.reason=="cancelled"?"おまかせ：中止済み":current.autoplay?.report!=null?"おまかせ：終了（"+(current.autoplay.report.reason=="completed" || current.autoplay.report.reason=="day_limit"?"予定完了":current.autoplay.report.reason=="blocked"?"回答待ちで終了":current.autoplay.report.message)+"）":"通常進行：停止中";}}
   bool CanContinue {get{var c=GetComponent<PythonStateClient>();return online && current.game_over==null && (c.AutoPlayRunning?c.AutoPlayPaused && c.CanManageSaves && string.IsNullOrEmpty(current.required_action) && !(CafeBackends.Local as LocalCafeBackend).ConversationBlocksProgress:c.CanProgressBusiness || c.CanStartAutomatic);}}

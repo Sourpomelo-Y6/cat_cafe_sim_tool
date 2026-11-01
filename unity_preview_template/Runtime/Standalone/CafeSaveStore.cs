@@ -39,6 +39,7 @@ namespace CatCafePreview.Standalone
         public string encounter_conversation_selected;
         public CafeDispatchIntroductionConversation[] dispatch_introduction_conversations;
         public string dispatch_introduction_conversation_selected;
+        public CafeOptionalEvent[] optional_events;
         public CafeDisplayReceipt[] display_receipts; // Optional UI facts; outside gameplay and replay digests.
     }
     public sealed class CafeSaveStore
@@ -60,7 +61,7 @@ namespace CatCafePreview.Standalone
             var value = decode(File.ReadAllText(PathFor(slot), Encoding.UTF8));
             if (value == null || value.version != 1 || value.slot != slot || !DateTimeOffset.TryParse(value.created_at, out _)) throw new ArgumentException("Unsupported save envelope");
             migrate?.Invoke(value);
-            validate(value.state); CafeInteractionStatistics.Validate(value.interaction_statistics,value.state); return value;
+            validate(value.state); CafeOptionalEvents.Validate(value.optional_events); CafeInteractionStatistics.Validate(value.interaction_statistics,value.state); return value;
         }
         public void SaveNew(int slot,CafeSnapshot state)
         {
@@ -79,7 +80,7 @@ namespace CatCafePreview.Standalone
             // A failed write/validation never replaces the previous save.
             var readback = decode(File.ReadAllText(temp, Encoding.UTF8));
             if (readback == null || readback.version != 1 || readback.slot != slot) throw new IOException("Save verification failed");
-            validate(readback.state); CafeInteractionStatistics.Validate(readback.interaction_statistics,readback.state);
+            validate(readback.state); CafeOptionalEvents.Validate(readback.optional_events); CafeInteractionStatistics.Validate(readback.interaction_statistics,readback.state);
             if (File.Exists(path)) ReplaceWithRetry(temp, path); else File.Move(temp, path);
         }
         // Keep the atomic replacement and backup. A short IO conflict may clear;

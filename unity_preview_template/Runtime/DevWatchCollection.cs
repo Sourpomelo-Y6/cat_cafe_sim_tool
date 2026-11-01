@@ -81,7 +81,7 @@ namespace CatCafePreview
         {
             if(!backend.ConversationBlocksProgress)return false;
             var list=Client.GetComponent<PythonEventListPanel>();
-            var row=list.PendingCases().FirstOrDefault(r=>r.group!=3 && string.IsNullOrEmpty(r.reason));
+            var row=list.PendingCases().FirstOrDefault(r=>!r.optional && r.group!=3 && string.IsNullOrEmpty(r.reason));
             if(row==null)return false;
             Schedule("先に確認できる出来事・結果会話を読みます："+row.title,()=>{list.Close();row.resume();});return true;
         }
@@ -90,7 +90,7 @@ namespace CatCafePreview
             var sim=backend.Simulation;var s=sim.State;bool done=CurrentRoute.targets.Length>0?AssignedAcquired()==CurrentRoute.targets.Length:CurrentRoute.objective=="free"?s.day>30:sim.AutoTargetStatus(CurrentRoute.objective)=="cleared" && (CurrentRoute.objective!="popularity" || s.goal.Count==sim.Rules.goal_stages.Length);
             if(done && !backend.ConversationBlocksProgress){completeAfterSave=true;RequestSave(false);return;}
             if(s.day>150){Fail("収集ルートが150日の上限に達しました："+CurrentRoute.id);return;}
-            if(backend.ConversationBlocksProgress && Client.GetComponent<PythonEventListPanel>().PendingCount>0)
+            if(backend.ConversationBlocksProgress && Client.GetComponent<PythonEventListPanel>().RequiredPendingCount>0)
             {var list=Client.GetComponent<PythonEventListPanel>();Schedule("残っている結果会話を開きます。",()=>{list.Open();var b=list.entries.FirstOrDefault(x=>x.gameObject.activeInHierarchy && x.IsInteractable());if(b!=null)b.onClick.Invoke();});return;}
             ApplyCollectionOperation(CafeDevAcquisition.ProposeOperation(sim,CurrentRoute));
         }

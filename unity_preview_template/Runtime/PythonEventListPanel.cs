@@ -13,6 +13,7 @@ namespace CatCafePreview
         public GameObject[] detailPanels;public RectTransform content;public ScrollRect scroll;public Text title;
         public static readonly string[] GroupNames={"回答・会話待ち","出会い・交流","派遣・帰還","記録"};
         public int SelectedGroup=>group;public int PendingCount=>CafeBackends.Standalone && current!=null ? PendingCases().Count : Enumerable.Range(0,14).Sum(PendingFor);
+        public int RequiredPendingCount=>CafeBackends.Standalone && current!=null?PendingCases().Count(r=>!r.optional):PendingCount;
         private int group=1;private GameObject returnPanel;private Button returnButton;private string returnCaption;
         private readonly HashSet<Button> bound=new HashSet<Button>();
         public Text notice;
@@ -212,7 +213,7 @@ namespace CatCafePreview
         }
         private void RefreshGroups()
         {
-            int total=PendingCount;var caption=open.GetComponentInChildren<Text>();caption.text=total>0?"イベント一覧\n要確認 "+total+"件":"イベント一覧";caption.fontSize=total>0?14:17;caption.resizeTextForBestFit=total>0;caption.resizeTextMinSize=10;caption.resizeTextMaxSize=14;
+            int total=PendingCount;var caption=open.GetComponentInChildren<Text>();int required=RequiredPendingCount;caption.text=total>0?"イベント一覧\n"+(required>0?"要確認 "+required+"件":"任意 "+total+"件"):"イベント一覧";caption.fontSize=total>0?14:17;caption.resizeTextForBestFit=total>0;caption.resizeTextMinSize=10;caption.resizeTextMaxSize=14;
             if(tabs==null || tabs.Length!=4)return;
             int rows=0;for(int i=0;i<entries.Length;i++)
             {

@@ -9,6 +9,7 @@ namespace CatCafePreview.Standalone
     {
         public string conversation_id,branch_id,title,cat_id,cat_name,personality;
         public string customer_id;
+        public string image_resource; // Optional frozen portrait for authored story receipts.
         public CafeConversationLine[] lines;
         public string Key=>conversation_id+"/"+branch_id;
     }
@@ -23,6 +24,8 @@ namespace CatCafePreview.Standalone
     {
         public static bool IsEnding(string id)=>id==CafeOutcome.Id || id==CafePopularityEnding.Id || id==CafeBondEnding.Id || id==CafePatronEnding.Id;
         public static readonly CafeReplayDefinition[] All={
+            new CafeReplayDefinition(CafeOptionalEvents.MikeId+".v1","accepted",CafeOptionalEvents.MikeTitle+" · 静かに待つ"),
+            new CafeReplayDefinition(CafeOptionalEvents.MikeId+".v1","declined",CafeOptionalEvents.MikeTitle+" · そっと名前を呼ぶ"),
             new CafeReplayDefinition("dispatch.patron_visit.v1.departure","departed","地域の有力者 · 出発"),
             new CafeReplayDefinition("dispatch.patron_visit.v1.departure","cancelled","地域の有力者 · 今回は出発しない"),
             new CafeReplayDefinition("dispatch.patron_visit.v1.travelling","travelling","地域の有力者 · 派遣中"),
@@ -98,16 +101,18 @@ namespace CatCafePreview.Standalone
         public static void Validate(CafeReplayProfile profile)
         {
             if(profile==null || profile.version!=1 || profile.entries==null || profile.entries.Length>All.Length || profile.entries.Any(e=>e==null) || profile.entries.Select(e=>e.Key).Distinct().Count()!=profile.entries.Length)throw new ArgumentException("回想記録の形式が不正です。");
-            foreach(var e in profile.entries)if(!All.Any(d=>d.Key==e.Key) || string.IsNullOrEmpty(e.title) || e.title.Length>256 || (e.cat_name??"").Length>256 || (e.cat_id??"").Length>256 || (e.personality??"").Length>1024 || e.lines==null || e.lines.Length==0 || e.lines.Length>100 || e.lines.Any(l=>l==null || l.text==null || l.text.Length>10000 || (l.speaker??"").Length>256))throw new ArgumentException("回想の本文が不正です。");
+            foreach(var e in profile.entries)if(!All.Any(d=>d.Key==e.Key) || string.IsNullOrEmpty(e.title) || e.title.Length>256 || (e.cat_name??"").Length>256 || (e.cat_id??"").Length>256 || (e.personality??"").Length>1024 || (e.image_resource??"").Length>1024 || e.lines==null || e.lines.Length==0 || e.lines.Length>100 || e.lines.Any(l=>l==null || l.text==null || l.text.Length>10000 || (l.speaker??"").Length>256))throw new ArgumentException("回想の本文が不正です。");
         }
         public static void ValidateSave(CafeSaveEnvelope s)
         {
-            CafeMissingDialogue.Validate(s.state);CafeOutcome.Validate(s.outcome,s.state);CafePatronEnding.Validate(s.patron_ending,s.state);CafeBondEnding.Validate(s.bond_ending,s.state);CafeOpening.Validate(s.opening,s.state);CafePopularityEnding.Validate(s.popularity_ending,s.state);CafeIntakeConversation.Validate(s.conversation,s.state.intake_request.status);CafeRegularConversation.Validate(s.regular_conversation,s.state.regular_introduction.status);
+            CafeOptionalEvents.Validate(s.optional_events);CafeMissingDialogue.Validate(s.state);CafeOutcome.Validate(s.outcome,s.state);CafePatronEnding.Validate(s.patron_ending,s.state);CafeBondEnding.Validate(s.bond_ending,s.state);CafeOpening.Validate(s.opening,s.state);CafePopularityEnding.Validate(s.popularity_ending,s.state);CafeIntakeConversation.Validate(s.conversation,s.state.intake_request.status);CafeRegularConversation.Validate(s.regular_conversation,s.state.regular_introduction.status);
             CafeCocoDialogue.Validate(s.coco_conversations,s.state);CafeEquipmentDialogue.Validate(s.equipment_conversations,s.equipment_conversation_selected,s.state);CafeReservationDialogue.Validate(s.reservation_conversations,s.reservation_conversation_selected,s.state);CafeTrustDialogue.Validate(s.trust_conversations,s.trust_conversation_selected,s.state);CafeAdoptionDialogue.Validate(s.adoption_conversations,s.adoption_conversation_selected,s.state);CafeLodgeDialogue.Validate(s.lodge_conversations,s.lodge_conversation_selected,s.state);CafeDispatchDialogue.Validate(s.dispatch_conversations,s.dispatch_conversation_selected,s.state);CafeEncounterDialogue.Validate(s.encounter_conversations,s.encounter_conversation_selected,s.state);CafeDispatchIntroductionDialogue.Validate(s.dispatch_introduction_conversations,s.dispatch_introduction_conversation_selected,s.state);
         }
         public static CafeReplayEntry[] FromSave(CafeSaveEnvelope save,CafeRules rules,Func<string,string> catName,Func<string,string> customerName,Func<string,string> contentId)
         {
             ValidateSave(save);var result=new List<CafeReplayEntry>();
+            foreach(var row in save.optional_events??new CafeOptionalEvent[0])if(row.progress.completed)
+                result.Add(new CafeReplayEntry{conversation_id=row.progress.conversation_id,branch_id=row.progress.branch_id,title=row.title+" · "+(row.progress.branch_id=="accepted"?row.accept_caption:row.decline_caption),image_resource=row.image_resource,cat_id=row.content_cat_id,cat_name=row.cat_name,personality=row.started_day+"日目の記録",lines=row.introduction.Concat(new[]{new CafeConversationLine("あなた",row.progress.branch_id=="accepted"?row.accept_caption:row.decline_caption)}).Concat(CafeOptionalEvents.Lines(row,row.progress.branch_id)).Select(l=>new CafeConversationLine(l.speaker,l.text)).ToArray()});
             Action<CafeConversationProgress,string,string,string,Func<string,CafeConversationLine[]>,bool> add=(p,id,name,personality,script,intro)=>{
                 if(p==null)return;
                 foreach(string branch in p.viewed_branches??new string[0])

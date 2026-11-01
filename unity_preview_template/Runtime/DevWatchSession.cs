@@ -218,7 +218,7 @@ namespace CatCafePreview
                 Schedule("確認待ちの出来事を開き、会話で内容を確かめます。",()=>c.GetComponent<PythonEventListPanel>().ShowMenu(route));return;
             }
             var eventList=c.GetComponent<PythonEventListPanel>();
-            if(eventList.panel.activeInHierarchy && eventList.PendingCount==0){Schedule("出来事の確認を終え、営業画面へ戻ります。",eventList.ReturnToBusiness);return;}
+            if(eventList.panel.activeInHierarchy && eventList.RequiredPendingCount==0){Schedule("出来事の確認を終え、営業画面へ戻ります。",eventList.ReturnToBusiness);return;}
             if(plan.collection){ChooseCollectionOperation();return;}
             if(s.day>plan.days){completeAfterSave=true;RequestSave(false);return;}
             var prep=c.GetComponent<PythonPreparationPanel>();
@@ -239,7 +239,7 @@ namespace CatCafePreview
                 }
                 Click(c.GetComponent<ContentPreview>().GetSceneButton(2),"接客を1刻進めます。猫とお客さんの様子を見守ります。");return;
             }
-            var events=c.GetComponent<PythonEventListPanel>();if(events.PendingCount>0){Schedule("まだ読んでいない結果会話を開きます。",()=>{events.Open();var entry=events.entries.FirstOrDefault(b=>b.gameObject.activeInHierarchy && b.IsInteractable());if(entry!=null)entry.onClick.Invoke();});return;}
+            var events=c.GetComponent<PythonEventListPanel>();if(events.RequiredPendingCount>0){Schedule("まだ読んでいない結果会話を開きます。",()=>{events.Open();var entry=events.entries.FirstOrDefault(b=>b.gameObject.activeInHierarchy && b.IsInteractable());if(entry!=null)entry.onClick.Invoke();});return;}
         }
         void RequestSave(bool quit){if(resume && !loaded){saveError="読み込み未完了のため、直前の保存を上書きしません。";next=saveError;Publish();return;}if(Client==null)return;if(saving || saveRequested){quitAfterSave|=quit;return;}paused=true;single=false;pending=null;quitAfterSave=quit;saveRequested=true;saved=false;saveError="";saveStarted=Time.realtimeSinceStartup;next="進行を止め、検証専用セーブへ保存します。";Publish();}
         void OnGUI()

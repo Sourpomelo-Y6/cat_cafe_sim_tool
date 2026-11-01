@@ -70,6 +70,7 @@ namespace CatCafePreview
             panel.SetActive(true);
             if(!showingCare || GetComponent<PythonItemsPanel>()?.panel.activeSelf!=true){showingCare=false;panel.transform.SetAsLastSibling();}
             InteractionStatisticsPanel.EnsureEntry(this,panel.transform.Find("Details Card"),title,interact,()=>selectedId,null);
+            EnsureOptionalEventEntry();
             title.text=cat.name+"の詳細";
             string health="体調と予定\n"+"体力："+cat.stamina.ToString("0.#")+" / "+cat.max_stamina.ToString("0.#")
                 +"\n疲労："+cat.fatigue.ToString("0.#")+" / ストレス："+cat.stress.ToString("0.#")
@@ -85,6 +86,23 @@ namespace CatCafePreview
             else if(recordPage>0)details.text=cat.records==null ? "記録情報はありません。" : recordPage==1 ? cat.records.events : recordPage==2 ? cat.records.relationships : cat.records.history;
             if(recordTabs!=null)for(int i=0;i<recordTabs.Length;i++)recordTabs[i].GetComponent<Image>().color=i==recordPage ? new Color(.78f,.88f,.74f) : Color.white;
             RefreshControls();
+        }
+        Button optionalEventEntry;
+        void EnsureOptionalEventEntry()
+        {
+            if(!CafeBackends.Standalone)return;
+            if(optionalEventEntry==null)
+            {
+                optionalEventEntry=Instantiate(interact,title.transform.parent);optionalEventEntry.name="Optional Cat Event Entry";
+                optionalEventEntry.onClick=new Button.ButtonClickedEvent();
+                var rect=optionalEventEntry.GetComponent<RectTransform>();rect.anchorMin=rect.anchorMax=rect.pivot=new Vector2(0,1);rect.anchoredPosition=new Vector2(184,-318);rect.sizeDelta=new Vector2(144,40);
+                optionalEventEntry.GetComponentInChildren<Text>().text="個別イベント";optionalEventEntry.GetComponentInChildren<Text>().fontSize=16;
+                optionalEventEntry.onClick.AddListener(()=>{var view=GetComponent<OptionalEventConversationPanel>()??gameObject.AddComponent<OptionalEventConversationPanel>();if(view.OpenEvent())Close();});
+            }
+            var b=CafeBackends.Local as LocalCafeBackend;
+            bool visible=selectedId=="cat-mike" && b.OptionalEventListed;optionalEventEntry.gameObject.SetActive(visible);
+            if(care!=null){care.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,visible?144:304);care.GetComponentInChildren<Text>().text=visible?"用品・ケア":"用品・ケアを開く";}
+            optionalEventEntry.interactable=GetComponent<PythonStateClient>().CanManageSaves && !GetComponent<PythonStateClient>().AutoPlayExecuting && b.OptionalEventReason=="";
         }
         public void RefreshControls()
         {
