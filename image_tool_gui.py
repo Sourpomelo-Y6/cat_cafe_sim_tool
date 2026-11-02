@@ -9,6 +9,17 @@ SCENES = tuple((key, display_label('modes', key, value)) for key, value in SCENE
 
 
 class ContentImageToolWindow:
+    def open_cat_outfits(self):
+        from cat_outfit_editor_gui import CatOutfitEditorWindow
+        from cat_outfits import CatOutfitStore
+        try:
+            current = getattr(self, 'cat_outfit_editor', None)
+            if current and current.window.winfo_exists():
+                current.window.lift(); return
+            self.cat_outfit_editor = CatOutfitEditorWindow(self.window, CatOutfitStore(self.registry.directory), self.catalog_provider)
+        except (OSError, ValueError) as exc:
+            self.notice.set('見た目を開けません：' + str(exc))
+
     def open_state_images(self):
         from state_image_editor_gui import StateImageEditorWindow
         from state_images import StateImageStore
@@ -104,6 +115,7 @@ class ContentImageToolWindow:
         image_page.pack(fill='both', expand=True)
         self.cat_image_panel = image_page
         ttk.Button(image_page, text='ミケの状態別画像…', command=self.open_state_images).pack(anchor='w', pady=4)
+        ttk.Button(image_page, text='ミケの見た目…', command=self.open_cat_outfits).pack(anchor='w', pady=4)
         from portrait_panel import PortraitPanel
         self.portrait_panel = PortraitPanel(self.pages['画像'], self.registry.directory)
         selection = ttk.LabelFrame(image_page, text='1. 場面・行動を選ぶ', padding=10)

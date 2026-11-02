@@ -50,6 +50,11 @@ namespace CatCafePreview.Editor
         {
             var folder = EditorUtility.OpenFolderPanel("制作ツールで書き出した素材パックを選ぶ", "", "");
             if (folder == "") return;
+            if(!File.Exists(Path.Combine(folder,"bundle.json")) && File.Exists(Path.Combine(folder,"cat_outfits.json")))
+            {
+                try{Import(folder);EditorUtility.DisplayDialog("見た目を取り込みました","ミケの猫詳細の「見た目…」から選べます。Playerへは次のビルドで反映されます。","OK");}
+                catch(Exception ex){Debug.LogException(ex);EditorUtility.DisplayDialog("取り込みできません",ex.Message,"OK");}return;
+            }
             if(!File.Exists(Path.Combine(folder,"bundle.json")) && File.Exists(Path.Combine(folder,"state_images.json")))
             {
                 try{Import(folder);EditorUtility.DisplayDialog("状態画像を取り込みました","ミケの猫詳細画面で、状態の条件に応じて表示します。未登録の状態は従来画像を使用します。Playerへは次のビルドで反映されます。","OK");}
@@ -62,6 +67,7 @@ namespace CatCafePreview.Editor
         public static void Import(string folder)
         {
             folder = Path.GetFullPath(folder);
+            if(!File.Exists(Path.Combine(folder,"bundle.json")) && File.Exists(Path.Combine(folder,"cat_outfits.json"))){CatOutfitImport.Import(folder);return;}
             if(!File.Exists(Path.Combine(folder,"bundle.json")) && File.Exists(Path.Combine(folder,"state_images.json"))){CatStateImageImport.Import(folder);return;}
             if(!File.Exists(Path.Combine(folder,"bundle.json")) && File.Exists(Path.Combine(folder,"optional_events.json"))){OptionalEventImport.Import(folder);return;}
             if(!File.Exists(Path.Combine(folder,"bundle.json")) && File.Exists(Path.Combine(folder,"human_portraits.json"))){HumanPortraitImport.Import(folder);return;}
@@ -69,6 +75,8 @@ namespace CatCafePreview.Editor
             var json = File.ReadAllText(Path.Combine(folder, "bundle.json"));
             var bundle = JsonUtility.FromJson<ContentBundle>(json);
             ContentValidation.Validate(bundle);
+            bool hasOutfits=File.Exists(Path.Combine(folder,"cat_outfits.json"));
+            if(hasOutfits)CatOutfitImport.Validate(folder,bundle,true);
             bool hasStateImages=File.Exists(Path.Combine(folder,"state_images.json"));
             if(hasStateImages)CatStateImageImport.Validate(folder,bundle,true);
             bool hasOptional=File.Exists(Path.Combine(folder,"optional_events.json"));
@@ -145,6 +153,7 @@ namespace CatCafePreview.Editor
             File.WriteAllText(temporary, JsonUtility.ToJson(catalog, true), new System.Text.UTF8Encoding(false));
             if (File.Exists(catalogPath)) File.Replace(temporary, catalogPath, null);
             else File.Move(temporary, catalogPath);
+            if(hasOutfits)CatOutfitImport.Import(folder,bundle,true);
             if(hasStateImages)CatStateImageImport.Import(folder,bundle,true);
             AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
             CatTexturePolicy.ApplyPack(target);

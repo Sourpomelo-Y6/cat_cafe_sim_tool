@@ -113,12 +113,44 @@ namespace CatCafePreview
             panel.Open(state.cats.First(c=>c.cat_id!="cat-mike").cat_id);Check(!card.Find("State Badge").gameObject.activeSelf,"F4 other cat reset");panel.Close();
             Check(JsonUtility.ToJson(backend.Simulation.State)==before,"F4 render does not alter simulation");apply(backend.View());
         }
+        private IEnumerator OutfitChecks()
+        {
+            yield return Wait(()=>Client.UIStateReady,"F5 UI ready");
+            var initial=JsonUtility.FromJson<CafeSnapshot>(JsonUtility.ToJson(backend.Simulation.State));initial.NormalizeJsonStrings();
+            var panel=Client.GetComponent<PythonCatDetailsPanel>();panel.Open("cat-mike");var ui=Client.GetComponent<CatOutfitPanel>();
+            yield return Click(ui.entry,"F5 open selection");yield return Click(ui.ribbon,"F5 preview ribbon");yield return Capture("f5-selection");yield return Click(ui.cancel,"F5 cancel");Check(backend.CatOutfit("cat-mike")=="","F5 cancel preserves normal");
+            yield return Click(ui.entry,"F5 reopen");yield return Click(ui.ribbon,"F5 choose ribbon");string before=JsonUtility.ToJson(backend.Simulation.State);yield return Click(ui.apply,"F5 apply");
+            yield return Wait(()=>Client.UIStateReady && backend.CatOutfit("cat-mike")=="ribbon","F5 selection response without revision change");Check(JsonUtility.ToJson(backend.Simulation.State)==before,"F5 game state unchanged");
+            var portrait=panel.panel.transform.Find("Details Card/State Portrait").GetComponent<RawImage>();Check(portrait.texture==CatOutfits.ImageFor("playtest-mike"),"F5 ribbon in detail");yield return Capture("f5-ribbon");
+            var browser=Client.GetComponent<PythonSaveBrowser>();panel.Close();browser.OpenSave();browser.Select(0);yield return Click(browser.action,"F5 save review");int rev=Client.CurrentState.revision;yield return Click(browser.confirm,"F5 save confirm");yield return Changed(rev);browser.Close();
+            // Keep a dedicated slot for cross-process QA, away from the rest of the smoke run.
+            Client.SaveToSlot(9);yield return Wait(()=>Client.UIStateReady && File.Exists(Path.Combine(output,"saves/slot-9.json")),"F5 dedicated save");
+            panel.Open("cat-mike");yield return Click(ui.entry,"F5 clear selection dialog");yield return Click(ui.normal,"F5 preview normal");yield return Click(ui.apply,"F5 clear");yield return Wait(()=>Client.UIStateReady && backend.CatOutfit("cat-mike")=="","F5 clear response");
+            panel.Close();browser.OpenLoad();browser.Select(0);yield return Click(browser.action,"F5 load review");yield return Click(browser.confirm,"F5 load confirm");yield return Wait(()=>Client.UIStateReady && backend.CatOutfit("cat-mike")=="ribbon","F5 load restores");panel.Open("cat-mike");Check(portrait.texture==CatOutfits.ImageFor("playtest-mike"),"F5 load recomputes image");
+            foreach(var tab in panel.recordTabs)yield return Click(tab,"F5 existing record tab");panel.Open("cat-sora");Check(!ui.entry.gameObject.activeSelf,"F5 other cat hides entry");panel.Open("cat-mike");
+            // Conditions are an isolated fixture; purchase/use goes through real UGUI confirmation callbacks.
+            var fixture=JsonUtility.FromJson<CafeSnapshot>(JsonUtility.ToJson(backend.Simulation.State));fixture.NormalizeJsonStrings();fixture.cats.Single(c=>c.id=="cat-mike").stress=65;fixture.cats.Single(c=>c.id=="cat-mike").fatigue=65;RestoreFixture(fixture);
+            yield return Wait(()=>Client.UIStateReady && Client.CurrentState.cats.Single(c=>c.cat_id=="cat-mike").stress==65,"F5 stress fixture refreshed");
+            foreach(int kind in new[]{1,2})
+            {
+                panel.Open("cat-mike");yield return Capture("f5-care-detail-"+kind);var cat=Client.CurrentState.cats.Single(c=>c.cat_id=="cat-mike");Check(CatStateMark.Resolve(cat)==kind && portrait.texture==CatStateImages.Resolve(cat,kind),"F5 F4 priority before care "+kind+" resolved="+CatStateMark.Resolve(cat)+" actual="+portrait.texture?.name+" expected="+CatStateImages.Resolve(cat,kind)?.name);yield return Capture("f5-before-care-"+kind);
+                var item=backend.Simulation.Rules.item_shop.First(r=>kind==1?r.item.stress_relief>5:r.item.fatigue_relief>5);panel.Care();var items=Client.GetComponent<PythonItemsPanel>();items.ShowPurchase();items.shop.value=Array.FindIndex(Client.CurrentState.items.shop,r=>r.choice==item.item.id);yield return Click(items.buy,"F5 buy care item");rev=Client.CurrentState.revision;yield return Click(items.confirm,"F5 confirm purchase");yield return Changed(rev);
+                items.ShowCare();items.owned.value=Array.FindIndex(Client.CurrentState.items.owned,r=>r.item_id==item.item.id);var owned=Client.CurrentState.items.owned[items.owned.value];items.cats.value=Array.FindIndex(owned.targets,r=>r.cat_id=="cat-mike");yield return Click(items.use,"F5 use care item");rev=Client.CurrentState.revision;yield return Click(items.confirm,"F5 confirm care");yield return Changed(rev);items.Close();
+            }
+            Check(backend.CatOutfit("cat-mike")=="ribbon" && portrait.texture==CatOutfits.ImageFor("playtest-mike"),"F5 care returns to chosen outfit");yield return Capture("f5-after-care");panel.Close();
+            Client.GetComponent<PythonReturnToTitle>().Return();yield return Wait(()=>FindObjectOfType<PythonTitleScreen>()?.CanManageSaves==true,"F5 title ready");FindObjectOfType<PythonTitleScreen>().ResumeSaved("9");yield return Wait(()=>Client?.UIStateReady==true,"F5 title resume ready");Check(backend.CatOutfit("cat-mike")=="ribbon","F5 title resumes selection");
+            panel=Client.GetComponent<PythonCatDetailsPanel>();panel.Open("cat-mike");yield return Capture("f5-title-resume");var newUi=Client.GetComponent<CatOutfitPanel>();yield return Click(newUi.entry,"F5 final clear dialog");yield return Click(newUi.normal,"F5 final normal");yield return Click(newUi.apply,"F5 final clear");yield return Wait(()=>Client.UIStateReady && backend.CatOutfit("cat-mike")=="","F5 final clear completed");panel.Close();RestoreFixture(initial);yield return Wait(()=>Client.UIStateReady && Client.CurrentState.instance_id==initial.instance_id && Client.CurrentState.funds==initial.funds,"F5 original fixture restored");
+        }
         private IEnumerator Run()
         {
             var dailyReference=Argument("--catcafe-daily-reference");if(!string.IsNullOrEmpty(dailyReference))StandaloneDailySmoke.Run(Path.Combine(output,"daily-checks"),dailyReference);
             Check(nativeDefault,"standalone default before QA override");Check(CafeBackends.Standalone,"standalone default");CompareRestProposals();var referencePath=Argument("--catcafe-details-reference");if(!string.IsNullOrEmpty(referencePath))checks.Add("Unity details references: "+StandaloneDetailsSmoke.Run(Path.Combine(output,"details-checks"),referencePath));
             yield return Wait(()=>FindObjectOfType<PythonTitleScreen>()?.CanManageSaves==true,"title ready without server");
             var title=FindObjectOfType<PythonTitleScreen>();yield return Capture("01-title");
+            if(Array.Exists(Environment.GetCommandLineArgs(),a=>a=="--catcafe-outfit-resume-only"))
+            {
+                title.ResumeSaved("9");yield return Wait(()=>Client?.UIStateReady==true,"F5 cross-process business ready");var panel=Client.GetComponent<PythonCatDetailsPanel>();panel.Open("cat-mike");Check(backend.CatOutfit("cat-mike")=="ribbon","F5 cross-process selection");bool absent=Array.Exists(Environment.GetCommandLineArgs(),a=>a=="--catcafe-outfit-no-images");var cat=Client.CurrentState.cats.Single(c=>c.cat_id=="cat-mike");Check(panel.panel.transform.Find("Details Card/State Portrait").GetComponent<RawImage>().texture==(absent?Client.GetComponent<ContentPreview>().PythonCatTexture(cat):CatOutfits.ImageFor("playtest-mike")),"F5 cross-process image");if(absent){Check(CatOutfits.ImageFor("playtest-mike")==null,"F5 normal build excludes fake image");var ui=Client.GetComponent<CatOutfitPanel>();yield return Click(ui.entry,"F5 missing-image selection");Check(!ui.ribbon.interactable,"F5 missing ribbon disabled");yield return Click(ui.normal,"F5 missing-image normal");yield return Click(ui.apply,"F5 missing-image clear");yield return Wait(()=>Client.UIStateReady && backend.CatOutfit("cat-mike")=="","F5 missing-image clear completes");}yield return Capture("f5-cross-process");yield break;
+            }
             if(Array.Exists(Environment.GetCommandLineArgs(),a=>a=="--catcafe-ui-resume-only"))
             {
                 title.ShowSaves();var saved=title.GetComponent<PythonSaveBrowser>();saved.OpenLoad();saved.Select(1);yield return Click(saved.action,"restart title load review");yield return Click(saved.confirm,"restart title load");
@@ -130,6 +162,8 @@ namespace CatCafePreview
             yield return Click(title.startGame,"new game confirmation");Check(title.conditions.text.Contains("開始の確認"),"new game review");yield return Click(title.startGame,"confirmed new game");
             yield return Wait(()=>Client?.CanManageSaves==true,"business scene ready");Check(Client.CurrentState.day==1 && Client.CurrentState.can_set_shifts,"initial preparation");Check(Client.CurrentState.rest_proposal.SequenceEqual(new[]{"cat-mugi","cat-sora","cat-tama"}),"rest proposal matches Python initial tie ordering");
             if(Array.Exists(Environment.GetCommandLineArgs(),a=>a=="--catcafe-state-images-check"))yield return StateImageChecks();
+            // Outfit fixtures modify care records; run baseline regression in a fresh Player.
+            if(Array.Exists(Environment.GetCommandLineArgs(),a=>a=="--catcafe-outfit-check")){yield return OutfitChecks();yield break;}
             var reference=new CafeSimulation(backend.Simulation.Rules,backend.Simulation.State.seed,"free");
             var owner=Client.gameObject;var prep=owner.GetComponent<PythonPreparationPanel>();prep.Open();yield return Capture("02-preparation");
             prep.SelectCat(0);int revision=Client.CurrentState.revision;yield return Click(owner.GetComponent<PythonPreparationRoster>().RestButton(0),"rest first cat");yield return Changed(revision);Check(!Client.CurrentState.cats[0].working,"rest command mapped");

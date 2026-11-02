@@ -9,6 +9,7 @@ namespace CatCafePreview
     [Serializable] public class PythonCatRecords { public string events, relationships, history; }
     [Serializable] public class PythonCatState
     {
+        public string outfit_id;
         public string cat_id, content_cat_id, name, health_status, activity, health_label, activity_label, growth_details, profile_details;
         public string shift_forecast;
         public PythonCatRecords records;
@@ -532,6 +533,13 @@ namespace CatCafePreview
             preview.RefreshPythonControls();
         }
 
+        public bool CanChangeCatOutfit=>CafeBackends.Standalone && !sendingCommand && !refreshingState && CanManageSaves && !AutoPlayRunning && (CafeBackends.Local as LocalCafeBackend)?.CanChangeCatOutfit==true;
+        public void SetCatOutfit(string choice)
+        {
+            if(!CanChangeCatOutfit)return;
+            pending=new PythonShiftCommand{request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,expected_revision=current.revision,kind="set_cat_outfit",cat_id="cat-mike",choice=choice};
+            preview.RefreshPythonControls();
+        }
         private void Accept(PythonCafeState state)
         {
             Validate(state);
@@ -588,7 +596,7 @@ namespace CatCafePreview
                                     if(restarted){GetComponent<PythonDispatchComparisonPanel>()?.ResetSelection();GetComponent<PythonDispatchPanel>()?.ResetSelection();GetComponent<PythonGeneralDispatchPanel>()?.ResetSelection();GetComponent<PythonServiceAssignmentPanel>()?.ResetSelection();GetComponent<PythonAutoPlayPanel>()?.ResetSelection();}
                                     if(loaded){var player=GetComponent<PythonPlayerPanel>();if(player!=null)player.Restore();}
                                     if(restarted){var adoption=GetComponent<PythonAdoptionPanel>();if(adoption!=null)adoption.ResetConfirmation();var menu=GetComponent<PythonNewGamePanel>();if(menu!=null)menu.Close();}
-                                    notice = command.kind == "resume_autoplay" ? "おまかせを再開しました。" : command.kind == "start_autoplay" ? "おまかせを開始しました。" : command.kind == "stop_autoplay" ? "おまかせを中止しました。実行結果を保存できます。" : command.kind == "step_autoplay" ? "" : command.kind == "assign_service" ? "選んだ客・猫・席で接客を開始しました。営業を進める操作で交流を進めます。" : command.kind == "set_auto_assignment" ? "自動割り当て設定を変更しました。" : command.kind == "set_shifts" ? "出勤・休養を変更しました。"
+                                    notice = command.kind == "set_cat_outfit" ? "見た目を変更しました。次のゲーム保存に含まれます。" : command.kind == "resume_autoplay" ? "おまかせを再開しました。" : command.kind == "start_autoplay" ? "おまかせを開始しました。" : command.kind == "stop_autoplay" ? "おまかせを中止しました。実行結果を保存できます。" : command.kind == "step_autoplay" ? "" : command.kind == "assign_service" ? "選んだ客・猫・席で接客を開始しました。営業を進める操作で交流を進めます。" : command.kind == "set_auto_assignment" ? "自動割り当て設定を変更しました。" : command.kind == "set_shifts" ? "出勤・休養を変更しました。"
                                         : command.kind == "persist_retry" ? "交流結果を確定しました。セーブで進捗を保存してください。" : command.kind == "save_game" ? "保存しました。" : loaded ? "保存したゲームを再開しました。"
                                         : command.kind == "new_game" ? "新規ゲームを作成し、初期状態を保存しました。出勤・休養を設定して営業を始めてください。"
                                         : command.kind == "next_day" ? "翌日の営業準備へ進みました。出勤・休養を設定してください。"
@@ -660,6 +668,7 @@ namespace CatCafePreview
                 preview.RefreshPythonControls();
                 // Local requests can complete synchronously; give input and rendering a frame.
                 refreshingState=false;
+                GetComponent<CatOutfitPanel>()?.RefreshControls();
                 yield return null;
                 while (pending == null && Time.realtimeSinceStartup < until)
                 {

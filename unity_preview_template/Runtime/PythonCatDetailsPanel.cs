@@ -40,6 +40,7 @@ namespace CatCafePreview
         {
             var client=GetComponent<PythonStateClient>();
             if(!client.CanManageSaves || current == null) return;
+            GetComponent<CatOutfitPanel>()?.Close();
             showingCare=false;originScroll=null;panel.transform.Find("Details Card/Close").GetComponentInChildren<Text>().text="閉じる";
             if(selectedId!=catId)recordPage=0;
             selectedId=catId;
@@ -48,7 +49,7 @@ namespace CatCafePreview
             if(stateDetails!=null){var healthScroll=stateDetails.GetComponentInParent<ScrollRect>();if(healthScroll!=null)healthScroll.verticalNormalizedPosition=1;}
         }
         public void RefreshVisibility(){if(selectedId!=null && Array.Find(GetComponent<ContentPreview>().VisiblePythonCats,row=>row.cat_id==selectedId)==null)Close();}
-        public void Close() { if(showingCare)GetComponent<PythonItemsPanel>()?.Close();showingCare=false;panel.SetActive(false); selectedId=null;if(originScroll!=null){var service=GetComponent<PythonServiceScreen>();if(originSeats)service.ShowSeats();else service.ShowCats();Canvas.ForceUpdateCanvases();originScroll.StopMovement();originScroll.verticalNormalizedPosition=originPosition;originScroll=null;} }
+        public void Close() { GetComponent<CatOutfitPanel>()?.Close(); if(showingCare)GetComponent<PythonItemsPanel>()?.Close();showingCare=false;panel.SetActive(false); selectedId=null;if(originScroll!=null){var service=GetComponent<PythonServiceScreen>();if(originSeats)service.ShowSeats();else service.ShowCats();Canvas.ForceUpdateCanvases();originScroll.StopMovement();originScroll.verticalNormalizedPosition=originPosition;originScroll=null;} }
         public void Interact()
         {
             var client=GetComponent<PythonStateClient>();var active=current==null ? null : current.player_interaction;
@@ -86,6 +87,7 @@ namespace CatCafePreview
             if(recordPage==4)details.text=string.IsNullOrEmpty(cat.profile_details) ? "プロフィール情報はありません。" : cat.profile_details;
             else if(recordPage>0)details.text=cat.records==null ? "記録情報はありません。" : recordPage==1 ? cat.records.events : recordPage==2 ? cat.records.relationships : cat.records.history;
             if(recordTabs!=null)for(int i=0;i<recordTabs.Length;i++)recordTabs[i].GetComponent<Image>().color=i==recordPage ? new Color(.78f,.88f,.74f) : Color.white;
+            (GetComponent<CatOutfitPanel>()??gameObject.AddComponent<CatOutfitPanel>()).Refresh(this,cat);
             RefreshControls();
         }
         Button optionalEventEntry;
@@ -107,6 +109,7 @@ namespace CatCafePreview
         }
         public void RefreshControls()
         {
+            GetComponent<CatOutfitPanel>()?.RefreshControls();
             if(care!=null)care.interactable=GetComponent<PythonStateClient>().CanManageSaves && current?.items!=null && selectedId!=null;
             if(recordTabs!=null)foreach(var tab in recordTabs)tab.interactable=GetComponent<PythonStateClient>().CanManageSaves && current!=null && selectedId!=null;
             if(adoption!=null)adoption.interactable=GetComponent<PythonStateClient>().CanManageSaves && selectedId!=null;
@@ -139,6 +142,7 @@ namespace CatCafePreview
         }
         public void Disconnect()
         {
+            GetComponent<CatOutfitPanel>()?.Close();
             GetComponent<CatStateMarkView>()?.Hide();
             current=null;
             RefreshControls();
