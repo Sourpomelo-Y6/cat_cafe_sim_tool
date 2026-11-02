@@ -21,7 +21,8 @@ namespace CatCafePreview
         public void Refresh(PythonCatDetailsPanel details,PythonCatState value)
         {
             owner=details;if(cat?.cat_id!=value.cat_id || session!=Client.CurrentState?.instance_id)Close();cat=value;session=Client.CurrentState?.instance_id;
-            if(entry==null)entry=Button(owner.panel.transform.Find("Details Card"),"Cat Outfit Entry","見た目…",24,242,96,Open);
+            if(entry==null)entry=Button(owner.panel.transform.Find("Details Card"),"Cat Outfit Entry","見た目…",184,20,112,Open);
+            owner.title.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,CafeBackends.Standalone && value.cat_id=="cat-mike"?144:310);
             entry.GetComponentInChildren<Text>().fontSize=15;entry.gameObject.SetActive(CafeBackends.Standalone && value.cat_id=="cat-mike");entry.interactable=CanEdit;
             if(host!=null && host.activeSelf){if((CafeBackends.Local as LocalCafeBackend)?.CanChangeCatOutfit!=true){Close();return;}host.transform.SetAsLastSibling();UpdatePreview();}
         }

@@ -16,7 +16,7 @@ namespace CatCafePreview.Editor
         [Serializable] class Packs {public string all,full,states,empty;}
         [Serializable] class Backup {public string path;public bool exists;public string bytes;}
         [Serializable] class Snapshot {public Backup[] files;public string[] created;}
-        static string Output=>Path.Combine(Environment.GetEnvironmentVariable("CATCAFE_WORKSPACE_ROOT"),"Logs/OutfitsF5");
+        static string Output=>Environment.GetEnvironmentVariable("CATCAFE_OUTFIT_QA_ROOT")??Path.Combine(Environment.GetEnvironmentVariable("CATCAFE_WORKSPACE_ROOT"),"Logs/OutfitsF5");
         static string ResourcesRoot=>Path.Combine(Application.dataPath,"Resources");
         static Packs Fixtures=>JsonUtility.FromJson<Packs>(File.ReadAllText(Path.Combine(Output,"fixtures/packs.json")));
         static int checks;
