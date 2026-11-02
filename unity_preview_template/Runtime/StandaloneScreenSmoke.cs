@@ -63,6 +63,18 @@ namespace CatCafePreview
         }
         private void RestoreFixture(CafeSnapshot state){backend.Simulation.Restore(state);typeof(LocalCafeBackend).GetMethod("ResetJournal",System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Instance).Invoke(backend,null);}
         private IEnumerator Changed(int revision){yield return Wait(()=>Client!=null && Client.CurrentState!=null && Client.CurrentState.revision!=revision && Client.CanManageSaves,"command completed");}
+        private Button EquipmentButton(EquipmentConversationPanel view,string field)=>
+            (Button)typeof(AcquisitionConversationPanel).GetField(field,System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic).GetValue(view);
+        private IEnumerator EquipmentChoices(EquipmentConversationPanel view)
+        {
+            for(int i=0;i<60 && view.Showing && !view.PlaybackChoosing;i++){yield return Click(EquipmentButton(view,"next"),"equipment introduction next");yield return null;}
+            Check(view.Showing && view.PlaybackChoosing,"equipment choices reached");
+        }
+        private IEnumerator EquipmentFinish(EquipmentConversationPanel view)
+        {
+            for(int i=0;i<60 && view.Showing;i++){yield return Click(EquipmentButton(view,"next"),"equipment result next");yield return null;}
+            Check(!view.Showing && !backend.EquipmentResultPending,"equipment result completed");
+        }
         [Serializable] private class RestReferences{public RestCase[] cases;public PythonDay day;}
         [Serializable] private class PythonDay{public double funds,revenue,expenses,popularity;public int completed;public PythonDayCat[] cats;}
         [Serializable] private class PythonDayCat{public string id;public double stamina,fatigue,stress;}
@@ -152,11 +164,18 @@ namespace CatCafePreview
             // Establish a deterministic unanswered event, then exercise its actual UI/save routes.
             var eventState=new CafeSimulation(backend.Simulation.Rules,Enumerable.Range(0,1000).First(i=>new CafeSimulation(backend.Simulation.Rules,i).CurrentStoreEvent.type=="trouble")).State;
             RestoreFixture(eventState);yield return Wait(()=>Client.CurrentState.instance_id==backend.Simulation.State.instance_id && Client.CanManageSaves,"event fixture displayed");owner=Client.gameObject;
-            var store=owner.GetComponent<PythonStoreEventPanel>();Check(store.panel.activeSelf && !Client.CanProgressBusiness,"unanswered event blocks service");yield return Capture("08-event");
+            var store=owner.GetComponent<PythonStoreEventPanel>();var equipment=store.Dialogue;
+            Check(!store.panel.activeSelf && !Client.CanProgressBusiness && backend.Simulation.StoreEventWaiting,"unanswered equipment conversation blocks service");
+            Check(equipment.OpenPending(),"open equipment conversation");yield return null;yield return EquipmentChoices(equipment);
+            string equipmentKey=equipment.PlaybackKey;yield return Capture("08-event");
             browser=owner.GetComponent<PythonSaveBrowser>();browser.OpenSave();browser.Select(3);yield return Click(browser.action,"event save review");revision=Client.CurrentState.revision;yield return Click(browser.confirm,"save unanswered event");yield return Changed(revision);browser.Close();
-            revision=Client.CurrentState.revision;yield return Click(store.choices[0],"answer event");yield return Changed(revision);Check(!backend.Simulation.StoreEventWaiting,"event answered once");
+            revision=Client.CurrentState.revision;yield return Click(EquipmentButton(equipment,"accept"),"answer equipment conversation");yield return Changed(revision);Check(!backend.Simulation.StoreEventWaiting && backend.EquipmentResultPending,"event answered once with result pending");
+            Check(!Client.CanProgressBusiness,"equipment result blocks service until completed");yield return Capture("08-event-result");yield return EquipmentFinish(equipment);
             browser.OpenLoad();browser.Select(3);yield return Click(browser.action,"event reload review");yield return Click(browser.confirm,"reload unanswered event");yield return Wait(()=>Client.CanManageSaves && backend.Simulation.StoreEventWaiting,"reload restores unanswered event");
-            revision=Client.CurrentState.revision;yield return Click(store.choices[0],"answer restored event");yield return Changed(revision);Check(!backend.Simulation.StoreEventWaiting,"restored event answer accepted");
+            Check(!Client.CanProgressBusiness && !store.panel.activeSelf,"restored unanswered equipment blocks service");
+            Check(equipment.OpenPending(),"open restored equipment conversation");yield return null;
+            Check(equipment.PlaybackKey==equipmentKey && equipment.PlaybackChoosing,"equipment save restores conversation position");yield return Capture("08-event-restored");
+            revision=Client.CurrentState.revision;yield return Click(EquipmentButton(equipment,"accept"),"answer restored equipment conversation");yield return Changed(revision);Check(!backend.Simulation.StoreEventWaiting,"restored event answer accepted");yield return EquipmentFinish(equipment);
             // A paused native autoplay save needs an explicit resume command, not only a UI flag.
             RestoreFixture(new CafeSimulation(backend.Simulation.Rules,0,"bond").State);backend.Simulation.StartAutoplay("bond","basic",1);backend.Simulation.PauseAutoplay();yield return Wait(()=>Client.CurrentState.autoplay?.paused==true,"paused autoplay displayed");
             var auto=owner.GetComponent<PythonAutoPlayPanel>();auto.Open();yield return Click(auto.proceed,"resume paused autoplay");yield return Wait(()=>backend.Simulation.State.autoplay.paused==false,"native autoplay resumed");Client.StopAutoPlay();yield return Wait(()=>Client.CanManageSaves && !Client.AutoPlayRunning,"autoplay stopped through UI client");
