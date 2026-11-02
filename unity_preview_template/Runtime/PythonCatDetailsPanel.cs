@@ -72,6 +72,7 @@ namespace CatCafePreview
             InteractionStatisticsPanel.EnsureEntry(this,panel.transform.Find("Details Card"),title,interact,()=>selectedId,null);
             EnsureOptionalEventEntry();
             title.text=cat.name+"の詳細";
+            (GetComponent<CatStateMarkView>()??gameObject.AddComponent<CatStateMarkView>()).Show(this,cat,GetComponent<ContentPreview>());
             string health="体調と予定\n"+"体力："+cat.stamina.ToString("0.#")+" / "+cat.max_stamina.ToString("0.#")
                 +"\n疲労："+cat.fatigue.ToString("0.#")+" / ストレス："+cat.stress.ToString("0.#")
                 +"\n体調："+PythonCatCard.Health(cat)
@@ -138,6 +139,7 @@ namespace CatCafePreview
         }
         public void Disconnect()
         {
+            GetComponent<CatStateMarkView>()?.Hide();
             current=null;
             RefreshControls();
             if(panel.activeSelf){details.text="未接続です。再接続後に最新の情報を表示します。";if(stateDetails!=null)stateDetails.text=details.text;}
