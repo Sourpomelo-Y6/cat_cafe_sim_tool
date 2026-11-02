@@ -10,6 +10,7 @@ namespace CatCafePreview.Standalone
     // Strict types and duplicate/unknown keys cannot be checked by JsonUtility alone.
     public static class CafeOptionalEventJson
     {
+        public static object ReadValue(string json)=>new Reader(json).Read();
         static Dictionary<string,object> Object(object value,params string[] keys)
         {
             var data=value as Dictionary<string,object>;

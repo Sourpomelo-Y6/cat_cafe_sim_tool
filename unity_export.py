@@ -39,6 +39,8 @@ def export_bundle(catalog, registry, texts, destination, *, profiles=None, inter
     interactions['pack_id'] = pack_id
     from optional_events import OptionalEventStore
     events = (optional_events or OptionalEventStore(registry.directory / 'optional_events.json')).export_data(catalog, pack_id)
+    from state_images import StateImageStore
+    state_images, state_blobs = StateImageStore(registry.directory).export_data(catalog, pack_id)
     folder = destination / f'CatCafeContent-{pack_id}'
     warnings, cats, blobs = [], [], {}
     for cat_id, name in catalog.items():
@@ -80,6 +82,7 @@ def export_bundle(catalog, registry, texts, destination, *, profiles=None, inter
     blobs.update(people_blobs)
     warnings.extend(people_warnings)
     blobs.update(interaction_blobs)
+    blobs.update(state_blobs)
     warnings.extend(interaction_report['image_warnings'])
     if interaction_report['missing_count']:
         warnings.append(f"交流文：{interaction_report['missing_count']}条件が未制作です。validation.jsonを確認してください。")
@@ -93,6 +96,8 @@ def export_bundle(catalog, registry, texts, destination, *, profiles=None, inter
             (folder / relative).write_bytes(data)
         for filename, value in (('optional_events.json', events), ('human_portraits.json', people), ('bundle.json', bundle), ('interaction_texts.json', interactions), ('validation.json', report)):
             (folder / filename).write_text(json.dumps(value, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+        if state_images is not None:
+            (folder / 'state_images.json').write_text(json.dumps(state_images, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     except Exception:
         # 自分で作成した新規パックだけを片付ける。既存の出力は触らない。
         if folder.resolve().parent != destination or folder.name != f'CatCafeContent-{pack_id}':

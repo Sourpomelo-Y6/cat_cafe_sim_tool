@@ -62,9 +62,10 @@ namespace CatCafePreview
             var scroll=health.GetComponent<ScrollRect>();var viewport=scroll.viewport;viewport.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,visible?168:originalSize.x-32);
             owner.stateDetails.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,visible?168:originalSize.x-32);
             var bar=scroll.verticalScrollbar.GetComponent<RectTransform>();bar.anchoredPosition=new Vector2((visible?200:originalSize.x)-18,-6);
-            portrait.texture=visible?preview.PythonCatTexture(cat):null;portrait.enabled=portrait.texture!=null;
+            int stateKind=CatStateMark.Resolve(cat);
+            portrait.texture=visible?(CatStateImages.Resolve(cat,stateKind)??preview.PythonCatTexture(cat)):null;portrait.enabled=portrait.texture!=null;
             if(portrait.texture!=null){float ratio=(float)portrait.texture.width/portrait.texture.height;portrait.rectTransform.sizeDelta=ratio>=1?new Vector2(96,96/ratio):new Vector2(96*ratio,96);}
-            int kind=visible && portrait.texture!=null && portrait.texture!=ContentPreview.CatPlaceholderTexture()?CatStateMark.Resolve(cat):0;
+            int kind=visible && portrait.texture!=null && portrait.texture!=ContentPreview.CatPlaceholderTexture()?stateKind:0;
             caption.text=CatStateMark.Caption(kind);badge.gameObject.SetActive(kind!=0);symbol.kind=kind;symbol.color=kind==3?new Color(.72f,.18f,.3f):new Color(.4f,.27f,.16f);symbol.SetVerticesDirty();
         }
         public void Hide(){if(portrait!=null)portrait.gameObject.SetActive(false);if(caption!=null)caption.gameObject.SetActive(false);if(badge!=null)badge.gameObject.SetActive(false);}

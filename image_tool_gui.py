@@ -9,6 +9,17 @@ SCENES = tuple((key, display_label('modes', key, value)) for key, value in SCENE
 
 
 class ContentImageToolWindow:
+    def open_state_images(self):
+        from state_image_editor_gui import StateImageEditorWindow
+        from state_images import StateImageStore
+        try:
+            current = getattr(self, 'state_image_editor', None)
+            if current and current.window.winfo_exists():
+                current.window.lift(); return
+            self.state_image_editor = StateImageEditorWindow(self.window, StateImageStore(self.registry.directory), self.catalog_provider)
+        except (OSError, ValueError) as exc:
+            self.notice.set('状態画像を開けません：' + str(exc))
+
     def open_optional_event_editor(self):
         from optional_event_editor_gui import OptionalEventEditorWindow
         from optional_events import OptionalEventStore, DEFAULT_DRAFT
@@ -92,6 +103,7 @@ class ContentImageToolWindow:
         image_page = ttk.Frame(self.pages['画像'])
         image_page.pack(fill='both', expand=True)
         self.cat_image_panel = image_page
+        ttk.Button(image_page, text='ミケの状態別画像…', command=self.open_state_images).pack(anchor='w', pady=4)
         from portrait_panel import PortraitPanel
         self.portrait_panel = PortraitPanel(self.pages['画像'], self.registry.directory)
         selection = ttk.LabelFrame(image_page, text='1. 場面・行動を選ぶ', padding=10)

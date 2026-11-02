@@ -96,6 +96,23 @@ namespace CatCafePreview
             Check(state.funds==expected.funds && state.revenue==expected.revenue && state.expenses==expected.expenses && state.completed==expected.completed && state.popularity==expected.popularity,"UI full day matches original complete Python settlement");
             foreach(var row in expected.cats){var cat=state.cats.Single(c=>c.id==row.id);Check(Math.Abs(cat.stamina-row.stamina)<1e-9 && Math.Abs(cat.fatigue-row.fatigue)<1e-9 && Math.Abs(cat.stress-row.stress)<1e-9,"UI full day matches Python cat condition");}
         }
+        private IEnumerator StateImageChecks()
+        {
+            var hidden=System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Instance;
+            var preview=Client.GetComponent<ContentPreview>();var panel=Client.GetComponent<PythonCatDetailsPanel>();
+            Action<PythonCafeState> apply=s=>typeof(PythonStateClient).GetMethod("Accept",hidden).Invoke(Client,new object[]{s});
+            var state=backend.View();var mike=state.cats.Single(c=>c.cat_id=="cat-mike");apply(state);panel.Open("cat-mike");
+            var card=panel.panel.transform.Find("Details Card");var portrait=card.Find("State Portrait").GetComponent<RawImage>();
+            foreach(int kind in new[]{1,2,3})
+            {
+                mike.stress=kind==1?65:0;mike.fatigue=kind==2?65:0;mike.affinity=80;apply(state);
+                Check(CatStateImages.Resolve(mike,kind)!=null && portrait.texture==CatStateImages.Resolve(mike,kind),"F4 compiled image "+kind);
+                Check(card.Find("State Badge").gameObject.activeSelf,"F4 mark agrees "+kind);yield return Capture("f4-state-"+kind);
+            }
+            string before=JsonUtility.ToJson(backend.Simulation.State);mike.stress=mike.fatigue=0;mike.affinity=0;apply(state);Check(portrait.texture==preview.PythonCatTexture(mike),"F4 normal fallback");
+            panel.Open(state.cats.First(c=>c.cat_id!="cat-mike").cat_id);Check(!card.Find("State Badge").gameObject.activeSelf,"F4 other cat reset");panel.Close();
+            Check(JsonUtility.ToJson(backend.Simulation.State)==before,"F4 render does not alter simulation");apply(backend.View());
+        }
         private IEnumerator Run()
         {
             var dailyReference=Argument("--catcafe-daily-reference");if(!string.IsNullOrEmpty(dailyReference))StandaloneDailySmoke.Run(Path.Combine(output,"daily-checks"),dailyReference);
@@ -112,6 +129,7 @@ namespace CatCafePreview
             Check(title.conditions.verticalOverflow==VerticalWrapMode.Overflow && title.conditions.raycastTarget,"start conditions render full scroll content");Check(startScroll.content.rect.height>=title.conditions.preferredHeight,"start conditions height includes all text");startScroll.verticalNormalizedPosition=0;yield return Capture("01-popularity-conditions-end");title.objectives.value=Array.FindIndex(title.CurrentState.new_game_options,r=>r.choice=="free");
             yield return Click(title.startGame,"new game confirmation");Check(title.conditions.text.Contains("開始の確認"),"new game review");yield return Click(title.startGame,"confirmed new game");
             yield return Wait(()=>Client?.CanManageSaves==true,"business scene ready");Check(Client.CurrentState.day==1 && Client.CurrentState.can_set_shifts,"initial preparation");Check(Client.CurrentState.rest_proposal.SequenceEqual(new[]{"cat-mugi","cat-sora","cat-tama"}),"rest proposal matches Python initial tie ordering");
+            if(Array.Exists(Environment.GetCommandLineArgs(),a=>a=="--catcafe-state-images-check"))yield return StateImageChecks();
             var reference=new CafeSimulation(backend.Simulation.Rules,backend.Simulation.State.seed,"free");
             var owner=Client.gameObject;var prep=owner.GetComponent<PythonPreparationPanel>();prep.Open();yield return Capture("02-preparation");
             prep.SelectCat(0);int revision=Client.CurrentState.revision;yield return Click(owner.GetComponent<PythonPreparationRoster>().RestButton(0),"rest first cat");yield return Changed(revision);Check(!Client.CurrentState.cats[0].working,"rest command mapped");
