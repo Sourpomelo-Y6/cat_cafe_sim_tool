@@ -1,0 +1,23 @@
+{
+  "event_id": "optional.mike.afternoon",
+  "cat_id": "cat-mike",
+  "content_cat_id": "playtest-mike",
+  "min_day": 2,
+  "min_affinity": 20,
+  "title": "少し近づいた午後",
+  "accept_caption": "静かに待つ",
+  "decline_caption": "そっと名前を呼ぶ",
+  "introduction": [
+    {"speaker": "", "text": "営業準備のひととき。窓辺の光を見ていたミケが、こちらへ顔を向けた。"},
+    {"speaker": "あなた", "text": "ここにいてもいいかな。今日は、少しゆっくりしよう。"},
+    {"speaker": "", "text": "ミケは小さく耳を動かした。すぐには近づかず、あなたの様子を見ている。"}
+  ],
+  "accepted": [
+    {"speaker": "", "text": "手を伸ばさずに待っていると、ミケが一歩ずつ近づいてきた。"},
+    {"speaker": "あなた", "text": "来てくれてありがとう。この距離から、ゆっくりでいいよ。"}
+  ],
+  "declined": [
+    {"speaker": "あなた", "text": "ミケ。いつも一緒にいてくれて、ありがとう。"},
+    {"speaker": "", "text": "聞き慣れた声に、ミケは目を細めた。窓辺に座るふたりの間を、穏やかな時間が流れた。"}
+  ]
+}

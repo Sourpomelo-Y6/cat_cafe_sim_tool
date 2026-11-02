@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 namespace CatCafePreview
 {
     [Serializable] public class ContentCatalog { public string bundleResource, interactionResource; }
-    [Serializable] public class ContentBundle { public int version; public string pack_id; public CatContent[] cats; public ContentDisplayLabels display_labels; }
+    [Serializable] public class ContentBundle { public int version; public string pack_id; public string optional_events; public CatContent[] cats; public ContentDisplayLabels display_labels; }
     [Serializable] public class CatContent { public string cat_id; public string name; public string introduction; public string[] features; public CatAppearance appearance; public SceneContent[] scenes; }
     [Serializable] public class CatAppearance { public string eye_color; public string body_type; public string markings; public string face_shape; public string tail; public string notes; }
     [Serializable] public class SceneContent { public string key; public string label; public string text; public string image; }

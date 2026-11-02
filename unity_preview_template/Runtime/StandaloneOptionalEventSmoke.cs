@@ -62,6 +62,8 @@ namespace CatCafePreview
         {
             CafeOptions.Current.instant=true;
             var b=Create(Path.Combine(output,"isolated-save"));CafeBackends.UseLocal(b);
+            var args=Environment.GetCommandLineArgs();int variant=Array.IndexOf(args,"--optional-authoring-variant");
+            if(variant>=0)b.SetOptionalCatalog(CafeOptionalEventJson.Parse(File.ReadAllText(args[variant+1])));
             if(resume)Good(b,"load_game",slot:3);
             else
             {
@@ -76,6 +78,7 @@ namespace CatCafePreview
             Screen.SetResolution(resume?1024:1280,resume?768:800,false);yield return new WaitForSecondsRealtime(.5f);
             var view=client.GetComponent<OptionalEventConversationPanel>()??client.gameObject.AddComponent<OptionalEventConversationPanel>();
             Check(!view.Showing && !b.ConversationBlocksProgress,"Does not auto-open or block");
+            if(resume && variant>=0)Check(JsonUtility.ToJson(b.OptionalEvent)==File.ReadAllText(Path.Combine(output,"frozen-story.json")),"Started story remains identical after catalogue rewrite across processes");
             if(resume)Check(b.OptionalEvent.progress.branch_id=="declined" && b.OptionalEvent.progress.node==1 && b.OptionalEvent.progress.page_offset==2,"Different-process result position restored");
             Check(view.OpenEvent(),"Explicit start or resume");Check(b.ConversationBlocksProgress,"Visible event blocks business input");
             var portrait=(RawImage)typeof(AcquisitionConversationPanel).GetField("portrait",Hidden).GetValue(view);Check(portrait.texture!=null && portrait.texture!=ContentPreview.CatPlaceholderTexture(),"Frozen cat portrait");
@@ -86,7 +89,7 @@ namespace CatCafePreview
             {
                 b.OptionalEvent.progress.node=b.OptionalEvent.introduction.Length;b.OptionalEvent.progress.page_offset=0;view.Refresh();Check(view.PlaybackChoosing,"Two choices ready");yield return Shot("choices-1280");
                 yield return null;view.Answer(false);Check(b.OptionalEvent.progress.branch_id=="declined","UI choice records branch");yield return Shot("result-1280");
-                b.OptionalEvent.progress.node=1;b.OptionalEvent.progress.page_offset=2;Good(b,"save_game",slot:3);Check(!b.OptionalEvent.progress.completed,"Partial save is unfinished");
+                b.OptionalEvent.progress.node=1;b.OptionalEvent.progress.page_offset=2;File.WriteAllText(Path.Combine(output,"frozen-story.json"),JsonUtility.ToJson(b.OptionalEvent));Good(b,"save_game",slot:3);Check(!b.OptionalEvent.progress.completed,"Partial save is unfinished");
             }
             else
             {
@@ -96,6 +99,12 @@ namespace CatCafePreview
                 Good(b,"save_game",slot:4);Good(b,"load_game",slot:4);apply();Check(b.OptionalEvent.progress.completed && !b.ConversationBlocksProgress,"Completed save reload");
             }
             Check(digest==CafeReplayJournal.Digest(b.Simulation.State),"Story does not change gameplay digest");
+            if(resume && variant>=0)
+            {
+                string oldRevision=b.OptionalEvent.revision;Good(b,"new_game","free");Good(b,"day_off");if(b.Simulation.State.phase=="closed")Good(b,"next_day");Good(b,"player_begin");Good(b,"player_step","direct");if(b.Simulation.PlayerActive)Good(b,"player_finish");apply();
+                Check(view.OpenEvent() && b.OptionalEvent.revision==b.OptionalDefinition.revision && b.OptionalEvent.revision!=oldRevision,"New start uses revised definition");
+                yield return Shot("new-revision-1024");view.Close();
+            }
         }
     }
 }

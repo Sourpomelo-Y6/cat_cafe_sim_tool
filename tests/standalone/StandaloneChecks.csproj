@@ -3,6 +3,7 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="OptionalEventChecks.cs" />
+    <Compile Include="OptionalAuthoringChecks.cs" />
     <Compile Include="InteractionStatisticsChecks.cs" />
     <Compile Include="DisplayNameChecks.cs" />
     <Compile Include="ReadChecks.cs" />

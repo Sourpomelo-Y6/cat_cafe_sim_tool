@@ -22,6 +22,13 @@ namespace CatCafePreview.Standalone
     }
     public static class CafeReplayCatalog
     {
+        public static bool IsOptional(string id)=>System.Text.RegularExpressions.Regex.IsMatch(id??"","^"+System.Text.RegularExpressions.Regex.Escape(CafeOptionalEvents.MikeId)+@"\.v(1|[a-f0-9]{64})$");
+        public static CafeReplayDefinition[] Definitions(CafeReplayProfile profile,CafeOptionalEventCatalog catalog)
+        {
+            var current=(catalog?.events??new CafeOptionalDefinition[0]).SelectMany(e=>new[]{new CafeReplayDefinition(e.event_id+".v"+e.revision,"accepted",e.title+" · "+e.accept_caption),new CafeReplayDefinition(e.event_id+".v"+e.revision,"declined",e.title+" · "+e.decline_caption)});
+            var historical=(profile?.entries??new CafeReplayEntry[0]).Where(e=>IsOptional(e.conversation_id)).Select(e=>new CafeReplayDefinition(e.conversation_id,e.branch_id,e.title));
+            return All.Concat(current).Concat(historical).GroupBy(e=>e.Key).Select(g=>g.Last()).ToArray();
+        }
         public static bool IsEnding(string id)=>id==CafeOutcome.Id || id==CafePopularityEnding.Id || id==CafeBondEnding.Id || id==CafePatronEnding.Id;
         public static readonly CafeReplayDefinition[] All={
             new CafeReplayDefinition(CafeOptionalEvents.MikeId+".v1","accepted",CafeOptionalEvents.MikeTitle+" · 静かに待つ"),
@@ -100,8 +107,8 @@ namespace CatCafePreview.Standalone
             new CafeReplayDefinition(CafeDispatchIntroductionDialogue.Id,"accepted","商店街からの猫紹介 · 迎える"),new CafeReplayDefinition(CafeDispatchIntroductionDialogue.Id,"declined","商店街からの猫紹介 · 見送る")};
         public static void Validate(CafeReplayProfile profile)
         {
-            if(profile==null || profile.version!=1 || profile.entries==null || profile.entries.Length>All.Length || profile.entries.Any(e=>e==null) || profile.entries.Select(e=>e.Key).Distinct().Count()!=profile.entries.Length)throw new ArgumentException("回想記録の形式が不正です。");
-            foreach(var e in profile.entries)if(!All.Any(d=>d.Key==e.Key) || string.IsNullOrEmpty(e.title) || e.title.Length>256 || (e.cat_name??"").Length>256 || (e.cat_id??"").Length>256 || (e.personality??"").Length>1024 || (e.image_resource??"").Length>1024 || e.lines==null || e.lines.Length==0 || e.lines.Length>100 || e.lines.Any(l=>l==null || l.text==null || l.text.Length>10000 || (l.speaker??"").Length>256))throw new ArgumentException("回想の本文が不正です。");
+            if(profile==null || profile.version!=1 || profile.entries==null || profile.entries.Length>All.Length+1000 || profile.entries.Any(e=>e==null) || profile.entries.Select(e=>e.Key).Distinct().Count()!=profile.entries.Length)throw new ArgumentException("回想記録の形式が不正です。");
+            foreach(var e in profile.entries)if((!All.Any(d=>d.Key==e.Key) && !(IsOptional(e.conversation_id) && new[]{"accepted","declined"}.Contains(e.branch_id))) || string.IsNullOrEmpty(e.title) || e.title.Length>256 || (e.cat_name??"").Length>256 || (e.cat_id??"").Length>256 || (e.personality??"").Length>1024 || (e.image_resource??"").Length>1024 || e.lines==null || e.lines.Length==0 || e.lines.Length>100 || e.lines.Any(l=>l==null || l.text==null || l.text.Length>10000 || (l.speaker??"").Length>256))throw new ArgumentException("回想の本文が不正です。");
         }
         public static void ValidateSave(CafeSaveEnvelope s)
         {

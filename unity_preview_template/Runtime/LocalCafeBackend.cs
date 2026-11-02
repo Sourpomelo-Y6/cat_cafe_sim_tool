@@ -45,6 +45,7 @@ namespace CatCafePreview
             Replays=new CafeReplayStore(this.saveDirectory,value=>JsonUtility.ToJson(value,true),text=>JsonUtility.FromJson<CafeReplayProfile>(text));
             Simulation = new CafeSimulation(rules);
             var presentation=Resources.Load<TextAsset>("CatCafeStandalone/presentation");if(presentation==null)throw new InvalidOperationException("単独版の表示定義がありません。");Details=new CafeDetailPresentation(Simulation,JsonUtility.FromJson<CafePresentationCatalog>(presentation.text));displayEpoch=Simulation.State.instance_id;Details.SavedNetStamina=(day,id)=>displayEpoch==Simulation.State.instance_id?displayReceipts.FirstOrDefault(r=>r.day==day && r.cat_id==id)?.net_stamina:null;
+            LoadOptionalCatalog();
             Narratives=new CafeNarratives(Simulation){CustomerName=Details.CustomerName,SpecialImage=(cat,scene)=>CafeNarrativeResources.SceneResource(Narratives.Catalog,Details.ContentId(cat),scene)};
             try{Narratives.SetCatalog(CafeNarrativeResources.Load());}catch(Exception ex){Debug.LogWarning("交流文は試作文を使用します："+ex.Message);}
             DailyRecords=new CafeDailyRecords(Simulation,true);Details.SavedDailyRecord=DailyRecords.Find;

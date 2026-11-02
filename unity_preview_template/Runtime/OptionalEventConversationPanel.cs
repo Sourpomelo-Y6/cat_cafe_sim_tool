@@ -34,7 +34,7 @@ namespace CatCafePreview
             try {
             var catalog=JsonUtility.FromJson<ContentCatalog>(Resources.Load<TextAsset>("CatCafeContent/catalog").text);
             var bundle=JsonUtility.FromJson<ContentBundle>(Resources.Load<TextAsset>(catalog.bundleResource).text);
-            var cat=Array.Find(bundle.cats,c=>c.cat_id==Backend.Details.ContentId("cat-mike"));
+            var cat=Array.Find(bundle.cats,c=>c.cat_id==Backend.OptionalContentId);
             var image=cat==null?null:Array.Find(cat.scenes??new SceneContent[0],s=>s.key=="normal")?.image;
             if(string.IsNullOrEmpty(image) || !image.EndsWith(".png",StringComparison.OrdinalIgnoreCase))return "";
             return catalog.bundleResource.Substring(0,catalog.bundleResource.Length-"bundle".Length)+image.Substring(0,image.Length-4);

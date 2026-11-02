@@ -17,7 +17,7 @@ SCENES = (
 )
 
 
-def export_bundle(catalog, registry, texts, destination, *, profiles=None, interaction_texts=None, interaction_bindings=None, display_labels=None):
+def export_bundle(catalog, registry, texts, destination, *, profiles=None, interaction_texts=None, interaction_bindings=None, display_labels=None, optional_events=None):
     if (not isinstance(catalog, dict) or not catalog or any(
             not isinstance(key, str) or not key or not isinstance(name, str) or not name
             for key, name in catalog.items())):
@@ -37,6 +37,8 @@ def export_bundle(catalog, registry, texts, destination, *, profiles=None, inter
         raise ValueError('書き出し先は登録素材のフォルダとは別にしてください。')
     pack_id = uuid.uuid4().hex
     interactions['pack_id'] = pack_id
+    from optional_events import OptionalEventStore
+    events = (optional_events or OptionalEventStore(registry.directory / 'optional_events.json')).export_data(catalog, pack_id)
     folder = destination / f'CatCafeContent-{pack_id}'
     warnings, cats, blobs = [], [], {}
     for cat_id, name in catalog.items():
@@ -81,7 +83,7 @@ def export_bundle(catalog, registry, texts, destination, *, profiles=None, inter
     warnings.extend(interaction_report['image_warnings'])
     if interaction_report['missing_count']:
         warnings.append(f"交流文：{interaction_report['missing_count']}条件が未制作です。validation.jsonを確認してください。")
-    bundle = {'version': 1, 'pack_id': pack_id, 'cats': cats, 'display_labels': exported_labels}
+    bundle = {'version': 1, 'pack_id': pack_id, 'cats': cats, 'display_labels': exported_labels, 'optional_events': 'optional_events.json'}
     report = {'version': 1, 'cat_count': len(cats), 'image_count': len(blobs), 'warnings': warnings, 'interactions': interaction_report}
     folder.mkdir(parents=True, exist_ok=False)
     try:
@@ -89,7 +91,7 @@ def export_bundle(catalog, registry, texts, destination, *, profiles=None, inter
         (folder / 'people').mkdir()
         for relative, data in blobs.items():
             (folder / relative).write_bytes(data)
-        for filename, value in (('human_portraits.json', people), ('bundle.json', bundle), ('interaction_texts.json', interactions), ('validation.json', report)):
+        for filename, value in (('optional_events.json', events), ('human_portraits.json', people), ('bundle.json', bundle), ('interaction_texts.json', interactions), ('validation.json', report)):
             (folder / filename).write_text(json.dumps(value, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     except Exception:
         # 自分で作成した新規パックだけを片付ける。既存の出力は触らない。

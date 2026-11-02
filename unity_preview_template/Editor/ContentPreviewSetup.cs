@@ -50,18 +50,22 @@ namespace CatCafePreview.Editor
         {
             var folder = EditorUtility.OpenFolderPanel("制作ツールで書き出した素材パックを選ぶ", "", "");
             if (folder == "") return;
-            try { Import(folder); EditorUtility.DisplayDialog("素材を取り込みました", "Cat Cafe → プレビュー → 素材プレビューを開く を開き、Playで確認してください。", "OK"); }
+            try { bool eventsOnly=!File.Exists(Path.Combine(folder,"bundle.json")) && File.Exists(Path.Combine(folder,"optional_events.json"));Import(folder); EditorUtility.DisplayDialog(eventsOnly?"イベントを取り込みました":"素材を取り込みました", eventsOnly?"通常画面のイベント一覧・ミケの詳細から、開始条件を満たしたときに確認できます。開始済みの会話は保存した本文を使います。Playerへは次のビルドで反映されます。":"Cat Cafe → プレビュー → 素材プレビューを開く を開き、Playで確認してください。", "OK"); }
             catch (Exception ex) { Debug.LogException(ex); EditorUtility.DisplayDialog("取り込みできません", ex.Message, "OK"); }
         }
 
         public static void Import(string folder)
         {
             folder = Path.GetFullPath(folder);
+            if(!File.Exists(Path.Combine(folder,"bundle.json")) && File.Exists(Path.Combine(folder,"optional_events.json"))){OptionalEventImport.Import(folder);return;}
             if(!File.Exists(Path.Combine(folder,"bundle.json")) && File.Exists(Path.Combine(folder,"human_portraits.json"))){HumanPortraitImport.Import(folder);return;}
             if(File.Exists(Path.Combine(folder,"human_portraits.json")))HumanPortraitImport.Validate(folder);
             var json = File.ReadAllText(Path.Combine(folder, "bundle.json"));
             var bundle = JsonUtility.FromJson<ContentBundle>(json);
             ContentValidation.Validate(bundle);
+            bool hasOptional=File.Exists(Path.Combine(folder,"optional_events.json"));
+            if(hasOptional!=(!string.IsNullOrEmpty(bundle.optional_events)) || hasOptional && bundle.optional_events!="optional_events.json")throw new ArgumentException("任意イベント定義の指定とファイルが一致しません。");
+            if(hasOptional){var optional=OptionalEventImport.Validate(folder,bundle);if(optional.pack_id!=bundle.pack_id)throw new ArgumentException("任意イベントと素材パックのIDが一致しません。");}
             string interactionPath=Path.Combine(folder,"interaction_texts.json");
             string interactionJson=File.Exists(interactionPath)?File.ReadAllText(interactionPath):null;
             CatCafePreview.Standalone.CafeNarrativeCatalog interactions=null;
@@ -97,6 +101,8 @@ namespace CatCafePreview.Editor
             {
                 if (File.ReadAllText(Path.Combine(target, "bundle.json")) != json)
                     throw new ArgumentException("同じパックIDで異なる内容が存在します。制作ツールから書き出し直してください。");
+                string existingOptional=Path.Combine(target,"optional_events.json");
+                if(File.Exists(existingOptional)!=hasOptional || hasOptional && File.ReadAllText(existingOptional)!=File.ReadAllText(Path.Combine(folder,"optional_events.json")))throw new ArgumentException("同じパックIDの任意イベントが変更されています。");
                 string existingInteraction=Path.Combine(target,"interaction_texts.json");
                 if(File.Exists(existingInteraction)!=(interactionJson!=null) || interactionJson!=null && File.ReadAllText(existingInteraction)!=interactionJson)
                     throw new ArgumentException("同じパックIDで交流文が変更されています。書き出し直してください。");
@@ -113,6 +119,7 @@ namespace CatCafePreview.Editor
                     foreach (var relative in imagePaths) File.Copy(Path.Combine(folder, relative), Path.Combine(pending, relative));
                     File.WriteAllText(Path.Combine(pending, "bundle.json"), json, new System.Text.UTF8Encoding(false));
                     if(interactionJson!=null)File.WriteAllText(Path.Combine(pending,"interaction_texts.json"),interactionJson,new System.Text.UTF8Encoding(false));
+                    if(hasOptional)File.Copy(Path.Combine(folder,"optional_events.json"),Path.Combine(pending,"optional_events.json"));
                     var report=Path.Combine(folder,"validation.json");if(File.Exists(report))File.Copy(report,Path.Combine(pending,"validation.json"));
                     Directory.Move(pending,target);
                 }
@@ -133,6 +140,7 @@ namespace CatCafePreview.Editor
             AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
             CatTexturePolicy.ApplyPack(target);
             if(File.Exists(Path.Combine(folder,"human_portraits.json")))HumanPortraitImport.Import(folder);
+            if(hasOptional)OptionalEventImport.Import(folder,bundle);
             Debug.Log("Imported cat cafe pack: " + bundle.pack_id);
         }
 

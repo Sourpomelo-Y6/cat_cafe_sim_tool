@@ -64,8 +64,8 @@ namespace CatCafePreview.Standalone
             if(rows.Length>1)throw new ArgumentException("任意イベントの保存件数が不正です。");
             foreach(var r in rows)
             {
-                if(r==null || r.event_id!=MikeId || string.IsNullOrEmpty(r.revision) || r.revision.Length>32
-                    || r.cat_id!="cat-mike" || string.IsNullOrEmpty(r.content_cat_id) || r.content_cat_id.Length>256 || r.started_day<2
+                if(r==null || r.event_id!=MikeId || !CafeReplayCatalog.IsOptional(r.event_id+".v"+r.revision)
+                    || r.cat_id!="cat-mike" || string.IsNullOrEmpty(r.content_cat_id) || r.content_cat_id.Length>256 || r.started_day<1
                     || string.IsNullOrEmpty(r.title) || r.title.Length>256 || string.IsNullOrEmpty(r.cat_name) || r.cat_name.Length>256
                     || string.IsNullOrEmpty(r.accept_caption) || r.accept_caption.Length>128 || string.IsNullOrEmpty(r.decline_caption) || r.decline_caption.Length>128
                     || (r.image_resource??"").Length>1024 || new[]{r.introduction,r.accepted,r.declined}.Any(a=>a==null || a.Length<1 || a.Length>20 || a.Any(l=>l==null || string.IsNullOrEmpty(l.text) || l.text.Length>10000 || (l.speaker??"").Length>256)))
