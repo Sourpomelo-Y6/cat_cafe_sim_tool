@@ -40,7 +40,7 @@ class StateImagesTests(unittest.TestCase):
             bad = copy.deepcopy(data); bad[key] = value
             with self.assertRaises(ValueError):
                 validate(bad)
-        for key, value in [('state', []), ('state', 'unknown'), ('image', '../test.png'), ('content_cat_id', 'other')]:
+        for key, value in [('state', []), ('state', 'unknown'), ('image', '../test.png'), ('content_cat_id', 'other/')]:
             bad = copy.deepcopy(data); bad['bindings'][0][key] = value
             with self.assertRaises(ValueError):
                 validate(bad)

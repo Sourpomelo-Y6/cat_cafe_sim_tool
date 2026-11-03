@@ -50,6 +50,11 @@ namespace CatCafePreview.Editor
         {
             var folder = EditorUtility.OpenFolderPanel("制作ツールで書き出した素材パックを選ぶ", "", "");
             if (folder == "") return;
+            if(File.Exists(Path.Combine(folder,"state_images.json")))
+            {
+                try{if(!EditorUtility.DisplayDialog("状態画像の全体置換",CatStateImageImport.ReplacementSummary(folder),"取り込む","キャンセル"))return;}
+                catch(Exception ex){Debug.LogException(ex);EditorUtility.DisplayDialog("取り込みできません",ex.Message,"OK");return;}
+            }
             if(!File.Exists(Path.Combine(folder,"bundle.json")) && File.Exists(Path.Combine(folder,"cat_outfits.json")))
             {
                 try{Import(folder);EditorUtility.DisplayDialog("見た目を取り込みました","ミケの猫詳細の「見た目…」から選べます。Playerへは次のビルドで反映されます。","OK");}
@@ -57,7 +62,7 @@ namespace CatCafePreview.Editor
             }
             if(!File.Exists(Path.Combine(folder,"bundle.json")) && File.Exists(Path.Combine(folder,"state_images.json")))
             {
-                try{Import(folder);EditorUtility.DisplayDialog("状態画像を取り込みました","ミケの猫詳細画面で、状態の条件に応じて表示します。未登録の状態は従来画像を使用します。Playerへは次のビルドで反映されます。","OK");}
+                try{Import(folder);EditorUtility.DisplayDialog("状態画像を取り込みました","猫詳細画面で、個体ごとの状態に応じて表示します。未登録の状態は従来画像を使用します。Playerへは次のビルドで反映されます。","OK");}
                 catch(Exception ex){Debug.LogException(ex);EditorUtility.DisplayDialog("取り込みできません",ex.Message,"OK");}return;
             }
             try { bool eventsOnly=!File.Exists(Path.Combine(folder,"bundle.json")) && File.Exists(Path.Combine(folder,"optional_events.json"));Import(folder); EditorUtility.DisplayDialog(eventsOnly?"イベントを取り込みました":"素材を取り込みました", eventsOnly?"通常画面のイベント一覧・ミケの詳細から、開始条件を満たしたときに確認できます。開始済みの会話は保存した本文を使います。Playerへは次のビルドで反映されます。":"Cat Cafe → プレビュー → 素材プレビューを開く を開き、Playで確認してください。", "OK"); }

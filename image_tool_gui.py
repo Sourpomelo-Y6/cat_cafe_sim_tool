@@ -114,7 +114,7 @@ class ContentImageToolWindow:
         image_page = ttk.Frame(self.pages['画像'])
         image_page.pack(fill='both', expand=True)
         self.cat_image_panel = image_page
-        ttk.Button(image_page, text='ミケの状態別画像…', command=self.open_state_images).pack(anchor='w', pady=4)
+        ttk.Button(image_page, text='猫の状態別画像…', command=self.open_state_images).pack(anchor='w', pady=4)
         ttk.Button(image_page, text='ミケの見た目…', command=self.open_cat_outfits).pack(anchor='w', pady=4)
         from portrait_panel import PortraitPanel
         self.portrait_panel = PortraitPanel(self.pages['画像'], self.registry.directory)
