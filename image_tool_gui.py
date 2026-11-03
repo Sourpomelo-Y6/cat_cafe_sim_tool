@@ -156,7 +156,7 @@ class ContentImageToolWindow:
         ttk.Button(reference_controls, text='基準画像を選ぶ…', command=self.choose_reference).pack(side='left')
         ttk.Button(reference_controls, text='登録済み通常画像を基準に', command=self.use_normal_reference).pack(side='left', padx=8)
         text_page = self.pages['文章']
-        ttk.Button(text_page, text="ミケの個別イベントを編集…", command=self.open_optional_event_editor).pack(anchor="w", pady=6)
+        ttk.Button(text_page, text="猫の個別イベント…", command=self.open_optional_event_editor).pack(anchor="w", pady=6)
         ttk.Label(text_page, text='作りたい文章を選んでください。', font=('', 12, 'bold')).pack(anchor='w', pady=(0, 12))
         for title, description, label, command in (
             ('猫の紹介・場面の描写', '選択した猫の紹介文と、通常・遊ぶ・撫でられる・眠る場面の文章を制作します。',

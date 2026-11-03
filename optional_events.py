@@ -1,8 +1,9 @@
-"""One authored Mike story; immutable content revisions and atomic local editing."""
+"""Optional stories with shared definitions, legacy Mike scope and atomic local editing."""
 import copy
 import hashlib
 import json
 import os
+import re
 import tempfile
 import uuid
 from pathlib import Path
@@ -42,7 +43,8 @@ def _text(value, maximum, *, empty=False, single_line=False):
 
 
 def revision(event):
-    values = [str(event[key]) for key in FIELDS[:8]]
+    identity = [event[k] for k in ('event_id','cat_id','content_cat_id')] if 'target_kind' not in event else ['2',event['event_id'],event['target_kind'],event['content_cat_id'],event.get('cat_id','')]
+    values = identity + [str(event[key]) for key in ('min_day','min_affinity','title','accept_caption','decline_caption')]
     for branch in BRANCHES:
         for line in event[branch]:
             values.extend((line['speaker'], line['text']))
@@ -51,11 +53,17 @@ def revision(event):
 
 
 def validate_event(event, *, require_revision=True):
-    if not isinstance(event, dict) or set(event) != set(FIELDS) | ({'revision'} if require_revision else set()):
+    if not isinstance(event, dict):
+        raise ValueError('イベント定義の項目が不正です。')
+    fields = set(FIELDS) if 'target_kind' not in event else (set(FIELDS) - {'cat_id'}) | {'target_kind'} | ({'cat_id'} if event.get('target_kind') == 'individual' else set())
+    if set(event) != fields | ({'revision'} if require_revision else set()):
         raise ValueError('イベント定義の項目が不正です。')
     clean = copy.deepcopy(event)
-    if clean['event_id'] != EVENT_ID or clean['cat_id'] != 'cat-mike' or clean['content_cat_id'] != 'playtest-mike':
-        raise ValueError('この版はミケの固定イベント1件に対応しています。')
+    legacy = 'target_kind' not in clean
+    if not legacy and (clean['target_kind'] not in ('content','individual') or not isinstance(clean['event_id'],str) or not re.fullmatch(r'optional\.[a-z][a-z0-9_.-]{0,86}',clean['event_id']) or not isinstance(clean['content_cat_id'],str) or not re.fullmatch('[a-z][a-z0-9_-]{0,63}',clean['content_cat_id'])):
+        raise ValueError('イベントのID・対象が不正です。')
+    if (legacy or clean['target_kind']=='individual') and (clean['event_id'] != EVENT_ID or clean['cat_id'] != 'cat-mike' or clean['content_cat_id'] != 'playtest-mike'):
+        raise ValueError('個体専用の定義は旧ミケ互換だけです。')
     for key, low, high in (('min_day', 1, 9999), ('min_affinity', 0, 100)):
         if type(clean[key]) is not int or not low <= clean[key] <= high:
             raise ValueError(('開始日数' if key == 'min_day' else '開始好感度') + 'の範囲が不正です。')
@@ -77,66 +85,164 @@ def validate_event(event, *, require_revision=True):
 
 
 def validate_pack(data, catalog=None):
-    if not isinstance(data, dict) or set(data) != {'version', 'pack_id', 'events'} or type(data['version']) is not int or data['version'] != 1:
+    if not isinstance(data, dict) or set(data) != {'version', 'pack_id', 'events'} or type(data['version']) is not int or data['version'] not in (1,2):
         raise ValueError('イベントパックの形式が不正です。')
     import re
     if not isinstance(data['pack_id'], str) or not re.fullmatch('[a-f0-9]{32}', data['pack_id']):
         raise ValueError('パックIDが不正です。')
-    if not isinstance(data['events'], list) or len(data['events']) > 1:
-        raise ValueError('ミケのイベントは最大1件です。')
+    if not isinstance(data['events'], list) or len(data['events']) > (1 if data['version']==1 else 64):
+        raise ValueError('イベントは旧v1で1件、v2で64件までです。')
     events = [validate_event(row) for row in data['events']]
+    if any(('target_kind' in e) != (data['version']==2) for e in events) or len({e['event_id'] for e in events}) != len(events) or len({e['content_cat_id'] for e in events}) != len(events):
+        raise ValueError('イベントの版・対象・IDが重複または不正です。')
     if catalog is not None and any(row['content_cat_id'] not in catalog for row in events):
-        raise ValueError('出力先の素材一覧にミケがありません。')
-    return dict(version=1, pack_id=data['pack_id'], events=events)
+        raise ValueError('出力対象の画像IDが素材一覧にありません。')
+    return dict(version=data['version'], pack_id=data['pack_id'], events=events)
+
+
+MAX_JSON = 1000000
+
+def definition_text(data):
+    text = json.dumps(data, ensure_ascii=False, indent=2) + '\n'
+    if len(text.encode('utf-16-le')) // 2 > MAX_JSON:
+        raise ValueError('イベントJSONは1,000,000 UTF16文字以内にしてください。')
+    return text
+
+
+def read_pack(text, catalog=None):
+    if len(text.encode('utf-16-le')) // 2 > MAX_JSON:
+        raise ValueError('イベントJSONが大きすぎます。')
+    data = validate_pack(read_json(text), catalog)
+    if data['version'] == 1 and len(text.encode('utf-16-le')) // 2 > 100000:
+        raise ValueError('旧イベントJSONが大きすぎます。')
+    return data
+
+
+def normalize_event(event):
+    clean = validate_event(event)
+    if 'target_kind' not in clean:
+        clean['target_kind'] = 'individual'
+    clean.pop('revision', None)
+    return validate_event(clean, require_revision=False)
+
+
+def blank_event(content_id):
+    if not isinstance(content_id, str) or not re.fullmatch('[a-z][a-z0-9_-]{0,63}',content_id):
+        raise ValueError('画像IDが不正です。')
+    return dict(event_id='optional.'+content_id+'.story',target_kind='content',content_cat_id=content_id,
+                min_day=2,min_affinity=20,title='',accept_caption='',decline_caption='',
+                introduction=[dict(speaker='',text='') for _ in range(3)],
+                accepted=[dict(speaker='',text='') for _ in range(2)],declined=[dict(speaker='',text='') for _ in range(2)])
 
 
 class OptionalEventStore:
     def __init__(self, path):
         self.path = Path(path)
 
-    def read(self):
+    def read_all(self):
         if not self.path.exists():
-            return dict(version=1, enabled=True, event=validate_event(default_event(), require_revision=False))
-        data = read_json(self.path.read_text(encoding='utf-8-sig'))
-        if not isinstance(data, dict) or set(data) != {'version', 'enabled', 'event'} or type(data['version']) is not int or data['version'] != 1 or type(data['enabled']) is not bool:
-            raise ValueError('イベント保存データが不正です。上書きしていません。')
-        return dict(version=1, enabled=data['enabled'], event=validate_event(data['event']))
+            return dict(version=2,entries=[dict(enabled=True,event=normalize_event(validate_event(default_event(),require_revision=False)))])
+        if self.path.stat().st_size > 4000003:
+            raise ValueError('イベント登録が大きすぎます。')
+        text = self.path.read_text(encoding='utf-8-sig')
+        if len(text.encode('utf-16-le')) // 2 > MAX_JSON:
+            raise ValueError('イベント登録が大きすぎます。')
+        data = read_json(text)
+        if not isinstance(data,dict) or type(data.get('version')) is not int:
+            raise ValueError('イベント登録が不正です。')
+        if data['version'] == 1:
+            if set(data) != {'version','enabled','event'} or type(data['enabled']) is not bool:
+                raise ValueError('旧イベント登録が不正です。')
+            event = validate_event(data['event'])
+            if 'target_kind' in event:
+                raise ValueError('旧イベント登録の版が不正です。')
+            return dict(version=2,entries=[dict(enabled=data['enabled'],event=normalize_event(event))])
+        return self._validate_all(data)
 
-    def save(self, data):
-        if not isinstance(data, dict) or set(data) != {'version', 'enabled', 'event'} or type(data['version']) is not int or data['version'] != 1 or type(data['enabled']) is not bool:
-            raise ValueError('イベント保存データの形式が不正です。')
-        if not isinstance(data['event'], dict):
-            raise ValueError('イベント保存データの形式が不正です。')
-        event = {key: value for key, value in data['event'].items() if key != 'revision'}
-        clean = dict(version=1, enabled=data['enabled'], event=validate_event(event, require_revision=False))
-        self.path.parent.mkdir(parents=True, exist_ok=True)
-        fd, name = tempfile.mkstemp(prefix=self.path.name + '.', suffix='.tmp', dir=self.path.parent)
+    @staticmethod
+    def _validate_all(data):
+        if not isinstance(data,dict) or set(data) != {'version','entries'} or type(data['version']) is not int or data['version'] != 2 or not isinstance(data['entries'],list) or len(data['entries']) > 64:
+            raise ValueError('イベント登録一覧が不正です。')
+        rows=[]
+        for row in data['entries']:
+            if not isinstance(row,dict) or set(row) != {'enabled','event'} or type(row['enabled']) is not bool:
+                raise ValueError('イベント登録行が不正です。')
+            event=validate_event(row['event'])
+            if 'target_kind' not in event:
+                raise ValueError('イベント登録行の版が不正です。')
+            rows.append(dict(enabled=row['enabled'],event=event))
+        validate_pack(dict(version=2,pack_id='0'*32,events=[r['event'] for r in rows]))
+        return dict(version=2,entries=copy.deepcopy(rows))
+
+    def read(self, content_id='playtest-mike'):
+        row = next((r for r in self.read_all()['entries'] if r['event']['content_cat_id']==content_id),None)
+        return dict(version=1,enabled=row['enabled'],event=row['event']) if row else dict(version=1,enabled=True,event=blank_event(content_id))
+
+    def save_all(self, data):
+        self.read_all()
+        clean=self._validate_all(data)
+        text=definition_text(clean)
+        self.path.parent.mkdir(parents=True,exist_ok=True)
+        fd,name=tempfile.mkstemp(prefix=self.path.name+'.',suffix='.tmp',dir=self.path.parent)
         try:
-            with os.fdopen(fd, 'w', encoding='utf-8', newline='\n') as stream:
-                json.dump(clean, stream, ensure_ascii=False, indent=2)
-                stream.write('\n')
-            os.replace(name, self.path)
+            with os.fdopen(fd,'w',encoding='utf-8',newline='\n') as stream:
+                stream.write(text);stream.flush();os.fsync(stream.fileno())
+            if self.path.exists():
+                raw=self.path.read_bytes()
+                if read_json(raw.decode('utf-8-sig')).get('version')==1:
+                    backup=self.path.with_name(self.path.stem+'.v1'+self.path.suffix)
+                    if backup.exists() and backup.read_bytes()!=raw:
+                        raise ValueError('旧登録の退避内容が異なります。元を保持しました。')
+                    if not backup.exists():
+                        created=False
+                        try:
+                            with backup.open('xb') as stream:
+                                created=True;stream.write(raw);stream.flush();os.fsync(stream.fileno())
+                        except Exception:
+                            if created:backup.unlink()
+                            raise
+            os.replace(name,self.path)
         finally:
-            if os.path.exists(name):
-                os.unlink(name)
+            if os.path.exists(name):os.unlink(name)
         return clean
 
-    def export_data(self, catalog, pack_id=None):
-        data = self.read()
-        events = [data['event']] if data['enabled'] else []
-        # Existing tiny/non-Mike export callers need no new content or user-data file.
-        if not self.path.exists() and 'playtest-mike' not in catalog:
-            events = []
-        return validate_pack(dict(version=1, pack_id=pack_id or uuid.uuid4().hex, events=events), catalog)
+    def save(self,data):
+        self.read_all()  # Do not silently repair corrupt existing data.
+        if not isinstance(data,dict) or set(data)!={'version','enabled','event'} or type(data['version']) is not int or data['version']!=1 or type(data['enabled']) is not bool:
+            raise ValueError('イベント編集データが不正です。')
+        event={k:v for k,v in data['event'].items() if k!='revision'}
+        event=validate_event(event,require_revision=False)
+        if 'target_kind' not in event:event=normalize_event(event)
+        rows=[r for r in self.read_all()['entries'] if r['event']['content_cat_id']!=event['content_cat_id']]
+        rows.append(dict(enabled=data['enabled'],event=event))
+        self.save_all(dict(version=2,entries=rows))
+        return dict(version=1,enabled=data['enabled'],event=event)
 
-    def import_pack(self, path):
-        data = validate_pack(read_json(Path(path).read_text(encoding='utf-8-sig')))
-        return self.save(dict(version=1, enabled=bool(data['events']), event=data['events'][0] if data['events'] else self.read()['event']))
+    def export_data(self,catalog,pack_id=None):
+        data=self.read_all()
+        rows=[r['event'] for r in data['entries'] if r['enabled']]
+        if not self.path.exists() and 'playtest-mike' not in catalog:rows=[]
+        result=validate_pack(dict(version=2,pack_id=pack_id or uuid.uuid4().hex,events=rows),catalog)
+        definition_text(result)
+        return result
+
+    def import_pack(self,path):
+        data=read_pack(Path(path).read_text(encoding='utf-8-sig'))
+        rows=[dict(enabled=True,event=normalize_event(e)) for e in data['events']]
+        if not rows:rows=[dict(enabled=False,event=r['event']) for r in self.read_all()['entries']]
+        self.save_all(dict(version=2,entries=rows))
+        return self.read()
 
 
-def export_event_pack(store, catalog, destination):
-    data = store.export_data(catalog)
-    folder = Path(destination) / ('CatCafeEvents-' + data['pack_id'])
-    folder.mkdir(parents=True, exist_ok=False)
-    (folder / 'optional_events.json').write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+def export_event_pack(store,catalog,destination):
+    data=store.export_data(catalog)
+    destination=Path(destination).resolve()
+    folder=destination/('CatCafeEvents-'+data['pack_id'])
+    folder.mkdir(parents=True,exist_ok=False)
+    try:
+        (folder/'optional_events.json').write_text(definition_text(data),encoding='utf-8')
+    except Exception:
+        import shutil
+        if folder.resolve().parent==destination and folder.name=='CatCafeEvents-'+data['pack_id']:shutil.rmtree(folder)
+        raise
     return folder

@@ -1,15 +1,22 @@
 using System;
 using System.Linq;
+using System.Collections.Generic;
 using CatCafePreview.Standalone;
-
 namespace CatCafePreview
 {
+    public sealed class OptionalEventCandidate
+    {
+        public string cat_id,event_id,revision,title,cat_name,content_cat_id;
+        public bool resume;
+    }
     public sealed partial class LocalCafeBackend
     {
         CafeOptionalEvent[] optionalEvents=new CafeOptionalEvent[0];
         CafeOptionalEventCatalog optionalCatalog;
+        CafeOptionalEvent selectedOptional;
         public CafeOptionalDefinition OptionalDefinition=>optionalCatalog?.events.FirstOrDefault();
         public string CurrentOptionalConversationId=>optionalCatalog==null?CafeOptionalEvents.MikeId+".v1":OptionalDefinition==null?null:OptionalDefinition.event_id+".v"+OptionalDefinition.revision;
+        public bool IsCurrentOptionalConversation(string id)=>optionalCatalog==null?id==CafeOptionalEvents.MikeId+".v1":optionalCatalog.events.Any(d=>id==d.event_id+".v"+d.revision);
         public string OptionalTitle=>OptionalEvent?.title??OptionalDefinition?.title??CafeOptionalEvents.MikeTitle;
         public string OptionalContentId=>OptionalEvent?.content_cat_id??OptionalDefinition?.content_cat_id??Details.ContentId("cat-mike");
         public void SetOptionalCatalog(CafeOptionalEventCatalog catalog){catalog?.Validate();optionalCatalog=catalog?.Copy();}
@@ -21,32 +28,56 @@ namespace CatCafePreview
         }
         public bool OptionalEventOpen {get;set;}
         public CafeOptionalEvent[] OptionalEvents {get{SyncConversations();return optionalEvents;}}
-        public CafeOptionalEvent OptionalEvent=>OptionalEvents.FirstOrDefault();
-        public bool OptionalEventListed=>OptionalEvent!=null?!OptionalEvent.progress.completed:optionalCatalog==null?CafeOptionalEvents.Eligible(Simulation.State):OptionalDefinition?.Eligible(Simulation.State)==true;
-        public string OptionalEventReason
+        public CafeOptionalEvent OptionalEvent=>selectedOptional??optionalEvents.FirstOrDefault(r=>!r.progress.completed)??optionalEvents.FirstOrDefault();
+        CafeOptionalDefinition DefinitionFor(string cat)
+        {if(optionalCatalog==null || optionalCatalog.events.Length==0)return null;string content=Details.ContentId(cat);return optionalCatalog.events.FirstOrDefault(d=>d.Matches(cat,content));}
+        public OptionalEventCandidate[] OptionalCandidates
         {
             get
             {
-                if(!OptionalEventListed)return "開始条件を満たしていません。";
-                if(Simulation.State.phase!="preparation")return "営業準備で確認してください。";
-                if(!string.IsNullOrEmpty(Simulation.State.game_over))return "営業を終了しています。";
-                if(OpeningPending || OutcomePending || PatronEndingPending || BondEndingPending || PopularityEndingPending
-                    || EquipmentResultPending || IntakeResultPending || RegularResultPending || DispatchResultPending || EncounterResultPending
-                    || AdoptionResultPending || TrustBlocksProgress || ReservationBlocksProgress || MissingBlocksProgress || LodgeResultPending || DispatchIntroductionResultPending
-                    || !string.IsNullOrEmpty(View().required_action))return "必須の回答・結果会話を先に確認してください。";
-                return "";
+                var rows=new List<OptionalEventCandidate>();
+                foreach(var r in optionalEvents.Where(r=>!r.progress.completed))rows.Add(new OptionalEventCandidate{cat_id=r.cat_id,event_id=r.event_id,revision=r.revision,title=r.title,cat_name=r.cat_name,content_cat_id=r.content_cat_id,resume=true});
+                foreach(var c in Simulation.State.cats)
+                {
+                    var d=DefinitionFor(c.id);string id=d?.event_id??CafeOptionalEvents.MikeId;
+                    bool eligible=optionalCatalog==null?c.id=="cat-mike" && CafeOptionalEvents.Eligible(Simulation.State):d?.Eligible(Simulation.State,c.id)==true;
+                    if(!eligible || optionalEvents.Any(r=>r.cat_id==c.id && r.event_id==id))continue;
+                    rows.Add(new OptionalEventCandidate{cat_id=c.id,event_id=id,revision=d?.revision??"1",title=d?.title??CafeOptionalEvents.MikeTitle,cat_name=Simulation.Definition(c.id).name,content_cat_id=d?.content_cat_id??Details.ContentId(c.id)});
+                }
+                return rows.ToArray();
             }
         }
-        // No simulation command/reward: revalidate the current instance and revision at explicit start.
-        public bool BeginOptionalEvent(string instance,int revision,string imageResource)
+        public OptionalEventCandidate OptionalForCat(string cat)=>OptionalCandidates.FirstOrDefault(r=>r.cat_id==cat);
+        public bool OptionalEventListed=>OptionalCandidates.Length!=0;
+        public string OptionalEventReason=>OptionalCandidates.Length==0?"開始条件を満たしていません。":OptionalReason(OptionalCandidates[0]);
+        public string OptionalReason(OptionalEventCandidate candidate)
         {
-            if(instance!=Simulation.State.instance_id || revision!=Simulation.State.revision || OptionalEventReason!="")return false;
-            if(OptionalEvent==null)optionalEvents=new[]{OptionalDefinition==null?CafeOptionalEvents.Start(Simulation.State,Simulation.Definition("cat-mike").name,Details.ContentId("cat-mike"),imageResource):OptionalDefinition.Start(Simulation.State,Simulation.Definition("cat-mike").name,imageResource)};
-            return true;
+            if(candidate==null)return "開始条件を満たしていません。";
+            if(Simulation.State.phase!="preparation")return "営業準備で確認してください。";
+            if(!string.IsNullOrEmpty(Simulation.State.game_over))return "営業を終了しています。";
+            if(Simulation.PlayerActive || (Simulation.State.autoplay?.running==true && !Simulation.State.autoplay.paused))return "交流・自動進行を止めてから確認してください。";
+            if(OpeningPending || OutcomePending || PatronEndingPending || BondEndingPending || PopularityEndingPending
+                || EquipmentResultPending || IntakeResultPending || RegularResultPending || DispatchResultPending || EncounterResultPending
+                || AdoptionResultPending || TrustBlocksProgress || ReservationBlocksProgress || MissingBlocksProgress || LodgeResultPending || DispatchIntroductionResultPending
+                || (Simulation.AdoptionWaiting || Simulation.PlayerActive || Simulation.BondWaiting || Simulation.DispatchTroubleWaiting || Simulation.DispatchChoiceWaiting || Simulation.DispatchWaiting || MissingWaiting || Simulation.ReservationWaiting || Simulation.PatronWaiting || Simulation.GoalWaiting || Simulation.DispatchIntroductionWaiting || Simulation.IntakeWaiting || Simulation.RegularIntroductionWaiting || Simulation.CustomerTrustWaiting || Simulation.StoreEventWaiting || Simulation.GrowthWaiting || Simulation.AssignmentWaiting))return "必須の回答・結果会話を先に確認してください。";
+            if(!candidate.resume && optionalEvents.Any(r=>!r.progress.completed))return "進行中の個別イベントを先に完了してください。";
+            if(!candidate.resume && optionalEvents.Length>=CafeOptionalEvents.MaxRecords)return "個別イベントの保存上限512件に達しています。";
+            return "";
+        }
+        public bool BeginOptionalEvent(string instance,int revision,string imageResource)
+        {var c=OptionalCandidates.FirstOrDefault();return c!=null && BeginOptionalEvent(c.cat_id,c.event_id,c.revision,instance,revision,imageResource);}
+        public bool BeginOptionalEvent(string cat,string eventId,string contentRevision,string instance,int revision,string imageResource)
+        {
+            if(instance!=Simulation.State.instance_id || revision!=Simulation.State.revision)return false;
+            var candidate=OptionalCandidates.FirstOrDefault(c=>c.cat_id==cat && c.event_id==eventId && c.revision==contentRevision);
+            if(candidate==null || OptionalReason(candidate)!="")return false;
+            var existing=optionalEvents.FirstOrDefault(r=>r.cat_id==cat && r.event_id==eventId);
+            if(existing!=null){selectedOptional=existing;return !existing.progress.completed;}
+            var d=DefinitionFor(cat);
+            var created=d==null?CafeOptionalEvents.Start(Simulation.State,Simulation.Definition(cat).name,Details.ContentId(cat),imageResource):d.Start(Simulation.State,cat,Simulation.Definition(cat).name,imageResource);
+            var next=optionalEvents.Concat(new[]{created}).ToArray();CafeOptionalEvents.Validate(next);optionalEvents=next;selectedOptional=created;return true;
         }
         void RestoreOptionalEvents(CafeOptionalEvent[] rows)
-        {
-            optionalEvents=rows??new CafeOptionalEvent[0];OptionalEventOpen=false;
-        }
+        {CafeOptionalEvents.Validate(rows);optionalEvents=rows??new CafeOptionalEvent[0];selectedOptional=null;OptionalEventOpen=false;}
     }
 }

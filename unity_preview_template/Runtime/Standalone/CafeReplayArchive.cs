@@ -22,7 +22,7 @@ namespace CatCafePreview.Standalone
     }
     public static class CafeReplayCatalog
     {
-        public static bool IsOptional(string id)=>System.Text.RegularExpressions.Regex.IsMatch(id??"","^"+System.Text.RegularExpressions.Regex.Escape(CafeOptionalEvents.MikeId)+@"\.v(1|[a-f0-9]{64})$");
+        public static bool IsOptional(string id)=>CafeOptionalEvents.ValidConversationId(id);
         public static CafeReplayDefinition[] Definitions(CafeReplayProfile profile,CafeOptionalEventCatalog catalog)
         {
             var current=(catalog?.events??new CafeOptionalDefinition[0]).SelectMany(e=>new[]{new CafeReplayDefinition(e.event_id+".v"+e.revision,"accepted",e.title+" · "+e.accept_caption),new CafeReplayDefinition(e.event_id+".v"+e.revision,"declined",e.title+" · "+e.decline_caption)});
@@ -118,7 +118,7 @@ namespace CatCafePreview.Standalone
         public static CafeReplayEntry[] FromSave(CafeSaveEnvelope save,CafeRules rules,Func<string,string> catName,Func<string,string> customerName,Func<string,string> contentId)
         {
             ValidateSave(save);var result=new List<CafeReplayEntry>();
-            foreach(var row in save.optional_events??new CafeOptionalEvent[0])if(row.progress.completed)
+            foreach(var row in (save.optional_events??new CafeOptionalEvent[0]).Select((row,index)=>new{row,index}).OrderByDescending(p=>p.row.started_day).ThenByDescending(p=>p.index).Select(p=>p.row))if(row.progress.completed)
                 result.Add(new CafeReplayEntry{conversation_id=row.progress.conversation_id,branch_id=row.progress.branch_id,title=row.title+" · "+(row.progress.branch_id=="accepted"?row.accept_caption:row.decline_caption),image_resource=row.image_resource,cat_id=row.content_cat_id,cat_name=row.cat_name,personality=row.started_day+"日目の記録",lines=row.introduction.Concat(new[]{new CafeConversationLine("あなた",row.progress.branch_id=="accepted"?row.accept_caption:row.decline_caption)}).Concat(CafeOptionalEvents.Lines(row,row.progress.branch_id)).Select(l=>new CafeConversationLine(l.speaker,l.text)).ToArray()});
             Action<CafeConversationProgress,string,string,string,Func<string,CafeConversationLine[]>,bool> add=(p,id,name,personality,script,intro)=>{
                 if(p==null)return;

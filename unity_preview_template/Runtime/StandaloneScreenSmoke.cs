@@ -182,6 +182,7 @@ namespace CatCafePreview
             Check(nativeDefault,"standalone default before QA override");Check(CafeBackends.Standalone,"standalone default");CompareRestProposals();var referencePath=Argument("--catcafe-details-reference");if(!string.IsNullOrEmpty(referencePath))checks.Add("Unity details references: "+StandaloneDetailsSmoke.Run(Path.Combine(output,"details-checks"),referencePath));
             yield return Wait(()=>FindObjectOfType<PythonTitleScreen>()?.CanManageSaves==true,"title ready without server");
             var title=FindObjectOfType<PythonTitleScreen>();yield return Capture("01-title");
+            if(Array.Exists(Environment.GetCommandLineArgs(),a=>a=="--catcafe-all-optional-resume-only")){yield return AllOptionalResume();yield break;}
             if(Array.Exists(Environment.GetCommandLineArgs(),a=>a=="--catcafe-all-outfits-resume-only")){yield return AllCatOutfitResume();yield break;}
             if(Array.Exists(Environment.GetCommandLineArgs(),a=>a=="--catcafe-all-state-resume-only"))
             {title.ResumeSaved("9");yield return Wait(()=>Client?.UIStateReady==true && Client.CurrentState.cats.Length==32,"all-state cross-process resume");var panel=Client.GetComponent<PythonCatDetailsPanel>();var cat=Client.CurrentState.cats.Last();panel.Open(cat.cat_id);Check(panel.panel.activeSelf && panel.title.text==cat.name+"の詳細","all-state cross-process identity");yield return Capture("state-cross-process");yield break;}
@@ -203,6 +204,7 @@ namespace CatCafePreview
             yield return Wait(()=>Client?.CanManageSaves==true,"business scene ready");Check(Client.CurrentState.day==1 && Client.CurrentState.can_set_shifts,"initial preparation");Check(Client.CurrentState.rest_proposal.SequenceEqual(new[]{"cat-mugi","cat-sora","cat-tama"}),"rest proposal matches Python initial tie ordering");
             if(Array.Exists(Environment.GetCommandLineArgs(),a=>a=="--catcafe-state-images-check"))yield return StateImageChecks();
             // Outfit fixtures modify care records; run baseline regression in a fresh Player.
+            if(Array.Exists(Environment.GetCommandLineArgs(),a=>a=="--catcafe-all-optional-check")){yield return AllOptionalChecks();yield break;}
             if(Array.Exists(Environment.GetCommandLineArgs(),a=>a=="--catcafe-all-outfits-check")){yield return AllCatOutfitChecks();yield break;}
             if(Array.Exists(Environment.GetCommandLineArgs(),a=>a=="--catcafe-outfit-check")){yield return OutfitChecks();yield break;}
             if(Array.Exists(Environment.GetCommandLineArgs(),a=>a=="--catcafe-all-cat-marks-check")){yield return AllCatMarkChecks();yield break;}

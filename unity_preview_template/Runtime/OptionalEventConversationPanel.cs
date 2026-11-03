@@ -10,10 +10,10 @@ namespace CatCafePreview
         GameObject host;
         CafeOptionalEvent selected;
         bool requested;
-        CafeOptionalEvent Row=>Backend.OptionalEvent;
+        CafeOptionalEvent Row=>selected;
         public void Apply(PythonCafeState value)
         {
-            if(!ReferenceEquals(selected,Row))requested=false;
+            if(selected!=null && !Array.Exists(Backend.OptionalEvents,r=>ReferenceEquals(r,selected))){selected=null;requested=false;}
             if(host==null)
             {
                 var owner=GetComponent<PythonCatDetailsPanel>();
@@ -22,19 +22,20 @@ namespace CatCafePreview
             }
             Bind(value,host,GetComponent<PythonCatDetailsPanel>().title.font);
         }
-        public bool OpenEvent()
+        public bool OpenEvent(string catId=null,string eventId=null,string revision=null)
         {
             if(!Client.CanManageSaves || Client.AutoPlayExecuting || GetComponents<AcquisitionConversationPanel>().AnyShowing(this))return false;
             var value=Client.CurrentState;
-            if(!Backend.BeginOptionalEvent(value.instance_id,value.revision,NormalImage()))return false;
-            selected=Row;requested=true;Apply(value);Open();return Showing;
+            var target=catId==null?Array.Find(Backend.OptionalCandidates,c=>true):Array.Find(Backend.OptionalCandidates,c=>c.cat_id==catId && (eventId==null || c.event_id==eventId) && (revision==null || c.revision==revision));
+            if(target==null || !Backend.BeginOptionalEvent(target.cat_id,target.event_id,target.revision,value.instance_id,value.revision,NormalImage(target.content_cat_id)))return false;
+            selected=Backend.OptionalEvent;requested=true;Apply(value);Open();return Showing;
         }
-        string NormalImage()
+        string NormalImage(string contentId)
         {
             try {
             var catalog=JsonUtility.FromJson<ContentCatalog>(Resources.Load<TextAsset>("CatCafeContent/catalog").text);
             var bundle=JsonUtility.FromJson<ContentBundle>(Resources.Load<TextAsset>(catalog.bundleResource).text);
-            var cat=Array.Find(bundle.cats,c=>c.cat_id==Backend.OptionalContentId);
+            var cat=Array.Find(bundle.cats,c=>c.cat_id==contentId);
             var image=cat==null?null:Array.Find(cat.scenes??new SceneContent[0],s=>s.key=="normal")?.image;
             if(string.IsNullOrEmpty(image) || !image.EndsWith(".png",StringComparison.OrdinalIgnoreCase))return "";
             return catalog.bundleResource.Substring(0,catalog.bundleResource.Length-"bundle".Length)+image.Substring(0,image.Length-4);
@@ -50,13 +51,13 @@ namespace CatCafePreview
         protected override Texture2D PortraitTexture(string id)=>string.IsNullOrEmpty(Row.image_resource)?null:Resources.Load<Texture2D>(Row.image_resource);
         protected override string Title=>Row.title;
         protected override string SceneLabel=>Row.started_day+"日目 · 開始時の記録";
-        protected override string ChoicePrompt=>"ミケと、どのように過ごしますか。";
+        protected override string ChoicePrompt=>Row.cat_name+"と、どのように過ごしますか。";
         protected override string AcceptCaption=>Row.accept_caption;
         protected override string DeclineCaption=>Row.decline_caption;
         protected override string AcceptEffect=>"数値の変化はありません。";
         protected override string DeclineEffect=>"数値の変化はありません。";
         protected override string Notice=>"閉じても会話の位置を保持します。通常操作・おまかせを続けられます。";
-        protected override string EndText=>"ミケと過ごしたひとときを記録しました。";
+        protected override string EndText=>Row.cat_name+"と過ごしたひとときを記録しました。";
         protected override string HistoryPrefix=>progress.branch_id=="introduction"?"":string.Join("\n\n",Array.ConvertAll(Row.introduction,l=>l.text))+"\n\n【"+(progress.branch_id=="accepted"?Row.accept_caption:Row.decline_caption)+"】\n\n";
         protected override bool CanAnswer(bool yes)=>Ready && progress.branch_id=="introduction";
         protected override void SendAnswer(bool yes){CafeOptionalEvents.Choose(Row,yes);}

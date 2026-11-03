@@ -100,12 +100,12 @@ namespace CatCafePreview
                 optionalEventEntry.onClick=new Button.ButtonClickedEvent();
                 var rect=optionalEventEntry.GetComponent<RectTransform>();rect.anchorMin=rect.anchorMax=rect.pivot=new Vector2(0,1);rect.anchoredPosition=new Vector2(184,-318);rect.sizeDelta=new Vector2(144,40);
                 optionalEventEntry.GetComponentInChildren<Text>().text="個別イベント";optionalEventEntry.GetComponentInChildren<Text>().fontSize=16;
-                optionalEventEntry.onClick.AddListener(()=>{var view=GetComponent<OptionalEventConversationPanel>()??gameObject.AddComponent<OptionalEventConversationPanel>();if(view.OpenEvent())Close();});
+                optionalEventEntry.onClick.AddListener(()=>{var view=GetComponent<OptionalEventConversationPanel>()??gameObject.AddComponent<OptionalEventConversationPanel>();if(view.OpenEvent(selectedId))Close();});
             }
             var b=CafeBackends.Local as LocalCafeBackend;
-            bool visible=selectedId=="cat-mike" && b.OptionalEventListed;optionalEventEntry.gameObject.SetActive(visible);
+            var candidate=b.OptionalForCat(selectedId);bool visible=candidate!=null;optionalEventEntry.gameObject.SetActive(visible);
             if(care!=null){care.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,visible?144:304);care.GetComponentInChildren<Text>().text=visible?"用品・ケア":"用品・ケアを開く";}
-            optionalEventEntry.interactable=GetComponent<PythonStateClient>().CanManageSaves && !GetComponent<PythonStateClient>().AutoPlayExecuting && b.OptionalEventReason=="";
+            optionalEventEntry.interactable=GetComponent<PythonStateClient>().CanManageSaves && !GetComponent<PythonStateClient>().AutoPlayExecuting && b.OptionalReason(candidate)=="";
         }
         public void RefreshControls()
         {

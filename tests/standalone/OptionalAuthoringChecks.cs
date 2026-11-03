@@ -24,7 +24,7 @@ static partial class Program
         CafeReplayCatalog.Validate(profile);var definitions=CafeReplayCatalog.Definitions(profile,new CafeOptionalEventCatalog{version=1,pack_id=new string('0',32),events=new CafeOptionalDefinition[0]});
         Assert(profile.entries.All(e=>definitions.Any(d=>d.Key==e.Key)),"Removed catalogue retains both historical Extra revisions");
         string json=File.ReadAllText(Path.Combine(folder,"first","optional_events.json"));
-        foreach(string invalid in new[]{json.Replace("\"min_day\": 2","\"min_day\": \"2\""),json.Replace("\"version\": 1","\"version\": 1, \"version\": 1"),json.Replace("\"events\":", "\"reward\": 10, \"events\":"),json+"x","{}",json.Replace("\"min_day\": 2","\"min_day\": 2.0")})
+        foreach(string invalid in new[]{json.Replace("\"min_day\": 2","\"min_day\": \"2\""),json.Replace("\"version\": 1","\"version\": 1, \"version\": 1").Replace("\"version\": 2","\"version\": 2, \"version\": 2"),json.Replace("\"events\":", "\"reward\": 10, \"events\":"),json+"x","{}",json.Replace("\"min_day\": 2","\"min_day\": 2.0")})
         {bool denied=false;try{CafeOptionalEventJson.Parse(invalid);}catch(ArgumentException){denied=true;}Assert(denied,"Strict JSON contract rejects malformed fields/types/duplicates");}
         foreach(Action<CafeOptionalDefinition> edit in new Action<CafeOptionalDefinition>[] {d=>d.title=new string('長',31),d=>d.min_day=0,d=>d.min_affinity=101,d=>d.accept_caption=new string('長',25),d=>d.introduction[0].speaker=new string('話',8)})
         {var invalid=second.events[0].Copy();edit(invalid);invalid.revision=invalid.Digest();bool denied=false;try{invalid.Validate();}catch(ArgumentException){denied=true;}Assert(denied,"Field bounds rejected independently of revision verification");}

@@ -10,7 +10,7 @@ namespace CatCafePreview.Standalone
     // Strict types and duplicate/unknown keys cannot be checked by JsonUtility alone.
     public static class CafeOptionalEventJson
     {
-        public static object ReadValue(string json)=>new Reader(json).Read();
+        public static object ReadValue(string json,int maximum=100000,bool literals=false)=>new Reader(json,maximum,literals).Read();
         static Dictionary<string,object> Object(object value,params string[] keys)
         {
             var data=value as Dictionary<string,object>;
@@ -23,16 +23,19 @@ namespace CatCafePreview.Standalone
         static CafeConversationLine[] Lines(object value)=>Array(value).Select(v=>{var row=Object(v,"speaker","text");return new CafeConversationLine(Text(row["speaker"]),Text(row["text"]));}).ToArray();
         public static CafeOptionalEventCatalog Parse(string json)
         {
-            var root=Object(new Reader(json).Read(),"version","pack_id","events");
-            var result=new CafeOptionalEventCatalog{version=Number(root["version"]),pack_id=Text(root["pack_id"]),events=Array(root["events"]).Select(v=>{
-                var r=Object(v,"event_id","cat_id","content_cat_id","min_day","min_affinity","title","accept_caption","decline_caption","introduction","accepted","declined","revision");
-                return new CafeOptionalDefinition{event_id=Text(r["event_id"]),cat_id=Text(r["cat_id"]),content_cat_id=Text(r["content_cat_id"]),min_day=Number(r["min_day"]),min_affinity=Number(r["min_affinity"]),title=Text(r["title"]),accept_caption=Text(r["accept_caption"]),decline_caption=Text(r["decline_caption"]),revision=Text(r["revision"]),introduction=Lines(r["introduction"]),accepted=Lines(r["accepted"]),declined=Lines(r["declined"])};
+            var root=Object(new Reader(json,1000000).Read(),"version","pack_id","events");
+            int version=Number(root["version"]);if(version==1 && json.Length>100000)throw new ArgumentException("旧イベントJSONが大きすぎます。");
+            var result=new CafeOptionalEventCatalog{version=version,pack_id=Text(root["pack_id"]),events=Array(root["events"]).Select(v=>{
+                var keys=new List<string>{"event_id","content_cat_id","min_day","min_affinity","title","accept_caption","decline_caption","introduction","accepted","declined","revision"};
+                var raw=v as Dictionary<string,object>;if(raw==null)throw new ArgumentException("イベント行が不正です。");
+                if(version==1 || raw.ContainsKey("target_kind") && Text(raw["target_kind"])=="individual")keys.Add("cat_id");if(version==2)keys.Add("target_kind");var r=Object(v,keys.ToArray());
+                return new CafeOptionalDefinition{schema_version=version,target_kind=version==2?Text(r["target_kind"]):null,event_id=Text(r["event_id"]),cat_id=r.ContainsKey("cat_id")?Text(r["cat_id"]):null,content_cat_id=Text(r["content_cat_id"]),min_day=Number(r["min_day"]),min_affinity=Number(r["min_affinity"]),title=Text(r["title"]),accept_caption=Text(r["accept_caption"]),decline_caption=Text(r["decline_caption"]),revision=Text(r["revision"]),introduction=Lines(r["introduction"]),accepted=Lines(r["accepted"]),declined=Lines(r["declined"])};
             }).ToArray()};result.Validate();return result;
         }
         sealed class Reader
         {
-            readonly string text;int at;
-            public Reader(string json){if(json==null || json.Length>100000)throw new ArgumentException("任意イベントJSONが大きすぎます。");text=json;}
+            readonly string text;readonly bool literals;int at;
+            public Reader(string json,int maximum=100000,bool literals=false){this.literals=literals;if(json==null || json.Length>maximum)throw new ArgumentException("任意イベントJSONが大きすぎます。");text=json;}
             ArgumentException Bad()=>new ArgumentException("任意イベントJSONの構文が不正です。");
             void Space(){while(at<text.Length && " \t\n\r".IndexOf(text[at])>=0)at++;}
             bool Eat(char c){Space();if(at<text.Length && text[at]==c){at++;return true;}return false;}
@@ -48,6 +51,7 @@ namespace CatCafePreview.Standalone
                     do{Space();var key=String();Need(':');if(result.ContainsKey(key))throw Bad();result.Add(key,Value(depth+1));}while(Eat(','));Need('}');return result;
                 }
                 if(Eat('[')){var result=new List<object>();if(Eat(']'))return result.ToArray();do{result.Add(Value(depth+1));}while(Eat(','));Need(']');return result.ToArray();}
+                if(literals){foreach(string token in new[]{"true","false","null"})if(at+token.Length<=text.Length && string.Compare(text,at,token,0,token.Length,StringComparison.Ordinal)==0){at+=token.Length;return token=="null"?null:(object)(token=="true");}}
                 int start=at;if(text[at]=='-')at++;if(at>=text.Length || text[at]<'0' || text[at]>'9')throw Bad();
                 if(text[at]=='0')at++;else while(at<text.Length && text[at]>='0' && text[at]<='9')at++;
                 if(!int.TryParse(text.Substring(start,at-start),NumberStyles.AllowLeadingSign,CultureInfo.InvariantCulture,out int number))throw Bad();return number;

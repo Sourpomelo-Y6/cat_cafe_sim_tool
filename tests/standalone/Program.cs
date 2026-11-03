@@ -175,6 +175,7 @@ static partial class Program
     {
         if(args.Length>0 && args[0]=="--optional-authoring"){OptionalAuthoringChecks(args[1]);return;}
         if(args.Length>0 && args[0]=="--optional-authoring"){OptionalAuthoringChecks(args[1]);return;}
+        if(args.Length>0 && args[0]=="--optional-all"){AllOptionalEventChecks(args[1]);return;}
         if(args.Length>0 && args[0]=="--optional-events"){OptionalEventChecks();return;}
         if(args.Length>0 && args[0]=="--housing32"){Housing32Checks(args[1],args[2],args[3]);return;}
         if(args.Length>0 && args[0]=="--interaction-statistics"){InteractionStatisticsChecks(args[1],args[2]);return;}

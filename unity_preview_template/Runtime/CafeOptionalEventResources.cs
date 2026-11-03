@@ -9,10 +9,11 @@ namespace CatCafePreview
     {
         public static CafeOptionalEventCatalog Load()
         {
-            var imagePointer=Resources.Load<TextAsset>("CatCafeContent/catalog");if(imagePointer==null)return null;
+            var pointer=Resources.Load<TextAsset>("CatCafeEvents/catalog");
+            var imagePointer=Resources.Load<TextAsset>("CatCafeContent/catalog");if(imagePointer==null){if(pointer!=null)throw new ArgumentException("明示されたイベント定義に対応する通常素材がありません。");return null;}
             var content=JsonUtility.FromJson<ContentCatalog>(imagePointer.text);
             var bundle=JsonUtility.FromJson<ContentBundle>(Resources.Load<TextAsset>(content.bundleResource).text);
-            var pointer=Resources.Load<TextAsset>("CatCafeEvents/catalog");string resource;
+            string resource;
             if(pointer!=null)
             {
                 resource=JsonUtility.FromJson<OptionalEventPointer>(pointer.text)?.eventResource;
