@@ -7,10 +7,16 @@ namespace CatCafePreview.Standalone
     [Serializable] public sealed class CafeCatOutfitSelection {public string cat_id,outfit_id;}
     public static class CafeCatOutfits
     {
+        public const int MaxSelections=512;
+        public static void Validate(CafeCatOutfitSelection[] rows,CafeSnapshot state)
+        {
+            var copy=Copy(rows);
+            if(state?.cats==null || copy.Any(r=>!state.cats.Any(c=>c.id==r.cat_id)))throw new ArgumentException("見た目の個体が保存内に存在しません。");
+        }
         public static CafeCatOutfitSelection[] Copy(CafeCatOutfitSelection[] rows)
         {
             rows=rows??new CafeCatOutfitSelection[0];
-            if(rows.Length>1 || rows.Any(r=>r==null || r.cat_id!="cat-mike" || !Regex.IsMatch(r.outfit_id??"","\\A[a-z][a-z0-9_-]{0,31}\\z")))throw new ArgumentException("見た目の保存項目が不正です。");
+            if(rows.Length>MaxSelections || rows.Where(r=>r!=null).Select(r=>r.cat_id).Distinct().Count()!=rows.Length || rows.Any(r=>r==null || !Regex.IsMatch(r.cat_id??"","\\A[a-z][a-z0-9_-]{0,63}\\z") || !Regex.IsMatch(r.outfit_id??"","\\A[a-z][a-z0-9_-]{0,31}\\z")))throw new ArgumentException("見た目の保存項目が不正です。");
             return rows.Select(r=>new CafeCatOutfitSelection{cat_id=r.cat_id,outfit_id=r.outfit_id}).ToArray();
         }
         // Find only a root property. Strings elsewhere (including saved dialogue) are not fields.
@@ -32,10 +38,10 @@ namespace CatCafePreview.Standalone
                 if(key=="cat_outfits")
                 {
                     if(found)throw new ArgumentException("見た目の保存項目が重複しています。");found=true;string value=json.Substring(start,at-start).Trim();
-                    if(value.Length>4096)throw new ArgumentException("見た目の保存項目が大きすぎます。");
+                    if(value.Length>100000)throw new ArgumentException("見た目の保存項目が大きすぎます。");
                     if(value!="null")
                     {
-                        var array=CafeOptionalEventJson.ReadValue(value) as object[];if(array==null || array.Length>1)throw new ArgumentException("見た目の保存配列が不正です。");
+                        var array=CafeOptionalEventJson.ReadValue(value) as object[];if(array==null || array.Length>MaxSelections)throw new ArgumentException("見た目の保存配列が不正です。");
                         result=array.Select(v=>{var row=v as Dictionary<string,object>;if(row==null || row.Count!=2 || !row.ContainsKey("cat_id") || !row.ContainsKey("outfit_id") || !(row["cat_id"] is string) || !(row["outfit_id"] is string))throw new ArgumentException("見た目の保存項目が不正です。");return new CafeCatOutfitSelection{cat_id=(string)row["cat_id"],outfit_id=(string)row["outfit_id"]};}).ToArray();
                     }
                 }

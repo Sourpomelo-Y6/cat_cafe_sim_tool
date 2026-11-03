@@ -59,11 +59,12 @@ namespace CatCafePreview
             var texture=cat==null?null:(CatStateImages.Resolve(cat,stateKind)??CatOutfits.Resolve(cat)??preview.PythonCatTexture(cat));
             bool visible=texture!=null && texture!=ContentPreview.CatPlaceholderTexture();
             portrait.gameObject.SetActive(visible);caption.gameObject.SetActive(visible);
-            health.anchoredPosition=visible?new Vector2(128,-80):originalPosition;health.sizeDelta=visible?new Vector2(200,212):originalSize;
+            health.anchoredPosition=visible?new Vector2(128,-80):originalPosition;health.sizeDelta=visible?new Vector2(200,CafeBackends.Standalone?188:212):new Vector2(originalSize.x,CafeBackends.Standalone?188:originalSize.y);
             // The viewport and scrollbar use fixed coordinates in the existing layout.
             var scroll=health.GetComponent<ScrollRect>();var viewport=scroll.viewport;viewport.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,visible?168:originalSize.x-32);
             owner.stateDetails.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,visible?168:originalSize.x-32);
-            var bar=scroll.verticalScrollbar.GetComponent<RectTransform>();bar.anchoredPosition=new Vector2((visible?200:originalSize.x)-18,-6);
+            if(CafeBackends.Standalone)viewport.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,176);
+            var bar=scroll.verticalScrollbar.GetComponent<RectTransform>();if(CafeBackends.Standalone)bar.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,176);bar.anchoredPosition=new Vector2((visible?200:originalSize.x)-18,-6);
             portrait.texture=visible?texture:null;portrait.enabled=portrait.texture!=null;
             if(portrait.texture!=null){float ratio=(float)portrait.texture.width/portrait.texture.height;portrait.rectTransform.sizeDelta=ratio>=1?new Vector2(96,96/ratio):new Vector2(96*ratio,96);}
             int kind=visible && portrait.texture!=null && portrait.texture!=ContentPreview.CatPlaceholderTexture()?stateKind:0;

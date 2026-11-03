@@ -40,7 +40,7 @@ class CatOutfitsTests(unittest.TestCase):
             bad = copy.deepcopy(data); bad[key] = value
             with self.assertRaises(ValueError):
                 validate(bad)
-        for key, value in [('outfit_id', []), ('outfit_id', 'unknown'), ('image', '../test.png'), ('content_cat_id', 'other'), ('label', ' '), ('label', []), ('label', 'x' * 41)]:
+        for key, value in [('outfit_id', []), ('outfit_id', 'unknown'), ('image', '../test.png'), ('content_cat_id', '../other'), ('label', ' '), ('label', []), ('label', 'x' * 41)]:
             bad = copy.deepcopy(data); bad['outfits'][0][key] = value
             with self.assertRaises(ValueError):
                 validate(bad)

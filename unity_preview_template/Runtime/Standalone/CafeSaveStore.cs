@@ -62,12 +62,12 @@ namespace CatCafePreview.Standalone
             var value = decode(File.ReadAllText(PathFor(slot), Encoding.UTF8));
             if (value == null || value.version != 1 || value.slot != slot || !DateTimeOffset.TryParse(value.created_at, out _)) throw new ArgumentException("Unsupported save envelope");
             migrate?.Invoke(value);
-            CafeCatOutfits.Copy(value.cat_outfits); validate(value.state); CafeOptionalEvents.Validate(value.optional_events); CafeInteractionStatistics.Validate(value.interaction_statistics,value.state); return value;
+            CafeCatOutfits.Validate(value.cat_outfits,value.state); validate(value.state); CafeOptionalEvents.Validate(value.optional_events); CafeInteractionStatistics.Validate(value.interaction_statistics,value.state); return value;
         }
         public void SaveNew(int slot,CafeSnapshot state)
         {
             validate(state);string path=PathFor(slot);Directory.CreateDirectory(directory);var value=new CafeSaveEnvelope {slot=slot,created_at=DateTimeOffset.UtcNow.ToString("o"),state=state};string temp=path+".import-"+Guid.NewGuid().ToString("N");
-            try{using(var stream=new FileStream(temp,FileMode.CreateNew,FileAccess.Write,FileShare.None)){var bytes=Encoding.UTF8.GetBytes(encode(value));stream.Write(bytes,0,bytes.Length);stream.Flush(true);}var verified=decode(File.ReadAllText(temp,Encoding.UTF8));if(verified==null || verified.slot!=slot || verified.version!=1)throw new IOException("Import verification failed");CafeCatOutfits.Copy(verified.cat_outfits);validate(verified.state);CafeInteractionStatistics.Validate(verified.interaction_statistics,verified.state);File.Move(temp,path);}finally{if(File.Exists(temp))File.Delete(temp);}
+            try{using(var stream=new FileStream(temp,FileMode.CreateNew,FileAccess.Write,FileShare.None)){var bytes=Encoding.UTF8.GetBytes(encode(value));stream.Write(bytes,0,bytes.Length);stream.Flush(true);}var verified=decode(File.ReadAllText(temp,Encoding.UTF8));if(verified==null || verified.slot!=slot || verified.version!=1)throw new IOException("Import verification failed");CafeCatOutfits.Validate(verified.cat_outfits,verified.state);validate(verified.state);CafeInteractionStatistics.Validate(verified.interaction_statistics,verified.state);File.Move(temp,path);}finally{if(File.Exists(temp))File.Delete(temp);}
         }
         public void Save(int slot, CafeSnapshot state)
         {
@@ -81,7 +81,7 @@ namespace CatCafePreview.Standalone
             // A failed write/validation never replaces the previous save.
             var readback = decode(File.ReadAllText(temp, Encoding.UTF8));
             if (readback == null || readback.version != 1 || readback.slot != slot) throw new IOException("Save verification failed");
-            CafeCatOutfits.Copy(readback.cat_outfits); validate(readback.state); CafeOptionalEvents.Validate(readback.optional_events); CafeInteractionStatistics.Validate(readback.interaction_statistics,readback.state);
+            CafeCatOutfits.Validate(readback.cat_outfits,readback.state); validate(readback.state); CafeOptionalEvents.Validate(readback.optional_events); CafeInteractionStatistics.Validate(readback.interaction_statistics,readback.state);
             if (File.Exists(path)) ReplaceWithRetry(temp, path); else File.Move(temp, path);
         }
         // Keep the atomic replacement and backup. A short IO conflict may clear;

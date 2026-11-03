@@ -534,10 +534,10 @@ namespace CatCafePreview
         }
 
         public bool CanChangeCatOutfit=>CafeBackends.Standalone && !sendingCommand && !refreshingState && CanManageSaves && !AutoPlayRunning && (CafeBackends.Local as LocalCafeBackend)?.CanChangeCatOutfit==true;
-        public void SetCatOutfit(string choice)
+        public void SetCatOutfit(string choice,string catId="cat-mike")
         {
             if(!CanChangeCatOutfit)return;
-            pending=new PythonShiftCommand{request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,expected_revision=current.revision,kind="set_cat_outfit",cat_id="cat-mike",choice=choice};
+            pending=new PythonShiftCommand{request_id=Guid.NewGuid().ToString("N"),instance_id=current.instance_id,expected_revision=current.revision,kind="set_cat_outfit",cat_id=catId,choice=choice};
             preview.RefreshPythonControls();
         }
         private void Accept(PythonCafeState state)

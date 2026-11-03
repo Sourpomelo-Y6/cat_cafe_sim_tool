@@ -104,9 +104,11 @@ namespace CatCafePreview
                 if (cmd.instance_id != s.instance_id || cmd.expected_revision != s.revision) throw new InvalidOperationException("状態が更新されています。最新状態で再操作してください。");
                 if(cmd.kind=="set_cat_outfit")
                 {
-                    if(!CanChangeCatOutfit || cmd.cat_id!="cat-mike" || !s.cats.Any(c=>c.id==cmd.cat_id) || (cmd.choice!="" && cmd.choice!="ribbon"))throw new InvalidOperationException("見た目は操作可能な営業準備中に変更してください。");
-                    if(cmd.choice=="ribbon" && CatOutfits.ImageFor("playtest-mike")==null)throw new InvalidOperationException("リボン姿の画像が未登録です。");
-                    catOutfits=cmd.choice==""?new CafeCatOutfitSelection[0]:new[]{new CafeCatOutfitSelection{cat_id=cmd.cat_id,outfit_id=cmd.choice}};
+                    if(!CanChangeCatOutfit || !s.cats.Any(c=>c.id==cmd.cat_id) || (cmd.choice!="" && cmd.choice!="ribbon"))throw new InvalidOperationException("見た目は操作可能な営業準備中に変更してください。");
+                    if(cmd.choice=="ribbon" && (s.cats.First(c=>c.id==cmd.cat_id).activity=="adopted" || CatOutfits.ImageFor(cmd.cat_id,Details.ContentId(cmd.cat_id),"ribbon")==null))throw new InvalidOperationException("リボン姿の画像が未登録です。");
+                    var next=catOutfits.Where(r=>r.cat_id!=cmd.cat_id).ToList();
+                    if(cmd.choice!="")next.Add(new CafeCatOutfitSelection{cat_id=cmd.cat_id,outfit_id=cmd.choice});
+                    var updated=CafeCatOutfits.Copy(next.ToArray());CafeCatOutfits.Validate(updated,s);catOutfits=updated;
                     var changed=Success(JsonUtility.ToJson(new PythonCommandReply{state=View()}));replies.Add(cmd.request_id,new KeyValuePair<string,CafeResponse>(json,changed));return changed;
                 }
                 // A newly pending conversation must yield control, not reject a step while
