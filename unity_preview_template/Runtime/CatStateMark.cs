@@ -19,6 +19,25 @@ namespace CatCafePreview
     public sealed class CatStateMarkGraphic : MaskableGraphic
     {
         public int kind;
+        public static CatStateMarkGraphic Create(Transform parent, string name, Vector2 position, float size)
+        {
+            var mark = new GameObject(name, typeof(RectTransform), typeof(CanvasRenderer), typeof(CatStateMarkGraphic)).GetComponent<CatStateMarkGraphic>();
+            var rect = mark.rectTransform;
+            rect.SetParent(parent, false);
+            rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(0, 1);
+            rect.anchoredPosition = position;
+            rect.sizeDelta = new Vector2(size, size);
+            mark.raycastTarget = false;
+            return mark;
+        }
+
+        public void ShowKind(int value)
+        {
+            if (kind == value) return;
+            kind = value;
+            color = kind == 3 ? new Color(.72f,.18f,.3f) : new Color(.4f,.27f,.16f);
+            SetVerticesDirty();
+        }
         protected override void OnPopulateMesh(VertexHelper mesh)
         {
             mesh.Clear();
@@ -68,7 +87,7 @@ namespace CatCafePreview
             portrait.texture=visible?texture:null;portrait.enabled=portrait.texture!=null;
             if(portrait.texture!=null){float ratio=(float)portrait.texture.width/portrait.texture.height;portrait.rectTransform.sizeDelta=ratio>=1?new Vector2(96,96/ratio):new Vector2(96*ratio,96);}
             int kind=visible && portrait.texture!=null && portrait.texture!=ContentPreview.CatPlaceholderTexture()?stateKind:0;
-            caption.text=CatStateMark.Caption(kind);badge.gameObject.SetActive(kind!=0);symbol.kind=kind;symbol.color=kind==3?new Color(.72f,.18f,.3f):new Color(.4f,.27f,.16f);symbol.SetVerticesDirty();
+            caption.text=CatStateMark.Caption(kind);badge.gameObject.SetActive(kind!=0);symbol.ShowKind(kind);
         }
         public void Hide(){if(portrait!=null)portrait.gameObject.SetActive(false);if(caption!=null)caption.gameObject.SetActive(false);if(badge!=null)badge.gameObject.SetActive(false);}
     }

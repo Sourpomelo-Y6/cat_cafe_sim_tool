@@ -48,7 +48,14 @@ namespace CatCafePreview
                 detailText.fontSize = showSeats ? 16 : phase == "open" ? 18 : 22;
             }
             var rosterScroll=rosterPanel.GetComponent<ScrollRect>();
-            if(rosterScroll!=null){rosterPanel.GetComponent<RectTransform>().anchoredPosition=new Vector2(24,phase=="open" ? -262 : -220);rosterPanel.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,phase=="open" ? 476 : 518);rosterScroll.viewport.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,phase=="open" ? 476 : 518);}
+            if(rosterScroll!=null)
+            {
+                float height = phase == "open" ? 476 : 518;
+                var rect = rosterPanel.GetComponent<RectTransform>();
+                rect.anchoredPosition = new Vector2(24, phase == "open" ? -262 : -220);
+                rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
+                GetComponent<PythonCatRoster>().LayoutMarkLegend(rosterScroll, height);
+            }
             var visibility=GetComponent<PythonCatVisibility>();if(visibility?.rosterToggle!=null)visibility.rosterToggle.GetComponent<RectTransform>().anchoredPosition=new Vector2(24,phase=="open" ? -94 : -184);
             heading.text = phase == "closed" ? "閉店結果・猫の状態" : showSeats ? "席一覧　　人物アイコン：接客中のお客さん" : "猫一覧";
             if((state.sidebar_progress ?? (CafeBackends.Standalone ? null : state.objective_progress)) != null)

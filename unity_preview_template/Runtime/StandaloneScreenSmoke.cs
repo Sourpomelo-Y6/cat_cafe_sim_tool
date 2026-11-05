@@ -205,6 +205,7 @@ namespace CatCafePreview
             yield return Wait(()=>Client?.CanManageSaves==true,"business scene ready");Check(Client.CurrentState.day==1 && Client.CurrentState.can_set_shifts,"initial preparation");Check(Client.CurrentState.rest_proposal.SequenceEqual(new[]{"cat-mugi","cat-sora","cat-tama"}),"rest proposal matches Python initial tie ordering");
             if(Array.Exists(Environment.GetCommandLineArgs(),a=>a=="--catcafe-state-images-check"))yield return StateImageChecks();
             // Outfit fixtures modify care records; run baseline regression in a fresh Player.
+            if(Array.Exists(Environment.GetCommandLineArgs(),a=>a=="--catcafe-roster-marks-check")){yield return RosterStateMarkChecks();yield break;}
             if(Array.Exists(Environment.GetCommandLineArgs(),a=>a=="--catcafe-combined-cat-check")){yield return CombinedCatStart();yield break;}
             if(Array.Exists(Environment.GetCommandLineArgs(),a=>a=="--catcafe-all-optional-check")){yield return AllOptionalChecks();yield break;}
             if(Array.Exists(Environment.GetCommandLineArgs(),a=>a=="--catcafe-all-outfits-check")){yield return AllCatOutfitChecks();yield break;}

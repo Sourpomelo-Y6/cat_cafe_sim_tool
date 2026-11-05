@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,9 +12,64 @@ namespace CatCafePreview
         public GameObject customerIcon;
         public Button work, rest, details;
         [NonSerialized] public PythonCatState state;
+        private CatStateMarkGraphic rosterMark;
+        private string rosterName;
+
+        private void SetRosterName(string name)
+        {
+            name = (name ?? "").Replace('\r', ' ').Replace('\n', ' ');
+            if (rosterName == name) return;
+            rosterName = name;
+            var rect = catName.rectTransform;
+            rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 154);
+            catName.resizeTextForBestFit = false;
+            catName.horizontalOverflow = HorizontalWrapMode.Overflow;
+            catName.supportRichText = false;
+            var settings = catName.GetGenerationSettings(rect.rect.size);
+            var generator = catName.cachedTextGeneratorForLayout;
+            float width = rect.rect.width * catName.pixelsPerUnit;
+            for (settings.fontSize = 20; settings.fontSize > 14; settings.fontSize--)
+                if (generator.GetPreferredWidth(name, settings) <= width) break;
+            catName.fontSize = settings.fontSize;
+            if (generator.GetPreferredWidth(name, settings) <= width)
+            {
+                catName.text = name;
+                return;
+            }
+            string prefix = "";
+            var elements = StringInfo.GetTextElementEnumerator(name);
+            while (elements.MoveNext())
+            {
+                string next = prefix + elements.GetTextElement();
+                if (generator.GetPreferredWidth(next + "…", settings) > width) break;
+                prefix = next;
+            }
+            catName.text = prefix + "…";
+        }
+
+        public void ClearRosterMark()
+        {
+            if (rosterMark != null) rosterMark.gameObject.SetActive(false);
+        }
+
+        private void SetRosterMark(int kind)
+        {
+            if (kind == 0) { ClearRosterMark(); return; }
+            if (rosterMark == null)
+            {
+                var nameRect = catName.rectTransform;
+                float centerY = nameRect.anchoredPosition.y + (.5f - nameRect.pivot.y) * nameRect.rect.height;
+                rosterMark = CatStateMarkGraphic.Create(transform, "Roster State Mark", new Vector2(170, centerY + 10), 20);
+            }
+            rosterMark.ShowKind(kind);
+            rosterMark.gameObject.SetActive(true);
+        }
+
         public void Set(PythonCatState cat, PythonCafeState cafe, ContentPreview preview, PythonStateClient client)
         {
-            state = cat; catName.text = cat.name;
+            state = cat;
+            SetRosterName(cat.name);
+            SetRosterMark(CatStateMark.Resolve(cat));
             picture.texture = preview.PythonCatTexture(cat);
             picture.enabled = picture.texture != null;
             bool occupied = cafe.seats != null && Array.Exists(cafe.seats,

@@ -10,6 +10,42 @@ namespace CatCafePreview
         public RectTransform content;
         public PythonCatCard cardPrefab;
         private readonly List<PythonCatCard> cards = new List<PythonCatCard>();
+        private GameObject markLegend;
+
+        public void LayoutMarkLegend(ScrollRect scroll, float height)
+        {
+            const float legendHeight = 24;
+            var viewport = scroll.viewport;
+            viewport.anchoredPosition = new Vector2(viewport.anchoredPosition.x, -legendHeight);
+            viewport.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height - legendHeight);
+            if (markLegend == null)
+            {
+                markLegend = new GameObject("Roster State Legend", typeof(RectTransform));
+                var legendRect = (RectTransform)markLegend.transform;
+                legendRect.SetParent(scroll.transform, false);
+                legendRect.anchorMin = legendRect.anchorMax = legendRect.pivot = new Vector2(0, 1);
+                legendRect.anchoredPosition = new Vector2(10, 0);
+                legendRect.sizeDelta = new Vector2(390, legendHeight);
+                for (int kind = 1; kind <= 3; kind++)
+                {
+                    float x = (kind - 1) * 130;
+                    CatStateMarkGraphic.Create(legendRect, "Legend Mark " + kind, new Vector2(x, -3), 18).ShowKind(kind);
+                    var caption = new GameObject("Legend Caption " + kind, typeof(RectTransform), typeof(Text)).GetComponent<Text>();
+                    var rect = caption.rectTransform;
+                    rect.SetParent(legendRect, false);
+                    rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(0, 1);
+                    rect.anchoredPosition = new Vector2(x + 22, 0);
+                    rect.sizeDelta = new Vector2(108, legendHeight);
+                    caption.font = cardPrefab.catName.font;
+                    caption.fontSize = 14;
+                    caption.color = new Color(.16f,.21f,.18f);
+                    caption.alignment = TextAnchor.MiddleLeft;
+                    caption.raycastTarget = false;
+                    caption.text = CatStateMark.Caption(kind);
+                }
+            }
+            markLegend.SetActive(true);
+        }
         private void EnsureScrollNavigation()
         {
             var scroll=content.GetComponentInParent<ScrollRect>();if(scroll==null)return;
@@ -40,12 +76,14 @@ namespace CatCafePreview
         public void RefreshControls() { foreach (var card in cards) card.Refresh(GetComponent<PythonStateClient>()); }
         public void Disconnect()
         {
+            if (markLegend != null) markLegend.SetActive(false);
             foreach (var card in content.GetComponentsInChildren<PythonCatCard>(true))
             {
                 card.picture.texture = null; card.picture.enabled = false;
                 card.customerIcon.SetActive(false); card.work.interactable = card.rest.interactable = false;
                 if(card.details != null) card.details.interactable=false;
                 card.stateText.text = "未接続";
+                card.ClearRosterMark();
             }
         }
     }

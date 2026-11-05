@@ -224,6 +224,100 @@ namespace CatCafePreview
             yield return Click(entry, "play combined Extra branch");
             yield return Capture("combined-extra-replay");
         }
+        IEnumerator RosterStateMarkChecks()
+        {
+            File.Copy(Argument("--catcafe-full-roster-save"), Path.Combine(output, "saves/slot-1.json"), true);
+            Client.LoadSaved("1");
+            yield return Wait(() => Client.UIStateReady && Client.CurrentState.cats.Length == 32, "roster mark fixture loaded");
+            var preparation = Client.GetComponent<PythonPreparationPanel>();
+            if (preparation.panel.activeSelf) yield return Click(preparation.close, "close preparation to reveal roster");
+            var roster = Client.GetComponent<PythonCatRoster>();
+            var scroll = roster.content.GetComponentInParent<ScrollRect>();
+            var service = Client.GetComponent<PythonServiceScreen>();
+            service.ShowCats();
+            Canvas.ForceUpdateCanvases();
+            Check(roster.Count == 32 && roster.content.rect.height > scroll.viewport.rect.height, "32 cards remain scrollable");
+            var legend = scroll.transform.Find("Roster State Legend");
+            Check(legend.gameObject.activeInHierarchy && legend.GetComponentsInChildren<CatStateMarkGraphic>().Length == 3, "roster legend visible");
+
+            var family = CombinedFamily();
+            string first = family[0].cat_id, last = family[1].cat_id;
+            PythonCatCard Card(string id) => Enumerable.Range(0, roster.Count).Select(roster.GetCard).Single(c => c.state.cat_id == id);
+            CatStateMarkGraphic Mark(PythonCatCard card) => card.transform.Find("Roster State Mark")?.GetComponent<CatStateMarkGraphic>();
+            int Kind(PythonCatCard card) => Mark(card)?.gameObject.activeSelf == true ? Mark(card).kind : 0;
+            var fixture = backend.View();
+            var target = fixture.cats.Single(c => c.cat_id == last);
+            var sibling = fixture.cats.Single(c => c.cat_id == first);
+            target.name = "派遣先から紹介されたとても長い名前の猫";
+            target.stress = target.fatigue = 60;
+            target.affinity = 80;
+            target.working = false;
+            target.content_cat_id = "qa-missing-cat-art";
+            sibling.stress = 0;
+            sibling.fatigue = 60;
+            sibling.affinity = 80;
+            fixture.seats = new[] { new PythonSeatState { cat_id = last, customer_id = "qa-customer" } };
+            roster.Apply(fixture);
+            Canvas.ForceUpdateCanvases();
+            var card = Card(last);
+            var mark = Mark(card);
+            var customer = card.customerIcon.GetComponent<RectTransform>();
+            Check(Kind(card) == 1 && Kind(Card(first)) == 2, "individual priority and resting cat without art");
+            Check(card.customerIcon.activeSelf && card.catName.text.EndsWith("…") && card.catName.preferredWidth <= card.catName.rectTransform.rect.width + 1, "long name fits beside both icons");
+            Check(card.catName.rectTransform.anchoredPosition.x + card.catName.rectTransform.rect.width < mark.rectTransform.anchoredPosition.x
+                && mark.rectTransform.anchoredPosition.x + mark.rectTransform.rect.width < customer.anchoredPosition.x, "name and icons do not overlap");
+            target.stress = target.fatigue = 0;
+            roster.Apply(fixture);
+            Check(Kind(card) == 3, "affinity threshold");
+            target.health_status = "sick";
+            roster.Apply(fixture);
+            Check(Kind(card) == 0, "sick cat clears mark");
+            target.health_status = "healthy";
+            target.activity = "dispatched";
+            roster.Apply(fixture);
+            Check(Kind(card) == 0, "offsite cat clears mark");
+            target.activity = "cafe";
+            roster.Apply(fixture);
+            roster.Disconnect();
+            Check(Kind(card) == 0 && !legend.gameObject.activeSelf, "disconnect clears marks and legend");
+
+            var native = backend.Simulation.State.cats.Single(c => c.id == last);
+            native.stress = 65;
+            backend.Simulation.State.cats.Single(c => c.id == first).fatigue = 65;
+            typeof(LocalCafeBackend).GetMethod("ResetJournal", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(backend, null);
+            yield return Wait(() => Client.UIStateReady && Card(last).state.stress == 65 && Kind(Card(last)) == 1 && Kind(Card(first)) == 2, "live roster refreshed from cat state");
+            Canvas.ForceUpdateCanvases();
+            var targetRect = (RectTransform)Card(last).transform;
+            float offset = -targetRect.anchoredPosition.y - targetRect.rect.height * targetRect.pivot.y;
+            float scrollPosition = 1 - Mathf.Clamp01(offset / (roster.content.rect.height - scroll.viewport.rect.height));
+            scroll.verticalNormalizedPosition = scrollPosition;
+            yield return Capture("roster-before-care");
+            yield return Click(Card(last).details, "open late roster card");
+            var detail = Client.GetComponent<PythonCatDetailsPanel>();
+            Check(detail.panel.activeSelf && detail.title.text.Contains(Client.CurrentState.cats.Single(c => c.cat_id == last).name), "card opens correct cat details");
+            detail.Care();
+            var items = Client.GetComponent<PythonItemsPanel>();
+            var item = backend.Simulation.Rules.item_shop.First(r => r.item.stress_relief > 5);
+            items.ShowPurchase();
+            items.shop.value = Array.FindIndex(Client.CurrentState.items.shop, r => r.choice == item.item.id);
+            yield return Click(items.buy, "buy roster care item");
+            int revision = Client.CurrentState.revision;
+            yield return Click(items.confirm, "confirm roster purchase");
+            yield return Changed(revision);
+            items.ShowCare();
+            items.owned.value = Array.FindIndex(Client.CurrentState.items.owned, r => r.item_id == item.item.id);
+            items.cats.value = Array.FindIndex(Client.CurrentState.items.owned[items.owned.value].targets, r => r.cat_id == last);
+            yield return Click(items.use, "use roster care item");
+            revision = Client.CurrentState.revision;
+            yield return Click(items.confirm, "confirm roster care");
+            yield return Changed(revision);
+            items.Close();
+            yield return Click(detail.panel.transform.Find("Details Card/Close").GetComponent<Button>(), "return to roster");
+            Check(Kind(Card(last)) == 0 && Kind(Card(first)) == 2, "care clears only target mark");
+            Check(Mathf.Abs(scroll.verticalNormalizedPosition - scrollPosition) < .01f && !service.ShowingSeats, "return preserves roster scroll");
+            yield return Capture("roster-after-care");
+        }
+
         IEnumerator AllOptionalResume()
         {
             CafeOptions.Current.instant=true;FindObjectOfType<PythonTitleScreen>().ResumeSaved("9");yield return Wait(()=>Client?.UIStateReady==true && Client.CurrentState.cats.Length==32,"optional cross-process 32-cat resume");
