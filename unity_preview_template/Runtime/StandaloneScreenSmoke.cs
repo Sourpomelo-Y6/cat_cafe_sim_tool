@@ -205,6 +205,7 @@ namespace CatCafePreview
             yield return Wait(()=>Client?.CanManageSaves==true,"business scene ready");Check(Client.CurrentState.day==1 && Client.CurrentState.can_set_shifts,"initial preparation");Check(Client.CurrentState.rest_proposal.SequenceEqual(new[]{"cat-mugi","cat-sora","cat-tama"}),"rest proposal matches Python initial tie ordering");
             if(Array.Exists(Environment.GetCommandLineArgs(),a=>a=="--catcafe-state-images-check"))yield return StateImageChecks();
             // Outfit fixtures modify care records; run baseline regression in a fresh Player.
+            if(Array.Exists(Environment.GetCommandLineArgs(),a=>a=="--catcafe-roster-care-check")){yield return RosterCareFilterChecks();yield break;}
             if(Array.Exists(Environment.GetCommandLineArgs(),a=>a=="--catcafe-roster-marks-check")){yield return RosterStateMarkChecks();yield break;}
             if(Array.Exists(Environment.GetCommandLineArgs(),a=>a=="--catcafe-combined-cat-check")){yield return CombinedCatStart();yield break;}
             if(Array.Exists(Environment.GetCommandLineArgs(),a=>a=="--catcafe-all-optional-check")){yield return AllOptionalChecks();yield break;}
@@ -297,8 +298,9 @@ namespace CatCafePreview
             var saved=JsonUtility.FromJson<CafeSaveEnvelope>(File.ReadAllText(Path.Combine(output,"saves/slot-5.json")));Check(saved.state.autoplay.paused && saved.state.day==savedDay && saved.state.phase=="open","saved autoplay is paused midbusiness");
             int savedTick=backend.Simulation.State.tick;for(int frame=0;frame<4;frame++)yield return null;Check(backend.Simulation.State.tick==savedTick,"saved autoplay does not advance implicitly");
             Client.StopAutoPlay();yield return Wait(()=>Client.CanManageSaves && !Client.AutoPlayRunning,"stop before replacing paused session");
+            string pausedInstance = Client.CurrentState.instance_id;
             var browser=owner.GetComponent<PythonSaveBrowser>();browser.OpenLoad();browser.Select(4);yield return Click(browser.action,"paused autoplay load review");yield return Click(browser.confirm,"paused autoplay load");
-            yield return Wait(()=>Client.CanSaveNow && Client.CurrentState.autoplay?.paused==true,"load preserves explicit autoplay pause");browser.Close();auto.Open();yield return Click(auto.proceed,"saved autoplay explicit resume");yield return Wait(()=>Client.BatchAutomatic && !backend.Simulation.State.autoplay.paused,"saved autoplay resumes through screen");
+            yield return Wait(()=>Client.UIStateReady && Client.CurrentState.instance_id!=pausedInstance && Client.CanSaveNow && Client.CurrentState.autoplay?.paused==true,"load preserves explicit autoplay pause");browser.Close();auto.Open();yield return Click(auto.proceed,"saved autoplay explicit resume");yield return Wait(()=>Client.BatchAutomatic && !backend.Simulation.State.autoplay.paused,"saved autoplay resumes through screen");
             var pendingField=typeof(PythonStateClient).GetField("pending",System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Instance);
             yield return Wait(()=>Client.CanSaveNow && (pendingField.GetValue(Client) as PythonShiftCommand)?.kind=="step_autoplay","save remains enabled during queued autoplay operation");
             Client.SaveToSlot(6);Client.SaveToSlot(7);yield return Wait(()=>Client.CanSaveNow && Client.CurrentState.autoplay?.paused==true && !Client.BatchAutomatic,"queued autoplay operation finishes before deferred save");

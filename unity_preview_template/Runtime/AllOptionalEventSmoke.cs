@@ -224,6 +224,118 @@ namespace CatCafePreview
             yield return Click(entry, "play combined Extra branch");
             yield return Capture("combined-extra-replay");
         }
+        IEnumerator RosterFilterCare(string catId)
+        {
+            var detail = Client.GetComponent<PythonCatDetailsPanel>();
+            detail.Care();
+            var items = Client.GetComponent<PythonItemsPanel>();
+            var item = backend.Simulation.Rules.item_shop.First(r => r.item.stress_relief > 5);
+            items.ShowPurchase();
+            items.shop.value = Array.FindIndex(Client.CurrentState.items.shop, r => r.choice == item.item.id);
+            yield return Click(items.buy, "filter buy care item");
+            int revision = Client.CurrentState.revision;
+            yield return Click(items.confirm, "filter confirm purchase");
+            yield return Changed(revision);
+            items.ShowCare();
+            items.owned.value = Array.FindIndex(Client.CurrentState.items.owned, r => r.item_id == item.item.id);
+            items.cats.value = Array.FindIndex(Client.CurrentState.items.owned[items.owned.value].targets, r => r.cat_id == catId);
+            yield return Click(items.use, "filter use care item");
+            revision = Client.CurrentState.revision;
+            yield return Click(items.confirm, "filter confirm care");
+            yield return Changed(revision);
+            Check(items.panel.activeSelf && detail.panel.activeSelf, "care can finish while target leaves filtered roster");
+            items.Close();
+            yield return Click(detail.panel.transform.Find("Details Card/Close").GetComponent<Button>(), "filter return from detail");
+        }
+
+        IEnumerator RosterCareFilterChecks()
+        {
+            File.Copy(Argument("--catcafe-full-roster-save"), Path.Combine(output, "saves/slot-1.json"), true);
+            Client.LoadSaved("1");
+            yield return Wait(() => Client.UIStateReady && Client.CurrentState.cats.Length == 32, "care filter roster loaded");
+            var prep = Client.GetComponent<PythonPreparationPanel>();
+            if (prep.panel.activeSelf) yield return Click(prep.close, "filter close preparation");
+            var service = Client.GetComponent<PythonServiceScreen>();
+            service.ShowCats();
+            var roster = Client.GetComponent<PythonCatRoster>();
+            var scroll = roster.content.GetComponentInParent<ScrollRect>();
+            Check(!roster.CareOnly && roster.Count == 32, "all cats selected initially");
+            var fixture = backend.View();
+            foreach (var cat in fixture.cats) { cat.stress = cat.fatigue = 0; cat.affinity = 80; }
+            fixture.cats[0].stress = 60;
+            fixture.cats[1].fatigue = 60;
+            fixture.cats[1].working = false;
+            fixture.cats[1].content_cat_id = "qa-no-image";
+            fixture.cats[2].stress = 60; fixture.cats[2].health_status = "sick";
+            fixture.cats[3].stress = 60; fixture.cats[3].activity = "dispatched";
+            fixture.cats[4].stress = 60; fixture.cats[4].activity = "adopted";
+            roster.Apply(fixture);
+            roster.ChangeCareFilter(true);
+            Check(roster.Count == 2 && roster.GetCard(0).state.cat_id == fixture.cats[0].cat_id && roster.GetCard(1).state.cat_id == fixture.cats[1].cat_id, "threshold resting missing art and excluded states");
+            var visibility = Client.GetComponent<PythonCatVisibility>();
+            visibility.Change(true);
+            roster.Apply(fixture);
+            Check(roster.Count == 2 && roster.AllCatsButton.GetComponentInChildren<Text>().text.Contains("32"), "adopted display does not add care candidates");
+            Check(visibility.Filter(fixture.cats).Length == 32, "shared visibility stays independent of care filter");
+            roster.Disconnect();
+            Check(!roster.AllCatsButton.interactable && !roster.CareCatsButton.interactable, "disconnected filters disabled");
+            roster.Apply(fixture);
+            Check(roster.CareOnly && roster.Count == 2, "same session reconnect retains filter");
+            var different = JsonUtility.FromJson<PythonCafeState>(JsonUtility.ToJson(fixture));
+            different.instance_id = "qa-new-care-session";
+            roster.Apply(different);
+            Check(!roster.CareOnly, "new session resets filter");
+            visibility.Change(false);
+            roster.Apply(backend.View());
+
+            var pair = CombinedFamily();
+            string target = pair[1].cat_id, sibling = pair[0].cat_id;
+            foreach (var cat in backend.Simulation.State.cats) cat.stress = cat.fatigue = 0;
+            var stressed = backend.Simulation.State.cats.Skip(14).Take(12).ToArray();
+            foreach (var cat in stressed) cat.stress = 65;
+            backend.Simulation.State.cats.Single(c => c.id == sibling).fatigue = 65;
+            typeof(LocalCafeBackend).GetMethod("ResetJournal", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(backend, null);
+            yield return Wait(() => Client.UIStateReady && Client.CurrentState.cats.Single(c => c.cat_id == target).stress == 65, "live care filter fixture refreshed");
+            yield return Click(roster.CareCatsButton, "choose care targets");
+            Check(roster.CareOnly && roster.Count == stressed.Length + 1, "live care candidate count");
+            Canvas.ForceUpdateCanvases();
+            var selected = Enumerable.Range(0, roster.Count).Select(roster.GetCard).Single(c => c.state.cat_id == target);
+            float y = -((RectTransform)selected.transform).anchoredPosition.y;
+            scroll.verticalNormalizedPosition = 1 - Mathf.Clamp01(y / (roster.content.rect.height - scroll.viewport.rect.height));
+            yield return Capture("care-filter-before");
+            yield return Click(selected.details, "open filtered late cat");
+            yield return RosterFilterCare(target);
+            Check(roster.CareOnly && roster.Count == stressed.Length && !Enumerable.Range(0, roster.Count).Any(i => roster.GetCard(i).state.cat_id == target), "only cared cat removed from filter");
+            Check(Enumerable.Range(0, roster.Count).Any(i => roster.GetCard(i).state.cat_id == sibling), "same-family sibling stays a care target");
+            Check(contentBoundsValid(scroll), "filtered return stays within scroll bounds");
+            yield return Capture("care-filter-after");
+
+            foreach (var cat in backend.Simulation.State.cats) cat.stress = cat.fatigue = 0;
+            backend.Simulation.State.cats.Single(c => c.id == target).stress = 65;
+            typeof(LocalCafeBackend).GetMethod("ResetJournal", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(backend, null);
+            yield return Wait(() => Client.UIStateReady && roster.Count == 1 && roster.GetCard(0).state.cat_id == target, "last care target refreshed");
+            yield return Click(roster.GetCard(0).details, "open last filtered cat");
+            yield return RosterFilterCare(target);
+            Check(roster.CareOnly && roster.Count == 0 && roster.ReturnToAllButton.gameObject.activeInHierarchy, "last care target shows empty state");
+            yield return Capture("care-filter-empty");
+            yield return Click(roster.ReturnToAllButton, "return to all cats");
+            Check(!roster.CareOnly && roster.Count == 32 && scroll.verticalNormalizedPosition >= .99f, "all cats restored at top");
+            yield return Click(roster.CareCatsButton, "filter empty again");
+            int revision = Client.CurrentState.revision;
+            Client.SaveToSlot(9);
+            yield return Changed(revision);
+            Check(roster.CareOnly, "normal save preserves active filter");
+            Client.LoadSaved("9");
+            yield return Wait(() => Client.UIStateReady && !roster.CareOnly && roster.Count == 32, "save load resets to all cats");
+            yield return Capture("care-filter-reloaded");
+        }
+
+        bool contentBoundsValid(ScrollRect scroll)
+        {
+            float y = scroll.content.anchoredPosition.y;
+            return y >= -1 && y <= Mathf.Max(0, scroll.content.rect.height - scroll.viewport.rect.height) + 1;
+        }
+
         IEnumerator RosterStateMarkChecks()
         {
             File.Copy(Argument("--catcafe-full-roster-save"), Path.Combine(output, "saves/slot-1.json"), true);

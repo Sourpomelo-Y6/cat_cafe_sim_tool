@@ -10,6 +10,7 @@ namespace CatCafePreview
         public ScrollRect scroll;
         public Button interact, previousInteraction, dispatch, missing, adoption,care;
         private bool showingCare;private ScrollRect originScroll;private float originPosition;private bool originSeats;
+        private PythonCatRoster.Position rosterPosition;
         public Button[] recordTabs;
         private int recordPage;
         private string instanceId;
@@ -32,16 +33,17 @@ namespace CatCafePreview
         public void OpenFromList(string catId,bool seats)
         {
             Open(catId);if(!panel.activeSelf)return;var service=GetComponent<PythonServiceScreen>();originSeats=seats;originScroll=(seats?service.seatPanel:service.rosterPanel).GetComponent<ScrollRect>();originPosition=originScroll.verticalNormalizedPosition;
+            rosterPosition = seats ? null : GetComponent<PythonCatRoster>().RememberPosition(catId);
             var close=panel.transform.Find("Details Card/Close").GetComponent<Button>();close.GetComponentInChildren<Text>().text=seats?"席一覧へ戻る":"猫一覧へ戻る";
         }
-        public void ResetSelection(){originScroll=null;Close();recordPage=0;}
+        public void ResetSelection(){originScroll=null;rosterPosition=null;Close();recordPage=0;}
         public void Care(){var items=GetComponent<PythonItemsPanel>();if(items==null)return;items.OpenForCat(selectedId);showingCare=items.panel.activeSelf;}
         public void Open(string catId)
         {
             var client=GetComponent<PythonStateClient>();
             if(!client.CanManageSaves || current == null) return;
             GetComponent<CatOutfitPanel>()?.Close();
-            showingCare=false;originScroll=null;panel.transform.Find("Details Card/Close").GetComponentInChildren<Text>().text="閉じる";
+            showingCare=false;originScroll=null;rosterPosition=null;panel.transform.Find("Details Card/Close").GetComponentInChildren<Text>().text="閉じる";
             if(selectedId!=catId)recordPage=0;
             selectedId=catId;
             Render();
@@ -49,7 +51,26 @@ namespace CatCafePreview
             if(stateDetails!=null){var healthScroll=stateDetails.GetComponentInParent<ScrollRect>();if(healthScroll!=null)healthScroll.verticalNormalizedPosition=1;}
         }
         public void RefreshVisibility(){if(selectedId!=null && Array.Find(GetComponent<ContentPreview>().VisiblePythonCats,row=>row.cat_id==selectedId)==null)Close();}
-        public void Close() { GetComponent<CatOutfitPanel>()?.Close(); if(showingCare)GetComponent<PythonItemsPanel>()?.Close();showingCare=false;panel.SetActive(false); selectedId=null;if(originScroll!=null){var service=GetComponent<PythonServiceScreen>();if(originSeats)service.ShowSeats();else service.ShowCats();Canvas.ForceUpdateCanvases();originScroll.StopMovement();originScroll.verticalNormalizedPosition=originPosition;originScroll=null;} }
+        public void Close()
+        {
+            GetComponent<CatOutfitPanel>()?.Close();
+            if (showingCare) GetComponent<PythonItemsPanel>()?.Close();
+            showingCare = false;
+            panel.SetActive(false);
+            selectedId = null;
+            if (originScroll != null)
+            {
+                var service = GetComponent<PythonServiceScreen>();
+                if (originSeats) service.ShowSeats();
+                else service.ShowCats();
+                Canvas.ForceUpdateCanvases();
+                originScroll.StopMovement();
+                if (rosterPosition != null) GetComponent<PythonCatRoster>().RestorePosition(rosterPosition);
+                else originScroll.verticalNormalizedPosition = originPosition;
+                originScroll = null;
+                rosterPosition = null;
+            }
+        }
         public void Interact()
         {
             var client=GetComponent<PythonStateClient>();var active=current==null ? null : current.player_interaction;
