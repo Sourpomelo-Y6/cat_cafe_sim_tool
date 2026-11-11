@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
-from optional_events import (OptionalEventStore, default_event, validate_event,
+from optional_events import (OptionalEventStore, default_event, validate_event, event_slot,
                              validate_pack, normalize_event, blank_event, read_pack, definition_text)
 
 
@@ -32,6 +32,20 @@ class OptionalEventsV2Tests(unittest.TestCase):
         self.assertEqual({e['content_cat_id'] for e in pack['events']}, {'playtest-mike', 'playtest-tama'})
         self.assertEqual(len(self.store.read_all()['entries']), 3)
         with self.assertRaises(ValueError): self.store.export_data({})
+
+    def test_one_family_can_publish_multiple_milestones(self):
+        for content_id, milestone in (('playtest-mike', 40), ('playtest-tama', 20), ('playtest-sora', 20)):
+            event = authored(content_id)
+            event.pop('revision')
+            event.update(event_id=f'optional.{content_id}.affinity-{milestone}', milestone=milestone, min_affinity=milestone)
+            self.store.save(dict(version=1, enabled=True, event=event))
+        catalog = {cid: cid for cid in ('playtest-mike', 'playtest-tama', 'playtest-sora')}
+        exported = self.store.export_data(catalog)
+        self.assertEqual({event_slot(e) for e in exported['events']}, {
+            ('playtest-mike', 20), ('playtest-mike', 40), ('playtest-tama', 20), ('playtest-sora', 20),
+        })
+        self.assertEqual(self.store.read('playtest-mike', 40)['event']['milestone'], 40)
+        self.assertEqual(self.store.read('playtest-mike', 20)['event']['event_id'], 'optional.mike.afternoon')
 
     def test_legacy_read_export_migration_and_failure(self):
         old = dict(version=1, enabled=True, event=validate_event(default_event(), require_revision=False))

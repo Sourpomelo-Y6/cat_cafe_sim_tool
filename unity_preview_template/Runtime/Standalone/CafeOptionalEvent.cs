@@ -9,6 +9,8 @@ namespace CatCafePreview.Standalone
     {
         public string event_id, revision, title, cat_id, content_cat_id, cat_name, image_resource;
         public int started_day;
+        public int milestone;
+        public int Milestone() => milestone!=0?milestone:event_id==CafeOptionalEvents.MikeId?20:0;
         public int scene_art;
         public string[] artwork;
         public string accept_caption, decline_caption;
@@ -26,6 +28,7 @@ namespace CatCafePreview.Standalone
         public const string MikeId="optional.mike.afternoon";
         public const string MikeCatId="cat-mike";
         public const int MikeAffinityMilestone=20;
+        public static bool ValidMilestone(int value)=>value>=20 && value<=100 && value%20==0;
         public const int MikeWindowArt=1;
         public const string WindowBackground="mike-window-v1", MikeApproachesStill="mike-approaches-v1";
         public static bool ValidArtwork(string[] artwork) =>
@@ -78,13 +81,17 @@ namespace CatCafePreview.Standalone
         public static void Validate(CafeOptionalEvent[] rows)
         {
             if(rows==null)return;
-            if(rows.Length>MaxRecords || rows.Any(r=>r==null || r.progress==null) || rows.Select(r=>r.event_id+"/"+r.cat_id).Distinct().Count()!=rows.Length || rows.Count(r=>!r.progress.completed)>1)throw new ArgumentException("任意イベントの保存件数が不正です。");
+            if(rows.Length>MaxRecords || rows.Any(r=>r==null || r.progress==null) || rows.Select(r=>r.event_id+"/"+r.cat_id).Distinct().Count()!=rows.Length || rows.Count(r=>r.Milestone()==0 && !r.progress.completed)>1
+                || rows.Where(r=>r.Milestone()>0).GroupBy(r=>new{r.cat_id,Milestone=r.Milestone()}).Any(g=>g.Count()>1))
+                throw new ArgumentException("任意イベントの保存件数が不正です。");
             foreach(var r in rows)
             {
                 if(r.scene_art!=0 && (r.scene_art!=MikeWindowArt || r.event_id!=MikeId || r.cat_id!=MikeCatId))
                     throw new ArgumentException("任意イベントの演出設定が不正です。");
                 if(!ValidArtwork(r.artwork) || r.scene_art!=0 && r.artwork!=null)
                     throw new ArgumentException("任意イベントの画像指定が不正です。");
+                if(r.milestone!=0 && (!ValidMilestone(r.milestone) || r.event_id==MikeId && r.milestone!=20))
+                    throw new ArgumentException("任意イベントの節目が不正です。");
                 if(r==null || !ValidEventId(r.event_id) || !CafeReplayCatalog.IsOptional(r.event_id+".v"+r.revision)
                     || (r.revision=="1" && r.cat_id!="cat-mike") || !ValidCatId(r.cat_id) || (r.event_id==MikeId && r.cat_id=="cat-mike"?string.IsNullOrEmpty(r.content_cat_id) || r.content_cat_id.Length>256:!ValidCatId(r.content_cat_id)) || r.started_day<1
                     || string.IsNullOrEmpty(r.title) || r.title.Length>256 || string.IsNullOrEmpty(r.cat_name) || r.cat_name.Length>256

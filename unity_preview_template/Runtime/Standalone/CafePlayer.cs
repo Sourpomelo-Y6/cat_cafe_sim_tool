@@ -13,7 +13,13 @@ namespace CatCafePreview.Standalone
         public double max_stamina; public int stamina_rule_version;
         public double initial_stamina,initial_affinity,stress_before,stress_after;
         public bool mike_milestone_limit;
+        public int affinity_milestone_limit;
         public bool manual;public CafeExchange exchange;public List<CafePlayerAction> actions=new List<CafePlayerAction>();
+    }
+    [Serializable] public sealed class CafeAffinityCap
+    {
+        public string cat_id;
+        public int affinity;
     }
     [Serializable] public class CafeBondGoal {public string id,status="active";public int started_day=1,resolved_day;public bool continued;public List<string> achieved_cats=new List<string>();}
     public sealed partial class CafeSimulation
@@ -22,16 +28,20 @@ namespace CatCafePreview.Standalone
         public const int PlayerSetTicks = 20;
         internal bool LegacyPlayerReplay;
         public bool MikeMilestoneLocked { get; set; }
+        public CafeAffinityCap[] AffinityCaps { get; set; } = new CafeAffinityCap[0];
 
-        public bool PlayerAtAffinityMilestone(string id) =>
-            MikeMilestoneLocked && id == CafeOptionalEvents.MikeCatId
-            && PlayerCat(id).affinity == CafeOptionalEvents.MikeAffinityMilestone;
+        int PlayerAffinityLimit(string id) => AffinityCaps.FirstOrDefault(cap=>cap.cat_id==id)?.affinity
+            ?? (MikeMilestoneLocked && id==CafeOptionalEvents.MikeCatId?CafeOptionalEvents.MikeAffinityMilestone:0);
+        public bool PlayerAtAffinityMilestone(string id)
+        {
+            int limit=PlayerAffinityLimit(id);
+            return limit>0 && PlayerCat(id).affinity==limit;
+        }
 
         public double PlayerAffinityAfter(CafePlayerSession session)
         {
-            double limit = session.mike_milestone_limit
-                ? Math.Min(Rules.player.max_affinity, CafeOptionalEvents.MikeAffinityMilestone)
-                : Rules.player.max_affinity;
+            int milestone = session.mike_milestone_limit?CafeOptionalEvents.MikeAffinityMilestone:session.affinity_milestone_limit;
+            double limit = milestone>0?Math.Min(Rules.player.max_affinity,milestone):Rules.player.max_affinity;
             return Clamp(session.exchange.affinity_start + session.exchange.affinity_pending, limit);
         }
         public int PlayerSessionTicks(CafePlayerSession session)
@@ -85,7 +95,7 @@ namespace CatCafePreview.Standalone
             if(BondWaiting)return "好感度目標の結果を確認してください。";
             string reason=ItemsReason();if(reason!="")return reason;
             var c=State.cats.SingleOrDefault(c=>c.id==id);if(c==null || c.activity!="cafe")return "在店している猫を選んでください。";
-            if(PlayerAtAffinityMilestone(id))return "好感度20で上限です。イベント一覧で個別イベントを読み終えると、交流を再開できます。";
+            if(PlayerAtAffinityMilestone(id))return "好感度"+PlayerAffinityLimit(id)+"で上限です。イベント一覧で個別イベントを読み終えると、交流を再開できます。";
             if(c.health!="healthy" || c.cannot_continue || c.stamina<=0)return "療養中・体力切れの猫は遊べません。";
             return PlayerRemaining<=0?"本日の交流回数を使い切りました。":"";
         }
@@ -107,6 +117,8 @@ namespace CatCafePreview.Standalone
             var session=new CafePlayerSession {max_stamina=State.stamina_growth==null?0:MaxStamina(id),stamina_rule_version=State.stamina_growth==null?0:1,set_ticks=LegacyPlayerReplay?0:PlayerSetTicks,id="player-"+State.day+"-"+(State.player_cats.Sum(r=>r.today)+1),cat_id=id,day=State.day,ordinal=State.player_cats.Sum(r=>r.today)+1,initial_revision=bond.total,initial_affinity=bond.affinity,initial_stamina=c.stamina};
             session.mike_milestone_limit = MikeMilestoneLocked && id == CafeOptionalEvents.MikeCatId
                 && bond.affinity < CafeOptionalEvents.MikeAffinityMilestone;
+            int limit=PlayerAffinityLimit(id);
+            if(!session.mike_milestone_limit && limit>bond.affinity)session.affinity_milestone_limit=limit;
             session.exchange=ReplayPlayer(State,session);bond.today++;bond.total++;State.player_sessions.Add(session);State.revision++;
         }
         private void AdvancePlayer(string action,string target,bool finish)
@@ -148,6 +160,10 @@ namespace CatCafePreview.Standalone
                 if(session.mike_milestone_limit && (session.cat_id!=CafeOptionalEvents.MikeCatId
                     || session.initial_affinity>=CafeOptionalEvents.MikeAffinityMilestone))
                     throw new ArgumentException("Invalid affinity milestone limit");
+                if(session.affinity_milestone_limit!=0 && (session.mike_milestone_limit
+                    || !CafeOptionalEvents.ValidMilestone(session.affinity_milestone_limit)
+                    || session.affinity_milestone_limit>=100 || session.initial_affinity>=session.affinity_milestone_limit))
+                    throw new ArgumentException("Invalid player affinity cap");
                 // Check the entire public exchange, including counters, pending reactions and disabled growth/equipment modifiers.
                 foreach(var field in typeof(CafeExchange).GetFields())
                 {

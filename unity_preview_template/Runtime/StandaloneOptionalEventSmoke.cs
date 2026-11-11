@@ -76,6 +76,12 @@ namespace CatCafePreview
             CafeOptions.Current.instant=true;
             var b=Create(Path.Combine(output,"isolated-save"));CafeBackends.UseLocal(b);
             var args=Environment.GetCommandLineArgs();int variant=Array.IndexOf(args,"--optional-authoring-variant");
+            if(args.Contains("--optional-milestones"))
+            {
+                var milestones=Milestones(b);
+                while(milestones.MoveNext())yield return milestones.Current;
+                yield break;
+            }
             bool accepted=args.Contains("--optional-accept");
             string branch=accepted?"accepted":"declined";
             if(variant>=0)b.SetOptionalCatalog(CafeOptionalEventJson.Parse(File.ReadAllText(args[variant+1])));
@@ -150,6 +156,77 @@ namespace CatCafePreview
                 Check(view.OpenEvent() && b.OptionalEvent.revision==b.OptionalDefinition.revision && b.OptionalEvent.revision!=oldRevision,"New start uses revised definition");
                 yield return Shot("new-revision-1024");view.Close();
             }
+        }
+        IEnumerator Milestones(LocalCafeBackend b)
+        {
+            void Step(string kind,string cat,string choice=null,int slot=1)=>
+                StandaloneDispatchConversationSmoke.Good(b,kind,choice,cat:cat,slot:slot);
+            void Gain(string cat)
+            {
+                Step("player_begin",cat);Step("player_step",cat,"direct");
+                if(b.Simulation.PlayerActive)Step("player_finish",cat);
+            }
+            void NextDay()
+            {
+                Good(b,"day_off");
+                if(b.Simulation.State.phase=="closed")Good(b,"next_day");
+            }
+            double Affinity(string cat)=>b.Simulation.PlayerCat(cat).affinity;
+            string[] cats={"cat-mike","cat-tama","cat-sora"};
+            Check(!b.OptionalEventListed,"No pending milestone below its threshold");
+            NextDay();
+            foreach(string cat in cats)
+            {
+                Gain(cat);
+                Check(Affinity(cat)==20 && b.Simulation.PlayerAtAffinityMilestone(cat),"Affinity caps independently: "+cat);
+            }
+            Check(b.OptionalCandidates.Length==3 && b.OptionalCandidates.All(c=>c.milestone==20),"Three reached milestones appear");
+            b.Journal.Verify(b.Journal.Document);
+            NextDay();
+            Check(cats.All(cat=>Affinity(cat)==20),"Daily progress with unread events");
+            SceneManager.LoadScene("CatCafePythonState");yield return new WaitForSecondsRealtime(2);
+            var client=FindObjectOfType<PythonStateClient>();client.enabled=false;CafeBackends.UseLocal(b);
+            Action apply=()=>typeof(PythonStateClient).GetMethod("Accept",Hidden).Invoke(client,new object[]{b.View()});apply();
+            var view=client.GetComponent<OptionalEventConversationPanel>()??client.gameObject.AddComponent<OptionalEventConversationPanel>();
+            foreach(string cat in cats)
+            {
+                var candidate=b.OptionalForCat(cat);
+                Check(view.OpenEvent(cat,candidate.event_id,candidate.revision),"Open another cat while others are unfinished: "+cat);
+                b.OptionalEvent.progress.node=1;view.Close();
+            }
+            Good(b,"save_game",slot:5);Good(b,"load_game",slot:5);apply();
+            Check(b.OptionalEvents.Length==3 && b.OptionalEvents.All(r=>r.progress.node==1 && !r.progress.completed),"All positions survive save and load");
+            var mike=b.OptionalForCat(cats[0]);
+            Check(view.OpenEvent(mike.cat_id,mike.event_id,mike.revision) && b.OptionalEvent.progress.node==1,"Resume Mike's first story");
+            var row=b.OptionalEvent;row.progress.node=row.introduction.Length;row.progress.page_offset=0;view.Refresh();
+            yield return null;view.Answer(true);
+            row.progress.node=row.accepted.Length;row.progress.page_offset=0;view.Refresh();
+            yield return null;view.Next();apply();
+            Check(row.progress.completed && b.OptionalForCat(cats[0])==null,"First milestone completes");
+            Gain(cats[0]);
+            Check(Affinity(cats[0])==40 && b.OptionalForCat(cats[0])?.milestone==40,"Mike reaches his second milestone");
+            Check(cats.Skip(1).All(cat=>Affinity(cat)==20 && b.OptionalForCat(cat).resume),"Tama and Sora remain independently capped");
+            var second=b.OptionalForCat(cats[0]);
+            Check(b.BeginOptionalEvent(second.cat_id,second.event_id,second.revision,b.Simulation.State.instance_id,b.Simulation.State.revision,""),"Start Mike's 40 event");
+            row=b.OptionalEvent;row.progress.node=row.introduction.Length;CafeOptionalEvents.Choose(row,false);
+            row.progress.node=row.declined.Length;b.FinishOptionalEvent(row);
+            Gain(cats[0]);
+            Check(Affinity(cats[0])>60 && b.OptionalForCat(cats[0])==null,"Unregistered milestones do not stop affinity growth");
+            b.Journal.Verify(b.Journal.Document);
+            var priorityCatalog=CafeOptionalEventResources.Load();
+            b.SetOptionalCatalog(new CafeOptionalEventCatalog{version=2,pack_id=new string('0',32),events=new CafeOptionalDefinition[0]});
+            Good(b,"new_game","free");NextDay();Gain(cats[0]);
+            Check(Affinity(cats[0])>20,"Existing game can have affinity above 20");
+            Good(b,"save_game",slot:6);
+            b.SetOptionalCatalog(priorityCatalog);Good(b,"load_game",slot:6);
+            Check(Affinity(cats[0])>20 && b.OptionalForCat(cats[0])?.milestone==20 && !b.Simulation.PlayerAtAffinityMilestone(cats[0]),"Old affinity preserved and earlier story remains available");
+            b.SetOptionalCatalog(null);
+            var legacy=b.OptionalForCat(cats[0]);
+            Check(b.BeginOptionalEvent(legacy.cat_id,legacy.event_id,legacy.revision,b.Simulation.State.instance_id,b.Simulation.State.revision,""),"Legacy Mike receipt starts");
+            row=b.OptionalEvent;row.progress.node=row.introduction.Length;CafeOptionalEvents.Choose(row,false);row.progress.node=row.declined.Length;b.FinishOptionalEvent(row);
+            Good(b,"save_game",slot:6);
+            b.SetOptionalCatalog(priorityCatalog);Good(b,"load_game",slot:6);
+            Check(b.OptionalForCat(cats[0])==null && b.OptionalEvents.Single().progress.completed,"Legacy completion prevents duplicate milestone");
         }
     }
 }

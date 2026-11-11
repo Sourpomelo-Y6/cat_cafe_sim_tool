@@ -14,6 +14,9 @@ FIELDS = ('event_id', 'cat_id', 'content_cat_id', 'min_day', 'min_affinity', 'ti
 BRANCHES = ('introduction', 'accepted', 'declined')
 DEFAULT_LINE_COUNTS = (3, 2, 2)
 MAX_BRANCH_LINES = 20
+MILESTONES = (20, 40, 60, 80, 100)
+MAX_FAMILIES = 64
+MAX_DEFINITIONS = MAX_FAMILIES * (len(MILESTONES) + 1)
 EVENT_BACKGROUNDS = {'': '標準の店内', 'mike-window-v1': 'カフェの窓辺'}
 EVENT_STILLS = {'': '指定なし', 'mike-approaches-v1': 'ミケが一歩近づく'}
 ARTWORK_SLOTS = (EVENT_BACKGROUNDS, EVENT_STILLS, EVENT_STILLS, EVENT_STILLS)
@@ -56,6 +59,8 @@ def revision(event):
         values.extend(('branch_counts', *(str(count) for count in counts)))
     if 'artwork' in event:
         values.extend(('event_artwork', *event['artwork']))
+    if 'milestone' in event:
+        values.extend(('affinity_milestone', str(event['milestone'])))
     for branch in BRANCHES:
         for line in event[branch]:
             values.extend((line['speaker'], line['text']))
@@ -67,8 +72,8 @@ def validate_event(event, *, require_revision=True):
     if not isinstance(event, dict):
         raise ValueError('イベント定義の項目が不正です。')
     fields = set(FIELDS) if 'target_kind' not in event else (set(FIELDS) - {'cat_id'}) | {'target_kind'} | ({'cat_id'} if event.get('target_kind') == 'individual' else set())
-    if 'target_kind' in event and 'artwork' in event:
-        fields.add('artwork')
+    if 'target_kind' in event:
+        fields.update(event.keys() & {'artwork', 'milestone'})
     if set(event) != fields | ({'revision'} if require_revision else set()):
         raise ValueError('イベント定義の項目が不正です。')
     clean = copy.deepcopy(event)
@@ -86,6 +91,10 @@ def validate_event(event, *, require_revision=True):
     for key, low, high in (('min_day', 1, 9999), ('min_affinity', 0, 100)):
         if type(clean[key]) is not int or not low <= clean[key] <= high:
             raise ValueError(('開始日数' if key == 'min_day' else '開始好感度') + 'の範囲が不正です。')
+    if 'milestone' in clean and (type(clean['milestone']) is not int or clean['milestone'] not in MILESTONES
+                                  or clean['min_affinity'] != clean['milestone']
+                                  or clean['event_id'] == EVENT_ID and clean['milestone'] != 20):
+        raise ValueError('好感度の節目と開始好感度が一致していません。')
     for key, maximum in (('title', 30), ('accept_caption', 24), ('decline_caption', 24)):
         _text(clean[key], maximum, single_line=True)
     for branch, count in zip(BRANCHES, DEFAULT_LINE_COUNTS):
@@ -106,16 +115,24 @@ def validate_event(event, *, require_revision=True):
     return clean
 
 
+def event_slot(event):
+    legacy_mike = event['event_id'] == EVENT_ID and event['min_affinity'] == 20
+    return event['content_cat_id'], event.get('milestone', 20 if legacy_mike else 0)
+
+
 def validate_pack(data, catalog=None):
     if not isinstance(data, dict) or set(data) != {'version', 'pack_id', 'events'} or type(data['version']) is not int or data['version'] not in (1,2):
         raise ValueError('イベントパックの形式が不正です。')
     import re
     if not isinstance(data['pack_id'], str) or not re.fullmatch('[a-f0-9]{32}', data['pack_id']):
         raise ValueError('パックIDが不正です。')
-    if not isinstance(data['events'], list) or len(data['events']) > (1 if data['version']==1 else 64):
-        raise ValueError('イベントは旧v1で1件、v2で64件までです。')
+    if not isinstance(data['events'], list) or len(data['events']) > (1 if data['version']==1 else MAX_DEFINITIONS):
+        raise ValueError(f'イベントは旧v1で1件、v2で{MAX_DEFINITIONS}件までです。')
     events = [validate_event(row) for row in data['events']]
-    if any(('target_kind' in e) != (data['version']==2) for e in events) or len({e['event_id'] for e in events}) != len(events) or len({e['content_cat_id'] for e in events}) != len(events):
+    if (any(('target_kind' in e) != (data['version']==2) for e in events)
+        or len({e['content_cat_id'] for e in events}) > MAX_FAMILIES
+        or len({e['event_id'] for e in events}) != len(events)
+        or len({event_slot(e) for e in events}) != len(events)):
         raise ValueError('イベントの版・対象・IDが重複または不正です。')
     if catalog is not None and any(row['content_cat_id'] not in catalog for row in events):
         raise ValueError('出力対象の画像IDが素材一覧にありません。')
@@ -148,11 +165,13 @@ def normalize_event(event):
     return validate_event(clean, require_revision=False)
 
 
-def blank_event(content_id):
+def blank_event(content_id, milestone=0):
     if not isinstance(content_id, str) or not re.fullmatch('[a-z][a-z0-9_-]{0,63}',content_id):
         raise ValueError('画像IDが不正です。')
-    return dict(event_id='optional.'+content_id+'.story',target_kind='content',content_cat_id=content_id,
-                min_day=2,min_affinity=20,title='',accept_caption='',decline_caption='',
+    return dict(event_id='optional.'+content_id+(f'.affinity-{milestone}' if milestone else '.story'),
+                target_kind='content',content_cat_id=content_id,
+                min_day=2,min_affinity=milestone or 20,title='',accept_caption='',decline_caption='',
+                **({'milestone': milestone} if milestone else {}),
                 **{branch: [dict(speaker='', text='') for _ in range(count)]
                    for branch, count in zip(BRANCHES, DEFAULT_LINE_COUNTS)})
 
@@ -183,7 +202,7 @@ class OptionalEventStore:
 
     @staticmethod
     def _validate_all(data):
-        if not isinstance(data,dict) or set(data) != {'version','entries'} or type(data['version']) is not int or data['version'] != 2 or not isinstance(data['entries'],list) or len(data['entries']) > 64:
+        if not isinstance(data,dict) or set(data) != {'version','entries'} or type(data['version']) is not int or data['version'] != 2 or not isinstance(data['entries'],list) or len(data['entries']) > MAX_DEFINITIONS:
             raise ValueError('イベント登録一覧が不正です。')
         rows=[]
         for row in data['entries']:
@@ -196,9 +215,12 @@ class OptionalEventStore:
         validate_pack(dict(version=2,pack_id='0'*32,events=[r['event'] for r in rows]))
         return dict(version=2,entries=copy.deepcopy(rows))
 
-    def read(self, content_id='playtest-mike'):
-        row = next((r for r in self.read_all()['entries'] if r['event']['content_cat_id']==content_id),None)
-        return dict(version=1,enabled=row['enabled'],event=row['event']) if row else dict(version=1,enabled=True,event=blank_event(content_id))
+    def read(self, content_id='playtest-mike', milestone=None):
+        rows = [r for r in self.read_all()['entries'] if r['event']['content_cat_id'] == content_id]
+        if milestone is None:
+            milestone = 20 if content_id == 'playtest-mike' and any(event_slot(r['event'])[1] == 20 for r in rows) else 0
+        row = next((r for r in rows if event_slot(r['event'])[1] == milestone), None)
+        return dict(version=1,enabled=row['enabled'],event=row['event']) if row else dict(version=1,enabled=True,event=blank_event(content_id, milestone))
 
     def save_all(self, data):
         self.read_all()
@@ -235,7 +257,8 @@ class OptionalEventStore:
         event={k:v for k,v in data['event'].items() if k!='revision'}
         event=validate_event(event,require_revision=False)
         if 'target_kind' not in event:event=normalize_event(event)
-        rows=[r for r in self.read_all()['entries'] if r['event']['content_cat_id']!=event['content_cat_id']]
+        rows=[r for r in self.read_all()['entries'] if event_slot(r['event'])!=event_slot(event)
+              and not (event['event_id']==EVENT_ID and r['event']['event_id']==EVENT_ID)]
         rows.append(dict(enabled=data['enabled'],event=event))
         self.save_all(dict(version=2,entries=rows))
         return dict(version=1,enabled=data['enabled'],event=event)

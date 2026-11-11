@@ -129,7 +129,8 @@ namespace CatCafePreview
                 if(cmd.kind=="resolve_missing"){SyncConversations();if(!s.missing_cases.Any(e=>e.id==cmd.choice && e.cat_id==cmd.cat_id && e.resolved_day==0))throw new InvalidOperationException("現在の帰還案件を選び直してください。");}
                 SyncConversations();
                 if(cmd.kind=="resolve_store_event" && CafeEquipmentDialogue.Supports(Simulation.CurrentStoreEvent.type) && !string.IsNullOrEmpty(cmd.event_id) && cmd.event_id!=CafeEquipmentDialogue.EventId(s.day,Simulation.CurrentStoreEvent.type))throw new InvalidOperationException("店舗イベントの案件を選び直してください。");
-                var replayBefore=Journal.CaptureBefore(s);Simulation.ReplayActions.Clear();CafeAutoOperation replayAutomatic=null;
+                SyncAffinityMilestones();
+                var replayBefore=Journal.CaptureBefore(s);var affinityCaps=Simulation.AffinityCaps;Simulation.ReplayActions.Clear();CafeAutoOperation replayAutomatic=null;
                 switch (cmd.kind)
                 {
                     case "import_legacy_save":ImportLegacy(cmd.save_id,cmd.save_slot);break;
@@ -203,7 +204,11 @@ namespace CatCafePreview
                 }
                 if(cmd.kind=="import_legacy_save")catOutfits=new CafeCatOutfitSelection[0];
                 SyncConversations();CaptureDisplay();
-                if(cmd.kind=="new_game" || cmd.kind=="load_game" || cmd.kind=="import_legacy_save")ResetJournal();else Journal.Append(replayBefore,Simulation,ReplayOperation(cmd),replayAutomatic);
+                if(cmd.kind=="new_game" || cmd.kind=="load_game" || cmd.kind=="import_legacy_save")ResetJournal();else
+                {
+                    var operation=ReplayOperation(cmd);operation.affinity_caps=affinityCaps;
+                    Journal.Append(replayBefore,Simulation,operation,replayAutomatic);
+                }
                 response = Success(JsonUtility.ToJson(new PythonCommandReply { state = View() }));
             }
             catch (Exception ex) { response = Failure(ex.Message); }
@@ -240,6 +245,7 @@ namespace CatCafePreview
         public string CatOutfit(string cat)=>catOutfits.FirstOrDefault(r=>r.cat_id==cat)?.outfit_id??"";
         public PythonCafeState View()
         {
+            SyncConversations();SyncAffinityMilestones();
             var s = Simulation.State; var rules = Simulation.Rules;var fixedOutcome=Outcome;
             return new PythonCafeState
             {

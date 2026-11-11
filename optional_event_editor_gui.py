@@ -1,6 +1,6 @@
 """Edit optional stories by image family."""
 import copy
-from optional_events import BRANCHES, MAX_BRANCH_LINES, ARTWORK_SLOTS, EVENT_BACKGROUNDS, EVENT_STILLS, EVENT_ID, export_event_pack
+from optional_events import BRANCHES, MAX_BRANCH_LINES, MILESTONES, ARTWORK_SLOTS, EVENT_BACKGROUNDS, EVENT_STILLS, EVENT_ID, event_slot, export_event_pack
 
 
 class OptionalEventEditorWindow:
@@ -11,7 +11,8 @@ class OptionalEventEditorWindow:
         self.import_review_pending=False;self.reviewed_all=None
         self.content_id='playtest-mike'
         adopted = published.read(self.content_id)  # A broken store must never become an empty overwrite.
-        data = drafts.read() if drafts.path.exists() else adopted
+        data = adopted
+        self.slot = event_slot(adopted['event'])[1]
         self.window = tk.Toplevel(parent)
         self.window.title('猫の個別イベント — 編集・確認・出力')
         self.window.geometry('1020x800')
@@ -21,10 +22,15 @@ class OptionalEventEditorWindow:
         self.enabled = tk.BooleanVar(master=self.window)
         outer = ttk.Frame(self.window, padding=12)
         outer.pack(fill='both', expand=True)
-        ttk.Label(outer, text=f'1系統1イベント。進行は個体別。導入 → 2択 → 結果（各1〜{MAX_BRANCH_LINES}行）。').pack(anchor='w')
+        ttk.Label(outer, text=f'進行は個体・節目ごと。導入 → 2択 → 結果（各1〜{MAX_BRANCH_LINES}行）。').pack(anchor='w')
         self.content=tk.StringVar(master=self.window)
         self.selector=ttk.Combobox(outer,textvariable=self.content,state='readonly')
         self.selector.pack(fill='x');self.selector.bind('<<ComboboxSelected>>',self.change_target)
+        self.milestones = {'従来の開始条件': 0, **{f'好感度 {value}': value for value in MILESTONES}}
+        self.milestone_choice = ttk.Combobox(outer, values=list(self.milestones), state='readonly')
+        self.milestone_choice.pack(fill='x')
+        self.milestone_choice.bind('<<ComboboxSelected>>', self.change_milestone)
+        self.show_milestone()
         self.summary=ttk.Label(outer);self.summary.pack(anchor='w')
         ttk.Button(outer,text='画像対象の一覧を更新',command=lambda:self._run(self.refresh_catalog)).pack(anchor='w')
         ttk.Button(outer,text='この系統で共有する（旧ミケのみ）',command=lambda:self._run(self.share_legacy)).pack(anchor='w')
@@ -36,7 +42,10 @@ class OptionalEventEditorWindow:
             ttk.Label(fields, text=caption).grid(row=index, column=0, sticky='w', pady=3)
             value = tk.StringVar(master=self.window)
             self.values[key] = value
-            ttk.Entry(fields, textvariable=value).grid(row=index, column=1, sticky='ew', padx=8, pady=3)
+            entry = ttk.Entry(fields, textvariable=value)
+            entry.grid(row=index, column=1, sticky='ew', padx=8, pady=3)
+            if key == 'min_affinity':
+                self.affinity_entry = entry
         ttk.Checkbutton(outer, text='採用後の出力に含める（外しても開始済みの会話は保持）', variable=self.enabled).pack(anchor='w')
         self.artwork = []
         background = ttk.Frame(outer)
@@ -109,6 +118,7 @@ class OptionalEventEditorWindow:
             variable.set(options[asset])
         for key, value in self.values.items():
             value.set(str(data['event'][key]))
+        self.affinity_entry.configure(state='readonly' if self.slot else 'normal')
         for branch in BRANCHES:
             for frame, _, _ in self.lines[branch]:
                 frame.destroy()
@@ -211,6 +221,8 @@ class OptionalEventEditorWindow:
                 raise ValueError('日数・好感度は整数で入力してください。')
             data['event'][key] = int(data['event'][key])
         data['event'].pop('revision', None)
+        if self.slot and data['event']['min_affinity'] != self.slot:
+            raise ValueError('開始好感度は選択中の節目と一致させてください。')
         if 'artwork' not in data['event'] and any(self.artwork_for(data['event'])):
             data['event']['artwork'] = self.artwork_for(data['event'])
         data['event'] = validate_event(data['event'], require_revision=False)
@@ -240,7 +252,7 @@ class OptionalEventEditorWindow:
                 return self.preview_all()
             data = self.validated()
             adopted = next((row for row in self.effective_published()['entries']
-                            if row['event']['content_cat_id'] == self.content_id), None)
+                            if event_slot(row['event']) == (self.content_id, self.slot)), None)
             window = tk.Toplevel(self.window)
             window.title('プレビューと採用内容の比較')
             window.geometry('1000x700')
@@ -307,7 +319,7 @@ class OptionalEventEditorWindow:
             return
         def load():
             self.import_review_pending=False
-            self.populate(self.published.read(self.content_id))
+            self.populate(self.published.read(self.content_id, self.slot))
             self.saved_form = self.collect()
             self.update_summary()
             self.notice.set('採用内容を読みました。')
@@ -326,8 +338,8 @@ class OptionalEventEditorWindow:
                 if not messagebox.askokcancel('全下書きを読み込む',f"{len(data['events'])}件の定義で下書き全体を置き換えます。空の場合は既存本文を保持して全件を出力対象外にします。採用は比較後に確定します。",parent=self.window):return
                 if data['events']:rows=[dict(enabled=True,event=normalize_event(e)) for e in data['events']]
                 else:
-                    merged={r['event']['content_cat_id']:r for r in self.published.read_all()['entries']} if self.published.path.exists() or 'playtest-mike' in self.catalog_provider() else {}
-                    if self.drafts.path.exists():merged.update({r['event']['content_cat_id']:r for r in self.drafts.read_all()['entries']})
+                    merged={event_slot(r['event']):r for r in self.effective_published()['entries']}
+                    if self.drafts.path.exists():merged.update({event_slot(r['event']):r for r in self.drafts.read_all()['entries']})
                     rows=[dict(enabled=False,event=r['event']) for r in merged.values()]
                 self.drafts.save_all(dict(version=2,entries=rows))
                 self.import_review_pending=True
@@ -351,8 +363,9 @@ class OptionalEventEditorWindow:
 
     def bulk_collection(self):
         data=self.drafts.read_all();rows=data['entries']
-        if any(r['event']['content_cat_id']==self.content_id for r in rows) or self.collect()!=self.saved_form:
-            current=self.validated();rows=[r for r in rows if r['event']['content_cat_id']!=self.content_id]
+        slot = self.content_id, self.slot
+        if any(event_slot(r['event']) == slot for r in rows) or self.collect()!=self.saved_form:
+            current=self.validated();rows=[r for r in rows if event_slot(r['event']) != slot]
             rows.append(dict(enabled=current['enabled'],event=current['event']))
         result=dict(version=2,entries=rows)
         self.drafts._validate_all(result)
@@ -379,17 +392,17 @@ class OptionalEventEditorWindow:
         for value,label in ((self.effective_published(),'現在の全採用'),(data,'採用予定の全下書き')):
             text=ScrolledText(window,width=48,wrap='word');text.pack(side='left',fill='both',expand=True);text.insert('end',label+'\n\n'+describe(value));text.configure(state='disabled')
         self.reviewed=self.collect();self.reviewed_all=data
-        self.notice.set(f"全{len(data['entries'])}系統の両分岐を比較しました。採用ボタンで全体を確定します。")
+        self.notice.set(f"全{len(data['entries'])}件の両分岐を比較しました。採用ボタンで全体を確定します。")
 
     def effective_published(self):
         return self.published.read_all() if self.published.path.exists() or 'playtest-mike' in self.catalog_provider() else dict(version=2,entries=[])
 
     def update_summary(self):
         rows=self.effective_published()['entries']
-        adopted = next((row for row in rows if row['event']['content_cat_id'] == self.content_id), None)
+        adopted = next((row for row in rows if event_slot(row['event']) == (self.content_id, self.slot)), None)
         status = '未採用' if adopted is None else ('採用・出力対象' if adopted['enabled'] else '採用・出力対象外')
         scope = '旧ミケ個体専用' if self.identity.get('target_kind') == 'individual' else '画像系統で共有'
-        self.summary.config(text=f"選択中：{status}／編集対象：{scope}　全体：採用{len(rows)}系統・出力{sum(r['enabled'] for r in rows)}件")
+        self.summary.config(text=f"選択中：{status}／編集対象：{scope}　全体：採用{len(rows)}件・出力{sum(r['enabled'] for r in rows)}件")
 
     def refresh_catalog(self,confirm=True):
         if confirm and not self.confirm_leave():return
@@ -405,11 +418,27 @@ class OptionalEventEditorWindow:
     def load_target(self):
         if self.content.get() not in self.targets:
             self.notice.set('画像対象がありません。');return
-        self.content_id=self.targets[self.content.get()]
+        content_id = self.targets[self.content.get()]
         rows=self.drafts.read_all()['entries'] if self.drafts.path.exists() else []
-        saved=next((r for r in rows if r['event']['content_cat_id']==self.content_id),None)
-        self.populate(dict(version=1,enabled=saved['enabled'],event=saved['event']) if saved else self.published.read(self.content_id))
+        if content_id != self.content_id:
+            self.content_id = content_id
+            registered = rows + self.effective_published()['entries']
+            slots = [event_slot(row['event']) for row in registered]
+            self.slot = min((slot for cid, slot in slots if cid == content_id), default=0)
+        self.show_milestone()
+        saved=next((r for r in rows if event_slot(r['event']) == (self.content_id, self.slot)),None)
+        self.populate(dict(version=1,enabled=saved['enabled'],event=saved['event']) if saved else self.published.read(self.content_id, self.slot))
         self.saved_form=self.collect();self.update_summary()
+
+    def show_milestone(self):
+        self.milestone_choice.set(next(label for label, value in self.milestones.items() if value == self.slot))
+
+    def change_milestone(self, _=None):
+        if self.confirm_leave():
+            self.slot = self.milestones[self.milestone_choice.get()]
+            self.load_target()
+        else:
+            self.show_milestone()
 
     def change_target(self,_=None):
         if not self.confirm_leave():

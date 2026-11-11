@@ -12,6 +12,7 @@ namespace CatCafePreview.Standalone
         public string kind,cat_id,choice,source,seat_id,customer_id,objective,mode;
         public int growth_policy_version;
         public bool mike_milestone_locked;
+        public CafeAffinityCap[] affinity_caps;
         public CafeStaminaRules stamina_rules;public int stamina_policy_version; public int player_policy_version,days;public string[] working;
     }
     [Serializable] public class CafeReplayRow
@@ -67,6 +68,7 @@ namespace CatCafePreview.Standalone
                 if((value is CafePlayerSession || value is CafeExchange) && field.Name=="max_stamina" && (double)field.GetValue(value)==0)continue;
                 if(value is CafePlayerSession && field.Name=="stamina_rule_version" && (int)field.GetValue(value)==0)continue;
                 if(value is CafePlayerSession && field.Name=="mike_milestone_limit" && !((CafePlayerSession)value).mike_milestone_limit)continue;
+                if(value is CafePlayerSession && field.Name=="affinity_milestone_limit" && (int)field.GetValue(value)==0)continue;
                 if(value is CafeReplayOperation && field.Name=="player_policy_version" && (int)field.GetValue(value)==0)continue;
                 if(value is CafePlayerSession && field.Name=="set_ticks" && (int)field.GetValue(value)==0)continue;
                 if(value is CafeDayResult && field.Name=="legacy_service_ticks" && field.GetValue(value)==null)continue;
@@ -98,6 +100,12 @@ namespace CatCafePreview.Standalone
 
             sim.ReplayStaminaRules=CafeStaminaRules.Missing(op.stamina_rules)?null:op.stamina_rules;
             sim.MikeMilestoneLocked=op.mike_milestone_locked;
+            var caps=op.affinity_caps??new CafeAffinityCap[0];
+            if(caps.Length>384 || caps.Any(cap=>cap==null || !CafeOptionalEvents.ValidCatId(cap.cat_id)
+                || !CafeOptionalEvents.ValidMilestone(cap.affinity) || cap.affinity>=100)
+                || caps.Select(cap=>cap.cat_id).Distinct().Count()!=caps.Length || op.mike_milestone_locked && caps.Length!=0)
+                throw new ArgumentException("Invalid affinity caps in replay");
+            sim.AffinityCaps=caps;
             sim.ReplayActions.Clear();switch(op.kind)
             {
                 case "start_autoplay":sim.StartAutoplay(op.objective,op.mode,op.days);break;

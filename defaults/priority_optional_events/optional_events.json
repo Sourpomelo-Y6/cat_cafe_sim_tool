@@ -1,0 +1,202 @@
+{
+  "version": 2,
+  "pack_id": "793831dcf2e943d2ba991213512a3fee",
+  "events": [
+    {
+      "event_id": "optional.mike.afternoon",
+      "cat_id": "cat-mike",
+      "content_cat_id": "playtest-mike",
+      "min_day": 2,
+      "min_affinity": 20,
+      "title": "少し近づいた午後",
+      "accept_caption": "静かに待つ",
+      "decline_caption": "そっと名前を呼ぶ",
+      "introduction": [
+        {
+          "speaker": "",
+          "text": "営業準備のひととき。窓辺の光を見ていたミケが、こちらへ顔を向けた。"
+        },
+        {
+          "speaker": "あなた",
+          "text": "ここにいてもいいかな。今日は、少しゆっくりしよう。"
+        },
+        {
+          "speaker": "",
+          "text": "ミケは小さく耳を動かした。すぐには近づかず、あなたの様子を見ている。"
+        }
+      ],
+      "accepted": [
+        {
+          "speaker": "",
+          "text": "手を伸ばさずに待っていると、ミケが一歩ずつ近づいてきた。"
+        },
+        {
+          "speaker": "あなた",
+          "text": "来てくれてありがとう。この距離から、ゆっくりでいいよ。"
+        }
+      ],
+      "declined": [
+        {
+          "speaker": "あなた",
+          "text": "ミケ。いつも一緒にいてくれて、ありがとう。"
+        },
+        {
+          "speaker": "",
+          "text": "聞き慣れた声に、ミケは目を細めた。窓辺に座るふたりの間を、穏やかな時間が流れた。"
+        }
+      ],
+      "target_kind": "individual",
+      "revision": "a4705aef9173646bbcd57f818ee5401ac74ae0c99c8c4bf9107670cfce47d4a4"
+    },
+    {
+      "event_id": "optional.playtest-mike.affinity-40",
+      "target_kind": "content",
+      "content_cat_id": "playtest-mike",
+      "min_day": 2,
+      "min_affinity": 40,
+      "title": "窓辺のとなり",
+      "accept_caption": "いつもの場所を空ける",
+      "decline_caption": "そばに座る",
+      "milestone": 40,
+      "introduction": [
+        {
+          "speaker": "",
+          "text": "窓辺へ向かうと、ミケがいつもの場所から少しだけ身をずらした。"
+        },
+        {
+          "speaker": "",
+          "text": "窓の外では葉が風に揺れている。ミケはこちらを一度見て、また庭へ顔を向けた。"
+        },
+        {
+          "speaker": "",
+          "text": "日なたには、ふたりで座れるだけの場所があった。"
+        }
+      ],
+      "accepted": [
+        {
+          "speaker": "",
+          "text": "少し離れて腰を下ろすと、ミケが自分から体の向きを変えた。"
+        },
+        {
+          "speaker": "",
+          "text": "窓の外を眺める横顔が、いつもより近くにあった。"
+        }
+      ],
+      "declined": [
+        {
+          "speaker": "",
+          "text": "静かに隣へ座ると、ミケは耳をこちらに向けた。"
+        },
+        {
+          "speaker": "",
+          "text": "やがて目を細め、ふたりで窓の外の葉を眺めた。"
+        }
+      ],
+      "artwork": [
+        "mike-window-v1",
+        "",
+        "",
+        ""
+      ],
+      "revision": "70d197081ca50d09207afcde91660a3b2e1d74255a874104fe3a6fc6415b0d8c"
+    },
+    {
+      "event_id": "optional.playtest-tama.affinity-20",
+      "target_kind": "content",
+      "content_cat_id": "playtest-tama",
+      "min_day": 2,
+      "min_affinity": 20,
+      "title": "小さな足音",
+      "accept_caption": "その場で待つ",
+      "decline_caption": "低い声で呼ぶ",
+      "milestone": 20,
+      "introduction": [
+        {
+          "speaker": "",
+          "text": "開店前の店内で、タマの足音が椅子の下で止まった。"
+        },
+        {
+          "speaker": "",
+          "text": "覗き込むと、椅子の脚の間からタマがこちらを見ていた。"
+        },
+        {
+          "speaker": "",
+          "text": "タマは片方の前足を出し、こちらの出方をうかがった。"
+        }
+      ],
+      "accepted": [
+        {
+          "speaker": "",
+          "text": "そのまま待つと、タマはゆっくりと椅子の下から出てきた。"
+        },
+        {
+          "speaker": "",
+          "text": "すれ違いざま、足元でしっぽが小さく揺れた。"
+        }
+      ],
+      "declined": [
+        {
+          "speaker": "",
+          "text": "小さな声で名前を呼ぶと、タマの耳がぴくりと動いた。"
+        },
+        {
+          "speaker": "",
+          "text": "返事のように一歩近づいて、足元に腰を下ろした。"
+        }
+      ],
+      "revision": "5e984530d390fcbe61a7ff4757ecc81339036479e8fc3523fc4c67801bd93e3e"
+    },
+    {
+      "event_id": "optional.playtest-sora.affinity-20",
+      "target_kind": "content",
+      "content_cat_id": "playtest-sora",
+      "min_day": 2,
+      "min_affinity": 20,
+      "title": "窓に落ちる影",
+      "accept_caption": "隣で外を見る",
+      "decline_caption": "少し離れて見守る",
+      "milestone": 20,
+      "introduction": [
+        {
+          "speaker": "",
+          "text": "ソラが窓のそばで、床を横切る影を目で追っていた。"
+        },
+        {
+          "speaker": "",
+          "text": "雲の切れ間から光が差すと、影はいつの間にか消えた。"
+        },
+        {
+          "speaker": "",
+          "text": "ソラは窓から顔を上げ、こちらをじっと見た。"
+        }
+      ],
+      "accepted": [
+        {
+          "speaker": "",
+          "text": "隣から窓の外を見上げると、ソラもまた空へ目を戻した。"
+        },
+        {
+          "speaker": "",
+          "text": "次の雲が流れてくるまで、ふたりで窓辺にいた。"
+        }
+      ],
+      "declined": [
+        {
+          "speaker": "",
+          "text": "少し離れたところで座ると、ソラは自分から向きを変えた。"
+        },
+        {
+          "speaker": "",
+          "text": "床に影が戻ると、ソラはこちらにも目を向けてから、小さく伸びをした。"
+        }
+      ],
+      "artwork": [
+        "mike-window-v1",
+        "",
+        "",
+        ""
+      ],
+      "revision": "259d7b716fef6be2b6af0f4892ff3021b5ab4839c38189dcdf72b5523c58c1ca"
+    }
+  ]
+}
