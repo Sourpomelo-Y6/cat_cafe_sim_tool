@@ -1,13 +1,12 @@
-"""Edit the single optional story without exposing a script/graph editor."""
+"""Edit optional stories by image family."""
 import copy
-from optional_events import BRANCHES, export_event_pack
+from optional_events import BRANCHES, MAX_BRANCH_LINES, export_event_pack
 
 
 class OptionalEventEditorWindow:
     def __init__(self, parent, drafts, published, catalog_provider):
         import tkinter as tk
         from tkinter import ttk
-        from tkinter.scrolledtext import ScrolledText
         self.drafts, self.published, self.catalog_provider = drafts, published, catalog_provider
         self.import_review_pending=False;self.reviewed_all=None
         self.content_id='playtest-mike'
@@ -22,7 +21,7 @@ class OptionalEventEditorWindow:
         self.enabled = tk.BooleanVar(master=self.window)
         outer = ttk.Frame(self.window, padding=12)
         outer.pack(fill='both', expand=True)
-        ttk.Label(outer, text='1系統1イベント。進行は個体別。導入3行 → 2択 → 各結果2行。数値報酬なし。').pack(anchor='w')
+        ttk.Label(outer, text=f'1系統1イベント。進行は個体別。導入 → 2択 → 結果（各1〜{MAX_BRANCH_LINES}行）。').pack(anchor='w')
         self.content=tk.StringVar(master=self.window)
         self.selector=ttk.Combobox(outer,textvariable=self.content,state='readonly')
         self.selector.pack(fill='x');self.selector.bind('<<ComboboxSelected>>',self.change_target)
@@ -42,19 +41,31 @@ class OptionalEventEditorWindow:
         book = ttk.Notebook(outer)
         book.pack(fill='both', expand=True, pady=8)
         self.lines = {}
-        for branch, caption, count in zip(BRANCHES, ('導入', '結果1', '結果2'), (3, 2, 2)):
+        self.line_lists = {}
+        self.line_hosts = {}
+        self.line_buttons = {}
+        for branch, caption in zip(BRANCHES, ('導入', '結果1', '結果2')):
             page = ttk.Frame(book, padding=8)
             book.add(page, text=caption)
-            page.columnconfigure(1, weight=1)
             self.lines[branch] = []
-            for i in range(count):
-                page.rowconfigure(i * 2 + 1, weight=1)
-                ttk.Label(page, text=f'{i+1}行目の話者（空欄は地の文）').grid(row=i*2, column=0, sticky='w')
-                speaker = tk.StringVar(master=self.window)
-                ttk.Entry(page, textvariable=speaker).grid(row=i*2, column=1, sticky='ew', padx=8)
-                text = ScrolledText(page, height=3, wrap='word', undo=True)
-                text.grid(row=i*2+1, column=0, columnspan=2, sticky='nsew', pady=(4, 10))
-                self.lines[branch].append((speaker, text))
+            tools = ttk.Frame(page)
+            tools.pack(fill='x', pady=(0, 8))
+            self.line_buttons[branch] = {}
+            for action, caption in (('add', '行を追加'), ('remove', '行を削除'), ('up', '上へ'), ('down', '下へ')):
+                button = ttk.Button(tools, text=caption, command=lambda b=branch, a=action: self.edit_lines(b, a))
+                button.pack(side='left', padx=(0, 4))
+                self.line_buttons[branch][action] = button
+            side = ttk.Frame(page)
+            side.pack(side='left', fill='y', padx=(0, 8))
+            rows = tk.Listbox(side, width=10, exportselection=False)
+            scroll = ttk.Scrollbar(side, orient='vertical', command=rows.yview)
+            rows.configure(yscrollcommand=scroll.set)
+            scroll.pack(side='right', fill='y')
+            rows.pack(side='left', fill='y')
+            rows.bind('<<ListboxSelect>>', lambda _, b=branch: self.show_line(b))
+            self.line_lists[branch] = rows
+            self.line_hosts[branch] = ttk.Frame(page)
+            self.line_hosts[branch].pack(side='left', fill='both', expand=True)
         controls = ttk.Frame(outer)
         controls.pack(fill='x')
         self.buttons = {}
@@ -75,19 +86,91 @@ class OptionalEventEditorWindow:
         for key, value in self.values.items():
             value.set(str(data['event'][key]))
         for branch in BRANCHES:
-            for (speaker, widget), line in zip(self.lines[branch], data['event'][branch]):
-                speaker.set(line['speaker'])
-                widget.delete('1.0', 'end')
-                widget.insert('1.0', line['text'])
+            for frame, _, _ in self.lines[branch]:
+                frame.destroy()
+            self.lines[branch].clear()
+            for line in data['event'][branch]:
+                self.insert_line(branch, len(self.lines[branch]), line)
+            self.select_line(branch, 0)
         self.reviewed = None
         self.reviewed_all = None
+
+    def insert_line(self, branch, index, line):
+        import tkinter as tk
+        from tkinter import ttk
+        from tkinter.scrolledtext import ScrolledText
+
+        frame = ttk.Frame(self.line_hosts[branch])
+        ttk.Label(frame, text='話者（空欄は地の文）').pack(anchor='w')
+        speaker = tk.StringVar(master=frame, value=line['speaker'])
+        ttk.Entry(frame, textvariable=speaker).pack(fill='x', pady=(0, 6))
+        widget = ScrolledText(frame, height=3, wrap='word', undo=True)
+        widget.pack(fill='both', expand=True)
+        widget.insert('1.0', line['text'])
+        widget.edit_reset()
+        self.lines[branch].insert(index, (frame, speaker, widget))
+
+    def select_line(self, branch, index):
+        rows = self.line_lists[branch]
+        rows.delete(0, 'end')
+        rows.insert('end', *(f'{i + 1}行目' for i in range(len(self.lines[branch]))))
+        rows.selection_set(index)
+        rows.activate(index)
+        rows.see(index)
+        self.show_line(branch)
+
+    def show_line(self, branch):
+        selection = self.line_lists[branch].curselection()
+        if not selection:
+            return
+        index = selection[0]
+        lines = self.lines[branch]
+        for frame, _, _ in lines:
+            frame.pack_forget()
+        lines[index][0].pack(fill='both', expand=True)
+        for action, enabled in (
+            ('add', len(lines) < MAX_BRANCH_LINES), ('remove', len(lines) > 1),
+            ('up', index > 0), ('down', index < len(lines) - 1),
+        ):
+            self.line_buttons[branch][action].state(['!disabled' if enabled else 'disabled'])
+
+    def edit_lines(self, branch, action):
+        from tkinter import messagebox
+
+        index = self.line_lists[branch].curselection()[0]
+        lines = self.lines[branch]
+        if action == 'add' and len(lines) < MAX_BRANCH_LINES:
+            index += 1
+            self.insert_line(branch, index, dict(speaker='', text=''))
+        elif action == 'remove' and len(lines) > 1:
+            frame, speaker, widget = lines[index]
+            if (speaker.get() or widget.get('1.0', 'end-1c')) and not messagebox.askyesno(
+                '会話行の削除', f'{index + 1}行目を削除しますか？', parent=self.window,
+            ):
+                return
+            frame.destroy()
+            lines.pop(index)
+            index = min(index, len(lines) - 1)
+        elif action in ('up', 'down'):
+            target = index + (-1 if action == 'up' else 1)
+            if not 0 <= target < len(lines):
+                return
+            lines[index], lines[target] = lines[target], lines[index]
+            index = target
+        else:
+            return
+        self.reviewed = self.reviewed_all = None
+        self.select_line(branch, index)
 
     def collect(self):
         event = copy.deepcopy(self.identity)
         for key, value in self.values.items():
             event[key] = value.get()
         for branch in BRANCHES:
-            event[branch] = [dict(speaker=s.get(), text=t.get('1.0', 'end-1c')) for s, t in self.lines[branch]]
+            event[branch] = [
+                dict(speaker=speaker.get(), text=widget.get('1.0', 'end-1c'))
+                for _, speaker, widget in self.lines[branch]
+            ]
         return dict(version=1, enabled=self.enabled.get(), event=event)
 
     def validated(self):
@@ -111,6 +194,7 @@ class OptionalEventEditorWindow:
         def save():
             self.save_row(self.drafts,self.validated())
             self.saved_form = self.collect()
+            self.update_summary()
             self.notice.set('下書きを保存しました。採用・Unity出力はまだ行っていません。')
         return self._run(save)
 
@@ -122,7 +206,8 @@ class OptionalEventEditorWindow:
             if self.import_review_pending:
                 return self.preview_all()
             data = self.validated()
-            adopted = self.published.read(self.content_id)
+            adopted = next((row for row in self.effective_published()['entries']
+                            if row['event']['content_cat_id'] == self.content_id), None)
             window = tk.Toplevel(self.window)
             window.title('プレビューと採用内容の比較')
             window.geometry('1000x700')
@@ -134,8 +219,15 @@ class OptionalEventEditorWindow:
                 for content, heading in ((adopted, '現在の採用'), (data, '編集中')):
                     text = ScrolledText(pane, width=48, wrap='word')
                     text.pack(side='left', fill='both', expand=True)
+                    if content is None:
+                        text.insert('end', heading + '\n採用された定義はありません。')
+                        text.configure(state='disabled')
+                        continue
                     e = content['event']
-                    text.insert('end', heading + '\n' + e['title'] + f"\n{e['min_day']}日目以降 / 好感度{e['min_affinity']}以上\n\n")
+                    scope = '旧ミケ個体専用' if e.get('target_kind') == 'individual' else '画像系統で共有'
+                    output = '出力対象' if content['enabled'] else '出力対象外'
+                    text.insert('end', f"{heading}（{scope}／{output}）\n{e['title']}\n"
+                                f"{e['min_day']}日目以降 / 好感度{e['min_affinity']}以上\n\n")
                     for line in e['introduction'] + [dict(speaker='あなた', text=e['accept_caption' if branch == 'accepted' else 'decline_caption'])] + e[branch]:
                         text.insert('end', (line['speaker'] or '地の文') + '\n' + line['text'] + '\n\n')
                     text.configure(state='disabled')
@@ -156,7 +248,7 @@ class OptionalEventEditorWindow:
                 self.save_row(self.published,data)
             self.saved_form = self.collect()
             self.update_summary()
-            self.notice.set('採用登録しました。次のUnity出力に含まれます。')
+            self.notice.set('採用登録しました。出力対象に設定した定義が次のUnity出力に含まれます。')
         return self._run(save)
 
     def load_published(self):
@@ -167,6 +259,7 @@ class OptionalEventEditorWindow:
             self.import_review_pending=False
             self.populate(self.published.read(self.content_id))
             self.saved_form = self.collect()
+            self.update_summary()
             self.notice.set('採用内容を読みました。')
         self._run(load)
 
@@ -241,7 +334,10 @@ class OptionalEventEditorWindow:
 
     def update_summary(self):
         rows=self.effective_published()['entries']
-        self.summary.config(text=f"採用：{len(rows)}系統／出力：{sum(r['enabled'] for r in rows)}件。"+('対象：旧ミケ個体専用' if self.identity.get('target_kind')=='individual' else '対象：画像系統で共有'))
+        adopted = next((row for row in rows if row['event']['content_cat_id'] == self.content_id), None)
+        status = '未採用' if adopted is None else ('採用・出力対象' if adopted['enabled'] else '採用・出力対象外')
+        scope = '旧ミケ個体専用' if self.identity.get('target_kind') == 'individual' else '画像系統で共有'
+        self.summary.config(text=f"選択中：{status}／編集対象：{scope}　全体：採用{len(rows)}系統・出力{sum(r['enabled'] for r in rows)}件")
 
     def refresh_catalog(self,confirm=True):
         if confirm and not self.confirm_leave():return

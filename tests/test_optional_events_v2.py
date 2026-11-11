@@ -58,6 +58,23 @@ class OptionalEventsV2Tests(unittest.TestCase):
         self.assertNotEqual(first['revision'], shared['revision'])
         self.assertEqual(self.store.read()['event']['target_kind'], 'individual')
 
+    def test_variable_line_counts_change_revision_and_round_trip(self):
+        event = authored('playtest-sora')
+        initial_revision = event.pop('revision')
+        event['accepted'].insert(0, event['introduction'].pop())
+        edited = validate_event(event, require_revision=False)
+        self.assertNotEqual(initial_revision, edited['revision'])
+        self.store.save(dict(version=1, enabled=True, event=edited))
+        pack = self.store.export_data({'playtest-mike': 'ミケ', 'playtest-sora': 'ソラ'})
+        self.assertIn(edited, read_pack(definition_text(pack))['events'])
+        for count in (0, 21):
+            with self.assertRaises(ValueError):
+                validate_event(dict(event, declined=event['declined'][:1] * count), require_revision=False)
+        legacy = default_event()
+        legacy['accepted'].append(legacy['introduction'].pop())
+        with self.assertRaises(ValueError):
+            validate_event(legacy, require_revision=False)
+
     def test_contract_limits_and_json_utf16(self):
         row = authored('cat-image')
         rows = [dict(row, content_cat_id='c' + str(i), event_id='optional.c' + str(i) + '.story') for i in range(64)]
@@ -93,9 +110,21 @@ class OptionalEventsV2Tests(unittest.TestCase):
             gui = OptionalEventEditorWindow(root, draft, self.store, lambda: {'playtest-mike': '同名', 'playtest-sora': '同名'})
             gui.content.set(next(k for k, v in gui.targets.items() if v == 'playtest-sora')); gui.change_target()
             gui.populate(dict(version=1, enabled=True, event=authored('playtest-sora')))
+            gui.preview()
+            gui.edit_lines('introduction', 'add')
+            gui.lines['introduction'][1][2].insert('1.0', '追加した行')
+            gui.edit_lines('introduction', 'up')
+            with patch('tkinter.messagebox.askyesno', return_value=True):
+                gui.edit_lines('declined', 'remove')
+            gui.publish()
+            self.assertFalse(self.store.path.exists())
             gui.preview(); gui.publish()
             self.assertFalse(draft.path.exists())
-            self.assertEqual(self.store.read('playtest-sora')['event']['title'], '午後のひととき')
+            event = self.store.read('playtest-sora')['event']
+            self.assertEqual(event['title'], '午後のひととき')
+            self.assertEqual(len(event['introduction']), 4)
+            self.assertEqual(event['introduction'][0]['text'], '追加した行')
+            self.assertEqual(len(event['declined']), 1)
             gui.saved_form = gui.collect(); gui.content.set(next(k for k, v in gui.targets.items() if v == 'playtest-mike')); gui.change_target()
             self.assertIsNone(gui.reviewed); self.assertEqual(gui.identity['target_kind'], 'individual')
             gui.window.update_idletasks()

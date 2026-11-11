@@ -12,6 +12,8 @@ EVENT_ID = 'optional.mike.afternoon'
 FIELDS = ('event_id', 'cat_id', 'content_cat_id', 'min_day', 'min_affinity', 'title',
           'accept_caption', 'decline_caption', 'introduction', 'accepted', 'declined')
 BRANCHES = ('introduction', 'accepted', 'declined')
+DEFAULT_LINE_COUNTS = (3, 2, 2)
+MAX_BRANCH_LINES = 20
 DEFAULT_DRAFT = Path(__file__).resolve().parent / 'user_data' / 'optional_event_draft.json'
 
 
@@ -45,6 +47,10 @@ def _text(value, maximum, *, empty=False, single_line=False):
 def revision(event):
     identity = [event[k] for k in ('event_id','cat_id','content_cat_id')] if 'target_kind' not in event else ['2',event['event_id'],event['target_kind'],event['content_cat_id'],event.get('cat_id','')]
     values = identity + [str(event[key]) for key in ('min_day','min_affinity','title','accept_caption','decline_caption')]
+    counts = tuple(len(event[branch]) for branch in BRANCHES)
+    if counts != DEFAULT_LINE_COUNTS:
+        # Include the branch boundaries while preserving all existing revision IDs.
+        values.extend(('branch_counts', *(str(count) for count in counts)))
     for branch in BRANCHES:
         for line in event[branch]:
             values.extend((line['speaker'], line['text']))
@@ -69,9 +75,12 @@ def validate_event(event, *, require_revision=True):
             raise ValueError(('開始日数' if key == 'min_day' else '開始好感度') + 'の範囲が不正です。')
     for key, maximum in (('title', 30), ('accept_caption', 24), ('decline_caption', 24)):
         _text(clean[key], maximum, single_line=True)
-    for branch, count in zip(BRANCHES, (3, 2, 2)):
-        if not isinstance(clean[branch], list) or len(clean[branch]) != count:
-            raise ValueError('導入3行・各結果2行が必要です。')
+    for branch, count in zip(BRANCHES, DEFAULT_LINE_COUNTS):
+        lines = clean[branch]
+        if not isinstance(lines, list) or not 1 <= len(lines) <= MAX_BRANCH_LINES:
+            raise ValueError(f'導入と各結果はそれぞれ1〜{MAX_BRANCH_LINES}行で入力してください。')
+        if legacy and len(lines) != count:
+            raise ValueError('旧形式では導入3行・各結果2行が必要です。')
         for line in clean[branch]:
             if not isinstance(line, dict) or set(line) != {'speaker', 'text'}:
                 raise ValueError('会話行の形式が不正です。')
@@ -131,8 +140,8 @@ def blank_event(content_id):
         raise ValueError('画像IDが不正です。')
     return dict(event_id='optional.'+content_id+'.story',target_kind='content',content_cat_id=content_id,
                 min_day=2,min_affinity=20,title='',accept_caption='',decline_caption='',
-                introduction=[dict(speaker='',text='') for _ in range(3)],
-                accepted=[dict(speaker='',text='') for _ in range(2)],declined=[dict(speaker='',text='') for _ in range(2)])
+                **{branch: [dict(speaker='', text='') for _ in range(count)]
+                   for branch, count in zip(BRANCHES, DEFAULT_LINE_COUNTS)})
 
 
 class OptionalEventStore:

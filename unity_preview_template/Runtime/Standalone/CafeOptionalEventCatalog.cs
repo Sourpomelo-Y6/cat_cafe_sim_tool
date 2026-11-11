@@ -9,6 +9,8 @@ namespace CatCafePreview.Standalone
 {
     [Serializable] public sealed class CafeOptionalDefinition
     {
+        const int MaxBranchLines = 20;
+        static readonly int[] DefaultLineCounts = {3, 2, 2};
         public int schema_version=1;
         public string target_kind;
         public string event_id,cat_id,content_cat_id,revision,title,accept_caption,decline_caption;
@@ -19,8 +21,11 @@ namespace CatCafePreview.Standalone
         public string Digest()
         {
             var identity=schema_version==1?new[]{event_id,cat_id,content_cat_id}:new[]{"2",event_id,target_kind,content_cat_id,cat_id??""};
-            var values=identity.Concat(new[]{min_day.ToString(CultureInfo.InvariantCulture),min_affinity.ToString(CultureInfo.InvariantCulture),title,accept_caption,decline_caption})
-                .Concat(introduction.Concat(accepted).Concat(declined).SelectMany(l=>new[]{l.speaker,l.text}));
+            var values=identity.Concat(new[]{min_day.ToString(CultureInfo.InvariantCulture),min_affinity.ToString(CultureInfo.InvariantCulture),title,accept_caption,decline_caption});
+            var counts = new[] { introduction.Length, accepted.Length, declined.Length };
+            if (!counts.SequenceEqual(DefaultLineCounts))
+                values = values.Concat(new[] { "branch_counts" }).Concat(counts.Select(count => count.ToString(CultureInfo.InvariantCulture)));
+            values = values.Concat(introduction.Concat(accepted).Concat(declined).SelectMany(l=>new[]{l.speaker,l.text}));
             var canonical=string.Concat(values.Select(s=>s.Length.ToString(CultureInfo.InvariantCulture)+":"+s));
             using(var sha=SHA256.Create())return string.Concat(sha.ComputeHash(Encoding.UTF8.GetBytes(canonical)).Select(b=>b.ToString("x2")));
         }
@@ -34,8 +39,15 @@ namespace CatCafePreview.Standalone
                 || (individual && (event_id!=CafeOptionalEvents.MikeId || cat_id!="cat-mike" || content_cat_id!="playtest-mike"))
                 || (!individual && cat_id!=null) || min_day<1 || min_day>9999 || min_affinity<0 || min_affinity>100
                 || !Label(title,30) || !Label(accept_caption,24) || !Label(decline_caption,24))throw new ArgumentException("任意イベント定義の項目が不正です。");
-            var branches=new[]{introduction,accepted,declined};var counts=new[]{3,2,2};
-            for(int i=0;i<3;i++)if(branches[i]==null || branches[i].Length!=counts[i] || branches[i].Any(l=>l==null || !Label(l.speaker,7,true) || !Text(l.text,1000)))throw new ArgumentException("任意イベントの本文・分岐が不正です。");
+            var branches = new[] { introduction, accepted, declined };
+            for (int i = 0; i < branches.Length; i++)
+            {
+                var lines = branches[i];
+                if (lines == null || lines.Length < 1 || lines.Length > MaxBranchLines
+                    || (schema_version == 1 && lines.Length != DefaultLineCounts[i])
+                    || lines.Any(l => l == null || !Label(l.speaker, 7, true) || !Text(l.text, 1000)))
+                    throw new ArgumentException("任意イベントの本文・分岐が不正です。");
+            }
             if(revision!=Digest())throw new ArgumentException("任意イベントの本文と版が一致しません。");
         }
         public bool Matches(string cat,string content)=>content==content_cat_id && (schema_version==2 && target_kind=="content" || cat==cat_id);
