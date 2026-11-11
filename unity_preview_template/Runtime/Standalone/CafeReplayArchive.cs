@@ -9,6 +9,7 @@ namespace CatCafePreview.Standalone
     {
         public string conversation_id,branch_id,title,cat_id,cat_name,personality;
         public string customer_id;
+        public int scene_art, still_start_node;
         public string image_resource; // Optional frozen portrait for authored story receipts.
         public CafeConversationLine[] lines;
         public string Key=>conversation_id+"/"+branch_id;
@@ -119,7 +120,7 @@ namespace CatCafePreview.Standalone
         {
             ValidateSave(save);var result=new List<CafeReplayEntry>();
             foreach(var row in (save.optional_events??new CafeOptionalEvent[0]).Select((row,index)=>new{row,index}).OrderByDescending(p=>p.row.started_day).ThenByDescending(p=>p.index).Select(p=>p.row))if(row.progress.completed)
-                result.Add(new CafeReplayEntry{conversation_id=row.progress.conversation_id,branch_id=row.progress.branch_id,title=row.title+" · "+(row.progress.branch_id=="accepted"?row.accept_caption:row.decline_caption),image_resource=row.image_resource,cat_id=row.content_cat_id,cat_name=row.cat_name,personality=row.started_day+"日目の記録",lines=row.introduction.Concat(new[]{new CafeConversationLine("あなた",row.progress.branch_id=="accepted"?row.accept_caption:row.decline_caption)}).Concat(CafeOptionalEvents.Lines(row,row.progress.branch_id)).Select(l=>new CafeConversationLine(l.speaker,l.text)).ToArray()});
+                result.Add(new CafeReplayEntry{conversation_id=row.progress.conversation_id,branch_id=row.progress.branch_id,title=row.title+" · "+(row.progress.branch_id=="accepted"?row.accept_caption:row.decline_caption),image_resource=row.image_resource,scene_art=row.scene_art,still_start_node=row.scene_art!=0 && row.progress.branch_id=="accepted"?row.introduction.Length+1:0,cat_id=row.content_cat_id,cat_name=row.cat_name,personality=row.started_day+"日目の記録",lines=row.introduction.Concat(new[]{new CafeConversationLine("あなた",row.progress.branch_id=="accepted"?row.accept_caption:row.decline_caption)}).Concat(CafeOptionalEvents.Lines(row,row.progress.branch_id)).Select(l=>new CafeConversationLine(l.speaker,l.text)).ToArray()});
             Action<CafeConversationProgress,string,string,string,Func<string,CafeConversationLine[]>,bool> add=(p,id,name,personality,script,intro)=>{
                 if(p==null)return;
                 foreach(string branch in p.viewed_branches??new string[0])

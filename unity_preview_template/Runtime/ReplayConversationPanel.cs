@@ -17,6 +17,8 @@ namespace CatCafePreview
         }
         protected override bool TrackRead=>false;
         protected override bool ShowPortrait=>entry?.conversation_id!=CafeEquipmentDialogue.Id;
+        protected override int SceneArt=>entry?.scene_art??0;
+        protected override bool SceneStill=>entry!=null && entry.still_start_node>0 && position.node>=entry.still_start_node;
         protected override bool Ready=>true;
         protected override bool AutoRunning=>false;
         protected override bool SaveControls=>false;

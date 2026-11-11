@@ -13,6 +13,10 @@ namespace CatCafePreview
         public bool OriginalShowing {get;private set;}
         GameObject card,dialogue,choiceGroup,historyWindow; Text heading,body,speaker,hint,acceptEffect,declineEffect,catLabel,historyBody,sceneLabel; RawImage portrait;
         CanvasGroup catGroup; ScrollRect historyScroll; Vector2 layoutSize; bool layoutHistory,layoutThreeLinePages;
+        RawImage sceneImage;
+        GameObject sceneRoom, sceneHeading, catTag;
+        bool illustratedLayout;
+        static Texture2D mikeWindow, mikeStill;
         static readonly Color Paper=new Color(.99f,.97f,.92f),Ink=new Color(.22f,.26f,.20f),Olive=new Color(.36f,.43f,.31f);
         public ScrollRect HistoryScroll=>historyScroll;
         Button third;Text thirdEffect;
@@ -44,6 +48,8 @@ namespace CatCafePreview
         protected virtual string BusyNotice=>!Client.CanSendCommands?"処理中です。完了をお待ちください。":Notice;
         protected virtual Texture2D PortraitTexture(string id)=>GetComponent<ContentPreview>().CandidateCatTexture(id);
         protected virtual bool ShowPortrait=>true;
+        protected virtual int SceneArt=>0;
+        protected virtual bool SceneStill=>false;
         protected virtual void PauseProgress(){if(Client.Automatic)Client.PauseAutomaticForSave();}
         protected virtual void AfterClose(){GetComponent<ContentPreview>().RefreshPythonControls();}
         protected virtual void RecordCompletion(){Backend.RememberViewedConversations();}
@@ -128,9 +134,79 @@ namespace CatCafePreview
             if(third!=null){third.gameObject.SetActive(choosing && !history);third.interactable=ready && CanThird;third.GetComponentInChildren<Text>().text=ThirdCaption;thirdEffect.text=ThirdEffect;}
             acceptEffect.text=AcceptEffect;declineEffect.text=DeclineEffect;
             hint.text=Backend?.ReadHistory?.Error??BusyNotice;hint.gameObject.SetActive(!ThreeLinePages);
-            portrait.transform.parent.parent.gameObject.SetActive(ShowPortrait);
-            portrait.texture=ShowPortrait?(PortraitTexture(q.cat_id)??ContentPreview.CatPlaceholderTexture()):null;portrait.enabled=portrait.texture!=null;
+            bool still=RefreshSceneArt();
+            bool showPortrait=ShowPortrait && !still;
+            portrait.transform.parent.parent.gameObject.SetActive(showPortrait);
+            portrait.texture=showPortrait?(PortraitTexture(q.cat_id)??ContentPreview.CatPlaceholderTexture()):null;portrait.enabled=portrait.texture!=null;
             if(portrait.texture!=null)portrait.GetComponent<AspectRatioFitter>().aspectRatio=(float)portrait.texture.width/portrait.texture.height;
+        }
+        bool RefreshSceneArt()
+        {
+            bool illustrated=SceneArt==CafeOptionalEvents.MikeWindowArt;
+            if(!illustrated && !illustratedLayout)return false;
+            illustratedLayout=illustrated;
+            var size=card.GetComponent<RectTransform>().rect.size;
+            var mask=portrait.rectTransform.parent.GetComponent<RectTransform>();
+            var frame=mask.parent.GetComponent<RectTransform>();
+            var tag=catTag.GetComponent<RectTransform>();
+            Texture2D art=null;
+            bool still=false;
+            if(illustrated)
+            {
+                if(SceneStill)
+                {
+                    if(mikeStill==null)mikeStill=Resources.Load<Texture2D>("CatCafeDefaults/mike-approaches-v1");
+                    art=mikeStill;
+                    still=art!=null;
+                }
+                if(art==null)
+                {
+                    if(mikeWindow==null)mikeWindow=Resources.Load<Texture2D>("CatCafeDefaults/mike-window-v1");
+                    art=mikeWindow;
+                }
+            }
+            sceneImage.texture=art;
+            sceneImage.enabled=art!=null;
+            sceneHeading.SetActive(art!=null);
+            sceneRoom.SetActive(art==null);
+            catTag.SetActive(!still);
+            card.GetComponent<ConversationShape>().color=still?new Color(.20f,.16f,.12f):Paper;
+            if(art!=null && size.x>0 && size.y>0)
+            {
+                float headingWidth=Mathf.Min(size.x-64,Mathf.Max(334,Mathf.Max(heading.preferredWidth,sceneLabel.preferredWidth)+32));
+                sceneHeading.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,headingWidth);
+                float ratio=(float)art.width/art.height;
+                if(still)
+                {
+                    float height=Mathf.Max(0,Mathf.Min(size.y-306,(size.x-48)/ratio));
+                    float width=height*ratio;
+                    Place(sceneImage.rectTransform,(size.x-width)/2,8,width,height);
+                    sceneImage.uvRect=new Rect(0,0,1,1);
+                }
+                else
+                {
+                    Stretch(sceneImage.rectTransform);
+                    float screenRatio=size.x/size.y;
+                    float u=Mathf.Min(1,screenRatio/ratio),v=Mathf.Min(1,ratio/screenRatio);
+                    sceneImage.uvRect=new Rect((1-u)/2,(1-v)/2,u,v);
+                }
+            }
+            if(illustrated)
+            {
+                float edge=Mathf.Clamp(size.y-422,330,412);
+                Place(frame,(size.x-edge)/2,110,edge,edge);
+                Place(mask,8,8,edge-16,edge-16);
+                Place(tag,Mathf.Min((size.x+edge)/2+16,size.x-220),128,196,88);
+                Place(catLabel.rectTransform,14,10,168,68);
+            }
+            else
+            {
+                frame.anchorMin=frame.anchorMax=new Vector2(.5f,.60f);frame.pivot=new Vector2(.5f,.5f);frame.anchoredPosition=Vector2.zero;frame.sizeDelta=new Vector2(322,310);
+                Place(mask,8,8,306,294);
+                tag.anchorMin=tag.anchorMax=new Vector2(.5f,.60f);tag.pivot=new Vector2(0,1);tag.anchoredPosition=new Vector2(184,36);tag.sizeDelta=new Vector2(344,96);
+                Place(catLabel.rectTransform,16,12,312,80);
+            }
+            return still;
         }
         string Page(string full)
         {
@@ -200,10 +276,17 @@ namespace CatCafePreview
             Stretch(panel.GetComponent<RectTransform>());panel.GetComponent<UnityEngine.UI.Image>().color=Paper;
             card=Box(panel.transform,regular?"Regular Conversation":"Intake Conversation",0,0,1280,800,Paper);Stretch(card.GetComponent<RectTransform>());
             var room=new GameObject("Cafe Interior",typeof(RectTransform),typeof(CanvasRenderer),typeof(ConversationRoomGraphic));room.transform.SetParent(card.transform,false);Stretch(room.GetComponent<RectTransform>());room.GetComponent<ConversationRoomGraphic>().raycastTarget=false;
+            sceneRoom=room;
+            var artwork=new GameObject("Event Artwork",typeof(RectTransform),typeof(RawImage));
+            artwork.transform.SetParent(card.transform,false);
+            sceneImage=artwork.GetComponent<RawImage>();sceneImage.raycastTarget=false;sceneImage.enabled=false;
+            sceneHeading=Box(card.transform,"Event Artwork Heading",32,18,334,88,Paper,12);
+            sceneHeading.SetActive(false);
             heading=Label(card.transform,"Title",48,30,900,42,25);sceneLabel=Label(card.transform,"Scene",48,78,800,30,17);
             var stage=new GameObject("Cat Stage",typeof(RectTransform),typeof(CanvasGroup));stage.transform.SetParent(card.transform,false);Stretch(stage.GetComponent<RectTransform>());catGroup=stage.GetComponent<CanvasGroup>();catGroup.blocksRaycasts=false;
             portrait=Image(stage.transform,0,0,322,310);var frame=portrait.transform.parent.parent.GetComponent<RectTransform>();frame.anchorMin=frame.anchorMax=new Vector2(.5f,.60f);frame.pivot=new Vector2(.5f,.5f);frame.anchoredPosition=Vector2.zero;
             var tag=Box(stage.transform,"Cat Label",0,0,344,96,new Color(Paper.r,Paper.g,Paper.b,.94f),12);var tagRect=tag.GetComponent<RectTransform>();tagRect.anchorMin=tagRect.anchorMax=new Vector2(.5f,.60f);tagRect.anchoredPosition=new Vector2(184,36);catLabel=Label(tag.transform,"Cat Name",16,12,312,80,21);catLabel.lineSpacing=1.4f;
+            catTag=tag;
             dialogue=Box(card.transform,"Dialogue Window",48,0,1184,254,Paper,16);var dock=dialogue.GetComponent<RectTransform>();dock.anchorMin=new Vector2(0,0);dock.anchorMax=new Vector2(1,0);dock.pivot=new Vector2(.5f,0);dock.offsetMin=new Vector2(48,32);dock.offsetMax=new Vector2(-48,286);
             var plate=Box(dialogue.transform,"Name Plate",24,-20,170,48,Olive,9);speaker=Label(plate.transform,"Speaker",12,8,146,32,20);speaker.color=Paper;speaker.alignment=TextAnchor.MiddleCenter;
             body=Scroll(dialogue.transform,"Dialogue",32,46,1120,112,23,out scroll);body.lineSpacing=1.2f;var surface=scroll.gameObject.AddComponent<ConversationAdvanceSurface>();surface.conversation=this;

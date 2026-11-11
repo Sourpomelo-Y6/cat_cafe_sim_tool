@@ -28,6 +28,9 @@ static partial class Program
         var round=CafeOptionalEventSaveJson.ReadSave(Receipt(new[]{a,b}));Assert(round.Length==2 && round[1].cat_id=="rescue-100","strict save readback");
         Assert(CafeOptionalEventSaveJson.ReadSave("{}").Length==0 && CafeOptionalEventSaveJson.ReadSave("{\"optional_events\":null}").Length==0,"legacy absent/null saves");
         string json=Receipt(new[]{a,b});
+        var legacyReceipt=CafeOptionalEventSaveJson.ReadSave(json.Replace("\"scene_art\":0,", ""));
+        Assert(legacyReceipt.Length==2 && legacyReceipt.All(row=>row.scene_art==0),"Old receipts without artwork still load");
+        Assert(Reject(()=>CafeOptionalEventSaveJson.ReadSave(json.Replace("\"scene_art\":0","\"scene_art\":1"))),"Mike artwork is limited to his receipt");
         foreach(string bad in new[]{"false","{}","[{\"unknown\":1}]"})Assert(Reject(()=>CafeOptionalEventSaveJson.ReadSave("{\"optional_events\":"+bad+"}")),"bad save field rejects");
         Assert(Reject(()=>CafeOptionalEventSaveJson.ReadSave("{\"optional_events\":[],\"optional_events\":[]}")),"duplicate root rejects");
         Assert(Reject(()=>CafeOptionalEventSaveJson.ReadSave(json.Replace("\"completed\":true","\"completed\":1"))),"boolean type strict");

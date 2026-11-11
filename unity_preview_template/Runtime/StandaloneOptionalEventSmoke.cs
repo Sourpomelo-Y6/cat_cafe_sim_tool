@@ -30,6 +30,19 @@ namespace CatCafePreview
         }
         static void Good(LocalCafeBackend b,string kind,string choice=null,int slot=1)=>StandaloneDispatchConversationSmoke.Good(b,kind,choice,cat:"cat-mike",slot:slot);
         void Check(bool ok,string label){checks++;if(!ok)throw new Exception(label);}
+        void CheckArtwork(AcquisitionConversationPanel view,bool still)
+        {
+            var artwork=(RawImage)typeof(AcquisitionConversationPanel).GetField("sceneImage",Hidden).GetValue(view);
+            var portrait=(RawImage)typeof(AcquisitionConversationPanel).GetField("portrait",Hidden).GetValue(view);
+            Check(artwork.enabled && artwork.texture!=null && artwork.texture.name==(still?"mike-approaches-v1":"mike-window-v1"),"Correct scene illustration");
+            Check(portrait.enabled!=still,"Portrait switches off for the full illustration");
+            var heading=(Text)typeof(AcquisitionConversationPanel).GetField("heading",Hidden).GetValue(view);
+            var headingBox=(GameObject)typeof(AcquisitionConversationPanel).GetField("sceneHeading",Hidden).GetValue(view);
+            Check(headingBox.GetComponent<RectTransform>().rect.width>=heading.preferredWidth+32,"Title fits on its backing");
+            if(still)return;
+            var frame=portrait.transform.parent.parent.GetComponent<RectTransform>();
+            Check(frame.rect.height>310 && portrait.texture!=ContentPreview.CatPlaceholderTexture(),"Larger portrait uses the frozen cat texture");
+        }
         IEnumerator Guard()
         {
             var work=Run();while(true){bool more;try{more=work.MoveNext();}catch(Exception ex){File.WriteAllText(Path.Combine(output,resume?"resume-failure.txt":"failure.txt"),ex.ToString());Debug.LogException(ex);Application.Quit(1);yield break;}if(!more)break;yield return work.Current;}
@@ -85,20 +98,22 @@ namespace CatCafePreview
             SceneManager.LoadScene("CatCafePythonState");yield return new WaitForSecondsRealtime(2);
             var client=FindObjectOfType<PythonStateClient>();client.enabled=false;CafeBackends.UseLocal(b);
             Action apply=()=>typeof(PythonStateClient).GetMethod("Accept",Hidden).Invoke(client,new object[]{b.View()});apply();
-            Screen.SetResolution(resume?1024:1280,resume?768:800,false);yield return new WaitForSecondsRealtime(.5f);
+            bool compact=resume || !accepted;
+            int width=compact?1024:1280;
+            Screen.SetResolution(width,compact?768:800,false);yield return new WaitForSecondsRealtime(.5f);
             var view=client.GetComponent<OptionalEventConversationPanel>()??client.gameObject.AddComponent<OptionalEventConversationPanel>();
             Check(!view.Showing && !b.ConversationBlocksProgress,"Does not auto-open or block");
             if(resume && variant>=0)Check(JsonUtility.ToJson(b.OptionalEvent)==File.ReadAllText(Path.Combine(output,"frozen-story.json")),"Started story remains identical after catalogue rewrite across processes");
             if(resume)Check(b.OptionalEvent.progress.branch_id==branch && b.OptionalEvent.progress.node==1 && b.OptionalEvent.progress.page_offset==2,"Different-process result position restored");
             Check(view.OpenEvent(),"Explicit start or resume");Check(b.ConversationBlocksProgress,"Visible event blocks business input");
-            var portrait=(RawImage)typeof(AcquisitionConversationPanel).GetField("portrait",Hidden).GetValue(view);Check(portrait.texture!=null && portrait.texture!=ContentPreview.CatPlaceholderTexture(),"Frozen cat portrait");
-            yield return Shot(resume?"resume-1024":"introduction-1280");
+            CheckArtwork(view,resume && accepted);
+            yield return Shot(resume?"resume-1024":"introduction-"+width);
             view.Close();Check(!b.ConversationBlocksProgress,"Close releases business and autoplay");
             Check(view.OpenEvent(),"Reopen retains progress");
             if(!resume)
             {
-                b.OptionalEvent.progress.node=b.OptionalEvent.introduction.Length;b.OptionalEvent.progress.page_offset=0;view.Refresh();Check(view.PlaybackChoosing,"Two choices ready");yield return Shot("choices-1280");
-                yield return null;view.Answer(accepted);Check(b.OptionalEvent.progress.branch_id==branch,"UI choice records branch");yield return Shot("result-1280");
+                b.OptionalEvent.progress.node=b.OptionalEvent.introduction.Length;b.OptionalEvent.progress.page_offset=0;view.Refresh();Check(view.PlaybackChoosing,"Two choices ready");yield return Shot("choices-"+width);
+                yield return null;view.Answer(accepted);Check(b.OptionalEvent.progress.branch_id==branch,"UI choice records branch");CheckArtwork(view,accepted);yield return Shot("result-"+width);
                 b.OptionalEvent.progress.node=1;b.OptionalEvent.progress.page_offset=2;File.WriteAllText(Path.Combine(output,"frozen-story.json"),JsonUtility.ToJson(b.OptionalEvent));Good(b,"save_game",slot:3);Check(!b.OptionalEvent.progress.completed,"Partial save is unfinished");
             }
             else
@@ -107,6 +122,16 @@ namespace CatCafePreview
                 Check(b.OptionalEvent.progress.completed && !b.OptionalEventListed,"UI completion recorded once");
                 Check(b.Replays.Load().entries.Count(e=>e.conversation_id==b.OptionalEvent.progress.conversation_id)==1,"Only chosen branch archived");
                 Good(b,"save_game",slot:4);Good(b,"load_game",slot:4);apply();Check(b.OptionalEvent.progress.completed && !b.ConversationBlocksProgress,"Completed save reload");
+                var entry=b.Replays.Load().entries.Single(e=>e.conversation_id==b.OptionalEvent.progress.conversation_id);
+                Check(entry.scene_art==CafeOptionalEvents.MikeWindowArt && entry.still_start_node==(accepted?b.OptionalEvent.introduction.Length+1:0),"Extra stores the result artwork boundary");
+                var host=new GameObject("Extra artwork verification",typeof(RectTransform),typeof(Image));
+                host.transform.SetParent(view.PlaybackHost.transform.parent,false);
+                var replay=client.gameObject.AddComponent<ReplayConversationPanel>();
+                replay.Play(entry,host,client.GetComponent<PythonCatDetailsPanel>().title.font,()=>{});
+                yield return null;replay.Refresh();CheckArtwork(replay,false);
+                for(int i=0;i<b.OptionalEvent.introduction.Length+1;i++){yield return null;replay.Next();}
+                CheckArtwork(replay,accepted);
+                yield return Shot("extra-result-1024");replay.Close();
             }
             Check(digest==CafeReplayJournal.Digest(b.Simulation.State),"Story does not change gameplay digest");
             if(resume && variant<0)
