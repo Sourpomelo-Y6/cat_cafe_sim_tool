@@ -22,13 +22,15 @@ namespace CatCafePreview.Standalone
         public static bool ValidConversationId(string id)
         {if(id==null)return false;int at=id.LastIndexOf(".v",StringComparison.Ordinal);if(at<0)return false;string key=id.Substring(0,at),version=id.Substring(at+2);return ValidEventId(key) && (Regex.IsMatch(version,"\\A[a-f0-9]{64}\\z") || key==MikeId && version=="1");}
         public const string MikeId="optional.mike.afternoon";
+        public const string MikeCatId="cat-mike";
+        public const int MikeAffinityMilestone=20;
         public const string MikeRevision="1";
         public const string MikeTitle="少し近づいた午後";
         public static bool Eligible(CafeSnapshot state)
         {
             return state.day>=2 && state.phase=="preparation" && string.IsNullOrEmpty(state.game_over)
                 && state.cats.Any(c=>c.id=="cat-mike" && c.activity=="cafe" && c.health=="healthy")
-                && state.player_cats.Any(c=>c.cat_id=="cat-mike" && !double.IsNaN(c.affinity) && !double.IsInfinity(c.affinity) && c.affinity>=20);
+                && state.player_cats.Any(c=>c.cat_id==MikeCatId && !double.IsNaN(c.affinity) && !double.IsInfinity(c.affinity) && c.affinity>=MikeAffinityMilestone);
         }
         public static CafeOptionalEvent Start(CafeSnapshot state,string name,string contentId,string image)
         {

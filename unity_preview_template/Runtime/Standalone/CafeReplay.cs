@@ -11,6 +11,7 @@ namespace CatCafePreview.Standalone
     {
         public string kind,cat_id,choice,source,seat_id,customer_id,objective,mode;
         public int growth_policy_version;
+        public bool mike_milestone_locked;
         public CafeStaminaRules stamina_rules;public int stamina_policy_version; public int player_policy_version,days;public string[] working;
     }
     [Serializable] public class CafeReplayRow
@@ -65,6 +66,7 @@ namespace CatCafePreview.Standalone
                 if(value is CafeCat && (field.Name=="stamina_stage" && (int)field.GetValue(value)==0 || field.Name=="stamina_experience_origin" && (double)field.GetValue(value)==0))continue;
                 if((value is CafePlayerSession || value is CafeExchange) && field.Name=="max_stamina" && (double)field.GetValue(value)==0)continue;
                 if(value is CafePlayerSession && field.Name=="stamina_rule_version" && (int)field.GetValue(value)==0)continue;
+                if(value is CafePlayerSession && field.Name=="mike_milestone_limit" && !((CafePlayerSession)value).mike_milestone_limit)continue;
                 if(value is CafeReplayOperation && field.Name=="player_policy_version" && (int)field.GetValue(value)==0)continue;
                 if(value is CafePlayerSession && field.Name=="set_ticks" && (int)field.GetValue(value)==0)continue;
                 if(value is CafeDayResult && field.Name=="legacy_service_ticks" && field.GetValue(value)==null)continue;
@@ -74,6 +76,7 @@ namespace CatCafePreview.Standalone
         public void Append(CafeSnapshot before,CafeSimulation sim,CafeReplayOperation operation,CafeAutoOperation automatic=null)
         {
             operation.growth_policy_version=1;operation.stamina_policy_version=sim.LegacyStaminaReplay?0:1;operation.stamina_rules=sim.LegacyStaminaReplay?null:sim.State.stamina_growth;operation.player_policy_version=sim.LegacyPlayerReplay?0:2;var after=sim.State;var events=new List<string>(sim.ReplayActions);
+            operation.mike_milestone_locked=sim.MikeMilestoneLocked;
             foreach(var v in after.visits){var old=before.day==after.day?before.visits.Find(x=>x.id==v.id):null;if(old==null)events.Add("来店："+v.id+" / "+v.arrival+"tick");if(v.cat_id!=null && old?.cat_id!=v.cat_id)events.Add("接客開始："+v.id+" / "+v.cat_id+" / seat-"+(v.service_seat+1));if(v.departure!=null && old?.departure!=v.departure)events.Add("退店："+v.id+" / "+v.departure+" / 売上 "+N(v.bill)+" / "+v.satisfaction?.level);}
             foreach(var cat in after.cats){var old=before.cats.Find(c=>c.id==cat.id);if(old==null)events.Add("猫の加入："+cat.id);else if(old.fatigue!=cat.fatigue || old.stress!=cat.stress || old.health!=cat.health || old.activity!=cat.activity)events.Add(cat.id+"：疲労 "+N(old.fatigue)+" → "+N(cat.fatigue)+" / ストレス "+N(old.stress)+" → "+N(cat.stress)+" / "+old.health+" → "+cat.health+" / "+old.activity+" → "+cat.activity);}
             if(before.phase!=after.phase || before.day!=after.day)events.Add("営業："+before.day+"日目 "+before.phase+" → "+after.day+"日目 "+after.phase);
@@ -94,6 +97,7 @@ namespace CatCafePreview.Standalone
             if(op.stamina_policy_version!=0 && op.stamina_policy_version!=1)throw new ArgumentException("Invalid stamina policy");
 
             sim.ReplayStaminaRules=CafeStaminaRules.Missing(op.stamina_rules)?null:op.stamina_rules;
+            sim.MikeMilestoneLocked=op.mike_milestone_locked;
             sim.ReplayActions.Clear();switch(op.kind)
             {
                 case "start_autoplay":sim.StartAutoplay(op.objective,op.mode,op.days);break;

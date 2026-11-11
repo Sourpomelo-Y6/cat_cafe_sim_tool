@@ -35,6 +35,7 @@ namespace CatCafePreview
         {
             var s=Simulation.State;
             if(conversationEpoch!=s.instance_id){RestoreOptionalEvents(null);conversation=regularConversation=null;missingSelected=missingPhase=null;MissingConversationOpen=false;RestoreDispatchConversations(null,null);RestoreEncounterConversations(null,null);RestoreLodgeConversations(null,null);RestoreAdoptionConversations(null,null);RestoreTrustConversations(null,null);RestoreCocoConversations(null);RestoreEquipmentConversations(null,null);RestoreReservationConversations(null,null);RestoreDispatchIntroductionConversations(null,null);ConversationOpen=RegularConversationOpen=false;conversationEpoch=s.instance_id;}
+            SyncMikeMilestone();
             CafeIntakeConversation.SyncAnswer(conversation,s.intake_request.status);
             CafeRegularConversation.SyncAnswer(regularConversation,s.regular_introduction.status);
             SyncDispatchConversations();SyncEncounterConversations();SyncLodgeConversations();SyncAdoptionConversations();SyncTrustConversations();SyncCocoConversations();SyncEquipmentConversations();SyncReservationConversations();SyncMissingConversations();SyncDispatchIntroductionConversations();

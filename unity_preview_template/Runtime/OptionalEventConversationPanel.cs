@@ -61,7 +61,7 @@ namespace CatCafePreview
         protected override string HistoryPrefix=>progress.branch_id=="introduction"?"":string.Join("\n\n",Array.ConvertAll(Row.introduction,l=>l.text))+"\n\n【"+(progress.branch_id=="accepted"?Row.accept_caption:Row.decline_caption)+"】\n\n";
         protected override bool CanAnswer(bool yes)=>Ready && progress.branch_id=="introduction";
         protected override void SendAnswer(bool yes){CafeOptionalEvents.Choose(Row,yes);}
-        protected override void Finish()=>CafeOptionalEvents.Finish(Row);
+        protected override void Finish()=>Backend.FinishOptionalEvent(Row);
         protected override bool ReadSkippable(int node)=>true;
         public override void Close(){base.Close();if(!Showing)requested=false;}
     }

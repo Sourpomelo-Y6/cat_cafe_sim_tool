@@ -12,6 +12,7 @@ namespace CatCafePreview.Standalone
         public string id,cat_id;public int day,ordinal,initial_revision,set_ticks;
         public double max_stamina; public int stamina_rule_version;
         public double initial_stamina,initial_affinity,stress_before,stress_after;
+        public bool mike_milestone_limit;
         public bool manual;public CafeExchange exchange;public List<CafePlayerAction> actions=new List<CafePlayerAction>();
     }
     [Serializable] public class CafeBondGoal {public string id,status="active";public int started_day=1,resolved_day;public bool continued;public List<string> achieved_cats=new List<string>();}
@@ -20,6 +21,19 @@ namespace CatCafePreview.Standalone
         // Save/replay policy v2: missing per-session limits are legacy ten-turn sessions.
         public const int PlayerSetTicks = 20;
         internal bool LegacyPlayerReplay;
+        public bool MikeMilestoneLocked { get; set; }
+
+        public bool PlayerAtAffinityMilestone(string id) =>
+            MikeMilestoneLocked && id == CafeOptionalEvents.MikeCatId
+            && PlayerCat(id).affinity == CafeOptionalEvents.MikeAffinityMilestone;
+
+        public double PlayerAffinityAfter(CafePlayerSession session)
+        {
+            double limit = session.mike_milestone_limit
+                ? Math.Min(Rules.player.max_affinity, CafeOptionalEvents.MikeAffinityMilestone)
+                : Rules.player.max_affinity;
+            return Clamp(session.exchange.affinity_start + session.exchange.affinity_pending, limit);
+        }
         public int PlayerSessionTicks(CafePlayerSession session)
         {
             if(session.set_ticks!=0 && session.set_ticks!=10 && session.set_ticks!=PlayerSetTicks)throw new ArgumentException("Invalid player session limit");
@@ -71,6 +85,7 @@ namespace CatCafePreview.Standalone
             if(BondWaiting)return "好感度目標の結果を確認してください。";
             string reason=ItemsReason();if(reason!="")return reason;
             var c=State.cats.SingleOrDefault(c=>c.id==id);if(c==null || c.activity!="cafe")return "在店している猫を選んでください。";
+            if(PlayerAtAffinityMilestone(id))return "好感度20で上限です。イベント一覧で個別イベントを読み終えると、交流を再開できます。";
             if(c.health!="healthy" || c.cannot_continue || c.stamina<=0)return "療養中・体力切れの猫は遊べません。";
             return PlayerRemaining<=0?"本日の交流回数を使い切りました。":"";
         }
@@ -90,6 +105,8 @@ namespace CatCafePreview.Standalone
         {
             string reason=PlayerBeginReason(id);if(reason!="")throw new InvalidOperationException(reason);var c=State.cats.Single(c=>c.id==id);var bond=PlayerCat(id);
             var session=new CafePlayerSession {max_stamina=State.stamina_growth==null?0:MaxStamina(id),stamina_rule_version=State.stamina_growth==null?0:1,set_ticks=LegacyPlayerReplay?0:PlayerSetTicks,id="player-"+State.day+"-"+(State.player_cats.Sum(r=>r.today)+1),cat_id=id,day=State.day,ordinal=State.player_cats.Sum(r=>r.today)+1,initial_revision=bond.total,initial_affinity=bond.affinity,initial_stamina=c.stamina};
+            session.mike_milestone_limit = MikeMilestoneLocked && id == CafeOptionalEvents.MikeCatId
+                && bond.affinity < CafeOptionalEvents.MikeAffinityMilestone;
             session.exchange=ReplayPlayer(State,session);bond.today++;bond.total++;State.player_sessions.Add(session);State.revision++;
         }
         private void AdvancePlayer(string action,string target,bool finish)
@@ -103,7 +120,7 @@ namespace CatCafePreview.Standalone
             var cat=State.cats.Single(c=>c.id==session.cat_id);cat.stamina=e.stamina;if(cat.stamina==0)cat.cannot_continue=true;
             if(e.end_reason!=null)
             {
-                PlayerCat(cat.id).affinity=Clamp(e.affinity_start+e.affinity_pending,Rules.player.max_affinity);session.stress_before=cat.stress;
+                PlayerCat(cat.id).affinity=PlayerAffinityAfter(session);session.stress_before=cat.stress;
                 cat.stress=Clamp(cat.stress+(e.affinity_pending>0?-Rules.player.relief:e.affinity_pending<0?Rules.player.stress:0),100);session.stress_after=cat.stress;EvaluateBond();
             }
             State.revision++;
@@ -128,6 +145,9 @@ namespace CatCafePreview.Standalone
             {
                 if(session==null || (session.set_ticks!=0 && session.set_ticks!=10 && session.set_ticks!=PlayerSetTicks) || !scores.ContainsKey(session.cat_id) || session.day<JoinedDay(s,session.cat_id) || session.day>s.day || session.day<previous || session.ordinal!=s.player_sessions.TakeWhile(e=>e!=session).Count(e=>e.day==session.day)+1 || session.ordinal>Rules.player.daily_turns || session.id!="player-"+session.day+"-"+session.ordinal || session.initial_revision!=totals[session.cat_id] || session.initial_affinity!=scores[session.cat_id] || !Range(session.initial_stamina,double.Epsilon,session.max_stamina==0?Rules.max_stamina:session.max_stamina) || (session.stamina_rule_version==0?session.max_stamina!=0:session.stamina_rule_version!=1 || !Range(session.max_stamina,1,10000) || session.max_stamina>MaxStamina(s,session.cat_id)) || session.actions==null || session.exchange==null)throw new ArgumentException("Invalid player departure");
                 previous=session.day;var expected=ReplayPlayer(s,session);var e=session.exchange;
+                if(session.mike_milestone_limit && (session.cat_id!=CafeOptionalEvents.MikeCatId
+                    || session.initial_affinity>=CafeOptionalEvents.MikeAffinityMilestone))
+                    throw new ArgumentException("Invalid affinity milestone limit");
                 // Check the entire public exchange, including counters, pending reactions and disabled growth/equipment modifiers.
                 foreach(var field in typeof(CafeExchange).GetFields())
                 {
@@ -143,7 +163,7 @@ namespace CatCafePreview.Standalone
                 }
                 else
                 {
-                    scores[session.cat_id]=Clamp(e.affinity_start+e.affinity_pending,Rules.player.max_affinity);
+                    scores[session.cat_id]=PlayerAffinityAfter(session);
                     if(!Range(session.stress_before,0,100) || session.stress_after!=Clamp(session.stress_before+(e.affinity_pending>0?-Rules.player.relief:e.affinity_pending<0?Rules.player.stress:0),100))throw new ArgumentException("Invalid player stress effect");
                 }
             }

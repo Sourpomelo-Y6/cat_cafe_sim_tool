@@ -63,6 +63,8 @@ namespace CatCafePreview
             CafeOptions.Current.instant=true;
             var b=Create(Path.Combine(output,"isolated-save"));CafeBackends.UseLocal(b);
             var args=Environment.GetCommandLineArgs();int variant=Array.IndexOf(args,"--optional-authoring-variant");
+            bool accepted=args.Contains("--optional-accept");
+            string branch=accepted?"accepted":"declined";
             if(variant>=0)b.SetOptionalCatalog(CafeOptionalEventJson.Parse(File.ReadAllText(args[variant+1])));
             if(resume)Good(b,"load_game",slot:3);
             else
@@ -70,6 +72,14 @@ namespace CatCafePreview
                 Check(!b.OptionalEventListed,"Day one unavailable");Good(b,"day_off");if(b.Simulation.State.phase=="closed")Good(b,"next_day");
                 Good(b,"player_begin");Good(b,"player_step","direct");if(b.Simulation.PlayerActive)Good(b,"player_finish");
                 Check(b.OptionalEventListed && b.OptionalEventReason=="","Legal threshold fixture");
+                if(variant<0)
+                {
+                    Check(b.Simulation.PlayerCat("cat-mike").affinity==20 && b.Simulation.PlayerBeginReason("cat-mike").Contains("好感度20"),"Affinity overshoot is capped and the next interaction shows guidance");
+                    Check(b.OptionalCandidates.Single().affinity_milestone,"Event list includes the milestone");
+                    Check(b.Journal.Verify(b.Journal.Document).PlayerCat("cat-mike").affinity==20,"Business log replays the capped interaction");
+                    Good(b,"day_off");if(b.Simulation.State.phase=="closed")Good(b,"next_day");
+                    Check(b.OptionalEventListed && b.Simulation.PlayerCat("cat-mike").affinity==20,"Daily progression works with an unread milestone");
+                }
             }
             string digest=CafeReplayJournal.Digest(b.Simulation.State);
             SceneManager.LoadScene("CatCafePythonState");yield return new WaitForSecondsRealtime(2);
@@ -79,7 +89,7 @@ namespace CatCafePreview
             var view=client.GetComponent<OptionalEventConversationPanel>()??client.gameObject.AddComponent<OptionalEventConversationPanel>();
             Check(!view.Showing && !b.ConversationBlocksProgress,"Does not auto-open or block");
             if(resume && variant>=0)Check(JsonUtility.ToJson(b.OptionalEvent)==File.ReadAllText(Path.Combine(output,"frozen-story.json")),"Started story remains identical after catalogue rewrite across processes");
-            if(resume)Check(b.OptionalEvent.progress.branch_id=="declined" && b.OptionalEvent.progress.node==1 && b.OptionalEvent.progress.page_offset==2,"Different-process result position restored");
+            if(resume)Check(b.OptionalEvent.progress.branch_id==branch && b.OptionalEvent.progress.node==1 && b.OptionalEvent.progress.page_offset==2,"Different-process result position restored");
             Check(view.OpenEvent(),"Explicit start or resume");Check(b.ConversationBlocksProgress,"Visible event blocks business input");
             var portrait=(RawImage)typeof(AcquisitionConversationPanel).GetField("portrait",Hidden).GetValue(view);Check(portrait.texture!=null && portrait.texture!=ContentPreview.CatPlaceholderTexture(),"Frozen cat portrait");
             yield return Shot(resume?"resume-1024":"introduction-1280");
@@ -88,17 +98,24 @@ namespace CatCafePreview
             if(!resume)
             {
                 b.OptionalEvent.progress.node=b.OptionalEvent.introduction.Length;b.OptionalEvent.progress.page_offset=0;view.Refresh();Check(view.PlaybackChoosing,"Two choices ready");yield return Shot("choices-1280");
-                yield return null;view.Answer(false);Check(b.OptionalEvent.progress.branch_id=="declined","UI choice records branch");yield return Shot("result-1280");
+                yield return null;view.Answer(accepted);Check(b.OptionalEvent.progress.branch_id==branch,"UI choice records branch");yield return Shot("result-1280");
                 b.OptionalEvent.progress.node=1;b.OptionalEvent.progress.page_offset=2;File.WriteAllText(Path.Combine(output,"frozen-story.json"),JsonUtility.ToJson(b.OptionalEvent));Good(b,"save_game",slot:3);Check(!b.OptionalEvent.progress.completed,"Partial save is unfinished");
             }
             else
             {
-                b.OptionalEvent.progress.node=b.OptionalEvent.declined.Length;b.OptionalEvent.progress.page_offset=0;view.Refresh();yield return null;view.Next();
+                b.OptionalEvent.progress.node=CafeOptionalEvents.Lines(b.OptionalEvent,branch).Length;b.OptionalEvent.progress.page_offset=0;view.Refresh();yield return null;view.Next();
                 Check(b.OptionalEvent.progress.completed && !b.OptionalEventListed,"UI completion recorded once");
                 Check(b.Replays.Load().entries.Count(e=>e.conversation_id==b.OptionalEvent.progress.conversation_id)==1,"Only chosen branch archived");
                 Good(b,"save_game",slot:4);Good(b,"load_game",slot:4);apply();Check(b.OptionalEvent.progress.completed && !b.ConversationBlocksProgress,"Completed save reload");
             }
             Check(digest==CafeReplayJournal.Digest(b.Simulation.State),"Story does not change gameplay digest");
+            if(resume && variant<0)
+            {
+                Check(!b.Simulation.PlayerAtAffinityMilestone("cat-mike"),"Reading the result releases the cap after save and reload");
+                Good(b,"player_begin");Good(b,"player_step","direct");if(b.Simulation.PlayerActive)Good(b,"player_finish");
+                Check(b.Simulation.PlayerCat("cat-mike").affinity>20,"Subsequent interaction raises affinity above the milestone");
+                Check(b.Journal.Verify(b.Journal.Document).PlayerCat("cat-mike").affinity>20,"Business log replays the unlocked interaction");
+            }
             if(resume && variant>=0)
             {
                 string oldRevision=b.OptionalEvent.revision;Good(b,"new_game","free");Good(b,"day_off");if(b.Simulation.State.phase=="closed")Good(b,"next_day");Good(b,"player_begin");Good(b,"player_step","direct");if(b.Simulation.PlayerActive)Good(b,"player_finish");apply();
