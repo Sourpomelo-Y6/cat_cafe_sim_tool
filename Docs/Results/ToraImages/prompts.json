@@ -1,0 +1,191 @@
+[
+  {
+    "prompt": "CatCafeSim square soft painted storybook cat. Reference room/style only. TORA new adult athletic BROWN MACKEREL TABBY SHORT HAIR. Olive green eyes, wedge face, tall ears, dark brown nose, warm brown short coat narrow black stripes forehead M ringed legs, cream chin only, no white socks. Long slim ringed tail black tip. Seated full body four limbs tail visible, cream wall honey floor sage mat, warm light no text.",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-eafc20ba-431c-496e-8938-a9df50e9e36a.png",
+    "scene": "normal",
+    "file": "tora-normal.png",
+    "reference": "../KaedeImages/kaede-normal.png"
+  },
+  {
+    "scene": "sleep",
+    "file": "tora-sleep.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-ed1337dc-5f07-4e98-a1ea-af8f792a88c5.png",
+    "prompt": "CatCafeSim square painted storybook. Exact TORA identity from reference: adult athletic warm brown SHORT HAIRED MACKEREL TABBY olive green eyes wedge face tall ears dark brown nose black narrow stripes forehead M cream chin only, no white socks, slim ringed tail black tip. Scene curled asleep eyes closed. Entire cat and tail, natural FOUR limbs, same cream wall honey floor sage mat, no text.",
+    "reference": "tora-normal.png"
+  },
+  {
+    "scene": "pause",
+    "file": "tora-pause.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-cadeba30-ffec-4d6c-aa82-71f8df5c08e1.png",
+    "prompt": "CatCafeSim square painted storybook. Exact TORA identity from reference: adult athletic warm brown SHORT HAIRED MACKEREL TABBY olive green eyes wedge face tall ears dark brown nose black narrow stripes forehead M cream chin only, no white socks, slim ringed tail black tip. Scene sitting watching motionless feather on floor. Entire cat and tail, natural FOUR limbs, same cream wall honey floor sage mat, no text.",
+    "reference": "tora-normal.png"
+  },
+  {
+    "scene": "teaser",
+    "file": "tora-teaser.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-eabace89-f7c1-4b48-9a71-74a7c066ab9a.png",
+    "prompt": "CatCafeSim square painted storybook. Exact TORA identity from reference: adult athletic warm brown SHORT HAIRED MACKEREL TABBY olive green eyes wedge face tall ears dark brown nose black narrow stripes forehead M cream chin only, no white socks, slim ringed tail black tip. Scene crouching both front paws planted nosing feather wand. Entire cat and tail, natural FOUR limbs, same cream wall honey floor sage mat, no text.",
+    "reference": "tora-normal.png"
+  },
+  {
+    "scene": "ball",
+    "file": "tora-ball.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-7001c155-b095-4581-a670-a96b150291cb.png",
+    "prompt": "CatCafeSim square painted storybook. Exact TORA identity from reference: adult athletic warm brown SHORT HAIRED MACKEREL TABBY olive green eyes wedge face tall ears dark brown nose black narrow stripes forehead M cream chin only, no white socks, slim ringed tail black tip. Scene crouch tapping blue ball. Entire cat and tail, natural FOUR limbs, same cream wall honey floor sage mat, no text.",
+    "reference": "tora-normal.png"
+  },
+  {
+    "scene": "plush",
+    "file": "tora-plush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-58782ef4-2c1b-41ab-b01a-ceea653b8860.png",
+    "prompt": "CatCafeSim square painted storybook. Exact TORA identity from reference: adult athletic warm brown SHORT HAIRED MACKEREL TABBY olive green eyes wedge face tall ears dark brown nose black narrow stripes forehead M cream chin only, no white socks, slim ringed tail black tip. Scene belly down two forepaws around beige mouse plush. Entire cat and tail, natural FOUR limbs, same cream wall honey floor sage mat, no text.",
+    "reference": "tora-normal.png"
+  },
+  {
+    "scene": "tunnel",
+    "file": "tora-tunnel.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-228818ca-8d3e-4b7d-b495-48a1893b73cf.png",
+    "prompt": "CatCafeSim square painted storybook. Exact TORA identity from reference: adult athletic warm brown SHORT HAIRED MACKEREL TABBY olive green eyes wedge face tall ears dark brown nose black narrow stripes forehead M cream chin only, no white socks, slim ringed tail black tip. Scene crouching in tan fabric tunnel head paws and tail visible. Entire cat and tail, natural FOUR limbs, same cream wall honey floor sage mat, no text.",
+    "reference": "tora-normal.png"
+  },
+  {
+    "scene": "pet",
+    "file": "tora-pet.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-316ecda1-e29d-48b6-b275-0ae6a19616fc.png",
+    "prompt": "CatCafeSim square painted storybook. Exact TORA identity from reference: adult athletic warm brown SHORT HAIRED MACKEREL TABBY olive green eyes wedge face tall ears dark brown nose black narrow stripes forehead M cream chin only, no white socks, slim ringed tail black tip. Scene cream-sleeved hand strokes forehead. Entire cat and tail, natural FOUR limbs, same cream wall honey floor sage mat, no text.",
+    "reference": "tora-normal.png"
+  },
+  {
+    "scene": "brush",
+    "file": "tora-brush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-6a136453-667c-4bac-9c21-a6da07e05bef.png",
+    "prompt": "CatCafeSim square painted storybook. Exact TORA identity from reference: adult athletic warm brown SHORT HAIRED MACKEREL TABBY olive green eyes wedge face tall ears dark brown nose black narrow stripes forehead M cream chin only, no white socks, slim ringed tail black tip. Scene standing cream-sleeved hand brushes shoulder. Entire cat and tail, natural FOUR limbs, same cream wall honey floor sage mat, no text.",
+    "reference": "tora-normal.png"
+  },
+  {
+    "scene": "voice",
+    "file": "tora-voice.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-430198a9-a0a8-4745-90c2-c6c2b819221b.png",
+    "prompt": "CatCafeSim square painted storybook. Exact TORA identity from reference: adult athletic warm brown SHORT HAIRED MACKEREL TABBY olive green eyes wedge face tall ears dark brown nose black narrow stripes forehead M cream chin only, no white socks, slim ringed tail black tip. Scene sitting listening toward offscreen voice. Entire cat and tail, natural FOUR limbs, same cream wall honey floor sage mat, no text.",
+    "reference": "tora-normal.png"
+  },
+  {
+    "scene": "presence",
+    "file": "tora-presence.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-6f2d580f-af33-4b95-9c67-f9898652be20.png",
+    "prompt": "CatCafeSim square painted storybook. Exact TORA identity from reference: adult athletic warm brown SHORT HAIRED MACKEREL TABBY olive green eyes wedge face tall ears dark brown nose black narrow stripes forehead M cream chin only, no white socks, slim ringed tail black tip. Scene loaf beside cropped blue trouser knee. Entire cat and tail, natural FOUR limbs, same cream wall honey floor sage mat, no text.",
+    "reference": "tora-normal.png"
+  },
+  {
+    "scene": "teaser__open_up",
+    "file": "tora-teaser__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-b1bdc097-996c-41fe-89e8-7cf846141bea.png",
+    "prompt": "CatCafeSim square painted storybook. Exact TORA identity from reference: adult athletic warm brown SHORT HAIRED MACKEREL TABBY olive green eyes wedge face tall ears dark brown nose black narrow stripes forehead M cream chin only, no white socks, slim ringed tail black tip. Scene crouching both front paws planted nosing feather wand, relaxed half closed eyes trusting. Entire cat and tail, natural FOUR limbs, same cream wall honey floor sage mat, no text.",
+    "reference": "tora-normal.png"
+  },
+  {
+    "scene": "teaser__simultaneous",
+    "file": "tora-teaser__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-0cbfc670-526f-42cf-a6be-8caeec87d0f5.png",
+    "prompt": "CatCafeSim square painted storybook. Exact TORA identity from reference: adult athletic warm brown SHORT HAIRED MACKEREL TABBY olive green eyes wedge face tall ears dark brown nose black narrow stripes forehead M cream chin only, no white socks, slim ringed tail black tip. Scene crouching both front paws planted nosing feather wand, joyful animated posture alert eyes. Entire cat and tail, natural FOUR limbs, same cream wall honey floor sage mat, no text.",
+    "reference": "tora-normal.png"
+  },
+  {
+    "scene": "ball__open_up",
+    "file": "tora-ball__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-dab0d9d8-0390-4136-ad9b-b2f946746183.png",
+    "prompt": "CatCafeSim square painted storybook. Exact TORA identity from reference: adult athletic warm brown SHORT HAIRED MACKEREL TABBY olive green eyes wedge face tall ears dark brown nose black narrow stripes forehead M cream chin only, no white socks, slim ringed tail black tip. Scene crouch tapping blue ball, relaxed half closed eyes trusting. Entire cat and tail, natural FOUR limbs, same cream wall honey floor sage mat, no text.",
+    "reference": "tora-normal.png"
+  },
+  {
+    "scene": "ball__simultaneous",
+    "file": "tora-ball__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-dcd8a509-8caf-4034-9fad-99bfeca88bbd.png",
+    "prompt": "CatCafeSim square painted storybook. Exact TORA identity from reference: adult athletic warm brown SHORT HAIRED MACKEREL TABBY olive green eyes wedge face tall ears dark brown nose black narrow stripes forehead M cream chin only, no white socks, slim ringed tail black tip. Scene crouch tapping blue ball, joyful animated posture alert eyes. Entire cat and tail, natural FOUR limbs, same cream wall honey floor sage mat, no text.",
+    "reference": "tora-normal.png"
+  },
+  {
+    "scene": "plush__open_up",
+    "file": "tora-plush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-bb2096db-d8c0-4803-afa3-706a3d64f891.png",
+    "prompt": "CatCafeSim square painted storybook. Exact TORA identity from reference: adult athletic warm brown SHORT HAIRED MACKEREL TABBY olive green eyes wedge face tall ears dark brown nose black narrow stripes forehead M cream chin only, no white socks, slim ringed tail black tip. Scene belly down two forepaws around beige mouse plush, relaxed half closed eyes trusting. Entire cat and tail, natural FOUR limbs, same cream wall honey floor sage mat, no text.",
+    "reference": "tora-normal.png"
+  },
+  {
+    "scene": "plush__simultaneous",
+    "file": "tora-plush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-9080dad2-e7e3-4db0-8365-a18cffc11206.png",
+    "prompt": "CatCafeSim square painted storybook. Exact TORA identity from reference: adult athletic warm brown SHORT HAIRED MACKEREL TABBY olive green eyes wedge face tall ears dark brown nose black narrow stripes forehead M cream chin only, no white socks, slim ringed tail black tip. Scene belly down two forepaws around beige mouse plush, joyful animated posture alert eyes. Entire cat and tail, natural FOUR limbs, same cream wall honey floor sage mat, no text.",
+    "reference": "tora-normal.png"
+  },
+  {
+    "scene": "tunnel__open_up",
+    "file": "tora-tunnel__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-1cec3f38-5070-4441-8a3a-cccde7694281.png",
+    "prompt": "CatCafeSim square painted storybook. Exact TORA identity from reference: adult athletic warm brown SHORT HAIRED MACKEREL TABBY olive green eyes wedge face tall ears dark brown nose black narrow stripes forehead M cream chin only, no white socks, slim ringed tail black tip. Scene crouching in tan fabric tunnel head paws and tail visible, relaxed half closed eyes trusting. Entire cat and tail, natural FOUR limbs, same cream wall honey floor sage mat, no text.",
+    "reference": "tora-normal.png"
+  },
+  {
+    "scene": "tunnel__simultaneous",
+    "file": "tora-tunnel__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-5bffd34c-ad4b-4d39-af9e-a44a9793e8dd.png",
+    "prompt": "CatCafeSim square painted storybook. Exact TORA identity from reference: adult athletic warm brown SHORT HAIRED MACKEREL TABBY olive green eyes wedge face tall ears dark brown nose black narrow stripes forehead M cream chin only, no white socks, slim ringed tail black tip. Scene crouching in tan fabric tunnel head paws and tail visible, joyful animated posture alert eyes. Entire cat and tail, natural FOUR limbs, same cream wall honey floor sage mat, no text.",
+    "reference": "tora-normal.png"
+  },
+  {
+    "scene": "pet__open_up",
+    "file": "tora-pet__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-cae56e50-f546-4f5e-8fb4-015ba2221654.png",
+    "prompt": "CatCafeSim square painted storybook. Exact TORA identity from reference: adult athletic warm brown SHORT HAIRED MACKEREL TABBY olive green eyes wedge face tall ears dark brown nose black narrow stripes forehead M cream chin only, no white socks, slim ringed tail black tip. Scene cream-sleeved hand strokes forehead, relaxed half closed eyes trusting. Entire cat and tail, natural FOUR limbs, same cream wall honey floor sage mat, no text.",
+    "reference": "tora-normal.png"
+  },
+  {
+    "scene": "pet__simultaneous",
+    "file": "tora-pet__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-7337a707-911e-460e-80f5-d62ac91e659f.png",
+    "prompt": "CatCafeSim square painted storybook. Exact TORA identity from reference: adult athletic warm brown SHORT HAIRED MACKEREL TABBY olive green eyes wedge face tall ears dark brown nose black narrow stripes forehead M cream chin only, no white socks, slim ringed tail black tip. Scene cream-sleeved hand strokes forehead, joyful animated posture alert eyes. Entire cat and tail, natural FOUR limbs, same cream wall honey floor sage mat, no text.",
+    "reference": "tora-normal.png"
+  },
+  {
+    "scene": "brush__open_up",
+    "file": "tora-brush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-81a49d28-5acd-4e54-9f07-6737bdd1737c.png",
+    "prompt": "CatCafeSim square painted storybook. Exact TORA identity from reference: adult athletic warm brown SHORT HAIRED MACKEREL TABBY olive green eyes wedge face tall ears dark brown nose black narrow stripes forehead M cream chin only, no white socks, slim ringed tail black tip. Scene standing cream-sleeved hand brushes shoulder, relaxed half closed eyes trusting. Entire cat and tail, natural FOUR limbs, same cream wall honey floor sage mat, no text.",
+    "reference": "tora-normal.png"
+  },
+  {
+    "scene": "brush__simultaneous",
+    "file": "tora-brush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-ad7a4dfc-30cc-4f8f-838d-133956a017da.png",
+    "prompt": "CatCafeSim square painted storybook. Exact TORA identity from reference: adult athletic warm brown SHORT HAIRED MACKEREL TABBY olive green eyes wedge face tall ears dark brown nose black narrow stripes forehead M cream chin only, no white socks, slim ringed tail black tip. Scene standing cream-sleeved hand brushes shoulder, joyful animated posture alert eyes. Entire cat and tail, natural FOUR limbs, same cream wall honey floor sage mat, no text.",
+    "reference": "tora-normal.png"
+  },
+  {
+    "scene": "voice__open_up",
+    "file": "tora-voice__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-d4b1aff0-b1b6-4dfb-a42c-23a9b23b1b19.png",
+    "prompt": "CatCafeSim square painted storybook. Exact TORA identity from reference: adult athletic warm brown SHORT HAIRED MACKEREL TABBY olive green eyes wedge face tall ears dark brown nose black narrow stripes forehead M cream chin only, no white socks, slim ringed tail black tip. Scene sitting listening toward offscreen voice, relaxed half closed eyes trusting. Entire cat and tail, natural FOUR limbs, same cream wall honey floor sage mat, no text.",
+    "reference": "tora-normal.png"
+  },
+  {
+    "scene": "voice__simultaneous",
+    "file": "tora-voice__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-125b44ce-16dd-44f2-8692-19c8764b07bb.png",
+    "prompt": "CatCafeSim square painted storybook. Exact TORA identity from reference: adult athletic warm brown SHORT HAIRED MACKEREL TABBY olive green eyes wedge face tall ears dark brown nose black narrow stripes forehead M cream chin only, no white socks, slim ringed tail black tip. Scene sitting listening toward offscreen voice, joyful animated posture alert eyes. Entire cat and tail, natural FOUR limbs, same cream wall honey floor sage mat, no text.",
+    "reference": "tora-normal.png"
+  },
+  {
+    "scene": "presence__open_up",
+    "file": "tora-presence__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-6b8ceff7-3176-4512-b66c-e8bd20e93b02.png",
+    "prompt": "CatCafeSim square painted storybook. Exact TORA identity from reference: adult athletic warm brown SHORT HAIRED MACKEREL TABBY olive green eyes wedge face tall ears dark brown nose black narrow stripes forehead M cream chin only, no white socks, slim ringed tail black tip. Scene loaf beside cropped blue trouser knee, relaxed half closed eyes trusting. Entire cat and tail, natural FOUR limbs, same cream wall honey floor sage mat, no text.",
+    "reference": "tora-normal.png"
+  },
+  {
+    "scene": "presence__simultaneous",
+    "file": "tora-presence__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-a58c2ddb-591a-47a4-8fd8-72ced2f3b701.png",
+    "prompt": "CatCafeSim square painted storybook. Exact TORA identity from reference: adult athletic warm brown SHORT HAIRED MACKEREL TABBY olive green eyes wedge face tall ears dark brown nose black narrow stripes forehead M cream chin only, no white socks, slim ringed tail black tip. Scene loaf beside cropped blue trouser knee, joyful animated posture alert eyes. Entire cat and tail, natural FOUR limbs, same cream wall honey floor sage mat, no text.",
+    "reference": "tora-normal.png"
+  }
+]

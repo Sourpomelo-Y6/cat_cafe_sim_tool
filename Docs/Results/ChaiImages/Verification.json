@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-11",
+  "cat_id": "catalog-18",
+  "status": "completed",
+  "selected_png_count": 27,
+  "scene_keys": 52,
+  "narrative_bindings": 32,
+  "python_tests_passed": 28,
+  "unity_reaction_cases": 40,
+  "unity_screenshots_reviewed": 4,
+  "actual_test_id": "rescue-18",
+  "recruitment_batch": 6,
+  "game_day": 16,
+  "selected_png_bytes": 58228781,
+  "capacity_before": {
+    "latest_bytes": 5838730306,
+    "runs_bytes": 295274388,
+    "generated_bytes": 3277372585
+  },
+  "capacity_after": {
+    "latest_bytes": 5838730306,
+    "runs_bytes": 295274388,
+    "generated_bytes": 3277372585
+  },
+  "build_folders": [
+    "Latest",
+    "Runs"
+  ],
+  "build_performed": false
+}

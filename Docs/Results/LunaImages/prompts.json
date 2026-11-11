@@ -1,0 +1,191 @@
+[
+  {
+    "scene": "normal",
+    "file": "luna-normal.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-210de2a2-e67e-4201-8af0-d83a9f6fb79e.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook cat asset. Reference is room and brushwork ONLY. Create LUNA, a distinct adult ORANGE CLASSIC TABBY LONGHAIR, medium sturdy rounded body, thick plush long coat and ample ruff. Rich copper ginger fur with dark burnt-orange broad classic swirling flank markings, forehead M, ringed legs and tail. Cream chin and small cream bib, no white socks or large white patches. Both eyes clear leaf green, broad rounded face with full cheeks, small wide-set triangular ears and subtle tufts, terracotta pink nose. Long bushy ringed ginger tail with dark orange tip rests beside paws. Calm affectionate expression, seated full body natural four limbs and entire tail visible. Same cream wall honey wooden floor sage green mat, warm soft light, detailed painted fur. No text or collar. Different from slender pale apricot reference.",
+    "reference": "../AnzuImages/anzu-normal.png"
+  },
+  {
+    "scene": "sleep",
+    "file": "luna-sleep.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-8fc8ab50-b2a7-42f0-bd8c-cd8a0852618f.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact LUNA from reference: adult sturdy rounded copper ORANGE CLASSIC TABBY LONGHAIR, leaf green eyes broad rounded face full cheeks small wide set triangular ears subtle tufts terracotta pink nose. Thick long fur and ruff, dark burnt orange broad swirling flank marks forehead M ringed legs and bushy long ringed tail dark orange tip, cream chin and small bib ONLY no white socks. Scene: curled asleep eyes fully closed tail around body. Natural four limbs and complete tail in frame except natural prop occlusion. Same cream wall honey floor sage mat warm soft light detailed painted fur. No text no collar preserve individual.",
+    "reference": "luna-normal.png"
+  },
+  {
+    "scene": "pause",
+    "file": "luna-pause.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-953815c5-6c3f-4f39-85f9-a27e42d3527e.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact LUNA from reference: adult sturdy rounded copper ORANGE CLASSIC TABBY LONGHAIR, leaf green eyes broad rounded face full cheeks small wide set triangular ears subtle tufts terracotta pink nose. Thick long fur and ruff, dark burnt orange broad swirling flank marks forehead M ringed legs and bushy long ringed tail dark orange tip, cream chin and small bib ONLY no white socks. Scene: sitting still watching motionless feather wand lying on floor no active play. Natural four limbs and complete tail in frame except natural prop occlusion. Same cream wall honey floor sage mat warm soft light detailed painted fur. No text no collar preserve individual.",
+    "reference": "luna-normal.png"
+  },
+  {
+    "scene": "teaser",
+    "file": "luna-teaser.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-dc2ba6f4-d2f8-4a63-9b13-f1226e59399f.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact LUNA from reference: adult sturdy rounded copper ORANGE CLASSIC TABBY LONGHAIR, leaf green eyes broad rounded face full cheeks small wide set triangular ears subtle tufts terracotta pink nose. Thick long fur and ruff, dark burnt orange broad swirling flank marks forehead M ringed legs and bushy long ringed tail dark orange tip, cream chin and small bib ONLY no white socks. Scene: crouching two front paws planted nose approaching feather wand. Natural four limbs and complete tail in frame except natural prop occlusion. Same cream wall honey floor sage mat warm soft light detailed painted fur. No text no collar preserve individual.",
+    "reference": "luna-normal.png"
+  },
+  {
+    "scene": "ball",
+    "file": "luna-ball.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-b5541243-f45d-409c-82ec-562eb20e2e07.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact LUNA from reference: adult sturdy rounded copper ORANGE CLASSIC TABBY LONGHAIR, leaf green eyes broad rounded face full cheeks small wide set triangular ears subtle tufts terracotta pink nose. Thick long fur and ruff, dark burnt orange broad swirling flank marks forehead M ringed legs and bushy long ringed tail dark orange tip, cream chin and small bib ONLY no white socks. Scene: crouching one forepaw gently tapping blue ball. Natural four limbs and complete tail in frame except natural prop occlusion. Same cream wall honey floor sage mat warm soft light detailed painted fur. No text no collar preserve individual.",
+    "reference": "luna-normal.png"
+  },
+  {
+    "scene": "plush",
+    "file": "luna-plush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-cb451405-7318-47ec-a284-401c5becf153.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact LUNA from reference: adult sturdy rounded copper ORANGE CLASSIC TABBY LONGHAIR, leaf green eyes broad rounded face full cheeks small wide set triangular ears subtle tufts terracotta pink nose. Thick long fur and ruff, dark burnt orange broad swirling flank marks forehead M ringed legs and bushy long ringed tail dark orange tip, cream chin and small bib ONLY no white socks. Scene: belly down two front paws around beige stuffed mouse toy. Natural four limbs and complete tail in frame except natural prop occlusion. Same cream wall honey floor sage mat warm soft light detailed painted fur. No text no collar preserve individual.",
+    "reference": "luna-normal.png"
+  },
+  {
+    "scene": "tunnel",
+    "file": "luna-tunnel.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-856dfc81-6b9f-4111-9858-ed45a7eae339.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact LUNA from reference: adult sturdy rounded copper ORANGE CLASSIC TABBY LONGHAIR, leaf green eyes broad rounded face full cheeks small wide set triangular ears subtle tufts terracotta pink nose. Thick long fur and ruff, dark burnt orange broad swirling flank marks forehead M ringed legs and bushy long ringed tail dark orange tip, cream chin and small bib ONLY no white socks. Scene: crouching inside tan fabric cat tunnel head forepaws tail visible. Natural four limbs and complete tail in frame except natural prop occlusion. Same cream wall honey floor sage mat warm soft light detailed painted fur. No text no collar preserve individual.",
+    "reference": "luna-normal.png"
+  },
+  {
+    "scene": "pet",
+    "file": "luna-pet.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-f46494e5-c885-4d4d-b048-02a0c5e73753.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact LUNA from reference: adult sturdy rounded copper ORANGE CLASSIC TABBY LONGHAIR, leaf green eyes broad rounded face full cheeks small wide set triangular ears subtle tufts terracotta pink nose. Thick long fur and ruff, dark burnt orange broad swirling flank marks forehead M ringed legs and bushy long ringed tail dark orange tip, cream chin and small bib ONLY no white socks. Scene: seated as cropped human hand in cream knit sleeve gently strokes forehead. Natural four limbs and complete tail in frame except natural prop occlusion. Same cream wall honey floor sage mat warm soft light detailed painted fur. No text no collar preserve individual.",
+    "reference": "luna-normal.png"
+  },
+  {
+    "scene": "brush",
+    "file": "luna-brush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-f7e906ed-255f-407f-828c-5580069a602a.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact LUNA from reference: adult sturdy rounded copper ORANGE CLASSIC TABBY LONGHAIR, leaf green eyes broad rounded face full cheeks small wide set triangular ears subtle tufts terracotta pink nose. Thick long fur and ruff, dark burnt orange broad swirling flank marks forehead M ringed legs and bushy long ringed tail dark orange tip, cream chin and small bib ONLY no white socks. Scene: standing four paws as cropped human hand in cream knit sleeve brushes shoulder with wooden brush. Natural four limbs and complete tail in frame except natural prop occlusion. Same cream wall honey floor sage mat warm soft light detailed painted fur. No text no collar preserve individual.",
+    "reference": "luna-normal.png"
+  },
+  {
+    "scene": "voice",
+    "file": "luna-voice.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-7e7ef870-2597-40b5-a72d-49260b632eb3.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact LUNA from reference: adult sturdy rounded copper ORANGE CLASSIC TABBY LONGHAIR, leaf green eyes broad rounded face full cheeks small wide set triangular ears subtle tufts terracotta pink nose. Thick long fur and ruff, dark burnt orange broad swirling flank marks forehead M ringed legs and bushy long ringed tail dark orange tip, cream chin and small bib ONLY no white socks. Scene: sitting listening toward quiet offscreen human voice attentive ears no symbols. Natural four limbs and complete tail in frame except natural prop occlusion. Same cream wall honey floor sage mat warm soft light detailed painted fur. No text no collar preserve individual.",
+    "reference": "luna-normal.png"
+  },
+  {
+    "scene": "presence",
+    "file": "luna-presence.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-334cd794-bade-4a42-907e-9976684a810f.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact LUNA from reference: adult sturdy rounded copper ORANGE CLASSIC TABBY LONGHAIR, leaf green eyes broad rounded face full cheeks small wide set triangular ears subtle tufts terracotta pink nose. Thick long fur and ruff, dark burnt orange broad swirling flank marks forehead M ringed legs and bushy long ringed tail dark orange tip, cream chin and small bib ONLY no white socks. Scene: loafing comfortably beside cropped blue trouser knee at left edge no hand. Natural four limbs and complete tail in frame except natural prop occlusion. Same cream wall honey floor sage mat warm soft light detailed painted fur. No text no collar preserve individual.",
+    "reference": "luna-normal.png"
+  },
+  {
+    "scene": "teaser__open_up",
+    "file": "luna-teaser__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-17683d27-dc76-4b87-a4bf-52f804da1bf7.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact LUNA from reference: adult sturdy rounded copper ORANGE CLASSIC TABBY LONGHAIR, leaf green eyes broad rounded face full cheeks small wide set triangular ears subtle tufts terracotta pink nose. Thick long fur and ruff, dark burnt orange broad swirling flank marks forehead M ringed legs and bushy long ringed tail dark orange tip, cream chin and small bib ONLY no white socks. Scene: crouching two front paws planted nose approaching feather wand, relaxed trusting posture soft half closed green eyes. Natural four limbs and complete tail in frame except natural prop occlusion. Same cream wall honey floor sage mat warm soft light detailed painted fur. No text no collar preserve individual.",
+    "reference": "luna-normal.png"
+  },
+  {
+    "scene": "teaser__simultaneous",
+    "file": "luna-teaser__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-3f3ab1c4-c146-431d-84a6-28e269cf092e.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact LUNA from reference: adult sturdy rounded copper ORANGE CLASSIC TABBY LONGHAIR, leaf green eyes broad rounded face full cheeks small wide set triangular ears subtle tufts terracotta pink nose. Thick long fur and ruff, dark burnt orange broad swirling flank marks forehead M ringed legs and bushy long ringed tail dark orange tip, cream chin and small bib ONLY no white socks. Scene: crouching two front paws planted nose approaching feather wand, joyful animated posture bright alert green eyes delighted natural cat expression. Natural four limbs and complete tail in frame except natural prop occlusion. Same cream wall honey floor sage mat warm soft light detailed painted fur. No text no collar preserve individual.",
+    "reference": "luna-normal.png"
+  },
+  {
+    "scene": "ball__open_up",
+    "file": "luna-ball__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-768100a5-0f20-45e4-b341-8e8983ba8112.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact LUNA from reference: adult sturdy rounded copper ORANGE CLASSIC TABBY LONGHAIR, leaf green eyes broad rounded face full cheeks small wide set triangular ears subtle tufts terracotta pink nose. Thick long fur and ruff, dark burnt orange broad swirling flank marks forehead M ringed legs and bushy long ringed tail dark orange tip, cream chin and small bib ONLY no white socks. Scene: crouching one forepaw gently tapping blue ball, relaxed trusting posture soft half closed green eyes. Natural four limbs and complete tail in frame except natural prop occlusion. Same cream wall honey floor sage mat warm soft light detailed painted fur. No text no collar preserve individual.",
+    "reference": "luna-normal.png"
+  },
+  {
+    "scene": "ball__simultaneous",
+    "file": "luna-ball__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-5bdb7d2f-0862-4284-924a-359334d9d6ab.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact LUNA from reference: adult sturdy rounded copper ORANGE CLASSIC TABBY LONGHAIR, leaf green eyes broad rounded face full cheeks small wide set triangular ears subtle tufts terracotta pink nose. Thick long fur and ruff, dark burnt orange broad swirling flank marks forehead M ringed legs and bushy long ringed tail dark orange tip, cream chin and small bib ONLY no white socks. Scene: crouching one forepaw gently tapping blue ball, joyful animated posture bright alert green eyes delighted natural cat expression. Natural four limbs and complete tail in frame except natural prop occlusion. Same cream wall honey floor sage mat warm soft light detailed painted fur. No text no collar preserve individual.",
+    "reference": "luna-normal.png"
+  },
+  {
+    "scene": "plush__open_up",
+    "file": "luna-plush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-8bf311d5-5009-46ec-a23c-42427ee4be30.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact LUNA from reference: adult sturdy rounded copper ORANGE CLASSIC TABBY LONGHAIR, leaf green eyes broad rounded face full cheeks small wide set triangular ears subtle tufts terracotta pink nose. Thick long fur and ruff, dark burnt orange broad swirling flank marks forehead M ringed legs and bushy long ringed tail dark orange tip, cream chin and small bib ONLY no white socks. Scene: belly down two front paws around beige stuffed mouse toy, relaxed trusting posture soft half closed green eyes. Natural four limbs and complete tail in frame except natural prop occlusion. Same cream wall honey floor sage mat warm soft light detailed painted fur. No text no collar preserve individual.",
+    "reference": "luna-normal.png"
+  },
+  {
+    "scene": "plush__simultaneous",
+    "file": "luna-plush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-7d4229e7-1b1f-4331-aada-4f15ba913533.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact LUNA from reference: adult sturdy rounded copper ORANGE CLASSIC TABBY LONGHAIR, leaf green eyes broad rounded face full cheeks small wide set triangular ears subtle tufts terracotta pink nose. Thick long fur and ruff, dark burnt orange broad swirling flank marks forehead M ringed legs and bushy long ringed tail dark orange tip, cream chin and small bib ONLY no white socks. Scene: belly down two front paws around beige stuffed mouse toy, joyful animated posture bright alert green eyes delighted natural cat expression. Natural four limbs and complete tail in frame except natural prop occlusion. Same cream wall honey floor sage mat warm soft light detailed painted fur. No text no collar preserve individual.",
+    "reference": "luna-normal.png"
+  },
+  {
+    "scene": "tunnel__open_up",
+    "file": "luna-tunnel__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-da2694d8-2465-48c9-9605-176c28e7d7a2.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact LUNA from reference: adult sturdy rounded copper ORANGE CLASSIC TABBY LONGHAIR, leaf green eyes broad rounded face full cheeks small wide set triangular ears subtle tufts terracotta pink nose. Thick long fur and ruff, dark burnt orange broad swirling flank marks forehead M ringed legs and bushy long ringed tail dark orange tip, cream chin and small bib ONLY no white socks. Scene: crouching inside tan fabric cat tunnel head forepaws tail visible, relaxed trusting posture soft half closed green eyes. Natural four limbs and complete tail in frame except natural prop occlusion. Same cream wall honey floor sage mat warm soft light detailed painted fur. No text no collar preserve individual.",
+    "reference": "luna-normal.png"
+  },
+  {
+    "scene": "tunnel__simultaneous",
+    "file": "luna-tunnel__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-ba8d496e-c105-45fb-9b5d-3b22d5bab62d.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact LUNA from reference: adult sturdy rounded copper ORANGE CLASSIC TABBY LONGHAIR, leaf green eyes broad rounded face full cheeks small wide set triangular ears subtle tufts terracotta pink nose. Thick long fur and ruff, dark burnt orange broad swirling flank marks forehead M ringed legs and bushy long ringed tail dark orange tip, cream chin and small bib ONLY no white socks. Scene: crouching inside tan fabric cat tunnel head forepaws tail visible, joyful animated posture bright alert green eyes delighted natural cat expression. Natural four limbs and complete tail in frame except natural prop occlusion. Same cream wall honey floor sage mat warm soft light detailed painted fur. No text no collar preserve individual.",
+    "reference": "luna-normal.png"
+  },
+  {
+    "scene": "pet__open_up",
+    "file": "luna-pet__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-8baf4d3b-ebd7-4b95-822e-a2752b897be9.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact LUNA from reference: adult sturdy rounded copper ORANGE CLASSIC TABBY LONGHAIR, leaf green eyes broad rounded face full cheeks small wide set triangular ears subtle tufts terracotta pink nose. Thick long fur and ruff, dark burnt orange broad swirling flank marks forehead M ringed legs and bushy long ringed tail dark orange tip, cream chin and small bib ONLY no white socks. Scene: seated as cropped human hand in cream knit sleeve gently strokes forehead, relaxed trusting posture soft half closed green eyes. Natural four limbs and complete tail in frame except natural prop occlusion. Same cream wall honey floor sage mat warm soft light detailed painted fur. No text no collar preserve individual.",
+    "reference": "luna-normal.png"
+  },
+  {
+    "scene": "pet__simultaneous",
+    "file": "luna-pet__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-4631763b-442b-4d33-9a17-f3277f54d28a.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact LUNA from reference: adult sturdy rounded copper ORANGE CLASSIC TABBY LONGHAIR, leaf green eyes broad rounded face full cheeks small wide set triangular ears subtle tufts terracotta pink nose. Thick long fur and ruff, dark burnt orange broad swirling flank marks forehead M ringed legs and bushy long ringed tail dark orange tip, cream chin and small bib ONLY no white socks. Scene: seated as cropped human hand in cream knit sleeve gently strokes forehead, joyful animated posture bright alert green eyes delighted natural cat expression. Natural four limbs and complete tail in frame except natural prop occlusion. Same cream wall honey floor sage mat warm soft light detailed painted fur. No text no collar preserve individual.",
+    "reference": "luna-normal.png"
+  },
+  {
+    "scene": "brush__open_up",
+    "file": "luna-brush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-f459fcaa-6116-4097-8920-487c443423c7.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact LUNA from reference: adult sturdy rounded copper ORANGE CLASSIC TABBY LONGHAIR, leaf green eyes broad rounded face full cheeks small wide set triangular ears subtle tufts terracotta pink nose. Thick long fur and ruff, dark burnt orange broad swirling flank marks forehead M ringed legs and bushy long ringed tail dark orange tip, cream chin and small bib ONLY no white socks. Scene: standing four paws as cropped human hand in cream knit sleeve brushes shoulder with wooden brush, relaxed trusting posture soft half closed green eyes. Natural four limbs and complete tail in frame except natural prop occlusion. Same cream wall honey floor sage mat warm soft light detailed painted fur. No text no collar preserve individual.",
+    "reference": "luna-normal.png"
+  },
+  {
+    "scene": "brush__simultaneous",
+    "file": "luna-brush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-dca54e8f-51e0-4cdc-a3ed-09f1dde1165b.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact LUNA from reference: adult sturdy rounded copper ORANGE CLASSIC TABBY LONGHAIR, leaf green eyes broad rounded face full cheeks small wide set triangular ears subtle tufts terracotta pink nose. Thick long fur and ruff, dark burnt orange broad swirling flank marks forehead M ringed legs and bushy long ringed tail dark orange tip, cream chin and small bib ONLY no white socks. Scene: standing four paws as cropped human hand in cream knit sleeve brushes shoulder with wooden brush, joyful animated posture bright alert green eyes delighted natural cat expression. Natural four limbs and complete tail in frame except natural prop occlusion. Same cream wall honey floor sage mat warm soft light detailed painted fur. No text no collar preserve individual.",
+    "reference": "luna-normal.png"
+  },
+  {
+    "scene": "voice__open_up",
+    "file": "luna-voice__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-75ed9947-1120-4d46-a423-bce041bf6bbd.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact LUNA from reference: adult sturdy rounded copper ORANGE CLASSIC TABBY LONGHAIR, leaf green eyes broad rounded face full cheeks small wide set triangular ears subtle tufts terracotta pink nose. Thick long fur and ruff, dark burnt orange broad swirling flank marks forehead M ringed legs and bushy long ringed tail dark orange tip, cream chin and small bib ONLY no white socks. Scene: sitting listening toward quiet offscreen human voice attentive ears no symbols, relaxed trusting posture soft half closed green eyes. Natural four limbs and complete tail in frame except natural prop occlusion. Same cream wall honey floor sage mat warm soft light detailed painted fur. No text no collar preserve individual.",
+    "reference": "luna-normal.png"
+  },
+  {
+    "scene": "voice__simultaneous",
+    "file": "luna-voice__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-37cfb195-8d9c-4c21-a0e3-510d2a8c49b7.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact LUNA from reference: adult sturdy rounded copper ORANGE CLASSIC TABBY LONGHAIR, leaf green eyes broad rounded face full cheeks small wide set triangular ears subtle tufts terracotta pink nose. Thick long fur and ruff, dark burnt orange broad swirling flank marks forehead M ringed legs and bushy long ringed tail dark orange tip, cream chin and small bib ONLY no white socks. Scene: sitting listening toward quiet offscreen human voice attentive ears no symbols, joyful animated posture bright alert green eyes delighted natural cat expression. Natural four limbs and complete tail in frame except natural prop occlusion. Same cream wall honey floor sage mat warm soft light detailed painted fur. No text no collar preserve individual.",
+    "reference": "luna-normal.png"
+  },
+  {
+    "scene": "presence__open_up",
+    "file": "luna-presence__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-459facf9-2742-459c-867c-68b46a15f945.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact LUNA from reference: adult sturdy rounded copper ORANGE CLASSIC TABBY LONGHAIR, leaf green eyes broad rounded face full cheeks small wide set triangular ears subtle tufts terracotta pink nose. Thick long fur and ruff, dark burnt orange broad swirling flank marks forehead M ringed legs and bushy long ringed tail dark orange tip, cream chin and small bib ONLY no white socks. Scene: loafing comfortably beside cropped blue trouser knee at left edge no hand, relaxed trusting posture soft half closed green eyes. Natural four limbs and complete tail in frame except natural prop occlusion. Same cream wall honey floor sage mat warm soft light detailed painted fur. No text no collar preserve individual.",
+    "reference": "luna-normal.png"
+  },
+  {
+    "scene": "presence__simultaneous",
+    "file": "luna-presence__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-6595e00b-31f7-4623-a0d5-a1fd56b5da9a.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact LUNA from reference: adult sturdy rounded copper ORANGE CLASSIC TABBY LONGHAIR, leaf green eyes broad rounded face full cheeks small wide set triangular ears subtle tufts terracotta pink nose. Thick long fur and ruff, dark burnt orange broad swirling flank marks forehead M ringed legs and bushy long ringed tail dark orange tip, cream chin and small bib ONLY no white socks. Scene: loafing comfortably beside cropped blue trouser knee at left edge no hand, joyful animated posture bright alert green eyes delighted natural cat expression. Natural four limbs and complete tail in frame except natural prop occlusion. Same cream wall honey floor sage mat warm soft light detailed painted fur. No text no collar preserve individual.",
+    "reference": "luna-normal.png"
+  }
+]

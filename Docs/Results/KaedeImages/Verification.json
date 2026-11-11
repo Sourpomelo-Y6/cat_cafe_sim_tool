@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-04",
+  "cat_id": "catalog-11",
+  "name": "カエデ",
+  "status": "completed",
+  "selected_png_count": 27,
+  "scene_keys": 52,
+  "narrative_bindings": 32,
+  "retained_candidate_png_count": 1,
+  "python_tests_passed": 28,
+  "unity_reaction_cases": 40,
+  "unity_screenshots_reviewed": 4,
+  "unity_actual_recruitment_and_save_reload": true,
+  "actual_test_id": "rescue-11",
+  "recruitment_batch": 4,
+  "existing_cats_preserved": 23,
+  "existing_text_entries_preserved": 435,
+  "selected_png_bytes": 62798835,
+  "active_pack": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\Imports\\cbe0df94e7a5401a8f466406c105b493",
+  "runtime_id_resolution": {
+    "content_id": "catalog-11",
+    "rule": "Resolve actual rescue-N through standard saved recruitment batch and catalog position; validate original candidate fields"
+  },
+  "build_performed": false,
+  "capacity_before": {
+    "latest_bytes": 5753606210,
+    "runs_bytes": 286796761,
+    "generated_bytes": 3277372585
+  },
+  "capacity_after": {
+    "latest_bytes": 5753606210,
+    "runs_bytes": 286796761,
+    "generated_bytes": 3277372585
+  },
+  "build_folders": [
+    "Latest",
+    "Runs"
+  ]
+}

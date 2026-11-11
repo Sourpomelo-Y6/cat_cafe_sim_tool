@@ -1,0 +1,191 @@
+[
+  {
+    "scene": "normal",
+    "file": "shion-normal.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-1203d722-b74d-4fc8-8fbb-d5351389406d.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square painted storybook cat asset. Reference image is ONLY room, brushwork and framing reference. New distinct SHION: adult medium compact cat, PURE WHITE CLOSE-LYING SHORT SMOOTH FUR, NO long fur, no mane, no ear tufts, no markings. Both eyes clear sapphire blue, rounded face with short muzzle, medium round-tipped triangular ears, rose pink nose and inner ears. Slender smooth white tail gently curved beside paws, not fluffy. Reserved calm watchful expression. Seated full body, four natural limbs and entire tail visible. Cream wall honey wooden floor sage green mat, warm soft light, soft detailed painted fur consistent with reference style. No text, no collar.",
+    "reference": "../ShiroImages/shiro-normal.png"
+  },
+  {
+    "scene": "sleep",
+    "file": "shion-sleep.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-8738e6e4-be86-4424-af3f-605706442150.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact SHION identity from reference: adult compact PURE WHITE SHORT SMOOTH FURRED CAT, sapphire blue eyes, rounded face short muzzle medium round-tipped triangular ears, rose pink nose, slim smooth white tail. NO long fur or fluffy mane, no colored markings. Scene: curled asleep, eyes fully closed, tail around body. Natural four limbs, complete body and tail in frame wherever not naturally occluded by prop. Same cream wall honey floor sage mat, warm soft light, same painted style. No text, no collar. Preserve this individual.",
+    "reference": "shion-normal.png"
+  },
+  {
+    "scene": "pause",
+    "file": "shion-pause.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-55c1a7a3-a9cd-4179-993f-2ab3bfc5cf0f.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact SHION identity from reference: adult compact PURE WHITE SHORT SMOOTH FURRED CAT, sapphire blue eyes, rounded face short muzzle medium round-tipped triangular ears, rose pink nose, slim smooth white tail. NO long fur or fluffy mane, no colored markings. Scene: sitting still watching a motionless feather wand lying on floor, no active play. Natural four limbs, complete body and tail in frame wherever not naturally occluded by prop. Same cream wall honey floor sage mat, warm soft light, same painted style. No text, no collar. Preserve this individual.",
+    "reference": "shion-normal.png"
+  },
+  {
+    "scene": "teaser",
+    "file": "shion-teaser.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-40a00d18-9063-4343-929e-5b4801ba7c5d.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact SHION identity from reference: adult compact PURE WHITE SHORT SMOOTH FURRED CAT, sapphire blue eyes, rounded face short muzzle medium round-tipped triangular ears, rose pink nose, slim smooth white tail. NO long fur or fluffy mane, no colored markings. Scene: crouching with two forepaws planted, nose approaching a feather wand. Natural four limbs, complete body and tail in frame wherever not naturally occluded by prop. Same cream wall honey floor sage mat, warm soft light, same painted style. No text, no collar. Preserve this individual.",
+    "reference": "shion-normal.png"
+  },
+  {
+    "scene": "ball",
+    "file": "shion-ball.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-1f017e85-2329-4f50-85b4-1ebd13801f36.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact SHION identity from reference: adult compact PURE WHITE SHORT SMOOTH FURRED CAT, sapphire blue eyes, rounded face short muzzle medium round-tipped triangular ears, rose pink nose, slim smooth white tail. NO long fur or fluffy mane, no colored markings. Scene: crouching, one forepaw gently tapping a blue ball. Natural four limbs, complete body and tail in frame wherever not naturally occluded by prop. Same cream wall honey floor sage mat, warm soft light, same painted style. No text, no collar. Preserve this individual.",
+    "reference": "shion-normal.png"
+  },
+  {
+    "scene": "plush",
+    "file": "shion-plush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-6c7b1866-9dd2-433c-8471-44ec99368c8c.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact SHION identity from reference: adult compact PURE WHITE SHORT SMOOTH FURRED CAT, sapphire blue eyes, rounded face short muzzle medium round-tipped triangular ears, rose pink nose, slim smooth white tail. NO long fur or fluffy mane, no colored markings. Scene: belly down, two front paws around a beige stuffed mouse toy. Natural four limbs, complete body and tail in frame wherever not naturally occluded by prop. Same cream wall honey floor sage mat, warm soft light, same painted style. No text, no collar. Preserve this individual.",
+    "reference": "shion-normal.png"
+  },
+  {
+    "scene": "tunnel",
+    "file": "shion-tunnel.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-78c5279a-74e1-4ce0-b4e3-e59df67b9a73.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact SHION identity from reference: adult compact PURE WHITE SHORT SMOOTH FURRED CAT, sapphire blue eyes, rounded face short muzzle medium round-tipped triangular ears, rose pink nose, slim smooth white tail. NO long fur or fluffy mane, no colored markings. Scene: crouching inside a tan fabric cat tunnel, head forepaws and tail visible. Natural four limbs, complete body and tail in frame wherever not naturally occluded by prop. Same cream wall honey floor sage mat, warm soft light, same painted style. No text, no collar. Preserve this individual.",
+    "reference": "shion-normal.png"
+  },
+  {
+    "scene": "pet",
+    "file": "shion-pet.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-6db60b99-4e4e-40b2-93b5-6c19cc73fd79.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact SHION identity from reference: adult compact PURE WHITE SHORT SMOOTH FURRED CAT, sapphire blue eyes, rounded face short muzzle medium round-tipped triangular ears, rose pink nose, slim smooth white tail. NO long fur or fluffy mane, no colored markings. Scene: seated while a cropped human hand in cream knit sleeve gently strokes forehead. Natural four limbs, complete body and tail in frame wherever not naturally occluded by prop. Same cream wall honey floor sage mat, warm soft light, same painted style. No text, no collar. Preserve this individual.",
+    "reference": "shion-normal.png"
+  },
+  {
+    "scene": "brush",
+    "file": "shion-brush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-d28af2bd-6df0-4268-91f3-ac547d87cced.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact SHION identity from reference: adult compact PURE WHITE SHORT SMOOTH FURRED CAT, sapphire blue eyes, rounded face short muzzle medium round-tipped triangular ears, rose pink nose, slim smooth white tail. NO long fur or fluffy mane, no colored markings. Scene: standing on four paws while a cropped human hand in cream knit sleeve brushes shoulder with wooden brush. Natural four limbs, complete body and tail in frame wherever not naturally occluded by prop. Same cream wall honey floor sage mat, warm soft light, same painted style. No text, no collar. Preserve this individual.",
+    "reference": "shion-normal.png"
+  },
+  {
+    "scene": "voice",
+    "file": "shion-voice.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-8f1ac981-015a-44f6-babb-1c9818d12300.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact SHION identity from reference: adult compact PURE WHITE SHORT SMOOTH FURRED CAT, sapphire blue eyes, rounded face short muzzle medium round-tipped triangular ears, rose pink nose, slim smooth white tail. NO long fur or fluffy mane, no colored markings. Scene: sitting listening with attentive ears toward a quiet offscreen human voice, no symbols. Natural four limbs, complete body and tail in frame wherever not naturally occluded by prop. Same cream wall honey floor sage mat, warm soft light, same painted style. No text, no collar. Preserve this individual.",
+    "reference": "shion-normal.png"
+  },
+  {
+    "scene": "presence",
+    "file": "shion-presence.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-c9e5c40e-753b-4312-98a0-6dc45f68b79f.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact SHION identity from reference: adult compact PURE WHITE SHORT SMOOTH FURRED CAT, sapphire blue eyes, rounded face short muzzle medium round-tipped triangular ears, rose pink nose, slim smooth white tail. NO long fur or fluffy mane, no colored markings. Scene: loafing comfortably beside a cropped blue trouser knee at left edge, no hand. Natural four limbs, complete body and tail in frame wherever not naturally occluded by prop. Same cream wall honey floor sage mat, warm soft light, same painted style. No text, no collar. Preserve this individual.",
+    "reference": "shion-normal.png"
+  },
+  {
+    "scene": "teaser__open_up",
+    "file": "shion-teaser__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-f6beb806-6dde-4d44-9f5c-868f7330b0d2.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact SHION identity from reference: adult compact PURE WHITE SHORT SMOOTH FURRED CAT, sapphire blue eyes, rounded face short muzzle medium round-tipped triangular ears, rose pink nose, slim smooth white tail. NO long fur or fluffy mane, no colored markings. Scene: crouching with two forepaws planted, nose approaching a feather wand, relaxed trusting posture with soft half-closed eyes. Natural four limbs, complete body and tail in frame wherever not naturally occluded by prop. Same cream wall honey floor sage mat, warm soft light, same painted style. No text, no collar. Preserve this individual.",
+    "reference": "shion-normal.png"
+  },
+  {
+    "scene": "teaser__simultaneous",
+    "file": "shion-teaser__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-295f0157-477c-4972-a484-b7595a8cec1b.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact SHION identity from reference: adult compact PURE WHITE SHORT SMOOTH FURRED CAT, sapphire blue eyes, rounded face short muzzle medium round-tipped triangular ears, rose pink nose, slim smooth white tail. NO long fur or fluffy mane, no colored markings. Scene: crouching with two forepaws planted, nose approaching a feather wand, joyful animated posture with bright alert blue eyes, delighted natural cat expression. Natural four limbs, complete body and tail in frame wherever not naturally occluded by prop. Same cream wall honey floor sage mat, warm soft light, same painted style. No text, no collar. Preserve this individual.",
+    "reference": "shion-normal.png"
+  },
+  {
+    "scene": "ball__open_up",
+    "file": "shion-ball__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-1fa69f9d-aaf2-42f7-80c4-e5eebf040a45.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact SHION identity from reference: adult compact PURE WHITE SHORT SMOOTH FURRED CAT, sapphire blue eyes, rounded face short muzzle medium round-tipped triangular ears, rose pink nose, slim smooth white tail. NO long fur or fluffy mane, no colored markings. Scene: crouching, one forepaw gently tapping a blue ball, relaxed trusting posture with soft half-closed eyes. Natural four limbs, complete body and tail in frame wherever not naturally occluded by prop. Same cream wall honey floor sage mat, warm soft light, same painted style. No text, no collar. Preserve this individual.",
+    "reference": "shion-normal.png"
+  },
+  {
+    "scene": "ball__simultaneous",
+    "file": "shion-ball__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-216a1e65-14d1-43a4-b16a-e12d4870f8be.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact SHION identity from reference: adult compact PURE WHITE SHORT SMOOTH FURRED CAT, sapphire blue eyes, rounded face short muzzle medium round-tipped triangular ears, rose pink nose, slim smooth white tail. NO long fur or fluffy mane, no colored markings. Scene: crouching, one forepaw gently tapping a blue ball, joyful animated posture with bright alert blue eyes, delighted natural cat expression. Natural four limbs, complete body and tail in frame wherever not naturally occluded by prop. Same cream wall honey floor sage mat, warm soft light, same painted style. No text, no collar. Preserve this individual.",
+    "reference": "shion-normal.png"
+  },
+  {
+    "scene": "plush__open_up",
+    "file": "shion-plush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-18b9001a-d392-4540-87a3-d5f4cb7196ea.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact SHION identity from reference: adult compact PURE WHITE SHORT SMOOTH FURRED CAT, sapphire blue eyes, rounded face short muzzle medium round-tipped triangular ears, rose pink nose, slim smooth white tail. NO long fur or fluffy mane, no colored markings. Scene: belly down, two front paws around a beige stuffed mouse toy, relaxed trusting posture with soft half-closed eyes. Natural four limbs, complete body and tail in frame wherever not naturally occluded by prop. Same cream wall honey floor sage mat, warm soft light, same painted style. No text, no collar. Preserve this individual.",
+    "reference": "shion-normal.png"
+  },
+  {
+    "scene": "plush__simultaneous",
+    "file": "shion-plush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-d01a5c3b-c044-4586-b423-c65c6ccca971.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact SHION identity from reference: adult compact PURE WHITE SHORT SMOOTH FURRED CAT, sapphire blue eyes, rounded face short muzzle medium round-tipped triangular ears, rose pink nose, slim smooth white tail. NO long fur or fluffy mane, no colored markings. Scene: belly down, two front paws around a beige stuffed mouse toy, joyful animated posture with bright alert blue eyes, delighted natural cat expression. Natural four limbs, complete body and tail in frame wherever not naturally occluded by prop. Same cream wall honey floor sage mat, warm soft light, same painted style. No text, no collar. Preserve this individual.",
+    "reference": "shion-normal.png"
+  },
+  {
+    "scene": "tunnel__open_up",
+    "file": "shion-tunnel__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-c1967cde-00ac-467a-bbde-582c2abd3bb0.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact SHION identity from reference: adult compact PURE WHITE SHORT SMOOTH FURRED CAT, sapphire blue eyes, rounded face short muzzle medium round-tipped triangular ears, rose pink nose, slim smooth white tail. NO long fur or fluffy mane, no colored markings. Scene: crouching inside a tan fabric cat tunnel, head forepaws and tail visible, relaxed trusting posture with soft half-closed eyes. Natural four limbs, complete body and tail in frame wherever not naturally occluded by prop. Same cream wall honey floor sage mat, warm soft light, same painted style. No text, no collar. Preserve this individual.",
+    "reference": "shion-normal.png"
+  },
+  {
+    "scene": "tunnel__simultaneous",
+    "file": "shion-tunnel__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-97377906-ee48-4647-ac4c-f1a7fafd0cae.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact SHION identity from reference: adult compact PURE WHITE SHORT SMOOTH FURRED CAT, sapphire blue eyes, rounded face short muzzle medium round-tipped triangular ears, rose pink nose, slim smooth white tail. NO long fur or fluffy mane, no colored markings. Scene: crouching inside a tan fabric cat tunnel, head forepaws and tail visible, joyful animated posture with bright alert blue eyes, delighted natural cat expression. Natural four limbs, complete body and tail in frame wherever not naturally occluded by prop. Same cream wall honey floor sage mat, warm soft light, same painted style. No text, no collar. Preserve this individual.",
+    "reference": "shion-normal.png"
+  },
+  {
+    "scene": "pet__open_up",
+    "file": "shion-pet__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-e19e4fac-3449-4ca3-9023-d55c5b405fd9.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact SHION identity from reference: adult compact PURE WHITE SHORT SMOOTH FURRED CAT, sapphire blue eyes, rounded face short muzzle medium round-tipped triangular ears, rose pink nose, slim smooth white tail. NO long fur or fluffy mane, no colored markings. Scene: seated while a cropped human hand in cream knit sleeve gently strokes forehead, relaxed trusting posture with soft half-closed eyes. Natural four limbs, complete body and tail in frame wherever not naturally occluded by prop. Same cream wall honey floor sage mat, warm soft light, same painted style. No text, no collar. Preserve this individual.",
+    "reference": "shion-normal.png"
+  },
+  {
+    "scene": "pet__simultaneous",
+    "file": "shion-pet__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-d8455482-3716-42f5-adb2-795fcce044ba.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact SHION identity from reference: adult compact PURE WHITE SHORT SMOOTH FURRED CAT, sapphire blue eyes, rounded face short muzzle medium round-tipped triangular ears, rose pink nose, slim smooth white tail. NO long fur or fluffy mane, no colored markings. Scene: seated while a cropped human hand in cream knit sleeve gently strokes forehead, joyful animated posture with bright alert blue eyes, delighted natural cat expression. Natural four limbs, complete body and tail in frame wherever not naturally occluded by prop. Same cream wall honey floor sage mat, warm soft light, same painted style. No text, no collar. Preserve this individual.",
+    "reference": "shion-normal.png"
+  },
+  {
+    "scene": "brush__open_up",
+    "file": "shion-brush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-6b07e89a-2495-4ffb-be21-d64816e0a084.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact SHION identity from reference: adult compact PURE WHITE SHORT SMOOTH FURRED CAT, sapphire blue eyes, rounded face short muzzle medium round-tipped triangular ears, rose pink nose, slim smooth white tail. NO long fur or fluffy mane, no colored markings. Scene: standing on four paws while a cropped human hand in cream knit sleeve brushes shoulder with wooden brush, relaxed trusting posture with soft half-closed eyes. Natural four limbs, complete body and tail in frame wherever not naturally occluded by prop. Same cream wall honey floor sage mat, warm soft light, same painted style. No text, no collar. Preserve this individual.",
+    "reference": "shion-normal.png"
+  },
+  {
+    "scene": "brush__simultaneous",
+    "file": "shion-brush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-49078086-fed7-4a91-8ff6-63f3f1d6edde.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact SHION identity from reference: adult compact PURE WHITE SHORT SMOOTH FURRED CAT, sapphire blue eyes, rounded face short muzzle medium round-tipped triangular ears, rose pink nose, slim smooth white tail. NO long fur or fluffy mane, no colored markings. Scene: standing on four paws while a cropped human hand in cream knit sleeve brushes shoulder with wooden brush, joyful animated posture with bright alert blue eyes, delighted natural cat expression. Natural four limbs, complete body and tail in frame wherever not naturally occluded by prop. Same cream wall honey floor sage mat, warm soft light, same painted style. No text, no collar. Preserve this individual.",
+    "reference": "shion-normal.png"
+  },
+  {
+    "scene": "voice__open_up",
+    "file": "shion-voice__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-78766d54-3da6-4a1f-a38e-24674feb27f6.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact SHION identity from reference: adult compact PURE WHITE SHORT SMOOTH FURRED CAT, sapphire blue eyes, rounded face short muzzle medium round-tipped triangular ears, rose pink nose, slim smooth white tail. NO long fur or fluffy mane, no colored markings. Scene: sitting listening with attentive ears toward a quiet offscreen human voice, no symbols, relaxed trusting posture with soft half-closed eyes. Natural four limbs, complete body and tail in frame wherever not naturally occluded by prop. Same cream wall honey floor sage mat, warm soft light, same painted style. No text, no collar. Preserve this individual.",
+    "reference": "shion-normal.png"
+  },
+  {
+    "scene": "voice__simultaneous",
+    "file": "shion-voice__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-4a948aed-da4f-49fa-9092-2fbdab5c713c.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact SHION identity from reference: adult compact PURE WHITE SHORT SMOOTH FURRED CAT, sapphire blue eyes, rounded face short muzzle medium round-tipped triangular ears, rose pink nose, slim smooth white tail. NO long fur or fluffy mane, no colored markings. Scene: sitting listening with attentive ears toward a quiet offscreen human voice, no symbols, joyful animated posture with bright alert blue eyes, delighted natural cat expression. Natural four limbs, complete body and tail in frame wherever not naturally occluded by prop. Same cream wall honey floor sage mat, warm soft light, same painted style. No text, no collar. Preserve this individual.",
+    "reference": "shion-normal.png"
+  },
+  {
+    "scene": "presence__open_up",
+    "file": "shion-presence__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-d857c108-cb92-4101-b1f2-3dc2ecdeca3e.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact SHION identity from reference: adult compact PURE WHITE SHORT SMOOTH FURRED CAT, sapphire blue eyes, rounded face short muzzle medium round-tipped triangular ears, rose pink nose, slim smooth white tail. NO long fur or fluffy mane, no colored markings. Scene: loafing comfortably beside a cropped blue trouser knee at left edge, no hand, relaxed trusting posture with soft half-closed eyes. Natural four limbs, complete body and tail in frame wherever not naturally occluded by prop. Same cream wall honey floor sage mat, warm soft light, same painted style. No text, no collar. Preserve this individual.",
+    "reference": "shion-normal.png"
+  },
+  {
+    "scene": "presence__simultaneous",
+    "file": "shion-presence__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-b553fe47-1d6f-409a-9129-95576a5d8acc.png",
+    "prompt": "Use case: illustration-story. CatCafeSim square soft painted storybook. Exact SHION identity from reference: adult compact PURE WHITE SHORT SMOOTH FURRED CAT, sapphire blue eyes, rounded face short muzzle medium round-tipped triangular ears, rose pink nose, slim smooth white tail. NO long fur or fluffy mane, no colored markings. Scene: loafing comfortably beside a cropped blue trouser knee at left edge, no hand, joyful animated posture with bright alert blue eyes, delighted natural cat expression. Natural four limbs, complete body and tail in frame wherever not naturally occluded by prop. Same cream wall honey floor sage mat, warm soft light, same painted style. No text, no collar. Preserve this individual.",
+    "reference": "shion-normal.png"
+  }
+]

@@ -1,0 +1,218 @@
+[
+  {
+    "scene": "normal",
+    "file": "anzu-normal.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-cea0204b-660e-4c5d-97dd-797f498d35bd.png",
+    "prompt": "Use case: illustration-story. One square CatCafeSim NEW CAT ANZU identity. MARON reference STYLE/ROOM ONLY create DIFFERENT adult LONGHAIR cat. Medium SLENDER body LONG graceful legs elongated OVAL face slender muzzle LARGE triangular ears subtle tufts pale ROSE PINK nose. Both eyes clear BLUE GREEN TEAL almond shaped. Pale APRICOT ORANGE TABBY LONG FUR, soft chest ruff cheek fur, fine darker orange vertical stripes sides/back, M forehead two fine cheek stripes each side, ringed legs. CREAM muzzle chin chest belly, NO white socks or patches. LONG FEATHERY APRICOT TAIL dark orange rings DARK ORANGE TIP, tail curves LOW beside body entire tip in frame. Gentle affectionate calm expression adult not kitten. Entire seated cat FOUR limbs full tail centered at 65 percent width generous floor margin ALL sides. Same fine soft painted storybook artwork cream wall honey wooden floor sage green mat warm diffuse light. No text UI watermark humans props.",
+    "reference": "../CatExecutionImages/Prototypes/CatAppearance-v1/maron-normal.png",
+    "reference_role": "style_and_room"
+  },
+  {
+    "scene": "teaser",
+    "file": "anzu-teaser.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-642fbce8-bbae-40d4-bc56-1051c4adb8fc.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim illustration. Reference ANZU exact identity and soft painted storybook style room. Adult medium SLENDER ORANGE TABBY LONGHAIR long legs elongated OVAL face slender muzzle LARGE tufted triangular ears pale rose pink nose. BLUE GREEN TEAL almond eyes. Pale APRICOT long fur chest ruff, fine darker orange stripes back/sides, M forehead TWO cheek stripes each side, ringed legs. CREAM muzzle chin chest belly NO white socks patches. LONG FEATHERY APRICOT TAIL darker orange rings DARK ORANGE TIP no white tip. Calm gentle affectionate personality. Cream wall honey wood floor sage green mat warm light. FULL CAT and ENTIRE tail centered65% width generous empty floor margin ALL sides. Tail curved LOW along mat beside body no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Basic attentive play: one hand at edge holds feather teaser near cat. Cat reaches one forepaw toward feather, blue green teal eyes open, gentle calm engagement.",
+    "reference": "anzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball",
+    "file": "anzu-ball.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-9f4a38ec-aa5b-4be3-86ab-964796b7e114.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim illustration. Reference ANZU exact identity and soft painted storybook style room. Adult medium SLENDER ORANGE TABBY LONGHAIR long legs elongated OVAL face slender muzzle LARGE tufted triangular ears pale rose pink nose. BLUE GREEN TEAL almond eyes. Pale APRICOT long fur chest ruff, fine darker orange stripes back/sides, M forehead TWO cheek stripes each side, ringed legs. CREAM muzzle chin chest belly NO white socks patches. LONG FEATHERY APRICOT TAIL darker orange rings DARK ORANGE TIP no white tip. Calm gentle affectionate personality. Cream wall honey wood floor sage green mat warm light. FULL CAT and ENTIRE tail centered65% width generous empty floor margin ALL sides. Tail curved LOW along mat beside body no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Basic play: crouches and gently touches small blue toy ball on mat with one paw, attentive open blue green teal eyes. No humans or other toys.",
+    "reference": "anzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush",
+    "file": "anzu-plush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-d3a859b9-4c46-47ae-9bd6-3dd9949bda49.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim illustration. Reference ANZU exact identity and soft painted storybook style room. Adult medium SLENDER ORANGE TABBY LONGHAIR long legs elongated OVAL face slender muzzle LARGE tufted triangular ears pale rose pink nose. BLUE GREEN TEAL almond eyes. Pale APRICOT long fur chest ruff, fine darker orange stripes back/sides, M forehead TWO cheek stripes each side, ringed legs. CREAM muzzle chin chest belly NO white socks patches. LONG FEATHERY APRICOT TAIL darker orange rings DARK ORANGE TIP no white tip. Calm gentle affectionate personality. Cream wall honey wood floor sage green mat warm light. FULL CAT and ENTIRE tail centered65% width generous empty floor margin ALL sides. Tail curved LOW along mat beside body no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Basic play: cat lies naturally belly-down on mat with TWO forepaws resting on either side of a SMALL beige mouse plush ON THE FLOOR; sniffs mouse, eyes open. Hind legs tucked behind body. EXACTLY FOUR LIMBS TOTAL. No seated upright hugging pose, no extra paws. Tail curves beside body fully inside frame.",
+    "reference": "anzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel",
+    "file": "anzu-tunnel.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-a4d83745-e764-4e1f-9cdf-a53579095bc5.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim illustration. Reference ANZU exact identity and soft painted storybook style room. Adult medium SLENDER ORANGE TABBY LONGHAIR long legs elongated OVAL face slender muzzle LARGE tufted triangular ears pale rose pink nose. BLUE GREEN TEAL almond eyes. Pale APRICOT long fur chest ruff, fine darker orange stripes back/sides, M forehead TWO cheek stripes each side, ringed legs. CREAM muzzle chin chest belly NO white socks patches. LONG FEATHERY APRICOT TAIL darker orange rings DARK ORANGE TIP no white tip. Calm gentle affectionate personality. Cream wall honey wood floor sage green mat warm light. FULL CAT and ENTIRE tail centered65% width generous empty floor margin ALL sides. Tail curved LOW along mat beside body no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Basic play: crouches just inside short beige fabric cat tunnel, head front paws and tail fully visible at entrance, eyes open curious gentle expression. No humans or other toys.",
+    "reference": "anzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet",
+    "file": "anzu-pet.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-132948b6-5367-4f91-8370-49c0752fc3cd.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim illustration. Reference ANZU exact identity and soft painted storybook style room. Adult medium SLENDER ORANGE TABBY LONGHAIR long legs elongated OVAL face slender muzzle LARGE tufted triangular ears pale rose pink nose. BLUE GREEN TEAL almond eyes. Pale APRICOT long fur chest ruff, fine darker orange stripes back/sides, M forehead TWO cheek stripes each side, ringed legs. CREAM muzzle chin chest belly NO white socks patches. LONG FEATHERY APRICOT TAIL darker orange rings DARK ORANGE TIP no white tip. Calm gentle affectionate personality. Cream wall honey wood floor sage green mat warm light. FULL CAT and ENTIRE tail centered65% width generous empty floor margin ALL sides. Tail curved LOW along mat beside body no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Basic petting: one human hand gently strokes forehead, cat relaxed and attentive, blue green teal eyes open. No toys.",
+    "reference": "anzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush",
+    "file": "anzu-brush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-17768c72-99fd-4890-b3e1-457ff5141e03.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim illustration. Reference ANZU exact identity and soft painted storybook style room. Adult medium SLENDER ORANGE TABBY LONGHAIR long legs elongated OVAL face slender muzzle LARGE tufted triangular ears pale rose pink nose. BLUE GREEN TEAL almond eyes. Pale APRICOT long fur chest ruff, fine darker orange stripes back/sides, M forehead TWO cheek stripes each side, ringed legs. CREAM muzzle chin chest belly NO white socks patches. LONG FEATHERY APRICOT TAIL darker orange rings DARK ORANGE TIP no white tip. Calm gentle affectionate personality. Cream wall honey wood floor sage green mat warm light. FULL CAT and ENTIRE tail centered65% width generous empty floor margin ALL sides. Tail curved LOW along mat beside body no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Basic brushing: one human hand uses wooden pet brush on shoulder, bristles contact LONG fur, cat calmly stands with eyes open. No other props.",
+    "reference": "anzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice",
+    "file": "anzu-voice.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-6c33b14d-7f57-45f9-9989-3b223eec9648.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim illustration. Reference ANZU exact identity and soft painted storybook style room. Adult medium SLENDER ORANGE TABBY LONGHAIR long legs elongated OVAL face slender muzzle LARGE tufted triangular ears pale rose pink nose. BLUE GREEN TEAL almond eyes. Pale APRICOT long fur chest ruff, fine darker orange stripes back/sides, M forehead TWO cheek stripes each side, ringed legs. CREAM muzzle chin chest belly NO white socks patches. LONG FEATHERY APRICOT TAIL darker orange rings DARK ORANGE TIP no white tip. Calm gentle affectionate personality. Cream wall honey wood floor sage green mat warm light. FULL CAT and ENTIRE tail centered65% width generous empty floor margin ALL sides. Tail curved LOW along mat beside body no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Basic voice interaction: sits calmly, ears turn toward viewer listening, blue green teal eyes open, mouth closed. No human hands knees speech bubbles or props.",
+    "reference": "anzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence",
+    "file": "anzu-presence.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-268fd1ee-de53-4e7f-b16e-2a651166917b.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim illustration. Reference ANZU exact identity and soft painted storybook style room. Adult medium SLENDER ORANGE TABBY LONGHAIR long legs elongated OVAL face slender muzzle LARGE tufted triangular ears pale rose pink nose. BLUE GREEN TEAL almond eyes. Pale APRICOT long fur chest ruff, fine darker orange stripes back/sides, M forehead TWO cheek stripes each side, ringed legs. CREAM muzzle chin chest belly NO white socks patches. LONG FEATHERY APRICOT TAIL darker orange rings DARK ORANGE TIP no white tip. Calm gentle affectionate personality. Cream wall honey wood floor sage green mat warm light. FULL CAT and ENTIRE tail centered65% width generous empty floor margin ALL sides. Tail curved LOW along mat beside body no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Basic companionship: cat loafs calmly, blue green teal eyes open, only part of blue clothed knee at lower edge. No hands or toys.",
+    "reference": "anzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pause",
+    "file": "anzu-pause.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-a5671b5d-c131-4f4f-a3c6-f639d0c036af.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim illustration. Reference ANZU exact identity and soft painted storybook style room. Adult medium SLENDER ORANGE TABBY LONGHAIR long legs elongated OVAL face slender muzzle LARGE tufted triangular ears pale rose pink nose. BLUE GREEN TEAL almond eyes. Pale APRICOT long fur chest ruff, fine darker orange stripes back/sides, M forehead TWO cheek stripes each side, ringed legs. CREAM muzzle chin chest belly NO white socks patches. LONG FEATHERY APRICOT TAIL darker orange rings DARK ORANGE TIP no white tip. Calm gentle affectionate personality. Cream wall honey wood floor sage green mat warm light. FULL CAT and ENTIRE tail centered65% width generous empty floor margin ALL sides. Tail curved LOW along mat beside body no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Pause/wait: cat calmly sits, forepaws planted, eyes open, feather teaser lies completely still on mat at safe distance. No hands.",
+    "reference": "anzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "sleep",
+    "file": "anzu-sleep.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-bad4b294-a0d1-4910-a956-e554bd606b9a.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim illustration. Reference ANZU exact identity and soft painted storybook style room. Adult medium SLENDER ORANGE TABBY LONGHAIR long legs elongated OVAL face slender muzzle LARGE tufted triangular ears pale rose pink nose. BLUE GREEN TEAL almond eyes. Pale APRICOT long fur chest ruff, fine darker orange stripes back/sides, M forehead TWO cheek stripes each side, ringed legs. CREAM muzzle chin chest belly NO white socks patches. LONG FEATHERY APRICOT TAIL darker orange rings DARK ORANGE TIP no white tip. Calm gentle affectionate personality. Cream wall honey wood floor sage green mat warm light. FULL CAT and ENTIRE tail centered65% width generous empty floor margin ALL sides. Tail curved LOW along mat beside body no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Sleep: cat curled into a relaxed ball sleeping, eyes closed, head on front paws, long feathery apricot tail with darker orange rings and dark orange tip around body. No humans or toys.",
+    "reference": "anzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "teaser__open_up",
+    "file": "anzu-teaser__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-a34a9c57-309c-4131-bf71-d0b443401b63.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim illustration. Reference ANZU exact identity and soft painted storybook style room. Adult medium SLENDER ORANGE TABBY LONGHAIR long legs elongated OVAL face slender muzzle LARGE tufted triangular ears pale rose pink nose. BLUE GREEN TEAL almond eyes. Pale APRICOT long fur chest ruff, fine darker orange stripes back/sides, M forehead TWO cheek stripes each side, ringed legs. CREAM muzzle chin chest belly NO white socks patches. LONG FEATHERY APRICOT TAIL darker orange rings DARK ORANGE TIP no white tip. Calm gentle affectionate personality. Cream wall honey wood floor sage green mat warm light. FULL CAT and ENTIRE tail centered65% width generous empty floor margin ALL sides. Tail curved LOW along mat beside body no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special deep trust playing with feather teaser: one hand holds feather close; cat leans toward viewer, eyes soft half closed, paw reaches gently. Relaxed ears.",
+    "reference": "anzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "teaser__simultaneous",
+    "file": "anzu-teaser__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-06b89a6c-cda4-49ab-9328-1091941a225e.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim illustration. Reference ANZU exact identity and soft painted storybook style room. Adult medium SLENDER ORANGE TABBY LONGHAIR long legs elongated OVAL face slender muzzle LARGE tufted triangular ears pale rose pink nose. BLUE GREEN TEAL almond eyes. Pale APRICOT long fur chest ruff, fine darker orange stripes back/sides, M forehead TWO cheek stripes each side, ringed legs. CREAM muzzle chin chest belly NO white socks patches. LONG FEATHERY APRICOT TAIL darker orange rings DARK ORANGE TIP no white tip. Calm gentle affectionate personality. Cream wall honey wood floor sage green mat warm light. FULL CAT and ENTIRE tail centered65% width generous empty floor margin ALL sides. Tail curved LOW along mat beside body no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special excited and deeply trusting play: joyfully bats feather teaser held by one edge hand, ears forward bright blue green teal eyes, lifted paw, confident happy posture. No aggressive expression.",
+    "reference": "anzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball__open_up",
+    "file": "anzu-ball__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-62319c8f-5988-487c-b955-b32653d7b4d6.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim illustration. Reference ANZU exact identity and soft painted storybook style room. Adult medium SLENDER ORANGE TABBY LONGHAIR long legs elongated OVAL face slender muzzle LARGE tufted triangular ears pale rose pink nose. BLUE GREEN TEAL almond eyes. Pale APRICOT long fur chest ruff, fine darker orange stripes back/sides, M forehead TWO cheek stripes each side, ringed legs. CREAM muzzle chin chest belly NO white socks patches. LONG FEATHERY APRICOT TAIL darker orange rings DARK ORANGE TIP no white tip. Calm gentle affectionate personality. Cream wall honey wood floor sage green mat warm light. FULL CAT and ENTIRE tail centered65% width generous empty floor margin ALL sides. Tail curved LOW along mat beside body no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special deep trust: relaxed on side beside small blue ball, paw resting on ball, head tipped affectionately toward viewer, soft half closed eyes. No humans.",
+    "reference": "anzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball__simultaneous",
+    "file": "anzu-ball__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-df18486d-de95-46fd-9709-68884845ef40.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim illustration. Reference ANZU exact identity and soft painted storybook style room. Adult medium SLENDER ORANGE TABBY LONGHAIR long legs elongated OVAL face slender muzzle LARGE tufted triangular ears pale rose pink nose. BLUE GREEN TEAL almond eyes. Pale APRICOT long fur chest ruff, fine darker orange stripes back/sides, M forehead TWO cheek stripes each side, ringed legs. CREAM muzzle chin chest belly NO white socks patches. LONG FEATHERY APRICOT TAIL darker orange rings DARK ORANGE TIP no white tip. Calm gentle affectionate personality. Cream wall honey wood floor sage green mat warm light. FULL CAT and ENTIRE tail centered65% width generous empty floor margin ALL sides. Tail curved LOW along mat beside body no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special excited and trusting: playfully hugs small blue ball between forepaws, crouched with confident happy energy, bright blue green teal eyes. No humans or other toys.",
+    "reference": "anzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush__open_up",
+    "file": "anzu-plush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-eb037754-b944-43c3-b5df-ce620736fc6c.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim illustration. Reference ANZU exact identity and soft painted storybook style room. Adult medium SLENDER ORANGE TABBY LONGHAIR long legs elongated OVAL face slender muzzle LARGE tufted triangular ears pale rose pink nose. BLUE GREEN TEAL almond eyes. Pale APRICOT long fur chest ruff, fine darker orange stripes back/sides, M forehead TWO cheek stripes each side, ringed legs. CREAM muzzle chin chest belly NO white socks patches. LONG FEATHERY APRICOT TAIL darker orange rings DARK ORANGE TIP no white tip. Calm gentle affectionate personality. Cream wall honey wood floor sage green mat warm light. FULL CAT and ENTIRE tail centered65% width generous empty floor margin ALL sides. Tail curved LOW along mat beside body no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Deep trust: lies belly down with head resting on small beige mouse plush ON MAT, exactly TWO FRONT PAWS one each side of toy, rear legs tucked under rear haunches. NO hugging, NO paws near cheek, no extra paws. Soft HALF CLOSED blue green teal eyes affectionate relaxed face.",
+    "reference": "anzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush__simultaneous",
+    "file": "anzu-plush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-d14e3a2a-9469-4171-95a2-0a73e4dcfc83.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim illustration. Reference ANZU exact identity and soft painted storybook style room. Adult medium SLENDER ORANGE TABBY LONGHAIR long legs elongated OVAL face slender muzzle LARGE tufted triangular ears pale rose pink nose. BLUE GREEN TEAL almond eyes. Pale APRICOT long fur chest ruff, fine darker orange stripes back/sides, M forehead TWO cheek stripes each side, ringed legs. CREAM muzzle chin chest belly NO white socks patches. LONG FEATHERY APRICOT TAIL darker orange rings DARK ORANGE TIP no white tip. Calm gentle affectionate personality. Cream wall honey wood floor sage green mat warm light. FULL CAT and ENTIRE tail centered65% width generous empty floor margin ALL sides. Tail curved LOW along mat beside body no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special excited and trusting: joyfully rolls slightly on side hugging small beige mouse plush with front paws, bright blue green teal eyes, relaxed ears and happy posture. No humans.",
+    "reference": "anzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel__open_up",
+    "file": "anzu-tunnel__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-059b9864-c49e-4ea3-b3e9-9e6daa124be9.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim illustration. Reference ANZU exact identity and soft painted storybook style room. Adult medium SLENDER ORANGE TABBY LONGHAIR long legs elongated OVAL face slender muzzle LARGE tufted triangular ears pale rose pink nose. BLUE GREEN TEAL almond eyes. Pale APRICOT long fur chest ruff, fine darker orange stripes back/sides, M forehead TWO cheek stripes each side, ringed legs. CREAM muzzle chin chest belly NO white socks patches. LONG FEATHERY APRICOT TAIL darker orange rings DARK ORANGE TIP no white tip. Calm gentle affectionate personality. Cream wall honey wood floor sage green mat warm light. FULL CAT and ENTIRE tail centered65% width generous empty floor margin ALL sides. Tail curved LOW along mat beside body no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special deep trust: relaxed at short beige fabric tunnel entrance, chin on rim, soft half closed blue green teal eyes toward viewer, tail visible outside. No humans.",
+    "reference": "anzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel__simultaneous",
+    "file": "anzu-tunnel__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-087a7e0f-1989-4adc-82a5-03d3e4de43e9.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim illustration. Reference ANZU exact identity and soft painted storybook style room. Adult medium SLENDER ORANGE TABBY LONGHAIR long legs elongated OVAL face slender muzzle LARGE tufted triangular ears pale rose pink nose. BLUE GREEN TEAL almond eyes. Pale APRICOT long fur chest ruff, fine darker orange stripes back/sides, M forehead TWO cheek stripes each side, ringed legs. CREAM muzzle chin chest belly NO white socks patches. LONG FEATHERY APRICOT TAIL darker orange rings DARK ORANGE TIP no white tip. Calm gentle affectionate personality. Cream wall honey wood floor sage green mat warm light. FULL CAT and ENTIRE tail centered65% width generous empty floor margin ALL sides. Tail curved LOW along mat beside body no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special excited and trusting: cat playfully emerges from short beige fabric tunnel with TWO front paws reaching forward, bright blue green teal eyes friendly confident face and forward ears. Hindquarters still inside tunnel. Long feathery ring-striped tail curls LOW along floor beside tunnel, DARK ORANGE TIP fully visible with generous empty margin all around. No part of tail outside frame; no upright high tail. No humans.",
+    "reference": "anzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet__open_up",
+    "file": "anzu-pet__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-778f3d0e-ff26-4300-9181-0ef6382ae6b0.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim illustration. Reference ANZU exact identity and soft painted storybook style room. Adult medium SLENDER ORANGE TABBY LONGHAIR long legs elongated OVAL face slender muzzle LARGE tufted triangular ears pale rose pink nose. BLUE GREEN TEAL almond eyes. Pale APRICOT long fur chest ruff, fine darker orange stripes back/sides, M forehead TWO cheek stripes each side, ringed legs. CREAM muzzle chin chest belly NO white socks patches. LONG FEATHERY APRICOT TAIL darker orange rings DARK ORANGE TIP no white tip. Calm gentle affectionate personality. Cream wall honey wood floor sage green mat warm light. FULL CAT and ENTIRE tail centered65% width generous empty floor margin ALL sides. Tail curved LOW along mat beside body no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special deep trust petting: one hand strokes cheek, cat leans cheek into palm, eyes almost closed, affectionate relaxed expression. No toys.",
+    "reference": "anzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet__simultaneous",
+    "file": "anzu-pet__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-ebe250d1-6f2c-4484-aaaf-7e570e77039c.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim illustration. Reference ANZU exact identity and soft painted storybook style room. Adult medium SLENDER ORANGE TABBY LONGHAIR long legs elongated OVAL face slender muzzle LARGE tufted triangular ears pale rose pink nose. BLUE GREEN TEAL almond eyes. Pale APRICOT long fur chest ruff, fine darker orange stripes back/sides, M forehead TWO cheek stripes each side, ringed legs. CREAM muzzle chin chest belly NO white socks patches. LONG FEATHERY APRICOT TAIL darker orange rings DARK ORANGE TIP no white tip. Calm gentle affectionate personality. Cream wall honey wood floor sage green mat warm light. FULL CAT and ENTIRE tail centered65% width generous empty floor margin ALL sides. Tail curved LOW along mat beside body no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special delighted and trusting petting: one hand rubs under chin, cat lifts chin joyfully, content closed eyes and relaxed ears. No toys.",
+    "reference": "anzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush__open_up",
+    "file": "anzu-brush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-6473a695-952f-4932-b21d-38c80c6f90ab.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim illustration. Reference ANZU exact identity and soft painted storybook style room. Adult medium SLENDER ORANGE TABBY LONGHAIR long legs elongated OVAL face slender muzzle LARGE tufted triangular ears pale rose pink nose. BLUE GREEN TEAL almond eyes. Pale APRICOT long fur chest ruff, fine darker orange stripes back/sides, M forehead TWO cheek stripes each side, ringed legs. CREAM muzzle chin chest belly NO white socks patches. LONG FEATHERY APRICOT TAIL darker orange rings DARK ORANGE TIP no white tip. Calm gentle affectionate personality. Cream wall honey wood floor sage green mat warm light. FULL CAT and ENTIRE tail centered65% width generous empty floor margin ALL sides. Tail curved LOW along mat beside body no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special deep trust brushing: one hand gently brushes long chest ruff with wooden pet brush, cat leans toward brush, half closed eyes relaxed affectionate posture.",
+    "reference": "anzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush__simultaneous",
+    "file": "anzu-brush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-7cfb80b9-c8b0-4b2c-bee7-122b3551592d.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim illustration. Reference ANZU exact identity and soft painted storybook style room. Adult medium SLENDER ORANGE TABBY LONGHAIR long legs elongated OVAL face slender muzzle LARGE tufted triangular ears pale rose pink nose. BLUE GREEN TEAL almond eyes. Pale APRICOT long fur chest ruff, fine darker orange stripes back/sides, M forehead TWO cheek stripes each side, ringed legs. CREAM muzzle chin chest belly NO white socks patches. LONG FEATHERY APRICOT TAIL darker orange rings DARK ORANGE TIP no white tip. Calm gentle affectionate personality. Cream wall honey wood floor sage green mat warm light. FULL CAT and ENTIRE tail centered65% width generous empty floor margin ALL sides. Tail curved LOW along mat beside body no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special delighted and trusting brushing: one hand brushes shoulder with wooden brush, cat stretches neck and raises chin slightly, blissfully closed eyes, happy relaxed posture.",
+    "reference": "anzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice__open_up",
+    "file": "anzu-voice__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-a08e033b-9a0a-4d41-b683-d37ea3ccfb50.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim illustration. Reference ANZU exact identity and soft painted storybook style room. Adult medium SLENDER ORANGE TABBY LONGHAIR long legs elongated OVAL face slender muzzle LARGE tufted triangular ears pale rose pink nose. BLUE GREEN TEAL almond eyes. Pale APRICOT long fur chest ruff, fine darker orange stripes back/sides, M forehead TWO cheek stripes each side, ringed legs. CREAM muzzle chin chest belly NO white socks patches. LONG FEATHERY APRICOT TAIL darker orange rings DARK ORANGE TIP no white tip. Calm gentle affectionate personality. Cream wall honey wood floor sage green mat warm light. FULL CAT and ENTIRE tail centered65% width generous empty floor margin ALL sides. Tail curved LOW along mat beside body no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special deep trust response to a familiar voice. Cat leans its head and upper body slightly toward viewer, neck gently extended, EYES VISIBLY NARROWED TO SOFT HALF-CLOSED SLITS in a relaxed slow blink (not wide open), gentle affectionate expression, relaxed forward ears, mouth closed. Both front paws remain on mat. No hands, humans, knees, speech bubbles, toys or other props. Make the facial trust reaction clearly distinct from the open-eyed normal reference.",
+    "reference": "anzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice__simultaneous",
+    "file": "anzu-voice__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-2e045331-1707-40ad-b671-1b2159105b68.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim illustration. Reference ANZU exact identity and soft painted storybook style room. Adult medium SLENDER ORANGE TABBY LONGHAIR long legs elongated OVAL face slender muzzle LARGE tufted triangular ears pale rose pink nose. BLUE GREEN TEAL almond eyes. Pale APRICOT long fur chest ruff, fine darker orange stripes back/sides, M forehead TWO cheek stripes each side, ringed legs. CREAM muzzle chin chest belly NO white socks patches. LONG FEATHERY APRICOT TAIL darker orange rings DARK ORANGE TIP no white tip. Calm gentle affectionate personality. Cream wall honey wood floor sage green mat warm light. FULL CAT and ENTIRE tail centered65% width generous empty floor margin ALL sides. Tail curved LOW along mat beside body no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special delighted trusting response to voice: stands taking one friendly step toward viewer, bright welcoming blue green teal eyes and forward ears, low relaxed tail, mouth closed. No human or props.",
+    "reference": "anzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence__open_up",
+    "file": "anzu-presence__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-e3709b68-0000-4849-9eb3-a223014b041a.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim illustration. Reference ANZU exact identity and soft painted storybook style room. Adult medium SLENDER ORANGE TABBY LONGHAIR long legs elongated OVAL face slender muzzle LARGE tufted triangular ears pale rose pink nose. BLUE GREEN TEAL almond eyes. Pale APRICOT long fur chest ruff, fine darker orange stripes back/sides, M forehead TWO cheek stripes each side, ringed legs. CREAM muzzle chin chest belly NO white socks patches. LONG FEATHERY APRICOT TAIL darker orange rings DARK ORANGE TIP no white tip. Calm gentle affectionate personality. Cream wall honey wood floor sage green mat warm light. FULL CAT and ENTIRE tail centered65% width generous empty floor margin ALL sides. Tail curved LOW along mat beside body no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special deep trust companionship: lies comfortably on side beside blue clothed knee edge, soft half closed eyes relaxed head. No hands touching, no toys.",
+    "reference": "anzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence__simultaneous",
+    "file": "anzu-presence__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-e9e83247-6b03-4260-95a1-d6ce5eb13448.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim illustration. Reference ANZU exact identity and soft painted storybook style room. Adult medium SLENDER ORANGE TABBY LONGHAIR long legs elongated OVAL face slender muzzle LARGE tufted triangular ears pale rose pink nose. BLUE GREEN TEAL almond eyes. Pale APRICOT long fur chest ruff, fine darker orange stripes back/sides, M forehead TWO cheek stripes each side, ringed legs. CREAM muzzle chin chest belly NO white socks patches. LONG FEATHERY APRICOT TAIL darker orange rings DARK ORANGE TIP no white tip. Calm gentle affectionate personality. Cream wall honey wood floor sage green mat warm light. FULL CAT and ENTIRE tail centered65% width generous empty floor margin ALL sides. Tail curved LOW along mat beside body no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special delighted trusting companionship: sits close beside blue clothed knee edge, flank gently leaning against knee, blissfully half closed eyes. No hands touching, no toys.",
+    "reference": "anzu-normal.png",
+    "reference_role": "identity_and_style"
+  }
+]

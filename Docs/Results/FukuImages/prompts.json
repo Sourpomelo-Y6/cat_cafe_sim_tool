@@ -1,0 +1,218 @@
+[
+  {
+    "scene": "normal",
+    "file": "fuku-normal.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-cae9277f-38b2-47ed-a8b7-d61f14f7863a.png",
+    "prompt": "Square CatCafeSim soft painted storybook illustration. Reference STYLE AND ROOM ONLY. Create FUKU adult athletic medium lean BLACK AND WHITE SHORT HAIRED cat. White body with one large black saddle patch centered on back, black tail with white final tip. Symmetric black cap covers both ears and outer eye areas, broad white inverted V blaze between eyes down to entirely white muzzle/chin/chest. Nose pink with tiny black spot on its own right side. Both eyes pale jade green, angular oval face, large upright triangular ears, all four legs white. Curious adventurous expression, smooth close short coat, no tabby stripes, no long ruff. Full body seated three-quarter view, both front paws planted, full tail low curved beside cat, generous floor margin. Cream wall, honey wood floor and sage mat, warm diffuse light. One cat, anatomically natural four limbs, no humans, no text.",
+    "reference": "C:/Users/hi-wa/source/codex_repos/CatCafeSim/cat_cafe_sim_tool/Docs/Results/KaedeImages/kaede-normal.png",
+    "reference_role": "style_and_room"
+  },
+  {
+    "scene": "sleep",
+    "file": "fuku-sleep.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-8aa5599c-7dfa-4bbe-9de1-9aaaff5b5ed2.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Fuku identity and room in reference. FUKU adult athletic medium lean BLACK AND WHITE SHORT HAIRED cat. White body with one large black saddle patch centered on back, black tail with white final tip. Symmetric black cap covers both ears and outer eye areas, broad white inverted V blaze between eyes down to entirely white muzzle/chin/chest. Pink nose, tiny black beauty spot on its own right WHITE MUZZLE beside nose. Both eyes pale jade green, angular oval face, large upright triangular ears, all four legs white. Curious adventurous expression, smooth close short coat, no tabby stripes, no long ruff. Scene: curled asleep with closed eyes and black tail white tip around paws. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall, honey wooden floor and sage mat. No text UI watermark. Only specified props.",
+    "reference": "fuku-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "pause",
+    "file": "fuku-pause.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-8da35872-461e-4e24-bff3-4ef8e2de2ea1.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Fuku identity and room in reference. FUKU adult athletic medium lean BLACK AND WHITE SHORT HAIRED cat. White body with one large black saddle patch centered on back, black tail with white final tip. Symmetric black cap covers both ears and outer eye areas, broad white inverted V blaze between eyes down to entirely white muzzle/chin/chest. Pink nose, tiny black beauty spot on its own right WHITE MUZZLE beside nose. Both eyes pale jade green, angular oval face, large upright triangular ears, all four legs white. Curious adventurous expression, smooth close short coat, no tabby stripes, no long ruff. Scene: sitting still, watching a feather lying motionless on floor. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall, honey wooden floor and sage mat. No text UI watermark. Only specified props.",
+    "reference": "fuku-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "teaser",
+    "file": "fuku-teaser.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-83eb57f3-723a-4f5c-ba38-6ecc92e93e41.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Fuku identity and room in reference. FUKU adult athletic medium lean BLACK AND WHITE SHORT HAIRED cat. White body with one large black saddle patch centered on back, black tail with white final tip. Symmetric black cap covers both ears and outer eye areas, broad white inverted V blaze between eyes down to entirely white muzzle/chin/chest. Pink nose, tiny black beauty spot on its own right WHITE MUZZLE beside nose. Both eyes pale jade green, angular oval face, large upright triangular ears, all four legs white. Curious adventurous expression, smooth close short coat, no tabby stripes, no long ruff. Scene: belly low, two front paws planted, nose reaching toward feather wand just in front. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall, honey wooden floor and sage mat. No text UI watermark. Only specified props.",
+    "reference": "fuku-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "ball",
+    "file": "fuku-ball.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-3af1d13c-e178-41d0-b6e7-ed24b080377c.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Fuku identity and room in reference. FUKU adult athletic medium lean BLACK AND WHITE SHORT HAIRED cat. White body with one large black saddle patch centered on back, black tail with white final tip. Symmetric black cap covers both ears and outer eye areas, broad white inverted V blaze between eyes down to entirely white muzzle/chin/chest. Pink nose, tiny black beauty spot on its own right WHITE MUZZLE beside nose. Both eyes pale jade green, angular oval face, large upright triangular ears, all four legs white. Curious adventurous expression, smooth close short coat, no tabby stripes, no long ruff. Scene: crouch to tap small blue ball with a front paw. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall, honey wooden floor and sage mat. No text UI watermark. Only specified props.",
+    "reference": "fuku-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "plush",
+    "file": "fuku-plush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-127bd132-1b6b-4fba-96f8-58c6733ed244.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Fuku identity and room in reference. FUKU adult athletic medium lean BLACK AND WHITE SHORT HAIRED cat. White body with one large black saddle patch centered on back, black tail with white final tip. Symmetric black cap covers both ears and outer eye areas, broad white inverted V blaze between eyes down to entirely white muzzle/chin/chest. Pink nose, tiny black beauty spot on its own right WHITE MUZZLE beside nose. Both eyes pale jade green, angular oval face, large upright triangular ears, all four legs white. Curious adventurous expression, smooth close short coat, no tabby stripes, no long ruff. Scene: belly down, both front paws gently hold a beige mouse plush on floor. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall, honey wooden floor and sage mat. No text UI watermark. Only specified props.",
+    "reference": "fuku-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "tunnel",
+    "file": "fuku-tunnel.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-bb59457c-5703-4f8d-8799-c4bed9ee71ee.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Fuku identity and room in reference. FUKU adult athletic medium lean BLACK AND WHITE SHORT HAIRED cat. White body with one large black saddle patch centered on back, black tail with white final tip. Symmetric black cap covers both ears and outer eye areas, broad white inverted V blaze between eyes down to entirely white muzzle/chin/chest. Pink nose, tiny black beauty spot on its own right WHITE MUZZLE beside nose. Both eyes pale jade green, angular oval face, large upright triangular ears, all four legs white. Curious adventurous expression, smooth close short coat, no tabby stripes, no long ruff. Scene: crouching halfway through plain tan fabric tunnel, head and front paws outside entrance, tail visible at rear. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall, honey wooden floor and sage mat. No text UI watermark. Only specified props.",
+    "reference": "fuku-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "pet",
+    "file": "fuku-pet.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-1ef76273-6d1b-48ee-b97a-ed1973bedd41.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Fuku identity and room in reference. FUKU adult athletic medium lean BLACK AND WHITE SHORT HAIRED cat. White body with one large black saddle patch centered on back, black tail with white final tip. Symmetric black cap covers both ears and outer eye areas, broad white inverted V blaze between eyes down to entirely white muzzle/chin/chest. Pink nose, tiny black beauty spot on its own right WHITE MUZZLE beside nose. Both eyes pale jade green, angular oval face, large upright triangular ears, all four legs white. Curious adventurous expression, smooth close short coat, no tabby stripes, no long ruff. Scene: sitting while a cream-sleeved hand strokes forehead. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall, honey wooden floor and sage mat. No text UI watermark. Only specified props.",
+    "reference": "fuku-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "brush",
+    "file": "fuku-brush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-f3d925ac-812f-4f9b-b648-e2973887f20f.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Fuku identity and room in reference. FUKU adult athletic medium lean BLACK AND WHITE SHORT HAIRED cat. White body with one large black saddle patch centered on back, black tail with white final tip. Symmetric black cap covers both ears and outer eye areas, broad white inverted V blaze between eyes down to entirely white muzzle/chin/chest. Pink nose, tiny black beauty spot on its own right WHITE MUZZLE beside nose. Both eyes pale jade green, angular oval face, large upright triangular ears, all four legs white. Curious adventurous expression, smooth close short coat, no tabby stripes, no long ruff. Scene: standing while cream-sleeved hand brushes shoulder with wooden brush. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall, honey wooden floor and sage mat. No text UI watermark. Only specified props.",
+    "reference": "fuku-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "voice",
+    "file": "fuku-voice.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-7e1a0483-3d2e-4846-a5cc-4449a9239003.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Fuku identity and room in reference. FUKU adult athletic medium lean BLACK AND WHITE SHORT HAIRED cat. White body with one large black saddle patch centered on back, black tail with white final tip. Symmetric black cap covers both ears and outer eye areas, broad white inverted V blaze between eyes down to entirely white muzzle/chin/chest. Pink nose, tiny black beauty spot on its own right WHITE MUZZLE beside nose. Both eyes pale jade green, angular oval face, large upright triangular ears, all four legs white. Curious adventurous expression, smooth close short coat, no tabby stripes, no long ruff. Scene: sitting with ears and head turned toward offscreen voice, no visible text. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall, honey wooden floor and sage mat. No text UI watermark. Only specified props.",
+    "reference": "fuku-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "presence",
+    "file": "fuku-presence.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-e711dd97-315d-4689-9854-0b336bcb1d65.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Fuku identity and room in reference. FUKU adult athletic medium lean BLACK AND WHITE SHORT HAIRED cat. White body with one large black saddle patch centered on back, black tail with white final tip. Symmetric black cap covers both ears and outer eye areas, broad white inverted V blaze between eyes down to entirely white muzzle/chin/chest. Pink nose, tiny black beauty spot on its own right WHITE MUZZLE beside nose. Both eyes pale jade green, angular oval face, large upright triangular ears, all four legs white. Curious adventurous expression, smooth close short coat, no tabby stripes, no long ruff. Scene: loaf calmly beside cropped blue trouser knee, no toy. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall, honey wooden floor and sage mat. No text UI watermark. Only specified props.",
+    "reference": "fuku-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "teaser__open_up",
+    "file": "fuku-teaser__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-cf48d987-a3f2-4c2f-a24f-a47d8056e3f1.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Fuku identity and room in reference. FUKU adult athletic medium lean BLACK AND WHITE SHORT HAIRED cat. White body with one large black saddle patch centered on back, black tail with white final tip. Symmetric black cap covers both ears and outer eye areas, broad white inverted V blaze between eyes down to entirely white muzzle/chin/chest. Pink nose, tiny black beauty spot on its own right WHITE MUZZLE beside nose. Both eyes pale jade green, angular oval face, large upright triangular ears, all four legs white. Curious adventurous expression, smooth close short coat, no tabby stripes, no long ruff. Scene: belly low, two front paws planted, nose reaching toward feather wand just in front, soft half-closed eyes and trusting relaxed posture. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall, honey wooden floor and sage mat. No text UI watermark. Only specified props.",
+    "reference": "fuku-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "teaser__simultaneous",
+    "file": "fuku-teaser__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-dcedf367-0271-4379-a753-d350e113249a.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Fuku identity and room in reference. FUKU adult athletic medium lean BLACK AND WHITE SHORT HAIRED cat. White body with one large black saddle patch centered on back, black tail with white final tip. Symmetric black cap covers both ears and outer eye areas, broad white inverted V blaze between eyes down to entirely white muzzle/chin/chest. Pink nose, tiny black beauty spot on its own right WHITE MUZZLE beside nose. Both eyes pale jade green, angular oval face, large upright triangular ears, all four legs white. Curious adventurous expression, smooth close short coat, no tabby stripes, no long ruff. Scene: belly low, two front paws planted, nose reaching toward feather wand just in front, joyful engaged expression, alert eyes and animated posture, distinct from basic action. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall, honey wooden floor and sage mat. No text UI watermark. Only specified props.",
+    "reference": "fuku-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "ball__open_up",
+    "file": "fuku-ball__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-04c28bda-c710-42fd-b886-9a4f371676c4.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Fuku identity and room in reference. FUKU adult athletic medium lean BLACK AND WHITE SHORT HAIRED cat. White body with one large black saddle patch centered on back, black tail with white final tip. Symmetric black cap covers both ears and outer eye areas, broad white inverted V blaze between eyes down to entirely white muzzle/chin/chest. Pink nose, tiny black beauty spot on its own right WHITE MUZZLE beside nose. Both eyes pale jade green, angular oval face, large upright triangular ears, all four legs white. Curious adventurous expression, smooth close short coat, no tabby stripes, no long ruff. Scene: crouch to tap small blue ball with a front paw, soft half-closed eyes and trusting relaxed posture. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall, honey wooden floor and sage mat. No text UI watermark. Only specified props.",
+    "reference": "fuku-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "ball__simultaneous",
+    "file": "fuku-ball__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-c345d22f-61c2-4518-bf79-df10e49d65c5.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Fuku identity and room in reference. FUKU adult athletic medium lean BLACK AND WHITE SHORT HAIRED cat. White body with one large black saddle patch centered on back, black tail with white final tip. Symmetric black cap covers both ears and outer eye areas, broad white inverted V blaze between eyes down to entirely white muzzle/chin/chest. Pink nose, tiny black beauty spot on its own right WHITE MUZZLE beside nose. Both eyes pale jade green, angular oval face, large upright triangular ears, all four legs white. Curious adventurous expression, smooth close short coat, no tabby stripes, no long ruff. Scene: crouch to tap small blue ball with a front paw, joyful engaged expression, alert eyes and animated posture, distinct from basic action. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall, honey wooden floor and sage mat. No text UI watermark. Only specified props.",
+    "reference": "fuku-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "plush__open_up",
+    "file": "fuku-plush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-e45c1522-7b3b-4156-9db0-c38e88164e6a.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Fuku identity and room in reference. FUKU adult athletic medium lean BLACK AND WHITE SHORT HAIRED cat. White body with one large black saddle patch centered on back, black tail with white final tip. Symmetric black cap covers both ears and outer eye areas, broad white inverted V blaze between eyes down to entirely white muzzle/chin/chest. Pink nose, tiny black beauty spot on its own right WHITE MUZZLE beside nose. Both eyes pale jade green, angular oval face, large upright triangular ears, all four legs white. Curious adventurous expression, smooth close short coat, no tabby stripes, no long ruff. Scene: belly down, both front paws gently hold a beige mouse plush on floor, soft half-closed eyes and trusting relaxed posture. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall, honey wooden floor and sage mat. No text UI watermark. Only specified props.",
+    "reference": "fuku-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "plush__simultaneous",
+    "file": "fuku-plush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-14045611-b08f-41cd-acea-ea1d816f2b2d.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Fuku identity and room in reference. FUKU adult athletic medium lean BLACK AND WHITE SHORT HAIRED cat. White body with one large black saddle patch centered on back, black tail with white final tip. Symmetric black cap covers both ears and outer eye areas, broad white inverted V blaze between eyes down to entirely white muzzle/chin/chest. Pink nose, tiny black beauty spot on its own right WHITE MUZZLE beside nose. Both eyes pale jade green, angular oval face, large upright triangular ears, all four legs white. Curious adventurous expression, smooth close short coat, no tabby stripes, no long ruff. Scene: belly down, both front paws gently hold a beige mouse plush on floor, joyful engaged expression, alert eyes and animated posture, distinct from basic action. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall, honey wooden floor and sage mat. No text UI watermark. Only specified props.",
+    "reference": "fuku-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "tunnel__open_up",
+    "file": "fuku-tunnel__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-f3ff20b7-82f7-46c1-87be-a19bec49e2db.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Fuku identity and room in reference. FUKU adult athletic medium lean BLACK AND WHITE SHORT HAIRED cat. White body with one large black saddle patch centered on back, black tail with white final tip. Symmetric black cap covers both ears and outer eye areas, broad white inverted V blaze between eyes down to entirely white muzzle/chin/chest. Pink nose, tiny black beauty spot on its own right WHITE MUZZLE beside nose. Both eyes pale jade green, angular oval face, large upright triangular ears, all four legs white. Curious adventurous expression, smooth close short coat, no tabby stripes, no long ruff. Scene: crouching halfway through plain tan fabric tunnel, head and front paws outside entrance, tail visible at rear, soft half-closed eyes and trusting relaxed posture. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall, honey wooden floor and sage mat. No text UI watermark. Only specified props.",
+    "reference": "fuku-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "tunnel__simultaneous",
+    "file": "fuku-tunnel__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-842e14c3-f07f-4932-bd17-85664685e8d3.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Fuku identity and room in reference. FUKU adult athletic medium lean BLACK AND WHITE SHORT HAIRED cat. White body with one large black saddle patch centered on back, black tail with white final tip. Symmetric black cap covers both ears and outer eye areas, broad white inverted V blaze between eyes down to entirely white muzzle/chin/chest. Pink nose, tiny black beauty spot on its own right WHITE MUZZLE beside nose. Both eyes pale jade green, angular oval face, large upright triangular ears, all four legs white. Curious adventurous expression, smooth close short coat, no tabby stripes, no long ruff. Scene: crouching halfway through plain tan fabric tunnel, head and front paws outside entrance, tail visible at rear, joyful engaged expression, alert eyes and animated posture, distinct from basic action. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall, honey wooden floor and sage mat. No text UI watermark. Only specified props.",
+    "reference": "fuku-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "pet__open_up",
+    "file": "fuku-pet__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-79abf4c2-9c41-445d-887e-49ab55e13d97.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Fuku identity and room in reference. FUKU adult athletic medium lean BLACK AND WHITE SHORT HAIRED cat. White body with one large black saddle patch centered on back, black tail with white final tip. Symmetric black cap covers both ears and outer eye areas, broad white inverted V blaze between eyes down to entirely white muzzle/chin/chest. Pink nose, tiny black beauty spot on its own right WHITE MUZZLE beside nose. Both eyes pale jade green, angular oval face, large upright triangular ears, all four legs white. Curious adventurous expression, smooth close short coat, no tabby stripes, no long ruff. Scene: sitting while a cream-sleeved hand strokes forehead, soft half-closed eyes and trusting relaxed posture. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall, honey wooden floor and sage mat. No text UI watermark. Only specified props.",
+    "reference": "fuku-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "pet__simultaneous",
+    "file": "fuku-pet__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-313b5125-83ed-4f5d-bb8e-c3abee4fc126.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Fuku identity and room in reference. FUKU adult athletic medium lean BLACK AND WHITE SHORT HAIRED cat. White body with one large black saddle patch centered on back, black tail with white final tip. Symmetric black cap covers both ears and outer eye areas, broad white inverted V blaze between eyes down to entirely white muzzle/chin/chest. Pink nose, tiny black beauty spot on its own right WHITE MUZZLE beside nose. Both eyes pale jade green, angular oval face, large upright triangular ears, all four legs white. Curious adventurous expression, smooth close short coat, no tabby stripes, no long ruff. Scene: sitting while a cream-sleeved hand strokes forehead, joyful engaged expression, alert eyes and animated posture, distinct from basic action. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall, honey wooden floor and sage mat. No text UI watermark. Only specified props.",
+    "reference": "fuku-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "brush__open_up",
+    "file": "fuku-brush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-4fc71566-ba34-4e2d-8e0a-197d804e4856.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Fuku identity and room in reference. FUKU adult athletic medium lean BLACK AND WHITE SHORT HAIRED cat. White body with one large black saddle patch centered on back, black tail with white final tip. Symmetric black cap covers both ears and outer eye areas, broad white inverted V blaze between eyes down to entirely white muzzle/chin/chest. Pink nose, tiny black beauty spot on its own right WHITE MUZZLE beside nose. Both eyes pale jade green, angular oval face, large upright triangular ears, all four legs white. Curious adventurous expression, smooth close short coat, no tabby stripes, no long ruff. Scene: standing while cream-sleeved hand brushes shoulder with wooden brush, soft half-closed eyes and trusting relaxed posture. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall, honey wooden floor and sage mat. No text UI watermark. Only specified props.",
+    "reference": "fuku-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "brush__simultaneous",
+    "file": "fuku-brush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-5d823dac-e8a6-4532-9069-45e7b333337e.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Fuku identity and room in reference. FUKU adult athletic medium lean BLACK AND WHITE SHORT HAIRED cat. White body with one large black saddle patch centered on back, black tail with white final tip. Symmetric black cap covers both ears and outer eye areas, broad white inverted V blaze between eyes down to entirely white muzzle/chin/chest. Pink nose, tiny black beauty spot on its own right WHITE MUZZLE beside nose. Both eyes pale jade green, angular oval face, large upright triangular ears, all four legs white. Curious adventurous expression, smooth close short coat, no tabby stripes, no long ruff. Scene: standing while cream-sleeved hand brushes shoulder with wooden brush, joyful engaged expression, alert eyes and animated posture, distinct from basic action. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall, honey wooden floor and sage mat. No text UI watermark. Only specified props.",
+    "reference": "fuku-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "voice__open_up",
+    "file": "fuku-voice__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-311cc8dd-5cd3-4db7-8b0d-aab8f7b437e6.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Fuku identity and room in reference. FUKU adult athletic medium lean BLACK AND WHITE SHORT HAIRED cat. White body with one large black saddle patch centered on back, black tail with white final tip. Symmetric black cap covers both ears and outer eye areas, broad white inverted V blaze between eyes down to entirely white muzzle/chin/chest. Pink nose, tiny black beauty spot on its own right WHITE MUZZLE beside nose. Both eyes pale jade green, angular oval face, large upright triangular ears, all four legs white. Curious adventurous expression, smooth close short coat, no tabby stripes, no long ruff. Scene: sitting with ears and head turned toward offscreen voice, no visible text, soft half-closed eyes and trusting relaxed posture. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall, honey wooden floor and sage mat. No text UI watermark. Only specified props.",
+    "reference": "fuku-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "voice__simultaneous",
+    "file": "fuku-voice__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-ecc60741-2ed0-4646-8593-6e80bea78cc4.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Fuku identity and room in reference. FUKU adult athletic medium lean BLACK AND WHITE SHORT HAIRED cat. White body with one large black saddle patch centered on back, black tail with white final tip. Symmetric black cap covers both ears and outer eye areas, broad white inverted V blaze between eyes down to entirely white muzzle/chin/chest. Pink nose, tiny black beauty spot on its own right WHITE MUZZLE beside nose. Both eyes pale jade green, angular oval face, large upright triangular ears, all four legs white. Curious adventurous expression, smooth close short coat, no tabby stripes, no long ruff. Scene: sitting with ears and head turned toward offscreen voice, no visible text, joyful engaged expression, alert eyes and animated posture, distinct from basic action. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall, honey wooden floor and sage mat. No text UI watermark. Only specified props.",
+    "reference": "fuku-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "presence__open_up",
+    "file": "fuku-presence__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-1f6e6301-420b-4905-a636-527e7e9fc2a9.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Fuku identity and room in reference. FUKU adult athletic medium lean BLACK AND WHITE SHORT HAIRED cat. White body with one large black saddle patch centered on back, black tail with white final tip. Symmetric black cap covers both ears and outer eye areas, broad white inverted V blaze between eyes down to entirely white muzzle/chin/chest. Pink nose, tiny black beauty spot on its own right WHITE MUZZLE beside nose. Both eyes pale jade green, angular oval face, large upright triangular ears, all four legs white. Curious adventurous expression, smooth close short coat, no tabby stripes, no long ruff. Scene: loaf calmly beside cropped blue trouser knee, no toy, soft half-closed eyes and trusting relaxed posture. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall, honey wooden floor and sage mat. No text UI watermark. Only specified props.",
+    "reference": "fuku-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "presence__simultaneous",
+    "file": "fuku-presence__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-62fc4001-1d30-43af-99ad-298cb653f08e.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Fuku identity and room in reference. FUKU adult athletic medium lean BLACK AND WHITE SHORT HAIRED cat. White body with one large black saddle patch centered on back, black tail with white final tip. Symmetric black cap covers both ears and outer eye areas, broad white inverted V blaze between eyes down to entirely white muzzle/chin/chest. Pink nose, tiny black beauty spot on its own right WHITE MUZZLE beside nose. Both eyes pale jade green, angular oval face, large upright triangular ears, all four legs white. Curious adventurous expression, smooth close short coat, no tabby stripes, no long ruff. Scene: loaf calmly beside cropped blue trouser knee, no toy, joyful engaged expression, alert eyes and animated posture, distinct from basic action. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall, honey wooden floor and sage mat. No text UI watermark. Only specified props.",
+    "reference": "fuku-normal.png",
+    "reference_role": "identity_and_room"
+  }
+]

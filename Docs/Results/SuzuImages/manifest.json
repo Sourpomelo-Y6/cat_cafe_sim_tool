@@ -1,0 +1,177 @@
+{
+  "cat_id": "catalog-8",
+  "name": "スズ",
+  "date": "2026-10-31",
+  "tool": "built-in image_gen",
+  "images": [
+    {
+      "scene": "normal",
+      "file": "suzu-normal.png"
+    },
+    {
+      "scene": "sleep",
+      "file": "suzu-sleep.png"
+    },
+    {
+      "scene": "pause",
+      "file": "suzu-pause.png"
+    },
+    {
+      "scene": "teaser",
+      "file": "suzu-teaser.png"
+    },
+    {
+      "scene": "ball",
+      "file": "suzu-ball.png"
+    },
+    {
+      "scene": "plush",
+      "file": "suzu-plush.png"
+    },
+    {
+      "scene": "tunnel",
+      "file": "suzu-tunnel.png"
+    },
+    {
+      "scene": "pet",
+      "file": "suzu-pet.png"
+    },
+    {
+      "scene": "brush",
+      "file": "suzu-brush.png"
+    },
+    {
+      "scene": "voice",
+      "file": "suzu-voice.png"
+    },
+    {
+      "scene": "presence",
+      "file": "suzu-presence.png"
+    },
+    {
+      "scene": "teaser__open_up",
+      "file": "suzu-teaser__open_up.png"
+    },
+    {
+      "scene": "teaser__simultaneous",
+      "file": "suzu-teaser__simultaneous.png"
+    },
+    {
+      "scene": "ball__open_up",
+      "file": "suzu-ball__open_up.png"
+    },
+    {
+      "scene": "ball__simultaneous",
+      "file": "suzu-ball__simultaneous.png"
+    },
+    {
+      "scene": "plush__open_up",
+      "file": "suzu-plush__open_up.png"
+    },
+    {
+      "scene": "plush__simultaneous",
+      "file": "suzu-plush__simultaneous.png"
+    },
+    {
+      "scene": "tunnel__open_up",
+      "file": "suzu-tunnel__open_up.png"
+    },
+    {
+      "scene": "tunnel__simultaneous",
+      "file": "suzu-tunnel__simultaneous.png"
+    },
+    {
+      "scene": "pet__open_up",
+      "file": "suzu-pet__open_up.png"
+    },
+    {
+      "scene": "pet__simultaneous",
+      "file": "suzu-pet__simultaneous.png"
+    },
+    {
+      "scene": "brush__open_up",
+      "file": "suzu-brush__open_up.png"
+    },
+    {
+      "scene": "brush__simultaneous",
+      "file": "suzu-brush__simultaneous.png"
+    },
+    {
+      "scene": "voice__open_up",
+      "file": "suzu-voice__open_up.png"
+    },
+    {
+      "scene": "voice__simultaneous",
+      "file": "suzu-voice__simultaneous.png"
+    },
+    {
+      "scene": "presence__open_up",
+      "file": "suzu-presence__open_up.png"
+    },
+    {
+      "scene": "presence__simultaneous",
+      "file": "suzu-presence__simultaneous.png"
+    }
+  ],
+  "scenes": {
+    "normal": "images/2750999757373b67ccf9f67ccc49cf0ce84ef13b1b04e52db60b2d1353f9b3c8.png",
+    "sleep": "images/3003e0edca72bfc6ffec3da3d2648dc3ee30ef97d278e5b2f3c2f5d8ba98a97b.png",
+    "play": "images/ec45931d441e314acaa4c400728368655874767f1872979dd7a4957ced56216e.png",
+    "pause": "images/60bc90cc7e6e70b45f7fc32bafecaf42111cb9cca352bcff17ece1c75297eed2.png",
+    "teaser": "images/2750999757373b67ccf9f67ccc49cf0ce84ef13b1b04e52db60b2d1353f9b3c8.png",
+    "teaser__switch": "images/2750999757373b67ccf9f67ccc49cf0ce84ef13b1b04e52db60b2d1353f9b3c8.png",
+    "teaser__direct": "images/ec45931d441e314acaa4c400728368655874767f1872979dd7a4957ced56216e.png",
+    "teaser__adapt": "images/ec45931d441e314acaa4c400728368655874767f1872979dd7a4957ced56216e.png",
+    "teaser__open_up": "images/3f3d894070f105340c8f421b46c67d551b26bc528ba57069bfd88674bb59ce41.png",
+    "teaser__simultaneous": "images/23a54bad2c806b475e28b514c30506f0fe18a105834e7976978a5aae768a21b6.png",
+    "ball": "images/2750999757373b67ccf9f67ccc49cf0ce84ef13b1b04e52db60b2d1353f9b3c8.png",
+    "ball__switch": "images/2750999757373b67ccf9f67ccc49cf0ce84ef13b1b04e52db60b2d1353f9b3c8.png",
+    "ball__direct": "images/2cf12835cbc59555cb6ee8895c4c714e8871fa0d23d54a93822148757082bc88.png",
+    "ball__adapt": "images/2cf12835cbc59555cb6ee8895c4c714e8871fa0d23d54a93822148757082bc88.png",
+    "ball__open_up": "images/02461e69d499161397884b280ec2e2bb4b95f561d2c59dafeb6e94c3b7df1a67.png",
+    "ball__simultaneous": "images/5555a107f048b3354e165be8d5ae50f441511ede10e014ab8e1529a3f64c419b.png",
+    "plush": "images/2750999757373b67ccf9f67ccc49cf0ce84ef13b1b04e52db60b2d1353f9b3c8.png",
+    "plush__switch": "images/2750999757373b67ccf9f67ccc49cf0ce84ef13b1b04e52db60b2d1353f9b3c8.png",
+    "plush__direct": "images/dc18788882492c7fa064c241751bfd8ff31c14b101b9b9d71bb387ac04fa3d19.png",
+    "plush__adapt": "images/dc18788882492c7fa064c241751bfd8ff31c14b101b9b9d71bb387ac04fa3d19.png",
+    "plush__open_up": "images/e62ee2e42fb306b00d638f00937f6e1bb9e4a049e42846884b6ff28a6422b0e1.png",
+    "plush__simultaneous": "images/ff208427a13376bb346b39a2f7f1b8eec13b80dded311ba1416649fa222e5580.png",
+    "tunnel": "images/2750999757373b67ccf9f67ccc49cf0ce84ef13b1b04e52db60b2d1353f9b3c8.png",
+    "tunnel__switch": "images/2750999757373b67ccf9f67ccc49cf0ce84ef13b1b04e52db60b2d1353f9b3c8.png",
+    "tunnel__direct": "images/07a65815c250a007c29cdeb4a889bbe7c488067f465f8f122ee75c4e70e5690e.png",
+    "tunnel__adapt": "images/07a65815c250a007c29cdeb4a889bbe7c488067f465f8f122ee75c4e70e5690e.png",
+    "tunnel__open_up": "images/25ddb6342733e9204d9679ae5e53ccb9dc6831fc6522b440460d0c0944b56612.png",
+    "tunnel__simultaneous": "images/33d52fe334796515fa9cded91ad2baa4b000b78f4580d8619efaf1d18bff413e.png",
+    "pet": "images/2750999757373b67ccf9f67ccc49cf0ce84ef13b1b04e52db60b2d1353f9b3c8.png",
+    "pet__switch": "images/2750999757373b67ccf9f67ccc49cf0ce84ef13b1b04e52db60b2d1353f9b3c8.png",
+    "pet__direct": "images/69561b01a015106050284341817d441593f83bc420e07732862adb5e04e600c1.png",
+    "pet__adapt": "images/69561b01a015106050284341817d441593f83bc420e07732862adb5e04e600c1.png",
+    "pet__open_up": "images/eaf2e97cbf0046b3ed1c1a4f77d163861e757aefa64b060c7b6cf7bfb7f09b61.png",
+    "pet__simultaneous": "images/5a68d583f208d0c194a3095427851d82d19f2397b19665aaf9b43bac7029bb61.png",
+    "brush": "images/2750999757373b67ccf9f67ccc49cf0ce84ef13b1b04e52db60b2d1353f9b3c8.png",
+    "brush__switch": "images/2750999757373b67ccf9f67ccc49cf0ce84ef13b1b04e52db60b2d1353f9b3c8.png",
+    "brush__direct": "images/97b40b2d8a92c48a2038ca4f7e08def6c44af8d6658ad40abbda96412334df52.png",
+    "brush__adapt": "images/97b40b2d8a92c48a2038ca4f7e08def6c44af8d6658ad40abbda96412334df52.png",
+    "brush__open_up": "images/200a1ccdb5a2fba73bdb50c2cc8e3cefc76293052a089f1801bd501f8461a530.png",
+    "brush__simultaneous": "images/15ceed95a9ff348b1a4e03d5ccd15e1a3425425f143fbbebabcf091b2b216c61.png",
+    "voice": "images/2750999757373b67ccf9f67ccc49cf0ce84ef13b1b04e52db60b2d1353f9b3c8.png",
+    "voice__switch": "images/2750999757373b67ccf9f67ccc49cf0ce84ef13b1b04e52db60b2d1353f9b3c8.png",
+    "voice__direct": "images/3b6ef3f5e9d754f4847cb7874be0eefa4349bb4e77e882fdfae6aa325631e831.png",
+    "voice__adapt": "images/3b6ef3f5e9d754f4847cb7874be0eefa4349bb4e77e882fdfae6aa325631e831.png",
+    "voice__open_up": "images/c5c5b9d3f4d0e93088db8684400697d5c37f5d701d51c3c7133a96191c3ab3e5.png",
+    "voice__simultaneous": "images/df636065ab846f333cd38f79cf15018bc1efe992fa17c75c1aefa9966a2e499f.png",
+    "presence": "images/2750999757373b67ccf9f67ccc49cf0ce84ef13b1b04e52db60b2d1353f9b3c8.png",
+    "presence__switch": "images/2750999757373b67ccf9f67ccc49cf0ce84ef13b1b04e52db60b2d1353f9b3c8.png",
+    "presence__direct": "images/b70060105d3e89c1c51dee9f29fe6b2a1433f0910f12f5b8e4c882615b0d5240.png",
+    "presence__adapt": "images/b70060105d3e89c1c51dee9f29fe6b2a1433f0910f12f5b8e4c882615b0d5240.png",
+    "presence__open_up": "images/5f4ababbff4112760232bcb659861b6a3a632f5d3e60f023604c868386d1c12c.png",
+    "presence__simultaneous": "images/19c558be9beef233fc51e0c3f52d2fb8ca3f4ead727bdf005d406116e4fa9158.png"
+  },
+  "active_pack": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\Imports\\cbe0df94e7a5401a8f466406c105b493",
+  "runtime_id_resolution": {
+    "content_id": "catalog-8",
+    "rule": "Resolve actual rescue-N through standard saved recruitment batch and catalog position; validate original candidate fields"
+  },
+  "authored_entries_unchanged": true,
+  "existing_cats_unchanged": true
+}

@@ -1,0 +1,177 @@
+{
+  "cat_id": "catalog-16",
+  "name": "シオン",
+  "date": "2026-11-09",
+  "tool": "built-in image_gen",
+  "images": [
+    {
+      "scene": "normal",
+      "file": "shion-normal.png"
+    },
+    {
+      "scene": "sleep",
+      "file": "shion-sleep.png"
+    },
+    {
+      "scene": "pause",
+      "file": "shion-pause.png"
+    },
+    {
+      "scene": "teaser",
+      "file": "shion-teaser.png"
+    },
+    {
+      "scene": "ball",
+      "file": "shion-ball.png"
+    },
+    {
+      "scene": "plush",
+      "file": "shion-plush.png"
+    },
+    {
+      "scene": "tunnel",
+      "file": "shion-tunnel.png"
+    },
+    {
+      "scene": "pet",
+      "file": "shion-pet.png"
+    },
+    {
+      "scene": "brush",
+      "file": "shion-brush.png"
+    },
+    {
+      "scene": "voice",
+      "file": "shion-voice.png"
+    },
+    {
+      "scene": "presence",
+      "file": "shion-presence.png"
+    },
+    {
+      "scene": "teaser__open_up",
+      "file": "shion-teaser__open_up.png"
+    },
+    {
+      "scene": "teaser__simultaneous",
+      "file": "shion-teaser__simultaneous.png"
+    },
+    {
+      "scene": "ball__open_up",
+      "file": "shion-ball__open_up.png"
+    },
+    {
+      "scene": "ball__simultaneous",
+      "file": "shion-ball__simultaneous.png"
+    },
+    {
+      "scene": "plush__open_up",
+      "file": "shion-plush__open_up.png"
+    },
+    {
+      "scene": "plush__simultaneous",
+      "file": "shion-plush__simultaneous.png"
+    },
+    {
+      "scene": "tunnel__open_up",
+      "file": "shion-tunnel__open_up.png"
+    },
+    {
+      "scene": "tunnel__simultaneous",
+      "file": "shion-tunnel__simultaneous.png"
+    },
+    {
+      "scene": "pet__open_up",
+      "file": "shion-pet__open_up.png"
+    },
+    {
+      "scene": "pet__simultaneous",
+      "file": "shion-pet__simultaneous.png"
+    },
+    {
+      "scene": "brush__open_up",
+      "file": "shion-brush__open_up.png"
+    },
+    {
+      "scene": "brush__simultaneous",
+      "file": "shion-brush__simultaneous.png"
+    },
+    {
+      "scene": "voice__open_up",
+      "file": "shion-voice__open_up.png"
+    },
+    {
+      "scene": "voice__simultaneous",
+      "file": "shion-voice__simultaneous.png"
+    },
+    {
+      "scene": "presence__open_up",
+      "file": "shion-presence__open_up.png"
+    },
+    {
+      "scene": "presence__simultaneous",
+      "file": "shion-presence__simultaneous.png"
+    }
+  ],
+  "scenes": {
+    "normal": "images/1ba675bb7a8e24ac30194c9caf626f85830e68de1ff356b334fa6c719eea99f7.png",
+    "sleep": "images/6649955993e04513836a4be7da71f4056ff3fdef44d741819efc22d519dc7c60.png",
+    "play": "images/ba4400df854ffcb661fcf9591c7451a2379bee1acc0ceba83cf04cd8c7b048fa.png",
+    "pause": "images/61795ae44317b77ca9b9bce83ef8e0f7c610c49bb345323e6a7925520b8e3ee2.png",
+    "teaser": "images/1ba675bb7a8e24ac30194c9caf626f85830e68de1ff356b334fa6c719eea99f7.png",
+    "teaser__switch": "images/1ba675bb7a8e24ac30194c9caf626f85830e68de1ff356b334fa6c719eea99f7.png",
+    "teaser__direct": "images/ba4400df854ffcb661fcf9591c7451a2379bee1acc0ceba83cf04cd8c7b048fa.png",
+    "teaser__adapt": "images/ba4400df854ffcb661fcf9591c7451a2379bee1acc0ceba83cf04cd8c7b048fa.png",
+    "teaser__open_up": "images/05d0bed522ab6ca2dea7a701931fb32e8f82b0be005c7e9b0c3f505f47603aa6.png",
+    "teaser__simultaneous": "images/8c2748a118b83273db37c690d1443227aa1c7cd15b8a59c747e6a9cd379a903d.png",
+    "ball": "images/1ba675bb7a8e24ac30194c9caf626f85830e68de1ff356b334fa6c719eea99f7.png",
+    "ball__switch": "images/1ba675bb7a8e24ac30194c9caf626f85830e68de1ff356b334fa6c719eea99f7.png",
+    "ball__direct": "images/6026dae81a22cceb5c2bce870d346e7453fb219c8d130057b2e246e9dfb51842.png",
+    "ball__adapt": "images/6026dae81a22cceb5c2bce870d346e7453fb219c8d130057b2e246e9dfb51842.png",
+    "ball__open_up": "images/7741fbb6c1bbf64b8eb594bd684df31909b091794fd0cccb73530de2314b5546.png",
+    "ball__simultaneous": "images/504b1d601f11f6d03c0499d5c4e851015904dbe4470ff9c89a003a6651635c91.png",
+    "plush": "images/1ba675bb7a8e24ac30194c9caf626f85830e68de1ff356b334fa6c719eea99f7.png",
+    "plush__switch": "images/1ba675bb7a8e24ac30194c9caf626f85830e68de1ff356b334fa6c719eea99f7.png",
+    "plush__direct": "images/3a383d8d51097516443ccadf30b5da6a7a7246fcc0c886723924e2b21b1a3473.png",
+    "plush__adapt": "images/3a383d8d51097516443ccadf30b5da6a7a7246fcc0c886723924e2b21b1a3473.png",
+    "plush__open_up": "images/644e1f7af4611ee9787ee883bd3a662d549d3b40e9f29e062abc657ef4a64fdc.png",
+    "plush__simultaneous": "images/0ce87a85ad3942da6722efcb972cd46fb408dd68f55e7ceae15d53b18cb97718.png",
+    "tunnel": "images/1ba675bb7a8e24ac30194c9caf626f85830e68de1ff356b334fa6c719eea99f7.png",
+    "tunnel__switch": "images/1ba675bb7a8e24ac30194c9caf626f85830e68de1ff356b334fa6c719eea99f7.png",
+    "tunnel__direct": "images/8da9583960b3dca68d22d60bee944bd4e6ebaa767fa6f827bd5995f381917af2.png",
+    "tunnel__adapt": "images/8da9583960b3dca68d22d60bee944bd4e6ebaa767fa6f827bd5995f381917af2.png",
+    "tunnel__open_up": "images/6923afa0323ec7cea0a29f90db206705b397ee4dc2e7a8bf9c19b7b7e4ed556e.png",
+    "tunnel__simultaneous": "images/2a1c790bc61087c6b3d4c60ebf29c86e0f9c535bcc972ac2307bd8e27553fd92.png",
+    "pet": "images/1ba675bb7a8e24ac30194c9caf626f85830e68de1ff356b334fa6c719eea99f7.png",
+    "pet__switch": "images/1ba675bb7a8e24ac30194c9caf626f85830e68de1ff356b334fa6c719eea99f7.png",
+    "pet__direct": "images/acbc23b2dba3586c0a20af2b5eb2c267612ff49cd460dd81bcf2fde00860f8dd.png",
+    "pet__adapt": "images/acbc23b2dba3586c0a20af2b5eb2c267612ff49cd460dd81bcf2fde00860f8dd.png",
+    "pet__open_up": "images/abbc9a2496a696ed52b97aadf54cc40deb02054448c1bf308bc27014b6a983be.png",
+    "pet__simultaneous": "images/69a09d11d79cea0ba9bd4027b2e3e7d23d67f09a7914a8a9f792567e5aa3f9ce.png",
+    "brush": "images/1ba675bb7a8e24ac30194c9caf626f85830e68de1ff356b334fa6c719eea99f7.png",
+    "brush__switch": "images/1ba675bb7a8e24ac30194c9caf626f85830e68de1ff356b334fa6c719eea99f7.png",
+    "brush__direct": "images/7856bb2fd39bba563b6a0857bbd9ac58c7b9d4a3c82772cdd01ec15545eb8b23.png",
+    "brush__adapt": "images/7856bb2fd39bba563b6a0857bbd9ac58c7b9d4a3c82772cdd01ec15545eb8b23.png",
+    "brush__open_up": "images/8e4d3b740653030f9857318a94652328d0ebf54fd7a4abd3013236c0f28aefb4.png",
+    "brush__simultaneous": "images/beda8c0d08afe62b77a868c9acb281dc1ca6809dcf5f95970733873108171293.png",
+    "voice": "images/1ba675bb7a8e24ac30194c9caf626f85830e68de1ff356b334fa6c719eea99f7.png",
+    "voice__switch": "images/1ba675bb7a8e24ac30194c9caf626f85830e68de1ff356b334fa6c719eea99f7.png",
+    "voice__direct": "images/3e9d20ed06af845fc8afebeb5a59480c8dcb3ab9a9da7aa9afb39e0efc1b19c5.png",
+    "voice__adapt": "images/3e9d20ed06af845fc8afebeb5a59480c8dcb3ab9a9da7aa9afb39e0efc1b19c5.png",
+    "voice__open_up": "images/7de6e2930211352986eedf91f88cab26fd9486edc24e384cf51b4db1724425cd.png",
+    "voice__simultaneous": "images/2a9373b6dd51f060c23efe9a5295813868d4d89992bae3292ab78a5282befb25.png",
+    "presence": "images/1ba675bb7a8e24ac30194c9caf626f85830e68de1ff356b334fa6c719eea99f7.png",
+    "presence__switch": "images/1ba675bb7a8e24ac30194c9caf626f85830e68de1ff356b334fa6c719eea99f7.png",
+    "presence__direct": "images/809b677a01608a3917a601c320952b7e482bfe1da557fbcef80920712d6a3b65.png",
+    "presence__adapt": "images/809b677a01608a3917a601c320952b7e482bfe1da557fbcef80920712d6a3b65.png",
+    "presence__open_up": "images/49dd8cb146d54d477dde675a8b1d94006a96bc93c39ee0188bdc216dc3be7a49.png",
+    "presence__simultaneous": "images/d756dc23b5aff1ac5106f0a477d99d70ae4d9944fba4ca20ebd63d15c114fd9b.png"
+  },
+  "active_pack": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\Imports\\cbe0df94e7a5401a8f466406c105b493",
+  "runtime_id_resolution": {
+    "content_id": "catalog-16",
+    "rule": "Resolve actual rescue-N through standard saved recruitment batch and catalog position; validate original candidate fields"
+  },
+  "authored_entries_unchanged": true,
+  "existing_cats_unchanged": true
+}

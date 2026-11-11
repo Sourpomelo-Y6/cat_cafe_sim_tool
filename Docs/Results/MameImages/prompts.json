@@ -1,0 +1,218 @@
+[
+  {
+    "scene": "normal",
+    "file": "mame-normal.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-b3862b9c-8e9f-4765-8ecb-8a91f0bf70cf.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim identity illustration NEW cat MAME. MIKE reference STYLE AND ROOM ONLY different adult cat. MAME medium slender CALICO SHORTHAIR with longer legs, oval narrow face pink nose medium triangular ears. BOTH EYES bright LIGHT BLUE slightly almond shaped. Eye surrounds cheeks nose bridge muzzle are PURE WHITE. CAT'S OWN RIGHT EAR BLACK (viewer LEFT), CAT'S OWN LEFT EAR ORANGE (viewer RIGHT). Ear patches STOP ABOVE EYES, do not cover eyes. ONE SMALL ROUND ORANGE SPOT high center forehead. White chest belly ALL FOUR LEGS. Back and flanks have SEPARATED rounded BLACK and ORANGE PATCHES. LONG SLENDER ORANGE TAIL with WHITE TIP ONLY no black tail rings. Smooth SHORT fur, neutral calm attentive expression adult not kitten. Entire seated cat FOUR limbs and FULL tail centered with generous floor margin on ALL sides. Same fine soft painted storybook art cream wall honey wood floor sage green mat warm soft light. No text UI watermark props humans.",
+    "reference": "../MikeExecutionImages/Prototypes/CatAppearance-v1/mike-normal.png",
+    "reference_role": "style_and_room"
+  },
+  {
+    "scene": "teaser",
+    "file": "mame-teaser.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-ea51a687-97a0-495c-be50-342e2bcbd0e8.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim scene. Reference MAME exact identity and fine soft painted storybook style. Adult slender CALICO SHORTHAIR longer legs oval face pink nose LIGHT BLUE EYES. Cat's OWN RIGHT EAR and right crown BLACK (viewer LEFT), OWN LEFT EAR and left crown ORANGE (viewer RIGHT). White lower cheeks nose bridge muzzle chest belly ALL FOUR LEGS. SMALL ORANGE SPOT center forehead in white blaze. Black and orange PATCHES on back/flanks. LONG SLENDER ORANGE TAIL with WHITE TIP no black tail. Smooth SHORT fur NO longhair. Neutral calm attentive personality. Cream wall honey wood floor sage green mat warm diffuse light. FULL CAT and ENTIRE tail occupy central65% width generous EMPTY floor margin on all sides, tail low gently curved beside body. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Basic attentive play: one hand at edge holds feather teaser near cat. Cat reaches one forepaw toward feather, light blue eyes open, gentle calm engagement.",
+    "reference": "mame-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball",
+    "file": "mame-ball.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-3be6ed6f-c667-4fe6-945e-ad3a36439d7d.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim scene. Reference MAME exact identity and fine soft painted storybook style. Adult slender CALICO SHORTHAIR longer legs oval face pink nose LIGHT BLUE EYES. Cat's OWN RIGHT EAR and right crown BLACK (viewer LEFT), OWN LEFT EAR and left crown ORANGE (viewer RIGHT). White lower cheeks nose bridge muzzle chest belly ALL FOUR LEGS. SMALL ORANGE SPOT center forehead in white blaze. Black and orange PATCHES on back/flanks. LONG SLENDER ORANGE TAIL with WHITE TIP no black tail. Smooth SHORT fur NO longhair. Neutral calm attentive personality. Cream wall honey wood floor sage green mat warm diffuse light. FULL CAT and ENTIRE tail occupy central65% width generous EMPTY floor margin on all sides, tail low gently curved beside body. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Basic play: crouches and gently touches small blue toy ball on mat with one paw, attentive open light blue eyes. No humans or other toys.",
+    "reference": "mame-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush",
+    "file": "mame-plush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-616c2a2c-0122-4c29-a0f8-05df9c4c347b.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim scene. Reference MAME exact identity and fine soft painted storybook style. Adult slender CALICO SHORTHAIR longer legs oval face pink nose LIGHT BLUE EYES. Cat's OWN RIGHT EAR and right crown BLACK (viewer LEFT), OWN LEFT EAR and left crown ORANGE (viewer RIGHT). White lower cheeks nose bridge muzzle chest belly ALL FOUR LEGS. SMALL ORANGE SPOT center forehead in white blaze. Black and orange PATCHES on back/flanks. LONG SLENDER ORANGE TAIL with WHITE TIP no black tail. Smooth SHORT fur NO longhair. Neutral calm attentive personality. Cream wall honey wood floor sage green mat warm diffuse light. FULL CAT and ENTIRE tail occupy central65% width generous EMPTY floor margin on all sides, tail low gently curved beside body. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Basic play: cat lies naturally belly-down on mat with TWO forepaws resting on either side of a SMALL beige mouse plush ON THE FLOOR; sniffs mouse, eyes open. Hind legs tucked behind body. EXACTLY FOUR LIMBS TOTAL. No seated upright hugging pose, no extra paws. Tail curves beside body fully inside frame.",
+    "reference": "mame-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel",
+    "file": "mame-tunnel.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-9d5064a6-c1ee-4b0e-8568-4117bfd08ffc.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim scene. Reference MAME exact identity and fine soft painted storybook style. Adult slender CALICO SHORTHAIR longer legs oval face pink nose LIGHT BLUE EYES. Cat's OWN RIGHT EAR and right crown BLACK (viewer LEFT), OWN LEFT EAR and left crown ORANGE (viewer RIGHT). White lower cheeks nose bridge muzzle chest belly ALL FOUR LEGS. SMALL ORANGE SPOT center forehead in white blaze. Black and orange PATCHES on back/flanks. LONG SLENDER ORANGE TAIL with WHITE TIP no black tail. Smooth SHORT fur NO longhair. Neutral calm attentive personality. Cream wall honey wood floor sage green mat warm diffuse light. FULL CAT and ENTIRE tail occupy central65% width generous EMPTY floor margin on all sides, tail low gently curved beside body. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Basic play: crouches just inside short beige fabric cat tunnel, head front paws and tail fully visible at entrance, eyes open curious gentle expression. No humans or other toys.",
+    "reference": "mame-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet",
+    "file": "mame-pet.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-69d3057a-7d10-4c76-821c-0dc29a2b678a.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim scene. Reference MAME exact identity and fine soft painted storybook style. Adult slender CALICO SHORTHAIR longer legs oval face pink nose LIGHT BLUE EYES. Cat's OWN RIGHT EAR and right crown BLACK (viewer LEFT), OWN LEFT EAR and left crown ORANGE (viewer RIGHT). White lower cheeks nose bridge muzzle chest belly ALL FOUR LEGS. SMALL ORANGE SPOT center forehead in white blaze. Black and orange PATCHES on back/flanks. LONG SLENDER ORANGE TAIL with WHITE TIP no black tail. Smooth SHORT fur NO longhair. Neutral calm attentive personality. Cream wall honey wood floor sage green mat warm diffuse light. FULL CAT and ENTIRE tail occupy central65% width generous EMPTY floor margin on all sides, tail low gently curved beside body. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Basic petting: one human hand gently strokes forehead, cat relaxed and attentive, light blue eyes open. No toys.",
+    "reference": "mame-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush",
+    "file": "mame-brush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-a8759eff-2285-498a-bb2a-b8eb75991379.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim scene. Reference MAME exact identity and fine soft painted storybook style. Adult slender CALICO SHORTHAIR longer legs oval face pink nose LIGHT BLUE EYES. Cat's OWN RIGHT EAR and right crown BLACK (viewer LEFT), OWN LEFT EAR and left crown ORANGE (viewer RIGHT). White lower cheeks nose bridge muzzle chest belly ALL FOUR LEGS. SMALL ORANGE SPOT center forehead in white blaze. Black and orange PATCHES on back/flanks. LONG SLENDER ORANGE TAIL with WHITE TIP no black tail. Smooth SHORT fur NO longhair. Neutral calm attentive personality. Cream wall honey wood floor sage green mat warm diffuse light. FULL CAT and ENTIRE tail occupy central65% width generous EMPTY floor margin on all sides, tail low gently curved beside body. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Basic brushing: one human hand uses wooden pet brush on shoulder, bristles contact SHORT fur, cat calmly stands with eyes open. No other props.",
+    "reference": "mame-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice",
+    "file": "mame-voice.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-ce23c81f-d28e-400c-810e-97cb28ccbd82.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim scene. Reference MAME exact identity and fine soft painted storybook style. Adult slender CALICO SHORTHAIR longer legs oval face pink nose LIGHT BLUE EYES. Cat's OWN RIGHT EAR and right crown BLACK (viewer LEFT), OWN LEFT EAR and left crown ORANGE (viewer RIGHT). White lower cheeks nose bridge muzzle chest belly ALL FOUR LEGS. SMALL ORANGE SPOT center forehead in white blaze. Black and orange PATCHES on back/flanks. LONG SLENDER ORANGE TAIL with WHITE TIP no black tail. Smooth SHORT fur NO longhair. Neutral calm attentive personality. Cream wall honey wood floor sage green mat warm diffuse light. FULL CAT and ENTIRE tail occupy central65% width generous EMPTY floor margin on all sides, tail low gently curved beside body. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Basic voice interaction: sits calmly, ears turn toward viewer listening, light blue eyes open, mouth closed. No human hands knees speech bubbles or props.",
+    "reference": "mame-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence",
+    "file": "mame-presence.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-0baa5fe0-b744-42f4-8763-d8a7f93dd841.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim scene. Reference MAME exact identity and fine soft painted storybook style. Adult slender CALICO SHORTHAIR longer legs oval face pink nose LIGHT BLUE EYES. Cat's OWN RIGHT EAR and right crown BLACK (viewer LEFT), OWN LEFT EAR and left crown ORANGE (viewer RIGHT). White lower cheeks nose bridge muzzle chest belly ALL FOUR LEGS. SMALL ORANGE SPOT center forehead in white blaze. Black and orange PATCHES on back/flanks. LONG SLENDER ORANGE TAIL with WHITE TIP no black tail. Smooth SHORT fur NO longhair. Neutral calm attentive personality. Cream wall honey wood floor sage green mat warm diffuse light. FULL CAT and ENTIRE tail occupy central65% width generous EMPTY floor margin on all sides, tail low gently curved beside body. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Basic companionship: cat loafs calmly, light blue eyes open, only part of blue clothed knee at lower edge. No hands or toys.",
+    "reference": "mame-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pause",
+    "file": "mame-pause.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-8baed4c1-4e76-4bf4-bcd9-94cd61764388.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim scene. Reference MAME exact identity and fine soft painted storybook style. Adult slender CALICO SHORTHAIR longer legs oval face pink nose LIGHT BLUE EYES. Cat's OWN RIGHT EAR and right crown BLACK (viewer LEFT), OWN LEFT EAR and left crown ORANGE (viewer RIGHT). White lower cheeks nose bridge muzzle chest belly ALL FOUR LEGS. SMALL ORANGE SPOT center forehead in white blaze. Black and orange PATCHES on back/flanks. LONG SLENDER ORANGE TAIL with WHITE TIP no black tail. Smooth SHORT fur NO longhair. Neutral calm attentive personality. Cream wall honey wood floor sage green mat warm diffuse light. FULL CAT and ENTIRE tail occupy central65% width generous EMPTY floor margin on all sides, tail low gently curved beside body. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Pause/wait: cat calmly sits, forepaws planted, eyes open, feather teaser lies completely still on mat at safe distance. No hands.",
+    "reference": "mame-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "sleep",
+    "file": "mame-sleep.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-2bd070b2-ddac-44ac-8ffc-5d2dbf4d5677.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim scene. Reference MAME exact identity and fine soft painted storybook style. Adult slender CALICO SHORTHAIR longer legs oval face pink nose LIGHT BLUE EYES. Cat's OWN RIGHT EAR and right crown BLACK (viewer LEFT), OWN LEFT EAR and left crown ORANGE (viewer RIGHT). White lower cheeks nose bridge muzzle chest belly ALL FOUR LEGS. SMALL ORANGE SPOT center forehead in white blaze. Black and orange PATCHES on back/flanks. LONG SLENDER ORANGE TAIL with WHITE TIP no black tail. Smooth SHORT fur NO longhair. Neutral calm attentive personality. Cream wall honey wood floor sage green mat warm diffuse light. FULL CAT and ENTIRE tail occupy central65% width generous EMPTY floor margin on all sides, tail low gently curved beside body. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Sleep: cat curled into a relaxed ball sleeping, eyes closed, head on front paws, slender orange tail with white tip around body. No humans or toys.",
+    "reference": "mame-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "teaser__open_up",
+    "file": "mame-teaser__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-41cf6dcf-5510-4fe9-a16d-98d79e6b3f7a.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim scene. Reference MAME exact identity and fine soft painted storybook style. Adult slender CALICO SHORTHAIR longer legs oval face pink nose LIGHT BLUE EYES. Cat's OWN RIGHT EAR and right crown BLACK (viewer LEFT), OWN LEFT EAR and left crown ORANGE (viewer RIGHT). White lower cheeks nose bridge muzzle chest belly ALL FOUR LEGS. SMALL ORANGE SPOT center forehead in white blaze. Black and orange PATCHES on back/flanks. LONG SLENDER ORANGE TAIL with WHITE TIP no black tail. Smooth SHORT fur NO longhair. Neutral calm attentive personality. Cream wall honey wood floor sage green mat warm diffuse light. FULL CAT and ENTIRE tail occupy central65% width generous EMPTY floor margin on all sides, tail low gently curved beside body. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special deep trust playing with feather teaser: one hand holds feather close; cat leans toward viewer, eyes soft half closed, paw reaches gently. Relaxed ears.",
+    "reference": "mame-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "teaser__simultaneous",
+    "file": "mame-teaser__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-928a0785-cddc-4ead-b9f8-cca087d0db83.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim scene. Reference MAME exact identity and fine soft painted storybook style. Adult slender CALICO SHORTHAIR longer legs oval face pink nose LIGHT BLUE EYES. Cat's OWN RIGHT EAR and right crown BLACK (viewer LEFT), OWN LEFT EAR and left crown ORANGE (viewer RIGHT). White lower cheeks nose bridge muzzle chest belly ALL FOUR LEGS. SMALL ORANGE SPOT center forehead in white blaze. Black and orange PATCHES on back/flanks. LONG SLENDER ORANGE TAIL with WHITE TIP no black tail. Smooth SHORT fur NO longhair. Neutral calm attentive personality. Cream wall honey wood floor sage green mat warm diffuse light. FULL CAT and ENTIRE tail occupy central65% width generous EMPTY floor margin on all sides, tail low gently curved beside body. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special excited and deeply trusting play: joyfully bats feather teaser held by one edge hand, ears forward bright light blue eyes, lifted paw, confident happy posture. No aggressive expression.",
+    "reference": "mame-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball__open_up",
+    "file": "mame-ball__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-07920b3c-f2cc-45dc-9e9b-b04bac11398a.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim scene. Reference MAME exact identity and fine soft painted storybook style. Adult slender CALICO SHORTHAIR longer legs oval face pink nose LIGHT BLUE EYES. Cat's OWN RIGHT EAR and right crown BLACK (viewer LEFT), OWN LEFT EAR and left crown ORANGE (viewer RIGHT). White lower cheeks nose bridge muzzle chest belly ALL FOUR LEGS. SMALL ORANGE SPOT center forehead in white blaze. Black and orange PATCHES on back/flanks. LONG SLENDER ORANGE TAIL with WHITE TIP no black tail. Smooth SHORT fur NO longhair. Neutral calm attentive personality. Cream wall honey wood floor sage green mat warm diffuse light. FULL CAT and ENTIRE tail occupy central65% width generous EMPTY floor margin on all sides, tail low gently curved beside body. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special deep trust: relaxed on side beside small blue ball, paw resting on ball, head tipped affectionately toward viewer, soft half closed eyes. No humans.",
+    "reference": "mame-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball__simultaneous",
+    "file": "mame-ball__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-bc3f9ae8-30ae-4222-83a7-c1fbe30ad2a6.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim scene. Reference MAME exact identity and fine soft painted storybook style. Adult slender CALICO SHORTHAIR longer legs oval face pink nose LIGHT BLUE EYES. Cat's OWN RIGHT EAR and right crown BLACK (viewer LEFT), OWN LEFT EAR and left crown ORANGE (viewer RIGHT). White lower cheeks nose bridge muzzle chest belly ALL FOUR LEGS. SMALL ORANGE SPOT center forehead in white blaze. Black and orange PATCHES on back/flanks. LONG SLENDER ORANGE TAIL with WHITE TIP no black tail. Smooth SHORT fur NO longhair. Neutral calm attentive personality. Cream wall honey wood floor sage green mat warm diffuse light. FULL CAT and ENTIRE tail occupy central65% width generous EMPTY floor margin on all sides, tail low gently curved beside body. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special excited and trusting: playfully hugs small blue ball between forepaws, crouched with confident happy energy, bright light blue eyes. No humans or other toys.",
+    "reference": "mame-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush__open_up",
+    "file": "mame-plush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-a8434f80-1447-49a7-a9d6-9ae172f32b11.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim scene. Reference MAME exact identity and fine soft painted storybook style. Adult slender CALICO SHORTHAIR longer legs oval face pink nose LIGHT BLUE EYES. Cat's OWN RIGHT EAR and right crown BLACK (viewer LEFT), OWN LEFT EAR and left crown ORANGE (viewer RIGHT). White lower cheeks nose bridge muzzle chest belly ALL FOUR LEGS. SMALL ORANGE SPOT center forehead in white blaze. Black and orange PATCHES on back/flanks. LONG SLENDER ORANGE TAIL with WHITE TIP no black tail. Smooth SHORT fur NO longhair. Neutral calm attentive personality. Cream wall honey wood floor sage green mat warm diffuse light. FULL CAT and ENTIRE tail occupy central65% width generous EMPTY floor margin on all sides, tail low gently curved beside body. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Deep trust: lies belly down with head resting on small beige mouse plush ON MAT, exactly TWO FRONT PAWS one each side of toy. Rear legs tucked behind haunches. No hugging, NO paws near cheek, no extra paws. Soft HALF CLOSED LIGHT BLUE eyes.",
+    "reference": "mame-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush__simultaneous",
+    "file": "mame-plush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-66d8af79-7a86-4b19-a84f-5b6bb47b50d6.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim scene. Reference MAME exact identity and fine soft painted storybook style. Adult slender CALICO SHORTHAIR longer legs oval face pink nose LIGHT BLUE EYES. Cat's OWN RIGHT EAR and right crown BLACK (viewer LEFT), OWN LEFT EAR and left crown ORANGE (viewer RIGHT). White lower cheeks nose bridge muzzle chest belly ALL FOUR LEGS. SMALL ORANGE SPOT center forehead in white blaze. Black and orange PATCHES on back/flanks. LONG SLENDER ORANGE TAIL with WHITE TIP no black tail. Smooth SHORT fur NO longhair. Neutral calm attentive personality. Cream wall honey wood floor sage green mat warm diffuse light. FULL CAT and ENTIRE tail occupy central65% width generous EMPTY floor margin on all sides, tail low gently curved beside body. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special excited and trusting: joyfully rolls slightly on side hugging small beige mouse plush with front paws, bright light blue eyes, relaxed ears and happy posture. No humans.",
+    "reference": "mame-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel__open_up",
+    "file": "mame-tunnel__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-16055b95-a139-4801-8c76-6144da0cbe48.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim scene. Reference MAME exact identity and fine soft painted storybook style. Adult slender CALICO SHORTHAIR longer legs oval face pink nose LIGHT BLUE EYES. Cat's OWN RIGHT EAR and right crown BLACK (viewer LEFT), OWN LEFT EAR and left crown ORANGE (viewer RIGHT). White lower cheeks nose bridge muzzle chest belly ALL FOUR LEGS. SMALL ORANGE SPOT center forehead in white blaze. Black and orange PATCHES on back/flanks. LONG SLENDER ORANGE TAIL with WHITE TIP no black tail. Smooth SHORT fur NO longhair. Neutral calm attentive personality. Cream wall honey wood floor sage green mat warm diffuse light. FULL CAT and ENTIRE tail occupy central65% width generous EMPTY floor margin on all sides, tail low gently curved beside body. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special deep trust: relaxed at short beige fabric tunnel entrance, chin on rim, soft half closed light blue eyes toward viewer, tail visible outside. No humans.",
+    "reference": "mame-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel__simultaneous",
+    "file": "mame-tunnel__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-905981a6-73b6-471b-85d2-ecb2360d5995.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim scene. Reference MAME exact identity and fine soft painted storybook style. Adult slender CALICO SHORTHAIR longer legs oval face pink nose LIGHT BLUE EYES. Cat's OWN RIGHT EAR and right crown BLACK (viewer LEFT), OWN LEFT EAR and left crown ORANGE (viewer RIGHT). White lower cheeks nose bridge muzzle chest belly ALL FOUR LEGS. SMALL ORANGE SPOT center forehead in white blaze. Black and orange PATCHES on back/flanks. LONG SLENDER ORANGE TAIL with WHITE TIP no black tail. Smooth SHORT fur NO longhair. Neutral calm attentive personality. Cream wall honey wood floor sage green mat warm diffuse light. FULL CAT and ENTIRE tail occupy central65% width generous EMPTY floor margin on all sides, tail low gently curved beside body. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special excited and trusting: cat playfully emerges from short beige fabric tunnel with TWO front paws reaching forward, bright light blue eyes friendly confident face and forward ears. Hindquarters still inside tunnel. Slender orange tail curls LOW along floor beside tunnel, WHITE TIP fully visible with generous empty margin all around. No part of tail outside frame; no upright high tail. No humans.",
+    "reference": "mame-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet__open_up",
+    "file": "mame-pet__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-57497504-02a8-41fb-a08d-177c47d7f3c1.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim scene. Reference MAME exact identity and fine soft painted storybook style. Adult slender CALICO SHORTHAIR longer legs oval face pink nose LIGHT BLUE EYES. Cat's OWN RIGHT EAR and right crown BLACK (viewer LEFT), OWN LEFT EAR and left crown ORANGE (viewer RIGHT). White lower cheeks nose bridge muzzle chest belly ALL FOUR LEGS. SMALL ORANGE SPOT center forehead in white blaze. Black and orange PATCHES on back/flanks. LONG SLENDER ORANGE TAIL with WHITE TIP no black tail. Smooth SHORT fur NO longhair. Neutral calm attentive personality. Cream wall honey wood floor sage green mat warm diffuse light. FULL CAT and ENTIRE tail occupy central65% width generous EMPTY floor margin on all sides, tail low gently curved beside body. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special deep trust petting: one hand strokes cheek, cat leans cheek into palm, eyes almost closed, affectionate relaxed expression. No toys.",
+    "reference": "mame-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet__simultaneous",
+    "file": "mame-pet__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-508d6744-9d80-4535-ae8e-8e2efad5a2e0.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim scene. Reference MAME exact identity and fine soft painted storybook style. Adult slender CALICO SHORTHAIR longer legs oval face pink nose LIGHT BLUE EYES. Cat's OWN RIGHT EAR and right crown BLACK (viewer LEFT), OWN LEFT EAR and left crown ORANGE (viewer RIGHT). White lower cheeks nose bridge muzzle chest belly ALL FOUR LEGS. SMALL ORANGE SPOT center forehead in white blaze. Black and orange PATCHES on back/flanks. LONG SLENDER ORANGE TAIL with WHITE TIP no black tail. Smooth SHORT fur NO longhair. Neutral calm attentive personality. Cream wall honey wood floor sage green mat warm diffuse light. FULL CAT and ENTIRE tail occupy central65% width generous EMPTY floor margin on all sides, tail low gently curved beside body. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special delighted and trusting petting: one hand rubs under chin, cat lifts chin joyfully, content closed eyes and relaxed ears. No toys.",
+    "reference": "mame-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush__open_up",
+    "file": "mame-brush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-a0549aca-ff1f-4bb9-9e84-a4a501f3c0a4.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim scene. Reference MAME exact identity and fine soft painted storybook style. Adult slender CALICO SHORTHAIR longer legs oval face pink nose LIGHT BLUE EYES. Cat's OWN RIGHT EAR and right crown BLACK (viewer LEFT), OWN LEFT EAR and left crown ORANGE (viewer RIGHT). White lower cheeks nose bridge muzzle chest belly ALL FOUR LEGS. SMALL ORANGE SPOT center forehead in white blaze. Black and orange PATCHES on back/flanks. LONG SLENDER ORANGE TAIL with WHITE TIP no black tail. Smooth SHORT fur NO longhair. Neutral calm attentive personality. Cream wall honey wood floor sage green mat warm diffuse light. FULL CAT and ENTIRE tail occupy central65% width generous EMPTY floor margin on all sides, tail low gently curved beside body. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special deep trust brushing: one hand gently brushes short chest fur with wooden pet brush, cat leans toward brush, half closed eyes relaxed affectionate posture.",
+    "reference": "mame-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush__simultaneous",
+    "file": "mame-brush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-953f2a1b-ee8b-4774-867c-8c6dacabc778.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim scene. Reference MAME exact identity and fine soft painted storybook style. Adult slender CALICO SHORTHAIR longer legs oval face pink nose LIGHT BLUE EYES. Cat's OWN RIGHT EAR and right crown BLACK (viewer LEFT), OWN LEFT EAR and left crown ORANGE (viewer RIGHT). White lower cheeks nose bridge muzzle chest belly ALL FOUR LEGS. SMALL ORANGE SPOT center forehead in white blaze. Black and orange PATCHES on back/flanks. LONG SLENDER ORANGE TAIL with WHITE TIP no black tail. Smooth SHORT fur NO longhair. Neutral calm attentive personality. Cream wall honey wood floor sage green mat warm diffuse light. FULL CAT and ENTIRE tail occupy central65% width generous EMPTY floor margin on all sides, tail low gently curved beside body. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special delighted and trusting brushing: one hand brushes shoulder with wooden brush, cat stretches neck and raises chin slightly, blissfully closed eyes, happy relaxed posture.",
+    "reference": "mame-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice__open_up",
+    "file": "mame-voice__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-81b548e2-93ec-41a4-871b-1b923656bad8.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim scene. Reference MAME exact identity and fine soft painted storybook style. Adult slender CALICO SHORTHAIR longer legs oval face pink nose LIGHT BLUE EYES. Cat's OWN RIGHT EAR and right crown BLACK (viewer LEFT), OWN LEFT EAR and left crown ORANGE (viewer RIGHT). White lower cheeks nose bridge muzzle chest belly ALL FOUR LEGS. SMALL ORANGE SPOT center forehead in white blaze. Black and orange PATCHES on back/flanks. LONG SLENDER ORANGE TAIL with WHITE TIP no black tail. Smooth SHORT fur NO longhair. Neutral calm attentive personality. Cream wall honey wood floor sage green mat warm diffuse light. FULL CAT and ENTIRE tail occupy central65% width generous EMPTY floor margin on all sides, tail low gently curved beside body. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special deep trust response to a familiar voice. Cat leans its head and upper body slightly toward viewer, neck gently extended, EYES VISIBLY NARROWED TO SOFT HALF-CLOSED SLITS in a relaxed slow blink (not wide open), gentle affectionate expression, relaxed forward ears, mouth closed. Both front paws remain on mat. No hands, humans, knees, speech bubbles, toys or other props. Make the facial trust reaction clearly distinct from the open-eyed normal reference.",
+    "reference": "mame-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice__simultaneous",
+    "file": "mame-voice__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-19b7dfdf-7670-4698-9b66-3e555bcc8a9a.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim scene. Reference MAME exact identity and fine soft painted storybook style. Adult slender CALICO SHORTHAIR longer legs oval face pink nose LIGHT BLUE EYES. Cat's OWN RIGHT EAR and right crown BLACK (viewer LEFT), OWN LEFT EAR and left crown ORANGE (viewer RIGHT). White lower cheeks nose bridge muzzle chest belly ALL FOUR LEGS. SMALL ORANGE SPOT center forehead in white blaze. Black and orange PATCHES on back/flanks. LONG SLENDER ORANGE TAIL with WHITE TIP no black tail. Smooth SHORT fur NO longhair. Neutral calm attentive personality. Cream wall honey wood floor sage green mat warm diffuse light. FULL CAT and ENTIRE tail occupy central65% width generous EMPTY floor margin on all sides, tail low gently curved beside body. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special delighted trusting response to voice: stands taking one friendly step toward viewer, bright welcoming light blue eyes and forward ears, low relaxed tail, mouth closed. No human or props.",
+    "reference": "mame-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence__open_up",
+    "file": "mame-presence__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-9ef837ed-5e7b-45d1-96be-e46f0350f920.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim scene. Reference MAME exact identity and fine soft painted storybook style. Adult slender CALICO SHORTHAIR longer legs oval face pink nose LIGHT BLUE EYES. Cat's OWN RIGHT EAR and right crown BLACK (viewer LEFT), OWN LEFT EAR and left crown ORANGE (viewer RIGHT). White lower cheeks nose bridge muzzle chest belly ALL FOUR LEGS. SMALL ORANGE SPOT center forehead in white blaze. Black and orange PATCHES on back/flanks. LONG SLENDER ORANGE TAIL with WHITE TIP no black tail. Smooth SHORT fur NO longhair. Neutral calm attentive personality. Cream wall honey wood floor sage green mat warm diffuse light. FULL CAT and ENTIRE tail occupy central65% width generous EMPTY floor margin on all sides, tail low gently curved beside body. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special deep trust companionship: lies comfortably on side beside blue clothed knee edge, soft half closed eyes relaxed head. No hands touching, no toys.",
+    "reference": "mame-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence__simultaneous",
+    "file": "mame-presence__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-a560296d-1f25-4a18-b8fd-2c105252f639.png",
+    "prompt": "Use case: illustration-story. ONE square standalone CatCafeSim scene. Reference MAME exact identity and fine soft painted storybook style. Adult slender CALICO SHORTHAIR longer legs oval face pink nose LIGHT BLUE EYES. Cat's OWN RIGHT EAR and right crown BLACK (viewer LEFT), OWN LEFT EAR and left crown ORANGE (viewer RIGHT). White lower cheeks nose bridge muzzle chest belly ALL FOUR LEGS. SMALL ORANGE SPOT center forehead in white blaze. Black and orange PATCHES on back/flanks. LONG SLENDER ORANGE TAIL with WHITE TIP no black tail. Smooth SHORT fur NO longhair. Neutral calm attentive personality. Cream wall honey wood floor sage green mat warm diffuse light. FULL CAT and ENTIRE tail occupy central65% width generous EMPTY floor margin on all sides, tail low gently curved beside body. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special delighted trusting companionship: sits close beside blue clothed knee edge, flank gently leaning against knee, blissfully half closed eyes. No hands touching, no toys.",
+    "reference": "mame-normal.png",
+    "reference_role": "identity_and_style"
+  }
+]

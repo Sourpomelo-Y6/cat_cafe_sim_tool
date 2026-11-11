@@ -1,0 +1,218 @@
+[
+  {
+    "scene": "normal",
+    "file": "suzu-normal.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-73e425e3-f591-4d3b-8a3d-d5b843be24ba.png",
+    "prompt": "Use case: illustration-story. One square CatCafeSim identity illustration NEW cat SUZU. RIN reference STYLE AND ROOM ONLY, different cat: adult solid BLACK LONGHAIR, medium slender graceful body long legs. Emerald GREEN slightly narrow ALMOND shaped eyes, elongated oval face narrow muzzle, medium triangular ears with subtle tufts, black nose and paws. Rich flowing LONG BLACK fur thick chest ruff LONG full feathery black tail curved LOW beside body, black to tip. No white patches stripes gray pigment or short coat. Gentle cautious reserved expression for cat who values distance. Full seated cat and FULL TAIL centered at 65% of square width, generous floor margin all sides. Exactly FOUR limbs one cat. Same fine soft painted storybook illustration cream wall honey wooden floor sage green mat warm light. No text UI watermark humans props.",
+    "reference": "../RinImages/rin-normal.png",
+    "reference_role": "style_and_room"
+  },
+  {
+    "scene": "teaser",
+    "file": "suzu-teaser.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-7bc4ff74-d007-4c0d-881a-99cd8b5f084f.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim scene. Reference SUZU exact identity and soft painted storybook style room. Adult solid BLACK LONGHAIR medium slender graceful cat long legs. Emerald GREEN almond eyes, elongated oval face narrow muzzle medium triangular tufted ears BLACK nose/paws. LONG black fur chest ruff LONG FULL FEATHERY BLACK TAIL black to tip. NO white patches stripes or short hair. Cautious reserved gentle personality. Cream wall honey wood floor sage green mat warm light. FULL CAT AND ENTIRE TAIL centered occupy 65 percent width, EMPTY floor margin ALL sides. Tail LOW curved beside body, no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Basic attentive play: one hand at edge holds feather teaser near cat. Cat reaches one forepaw toward feather, emerald green eyes open, gentle calm engagement.",
+    "reference": "suzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball",
+    "file": "suzu-ball.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-606b16fa-cf08-4053-bc65-7b8b6bebbd6c.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim scene. Reference SUZU exact identity and soft painted storybook style room. Adult solid BLACK LONGHAIR medium slender graceful cat long legs. Emerald GREEN almond eyes, elongated oval face narrow muzzle medium triangular tufted ears BLACK nose/paws. LONG black fur chest ruff LONG FULL FEATHERY BLACK TAIL black to tip. NO white patches stripes or short hair. Cautious reserved gentle personality. Cream wall honey wood floor sage green mat warm light. FULL CAT AND ENTIRE TAIL centered occupy 65 percent width, EMPTY floor margin ALL sides. Tail LOW curved beside body, no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Basic play: crouches and gently touches small blue toy ball on mat with one paw, attentive open emerald green eyes. No humans or other toys.",
+    "reference": "suzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush",
+    "file": "suzu-plush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-5d81a369-e8c7-4575-a20f-48b421f9e614.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim scene. Reference SUZU exact identity and soft painted storybook style room. Adult solid BLACK LONGHAIR medium slender graceful cat long legs. Emerald GREEN almond eyes, elongated oval face narrow muzzle medium triangular tufted ears BLACK nose/paws. LONG black fur chest ruff LONG FULL FEATHERY BLACK TAIL black to tip. NO white patches stripes or short hair. Cautious reserved gentle personality. Cream wall honey wood floor sage green mat warm light. FULL CAT AND ENTIRE TAIL centered occupy 65 percent width, EMPTY floor margin ALL sides. Tail LOW curved beside body, no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Basic play: cat lies naturally belly-down on mat with TWO forepaws resting on either side of a SMALL beige mouse plush ON THE FLOOR; sniffs mouse, eyes open. Hind legs tucked behind body. EXACTLY FOUR LIMBS TOTAL. No seated upright hugging pose, no extra paws. Tail curves beside body fully inside frame.",
+    "reference": "suzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel",
+    "file": "suzu-tunnel.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-e94f53ed-3cd8-4348-9819-d4da33e27ccf.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim scene. Reference SUZU exact identity and soft painted storybook style room. Adult solid BLACK LONGHAIR medium slender graceful cat long legs. Emerald GREEN almond eyes, elongated oval face narrow muzzle medium triangular tufted ears BLACK nose/paws. LONG black fur chest ruff LONG FULL FEATHERY BLACK TAIL black to tip. NO white patches stripes or short hair. Cautious reserved gentle personality. Cream wall honey wood floor sage green mat warm light. FULL CAT AND ENTIRE TAIL centered occupy 65 percent width, EMPTY floor margin ALL sides. Tail LOW curved beside body, no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Basic play: crouches just inside short beige fabric cat tunnel, head front paws and tail fully visible at entrance, eyes open curious gentle expression. No humans or other toys.",
+    "reference": "suzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush",
+    "file": "suzu-brush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-3b33ef8a-e30a-485e-88a6-b43bd630ba71.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim scene. Reference SUZU exact identity and soft painted storybook style room. Adult solid BLACK LONGHAIR medium slender graceful cat long legs. Emerald GREEN almond eyes, elongated oval face narrow muzzle medium triangular tufted ears BLACK nose/paws. LONG black fur chest ruff LONG FULL FEATHERY BLACK TAIL black to tip. NO white patches stripes or short hair. Cautious reserved gentle personality. Cream wall honey wood floor sage green mat warm light. FULL CAT AND ENTIRE TAIL centered occupy 65 percent width, EMPTY floor margin ALL sides. Tail LOW curved beside body, no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Basic brushing: one human hand uses wooden pet brush on shoulder, bristles contact LONG fur, cat calmly stands with eyes open. No other props.",
+    "reference": "suzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice",
+    "file": "suzu-voice.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-719159c9-7a12-4065-9c28-3b8cd7e2f907.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim scene. Reference SUZU exact identity and soft painted storybook style room. Adult solid BLACK LONGHAIR medium slender graceful cat long legs. Emerald GREEN almond eyes, elongated oval face narrow muzzle medium triangular tufted ears BLACK nose/paws. LONG black fur chest ruff LONG FULL FEATHERY BLACK TAIL black to tip. NO white patches stripes or short hair. Cautious reserved gentle personality. Cream wall honey wood floor sage green mat warm light. FULL CAT AND ENTIRE TAIL centered occupy 65 percent width, EMPTY floor margin ALL sides. Tail LOW curved beside body, no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Basic voice interaction: sits calmly, ears turn toward viewer listening, emerald green eyes open, mouth closed. No human hands knees speech bubbles or props.",
+    "reference": "suzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence",
+    "file": "suzu-presence.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-d2f503dc-62b7-4dd1-80d7-5e2b47762b43.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim scene. Reference SUZU exact identity and soft painted storybook style room. Adult solid BLACK LONGHAIR medium slender graceful cat long legs. Emerald GREEN almond eyes, elongated oval face narrow muzzle medium triangular tufted ears BLACK nose/paws. LONG black fur chest ruff LONG FULL FEATHERY BLACK TAIL black to tip. NO white patches stripes or short hair. Cautious reserved gentle personality. Cream wall honey wood floor sage green mat warm light. FULL CAT AND ENTIRE TAIL centered occupy 65 percent width, EMPTY floor margin ALL sides. Tail LOW curved beside body, no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Basic companionship: cat loafs calmly, emerald green eyes open, only part of blue clothed knee at lower edge. No hands or toys.",
+    "reference": "suzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet",
+    "file": "suzu-pet.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-2e81ef11-6e9e-429e-b853-4120528cc41e.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim scene. Reference SUZU exact identity and soft painted storybook style room. Adult solid BLACK LONGHAIR medium slender graceful cat long legs. Emerald GREEN almond eyes, elongated oval face narrow muzzle medium triangular tufted ears BLACK nose/paws. LONG black fur chest ruff LONG FULL FEATHERY BLACK TAIL black to tip. NO white patches stripes or short hair. Cautious reserved gentle personality. Cream wall honey wood floor sage green mat warm light. FULL CAT AND ENTIRE TAIL centered occupy 65 percent width, EMPTY floor margin ALL sides. Tail LOW curved beside body, no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Basic petting: one human hand gently strokes forehead, cat relaxed and attentive, emerald green eyes open. No toys.",
+    "reference": "suzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "sleep",
+    "file": "suzu-sleep.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-50182521-a577-4a60-b635-5b96a7de5b90.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim scene. Reference SUZU exact identity and soft painted storybook style room. Adult solid BLACK LONGHAIR medium slender graceful cat long legs. Emerald GREEN almond eyes, elongated oval face narrow muzzle medium triangular tufted ears BLACK nose/paws. LONG black fur chest ruff LONG FULL FEATHERY BLACK TAIL black to tip. NO white patches stripes or short hair. Cautious reserved gentle personality. Cream wall honey wood floor sage green mat warm light. FULL CAT AND ENTIRE TAIL centered occupy 65 percent width, EMPTY floor margin ALL sides. Tail LOW curved beside body, no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Sleep: cat curled into a relaxed ball sleeping, eyes closed, head on front paws, long full feathery black tail around body. No humans or toys.",
+    "reference": "suzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "teaser__open_up",
+    "file": "suzu-teaser__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-20bcdf14-7375-46b1-8763-003b3a653a18.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim scene. Reference SUZU exact identity and soft painted storybook style room. Adult solid BLACK LONGHAIR medium slender graceful cat long legs. Emerald GREEN almond eyes, elongated oval face narrow muzzle medium triangular tufted ears BLACK nose/paws. LONG black fur chest ruff LONG FULL FEATHERY BLACK TAIL black to tip. NO white patches stripes or short hair. Cautious reserved gentle personality. Cream wall honey wood floor sage green mat warm light. FULL CAT AND ENTIRE TAIL centered occupy 65 percent width, EMPTY floor margin ALL sides. Tail LOW curved beside body, no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special deep trust playing with feather teaser: one hand holds feather close; cat leans toward viewer, eyes soft half closed, paw reaches gently. Relaxed ears.",
+    "reference": "suzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pause",
+    "file": "suzu-pause.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-fe0d44b1-7461-4949-9141-8b3ce71486e6.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim scene. Reference SUZU exact identity and soft painted storybook style room. Adult solid BLACK LONGHAIR medium slender graceful cat long legs. Emerald GREEN almond eyes, elongated oval face narrow muzzle medium triangular tufted ears BLACK nose/paws. LONG black fur chest ruff LONG FULL FEATHERY BLACK TAIL black to tip. NO white patches stripes or short hair. Cautious reserved gentle personality. Cream wall honey wood floor sage green mat warm light. FULL CAT AND ENTIRE TAIL centered occupy 65 percent width, EMPTY floor margin ALL sides. Tail LOW curved beside body, no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Pause/wait: cat calmly sits, forepaws planted, eyes open, feather teaser lies completely still on mat at safe distance. No hands.",
+    "reference": "suzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball__open_up",
+    "file": "suzu-ball__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-796a58be-2247-4ace-b62e-5e96f09b0d29.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim scene. Reference SUZU exact identity and soft painted storybook style room. Adult solid BLACK LONGHAIR medium slender graceful cat long legs. Emerald GREEN almond eyes, elongated oval face narrow muzzle medium triangular tufted ears BLACK nose/paws. LONG black fur chest ruff LONG FULL FEATHERY BLACK TAIL black to tip. NO white patches stripes or short hair. Cautious reserved gentle personality. Cream wall honey wood floor sage green mat warm light. FULL CAT AND ENTIRE TAIL centered occupy 65 percent width, EMPTY floor margin ALL sides. Tail LOW curved beside body, no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special deep trust: relaxed on side beside small blue ball, paw resting on ball, head tipped affectionately toward viewer, soft half closed eyes. No humans.",
+    "reference": "suzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "ball__simultaneous",
+    "file": "suzu-ball__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-8ef52391-7da3-4c19-a6f9-e8e9bdd0b11d.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim scene. Reference SUZU exact identity and soft painted storybook style room. Adult solid BLACK LONGHAIR medium slender graceful cat long legs. Emerald GREEN almond eyes, elongated oval face narrow muzzle medium triangular tufted ears BLACK nose/paws. LONG black fur chest ruff LONG FULL FEATHERY BLACK TAIL black to tip. NO white patches stripes or short hair. Cautious reserved gentle personality. Cream wall honey wood floor sage green mat warm light. FULL CAT AND ENTIRE TAIL centered occupy 65 percent width, EMPTY floor margin ALL sides. Tail LOW curved beside body, no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special excited and trusting: playfully hugs small blue ball between forepaws, crouched with confident happy energy, bright emerald green eyes. No humans or other toys.",
+    "reference": "suzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush__open_up",
+    "file": "suzu-plush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-d45f54cd-55b7-4ef5-8c09-1d3d8bda47ff.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim scene. Reference SUZU exact identity and soft painted storybook style room. Adult solid BLACK LONGHAIR medium slender graceful cat long legs. Emerald GREEN almond eyes, elongated oval face narrow muzzle medium triangular tufted ears BLACK nose/paws. LONG black fur chest ruff LONG FULL FEATHERY BLACK TAIL black to tip. NO white patches stripes or short hair. Cautious reserved gentle personality. Cream wall honey wood floor sage green mat warm light. FULL CAT AND ENTIRE TAIL centered occupy 65 percent width, EMPTY floor margin ALL sides. Tail LOW curved beside body, no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Deep trust: cat lies belly down with head resting on small beige mouse plush ON MAT, exactly TWO FRONT PAWS one each side of toy, rear legs tucked under rear haunches. No hugging and NO paws near cheek. Soft half closed emerald green eyes.",
+    "reference": "suzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "plush__simultaneous",
+    "file": "suzu-plush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-91616331-402d-4881-b17f-cf4dcef69518.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim scene. Reference SUZU exact identity and soft painted storybook style room. Adult solid BLACK LONGHAIR medium slender graceful cat long legs. Emerald GREEN almond eyes, elongated oval face narrow muzzle medium triangular tufted ears BLACK nose/paws. LONG black fur chest ruff LONG FULL FEATHERY BLACK TAIL black to tip. NO white patches stripes or short hair. Cautious reserved gentle personality. Cream wall honey wood floor sage green mat warm light. FULL CAT AND ENTIRE TAIL centered occupy 65 percent width, EMPTY floor margin ALL sides. Tail LOW curved beside body, no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special excited and trusting: joyfully rolls slightly on side hugging small beige mouse plush with front paws, bright emerald green eyes, relaxed ears and happy posture. No humans.",
+    "reference": "suzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel__simultaneous",
+    "file": "suzu-tunnel__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-4d1cbd8e-04f9-412e-a9b0-ca9237daedf5.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim scene. Reference SUZU exact identity and soft painted storybook style room. Adult solid BLACK LONGHAIR medium slender graceful cat long legs. Emerald GREEN almond eyes, elongated oval face narrow muzzle medium triangular tufted ears BLACK nose/paws. LONG black fur chest ruff LONG FULL FEATHERY BLACK TAIL black to tip. NO white patches stripes or short hair. Cautious reserved gentle personality. Cream wall honey wood floor sage green mat warm light. FULL CAT AND ENTIRE TAIL centered occupy 65 percent width, EMPTY floor margin ALL sides. Tail LOW curved beside body, no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special excited and trusting: cat playfully emerges from short beige fabric tunnel with TWO front paws reaching forward, bright emerald green eyes friendly confident face and forward ears. Hindquarters still inside tunnel. Long full feathery black tail curls LOW along floor beside tunnel, BLACK TIP fully visible with generous empty margin all around. No part of tail outside frame; no upright high tail. No humans.",
+    "reference": "suzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet__open_up",
+    "file": "suzu-pet__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-73f099a4-a45f-4cb4-b0b8-900d3dd783e1.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim scene. Reference SUZU exact identity and soft painted storybook style room. Adult solid BLACK LONGHAIR medium slender graceful cat long legs. Emerald GREEN almond eyes, elongated oval face narrow muzzle medium triangular tufted ears BLACK nose/paws. LONG black fur chest ruff LONG FULL FEATHERY BLACK TAIL black to tip. NO white patches stripes or short hair. Cautious reserved gentle personality. Cream wall honey wood floor sage green mat warm light. FULL CAT AND ENTIRE TAIL centered occupy 65 percent width, EMPTY floor margin ALL sides. Tail LOW curved beside body, no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special deep trust petting: one hand strokes cheek, cat leans cheek into palm, eyes almost closed, affectionate relaxed expression. No toys.",
+    "reference": "suzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "pet__simultaneous",
+    "file": "suzu-pet__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-31eb6925-1f69-4ad8-8c07-d4b4ca79c86d.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim scene. Reference SUZU exact identity and soft painted storybook style room. Adult solid BLACK LONGHAIR medium slender graceful cat long legs. Emerald GREEN almond eyes, elongated oval face narrow muzzle medium triangular tufted ears BLACK nose/paws. LONG black fur chest ruff LONG FULL FEATHERY BLACK TAIL black to tip. NO white patches stripes or short hair. Cautious reserved gentle personality. Cream wall honey wood floor sage green mat warm light. FULL CAT AND ENTIRE TAIL centered occupy 65 percent width, EMPTY floor margin ALL sides. Tail LOW curved beside body, no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special delighted and trusting petting: one hand rubs under chin, cat lifts chin joyfully, content closed eyes and relaxed ears. No toys.",
+    "reference": "suzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "tunnel__open_up",
+    "file": "suzu-tunnel__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-8b3d127d-ad17-4eca-9526-ed179512f0ca.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim scene. Reference SUZU exact identity and soft painted storybook style room. Adult solid BLACK LONGHAIR medium slender graceful cat long legs. Emerald GREEN almond eyes, elongated oval face narrow muzzle medium triangular tufted ears BLACK nose/paws. LONG black fur chest ruff LONG FULL FEATHERY BLACK TAIL black to tip. NO white patches stripes or short hair. Cautious reserved gentle personality. Cream wall honey wood floor sage green mat warm light. FULL CAT AND ENTIRE TAIL centered occupy 65 percent width, EMPTY floor margin ALL sides. Tail LOW curved beside body, no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special deep trust: relaxed at short beige fabric tunnel entrance, chin on rim, soft half closed emerald green eyes toward viewer, tail visible outside. No humans.",
+    "reference": "suzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush__open_up",
+    "file": "suzu-brush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-eb616fe7-0570-4b94-8bc1-2a5d4930e5f7.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim scene. Reference SUZU exact identity and soft painted storybook style room. Adult solid BLACK LONGHAIR medium slender graceful cat long legs. Emerald GREEN almond eyes, elongated oval face narrow muzzle medium triangular tufted ears BLACK nose/paws. LONG black fur chest ruff LONG FULL FEATHERY BLACK TAIL black to tip. NO white patches stripes or short hair. Cautious reserved gentle personality. Cream wall honey wood floor sage green mat warm light. FULL CAT AND ENTIRE TAIL centered occupy 65 percent width, EMPTY floor margin ALL sides. Tail LOW curved beside body, no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special deep trust brushing: one hand gently brushes long chest ruff with wooden pet brush, cat leans toward brush, half closed eyes relaxed affectionate posture.",
+    "reference": "suzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "brush__simultaneous",
+    "file": "suzu-brush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-c44625b5-8787-4706-bf47-622919c66230.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim scene. Reference SUZU exact identity and soft painted storybook style room. Adult solid BLACK LONGHAIR medium slender graceful cat long legs. Emerald GREEN almond eyes, elongated oval face narrow muzzle medium triangular tufted ears BLACK nose/paws. LONG black fur chest ruff LONG FULL FEATHERY BLACK TAIL black to tip. NO white patches stripes or short hair. Cautious reserved gentle personality. Cream wall honey wood floor sage green mat warm light. FULL CAT AND ENTIRE TAIL centered occupy 65 percent width, EMPTY floor margin ALL sides. Tail LOW curved beside body, no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special delighted and trusting brushing: one hand brushes shoulder with wooden brush, cat stretches neck and raises chin slightly, blissfully closed eyes, happy relaxed posture.",
+    "reference": "suzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice__open_up",
+    "file": "suzu-voice__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-df03e2ef-b7b2-4d11-b28b-bab5c7a2aa70.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim scene. Reference SUZU exact identity and soft painted storybook style room. Adult solid BLACK LONGHAIR medium slender graceful cat long legs. Emerald GREEN almond eyes, elongated oval face narrow muzzle medium triangular tufted ears BLACK nose/paws. LONG black fur chest ruff LONG FULL FEATHERY BLACK TAIL black to tip. NO white patches stripes or short hair. Cautious reserved gentle personality. Cream wall honey wood floor sage green mat warm light. FULL CAT AND ENTIRE TAIL centered occupy 65 percent width, EMPTY floor margin ALL sides. Tail LOW curved beside body, no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special deep trust response to a familiar voice. Cat leans its head and upper body slightly toward viewer, neck gently extended, EYES VISIBLY NARROWED TO SOFT HALF-CLOSED SLITS in a relaxed slow blink (not wide open), gentle affectionate expression, relaxed forward ears, mouth closed. Both front paws remain on mat. No hands, humans, knees, speech bubbles, toys or other props. Make the facial trust reaction clearly distinct from the open-eyed normal reference.",
+    "reference": "suzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "voice__simultaneous",
+    "file": "suzu-voice__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-d78b4308-72f9-4b27-b71d-e2f5cce623ba.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim scene. Reference SUZU exact identity and soft painted storybook style room. Adult solid BLACK LONGHAIR medium slender graceful cat long legs. Emerald GREEN almond eyes, elongated oval face narrow muzzle medium triangular tufted ears BLACK nose/paws. LONG black fur chest ruff LONG FULL FEATHERY BLACK TAIL black to tip. NO white patches stripes or short hair. Cautious reserved gentle personality. Cream wall honey wood floor sage green mat warm light. FULL CAT AND ENTIRE TAIL centered occupy 65 percent width, EMPTY floor margin ALL sides. Tail LOW curved beside body, no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special delighted trusting response to voice: stands taking one friendly step toward viewer, bright welcoming emerald green eyes and forward ears, low relaxed tail, mouth closed. No human or props.",
+    "reference": "suzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence__open_up",
+    "file": "suzu-presence__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-c6a66d25-0c70-4b64-aadd-986dcedc7a2c.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim scene. Reference SUZU exact identity and soft painted storybook style room. Adult solid BLACK LONGHAIR medium slender graceful cat long legs. Emerald GREEN almond eyes, elongated oval face narrow muzzle medium triangular tufted ears BLACK nose/paws. LONG black fur chest ruff LONG FULL FEATHERY BLACK TAIL black to tip. NO white patches stripes or short hair. Cautious reserved gentle personality. Cream wall honey wood floor sage green mat warm light. FULL CAT AND ENTIRE TAIL centered occupy 65 percent width, EMPTY floor margin ALL sides. Tail LOW curved beside body, no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special deep trust companionship: lies comfortably on side beside blue clothed knee edge, soft half closed eyes relaxed head. No hands touching, no toys.",
+    "reference": "suzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "presence__simultaneous",
+    "file": "suzu-presence__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-917e5343-7c0a-444f-ba82-439664e63444.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim scene. Reference SUZU exact identity and soft painted storybook style room. Adult solid BLACK LONGHAIR medium slender graceful cat long legs. Emerald GREEN almond eyes, elongated oval face narrow muzzle medium triangular tufted ears BLACK nose/paws. LONG black fur chest ruff LONG FULL FEATHERY BLACK TAIL black to tip. NO white patches stripes or short hair. Cautious reserved gentle personality. Cream wall honey wood floor sage green mat warm light. FULL CAT AND ENTIRE TAIL centered occupy 65 percent width, EMPTY floor margin ALL sides. Tail LOW curved beside body, no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special delighted trusting companionship: sits close beside blue clothed knee edge, flank gently leaning against knee, blissfully half closed eyes. No hands touching, no toys.",
+    "reference": "suzu-normal.png",
+    "reference_role": "identity_and_style"
+  },
+  {
+    "scene": "teaser__simultaneous",
+    "file": "suzu-teaser__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-63091b13-87c2-4b81-ae61-703c1e90670d.png",
+    "prompt": "Use case: illustration-story. ONE square CatCafeSim scene. Reference SUZU exact identity and soft painted storybook style room. Adult solid BLACK LONGHAIR medium slender graceful cat long legs. Emerald GREEN almond eyes, elongated oval face narrow muzzle medium triangular tufted ears BLACK nose/paws. LONG black fur chest ruff LONG FULL FEATHERY BLACK TAIL black to tip. NO white patches stripes or short hair. Cautious reserved gentle personality. Cream wall honey wood floor sage green mat warm light. FULL CAT AND ENTIRE TAIL centered occupy 65 percent width, EMPTY floor margin ALL sides. Tail LOW curved beside body, no crop. EXACTLY FOUR LIMBS TOTAL one cat no extra paws no text UI watermark human face. Special excited and deeply trusting play: joyfully bats feather teaser held by one edge hand, ears forward bright emerald green eyes, lifted paw, confident happy posture. No aggressive expression.",
+    "reference": "suzu-normal.png",
+    "reference_role": "identity_and_style"
+  }
+]

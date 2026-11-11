@@ -10,7 +10,7 @@
 
 ## 対象23枠
 
-2026-10-18にチロの外見・画像27枚・52場面登録・Unity検証を完了（[実施記録](Results/ChiroImages/Status.md)）。2026-10-19にレオも完了（[実施記録](Results/LeoImages/Status.md)）。2026-10-20にハナも完了（[実施記録](Results/HanaImages/Status.md)）。2026-10-21にセナも完了（[実施記録](Results/SenaImages/Status.md)）。2026-10-22にルカも完了（[実施記録](Results/LukaImages/Status.md)）。2026-10-23にハルも完了（[実施記録](Results/HaruImages/Status.md)）。2026-10-24にリンも完了（[実施記録](Results/RinImages/Status.md)）。2026-10-25にユキも完了（[実施記録](Results/YukiImages/Status.md)）。2026-10-27にアキも完了（[実施記録](Results/AkiImages/Status.md)）。2026-10-28にモモも完了（[実施記録](Results/MomoImages/Status.md)）。2026-10-29にクルミも完了（[実施記録](Results/KurumiImages/Status.md)）。2026-10-31にシロも完了（[実施記録](Results/ShiroImages/Status.md)）。残り11枠。以下の画像登録数・照合内容は初回調査時点の記録。ユーザー指定によりショップ3匹→派遣紹介2匹→募集18匹の順で、上から1日1匹を制作する。[日程表](CatImageSchedule.md)を参照。
+2026-10-18にチロの外見・画像27枚・52場面登録・Unity検証を完了（[実施記録](Results/ChiroImages/Status.md)）。2026-10-19にレオも完了（[実施記録](Results/LeoImages/Status.md)）。2026-10-20にハナも完了（[実施記録](Results/HanaImages/Status.md)）。2026-10-21にセナも完了（[実施記録](Results/SenaImages/Status.md)）。2026-10-22にルカも完了（[実施記録](Results/LukaImages/Status.md)）。2026-10-23にハルも完了（[実施記録](Results/HaruImages/Status.md)）。2026-10-24にリンも完了（[実施記録](Results/RinImages/Status.md)）。2026-10-25にユキも完了（[実施記録](Results/YukiImages/Status.md)）。2026-10-27にアキも完了（[実施記録](Results/AkiImages/Status.md)）。2026-10-28にモモも完了（[実施記録](Results/MomoImages/Status.md)）。2026-10-29にクルミも完了（[実施記録](Results/KurumiImages/Status.md)）。2026-10-31にシロも完了（[実施記録](Results/ShiroImages/Status.md)）。2026-10-31定例でスズも完了（[実施記録](Results/SuzuImages/Status.md)）。2026-11-02にマメも完了（[実施記録](Results/MameImages/Status.md)）。2026-11-03にアンズも完了（[実施記録](Results/AnzuImages/Status.md)）。2026-11-04にカエデも完了（[実施記録](Results/KaedeImages/Status.md)）。2026-11-05にフクも完了（[実施記録](Results/FukuImages/Status.md)）。2026-11-06にナギも完了（[実施記録](Results/NagiImages/Status.md)）。2026-11-07にミントも完了（[実施記録](Results/MintImages/Status.md)）。2026-11-08にトラも完了（[実施記録](Results/ToraImages/Status.md)）。2026-11-09にシオンも完了（[実施記録](Results/ShionImages/Status.md)）。2026-11-10にルナも完了（[実施記録](Results/LunaImages/Status.md)）。2026-11-11にチャイも完了（[実施記録](Results/ChaiImages/Status.md)）。以下の画像登録数・照合内容は初回調査時点の記録。ユーザー指定によりショップ3匹→派遣紹介2匹→募集18匹の順で、上から1日1匹を制作する。[日程表](CatImageSchedule.md)を参照。
 
 | 完了 | 名前 | 定義・資料ID | 性格 | 毛色・毛の長さ |
 | --- | --- | --- | --- | --- |
@@ -26,17 +26,17 @@
 | [x] | モモ | `catalog-5` | 穏やかな甘えん坊 | 白黒・長毛 |
 | [x] | クルミ | `catalog-6` | 中立 | キジトラ・短毛 |
 | [x] | シロ | `catalog-7` | 活発な探検家 | 白猫・長毛 |
-| [ ] | スズ | `catalog-8` | 距離を大切にする猫 | 黒猫・長毛 |
-| [ ] | マメ | `catalog-9` | 中立 | 三毛・短毛 |
-| [ ] | アンズ | `catalog-10` | 穏やかな甘えん坊 | 茶トラ・長毛 |
-| [ ] | カエデ | `catalog-11` | 遊び好きで繊細な猫 | キジトラ・長毛 |
-| [ ] | フク | `catalog-12` | 活発な探検家 | 白黒・短毛 |
-| [ ] | ナギ | `catalog-13` | 中立 | 黒猫・短毛 |
-| [ ] | ミント | `catalog-14` | 遊び好きで繊細な猫 | 白黒・長毛 |
-| [ ] | トラ | `catalog-15` | 活発な探検家 | キジトラ・短毛 |
-| [ ] | シオン | `catalog-16` | 距離を大切にする猫 | 白猫・短毛 |
-| [ ] | ルナ | `catalog-17` | 穏やかな甘えん坊 | 茶トラ・長毛 |
-| [ ] | チャイ | `catalog-18` | 遊び好きで繊細な猫 | 三毛・長毛 |
+| [x] | スズ | `catalog-8` | 距離を大切にする猫 | 黒猫・長毛 |
+| [x] | マメ | `catalog-9` | 中立 | 三毛・短毛 |
+| [x] | アンズ | `catalog-10` | 穏やかな甘えん坊 | 茶トラ・長毛 |
+| [x] | カエデ | `catalog-11` | 遊び好きで繊細な猫 | キジトラ・長毛 |
+| [x] | フク | `catalog-12` | 活発な探検家 | 白黒・短毛 |
+| [x] | ナギ | `catalog-13` | 中立 | 黒猫・短毛 |
+| [x] | ミント | `catalog-14` | 遊び好きで繊細な猫 | 白黒・長毛 |
+| [x] | トラ | `catalog-15` | 活発な探検家 | キジトラ・短毛 |
+| [x] | シオン | `catalog-16` | 距離を大切にする猫 | 白猫・短毛 |
+| [x] | ルナ | `catalog-17` | 穏やかな甘えん坊 | 茶トラ・長毛 |
+| [x] | チャイ | `catalog-18` | 遊び好きで繊細な猫 | 三毛・長毛 |
 
 ## 各猫の作業
 
@@ -80,3 +80,27 @@
 2026-10-31：シロ27枚・52場面・32交流画像枠の登録と実Unity検証・画面確認を完了。残り11匹。中断からの再開で後続を1日繰下げ、次は11月1日20時のスズ。
 
 2026-10-31訂正（ユーザー指定）：シロの再開完了は例外で、後続は繰り下げない。本日10月31日20時にスズを制作し、全完了予定は11月10日。直前の繰下げ記述より本訂正を優先する。
+
+2026-10-31定例：スズ27枚・52場面・32交流画像枠、実加入・Unity40ケース・画面確認完了。残り10匹、次は11月1日20時のマメ。後続日程は変更なし。
+
+2026-11-02：マメ27枚・52場面・32交流枠の登録、実加入・Unity40ケース・4画面確認完了。11月1日の中断から再開し、後続を1日繰下げ。残り9匹、次は11月3日20時のアンズ。
+
+2026-11-03：アンズ完了。27枚・52場面・32交流画像binding、実加入ID rescue-10対応、Python28件・Unity40ケースと画面確認成功。[実施記録](Results/AnzuImages/Status.md)。追加15/23匹完了、残り8匹。次は11月4日20時のカエデ。
+
+2026-11-04：カエデの[画像・検証](Results/KaedeImages/Status.md)を完了。27枚・52場面を登録。追加16/23匹完了、残り7匹。次は11月5日20時のフク。
+
+2026-11-05：フクの[画像・検証](Results/FukuImages/Status.md)を完了。27枚・52場面を登録、Python28件とUnity40ケース、実加入・睡眠・保存再開・4画面確認成功。追加17/23匹完了、残り6匹。次は11月6日20時のナギ。
+
+2026-11-06：ナギの[画像・検証](Results/NagiImages/Status.md)を完了。27枚・52場面登録、Python28件とUnity40ケース、実加入・睡眠・保存再開・4画面確認成功。追加18/23匹完了、残り5匹。次は11月7日20時のミント。
+
+2026-11-07：ミントの[画像・検証](Results/MintImages/Status.md)を完了。27枚・52場面登録、Python28件とUnity40ケース、実加入・睡眠・保存再開・4画面確認成功。追加19/23匹完了、残り4匹。次は11月8日20時のトラ。
+
+2026-11-08：トラは未完了。基準画像を保存。[残作業](Results/ToraImages/Status.md)を翌日継続。
+
+2026-11-08再開完了：トラ27枚・52場面・32交流画像枠の登録と実Unity検証完了（[実施記録](Results/ToraImages/Status.md)）。当日完了につき直前の繰下げを取り消す。追加20/23匹完了、残り3匹。次は11月9日20時のシオン、全完了予定11月11日。
+
+2026-11-09定例：シオン27枚・52場面・32交流画像枠の登録と実Unity検証完了（[実施記録](Results/ShionImages/Status.md)）。追加21/23匹完了、残り2匹。次は11月10日20時のルナ、全完了予定11月11日。
+
+2026-11-10定例：ルナ27枚・52場面・32交流画像枠の登録と実Unity検証完了（[実施記録](Results/LunaImages/Status.md)）。追加22/23匹完了、残り1匹。次は11月11日20時のチャイ、全完了予定11月11日。
+
+2026-11-11定例：チャイの[制作・登録・検証](Results/ChaiImages/Status.md)を完了。対象23/23匹が完了し、既存8匹を含む31匹を実Unity有効パックで確認した。

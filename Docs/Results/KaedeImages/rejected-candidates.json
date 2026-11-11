@@ -1,0 +1,11 @@
+[
+  {
+    "scene": "teaser",
+    "file": "kaede-teaser.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-4b97c4d2-2bb4-40a8-abb1-399c72eabc15.png",
+    "prompt": "Square CatCafeSim painted storybook scene. Match the exact cat, fur markings, face and room from the reference. Kaede, compact adult LONGHAIRED BROWN MACKEREL TABBY, cool taupe-brown coat with narrow charcoal stripes, dark forehead M and two cheek stripes, pale beige chin and full ruff, no white paws, bright amber-gold eyes, broad rounded face and small upright tufted ears, fluffy medium-long charcoal-ringed tail with solid dark tip, curious and sensitive playful expression. Scene: one paw reaches for feather wand. Cream wall, honey floor, sage green mat. Full body and tail in frame, anatomically natural four limbs, one cat, no text or UI.",
+    "reference": "kaede-normal.png",
+    "reference_role": "identity_and_room",
+    "reason": "前足と後ろ足の形が曖昧なため差し替え。"
+  }
+]

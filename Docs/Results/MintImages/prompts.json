@@ -1,0 +1,218 @@
+[
+  {
+    "scene": "normal",
+    "file": "mint-normal.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-88c9e224-9932-4de8-95c8-55a6161a1209.png",
+    "prompt": "Square CatCafeSim soft painted storybook. Reference STYLE AND ROOM ONLY. Create MINT adult medium SLENDER BLACK AND WHITE LONG HAIRED cat, long silky fur and white chest ruff. White body and white legs, black saddle across upper back. Black cap on both ears and forehead, black surrounds both eyes, narrow white centered blaze joins WHITE muzzle chin chest belly. Small separate BLACK OVAL PATCH on its own LEFT SHOULDER, white space separates it from saddle. Both eyes luminous pale MINT GREEN, rose pink nose, fine triangular face, large tufted triangular ears. Long BLACK PLUMED TAIL with WHITE FINAL TIP. Curious sensitive playful demeanor. Full seated cat three-quarter view, both forepaws planted, entire tail low curved beside body, generous margins. Cream wall honey wood floor sage mat warm diffuse light. One cat, anatomically natural four limbs, no humans or text.",
+    "reference": "C:/Users/hi-wa/source/codex_repos/CatCafeSim/cat_cafe_sim_tool/Docs/Results/NagiImages/nagi-normal.png",
+    "reference_role": "style_and_room"
+  },
+  {
+    "scene": "sleep",
+    "file": "mint-sleep.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-b312a454-81eb-4c40-858f-07b3f51ab503.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact MINT identity and room in reference. MINT adult medium SLENDER BLACK AND WHITE LONG HAIRED cat, long silky fur and white chest ruff. White body and white legs, black saddle across upper back. Black cap on both ears and forehead, black surrounds both eyes, narrow white centered blaze joins WHITE muzzle chin chest belly. Small separate BLACK OVAL PATCH on its own LEFT SHOULDER, white space separates it from saddle. Both eyes luminous pale MINT GREEN, rose pink nose, fine triangular face, large tufted triangular ears. Long BLACK PLUMED TAIL with WHITE FINAL TIP. Curious sensitive playful demeanor. Scene: curled asleep with fully closed eyes, black tail with white tip wraps paws. LEFT SHOULDER small separate oval black patch must be visible if left shoulder faces camera. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "mint-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "pause",
+    "file": "mint-pause.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-d0b75567-8e06-46f4-9fb9-f8f3a98fd103.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact MINT identity and room in reference. MINT adult medium SLENDER BLACK AND WHITE LONG HAIRED cat, long silky fur and white chest ruff. White body and white legs, black saddle across upper back. Black cap on both ears and forehead, black surrounds both eyes, narrow white centered blaze joins WHITE muzzle chin chest belly. Small separate BLACK OVAL PATCH on its own LEFT SHOULDER, white space separates it from saddle. Both eyes luminous pale MINT GREEN, rose pink nose, fine triangular face, large tufted triangular ears. Long BLACK PLUMED TAIL with WHITE FINAL TIP. Curious sensitive playful demeanor. Scene: sitting still, watching feather lying motionless on floor. LEFT SHOULDER small separate oval black patch must be visible if left shoulder faces camera. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "mint-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "teaser",
+    "file": "mint-teaser.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-d52ff261-ec83-4b69-850f-dcef323e2b20.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact MINT identity and room in reference. MINT adult medium SLENDER BLACK AND WHITE LONG HAIRED cat, long silky fur and white chest ruff. White body and white legs, black saddle across upper back. Black cap on both ears and forehead, black surrounds both eyes, narrow white centered blaze joins WHITE muzzle chin chest belly. Small separate BLACK OVAL PATCH on its own LEFT SHOULDER, white space separates it from saddle. Both eyes luminous pale MINT GREEN, rose pink nose, fine triangular face, large tufted triangular ears. Long BLACK PLUMED TAIL with WHITE FINAL TIP. Curious sensitive playful demeanor. Scene: belly low, two front paws planted, nose reaching toward feather wand in front. LEFT SHOULDER small separate oval black patch must be visible if left shoulder faces camera. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "mint-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "ball",
+    "file": "mint-ball.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-a1fffef2-8f2c-4dc5-af33-cbfcfd7b5868.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact MINT identity and room in reference. MINT adult medium SLENDER BLACK AND WHITE LONG HAIRED cat, long silky fur and white chest ruff. White body and white legs, black saddle across upper back. Black cap on both ears and forehead, black surrounds both eyes, narrow white centered blaze joins WHITE muzzle chin chest belly. Small separate BLACK OVAL PATCH on its own LEFT SHOULDER, white space separates it from saddle. Both eyes luminous pale MINT GREEN, rose pink nose, fine triangular face, large tufted triangular ears. Long BLACK PLUMED TAIL with WHITE FINAL TIP. Curious sensitive playful demeanor. Scene: crouch to tap small blue ball with a front paw. LEFT SHOULDER small separate oval black patch must be visible if left shoulder faces camera. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "mint-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "plush",
+    "file": "mint-plush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-8ea5ffc6-898a-4120-9e1e-814c30fd38db.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact MINT identity and room in reference. MINT adult medium SLENDER BLACK AND WHITE LONG HAIRED cat, long silky fur and white chest ruff. White body and white legs, black saddle across upper back. Black cap on both ears and forehead, black surrounds both eyes, narrow white centered blaze joins WHITE muzzle chin chest belly. Small separate BLACK OVAL PATCH on its own LEFT SHOULDER, white space separates it from saddle. Both eyes luminous pale MINT GREEN, rose pink nose, fine triangular face, large tufted triangular ears. Long BLACK PLUMED TAIL with WHITE FINAL TIP. Curious sensitive playful demeanor. Scene: belly down, two front paws gently holding beige mouse plush on floor. LEFT SHOULDER small separate oval black patch must be visible if left shoulder faces camera. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "mint-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "tunnel",
+    "file": "mint-tunnel.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-6f800ca3-a81d-4d97-9f7c-37cdfed3a2ab.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact MINT identity and room in reference. MINT adult medium SLENDER BLACK AND WHITE LONG HAIRED cat, long silky fur and white chest ruff. White body and white legs, black saddle across upper back. Black cap on both ears and forehead, black surrounds both eyes, narrow white centered blaze joins WHITE muzzle chin chest belly. Small separate BLACK OVAL PATCH on its own LEFT SHOULDER, white space separates it from saddle. Both eyes luminous pale MINT GREEN, rose pink nose, fine triangular face, large tufted triangular ears. Long BLACK PLUMED TAIL with WHITE FINAL TIP. Curious sensitive playful demeanor. Scene: crouching halfway through plain tan fabric tunnel, head and front paws outside, full tail visible. LEFT SHOULDER small separate oval black patch must be visible if left shoulder faces camera. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "mint-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "pet",
+    "file": "mint-pet.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-c3aba464-699f-4ce9-90d3-2673cb7a5647.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact MINT identity and room in reference. MINT adult medium SLENDER BLACK AND WHITE LONG HAIRED cat, long silky fur and white chest ruff. White body and white legs, black saddle across upper back. Black cap on both ears and forehead, black surrounds both eyes, narrow white centered blaze joins WHITE muzzle chin chest belly. Small separate BLACK OVAL PATCH on its own LEFT SHOULDER, white space separates it from saddle. Both eyes luminous pale MINT GREEN, rose pink nose, fine triangular face, large tufted triangular ears. Long BLACK PLUMED TAIL with WHITE FINAL TIP. Curious sensitive playful demeanor. Scene: sitting while cream-sleeved hand strokes forehead. LEFT SHOULDER small separate oval black patch must be visible if left shoulder faces camera. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "mint-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "brush",
+    "file": "mint-brush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-df988e9d-79b1-4083-b0ef-6263bae21b3f.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact MINT identity and room in reference. MINT adult medium SLENDER BLACK AND WHITE LONG HAIRED cat, long silky fur and white chest ruff. White body and white legs, black saddle across upper back. Black cap on both ears and forehead, black surrounds both eyes, narrow white centered blaze joins WHITE muzzle chin chest belly. Small separate BLACK OVAL PATCH on its own LEFT SHOULDER, white space separates it from saddle. Both eyes luminous pale MINT GREEN, rose pink nose, fine triangular face, large tufted triangular ears. Long BLACK PLUMED TAIL with WHITE FINAL TIP. Curious sensitive playful demeanor. Scene: standing while cream-sleeved hand brushes shoulder with wooden brush. LEFT SHOULDER small separate oval black patch must be visible if left shoulder faces camera. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "mint-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "voice",
+    "file": "mint-voice.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-1ca67cff-13ad-486e-80fb-ed78b8e9c6d5.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact MINT identity and room in reference. MINT adult medium SLENDER BLACK AND WHITE LONG HAIRED cat, long silky fur and white chest ruff. White body and white legs, black saddle across upper back. Black cap on both ears and forehead, black surrounds both eyes, narrow white centered blaze joins WHITE muzzle chin chest belly. Small separate BLACK OVAL PATCH on its own LEFT SHOULDER, white space separates it from saddle. Both eyes luminous pale MINT GREEN, rose pink nose, fine triangular face, large tufted triangular ears. Long BLACK PLUMED TAIL with WHITE FINAL TIP. Curious sensitive playful demeanor. Scene: sitting with ears and head toward offscreen voice, no visible text. LEFT SHOULDER small separate oval black patch must be visible if left shoulder faces camera. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "mint-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "presence",
+    "file": "mint-presence.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-08419594-e091-447a-aea9-141502b949b1.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact MINT identity and room in reference. MINT adult medium SLENDER BLACK AND WHITE LONG HAIRED cat, long silky fur and white chest ruff. White body and white legs, black saddle across upper back. Black cap on both ears and forehead, black surrounds both eyes, narrow white centered blaze joins WHITE muzzle chin chest belly. Small separate BLACK OVAL PATCH on its own LEFT SHOULDER, white space separates it from saddle. Both eyes luminous pale MINT GREEN, rose pink nose, fine triangular face, large tufted triangular ears. Long BLACK PLUMED TAIL with WHITE FINAL TIP. Curious sensitive playful demeanor. Scene: loaf calmly beside cropped blue trouser knee, no toy. LEFT SHOULDER small separate oval black patch must be visible if left shoulder faces camera. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "mint-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "teaser__open_up",
+    "file": "mint-teaser__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-78c6ef58-b324-4914-b5f6-08aa11db1e60.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact MINT identity and room in reference. MINT adult medium SLENDER BLACK AND WHITE LONG HAIRED cat, long silky fur and white chest ruff. White body and white legs, black saddle across upper back. Black cap on both ears and forehead, black surrounds both eyes, narrow white centered blaze joins WHITE muzzle chin chest belly. Small separate BLACK OVAL PATCH on its own LEFT SHOULDER, white space separates it from saddle. Both eyes luminous pale MINT GREEN, rose pink nose, fine triangular face, large tufted triangular ears. Long BLACK PLUMED TAIL with WHITE FINAL TIP. Curious sensitive playful demeanor. Scene: belly low, two front paws planted, nose reaching toward feather wand in front, soft half-closed eyes and trusting relaxed posture. LEFT SHOULDER small separate oval black patch must be visible if left shoulder faces camera. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "mint-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "teaser__simultaneous",
+    "file": "mint-teaser__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-5ca0232b-b810-452d-b013-f615d3ce0ecb.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact MINT identity and room in reference. MINT adult medium SLENDER BLACK AND WHITE LONG HAIRED cat, long silky fur and white chest ruff. White body and white legs, black saddle across upper back. Black cap on both ears and forehead, black surrounds both eyes, narrow white centered blaze joins WHITE muzzle chin chest belly. Small separate BLACK OVAL PATCH on its own LEFT SHOULDER, white space separates it from saddle. Both eyes luminous pale MINT GREEN, rose pink nose, fine triangular face, large tufted triangular ears. Long BLACK PLUMED TAIL with WHITE FINAL TIP. Curious sensitive playful demeanor. Scene: belly low, two front paws planted, nose reaching toward feather wand in front, joyful engaged expression, alert eyes and animated posture, distinct from basic action. LEFT SHOULDER small separate oval black patch must be visible if left shoulder faces camera. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "mint-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "ball__open_up",
+    "file": "mint-ball__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-1d2037ba-b9f8-42ed-b7f0-0812a2ffdcc3.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact MINT identity and room in reference. MINT adult medium SLENDER BLACK AND WHITE LONG HAIRED cat, long silky fur and white chest ruff. White body and white legs, black saddle across upper back. Black cap on both ears and forehead, black surrounds both eyes, narrow white centered blaze joins WHITE muzzle chin chest belly. Small separate BLACK OVAL PATCH on its own LEFT SHOULDER, white space separates it from saddle. Both eyes luminous pale MINT GREEN, rose pink nose, fine triangular face, large tufted triangular ears. Long BLACK PLUMED TAIL with WHITE FINAL TIP. Curious sensitive playful demeanor. Scene: crouch to tap small blue ball with a front paw, soft half-closed eyes and trusting relaxed posture. LEFT SHOULDER small separate oval black patch must be visible if left shoulder faces camera. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "mint-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "ball__simultaneous",
+    "file": "mint-ball__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-d41b1d59-5e3c-49c2-9269-889c04b06b0e.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact MINT identity and room in reference. MINT adult medium SLENDER BLACK AND WHITE LONG HAIRED cat, long silky fur and white chest ruff. White body and white legs, black saddle across upper back. Black cap on both ears and forehead, black surrounds both eyes, narrow white centered blaze joins WHITE muzzle chin chest belly. Small separate BLACK OVAL PATCH on its own LEFT SHOULDER, white space separates it from saddle. Both eyes luminous pale MINT GREEN, rose pink nose, fine triangular face, large tufted triangular ears. Long BLACK PLUMED TAIL with WHITE FINAL TIP. Curious sensitive playful demeanor. Scene: crouch to tap small blue ball with a front paw, joyful engaged expression, alert eyes and animated posture, distinct from basic action. LEFT SHOULDER small separate oval black patch must be visible if left shoulder faces camera. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "mint-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "plush__open_up",
+    "file": "mint-plush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-ff0fe67b-f94a-4238-9dcf-e4f7b90ec0cf.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact MINT identity and room in reference. MINT adult medium SLENDER BLACK AND WHITE LONG HAIRED cat, long silky fur and white chest ruff. White body and white legs, black saddle across upper back. Black cap on both ears and forehead, black surrounds both eyes, narrow white centered blaze joins WHITE muzzle chin chest belly. Small separate BLACK OVAL PATCH on its own LEFT SHOULDER, white space separates it from saddle. Both eyes luminous pale MINT GREEN, rose pink nose, fine triangular face, large tufted triangular ears. Long BLACK PLUMED TAIL with WHITE FINAL TIP. Curious sensitive playful demeanor. Scene: belly down, two front paws gently holding beige mouse plush on floor, soft half-closed eyes and trusting relaxed posture. LEFT SHOULDER small separate oval black patch must be visible if left shoulder faces camera. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "mint-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "plush__simultaneous",
+    "file": "mint-plush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-ee8cb368-6009-4bd5-92e3-7000ec8b524a.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact MINT identity and room in reference. MINT adult medium SLENDER BLACK AND WHITE LONG HAIRED cat, long silky fur and white chest ruff. White body and white legs, black saddle across upper back. Black cap on both ears and forehead, black surrounds both eyes, narrow white centered blaze joins WHITE muzzle chin chest belly. Small separate BLACK OVAL PATCH on its own LEFT SHOULDER, white space separates it from saddle. Both eyes luminous pale MINT GREEN, rose pink nose, fine triangular face, large tufted triangular ears. Long BLACK PLUMED TAIL with WHITE FINAL TIP. Curious sensitive playful demeanor. Scene: belly down, two front paws gently holding beige mouse plush on floor, joyful engaged expression, alert eyes and animated posture, distinct from basic action. LEFT SHOULDER small separate oval black patch must be visible if left shoulder faces camera. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "mint-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "tunnel__open_up",
+    "file": "mint-tunnel__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-23e48304-eec9-4616-90bd-819a59dbaebb.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact MINT identity and room in reference. MINT adult medium SLENDER BLACK AND WHITE LONG HAIRED cat, long silky fur and white chest ruff. White body and white legs, black saddle across upper back. Black cap on both ears and forehead, black surrounds both eyes, narrow white centered blaze joins WHITE muzzle chin chest belly. Small separate BLACK OVAL PATCH on its own LEFT SHOULDER, white space separates it from saddle. Both eyes luminous pale MINT GREEN, rose pink nose, fine triangular face, large tufted triangular ears. Long BLACK PLUMED TAIL with WHITE FINAL TIP. Curious sensitive playful demeanor. Scene: crouching halfway through plain tan fabric tunnel, head and front paws outside, full tail visible, soft half-closed eyes and trusting relaxed posture. LEFT SHOULDER small separate oval black patch must be visible if left shoulder faces camera. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "mint-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "tunnel__simultaneous",
+    "file": "mint-tunnel__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-85947b32-5efd-42e7-983a-002de31a5857.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact MINT identity and room in reference. MINT adult medium SLENDER BLACK AND WHITE LONG HAIRED cat, long silky fur and white chest ruff. White body and white legs, black saddle across upper back. Black cap on both ears and forehead, black surrounds both eyes, narrow white centered blaze joins WHITE muzzle chin chest belly. Small separate BLACK OVAL PATCH on its own LEFT SHOULDER, white space separates it from saddle. Both eyes luminous pale MINT GREEN, rose pink nose, fine triangular face, large tufted triangular ears. Long BLACK PLUMED TAIL with WHITE FINAL TIP. Curious sensitive playful demeanor. Scene: crouching halfway through plain tan fabric tunnel, head and front paws outside, full tail visible, joyful engaged expression, alert eyes and animated posture, distinct from basic action. LEFT SHOULDER small separate oval black patch must be visible if left shoulder faces camera. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "mint-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "pet__open_up",
+    "file": "mint-pet__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-6cba111c-f114-4807-8af6-d35fd0449efc.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact MINT identity and room in reference. MINT adult medium SLENDER BLACK AND WHITE LONG HAIRED cat, long silky fur and white chest ruff. White body and white legs, black saddle across upper back. Black cap on both ears and forehead, black surrounds both eyes, narrow white centered blaze joins WHITE muzzle chin chest belly. Small separate BLACK OVAL PATCH on its own LEFT SHOULDER, white space separates it from saddle. Both eyes luminous pale MINT GREEN, rose pink nose, fine triangular face, large tufted triangular ears. Long BLACK PLUMED TAIL with WHITE FINAL TIP. Curious sensitive playful demeanor. Scene: sitting while cream-sleeved hand strokes forehead, soft half-closed eyes and trusting relaxed posture. LEFT SHOULDER small separate oval black patch must be visible if left shoulder faces camera. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "mint-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "pet__simultaneous",
+    "file": "mint-pet__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-127b9727-11a0-4b26-a5f6-c5d9ba47bab9.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact MINT identity and room in reference. MINT adult medium SLENDER BLACK AND WHITE LONG HAIRED cat, long silky fur and white chest ruff. White body and white legs, black saddle across upper back. Black cap on both ears and forehead, black surrounds both eyes, narrow white centered blaze joins WHITE muzzle chin chest belly. Small separate BLACK OVAL PATCH on its own LEFT SHOULDER, white space separates it from saddle. Both eyes luminous pale MINT GREEN, rose pink nose, fine triangular face, large tufted triangular ears. Long BLACK PLUMED TAIL with WHITE FINAL TIP. Curious sensitive playful demeanor. Scene: sitting while cream-sleeved hand strokes forehead, joyful engaged expression, alert eyes and animated posture, distinct from basic action. LEFT SHOULDER small separate oval black patch must be visible if left shoulder faces camera. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "mint-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "brush__open_up",
+    "file": "mint-brush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-0b35a749-f427-4fa7-8706-6eb3f01933c3.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact MINT identity and room in reference. MINT adult medium SLENDER BLACK AND WHITE LONG HAIRED cat, long silky fur and white chest ruff. White body and white legs, black saddle across upper back. Black cap on both ears and forehead, black surrounds both eyes, narrow white centered blaze joins WHITE muzzle chin chest belly. Small separate BLACK OVAL PATCH on its own LEFT SHOULDER, white space separates it from saddle. Both eyes luminous pale MINT GREEN, rose pink nose, fine triangular face, large tufted triangular ears. Long BLACK PLUMED TAIL with WHITE FINAL TIP. Curious sensitive playful demeanor. Scene: standing while cream-sleeved hand brushes shoulder with wooden brush, soft half-closed eyes and trusting relaxed posture. LEFT SHOULDER small separate oval black patch must be visible if left shoulder faces camera. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "mint-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "brush__simultaneous",
+    "file": "mint-brush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-203ea40c-319f-47e0-b707-63428cac70bf.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact MINT identity and room in reference. MINT adult medium SLENDER BLACK AND WHITE LONG HAIRED cat, long silky fur and white chest ruff. White body and white legs, black saddle across upper back. Black cap on both ears and forehead, black surrounds both eyes, narrow white centered blaze joins WHITE muzzle chin chest belly. Small separate BLACK OVAL PATCH on its own LEFT SHOULDER, white space separates it from saddle. Both eyes luminous pale MINT GREEN, rose pink nose, fine triangular face, large tufted triangular ears. Long BLACK PLUMED TAIL with WHITE FINAL TIP. Curious sensitive playful demeanor. Scene: standing while cream-sleeved hand brushes shoulder with wooden brush, joyful engaged expression, alert eyes and animated posture, distinct from basic action. LEFT SHOULDER small separate oval black patch must be visible if left shoulder faces camera. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "mint-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "voice__open_up",
+    "file": "mint-voice__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-be548e29-4f5d-4ead-856f-8efc61dc0fdd.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact MINT identity and room in reference. MINT adult medium SLENDER BLACK AND WHITE LONG HAIRED cat, long silky fur and white chest ruff. White body and white legs, black saddle across upper back. Black cap on both ears and forehead, black surrounds both eyes, narrow white centered blaze joins WHITE muzzle chin chest belly. Small separate BLACK OVAL PATCH on its own LEFT SHOULDER, white space separates it from saddle. Both eyes luminous pale MINT GREEN, rose pink nose, fine triangular face, large tufted triangular ears. Long BLACK PLUMED TAIL with WHITE FINAL TIP. Curious sensitive playful demeanor. Scene: sitting with ears and head toward offscreen voice, no visible text, soft half-closed eyes and trusting relaxed posture. LEFT SHOULDER small separate oval black patch must be visible if left shoulder faces camera. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "mint-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "voice__simultaneous",
+    "file": "mint-voice__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-15c973cd-51e0-4b9b-b03c-bab1b763cdfb.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact MINT identity and room in reference. MINT adult medium SLENDER BLACK AND WHITE LONG HAIRED cat, long silky fur and white chest ruff. White body and white legs, black saddle across upper back. Black cap on both ears and forehead, black surrounds both eyes, narrow white centered blaze joins WHITE muzzle chin chest belly. Small separate BLACK OVAL PATCH on its own LEFT SHOULDER, white space separates it from saddle. Both eyes luminous pale MINT GREEN, rose pink nose, fine triangular face, large tufted triangular ears. Long BLACK PLUMED TAIL with WHITE FINAL TIP. Curious sensitive playful demeanor. Scene: sitting with ears and head toward offscreen voice, no visible text, joyful engaged expression, alert eyes and animated posture, distinct from basic action. LEFT SHOULDER small separate oval black patch must be visible if left shoulder faces camera. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "mint-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "presence__open_up",
+    "file": "mint-presence__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-eb6f67f6-93f4-4a8c-b934-17b454df48b7.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact MINT identity and room in reference. MINT adult medium SLENDER BLACK AND WHITE LONG HAIRED cat, long silky fur and white chest ruff. White body and white legs, black saddle across upper back. Black cap on both ears and forehead, black surrounds both eyes, narrow white centered blaze joins WHITE muzzle chin chest belly. Small separate BLACK OVAL PATCH on its own LEFT SHOULDER, white space separates it from saddle. Both eyes luminous pale MINT GREEN, rose pink nose, fine triangular face, large tufted triangular ears. Long BLACK PLUMED TAIL with WHITE FINAL TIP. Curious sensitive playful demeanor. Scene: loaf calmly beside cropped blue trouser knee, no toy, soft half-closed eyes and trusting relaxed posture. LEFT SHOULDER small separate oval black patch must be visible if left shoulder faces camera. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "mint-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "presence__simultaneous",
+    "file": "mint-presence__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-7017fe8c-bd27-4516-a440-05d8a8b38312.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact MINT identity and room in reference. MINT adult medium SLENDER BLACK AND WHITE LONG HAIRED cat, long silky fur and white chest ruff. White body and white legs, black saddle across upper back. Black cap on both ears and forehead, black surrounds both eyes, narrow white centered blaze joins WHITE muzzle chin chest belly. Small separate BLACK OVAL PATCH on its own LEFT SHOULDER, white space separates it from saddle. Both eyes luminous pale MINT GREEN, rose pink nose, fine triangular face, large tufted triangular ears. Long BLACK PLUMED TAIL with WHITE FINAL TIP. Curious sensitive playful demeanor. Scene: loaf calmly beside cropped blue trouser knee, no toy, joyful engaged expression, alert eyes and animated posture, distinct from basic action. LEFT SHOULDER small separate oval black patch must be visible if left shoulder faces camera. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "mint-normal.png",
+    "reference_role": "identity_and_room"
+  }
+]

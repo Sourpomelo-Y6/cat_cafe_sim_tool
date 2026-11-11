@@ -1,0 +1,218 @@
+[
+  {
+    "scene": "normal",
+    "file": "kaede-normal.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-e021cf52-3387-472b-a3e7-4f0b96075198.png",
+    "prompt": "Square CatCafeSim painted storybook illustration. Use reference only for room, rendering and scale. Replace cat identity with Kaede, compact adult LONGHAIRED BROWN MACKEREL TABBY, cool taupe-brown coat with narrow charcoal stripes, dark forehead M and two cheek stripes, pale beige chin and full ruff, no white paws, bright amber-gold eyes, broad rounded face and small upright tufted ears, fluffy medium-long charcoal-ringed tail with solid dark tip, curious and sensitive playful expression. Full body seated in three-quarter view, both forepaws on sage mat, entire tail curves beside body. Cream wall, honey wooden floor, warm diffused light, generous margins, no text or humans.",
+    "reference": "C:/Users/hi-wa/source/codex_repos/CatCafeSim/cat_cafe_sim_tool/Docs/Results/AnzuImages/anzu-normal.png",
+    "reference_role": "style_and_room"
+  },
+  {
+    "scene": "sleep",
+    "file": "kaede-sleep.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-ebb1606a-59bd-41dd-802d-1733c82e8385.png",
+    "prompt": "Square CatCafeSim painted storybook scene. Match the exact cat, fur markings, face and room from the reference. Kaede, compact adult LONGHAIRED BROWN MACKEREL TABBY, cool taupe-brown coat with narrow charcoal stripes, dark forehead M and two cheek stripes, pale beige chin and full ruff, no white paws, bright amber-gold eyes, broad rounded face and small upright tufted ears, fluffy medium-long charcoal-ringed tail with solid dark tip, curious and sensitive playful expression. Scene: curled asleep, eyes fully closed, tail wraps toes. Cream wall, honey floor, sage green mat. Full body and tail in frame, anatomically natural four limbs, one cat, no text or UI.",
+    "reference": "kaede-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "pause",
+    "file": "kaede-pause.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-41bc9a25-e058-47ad-bc9f-4c40341cf248.png",
+    "prompt": "Square CatCafeSim painted storybook scene. Match the exact cat, fur markings, face and room from the reference. Kaede, compact adult LONGHAIRED BROWN MACKEREL TABBY, cool taupe-brown coat with narrow charcoal stripes, dark forehead M and two cheek stripes, pale beige chin and full ruff, no white paws, bright amber-gold eyes, broad rounded face and small upright tufted ears, fluffy medium-long charcoal-ringed tail with solid dark tip, curious and sensitive playful expression. Scene: still, attentive, watching a stationary feather lying on floor. Cream wall, honey floor, sage green mat. Full body and tail in frame, anatomically natural four limbs, one cat, no text or UI.",
+    "reference": "kaede-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "teaser",
+    "file": "kaede-teaser-v2.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-905f900a-a844-4ce4-a0fe-4a8a84a87f8a.png",
+    "prompt": "Square painted CatCafeSim storybook, use exact Kaede and room from reference. Kaede, compact adult LONGHAIRED BROWN MACKEREL TABBY, cool taupe-brown coat with narrow charcoal stripes, dark forehead M and two cheek stripes, pale beige chin and full ruff, no white paws, bright amber-gold eyes, broad rounded face and small upright tufted ears, fluffy medium-long charcoal-ringed tail with solid dark tip, curious and sensitive playful expression. In profile with both forepaws clearly planted on the mat, the cat leans forward to nose a feather teaser wand just in front of its muzzle, eyes keenly focused on feathers. Hind legs naturally tucked and mostly occluded. Four limbs total, full cat and fluffy tail, same cream wall and sage mat, no text.",
+    "reference": "kaede-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "ball",
+    "file": "kaede-ball.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-e8d85b73-4ec3-449f-ac3d-4ac9138aa595.png",
+    "prompt": "Square CatCafeSim painted storybook scene. Match the exact cat, fur markings, face and room from the reference. Kaede, compact adult LONGHAIRED BROWN MACKEREL TABBY, cool taupe-brown coat with narrow charcoal stripes, dark forehead M and two cheek stripes, pale beige chin and full ruff, no white paws, bright amber-gold eyes, broad rounded face and small upright tufted ears, fluffy medium-long charcoal-ringed tail with solid dark tip, curious and sensitive playful expression. Scene: crouch and tap a small blue ball with one paw. Cream wall, honey floor, sage green mat. Full body and tail in frame, anatomically natural four limbs, one cat, no text or UI.",
+    "reference": "kaede-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "plush",
+    "file": "kaede-plush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-1e15eac8-81c2-4f98-b709-de1efc636a96.png",
+    "prompt": "Square CatCafeSim painted storybook scene. Match the exact cat, fur markings, face and room from the reference. Kaede, compact adult LONGHAIRED BROWN MACKEREL TABBY, cool taupe-brown coat with narrow charcoal stripes, dark forehead M and two cheek stripes, pale beige chin and full ruff, no white paws, bright amber-gold eyes, broad rounded face and small upright tufted ears, fluffy medium-long charcoal-ringed tail with solid dark tip, curious and sensitive playful expression. Scene: belly down, nudging a beige mouse plush with two front paws around it. Cream wall, honey floor, sage green mat. Full body and tail in frame, anatomically natural four limbs, one cat, no text or UI.",
+    "reference": "kaede-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "tunnel",
+    "file": "kaede-tunnel.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-f2b9774f-87ab-40ae-bbba-4c51f500b694.png",
+    "prompt": "Square CatCafeSim painted storybook scene. Match the exact cat, fur markings, face and room from the reference. Kaede, compact adult LONGHAIRED BROWN MACKEREL TABBY, cool taupe-brown coat with narrow charcoal stripes, dark forehead M and two cheek stripes, pale beige chin and full ruff, no white paws, bright amber-gold eyes, broad rounded face and small upright tufted ears, fluffy medium-long charcoal-ringed tail with solid dark tip, curious and sensitive playful expression. Scene: crouch at mouth of a tan fabric play tunnel, tail visible at rear. Cream wall, honey floor, sage green mat. Full body and tail in frame, anatomically natural four limbs, one cat, no text or UI.",
+    "reference": "kaede-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "pet",
+    "file": "kaede-pet.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-b888b967-247c-4f17-8a47-070f9af447ce.png",
+    "prompt": "Square CatCafeSim painted storybook scene. Match the exact cat, fur markings, face and room from the reference. Kaede, compact adult LONGHAIRED BROWN MACKEREL TABBY, cool taupe-brown coat with narrow charcoal stripes, dark forehead M and two cheek stripes, pale beige chin and full ruff, no white paws, bright amber-gold eyes, broad rounded face and small upright tufted ears, fluffy medium-long charcoal-ringed tail with solid dark tip, curious and sensitive playful expression. Scene: cream-sleeved hand gently strokes forehead. Cream wall, honey floor, sage green mat. Full body and tail in frame, anatomically natural four limbs, one cat, no text or UI.",
+    "reference": "kaede-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "brush",
+    "file": "kaede-brush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-edbde93f-2b0c-4881-ae38-6950a0d7599f.png",
+    "prompt": "Square CatCafeSim painted storybook scene. Match the exact cat, fur markings, face and room from the reference. Kaede, compact adult LONGHAIRED BROWN MACKEREL TABBY, cool taupe-brown coat with narrow charcoal stripes, dark forehead M and two cheek stripes, pale beige chin and full ruff, no white paws, bright amber-gold eyes, broad rounded face and small upright tufted ears, fluffy medium-long charcoal-ringed tail with solid dark tip, curious and sensitive playful expression. Scene: standing while cream-sleeved hand brushes shoulder with wooden brush. Cream wall, honey floor, sage green mat. Full body and tail in frame, anatomically natural four limbs, one cat, no text or UI.",
+    "reference": "kaede-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "voice",
+    "file": "kaede-voice.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-3f6813f4-6110-4b60-80af-049d57017664.png",
+    "prompt": "Square CatCafeSim painted storybook scene. Match the exact cat, fur markings, face and room from the reference. Kaede, compact adult LONGHAIRED BROWN MACKEREL TABBY, cool taupe-brown coat with narrow charcoal stripes, dark forehead M and two cheek stripes, pale beige chin and full ruff, no white paws, bright amber-gold eyes, broad rounded face and small upright tufted ears, fluffy medium-long charcoal-ringed tail with solid dark tip, curious and sensitive playful expression. Scene: turn ears and head toward offscreen voice, no visual text. Cream wall, honey floor, sage green mat. Full body and tail in frame, anatomically natural four limbs, one cat, no text or UI.",
+    "reference": "kaede-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "presence",
+    "file": "kaede-presence.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-29300aa0-4c6d-4384-9c75-94d2559dc055.png",
+    "prompt": "Square CatCafeSim painted storybook scene. Match the exact cat, fur markings, face and room from the reference. Kaede, compact adult LONGHAIRED BROWN MACKEREL TABBY, cool taupe-brown coat with narrow charcoal stripes, dark forehead M and two cheek stripes, pale beige chin and full ruff, no white paws, bright amber-gold eyes, broad rounded face and small upright tufted ears, fluffy medium-long charcoal-ringed tail with solid dark tip, curious and sensitive playful expression. Scene: loaf near a cropped blue-clad knee. Cream wall, honey floor, sage green mat. Full body and tail in frame, anatomically natural four limbs, one cat, no text or UI.",
+    "reference": "kaede-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "teaser__open_up",
+    "file": "kaede-teaser__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-c7f4039c-af77-4879-92c4-c2267d376ef5.png",
+    "prompt": "Square CatCafeSim painted storybook scene. Match the exact cat, fur markings, face and room from the reference. Kaede, compact adult LONGHAIRED BROWN MACKEREL TABBY, cool taupe-brown coat with narrow charcoal stripes, dark forehead M and two cheek stripes, pale beige chin and full ruff, no white paws, bright amber-gold eyes, broad rounded face and small upright tufted ears, fluffy medium-long charcoal-ringed tail with solid dark tip, curious and sensitive playful expression. Scene: one paw reaches for feather wand, soft half-closed eyes and relaxed trusting posture. Cream wall, honey floor, sage green mat. Full body and tail in frame, anatomically natural four limbs, one cat, no text or UI.",
+    "reference": "kaede-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "teaser__simultaneous",
+    "file": "kaede-teaser__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-12458f56-fff4-47d6-a340-55b14a6dfd6d.png",
+    "prompt": "Square CatCafeSim painted storybook scene. Match the exact cat, fur markings, face and room from the reference. Kaede, compact adult LONGHAIRED BROWN MACKEREL TABBY, cool taupe-brown coat with narrow charcoal stripes, dark forehead M and two cheek stripes, pale beige chin and full ruff, no white paws, bright amber-gold eyes, broad rounded face and small upright tufted ears, fluffy medium-long charcoal-ringed tail with solid dark tip, curious and sensitive playful expression. Scene: one paw reaches for feather wand, alert joyful eyes and more expressive engaged posture, visually distinct from basic action. Cream wall, honey floor, sage green mat. Full body and tail in frame, anatomically natural four limbs, one cat, no text or UI.",
+    "reference": "kaede-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "ball__open_up",
+    "file": "kaede-ball__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-7f014d26-04e6-4d57-a084-0477c2c372f9.png",
+    "prompt": "Square CatCafeSim painted storybook scene. Match the exact cat, fur markings, face and room from the reference. Kaede, compact adult LONGHAIRED BROWN MACKEREL TABBY, cool taupe-brown coat with narrow charcoal stripes, dark forehead M and two cheek stripes, pale beige chin and full ruff, no white paws, bright amber-gold eyes, broad rounded face and small upright tufted ears, fluffy medium-long charcoal-ringed tail with solid dark tip, curious and sensitive playful expression. Scene: crouch and tap a small blue ball with one paw, soft half-closed eyes and relaxed trusting posture. Cream wall, honey floor, sage green mat. Full body and tail in frame, anatomically natural four limbs, one cat, no text or UI.",
+    "reference": "kaede-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "ball__simultaneous",
+    "file": "kaede-ball__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-e50bdff6-6ae5-44e0-a855-6c2cc303ab7a.png",
+    "prompt": "Square CatCafeSim painted storybook scene. Match the exact cat, fur markings, face and room from the reference. Kaede, compact adult LONGHAIRED BROWN MACKEREL TABBY, cool taupe-brown coat with narrow charcoal stripes, dark forehead M and two cheek stripes, pale beige chin and full ruff, no white paws, bright amber-gold eyes, broad rounded face and small upright tufted ears, fluffy medium-long charcoal-ringed tail with solid dark tip, curious and sensitive playful expression. Scene: crouch and tap a small blue ball with one paw, alert joyful eyes and more expressive engaged posture, visually distinct from basic action. Cream wall, honey floor, sage green mat. Full body and tail in frame, anatomically natural four limbs, one cat, no text or UI.",
+    "reference": "kaede-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "plush__open_up",
+    "file": "kaede-plush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-f30979fb-76f6-4e08-9fc7-bededca77da5.png",
+    "prompt": "Square CatCafeSim painted storybook scene. Match the exact cat, fur markings, face and room from the reference. Kaede, compact adult LONGHAIRED BROWN MACKEREL TABBY, cool taupe-brown coat with narrow charcoal stripes, dark forehead M and two cheek stripes, pale beige chin and full ruff, no white paws, bright amber-gold eyes, broad rounded face and small upright tufted ears, fluffy medium-long charcoal-ringed tail with solid dark tip, curious and sensitive playful expression. Scene: belly down, nudging a beige mouse plush with two front paws around it, soft half-closed eyes and relaxed trusting posture. Cream wall, honey floor, sage green mat. Full body and tail in frame, anatomically natural four limbs, one cat, no text or UI.",
+    "reference": "kaede-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "plush__simultaneous",
+    "file": "kaede-plush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-4ac5bd91-513f-482f-98fd-5e9267817a8f.png",
+    "prompt": "Square CatCafeSim painted storybook scene. Match the exact cat, fur markings, face and room from the reference. Kaede, compact adult LONGHAIRED BROWN MACKEREL TABBY, cool taupe-brown coat with narrow charcoal stripes, dark forehead M and two cheek stripes, pale beige chin and full ruff, no white paws, bright amber-gold eyes, broad rounded face and small upright tufted ears, fluffy medium-long charcoal-ringed tail with solid dark tip, curious and sensitive playful expression. Scene: belly down, nudging a beige mouse plush with two front paws around it, alert joyful eyes and more expressive engaged posture, visually distinct from basic action. Cream wall, honey floor, sage green mat. Full body and tail in frame, anatomically natural four limbs, one cat, no text or UI.",
+    "reference": "kaede-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "tunnel__open_up",
+    "file": "kaede-tunnel__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-5751bb03-894c-4fcd-b4c1-1a79b0695d3b.png",
+    "prompt": "Square CatCafeSim painted storybook scene. Match the exact cat, fur markings, face and room from the reference. Kaede, compact adult LONGHAIRED BROWN MACKEREL TABBY, cool taupe-brown coat with narrow charcoal stripes, dark forehead M and two cheek stripes, pale beige chin and full ruff, no white paws, bright amber-gold eyes, broad rounded face and small upright tufted ears, fluffy medium-long charcoal-ringed tail with solid dark tip, curious and sensitive playful expression. Scene: crouch at mouth of a tan fabric play tunnel, tail visible at rear, soft half-closed eyes and relaxed trusting posture. Cream wall, honey floor, sage green mat. Full body and tail in frame, anatomically natural four limbs, one cat, no text or UI.",
+    "reference": "kaede-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "tunnel__simultaneous",
+    "file": "kaede-tunnel__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-123b8d9e-bef6-4407-a517-78c2ddce08ed.png",
+    "prompt": "Square CatCafeSim painted storybook scene. Match the exact cat, fur markings, face and room from the reference. Kaede, compact adult LONGHAIRED BROWN MACKEREL TABBY, cool taupe-brown coat with narrow charcoal stripes, dark forehead M and two cheek stripes, pale beige chin and full ruff, no white paws, bright amber-gold eyes, broad rounded face and small upright tufted ears, fluffy medium-long charcoal-ringed tail with solid dark tip, curious and sensitive playful expression. Scene: crouch at mouth of a tan fabric play tunnel, tail visible at rear, alert joyful eyes and more expressive engaged posture, visually distinct from basic action. Cream wall, honey floor, sage green mat. Full body and tail in frame, anatomically natural four limbs, one cat, no text or UI.",
+    "reference": "kaede-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "pet__open_up",
+    "file": "kaede-pet__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-9fe80b32-d334-4dd4-93f0-0d7484167eb7.png",
+    "prompt": "Square CatCafeSim painted storybook scene. Match the exact cat, fur markings, face and room from the reference. Kaede, compact adult LONGHAIRED BROWN MACKEREL TABBY, cool taupe-brown coat with narrow charcoal stripes, dark forehead M and two cheek stripes, pale beige chin and full ruff, no white paws, bright amber-gold eyes, broad rounded face and small upright tufted ears, fluffy medium-long charcoal-ringed tail with solid dark tip, curious and sensitive playful expression. Scene: cream-sleeved hand gently strokes forehead, soft half-closed eyes and relaxed trusting posture. Cream wall, honey floor, sage green mat. Full body and tail in frame, anatomically natural four limbs, one cat, no text or UI.",
+    "reference": "kaede-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "pet__simultaneous",
+    "file": "kaede-pet__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-ede69fa6-0df7-4b85-b3fb-46a2bfc3ea40.png",
+    "prompt": "Square CatCafeSim painted storybook scene. Match the exact cat, fur markings, face and room from the reference. Kaede, compact adult LONGHAIRED BROWN MACKEREL TABBY, cool taupe-brown coat with narrow charcoal stripes, dark forehead M and two cheek stripes, pale beige chin and full ruff, no white paws, bright amber-gold eyes, broad rounded face and small upright tufted ears, fluffy medium-long charcoal-ringed tail with solid dark tip, curious and sensitive playful expression. Scene: cream-sleeved hand gently strokes forehead, alert joyful eyes and more expressive engaged posture, visually distinct from basic action. Cream wall, honey floor, sage green mat. Full body and tail in frame, anatomically natural four limbs, one cat, no text or UI.",
+    "reference": "kaede-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "brush__open_up",
+    "file": "kaede-brush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-de1942ff-9f6a-4fe3-94f6-140f95820454.png",
+    "prompt": "Square CatCafeSim painted storybook scene. Match the exact cat, fur markings, face and room from the reference. Kaede, compact adult LONGHAIRED BROWN MACKEREL TABBY, cool taupe-brown coat with narrow charcoal stripes, dark forehead M and two cheek stripes, pale beige chin and full ruff, no white paws, bright amber-gold eyes, broad rounded face and small upright tufted ears, fluffy medium-long charcoal-ringed tail with solid dark tip, curious and sensitive playful expression. Scene: standing while cream-sleeved hand brushes shoulder with wooden brush, soft half-closed eyes and relaxed trusting posture. Cream wall, honey floor, sage green mat. Full body and tail in frame, anatomically natural four limbs, one cat, no text or UI.",
+    "reference": "kaede-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "brush__simultaneous",
+    "file": "kaede-brush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-eb776531-6bc7-4ca0-8e3e-f5d33a79d7d0.png",
+    "prompt": "Square CatCafeSim painted storybook scene. Match the exact cat, fur markings, face and room from the reference. Kaede, compact adult LONGHAIRED BROWN MACKEREL TABBY, cool taupe-brown coat with narrow charcoal stripes, dark forehead M and two cheek stripes, pale beige chin and full ruff, no white paws, bright amber-gold eyes, broad rounded face and small upright tufted ears, fluffy medium-long charcoal-ringed tail with solid dark tip, curious and sensitive playful expression. Scene: standing while cream-sleeved hand brushes shoulder with wooden brush, alert joyful eyes and more expressive engaged posture, visually distinct from basic action. Cream wall, honey floor, sage green mat. Full body and tail in frame, anatomically natural four limbs, one cat, no text or UI.",
+    "reference": "kaede-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "voice__open_up",
+    "file": "kaede-voice__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-2e2b0cac-bf53-49e3-ad11-01a849118870.png",
+    "prompt": "Square CatCafeSim painted storybook scene. Match the exact cat, fur markings, face and room from the reference. Kaede, compact adult LONGHAIRED BROWN MACKEREL TABBY, cool taupe-brown coat with narrow charcoal stripes, dark forehead M and two cheek stripes, pale beige chin and full ruff, no white paws, bright amber-gold eyes, broad rounded face and small upright tufted ears, fluffy medium-long charcoal-ringed tail with solid dark tip, curious and sensitive playful expression. Scene: turn ears and head toward offscreen voice, no visual text, soft half-closed eyes and relaxed trusting posture. Cream wall, honey floor, sage green mat. Full body and tail in frame, anatomically natural four limbs, one cat, no text or UI.",
+    "reference": "kaede-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "voice__simultaneous",
+    "file": "kaede-voice__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-43c4012e-6ff3-4ca4-8379-ae7692448cda.png",
+    "prompt": "Square CatCafeSim painted storybook scene. Match the exact cat, fur markings, face and room from the reference. Kaede, compact adult LONGHAIRED BROWN MACKEREL TABBY, cool taupe-brown coat with narrow charcoal stripes, dark forehead M and two cheek stripes, pale beige chin and full ruff, no white paws, bright amber-gold eyes, broad rounded face and small upright tufted ears, fluffy medium-long charcoal-ringed tail with solid dark tip, curious and sensitive playful expression. Scene: turn ears and head toward offscreen voice, no visual text, alert joyful eyes and more expressive engaged posture, visually distinct from basic action. Cream wall, honey floor, sage green mat. Full body and tail in frame, anatomically natural four limbs, one cat, no text or UI.",
+    "reference": "kaede-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "presence__open_up",
+    "file": "kaede-presence__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-90914a75-497d-4b96-973d-ce7fbe73d5fb.png",
+    "prompt": "Square CatCafeSim painted storybook scene. Match the exact cat, fur markings, face and room from the reference. Kaede, compact adult LONGHAIRED BROWN MACKEREL TABBY, cool taupe-brown coat with narrow charcoal stripes, dark forehead M and two cheek stripes, pale beige chin and full ruff, no white paws, bright amber-gold eyes, broad rounded face and small upright tufted ears, fluffy medium-long charcoal-ringed tail with solid dark tip, curious and sensitive playful expression. Scene: loaf near a cropped blue-clad knee, soft half-closed eyes and relaxed trusting posture. Cream wall, honey floor, sage green mat. Full body and tail in frame, anatomically natural four limbs, one cat, no text or UI.",
+    "reference": "kaede-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "presence__simultaneous",
+    "file": "kaede-presence__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-7c130563-9827-4888-9916-e6d48ce19df2.png",
+    "prompt": "Square CatCafeSim painted storybook scene. Match the exact cat, fur markings, face and room from the reference. Kaede, compact adult LONGHAIRED BROWN MACKEREL TABBY, cool taupe-brown coat with narrow charcoal stripes, dark forehead M and two cheek stripes, pale beige chin and full ruff, no white paws, bright amber-gold eyes, broad rounded face and small upright tufted ears, fluffy medium-long charcoal-ringed tail with solid dark tip, curious and sensitive playful expression. Scene: loaf near a cropped blue-clad knee, alert joyful eyes and more expressive engaged posture, visually distinct from basic action. Cream wall, honey floor, sage green mat. Full body and tail in frame, anatomically natural four limbs, one cat, no text or UI.",
+    "reference": "kaede-normal.png",
+    "reference_role": "identity_and_room"
+  }
+]

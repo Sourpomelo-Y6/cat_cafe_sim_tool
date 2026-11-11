@@ -1,0 +1,53 @@
+{
+  "date": "2026-11-02",
+  "cat_id": "catalog-9",
+  "name": "マメ",
+  "status": "completed",
+  "tool": "built-in image_gen",
+  "selected_png_count": 27,
+  "retained_candidate_png_count": 0,
+  "scene_keys": 52,
+  "narrative_bindings": 32,
+  "python_tests": {
+    "total": 28,
+    "passed": 28,
+    "skipped": 0
+  },
+  "actual_recruitment_appearance_cost_features_trait_save_reload": true,
+  "recruitment_batch": 3,
+  "actual_test_id": "rescue-9",
+  "preparation_fallbacks": 6,
+  "other_catalog_ids_distinct": true,
+  "unity_reaction_cases": 40,
+  "unity_normal_sleep_roster": true,
+  "unity_special_resources": true,
+  "unity_admission_save_reload": true,
+  "unity_log": "Logs/CatDailyImages/20261102/unity.log",
+  "visual_qa": "All 27 PNGs reviewed during generation, four Unity screenshots reviewed Nov2. Light blue eyes, own right black ear/crown, own left orange ear/crown, orange forehead spot, white lower cheeks and legs, short calico coat, orange tail with white tip. Correct limbs and action composition.",
+  "selected_png_bytes": 50242505,
+  "retained_candidate_png_bytes": 0,
+  "registered_png_bytes_each": 50242505,
+  "active_pack": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\Imports\\cbe0df94e7a5401a8f466406c105b493",
+  "interaction_catalog_version": 4,
+  "existing_authored_entries": 435,
+  "all_existing_v4_text_fields_preserved": true,
+  "active_cats_after": 22,
+  "build_performed": false,
+  "capacity_before": {
+    "latest_bytes": 5753468434,
+    "runs_bytes": 259351500,
+    "generated_bytes": 3277372585
+  },
+  "capacity_after": {
+    "latest_bytes": 5753468434,
+    "runs_bytes": 259351500,
+    "generated_bytes": 3277372585
+  },
+  "runtime_id_resolution": {
+    "content_id": "catalog-9",
+    "rule": "Resolve actual rescue-N through standard saved recruitment batch and catalog position; validate original candidate fields"
+  },
+  "texture_policy_registration": "CompleteActivePackRegistration succeeded; existing 1024 BC7 Standalone policy applied",
+  "production_date": "2026-11-01",
+  "validation_date": "2026-11-02"
+}

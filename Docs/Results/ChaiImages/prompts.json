@@ -1,0 +1,191 @@
+[
+  {
+    "scene": "normal",
+    "file": "chai-normal.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-4a02f98c-7b06-42c3-b366-db29939442c8.png",
+    "prompt": "Square soft painted storybook CatCafeSim asset. Reference room and illustration technique only. CHAI is a distinct petite slender adult LONGHAIR CALICO. Amber gold eyes, small heart-shaped face, rose nose, triangular ears with fine tufts. White face with both ears orange, orange cap across forehead, small distinct black oval patch below the cat's left eye (viewer right), white muzzle and ruff and white paws. Large separate black and cinnamon-orange patches on white flank. Long bushy black tail with orange terminal tip. Curious gentle posture, seated full body, natural four limbs and tail. Cream wall, honey wooden floor, sage mat, warm diffuse light. No text or collar.",
+    "reference": "../LunaImages/luna-normal.png"
+  },
+  {
+    "scene": "sleep",
+    "file": "chai-sleep.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-331e2992-6756-461e-a85d-6bd97b39e11b.png",
+    "prompt": "CatCafeSim square soft painted storybook. Preserve exact CHAI identity and coat patches from reference, amber eyes, orange ears and cap split by white blaze, small black oval below CAT LEFT eye (viewer right), white muzzle, chest and paws, black shoulder patch and cinnamon flank patch separated by white. Petite long-haired calico with bushy black tail ending orange. Scene: curled asleep with eyes fully closed. Natural anatomy, tail fully within frame, same cream wall honey floor sage mat and warm light. No text, no collar.",
+    "reference": "chai-normal.png"
+  },
+  {
+    "scene": "pause",
+    "file": "chai-pause.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-7c39a141-8a8a-4777-97f9-5b6915661abd.png",
+    "prompt": "CatCafeSim square soft painted storybook. Preserve exact CHAI identity and coat patches from reference, amber eyes, orange ears and cap split by white blaze, small black oval below CAT LEFT eye (viewer right), white muzzle, chest and paws, black shoulder patch and cinnamon flank patch separated by white. Petite long-haired calico with bushy black tail ending orange. Scene: sitting watching a feather wand lying still on floor. Natural anatomy, tail fully within frame, same cream wall honey floor sage mat and warm light. No text, no collar.",
+    "reference": "chai-normal.png"
+  },
+  {
+    "scene": "teaser",
+    "file": "chai-teaser.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-b466b8c0-c19a-404f-9d89-f53df5802930.png",
+    "prompt": "CatCafeSim square soft painted storybook. Preserve exact CHAI identity and coat patches from reference, amber eyes, orange ears and cap split by white blaze, small black oval below CAT LEFT eye (viewer right), white muzzle, chest and paws, black shoulder patch and cinnamon flank patch separated by white. Petite long-haired calico with bushy black tail ending orange. Scene: crouching and sniffing a feather wand. Natural anatomy, tail fully within frame, same cream wall honey floor sage mat and warm light. No text, no collar.",
+    "reference": "chai-normal.png"
+  },
+  {
+    "scene": "ball",
+    "file": "chai-ball.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-6d6aa061-078e-4742-b6d5-0b8351bce0a4.png",
+    "prompt": "CatCafeSim square soft painted storybook. Preserve exact CHAI identity and coat patches from reference, amber eyes, orange ears and cap split by white blaze, small black oval below CAT LEFT eye (viewer right), white muzzle, chest and paws, black shoulder patch and cinnamon flank patch separated by white. Petite long-haired calico with bushy black tail ending orange. Scene: one forepaw gently tapping blue ball. Natural anatomy, tail fully within frame, same cream wall honey floor sage mat and warm light. No text, no collar.",
+    "reference": "chai-normal.png"
+  },
+  {
+    "scene": "plush",
+    "file": "chai-plush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-e83b79bd-6b61-4771-8016-c57a22467af1.png",
+    "prompt": "CatCafeSim square soft painted storybook. Preserve exact CHAI identity and coat patches from reference, amber eyes, orange ears and cap split by white blaze, small black oval below CAT LEFT eye (viewer right), white muzzle, chest and paws, black shoulder patch and cinnamon flank patch separated by white. Petite long-haired calico with bushy black tail ending orange. Scene: lying with forepaws holding a beige mouse plush. Natural anatomy, tail fully within frame, same cream wall honey floor sage mat and warm light. No text, no collar.",
+    "reference": "chai-normal.png"
+  },
+  {
+    "scene": "tunnel",
+    "file": "chai-tunnel.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-c07657b1-9c2c-483e-8f53-d5b16453a216.png",
+    "prompt": "CatCafeSim square soft painted storybook. Preserve exact CHAI identity and coat patches from reference, amber eyes, orange ears and cap split by white blaze, small black oval below CAT LEFT eye (viewer right), white muzzle, chest and paws, black shoulder patch and cinnamon flank patch separated by white. Petite long-haired calico with bushy black tail ending orange. Scene: crouching inside tan fabric tunnel, face and tail visible. Natural anatomy, tail fully within frame, same cream wall honey floor sage mat and warm light. No text, no collar.",
+    "reference": "chai-normal.png"
+  },
+  {
+    "scene": "pet",
+    "file": "chai-pet.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-50c91cae-d43a-468a-8a5f-ad3a4aa5ba95.png",
+    "prompt": "CatCafeSim square soft painted storybook. Preserve exact CHAI identity and coat patches from reference, amber eyes, orange ears and cap split by white blaze, small black oval below CAT LEFT eye (viewer right), white muzzle, chest and paws, black shoulder patch and cinnamon flank patch separated by white. Petite long-haired calico with bushy black tail ending orange. Scene: seated as a cream-sleeved hand strokes forehead. Natural anatomy, tail fully within frame, same cream wall honey floor sage mat and warm light. No text, no collar.",
+    "reference": "chai-normal.png"
+  },
+  {
+    "scene": "brush",
+    "file": "chai-brush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-bf7159dc-7a1c-47aa-808c-96b6e22d9ec5.png",
+    "prompt": "CatCafeSim square soft painted storybook. Preserve exact CHAI identity and coat patches from reference, amber eyes, orange ears and cap split by white blaze, small black oval below CAT LEFT eye (viewer right), white muzzle, chest and paws, black shoulder patch and cinnamon flank patch separated by white. Petite long-haired calico with bushy black tail ending orange. Scene: standing as a cream-sleeved hand brushes shoulder with wooden brush. Natural anatomy, tail fully within frame, same cream wall honey floor sage mat and warm light. No text, no collar.",
+    "reference": "chai-normal.png"
+  },
+  {
+    "scene": "voice",
+    "file": "chai-voice.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-c8030f8f-d533-4913-8aa8-34a284ff116a.png",
+    "prompt": "CatCafeSim square soft painted storybook. Preserve exact CHAI identity and coat patches from reference, amber eyes, orange ears and cap split by white blaze, small black oval below CAT LEFT eye (viewer right), white muzzle, chest and paws, black shoulder patch and cinnamon flank patch separated by white. Petite long-haired calico with bushy black tail ending orange. Scene: sitting listening toward an offscreen voice. Natural anatomy, tail fully within frame, same cream wall honey floor sage mat and warm light. No text, no collar.",
+    "reference": "chai-normal.png"
+  },
+  {
+    "scene": "presence",
+    "file": "chai-presence.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-9cbea899-e195-45e5-adb3-702ae6623bd9.png",
+    "prompt": "CatCafeSim square soft painted storybook. Preserve exact CHAI identity and coat patches from reference, amber eyes, orange ears and cap split by white blaze, small black oval below CAT LEFT eye (viewer right), white muzzle, chest and paws, black shoulder patch and cinnamon flank patch separated by white. Petite long-haired calico with bushy black tail ending orange. Scene: loafing beside cropped blue trouser knee. Natural anatomy, tail fully within frame, same cream wall honey floor sage mat and warm light. No text, no collar.",
+    "reference": "chai-normal.png"
+  },
+  {
+    "scene": "teaser__open_up",
+    "file": "chai-teaser__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-80c0631b-a222-4863-8db7-59eb3789c576.png",
+    "prompt": "CatCafeSim square soft painted storybook. Preserve exact CHAI identity and coat patches from reference, amber eyes, orange ears and cap split by white blaze, small black oval below CAT LEFT eye (viewer right), white muzzle, chest and paws, black shoulder patch and cinnamon flank patch separated by white. Petite long-haired calico with bushy black tail ending orange. Scene: crouching and sniffing a feather wand, soft half-closed eyes, relaxed trusting posture. Natural anatomy, tail fully within frame, same cream wall honey floor sage mat and warm light. No text, no collar.",
+    "reference": "chai-normal.png"
+  },
+  {
+    "scene": "teaser__simultaneous",
+    "file": "chai-teaser__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-537d1547-9c7c-400c-af3a-4de7546f6ac3.png",
+    "prompt": "CatCafeSim square soft painted storybook. Preserve exact CHAI identity and coat patches from reference, amber eyes, orange ears and cap split by white blaze, small black oval below CAT LEFT eye (viewer right), white muzzle, chest and paws, black shoulder patch and cinnamon flank patch separated by white. Petite long-haired calico with bushy black tail ending orange. Scene: crouching and sniffing a feather wand, bright curious eyes, animated delighted posture. Natural anatomy, tail fully within frame, same cream wall honey floor sage mat and warm light. No text, no collar.",
+    "reference": "chai-normal.png"
+  },
+  {
+    "scene": "ball__open_up",
+    "file": "chai-ball__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-0464ccc5-6f12-4852-a202-78ade2b68ec9.png",
+    "prompt": "CatCafeSim square soft painted storybook. Preserve exact CHAI identity and coat patches from reference, amber eyes, orange ears and cap split by white blaze, small black oval below CAT LEFT eye (viewer right), white muzzle, chest and paws, black shoulder patch and cinnamon flank patch separated by white. Petite long-haired calico with bushy black tail ending orange. Scene: one forepaw gently tapping blue ball, soft half-closed eyes, relaxed trusting posture. Natural anatomy, tail fully within frame, same cream wall honey floor sage mat and warm light. No text, no collar.",
+    "reference": "chai-normal.png"
+  },
+  {
+    "scene": "ball__simultaneous",
+    "file": "chai-ball__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-03149f66-ee1a-41ba-90bf-ddf94a2188f5.png",
+    "prompt": "CatCafeSim square soft painted storybook. Preserve exact CHAI identity and coat patches from reference, amber eyes, orange ears and cap split by white blaze, small black oval below CAT LEFT eye (viewer right), white muzzle, chest and paws, black shoulder patch and cinnamon flank patch separated by white. Petite long-haired calico with bushy black tail ending orange. Scene: one forepaw gently tapping blue ball, bright curious eyes, animated delighted posture. Natural anatomy, tail fully within frame, same cream wall honey floor sage mat and warm light. No text, no collar.",
+    "reference": "chai-normal.png"
+  },
+  {
+    "scene": "plush__open_up",
+    "file": "chai-plush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-dc54b756-60af-4ce9-87f9-671f340f4090.png",
+    "prompt": "CatCafeSim square soft painted storybook. Preserve exact CHAI identity and coat patches from reference, amber eyes, orange ears and cap split by white blaze, small black oval below CAT LEFT eye (viewer right), white muzzle, chest and paws, black shoulder patch and cinnamon flank patch separated by white. Petite long-haired calico with bushy black tail ending orange. Scene: lying with forepaws holding a beige mouse plush, soft half-closed eyes, relaxed trusting posture. Natural anatomy, tail fully within frame, same cream wall honey floor sage mat and warm light. No text, no collar.",
+    "reference": "chai-normal.png"
+  },
+  {
+    "scene": "plush__simultaneous",
+    "file": "chai-plush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-424ce7bf-332d-4041-8864-3e95556cae1f.png",
+    "prompt": "CatCafeSim square soft painted storybook. Preserve exact CHAI identity and coat patches from reference, amber eyes, orange ears and cap split by white blaze, small black oval below CAT LEFT eye (viewer right), white muzzle, chest and paws, black shoulder patch and cinnamon flank patch separated by white. Petite long-haired calico with bushy black tail ending orange. Scene: lying with forepaws holding a beige mouse plush, bright curious eyes, animated delighted posture. Natural anatomy, tail fully within frame, same cream wall honey floor sage mat and warm light. No text, no collar.",
+    "reference": "chai-normal.png"
+  },
+  {
+    "scene": "tunnel__open_up",
+    "file": "chai-tunnel__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-af7ee373-1544-4938-bc9e-129fcca45877.png",
+    "prompt": "CatCafeSim square soft painted storybook. Preserve exact CHAI identity and coat patches from reference, amber eyes, orange ears and cap split by white blaze, small black oval below CAT LEFT eye (viewer right), white muzzle, chest and paws, black shoulder patch and cinnamon flank patch separated by white. Petite long-haired calico with bushy black tail ending orange. Scene: crouching inside tan fabric tunnel, face and tail visible, soft half-closed eyes, relaxed trusting posture. Natural anatomy, tail fully within frame, same cream wall honey floor sage mat and warm light. No text, no collar.",
+    "reference": "chai-normal.png"
+  },
+  {
+    "scene": "tunnel__simultaneous",
+    "file": "chai-tunnel__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-158440b6-9164-4c14-8bb6-13fd2347bd5a.png",
+    "prompt": "CatCafeSim square soft painted storybook. Preserve exact CHAI identity and coat patches from reference, amber eyes, orange ears and cap split by white blaze, small black oval below CAT LEFT eye (viewer right), white muzzle, chest and paws, black shoulder patch and cinnamon flank patch separated by white. Petite long-haired calico with bushy black tail ending orange. Scene: crouching inside tan fabric tunnel, face and tail visible, bright curious eyes, animated delighted posture. Natural anatomy, tail fully within frame, same cream wall honey floor sage mat and warm light. No text, no collar.",
+    "reference": "chai-normal.png"
+  },
+  {
+    "scene": "pet__open_up",
+    "file": "chai-pet__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-75e74417-9331-41ff-9b79-d892956b2707.png",
+    "prompt": "CatCafeSim square soft painted storybook. Preserve exact CHAI identity and coat patches from reference, amber eyes, orange ears and cap split by white blaze, small black oval below CAT LEFT eye (viewer right), white muzzle, chest and paws, black shoulder patch and cinnamon flank patch separated by white. Petite long-haired calico with bushy black tail ending orange. Scene: seated as a cream-sleeved hand strokes forehead, soft half-closed eyes, relaxed trusting posture. Natural anatomy, tail fully within frame, same cream wall honey floor sage mat and warm light. No text, no collar.",
+    "reference": "chai-normal.png"
+  },
+  {
+    "scene": "pet__simultaneous",
+    "file": "chai-pet__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-9cfd198b-a5b2-4798-84ec-864461c34300.png",
+    "prompt": "CatCafeSim square soft painted storybook. Preserve exact CHAI identity and coat patches from reference, amber eyes, orange ears and cap split by white blaze, small black oval below CAT LEFT eye (viewer right), white muzzle, chest and paws, black shoulder patch and cinnamon flank patch separated by white. Petite long-haired calico with bushy black tail ending orange. Scene: seated as a cream-sleeved hand strokes forehead, bright curious eyes, animated delighted posture. Natural anatomy, tail fully within frame, same cream wall honey floor sage mat and warm light. No text, no collar.",
+    "reference": "chai-normal.png"
+  },
+  {
+    "scene": "brush__open_up",
+    "file": "chai-brush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-dfd8ecad-8d8f-419f-abe9-74dfc0e08376.png",
+    "prompt": "CatCafeSim square soft painted storybook. Preserve exact CHAI identity and coat patches from reference, amber eyes, orange ears and cap split by white blaze, small black oval below CAT LEFT eye (viewer right), white muzzle, chest and paws, black shoulder patch and cinnamon flank patch separated by white. Petite long-haired calico with bushy black tail ending orange. Scene: standing as a cream-sleeved hand brushes shoulder with wooden brush, soft half-closed eyes, relaxed trusting posture. Natural anatomy, tail fully within frame, same cream wall honey floor sage mat and warm light. No text, no collar.",
+    "reference": "chai-normal.png"
+  },
+  {
+    "scene": "brush__simultaneous",
+    "file": "chai-brush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-899ee728-f00b-4a1a-bd25-81add3fcc7d7.png",
+    "prompt": "CatCafeSim square soft painted storybook. Preserve exact CHAI identity and coat patches from reference, amber eyes, orange ears and cap split by white blaze, small black oval below CAT LEFT eye (viewer right), white muzzle, chest and paws, black shoulder patch and cinnamon flank patch separated by white. Petite long-haired calico with bushy black tail ending orange. Scene: standing as a cream-sleeved hand brushes shoulder with wooden brush, bright curious eyes, animated delighted posture. Natural anatomy, tail fully within frame, same cream wall honey floor sage mat and warm light. No text, no collar.",
+    "reference": "chai-normal.png"
+  },
+  {
+    "scene": "voice__open_up",
+    "file": "chai-voice__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-62f24c8e-6634-4724-8abe-4f838d9494f6.png",
+    "prompt": "CatCafeSim square soft painted storybook. Preserve exact CHAI identity and coat patches from reference, amber eyes, orange ears and cap split by white blaze, small black oval below CAT LEFT eye (viewer right), white muzzle, chest and paws, black shoulder patch and cinnamon flank patch separated by white. Petite long-haired calico with bushy black tail ending orange. Scene: sitting listening toward an offscreen voice, soft half-closed eyes, relaxed trusting posture. Natural anatomy, tail fully within frame, same cream wall honey floor sage mat and warm light. No text, no collar.",
+    "reference": "chai-normal.png"
+  },
+  {
+    "scene": "voice__simultaneous",
+    "file": "chai-voice__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-8528f40f-aeb7-4b56-8009-db954a1897bb.png",
+    "prompt": "CatCafeSim square soft painted storybook. Preserve exact CHAI identity and coat patches from reference, amber eyes, orange ears and cap split by white blaze, small black oval below CAT LEFT eye (viewer right), white muzzle, chest and paws, black shoulder patch and cinnamon flank patch separated by white. Petite long-haired calico with bushy black tail ending orange. Scene: sitting listening toward an offscreen voice, bright curious eyes, animated delighted posture. Natural anatomy, tail fully within frame, same cream wall honey floor sage mat and warm light. No text, no collar.",
+    "reference": "chai-normal.png"
+  },
+  {
+    "scene": "presence__open_up",
+    "file": "chai-presence__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-54b35e9c-ab19-4c95-a164-85d144ad0f8f.png",
+    "prompt": "CatCafeSim square soft painted storybook. Preserve exact CHAI identity and coat patches from reference, amber eyes, orange ears and cap split by white blaze, small black oval below CAT LEFT eye (viewer right), white muzzle, chest and paws, black shoulder patch and cinnamon flank patch separated by white. Petite long-haired calico with bushy black tail ending orange. Scene: loafing beside cropped blue trouser knee, soft half-closed eyes, relaxed trusting posture. Natural anatomy, tail fully within frame, same cream wall honey floor sage mat and warm light. No text, no collar.",
+    "reference": "chai-normal.png"
+  },
+  {
+    "scene": "presence__simultaneous",
+    "file": "chai-presence__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-72fd5b09-8c6b-45df-abf3-3dfabe340385.png",
+    "prompt": "CatCafeSim square soft painted storybook. Preserve exact CHAI identity and coat patches from reference, amber eyes, orange ears and cap split by white blaze, small black oval below CAT LEFT eye (viewer right), white muzzle, chest and paws, black shoulder patch and cinnamon flank patch separated by white. Petite long-haired calico with bushy black tail ending orange. Scene: loafing beside cropped blue trouser knee, bright curious eyes, animated delighted posture. Natural anatomy, tail fully within frame, same cream wall honey floor sage mat and warm light. No text, no collar.",
+    "reference": "chai-normal.png"
+  }
+]

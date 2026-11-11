@@ -1,0 +1,218 @@
+[
+  {
+    "scene": "normal",
+    "file": "nagi-normal.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-1f1405e7-f88f-49b4-965b-f89f5d930674.png",
+    "prompt": "Square CatCafeSim soft painted storybook. Reference STYLE AND ROOM ONLY. Create NAGI adult medium stocky SOLID BLACK SHORT HAIRED cat, dense smooth glossy charcoal-black coat ALL OVER including all paws muzzle chest belly and tail, no white markings or tabby stripes. Round broad face, short rounded muzzle, small rounded triangular ears, black nose. Both eyes clear pale ICY BLUE, medium-long thick tapered black tail with rounded black tip. Quiet balanced attentive demeanor. Full seated cat three-quarter view, front paws planted, entire tail curved low beside body, generous margins, cream wall honey wood floor sage mat warm diffuse light. One cat, natural four limbs, no humans or text.",
+    "reference": "C:/Users/hi-wa/source/codex_repos/CatCafeSim/cat_cafe_sim_tool/Docs/Results/FukuImages/fuku-normal.png",
+    "reference_role": "style_and_room"
+  },
+  {
+    "scene": "sleep",
+    "file": "nagi-sleep.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-30fd83db-72f6-4adc-9699-91f8db70c5b9.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Nagi identity and room in reference. NAGI adult medium stocky SOLID BLACK SHORT HAIRED cat, dense smooth glossy charcoal-black coat ALL OVER including all paws muzzle chest belly and tail, no white markings or tabby stripes. Round broad face, short rounded muzzle, small rounded triangular ears, black nose. Both eyes clear pale ICY BLUE, medium-long thick tapered black tail with rounded black tip. Quiet balanced attentive demeanor. Scene: curled asleep with fully closed eyes, tail wraps paws. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "nagi-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "pause",
+    "file": "nagi-pause.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-1837ed69-2b8a-49d1-9059-046a89a99d31.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Nagi identity and room in reference. NAGI adult medium stocky SOLID BLACK SHORT HAIRED cat, dense smooth glossy charcoal-black coat ALL OVER including all paws muzzle chest belly and tail, no white markings or tabby stripes. Round broad face, short rounded muzzle, small rounded triangular ears, black nose. Both eyes clear pale ICY BLUE, medium-long thick tapered black tail with rounded black tip. Quiet balanced attentive demeanor. Scene: sitting still, watching feather lying motionless on floor. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "nagi-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "teaser",
+    "file": "nagi-teaser.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-767107cf-f509-4115-9626-68147204b424.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Nagi identity and room in reference. NAGI adult medium stocky SOLID BLACK SHORT HAIRED cat, dense smooth glossy charcoal-black coat ALL OVER including all paws muzzle chest belly and tail, no white markings or tabby stripes. Round broad face, short rounded muzzle, small rounded triangular ears, black nose. Both eyes clear pale ICY BLUE, medium-long thick tapered black tail with rounded black tip. Quiet balanced attentive demeanor. Scene: belly low, two front paws planted, nose reaching toward feather wand in front. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "nagi-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "ball",
+    "file": "nagi-ball.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-5a1aca9d-262b-46a5-b82e-e29bc8bbac79.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Nagi identity and room in reference. NAGI adult medium stocky SOLID BLACK SHORT HAIRED cat, dense smooth glossy charcoal-black coat ALL OVER including all paws muzzle chest belly and tail, no white markings or tabby stripes. Round broad face, short rounded muzzle, small rounded triangular ears, black nose. Both eyes clear pale ICY BLUE, medium-long thick tapered black tail with rounded black tip. Quiet balanced attentive demeanor. Scene: crouch to tap small blue ball with a front paw. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "nagi-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "plush",
+    "file": "nagi-plush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-25a34449-be6e-48c2-8e1b-7446cc7a9db8.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Nagi identity and room in reference. NAGI adult medium stocky SOLID BLACK SHORT HAIRED cat, dense smooth glossy charcoal-black coat ALL OVER including all paws muzzle chest belly and tail, no white markings or tabby stripes. Round broad face, short rounded muzzle, small rounded triangular ears, black nose. Both eyes clear pale ICY BLUE, medium-long thick tapered black tail with rounded black tip. Quiet balanced attentive demeanor. Scene: belly down, two front paws gently holding beige mouse plush on floor. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "nagi-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "tunnel",
+    "file": "nagi-tunnel.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-30b4b09c-f05f-4dfe-9c2b-640078b1a31d.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Nagi identity and room in reference. NAGI adult medium stocky SOLID BLACK SHORT HAIRED cat, dense smooth glossy charcoal-black coat ALL OVER including all paws muzzle chest belly and tail, no white markings or tabby stripes. Round broad face, short rounded muzzle, small rounded triangular ears, black nose. Both eyes clear pale ICY BLUE, medium-long thick tapered black tail with rounded black tip. Quiet balanced attentive demeanor. Scene: crouching halfway through plain tan fabric tunnel, head and front paws outside, full tail visible. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "nagi-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "pet",
+    "file": "nagi-pet.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-a7a09e75-a388-416b-850e-a12dd45eb64f.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Nagi identity and room in reference. NAGI adult medium stocky SOLID BLACK SHORT HAIRED cat, dense smooth glossy charcoal-black coat ALL OVER including all paws muzzle chest belly and tail, no white markings or tabby stripes. Round broad face, short rounded muzzle, small rounded triangular ears, black nose. Both eyes clear pale ICY BLUE, medium-long thick tapered black tail with rounded black tip. Quiet balanced attentive demeanor. Scene: sitting while cream-sleeved hand strokes forehead. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "nagi-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "brush",
+    "file": "nagi-brush.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-5e5934fe-1207-49f5-8a5e-0933338e9d60.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Nagi identity and room in reference. NAGI adult medium stocky SOLID BLACK SHORT HAIRED cat, dense smooth glossy charcoal-black coat ALL OVER including all paws muzzle chest belly and tail, no white markings or tabby stripes. Round broad face, short rounded muzzle, small rounded triangular ears, black nose. Both eyes clear pale ICY BLUE, medium-long thick tapered black tail with rounded black tip. Quiet balanced attentive demeanor. Scene: standing while cream-sleeved hand brushes shoulder with wooden brush. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "nagi-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "voice",
+    "file": "nagi-voice.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-86464dd4-3217-46af-8c3a-dc194b14b218.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Nagi identity and room in reference. NAGI adult medium stocky SOLID BLACK SHORT HAIRED cat, dense smooth glossy charcoal-black coat ALL OVER including all paws muzzle chest belly and tail, no white markings or tabby stripes. Round broad face, short rounded muzzle, small rounded triangular ears, black nose. Both eyes clear pale ICY BLUE, medium-long thick tapered black tail with rounded black tip. Quiet balanced attentive demeanor. Scene: sitting with ears and head toward offscreen voice, no visible text. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "nagi-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "presence",
+    "file": "nagi-presence.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-87b3a3e7-e455-47a2-9fee-3191c6a87d4a.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Nagi identity and room in reference. NAGI adult medium stocky SOLID BLACK SHORT HAIRED cat, dense smooth glossy charcoal-black coat ALL OVER including all paws muzzle chest belly and tail, no white markings or tabby stripes. Round broad face, short rounded muzzle, small rounded triangular ears, black nose. Both eyes clear pale ICY BLUE, medium-long thick tapered black tail with rounded black tip. Quiet balanced attentive demeanor. Scene: loaf calmly beside cropped blue trouser knee, no toy. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "nagi-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "teaser__open_up",
+    "file": "nagi-teaser__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-c7333d22-5cae-421c-8f72-2eb55dc20e45.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Nagi identity and room in reference. NAGI adult medium stocky SOLID BLACK SHORT HAIRED cat, dense smooth glossy charcoal-black coat ALL OVER including all paws muzzle chest belly and tail, no white markings or tabby stripes. Round broad face, short rounded muzzle, small rounded triangular ears, black nose. Both eyes clear pale ICY BLUE, medium-long thick tapered black tail with rounded black tip. Quiet balanced attentive demeanor. Scene: belly low, two front paws planted, nose reaching toward feather wand in front, soft half-closed eyes and trusting relaxed posture. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "nagi-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "teaser__simultaneous",
+    "file": "nagi-teaser__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-e670f9bc-9a85-4ce0-b37d-0176a4095fed.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Nagi identity and room in reference. NAGI adult medium stocky SOLID BLACK SHORT HAIRED cat, dense smooth glossy charcoal-black coat ALL OVER including all paws muzzle chest belly and tail, no white markings or tabby stripes. Round broad face, short rounded muzzle, small rounded triangular ears, black nose. Both eyes clear pale ICY BLUE, medium-long thick tapered black tail with rounded black tip. Quiet balanced attentive demeanor. Scene: belly low, two front paws planted, nose reaching toward feather wand in front, joyful engaged expression, alert eyes and animated posture, distinct from basic action. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "nagi-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "ball__open_up",
+    "file": "nagi-ball__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-7c238cc6-96e3-4448-9080-d2206e668bc6.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Nagi identity and room in reference. NAGI adult medium stocky SOLID BLACK SHORT HAIRED cat, dense smooth glossy charcoal-black coat ALL OVER including all paws muzzle chest belly and tail, no white markings or tabby stripes. Round broad face, short rounded muzzle, small rounded triangular ears, black nose. Both eyes clear pale ICY BLUE, medium-long thick tapered black tail with rounded black tip. Quiet balanced attentive demeanor. Scene: crouch to tap small blue ball with a front paw, soft half-closed eyes and trusting relaxed posture. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "nagi-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "ball__simultaneous",
+    "file": "nagi-ball__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-49141d9a-cbdc-4040-a101-facdc255e7c1.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Nagi identity and room in reference. NAGI adult medium stocky SOLID BLACK SHORT HAIRED cat, dense smooth glossy charcoal-black coat ALL OVER including all paws muzzle chest belly and tail, no white markings or tabby stripes. Round broad face, short rounded muzzle, small rounded triangular ears, black nose. Both eyes clear pale ICY BLUE, medium-long thick tapered black tail with rounded black tip. Quiet balanced attentive demeanor. Scene: crouch to tap small blue ball with a front paw, joyful engaged expression, alert eyes and animated posture, distinct from basic action. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "nagi-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "plush__open_up",
+    "file": "nagi-plush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-43a8007b-fd2b-4c42-bc90-0a6aed58d5df.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Nagi identity and room in reference. NAGI adult medium stocky SOLID BLACK SHORT HAIRED cat, dense smooth glossy charcoal-black coat ALL OVER including all paws muzzle chest belly and tail, no white markings or tabby stripes. Round broad face, short rounded muzzle, small rounded triangular ears, black nose. Both eyes clear pale ICY BLUE, medium-long thick tapered black tail with rounded black tip. Quiet balanced attentive demeanor. Scene: belly down, two front paws gently holding beige mouse plush on floor, soft half-closed eyes and trusting relaxed posture. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "nagi-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "plush__simultaneous",
+    "file": "nagi-plush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-67475055-56c3-4a56-a0a8-6776b6cb1c87.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Nagi identity and room in reference. NAGI adult medium stocky SOLID BLACK SHORT HAIRED cat, dense smooth glossy charcoal-black coat ALL OVER including all paws muzzle chest belly and tail, no white markings or tabby stripes. Round broad face, short rounded muzzle, small rounded triangular ears, black nose. Both eyes clear pale ICY BLUE, medium-long thick tapered black tail with rounded black tip. Quiet balanced attentive demeanor. Scene: belly down, two front paws gently holding beige mouse plush on floor, joyful engaged expression, alert eyes and animated posture, distinct from basic action. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "nagi-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "tunnel__open_up",
+    "file": "nagi-tunnel__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-520db2bd-1364-44c7-8e76-1f6bf0b27cc3.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Nagi identity and room in reference. NAGI adult medium stocky SOLID BLACK SHORT HAIRED cat, dense smooth glossy charcoal-black coat ALL OVER including all paws muzzle chest belly and tail, no white markings or tabby stripes. Round broad face, short rounded muzzle, small rounded triangular ears, black nose. Both eyes clear pale ICY BLUE, medium-long thick tapered black tail with rounded black tip. Quiet balanced attentive demeanor. Scene: crouching halfway through plain tan fabric tunnel, head and front paws outside, full tail visible, soft half-closed eyes and trusting relaxed posture. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "nagi-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "tunnel__simultaneous",
+    "file": "nagi-tunnel__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-2488800b-b67c-46e5-afe3-1a04e7b26104.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Nagi identity and room in reference. NAGI adult medium stocky SOLID BLACK SHORT HAIRED cat, dense smooth glossy charcoal-black coat ALL OVER including all paws muzzle chest belly and tail, no white markings or tabby stripes. Round broad face, short rounded muzzle, small rounded triangular ears, black nose. Both eyes clear pale ICY BLUE, medium-long thick tapered black tail with rounded black tip. Quiet balanced attentive demeanor. Scene: crouching halfway through plain tan fabric tunnel, head and front paws outside, full tail visible, joyful engaged expression, alert eyes and animated posture, distinct from basic action. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "nagi-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "pet__open_up",
+    "file": "nagi-pet__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-a87eb0b2-791c-425a-8eb4-5221ded5f3c9.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Nagi identity and room in reference. NAGI adult medium stocky SOLID BLACK SHORT HAIRED cat, dense smooth glossy charcoal-black coat ALL OVER including all paws muzzle chest belly and tail, no white markings or tabby stripes. Round broad face, short rounded muzzle, small rounded triangular ears, black nose. Both eyes clear pale ICY BLUE, medium-long thick tapered black tail with rounded black tip. Quiet balanced attentive demeanor. Scene: sitting while cream-sleeved hand strokes forehead, soft half-closed eyes and trusting relaxed posture. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "nagi-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "pet__simultaneous",
+    "file": "nagi-pet__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-c030243b-dc67-4040-b15e-e98b436c392d.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Nagi identity and room in reference. NAGI adult medium stocky SOLID BLACK SHORT HAIRED cat, dense smooth glossy charcoal-black coat ALL OVER including all paws muzzle chest belly and tail, no white markings or tabby stripes. Round broad face, short rounded muzzle, small rounded triangular ears, black nose. Both eyes clear pale ICY BLUE, medium-long thick tapered black tail with rounded black tip. Quiet balanced attentive demeanor. Scene: sitting while cream-sleeved hand strokes forehead, joyful engaged expression, alert eyes and animated posture, distinct from basic action. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "nagi-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "brush__open_up",
+    "file": "nagi-brush__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-6b592309-926e-40c4-b8f9-ba8f108d6c3c.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Nagi identity and room in reference. NAGI adult medium stocky SOLID BLACK SHORT HAIRED cat, dense smooth glossy charcoal-black coat ALL OVER including all paws muzzle chest belly and tail, no white markings or tabby stripes. Round broad face, short rounded muzzle, small rounded triangular ears, black nose. Both eyes clear pale ICY BLUE, medium-long thick tapered black tail with rounded black tip. Quiet balanced attentive demeanor. Scene: standing while cream-sleeved hand brushes shoulder with wooden brush, soft half-closed eyes and trusting relaxed posture. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "nagi-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "brush__simultaneous",
+    "file": "nagi-brush__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-234d49cd-ed0d-4859-af30-a4bcd6c67ebe.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Nagi identity and room in reference. NAGI adult medium stocky SOLID BLACK SHORT HAIRED cat, dense smooth glossy charcoal-black coat ALL OVER including all paws muzzle chest belly and tail, no white markings or tabby stripes. Round broad face, short rounded muzzle, small rounded triangular ears, black nose. Both eyes clear pale ICY BLUE, medium-long thick tapered black tail with rounded black tip. Quiet balanced attentive demeanor. Scene: standing while cream-sleeved hand brushes shoulder with wooden brush, joyful engaged expression, alert eyes and animated posture, distinct from basic action. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "nagi-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "voice__open_up",
+    "file": "nagi-voice__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-cfbdb9d3-b52c-489b-92ca-9c37fa5dae5b.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Nagi identity and room in reference. NAGI adult medium stocky SOLID BLACK SHORT HAIRED cat, dense smooth glossy charcoal-black coat ALL OVER including all paws muzzle chest belly and tail, no white markings or tabby stripes. Round broad face, short rounded muzzle, small rounded triangular ears, black nose. Both eyes clear pale ICY BLUE, medium-long thick tapered black tail with rounded black tip. Quiet balanced attentive demeanor. Scene: sitting with ears and head toward offscreen voice, no visible text, soft half-closed eyes and trusting relaxed posture. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "nagi-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "voice__simultaneous",
+    "file": "nagi-voice__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-ef3cbf85-dd95-4bec-a981-eefc8119c145.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Nagi identity and room in reference. NAGI adult medium stocky SOLID BLACK SHORT HAIRED cat, dense smooth glossy charcoal-black coat ALL OVER including all paws muzzle chest belly and tail, no white markings or tabby stripes. Round broad face, short rounded muzzle, small rounded triangular ears, black nose. Both eyes clear pale ICY BLUE, medium-long thick tapered black tail with rounded black tip. Quiet balanced attentive demeanor. Scene: sitting with ears and head toward offscreen voice, no visible text, joyful engaged expression, alert eyes and animated posture, distinct from basic action. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "nagi-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "presence__open_up",
+    "file": "nagi-presence__open_up.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-4ad68ba7-8c6e-4cf6-88df-b2c550f9f6c1.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Nagi identity and room in reference. NAGI adult medium stocky SOLID BLACK SHORT HAIRED cat, dense smooth glossy charcoal-black coat ALL OVER including all paws muzzle chest belly and tail, no white markings or tabby stripes. Round broad face, short rounded muzzle, small rounded triangular ears, black nose. Both eyes clear pale ICY BLUE, medium-long thick tapered black tail with rounded black tip. Quiet balanced attentive demeanor. Scene: loaf calmly beside cropped blue trouser knee, no toy, soft half-closed eyes and trusting relaxed posture. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "nagi-normal.png",
+    "reference_role": "identity_and_room"
+  },
+  {
+    "scene": "presence__simultaneous",
+    "file": "nagi-presence__simultaneous.png",
+    "source": "C:\\Users\\hi-wa\\.codex\\generated_images\\01a146e0-cf1c-72f0-90f0-83bd1fdba206\\exec-590da019-bb96-4aae-b8b6-85dbe04e1e01.png",
+    "prompt": "Square painted CatCafeSim storybook. Preserve exact Nagi identity and room in reference. NAGI adult medium stocky SOLID BLACK SHORT HAIRED cat, dense smooth glossy charcoal-black coat ALL OVER including all paws muzzle chest belly and tail, no white markings or tabby stripes. Round broad face, short rounded muzzle, small rounded triangular ears, black nose. Both eyes clear pale ICY BLUE, medium-long thick tapered black tail with rounded black tip. Quiet balanced attentive demeanor. Scene: loaf calmly beside cropped blue trouser knee, no toy, joyful engaged expression, alert eyes and animated posture, distinct from basic action. Full body and entire tail within generous margins, anatomically natural four limbs, one cat. Cream wall honey wood floor sage mat. No text UI watermark. Only specified props.",
+    "reference": "nagi-normal.png",
+    "reference_role": "identity_and_room"
+  }
+]

@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-06",
+  "cat_id": "catalog-13",
+  "name": "ナギ",
+  "status": "completed",
+  "selected_png_count": 27,
+  "scene_keys": 52,
+  "narrative_bindings": 32,
+  "retained_candidate_png_count": 0,
+  "python_tests_passed": 28,
+  "unity_reaction_cases": 40,
+  "unity_screenshots_reviewed": 4,
+  "all_27_pngs_visually_reviewed": true,
+  "unity_actual_recruitment_and_save_reload": true,
+  "actual_test_id": "rescue-13",
+  "recruitment_batch": 5,
+  "existing_cats_preserved": 25,
+  "existing_text_entries_preserved": 435,
+  "selected_png_bytes": 64131837,
+  "active_pack": "C:\\Users\\hi-wa\\unity_workspase\\CatCafeSim\\Assets\\Resources\\CatCafeContent\\Imports\\cbe0df94e7a5401a8f466406c105b493",
+  "runtime_id_resolution": {
+    "content_id": "catalog-13",
+    "rule": "Resolve actual rescue-N through standard saved recruitment batch and catalog position; validate original candidate fields"
+  },
+  "build_performed": false,
+  "capacity_before": {
+    "latest_bytes": 5838730306,
+    "runs_bytes": 295274388,
+    "generated_bytes": 3277372585
+  },
+  "capacity_after": {
+    "latest_bytes": 5838730306,
+    "runs_bytes": 295274388,
+    "generated_bytes": 3277372585
+  },
+  "build_folders": [
+    "Latest",
+    "Runs"
+  ]
+}
