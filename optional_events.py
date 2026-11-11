@@ -14,6 +14,9 @@ FIELDS = ('event_id', 'cat_id', 'content_cat_id', 'min_day', 'min_affinity', 'ti
 BRANCHES = ('introduction', 'accepted', 'declined')
 DEFAULT_LINE_COUNTS = (3, 2, 2)
 MAX_BRANCH_LINES = 20
+EVENT_BACKGROUNDS = {'': '標準の店内', 'mike-window-v1': 'カフェの窓辺'}
+EVENT_STILLS = {'': '指定なし', 'mike-approaches-v1': 'ミケが一歩近づく'}
+ARTWORK_SLOTS = (EVENT_BACKGROUNDS, EVENT_STILLS, EVENT_STILLS, EVENT_STILLS)
 DEFAULT_DRAFT = Path(__file__).resolve().parent / 'user_data' / 'optional_event_draft.json'
 
 
@@ -51,6 +54,8 @@ def revision(event):
     if counts != DEFAULT_LINE_COUNTS:
         # Include the branch boundaries while preserving all existing revision IDs.
         values.extend(('branch_counts', *(str(count) for count in counts)))
+    if 'artwork' in event:
+        values.extend(('event_artwork', *event['artwork']))
     for branch in BRANCHES:
         for line in event[branch]:
             values.extend((line['speaker'], line['text']))
@@ -62,10 +67,18 @@ def validate_event(event, *, require_revision=True):
     if not isinstance(event, dict):
         raise ValueError('イベント定義の項目が不正です。')
     fields = set(FIELDS) if 'target_kind' not in event else (set(FIELDS) - {'cat_id'}) | {'target_kind'} | ({'cat_id'} if event.get('target_kind') == 'individual' else set())
+    if 'target_kind' in event and 'artwork' in event:
+        fields.add('artwork')
     if set(event) != fields | ({'revision'} if require_revision else set()):
         raise ValueError('イベント定義の項目が不正です。')
     clean = copy.deepcopy(event)
     legacy = 'target_kind' not in clean
+    if 'artwork' in clean:
+        artwork = clean['artwork']
+        if not isinstance(artwork, list) or len(artwork) != len(ARTWORK_SLOTS) or any(
+            not isinstance(asset, str) or asset not in choices for asset, choices in zip(artwork, ARTWORK_SLOTS)
+        ):
+            raise ValueError('イベントの背景・スチルの指定が不正です。')
     if not legacy and (clean['target_kind'] not in ('content','individual') or not isinstance(clean['event_id'],str) or not re.fullmatch(r'optional\.[a-z][a-z0-9_.-]{0,86}',clean['event_id']) or not isinstance(clean['content_cat_id'],str) or not re.fullmatch('[a-z][a-z0-9_-]{0,63}',clean['content_cat_id'])):
         raise ValueError('イベントのID・対象が不正です。')
     if (legacy or clean['target_kind']=='individual') and (clean['event_id'] != EVENT_ID or clean['cat_id'] != 'cat-mike' or clean['content_cat_id'] != 'playtest-mike'):

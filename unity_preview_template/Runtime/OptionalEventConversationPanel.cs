@@ -45,8 +45,12 @@ namespace CatCafePreview
         protected override bool Available=>requested && base.Available;
         protected override bool AutoRunning=>false;
         protected override bool ThreeLinePages=>true;
-        protected override int SceneArt=>Row?.scene_art??0;
-        protected override bool SceneStill=>progress?.branch_id=="accepted";
+        protected override string SceneBackgroundAsset=>Row?.artwork?[0]
+            ?? (Row?.scene_art==CafeOptionalEvents.MikeWindowArt?CafeOptionalEvents.WindowBackground:null);
+        protected override string SceneStillAsset=>Choosing?null:Row?.artwork!=null
+            ? CafeOptionalEvents.Still(Row.artwork,progress.branch_id)
+            : Row?.scene_art==CafeOptionalEvents.MikeWindowArt && progress?.branch_id=="accepted"
+                ? CafeOptionalEvents.MikeApproachesStill:null;
         protected override void SetOpen(bool open){Backend.OptionalEventOpen=open;}
         protected override CafeConversationLine[] Lines(string branch)=>CafeOptionalEvents.Lines(Row,branch);
         protected override PythonIntakeState Request=>new PythonIntakeState{cat_id=Row.content_cat_id,name=Row.cat_name,personality="開始時の記録",can_decline=true};

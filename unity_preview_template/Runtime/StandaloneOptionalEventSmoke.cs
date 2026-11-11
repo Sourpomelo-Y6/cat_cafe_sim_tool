@@ -123,7 +123,10 @@ namespace CatCafePreview
                 Check(b.Replays.Load().entries.Count(e=>e.conversation_id==b.OptionalEvent.progress.conversation_id)==1,"Only chosen branch archived");
                 Good(b,"save_game",slot:4);Good(b,"load_game",slot:4);apply();Check(b.OptionalEvent.progress.completed && !b.ConversationBlocksProgress,"Completed save reload");
                 var entry=b.Replays.Load().entries.Single(e=>e.conversation_id==b.OptionalEvent.progress.conversation_id);
-                Check(entry.scene_art==CafeOptionalEvents.MikeWindowArt && entry.still_start_node==(accepted?b.OptionalEvent.introduction.Length+1:0),"Extra stores the result artwork boundary");
+                if(b.OptionalEvent.artwork!=null)
+                    Check(entry.artwork.SequenceEqual(b.OptionalEvent.artwork) && entry.artwork_choice_node==b.OptionalEvent.introduction.Length,"Extra stores the authored artwork and choice boundary");
+                else
+                    Check(entry.scene_art==CafeOptionalEvents.MikeWindowArt && entry.still_start_node==(accepted?b.OptionalEvent.introduction.Length+1:0),"Extra stores the result artwork boundary");
                 var host=new GameObject("Extra artwork verification",typeof(RectTransform),typeof(Image));
                 host.transform.SetParent(view.PlaybackHost.transform.parent,false);
                 var replay=client.gameObject.AddComponent<ReplayConversationPanel>();

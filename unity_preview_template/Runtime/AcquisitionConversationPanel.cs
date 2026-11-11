@@ -48,8 +48,8 @@ namespace CatCafePreview
         protected virtual string BusyNotice=>!Client.CanSendCommands?"処理中です。完了をお待ちください。":Notice;
         protected virtual Texture2D PortraitTexture(string id)=>GetComponent<ContentPreview>().CandidateCatTexture(id);
         protected virtual bool ShowPortrait=>true;
-        protected virtual int SceneArt=>0;
-        protected virtual bool SceneStill=>false;
+        protected virtual string SceneBackgroundAsset=>null;
+        protected virtual string SceneStillAsset=>null;
         protected virtual void PauseProgress(){if(Client.Automatic)Client.PauseAutomaticForSave();}
         protected virtual void AfterClose(){GetComponent<ContentPreview>().RefreshPythonControls();}
         protected virtual void RecordCompletion(){Backend.RememberViewedConversations();}
@@ -142,7 +142,8 @@ namespace CatCafePreview
         }
         bool RefreshSceneArt()
         {
-            bool illustrated=SceneArt==CafeOptionalEvents.MikeWindowArt;
+            string background=SceneBackgroundAsset, stillAsset=SceneStillAsset;
+            bool illustrated=!string.IsNullOrEmpty(background) || !string.IsNullOrEmpty(stillAsset);
             if(!illustrated && !illustratedLayout)return false;
             illustratedLayout=illustrated;
             var size=card.GetComponent<RectTransform>().rect.size;
@@ -153,13 +154,13 @@ namespace CatCafePreview
             bool still=false;
             if(illustrated)
             {
-                if(SceneStill)
+                if(stillAsset==CafeOptionalEvents.MikeApproachesStill)
                 {
                     if(mikeStill==null)mikeStill=Resources.Load<Texture2D>("CatCafeDefaults/mike-approaches-v1");
                     art=mikeStill;
                     still=art!=null;
                 }
-                if(art==null)
+                if(art==null && background==CafeOptionalEvents.WindowBackground)
                 {
                     if(mikeWindow==null)mikeWindow=Resources.Load<Texture2D>("CatCafeDefaults/mike-window-v1");
                     art=mikeWindow;

@@ -93,7 +93,8 @@ namespace CatCafePreview
             if(existing!=null){selectedOptional=existing;return !existing.progress.completed;}
             var d=DefinitionFor(cat);
             var created=d==null?CafeOptionalEvents.Start(Simulation.State,Simulation.Definition(cat).name,Details.ContentId(cat),imageResource):d.Start(Simulation.State,cat,Simulation.Definition(cat).name,imageResource);
-            if(created.event_id==CafeOptionalEvents.MikeId && created.cat_id==CafeOptionalEvents.MikeCatId)
+            if(created.artwork==null && created.event_id==CafeOptionalEvents.MikeId && created.cat_id==CafeOptionalEvents.MikeCatId
+                && (d==null || d.target_kind!="content"))
                 created.scene_art=CafeOptionalEvents.MikeWindowArt;
             var next=optionalEvents.Concat(new[]{created}).ToArray();CafeOptionalEvents.Validate(next);optionalEvents=next;selectedOptional=created;return true;
         }

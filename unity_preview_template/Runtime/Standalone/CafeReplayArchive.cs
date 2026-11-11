@@ -9,7 +9,8 @@ namespace CatCafePreview.Standalone
     {
         public string conversation_id,branch_id,title,cat_id,cat_name,personality;
         public string customer_id;
-        public int scene_art, still_start_node;
+        public int scene_art, still_start_node, artwork_choice_node;
+        public string[] artwork;
         public string image_resource; // Optional frozen portrait for authored story receipts.
         public CafeConversationLine[] lines;
         public string Key=>conversation_id+"/"+branch_id;
@@ -109,6 +110,10 @@ namespace CatCafePreview.Standalone
         public static void Validate(CafeReplayProfile profile)
         {
             if(profile==null || profile.version!=1 || profile.entries==null || profile.entries.Length>All.Length+1000 || profile.entries.Any(e=>e==null) || profile.entries.Select(e=>e.Key).Distinct().Count()!=profile.entries.Length)throw new ArgumentException("回想記録の形式が不正です。");
+            foreach(var entry in profile.entries.Where(e=>e?.artwork?.Length>0))
+                if(!CafeOptionalEvents.ValidArtwork(entry.artwork) || !IsOptional(entry.conversation_id) || entry.scene_art!=0
+                    || entry.artwork_choice_node<1 || entry.lines==null || entry.artwork_choice_node>=entry.lines.Length-1)
+                    throw new ArgumentException("回想の画像指定が不正です。");
             foreach(var e in profile.entries)if((!All.Any(d=>d.Key==e.Key) && !(IsOptional(e.conversation_id) && new[]{"accepted","declined"}.Contains(e.branch_id))) || string.IsNullOrEmpty(e.title) || e.title.Length>256 || (e.cat_name??"").Length>256 || (e.cat_id??"").Length>256 || (e.personality??"").Length>1024 || (e.image_resource??"").Length>1024 || e.lines==null || e.lines.Length==0 || e.lines.Length>100 || e.lines.Any(l=>l==null || l.text==null || l.text.Length>10000 || (l.speaker??"").Length>256))throw new ArgumentException("回想の本文が不正です。");
         }
         public static void ValidateSave(CafeSaveEnvelope s)
@@ -120,7 +125,7 @@ namespace CatCafePreview.Standalone
         {
             ValidateSave(save);var result=new List<CafeReplayEntry>();
             foreach(var row in (save.optional_events??new CafeOptionalEvent[0]).Select((row,index)=>new{row,index}).OrderByDescending(p=>p.row.started_day).ThenByDescending(p=>p.index).Select(p=>p.row))if(row.progress.completed)
-                result.Add(new CafeReplayEntry{conversation_id=row.progress.conversation_id,branch_id=row.progress.branch_id,title=row.title+" · "+(row.progress.branch_id=="accepted"?row.accept_caption:row.decline_caption),image_resource=row.image_resource,scene_art=row.scene_art,still_start_node=row.scene_art!=0 && row.progress.branch_id=="accepted"?row.introduction.Length+1:0,cat_id=row.content_cat_id,cat_name=row.cat_name,personality=row.started_day+"日目の記録",lines=row.introduction.Concat(new[]{new CafeConversationLine("あなた",row.progress.branch_id=="accepted"?row.accept_caption:row.decline_caption)}).Concat(CafeOptionalEvents.Lines(row,row.progress.branch_id)).Select(l=>new CafeConversationLine(l.speaker,l.text)).ToArray()});
+                result.Add(new CafeReplayEntry{conversation_id=row.progress.conversation_id,branch_id=row.progress.branch_id,title=row.title+" · "+(row.progress.branch_id=="accepted"?row.accept_caption:row.decline_caption),image_resource=row.image_resource,scene_art=row.scene_art,artwork=row.artwork?.ToArray(),artwork_choice_node=row.artwork!=null?row.introduction.Length:0,still_start_node=row.scene_art!=0 && row.progress.branch_id=="accepted"?row.introduction.Length+1:0,cat_id=row.content_cat_id,cat_name=row.cat_name,personality=row.started_day+"日目の記録",lines=row.introduction.Concat(new[]{new CafeConversationLine("あなた",row.progress.branch_id=="accepted"?row.accept_caption:row.decline_caption)}).Concat(CafeOptionalEvents.Lines(row,row.progress.branch_id)).Select(l=>new CafeConversationLine(l.speaker,l.text)).ToArray()});
             Action<CafeConversationProgress,string,string,string,Func<string,CafeConversationLine[]>,bool> add=(p,id,name,personality,script,intro)=>{
                 if(p==null)return;
                 foreach(string branch in p.viewed_branches??new string[0])

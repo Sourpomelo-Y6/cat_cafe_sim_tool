@@ -1,6 +1,6 @@
 """Edit optional stories by image family."""
 import copy
-from optional_events import BRANCHES, MAX_BRANCH_LINES, export_event_pack
+from optional_events import BRANCHES, MAX_BRANCH_LINES, ARTWORK_SLOTS, EVENT_BACKGROUNDS, EVENT_STILLS, EVENT_ID, export_event_pack
 
 
 class OptionalEventEditorWindow:
@@ -38,6 +38,10 @@ class OptionalEventEditorWindow:
             self.values[key] = value
             ttk.Entry(fields, textvariable=value).grid(row=index, column=1, sticky='ew', padx=8, pady=3)
         ttk.Checkbutton(outer, text='採用後の出力に含める（外しても開始済みの会話は保持）', variable=self.enabled).pack(anchor='w')
+        self.artwork = []
+        background = ttk.Frame(outer)
+        background.pack(fill='x', pady=(6, 0))
+        self.add_artwork_selector(background, '背景', EVENT_BACKGROUNDS)
         book = ttk.Notebook(outer)
         book.pack(fill='both', expand=True, pady=8)
         self.lines = {}
@@ -50,6 +54,7 @@ class OptionalEventEditorWindow:
             self.lines[branch] = []
             tools = ttk.Frame(page)
             tools.pack(fill='x', pady=(0, 8))
+            self.add_artwork_selector(tools, 'スチル', EVENT_STILLS)
             self.line_buttons[branch] = {}
             for action, caption in (('add', '行を追加'), ('remove', '行を削除'), ('up', '上へ'), ('down', '下へ')):
                 button = ttk.Button(tools, text=caption, command=lambda b=branch, a=action: self.edit_lines(b, a))
@@ -80,9 +85,28 @@ class OptionalEventEditorWindow:
         self.refresh_catalog()
         self.notice.set('下書きの編集だけではUnityへ反映されません。プレビューで確認し、採用登録して出力してください。')
 
+    def add_artwork_selector(self, parent, label, choices):
+        import tkinter as tk
+        from tkinter import ttk
+
+        value = tk.StringVar(master=self.window)
+        ttk.Label(parent, text=label).pack(side='left', padx=(0, 4))
+        ttk.Combobox(parent, textvariable=value, values=list(choices.values()), state='readonly', width=19).pack(side='left', padx=(0, 8))
+        self.artwork.append(value)
+
+    @staticmethod
+    def artwork_for(event):
+        if 'artwork' in event:
+            return event['artwork']
+        if event['event_id'] == EVENT_ID and event.get('target_kind') == 'individual':
+            return ['mike-window-v1', '', 'mike-approaches-v1', '']
+        return ['', '', '', '']
+
     def populate(self, data):
         self.identity = copy.deepcopy(data['event'])
         self.enabled.set(data['enabled'])
+        for variable, options, asset in zip(self.artwork, ARTWORK_SLOTS, self.artwork_for(self.identity)):
+            variable.set(options[asset])
         for key, value in self.values.items():
             value.set(str(data['event'][key]))
         for branch in BRANCHES:
@@ -164,6 +188,12 @@ class OptionalEventEditorWindow:
 
     def collect(self):
         event = copy.deepcopy(self.identity)
+        selected = [
+            next(asset for asset, label in choices.items() if label == value.get())
+            for value, choices in zip(self.artwork, ARTWORK_SLOTS)
+        ]
+        if 'artwork' in event or selected != self.artwork_for(event):
+            event['artwork'] = selected
         for key, value in self.values.items():
             event[key] = value.get()
         for branch in BRANCHES:
@@ -181,6 +211,8 @@ class OptionalEventEditorWindow:
                 raise ValueError('日数・好感度は整数で入力してください。')
             data['event'][key] = int(data['event'][key])
         data['event'].pop('revision', None)
+        if 'artwork' not in data['event'] and any(self.artwork_for(data['event'])):
+            data['event']['artwork'] = self.artwork_for(data['event'])
         data['event'] = validate_event(data['event'], require_revision=False)
         return data
 
@@ -200,6 +232,7 @@ class OptionalEventEditorWindow:
 
     def preview(self):
         import tkinter as tk
+        from pathlib import Path
         from tkinter import ttk
         from tkinter.scrolledtext import ScrolledText
         def show():
@@ -213,6 +246,9 @@ class OptionalEventEditorWindow:
             window.geometry('1000x700')
             book = ttk.Notebook(window)
             book.pack(fill='both', expand=True)
+            images = {}
+            window.artwork_images = images
+            asset_folder = Path(__file__).resolve().parent / 'unity_preview_template/Resources/CatCafeDefaults'
             for branch, label in (('accepted', '選択肢1の流れ'), ('declined', '選択肢2の流れ')):
                 pane = ttk.Frame(book)
                 book.add(pane, text=label)
@@ -228,6 +264,20 @@ class OptionalEventEditorWindow:
                     output = '出力対象' if content['enabled'] else '出力対象外'
                     text.insert('end', f"{heading}（{scope}／{output}）\n{e['title']}\n"
                                 f"{e['min_day']}日目以降 / 好感度{e['min_affinity']}以上\n\n")
+                    background, intro, accepted, declined = self.artwork_for(e)
+                    for label, asset, options in (
+                        ('背景', background, EVENT_BACKGROUNDS),
+                        ('導入', intro, EVENT_STILLS),
+                        ('結果', accepted if branch == 'accepted' else declined, EVENT_STILLS),
+                    ):
+                        text.insert('end', f'{label}：{options[asset]}\n')
+                        if asset:
+                            if asset not in images:
+                                image = tk.PhotoImage(master=window, file=asset_folder / (asset + '.png'))
+                                images[asset] = image.subsample(max(1, (image.width() + 299) // 300))
+                            text.image_create('end', image=images[asset])
+                            text.insert('end', '\n')
+                    text.insert('end', '\n')
                     for line in e['introduction'] + [dict(speaker='あなた', text=e['accept_caption' if branch == 'accepted' else 'decline_caption'])] + e[branch]:
                         text.insert('end', (line['speaker'] or '地の文') + '\n' + line['text'] + '\n\n')
                     text.configure(state='disabled')
@@ -318,6 +368,8 @@ class OptionalEventEditorWindow:
                 e=row['event'];result.append(e['title']+'（'+e['content_cat_id']+'）'+(' 出力する' if row['enabled'] else ' 出力しない'))
                 result.append('対象：旧ミケ専用' if e.get('target_kind')=='individual' else '対象：画像系統で共有')
                 result.append(f"{e['min_day']}日目／好感度{e['min_affinity']}以上")
+                artwork = [choices[asset] for choices, asset in zip(ARTWORK_SLOTS, self.artwork_for(e))]
+                result.append('背景・導入・結果1・結果2：' + '／'.join(artwork))
                 for branch in BRANCHES:
                     result.append({'introduction':'導入','accepted':e['accept_caption'],'declined':e['decline_caption']}[branch])
                     result.extend((line['speaker'] or '地の文')+'：'+line['text'] for line in e[branch])
