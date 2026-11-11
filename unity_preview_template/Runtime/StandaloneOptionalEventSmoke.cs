@@ -76,6 +76,7 @@ namespace CatCafePreview
             CafeOptions.Current.instant=true;
             var b=Create(Path.Combine(output,"isolated-save"));CafeBackends.UseLocal(b);
             var args=Environment.GetCommandLineArgs();int variant=Array.IndexOf(args,"--optional-authoring-variant");
+            if(args.Contains("--optional-milestone-pace")){MeasureMilestonePace();yield break;}
             if(args.Contains("--optional-milestones"))
             {
                 var milestones=Milestones(b);
@@ -211,8 +212,22 @@ namespace CatCafePreview
             row=b.OptionalEvent;row.progress.node=row.introduction.Length;CafeOptionalEvents.Choose(row,false);
             row.progress.node=row.declined.Length;b.FinishOptionalEvent(row);
             Gain(cats[0]);
-            Check(Affinity(cats[0])>60 && b.OptionalForCat(cats[0])==null,"Unregistered milestones do not stop affinity growth");
+            Check(Affinity(cats[0])==60 && b.OptionalForCat(cats[0])?.milestone==60,"Mike reaches his third milestone");
+            CompleteMilestone(b,b.OptionalForCat(cats[0]),true);
+            NextDay();
+            Gain(cats[0]);
+            Check(Affinity(cats[0])>80 && b.OptionalForCat(cats[0])==null,"Unregistered milestones do not stop affinity growth");
+            foreach(string cat in cats.Skip(1))
+            {
+                CompleteMilestone(b,b.OptionalForCat(cat),false);
+                Gain(cat);
+                Check(Affinity(cat)==40 && b.OptionalForCat(cat)?.milestone==40,"Second milestone caps independently: "+cat);
+                CompleteMilestone(b,b.OptionalForCat(cat),true);
+            }
+            Check(b.OptionalEvents.Count(r=>r.progress.completed)==7,"All seven priority stories completed independently");
             b.Journal.Verify(b.Journal.Document);
+            Good(b,"save_game",slot:7);Good(b,"load_game",slot:7);
+            Check(b.OptionalEvents.Count(r=>r.progress.completed)==7 && !b.OptionalEventListed,"Seven completions persist after reload");
             var priorityCatalog=CafeOptionalEventResources.Load();
             b.SetOptionalCatalog(new CafeOptionalEventCatalog{version=2,pack_id=new string('0',32),events=new CafeOptionalDefinition[0]});
             Good(b,"new_game","free");NextDay();Gain(cats[0]);
@@ -227,6 +242,118 @@ namespace CatCafePreview
             Good(b,"save_game",slot:6);
             b.SetOptionalCatalog(priorityCatalog);Good(b,"load_game",slot:6);
             Check(b.OptionalForCat(cats[0])==null && b.OptionalEvents.Single().progress.completed,"Legacy completion prevents duplicate milestone");
+        }
+        void CompleteMilestone(LocalCafeBackend b,OptionalEventCandidate candidate,bool accept)
+        {
+            var state=b.Simulation.State;
+            Check(candidate!=null && b.BeginOptionalEvent(candidate.cat_id,candidate.event_id,candidate.revision,state.instance_id,state.revision,""),
+                "Open milestone");
+            var row=b.OptionalEvent;
+            row.progress.node=row.introduction.Length;row.progress.page_offset=0;
+            Check(CafeOptionalEvents.Choose(row,accept),"Choose milestone branch");
+            row.progress.node=CafeOptionalEvents.Lines(row,row.progress.branch_id).Length;
+            b.FinishOptionalEvent(row);
+        }
+        void MeasureMilestonePace()
+        {
+            var b=new LocalCafeBackend(Path.Combine(output,"normal-rules"));
+            var sim=b.Simulation;
+            var state=sim.State;
+            string[] cats={"cat-mike","cat-tama","cat-sora"};
+            int[] targets={60,40,40};
+            var rows=new System.Collections.Generic.List<string>{"cat_id,milestone,day,exchange_sets"};
+            string report=Path.Combine(output,"milestone-pace.csv");
+            void Record(OptionalEventCandidate pending)
+            {
+                rows.Add($"{pending.cat_id},{pending.milestone},{state.day},{sim.PlayerCat(pending.cat_id).total}");
+                File.WriteAllLines(report,rows);
+                CompleteMilestone(b,pending,true);
+            }
+            void ResolveReturns()
+            {
+                foreach(var cat in state.cats.Where(c=>c.activity=="missing" && c.missing_remaining==0 && !sim.DispatchMissing(state,c.id)).ToArray())
+                    sim.Execute("resolve_missing",catId:cat.id);
+                if(!b.MissingResultPending)return;
+                foreach(var missing in state.missing_cases.Where(e=>e.result!=null && !e.result.completed))
+                {
+                    missing.result.node=CafeMissingDialogue.Lines(missing,"result","").Length;
+                    CafeMissingDialogue.Finish(missing.result);
+                }
+            }
+            void ResolveGrowth()
+            {
+                for(int stage=0;sim.GrowthWaiting;stage++)
+                {
+                    if(stage>=20)throw new InvalidOperationException("Growth choices did not settle");
+                    sim.Execute("resolve_growth_auto");
+                    sim.Execute("resolve_growth_batch");
+                }
+            }
+            void ReadRequiredResults()
+            {
+                foreach(var row in b.EquipmentConversations.Where(r=>!r.progress.completed && r.progress.branch_id!="introduction"))
+                {
+                    row.progress.node=CafeEquipmentDialogue.Lines(row,row.progress.branch_id).Length;
+                    CafeEquipmentDialogue.Finish(row);
+                }
+                foreach(var row in b.TrustConversations.Where(CafeTrustDialogue.Pending))
+                {
+                    row.Current.node=CafeTrustDialogue.Lines(row.Current==row.result,row.Current.branch_id,"",sim.Rules.trust.popularity_loss).Length;
+                    CafeTrustDialogue.Finish(row);
+                }
+                foreach(var row in b.ReservationConversations.Where(CafeReservationDialogue.Pending))
+                {
+                    row.Current.node=CafeReservationDialogue.Lines(row,row.Current==row.result,row.Current.branch_id).Length;
+                    CafeReservationDialogue.Finish(row);
+                }
+            }
+            sim.Execute("set_auto_assignment",choice:"automatic");
+            for(int day=1;day<=30;day++)
+            {
+                Check(state.day==day && state.phase=="preparation" && state.game_over==null,"Normal business reached preparation on day "+day);
+                ResolveReturns();
+                if(sim.StoreEventWaiting)sim.Execute("resolve_store_event",choice:sim.CurrentStoreEvent.type=="trouble"?"patch":"decline");
+                if(sim.IntakeWaiting)sim.Execute("resolve_intake",choice:"decline");
+                if(sim.RegularIntroductionWaiting)sim.Execute("resolve_regular_introduction",choice:"decline");
+                if(sim.ReservationWaiting)sim.Execute("resolve_reservation",choice:"decline");
+                foreach(var item in state.trust_events.Where(e=>e.status=="waiting").ToArray())
+                    sim.Execute("resolve_customer_trust",choice:"ignore",source:item.id);
+                ReadRequiredResults();
+                ResolveGrowth();
+                b.View();
+                for(int i=0;i<cats.Length;i++)
+                {
+                    string cat=cats[i];
+                    var pending=b.OptionalForCat(cat);
+                    if(pending!=null && b.OptionalReason(pending)=="")
+                        Record(pending);
+                    if(sim.PlayerCat(cat).affinity>=targets[i] || sim.PlayerBeginReason(cat)!="")continue;
+                    sim.Execute("player_begin",catId:cat);
+                    while(sim.PlayerActive)
+                    {
+                        var action=sim.PlanAutoplay("bond","clear");
+                        sim.Execute(action.kind,choice:action.choice,source:action.source);
+                    }
+                    ResolveGrowth();
+                    pending=b.OptionalForCat(cat);
+                    if(pending!=null && b.OptionalReason(pending)=="")
+                        Record(pending);
+                }
+                if(b.OptionalEvents.Count(r=>r.progress.completed)==7)break;
+                var workers=state.cats.Where(c=>c.activity=="cafe" && c.health=="healthy" && c.stamina>0 && !c.cannot_continue)
+                    .OrderBy(c=>cats.Contains(c.id)).ThenBy(c=>c.fatigue+c.stress).Take(sim.State.seat_count).Select(c=>c.id).ToArray();
+                if(workers.Length==0)sim.Execute("day_off");
+                else
+                {
+                    sim.Execute("set_shifts",working:workers);sim.Execute("start_business");
+                    while(state.phase=="open")sim.Execute("advance_business");
+                }
+                ResolveReturns();
+                ResolveGrowth();
+                if(state.phase=="closed")sim.Execute("next_day");
+            }
+            File.WriteAllLines(report,rows);
+            Check(b.OptionalEvents.Count(r=>r.progress.completed)==7,"All seven milestones reached under shipped rules");
         }
     }
 }
