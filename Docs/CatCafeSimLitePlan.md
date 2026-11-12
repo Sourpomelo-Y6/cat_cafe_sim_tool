@@ -49,6 +49,12 @@ Unity 作業ツリー `C:/Users/hi-wa/unity_workspase/CatCafeSim` を計測し�
 
 ## 参照を解決して素材を選ぶ
 
+組み立てに使う入力を [収録ファイル一覧](CatCafeSimLiteInventory.json) に記録した。基準コミットに追跡されている1,373ファイル、212,568,445バイト。各ファイルにパス、サイズ、SHA-256、用途を記録した。画像は猫90枚、客12枚、イベントの共用画像2枚。イベント15件それぞれの通常立ち絵と専用画像も記録した。
+
+- `filter-json` の5ファイルは軽量版用に書き出す。交流文は標準3匹と来店12枠に加えて `player` の定義を保持する。現行データの ID で絞ると画像対応96行、交流文366件（猫反応250件、人物発言116件）。共通行動文・地の文を保持し、書き出し時に `revision` を再計算する。肖像の絞り込みと、営業ルール・表示定義の変更は同じ ID 一覧に合わせる。
+- `guidReplacements` の5件は、営業シーンの収録外4画像を猫シルエットへ、プレビュープレハブの旧取り込み画像1枚を現行のミケの通常画像へ差し替える案。対象は `Texture2D` の参照12箇所。シーンとプレハブ上で表示を確認する。 `guidsToResolveInUnity` の44件は Unity の組み込み・パッケージ参照を含むため、インポート後に解決を確認する。
+- `editor-review`、`test-review`、`legacy-review` は依存確認用の候補。公開用ツリーに必要な検証・生成入口を確定してから整理する。入力一覧の容量はこれらを含み、生成後の JSON や公開用文書の容量は組み立て後に測る。
+
 1. `StandaloneScreenSetup.Build` が使う `CatCafeTitle.unity` と `CatCafePythonState.unity` を入口にする。後者は名前に Python を含むが、共有版では Unity 内の `LocalCafeBackend` で動かす。シーン、プレハブ、マテリアル、フォント、設定の依存を `AssetDatabase.GetDependencies` と YAML の GUID／`.meta` で照合する。営業シーンには現行取り込み画像への直接参照が7件あり、共有画像を含む。さらにシーンから参照される `ContentPreview.prefab` は旧取り込み `bba09…` の画像を1件参照する。収録素材へ差し替えるか必要な機能と一緒に外し、削除対象パスへの GUID 参照を解消する。単独の検証用 `CatCafeStandalone.unity` は共有版の通常起動入口から外す。
 2. 文字列によるロードを追う。`CatCafeContent/catalog` → `bundleResource`／`interactionResource` → 猫 ID・交流文・画像キー、`human_portraits` → `pack_id`／`game_id` → 肖像、`CatCafeEvents/catalog` → 任意イベント定義 → 通常画像、`CatCafeStandalone` → ルール・表示・成長・フォールバック。`rules.json`、`presentation.json`、猫の表示名・画像結び付け、交流文の話者／対象猫、ギャラリー・回想のキーも同じ収録表に合わせる。カタログの版・ハッシュは既存の生成・検証規則に従う。過去のカタログを固定パスで読む `NarrativeProofreadingSmoke` などは共有用の検証入口から切り離すか軽量版のデータで動かす。
 3. 公開許諾が確認できた実行用素材の許可リストを作り、ID・参照元・相対パス・GUID・サイズ・権利根拠を記録する。タイトル背景、M PLUS フォントとライセンス、汎用猫シルエット・客アイコン、ミケの導入画像、必要な共通 UI を含める。未収録シーンや素材からの参照が残る場合は収録前に解決し、必要な `.meta` は保持する。
