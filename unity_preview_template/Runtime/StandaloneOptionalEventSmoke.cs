@@ -214,20 +214,39 @@ namespace CatCafePreview
             Gain(cats[0]);
             Check(Affinity(cats[0])==60 && b.OptionalForCat(cats[0])?.milestone==60,"Mike reaches his third milestone");
             CompleteMilestone(b,b.OptionalForCat(cats[0]),true);
-            NextDay();
-            Gain(cats[0]);
-            Check(Affinity(cats[0])>80 && b.OptionalForCat(cats[0])==null,"Unregistered milestones do not stop affinity growth");
-            foreach(string cat in cats.Skip(1))
+            foreach(string cat in cats.Skip(1))CompleteMilestone(b,b.OptionalForCat(cat),false);
+            Good(b,"enable_bond_goal");
+            for(int level=40;level<=100;level+=20)
             {
-                CompleteMilestone(b,b.OptionalForCat(cat),false);
-                Gain(cat);
-                Check(Affinity(cat)==40 && b.OptionalForCat(cat)?.milestone==40,"Second milestone caps independently: "+cat);
-                CompleteMilestone(b,b.OptionalForCat(cat),true);
+                NextDay();
+                foreach(string cat in cats.Where(id=>Affinity(id)<level))
+                {
+                    Gain(cat);
+                    var candidate=b.OptionalForCat(cat);
+                    Check(Affinity(cat)==level && candidate?.milestone==level,"Event listed at "+level+": "+cat);
+                    Check(b.Simulation.PlayerAtAffinityMilestone(cat)==(level<100),"Only milestones below 100 cap affinity: "+cat);
+                    if(level==80)
+                        Check(b.Simulation.BondQualifying(b.Simulation.State).Contains(cat),"Unread 80 counts toward the bond goal: "+cat);
+                    CompleteMilestone(b,candidate,cat!="cat-tama");
+                }
             }
-            Check(b.OptionalEvents.Count(r=>r.progress.completed)==7,"All seven priority stories completed independently");
+            Check(b.OptionalEvents.Count(r=>r.progress.completed)==15,"All fifteen priority stories completed independently");
             b.Journal.Verify(b.Journal.Document);
             Good(b,"save_game",slot:7);Good(b,"load_game",slot:7);
-            Check(b.OptionalEvents.Count(r=>r.progress.completed)==7 && !b.OptionalEventListed,"Seven completions persist after reload");
+            Check(b.OptionalEvents.Count(r=>r.progress.completed)==15 && !b.OptionalEventListed,"Fifteen completions persist after reload");
+            var archive=b.Replays.Load().entries;
+            var finale=b.OptionalEvents.Where(r=>r.milestone==100).ToArray();
+            Check(finale.Length==3 && finale.All(r=>archive.Any(e=>e.conversation_id==r.progress.conversation_id &&
+                e.branch_id==r.progress.branch_id && e.lines.Last().text==CafeOptionalEvents.Lines(r,r.progress.branch_id).Last().text)),
+                "Extra retains the chosen finale for all three cats");
+            var entry=archive.Single(e=>e.conversation_id==finale[0].progress.conversation_id);
+            var host=new GameObject("Extra finale verification",typeof(RectTransform),typeof(Image));
+            host.transform.SetParent(view.PlaybackHost.transform.parent,false);
+            var replay=client.gameObject.AddComponent<ReplayConversationPanel>();
+            replay.Play(entry,host,client.GetComponent<PythonCatDetailsPanel>().title.font,()=>{});
+            yield return null;
+            Check(replay.Showing && replay.PlaybackKey.StartsWith(entry.conversation_id),"Finale opens in Extra playback");
+            replay.Close();
             var priorityCatalog=CafeOptionalEventResources.Load();
             b.SetOptionalCatalog(new CafeOptionalEventCatalog{version=2,pack_id=new string('0',32),events=new CafeOptionalDefinition[0]});
             Good(b,"new_game","free");NextDay();Gain(cats[0]);
@@ -260,7 +279,6 @@ namespace CatCafePreview
             var sim=b.Simulation;
             var state=sim.State;
             string[] cats={"cat-mike","cat-tama","cat-sora"};
-            int[] targets={60,40,40};
             var rows=new System.Collections.Generic.List<string>{"cat_id,milestone,day,exchange_sets"};
             string report=Path.Combine(output,"milestone-pace.csv");
             void Record(OptionalEventCandidate pending)
@@ -327,7 +345,7 @@ namespace CatCafePreview
                     var pending=b.OptionalForCat(cat);
                     if(pending!=null && b.OptionalReason(pending)=="")
                         Record(pending);
-                    if(sim.PlayerCat(cat).affinity>=targets[i] || sim.PlayerBeginReason(cat)!="")continue;
+                    if(sim.PlayerCat(cat).affinity>=100 || sim.PlayerBeginReason(cat)!="")continue;
                     sim.Execute("player_begin",catId:cat);
                     while(sim.PlayerActive)
                     {
@@ -339,7 +357,7 @@ namespace CatCafePreview
                     if(pending!=null && b.OptionalReason(pending)=="")
                         Record(pending);
                 }
-                if(b.OptionalEvents.Count(r=>r.progress.completed)==7)break;
+                if(b.OptionalEvents.Count(r=>r.progress.completed)==15)break;
                 var workers=state.cats.Where(c=>c.activity=="cafe" && c.health=="healthy" && c.stamina>0 && !c.cannot_continue)
                     .OrderBy(c=>cats.Contains(c.id)).ThenBy(c=>c.fatigue+c.stress).Take(sim.State.seat_count).Select(c=>c.id).ToArray();
                 if(workers.Length==0)sim.Execute("day_off");
@@ -353,7 +371,7 @@ namespace CatCafePreview
                 if(state.phase=="closed")sim.Execute("next_day");
             }
             File.WriteAllLines(report,rows);
-            Check(b.OptionalEvents.Count(r=>r.progress.completed)==7,"All seven milestones reached under shipped rules");
+            Check(b.OptionalEvents.Count(r=>r.progress.completed)==15,"All fifteen milestones reached under shipped rules");
         }
     }
 }

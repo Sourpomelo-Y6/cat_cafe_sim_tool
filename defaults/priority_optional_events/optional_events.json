@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "pack_id": "7d644ad7e4f64f93b1d1dce154cda8e3",
+  "pack_id": "831e8c62fc25417a9095d507708519a3",
   "events": [
     {
       "event_id": "optional.mike.afternoon",
@@ -341,6 +341,392 @@
         }
       ],
       "revision": "6922a6243043c5f2a4c906f3369db65c322d687e2a597ace4f88f6fe01c6daa7"
+    },
+    {
+      "event_id": "optional.playtest-tama.affinity-60",
+      "target_kind": "content",
+      "content_cat_id": "playtest-tama",
+      "min_day": 2,
+      "min_affinity": 60,
+      "title": "椅子を戻す音",
+      "accept_caption": "手を止めて待つ",
+      "decline_caption": "椅子をそっと引く",
+      "milestone": 60,
+      "introduction": [
+        {
+          "speaker": "",
+          "text": "閉店後、最後の椅子を戻すと、タマが足元までついてきた。"
+        },
+        {
+          "speaker": "",
+          "text": "椅子の下には入らず、あなたが片づけを終えるのを待っている。"
+        },
+        {
+          "speaker": "",
+          "text": "椅子の脚から手を離すと、タマが短く鳴いた。"
+        }
+      ],
+      "accepted": [
+        {
+          "speaker": "",
+          "text": "手を止めると、タマは靴のつま先に頬を寄せた。"
+        },
+        {
+          "speaker": "",
+          "text": "それから椅子の下を通り抜け、少し先で振り返った。"
+        }
+      ],
+      "declined": [
+        {
+          "speaker": "",
+          "text": "椅子を一脚引くと、タマが座面に跳び上がった。"
+        },
+        {
+          "speaker": "",
+          "text": "あなたが隣の椅子に座るまで、タマはその場所を離れなかった。"
+        }
+      ],
+      "revision": "753779d7c1d5fa9977f845ea0d25b7f9bf0285d4189b38fa6459f383e19ada99"
+    },
+    {
+      "event_id": "optional.playtest-sora.affinity-60",
+      "target_kind": "content",
+      "content_cat_id": "playtest-sora",
+      "min_day": 2,
+      "min_affinity": 60,
+      "title": "雲の切れ間",
+      "accept_caption": "影が戻るのを待つ",
+      "decline_caption": "手を窓辺に置く",
+      "milestone": 60,
+      "introduction": [
+        {
+          "speaker": "",
+          "text": "窓の外を厚い雲が流れ、床の影がひとつずつ消えていった。"
+        },
+        {
+          "speaker": "",
+          "text": "ソラは窓の外を見上げたあと、あなたの座る場所まで歩いてきた。"
+        },
+        {
+          "speaker": "",
+          "text": "いつもなら影が戻るまで窓を見ているソラが、今日はあなたの隣で足を止めた。"
+        }
+      ],
+      "accepted": [
+        {
+          "speaker": "",
+          "text": "並んで待っていると、床に葉の影が戻った。"
+        },
+        {
+          "speaker": "",
+          "text": "ソラは影をひと目見て、あなたの膝のそばで伸びをした。"
+        }
+      ],
+      "declined": [
+        {
+          "speaker": "",
+          "text": "窓辺に手を置くと、ソラが手の甲に鼻を近づけた。"
+        },
+        {
+          "speaker": "",
+          "text": "明るくなった床には向かわず、その手のそばに座った。"
+        }
+      ],
+      "artwork": [
+        "mike-window-v1",
+        "",
+        "",
+        ""
+      ],
+      "revision": "d294f3dccaf03e3231d40795bde2b60e300c7960077a8fccdb882082806c1f5d"
+    },
+    {
+      "event_id": "optional.playtest-mike.affinity-80",
+      "target_kind": "content",
+      "content_cat_id": "playtest-mike",
+      "min_day": 2,
+      "min_affinity": 80,
+      "title": "半分ずつの日なた",
+      "accept_caption": "隣へ腰を下ろす",
+      "decline_caption": "日なたをミケに譲る",
+      "milestone": 80,
+      "introduction": [
+        {
+          "speaker": "",
+          "text": "開店前、窓辺に細い日なたが伸びていた。"
+        },
+        {
+          "speaker": "",
+          "text": "先に来ていたミケは窓側へ少し詰め、あなたの場所を空けた。"
+        },
+        {
+          "speaker": "",
+          "text": "窓辺の板は、日なたのところだけほんのり暖かかった。"
+        }
+      ],
+      "accepted": [
+        {
+          "speaker": "",
+          "text": "腰を下ろすと、ミケが袖に体を預けた。"
+        },
+        {
+          "speaker": "",
+          "text": "日なたが少しずつ動いても、ふたりはそのまま座っていた。"
+        }
+      ],
+      "declined": [
+        {
+          "speaker": "",
+          "text": "日なたを空けて端に座ると、ミケが暖かい場所から出てきた。"
+        },
+        {
+          "speaker": "",
+          "text": "そのままあなたの隣に丸くなり、しっぽを袖の上に置いた。"
+        }
+      ],
+      "artwork": [
+        "mike-window-v1",
+        "",
+        "",
+        ""
+      ],
+      "revision": "a5d23f7ef996ba48f7fa332e476781484716dd6981b8744850f87332c94aaa0c"
+    },
+    {
+      "event_id": "optional.playtest-tama.affinity-80",
+      "target_kind": "content",
+      "content_cat_id": "playtest-tama",
+      "min_day": 2,
+      "min_affinity": 80,
+      "title": "ふたつ並んだ椅子",
+      "accept_caption": "タマの隣に座る",
+      "decline_caption": "座面を手で払う",
+      "milestone": 80,
+      "introduction": [
+        {
+          "speaker": "",
+          "text": "片づけが終わるころ、タマが並んだ椅子の片方に跳び乗った。"
+        },
+        {
+          "speaker": "",
+          "text": "残りの一脚へ視線を向けてから、前足をそろえて座り直した。"
+        },
+        {
+          "speaker": "",
+          "text": "誰もいなくなった店内で、タマの喉が小さく鳴った。"
+        }
+      ],
+      "accepted": [
+        {
+          "speaker": "",
+          "text": "隣に座ると、タマは椅子の端まで寄ってきた。"
+        },
+        {
+          "speaker": "",
+          "text": "膝に飛び移る前に一度顔を見上げ、それからゆっくり前足を置いた。"
+        }
+      ],
+      "declined": [
+        {
+          "speaker": "",
+          "text": "空いている座面を払うと、タマがそちらへ渡った。"
+        },
+        {
+          "speaker": "",
+          "text": "あなたが元の椅子に座ると、隣からしっぽの先が触れた。"
+        }
+      ],
+      "revision": "52c5f4e3e8df129c25b35352d9f8a988fe32b59ccad799182dc475e95c4dff6e"
+    },
+    {
+      "event_id": "optional.playtest-sora.affinity-80",
+      "target_kind": "content",
+      "content_cat_id": "playtest-sora",
+      "min_day": 2,
+      "min_affinity": 80,
+      "title": "影を待たない午後",
+      "accept_caption": "隣で空を眺める",
+      "decline_caption": "そっと名前を呼ぶ",
+      "milestone": 80,
+      "introduction": [
+        {
+          "speaker": "",
+          "text": "雲ひとつない午後、窓辺の床には葉の影が落ちていた。"
+        },
+        {
+          "speaker": "",
+          "text": "ソラは影のそばを通り過ぎ、あなたの座る場所で止まった。"
+        },
+        {
+          "speaker": "",
+          "text": "追いかける気配もなく、窓を向いたまま体を寄せてきた。"
+        }
+      ],
+      "accepted": [
+        {
+          "speaker": "",
+          "text": "並んで空を見上げると、ソラがまぶしそうに目を細めた。"
+        },
+        {
+          "speaker": "",
+          "text": "やがて目を閉じ、肩が触れる距離で眠り始めた。"
+        }
+      ],
+      "declined": [
+        {
+          "speaker": "",
+          "text": "名前を呼ぶと、ソラが一度だけ短く鳴いた。"
+        },
+        {
+          "speaker": "",
+          "text": "それからあなたの袖に鼻を寄せ、静かに空を見上げた。"
+        }
+      ],
+      "artwork": [
+        "mike-window-v1",
+        "",
+        "",
+        ""
+      ],
+      "revision": "c56a0d51c90dcede4b54771de5f3c7235cf903175a58a47ee23da85dcaa06f3b"
+    },
+    {
+      "event_id": "optional.playtest-mike.affinity-100",
+      "target_kind": "content",
+      "content_cat_id": "playtest-mike",
+      "min_day": 2,
+      "min_affinity": 100,
+      "title": "今日も、窓辺で",
+      "accept_caption": "いつもの席に座る",
+      "decline_caption": "ミケが来るまで待つ",
+      "milestone": 100,
+      "introduction": [
+        {
+          "speaker": "",
+          "text": "いつもの窓辺で、ミケが毛づくろいをしていた。"
+        },
+        {
+          "speaker": "",
+          "text": "あなたが近づくと、ミケは前足を下ろして隣を空けた。"
+        },
+        {
+          "speaker": "",
+          "text": "初めてここで待った午後と同じ光が、ふたりの足元に落ちている。"
+        }
+      ],
+      "accepted": [
+        {
+          "speaker": "",
+          "text": "腰を下ろすと、ミケが何のためらいもなく膝に上がった。"
+        },
+        {
+          "speaker": "",
+          "text": "窓の外の光が傾くまで、膝の重みはそのままだった。"
+        }
+      ],
+      "declined": [
+        {
+          "speaker": "",
+          "text": "窓から少し離れて立っていると、ミケが自分から歩いてきた。"
+        },
+        {
+          "speaker": "",
+          "text": "先にあなたの足元へ座ったので、今日はその場所で並んで過ごした。"
+        }
+      ],
+      "revision": "0907ec98253d55936a61ae906d529444fdce8fd80d63e95877b2c87ac68f29b8"
+    },
+    {
+      "event_id": "optional.playtest-tama.affinity-100",
+      "target_kind": "content",
+      "content_cat_id": "playtest-tama",
+      "min_day": 2,
+      "min_affinity": 100,
+      "title": "最後の椅子はそのまま",
+      "accept_caption": "椅子を一脚残す",
+      "decline_caption": "床に並んで座る",
+      "milestone": 100,
+      "introduction": [
+        {
+          "speaker": "",
+          "text": "閉店後、椅子を戻す音が止むと、タマが足元へやってきた。"
+        },
+        {
+          "speaker": "",
+          "text": "前は椅子の下で聞いていたその音を、今日はあなたのすぐそばで聞いていた。"
+        },
+        {
+          "speaker": "",
+          "text": "最後の椅子に手をかけると、タマが座面に前足を置いた。"
+        }
+      ],
+      "accepted": [
+        {
+          "speaker": "",
+          "text": "その椅子を残すと、タマが跳び乗って体の向きを変えた。"
+        },
+        {
+          "speaker": "",
+          "text": "あなたが隣に腰を下ろすと、タマは膝へ渡って丸くなった。"
+        }
+      ],
+      "declined": [
+        {
+          "speaker": "",
+          "text": "手を離して床に座ると、タマが隣に腰を下ろした。"
+        },
+        {
+          "speaker": "",
+          "text": "片づけの音がなくなった店で、タマの小さな寝息が聞こえた。"
+        }
+      ],
+      "revision": "51f602247f7bfda8c07ab675d202102550850f09dd1c76e0b4c7fe45ac0164e4"
+    },
+    {
+      "event_id": "optional.playtest-sora.affinity-100",
+      "target_kind": "content",
+      "content_cat_id": "playtest-sora",
+      "min_day": 2,
+      "min_affinity": 100,
+      "title": "ふたりで見送る光",
+      "accept_caption": "最後の影まで眺める",
+      "decline_caption": "ソラの隣で目を閉じる",
+      "milestone": 100,
+      "introduction": [
+        {
+          "speaker": "",
+          "text": "夕方、窓から伸びた影が、床の端まで届いていた。"
+        },
+        {
+          "speaker": "",
+          "text": "ソラはそれを追わず、あなたが窓辺に来るのを待っていた。"
+        },
+        {
+          "speaker": "",
+          "text": "並んで座ると、ソラのしっぽがあなたの手の甲に触れた。"
+        }
+      ],
+      "accepted": [
+        {
+          "speaker": "",
+          "text": "ふたりで眺めていると、葉の影が夕闇に溶けた。"
+        },
+        {
+          "speaker": "",
+          "text": "何も動かなくなった窓辺で、ソラはあなたに寄りかかった。"
+        }
+      ],
+      "declined": [
+        {
+          "speaker": "",
+          "text": "目を閉じると、ソラが隣で小さく息をついた。"
+        },
+        {
+          "speaker": "",
+          "text": "目を開けたときには影は消え、ソラのしっぽだけが手の上に残っていた。"
+        }
+      ],
+      "revision": "ef63c4c7ead5827cb862ce06bc33702fe006a00e77ca56e69531d4534b39b249"
     }
   ]
 }
