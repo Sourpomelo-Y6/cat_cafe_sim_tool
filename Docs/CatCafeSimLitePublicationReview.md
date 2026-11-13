@@ -38,3 +38,20 @@ Unity の 2021.3.45f2 公式リリースページに Windows Mono のインス�
 3. **Windows Player の表示**を仕上げる。配布するビルドと一致する f2 Windows Mono の第三者表示を取得して同梱し、Player 一式とクレジットを照合する。
 
 確認が残る画像を差し替える場合は、公開する Git 履歴に当該画像の旧版が含まれるかも確認する。公開候補を決める時点で、配布用のファイル一覧と Git の履歴を再確認する。
+
+### 収録判断に必要な確認
+
+- 猫画像90枚のうちミケ33枚、タマ28枚、ソラ29枚。通常ポーズ制作記録ではミケの初期比較を全猫共通の画風・背景参照としている。初期入力の確認が難しく差し替えを選ぶ場合は、ミケの33枚に加え、タマ・ソラへの参照のつながりも確認して対象を決める。 [通常ポーズの制作記録](../../Docs/Prototypes/CatAppearance-v1/README.md)
+- 佐藤さんの現行 v2 は来店客12枚のうち1枚。差し替える場合は `guest-1` の肖像参照を更新する。個別イベントの挿絵2枚について、採用記録からはイベント定義と表示用途を確認できた。差し替える場合は共用の窓辺背景とミケの分岐スチルを置き換え、会話と回想の両方で確認する。
+- 現行画像を GitHub の公開リポジトリに置く場合は、GitHub 上での閲覧と fork を含む公開範囲を了承したうえで、画像の改変・商用利用・GitHub 外での再配布の条件を決める。画像を差し替える場合は、初回コミット `eff571e` にも現行素材が入っているため、確定した素材から公開用履歴を作る。 [GitHub のライセンス案内](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository)
+- Windows 配布の照会文案。「Unity 2021.3.45f2（changeset 88f88f591b2e）でビルドした Windows x64 Standalone Mono Player をゲームに同梱する予定です。この版の Player に対応する第三者通知（Third Party Notices）の原文または正式な取得先を教えてください。」インストール済みファイルの確認では UnityReferenceAssemblies やライセンスクライアントの通知は見つかったが、対象の Windows Mono Player 用原文は特定できていない。 [Unity 公式リリース情報](https://unity.com/releases/editor/whats-new/2021.3.45f2)
+
+### 2026-11-14 の進捗
+
+現行画像108ファイルを使って準備を進める。制作環境は Illustrious または ChatGPT Images とのユーザーの認識を記録し、個々の画像への対応は既存の制作記録に従う。画像の改変・商用利用・素材単体の再配布の許諾は未指定。
+
+GitHub 上の `Sourpomelo-Y6/CatCafeSimLite` は公開済み。ローカルの `main` と追跡先 `origin/main` はともに `4ca8b05`。ローカルの全参照からたどれる履歴を点検し、LFS ポインタ、LFS 属性ファイル、Unity のキャッシュ、Player 実行ファイル・配布アーカイブの混入は見つからなかった。最大ファイルは営業シーンの 6,217,550 バイト。 [GitHub リポジトリ](https://github.com/Sourpomelo-Y6/CatCafeSimLite)
+
+Windows 検証ビルドの UnityPlayer・Mono・クラスライブラリ等は、既存のランタイム監査24ファイルとすべて SHA-256 が一致。対象版の Player 用第三者通知は引き続き未取得。 [ランタイム監査](../../Docs/ThirdPartyAudit20261031Runtime.csv)
+
+Windows 配布時は `CatCafeStandalone.exe`、`CatCafeStandalone_Data`、`MonoBleedingEdge`、`UnityPlayer.dll`、`UnityCrashHandler64.exe` を一式として扱い、クレジット・第三者表示と参照先のライセンス原文（M PLUS 1p の OFL を含む）を添える。`CatCafeSimLite_BurstDebugInformation_DoNotShip` は配布対象から外す。利用者向け案内には「展開したフォルダ内で CatCafeStandalone.exe を起動してください。Windows x64 用です。軽量版は新規ゲームから開始してください」と記載する。
