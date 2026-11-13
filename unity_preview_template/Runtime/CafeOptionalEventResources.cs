@@ -7,6 +7,26 @@ namespace CatCafePreview
     [Serializable] public sealed class OptionalEventPointer {public string eventResource;}
     public static class CafeOptionalEventResources
     {
+        public const string BackgroundDirectory="CatCafeEvents/Backgrounds";
+        public const string SharedBackgroundFile="event_backgrounds/shared.png";
+        const string EventResourcePattern=@"\ACatCafeEvents/Imports/[a-f0-9]{32}/optional_events\z";
+
+        public static Texture2D SharedBackground()
+        {
+            var pointer=Resources.Load<TextAsset>("CatCafeEvents/catalog");
+            if(pointer!=null)
+            {
+                string resource=JsonUtility.FromJson<OptionalEventPointer>(pointer.text)?.eventResource;
+                if(Regex.IsMatch(resource??"",EventResourcePattern))
+                {
+                    string folder=resource.Substring(0,resource.LastIndexOf('/'));
+                    var background=Resources.Load<Texture2D>(folder+"/event_backgrounds/shared");
+                    if(background!=null)return background;
+                }
+            }
+            return Resources.Load<Texture2D>("CatCafeDefaults/cafe-interior-v1");
+        }
+
         public static CafeOptionalEventCatalog Load()
         {
             var pointer=Resources.Load<TextAsset>("CatCafeEvents/catalog");
@@ -17,7 +37,7 @@ namespace CatCafePreview
             if(pointer!=null)
             {
                 resource=JsonUtility.FromJson<OptionalEventPointer>(pointer.text)?.eventResource;
-                if(!Regex.IsMatch(resource??"","^CatCafeEvents/Imports/[a-f0-9]{32}/optional_events$"))throw new ArgumentException("任意イベントの参照先が不正です。");
+                if(!Regex.IsMatch(resource??"",EventResourcePattern))throw new ArgumentException("任意イベントの参照先が不正です。");
             }
             else
             {

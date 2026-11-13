@@ -6,7 +6,8 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 from optional_events import (OptionalEventStore, default_event, validate_event, event_slot,
-                             validate_pack, normalize_event, blank_event, read_pack, definition_text)
+                             validate_pack, normalize_event, blank_event, read_pack, definition_text,
+                             export_event_pack, SHARED_BACKGROUND_FILE)
 
 
 def authored(cid):
@@ -32,6 +33,34 @@ class OptionalEventsV2Tests(unittest.TestCase):
         self.assertEqual({e['content_cat_id'] for e in pack['events']}, {'playtest-mike', 'playtest-tama'})
         self.assertEqual(len(self.store.read_all()['entries']), 3)
         with self.assertRaises(ValueError): self.store.export_data({})
+
+    def test_background_export_and_reimport(self):
+        from PIL import Image
+        source = self.root / 'scene.png'
+        Image.new('RGB', (16, 10), 'green').save(source)
+        asset = self.store.register_background(source)
+        self.store.register_background(source, shared=True)
+        event = authored('playtest-sora')
+        event['artwork'] = [asset, '', '', '']
+        self.store.save(dict(version=1, enabled=True, event=event))
+        catalog = {'playtest-mike': 'ミケ', 'playtest-sora': 'ソラ'}
+        folder = export_event_pack(self.store, catalog, self.root)
+        image = folder / 'event_backgrounds' / (asset + '.png')
+        self.assertEqual(image.read_bytes(), source.read_bytes())
+        self.assertEqual((folder / SHARED_BACKGROUND_FILE).read_bytes(), source.read_bytes())
+
+        imported = OptionalEventStore(self.root / 'other' / 'events.json')
+        imported.import_pack(folder / 'optional_events.json')
+        self.assertEqual(imported.read('playtest-sora')['event']['artwork'][0], asset)
+        self.assertEqual(imported.background_path(asset).read_bytes(), source.read_bytes())
+
+        Image.new('RGB', (16, 10), 'blue').save(image)
+        with self.assertRaises(ValueError):
+            imported.import_pack(folder / 'optional_events.json')
+        self.assertEqual(imported.background_path(asset).read_bytes(), source.read_bytes())
+        self.store.reset_shared_background()
+        reset = export_event_pack(self.store, catalog, self.root)
+        self.assertFalse((reset / SHARED_BACKGROUND_FILE).exists())
 
     def test_one_family_can_publish_multiple_milestones(self):
         for content_id, milestone in (('playtest-mike', 40), ('playtest-tama', 20), ('playtest-sora', 20)):

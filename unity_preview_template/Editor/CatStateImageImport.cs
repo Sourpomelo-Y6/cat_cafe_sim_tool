@@ -8,7 +8,7 @@ namespace CatCafePreview.Editor
 {
     public static class CatStateImageImport
     {
-        static string Hash(byte[] bytes){using(var sha=SHA256.Create())return BitConverter.ToString(sha.ComputeHash(bytes)).Replace("-","").ToLowerInvariant();}
+        internal static string Hash(byte[] bytes){using(var sha=SHA256.Create())return BitConverter.ToString(sha.ComputeHash(bytes)).Replace("-","").ToLowerInvariant();}
         static string Root=>Path.Combine(Application.dataPath,"Resources/CatCafeStateImages");
         public static long AddImageSize(long total,long size)
         {if(total<0 || size<0 || size>16L*1024*1024 || total>256L*1024*1024-size)throw new ArgumentException("状態画像は1枚16MiB・合計256MiB以内です。");return total+size;}
@@ -27,13 +27,13 @@ namespace CatCafePreview.Editor
             int removed=current==null?0:current.bindings.Count(b=>!next.bindings.Any(n=>n.content_cat_id==b.content_cat_id && n.state==b.state));
             return next.bindings.Select(b=>b.content_cat_id).Distinct().Count()+"画像ID／"+next.bindings.Length+"対応へ全体を切り替えます。現在から外れる対応："+removed+"。\n部分更新やマージは行いません。空の定義は全解除です。"+(next.version==1?"\nv1はミケ専用です。他猫の状態画像は非表示になります。":"")+"\nPlayerへは次のビルドで反映されます。";
         }
-        static void CheckPng(byte[] bytes)
+        internal static void CheckPng(byte[] bytes)
         {
             byte[] signature={137,80,78,71,13,10,26,10};
-            if(bytes.Length<33 || bytes.Length>16*1024*1024 || !bytes.Take(8).SequenceEqual(signature) || System.Text.Encoding.ASCII.GetString(bytes,12,4)!="IHDR")throw new ArgumentException("状態画像は16MiB以内のPNGが必要です。");
+            if(bytes.Length<33 || bytes.Length>16*1024*1024 || !bytes.Take(8).SequenceEqual(signature) || System.Text.Encoding.ASCII.GetString(bytes,12,4)!="IHDR")throw new ArgumentException("画像は16MiB以内のPNGが必要です。");
             Func<int,long> size=i=>(long)bytes[i]*16777216+bytes[i+1]*65536+bytes[i+2]*256+bytes[i+3];
-            long width=size(16),height=size(20);if(width<1 || height<1 || width>2048 || height>2048)throw new ArgumentException("状態画像の長辺は2048px以内にしてください。");
-            var texture=new Texture2D(2,2);try{if(!texture.LoadImage(bytes) || texture.width!=width || texture.height!=height)throw new ArgumentException("状態画像が破損しています。");}finally{UnityEngine.Object.DestroyImmediate(texture);}
+            long width=size(16),height=size(20);if(width<1 || height<1 || width>2048 || height>2048)throw new ArgumentException("画像の長辺は2048px以内にしてください。");
+            var texture=new Texture2D(2,2);try{if(!texture.LoadImage(bytes) || texture.width!=width || texture.height!=height)throw new ArgumentException("PNG画像が破損しています。");}finally{UnityEngine.Object.DestroyImmediate(texture);}
         }
         public static CatStateImagePack Validate(string folder,ContentBundle bundle,bool full=false)
         {string json;return Validate(folder,bundle,full,out json);}

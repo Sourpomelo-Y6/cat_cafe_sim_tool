@@ -15,8 +15,10 @@ namespace CatCafePreview
         CanvasGroup catGroup; ScrollRect historyScroll; Vector2 layoutSize; bool layoutHistory,layoutThreeLinePages;
         RawImage sceneImage;
         GameObject sceneRoom, sceneHeading, catTag;
-        bool illustratedLayout;
-        static Texture2D mikeWindow, mikeStill;
+        static Texture2D mikeWindow, mikeStill, sharedBackground;
+        static bool sharedBackgroundLoaded;
+        string customBackgroundId;
+        Texture2D customBackground;
         static readonly Color Paper=new Color(.99f,.97f,.92f),Ink=new Color(.22f,.26f,.20f),Olive=new Color(.36f,.43f,.31f);
         public ScrollRect HistoryScroll=>historyScroll;
         Button third;Text thirdEffect;
@@ -144,8 +146,6 @@ namespace CatCafePreview
         {
             string background=SceneBackgroundAsset, stillAsset=SceneStillAsset;
             bool illustrated=!string.IsNullOrEmpty(background) || !string.IsNullOrEmpty(stillAsset);
-            if(!illustrated && !illustratedLayout)return false;
-            illustratedLayout=illustrated;
             var size=card.GetComponent<RectTransform>().rect.size;
             var mask=portrait.rectTransform.parent.GetComponent<RectTransform>();
             var frame=mask.parent.GetComponent<RectTransform>();
@@ -165,6 +165,24 @@ namespace CatCafePreview
                     if(mikeWindow==null)mikeWindow=Resources.Load<Texture2D>("CatCafeDefaults/mike-window-v1");
                     art=mikeWindow;
                 }
+                if(art==null && !string.IsNullOrEmpty(background) && CafeOptionalEvents.IsCustomBackground(background))
+                {
+                    if(customBackgroundId!=background)
+                    {
+                        customBackgroundId=background;
+                        customBackground=Resources.Load<Texture2D>(CafeOptionalEventResources.BackgroundDirectory+"/"+background);
+                    }
+                    art=customBackground;
+                }
+            }
+            if(art==null)
+            {
+                if(!sharedBackgroundLoaded)
+                {
+                    sharedBackground=CafeOptionalEventResources.SharedBackground();
+                    sharedBackgroundLoaded=true;
+                }
+                art=sharedBackground;
             }
             sceneImage.texture=art;
             sceneImage.enabled=art!=null;

@@ -44,6 +44,7 @@ $previewFiles += @('Runtime/PythonTitleScreen.cs', 'Runtime/PythonReturnToTitle.
 $previewFiles += @('Art/cat-cafe-title-background-v1.png', 'Art/cat-cafe-title-background-v1.png.meta')
 $previewFiles += @('Resources/CatCafeDefaults/cat-silhouette-v1.png')
 $previewFiles += @('Resources/CatCafeDefaults/mike-window-v1.png', 'Resources/CatCafeDefaults/mike-approaches-v1.png')
+$previewFiles += @('Resources/CatCafeDefaults/cafe-interior-v1.png', 'Resources/CatCafeDefaults/cafe-interior-v1.png.meta')
 $previewFiles += @('Runtime/PythonNewGamePanel.cs', 'Editor/PythonNewGameSetup.cs')
 $previewFiles += @('Runtime/PythonCatDetailsPanel.cs', 'Editor/PythonCatDetailsSetup.cs')
 $previewFiles += @('Runtime/PythonAdoptionPanel.cs', 'Runtime/PythonGameOverPanel.cs', 'Editor/PythonAdoptionSetup.cs', 'Editor/PythonGameOverSetup.cs', 'Editor/PythonGameOverVerification.cs', 'Editor/PythonAdoptionVerification.cs')

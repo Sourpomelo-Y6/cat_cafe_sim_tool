@@ -1,6 +1,6 @@
 """Edit optional stories by image family."""
 import copy
-from optional_events import BRANCHES, MAX_BRANCH_LINES, MILESTONES, ARTWORK_SLOTS, EVENT_BACKGROUNDS, EVENT_STILLS, EVENT_ID, event_slot, export_event_pack
+from optional_events import BRANCHES, MAX_BRANCH_LINES, MILESTONES, ARTWORK_SLOTS, EVENT_BACKGROUNDS, EVENT_STILLS, EVENT_ID, custom_background, event_slot, export_event_pack
 
 
 class OptionalEventEditorWindow:
@@ -48,9 +48,13 @@ class OptionalEventEditorWindow:
                 self.affinity_entry = entry
         ttk.Checkbutton(outer, text='採用後の出力に含める（外しても開始済みの会話は保持）', variable=self.enabled).pack(anchor='w')
         self.artwork = []
+        self.background_choices = dict(EVENT_BACKGROUNDS)
         background = ttk.Frame(outer)
         background.pack(fill='x', pady=(6, 0))
-        self.add_artwork_selector(background, '背景', EVENT_BACKGROUNDS)
+        self.background_selector = self.add_artwork_selector(background, '背景', self.background_choices)
+        ttk.Button(background, text='個別のPNGを選ぶ…', command=self.choose_background).pack(side='left')
+        ttk.Button(background, text='共通背景を変更…', command=lambda: self.choose_background(shared=True)).pack(side='left', padx=4)
+        ttk.Button(background, text='共通背景を初期画像に戻す', command=self.reset_shared_background).pack(side='left')
         book = ttk.Notebook(outer)
         book.pack(fill='both', expand=True, pady=8)
         self.lines = {}
@@ -100,8 +104,43 @@ class OptionalEventEditorWindow:
 
         value = tk.StringVar(master=self.window)
         ttk.Label(parent, text=label).pack(side='left', padx=(0, 4))
-        ttk.Combobox(parent, textvariable=value, values=list(choices.values()), state='readonly', width=19).pack(side='left', padx=(0, 8))
+        selector = ttk.Combobox(parent, textvariable=value, values=list(choices.values()), state='readonly', width=24)
+        selector.pack(side='left', padx=(0, 8))
         self.artwork.append(value)
+        return selector
+
+    @staticmethod
+    def background_label(asset):
+        return f'個別画像 {asset[3:15]}' if custom_background(asset) else EVENT_BACKGROUNDS[asset]
+
+    def select_background(self, asset):
+        if custom_background(asset):
+            self.background_choices[asset] = self.background_label(asset)
+            self.background_selector.configure(values=list(self.background_choices.values()))
+        self.artwork[0].set(self.background_label(asset))
+
+    def choose_background(self, *, shared=False):
+        from tkinter import filedialog
+        path = filedialog.askopenfilename(parent=self.window, title='背景画像を選ぶ', filetypes=[('PNG画像', '*.png')])
+        if not path:
+            return
+
+        def apply():
+            asset = self.published.register_background(path, shared=shared)
+            self.reviewed = self.reviewed_all = None
+            if shared:
+                self.notice.set('共通背景を更新しました。次回の出力に含まれます。')
+            else:
+                self.select_background(asset)
+                self.notice.set('個別背景を選びました。プレビューで確認して採用登録してください。')
+        self._run(apply)
+
+    def reset_shared_background(self):
+        def reset():
+            self.published.reset_shared_background()
+            self.reviewed = self.reviewed_all = None
+            self.notice.set('共通背景を初期画像に戻しました。次回の出力で反映されます。')
+        self._run(reset)
 
     @staticmethod
     def artwork_for(event):
@@ -114,7 +153,9 @@ class OptionalEventEditorWindow:
     def populate(self, data):
         self.identity = copy.deepcopy(data['event'])
         self.enabled.set(data['enabled'])
-        for variable, options, asset in zip(self.artwork, ARTWORK_SLOTS, self.artwork_for(self.identity)):
+        artwork = self.artwork_for(self.identity)
+        self.select_background(artwork[0])
+        for variable, options, asset in zip(self.artwork[1:], ARTWORK_SLOTS[1:], artwork[1:]):
             variable.set(options[asset])
         for key, value in self.values.items():
             value.set(str(data['event'][key]))
@@ -200,7 +241,7 @@ class OptionalEventEditorWindow:
         event = copy.deepcopy(self.identity)
         selected = [
             next(asset for asset, label in choices.items() if label == value.get())
-            for value, choices in zip(self.artwork, ARTWORK_SLOTS)
+            for value, choices in zip(self.artwork, (self.background_choices, *ARTWORK_SLOTS[1:]))
         ]
         if 'artwork' in event or selected != self.artwork_for(event):
             event['artwork'] = selected
@@ -260,7 +301,6 @@ class OptionalEventEditorWindow:
             book.pack(fill='both', expand=True)
             images = {}
             window.artwork_images = images
-            asset_folder = Path(__file__).resolve().parent / 'unity_preview_template/Resources/CatCafeDefaults'
             for branch, label in (('accepted', '選択肢1の流れ'), ('declined', '選択肢2の流れ')):
                 pane = ttk.Frame(book)
                 book.add(pane, text=label)
@@ -282,10 +322,14 @@ class OptionalEventEditorWindow:
                         ('導入', intro, EVENT_STILLS),
                         ('結果', accepted if branch == 'accepted' else declined, EVENT_STILLS),
                     ):
-                        text.insert('end', f'{label}：{options[asset]}\n')
-                        if asset:
+                        caption = self.background_label(asset) if label == '背景' else options[asset]
+                        text.insert('end', f'{label}：{caption}\n')
+                        if asset or label == '背景':
+                            path = self.published.background_path(asset)
+                            if not path.is_file():
+                                raise ValueError(f'背景・スチルが見つかりません：{caption}')
                             if asset not in images:
-                                image = tk.PhotoImage(master=window, file=asset_folder / (asset + '.png'))
+                                image = tk.PhotoImage(master=window, file=path)
                                 images[asset] = image.subsample(max(1, (image.width() + 299) // 300))
                             text.image_create('end', image=images[asset])
                             text.insert('end', '\n')
@@ -336,6 +380,7 @@ class OptionalEventEditorWindow:
                 from optional_events import read_pack, normalize_event
                 data=read_pack(Path(path).read_text(encoding='utf-8-sig'))
                 if not messagebox.askokcancel('全下書きを読み込む',f"{len(data['events'])}件の定義で下書き全体を置き換えます。空の場合は既存本文を保持して全件を出力対象外にします。採用は比較後に確定します。",parent=self.window):return
+                self.published.copy_backgrounds(data['events'], Path(path).parent)
                 if data['events']:rows=[dict(enabled=True,event=normalize_event(e)) for e in data['events']]
                 else:
                     merged={event_slot(r['event']):r for r in self.effective_published()['entries']}
@@ -381,7 +426,8 @@ class OptionalEventEditorWindow:
                 e=row['event'];result.append(e['title']+'（'+e['content_cat_id']+'）'+(' 出力する' if row['enabled'] else ' 出力しない'))
                 result.append('対象：旧ミケ専用' if e.get('target_kind')=='individual' else '対象：画像系統で共有')
                 result.append(f"{e['min_day']}日目／好感度{e['min_affinity']}以上")
-                artwork = [choices[asset] for choices, asset in zip(ARTWORK_SLOTS, self.artwork_for(e))]
+                background, *stills = self.artwork_for(e)
+                artwork = [self.background_label(background), *(EVENT_STILLS[asset] for asset in stills)]
                 result.append('背景・導入・結果1・結果2：' + '／'.join(artwork))
                 for branch in BRANCHES:
                     result.append({'introduction':'導入','accepted':e['accept_caption'],'declined':e['decline_caption']}[branch])

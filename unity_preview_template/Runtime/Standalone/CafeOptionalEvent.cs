@@ -31,8 +31,9 @@ namespace CatCafePreview.Standalone
         public static bool ValidMilestone(int value)=>value>=20 && value<=100 && value%20==0;
         public const int MikeWindowArt=1;
         public const string WindowBackground="mike-window-v1", MikeApproachesStill="mike-approaches-v1";
+        public static bool IsCustomBackground(string asset)=>Regex.IsMatch(asset??"", "\\Abg-[0-9a-f]{64}\\z");
         public static bool ValidArtwork(string[] artwork) =>
-            artwork==null || artwork.Length==4 && (artwork[0]=="" || artwork[0]==WindowBackground)
+            artwork==null || artwork.Length==4 && (artwork[0]=="" || artwork[0]==WindowBackground || IsCustomBackground(artwork[0]))
                 && artwork.Skip(1).All(asset=>asset=="" || asset==MikeApproachesStill);
         public static string Still(string[] artwork,string branch) =>
             artwork==null?null:artwork[branch=="introduction"?1:branch=="accepted"?2:3];

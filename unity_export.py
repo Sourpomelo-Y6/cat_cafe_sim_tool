@@ -38,7 +38,8 @@ def export_bundle(catalog, registry, texts, destination, *, profiles=None, inter
     pack_id = uuid.uuid4().hex
     interactions['pack_id'] = pack_id
     from optional_events import OptionalEventStore
-    events = (optional_events or OptionalEventStore(registry.directory / 'optional_events.json')).export_data(catalog, pack_id)
+    event_store = optional_events or OptionalEventStore(registry.directory / 'optional_events.json')
+    events = event_store.export_data(catalog, pack_id)
     from state_images import StateImageStore
     state_images, state_blobs = StateImageStore(registry.directory).export_data(catalog, pack_id)
     from cat_outfits import CatOutfitStore
@@ -97,6 +98,7 @@ def export_bundle(catalog, registry, texts, destination, *, profiles=None, inter
         (folder / 'people').mkdir()
         for relative, data in blobs.items():
             (folder / relative).write_bytes(data)
+        event_store.export_backgrounds(events['events'], folder)
         for filename, value in (('optional_events.json', events), ('human_portraits.json', people), ('bundle.json', bundle), ('interaction_texts.json', interactions), ('validation.json', report)):
             (folder / filename).write_text(json.dumps(value, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
         if cat_outfits is not None:

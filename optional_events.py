@@ -21,6 +21,36 @@ EVENT_BACKGROUNDS = {'': '標準の店内', 'mike-window-v1': 'カフェの窓�
 EVENT_STILLS = {'': '指定なし', 'mike-approaches-v1': 'ミケが一歩近づく'}
 ARTWORK_SLOTS = (EVENT_BACKGROUNDS, EVENT_STILLS, EVENT_STILLS, EVENT_STILLS)
 DEFAULT_DRAFT = Path(__file__).resolve().parent / 'user_data' / 'optional_event_draft.json'
+DEFAULT_BACKGROUND = 'cafe-interior-v1'
+SHARED_BACKGROUND_FILE = 'event_backgrounds/shared.png'
+BACKGROUND_ASSET_DIR = Path(__file__).resolve().parent / 'unity_preview_template/Resources/CatCafeDefaults'
+
+
+def custom_background(asset):
+    return isinstance(asset, str) and re.fullmatch(r'bg-[0-9a-f]{64}', asset) is not None
+
+
+def read_background(path, asset=None):
+    from state_images import MAX_BYTES, png
+    if not path.is_file():
+        raise ValueError(f'背景画像が見つかりません：{path.name}')
+    with path.open('rb') as stream:
+        data = png(stream.read(MAX_BYTES + 1))
+    if asset and asset != 'bg-' + hashlib.sha256(data).hexdigest():
+        raise ValueError('背景画像が登録時の内容と一致しません。')
+    return data
+
+
+def write_background(path, data):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd, name = tempfile.mkstemp(suffix='.tmp', dir=path.parent)
+    try:
+        with os.fdopen(fd, 'wb') as stream:
+            stream.write(data)
+        os.replace(name, path)
+    finally:
+        if os.path.exists(name):
+            os.unlink(name)
 
 
 def _unique_object(pairs):
@@ -81,7 +111,8 @@ def validate_event(event, *, require_revision=True):
     if 'artwork' in clean:
         artwork = clean['artwork']
         if not isinstance(artwork, list) or len(artwork) != len(ARTWORK_SLOTS) or any(
-            not isinstance(asset, str) or asset not in choices for asset, choices in zip(artwork, ARTWORK_SLOTS)
+            not isinstance(asset, str) or (asset not in choices and not (index == 0 and custom_background(asset)))
+            for index, (asset, choices) in enumerate(zip(artwork, ARTWORK_SLOTS))
         ):
             raise ValueError('イベントの背景・スチルの指定が不正です。')
     if not legacy and (clean['target_kind'] not in ('content','individual') or not isinstance(clean['event_id'],str) or not re.fullmatch(r'optional\.[a-z][a-z0-9_.-]{0,86}',clean['event_id']) or not isinstance(clean['content_cat_id'],str) or not re.fullmatch('[a-z][a-z0-9_-]{0,63}',clean['content_cat_id'])):
@@ -180,6 +211,55 @@ class OptionalEventStore:
     def __init__(self, path):
         self.path = Path(path)
 
+    def background_path(self, asset=''):
+        if custom_background(asset):
+            return self.path.parent / 'event_backgrounds' / (asset + '.png')
+        if not asset:
+            shared = self.path.parent / SHARED_BACKGROUND_FILE
+            if shared.is_file():
+                return shared
+            asset = DEFAULT_BACKGROUND
+        return BACKGROUND_ASSET_DIR / (asset + '.png')
+
+    def register_background(self, source, *, shared=False):
+        data = read_background(Path(source))
+        asset = 'bg-' + hashlib.sha256(data).hexdigest()
+        target = self.path.parent / SHARED_BACKGROUND_FILE if shared else self.background_path(asset)
+        write_background(target, data)
+        return asset
+
+    def reset_shared_background(self):
+        (self.path.parent / SHARED_BACKGROUND_FILE).unlink(missing_ok=True)
+
+    def copy_backgrounds(self, events, source):
+        assets = self.custom_backgrounds(events)
+        for asset in assets:
+            read_background(source / 'event_backgrounds' / (asset + '.png'), asset)
+        for asset in assets:
+            data = read_background(source / 'event_backgrounds' / (asset + '.png'), asset)
+            write_background(self.background_path(asset), data)
+
+    @staticmethod
+    def custom_backgrounds(events):
+        return sorted({row['artwork'][0] for row in events if row.get('artwork') and custom_background(row['artwork'][0])})
+
+    def export_backgrounds(self, events, folder):
+        from state_images import MAX_TOTAL_BYTES
+        paths = {f'event_backgrounds/{asset}.png': (self.background_path(asset), asset)
+                 for asset in self.custom_backgrounds(events)}
+        shared = self.path.parent / SHARED_BACKGROUND_FILE
+        if shared.is_file():
+            paths[SHARED_BACKGROUND_FILE] = (shared, None)
+        total = 0
+        for relative, (source, asset) in paths.items():
+            data = read_background(source, asset)
+            total += len(data)
+            if total > MAX_TOTAL_BYTES:
+                raise ValueError('イベント背景は合計256MiB以内にしてください。')
+            target = folder / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(data)
+
     def read_all(self):
         if not self.path.exists():
             return dict(version=2,entries=[dict(enabled=True,event=normalize_event(validate_event(default_event(),require_revision=False)))])
@@ -273,6 +353,8 @@ class OptionalEventStore:
 
     def import_pack(self,path):
         data=read_pack(Path(path).read_text(encoding='utf-8-sig'))
+        self.read_all()
+        self.copy_backgrounds(data['events'], Path(path).parent)
         rows=[dict(enabled=True,event=normalize_event(e)) for e in data['events']]
         if not rows:rows=[dict(enabled=False,event=r['event']) for r in self.read_all()['entries']]
         self.save_all(dict(version=2,entries=rows))
@@ -286,6 +368,7 @@ def export_event_pack(store,catalog,destination):
     folder.mkdir(parents=True,exist_ok=False)
     try:
         (folder/'optional_events.json').write_text(definition_text(data),encoding='utf-8')
+        store.export_backgrounds(data['events'], folder)
     except Exception:
         import shutil
         if folder.resolve().parent==destination and folder.name=='CatCafeEvents-'+data['pack_id']:shutil.rmtree(folder)
