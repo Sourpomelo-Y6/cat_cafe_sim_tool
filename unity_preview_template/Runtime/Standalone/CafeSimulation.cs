@@ -236,6 +236,7 @@ namespace CatCafePreview.Standalone
             PresentVisitingCat();
             PresentDispatchIntroductions();
             PresentSatoDispatch();
+            PresentSatoAdoption();
             PresentCustomerTrust();
             PresentReservation();
         }

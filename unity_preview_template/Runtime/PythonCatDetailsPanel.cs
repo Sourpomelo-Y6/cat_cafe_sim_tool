@@ -121,12 +121,31 @@ namespace CatCafePreview
                 optionalEventEntry.onClick=new Button.ButtonClickedEvent();
                 var rect=optionalEventEntry.GetComponent<RectTransform>();rect.anchorMin=rect.anchorMax=rect.pivot=new Vector2(0,1);rect.anchoredPosition=new Vector2(184,-318);rect.sizeDelta=new Vector2(144,40);
                 optionalEventEntry.GetComponentInChildren<Text>().text="個別イベント";optionalEventEntry.GetComponentInChildren<Text>().fontSize=16;
-                optionalEventEntry.onClick.AddListener(()=>{var view=GetComponent<OptionalEventConversationPanel>()??gameObject.AddComponent<OptionalEventConversationPanel>();if(view.OpenEvent(selectedId))Close();});
+                optionalEventEntry.onClick.AddListener(OpenCatStory);
             }
             var b=CafeBackends.Local as LocalCafeBackend;
-            var candidate=b.OptionalForCat(selectedId);bool visible=candidate!=null;optionalEventEntry.gameObject.SetActive(visible);
+            var candidate=b.OptionalForCat(selectedId);bool epilogue=b.Simulation.SatoEpilogueAvailable(selectedId);
+            optionalEventEntry.GetComponentInChildren<Text>().text=epilogue
+                ? (b.Simulation.State.sato_dispatch.epilogue_read?"後日談":"後日談・未読") : "個別イベント";
+            bool visible=epilogue || candidate!=null;optionalEventEntry.gameObject.SetActive(visible);
             if(care!=null){care.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,visible?144:304);care.GetComponentInChildren<Text>().text=visible?"用品・ケア":"用品・ケアを開く";}
-            optionalEventEntry.interactable=GetComponent<PythonStateClient>().CanManageSaves && !GetComponent<PythonStateClient>().AutoPlayExecuting && b.OptionalReason(candidate)=="";
+            optionalEventEntry.interactable=GetComponent<PythonStateClient>().CanManageSaves && !GetComponent<PythonStateClient>().AutoPlayExecuting && (epilogue || b.OptionalReason(candidate)=="");
+        }
+        private void OpenCatStory()
+        {
+            var client=GetComponent<PythonStateClient>();
+            if(!client.CanManageSaves || client.AutoPlayExecuting)return;
+            var backend=CafeBackends.Local as LocalCafeBackend;
+            if(backend?.Simulation.SatoEpilogueAvailable(selectedId)==true)
+            {
+                var cat=Array.Find(current.cats,row=>row.cat_id==selectedId);
+                if(cat==null)return;
+                var epilogue=GetComponent<SatoEpiloguePanel>()??gameObject.AddComponent<SatoEpiloguePanel>();
+                epilogue.OpenCat(cat);
+                return;
+            }
+            var view=GetComponent<OptionalEventConversationPanel>()??gameObject.AddComponent<OptionalEventConversationPanel>();
+            if(view.OpenEvent(selectedId))Close();
         }
         public void RefreshControls()
         {

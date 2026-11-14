@@ -8,7 +8,7 @@ namespace CatCafePreview.Standalone
     {
         public string cat_id;
         public int requested_day, accepted_day, declined_day, returned_day;
-        public bool refused_return, returned_after_service;
+        public bool refused_return, returned_after_service, epilogue_read;
         public CafeConversationProgress conversation;
     }
 
@@ -65,6 +65,29 @@ namespace CatCafePreview.Standalone
             State.sato_dispatch = new CafeSatoDispatch { cat_id=candidate.cat_id, requested_day=State.day,
                 conversation=SatoScene("sato.request.v1","introduction") };
         }
+
+        public const string SatoAdoptionSource = "sato-return";
+
+        private void PresentSatoAdoption()
+        {
+            var missing = SatoMissing(State);
+            if (missing == null || missing.resolved_day == 0 || missing.resolved_day + 1 != State.day
+                || State.adoption?.enabled != true) return;
+            var cat = State.cats.Single(c => c.id == missing.cat_id);
+            if (cat.activity != "cafe") return;
+            double affinity = State.relationships.Find(r => r.cat_id == cat.id && r.customer_id == Sato)?.affinity ?? 0;
+            double player = PlayerCat(cat.id).affinity;
+            if (affinity < Math.Max(80,Rules.adoption_threshold) || affinity <= player || player > 40) return;
+            State.adoption.events.Add(new CafeAdoptionEvent { id="adoption-"+State.day+"-"+cat.id,
+                cat_id=cat.id, customer_id=Sato, source=SatoAdoptionSource, day=State.day, tick=0,
+                guest_affinity=affinity, player_affinity=player, threshold=Rules.adoption_threshold });
+        }
+
+        public bool SatoEpilogueAvailable(string catId) => SatoEpilogueAvailable(State,catId);
+
+        private static bool SatoEpilogueAvailable(CafeSnapshot s,string catId)
+            => s.adoption?.events.Any(e => e.source == SatoAdoptionSource && e.cat_id == catId
+                && e.status == "resolved" && e.choice == "accept" && s.day - e.resolved_day >= 3) == true;
 
         private static CafeMissingCase SatoMissing(CafeSnapshot state)
             => state.missing_cases?.FirstOrDefault(e => e.reason == "sato_expired" || e.reason == "sato_refused");
@@ -151,6 +174,8 @@ namespace CatCafePreview.Standalone
                 return;
             }
 
+            if (request.epilogue_read && !SatoEpilogueAvailable(s,request.cat_id))
+                throw new ArgumentException("Sato epilogue read before unlock");
             var trip = trips.SingleOrDefault();
             if (!s.sato_affinity.Any(e => e.cat_id == request.cat_id) || request.requested_day < 2 || request.requested_day > s.day
                 || request.accepted_day < 0 || request.accepted_day > s.day || request.declined_day < 0 || request.declined_day > s.day

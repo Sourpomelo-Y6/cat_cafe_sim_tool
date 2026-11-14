@@ -40,11 +40,25 @@ namespace CatCafePreview.Standalone
             var adopted=new HashSet<string>();
             foreach(var e in a.events)
             {
-                var cat=s.cats.SingleOrDefault(c=>c.id==e.cat_id);if(cat==null || e.day<1 || e.day>s.day || e.tick<0 || e.tick>=Rules.opening_ticks || e.day==s.day && e.tick>s.tick || e.id!="adoption-"+e.day+"-"+e.cat_id || e.source!="service-"+e.day+"-"+e.cat_id+"-"+e.customer_id || e.threshold!=Rules.adoption_threshold || !Range(e.guest_affinity,e.threshold,100) || !Range(e.player_affinity,0,100) || e.guest_affinity<=e.player_affinity)throw new ArgumentException("Invalid adoption conditions");
+                var cat=s.cats.SingleOrDefault(c=>c.id==e.cat_id);if(cat==null || e.day<1 || e.day>s.day || e.tick<0 || e.tick>=Rules.opening_ticks || e.day==s.day && e.tick>s.tick || e.id!="adoption-"+e.day+"-"+e.cat_id || e.source!=SatoAdoptionSource && e.source!="service-"+e.day+"-"+e.cat_id+"-"+e.customer_id || e.threshold!=Rules.adoption_threshold || !Range(e.guest_affinity,e.threshold,100) || !Range(e.player_affinity,0,100) || e.guest_affinity<=e.player_affinity)throw new ArgumentException("Invalid adoption conditions");
                 var record=e.day==s.day?s.visits.Where(v=>v.id==e.customer_id && v.cat_id==e.cat_id && v.satisfaction!=null).Select(v=>new CafeCustomerRecord {cat_id=v.cat_id,customer_id=v.id,completed_tick=v.completed_tick,affinity_delta=v.affinity_delta}).SingleOrDefault():s.history[e.day-1].customer_records.SingleOrDefault(v=>v.customer_id==e.customer_id && v.cat_id==e.cat_id && v.satisfaction!=null);
                 double affinity=s.history.Where(h=>h.day<=e.day).SelectMany(h=>h.customer_records.Where(v=>v.customer_id==e.customer_id && v.cat_id==e.cat_id)).Sum(v=>v.affinity_delta)+(e.day==s.day?s.visits.Where(v=>v.id==e.customer_id && v.cat_id==e.cat_id).Sum(v=>v.affinity_delta):0);
                 double player=s.player_sessions.Where(p=>p.cat_id==e.cat_id && p.day<=e.day && p.exchange.end_reason!=null).Select(PlayerAffinityAfter).LastOrDefault();
-                if(record==null || record.completed_tick!=e.tick || Math.Abs(affinity-e.guest_affinity)>1e-8 || player!=e.player_affinity)throw new ArgumentException("Adoption differs from service or player history");
+                if(e.source==SatoAdoptionSource)
+                {
+                    var missing=SatoMissing(s);
+                    affinity=s.history.Where(h=>h.day<e.day).SelectMany(h=>h.customer_records)
+                        .Where(v=>v.customer_id==Sato && v.cat_id==e.cat_id).Sum(v=>v.affinity_delta);
+                    player=s.player_sessions.Where(p=>p.cat_id==e.cat_id && p.day<e.day && p.exchange.end_reason!=null)
+                        .Select(PlayerAffinityAfter).LastOrDefault();
+                    if(missing==null || missing.resolved_day==0 || missing.resolved_day+1!=e.day || missing.cat_id!=e.cat_id
+                        || e.customer_id!=Sato || e.tick!=0 || e.guest_affinity<80 || e.player_affinity>40)
+                        throw new ArgumentException("Invalid Sato adoption");
+                }
+                else if(record==null || record.completed_tick!=e.tick)
+                    throw new ArgumentException("Adoption differs from service history");
+                if(Math.Abs(affinity-e.guest_affinity)>1e-8 || player!=e.player_affinity)
+                    throw new ArgumentException("Adoption differs from relationship history");
                 if(e.status=="waiting"){if(e.choice!=null || e.resolved_day!=0 || e.resolved_tick!=0 || !a.enabled || e.day!=s.day || cat.activity!="cafe")throw new ArgumentException("Invalid pending adoption");}
                 else if(e.status!="resolved" || e.choice!="accept" && e.choice!="decline" || e.resolved_day!=e.day || e.resolved_tick<e.tick || e.resolved_tick>Rules.opening_ticks || e.day==s.day && e.resolved_tick>s.tick)throw new ArgumentException("Invalid adoption answer");
                 if(e.status=="resolved" && e.choice=="accept" && (!adopted.Add(e.cat_id) || cat.activity!="adopted" || cat.working))throw new ArgumentException("Invalid adopted cat");
