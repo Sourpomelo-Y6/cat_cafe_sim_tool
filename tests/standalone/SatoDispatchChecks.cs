@@ -8,6 +8,8 @@ static partial class Program
         {
             var rules=Decode<CafeRules>(File.ReadAllText(rulesPath));
             rules.starting_funds=100000;
+            // Force suspension in one missed visit for the refusal fixture.
+            if(route=="refused")rules.discontent.waiting_gain=100;
             rules.store_events.probability=0;
             var sim=new CafeSimulation(rules);
             var catId=sim.State.cats[0].id;
@@ -66,6 +68,7 @@ static partial class Program
 
             Prepare();
             Assert(sim.State.sato_dispatch!=null,"Sato request was not issued");
+            Assert(sim.DiscontentScore(CafeSimulation.Sato,sim.State.day)==(route=="refused"?100:50),"Wrong score at request");
             sim.State.sato_dispatch.conversation.node=1;
             RoundTrip();
             Assert(sim.State.sato_dispatch.conversation.node==1,"Request conversation position was lost");
@@ -84,16 +87,7 @@ static partial class Program
             }
             else
             {
-                if (route=="refused")
-                {
-                    var cat=sim.State.cats.Single(c=>c.id==catId);
-                    sim.Execute("set_shifts",working:new[]{catId});
-                    cat.stamina=0;cat.cannot_continue=true;
-                    sim.Execute("start_business");
-                    while(sim.State.phase=="open") sim.Execute("advance_business");
-                    sim.Execute("next_day");
-                    Assert(sim.DiscontentScore(CafeSimulation.Sato,sim.State.day)==100,"Sato did not reach suspension");
-                }
+                if (route=="refused") Day(false);
                 sim.Execute("resolve_sato_dispatch",choice:"accept");
                 Day(false);
                 var trip=sim.State.dispatches.Single(e=>e.destination==CafeSimulation.SatoDestination);
@@ -101,7 +95,7 @@ static partial class Program
                 if (route=="normal")
                 {
                     RoundTrip();
-                    Assert(sim.DiscontentScore(CafeSimulation.Sato,sim.State.day)==50,"Return did not reduce dissatisfaction");
+                    Assert(sim.DiscontentScore(CafeSimulation.Sato,sim.State.day)==25,"Return did not reduce dissatisfaction");
                     continue;
                 }
             }

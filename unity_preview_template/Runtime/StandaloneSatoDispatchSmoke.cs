@@ -116,6 +116,8 @@ namespace CatCafePreview
                 var rules=JsonUtility.FromJson<CafeRules>(Resources.Load<TextAsset>("CatCafeStandalone/rules").text);
                 rules.store_events.probability=0;
                 rules.starting_funds=100000;
+                // Force suspension in one missed visit for the refusal fixture.
+                if(route=="refused")rules.discontent.waiting_gain=100;
                 var backend=new LocalCafeBackend(Path.Combine(output,route),rules);
                 var sim=backend.Simulation;
                 string cat=sim.State.cats[0].id;
@@ -123,7 +125,8 @@ namespace CatCafePreview
                 while(sim.State.sato_dispatch==null && sim.State.day<20)Serve(sim,cat,true);
                 Prepare(sim);
                 Check(sim.State.sato_dispatch!=null,"No request: "+route);
-                if(route=="refused")Serve(sim,cat,true);
+                Check(sim.DiscontentScore(CafeSimulation.Sato,sim.State.day)==(route=="refused"?100:50),"Wrong score at request");
+                if(route=="refused")sim.Execute("day_off");
                 Command(backend,"save_game");
                 Command(backend,"load_game");
 
@@ -177,7 +180,7 @@ namespace CatCafePreview
                     Check(trip.status=="resolved","Dispatch receive was not applied");
                     if(route=="normal")
                     {
-                        Check(sim.DiscontentScore(CafeSimulation.Sato,sim.State.day)==50,"Dissatisfaction was not reduced");
+                        Check(sim.DiscontentScore(CafeSimulation.Sato,sim.State.day)==25,"Dissatisfaction was not reduced");
                         continue;
                     }
                 }

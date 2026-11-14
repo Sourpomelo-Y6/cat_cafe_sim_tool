@@ -23,7 +23,7 @@ namespace CatCafePreview.Standalone
         public const string Sato = "guest-1";
         public const string SatoDestination = "sato_request";
         private const double SatoAffinity = 80;
-        private const double SatoDiscontent = 75;
+        private const double SatoDiscontent = 50;
         internal static readonly DispatchRules SatoVisit = new DispatchRules
             { id=SatoDestination, name="佐藤さんへの指名派遣", days=1, max_fatigue=60 };
 
