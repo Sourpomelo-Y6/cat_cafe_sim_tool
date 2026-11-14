@@ -151,10 +151,15 @@ namespace CatCafePreview
                 OpenRow(list,customerName+(route=="refused"?"からの催促":"からの指名依頼"));
                 var dialogue=client.GetComponent<SatoDispatchConversationPanel>();
                 Check(dialogue.Showing,"Request conversation did not open");
+                bool suzukiReminder=customer==CafeSimulation.Suzuki && route=="refused";
+                bool showsOpeningDeadline=dialogue.PlaybackHost.GetComponentsInChildren<Text>().Any(t=>t.text.Contains("開店前に"));
                 dialogue.Next();
                 yield return null;
+                showsOpeningDeadline |= dialogue.PlaybackHost.GetComponentsInChildren<Text>().Any(t=>t.text.Contains("開店前に"));
                 dialogue.Next();
                 yield return null;
+                if(suzukiReminder)
+                    Check(showsOpeningDeadline || dialogue.PlaybackHost.GetComponentsInChildren<Text>().Any(t=>t.text.Contains("開店前に")),"Suzuki reminder does not say before opening");
                 string position=dialogue.PlaybackKey;
                 dialogue.Close();
                 OpenRow(list,customerName+(route=="refused"?"からの催促":"からの指名依頼"));
@@ -179,6 +184,7 @@ namespace CatCafePreview
                         yield return null;
                     }
                     Check(dialogue.PlaybackChoosing,"Request choices did not open");
+                    Check(dialogue.PlaybackHost.GetComponentsInChildren<Text>().Any(t=>t.text.Contains((sim.NamedRequest(customer).requested_day+1)+"日目の営業準備が回答最終日")),"Answer screen deadline missing");
                     dialogue.Answer(route!="decline");
                     for(int frame=0;frame<120 && sim.NamedRequest(customer).accepted_day==0 &&
                         sim.NamedRequest(customer).declined_day==0;frame++)yield return null;
