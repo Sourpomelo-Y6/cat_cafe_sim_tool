@@ -137,6 +137,10 @@ namespace CatCafePreview
                 Apply(client,backend);
                 var list=client.GetComponent<PythonEventListPanel>();
                 list.HoldConversations=true;
+                string shortcut=list.open.GetComponentInChildren<Text>().text;
+                Check(shortcut.Contains(route=="refused"?"指名派遣・本日まで":"指名派遣の依頼"),"Preparation shortcut missing");
+                var requestRow=list.PendingCases().Single(row=>row.timedRequest);
+                Check(requestRow.Caption.Contains((sim.State.sato_dispatch.requested_day+1)+"日目の営業準備が回答最終日"),"Last response day missing");
                 OpenRow(list,route=="refused"?"佐藤さんからの催促":"佐藤さんからの指名依頼");
                 var dialogue=client.GetComponent<SatoDispatchConversationPanel>();
                 Check(dialogue.Showing,"Request conversation did not open");
@@ -145,6 +149,9 @@ namespace CatCafePreview
                 dialogue.Next();
                 yield return null;
                 string position=dialogue.PlaybackKey;
+                dialogue.Close();
+                OpenRow(list,route=="refused"?"佐藤さんからの催促":"佐藤さんからの指名依頼");
+                Check(dialogue.Showing && dialogue.PlaybackKey==position,"Closing lost request position");
                 Command(backend,"save_game");
                 Command(backend,"load_game");
                 Apply(client,backend);

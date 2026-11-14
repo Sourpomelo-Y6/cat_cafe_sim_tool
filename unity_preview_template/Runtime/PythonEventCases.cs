@@ -7,8 +7,8 @@ using CatCafePreview.Standalone;
 namespace CatCafePreview {
  public partial class PythonEventListPanel {
   public sealed class PendingCase {
-   public int group; public string id,title,subject,reason; public bool result; public bool optional; public Action resume;
-   public string Caption=>(optional?"【任意・猫イベント】":result?"【回答済み・結果会話未完了】":"【回答・確認待ち】")+"\n"+title+" / "+subject+(optional?"":" / "+id)+"\n"+(string.IsNullOrEmpty(reason)?"続きへ（選択した案件を開く）":"先に必要："+reason);
+   public int group; public string id,title,subject,reason; public bool result; public bool optional; public bool timedRequest; public Action resume;
+   public string Caption=>(timedRequest?"【期限付き依頼】":optional?"【任意・猫イベント】":result?"【回答済み・結果会話未完了】":"【回答・確認待ち】")+"\n"+title+" / "+subject+(optional?"":" / "+id)+"\n"+(string.IsNullOrEmpty(reason)?"続きへ（選択した案件を開く）":"先に必要："+reason);
   }
   public bool HoldConversations {get;set;}
   readonly List<Button> caseButtons=new List<Button>(); Button continueButton;
@@ -61,7 +61,7 @@ namespace CatCafePreview {
    var request=b.Simulation.State.sato_dispatch;
    if(request!=null && request.accepted_day==0 && request.declined_day==0 && current.day<request.requested_day+2)
        rows.Add(new PendingCase{group=15,id="sato-request",title=current.day>request.requested_day?"佐藤さんからの催促":"佐藤さんからの指名依頼",
-           subject=cat(request.cat_id)+" / "+(request.requested_day+2)+"日目の準備まで",optional=true,resume=()=>OpenSatoScene(request.cat_id,true)});
+           subject=cat(request.cat_id)+" / "+(request.requested_day+1)+"日目の営業準備が回答最終日",optional=true,timedRequest=true,resume=()=>OpenSatoScene(request.cat_id,true)});
    return rows;
   }
   void OpenSatoScene(string catId,bool request){

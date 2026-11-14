@@ -53,7 +53,7 @@ namespace CatCafePreview
         protected override Texture2D PortraitTexture(string id)=>HumanPortraitResources.Resolve(CafeSimulation.Sato);
         protected override PythonIntakeState Request=>new PythonIntakeState{cat_id=catId,name=CatName,can_decline=true};
         protected override string Title=>request?"佐藤さんからの指名依頼":"佐藤さんといつもの席";
-        protected override string ChoicePrompt=>"回答期限は "+(Simulation.State.sato_dispatch.requested_day+2)+"日目の営業準備までです。";
+        protected override string ChoicePrompt=>"回答期限は "+(Simulation.State.sato_dispatch.requested_day+1)+"日目の営業準備が回答最終日です。";
         protected override string AcceptCaption=>"派遣する";
         protected override string DeclineCaption=>"辞退する";
         protected override string AcceptEffect=>AnswerReason(true)!=""?AnswerReason(true):

@@ -213,7 +213,9 @@ namespace CatCafePreview
         }
         private void RefreshGroups()
         {
-            int total=PendingCount;var caption=open.GetComponentInChildren<Text>();int required=RequiredPendingCount;caption.text=total>0?"イベント一覧\n"+(required>0?"要確認 "+required+"件":"任意 "+total+"件"):"イベント一覧";caption.fontSize=total>0?14:17;caption.resizeTextForBestFit=total>0;caption.resizeTextMinSize=10;caption.resizeTextMaxSize=14;
+            int total=PendingCount;var caption=open.GetComponentInChildren<Text>();int required=RequiredPendingCount;caption.text=total>0?"イベント一覧\n"+(required>0?"要確認 "+required+"件":"任意 "+total+"件"):"イベント一覧";if(CafeBackends.Standalone && current?.phase=="preparation" && PendingCases().Any(r=>r.timedRequest))
+                caption.text="イベント一覧\n"+(PendingCases().Any(r=>r.timedRequest && r.title=="佐藤さんからの催促")?"指名派遣・本日まで":"指名派遣の依頼");
+            caption.fontSize=total>0?14:17;caption.resizeTextForBestFit=total>0;caption.resizeTextMinSize=10;caption.resizeTextMaxSize=14;
             if(tabs==null || tabs.Length!=4)return;
             int rows=0;for(int i=0;i<entries.Length;i++)
             {
