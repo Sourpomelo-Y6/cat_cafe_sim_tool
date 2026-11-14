@@ -30,7 +30,7 @@ namespace CatCafePreview {
    foreach(var e in b.Simulation.State.missing_cases){
     bool result=e.result!=null && !e.result.completed;var dto=current.missing_cats?.FirstOrDefault(c=>c.cat_id==e.cat_id && c.status=="waiting");
     if(!result && (e.resolved_day>0 || dto==null))continue;var id=e.id;
-    add(4,id,e.reason=="sato_expired" || e.reason=="sato_refused"?"指名猫の帰還":"猫の家出・帰還",cat(e.cat_id),result,safe,()=>{GetComponent<PythonMissingPanel>().OpenCase(id);});
+    add(4,id,CafeSimulation.NamedMissingCustomer(e.reason)!=null?"指名猫の帰還":"猫の家出・帰還",cat(e.cat_id),result,safe,()=>{GetComponent<PythonMissingPanel>().OpenCase(id);});
    }
    foreach(var e in current.adoption?.events ?? new PythonAdoptionEvent[0]){
     bool result=b.AdoptionConversations.Any(r=>r.event_id==e.event_id && CafeAdoptionDialogue.ResultPending(r));if(e.status!="waiting" && !result)continue;var id=e.event_id;
@@ -44,7 +44,7 @@ namespace CatCafePreview {
    foreach(var e in b.Simulation.State.dispatches){
     var id=e.id;var subject=e.started_day+"日目発 / "+cat(e.cat_id)+" / "+CafeDispatchDialogue.Title(e.destination);
     var dispatch=b.DispatchConversations.FirstOrDefault(r=>r.DispatchId==id && r.Destination==e.destination);bool result=dispatch!=null && CafeDispatchDialogue.ResultPending(dispatch);
-    if(!CafeSimulation.DispatchInterrupted(e) && (e.status=="waiting" || result))add(CafeDispatchDialogue.Patron(e.destination)?6:10,id,"派遣・帰還",subject,result,priority,()=>{var p=GetComponent<PythonGeneralDispatchPanel>();if(e.destination==CafeSimulation.SatoDestination)p.OpenReturn(id);else p.Dialogue.OpenEvent(id);});
+    if(!CafeSimulation.DispatchInterrupted(e) && (e.status=="waiting" || result))add(CafeDispatchDialogue.Patron(e.destination)?6:10,id,"派遣・帰還",subject,result,priority,()=>{var p=GetComponent<PythonGeneralDispatchPanel>();if(CafeSimulation.NamedDestinationCustomer(e.destination)!=null)p.OpenReturn(id);else p.Dialogue.OpenEvent(id);});
     var encounter=b.EncounterConversations.FirstOrDefault(r=>r.event_id==id);result=encounter!=null && CafeEncounterDialogue.ResultPending(encounter);
     if(e.encounter?.status=="waiting" || result)add(11,id,"派遣中の選択",subject,result,safe,()=>GetComponent<PythonDispatchChoicePanel>().Dialogue.OpenEvent(id));
     var lodge=b.LodgeConversations.FirstOrDefault(r=>r.event_id==id);result=lodge!=null && CafeLodgeDialogue.ResultPending(lodge);
@@ -55,18 +55,23 @@ namespace CatCafePreview {
    var keys=new Dictionary<int,string>{{1,"intake_request"},{2,"store_event"},{3,"growth"},{4,"missing_return"},{5,"adoption"},{6,"dispatch_return"},{7,"regular_introduction"},{8,"reservation"},{9,"customer_trust"},{10,"dispatch_return"},{11,"dispatch_choice"},{12,"dispatch_trouble"},{13,"dispatch_introduction"}};
    foreach(var row in rows)if(!row.result && string.IsNullOrEmpty(row.reason) && !string.IsNullOrEmpty(current.required_action) && keys[row.group]!=current.required_action && !(row.group==12 && current.required_action=="dispatch_return"))row.reason=ActionLabel(current.required_action)+"を先に確認してください。";
    foreach(var candidate in b.OptionalCandidates){var target=candidate;rows.Add(new PendingCase{group=14,id=target.event_id+"/"+target.cat_id,title=target.title+(target.resume?" · 再開":" · 開始"),subject=target.cat_name+(target.milestone>0?" · 好感度"+target.milestone+(target.affinity_milestone?"で上限":""):"（"+target.cat_id+"）"),optional=true,reason=b.OptionalReason(target),resume=()=>{var view=GetComponent<OptionalEventConversationPanel>()??gameObject.AddComponent<OptionalEventConversationPanel>();view.OpenEvent(target.cat_id,target.event_id,target.revision);}});}
-   foreach(var scene in b.Simulation.State.sato_affinity.Where(e=>!e.conversation.completed))
-       rows.Add(new PendingCase{group=15,id="sato-affinity-"+scene.cat_id,title="佐藤さんといつもの席",subject=cat(scene.cat_id),
-           optional=true,resume=()=>OpenSatoScene(scene.cat_id,false)});
-   var request=b.Simulation.State.sato_dispatch;
-   if(request!=null && request.accepted_day==0 && request.declined_day==0 && current.day<request.requested_day+2)
-       rows.Add(new PendingCase{group=15,id="sato-request",title=current.day>request.requested_day?"佐藤さんからの催促":"佐藤さんからの指名依頼",
-           subject=cat(request.cat_id)+" / "+(request.requested_day+1)+"日目の営業準備が回答最終日",optional=true,timedRequest=true,resume=()=>OpenSatoScene(request.cat_id,true)});
+   foreach(var customer in CafeSimulation.NamedDispatchCustomers)
+   {
+       var name=CafeSimulation.NamedCustomerName(customer);
+       foreach(var scene in b.Simulation.NamedAffinity(customer).Where(e=>!e.conversation.completed))
+           rows.Add(new PendingCase{group=15,id=customer+"-affinity-"+scene.cat_id,title=name+(customer==CafeSimulation.Sato?"といつもの席":"とねこじゃらし"),
+               subject=cat(scene.cat_id),optional=true,resume=()=>OpenSatoScene(scene.cat_id,false,customer)});
+       var request=b.Simulation.NamedRequest(customer);
+       if(b.Simulation.NamedDispatchAwaitingAnswer(customer))
+           rows.Add(new PendingCase{group=15,id=customer+"-request",title=name+(current.day>request.requested_day?"からの催促":"からの指名依頼"),
+               subject=cat(request.cat_id)+" / "+(request.requested_day+1)+"日目の営業準備が回答最終日",
+               optional=true,timedRequest=true,resume=()=>OpenSatoScene(request.cat_id,true,customer)});
+   }
    return rows;
   }
-  void OpenSatoScene(string catId,bool request){
+  void OpenSatoScene(string catId,bool request,string customer){
    var view=GetComponent<SatoDispatchConversationPanel>()??gameObject.AddComponent<SatoDispatchConversationPanel>();
-   view.OpenEvent(catId,request);
+   view.OpenEvent(catId,request,customer);
   }
   static string ActionLabel(string action){switch(action){case "adoption":return "譲渡の申し出";case "player":return "プレイヤー交流";case "dispatch_trouble":return "宿のトラブル";case "dispatch_choice":return "派遣中の選択";case "dispatch_return":return "派遣の帰還";case "missing_return":return "猫の帰還";case "reservation":return "特別予約";case "dispatch_introduction":return "派遣先からの猫紹介";case "intake_request":return "保護猫の受け入れ";case "regular_introduction":return "常連からの猫紹介";case "customer_trust":return "顧客の信頼回復";case "store_event":return "店舗イベント";case "growth":return "猫の成長";case "service_assignment":return "接客の割り当て";default:return "目標・営業の結果";}}
   void RefreshCaseRows(){

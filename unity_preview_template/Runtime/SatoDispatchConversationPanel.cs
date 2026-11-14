@@ -8,15 +8,17 @@ namespace CatCafePreview
     public sealed class SatoDispatchConversationPanel : AcquisitionConversationPanel
     {
         private GameObject host;
-        private string catId, instance;
+        private string catId, instance, customer;
+        private string CustomerName=>CafeSimulation.NamedCustomerName(customer);
         private bool request;
         private CafeSimulation Simulation=>Backend.Simulation;
         private string CatName=>Simulation.Definition(catId).name;
-        private string AnswerReason(bool accept)=>Simulation.SatoDispatchResponseReason(accept);
+        private string AnswerReason(bool accept)=>Simulation.SatoDispatchResponseReason(accept,customer);
 
-        public void OpenEvent(string id,bool isRequest)
+        public void OpenEvent(string id,bool isRequest,string customerId)
         {
             catId=id;
+            customer=customerId;
             request=isRequest;
             instance=Client.CurrentState.instance_id;
             if(host==null)
@@ -33,7 +35,7 @@ namespace CatCafePreview
         protected override void Update()
         {
             if(Showing && (Client.CurrentState?.instance_id!=instance || Backend==null || request &&
-                (Simulation.State.sato_dispatch?.accepted_day>0 || Simulation.State.sato_dispatch?.declined_day>0)))
+                (Simulation.NamedRequest(customer)?.accepted_day>0 || Simulation.NamedRequest(customer)?.declined_day>0)))
             {
                 Close();
                 return;
@@ -42,35 +44,48 @@ namespace CatCafePreview
         }
 
         protected override CafeConversationProgress ResolveProgress()=>request
-            ? Simulation.State.sato_dispatch?.conversation
-            : Simulation.State.sato_affinity.FirstOrDefault(e=>e.cat_id==catId)?.conversation;
+            ? Simulation.NamedRequest(customer)?.conversation
+            : Simulation.NamedAffinity(customer).FirstOrDefault(e=>e.cat_id==catId)?.conversation;
         protected override bool ThreeLinePages=>true;
         protected override void SetOpen(bool open){if(Backend!=null)Backend.SatoConversationOpen=open;}
         protected override bool CanAnswer(bool answer)=>Ready && request && AnswerReason(answer)=="";
-        protected override void SendAnswer(bool answer){if(CanAnswer(answer))Client.RespondSatoDispatch(answer);}
+        protected override void SendAnswer(bool answer){if(CanAnswer(answer))Client.RespondSatoDispatch(answer,customer);}
         protected override void Finish()=>CafeMissingDialogue.Finish(progress);
         protected override void RecordCompletion(){}
-        protected override Texture2D PortraitTexture(string id)=>HumanPortraitResources.Resolve(CafeSimulation.Sato);
+        protected override Texture2D PortraitTexture(string id)=>HumanPortraitResources.Resolve(customer);
         protected override PythonIntakeState Request=>new PythonIntakeState{cat_id=catId,name=CatName,can_decline=true};
-        protected override string Title=>request?"佐藤さんからの指名依頼":"佐藤さんといつもの席";
-        protected override string ChoicePrompt=>"回答期限は "+(Simulation.State.sato_dispatch.requested_day+1)+"日目の営業準備が回答最終日です。";
+        protected override string Title=>CustomerName+(request?"からの指名依頼":customer==CafeSimulation.Suzuki?"とねこじゃらし":"といつもの席");
+        protected override string ChoicePrompt=>"回答期限は "+(Simulation.NamedRequest(customer).requested_day+1)+"日目の営業準備が回答最終日です。";
         protected override string AcceptCaption=>"派遣する";
         protected override string DeclineCaption=>"辞退する";
         protected override string AcceptEffect=>AnswerReason(true)!=""?AnswerReason(true):
-            Simulation.DiscontentScore(CafeSimulation.Sato,Simulation.State.day)>=Simulation.Rules.discontent.threshold
-                ?"文面には、予定どおり迎えに行っても返してもらえない懸念があります。":"1日の派遣。帰還時に佐藤さんの不満が下がります。";
+            Simulation.DiscontentScore(customer,Simulation.State.day)>=Simulation.Rules.discontent.threshold
+                ?"文面には、予定どおり迎えに行っても返してもらえない懸念があります。":"1日の派遣。帰還時にお客さんの不満が下がります。";
         protected override string DeclineEffect=>AnswerReason(false)!=""?AnswerReason(false):"依頼を終了します。";
         protected override string HistoryPrefix=>"";
         protected override string Notice=>request?"閉じても営業できます。期限を過ぎると回答できません。":"イベント一覧で確認できる猫とお客さんの交流です。";
 
         protected override CafeConversationLine[] Lines(string branch)
         {
+            if(customer==CafeSimulation.Suzuki)
+            {
+                if(!request)return new[]{
+                    new CafeConversationLine("",CatName+"が戻ってきて、片づけかけたねこじゃらしに前足を伸ばした。"),
+                    new CafeConversationLine(CustomerName,"もう一回ですか。じゃあ、ここで待ってますね。")
+                };
+                bool reminderDay=Simulation.State.day>Simulation.NamedRequest(customer).requested_day;
+                bool high=Simulation.DiscontentScore(customer,Simulation.State.day)>=Simulation.Rules.discontent.threshold;
+                return new[]{
+                    new CafeConversationLine(CustomerName,reminderDay?"昨日のお願い、今日中にお返事をもらえますか？":"この間も待って帰ったので、今度はゆっくり遊びたいんです。"+CatName+"に、一日だけうちに来てもらえませんか？"),
+                    new CafeConversationLine(CustomerName,high?"またお店で遊べなくなるなら、少し長く預かることも考えてほしいです。":"ねこじゃらしを用意して待ってます。")
+                };
+            }
             if(!request)return new[]{
                 new CafeConversationLine("", "佐藤さんの声が聞こえると、"+CatName+"は自分から近くへ歩いていった。"),
                 new CafeConversationLine("佐藤さん", "今日も隣に来てくれたのね。ここ、空けておいたよ。")
             };
-            bool reminder=Simulation.State.day>Simulation.State.sato_dispatch.requested_day;
-            bool severe=Simulation.DiscontentScore(CafeSimulation.Sato,Simulation.State.day)>=Simulation.Rules.discontent.threshold;
+            bool reminder=Simulation.State.day>Simulation.NamedRequest(customer).requested_day;
+            bool severe=Simulation.DiscontentScore(customer,Simulation.State.day)>=Simulation.Rules.discontent.threshold;
             return new[]{
                 new CafeConversationLine("佐藤さん",reminder?CatName+"のこと、昨日のお返事をいただけますか。":"お店で待っても会えない日が続きました。"+CatName+"を、うちに一日だけ呼べませんか。"),
                 new CafeConversationLine("佐藤さん",severe?"一日で迎えに来られても、あの子が落ち着いていたら、そのままうちにいてほしいんです。":"あの子が落ち着けるように、窓辺に場所を空けておきます。")

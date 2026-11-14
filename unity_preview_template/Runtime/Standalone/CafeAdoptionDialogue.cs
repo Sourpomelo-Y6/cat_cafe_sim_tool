@@ -24,8 +24,8 @@ namespace CatCafePreview.Standalone
                 new CafeConversationLine("あなた","店で一緒に過ごす選択も、大切にしたいと思います。また申し出があったときは、そのときに考えましょう。")};
             return new[]{
                 new CafeConversationLine("",e.day+"日目、"+customer+"から、"+name+"を迎えたいという申し出が届いた。"),
-                new CafeConversationLine(customer,e.source==CafeSimulation.SatoAdoptionSource
-                    ?"あのときは私が勝手に決めてしまいました。改めて、"+name+"を迎えることについて相談させてください。"
+                new CafeConversationLine(customer,CafeSimulation.IsNamedAdoption(e.source)
+                    ?e.customer_id==CafeSimulation.Suzuki?"先日は約束を越えてしまってすみません。もし里親を探すなら、今度はお店と相談して決めたいです。":"あのときは私が勝手に決めてしまいました。改めて、"+name+"を迎えることについて相談させてください。"
                     :name+"を迎えることについて、相談させてください。"),
                 new CafeConversationLine("","申し出時の記録では、お客さんへの親しみは"+e.guest_affinity.ToString("0.#")+"、プレイヤー好感度は"+e.player_affinity.ToString("0.#")+"。接客で築いた関係に沿った申し出だ。"),
                 new CafeConversationLine("あなた","送り出すことも、この店で一緒に過ごすことも、大切に考えます。変更されることを確認してから決めましょう。")};

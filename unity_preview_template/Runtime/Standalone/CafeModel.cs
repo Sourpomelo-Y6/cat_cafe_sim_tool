@@ -191,13 +191,16 @@ namespace CatCafePreview.Standalone
         public CafeRegularIntroduction regular_introduction = new CafeRegularIntroduction();
         public CafeVisitingCat visiting_cat = new CafeVisitingCat();
         public List<CafeShopPurchase> shop_purchases = new List<CafeShopPurchase>();
-        public CafeSatoDispatch sato_dispatch;
+        public CafeSatoDispatch sato_dispatch, suzuki_dispatch;
+        public List<CafeSatoAffinityScene> suzuki_affinity = new List<CafeSatoAffinityScene>();
         public List<CafeSatoAffinityScene> sato_affinity = new List<CafeSatoAffinityScene>();
         public CafeRecruitment recruitment; public CafeAdoption adoption;
         // Unity JsonUtility materializes JSON null strings as empty strings.
         public void NormalizeJsonStrings()
         {
             if(sato_dispatch!=null && string.IsNullOrEmpty(sato_dispatch.cat_id) && sato_dispatch.requested_day==0)sato_dispatch=null;
+            if(suzuki_dispatch!=null && string.IsNullOrEmpty(suzuki_dispatch.cat_id) && suzuki_dispatch.requested_day==0)suzuki_dispatch=null;
+            if(suzuki_affinity==null)suzuki_affinity=new List<CafeSatoAffinityScene>();
             if(sato_affinity==null)sato_affinity=new List<CafeSatoAffinityScene>();
             if(missing_cases==null)missing_cases=new List<CafeMissingCase>();
             foreach(var e in missing_cases){if(e==null)continue;if(string.IsNullOrEmpty(e.notice?.conversation_id))e.notice=null;if(string.IsNullOrEmpty(e.waiting?.conversation_id))e.waiting=null;if(string.IsNullOrEmpty(e.confirmation?.conversation_id))e.confirmation=null;if(string.IsNullOrEmpty(e.result?.conversation_id))e.result=null;}

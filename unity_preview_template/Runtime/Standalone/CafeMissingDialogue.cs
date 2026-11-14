@@ -10,6 +10,14 @@ namespace CatCafePreview.Standalone {
   public const string Id="cafe.missing.v1";
   public static CafeConversationProgress Start(string phase,string branch)=>new CafeConversationProgress{conversation_id=Id+"."+phase,branch_id=branch,viewed_branches=new string[0]};
   public static CafeConversationLine[] Lines(CafeMissingCase e,string phase,string name) {
+   if(CafeSimulation.NamedMissingCustomer(e.reason)==CafeSimulation.Suzuki)
+   {
+    bool refused=e.reason=="suzuki_refused";
+    if(phase=="notice")return new[]{new CafeConversationLine("",refused?"迎えに行くと、鈴木さんは"+name+"を返そうとしなかった。":"鈴木さんがねこじゃらしを持って帰ったあと、"+name+"の姿が見えなくなった。"),new CafeConversationLine(refused?"鈴木さん":"あなた",refused?"さっきも自分から遊びに来たんです。もう少し、うちにいさせてください。":"鈴木さんに連絡して、迎えに行こう。")};
+    if(phase=="waiting")return new[]{new CafeConversationLine("","鈴木さんに連絡を取り、"+name+"を迎えに行ける日を待っている。")};
+    if(phase=="confirmation")return new[]{new CafeConversationLine("鈴木さん",refused?"遊びに来てくれたのがうれしくて、ここにいたいんだと思い込んでました。約束の時間に返すべきでした。":"会える時間を作りたくて、勝手に連れていってしまいました。返事がないからって、連れていっていいわけがないですよね。"),new CafeConversationLine("あなた","今日は一緒に店へ戻ろう、"+name+"。")};
+    return new[]{new CafeConversationLine("",name+"は鈴木さんのところから店に戻った。"),new CafeConversationLine("あなた","おかえり。今日はゆっくり休もうね。")};
+   }
    if(e.reason=="sato_expired" || e.reason=="sato_refused")
    {
     if(phase=="notice")return new[]{new CafeConversationLine("",e.reason=="sato_expired"?"返事を待っていた佐藤さんが店を訪ねた。そのあと、"+name+"の姿が見えなくなった。":"迎えに行くと、佐藤さんは"+name+"を返そうとしなかった。"),new CafeConversationLine("あなた","佐藤さんに連絡して、"+name+"を迎えに行こう。")};

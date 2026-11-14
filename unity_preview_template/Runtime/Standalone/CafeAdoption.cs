@@ -15,7 +15,7 @@ namespace CatCafePreview.Standalone
         {if(choice!="on" && choice!="off")throw new ArgumentException("譲渡イベントをON/OFFで指定してください。");string reason=AdoptionConfigureReason();if(reason!="")throw new InvalidOperationException(reason);if(State.adoption==null)State.adoption=new CafeAdoption {id="adoption"};State.adoption.enabled=choice=="on";State.revision++;}
         private void ConsiderAdoption(string cat,CafeVisit visit,double affinity)
         {
-            if (visit.id == Sato && State.sato_dispatch?.cat_id == cat && SatoTrustDay(State,Sato,State.day) != State.day) return;
+            if (NamedRequest(visit.id)?.cat_id == cat && SatoTrustDay(State,visit.id,State.day) != State.day) return;
             var a=State.adoption;if(a==null || !a.enabled || State.cats.Single(c=>c.id==cat).activity!="cafe")return;string id="adoption-"+State.day+"-"+cat;double player=PlayerCat(cat).affinity;
             if(affinity<Rules.adoption_threshold || affinity<=player || a.events.Any(e=>e.id==id))return;
             a.events.Add(new CafeAdoptionEvent {id=id,cat_id=cat,customer_id=visit.id,source="service-"+State.day+"-"+cat+"-"+visit.id,day=State.day,tick=State.tick,guest_affinity=affinity,player_affinity=player,threshold=Rules.adoption_threshold});
@@ -40,19 +40,19 @@ namespace CatCafePreview.Standalone
             var adopted=new HashSet<string>();
             foreach(var e in a.events)
             {
-                var cat=s.cats.SingleOrDefault(c=>c.id==e.cat_id);if(cat==null || e.day<1 || e.day>s.day || e.tick<0 || e.tick>=Rules.opening_ticks || e.day==s.day && e.tick>s.tick || e.id!="adoption-"+e.day+"-"+e.cat_id || e.source!=SatoAdoptionSource && e.source!="service-"+e.day+"-"+e.cat_id+"-"+e.customer_id || e.threshold!=Rules.adoption_threshold || !Range(e.guest_affinity,e.threshold,100) || !Range(e.player_affinity,0,100) || e.guest_affinity<=e.player_affinity)throw new ArgumentException("Invalid adoption conditions");
+                var cat=s.cats.SingleOrDefault(c=>c.id==e.cat_id);if(cat==null || e.day<1 || e.day>s.day || e.tick<0 || e.tick>=Rules.opening_ticks || e.day==s.day && e.tick>s.tick || e.id!="adoption-"+e.day+"-"+e.cat_id || !IsNamedAdoption(e.source) && e.source!="service-"+e.day+"-"+e.cat_id+"-"+e.customer_id || e.threshold!=Rules.adoption_threshold || !Range(e.guest_affinity,e.threshold,100) || !Range(e.player_affinity,0,100) || e.guest_affinity<=e.player_affinity)throw new ArgumentException("Invalid adoption conditions");
                 var record=e.day==s.day?s.visits.Where(v=>v.id==e.customer_id && v.cat_id==e.cat_id && v.satisfaction!=null).Select(v=>new CafeCustomerRecord {cat_id=v.cat_id,customer_id=v.id,completed_tick=v.completed_tick,affinity_delta=v.affinity_delta}).SingleOrDefault():s.history[e.day-1].customer_records.SingleOrDefault(v=>v.customer_id==e.customer_id && v.cat_id==e.cat_id && v.satisfaction!=null);
                 double affinity=s.history.Where(h=>h.day<=e.day).SelectMany(h=>h.customer_records.Where(v=>v.customer_id==e.customer_id && v.cat_id==e.cat_id)).Sum(v=>v.affinity_delta)+(e.day==s.day?s.visits.Where(v=>v.id==e.customer_id && v.cat_id==e.cat_id).Sum(v=>v.affinity_delta):0);
                 double player=s.player_sessions.Where(p=>p.cat_id==e.cat_id && p.day<=e.day && p.exchange.end_reason!=null).Select(PlayerAffinityAfter).LastOrDefault();
-                if(e.source==SatoAdoptionSource)
+                if(IsNamedAdoption(e.source))
                 {
-                    var missing=SatoMissing(s);
+                    var missing=NamedMissing(s,e.customer_id);
                     affinity=s.history.Where(h=>h.day<e.day).SelectMany(h=>h.customer_records)
-                        .Where(v=>v.customer_id==Sato && v.cat_id==e.cat_id).Sum(v=>v.affinity_delta);
+                        .Where(v=>v.customer_id==e.customer_id && v.cat_id==e.cat_id).Sum(v=>v.affinity_delta);
                     player=s.player_sessions.Where(p=>p.cat_id==e.cat_id && p.day<e.day && p.exchange.end_reason!=null)
                         .Select(PlayerAffinityAfter).LastOrDefault();
                     if(missing==null || missing.resolved_day==0 || missing.resolved_day+1!=e.day || missing.cat_id!=e.cat_id
-                        || e.customer_id!=Sato || e.tick!=0 || e.guest_affinity<80 || e.player_affinity>40)
+                        || e.source!=NamedAdoptionSource(e.customer_id) || e.tick!=0 || e.guest_affinity<80 || e.player_affinity>40)
                         throw new ArgumentException("Invalid Sato adoption");
                 }
                 else if(record==null || record.completed_tick!=e.tick)

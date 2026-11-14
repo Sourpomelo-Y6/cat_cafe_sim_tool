@@ -73,7 +73,7 @@ namespace CatCafePreview
             if(sim.RegularIntroductionWaiting)sim.Execute("resolve_regular_introduction",choice:"decline");
         }
 
-        private static void Serve(CafeSimulation sim,string catId,bool timeout)
+        private static void Serve(CafeSimulation sim,string catId,bool timeout,string customer)
         {
             Prepare(sim);
             sim.Execute("set_shifts",working:new[]{catId});
@@ -86,7 +86,7 @@ namespace CatCafePreview
             sim.Execute("start_business");
             while(sim.State.phase=="open")
             {
-                var exchange=sim.State.exchanges.SingleOrDefault(e=>e.customer_id==CafeSimulation.Sato);
+                var exchange=sim.State.exchanges.SingleOrDefault(e=>e.customer_id==customer);
                 if(!timeout && exchange!=null)exchange.affinity_pending=100;
                 sim.Execute("advance_business");
             }
@@ -111,6 +111,7 @@ namespace CatCafePreview
 
         private IEnumerator Run()
         {
+            foreach(var customer in CafeSimulation.NamedDispatchCustomers)
             foreach(var route in new[]{"normal","decline","expired","refused"})
             {
                 var rules=JsonUtility.FromJson<CafeRules>(Resources.Load<TextAsset>("CatCafeStandalone/rules").text);
@@ -118,14 +119,20 @@ namespace CatCafePreview
                 rules.starting_funds=100000;
                 // Force suspension in one missed visit for the refusal fixture.
                 if(route=="refused")rules.discontent.waiting_gain=100;
-                var backend=new LocalCafeBackend(Path.Combine(output,route),rules);
+                if(customer==CafeSimulation.Suzuki)
+                {
+                    (rules.arrival_ticks[0],rules.arrival_ticks[1])=(rules.arrival_ticks[1],rules.arrival_ticks[0]);
+                    (rules.patterns[0],rules.patterns[1])=(rules.patterns[1],rules.patterns[0]);
+                }
+                string customerName=CafeSimulation.NamedCustomerName(customer);
+                var backend=new LocalCafeBackend(Path.Combine(output,customer,route),rules);
                 var sim=backend.Simulation;
                 string cat=sim.State.cats[0].id;
-                Serve(sim,cat,false);
-                while(sim.State.sato_dispatch==null && sim.State.day<20)Serve(sim,cat,true);
+                Serve(sim,cat,false,customer);
+                while(sim.NamedRequest(customer)==null && sim.State.day<20)Serve(sim,cat,true,customer);
                 Prepare(sim);
-                Check(sim.State.sato_dispatch!=null,"No request: "+route);
-                Check(sim.DiscontentScore(CafeSimulation.Sato,sim.State.day)==(route=="refused"?100:50),"Wrong score at request");
+                Check(sim.NamedRequest(customer)!=null,"No request: "+route);
+                Check(sim.DiscontentScore(customer,sim.State.day)==(route=="refused"?100:50),"Wrong score at request");
                 if(route=="refused")sim.Execute("day_off");
                 Command(backend,"save_game");
                 Command(backend,"load_game");
@@ -140,8 +147,8 @@ namespace CatCafePreview
                 string shortcut=list.open.GetComponentInChildren<Text>().text;
                 Check(shortcut.Contains(route=="refused"?"指名派遣・本日まで":"指名派遣の依頼"),"Preparation shortcut missing");
                 var requestRow=list.PendingCases().Single(row=>row.timedRequest);
-                Check(requestRow.Caption.Contains((sim.State.sato_dispatch.requested_day+1)+"日目の営業準備が回答最終日"),"Last response day missing");
-                OpenRow(list,route=="refused"?"佐藤さんからの催促":"佐藤さんからの指名依頼");
+                Check(requestRow.Caption.Contains((sim.NamedRequest(customer).requested_day+1)+"日目の営業準備が回答最終日"),"Last response day missing");
+                OpenRow(list,customerName+(route=="refused"?"からの催促":"からの指名依頼"));
                 var dialogue=client.GetComponent<SatoDispatchConversationPanel>();
                 Check(dialogue.Showing,"Request conversation did not open");
                 dialogue.Next();
@@ -150,13 +157,13 @@ namespace CatCafePreview
                 yield return null;
                 string position=dialogue.PlaybackKey;
                 dialogue.Close();
-                OpenRow(list,route=="refused"?"佐藤さんからの催促":"佐藤さんからの指名依頼");
+                OpenRow(list,customerName+(route=="refused"?"からの催促":"からの指名依頼"));
                 Check(dialogue.Showing && dialogue.PlaybackKey==position,"Closing lost request position");
                 Command(backend,"save_game");
                 Command(backend,"load_game");
                 Apply(client,backend);
                 yield return null;
-                OpenRow(list,route=="refused"?"佐藤さんからの催促":"佐藤さんからの指名依頼");
+                OpenRow(list,customerName+(route=="refused"?"からの催促":"からの指名依頼"));
                 Check(dialogue.PlaybackKey==position,"Request page was lost");
                 if(route=="expired")
                 {
@@ -173,13 +180,13 @@ namespace CatCafePreview
                     }
                     Check(dialogue.PlaybackChoosing,"Request choices did not open");
                     dialogue.Answer(route!="decline");
-                    for(int frame=0;frame<120 && sim.State.sato_dispatch.accepted_day==0 &&
-                        sim.State.sato_dispatch.declined_day==0;frame++)yield return null;
-                    Check(route=="decline"?sim.State.sato_dispatch.declined_day>0:sim.State.sato_dispatch.accepted_day>0,"UI answer was not applied");
+                    for(int frame=0;frame<120 && sim.NamedRequest(customer).accepted_day==0 &&
+                        sim.NamedRequest(customer).declined_day==0;frame++)yield return null;
+                    Check(route=="decline"?sim.NamedRequest(customer).declined_day>0:sim.NamedRequest(customer).accepted_day>0,"UI answer was not applied");
                     if(route=="decline")continue;
                     yield return null;
                     sim.Execute("day_off");
-                    var trip=sim.State.dispatches.Single(e=>e.destination==CafeSimulation.SatoDestination);
+                    var trip=sim.State.dispatches.Single(e=>CafeSimulation.NamedDestinationCustomer(e.destination)==customer);
                     Apply(client,backend);
                     OpenRow(list,"派遣・帰還");
                     client.GetComponent<PythonGeneralDispatchPanel>().receive.onClick.Invoke();
@@ -187,7 +194,7 @@ namespace CatCafePreview
                     Check(trip.status=="resolved","Dispatch receive was not applied");
                     if(route=="normal")
                     {
-                        Check(sim.DiscontentScore(CafeSimulation.Sato,sim.State.day)==25,"Dissatisfaction was not reduced");
+                        Check(sim.DiscontentScore(customer,sim.State.day)==25,"Dissatisfaction was not reduced");
                         continue;
                     }
                 }
@@ -202,11 +209,11 @@ namespace CatCafePreview
                 OpenRow(list,"指名猫の帰還");
                 Check(client.GetComponent<MissingConversationPanel>().Showing,"Missing conversation did not open");
                 Command(backend,"resolve_missing",choice:sim.State.missing_cases.Single(e=>e.cat_id==cat && e.resolved_day==0).id,cat:cat);
-                Check(sim.State.sato_dispatch.returned_day==sim.State.day,"Missing return was not applied");
+                Check(sim.NamedRequest(customer).returned_day==sim.State.day,"Missing return was not applied");
                 if(route!="expired")continue;
                 sim.Execute("configure_adoption",choice:"on");
                 sim.Execute("day_off");
-                var offer=sim.State.adoption.events.Single(e=>e.source==CafeSimulation.SatoAdoptionSource);
+                var offer=sim.State.adoption.events.Single(e=>CafeSimulation.IsNamedAdoption(e.source) && e.customer_id==customer);
                 Command(backend,"save_game");
                 Command(backend,"load_game");
                 sim.Execute("resolve_adoption",source:offer.id,choice:"accept");
@@ -225,9 +232,10 @@ namespace CatCafePreview
                 Check(entry.GetComponentInChildren<Text>().text=="後日談・未読","Unread epilogue button absent");
                 entry.onClick.Invoke();
                 var reader=client.GetComponent<SatoEpiloguePanel>();
+                Check(reader.PlaybackKey.StartsWith(customer==CafeSimulation.Suzuki?"suzuki.epilogue.v1":"sato.epilogue.v1"),"Wrong epilogue customer");
                 Check(reader.Showing && !details.panel.activeSelf,"Cat details cover the epilogue");
                 for(int frame=0;frame<40 && reader.Showing;frame++){reader.Next();yield return null;}
-                Check(!reader.Showing && details.panel.activeSelf && sim.State.sato_dispatch.epilogue_read,"Epilogue was not marked read");
+                Check(!reader.Showing && details.panel.activeSelf && sim.NamedRequest(customer).epilogue_read,"Epilogue was not marked read");
                 Check(!backend.ConversationBlocksProgress || backend.AdoptionResultPending || backend.MissingResultPending,"Epilogue blocked progress");
                 Command(backend,"save_game");
                 Command(backend,"load_game");
