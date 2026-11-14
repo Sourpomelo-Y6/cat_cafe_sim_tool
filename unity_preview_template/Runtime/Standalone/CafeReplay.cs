@@ -57,6 +57,7 @@ namespace CatCafePreview.Standalone
             if(value is System.Collections.IEnumerable sequence){text.Append('[');foreach(var item in sequence)Canonical(item,text);text.Append(']');return;}
             text.Append('{');foreach(var field in Fields(value.GetType()))
             {if(field.Name=="missing_cases" && value is CafeSnapshot)continue;
+                if(value is CafeSnapshot && (field.Name=="sato_affinity" || field.Name=="sato_dispatch"))continue;
                 if(field.Name=="growth_policy_version" && value is CafeReplayOperation && (int)field.GetValue(value)==0)continue;
                 if(field.Name=="stamina_policy_version" && (value is CafeReplayOperation || value is CafeGrowthOperation) && (int)field.GetValue(value)==0)continue;
                 if(field.Name=="stamina_rules" && value is CafeReplayOperation && field.GetValue(value)==null)continue;

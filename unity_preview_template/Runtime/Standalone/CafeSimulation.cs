@@ -70,6 +70,7 @@ namespace CatCafePreview.Standalone
             ValidateVisitingCat(s);
             ValidateStoreEvents(s);
             ValidateGrowth(s); ValidateGrowthSelections(s);
+            ValidateSatoDispatch(s);
             ValidateTrust(s);
             ValidateCustomers(s);
             ValidateRegularIntroduction(s);
@@ -122,6 +123,7 @@ namespace CatCafePreview.Standalone
             if(kind=="resolve_growth_stage" || kind=="resolve_growth_auto" || kind=="resolve_growth_batch"){GrowthBatchCommand(kind,catId,choice);return;}
             if(kind=="open_recruitment"){OpenRecruitment();return;}
             if (s.game_over != null) throw new InvalidOperationException("経営終了後は保存・閲覧のみ利用できます。");
+            if(kind=="resolve_sato_dispatch"){RespondSatoDispatch(choice);s.revision++;return;}
             if(kind=="set_auto_assignment"){SetAutoAssignment(choice);return;}
             if(kind=="assign_service"){AssignService(customerId,catId,seatId);return;}
             if(kind=="resolve_adoption"){ResolveAdoption(source,choice);return;}
@@ -165,7 +167,9 @@ namespace CatCafePreview.Standalone
                 case "begin_second_group_type_practice": case "begin_second_group_second_type_practice": case "begin_third_group_practice": case "begin_third_group_type_practice": case "begin_third_group_second_type_practice": BeginGrowthPractice(kind, catId); break;
                 case "resolve_store_event": ResolveStoreEvent(choice); return;
                 case "dispatch_patron":if(!IsPatronDestination(choice))throw new ArgumentException("有力者の派遣先を選んでください。");Dispatch(catId,choice);break;
-                case "dispatch":case "dispatch_general":Dispatch(catId,choice);break;
+                case "dispatch":case "dispatch_general":
+                    if(choice==SatoDestination)throw new ArgumentException("佐藤さんの依頼から回答してください。");
+                    Dispatch(catId,choice);break;
                 case "expand_seats": ExpandSeats(); break;
                 case "purchase_waiting_area": case "upgrade_waiting_area": ChangeWaitingArea(kind); break;
                 case "purchase_rest_space": case "upgrade_rest_space": case "soundproof_rest_space": ChangeRestSpace(kind); break;
@@ -205,6 +209,7 @@ namespace CatCafePreview.Standalone
                     if (cat == null) throw new ArgumentException("帰還待ちの猫を選んでください。");
                     var missingCase=State.missing_cases.LastOrDefault(e=>e.cat_id==cat.id && e.resolved_day==0);
                     cat.activity = "cafe"; cat.stamina = MaxStamina(cat.id); cat.cannot_continue = cat.health != "healthy"; cat.stress = Rules.return_stress;
+                    if (missingCase != null && missingCase == SatoMissing(s)) s.sato_dispatch.returned_day=s.day;
                     double cost = cat.kitten ? Rules.kitten_cost : 0; s.funds -= cost; s.expenses += cost; if(missingCase!=null){missingCase.resolved_day=s.day;missingCase.cost=cost;missingCase.funds_after=s.funds;missingCase.stamina=cat.stamina;missingCase.stress=cat.stress;missingCase.kitten=cat.kitten;} CheckEnd(); break;
                 default: throw new NotSupportedException("単独版の第1段階では未対応の操作です：" + kind);
             }
@@ -230,6 +235,7 @@ namespace CatCafePreview.Standalone
             PresentRegularIntroduction();
             PresentVisitingCat();
             PresentDispatchIntroductions();
+            PresentSatoDispatch();
             PresentCustomerTrust();
             PresentReservation();
         }
@@ -273,6 +279,7 @@ namespace CatCafePreview.Standalone
                     if (relationship == null) { relationship = new CafeRelationship { cat_id = e.cat_id, customer_id = e.customer_id }; s.relationships.Add(relationship); }
                     relationship.affinity = Clamp(e.affinity_start + e.affinity_pending, 100);
                     visit.type_actions = (int[])e.type_actions.Clone(); visit.affinity_delta = relationship.affinity - e.affinity_start; visit.stamina_spent = e.stamina_spent;
+                    ObserveSatoAffinity(cat.id,visit.id,relationship.affinity);
                     ConsiderAdoption(cat.id,visit,relationship.affinity);
                     GrowthService(cat.id, visit);
                     s.completed++; s.exchanges.Remove(e); if (cat.stamina == 0) cat.cannot_continue = true;
@@ -376,7 +383,7 @@ namespace CatCafePreview.Standalone
             GrowthRestDay();
             double after = Math.Min(Rules.popularity.cap, s.popularity + s.visits.Count(v => v.satisfaction != null && v.satisfaction.level == "satisfied") * Rules.popularity.gain_per_success + CurrentStoreEvent.popularity + s.visits.Sum(v=>SpecialistPopularity(v.id,v.specialist_result)));
             s.popularity_gain = after - s.popularity; s.popularity = after;
-            foreach (var cat in s.cats.Where(cat => cat.activity == "missing" && !DispatchMissing(s,cat.id))) if (cat.missing_remaining > 0) cat.missing_remaining--;
+            foreach (var cat in s.cats.Where(cat => cat.activity == "missing" && !DispatchMissing(s,cat.id))) if (cat.missing_remaining > 0 && !(SatoMissing(s) is CafeMissingCase missing && missing.cat_id==cat.id && missing.departed_day==s.day)) cat.missing_remaining--;
             foreach (var cat in s.cats.Where(cat => cat.activity == "cafe"))
             {
                 var p = Definition(cat.id);

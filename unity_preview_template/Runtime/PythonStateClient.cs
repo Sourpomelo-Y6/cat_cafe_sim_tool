@@ -435,6 +435,12 @@ namespace CatCafePreview
         }
         public void RespondReservation(string choice){if(CanRespondReservation(choice))QueueAdoption("resolve_reservation","",choice,current.reservation.event_id);}
         public bool CanRespondTrust(string id){return CanManageSaves && current.customer_trust?.events!=null && Array.Exists(current.customer_trust.events,e=>e.event_id==id && e.can_respond);}
+        public void RespondSatoDispatch(bool accept)
+        {
+            var backend=CafeBackends.Local as LocalCafeBackend;
+            if(CanManageSaves && !AutoPlayRunning && backend?.Simulation.SatoDispatchResponseReason(accept)=="")
+                QueuePlayer("resolve_sato_dispatch","",accept?"accept":"decline","");
+        }
         public void RespondTrust(string id,string choice){if(CanRespondTrust(id) && (choice=="recover" || choice=="ignore"))QueueAdoption("resolve_customer_trust","",choice,id);}
         public void RespondRegular(string choice)
         { if(CanRespondRegular(choice))QueuePlayer("resolve_regular_introduction",current.regular_introduction.cat_id,choice,""); }

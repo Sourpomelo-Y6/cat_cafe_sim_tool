@@ -12,6 +12,7 @@ namespace CatCafePreview.Standalone
             foreach (var d in State.discontent.OrderBy(r => r.customer_id, StringComparer.Ordinal))
             {
                 var row = State.trust_customers.Find(r => r.customer_id == d.customer_id);
+                if (SatoTrustDay(State,d.customer_id,State.day) != State.day) continue;
                 if (d.suspensions.Count < Rules.trust.warning_suspensions || row != null && row.status != "stable") continue;
                 var e = new CafeTrustEvent { id = "trust-" + State.day + "-" + d.customer_id, customer_id = d.customer_id,
                     day = State.day, suspensions = d.suspensions.Count, status = "waiting" };
@@ -97,10 +98,10 @@ namespace CatCafePreview.Standalone
                 int expectedDay = d.suspensions[Rules.trust.warning_suspensions - 1].day + 1;
                 foreach (var e in s.trust_events.Where(e => e.customer_id == d.customer_id).OrderBy(e => e.day))
                 {
-                    if (e.day != expectedDay) throw new ArgumentException("Trust warning presentation disagrees with history");
+                    if (e.day != SatoTrustDay(s,d.customer_id,expectedDay)) throw new ArgumentException("Trust warning presentation disagrees with history");
                     expectedDay = e.outcome == "recovered" ? e.resolved_day + 1 : int.MaxValue;
                 }
-                if (expectedDay <= s.day) throw new ArgumentException("Missing trust warning");
+                if (SatoTrustDay(s,d.customer_id,expectedDay) <= s.day) throw new ArgumentException("Missing trust warning");
             }
             foreach (var r in s.trust_customers)
             {

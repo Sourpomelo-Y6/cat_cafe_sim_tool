@@ -115,14 +115,18 @@ namespace CatCafePreview.Standalone
             foreach (var h in s.history)
             {
                 if (h.customer_records == null || h.customer_records.Count != h.arrivals || h.customer_records.Select(r => r.customer_id).Distinct().Count() != h.customer_records.Count || h.customer_records.Count(r => r.satisfaction != null) != h.completed) throw new ArgumentException("Invalid customer history");
+                ReplaySatoReturn(s, expectedDiscontent, h.day, false);
                 foreach (var r in h.customer_records)
                 {
                     if (string.IsNullOrEmpty(r.customer_id) || !new[] { "queue_full", "wait_timeout", "closing", "interaction_exhausted", "interaction_time_limit" }.Contains(r.departure) || r.satisfaction != null && !new[] { "satisfied", "normal", "dissatisfied" }.Contains(r.satisfaction)) throw new ArgumentException("Invalid customer outcome");
                     ReplayCustomer(expectedLoyalty, expectedDiscontent, h.day, r.customer_id, r.departure, r.satisfaction, r.specialist_result);
                     ReplayTrustRecovery(s, expectedDiscontent, h.day, r.customer_id, r.satisfaction);
                 }
+                ReplaySatoReturn(s, expectedDiscontent, h.day, true);
             }
+            ReplaySatoReturn(s, expectedDiscontent, s.day, false);
             foreach (var v in s.visits) { ReplayCustomer(expectedLoyalty, expectedDiscontent, s.day, v.id, v.departure, v.satisfaction?.level, v.specialist_result); ReplayTrustRecovery(s, expectedDiscontent, s.day, v.id, v.satisfaction?.level); }
+            ReplaySatoReturn(s, expectedDiscontent, s.day, true);
             if (expectedLoyalty.Count != s.loyalty.Count || expectedDiscontent.Count != s.discontent.Count) throw new ArgumentException("Customer totals disagree with history");
             foreach (var r in expectedLoyalty) if (!s.loyalty.Any(a => a.customer_id == r.customer_id && a.score == r.score && a.regular_day == r.regular_day)) throw new ArgumentException("Loyalty disagrees with history");
             foreach (var r in expectedDiscontent)

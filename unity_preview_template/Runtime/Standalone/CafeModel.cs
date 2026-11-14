@@ -191,10 +191,14 @@ namespace CatCafePreview.Standalone
         public CafeRegularIntroduction regular_introduction = new CafeRegularIntroduction();
         public CafeVisitingCat visiting_cat = new CafeVisitingCat();
         public List<CafeShopPurchase> shop_purchases = new List<CafeShopPurchase>();
+        public CafeSatoDispatch sato_dispatch;
+        public List<CafeSatoAffinityScene> sato_affinity = new List<CafeSatoAffinityScene>();
         public CafeRecruitment recruitment; public CafeAdoption adoption;
         // Unity JsonUtility materializes JSON null strings as empty strings.
         public void NormalizeJsonStrings()
         {
+            if(sato_dispatch!=null && string.IsNullOrEmpty(sato_dispatch.cat_id) && sato_dispatch.requested_day==0)sato_dispatch=null;
+            if(sato_affinity==null)sato_affinity=new List<CafeSatoAffinityScene>();
             if(missing_cases==null)missing_cases=new List<CafeMissingCase>();
             foreach(var e in missing_cases){if(e==null)continue;if(string.IsNullOrEmpty(e.notice?.conversation_id))e.notice=null;if(string.IsNullOrEmpty(e.waiting?.conversation_id))e.waiting=null;if(string.IsNullOrEmpty(e.confirmation?.conversation_id))e.confirmation=null;if(string.IsNullOrEmpty(e.result?.conversation_id))e.result=null;}
             if(stamina_growth!=null && stamina_growth.version==0 && stamina_growth.initial==0 && stamina_growth.cap==0 && stamina_growth.increment==0 && stamina_growth.experience_per_stage==0)stamina_growth=null;

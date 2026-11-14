@@ -24,7 +24,7 @@ namespace CatCafePreview.Standalone
         }
         public DispatchRules[] DispatchDestinations()=>(Rules.dispatch_destinations??new[]{Rules.dispatch}).Concat(State.patron==null?new DispatchRules[0]:PatronDestinations()).ToArray();
         public DispatchRules[] PatronDestinations()=>new[]{Rules.patron.destination}.Concat(Rules.patron.members.Select(r=>new DispatchRules {id=r.id,name=r.name+"への訪問",days=Rules.patron.destination.days,reward=Rules.patron.destination.reward,max_fatigue=Rules.patron.destination.max_fatigue})).ToArray();
-        public DispatchRules DispatchDestination(string id)=>(Rules.dispatch_destinations??new[]{Rules.dispatch}).Concat(Rules.patron==null?new DispatchRules[0]:PatronDestinations()).SingleOrDefault(r=>r.id==id);
+        public DispatchRules DispatchDestination(string id)=>id==SatoDestination?SatoVisit:(Rules.dispatch_destinations??new[]{Rules.dispatch}).Concat(Rules.patron==null?new DispatchRules[0]:PatronDestinations()).SingleOrDefault(r=>r.id==id);
         public double DispatchReward(string id,string destination=null)=>DispatchTerms(State,id,State.day,destination:destination).reward;
         public string DispatchReason(string id,string destination)
         {
@@ -66,7 +66,8 @@ namespace CatCafePreview.Standalone
             e.status="resolved";e.choice=choice;e.resolved_day=State.day;var c=State.cats.Single(c=>c.id==e.cat_id);c.activity="cafe";if(DispatchInterrupted(e)){c.stress=Rules.dispatch_trouble.return_stress;c.stamina=MaxStamina(c.id);c.cannot_continue=c.health!="healthy";}else c.stress=Math.Min(100,c.stress+e.return_stress);
             State.funds+=DispatchReceivedReward(e);State.dispatch_income+=DispatchReceivedReward(e);
             ReceivePatron(e);
-            if(!DispatchInterrupted(e))RecordGrowth(new CafeGrowthOperation {kind="dispatch",cat_id=c.id,customer_id=e.id,day=State.day,tick=State.tick});PresentDispatchIntroductions();State.revision++;
+            FinishSatoDispatch(e,c);
+            if(!DispatchInterrupted(e) && !SatoRefusal(State,e))RecordGrowth(new CafeGrowthOperation {kind="dispatch",cat_id=c.id,customer_id=e.id,day=State.day,tick=State.tick});PresentDispatchIntroductions();State.revision++;
         }
         private void ValidateDispatch(CafeSnapshot s)
         {
@@ -82,7 +83,7 @@ namespace CatCafePreview.Standalone
                 if(!interrupted && (e.status=="travelling"?(e.remaining<=0 || e.occurred_day!=0 || e.resolved_day!=0 || e.choice!=null):e.status=="waiting"?(e.remaining!=0 || e.occurred_day!=e.started_day+r.days-1 || e.resolved_day!=0 || e.choice!=null):e.status=="resolved"?(e.remaining!=0 || e.occurred_day!=e.started_day+r.days-1 || e.resolved_day<e.occurred_day || e.resolved_day>s.day || e.choice!="receive"):true))throw new ArgumentException("Invalid dispatch phase");
                 if(e.status!="resolved" && (!busy.Add(c.id) || c.activity!=(interrupted?"missing":"dispatched") || c.working))throw new ArgumentException("Overlapping dispatches");
                 var ops=s.growth_operations.Where(o=>o.kind=="dispatch" && o.customer_id==e.id).ToArray();
-                if(ops.Length!=(e.status=="resolved" && !interrupted?1:0) || ops.Any(o=>o.cat_id!=e.cat_id || o.day!=e.resolved_day))throw new ArgumentException("Dispatch experience differs from return");
+                if(ops.Length!=(e.status=="resolved" && !interrupted && !SatoRefusal(s,e)?1:0) || ops.Any(o=>o.cat_id!=e.cat_id || o.day!=e.resolved_day))throw new ArgumentException("Dispatch experience differs from return");
             }
             if(!busy.SetEquals(s.cats.Where(c=>c.activity=="dispatched" || DispatchMissing(s,c.id)).Select(c=>c.id)) || s.growth_operations.Any(o=>o.kind=="dispatch" && !s.dispatches.Any(e=>e.id==o.customer_id && e.status=="resolved")))throw new ArgumentException("Dispatch activity differs from events");
             foreach(var g in s.dispatches.GroupBy(e=>e.cat_id)){CafeDispatch previous=null;foreach(var e in g.OrderBy(e=>e.started_day)){if(previous!=null && (previous.status!="resolved" || e.started_day<previous.resolved_day))throw new ArgumentException("Overlapping dispatch dates");previous=e;}}

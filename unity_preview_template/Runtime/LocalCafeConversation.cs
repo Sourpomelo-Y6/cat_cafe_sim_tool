@@ -8,7 +8,8 @@ namespace CatCafePreview
         public bool ConversationOpen {get;set;}
         public bool RegularConversationOpen {get;set;}
         static bool UnfinishedResult(CafeConversationProgress p)=>p!=null && !p.completed && p.branch_id!="introduction";
-        public bool ConversationBlocksProgress=>OptionalEventOpen || EquipmentBlocksProgress || ReservationBlocksProgress || MissingBlocksProgress || TrustBlocksProgress || AdoptionConversationOpen || AdoptionResultPending || LodgeConversationOpen || LodgeResultPending || OutcomePending || OpeningPending || PatronEndingPending || BondEndingPending || PopularityEndingPending || ConversationOpen || RegularConversationOpen || DispatchConversationOpen || UnfinishedResult(Conversation) || UnfinishedResult(RegularConversation) || DispatchResultPending || EncounterConversationOpen || EncounterResultPending || DispatchIntroductionConversationOpen || DispatchIntroductionResultPending;
+        public bool SatoConversationOpen { get; set; }
+        public bool ConversationBlocksProgress=>SatoConversationOpen || OptionalEventOpen || EquipmentBlocksProgress || ReservationBlocksProgress || MissingBlocksProgress || TrustBlocksProgress || AdoptionConversationOpen || AdoptionResultPending || LodgeConversationOpen || LodgeResultPending || OutcomePending || OpeningPending || PatronEndingPending || BondEndingPending || PopularityEndingPending || ConversationOpen || RegularConversationOpen || DispatchConversationOpen || UnfinishedResult(Conversation) || UnfinishedResult(RegularConversation) || DispatchResultPending || EncounterConversationOpen || EncounterResultPending || DispatchIntroductionConversationOpen || DispatchIntroductionResultPending;
         public bool IntakeResultPending=>UnfinishedResult(Conversation);
         public bool RegularResultPending=>UnfinishedResult(RegularConversation);
         public string ConversationProgressReason

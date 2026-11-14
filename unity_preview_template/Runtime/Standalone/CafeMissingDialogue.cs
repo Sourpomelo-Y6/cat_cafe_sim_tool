@@ -10,6 +10,13 @@ namespace CatCafePreview.Standalone {
   public const string Id="cafe.missing.v1";
   public static CafeConversationProgress Start(string phase,string branch)=>new CafeConversationProgress{conversation_id=Id+"."+phase,branch_id=branch,viewed_branches=new string[0]};
   public static CafeConversationLine[] Lines(CafeMissingCase e,string phase,string name) {
+   if(e.reason=="sato_expired" || e.reason=="sato_refused")
+   {
+    if(phase=="notice")return new[]{new CafeConversationLine("",e.reason=="sato_expired"?"返事を待っていた佐藤さんが店を訪ねた。そのあと、"+name+"の姿が見えなくなった。":"迎えに行くと、佐藤さんは"+name+"を返そうとしなかった。"),new CafeConversationLine("あなた","佐藤さんに連絡して、"+name+"を迎えに行こう。")};
+    if(phase=="waiting")return new[]{new CafeConversationLine("","佐藤さんに連絡を取り、"+name+"を迎えに行ける日を待っている。")};
+    if(phase=="confirmation")return new[]{new CafeConversationLine("佐藤さん","うちで休ませてあげたいと思ったんです。でも、私が勝手に決めていいことではありませんでした。"),new CafeConversationLine("あなた",name+"を連れて帰ります。お話はまた改めて。")};
+    return new[]{new CafeConversationLine("",name+"は佐藤さんのところから店に戻った。"),new CafeConversationLine("あなた","おかえり。今日はゆっくり休もうね。")};
+   }
    if(phase=="notice")return new[]{new CafeConversationLine("",name+"が店から家出した。"),new CafeConversationLine("あなた",e.reason=="stress"?"接客後のストレスが家出の基準に達した記録があります。今は帰還を待ちましょう。":"家出日や原因の記録はありません。今分かる状態を確認しましょう。"),new CafeConversationLine("","家出中は接客・交流・派遣に参加できない。営業か休業で日程を進められる。居場所や帰還結果は、まだ確認できていない。")};
    if(phase=="waiting")return new[]{new CafeConversationLine("あなた",name+"は、まだ家出中です。帰還までの残り閉店回数は記録一覧で確認できます。"),new CafeConversationLine("","この状況確認は任意。会話を閉じて営業や休業を進めよう。出勤できる猫がいなくても、営業準備の休業を利用できる。")};
    if(phase=="confirmation")return new[]{new CafeConversationLine("",name+"が帰還待ちになった。"),new CafeConversationLine("あなた","子猫の有無と費用は、帰還の記録に公開されています。一覧で内容と確認後の資金を確かめてから、帰還を確定しましょう。"),new CafeConversationLine("","この会話だけでは帰還・費用は確定しない。会話を閉じると記録一覧へ戻る。帰還を確定するまで営業・休業は進められない。")};

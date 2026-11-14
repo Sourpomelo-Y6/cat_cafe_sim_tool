@@ -55,7 +55,7 @@ namespace CatCafePreview
             if(state==null)return;var option=destinations.value>=0 && destinations.value<options.Length?options[destinations.value]:null;
             details.text=PythonDispatchDisplay.Terms(state,catId,"general",option);if(summary!=null)summary.text=PythonDispatchDisplay.Summary(state,catId,"general",option);
             var ev=returns.value>=0 && returns.value<events.Length?events[returns.value]:null;
-            progress.text=ev==null?"この猫の派遣記録はありません。":"状態："+PythonDispatchDisplay.Status(ev)+"\n"+(ev.status=="travelling"?"あと "+ev.remaining+"回の閉店で帰還":ev.status=="waiting"?"帰還しました。報酬を受け取ってください。":ev.status=="resolved"?"帰還・報酬の受け取り済み":"イベントへの対応待ち")+"\n報酬："+PythonDispatchDisplay.N(ev.reward)+"\n"+ev.detail+(string.IsNullOrEmpty(ev.reason)?"":"\n操作できない理由："+ev.reason);
+            progress.text=ev==null?"この猫の派遣記録はありません。":"状態："+PythonDispatchDisplay.Status(ev)+"\n"+(ev.status=="travelling"?"あと "+ev.remaining+"回の閉店で帰還":ev.status=="waiting"?(ev.label.EndsWith(CatCafePreview.Standalone.CafeSimulation.SatoVisit.name,StringComparison.Ordinal)?"迎えの結果を確認してください。":"帰還しました。報酬を受け取ってください。"):ev.status=="resolved"?"帰還・報酬の受け取り済み":"イベントへの対応待ち")+"\n報酬："+PythonDispatchDisplay.N(ev.reward)+"\n"+ev.detail+(string.IsNullOrEmpty(ev.reason)?"":"\n操作できない理由："+ev.reason);
 
             if(ev?.needs_response==true)progress.text+="\n\nイベント一覧の「派遣中の選択」から回答してください。";else if(ev?.status=="missing")progress.text+="\n\nイベント一覧の「宿のトラブル」から対応してください。";
             PythonDispatchDisplay.Size(details);PythonDispatchDisplay.Size(progress);RefreshControls();

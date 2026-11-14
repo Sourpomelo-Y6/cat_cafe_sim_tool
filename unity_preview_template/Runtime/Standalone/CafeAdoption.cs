@@ -15,6 +15,7 @@ namespace CatCafePreview.Standalone
         {if(choice!="on" && choice!="off")throw new ArgumentException("譲渡イベントをON/OFFで指定してください。");string reason=AdoptionConfigureReason();if(reason!="")throw new InvalidOperationException(reason);if(State.adoption==null)State.adoption=new CafeAdoption {id="adoption"};State.adoption.enabled=choice=="on";State.revision++;}
         private void ConsiderAdoption(string cat,CafeVisit visit,double affinity)
         {
+            if (visit.id == Sato && State.sato_dispatch?.cat_id == cat && SatoTrustDay(State,Sato,State.day) != State.day) return;
             var a=State.adoption;if(a==null || !a.enabled || State.cats.Single(c=>c.id==cat).activity!="cafe")return;string id="adoption-"+State.day+"-"+cat;double player=PlayerCat(cat).affinity;
             if(affinity<Rules.adoption_threshold || affinity<=player || a.events.Any(e=>e.id==id))return;
             a.events.Add(new CafeAdoptionEvent {id=id,cat_id=cat,customer_id=visit.id,source="service-"+State.day+"-"+cat+"-"+visit.id,day=State.day,tick=State.tick,guest_affinity=affinity,player_affinity=player,threshold=Rules.adoption_threshold});
