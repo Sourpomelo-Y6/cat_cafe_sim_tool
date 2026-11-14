@@ -89,6 +89,7 @@ namespace CatCafePreview
         {
             var cat=current.cats == null ? null : Array.Find(current.cats,row => row.cat_id==selectedId);
             if(cat == null) { Close(); return; }
+            if(GetComponent<SatoEpiloguePanel>()?.Showing==true)return;
             panel.SetActive(true);
             if(!showingCare || GetComponent<PythonItemsPanel>()?.panel.activeSelf!=true){showingCare=false;panel.transform.SetAsLastSibling();}
             InteractionStatisticsPanel.EnsureEntry(this,panel.transform.Find("Details Card"),title,interact,()=>selectedId,null);

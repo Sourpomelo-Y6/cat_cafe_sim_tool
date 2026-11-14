@@ -27,6 +27,7 @@ namespace CatCafePreview
             }
             Bind(Client.CurrentState,host,details.title.font);
             Open();
+            if(Showing)details.panel.SetActive(false);
         }
 
         protected override void Update()
@@ -53,12 +54,19 @@ namespace CatCafePreview
             new CafeConversationLine("佐藤さん","店で隣に来てくれたときも、私が呼ぶより先に、あの子が自分で来てくれたんですよね。ここでも、"+cat.name+"が自分で選べる場所を増やしていきます。")
         };
 
+        protected override void AfterClose()
+        {
+            if(Client.CurrentState?.instance_id==instance)
+                GetComponent<PythonCatDetailsPanel>().Apply(Client.CurrentState);
+            base.AfterClose();
+        }
+
         protected override void Finish()
         {
             CafeMissingDialogue.Finish(reading);
             if(Backend?.Simulation.SatoEpilogueAvailable(cat.cat_id)==true)
                 Backend.Simulation.State.sato_dispatch.epilogue_read=true;
-            GetComponent<PythonCatDetailsPanel>().Apply(Client.CurrentState);
+
         }
     }
 }

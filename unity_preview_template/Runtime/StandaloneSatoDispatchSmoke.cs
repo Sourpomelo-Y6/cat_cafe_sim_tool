@@ -225,9 +225,9 @@ namespace CatCafePreview
                 Check(entry.GetComponentInChildren<Text>().text=="後日談・未読","Unread epilogue button absent");
                 entry.onClick.Invoke();
                 var reader=client.GetComponent<SatoEpiloguePanel>();
-                Check(reader.Showing,"Epilogue did not open");
+                Check(reader.Showing && !details.panel.activeSelf,"Cat details cover the epilogue");
                 for(int frame=0;frame<40 && reader.Showing;frame++){reader.Next();yield return null;}
-                Check(!reader.Showing && sim.State.sato_dispatch.epilogue_read,"Epilogue was not marked read");
+                Check(!reader.Showing && details.panel.activeSelf && sim.State.sato_dispatch.epilogue_read,"Epilogue was not marked read");
                 Check(!backend.ConversationBlocksProgress || backend.AdoptionResultPending || backend.MissingResultPending,"Epilogue blocked progress");
                 Command(backend,"save_game");
                 Command(backend,"load_game");
