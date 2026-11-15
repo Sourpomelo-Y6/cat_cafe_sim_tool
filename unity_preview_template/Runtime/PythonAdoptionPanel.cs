@@ -78,7 +78,8 @@ namespace CatCafePreview
             bool enabled=current!=null && current.enabled;configure.GetComponentInChildren<Text>().text="申し出の発生："+(enabled ? "ON → OFFにする" : "OFF → ONにする");
             settings.text="営業準備中に変更できます。初期設定はOFFです。\nお客さんへの親しみが80以上、かつプレイヤー好感度より高いと申し出が発生します。\nOFFにしても過去の履歴は残ります。";
             var row=Array.Find(rows,r=>r.event_id==selected);
-            details.text=row==null ? "申し出はありません。\n発生をONにすると、次の接客終了から条件を判定します。" : row.name+" → "+row.customer_name+" / "+row.day+"日目の申し出\nお客さんへの親しみ："+row.guest_affinity.ToString("0.#")+" / 発生基準："+row.threshold.ToString("0.#")+"\nプレイヤー好感度："+row.player_affinity.ToString("0.#")
+            details.text=row==null ? "申し出はありません。\n申し出の発生をONにすると、接客後に条件を確認します。"
+                +(CafeBackends.Standalone?"\n指名猫の帰還後は、条件を満たすと翌日の営業準備に申し出が届きます。":"") : row.name+" → "+row.customer_name+" / "+row.day+"日目の申し出\nお客さんへの親しみ："+row.guest_affinity.ToString("0.#")+" / 発生基準："+row.threshold.ToString("0.#")+"\nプレイヤー好感度："+row.player_affinity.ToString("0.#")
                 +"\n\n"+(row.status=="waiting" ? "譲渡すると、このゲームでは接客・派遣・交流に戻せません。\n見送るとカフェでの活動を続けます。" : row.choice=="accept" ? "譲渡が成立しました。猫の詳細と関係の記録は残っています。" : "申し出を見送りました。カフェでの活動を続けます。");
             notice.text=row!=null && row.status=="waiting" ? (!string.IsNullOrEmpty(row.accept_reason) ? row.accept_reason : !string.IsNullOrEmpty(row.decline_reason) ? row.decline_reason : "すべての申し出に回答するまで営業は停止します。") : current?.reason ?? "";
             if(string.IsNullOrEmpty(notice.text))notice.text="譲渡する場合は、次の画面で猫と相手を確認して確定します。";

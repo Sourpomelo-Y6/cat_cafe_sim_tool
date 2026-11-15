@@ -17,7 +17,9 @@ namespace CatCafePreview.Standalone
             if(branch=="accept")return new[]{
                 new CafeConversationLine("あなた",name+"の譲渡を確定しました。これまで店で一緒に過ごした時間も、大切な記録です。"),
                 new CafeConversationLine("",customer+"への譲渡が成立した。"+name+"は接客・派遣・個別交流の対象から外れる。金銭報酬はなく、猫の詳細と関係の記録は残る。"),
-                new CafeConversationLine("あなた","送り出すと決めたことを、大切に受け止めます。"+name+"との記録は、これからもここで見返せます。")};
+                new CafeConversationLine("あなた",CafeSimulation.IsNamedAdoption(e.source)
+                    ? "3日後から、"+name+"の近況を読めます。猫一覧で「譲渡済みも表示」を選び、この子の詳細から「後日談」を開けます。"
+                    : "送り出すと決めたことを、大切に受け止めます。"+name+"との記録は、これからもここで見返せます。")};
             if(branch=="decline")return new[]{
                 new CafeConversationLine("あなた","今回は譲渡を見送ります。"+name+"とは、引き続きこの店で過ごすことにします。"),
                 new CafeConversationLine("",customer+"からの今回の申し出は見送りとして記録された。譲渡は行わず、"+name+"の在籍と関係の記録を保つ。"),
@@ -25,7 +27,7 @@ namespace CatCafePreview.Standalone
             return new[]{
                 new CafeConversationLine("",e.day+"日目、"+customer+"から、"+name+"を迎えたいという申し出が届いた。"),
                 new CafeConversationLine(customer,CafeSimulation.IsNamedAdoption(e.source)
-                    ?e.customer_id==CafeSimulation.Suzuki?"先日は約束を越えてしまってすみません。もし里親を探すなら、今度はお店と相談して決めたいです。":"あのときは私が勝手に決めてしまいました。改めて、"+name+"を迎えることについて相談させてください。"
+                    ?e.customer_id==CafeSimulation.Suzuki?"先日は私が勝手に決めてしまってすみません。"+name+"を迎えることについて、改めてお店と相談させてください。":"あのときは私が勝手に決めてしまいました。改めて、"+name+"を迎えることについて相談させてください。"
                     :name+"を迎えることについて、相談させてください。"),
                 new CafeConversationLine("","申し出時の記録では、お客さんへの親しみは"+e.guest_affinity.ToString("0.#")+"、プレイヤー好感度は"+e.player_affinity.ToString("0.#")+"。接客で築いた関係に沿った申し出だ。"),
                 new CafeConversationLine("あなた","送り出すことも、この店で一緒に過ごすことも、大切に考えます。変更されることを確認してから決めましょう。")};
