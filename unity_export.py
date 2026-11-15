@@ -58,8 +58,15 @@ def export_bundle(catalog, registry, texts, destination, *, profiles=None, inter
         from interaction_scenes import INTERACTION_SCENES, COMBINATION_SCENES, SPECIAL_SCENES
         extra = tuple((key, label, label + 'をしています。') for key, label in INTERACTION_SCENES + COMBINATION_SCENES + SPECIAL_SCENES
                       if key in images['cats'].get(cat_id, {}))
-        for key, label, fallback in SCENES + extra:
-            text = record.get('scenes', {}).get(key, '').strip()
+        scenes = {key: (label, fallback) for key, label, fallback in SCENES + extra}
+        order = dict.fromkeys(record.get('scene_order', []) + list(scenes))
+        scene_texts = {**record.get('extra_scene_texts', {}), **record.get('scenes', {})}
+        for key in order:
+            if key not in scenes:
+                continue
+            label, fallback = scenes[key]
+            label = record.get('scene_labels', {}).get(key, label)
+            text = scene_texts.get(key, '').strip()
             if not text:
                 warnings.append(f'{name} / {label}：描写が未登録。定型文を使用します。')
             image = ''

@@ -88,7 +88,9 @@ class TextEditorWindow:
                 raise ValueError('「登録内容を確認」を押して、現在の文章を確認してください。')
             if self.published.get(self.cat_id) != self.reviewed_published:
                 raise ValueError('採用済み文章が更新されています。登録内容をもう一度確認してください。')
-            self.published.save(self.cat_id, record)
+            # This editor edits the introduction and the four basic descriptions.
+            previous = self.reviewed_published or {}
+            self.published.save(self.cat_id, {**previous, **record})
             self.notice.set('文章を登録しました。ゲームの「猫の画像…」へ反映されます。下書きは別途保存できます。古い下書きがあると、次回はそちらを優先して開きます。')
         except (OSError, ValueError) as exc:
             self.notice.set(f'登録できません：{exc}')

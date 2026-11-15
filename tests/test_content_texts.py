@@ -58,7 +58,17 @@ class TextTests(unittest.TestCase):
             self.assertFalse(tool.published_texts.path.exists())
             editor.preview()
             editor.register()
+            saved = tool.published_texts.get('cat-a')
+            saved.update(extra_scene_texts={'ball': 'ボールで遊ぶミケ'}, scene_labels={'play': '遊び'},
+                         scene_order=['play', 'normal'])
+            tool.published_texts.save('cat-a', saved)
+            editor.fields['play'].insert('end', '少し休みます。')
+            editor.preview()
+            editor.register()
             reader = TextReader(tool.published_texts.path)
+            adopted = reader.read()['cats']['cat-a']
+            for key in ('extra_scene_texts', 'scene_labels', 'scene_order'):
+                self.assertEqual(adopted[key], saved[key])
             expected = editor.values()
             self.assertEqual(reader.display('cat-a', 'ミケ', 'play')[1], expected['scenes']['play'])
             preview = CatActionPreviewWindow(root, text_reader=reader)

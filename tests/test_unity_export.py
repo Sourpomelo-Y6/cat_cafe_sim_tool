@@ -41,6 +41,26 @@ class UnityExportTests(unittest.TestCase):
             self.assertNotEqual(folder, second)
             self.assertEqual(json.loads((folder / 'bundle.json').read_text(encoding='utf-8')), data)
 
+    def test_published_scene_metadata_survives_export(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            registry = ImageRegistry(root / 'source')
+            registry.register('a', 'ball', ASSET)
+            texts = TextStore(registry.directory / 'texts.json')
+            texts.save('a', {
+                'introduction': '本番の紹介文',
+                'scenes': {},
+                'extra_scene_texts': {'ball': '本番の場面説明'},
+                'scene_labels': {'ball': '本番の表示名'},
+                'scene_order': ['ball', 'sleep'],
+            })
+            folder, _ = export_bundle({'a': 'ミケ'}, registry, texts, root / 'exports')
+            cat, = json.loads((folder / 'bundle.json').read_text(encoding='utf-8'))['cats']
+            self.assertEqual(cat['introduction'], '本番の紹介文')
+            self.assertEqual([scene['key'] for scene in cat['scenes']], ['ball', 'sleep', 'normal', 'play', 'pet'])
+            self.assertEqual(cat['scenes'][0]['label'], '本番の表示名')
+            self.assertEqual(cat['scenes'][0]['text'], '本番の場面説明')
+
     def test_interaction_images_are_optional_and_exported(self):
         from prompt_presets import PromptPresets, DEFAULTS
         from interaction_scenes import ACTION_PROMPTS

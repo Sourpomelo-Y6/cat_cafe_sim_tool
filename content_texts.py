@@ -13,9 +13,24 @@ def validate_record(record):
         raise ValueError('紹介文・行動描写の形式が不正です。')
     if len(record['introduction']) > 2000:
         raise ValueError('紹介文は2000文字以内にしてください。')
+    from content_images import SCENE_IDS
     for scene, value in record['scenes'].items():
         if scene not in SCENES or not isinstance(value, str) or len(value) > 500:
             raise ValueError('行動描写は既定の4場面、各500文字以内にしてください。')
+    extra = record.get('extra_scene_texts', {})
+    if not isinstance(extra, dict) or any(key not in SCENE_IDS or key in SCENES
+                                          or not isinstance(value, str) or len(value) > 500
+                                          for key, value in extra.items()):
+        raise ValueError('追加場面の描写が不正です。')
+
+    labels = record.get('scene_labels', {})
+    if not isinstance(labels, dict) or any(key not in SCENE_IDS or not isinstance(label, str)
+                                            or not label.strip() for key, label in labels.items()):
+        raise ValueError('場面の表示名が不正です。')
+    order = record.get('scene_order', [])
+    if (not isinstance(order, list) or any(key not in SCENE_IDS for key in order)
+            or len(order) != len(set(order))):
+        raise ValueError('場面の表示順が不正です。')
 
 
 class TextStore:
