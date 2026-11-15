@@ -26,14 +26,18 @@ namespace CatCafePreview {
   protected override bool AutoRunning=>Client.AutoPlayExecuting;
   protected override void SetOpen(bool open){Backend.MissingConversationOpen=open;}
   protected override CafeConversationLine[] Lines(string branch)=>CafeMissingDialogue.Lines(Backend.MissingCase,Backend.MissingPhase,Request.name);
-  protected override PythonIntakeState Request=>new PythonIntakeState{cat_id=Backend.Details.ContentId(Backend.MissingCase.cat_id),name=Backend.Simulation.Definition(Backend.MissingCase.cat_id).name,personality="店からの家出・帰還",can_decline=true};
-  protected override string Title=>"猫の家出・帰還";
-  protected override string SceneLabel=>(Backend.MissingCase.departed_day>0?Backend.MissingCase.departed_day+"日目の家出":"家出日不明")+" · "+(Backend.MissingPhase=="result"?"帰還確定":Backend.MissingPhase=="confirmation"?"帰還待ち":"家出中");
+  private bool NamedCase=>AccessCustomer!=null;
+  private string AbsenceCause=>Backend.MissingCase.reason.EndsWith("_refused",System.StringComparison.Ordinal)?"返還拒否":"連れ去り";
+  protected override PythonIntakeState Request=>new PythonIntakeState{cat_id=Backend.Details.ContentId(Backend.MissingCase.cat_id),name=Backend.Simulation.Definition(Backend.MissingCase.cat_id).name,personality=NamedCase?CafeSimulation.NamedCustomerName(AccessCustomer)+" · "+AbsenceCause:"店からの家出・帰還",can_decline=true};
+  protected override string Title=>NamedCase?"指名猫の帰還":"猫の家出・帰還";
+  protected override string SceneLabel=>NamedCase
+      ? Backend.MissingCase.departed_day+"日目の"+AbsenceCause+" · "+(Backend.MissingPhase=="result"?Backend.MissingCase.resolved_day+"日目に帰還":Backend.MissingPhase=="confirmation"?"帰還待ち":"迎え待ち")
+      : (Backend.MissingCase.departed_day>0?Backend.MissingCase.departed_day+"日目の家出":"家出日不明")+" · "+(Backend.MissingPhase=="result"?"帰還確定":Backend.MissingPhase=="confirmation"?"帰還待ち":"家出中");
   protected override string AcceptEffect=>"累積不満を引き継ぎ、7日間空けてから信頼回復が必要かを確認します。";
   protected override string DeclineEffect=>"このセーブでは以後の来店、売上、新規イベントがなくなります。過去の記録は見返せます。";
   protected override string HistoryPrefix=>"";
   protected override string Notice=>Backend.MissingConversationReason;
-  protected override string EndText=>"会話を終えて、家出・帰還の記録と店の状態を確認しましょう。";
+  protected override string EndText=>NamedCase?"会話を終えて、指名猫の帰還記録と店の状態を確認しましょう。":"会話を終えて、家出・帰還の記録と店の状態を確認しましょう。";
   protected override void Finish(){CafeMissingDialogue.Finish(progress);}
   protected override void AfterClose(){owner.ShowRecords();GetComponent<PythonGrowthPanel>()?.Apply(Client.CurrentState);GetComponent<PythonGoalPanel>()?.Apply(Client.CurrentState);GetComponent<PythonGameOverPanel>()?.Apply(Client.CurrentState);base.AfterClose();}
   void LateUpdate(){if(Showing && !GameOptionsPanel.IsOpen && GetComponent<PythonSavePanel>()?.panel.activeSelf!=true)host.transform.SetAsLastSibling();}

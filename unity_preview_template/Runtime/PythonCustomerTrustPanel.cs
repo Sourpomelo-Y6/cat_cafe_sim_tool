@@ -37,7 +37,7 @@ namespace CatCafePreview
         private void Render()
         {
             if(current?.customer_trust==null)return;title.text="お客さんの信頼回復";
-            details.text="来店停止を繰り返したお客さんの対応方針を選びます。\n費用はかかりません。\n\n信頼回復に取り組む：停止期間後の接客が「満足」なら回復、\n「不満」なら永久離脱します。\n対応しない：永久離脱し、人気が"+current.customer_trust.popularity_loss.ToString("0.#")+"下がります。\n\n"
+            details.text=(CafeBackends.Standalone?"信頼回復の対象になったお客さんへの対応方針を選びます。\n費用はかかりません。\n\n信頼回復に取り組む：次の来店時の接客が「満足」なら回復、":"来店停止を繰り返したお客さんの対応方針を選びます。\n費用はかかりません。\n\n信頼回復に取り組む：停止期間後の接客が「満足」なら回復、")+"\n「不満」なら永久離脱します。\n対応しない：永久離脱し、人気が"+current.customer_trust.popularity_loss.ToString("0.#")+"下がります。\n\n"
                 +(Pending==null ? "回答待ちはありません。" : "回答するお客さん："+Pending.name+" / 来店停止 "+Pending.suspensions+"回")+"\n\n履歴\n"+string.Join("\n",(current.customer_trust.events ?? new PythonTrustEvent[0]).Select(e=>e.day+"日目："+e.name+" / 停止 "+e.suspensions+"回 / "+Status(e)));
         }
         public void RefreshControls()

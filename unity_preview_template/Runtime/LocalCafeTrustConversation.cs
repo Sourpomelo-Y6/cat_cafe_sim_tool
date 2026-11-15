@@ -11,7 +11,7 @@ namespace CatCafePreview {
   public bool TrustResultPending=>TrustConversations.Any(CafeTrustDialogue.Pending);
   public bool TrustSafe=>Simulation.State.phase!="open" || Simulation.State.game_over!=null;
   public bool TrustBlocksProgress=>TrustSafe && (TrustConversationOpen || TrustResultPending);
-  public string TrustConversationReason=>TrustResultPending?"信頼の回答・接客結果は確定済みですが、結果会話が未完了です。イベント一覧の「顧客の信頼回復」から再開してください。":Simulation.CustomerTrustWaiting?"信頼警告が回答待ちです。イベント一覧の「顧客の信頼回復」から再開してください。":Simulation.State.trust_customers.Any(r=>r.status=="recovery")?"信頼回復中：来店停止期限は変わりません。営業・休業で日程を進め、来店後の接客結果を待ちます。状況はイベント一覧の「顧客の信頼回復」で確認できます。":"";
+  public string TrustConversationReason=>TrustResultPending?"信頼の回答・接客結果は確定済みですが、結果会話が未完了です。イベント一覧の「顧客の信頼回復」から再開してください。":Simulation.CustomerTrustWaiting?"信頼警告が回答待ちです。イベント一覧の「顧客の信頼回復」から再開してください。":Simulation.State.trust_customers.Any(r=>r.status=="recovery")?"信頼回復中：営業・休業で日程を進め、来店後の接客結果を待ちます。状況はイベント一覧の「顧客の信頼回復」で確認できます。":"";
   void SyncTrustConversations() {
    foreach(var e in Simulation.State.trust_events){var row=trustConversations.FirstOrDefault(r=>r.event_id==e.id);
     if(row==null && (e.status=="waiting" || e.status=="recovery")){row=new CafeTrustConversation{event_id=e.id,observe_result=true,response=e.status=="waiting"?CafeTrustDialogue.Start():null};trustConversations.Add(row);}

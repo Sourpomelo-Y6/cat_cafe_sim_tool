@@ -178,6 +178,19 @@ static partial class Program
                 if(sim.CustomerTrustWaiting)
                 {
                     var warning=sim.State.trust_events.Single(e=>e.customer_id==customer);
+                    if(route=="expired")
+                    {
+                        var view=Decode<CafeSnapshot>(Encode(sim.State));
+                        var stops=view.discontent.Single(d=>d.customer_id==customer).suspensions;
+                        var last=new CafeSuspension {day=warning.day-2,until=warning.day-1};
+                        stops.Add(last);
+                        var introduction=CafeTrustDialogue.EventLines(view,warning,false,"introduction",CafeSimulation.NamedCustomerName(customer),rules.trust.popularity_loss);
+                        Assert(introduction[0].text.Contains("来店を受け入れることにした") && introduction.All(l=>!l.text.Contains("来店停止期間")),
+                            "Return warning did not explain why it was shown, or mentioned an expired stop");
+                        last.until=warning.day;
+                        var recovery=CafeTrustDialogue.EventLines(view,warning,false,"recover",CafeSimulation.NamedCustomerName(customer),rules.trust.popularity_loss);
+                        Assert(recovery.Any(l=>l.text.Contains("現在の来店停止期間")), "Active stop was missing from recovery dialogue");
+                    }
                     sim.Execute("resolve_customer_trust",choice:"recover",source:warning.id);
                     Day(false);
                     Assert(sim.State.trust_events.Count(e=>e.customer_id==customer)==1,"Duplicate return warning");

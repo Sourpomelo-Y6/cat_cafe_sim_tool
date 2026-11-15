@@ -124,6 +124,9 @@ namespace CatCafePreview.Standalone
         internal static bool UsesReturnTrustRules(CafeSnapshot s,CafeTrustEvent e)
             => ReturnTrustDay(s,e.customer_id) is int day && day>0 && e.day>=day;
 
+        internal static bool IsNamedReturnTrustEvent(CafeSnapshot s,CafeTrustEvent e)
+            => ReturnTrustDay(s,e.customer_id)==e.day;
+
         private static int ReturnTrustDay(CafeSnapshot s,string customer)
         {
             var e=NamedRequest(s,customer);
