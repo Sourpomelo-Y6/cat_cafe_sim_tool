@@ -3,6 +3,7 @@ import copy
 import json
 import re
 import uuid
+from named_dispatch import validate_settings
 from pathlib import Path
 
 ID = re.compile(r'^[a-z][a-z0-9_-]{0,99}$')
@@ -57,8 +58,12 @@ class SubjectRegistry:
             raise ValueError('対象台帳の形式が不正です。')
         ids,bindings=set(),set()
         for row in data['subjects']:
-            if not isinstance(row,dict) or set(row)!=FIELDS or not identifier(row['id']) or row['id'] in ids or row['kind'] not in ('speech','cat_response'):
+            if not isinstance(row,dict) or set(row)-{'named_dispatch'}!=FIELDS or not identifier(row['id']) or row['id'] in ids or row['kind'] not in ('speech','cat_response'):
                 raise ValueError('対象ID・種類が不正または重複しています。')
+            if 'named_dispatch' in row:
+                if row['kind'] != 'speech' or row['game_id'] in ('', 'player'):
+                    raise ValueError('指名派遣にはお客さんのゲームIDが必要です。')
+                validate_settings(row['named_dispatch'])
             ids.add(row['id'])
             for name,limit in [('name',100),('notes',4000),('call',100),('game_id',100),('content_id',100)]:
                 if not isinstance(row[name],str) or len(row[name])>limit or row[name]!=row[name].strip() or any(ord(c)<32 and c not in '\n\t' for c in row[name]):
@@ -128,4 +133,6 @@ def game_subjects():
         if profile['id'] in cats:
             cats[profile['id']]['notes']='性格：'+profile.get('personality','未設定')+'\n外見資料：'+profile.get('appearance','未設定')
     people={f'guest-{i+1}':dict(game_id=f'guest-{i+1}',name=name+'さん',content_id='') for i,name in enumerate(display['names'])}
+    people.update({r['id']:dict(game_id=r['id'],name=r['label'],content_id='')
+                   for r in display['special_names']})
     return {'speech':people,'cat_response':cats}

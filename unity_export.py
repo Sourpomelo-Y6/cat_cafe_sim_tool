@@ -91,6 +91,11 @@ def export_bundle(catalog, registry, texts, destination, *, profiles=None, inter
     if interaction_report['missing_count']:
         warnings.append(f"交流文：{interaction_report['missing_count']}条件が未制作です。validation.jsonを確認してください。")
     bundle = {'version': 1, 'pack_id': pack_id, 'cats': cats, 'display_labels': exported_labels, 'optional_events': 'optional_events.json'}
+    from interaction_subjects import SubjectRegistry
+    from named_dispatch import export_settings
+    named_dispatch = export_settings(SubjectRegistry(registry.directory / 'interaction_subjects.json'))
+    if named_dispatch:
+        bundle['named_dispatch'] = named_dispatch
     report = {'version': 1, 'cat_count': len(cats), 'image_count': len(blobs), 'warnings': warnings, 'interactions': interaction_report}
     folder.mkdir(parents=True, exist_ok=False)
     try:

@@ -35,6 +35,14 @@ namespace CatCafePreview
                 var asset = Resources.Load<TextAsset>("CatCafeStandalone/rules");
                 if (asset == null) throw new InvalidOperationException("単独版の初期設定がありません。");
                 rules = JsonUtility.FromJson<CafeRules>(asset.text);
+                var pointer=Resources.Load<TextAsset>("CatCafeContent/catalog");
+                if(pointer!=null)
+                {
+                    var content=JsonUtility.FromJson<ContentCatalog>(pointer.text);
+                    var bundle=Resources.Load<TextAsset>(content.bundleResource);
+                    if(bundle!=null)
+                        rules.named_dispatch=JsonUtility.FromJson<ContentBundle>(bundle.text).named_dispatch;
+                }
                 var staminaRules=Resources.Load<TextAsset>("CatCafeStandalone/stamina_growth");
                 if(staminaRules!=null)rules.stamina_growth=JsonUtility.FromJson<CafeStaminaRules>(staminaRules.text);
             }

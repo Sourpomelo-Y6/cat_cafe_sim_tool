@@ -22,7 +22,7 @@ namespace CatCafePreview
         protected override CafeConversationProgress ResolveProgress(){Backend.PrepareAdoptionConversation();return Row?.progress;}
         protected override bool ThreeLinePages=>true;
         protected override void SetOpen(bool open){Backend.AdoptionConversationOpen=open;}
-        protected override CafeConversationLine[] Lines(string branch)=>CafeAdoptionDialogue.Lines(branch,Backend.Simulation.Definition(Event.cat_id).name,Backend.Details.CustomerName(Event.customer_id),Event);
+        protected override CafeConversationLine[] Lines(string branch)=>CafeAdoptionDialogue.Lines(branch,Backend.Simulation.Definition(Event.cat_id).name,Backend.Details.CustomerName(Event.customer_id),Event,Backend.Simulation.Rules.named_dispatch);
         protected override PythonIntakeState Request=>new PythonIntakeState{cat_id=Backend.Details.ContentId(Event.cat_id),name=Backend.Simulation.Definition(Event.cat_id).name,personality=Backend.Details.CustomerName(Event.customer_id)+"からの申し出",can_decline=true};
         protected override bool CanAnswer(bool yes)=>Backend.Simulation.AdoptionResponseReason(Event.id)=="";
         protected override string Title=>"猫の譲渡申し出";

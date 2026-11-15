@@ -24,7 +24,9 @@ namespace CatCafePreview.Standalone
         }
         public DispatchRules[] DispatchDestinations()=>(Rules.dispatch_destinations??new[]{Rules.dispatch}).Concat(State.patron==null?new DispatchRules[0]:PatronDestinations()).ToArray();
         public DispatchRules[] PatronDestinations()=>new[]{Rules.patron.destination}.Concat(Rules.patron.members.Select(r=>new DispatchRules {id=r.id,name=r.name+"への訪問",days=Rules.patron.destination.days,reward=Rules.patron.destination.reward,max_fatigue=Rules.patron.destination.max_fatigue})).ToArray();
-        public DispatchRules DispatchDestination(string id)=>id==SatoDestination?SatoVisit:id==SuzukiDestination?SuzukiVisit:(Rules.dispatch_destinations??new[]{Rules.dispatch}).Concat(Rules.patron==null?new DispatchRules[0]:PatronDestinations()).SingleOrDefault(r=>r.id==id);
+        public DispatchRules DispatchDestination(string id)=>id==SatoDestination?SatoVisit:id==SuzukiDestination?SuzukiVisit:
+            NamedDestinationCustomer(id) is string customer?new DispatchRules
+                {id=id,name=(NamedSettings(customer)?.name??customer)+"への指名派遣",days=SatoVisit.days,max_fatigue=SatoVisit.max_fatigue}:(Rules.dispatch_destinations??new[]{Rules.dispatch}).Concat(Rules.patron==null?new DispatchRules[0]:PatronDestinations()).SingleOrDefault(r=>r.id==id);
         public double DispatchReward(string id,string destination=null)=>DispatchTerms(State,id,State.day,destination:destination).reward;
         public string DispatchReason(string id,string destination)
         {

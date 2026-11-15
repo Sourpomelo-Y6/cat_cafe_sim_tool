@@ -12,7 +12,8 @@ namespace CatCafePreview.Standalone
         public const string Id="adoption.offer.v1";
         public const string Consequences="ゲーム内では復帰できません。接客・派遣・個別交流の対象から外れます。金銭報酬はありません。猫の詳細・関係の記録は保持します。";
         public static CafeConversationProgress Start()=>new CafeConversationProgress{conversation_id=Id,branch_id="introduction",viewed_branches=new string[0]};
-        public static CafeConversationLine[] Lines(string branch,string name,string customer,CafeAdoptionEvent e)
+        public static CafeConversationLine[] Lines(string branch,string name,string customer,CafeAdoptionEvent e,
+            CafeNamedDispatchSettings[] settings=null)
         {
             if(branch=="accept")return new[]{
                 new CafeConversationLine("あなた",name+"の譲渡を確定しました。これまで店で一緒に過ごした時間も、大切な記録です。"),
@@ -24,13 +25,16 @@ namespace CatCafePreview.Standalone
                 new CafeConversationLine("あなた","今回は譲渡を見送ります。"+name+"とは、引き続きこの店で過ごすことにします。"),
                 new CafeConversationLine("",customer+"からの今回の申し出は見送りとして記録された。譲渡は行わず、"+name+"の在籍と関係の記録を保つ。"),
                 new CafeConversationLine("あなた","店で一緒に過ごす選択も、大切にしたいと思います。また申し出があったときは、そのときに考えましょう。")};
-            return new[]{
+            bool named=CafeSimulation.IsNamedAdoption(e.source);
+            var lines=new[]{
                 new CafeConversationLine("",e.day+"日目、"+customer+"から、"+name+"を迎えたいという申し出が届いた。"),
-                new CafeConversationLine(customer,CafeSimulation.IsNamedAdoption(e.source)
+                new CafeConversationLine(customer,named
                     ?e.customer_id==CafeSimulation.Suzuki?"先日は私が勝手に決めてしまってすみません。"+name+"を迎えることについて、改めてお店と相談させてください。":"あのときは私が勝手に決めてしまいました。改めて、"+name+"を迎えることについて相談させてください。"
                     :name+"を迎えることについて、相談させてください。"),
                 new CafeConversationLine("","申し出時の記録では、お客さんへの親しみは"+e.guest_affinity.ToString("0.#")+"、プレイヤー好感度は"+e.player_affinity.ToString("0.#")+"。接客で築いた関係に沿った申し出だ。"),
                 new CafeConversationLine("あなた","送り出すことも、この店で一緒に過ごすことも、大切に考えます。変更されることを確認してから決めましょう。")};
+            if(named)lines[1]=CafeNamedDispatchDialogue.Apply(settings,e.customer_id,"adoption",name,customer,new[]{lines[1]})[0];
+            return lines;
         }
         public static void Sync(CafeAdoptionConversation r,CafeAdoptionEvent e)
         {if(r.progress.branch_id=="introduction" && e?.status=="resolved"){r.progress.branch_id=e.choice;r.progress.node=r.progress.page_offset=0;}}

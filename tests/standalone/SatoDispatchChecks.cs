@@ -2,9 +2,40 @@ using CatCafePreview.Standalone;
 
 static partial class Program
 {
-    static void SatoDispatchChecks(string rulesPath)
+    static void NamedDispatchTextChecks(CafeNamedDispatchSettings[] settings,CafeNamedDispatchSettings customer)
     {
-        foreach (var customer in CafeSimulation.NamedDispatchCustomers)
+        const string cat="タマ";
+        var baseline=CafeNamedDispatchDialogue.Request(null,customer.customer_id,cat,customer.name,true,false,false);
+        var lines=CafeNamedDispatchDialogue.Request(settings,customer.customer_id,cat,customer.name,true,false,false);
+        Assert(lines[0].text.Contains(cat) && lines[0].text.Contains(customer.name) && lines[0].text!=baseline[0].text,
+            "Customer request override did not expand both names");
+        Assert(lines[1].text==baseline[1].text,"Blank request line failed to use its default");
+        var reminder=CafeNamedDispatchDialogue.Request(settings,customer.customer_id,cat,customer.name,true,true,false);
+        Assert(reminder[0].text==CafeNamedDispatchDialogue.Request(null,customer.customer_id,cat,customer.name,true,true,false)[0].text,
+            "Request override spilled into reminder");
+        Assert(CafeNamedDispatchDialogue.Epilogue(settings,customer.customer_id,cat,customer.name)[1].text.Contains(cat),
+            "Epilogue did not use actual adopted cat");
+    }
+
+    static void SatoDispatchChecks(string rulesPath,string bundlePath=null)
+    {
+        var json=bundlePath==null?null:System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(bundlePath));
+        var configured=json==null?null:Decode<CafeNamedDispatchSettings[]>(json["named_dispatch"].ToJsonString());
+        var third=configured?.Single(r=>r.enabled && !CafeSimulation.NamedDispatchCustomers.Contains(r.customer_id));
+        if(third!=null)
+        {
+            NamedDispatchTextChecks(configured,third);
+            var disabledRules=Decode<CafeRules>(File.ReadAllText(rulesPath));
+            disabledRules.named_dispatch=new[]{
+                new CafeNamedDispatchSettings {customer_id=third.customer_id,name=third.name,scenes=third.scenes},
+                new CafeNamedDispatchSettings {customer_id=CafeSimulation.Sato,name="佐藤さん",scenes=Array.Empty<CafeNamedDispatchScene>()}};
+            var disabled=new CafeSimulation(disabledRules);
+            Assert(disabled.NamedCustomers.Contains(CafeSimulation.Suzuki) &&
+                !disabled.EnabledNamedCustomers.Contains(CafeSimulation.Sato) &&
+                !disabled.EnabledNamedCustomers.Contains(third.customer_id),"Explicit disabled settings were ignored");
+        }
+        var customers=third==null?CafeSimulation.NamedDispatchCustomers:CafeSimulation.NamedDispatchCustomers.Concat(new[]{third.customer_id});
+        foreach (var customer in customers)
         foreach (var route in new[]{"normal","decline","expired","refused","adopt","decline-adoption","ban","low-score","legacy-return"})
         {
             var rules=Decode<CafeRules>(File.ReadAllText(rulesPath));
@@ -13,11 +44,14 @@ static partial class Program
             // Force suspension in one missed visit for the refusal fixture.
             if(route=="refused")rules.discontent.waiting_gain=100;
             rules.store_events.probability=0;
-            if(customer==CafeSimulation.Suzuki)
+            if(customer==third?.customer_id)rules.named_dispatch=configured;
+            int slot=Array.IndexOf(customers.ToArray(),customer);
+            if(slot>0)
             {
-                // Test the same route with Suzuki's arrival slot and calendar.
-                (rules.arrival_ticks[0],rules.arrival_ticks[1])=(rules.arrival_ticks[1],rules.arrival_ticks[0]);
-                (rules.patterns[0],rules.patterns[1])=(rules.patterns[1],rules.patterns[0]);
+                // Give the customer under test the standard fixture's arrival slot and calendar.
+                (rules.arrival_ticks[0],rules.arrival_ticks[slot])=(rules.arrival_ticks[slot],rules.arrival_ticks[0]);
+                int pattern=slot % rules.patterns.Length;
+                (rules.patterns[0],rules.patterns[pattern])=(rules.patterns[pattern],rules.patterns[0]);
             }
             var sim=new CafeSimulation(rules);
             var catId=sim.State.cats[0].id;
@@ -27,15 +61,22 @@ static partial class Program
                 string encoded=Encode(sim.State);
                 if(customer==CafeSimulation.Sato)
                 {
-                    // Existing Sato saves have no Suzuki fields.
+                    // Existing Sato saves predate both Suzuki and configurable customers.
                     var legacy=System.Text.Json.Nodes.JsonNode.Parse(encoded).AsObject();
                     legacy.Remove("suzuki_dispatch");
                     legacy.Remove("suzuki_affinity");
+                    legacy.Remove("named_dispatch");
                     encoded=legacy.ToJsonString();
                 }
                 var copy=Decode<CafeSnapshot>(encoded);
                 copy.NormalizeJsonStrings();
                 sim.Restore(copy);
+                if(customer==third?.customer_id)
+                {
+                    var withoutPack=Decode<CafeRules>(Encode(rules));
+                    withoutPack.named_dispatch=null;
+                    new CafeSimulation(withoutPack).Restore(copy);
+                }
             }
 
             void Prepare()
@@ -218,12 +259,15 @@ static partial class Program
             }
         }
         var conflictRules=Decode<CafeRules>(File.ReadAllText(rulesPath));
+        conflictRules.named_dispatch=configured;
         var conflict=new CafeSimulation(conflictRules);
         string sharedCat=conflict.State.cats[0].id;
-        foreach(var customer in CafeSimulation.NamedDispatchCustomers)
+        foreach(var customer in customers)
         {
             conflict.State.relationships.Add(new CafeRelationship {cat_id=sharedCat,customer_id=customer,affinity=90});
-            conflict.NamedAffinity(customer).Add(new CafeSatoAffinityScene {cat_id=sharedCat});
+            // Use the same affinity hook as normal service, including the enabled check.
+            typeof(CafeSimulation).GetMethod("ObserveSatoAffinity",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic)
+                .Invoke(conflict,new object[]{sharedCat,customer,90.0});
             conflict.ChangeDiscontent(conflict.State.discontent,conflict.State.day,customer,50);
         }
         if(conflict.StoreEventWaiting)conflict.Execute("resolve_store_event",choice:"patch");
@@ -234,6 +278,16 @@ static partial class Program
         if(conflict.StoreEventWaiting)conflict.Execute("resolve_store_event",choice:"patch");
         conflict.Execute("day_off");
         Assert(conflict.NamedRequest(CafeSimulation.Suzuki)?.cat_id==sharedCat,"Held request did not recheck after first request ended");
+        if(third!=null)
+        {
+            Assert(conflict.NamedRequest(third.customer_id)==null,"Third customer reserved the same cat");
+            conflict.Execute("resolve_sato_dispatch",catId:CafeSimulation.Suzuki,choice:"decline");
+            if(conflict.StoreEventWaiting)conflict.Execute("resolve_store_event",choice:"patch");
+            conflict.Execute("day_off");
+            Assert(conflict.NamedRequest(third.customer_id)?.cat_id==sharedCat,"Third customer did not recheck released cat");
+            Assert(conflict.NamedRequest(CafeSimulation.Sato).declined_day!=0 &&
+                conflict.NamedRequest(CafeSimulation.Suzuki).declined_day!=0,"Third request overwrote a previous customer");
+        }
         Console.WriteLine($"PASS named dispatch: {assertions} assertions");
     }
 }

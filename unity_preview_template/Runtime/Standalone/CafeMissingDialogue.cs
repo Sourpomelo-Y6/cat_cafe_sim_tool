@@ -10,8 +10,18 @@ namespace CatCafePreview.Standalone {
   public const string Id="cafe.missing.v1";
   public static string NamedCause(string reason)=>CafeSimulation.NamedMissingCustomer(reason)==null?null:reason.EndsWith("_refused",StringComparison.Ordinal)?"返還拒否":"連れ去り";
   public static CafeConversationProgress Start(string phase,string branch)=>new CafeConversationProgress{conversation_id=Id+"."+phase,branch_id=branch,viewed_branches=new string[0]};
-  public static CafeConversationLine[] Lines(CafeMissingCase e,string phase,string name) {
-   if(CafeSimulation.NamedMissingCustomer(e.reason)==CafeSimulation.Suzuki)
+  public static CafeConversationLine[] Lines(CafeMissingCase e,string phase,string name,
+      CafeNamedDispatchSettings[] settings=null,Func<string,string> customerName=null)
+  {
+   string id=CafeSimulation.NamedMissingCustomer(e.reason);
+   if(id==null)return DefaultLines(e,phase,name,null,null);
+   string customer=customerName?.Invoke(id)??CafeSimulation.NamedCustomerName(id);
+   string route=e.reason.EndsWith("_refused",StringComparison.Ordinal)?"refused":"expired";
+   return CafeNamedDispatchDialogue.Apply(settings,id,route+"_"+phase,name,customer,DefaultLines(e,phase,name,id,customer));
+  }
+  private static CafeConversationLine[] DefaultLines(CafeMissingCase e,string phase,string name,string id,string customer)
+  {
+   if(id==CafeSimulation.Suzuki)
    {
     bool refused=e.reason=="suzuki_refused";
     if(phase=="notice")return new[]{new CafeConversationLine("",refused?"迎えに行くと、鈴木さんは"+name+"を返そうとしなかった。":"指名のお願いに返事をしないまま翌日を迎えた。鈴木さんが店を訪れ、そのあと"+name+"の姿が見えなくなった。"),new CafeConversationLine(refused?"鈴木さん":"あなた",refused?"さっきも自分から遊びに来たんです。もう少し、うちにいさせてください。":"鈴木さんに連絡して、迎えに行こう。")};
@@ -25,6 +35,19 @@ namespace CatCafePreview.Standalone {
     if(phase=="waiting")return new[]{new CafeConversationLine("","佐藤さんに連絡を取り、"+name+"を迎えに行ける日を待っている。")};
     if(phase=="confirmation")return new[]{new CafeConversationLine("佐藤さん","うちで休ませてあげたいと思ったんです。でも、私が勝手に決めていいことではありませんでした。"),new CafeConversationLine("あなた",name+"を連れて帰ります。お話はまた改めて。")};
     return new[]{new CafeConversationLine("",name+"は佐藤さんのところから店に戻った。"),new CafeConversationLine("あなた","おかえり。今日はゆっくり休もうね。")};
+   }
+   if(id!=null)
+   {
+    bool refused=e.reason.EndsWith("_refused",StringComparison.Ordinal);
+    if(phase=="notice")return new[]{
+        new CafeConversationLine("",refused?"迎えに行くと、"+customer+"は"+name+"を返そうとしなかった。":customer+"が店を訪れ、そのあと"+name+"の姿が見えなくなった。"),
+        new CafeConversationLine("あなた",customer+"に連絡して、"+name+"を迎えに行こう。")};
+    if(phase=="waiting")return new[]{new CafeConversationLine("",customer+"に連絡を取り、"+name+"を迎えに行ける日を待っている。")};
+    if(phase=="confirmation")return new[]{
+        new CafeConversationLine(customer,name+"と過ごしたい気持ちで、勝手に決めてしまいました。約束を守るべきでした。"),
+        new CafeConversationLine("あなた",name+"を連れて店に帰ります。お話はまた改めて。")};
+    return new[]{new CafeConversationLine("",name+"は"+customer+"のところから店に戻った。"),
+        new CafeConversationLine("あなた",name+"、おかえり。今日はゆっくり休もうね。")};
    }
    if(phase=="notice")return new[]{new CafeConversationLine("",name+"が店から家出した。"),new CafeConversationLine("あなた",e.reason=="stress"?"接客後のストレスが家出の基準に達した記録があります。今は帰還を待ちましょう。":"家出日や原因の記録はありません。今分かる状態を確認しましょう。"),new CafeConversationLine("","家出中は接客・交流・派遣に参加できない。営業か休業で日程を進められる。居場所や帰還結果は、まだ確認できていない。")};
    if(phase=="waiting")return new[]{new CafeConversationLine("あなた",name+"は、まだ家出中です。帰還までの残り閉店回数は記録一覧で確認できます。"),new CafeConversationLine("","この状況確認は任意。会話を閉じて営業や休業を進めよう。出勤できる猫がいなくても、営業準備の休業を利用できる。")};

@@ -13,6 +13,7 @@ namespace CatCafePreview.Standalone
         public WaitingAreaRules waiting_area,waiting_area_upgrade;
         public RestSpaceRules rest_space,rest_space_upgrade,rest_space_soundproof;
         public CafeStaminaRules stamina_growth;
+        public CafeNamedDispatchSettings[] named_dispatch;
         public List<CafeGrowthSelection> growth_selections = new List<CafeGrowthSelection>();
         public double max_stamina, time_price, starting_funds, starting_popularity;
         public double base_cost, per_seat_cost, max_fatigue, fatigue_per_service_tick, rest_day_recovery;
@@ -192,12 +193,16 @@ namespace CatCafePreview.Standalone
         public CafeVisitingCat visiting_cat = new CafeVisitingCat();
         public List<CafeShopPurchase> shop_purchases = new List<CafeShopPurchase>();
         public CafeSatoDispatch sato_dispatch, suzuki_dispatch;
+        public List<CafeNamedDispatchState> named_dispatch = new List<CafeNamedDispatchState>();
         public List<CafeSatoAffinityScene> suzuki_affinity = new List<CafeSatoAffinityScene>();
         public List<CafeSatoAffinityScene> sato_affinity = new List<CafeSatoAffinityScene>();
         public CafeRecruitment recruitment; public CafeAdoption adoption;
         // Unity JsonUtility materializes JSON null strings as empty strings.
         public void NormalizeJsonStrings()
         {
+            if(named_dispatch==null)named_dispatch=new List<CafeNamedDispatchState>();
+            foreach(var row in named_dispatch)
+                if(row?.request!=null && string.IsNullOrEmpty(row.request.cat_id) && row.request.requested_day==0)row.request=null;
             if(sato_dispatch!=null && string.IsNullOrEmpty(sato_dispatch.cat_id) && sato_dispatch.requested_day==0)sato_dispatch=null;
             if(suzuki_dispatch!=null && string.IsNullOrEmpty(suzuki_dispatch.cat_id) && suzuki_dispatch.requested_day==0)suzuki_dispatch=null;
             if(suzuki_affinity==null)suzuki_affinity=new List<CafeSatoAffinityScene>();

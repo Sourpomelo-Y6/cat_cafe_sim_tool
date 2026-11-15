@@ -17,7 +17,7 @@ namespace CatCafePreview
             cat=value;
             customer=Backend.Simulation.NamedEpilogueCustomer(cat.cat_id);
             instance=Client.CurrentState.instance_id;
-            reading=new CafeConversationProgress { conversation_id=customer==CafeSimulation.Suzuki?"suzuki.epilogue.v1":"sato.epilogue.v1", branch_id="letter",
+            reading=new CafeConversationProgress { conversation_id=CafeSimulation.NamedEpilogueId(customer), branch_id="letter",
                 viewed_branches=System.Array.Empty<string>() };
             var details=GetComponent<PythonCatDetailsPanel>();
             if(host==null)
@@ -43,21 +43,14 @@ namespace CatCafePreview
         protected override bool TrackRead=>false;
         protected override void SetOpen(bool open){}
         protected override void RecordCompletion(){}
-        protected override string Title=>CafeSimulation.NamedCustomerName(customer)+"からの便り";
+        protected override string Title=>Backend.Details.CustomerName(customer)+"からの便り";
         protected override string HistoryPrefix=>"";
         protected override string Notice=>"譲渡後の後日談";
         protected override string EndText=>"猫の詳細へ戻ります。";
         protected override PythonIntakeState Request=>new PythonIntakeState {cat_id=cat.content_cat_id,name=cat.name};
 
-        protected override CafeConversationLine[] Lines(string branch)=>customer==CafeSimulation.Suzuki?new[]{
-            new CafeConversationLine("","鈴木さんから、"+cat.name+"の近況を知らせる手紙が届いた。"),
-            new CafeConversationLine("鈴木さん","ねこじゃらしは棚に置いています。この前は"+cat.name+"が棚の下で待っていたので、そこに座って少し遊びました。"),
-            new CafeConversationLine("鈴木さん","遊びたいときは、自分から来てくれますね。")
-        }:new[]{
-            new CafeConversationLine("","佐藤さんから、"+cat.name+"の近況を知らせる手紙が届いた。"),
-            new CafeConversationLine("佐藤さん","窓辺にクッションを置きました。昨日はそこで午後の日差しを浴びていました。"),
-            new CafeConversationLine("佐藤さん","店で隣に来てくれたときも、私が呼ぶより先に、あの子が自分で来てくれたんですよね。ここでも、"+cat.name+"が自分で選べる場所を増やしていきます。")
-        };
+        protected override CafeConversationLine[] Lines(string branch)
+            => CafeNamedDispatchDialogue.Epilogue(Backend.Simulation.Rules.named_dispatch,customer,cat.name,Backend.Details.CustomerName(customer));
 
         protected override void AfterClose()
         {

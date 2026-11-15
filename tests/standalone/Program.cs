@@ -173,7 +173,7 @@ static partial class Program
     }
     static void Main(string[] args)
     {
-        if(args.Length>0 && args[0]=="--sato-dispatch"){SatoDispatchChecks(args[1]);return;}
+        if(args.Length>0 && args[0]=="--sato-dispatch"){SatoDispatchChecks(args[1],args.Length>2?args[2]:null);return;}
         if(args.Length>0 && args[0]=="--optional-authoring"){OptionalAuthoringChecks(args[1]);return;}
         if(args.Length>0 && args[0]=="--optional-authoring"){OptionalAuthoringChecks(args[1]);return;}
         if(args.Length>0 && args[0]=="--optional-all"){AllOptionalEventChecks(args[1]);return;}

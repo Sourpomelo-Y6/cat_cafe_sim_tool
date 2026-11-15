@@ -13,23 +13,23 @@ namespace CatCafePreview {
   protected override bool Choosing=>Backend.MissingPhase=="result" && Backend.Simulation.NamedReturnAccessPending(AccessCustomer)
       && progress.node>=Lines(progress.branch_id).Length;
   protected override bool CanAnswer(bool answer)=>Choosing && Client.CurrentState?.game_over==null;
-  protected override string ChoicePrompt=>"今後も"+CafeSimulation.NamedCustomerName(AccessCustomer)+"の来店を受け入れますか？";
+  protected override string ChoicePrompt=>"今後も"+Backend.Details.CustomerName(AccessCustomer)+"の来店を受け入れますか？";
   protected override string AcceptCaption=>"今後も来店を受け入れる";
   protected override string DeclineCaption=>"今後の来店を断る";
   protected override void SendAnswer(bool answer)
   {
       string customer=AccessCustomer;
       if(answer)Client.RespondNamedReturnAccess(customer,true);
-      else AskConfirmation(CafeSimulation.NamedCustomerName(customer)+"の来店を断りますか？ このセーブでは取り消せません。",
+      else AskConfirmation(Backend.Details.CustomerName(customer)+"の来店を断りますか？ このセーブでは取り消せません。",
           ()=>Client.RespondNamedReturnAccess(customer,false));
   }
   protected override bool AutoRunning=>Client.AutoPlayExecuting;
   protected override void SetOpen(bool open){Backend.MissingConversationOpen=open;}
-  protected override CafeConversationLine[] Lines(string branch)=>CafeMissingDialogue.Lines(Backend.MissingCase,Backend.MissingPhase,Request.name);
+  protected override CafeConversationLine[] Lines(string branch)=>CafeMissingDialogue.Lines(Backend.MissingCase,Backend.MissingPhase,Request.name,Backend.Simulation.Rules.named_dispatch,Backend.Details.CustomerName);
   private bool NamedCase=>AccessCustomer!=null;
   private string AbsenceCause=>CafeMissingDialogue.NamedCause(Backend.MissingCase.reason);
   protected override bool ShowEventListAfterClose=>!NamedCase || Backend.MissingPhase=="result";
-  protected override PythonIntakeState Request=>new PythonIntakeState{cat_id=Backend.Details.ContentId(Backend.MissingCase.cat_id),name=Backend.Simulation.Definition(Backend.MissingCase.cat_id).name,personality=NamedCase?CafeSimulation.NamedCustomerName(AccessCustomer)+" · "+AbsenceCause:"店からの家出・帰還",can_decline=true};
+  protected override PythonIntakeState Request=>new PythonIntakeState{cat_id=Backend.Details.ContentId(Backend.MissingCase.cat_id),name=Backend.Simulation.Definition(Backend.MissingCase.cat_id).name,personality=NamedCase?Backend.Details.CustomerName(AccessCustomer)+" · "+AbsenceCause:"店からの家出・帰還",can_decline=true};
   protected override string Title=>NamedCase?"指名猫の帰還":"猫の家出・帰還";
   protected override string SceneLabel=>NamedCase
       ? Backend.MissingCase.departed_day+"日目の"+AbsenceCause+" · "+(Backend.MissingPhase=="result"?Backend.MissingCase.resolved_day+"日目に帰還":Backend.MissingPhase=="confirmation"?"帰還待ち":"迎え待ち")

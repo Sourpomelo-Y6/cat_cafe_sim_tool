@@ -42,7 +42,7 @@ namespace CatCafePreview {
    }
    if(current.reservation?.status=="waiting" || b.ReservationResultPending)add(8,"reservation","特別予約",current.reservation.visit_day+"日目の来店",b.ReservationResultPending,safe,()=>Show(8));
    foreach(var e in b.Simulation.State.dispatches){
-    var id=e.id;var subject=e.started_day+"日目発 / "+cat(e.cat_id)+" / "+CafeDispatchDialogue.Title(e.destination);
+    var id=e.id;var subject=e.started_day+"日目発 / "+cat(e.cat_id)+" / "+b.DispatchNameForEvent(e);
     var dispatch=b.DispatchConversations.FirstOrDefault(r=>r.DispatchId==id && r.Destination==e.destination);bool result=dispatch!=null && CafeDispatchDialogue.ResultPending(dispatch);
     if(!CafeSimulation.DispatchInterrupted(e) && (e.status=="waiting" || result))add(CafeDispatchDialogue.Patron(e.destination)?6:10,id,"派遣・帰還",subject,result,priority,()=>{var p=GetComponent<PythonGeneralDispatchPanel>();if(CafeSimulation.NamedDestinationCustomer(e.destination)!=null)p.OpenReturn(id);else p.Dialogue.OpenEvent(id);});
     var encounter=b.EncounterConversations.FirstOrDefault(r=>r.event_id==id);result=encounter!=null && CafeEncounterDialogue.ResultPending(encounter);
@@ -55,11 +55,11 @@ namespace CatCafePreview {
    var keys=new Dictionary<int,string>{{1,"intake_request"},{2,"store_event"},{3,"growth"},{4,"missing_return"},{5,"adoption"},{6,"dispatch_return"},{7,"regular_introduction"},{8,"reservation"},{9,"customer_trust"},{10,"dispatch_return"},{11,"dispatch_choice"},{12,"dispatch_trouble"},{13,"dispatch_introduction"}};
    foreach(var row in rows)if(!row.result && string.IsNullOrEmpty(row.reason) && !string.IsNullOrEmpty(current.required_action) && keys[row.group]!=current.required_action && !(row.group==12 && current.required_action=="dispatch_return"))row.reason=ActionLabel(current.required_action)+"を先に確認してください。";
    foreach(var candidate in b.OptionalCandidates){var target=candidate;rows.Add(new PendingCase{group=14,id=target.event_id+"/"+target.cat_id,title=target.title+(target.resume?" · 再開":" · 開始"),subject=target.cat_name+(target.milestone>0?" · 好感度"+target.milestone+(target.affinity_milestone?"で上限":""):"（"+target.cat_id+"）"),optional=true,reason=b.OptionalReason(target),resume=()=>{var view=GetComponent<OptionalEventConversationPanel>()??gameObject.AddComponent<OptionalEventConversationPanel>();view.OpenEvent(target.cat_id,target.event_id,target.revision);}});}
-   foreach(var customer in CafeSimulation.NamedDispatchCustomers)
+   foreach(var customer in b.Simulation.NamedCustomers)
    {
-       var name=CafeSimulation.NamedCustomerName(customer);
+       var name=b.Details.CustomerName(customer);
        foreach(var scene in b.Simulation.NamedAffinity(customer).Where(e=>!e.conversation.completed))
-           rows.Add(new PendingCase{group=15,id=customer+"-affinity-"+scene.cat_id,title=name+(customer==CafeSimulation.Sato?"といつもの席":"とねこじゃらし"),
+           rows.Add(new PendingCase{group=15,id=customer+"-affinity-"+scene.cat_id,title=name+(customer==CafeSimulation.Sato?"といつもの席":customer==CafeSimulation.Suzuki?"とねこじゃらし":"との交流"),
                subject=cat(scene.cat_id),optional=true,resume=()=>OpenSatoScene(scene.cat_id,false,customer)});
        var request=b.Simulation.NamedRequest(customer);
        if(b.Simulation.NamedDispatchAwaitingAnswer(customer))

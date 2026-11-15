@@ -25,6 +25,7 @@ namespace CatCafePreview.Standalone
     [Serializable] public class CafeReplayDocument
     {
         public int player_policy_version;public int format_version=1;public string mode_id="unity-cafe-replay",rules_id,base_json,base_digest,final_digest;
+        public string[] named_dispatch_customers;
         public List<CafeReplayRow> operations=new List<CafeReplayRow>();
     }
     // Runtime journal is deliberately outside compact gameplay saves. Reload creates a new base.
@@ -37,7 +38,7 @@ namespace CatCafePreview.Standalone
         public CafeReplayJournal(CafeRules rules,CafeSnapshot initial,Func<CafeSaveEnvelope,string> encode,Func<string,CafeSaveEnvelope> decode)
         {
             this.rules=rules;this.encode=encode;this.decode=decode;
-            Document=new CafeReplayDocument {player_policy_version=2,rules_id=rules.rules_id,base_json=encode(new CafeSaveEnvelope {state=initial}),base_digest=Digest(initial),final_digest=Digest(initial)};
+            Document=new CafeReplayDocument {named_dispatch_customers=CafeSimulation.NamedCustomersForRules(rules),player_policy_version=2,rules_id=rules.rules_id,base_json=encode(new CafeSaveEnvelope {state=initial}),base_digest=Digest(initial),final_digest=Digest(initial)};
         }
         // Only presentation before-values are needed; never serialize the entire historical save per tick.
         public CafeSnapshot CaptureBefore(CafeSnapshot s)=>new CafeSnapshot {day=s.day,tick=s.tick,phase=s.phase,funds=s.funds,popularity=s.popularity,cats=s.cats.Select(c=>new CafeCat {id=c.id,fatigue=c.fatigue,stress=c.stress,health=c.health,activity=c.activity}).ToList(),visits=s.visits.Select(v=>new CafeVisit {id=v.id,cat_id=v.cat_id,departure=v.departure}).ToList()};
@@ -55,10 +56,20 @@ namespace CatCafePreview.Standalone
             if(value is double number){text.Append(BitConverter.DoubleToInt64Bits(number).ToString("x16")).Append(';');return;}
             if(value is bool flag){text.Append(flag?'1':'0').Append(';');return;}
             if(value is int integer){text.Append(integer.ToString(CultureInfo.InvariantCulture)).Append(';');return;}
+            // Reading a scene advances UI state outside recorded gameplay commands.
+            if(value is CafeNamedDispatchState named)
+            {
+                var r=named.request;
+                Canonical(new object[]{named.customer_id,named.affinity.Select(e=>e.cat_id),
+                    r==null?null:new object[]{r.cat_id,r.return_access,r.requested_day,r.accepted_day,
+                        r.declined_day,r.returned_day,r.refused_return,r.returned_after_service}},text);
+                return;
+            }
             if(value is System.Collections.IEnumerable sequence){text.Append('[');foreach(var item in sequence)Canonical(item,text);text.Append(']');return;}
             text.Append('{');foreach(var field in Fields(value.GetType()))
             {if(field.Name=="missing_cases" && value is CafeSnapshot)continue;
                 if(value is CafeSnapshot && (field.Name=="sato_affinity" || field.Name=="sato_dispatch" || field.Name=="suzuki_dispatch" && field.GetValue(value)==null || field.Name=="suzuki_affinity" && (((CafeSnapshot)value).suzuki_affinity?.Count??0)==0))continue;
+                if(value is CafeSnapshot && field.Name=="named_dispatch" && (((CafeSnapshot)value).named_dispatch?.Count??0)==0)continue;
                 if(value is CafeSatoDispatch && field.Name=="return_access" && (int)field.GetValue(value)==0)continue;
                 if(value is CafeReplayOperation && field.Name=="named_return_policy_version" && (int)field.GetValue(value)==0)continue;
                 if(field.Name=="growth_policy_version" && value is CafeReplayOperation && (int)field.GetValue(value)==0)continue;
@@ -132,6 +143,10 @@ namespace CatCafePreview.Standalone
             if(data==null || data.format_version!=1 || (data.player_policy_version!=0 && data.player_policy_version!=2) || data.mode_id!="unity-cafe-replay" || data.rules_id!=rules.rules_id || data.operations==null || data.operations.Count>50000 || string.IsNullOrEmpty(data.base_json) || data.base_digest==null || data.final_digest==null)throw new ArgumentException("対応するUnity営業ログとルールが必要です。");
             foreach(var row in data.operations){NormalizeOperation(row?.operation);NormalizeOperation(row?.automatic_operation);if(row?.automatic_operation!=null && string.IsNullOrEmpty(row.automatic_operation.kind))row.automatic_operation=null;}
             var envelope=decode(data.base_json);if(envelope==null || envelope.version!=1 || envelope.state==null)throw new ArgumentException("営業ログの起点が不正です。");var sim=new CafeSimulation(rules);sim.LegacyPlayerReplay=data.player_policy_version==0;bool basePaused=envelope.state.autoplay?.paused??false;sim.Restore(envelope.state);if(sim.State.autoplay?.running==true)sim.State.autoplay.paused=basePaused;
+            var namedCustomers=data.named_dispatch_customers??CafeSimulation.NamedDispatchCustomers.ToArray();
+            if(namedCustomers.Length>500 || namedCustomers.Any(c=>!CafeNamedDispatchSettings.CustomerId(c))
+                || namedCustomers.Distinct().Count()!=namedCustomers.Length)throw new ArgumentException("指名派遣のお客さんの記録が不正です。");
+            sim.ReplayNamedCustomers=namedCustomers;
             if(Digest(sim.State)!=data.base_digest)throw new ArgumentException("営業ログの起点が一致しません。");
             var reconstructed=new CafeReplayJournal(rules,sim.State,encode,decode);
             foreach(var row in data.operations)

@@ -18,29 +18,81 @@ namespace CatCafePreview.Standalone
         public CafeConversationProgress conversation;
     }
 
+    [Serializable] public sealed class CafeNamedDispatchState
+    {
+        public string customer_id;
+        public CafeSatoDispatch request;
+        public List<CafeSatoAffinityScene> affinity = new List<CafeSatoAffinityScene>();
+    }
+
     public sealed partial class CafeSimulation
     {
         public const string Sato = "guest-1";
         public const string Suzuki = "guest-2";
         public const string SuzukiDestination = "suzuki_request";
         public static readonly IReadOnlyList<string> NamedDispatchCustomers = Array.AsReadOnly(new[]{Sato,Suzuki});
-        public static string NamedCustomerName(string customer) => customer==Suzuki?"鈴木さん":"佐藤さん";
-        public static string NamedDestinationCustomer(string destination)
-            => destination==SatoDestination?Sato:destination==SuzukiDestination?Suzuki:null;
+        public static string NamedCustomerName(string customer)
+            => customer==Sato?"佐藤さん":customer==Suzuki?"鈴木さん":customer;
+
+        private static string NamedPrefix(string customer)
+            => customer==Sato?"sato":customer==Suzuki?"suzuki":"named-"+customer;
+
+        private static string CustomerFromNamedKey(string key,string suffix)
+        {
+            if(string.IsNullOrEmpty(key) || !key.EndsWith(suffix,StringComparison.Ordinal))return null;
+            string prefix=key.Substring(0,key.Length-suffix.Length);
+            if(prefix=="sato")return Sato;
+            if(prefix=="suzuki")return Suzuki;
+            if(!prefix.StartsWith("named-",StringComparison.Ordinal))return null;
+            string customer=prefix.Substring(6);
+            return !NamedDispatchCustomers.Contains(customer) && CafeNamedDispatchSettings.CustomerId(customer)?customer:null;
+        }
+
+        public static string NamedDestinationCustomer(string destination) => CustomerFromNamedKey(destination,"_request");
         public static string NamedMissingCustomer(string reason)
-            => reason=="sato_expired" || reason=="sato_refused"?Sato:
-                reason=="suzuki_expired" || reason=="suzuki_refused"?Suzuki:null;
-        private static string NamedPrefix(string customer) => customer==Suzuki?"suzuki":"sato";
+            => CustomerFromNamedKey(reason,"_expired") ?? CustomerFromNamedKey(reason,"_refused");
+        public static string NamedEpilogueId(string customer) => NamedPrefix(customer)+".epilogue.v1";
         private static string NamedAdoptionSource(string customer) => NamedPrefix(customer)+"-return";
-        public static bool IsNamedAdoption(string source) => source==SatoAdoptionSource || source=="suzuki-return";
+        public static bool IsNamedAdoption(string source) => CustomerFromNamedKey(source,"-return")!=null;
         internal static readonly DispatchRules SuzukiVisit = new DispatchRules
             { id=SuzukiDestination, name="鈴木さんへの指名派遣", days=1, max_fatigue=60 };
+
+        private readonly string[] enabledNamedCustomers;
+        internal string[] ReplayNamedCustomers;
+        internal IEnumerable<string> EnabledNamedCustomers => ReplayNamedCustomers ?? enabledNamedCustomers;
+        internal static string[] NamedCustomersForRules(CafeRules rules)
+        {
+            var settings=rules.named_dispatch??Array.Empty<CafeNamedDispatchSettings>();
+            return NamedDispatchCustomers.Where(c=>settings.All(r=>r.customer_id!=c || r.enabled))
+                .Concat(settings.Where(r=>r.enabled && !NamedDispatchCustomers.Contains(r.customer_id))
+                    .Select(r=>r.customer_id).OrderBy(c=>c,StringComparer.Ordinal)).ToArray();
+        }
+        private static IEnumerable<string> RecordedNamedCustomers(CafeSnapshot state)
+            => NamedDispatchCustomers.Concat(state.named_dispatch.Select(row=>row.customer_id));
+        public IEnumerable<string> NamedCustomers => RecordedNamedCustomers(State).Concat(EnabledNamedCustomers).Distinct();
+
+        private CafeNamedDispatchSettings NamedSettings(string customer)
+            => Rules.named_dispatch?.FirstOrDefault(row=>row.customer_id==customer);
+
         public CafeSatoDispatch NamedRequest(string customer) => NamedRequest(State,customer);
         private static CafeSatoDispatch NamedRequest(CafeSnapshot state,string customer)
-            => customer==Sato?state.sato_dispatch:customer==Suzuki?state.suzuki_dispatch:null;
-        public List<CafeSatoAffinityScene> NamedAffinity(string customer) => NamedAffinity(State,customer);
+            => customer==Sato?state.sato_dispatch:customer==Suzuki?state.suzuki_dispatch:
+                state.named_dispatch?.Find(row=>row.customer_id==customer)?.request;
+
+        public List<CafeSatoAffinityScene> NamedAffinity(string customer)
+            => NamedAffinity(State,customer) ?? new List<CafeSatoAffinityScene>();
         private static List<CafeSatoAffinityScene> NamedAffinity(CafeSnapshot state,string customer)
-            => customer==Suzuki?state.suzuki_affinity:state.sato_affinity;
+            => customer==Sato?state.sato_affinity:customer==Suzuki?state.suzuki_affinity:
+                state.named_dispatch.Find(row=>row.customer_id==customer)?.affinity;
+
+        private List<CafeSatoAffinityScene> EnsureNamedAffinity(string customer)
+        {
+            var affinity=NamedAffinity(State,customer);
+            if(affinity!=null)return affinity;
+            var row=new CafeNamedDispatchState {customer_id=customer};
+            State.named_dispatch.Add(row);
+            return row.affinity;
+        }
         public const string SatoDestination = "sato_request";
         private const double SatoAffinity = 80;
         private const double SatoDiscontent = 50;
@@ -52,13 +104,13 @@ namespace CatCafePreview.Standalone
 
         private void ObserveSatoAffinity(string catId, string customer, double affinity)
         {
-            if (State.import_history != null || !NamedDispatchCustomers.Contains(customer) || affinity < SatoAffinity || NamedAffinity(customer).Any(e => e.cat_id == catId)) return;
-            NamedAffinity(customer).Add(new CafeSatoAffinityScene { cat_id=catId, conversation=SatoScene(NamedPrefix(customer)+".affinity.v1","affinity") });
+            if (State.import_history != null || !EnabledNamedCustomers.Contains(customer) || affinity < SatoAffinity || NamedAffinity(customer).Any(e => e.cat_id == catId)) return;
+            EnsureNamedAffinity(customer).Add(new CafeSatoAffinityScene { cat_id=catId, conversation=SatoScene(NamedPrefix(customer)+".affinity.v1","affinity") });
         }
 
         private void PresentSatoDispatch()
         {
-            foreach(var customer in NamedDispatchCustomers)PresentNamedDispatch(customer);
+            foreach(var customer in NamedCustomers)PresentNamedDispatch(customer);
         }
 
         private void PresentNamedDispatch(string customer)
@@ -77,12 +129,12 @@ namespace CatCafePreview.Standalone
                 return;
             }
 
-            if (DiscontentScore(customer, State.day) < SatoDiscontent
+            if (!EnabledNamedCustomers.Contains(customer) || DiscontentScore(customer, State.day) < SatoDiscontent
                 || State.trust_customers.Any(c => c.customer_id == customer && c.status != "stable")
                 || State.adoption?.events.Any(e => e.customer_id == customer && e.status == "waiting") == true) return;
             var candidate = State.relationships
                 .Where(r => r.customer_id == customer && r.affinity >= SatoAffinity && NamedAffinity(customer).Any(e => e.cat_id == r.cat_id))
-                .Where(r => !NamedDispatchCustomers.Any(other => NamedRequest(other) is CafeSatoDispatch active
+                .Where(r => !NamedCustomers.Any(other => NamedRequest(other) is CafeSatoDispatch active
                     && active.cat_id==r.cat_id && active.returned_day==0 && active.declined_day==0))
                 .Where(r => State.adoption?.events.Any(e=>e.cat_id==r.cat_id && e.status=="waiting") != true)
                 .Where(r => State.cats.Any(c => c.id == r.cat_id && c.activity == "cafe" && c.health == "healthy"
@@ -92,7 +144,9 @@ namespace CatCafePreview.Standalone
             if (State.cats.Count(c => c.activity == "cafe" && c.health == "healthy" && !c.cannot_continue && c.stamina > 0) <= State.seat_count) return;
             request = new CafeSatoDispatch { cat_id=candidate.cat_id, requested_day=State.day,
                 conversation=SatoScene(NamedPrefix(customer)+".request.v1","introduction") };
-            if(customer==Sato)State.sato_dispatch=request;else State.suzuki_dispatch=request;
+            if(customer==Sato)State.sato_dispatch=request;
+            else if(customer==Suzuki)State.suzuki_dispatch=request;
+            else State.named_dispatch.Single(row=>row.customer_id==customer).request=request;
         }
 
         // Zero identifies returns resolved before this choice was introduced.
@@ -101,7 +155,7 @@ namespace CatCafePreview.Standalone
         private const int ReturnTrustDelay=8;
         private const double ReturnTrustDiscontent=50;
 
-        public bool NamedReturnAccessWaiting => NamedDispatchCustomers.Any(c=>NamedReturnAccessPending(c));
+        public bool NamedReturnAccessWaiting => NamedCustomers.Any(NamedReturnAccessPending);
 
         public bool NamedReturnAccessPending(string customer)
             => NamedRequest(customer)?.return_access==AwaitingReturnAccess;
@@ -150,7 +204,7 @@ namespace CatCafePreview.Standalone
 
         private void PresentSatoAdoption()
         {
-            foreach(var customer in NamedDispatchCustomers)PresentNamedAdoption(customer);
+            foreach(var customer in NamedCustomers)PresentNamedAdoption(customer);
         }
 
         private void PresentNamedAdoption(string customer)
@@ -171,7 +225,7 @@ namespace CatCafePreview.Standalone
 
         public bool SatoEpilogueAvailable(string catId) => NamedEpilogueCustomer(catId)!=null;
         public string NamedEpilogueCustomer(string catId)
-            => NamedDispatchCustomers.FirstOrDefault(c=>NamedEpilogueAvailable(State,catId,c));
+            => NamedCustomers.FirstOrDefault(c=>NamedEpilogueAvailable(State,catId,c));
 
         private static bool NamedEpilogueAvailable(CafeSnapshot s,string catId,string customer)
             => s.adoption?.events.Any(e => e.source == NamedAdoptionSource(customer) && e.customer_id==customer && e.cat_id == catId
@@ -195,7 +249,7 @@ namespace CatCafePreview.Standalone
         {
             if (!NamedDispatchAwaitingAnswer(customer)) return "この依頼の回答期限は終了しました。";
             if (State.game_over != null || State.phase != "preparation") return "営業準備中に回答してください。";
-            return accept ? DispatchReason(NamedRequest(customer).cat_id, customer==Suzuki?SuzukiDestination:SatoDestination) : "";
+            return accept ? DispatchReason(NamedRequest(customer).cat_id, NamedPrefix(customer)+"_request") : "";
         }
 
         private void RespondSatoDispatch(string choice,string customer)
@@ -206,7 +260,7 @@ namespace CatCafePreview.Standalone
             if (reason != "") throw new InvalidOperationException(reason);
             var request = NamedRequest(customer);
             if (!accept) { request.declined_day=State.day; return; }
-            Dispatch(request.cat_id, customer==Suzuki?SuzukiDestination:SatoDestination);
+            Dispatch(request.cat_id, NamedPrefix(customer)+"_request");
             request.accepted_day=State.day;
             request.refused_return=DiscontentScore(customer, State.day) >= Rules.discontent.threshold;
         }
@@ -240,7 +294,7 @@ namespace CatCafePreview.Standalone
 
         private void ReplaySatoReturn(CafeSnapshot s, List<CafeDiscontent> scores, int day, bool afterService)
         {
-            foreach(var customer in NamedDispatchCustomers)
+            foreach(var customer in RecordedNamedCustomers(s))
             {
                 var e=NamedRequest(s,customer);
                 if (e?.accepted_day > 0 && !e.refused_return && e.returned_day == day && e.returned_after_service == afterService)
@@ -251,9 +305,15 @@ namespace CatCafePreview.Standalone
         private void ValidateSatoDispatch(CafeSnapshot s)
         {
             CafeMissingDialogue.Validate(s);
-            foreach(var customer in NamedDispatchCustomers)ValidateNamedDispatch(s,customer);
-            var active=NamedDispatchCustomers.Select(c=>NamedRequest(s,c)).Where(e=>e!=null && e.returned_day==0 && e.declined_day==0).ToArray();
-            if(active.Length==2 && active[0].cat_id==active[1].cat_id)throw new ArgumentException("Overlapping named requests");
+            var customers=RecordedNamedCustomers(s).ToArray();
+            if(s.named_dispatch.Count>500 || s.named_dispatch.Any(row=>!CafeNamedDispatchSettings.CustomerId(row.customer_id))
+                || customers.Distinct().Count()!=customers.Length
+                || s.dispatches.Any(e=>NamedDestinationCustomer(e.destination) is string id && !customers.Contains(id))
+                || s.missing_cases.Any(e=>NamedMissingCustomer(e.reason) is string id && !customers.Contains(id)))
+                throw new ArgumentException("Invalid named dispatch customers");
+            foreach(var customer in customers)ValidateNamedDispatch(s,customer);
+            var active=customers.Select(c=>NamedRequest(s,c)).Where(e=>e!=null && e.returned_day==0 && e.declined_day==0);
+            if(active.GroupBy(e=>e.cat_id).Any(g=>g.Count()>1))throw new ArgumentException("Overlapping named requests");
         }
 
         private void ValidateNamedDispatch(CafeSnapshot s,string customer)

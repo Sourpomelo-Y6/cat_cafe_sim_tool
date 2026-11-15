@@ -109,7 +109,7 @@ namespace CatCafePreview
         {
             var sim=CafeBackends.Standalone?(CafeBackends.Local as LocalCafeBackend)?.Simulation:null;
             var deadlines=sim!=null && current.phase=="preparation" && current.game_over==null
-                ? CafeSimulation.NamedDispatchCustomers.Where(sim.NamedDispatchAwaitingAnswer)
+                ? sim.NamedCustomers.Where(sim.NamedDispatchAwaitingAnswer)
                     .Select(customer=>sim.NamedRequest(customer).requested_day+1).ToArray()
                 : Array.Empty<int>();
             bool dueToday=deadlines.Contains(current.day);

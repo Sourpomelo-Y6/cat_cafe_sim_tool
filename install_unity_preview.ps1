@@ -9,6 +9,7 @@ $housingFiles = @('Editor/Housing32Verification.cs','Runtime/Standalone/CafeHous
 $targetRoot = Join-Path $projectRoot 'Assets/CatCafePreview'
 $previewFiles = @('Runtime/ContentBundle.cs', 'Runtime/CatInteractionState.cs', 'Runtime/ContentPreview.cs', 'Editor/ContentPreviewSetup.cs', 'Editor/ContentPreviewLayout.cs', 'Fonts/MPLUS1p-Regular.ttf', 'Fonts/OFL.txt', 'Fonts/README.md')
 $previewFiles += $housingFiles
+$previewFiles += @('Runtime/Standalone/CafeNamedDispatchDialogue.cs')
 $previewFiles += @('Runtime/HumanPortraitResources.cs','Editor/HumanIconsApplyVerification.cs','Runtime/StandaloneHumanIconsSmoke.cs','Editor/HumanPortraitImport.cs','Editor/HumanPortraitVerification.cs')
 $previewFiles += @('Editor/InteractionStatisticsVerification.cs','Runtime/InteractionStatisticsPanel.cs','Runtime/Standalone/CafeInteractionStatistics.cs','Runtime/Standalone/CafeInteractionStatisticsPresentation.cs')
 $previewFiles += @('Runtime/Standalone/CafePlayerStaminaGuidance.cs', 'Runtime/StandalonePlayerStaminaSmoke.cs')

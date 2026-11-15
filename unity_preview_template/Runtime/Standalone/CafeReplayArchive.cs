@@ -135,7 +135,7 @@ namespace CatCafePreview.Standalone
                     result.Add(new CafeReplayEntry{conversation_id=d.id,branch_id=branch,title=d.title,cat_id=id,cat_name=name,personality=personality,lines=lines});
                 }
             };
-            foreach(var e in save.state.missing_cases)foreach(var phase in new[]{"notice","waiting","confirmation","result"})add(CafeMissingDialogue.Progress(e,phase),contentId(e.cat_id),catName(e.cat_id),"店からの家出・帰還",b=>CafeMissingDialogue.Lines(e,phase,catName(e.cat_id)),false);
+            foreach(var e in save.state.missing_cases)foreach(var phase in new[]{"notice","waiting","confirmation","result"})add(CafeMissingDialogue.Progress(e,phase),contentId(e.cat_id),catName(e.cat_id),"店からの家出・帰還",b=>CafeMissingDialogue.Lines(e,phase,catName(e.cat_id),rules.named_dispatch,customerName),false);
             var q=rules.intake;add(save.conversation,q.cat.id,q.cat.name,q.personality,b=>CafeIntakeConversation.Lines(b,q.cat.name),true);
             var r=rules.regular_introduction;add(save.regular_conversation,r.cat.id,r.cat.name,r.personality,b=>CafeRegularConversation.Lines(b,r.cat.name,customerName(save.state.regular_introduction.customer_id)),true);
             foreach(var row in save.dispatch_conversations??new CafeDispatchConversation[0])
@@ -152,7 +152,7 @@ namespace CatCafePreview.Standalone
             foreach(var row in save.reservation_conversations??new CafeReservationConversation[0]){int start=result.Count;add(row.response,"",row.name,"特別予約",b=>CafeReservationDialogue.Lines(row,false,b),true);add(row.result,"",row.name,"特別予約の接客結果",b=>CafeReservationDialogue.Lines(row,true,b),false);for(int i=start;i<result.Count;i++)result[i].customer_id="reservation-longhair";}
             foreach(var row in save.trust_conversations??new CafeTrustConversation[0]){int start=result.Count;var ev=save.state.trust_events.Single(e=>e.id==row.event_id);string name=customerName(ev.customer_id);add(row.response,"",name,"顧客の信頼",b=>CafeTrustDialogue.EventLines(save.state,ev,false,b,name,rules.trust.popularity_loss),true);add(row.result,"",name,"接客結果",b=>CafeTrustDialogue.EventLines(save.state,ev,true,b,name,rules.trust.popularity_loss),false);for(int i=start;i<result.Count;i++)result[i].customer_id=ev.customer_id;}
             foreach(var row in save.adoption_conversations??new CafeAdoptionConversation[0])
-            {var ev=save.state.adoption.events.Single(e=>e.id==row.event_id);string name=catName(ev.cat_id);add(row.progress,contentId(ev.cat_id),name,customerName(ev.customer_id)+"からの譲渡申し出",b=>CafeAdoptionDialogue.Lines(b,name,customerName(ev.customer_id),ev),true);}
+            {var ev=save.state.adoption.events.Single(e=>e.id==row.event_id);string name=catName(ev.cat_id);add(row.progress,contentId(ev.cat_id),name,customerName(ev.customer_id)+"からの譲渡申し出",b=>CafeAdoptionDialogue.Lines(b,name,customerName(ev.customer_id),ev,rules.named_dispatch),true);}
             foreach(var row in save.lodge_conversations??new CafeLodgeConversation[0])
             {var ev=save.state.dispatches.Single(e=>e.id==row.event_id);string name=catName(ev.cat_id);add(row.response,contentId(ev.cat_id),name,"山あいの宿・トラブル対応",b=>CafeLodgeDialogue.Lines(false,b,name),true);add(row.returning,contentId(ev.cat_id),name,"山あいの宿・帰還確認",b=>CafeLodgeDialogue.Lines(true,b,name),true);}
             foreach(var row in save.encounter_conversations??new CafeEncounterConversation[0])

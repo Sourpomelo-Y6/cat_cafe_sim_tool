@@ -1,6 +1,7 @@
 """猫・人物の台帳編集。本文・ゲームルールを変更しない。"""
 import copy
 import uuid
+from named_dispatch import LEGACY_CUSTOMERS, SCENES, validate_settings
 from interaction_subjects import game_subjects
 
 
@@ -49,6 +50,8 @@ class SubjectManagerWindow:
         buttons=ttk.Frame(frame);buttons.pack(fill='x')
         ttk.Button(buttons,text='対象と資料を保存',command=self.save).pack(side='left')
         ttk.Button(buttons,text='台帳を再読込',command=self.reload).pack(side='left',padx=8)
+        self.dispatch_button=ttk.Button(buttons,text='指名派遣・台詞…',command=self.edit_named_dispatch)
+        self.dispatch_button.pack(side='left',padx=8)
         ttk.Button(buttons,text='閉じる',command=self.close).pack(side='right')
         portrait_buttons=ttk.Frame(frame);portrait_buttons.pack(fill='x',pady=4)
         for label,command in [('人物画像を登録・差替…',self.register_portrait),('人物画像を確認',self.preview_portrait),('画像対応を解除',self.remove_portrait),('人物画像をUnity向けに書き出す…',self.export_portraits)]:
@@ -94,6 +97,9 @@ class SubjectManagerWindow:
         if self.current is None:return None
         row={k:v.get().strip() for k,v in self.variables.items()}
         row.update(kind=self.current['kind'],notes=self.notes.get('1.0','end-1c').strip(),enabled=self.enabled.get())
+        settings = self.current.get('named_dispatch')
+        if settings is not None and row['game_id'] == self.current['game_id']:
+            row['named_dispatch'] = copy.deepcopy(settings)
         return row
 
     def confirm_leave(self):
@@ -109,7 +115,90 @@ class SubjectManagerWindow:
         self.enabled.set(row['enabled']);self.notes.delete('1.0','end');self.notes.insert('1.0',row['notes'])
         self.baseline=copy.deepcopy(row)
         self.entries['content_id'].configure(state='normal' if row['kind']=='cat_response' else 'disabled')
+        customer = row['kind'] == 'speech' and row['game_id'] in self.references['speech']
+        self.dispatch_button.configure(state='normal' if customer else 'disabled')
         self.notice.set('猫は画像素材IDとゲームIDを別々に対応付けます。名前の変更で本文やIDは作り直しません。')
+
+    def edit_named_dispatch(self):
+        import tkinter as tk
+        from tkinter import messagebox, ttk
+        from tkinter.scrolledtext import ScrolledText
+
+        if self.value() != self.baseline and not self.save():
+            return
+        customer = self.current['game_id']
+        if self.current['kind'] != 'speech' or customer not in self.references['speech']:
+            return
+        defaults = dict(enabled=customer in LEGACY_CUSTOMERS, scenes={})
+        settings = copy.deepcopy(self.current.get('named_dispatch', defaults))
+        dialog = tk.Toplevel(self.window)
+        dialog.title(self.current['name'] + ' — 指名派遣・台詞')
+        dialog.transient(self.window)
+        dialog.grab_set()
+        frame = ttk.Frame(dialog, padding=12)
+        frame.pack(fill='both', expand=True)
+        enabled = tk.BooleanVar(dialog, settings['enabled'])
+        ttk.Checkbutton(frame, text='指名派遣を有効にする', variable=enabled).pack(anchor='w')
+        ttk.Label(frame, text='空欄の行は既定文を使用します。{cat} は指名された猫、{customer} はお客さんの名前です。').pack(anchor='w', pady=6)
+        names = {label: key for key, (label, _) in SCENES.items()}
+        chosen = ttk.Combobox(frame, state='readonly', values=list(names), width=42)
+        chosen.pack(anchor='w')
+        fields = []
+        for i in range(3):
+            group = ttk.LabelFrame(frame, text=f'{i+1}行目', padding=4)
+            field = ScrolledText(group, width=66, height=3, wrap='word', undo=True)
+            field.pack(fill='x')
+            fields.append((group, field))
+        controls = ttk.Frame(frame)
+        active = None
+
+        def read_lines():
+            if active is not None:
+                count = SCENES[active][1]
+                lines = [field.get('1.0', 'end-1c').strip() for _, field in fields[:count]]
+                if any(lines):
+                    settings['scenes'][active] = lines
+                else:
+                    settings['scenes'].pop(active, None)
+
+        def select_scene(event=None):
+            nonlocal active
+            read_lines()
+            active = names[chosen.get()]
+            count = SCENES[active][1]
+            lines = settings['scenes'].get(active, [''] * count)
+            for i, (group, field) in enumerate(fields):
+                group.pack_forget()
+                if i < count:
+                    group.pack(fill='x', pady=3, before=controls)
+                    field.delete('1.0', 'end')
+                    field.insert('1.0', lines[i])
+                    field.edit_reset()
+
+        def save():
+            read_lines()
+            settings['enabled'] = enabled.get()
+            try:
+                validate_settings(settings)
+                row = self.value()
+                row['named_dispatch'] = settings
+                self.registry.save(row, expected=self.snapshot)
+            except (OSError, ValueError) as exc:
+                messagebox.showerror('指名派遣の保存', str(exc), parent=dialog)
+                return
+            self.refresh()
+            self.load(row)
+            if self.on_saved:
+                self.on_saved()
+            self.notice.set('指名派遣を保存しました。通常のUnity向け素材書き出しに含まれます。')
+            dialog.destroy()
+
+        controls.pack(fill='x', pady=(8, 0))
+        ttk.Button(controls, text='保存', command=save).pack(side='left')
+        ttk.Button(controls, text='閉じる', command=dialog.destroy).pack(side='right')
+        chosen.bind('<<ComboboxSelected>>', select_scene)
+        chosen.current(0)
+        select_scene()
 
     def select(self,kind):
         tree=self.trees[kind];selected=tree.selection()
@@ -140,6 +229,8 @@ class SubjectManagerWindow:
                 self.notice.set('未登録の画像素材IDです。画像画面でこのIDへ画像を登録できます。')
             self.registry.save(row,expected=self.snapshot);self.baseline=copy.deepcopy(row);self.current=copy.deepcopy(row)
             self.refresh()
+            customer = row['kind'] == 'speech' and row['game_id'] in self.references['speech']
+            self.dispatch_button.configure(state='normal' if customer else 'disabled')
             if self.on_saved:self.on_saved()
             self.notice.set('対象と資料を保存しました。本文・ゲームの加入や来店ルールは変更していません。')
             return True

@@ -16,6 +16,8 @@ namespace CatCafePreview.Standalone
         {
             Rules = rules ?? throw new ArgumentNullException(nameof(rules));
             if (rules.version != 1 || rules.cats == null || rules.cats.Length == 0 || seed < 0) throw new ArgumentException("Invalid initial configuration");
+            CafeNamedDispatchSettings.Validate(rules.named_dispatch);
+            enabledNamedCustomers=NamedCustomersForRules(rules);
             State = new CafeSnapshot { seed = seed, rules_id = rules.rules_id, instance_id = Guid.NewGuid().ToString("N"), funds = rules.starting_funds, opening_funds = rules.starting_funds, popularity = rules.starting_popularity };
             foreach (var cat in rules.cats.OrderBy(c => c.id, StringComparer.Ordinal)) State.cats.Add(new CafeCat { id = cat.id, stamina = rules.max_stamina });
             foreach (var cat in State.cats) EnsureGrowthCat(cat.id);
@@ -48,6 +50,8 @@ namespace CatCafePreview.Standalone
                 || s.revenue < 0 || s.expenses < 0 || Math.Abs(s.funds - (s.opening_funds + s.revenue + s.item_sales_income + s.dispatch_income - s.expenses)) > 1e-7
                 || s.history.Count != s.day - 1 || s.completed < 0
                 || !Range(s.popularity, 0, Rules.popularity.cap)) throw new ArgumentException("Invalid standalone save");
+            if(s.named_dispatch==null || s.named_dispatch.Any(row=>row==null))
+                throw new ArgumentException("Invalid named dispatch state");
             ValidateStaminaGrowth(s);
             ValidateAutoplay(s);
             ValidateAdoption(s);

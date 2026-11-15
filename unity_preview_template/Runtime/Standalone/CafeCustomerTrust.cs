@@ -79,7 +79,7 @@ namespace CatCafePreview.Standalone
 
         private void ValidateReturnTrustDay(CafeSnapshot s,List<CafeDiscontent> scores,int day)
         {
-            foreach(var customer in NamedDispatchCustomers.Where(c=>ReturnTrustDay(s,c)==day))
+            foreach(var customer in RecordedNamedCustomers(s).Where(c=>ReturnTrustDay(s,c)==day))
             {
                 var d=scores.Find(r=>r.customer_id==customer);
                 bool expected=d!=null && IsReturnTrustWarning(s,d,day);
