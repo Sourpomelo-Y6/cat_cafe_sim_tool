@@ -199,7 +199,7 @@ namespace CatCafePreview
                 "保護猫の受け入れ："+(intake==null ? "依頼なし" : intake.name+" / "+(intake.status=="waiting" ? "確認待ち" : intake.status=="accepted" ? "受け入れ済み" : "見送り済み")),
                 "店舗イベント："+(current.store_event==null ? (string.IsNullOrEmpty(current.store_event_notice)?"確認待ちなし":current.store_event_label+" / 本日の通知") : current.store_event.title+" / 確認待ち"),
                 "猫の成長："+(current.growth_choices?.Length ?? 0)+"件の選択待ち",
-                "猫の家出・帰還："+missing.Count(r=>r.status=="waiting")+"件の帰還待ち / 家出中 "+missing.Count(r=>r.status=="missing")+"匹 / 記録 "+missing.Length+"件",
+                (missing.Any(r=>!string.IsNullOrEmpty(r.cause))?"猫の不在・帰還":"猫の家出・帰還")+"："+missing.Count(r=>r.status=="waiting")+"件の帰還待ち / 不在 "+missing.Count(r=>r.status=="missing")+"匹 / 記録 "+missing.Length+"件",
                 "譲渡の申し出："+adoption.Count(r=>r.status=="waiting")+"件の確認待ち / 記録 "+adoption.Length+"件",
                 "有力者派遣の帰還："+dispatch.Count(r=>r.status=="waiting")+"件の帰還待ち / 派遣中 "+dispatch.Count(r=>r.status=="travelling")+"匹",
                 "常連からの猫紹介："+(current.regular_introduction==null ? "対象なし" : current.regular_introduction.status=="untriggered" ? "まだ届いていません" : current.regular_introduction.name+" / "+(current.regular_introduction.status=="waiting" ? "確認待ち" : current.regular_introduction.status=="accepted" ? "加入済み" : "見送り済み"))};

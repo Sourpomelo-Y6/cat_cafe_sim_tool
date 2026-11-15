@@ -239,11 +239,20 @@ namespace CatCafePreview
                 yield return new WaitUntil(()=>client.UIStateReady);
                 Apply(client,backend);
                 OpenRow(list,"指名猫の帰還");
-                Check(client.GetComponent<MissingConversationPanel>().Showing,"Missing conversation did not open");
-                Command(backend,"resolve_missing",choice:sim.State.missing_cases.Single(e=>e.cat_id==cat && e.resolved_day==0).id,cat:cat);
-                Check(sim.NamedRequest(customer).returned_day==sim.State.day,"Missing return was not applied");
-                Apply(client,backend);
                 var returnDialog=client.GetComponent<MissingConversationPanel>();
+                Check(returnDialog.Showing,"Missing conversation did not open");
+                for(int frame=0;frame<30 && returnDialog.Showing;frame++){returnDialog.Next();yield return null;}
+                var records=client.GetComponent<PythonMissingPanel>();
+                Check(!returnDialog.Showing && records.panel.activeInHierarchy &&
+                      records.panel.transform.GetSiblingIndex()==records.panel.transform.parent.childCount-1,
+                    "Finishing the welcome conversation did not reveal the return record");
+                Check(records.title.text=="指名猫の帰還" && records.confirm.interactable,
+                    "Named return record did not offer confirmation");
+                yield return new WaitUntil(()=>client.UIStateReady && client.CurrentState.revision==sim.State.revision);
+                records.confirm.onClick.Invoke();
+                yield return new WaitUntil(()=>client.UIStateReady);
+                Check(sim.NamedRequest(customer).returned_day==sim.State.day,"Missing return was not applied");
+                Check(returnDialog.Showing,"Confirmed return did not open the result conversation");
                 for(int frame=0;frame<30 && !returnDialog.PlaybackChoosing;frame++)
                 {
                     returnDialog.Next();

@@ -27,7 +27,8 @@ namespace CatCafePreview {
   protected override void SetOpen(bool open){Backend.MissingConversationOpen=open;}
   protected override CafeConversationLine[] Lines(string branch)=>CafeMissingDialogue.Lines(Backend.MissingCase,Backend.MissingPhase,Request.name);
   private bool NamedCase=>AccessCustomer!=null;
-  private string AbsenceCause=>Backend.MissingCase.reason.EndsWith("_refused",System.StringComparison.Ordinal)?"返還拒否":"連れ去り";
+  private string AbsenceCause=>CafeMissingDialogue.NamedCause(Backend.MissingCase.reason);
+  protected override bool ShowEventListAfterClose=>!NamedCase || Backend.MissingPhase=="result";
   protected override PythonIntakeState Request=>new PythonIntakeState{cat_id=Backend.Details.ContentId(Backend.MissingCase.cat_id),name=Backend.Simulation.Definition(Backend.MissingCase.cat_id).name,personality=NamedCase?CafeSimulation.NamedCustomerName(AccessCustomer)+" · "+AbsenceCause:"店からの家出・帰還",can_decline=true};
   protected override string Title=>NamedCase?"指名猫の帰還":"猫の家出・帰還";
   protected override string SceneLabel=>NamedCase
@@ -37,7 +38,10 @@ namespace CatCafePreview {
   protected override string DeclineEffect=>"このセーブでは以後の来店、売上、新規イベントがなくなります。過去の記録は見返せます。";
   protected override string HistoryPrefix=>"";
   protected override string Notice=>Backend.MissingConversationReason;
-  protected override string EndText=>NamedCase?"会話を終えて、指名猫の帰還記録と店の状態を確認しましょう。":"会話を終えて、家出・帰還の記録と店の状態を確認しましょう。";
+  protected override string EndText=>!NamedCase?"会話を終えて、家出・帰還の記録と店の状態を確認しましょう。"
+      : Backend.MissingPhase=="confirmation"?"会話を終えたら、記録の「帰還と費用を確認する」で迎えを確定しましょう。"
+      : Backend.MissingPhase=="result"?"会話を終えて、指名猫の帰還記録と店の状態を確認しましょう。"
+      : "営業または休業で日程を進めると、迎えに行けるようになります。残り日数は帰還記録で確認できます。";
   protected override void Finish(){CafeMissingDialogue.Finish(progress);}
   protected override void AfterClose(){owner.ShowRecords();GetComponent<PythonGrowthPanel>()?.Apply(Client.CurrentState);GetComponent<PythonGoalPanel>()?.Apply(Client.CurrentState);GetComponent<PythonGameOverPanel>()?.Apply(Client.CurrentState);base.AfterClose();}
   void LateUpdate(){if(Showing && !GameOptionsPanel.IsOpen && GetComponent<PythonSavePanel>()?.panel.activeSelf!=true)host.transform.SetAsLastSibling();}

@@ -20,7 +20,7 @@ namespace CatCafePreview
                 row.day_after=after.day;row.ends_game=after.game_over!=null;
                 row.details="来客・接客なしで休業します。\n支出："+row.cost.ToString("0.#")+" / 資金："+s.funds.ToString("0.#")+" → "+row.funds_after.ToString("0.#")
                     +"\n"+(row.ends_game?"精算で経営終了となり、翌日には進みません。":after.day+"日目の準備へ進みます。目標・派遣・療養の日程も進みます。")
-                    +"\n\n"+string.Join("\n\n",s.cats.Select(c=>{var a=after.cats.Find(v=>v.id==c.id);return Simulation.Definition(c.id).name+"\n体力 "+c.stamina.ToString("0.#")+" → "+a.stamina.ToString("0.#")+" / 疲労 "+c.fatigue.ToString("0.#")+" → "+a.fatigue.ToString("0.#")+" / ストレス "+c.stress.ToString("0.#")+" → "+a.stress.ToString("0.#")+"\n健康："+(a.health=="healthy"?"健康":"療養あと"+a.recovery_remaining+"日")+" / 活動："+(a.activity=="cafe"?"在店":a.activity=="dispatched"?"派遣中":a.activity=="adopted"?"譲渡済み":"家出中");}));
+                    +"\n\n"+string.Join("\n\n",s.cats.Select(c=>{var a=after.cats.Find(v=>v.id==c.id);return Simulation.Definition(c.id).name+"\n体力 "+c.stamina.ToString("0.#")+" → "+a.stamina.ToString("0.#")+" / 疲労 "+c.fatigue.ToString("0.#")+" → "+a.fatigue.ToString("0.#")+" / ストレス "+c.stress.ToString("0.#")+" → "+a.stress.ToString("0.#")+"\n健康："+(a.health=="healthy"?"健康":"療養あと"+a.recovery_remaining+"日")+" / 活動："+(a.activity=="missing" && c.activity!="missing" && MissingCause(after,c.id)!=null?CatActivityLabel(s,c):CatActivityLabel(after,a));}));
             }
             catch(InvalidOperationException ex)
             {

@@ -5,6 +5,12 @@ namespace CatCafePreview
 {
     public sealed partial class LocalCafeBackend
     {
+        private static string MissingCause(CafeSnapshot s,string catId)
+            => CafeMissingDialogue.NamedCause(s.missing_cases?.LastOrDefault(e=>e.cat_id==catId && e.resolved_day==0)?.reason);
+
+        private static string CatActivityLabel(CafeSnapshot s,CafeCat c)
+            => c.activity=="adopted"?"譲渡済み":c.activity=="cafe"?"在店":c.activity=="dispatched"?"派遣中"
+                : MissingCause(s,c.id)!=null?(c.missing_remaining==0?"帰還待ち":"迎え待ち"):"家出中";
         private bool MissingWaiting => Simulation.State.cats.Any(c=>c.activity=="missing" && c.missing_remaining==0 && !Simulation.DispatchMissing(Simulation.State,c.id));
         private PythonMissingCat[] MissingView()
         {
@@ -19,7 +25,7 @@ namespace CatCafePreview
                     try{probe.Execute("resolve_missing",catId:c.id);}catch(Exception ex){reason=ex.Message;}
                 }
                 // Older snapshots do not store the departure date. Do not invent it.
-                return new PythonMissingCat{choice=e.id,cat_id=c.id,name=Simulation.Definition(c.id).name,status=resolved?"resolved":waiting?"waiting":"missing",departed_day=e.departed_day,resolved_day=e.resolved_day,remaining=resolved?0:c.missing_remaining,kitten=resolved?e.kitten:waiting && c.kitten,cost=(float)cost,funds_after=(float)(resolved?e.funds_after:s.funds-cost),return_stress=(float)(resolved?e.stress:Simulation.Rules.return_stress),max_stamina=(float)(resolved?e.stamina:Simulation.MaxStamina(c.id)),can_resolve=waiting && reason=="",reason=reason};
+                return new PythonMissingCat{choice=e.id,cat_id=c.id,name=Simulation.Definition(c.id).name,cause=CafeMissingDialogue.NamedCause(e.reason),status=resolved?"resolved":waiting?"waiting":"missing",departed_day=e.departed_day,resolved_day=e.resolved_day,remaining=resolved?0:c.missing_remaining,kitten=resolved?e.kitten:waiting && c.kitten,cost=(float)cost,funds_after=(float)(resolved?e.funds_after:s.funds-cost),return_stress=(float)(resolved?e.stress:Simulation.Rules.return_stress),max_stamina=(float)(resolved?e.stamina:Simulation.MaxStamina(c.id)),can_resolve=waiting && reason=="",reason=reason};
             }).ToArray();
         }
     }

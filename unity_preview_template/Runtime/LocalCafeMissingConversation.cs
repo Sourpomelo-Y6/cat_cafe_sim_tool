@@ -6,7 +6,7 @@ namespace CatCafePreview {
   public bool MissingSafe=>Simulation.State.phase!="open" || Simulation.State.game_over!=null;
   public bool MissingResultPending {get{SyncConversations();return Simulation.State.missing_cases.Any(e=>e.result!=null && !e.result.completed);}}
   public bool MissingBlocksProgress=>MissingSafe && MissingResultPending;
-  public string MissingConversationReason=>MissingBlocksProgress?"猫の帰還は確定済みですが結果会話が未完了です。イベント一覧の「猫の家出・帰還」から対象案件を選び、会話を最後まで進めてください。":MissingWaiting?"帰還待ちの猫がいます。イベント一覧の「猫の家出・帰還」で対象を選び、会話を閉じて費用と残金を確認し、「帰還と費用を確認する」を押してください。":"";
+  public string MissingConversationReason=>MissingBlocksProgress?"猫の帰還は確定済みですが結果会話が未完了です。イベント一覧の「回答・会話待ち」から対象案件を選び、会話を最後まで進めてください。":MissingWaiting?"帰還待ちの猫がいます。イベント一覧の「回答・会話待ち」で対象を選び、記録で費用と残金を確認し、「帰還と費用を確認する」を押してください。":"";
   public CafeMissingCase MissingCase=>Simulation.State.missing_cases.FirstOrDefault(e=>e.id==missingSelected);
   public string MissingPhase=>missingPhase;
   public CafeConversationProgress MissingProgress=>MissingCase==null?null:CafeMissingDialogue.Progress(MissingCase,missingPhase);

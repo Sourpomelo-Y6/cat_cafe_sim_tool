@@ -7,7 +7,7 @@ namespace CatCafePreview
     [Serializable] public class PythonMissingRest { public bool can_rest; public string reason; public float cost, funds_after; }
     [Serializable] public class PythonMissingCat
     {
-        public string choice, cat_id, name, status, reason;
+        public string choice, cat_id, name, status, reason, cause;
         public int departed_day, remaining, resolved_day;
         public bool kitten, can_resolve;
         public float cost, funds_after, return_stress, max_stamina;
@@ -23,14 +23,14 @@ namespace CatCafePreview
         private string signature, selected, instanceId;
         private bool showing;
         private string offered;
-        public void ShowRecords(){showing=true;Render();}
+        public void ShowRecords(){showing=true;Render();panel.transform.SetAsLastSibling();}
         MissingConversationPanel Dialogue=>GetComponent<MissingConversationPanel>()??gameObject.AddComponent<MissingConversationPanel>();
-        public void OpenCase(string id){if(!GetComponent<PythonStateClient>().CanManageSaves || !rows.Any(r=>r.choice==id))return;selected=id;showing=true;Render();if(CafeBackends.Standalone)Dialogue.Begin(id);}
+        public void OpenCase(string id){if(!GetComponent<PythonStateClient>().CanManageSaves || !rows.Any(r=>r.choice==id))return;selected=id;ShowRecords();if(CafeBackends.Standalone)Dialogue.Begin(id);}
         public void Open(string catId)
         {
             if(!GetComponent<PythonStateClient>().CanManageSaves)return;
             selected=rows.LastOrDefault(r=>r.cat_id==catId && r.status!="resolved")?.choice ?? rows.LastOrDefault(r=>r.cat_id==catId)?.choice;showing=true;
-            GetComponent<PythonCatDetailsPanel>().Close();Render();if(CafeBackends.Standalone && selected!=null)Dialogue.Begin(selected);
+            GetComponent<PythonCatDetailsPanel>().Close();ShowRecords();if(CafeBackends.Standalone && selected!=null)Dialogue.Begin(selected);
         }
         public void Close() { showing=false;panel.SetActive(false); }
         public void Select(int index)
@@ -56,20 +56,23 @@ namespace CatCafePreview
         private void Render()
         {
             panel.SetActive(showing);if(!showing)return;
-            cats.options.Clear();foreach(var row in rows)cats.options.Add(new Dropdown.OptionData(row.name+" / "+(row.departed_day>0 ? row.departed_day+"日目" : "家出日不明")+"（"+(row.status=="missing" ? "家出中" : row.status=="waiting" ? "帰還待ち" : "確認済み")+"）"));
+            cats.options.Clear();foreach(var row in rows)cats.options.Add(new Dropdown.OptionData(row.name+" / "+(row.departed_day>0 ? row.departed_day+"日目" : "家出日不明")+"（"+(row.status=="missing" ? WaitingLabel(row) : row.status=="waiting" ? "帰還待ち" : "確認済み")+"）"));
             if(rows.Length==0)cats.options.Add(new Dropdown.OptionData("家出の記録はありません"));
             cats.SetValueWithoutNotify(Math.Max(0,Array.FindIndex(rows,r=>r.choice==selected)));cats.RefreshShownValue();
             selected=cats.value<rows.Length ? rows[cats.value].choice : null;RenderDetails();
         }
+        private static string WaitingLabel(PythonMissingCat row)=>string.IsNullOrEmpty(row.cause)?"家出中":"迎え待ち";
         private void RenderDetails()
         {
-            var row=Array.Find(rows,r=>r.choice==selected);title.text="猫の家出・帰還";
+            var row=Array.Find(rows,r=>r.choice==selected);bool named=!string.IsNullOrEmpty(row?.cause);title.text=named?"指名猫の帰還":"猫の家出・帰還";
             rest.gameObject.SetActive(row!=null && row.status=="missing");
             if(row==null) { details.text="家出の記録はありません。";notice.text="猫のストレスは猫一覧や詳細画面で確認できます。";RefreshControls();return; }
-            details.text=row.name+" / "+(row.departed_day>0 ? row.departed_day+"日目に家出" : "家出日の記録なし")+"\n";
+            details.text=row.name+" / "+(row.departed_day>0 ? row.departed_day+"日目に"+(named?row.cause:"家出") : "家出日の記録なし")+"\n";
             if(row.status=="missing")
             {
-                details.text+="あと "+row.remaining+"回の閉店で帰還予定\n家出した日の閉店は残り日数に含みません。\n\n家出中は接客・プレイヤーとの交流・派遣を担当できません。\n帰還時に結果と費用を表示します。";
+                details.text+=named
+                    ? "あと "+row.remaining+"日進めると迎えに行けます。営業でも休業でも進みます。\n不在中は接客・交流・派遣に参加できません。"
+                    : "あと "+row.remaining+"回の閉店で帰還予定\n家出した日の閉店は残り日数に含みません。\n\n家出中は接客・プレイヤーとの交流・派遣を担当できません。\n帰還時に結果と費用を表示します。";
                 if(restState!=null && restState.can_rest)details.text+="\n\n休業費用："+restState.cost.ToString("0.#")+" / 休業後の資金："+restState.funds_after.ToString("0.#")+(restState.funds_after<=0 ? "（資金不足で経営終了）" : "");
                 notice.text=restState!=null && !string.IsNullOrEmpty(restState.reason) ? restState.reason : "営業を続けるか、準備中に休業すると帰還までの日数が進みます。";
             }
