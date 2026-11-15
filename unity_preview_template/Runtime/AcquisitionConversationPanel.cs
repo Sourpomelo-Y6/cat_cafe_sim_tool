@@ -248,7 +248,7 @@ namespace CatCafePreview
         bool Click(){if(GameOptionsPanel.IsOpen || !Ready || lastFrame==Time.frameCount)return false;lastFrame=Time.frameCount;return true;}
         public void Next()
         {
-            if(!Showing || !Click() || progress==null || history)return;
+            if(!Showing || !Click() || progress==null || history || Choosing)return;
             var lines=Lines(progress.branch_id);
             if(progress.node<lines.Length){if(revealed<pageText.Length)revealed=pageText.Length;else { RememberPage(lines);if(ThreeLinePages && progress.page_offset+pageText.Length<lines[progress.node].text.Length)progress.page_offset+=pageText.Length;else {progress.node++;progress.page_offset=0;} }}
             else if(progress.branch_id!="introduction"){Finish();RecordCompletion();ReturnToEvents();return;}
@@ -259,7 +259,7 @@ namespace CatCafePreview
         bool CanSkipRead(){if(!TrackRead || Backend==null || progress==null || Choosing || answerConfirmation!=null)return false;var lines=Lines(progress.branch_id);return progress.node<lines.Length && ReadSkippable(progress.node) && Backend.ReadHistory.Contains(ReadKey(lines,progress.node),0,lines[progress.node].text.Length);}
         // A single explicit operation advances only over contiguous known safe sections. Never invokes Next/Answer/Finish.
         public void SkipRead(){if(!Showing || history || !Click() || !CanSkipRead())return;var lines=Lines(progress.branch_id);while(progress.node<lines.Length && CanSkipRead()){progress.node++;progress.page_offset=0;}Refresh();}
-        public void Answer(bool answer){if(!Showing || !Click() || progress==null || progress.branch_id!="introduction" || progress.node<Lines("introduction").Length)return;SendAnswer(answer);Refresh();}
+        public void Answer(bool answer){if(!Showing || !Click() || progress==null || !Choosing || !CanAnswer(answer))return;SendAnswer(answer);Refresh();}
         bool EventConversation=>this is SatoDispatchConversationPanel || this is OptionalEventConversationPanel || this is IntakeConversationPanel || this is RegularConversationPanel || this is DispatchConversationPanel || this is EquipmentConversationPanel || this is TrustConversationPanel || this is AdoptionConversationPanel || this is MissingConversationPanel || this is ReservationConversationPanel || this is LodgeConversationPanel || this is EncounterConversationPanel || this is DispatchIntroductionConversationPanel;
         void ReturnToEvents(){if(!Ready)return;var list=GetComponent<PythonEventListPanel>();if(EventConversation && list!=null)list.HoldConversations=true;Close();if(EventConversation && list!=null)list.ConversationReturned();}
         public virtual void Open(){manualSelected=true;foreach(var other in GetComponents<AcquisitionConversationPanel>())if(other!=this && other.Showing)other.Close();hidden=false;OriginalShowing=false;if(card!=null){card.SetActive(true);foreach(var child in originalChildren)child.gameObject.SetActive(false);Stretch(panel.GetComponent<RectTransform>());}panel.SetActive(Available);panel.transform.SetAsLastSibling();Refresh();}

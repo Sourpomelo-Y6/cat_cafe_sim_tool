@@ -25,7 +25,7 @@ namespace CatCafePreview {
   protected override bool AutoRunning=>false;
   protected override void SetOpen(bool open){Backend.TrustConversationOpen=open;}
   protected override bool Choosing=>!Result && base.Choosing;
-  protected override CafeConversationLine[] Lines(string branch)=>CafeTrustDialogue.Lines(Result,branch,Backend.Details.CustomerName(Event.customer_id),Backend.Simulation.Rules.trust.popularity_loss);
+  protected override CafeConversationLine[] Lines(string branch)=>CafeTrustDialogue.Lines(Result,branch,Backend.Details.CustomerName(Event.customer_id),Backend.Simulation.Rules.trust.popularity_loss,CafeSimulation.UsesReturnTrustRules(Backend.Simulation.State,Event));
   protected override PythonIntakeState Request=>new PythonIntakeState{cat_id="",name=Backend.Details.CustomerName(Event.customer_id),personality=Result?"接客結果 · "+Event.resolved_day+"日目":"信頼警告 · 来店停止累計 "+Event.suspensions+"回",can_decline=true};
   protected override bool CanAnswer(bool yes)=>Event?.status=="waiting" && Client.CanRespondTrust(Event.id);
   protected override string Title=>"顧客の信頼回復";
@@ -35,7 +35,7 @@ namespace CatCafePreview {
   protected override string DeclineCaption=>"見送る（最終確認へ）";
   protected override string AcceptEffect=>"即時回復・費用・人気変化なし。来店停止期限は短縮しません。\n来店後の接客：満足で回復、普通で継続、不満で永久離脱。\n結果会話を終えたら、営業・休業で日程を進められます。";
   protected override string DeclineEffect=>"確定すると永久離脱し、今後は来店しません。\n人気 −"+Backend.Simulation.Rules.trust.popularity_loss.ToString("0.#")+"（下限0）。経営終了になる場合があります。\n費用なし。最終確認で取消した場合は回答しません。";
-  protected override string HistoryPrefix=>Result || progress.branch_id=="introduction"?"":string.Join("\n\n",CafeTrustDialogue.Lines(false,"introduction",Request.name,Backend.Simulation.Rules.trust.popularity_loss).Select(l=>(l.speaker==""?"地の文":l.speaker)+"\n"+l.text))+"\n\n";
+  protected override string HistoryPrefix=>Result || progress.branch_id=="introduction"?"":string.Join("\n\n",CafeTrustDialogue.Lines(false,"introduction",Request.name,Backend.Simulation.Rules.trust.popularity_loss,CafeSimulation.UsesReturnTrustRules(Backend.Simulation.State,Event)).Select(l=>(l.speaker==""?"地の文":l.speaker)+"\n"+l.text))+"\n\n";
   protected override string Notice=>Backend.TrustConversationReason;
   protected override string EndText=>"この結果は記録済みです。会話を終えて、残るイベントと店の状態を確認しましょう。";
   protected override void SendAnswer(bool yes){if(!CanAnswer(yes))return;if(yes)Client.RespondTrust(Event.id,"recover");else owner.BeginConversationIgnore(Event.id);}

@@ -12,8 +12,15 @@ namespace CatCafePreview.Standalone
             foreach (var d in State.discontent.OrderBy(r => r.customer_id, StringComparer.Ordinal))
             {
                 var row = State.trust_customers.Find(r => r.customer_id == d.customer_id);
-                if (SatoTrustDay(State,d.customer_id,State.day) != State.day) continue;
-                if (d.suspensions.Count < Rules.trust.warning_suspensions || row != null && row.status != "stable") continue;
+                if (row != null && row.status != "stable") continue;
+                bool returnWarning=IsReturnTrustWarning(State,d,State.day);
+                if (!returnWarning)
+                {
+                    if (d.suspensions.Count < Rules.trust.warning_suspensions) continue;
+                    var last=State.trust_events.LastOrDefault(e=>e.customer_id==d.customer_id);
+                    int due=last==null?d.suspensions[Rules.trust.warning_suspensions-1].day+1:last.resolved_day+1;
+                    if (OrdinaryTrustDay(State,d,due)!=State.day) continue;
+                }
                 var e = new CafeTrustEvent { id = "trust-" + State.day + "-" + d.customer_id, customer_id = d.customer_id,
                     day = State.day, suspensions = d.suspensions.Count, status = "waiting" };
                 State.trust_events.Add(e);
@@ -67,6 +74,20 @@ namespace CatCafePreview.Standalone
             if (d == null) throw new ArgumentException("Trust recovery has no discontent history");
             d.score = Rules.trust.recovery_score; d.score_day = day;
         }
+        private bool IsReturnTrustWarning(CafeSnapshot s,CafeDiscontent d,int day)
+            => ReturnTrustDay(s,d.customer_id)==day && EffectiveDiscontent(d,day)>=ReturnTrustDiscontent;
+
+        private void ValidateReturnTrustDay(CafeSnapshot s,List<CafeDiscontent> scores,int day)
+        {
+            foreach(var customer in NamedDispatchCustomers.Where(c=>ReturnTrustDay(s,c)==day))
+            {
+                var d=scores.Find(r=>r.customer_id==customer);
+                bool expected=d!=null && IsReturnTrustWarning(s,d,day);
+                if(expected!=s.trust_events.Any(e=>e.customer_id==customer && e.day==day))
+                    throw new ArgumentException("Return trust warning disagrees with discontent history");
+            }
+        }
+
         private void ValidateTrust(CafeSnapshot s)
         {
             if (Rules.trust == null || Rules.trust.warning_suspensions < 2 || !Range(Rules.trust.recovery_score, 0, Rules.discontent.threshold) || Rules.trust.recovery_score >= Rules.discontent.threshold || !Range(Rules.trust.popularity_loss, 0, double.MaxValue)
@@ -76,7 +97,7 @@ namespace CatCafePreview.Standalone
             {
                 var d = s.discontent.Find(r => r.customer_id == e.customer_id);
                 if (e.day < 1 || e.day > s.day || e.id != "trust-" + e.day + "-" + e.customer_id || !s.trust_customers.Any(r => r.customer_id == e.customer_id)
-                    || e.suspensions < Rules.trust.warning_suspensions || d?.suspensions == null || e.suspensions != d.suspensions.Count(p => p.day < e.day)) throw new ArgumentException("Invalid trust warning");
+                    || e.day!=ReturnTrustDay(s,e.customer_id) && e.suspensions < Rules.trust.warning_suspensions || d?.suspensions == null || e.suspensions != d.suspensions.Count(p => p.day < e.day)) throw new ArgumentException("Invalid trust warning");
                 if (e.status == "waiting" ? e.choice != null || e.resolved_day != 0 || e.outcome != null
                     : e.status == "recovery" ? e.choice != "recover" || e.resolved_day != 0 || e.outcome != null
                     : e.status != "resolved" || !new[] { "recover", "ignore" }.Contains(e.choice) || e.resolved_day < e.day || e.resolved_day > s.day || !new[] { "recovered", "departed" }.Contains(e.outcome)) throw new ArgumentException("Invalid trust result");
@@ -98,10 +119,10 @@ namespace CatCafePreview.Standalone
                 int expectedDay = d.suspensions[Rules.trust.warning_suspensions - 1].day + 1;
                 foreach (var e in s.trust_events.Where(e => e.customer_id == d.customer_id).OrderBy(e => e.day))
                 {
-                    if (e.day != SatoTrustDay(s,d.customer_id,expectedDay)) throw new ArgumentException("Trust warning presentation disagrees with history");
+                    if (e.day != ReturnTrustDay(s,e.customer_id) && e.day != OrdinaryTrustDay(s,d,expectedDay)) throw new ArgumentException("Trust warning presentation disagrees with history");
                     expectedDay = e.outcome == "recovered" ? e.resolved_day + 1 : int.MaxValue;
                 }
-                if (SatoTrustDay(s,d.customer_id,expectedDay) <= s.day) throw new ArgumentException("Missing trust warning");
+                if (OrdinaryTrustDay(s,d,expectedDay) <= s.day) throw new ArgumentException("Missing trust warning");
             }
             foreach (var r in s.trust_customers)
             {

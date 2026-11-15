@@ -435,6 +435,13 @@ namespace CatCafePreview
         }
         public void RespondReservation(string choice){if(CanRespondReservation(choice))QueueAdoption("resolve_reservation","",choice,current.reservation.event_id);}
         public bool CanRespondTrust(string id){return CanManageSaves && current.customer_trust?.events!=null && Array.Exists(current.customer_trust.events,e=>e.event_id==id && e.can_respond);}
+        public void RespondNamedReturnAccess(string customer,bool allow)
+        {
+            var backend=CafeBackends.Local as LocalCafeBackend;
+            if(CanManageSaves && !AutoPlayRunning && backend?.Simulation.NamedReturnAccessPending(customer)==true)
+                QueuePlayer("resolve_named_return_access",customer,allow?"allow":"ban","");
+        }
+
         public void RespondSatoDispatch(bool accept,string customer)
         {
             var backend=CafeBackends.Local as LocalCafeBackend;
@@ -616,6 +623,7 @@ namespace CatCafePreview
                                         : command.kind == "configure_adoption" ? "譲渡申し出の発生設定を変更しました。"
                                         : command.kind == "resolve_adoption" ? (command.choice=="accept" ? "譲渡が成立しました。" : "譲渡申し出を見送りました。")
                                         : command.kind == "rest_for_missing" ? "休業し、帰還までの日数を進めました。結果を確認してください。"
+                                        : command.kind == "resolve_named_return_access" ? (command.choice=="allow" ? "今後の来店を受け入れます。" : "今後の来店をお断りしました。")
                                         : command.kind == "resolve_missing" ? "猫の帰還と費用を確定しました。出勤設定を確認してください。"
                                         : command.kind == "dispatch_patron" ? "有力者への派遣を開始しました。"
                                         : command.kind == "receive_patron" ? "帰還を確認し、報酬と満足度を受け取りました。出勤設定を確認してください。"

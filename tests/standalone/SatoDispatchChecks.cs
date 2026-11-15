@@ -5,10 +5,11 @@ static partial class Program
     static void SatoDispatchChecks(string rulesPath)
     {
         foreach (var customer in CafeSimulation.NamedDispatchCustomers)
-        foreach (var route in new[]{"normal","decline","expired","refused","adopt","decline-adoption"})
+        foreach (var route in new[]{"normal","decline","expired","refused","adopt","decline-adoption","ban","low-score","legacy-return"})
         {
             var rules=Decode<CafeRules>(File.ReadAllText(rulesPath));
             rules.starting_funds=100000;
+            if(route=="low-score")rules.satisfaction.satisfied_score=1;
             // Force suspension in one missed visit for the refusal fixture.
             if(route=="refused")rules.discontent.waiting_gain=100;
             rules.store_events.probability=0;
@@ -95,7 +96,7 @@ static partial class Program
                 Assert(sim.NamedRequest(customer).declined_day==sim.State.day,"Decline was not recorded");
                 continue;
             }
-            if (route=="expired" || route=="adopt" || route=="decline-adoption")
+            if (route!="normal" && route!="refused")
             {
                 Day(false);
                 Assert(sim.NamedRequest(customer).conversation.node==0,"Reminder did not reset the scene to its first page");
@@ -122,15 +123,68 @@ static partial class Program
             RoundTrip();
             var missingCat=sim.State.cats.Single(c=>c.id==missing.cat_id);
             while (missingCat.missing_remaining>0) Day(false);
+            if(route=="legacy-return")
+            {
+                var journal=new CafeReplayJournal(rules,sim.State,ReplayEncode,ReplayDecode);
+                var before=journal.CaptureBefore(sim.State);
+                var op=new CafeReplayOperation {kind="resolve_missing",cat_id=missing.cat_id,growth_policy_version=1};
+                CafeReplayJournal.Apply(sim,op);
+                journal.Append(before,sim,op);
+                var recovered=journal.Verify(journal.Document);
+                Assert(!recovered.NamedReturnAccessWaiting,"Legacy replay acquired a new pending choice");
+                RoundTrip();
+                Day(false);
+                Assert(!sim.NamedReturnAccessWaiting,"Legacy return acquired a new pending choice");
+                continue;
+            }
             sim.Execute("resolve_missing",catId:missing.cat_id);
             RoundTrip();
             Assert(sim.NamedRequest(customer).returned_day==sim.State.day,"Missing cat return was not recorded");
+            Assert(sim.NamedReturnAccessPending(customer),"Return choice did not persist");
+            int returnedDay=sim.State.day;
+            string access=route=="ban"?"ban":"allow";
+            sim.Execute("resolve_named_return_access",catId:customer,choice:access);
+            RoundTrip();
+            Assert(!sim.NamedReturnAccessPending(customer),"Return answer did not persist");
+            if(route=="ban")
+            {
+                sim.Execute("configure_adoption",choice:"on");
+                for(int i=0;i<9;i++)Day(false);
+                Assert(Enumerable.Range(returnedDay,14).All(day=>!sim.CustomerAvailable(customer,day)
+                    && sim.CustomerSchedule(day).All(row=>row.customer_id!=customer)),"Banned customer returned");
+                Assert(sim.State.adoption.events.Count==0 && !sim.State.trust_events.Any(e=>e.customer_id==customer),"Banned customer received new event");
+                RoundTrip();
+                continue;
+            }
             bool adoption=route=="adopt" || route=="decline-adoption";
             if(adoption)sim.Execute("configure_adoption",choice:"on");
             Day(false);
             var offer=sim.State.adoption?.events.SingleOrDefault(e=>CafeSimulation.IsNamedAdoption(e.source) && e.customer_id==customer);
             Assert((offer!=null)==adoption,"Unexpected return adoption eligibility");
-            if(!adoption)continue;
+            if(!adoption)
+            {
+                if(route=="low-score")
+                {
+                    while(sim.State.day<returnedDay+7 && sim.DiscontentScore(customer,sim.State.day)>=50)
+                        Day(true);
+                    Assert(sim.DiscontentScore(customer,sim.State.day)<50,"Low-score route did not improve");
+                }
+                while(sim.State.day<returnedDay+7)Day(false);
+                Assert(!sim.State.trust_events.Any(e=>e.customer_id==customer),"Early return warning");
+                RoundTrip();
+                Day(false);
+                Assert(sim.State.trust_events.Count(e=>e.customer_id==customer)==(route=="low-score"?0:1),"Wrong return warning on day eight");
+                RoundTrip();
+                if(sim.CustomerTrustWaiting)
+                {
+                    var warning=sim.State.trust_events.Single(e=>e.customer_id==customer);
+                    sim.Execute("resolve_customer_trust",choice:"recover",source:warning.id);
+                    Day(false);
+                    Assert(sim.State.trust_events.Count(e=>e.customer_id==customer)==1,"Duplicate return warning");
+                    RoundTrip();
+                }
+                continue;
+            }
             RoundTrip();
             bool accept=route=="adopt";
             sim.Execute("resolve_adoption",source:offer.id,choice:accept?"accept":"decline");

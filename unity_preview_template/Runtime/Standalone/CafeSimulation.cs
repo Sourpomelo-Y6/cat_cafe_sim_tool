@@ -123,6 +123,9 @@ namespace CatCafePreview.Standalone
             if(kind=="resolve_growth_stage" || kind=="resolve_growth_auto" || kind=="resolve_growth_batch"){GrowthBatchCommand(kind,catId,choice);return;}
             if(kind=="open_recruitment"){OpenRecruitment();return;}
             if (s.game_over != null) throw new InvalidOperationException("経営終了後は保存・閲覧のみ利用できます。");
+            if(kind=="resolve_named_return_access"){ResolveNamedReturnAccess(catId,choice);return;}
+            if(NamedReturnAccessWaiting && (kind=="start_business" || kind=="advance_business" || kind=="next_day" || kind=="day_off"))
+                throw new InvalidOperationException("帰還後のお客さんの来店について回答してください。");
             if(kind=="resolve_sato_dispatch"){RespondSatoDispatch(choice,string.IsNullOrEmpty(catId)?Sato:catId);s.revision++;return;}
             if(kind=="set_auto_assignment"){SetAutoAssignment(choice);return;}
             if(kind=="assign_service"){AssignService(customerId,catId,seatId);return;}
@@ -209,7 +212,11 @@ namespace CatCafePreview.Standalone
                     if (cat == null) throw new ArgumentException("帰還待ちの猫を選んでください。");
                     var missingCase=State.missing_cases.LastOrDefault(e=>e.cat_id==cat.id && e.resolved_day==0);
                     cat.activity = "cafe"; cat.stamina = MaxStamina(cat.id); cat.cannot_continue = cat.health != "healthy"; cat.stress = Rules.return_stress;
-                    if (NamedRequest(NamedMissingCustomer(missingCase?.reason)) is CafeSatoDispatch request)request.returned_day=s.day;
+                    if (NamedRequest(NamedMissingCustomer(missingCase?.reason)) is CafeSatoDispatch request)
+                    {
+                        request.returned_day=s.day;
+                        if(s.import_history==null && !LegacyNamedReturnReplay)request.return_access=AwaitingReturnAccess;
+                    }
                     double cost = cat.kitten ? Rules.kitten_cost : 0; s.funds -= cost; s.expenses += cost; if(missingCase!=null){missingCase.resolved_day=s.day;missingCase.cost=cost;missingCase.funds_after=s.funds;missingCase.stamina=cat.stamina;missingCase.stress=cat.stress;missingCase.kitten=cat.kitten;} CheckEnd(); break;
                 default: throw new NotSupportedException("単独版の第1段階では未対応の操作です：" + kind);
             }

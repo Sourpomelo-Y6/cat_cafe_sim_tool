@@ -7,7 +7,7 @@ namespace CatCafePreview.Standalone
     [Serializable] public sealed class CafeSatoDispatch
     {
         public string cat_id;
-        public int requested_day, accepted_day, declined_day, returned_day;
+        public int return_access, requested_day, accepted_day, declined_day, returned_day;
         public bool refused_return, returned_after_service, epilogue_read;
         public CafeConversationProgress conversation;
     }
@@ -95,6 +95,54 @@ namespace CatCafePreview.Standalone
             if(customer==Sato)State.sato_dispatch=request;else State.suzuki_dispatch=request;
         }
 
+        // Zero identifies returns resolved before this choice was introduced.
+        public const int AwaitingReturnAccess=1, AllowReturnAccess=2, BanReturnAccess=3;
+        internal bool LegacyNamedReturnReplay;
+        private const int ReturnTrustDelay=8;
+        private const double ReturnTrustDiscontent=50;
+
+        public bool NamedReturnAccessWaiting => NamedDispatchCustomers.Any(c=>NamedReturnAccessPending(c));
+
+        public bool NamedReturnAccessPending(string customer)
+            => NamedRequest(customer)?.return_access==AwaitingReturnAccess;
+
+        private void ResolveNamedReturnAccess(string customer,string choice)
+        {
+            var request=NamedRequest(customer);
+            if(choice!="allow" && choice!="ban")throw new ArgumentException("今後の来店を選んでください。");
+            int access=choice=="allow"?AllowReturnAccess:BanReturnAccess;
+            if(request?.return_access==access)return;
+            if(request?.return_access!=AwaitingReturnAccess || request.returned_day!=State.day)
+                throw new InvalidOperationException("回答待ちの帰還案件を選んでください。");
+            request.return_access=access;
+            State.revision++;
+        }
+
+        private bool NamedCustomerBanned(string customer,int day)
+            => NamedRequest(customer) is CafeSatoDispatch e && e.return_access==BanReturnAccess && day>=e.returned_day;
+
+        internal static bool UsesReturnTrustRules(CafeSnapshot s,CafeTrustEvent e)
+            => ReturnTrustDay(s,e.customer_id) is int day && day>0 && e.day>=day;
+
+        private static int ReturnTrustDay(CafeSnapshot s,string customer)
+        {
+            var e=NamedRequest(s,customer);
+            return e?.return_access==AllowReturnAccess?e.returned_day+ReturnTrustDelay:0;
+        }
+
+        private static int OrdinaryTrustDay(CafeSnapshot s,CafeDiscontent d,int due)
+        {
+            if(due==int.MaxValue)return due;
+            var e=NamedRequest(s,d.customer_id);
+            if(e==null || due<e.requested_day)return due;
+            if(e.return_access==BanReturnAccess || e.return_access==AwaitingReturnAccess)return int.MaxValue;
+            int recheck=ReturnTrustDay(s,d.customer_id);
+            if(recheck==0)return SatoTrustDay(s,d.customer_id,due);
+            // Ignore old stops after the return check or a later successful recovery.
+            return d.suspensions.Where(stop=>stop.day>=Math.Max(recheck,due-1))
+                .Select(stop=>stop.day+1).DefaultIfEmpty(int.MaxValue).Min();
+        }
+
         public const string SatoAdoptionSource = "sato-return";
 
         private void PresentSatoAdoption()
@@ -106,7 +154,8 @@ namespace CatCafePreview.Standalone
         {
             var missing = NamedMissing(State,customer);
             if (missing == null || missing.resolved_day == 0 || missing.resolved_day + 1 != State.day
-                || State.adoption?.enabled != true) return;
+                || State.adoption?.enabled != true || NamedRequest(customer).return_access>=BanReturnAccess
+                || NamedReturnAccessPending(customer)) return;
             var cat = State.cats.Single(c => c.id == missing.cat_id);
             if (cat.activity != "cafe") return;
             double affinity = State.relationships.Find(r => r.cat_id == cat.id && r.customer_id == customer)?.affinity ?? 0;
@@ -224,6 +273,10 @@ namespace CatCafePreview.Standalone
 
             if (request.epilogue_read && !NamedEpilogueAvailable(s,request.cat_id,customer))
                 throw new ArgumentException("Sato epilogue read before unlock");
+            if(request.return_access<0 || request.return_access>BanReturnAccess
+                || request.return_access!=0 && (missing==null || missing.resolved_day==0)
+                || request.return_access==AwaitingReturnAccess && request.returned_day!=s.day)
+                throw new ArgumentException("Invalid access decision for named return");
             var trip = trips.SingleOrDefault();
             if (!NamedAffinity(s,customer).Any(e => e.cat_id == request.cat_id) || request.requested_day < 2 || request.requested_day > s.day
                 || request.accepted_day < 0 || request.accepted_day > s.day || request.declined_day < 0 || request.declined_day > s.day

@@ -10,6 +10,7 @@ namespace CatCafePreview.Standalone
     [Serializable] public class CafeReplayOperation
     {
         public string kind,cat_id,choice,source,seat_id,customer_id,objective,mode;
+        public int named_return_policy_version;
         public int growth_policy_version;
         public bool mike_milestone_locked;
         public CafeAffinityCap[] affinity_caps;
@@ -58,6 +59,8 @@ namespace CatCafePreview.Standalone
             text.Append('{');foreach(var field in Fields(value.GetType()))
             {if(field.Name=="missing_cases" && value is CafeSnapshot)continue;
                 if(value is CafeSnapshot && (field.Name=="sato_affinity" || field.Name=="sato_dispatch" || field.Name=="suzuki_dispatch" && field.GetValue(value)==null || field.Name=="suzuki_affinity" && (((CafeSnapshot)value).suzuki_affinity?.Count??0)==0))continue;
+                if(value is CafeSatoDispatch && field.Name=="return_access" && (int)field.GetValue(value)==0)continue;
+                if(value is CafeReplayOperation && field.Name=="named_return_policy_version" && (int)field.GetValue(value)==0)continue;
                 if(field.Name=="growth_policy_version" && value is CafeReplayOperation && (int)field.GetValue(value)==0)continue;
                 if(field.Name=="stamina_policy_version" && (value is CafeReplayOperation || value is CafeGrowthOperation) && (int)field.GetValue(value)==0)continue;
                 if(field.Name=="stamina_rules" && value is CafeReplayOperation && field.GetValue(value)==null)continue;
@@ -78,6 +81,7 @@ namespace CatCafePreview.Standalone
         }
         public void Append(CafeSnapshot before,CafeSimulation sim,CafeReplayOperation operation,CafeAutoOperation automatic=null)
         {
+            if(operation.kind=="resolve_missing" && !sim.LegacyNamedReturnReplay)operation.named_return_policy_version=1;
             operation.growth_policy_version=1;operation.stamina_policy_version=sim.LegacyStaminaReplay?0:1;operation.stamina_rules=sim.LegacyStaminaReplay?null:sim.State.stamina_growth;operation.player_policy_version=sim.LegacyPlayerReplay?0:2;var after=sim.State;var events=new List<string>(sim.ReplayActions);
             operation.mike_milestone_locked=sim.MikeMilestoneLocked;
             foreach(var v in after.visits){var old=before.day==after.day?before.visits.Find(x=>x.id==v.id):null;if(old==null)events.Add("来店："+v.id+" / "+v.arrival+"tick");if(v.cat_id!=null && old?.cat_id!=v.cat_id)events.Add("接客開始："+v.id+" / "+v.cat_id+" / seat-"+(v.service_seat+1));if(v.departure!=null && old?.departure!=v.departure)events.Add("退店："+v.id+" / "+v.departure+" / 売上 "+N(v.bill)+" / "+v.satisfaction?.level);}
@@ -97,6 +101,8 @@ namespace CatCafePreview.Standalone
             sim.LegacyGrowthReplay=op?.growth_policy_version==0;
             if(op==null || string.IsNullOrEmpty(op.kind))throw new ArgumentException("リプレイの操作がありません。");
             if(sim.State.autoplay?.running==true && !sim.State.autoplay.paused && !new[]{"step_autoplay","stop_autoplay","pause_autoplay","resume_autoplay","save_game"}.Contains(op.kind))throw new ArgumentException("おまかせ中の通常操作は再生できません。");
+            if(op.named_return_policy_version<0 || op.named_return_policy_version>1)throw new ArgumentException("Invalid named return policy");
+            sim.LegacyNamedReturnReplay=op.named_return_policy_version==0;
             if(op.stamina_policy_version!=0 && op.stamina_policy_version!=1)throw new ArgumentException("Invalid stamina policy");
 
             sim.ReplayStaminaRules=CafeStaminaRules.Missing(op.stamina_rules)?null:op.stamina_rules;

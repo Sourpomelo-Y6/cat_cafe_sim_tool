@@ -33,7 +33,7 @@ namespace CatCafePreview.Standalone
         {
             if(State.game_over!=null || GoalWaiting || BondWaiting || PatronWaiting)return "経営終了・目標結果を確認してください。";
             if(!new[]{"popularity","bond","patron"}.Any(t=>AutoTargetStatus(t)=="active"))return "挑戦中の目標が必要です。";
-            if(PlayerActive || AdoptionWaiting || DispatchWaiting || DispatchChoiceWaiting || DispatchTroubleWaiting || DispatchIntroductionWaiting || ReservationWaiting || IntakeWaiting || RegularIntroductionWaiting || CustomerTrustWaiting || GrowthWaiting || StoreEventWaiting || State.cats.Any(c=>c.activity=="missing" && c.missing_remaining==0))return "回答待ちのイベント・交流を先に確認してください。";
+            if(NamedReturnAccessWaiting || PlayerActive || AdoptionWaiting || DispatchWaiting || DispatchChoiceWaiting || DispatchTroubleWaiting || DispatchIntroductionWaiting || ReservationWaiting || IntakeWaiting || RegularIntroductionWaiting || CustomerTrustWaiting || GrowthWaiting || StoreEventWaiting || State.cats.Any(c=>c.activity=="missing" && c.missing_remaining==0))return "回答待ちのイベント・交流を先に確認してください。";
             return "";
         }
         private void StartAutoplayCore(string objective,string mode,int days)

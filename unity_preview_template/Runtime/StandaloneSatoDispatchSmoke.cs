@@ -210,13 +210,41 @@ namespace CatCafePreview
                 Command(backend,"load_game");
                 Check(sim.State.cats.Single(c=>c.id==cat).activity=="missing","Missing state was lost on load");
                 while(sim.State.cats.Single(c=>c.id==cat).missing_remaining>0)sim.Execute("day_off");
-                for(int frame=0;frame<120 && !client.CanManageSaves;frame++)yield return null;
+                yield return new WaitUntil(()=>client.UIStateReady);
                 Apply(client,backend);
                 OpenRow(list,"指名猫の帰還");
                 Check(client.GetComponent<MissingConversationPanel>().Showing,"Missing conversation did not open");
                 Command(backend,"resolve_missing",choice:sim.State.missing_cases.Single(e=>e.cat_id==cat && e.resolved_day==0).id,cat:cat);
                 Check(sim.NamedRequest(customer).returned_day==sim.State.day,"Missing return was not applied");
-                if(route!="expired")continue;
+                Apply(client,backend);
+                var returnDialog=client.GetComponent<MissingConversationPanel>();
+                for(int frame=0;frame<30 && !returnDialog.PlaybackChoosing;frame++)
+                {
+                    returnDialog.Next();
+                    yield return null;
+                }
+                Check(returnDialog.PlaybackChoosing,"Return access choices did not open");
+                bool allow=route=="expired";
+                yield return new WaitUntil(()=>client.UIStateReady && client.CurrentState.revision==sim.State.revision);
+                returnDialog.Answer(allow);
+                if(!allow)
+                {
+                    yield return new WaitUntil(()=>client.UIStateReady && client.CurrentState.revision==sim.State.revision);
+                    var confirm=returnDialog.PlaybackHost.GetComponentsInChildren<Button>()
+                        .Single(b=>b.GetComponentInChildren<Text>().text=="この内容で回答");
+                    Check(sim.NamedReturnAccessPending(customer),"Ban applied before confirmation");
+                    confirm.onClick.Invoke();
+                }
+                yield return new WaitUntil(()=>client.UIStateReady);
+                Check(!sim.NamedReturnAccessPending(customer),$"Return access answer was not applied: {customer}/{route}, client revision {client.CurrentState.revision}, simulation revision {sim.State.revision}");
+                for(int frame=0;frame<30 && returnDialog.Showing;frame++){returnDialog.Next();yield return null;}
+                Check(!returnDialog.Showing,"Return result did not finish");
+                if(!allow)
+                {
+                    Check(!sim.CustomerAvailable(customer,sim.State.day+14),"Banned customer still available");
+                    continue;
+                }
+                yield return new WaitUntil(()=>client.UIStateReady);
                 sim.Execute("configure_adoption",choice:"on");
                 sim.Execute("day_off");
                 var offer=sim.State.adoption.events.Single(e=>CafeSimulation.IsNamedAdoption(e.source) && e.customer_id==customer);
@@ -234,14 +262,17 @@ namespace CatCafePreview
                 foreach(var open in client.GetComponents<AcquisitionConversationPanel>().Where(p=>p.Showing))open.Close();
                 var details=client.GetComponent<PythonCatDetailsPanel>();
                 details.Open(cat);
-                var entry=details.panel.GetComponentsInChildren<Button>().Single(b=>b.name=="Optional Cat Event Entry");
+                var entry=details.panel.GetComponentsInChildren<Button>().FirstOrDefault(b=>b.name=="Optional Cat Event Entry");
+                Check(entry!=null,"Cat details did not show the available epilogue");
                 Check(entry.GetComponentInChildren<Text>().text=="後日談・未読","Unread epilogue button absent");
                 entry.onClick.Invoke();
                 var reader=client.GetComponent<SatoEpiloguePanel>();
                 Check(reader.PlaybackKey.StartsWith(customer==CafeSimulation.Suzuki?"suzuki.epilogue.v1":"sato.epilogue.v1"),"Wrong epilogue customer");
                 Check(reader.Showing && !details.panel.activeSelf,"Cat details cover the epilogue");
                 for(int frame=0;frame<40 && reader.Showing;frame++){reader.Next();yield return null;}
-                Check(!reader.Showing && details.panel.activeSelf && sim.NamedRequest(customer).epilogue_read,"Epilogue was not marked read");
+                Check(!reader.Showing,$"Epilogue did not finish: {reader.PlaybackKey}, ready={client.CanManageSaves}, visible={details.panel.activeSelf}, key={client.CurrentState.instance_id}");
+                Check(sim.NamedRequest(customer).epilogue_read,"Epilogue did not record the read flag");
+                Check(details.panel.activeSelf,"Epilogue did not restore cat details");
                 Check(!backend.ConversationBlocksProgress || backend.AdoptionResultPending || backend.MissingResultPending,"Epilogue blocked progress");
                 Command(backend,"save_game");
                 Command(backend,"load_game");

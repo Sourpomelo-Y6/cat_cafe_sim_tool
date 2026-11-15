@@ -9,11 +9,11 @@ namespace CatCafePreview.Standalone {
  public static class CafeTrustDialogue {
   public const string Id="customer.trust.v1";
   public static CafeConversationProgress Start(bool result=false)=>new CafeConversationProgress{conversation_id=Id+(result?".result":".response"),branch_id="introduction",viewed_branches=new string[0]};
-  public static CafeConversationLine[] Lines(bool result,string branch,string name,double loss) {
+  public static CafeConversationLine[] Lines(bool result,string branch,string name,double loss,bool afterNamedReturn=false) {
    if(result)return branch=="recovered"?new[]{
     new CafeConversationLine("",name+"への接客は「満足」と記録された。信頼は回復済みになった。"),
     new CafeConversationLine("あなた","今回の接客結果を受け止めて、これからも一回ずつ丁寧に対応していきましょう。"),
-    new CafeConversationLine("","不満の値は既定の回復値へ反映済み。来店停止の累計は残るため、次の準備日に再び信頼警告が出る場合がある。")}:new[]{
+    new CafeConversationLine("",afterNamedReturn?"不満は回復時の値に戻った。この先、新たな来店停止が起きたときに信頼を確認する。":"不満の値は既定の回復値へ反映済み。来店停止の累計は残るため、次の準備日に再び信頼警告が出る場合がある。")}:new[]{
     new CafeConversationLine("",name+"への接客は「不満」と記録された。回復中だった信頼は、永久離脱という結果になった。"),
     new CafeConversationLine("あなた",name+"は今後の来店対象から外れます。この結果を確認しておきましょう。"),
     new CafeConversationLine("","永久離脱による人気低下（"+loss.ToString("0.#")+"、下限0）と経営終了判定は反映済み。この会話で再び差し引くことはない。")};
@@ -25,7 +25,7 @@ namespace CatCafePreview.Standalone {
     new CafeConversationLine("あなた",name+"の信頼回復は見送ります。"),
     new CafeConversationLine("",name+"の永久離脱が確定した。今後の来店対象から外れ、人気低下（"+loss.ToString("0.#")+"、下限0）と経営終了判定は反映済み。"),
     new CafeConversationLine("あなた","この回答を記録しました。会話を終えて、店の状態を確認しましょう。")};
-   return new[]{new CafeConversationLine("",name+"は来店停止を繰り返し、信頼警告の対象になっている。"),
+   return new[]{new CafeConversationLine("",afterNamedReturn?name+"は店での過ごし方にまだ不満を抱えている。今後の対応を考えよう。":name+"は来店停止を繰り返し、信頼警告の対象になっている。"),
     new CafeConversationLine("あなた",name+"への対応方針を決めましょう。回復を試みても、ここで直ちに信頼が戻るわけではありません。"),
     new CafeConversationLine("","回復を試みる場合は、来店停止期限を変えず、来店後の接客結果を待つ。見送る場合は永久離脱となる。選択の結果を確認して決めよう。")};
   }
