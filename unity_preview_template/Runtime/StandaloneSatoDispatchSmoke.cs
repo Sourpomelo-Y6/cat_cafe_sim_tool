@@ -151,21 +151,41 @@ namespace CatCafePreview
                 var list=client.GetComponent<PythonEventListPanel>();
                 list.HoldConversations=true;
                 string shortcut=list.open.GetComponentInChildren<Text>().text;
-                Check(shortcut.Contains(route=="refused"?"指名派遣・本日まで":"指名派遣の依頼"),"Preparation shortcut missing");
-                var requestRow=list.PendingCases().Single(row=>row.timedRequest);
+                Check(shortcut.Contains(route=="refused"?"指名派遣・開店前まで":"指名派遣の依頼"),"Preparation shortcut missing");
+                var preparation=client.GetComponent<PythonPreparationPanel>();
+                Check(preparation.summary.text.Contains(route=="refused"?"今日の開店前まで":(sim.State.day+1)+"日目の開店前まで"),
+                    "Preparation panel did not show the deadline");
+                if(route=="refused")
+                {
+                    var festival=backend.View();
+                    festival.store_event_notice="地域のお祭り";
+                    festival.store_event_label="地域のお祭り";
+                    preparation.Apply(festival);
+                    Check(preparation.summary.text.Contains("今日の開店前まで") && preparation.summary.text.Contains("地域のお祭り"),
+                        "The deadline and store notice did not coexist");
+                    Check(preparation.summary.preferredHeight<=preparation.summary.rectTransform.rect.height+1,$"Deadline was clipped in preparation ({preparation.summary.preferredHeight} > {preparation.summary.rectTransform.rect.height})");
+                    var generated=new TextGenerator();
+                    generated.Populate(preparation.summary.text,preparation.summary.GetGenerationSettings(preparation.summary.rectTransform.rect.size));
+                    Check(generated.lineCount==3,"The preparation summary did not render all three lines");
+                    preparation.Apply(client.CurrentState);
+                }
+                var pendingCases=list.PendingCases();
+                var requestRow=pendingCases.Single(row=>row.timedRequest);
+                Check(!pendingCases.TakeWhile(row=>row!=requestRow).Any(row=>row.optional && !row.timedRequest),
+                    "An optional scene was placed before the timed request");
                 Check(requestRow.Caption.Contains((sim.NamedRequest(customer).requested_day+1)+"日目の営業準備が回答最終日"),"Last response day missing");
                 OpenRow(list,customerName+(route=="refused"?"からの催促":"からの指名依頼"));
                 var dialogue=client.GetComponent<SatoDispatchConversationPanel>();
                 Check(dialogue.Showing,"Request conversation did not open");
-                bool suzukiReminder=customer==CafeSimulation.Suzuki && route=="refused";
+                bool reminder=route=="refused";
                 bool showsOpeningDeadline=dialogue.PlaybackHost.GetComponentsInChildren<Text>().Any(t=>t.text.Contains("開店前に"));
                 dialogue.Next();
                 yield return null;
                 showsOpeningDeadline |= dialogue.PlaybackHost.GetComponentsInChildren<Text>().Any(t=>t.text.Contains("開店前に"));
                 dialogue.Next();
                 yield return null;
-                if(suzukiReminder)
-                    Check(showsOpeningDeadline || dialogue.PlaybackHost.GetComponentsInChildren<Text>().Any(t=>t.text.Contains("開店前に")),"Suzuki reminder does not say before opening");
+                if(reminder)
+                    Check(showsOpeningDeadline || dialogue.PlaybackHost.GetComponentsInChildren<Text>().Any(t=>t.text.Contains("開店前に")),"Reminder does not say before opening");
                 string position=dialogue.PlaybackKey;
                 dialogue.Close();
                 OpenRow(list,customerName+(route=="refused"?"からの催促":"からの指名依頼"));

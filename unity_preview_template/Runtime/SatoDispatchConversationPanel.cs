@@ -54,7 +54,9 @@ namespace CatCafePreview
         protected override void RecordCompletion(){}
         protected override Texture2D PortraitTexture(string id)=>HumanPortraitResources.Resolve(customer);
         protected override PythonIntakeState Request=>new PythonIntakeState{cat_id=catId,name=CatName,can_decline=true};
-        protected override string Title=>CustomerName+(request?"からの指名依頼":customer==CafeSimulation.Suzuki?"とねこじゃらし":"といつもの席");
+        private bool Reminder=>request && Simulation.State.day>Simulation.NamedRequest(customer).requested_day;
+        protected override string SceneLabel=>Simulation.State.day+"日目 · "+(Simulation.State.phase=="closed"?"閉店後":Simulation.State.phase=="open"?"営業中":"営業準備");
+        protected override string Title=>CustomerName+(request?(Reminder?"からの催促":"からの指名依頼"):customer==CafeSimulation.Suzuki?"とねこじゃらし":"といつもの席");
         protected override string ChoicePrompt=>(Simulation.NamedRequest(customer).requested_day+1)+"日目の営業準備が回答最終日です。";
         protected override string AcceptCaption=>"派遣する";
         protected override string DeclineCaption=>"辞退する";
@@ -87,7 +89,7 @@ namespace CatCafePreview
             bool reminder=Simulation.State.day>Simulation.NamedRequest(customer).requested_day;
             bool severe=Simulation.DiscontentScore(customer,Simulation.State.day)>=Simulation.Rules.discontent.threshold;
             return new[]{
-                new CafeConversationLine("佐藤さん",reminder?CatName+"のこと、昨日のお返事をいただけますか。":"お店で待っても会えない日が続きました。"+CatName+"を、うちに一日だけ呼べませんか。"),
+                new CafeConversationLine("佐藤さん",reminder?CatName+"のこと、開店前にお返事をいただけますか。":"お店で待っても会えない日が続きました。"+CatName+"を、うちに一日だけ呼べませんか。"),
                 new CafeConversationLine("佐藤さん",severe?"一日で迎えに来られても、あの子が落ち着いていたら、そのままうちにいてほしいんです。":"あの子が落ち着けるように、窓辺に場所を空けておきます。")
             };
         }

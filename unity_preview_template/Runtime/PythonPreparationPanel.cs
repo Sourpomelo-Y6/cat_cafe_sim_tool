@@ -1,5 +1,7 @@
 using System;
 using System.Text;
+using System.Linq;
+using CatCafePreview.Standalone;
 using UnityEngine;
 using UnityEngine.UI;
 namespace CatCafePreview
@@ -84,7 +86,7 @@ namespace CatCafePreview
             var rows=current.cats ?? new PythonCatState[0];
             if(title!=null)title.text=current.day+"日目・営業の準備";
             int working=Array.FindAll(rows,cat=>Working(cat)).Length;
-            if(summary!=null)summary.text="出勤 "+working+"匹 / 休養・不在 "+(rows.Length-working)+"匹 / 席 "+(current.seats?.Length ?? 0)+"席 / 資金 "+current.funds.ToString("0.#")+"\n"+(string.IsNullOrEmpty(current.store_event_notice)?"猫の体調と疲労を確認し、今日の出勤を選びましょう。":"本日の通知："+current.store_event_label+"（「目標・営業の案内」で確認）");
+            if(summary!=null)RenderSummary(working,rows.Length);
             var option=Array.Find(current.new_game_options ?? new PythonNewGameOption[0],row=>row.choice==current.objective);
             var text=new StringBuilder("経営目標："+(current.objective_progress?.label ?? option?.label ?? "自由営業"));
             text.Append("\n"+(current.objective_progress?.details ?? option?.detail ?? "目標情報を取得していません。"));
@@ -102,6 +104,25 @@ namespace CatCafePreview
             var roster=new StringBuilder();foreach(var cat in visible)roster.Append(cat.name+"："+(Working(cat) ? "出勤" : cat.activity=="cafe" && cat.health_status=="healthy" ? "休養" : cat.health_label+" / "+cat.activity_label)+"\n体力 "+cat.stamina.ToString("0.#")+"/"+cat.max_stamina.ToString("0.#")+" / 疲労 "+cat.fatigue.ToString("0.#")+"\n\n");
             if(catsDetails!=null)catsDetails.text=roster.ToString();
             RenderSelected();RenderNotice();
+        }
+        private void RenderSummary(int working,int catsCount)
+        {
+            var sim=CafeBackends.Standalone?(CafeBackends.Local as LocalCafeBackend)?.Simulation:null;
+            var deadlines=sim!=null && current.phase=="preparation" && current.game_over==null
+                ? CafeSimulation.NamedDispatchCustomers.Where(sim.NamedDispatchAwaitingAnswer)
+                    .Select(customer=>sim.NamedRequest(customer).requested_day+1).ToArray()
+                : Array.Empty<int>();
+            bool dueToday=deadlines.Contains(current.day);
+            string dispatch=deadlines.Length==0?"":dueToday
+                ? "【回答期限】指名派遣は今日の開店前まで。「イベント一覧」から確認できます。"
+                : "指名派遣の依頼があります。"+deadlines.Min()+"日目の開店前までに「イベント一覧」から回答できます。";
+            string store=string.IsNullOrEmpty(current.store_event_notice)?"":"本日の通知："+current.store_event_label+"（「目標・営業の案内」で確認）";
+            bool threeLines=dispatch!="" && store!="";
+            summary.fontSize=threeLines?15:18;
+            summary.lineSpacing=threeLines?.85f:1f;
+            summary.verticalOverflow=threeLines?VerticalWrapMode.Overflow:VerticalWrapMode.Truncate;
+            summary.text="出勤 "+working+"匹 / 休養・不在 "+(catsCount-working)+"匹 / 席 "+(current.seats?.Length ?? 0)+"席 / 資金 "+current.funds.ToString("0.#")
+                +"\n"+(dispatch!=""?dispatch+(store!=""?"\n"+store:""):store!=""?store:"猫の体調と疲労を確認し、今日の出勤を選びましょう。");
         }
         private void RenderSelected()
         {

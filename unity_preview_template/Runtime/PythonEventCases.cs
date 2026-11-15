@@ -7,7 +7,7 @@ using CatCafePreview.Standalone;
 namespace CatCafePreview {
  public partial class PythonEventListPanel {
   public sealed class PendingCase {
-   public int group; public string id,title,subject,reason; public bool result; public bool optional; public bool timedRequest; public Action resume;
+   public int group; public string id,title,subject,reason; public bool result; public bool optional; public int responseDeadline; public bool timedRequest=>responseDeadline>0; public Action resume;
    public string Caption=>(timedRequest?"【期限付き依頼】":optional?"【任意・猫イベント】":result?"【回答済み・結果会話未完了】":"【回答・確認待ち】")+"\n"+title+" / "+subject+(optional?"":" / "+id)+"\n"+(string.IsNullOrEmpty(reason)?"続きへ（選択した案件を開く）":"先に必要："+reason);
   }
   public bool HoldConversations {get;set;}
@@ -65,9 +65,9 @@ namespace CatCafePreview {
        if(b.Simulation.NamedDispatchAwaitingAnswer(customer))
            rows.Add(new PendingCase{group=15,id=customer+"-request",title=name+(current.day>request.requested_day?"からの催促":"からの指名依頼"),
                subject=cat(request.cat_id)+" / "+(request.requested_day+1)+"日目の営業準備が回答最終日",
-               optional=true,timedRequest=true,resume=()=>OpenSatoScene(request.cat_id,true,customer)});
+               optional=true,responseDeadline=request.requested_day+1,resume=()=>OpenSatoScene(request.cat_id,true,customer)});
    }
-   return rows;
+   return rows.OrderBy(row=>!row.optional?0:row.timedRequest?1:2).ThenBy(row=>row.responseDeadline).ToList();
   }
   void OpenSatoScene(string catId,bool request,string customer){
    var view=GetComponent<SatoDispatchConversationPanel>()??gameObject.AddComponent<SatoDispatchConversationPanel>();
@@ -81,6 +81,7 @@ namespace CatCafePreview {
     if(i>=caseButtons.Count){var copy=Instantiate(entries[1],content);copy.name="Pending Case "+i;copy.onClick=new Button.ButtonClickedEvent();caseButtons.Add(copy);}
     var button=caseButtons[i];var row=rows[i];button.onClick.RemoveAllListeners();button.onClick.AddListener(()=>ResumeCase(row));button.gameObject.SetActive(group==0);
     var rect=button.GetComponent<RectTransform>();rect.anchoredPosition=new Vector2(4,-i*112);rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,104);
+    button.GetComponent<Image>().color=row.timedRequest && row.responseDeadline==current.day?new Color(1f,.94f,.77f):Color.white;
     var label=button.GetComponentInChildren<Text>();label.text=row.Caption;label.fontSize=16;label.resizeTextForBestFit=false;label.horizontalOverflow=HorizontalWrapMode.Wrap;label.verticalOverflow=VerticalWrapMode.Truncate;
     button.interactable=online && GetComponent<PythonStateClient>().CanManageSaves && !GetComponent<PythonStateClient>().AutoPlayExecuting && string.IsNullOrEmpty(row.reason);
    }
