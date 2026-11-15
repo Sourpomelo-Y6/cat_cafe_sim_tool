@@ -279,7 +279,44 @@ namespace CatCafePreview
                 Check(!returnDialog.Showing,"Return result did not finish");
                 if(!allow)
                 {
-                    Check(!sim.CustomerAvailable(customer,sim.State.day+14),"Banned customer still available");
+                    int returnDay=sim.State.day;
+                    int pastVisits=sim.State.history.Sum(h=>h.customer_records.Count(r=>r.customer_id==customer));
+                    Check(pastVisits>0,"Ban route lacks prior visits");
+                    yield return new WaitUntil(()=>client.UIStateReady);
+                    Command(backend,"configure_adoption",choice:"on");
+                    Command(backend,"save_game");
+                    Command(backend,"load_game");
+                    Check(sim.State.adoption.enabled && sim.NamedRequest(customer).return_access==CafeSimulation.BanReturnAccess,
+                        "Adoption setting or ban was lost on load");
+                    Check(sim.State.history.Sum(h=>h.customer_records.Count(r=>r.customer_id==customer))==pastVisits,
+                        "Ban erased previous visit records");
+                    Check(!sim.CustomerSchedule(returnDay).Any(r=>r.customer_id==customer),"Banned customer still scheduled on return day");
+                    Prepare(sim);
+                    sim.Execute("day_off");
+                    Check(!sim.State.adoption.events.Any(e=>CafeSimulation.IsNamedAdoption(e.source) && e.customer_id==customer),
+                        "Banned customer made a next-day adoption offer");
+                    for(int i=0;i<9;i++)
+                    {
+                        Check(!sim.CustomerAvailable(customer,sim.State.day) &&
+                            sim.CustomerSchedule(sim.State.day).All(r=>r.customer_id!=customer),
+                            "Banned customer became available after reload");
+                        Prepare(sim);
+                        sim.Execute("day_off");
+                    }
+                    Check(!sim.State.trust_events.Any(e=>e.customer_id==customer),"Trust check opened after ban");
+                    Command(backend,"save_game");
+                    Command(backend,"load_game");
+                    Apply(client,backend);
+                    var catRecord=client.GetComponent<PythonCatDetailsPanel>();
+                    catRecord.Open(cat);
+                    catRecord.RelationshipRecords();
+                    Check(catRecord.panel.activeInHierarchy &&
+                        catRecord.details.text.Contains(backend.Details.CustomerName(customer)+"（"+customer+"）"),
+                        "Past relationship record was not readable");
+                    catRecord.Missing();
+                    Check(records.panel.activeInHierarchy && records.details.text.Contains(returnDay+"日目に帰還を確認しました。"),
+                        "Past named return record was not readable");
+                    records.Close();
                     continue;
                 }
                 yield return new WaitUntil(()=>client.UIStateReady);
