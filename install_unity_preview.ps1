@@ -7,7 +7,7 @@ if (-not (Test-Path -LiteralPath (Join-Path $projectRoot 'ProjectSettings/Projec
 $templateRoot = Join-Path $PSScriptRoot 'unity_preview_template'
 $housingFiles = @('Editor/Housing32Verification.cs','Runtime/Standalone/CafeHousingMigration.cs','Resources/CatCafeStandalone/housing_legacy_rules.json')
 $targetRoot = Join-Path $projectRoot 'Assets/CatCafePreview'
-$previewFiles = @('Runtime/ContentBundle.cs', 'Runtime/CatInteractionState.cs', 'Runtime/ContentPreview.cs', 'Editor/ContentPreviewSetup.cs', 'Editor/ContentImportComparison.cs', 'Editor/ContentImportActivation.cs', 'Editor/ContentImportHistory.cs', 'Editor/ContentPreviewLayout.cs', 'Fonts/MPLUS1p-Regular.ttf', 'Fonts/OFL.txt', 'Fonts/README.md')
+$previewFiles = @('Runtime/ContentBundle.cs', 'Runtime/CatInteractionState.cs', 'Runtime/ContentPreview.cs', 'Editor/ContentPreviewSetup.cs', 'Editor/ContentImportComparison.cs', 'Editor/ContentImportActivation.cs', 'Editor/ContentImportHistory.cs', 'Editor/ContentPackInventory.cs', 'Editor/ContentPreviewLayout.cs', 'Fonts/MPLUS1p-Regular.ttf', 'Fonts/OFL.txt', 'Fonts/README.md')
 $previewFiles += $housingFiles
 $previewFiles += @('Runtime/Standalone/CafeNamedDispatchDialogue.cs')
 $previewFiles += @('Runtime/HumanPortraitResources.cs','Editor/HumanIconsApplyVerification.cs','Runtime/StandaloneHumanIconsSmoke.cs','Editor/HumanPortraitImport.cs','Editor/HumanPortraitVerification.cs')

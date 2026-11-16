@@ -24,7 +24,7 @@ namespace CatCafePreview.Editor
         }
 
         private static string ResourcesPath => Path.Combine(Application.dataPath, "Resources");
-        private static string HistoryPath => Path.Combine(Path.GetDirectoryName(Application.dataPath), "UserSettings", "CatCafePreviousContent.json");
+        internal static string HistoryPath => Path.Combine(Path.GetDirectoryName(Application.dataPath), "UserSettings", "CatCafePreviousContent.json");
 
         internal static void PublishImport(ContentImportActivation activation)
         {
@@ -69,6 +69,14 @@ namespace CatCafePreview.Editor
                 throw new ArgumentException("直前の素材構成の記録が不正です。");
             return snapshot;
         }
+
+        internal static Snapshot ReadPreviousIfPresent(string path) => File.Exists(path) ? ReadHistory(path) : null;
+
+        internal static string[] PointerTexts(Snapshot snapshot) => snapshot.pointers.Select(value =>
+        {
+            var bytes = Bytes(value);
+            return bytes == null ? null : System.Text.Encoding.UTF8.GetString(bytes).TrimStart('\ufeff');
+        }).ToArray();
 
         [MenuItem("Cat Cafe/素材/直前の素材構成に戻す…", false, 1)]
         private static void RestoreMenu()
