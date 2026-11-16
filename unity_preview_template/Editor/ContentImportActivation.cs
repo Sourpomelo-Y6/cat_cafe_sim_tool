@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using UnityEditor;
 
@@ -11,16 +12,21 @@ namespace CatCafePreview.Editor
     {
         private sealed class Change
         {
-            internal string Path, Text, Pending;
-            internal byte[] Previous;
+            internal string Path, Pending;
+            internal byte[] Content, Previous;
         }
 
         private readonly List<Change> changes = new List<Change>();
 
-        internal void Add(string path, string json)
+        internal void Add(string path, string json) => AddBytes(path, Encoding.UTF8.GetBytes(json));
+
+        internal void AddBytes(string path, byte[] content)
         {
-            changes.Add(new Change { Path = path, Text = json });
+            changes.Add(new Change { Path = path, Content = content });
         }
+
+        internal bool HasDifference() => changes.Any(change => change.Content == null ? File.Exists(change.Path) :
+            !File.Exists(change.Path) || !File.ReadAllBytes(change.Path).SequenceEqual(change.Content));
 
         internal void Publish()
         {
@@ -30,8 +36,11 @@ namespace CatCafePreview.Editor
                 foreach (var change in changes)
                 {
                     change.Previous = File.Exists(change.Path) ? File.ReadAllBytes(change.Path) : null;
-                    change.Pending = TemporaryPath(change.Path);
-                    File.WriteAllText(change.Pending, change.Text, new UTF8Encoding(false));
+                    if (change.Content != null)
+                    {
+                        change.Pending = TemporaryPath(change.Path);
+                        File.WriteAllBytes(change.Pending, change.Content);
+                    }
                 }
 
                 AssetDatabase.DisallowAutoRefresh();
@@ -39,7 +48,12 @@ namespace CatCafePreview.Editor
                 {
                     foreach (var change in changes)
                     {
-                        Replace(change.Pending, change.Path, change.Previous != null);
+                        if (change.Pending == null)
+                        {
+                            if (change.Previous == null) continue;
+                            File.Delete(change.Path);
+                        }
+                        else Replace(change.Pending, change.Path, change.Previous != null);
                         applied.Add(change);
                     }
                     AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);

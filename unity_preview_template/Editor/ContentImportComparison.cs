@@ -137,7 +137,7 @@ namespace CatCafePreview.Editor
             return File.Exists(file) ? file : null;
         }
 
-        private static string ResourceFile(string resources, string resource, string root, string filename)
+        internal static string ResourceFile(string resources, string resource, string root, string filename)
         {
             var pattern = @"\A" + Regex.Escape(root) + "/[a-f0-9]{32}/" + Regex.Escape(filename) + @"\z";
             if (!Regex.IsMatch(resource ?? "", pattern)) throw new ArgumentException("現行パックの参照先が不正です: " + resource);

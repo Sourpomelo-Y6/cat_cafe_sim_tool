@@ -191,7 +191,7 @@ namespace CatCafePreview.Editor
             CatTexturePolicy.ApplyPack(target);
             if (File.Exists(Path.Combine(folder, "human_portraits.json"))) HumanPortraitImport.Prepare(folder, activation);
             if (hasOptional) OptionalEventImport.Prepare(folder, bundle, activation);
-            activation.Publish();
+            ContentImportHistory.PublishImport(activation);
             Debug.Log("Imported cat cafe pack: " + bundle.pack_id);
         }
 

@@ -89,7 +89,7 @@ namespace CatCafePreview.Editor
         {
             var activation = new ContentImportActivation();
             Prepare(folder, bundle, activation);
-            activation.Publish();
+            ContentImportHistory.PublishImport(activation);
         }
 
         internal static void Prepare(string folder, ContentBundle bundle, ContentImportActivation activation)

@@ -14,7 +14,7 @@ namespace CatCafePreview.Editor {
   public static void Import(string folder){
    var activation = new ContentImportActivation();
    Prepare(folder, activation);
-   activation.Publish();
+   ContentImportHistory.PublishImport(activation);
   }
   internal static void Prepare(string folder, ContentImportActivation activation){
    var pack=Validate(folder);string json=File.ReadAllText(Path.Combine(folder,"human_portraits.json"));
