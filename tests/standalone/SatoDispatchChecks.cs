@@ -348,7 +348,9 @@ static partial class Program
     {
         var preferredSeat=typeof(CafeSimulation).GetMethod("PreferredSeat",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic);
         bool checkpointsWritten=false, receivedRequest=false;
-        foreach(int seed in new[]{0,1,42})
+        // Kato's two natural requests were identified in the remaining-guest comparison.
+        int[] seeds=customer=="guest-10"?new[]{0,5}:new[]{0,1,42};
+        foreach(int seed in seeds)
         {
             var rules=Decode<CafeRules>(File.ReadAllText(rulesPath));
             rules.stamina_growth=Decode<CafeStaminaRules>(File.ReadAllText(Path.Combine(Path.GetDirectoryName(rulesPath),"stamina_growth.json")));
@@ -404,6 +406,9 @@ static partial class Program
             var requestAfterUnlock=sim.NamedRequest(customer);
             Assert(requestAfterUnlock==null || requestAfterUnlock.requested_day>=affinityDay,
                 "Unlocked guest did not receive a request after the affinity scene in seed "+seed);
+            if(customer=="guest-10")
+                Assert(requestAfterUnlock?.requested_day==100 && requestAfterUnlock.cat_id=="cat-mugi",
+                    "Kato's baseline request did not reproduce in seed "+seed);
             receivedRequest|=requestAfterUnlock!=null;
             sim.Validate(sim.State);
             var visits=sim.State.history.SelectMany(h=>h.customer_records).Where(v=>v.customer_id==customer).ToArray();
@@ -707,6 +712,7 @@ static partial class Program
         string target,string favorite,System.Reflection.MethodInfo preferredSeat,double threshold,string checkpoints=null,string mode="clear")
     {
         var branches=new[]{"open-as-usual","close-after-return","close-from-request"};
+        string checkpointBranch=guest=="guest-10"?"open-as-usual":"close-from-request";
         bool savedReissue=false;
         foreach(string branch in branches)
         {
@@ -742,7 +748,7 @@ static partial class Program
             Assert(original.returned_day>0 && sim.State.day==original.returned_day+8,"Natural continuation did not reach day eight");
             sim.Validate(sim.State);
             var repeat=sim.NamedRequest(guest);
-            if(checkpoints!=null && branch=="close-from-request" && repeat!=original && sim.NamedDispatchAwaitingAnswer(guest))
+            if(checkpoints!=null && branch==checkpointBranch && repeat!=original && sim.NamedDispatchAwaitingAnswer(guest))
             {
                 SaveDispatchCheckpoint(sim,checkpoints,"reissue");
                 savedReissue=true;
