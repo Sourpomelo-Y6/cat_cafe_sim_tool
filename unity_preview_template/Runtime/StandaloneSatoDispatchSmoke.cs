@@ -114,12 +114,61 @@ namespace CatCafePreview
             button.onClick.Invoke();
         }
 
+        private IEnumerator CheckUnlockedGuestSaves(string checkpoints,CafeNamedDispatchSettings guest)
+        {
+            var folder=Path.Combine(output,guest.customer_id);
+            var backend=new LocalCafeBackend(folder);
+            CafeBackends.UseLocal(backend);
+            SceneManager.LoadScene("CatCafePythonState");
+            yield return new WaitForSecondsRealtime(2);
+            var client=FindObjectOfType<PythonStateClient>();
+            var list=client.GetComponent<PythonEventListPanel>();
+            list.HoldConversations=true;
+
+            foreach(string stage in new[]{"affinity","request","reissue"})
+            {
+                Directory.CreateDirectory(folder);
+                File.Copy(Path.Combine(checkpoints,guest.customer_id,stage,"slot-9.json"),Path.Combine(folder,"slot-9.json"),true);
+                Command(backend,"load_game");
+                Apply(client,backend);
+                yield return null;
+
+                var sim=backend.Simulation;
+                Check(sim.ClearedGoalDay(1)>0 && sim.NamedAffinity(guest.customer_id).Count>0,"Unlocked guest affinity was not restored");
+                if(stage=="reissue")
+                    Check(sim.State.named_dispatch_archive.Any(e=>e.customer_id==guest.customer_id &&
+                        e.request.returned_day+8==sim.State.day),"Reissued request lost its return day");
+                if(stage!="affinity")
+                    Check(sim.NamedDispatchAwaitingAnswer(guest.customer_id),"Unlocked guest request was not restored");
+                OpenRow(list,guest.name+(stage=="affinity"?"との交流":"からの指名依頼"));
+                var dialogue=client.GetComponent<SatoDispatchConversationPanel>();
+                Check(dialogue.Showing,"Unlocked guest dialogue did not open: "+stage);
+                dialogue.Close();
+                list.Close();
+            }
+        }
+
         private IEnumerator Run()
         {
             var content=JsonUtility.FromJson<ContentCatalog>(Resources.Load<TextAsset>("CatCafeContent/catalog").text);
             var configured=JsonUtility.FromJson<ContentBundle>(Resources.Load<TextAsset>(content.bundleResource).text).named_dispatch;
-            var guests=CafeSimulation.NamedDispatchCustomers.Concat((configured??Array.Empty<CafeNamedDispatchSettings>())
-                .Where(r=>r.enabled && !CafeSimulation.NamedDispatchCustomers.Contains(r.customer_id)).Select(r=>r.customer_id)).ToArray();
+            var rulesAsset=Resources.Load<TextAsset>("CatCafeStandalone/rules");
+            int initialCount=JsonUtility.FromJson<CafeRules>(rulesAsset.text).arrival_ticks.Length;
+            var initial=Enumerable.Range(1,initialCount).Select(i=>"guest-"+i).ToArray();
+            var settings=configured??Array.Empty<CafeNamedDispatchSettings>();
+            var guests=CafeSimulation.NamedDispatchCustomers.Concat(settings
+                .Where(r=>r.enabled && initial.Contains(r.customer_id) && !CafeSimulation.NamedDispatchCustomers.Contains(r.customer_id))
+                .Select(r=>r.customer_id)).ToArray();
+            var args=Environment.GetCommandLineArgs();
+            int checkpointArgument=Array.IndexOf(args,"--catcafe-named-dispatch-checkpoints");
+            if(checkpointArgument>=0)
+            {
+                foreach(var guest in settings.Where(r=>r.enabled && !initial.Contains(r.customer_id)))
+                {
+                    var check=CheckUnlockedGuestSaves(args[checkpointArgument+1],guest);
+                    while(check.MoveNext())yield return check.Current;
+                }
+            }
             foreach(var customer in guests)
             foreach(var route in new[]{"normal","decline","expired","refused","repeat"})
             {

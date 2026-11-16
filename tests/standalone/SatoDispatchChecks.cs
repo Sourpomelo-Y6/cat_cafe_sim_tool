@@ -21,7 +21,7 @@ static partial class Program
             "Epilogue did not use actual adopted cat");
     }
 
-    static void SatoDispatchChecks(string rulesPath,string bundlePath=null)
+    static void SatoDispatchChecks(string rulesPath,string bundlePath=null,string checkpointDirectory=null)
     {
         RepeatedSuspensionChecks(rulesPath);
         var json=bundlePath==null?null:System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(bundlePath));
@@ -40,7 +40,10 @@ static partial class Program
                 !disabled.EnabledNamedCustomers.Contains(CafeSimulation.Sato) &&
                 !disabled.EnabledNamedCustomers.Contains(guest.customer_id),"Explicit disabled settings were ignored");
         }
-        var customers=CafeSimulation.NamedDispatchCustomers.Concat(additional.Select(r=>r.customer_id)).ToArray();
+        int initialCount=Decode<CafeRules>(File.ReadAllText(rulesPath)).arrival_ticks.Length;
+        var initialIds=Enumerable.Range(1,initialCount).Select(i=>"guest-"+i).ToHashSet();
+        var customers=CafeSimulation.NamedDispatchCustomers.Concat(additional.Where(r=>initialIds.Contains(r.customer_id))
+            .Select(r=>r.customer_id)).ToArray();
         foreach (var customer in customers)
         foreach (var route in new[]{"normal","decline","expired","refused","adopt","decline-adoption","ban","low-score","legacy-return"})
         {
@@ -309,6 +312,8 @@ static partial class Program
         }
         Assert(customers.All(c=>conflict.NamedRequest(c).declined_day>0),"Later request overwrote another customer's record");
         if (customers.Length==6) InitialGuestDispatchFrequency(rulesPath,configured,customers);
+        foreach(var guest in additional.Where(r=>!initialIds.Contains(r.customer_id)))
+            GoalUnlockedDispatchChecks(rulesPath,configured,guest.customer_id,checkpointDirectory);
         Console.WriteLine($"PASS named dispatch: {assertions} assertions");
     }
 
@@ -336,6 +341,57 @@ static partial class Program
             Console.WriteLine($"60-day {mode}/{seed}: {(requested.Length==0?"no requests":requested)}");
         }
     }
+
+    static void GoalUnlockedDispatchChecks(string rulesPath,CafeNamedDispatchSettings[] settings,string customer,string checkpointDirectory)
+    {
+        var preferredSeat=typeof(CafeSimulation).GetMethod("PreferredSeat",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic);
+        foreach(int seed in new[]{0,1,42})
+        {
+            var rules=Decode<CafeRules>(File.ReadAllText(rulesPath));
+            rules.stamina_growth=Decode<CafeStaminaRules>(File.ReadAllText(Path.Combine(Path.GetDirectoryName(rulesPath),"stamina_growth.json")));
+            rules.named_dispatch=settings;
+            var sim=new CafeSimulation(rules,seed,"popularity");
+            string checkpoints=checkpointDirectory!=null && seed==0?Path.Combine(checkpointDirectory,customer):null;
+            Assert(!sim.CustomerSchedule(1).Any(a=>a.customer_id==customer),"Guest could visit before goal clearance");
+            int affinityDay=0, operations=0;
+            bool issuedWhileLocked=false;
+            while(sim.State.day<=120 && sim.State.game_over==null && operations++<100000)
+            {
+                var s=sim.State;
+                if(sim.ClearedGoalDay(1)==0)
+                    issuedWhileLocked|=sim.NamedRequest(customer)!=null || sim.NamedAffinity(customer).Count>0;
+                if(s.phase=="preparation" && affinityDay==0 && sim.NamedAffinity(customer).Count>0)
+                {
+                    affinityDay=s.day;
+                    if(checkpoints!=null)SaveDispatchCheckpoint(sim,checkpoints,"affinity");
+                }
+                var request=sim.NamedCustomers.FirstOrDefault(sim.NamedDispatchAwaitingAnswer);
+                if(request!=null && s.phase=="preparation")
+                {
+                    if(request==customer)
+                    {
+                        if(checkpoints!=null)SaveDispatchCheckpoint(sim,checkpoints,"request");
+                        NaturalNamedDispatchContinuation(sim,seed,customer,null,null,preferredSeat,50,checkpoints);
+                    }
+                    sim.Execute("resolve_sato_dispatch",catId:request,choice:"decline");
+                }
+                else
+                    BalanceExecute(sim,BalanceOp(sim,"popularity","clear",false));
+            }
+            Assert(!issuedWhileLocked,"Locked guest issued an event");
+            Assert(sim.State.day==121 && sim.ClearedGoalDay(1)>0 && affinityDay>sim.ClearedGoalDay(1),
+                "Unlocked guest did not develop an affinity scene in seed "+seed);
+            Assert(sim.NamedRequest(customer) is CafeSatoDispatch requestAfterUnlock && requestAfterUnlock.requested_day>=affinityDay,
+                "Unlocked guest did not receive a request after the affinity scene in seed "+seed);
+            sim.Validate(sim.State);
+            var visits=sim.State.history.SelectMany(h=>h.customer_records).Where(v=>v.customer_id==customer).ToArray();
+            Console.WriteLine(Encode(new{customer,seed,unlocked_after=sim.ClearedGoalDay(1),affinity_day=affinityDay,
+                visits=visits.Length,services=visits.Count(v=>v.satisfaction!=null),request_day=sim.NamedRequest(customer)?.requested_day}));
+        }
+    }
+
+    static void SaveDispatchCheckpoint(CafeSimulation sim,string directory,string stage)
+        => new CafeSaveStore(Path.Combine(directory,stage),ReplayEncode,ReplayDecode,sim.Validate).Save(9,sim.State);
 
     static void RepeatedSuspensionChecks(string rulesPath)
     {
@@ -467,7 +523,7 @@ static partial class Program
     }
 
     static void NaturalNamedDispatchContinuation(CafeSimulation baseline,int seed,string guest,
-        string target,string favorite,System.Reflection.MethodInfo preferredSeat,double threshold)
+        string target,string favorite,System.Reflection.MethodInfo preferredSeat,double threshold,string checkpoints=null)
     {
         var branches=new[]{"open-as-usual","close-after-return","close-from-request"};
         foreach(string branch in branches)
@@ -504,6 +560,11 @@ static partial class Program
             Assert(original.returned_day>0 && sim.State.day==original.returned_day+8,"Natural continuation did not reach day eight");
             sim.Validate(sim.State);
             var repeat=sim.NamedRequest(guest);
+            if(checkpoints!=null && branch=="close-from-request")
+            {
+                Assert(repeat!=original && sim.NamedDispatchAwaitingAnswer(guest),"Expected a reissue to save for Windows");
+                SaveDispatchCheckpoint(sim,checkpoints,"reissue");
+            }
             Console.WriteLine(Encode(new{threshold,seed,policy=target==null?"auto":"same-cat",branch,guest,
                 request_day=original.requested_day,cat=original.cat_id,
                 missing_day=sim.State.missing_cases.Single(m=>CafeSimulation.NamedMissingCustomer(m.reason)==guest).departed_day,
