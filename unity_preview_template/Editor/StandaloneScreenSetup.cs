@@ -35,6 +35,10 @@ namespace CatCafePreview.Editor
         {
             Configure();StandaloneCafeSmoke.Run("StandaloneEditorSmoke.json");Build();
         }
+        public static void BuildSharedAllImages()
+        {
+            StandaloneBuildStorage.Build(Scenes, shareAllImages: true);
+        }
         public static void BuildSharedImages()
         {
             StandaloneBuildStorage.Build(Scenes, shareImagePair: true);

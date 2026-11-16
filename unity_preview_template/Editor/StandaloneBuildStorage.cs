@@ -9,7 +9,7 @@ namespace CatCafePreview.Editor
     // All verification entry points share one output, even with legacy environment variables.
     public static class StandaloneBuildStorage
     {
-        public static void Build(string[] scenes, string[] extraScriptingDefines = null, bool shareImagePair = false)
+        public static void Build(string[] scenes, string[] extraScriptingDefines = null, bool shareImagePair = false, bool shareAllImages = false)
         {
             string workspace = Environment.GetEnvironmentVariable("CATCAFE_WORKSPACE_ROOT");
             string legacy = Environment.GetEnvironmentVariable("CATCAFE_STANDALONE_BUILD");
@@ -33,6 +33,7 @@ namespace CatCafePreview.Editor
             using (var buildLock = new FileStream(Path.Combine(root, "build.lock"), FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None))
             {
                 SharedPackBuildImages.Recover();
+                SharedImageBuildPlan.Recover();
                 string pending = Path.Combine(root, "Pending");
                 string latest = Path.Combine(root, "Latest");
                 string previous = Path.Combine(root, "Previous");
@@ -45,7 +46,8 @@ namespace CatCafePreview.Editor
                 {
                     Directory.CreateDirectory(pending);
                     var options = new BuildPlayerOptions { scenes=scenes, locationPathName=Path.Combine(pending, "CatCafeStandalone.exe"), target=BuildTarget.StandaloneWindows64, options=BuildOptions.None, extraScriptingDefines=extraScriptingDefines??new string[0] };
-                    var report = shareImagePair ? SharedPackBuildImages.Run(scenes, () => BuildPipeline.BuildPlayer(options))
+                    var report = shareAllImages ? SharedImageBuildPlan.Run(() => BuildPipeline.BuildPlayer(options))
+                        : shareImagePair ? SharedPackBuildImages.Run(scenes, () => BuildPipeline.BuildPlayer(options))
                         : BuildPipeline.BuildPlayer(options);
                     if (report.summary.result != BuildResult.Succeeded)
                         throw new Exception("Standalone build failed: " + report.summary.result);

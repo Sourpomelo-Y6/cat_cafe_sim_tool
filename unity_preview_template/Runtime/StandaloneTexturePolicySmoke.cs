@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using CatCafePreview.Standalone;
 namespace CatCafePreview
 {
     // Explicit rendering fixture; ordinary game startup is unchanged.
@@ -58,7 +60,50 @@ namespace CatCafePreview
                 panel.panel.SetActive(false);
                 lines.Add("slot " + slot + ": loaded " + oldRows.Length + " old image receipts; verified shared asset in seat history.");
             }
+            if (Environment.GetCommandLineArgs().Contains("--shared-all-history"))
+            {
+                var extraCheck = VerifySharedHistory(backend, lines);
+                while (extraCheck.MoveNext()) yield return extraCheck.Current;
+            }
             File.WriteAllLines(Path.Combine(output, "shared-pair-result.txt"), lines);
+        }
+
+        IEnumerator VerifySharedHistory(LocalCafeBackend backend, List<string> lines)
+        {
+            string oldPrefix = SharedPackImages.Root + SharedPackImages.PreviousPack + SharedPackImages.ImageFolder;
+            var aliases = SharedPackImages.Aliases;
+            if (aliases.Count <= 860) throw new Exception("Cross-pack alias data was not included.");
+            var archived = aliases.First(row => !row.Key.StartsWith(oldPrefix, StringComparison.Ordinal));
+            if (Resources.Load<Texture2D>(archived.Key) != null ||
+                new CatGalleryImage {resource = archived.Key}.Texture() != Resources.Load<Texture2D>(archived.Value) ||
+                Resources.Load<Texture2D>(archived.Value) == null)
+                throw new Exception("Additional old pack did not resolve in the gallery texture path.");
+
+            SceneManager.LoadScene("CatCafeTitle");
+            yield return new WaitForSecondsRealtime(2);
+            var extra = FindObjectOfType<PythonTitleScreen>().GetComponent<TitleExtraPanel>();
+            extra.Open();
+            var replay = backend.Replays.Load().entries.First(row => CafeReplayCatalog.IsOptional(row.conversation_id)
+                && !string.IsNullOrEmpty(row.image_resource) && aliases.ContainsKey(row.image_resource));
+            var expected = Resources.Load<Texture2D>(aliases[replay.image_resource]);
+            extra.OpenReplay(replay.Key);
+            yield return new WaitForEndOfFrame();
+            var portrait = extra.Replay.Panel.GetComponentsInChildren<RawImage>(true).Single(row => row.name == "Portrait");
+            if (!extra.Replay.Showing || expected == null || !portrait.enabled || portrait.texture != expected)
+                throw new Exception("Archived replay did not show the saved portrait.");
+            CaptureCanvas(extra.Replay.Panel.GetComponentInParent<Canvas>().rootCanvas, Path.Combine(output, "old-replay.png"));
+            extra.Replay.Close();
+
+            var gallery = extra.Images;
+            gallery.Open();
+            var unlocked = new HashSet<string>(backend.Gallery.Load().viewed);
+            var item = gallery.Items.First(row => unlocked.Contains(row.key));
+            gallery.OpenImage(item.key);
+            yield return new WaitForEndOfFrame();
+            if (!gallery.Viewer.activeInHierarchy || item.Texture() == null || gallery.Enlarged.texture != item.Texture())
+                throw new Exception("Previously viewed gallery image did not open.");
+            CaptureCanvas(gallery.Viewer.GetComponentInParent<Canvas>().rootCanvas, Path.Combine(output, "old-gallery.png"));
+            lines.Add("Read older replay and gallery records; rendered both screens. Cross-pack aliases: " + aliases.Count);
         }
 
         private static void CaptureCanvas(Canvas canvas, string path)

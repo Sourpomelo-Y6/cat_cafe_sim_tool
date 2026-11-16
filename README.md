@@ -187,6 +187,11 @@ denoiseが低いと元の柄・背景を残しやすい一方、姿勢も残り�
 
 ### 画像共用のWindows検証ビルド
 
+通常素材パックを横断する検証は、`build_standalone.ps1 -ProjectPath <Unityプロジェクト> -ExecuteMethod CatCafePreview.Editor.StandaloneScreenSetup.BuildSharedAllImages` を使います。元PNGのSHA-256とUnityのインポート設定で共用候補を決め、アセットIDで直接参照される画像を保持します。旧セーブが保持するパスは、ビルド内の対応表を通じて共用画像に解決します。
+
+対象と対応先は `Logs/StandaloneBuild/Runs/SharedImagePlan-*.tsv` で確認できます。原本の退避はビルド中だけ `UserSettings/CatCafeSharedImagePlan` で行い、処理終了時に復元します。
+
+
 現行・旧パックの同じ860枚を共用する検証ビルドは、`build_standalone.ps1 -ProjectPath <Unityプロジェクト> -ExecuteMethod CatCafePreview.Editor.StandaloneScreenSetup.BuildSharedImages` で作成できます。旧セーブのリソースパスは読み込み時に同一画像へ解決します。
 
 ビルド前に双方の画像のSHA-256とインポート設定を照合します。旧画像は同じUnityプロジェクトの `UserSettings/CatCafeSharedPackBuild` に一時移動し、ビルド処理終了時に元へ戻します。中断時の一時移動は、次に指定のビルドスクリプトを実行した際に復元を試みます。Windows版の保存先は共通の `Logs/StandaloneBuild/Latest` です。
