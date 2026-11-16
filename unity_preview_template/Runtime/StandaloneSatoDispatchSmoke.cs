@@ -134,10 +134,16 @@ namespace CatCafePreview
                 yield return null;
 
                 var sim=backend.Simulation;
-                int guestNumber=int.Parse(guest.customer_id.Substring("guest-".Length));
-                int goalStage=guestNumber>sim.Rules.arrival_ticks.Length+sim.Rules.popular_customer_count?2:1;
-                Check(sim.ClearedGoalDay(goalStage)>0 && sim.NamedAffinity(guest.customer_id).Count>0,
-                    "Unlocked guest affinity was not restored");
+                bool unlocked;
+                if(guest.customer_id=="expanded-guest")
+                    unlocked=sim.State.expansion.Any(p=>p.seats==4 && p.day<sim.State.day);
+                else
+                {
+                    int guestNumber=int.Parse(guest.customer_id.Substring("guest-".Length));
+                    int goalStage=guestNumber>sim.Rules.arrival_ticks.Length+sim.Rules.popular_customer_count?2:1;
+                    unlocked=sim.ClearedGoalDay(goalStage)>0;
+                }
+                Check(unlocked && sim.NamedAffinity(guest.customer_id).Count>0,"Unlocked guest affinity was not restored");
                 if(stage=="reissue")
                     Check(sim.State.named_dispatch_archive.Any(e=>e.customer_id==guest.customer_id &&
                         e.request.returned_day+8==sim.State.day),"Reissued request lost its return day");

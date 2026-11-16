@@ -348,7 +348,8 @@ static partial class Program
     {
         var preferredSeat=typeof(CafeSimulation).GetMethod("PreferredSeat",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic);
         bool checkpointsWritten=false, receivedRequest=false;
-        bool requiresFixture=customer is "guest-7" or "guest-8" or "guest-11" or "guest-12";
+        bool expanded=customer=="expanded-guest";
+        bool requiresFixture=expanded || customer is "guest-7" or "guest-8" or "guest-11" or "guest-12";
         // Kato's two natural requests were identified in the remaining-guest comparison.
         int[] seeds=customer=="guest-10"?new[]{0,5}:new[]{0,1,42};
         foreach(int seed in seeds)
@@ -356,12 +357,13 @@ static partial class Program
             var rules=Decode<CafeRules>(File.ReadAllText(rulesPath));
             rules.stamina_growth=Decode<CafeStaminaRules>(File.ReadAllText(Path.Combine(Path.GetDirectoryName(rulesPath),"stamina_growth.json")));
             rules.named_dispatch=settings;
-            int stage=int.Parse(customer.Substring("guest-".Length))>rules.arrival_ticks.Length+rules.popular_customer_count?2:1;
+            int stage=!expanded && int.Parse(customer.Substring("guest-".Length))>rules.arrival_ticks.Length+rules.popular_customer_count?2:1;
             string mode=customer is "guest-8" or "guest-11"?"fast":"clear";
             var sim=new CafeSimulation(rules,seed,"popularity");
             string checkpoints=checkpointDirectory!=null && !checkpointsWritten?Path.Combine(checkpointDirectory,customer):null;
             CafeSnapshot affinityCheckpoint=null, unlockCheckpoint=null;
-            Assert(!sim.CustomerSchedule(1).Any(a=>a.customer_id==customer),"Guest could visit before goal clearance");
+            int UnlockDay()=>expanded?sim.State.expansion.FirstOrDefault(p=>p.seats==4)?.day??0:sim.ClearedGoalDay(stage);
+            Assert(!sim.CustomerSchedule(1).Any(a=>a.customer_id==customer),"Guest could visit on the first day");
             var observed=new DispatchBalanceRow();
             int affinityDay=0, operations=0, observedDay=0;
             bool issuedWhileLocked=false;
@@ -373,10 +375,11 @@ static partial class Program
                     observedDay=s.day;
                     observed.Observe(sim,customer,50);
                 }
-                if(sim.ClearedGoalDay(stage)==0)
+                int unlock=UnlockDay();
+                if(unlock==0 || s.day<=unlock)
                     issuedWhileLocked|=sim.CustomerSchedule(s.day).Any(a=>a.customer_id==customer)
                         || sim.NamedRequest(customer)!=null || sim.NamedAffinity(customer).Count>0;
-                if(requiresFixture && seed==0 && unlockCheckpoint==null && s.phase=="preparation" && sim.ClearedGoalDay(stage)>0)
+                if(requiresFixture && seed==0 && unlockCheckpoint==null && s.phase=="preparation" && unlock>0 && s.day>unlock)
                     unlockCheckpoint=CloneDispatchSnapshot(s);
                 if(s.phase=="preparation" && affinityDay==0 && sim.NamedAffinity(customer).Count>0)
                 {
@@ -402,8 +405,8 @@ static partial class Program
                     BalanceExecute(sim,BalanceOp(sim,"popularity",mode,false));
             }
             Assert(!issuedWhileLocked,"Locked guest issued an event");
-            Assert(sim.State.day==121 && sim.ClearedGoalDay(stage)>0
-                && (affinityDay>sim.ClearedGoalDay(stage) || requiresFixture && affinityDay==0),
+            Assert(sim.State.day==121 && UnlockDay()>0
+                && (affinityDay>UnlockDay() || requiresFixture && affinityDay==0),
                 "Unlocked guest did not finish the comparison in seed "+seed);
             var requestAfterUnlock=sim.NamedRequest(customer);
             Assert(requestAfterUnlock==null || requestAfterUnlock.requested_day>=affinityDay,
@@ -414,15 +417,19 @@ static partial class Program
             receivedRequest|=requestAfterUnlock!=null;
             sim.Validate(sim.State);
             var visits=sim.State.history.SelectMany(h=>h.customer_records).Where(v=>v.customer_id==customer).ToArray();
-            Console.WriteLine(Encode(new{customer,seed,stage,unlocked_after=sim.ClearedGoalDay(stage),affinity_day=affinityDay,
+            if(expanded)
+                Assert(sim.State.history[UnlockDay()].customer_records.Any(v=>v.customer_id==customer),
+                    "Okada did not arrive on the day after the fourth seat");
+            Console.WriteLine(Encode(new{customer,seed,stage,unlocked_after=UnlockDay(),affinity_day=affinityDay,
                 visits=visits.Length,services=visits.Count(v=>v.satisfaction!=null),request_day=sim.NamedRequest(customer)?.requested_day,
                 observed.max_discontent,observed.overlap_days,observed.staff_block_days}));
-            if(requiresFixture && seed==0 && requestAfterUnlock==null)
+            if(requiresFixture && seed==0 && (expanded || requestAfterUnlock==null))
             {
                 var shortage=new CafeSimulation(rules);
                 shortage.Restore(unlockCheckpoint);
                 var fixtureAffinity=ExerciseUnlockedDispatch(shortage,customer,seed);
                 Assert(shortage.NamedDispatchAwaitingAnswer(customer),"The unlocked guest fixture did not trigger a request");
+                if(expanded)AssertFourSeatDispatchBoundary(shortage,customer);
                 bool reissued=NaturalNamedDispatchContinuation(shortage,seed,customer,null,null,preferredSeat,50,checkpoints,"clear");
                 receivedRequest=true;
                 if(checkpoints!=null && reissued)
@@ -435,6 +442,26 @@ static partial class Program
         }
         Assert(receivedRequest,"No unlocked guest request in the tested seeds: "+customer);
         Assert(checkpointDirectory==null || checkpointsWritten,"No reissue to verify in Windows: "+customer);
+    }
+
+    static void AssertFourSeatDispatchBoundary(CafeSimulation fixture,string customer)
+    {
+        var sim=new CafeSimulation(fixture.Rules);
+        sim.Restore(CloneDispatchSnapshot(fixture.State));
+        var s=sim.State;
+        var request=sim.NamedRequest(customer);
+        var available=s.cats.Where(c=>c.activity=="cafe" && c.health=="healthy" && !c.cannot_continue && c.stamina>0)
+            .OrderByDescending(c=>c.id==request.cat_id).ToArray();
+        Assert(s.seat_count==4 && available.Length>=5,"Expected four seats and five available cats");
+        s.named_dispatch.Single(row=>row.customer_id==customer).request=null;
+        foreach(var cat in available.Skip(4))cat.cannot_continue=true;
+        var present=typeof(CafeSimulation).GetMethod("PresentNamedDispatch",System.Reflection.BindingFlags.Instance
+            | System.Reflection.BindingFlags.NonPublic);
+        present.Invoke(sim,new object[]{customer});
+        Assert(sim.NamedRequest(customer)==null,"Four available cats must not permit a dispatch in a four-seat cafe");
+        available[4].cannot_continue=false;
+        present.Invoke(sim,new object[]{customer});
+        Assert(sim.NamedDispatchAwaitingAnswer(customer),"Five available cats should permit the request");
     }
 
     static CafeSnapshot CloneDispatchSnapshot(CafeSnapshot state)
