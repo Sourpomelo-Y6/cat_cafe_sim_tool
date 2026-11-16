@@ -8,6 +8,8 @@
 
 Unityを閉じてから実行する。EditorはプロジェクトのバージョンとUnity Hubの登録先から検出する。必要な場合は `-UnityPath` を指定できる。既存の検証とビルドを合わせて実行する場合は `-ExecuteMethod CatCafePreview.Editor.NarrativeVerification.VerifyAndBuild` などを指定し、必要な検証用環境変数は従来どおり設定する。
 
+起動した Unity が失敗終了した場合、実行中に書き込まれた空の `Temp/UnityLockfile` だけを、ほかの Unity Editor が終了していてファイルを使用中でないことを確認できた場合に片づける。失敗の内容は実行ログで確認でき、同じコマンドで再実行できる。起動前からあるロックは保持する。
+
 - 成功ビルド：ソース作業フォルダの `Logs/StandaloneBuild/Latest/CatCafeStandalone.exe`。
 - 実行ログ：同じ作業フォルダの `Logs/StandaloneBuild/Runs/<日時>-<ID>.log`。
 - ビルド中のみ固定の Pending を使用し、成功時にフォルダを移動してLatestを置き換える。コピーはしない。失敗時はPendingを削除して前回の成功ビルドを保持する。更新中に中断した場合は次回ビルドでPreviousから復旧する。

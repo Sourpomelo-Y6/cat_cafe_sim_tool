@@ -8,9 +8,7 @@ $workspaceRoot = Split-Path -Parent $PSScriptRoot
 $projectRoot = (Resolve-Path -LiteralPath $ProjectPath).Path
 $versionFile = Join-Path $projectRoot 'ProjectSettings/ProjectVersion.txt'
 if (-not (Test-Path -LiteralPath $versionFile)) { throw 'Specify a Unity project root.' }
-if (Test-Path -LiteralPath (Join-Path $projectRoot 'Temp/UnityLockfile')) {
-    throw 'Close this Unity project before running the batch build.'
-}
+$unityLockPath = Join-Path $projectRoot 'Temp/UnityLockfile'
 if (-not $UnityPath) {
     $versionLine = Get-Content -LiteralPath $versionFile | Where-Object { $_ -match '^m_EditorVersion:' }
     $version = ($versionLine -split ':',2)[1].Trim()
@@ -41,9 +39,40 @@ try {
     $env:CATCAFE_WORKSPACE_ROOT = $workspaceRoot
     $env:CATCAFE_STANDALONE_BUILD = Join-Path $workspaceRoot 'Logs/StandaloneBuild/Latest/CatCafeStandalone.exe'
     $arguments = @('-batchmode', '-quit', '-projectPath', ('"' + $projectRoot + '"'), '-executeMethod', $ExecuteMethod, '-logFile', ('"' + $logPath + '"'))
+    if (Test-Path -LiteralPath $unityLockPath) {
+        throw 'Close this Unity project before running the batch build.'
+    }
+    $launchTime = [DateTime]::UtcNow
     $process = Start-Process -FilePath $UnityPath -ArgumentList $arguments -WindowStyle Hidden -PassThru
     # Wait for the Editor itself, not persistent licensing/crash-handler children.
     $process.WaitForExit()
+    if ($process.ExitCode -ne 0 -and [IO.File]::Exists($unityLockPath)) {
+        try {
+            $lockFile = Get-Item -LiteralPath $unityLockPath -Force
+            $tempDirectory = Get-Item -LiteralPath $lockFile.DirectoryName -Force
+            if (($lockFile.Attributes -band [IO.FileAttributes]::ReparsePoint) -or
+                ($tempDirectory.Attributes -band [IO.FileAttributes]::ReparsePoint)) {
+                throw 'The Unity lock path contains a link.'
+            }
+            # Refuse access while another handle is reading or writing the lock, and keep
+            # this handle open through deletion so Unity cannot reopen it in between.
+            $lockHandle = [IO.File]::Open($unityLockPath, 'Open', 'ReadWrite', 'Delete')
+            try {
+                $lockFile.Refresh()
+                if ($lockHandle.Length -ne 0 -or $lockFile.LastWriteTimeUtc -lt $launchTime -or
+                    $lockFile.LastWriteTimeUtc -gt $process.ExitTime.ToUniversalTime() -or
+                    (Get-Process -Name Unity -ErrorAction SilentlyContinue)) {
+                    throw 'The remaining Unity lock cannot be attributed to this completed batch.'
+                }
+                [IO.File]::Delete($unityLockPath)
+                Write-Host "Removed the Unity lock left by batch process $($process.Id)."
+            } finally {
+                $lockHandle.Dispose()
+            }
+        } catch {
+            Write-Warning "Kept the Unity lock at ${unityLockPath}: $($_.Exception.Message)"
+        }
+    }
     if ($process.ExitCode -ne 0) { throw "Unity failed ($($process.ExitCode)). Log: $logPath" }
     if (-not [IO.File]::ReadAllText($logPath).Contains('CAT_CAFE_STANDALONE_BUILD_OK:')) { throw "No successful build recorded. Log: $logPath" }
     Write-Output "Build: $env:CATCAFE_STANDALONE_BUILD"
