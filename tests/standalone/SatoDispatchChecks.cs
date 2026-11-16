@@ -520,6 +520,60 @@ static partial class Program
     static void SaveDispatchCheckpoint(CafeSimulation sim,string directory,string stage,CafeSnapshot snapshot=null)
         => new CafeSaveStore(Path.Combine(directory,stage),ReplayEncode,ReplayDecode,sim.Validate).Save(9,snapshot??sim.State);
 
+    static void RemainingGuestDispatchBalance(string rulesPath,string bundlePath)
+    {
+        var bundle=System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(bundlePath));
+        var configured=Decode<CafeNamedDispatchSettings[]>(bundle["named_dispatch"].ToJsonString());
+        var candidates=new[]{(id:"guest-7",name:"山本さん",stage:1),(id:"guest-8",name:"中村さん",stage:1),
+            (id:"guest-10",name:"加藤さん",stage:1),(id:"guest-12",name:"山田さん",stage:2)};
+        var settings=configured.Concat(candidates.Select(c=>new CafeNamedDispatchSettings
+            {customer_id=c.id,name=c.name,enabled=true,scenes=Array.Empty<CafeNamedDispatchScene>()})).ToArray();
+        foreach(string mode in new[]{"clear","fast"})
+        foreach(int seed in Enumerable.Range(0,10).Append(42))
+        {
+            var rules=Decode<CafeRules>(File.ReadAllText(rulesPath));
+            rules.stamina_growth=Decode<CafeStaminaRules>(File.ReadAllText(Path.Combine(Path.GetDirectoryName(rulesPath),"stamina_growth.json")));
+            rules.named_dispatch=settings;
+            var sim=new CafeSimulation(rules,seed,"popularity");
+            var rows=candidates.ToDictionary(c=>c.id,c=>new DispatchBalanceRow());
+            var firstOverlap=new Dictionary<string,int>();
+            int lastDay=0, operations=0;
+            while(sim.State.day<=120 && sim.State.game_over==null && operations++<100000)
+            {
+                var s=sim.State;
+                if(s.phase=="preparation" && s.day!=lastDay)
+                {
+                    lastDay=s.day;
+                    foreach(var candidate in candidates)
+                    {
+                        rows[candidate.id].Observe(sim,candidate.id,50);
+                        if(sim.DiscontentScore(candidate.id,s.day)>=50 && s.relationships.Any(r=>r.customer_id==candidate.id
+                            && r.affinity>=80 && sim.NamedAffinity(candidate.id).Any(e=>e.cat_id==r.cat_id)))
+                            firstOverlap.TryAdd(candidate.id,s.day);
+                    }
+                }
+                var request=sim.NamedCustomers.FirstOrDefault(sim.NamedDispatchAwaitingAnswer);
+                if(request!=null && s.phase=="preparation")
+                    sim.Execute("resolve_sato_dispatch",catId:request,choice:"decline");
+                else
+                    BalanceExecute(sim,BalanceOp(sim,"popularity",mode,false));
+            }
+            Assert(sim.State.day==121,"Remaining guest comparison did not finish: "+mode+"/"+seed);
+            sim.Validate(sim.State);
+            foreach(var candidate in candidates)
+            {
+                var row=rows[candidate.id];
+                var visits=sim.State.history.SelectMany(h=>h.customer_records).Where(v=>v.customer_id==candidate.id).ToArray();
+                var request=sim.NamedRequest(candidate.id);
+                Console.WriteLine(Encode(new{mode,seed,customer=candidate.id,unlocked_after=sim.ClearedGoalDay(candidate.stage),
+                    visits=visits.Length,services=visits.Count(v=>v.satisfaction!=null),row.affinity_day,row.discontent_day,
+                    first_overlap_day=firstOverlap.GetValueOrDefault(candidate.id),request_day=request?.requested_day,
+                    requested_cat=request?.cat_id,row.max_affinity,row.max_discontent,row.overlap_days,
+                    row.cat_block_days,row.staff_block_days,row.competition_days}));
+            }
+        }
+    }
+
     static void RepeatedSuspensionChecks(string rulesPath)
     {
         var rules = Decode<CafeRules>(File.ReadAllText(rulesPath));
