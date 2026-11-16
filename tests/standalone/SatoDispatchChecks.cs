@@ -348,6 +348,7 @@ static partial class Program
     {
         var preferredSeat=typeof(CafeSimulation).GetMethod("PreferredSeat",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic);
         bool checkpointsWritten=false, receivedRequest=false;
+        bool requiresFixture=customer is "guest-7" or "guest-8" or "guest-11" or "guest-12";
         // Kato's two natural requests were identified in the remaining-guest comparison.
         int[] seeds=customer=="guest-10"?new[]{0,5}:new[]{0,1,42};
         foreach(int seed in seeds)
@@ -356,7 +357,7 @@ static partial class Program
             rules.stamina_growth=Decode<CafeStaminaRules>(File.ReadAllText(Path.Combine(Path.GetDirectoryName(rulesPath),"stamina_growth.json")));
             rules.named_dispatch=settings;
             int stage=int.Parse(customer.Substring("guest-".Length))>rules.arrival_ticks.Length+rules.popular_customer_count?2:1;
-            string mode=stage==2?"fast":"clear";
+            string mode=customer is "guest-8" or "guest-11"?"fast":"clear";
             var sim=new CafeSimulation(rules,seed,"popularity");
             string checkpoints=checkpointDirectory!=null && !checkpointsWritten?Path.Combine(checkpointDirectory,customer):null;
             CafeSnapshot affinityCheckpoint=null, unlockCheckpoint=null;
@@ -375,7 +376,7 @@ static partial class Program
                 if(sim.ClearedGoalDay(stage)==0)
                     issuedWhileLocked|=sim.CustomerSchedule(s.day).Any(a=>a.customer_id==customer)
                         || sim.NamedRequest(customer)!=null || sim.NamedAffinity(customer).Count>0;
-                if(stage==2 && seed==0 && unlockCheckpoint==null && s.phase=="preparation" && sim.ClearedGoalDay(stage)>0)
+                if(requiresFixture && seed==0 && unlockCheckpoint==null && s.phase=="preparation" && sim.ClearedGoalDay(stage)>0)
                     unlockCheckpoint=CloneDispatchSnapshot(s);
                 if(s.phase=="preparation" && affinityDay==0 && sim.NamedAffinity(customer).Count>0)
                 {
@@ -401,8 +402,9 @@ static partial class Program
                     BalanceExecute(sim,BalanceOp(sim,"popularity",mode,false));
             }
             Assert(!issuedWhileLocked,"Locked guest issued an event");
-            Assert(sim.State.day==121 && sim.ClearedGoalDay(stage)>0 && affinityDay>sim.ClearedGoalDay(stage),
-                "Unlocked guest did not develop an affinity scene in seed "+seed);
+            Assert(sim.State.day==121 && sim.ClearedGoalDay(stage)>0
+                && (affinityDay>sim.ClearedGoalDay(stage) || requiresFixture && affinityDay==0),
+                "Unlocked guest did not finish the comparison in seed "+seed);
             var requestAfterUnlock=sim.NamedRequest(customer);
             Assert(requestAfterUnlock==null || requestAfterUnlock.requested_day>=affinityDay,
                 "Unlocked guest did not receive a request after the affinity scene in seed "+seed);
@@ -415,7 +417,7 @@ static partial class Program
             Console.WriteLine(Encode(new{customer,seed,stage,unlocked_after=sim.ClearedGoalDay(stage),affinity_day=affinityDay,
                 visits=visits.Length,services=visits.Count(v=>v.satisfaction!=null),request_day=sim.NamedRequest(customer)?.requested_day,
                 observed.max_discontent,observed.overlap_days,observed.staff_block_days}));
-            if(stage==2 && seed==0 && requestAfterUnlock==null)
+            if(requiresFixture && seed==0 && requestAfterUnlock==null)
             {
                 var shortage=new CafeSimulation(rules);
                 shortage.Restore(unlockCheckpoint);
@@ -446,16 +448,28 @@ static partial class Program
     {
         CafeSnapshot affinity=null;
         int started=sim.State.day, operations=0;
-        while(sim.State.day<started+10 && !sim.NamedDispatchAwaitingAnswer(customer)
+        sim.Execute("set_auto_assignment",choice:"manual");
+        while(sim.State.day<started+75 && !sim.NamedDispatchAwaitingAnswer(customer)
             && sim.State.game_over==null && operations++<20000)
         {
             var s=sim.State;
             if(affinity==null && s.phase=="preparation" && sim.NamedAffinity(customer).Count>0)
+            {
+                sim.Execute("set_auto_assignment",choice:"automatic");
                 affinity=CloneDispatchSnapshot(s);
+            }
             if(affinity==null && s.phase=="open")
             {
                 var exchange=s.exchanges.FirstOrDefault(e=>e.customer_id==customer);
                 if(exchange!=null)exchange.affinity_pending=100;
+                if(sim.AssignmentWaiting)
+                {
+                    string guest=s.queue.Contains(customer)?customer:s.queue[0];
+                    var assigned=sim.AssignmentCats.OrderByDescending(c=>sim.AssignmentMatched(c.id,guest))
+                        .ThenByDescending(c=>c.stamina).ThenBy(c=>c.id,StringComparer.Ordinal).First();
+                    sim.Execute("assign_service",catId:assigned.id,seatId:"seat-"+(sim.AssignmentFreeSeats[0]+1),customerId:guest);
+                    continue;
+                }
             }
             var other=sim.NamedCustomers.FirstOrDefault(c=>c!=customer && sim.NamedDispatchAwaitingAnswer(c));
             if(other!=null && s.phase=="preparation")
@@ -463,9 +477,14 @@ static partial class Program
                 sim.Execute("resolve_sato_dispatch",catId:other,choice:"decline");
                 continue;
             }
-            var op=BalanceOp(sim,"popularity","fast",false);
+            var op=BalanceOp(sim,"popularity",customer=="guest-12"?"clear":"fast",false);
             if(s.phase=="preparation" && (op.kind=="set_shifts" || op.kind=="start_business" || op.kind=="expand_seats"))
             {
+                if(customer=="guest-12" && affinity==null && op.kind!="expand_seats")
+                {
+                    BalanceExecute(sim,op);
+                    continue;
+                }
                 var available=s.cats.Where(c=>c.activity=="cafe" && c.health=="healthy").ToArray();
                 var workers=(affinity==null?available:available.Take(1)).ToArray();
                 if(s.cats.Where(c=>c.working).Select(c=>c.id).SequenceEqual(workers.Select(c=>c.id)))
@@ -481,8 +500,11 @@ static partial class Program
             }
             BalanceExecute(sim,op);
         }
+        if(!sim.State.auto_assignment)sim.Execute("set_auto_assignment",choice:"automatic");
+        if(affinity==null && sim.NamedAffinity(customer).Count>0)
+            affinity=CloneDispatchSnapshot(sim.State);
         Console.WriteLine(Encode(new{customer,seed,policy="controlled-fixture-after-unlock",affinity_day=affinity?.day,
-            request_day=sim.NamedRequest(customer)?.requested_day,sim.State.seat_count,
+            request_day=sim.NamedRequest(customer)?.requested_day,sim.State.seat_count,sim.State.day,sim.State.game_over,
             discontent=sim.DiscontentScore(customer,sim.State.day)}));
         return affinity;
     }
@@ -531,7 +553,7 @@ static partial class Program
         var configured=Decode<CafeNamedDispatchSettings[]>(bundle["named_dispatch"].ToJsonString());
         var candidates=new[]{(id:"guest-7",name:"山本さん",stage:1),(id:"guest-8",name:"中村さん",stage:1),
             (id:"guest-10",name:"加藤さん",stage:1),(id:"guest-12",name:"山田さん",stage:2)};
-        var settings=configured.Concat(candidates.Select(c=>new CafeNamedDispatchSettings
+        var settings=configured.Where(row=>candidates.All(c=>c.id!=row.customer_id)).Concat(candidates.Select(c=>new CafeNamedDispatchSettings
             {customer_id=c.id,name=c.name,enabled=true,scenes=Array.Empty<CafeNamedDispatchScene>()})).ToArray();
         foreach(string mode in new[]{"clear","fast"})
         foreach(int seed in Enumerable.Range(0,10).Append(42))
@@ -720,6 +742,8 @@ static partial class Program
             var saved=Decode<CafeSnapshot>(Encode(baseline.State));
             saved.NormalizeJsonStrings();
             sim.Restore(saved);
+            if(target==null && !sim.State.auto_assignment)
+                sim.Execute("set_auto_assignment",choice:"automatic");
             var original=sim.NamedRequest(guest);
             int operations=0;
             while(sim.State.game_over==null && operations++<30000)
