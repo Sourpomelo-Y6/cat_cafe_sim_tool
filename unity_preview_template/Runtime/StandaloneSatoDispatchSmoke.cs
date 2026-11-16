@@ -142,8 +142,12 @@ namespace CatCafePreview
                 }
                 else
                 {
-                    int guestNumber=int.Parse(guest.customer_id.Substring("guest-".Length));
-                    int goalStage=guestNumber>sim.Rules.arrival_ticks.Length+sim.Rules.popular_customer_count?2:1;
+                    int goalStage=guest.customer_id=="vip-calico"?3:guest.customer_id=="advanced-longhair"?2:1;
+                    if(guest.customer_id.StartsWith("guest-",StringComparison.Ordinal))
+                    {
+                        int guestNumber=int.Parse(guest.customer_id.Substring("guest-".Length));
+                        if(guestNumber>sim.Rules.arrival_ticks.Length+sim.Rules.popular_customer_count)goalStage=2;
+                    }
                     unlocked=sim.ClearedGoalDay(goalStage)>0;
                 }
                 Check(unlocked && sim.NamedAffinity(guest.customer_id).Count>0,"Unlocked guest affinity was not restored");

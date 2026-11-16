@@ -17,7 +17,10 @@ static partial class Program
         var reminder=CafeNamedDispatchDialogue.Request(settings,customer.customer_id,cat,customer.name,true,true,false);
         Assert(reminder[0].text==CafeNamedDispatchDialogue.Request(null,customer.customer_id,cat,customer.name,true,true,false)[0].text,
             "Request override spilled into reminder");
-        Assert(CafeNamedDispatchDialogue.Epilogue(settings,customer.customer_id,cat,customer.name)[1].text.Contains(cat),
+        var epilogue=CafeNamedDispatchDialogue.Epilogue(settings,customer.customer_id,cat,customer.name);
+        var letter=customer.scenes.FirstOrDefault(scene=>scene.id=="epilogue");
+        Assert(epilogue.Any(line=>line.text.Contains(cat)) && (letter==null || letter.lines.Select((line,i)=>new{line,i})
+            .Where(row=>row.line.Contains("{cat}")).All(row=>epilogue[row.i].text.Contains(cat))),
             "Epilogue did not use actual adopted cat");
     }
 
@@ -316,6 +319,8 @@ static partial class Program
         {
             if(guest.customer_id.StartsWith("expanded-guest-",StringComparison.Ordinal))
                 ExpandedCapacityDispatchChecks(rulesPath,configured,guest.customer_id,checkpointDirectory);
+            else if(guest.customer_id.StartsWith("advanced-",StringComparison.Ordinal) || guest.customer_id=="vip-calico")
+                SpecialistDispatchChecks(rulesPath,configured,guest.customer_id,checkpointDirectory);
             else
                 GoalUnlockedDispatchChecks(rulesPath,configured,guest.customer_id,checkpointDirectory);
         }
@@ -538,6 +543,86 @@ static partial class Program
         }
         Console.WriteLine(Encode(new{customer,seats,purchase_day=purchaseDay,roster,capacity,
             affinity_day=affinity.day,request_day=sim.NamedRequest(customer).requested_day}));
+    }
+
+    static void SpecialistDispatchChecks(string rulesPath,CafeNamedDispatchSettings[] settings,string customer,string checkpointDirectory)
+    {
+        var rules=Decode<CafeRules>(File.ReadAllText(rulesPath));
+        rules.stamina_growth=Decode<CafeStaminaRules>(File.ReadAllText(Path.Combine(Path.GetDirectoryName(rulesPath),"stamina_growth.json")));
+        rules.named_dispatch=settings;
+        var sim=new CafeSimulation(rules,0,"popularity");
+        int stage=customer=="vip-calico"?3:customer=="advanced-longhair"?2:1;
+        int operations=0;
+        bool accessBeforeUnlock=false;
+        while(sim.State.day<=60 && sim.State.game_over==null && operations++<50000)
+        {
+            var state=sim.State;
+            int cleared=sim.ClearedGoalDay(stage);
+            if(cleared>0 && state.day>cleared)break;
+            accessBeforeUnlock|=sim.CustomerSchedule(state.day).Any(a=>a.customer_id==customer)
+                || sim.NamedAffinity(customer).Count>0 || sim.NamedRequest(customer)!=null;
+            var pending=sim.NamedCustomers.FirstOrDefault(sim.NamedDispatchAwaitingAnswer);
+            if(pending!=null && state.phase=="preparation")
+                sim.Execute("resolve_sato_dispatch",catId:pending,choice:"decline");
+            else
+                BalanceExecute(sim,BalanceOp(sim,"popularity","clear",false));
+        }
+        int unlockedAfter=sim.ClearedGoalDay(stage);
+        Assert(!accessBeforeUnlock && unlockedAfter>0 && sim.State.day==unlockedAfter+1,"Wrong specialist unlock: "+customer);
+        foreach(int day in Enumerable.Range(sim.State.day,14))
+        {
+            int weekday=(rules.start_weekday+day-1)%7;
+            bool expected=customer switch
+            {
+                "advanced-quiet"=>rules.play_customer.quiet_weekdays.Contains(weekday),
+                "advanced-play"=>rules.play_customer.weekdays.Contains(weekday),
+                "advanced-contact"=>rules.contact_customer.weekdays.Contains(weekday),
+                "advanced-longhair"=>CafeSimulation.LonghairDraw(sim.State.seed,day)<rules.longhair_customer.probability,
+                _=>true
+            };
+            Assert(sim.CustomerSchedule(day).Count(a=>a.customer_id==customer)==(expected?1:0),
+                "Specialist arrival schedule differs: "+customer+"/"+day);
+        }
+        AssertSpecialistServiceReward(sim,customer);
+        var affinity=ExerciseUnlockedDispatch(sim,customer,0);
+        Assert(affinity!=null && sim.NamedDispatchAwaitingAnswer(customer),"Specialist request did not issue: "+customer);
+        int firstVisit=sim.State.history.First(h=>h.customer_records.Any(v=>v.customer_id==customer)).day;
+        Assert(firstVisit>unlockedAfter,"Specialist visited before unlock: "+customer);
+        string checkpoints=checkpointDirectory==null?null:Path.Combine(checkpointDirectory,customer);
+        bool reissued=NaturalNamedDispatchContinuation(sim,0,customer,null,null,null,50,checkpoints);
+        Assert(checkpoints==null || reissued,"No specialist reissue to verify in Windows: "+customer);
+        if(checkpoints!=null)
+        {
+            SaveDispatchCheckpoint(sim,checkpoints,"affinity",affinity);
+            SaveDispatchCheckpoint(sim,checkpoints,"request");
+        }
+        Console.WriteLine(Encode(new{customer,stage,unlocked_after=unlockedAfter,first_visit=firstVisit,
+            affinity_day=affinity.day,request_day=sim.NamedRequest(customer).requested_day}));
+    }
+
+    static void AssertSpecialistServiceReward(CafeSimulation sim,string customer)
+    {
+        (string cat,int connect,int open,bool equipment,int actions,int simultaneous,double bonus,double popularity) sample=customer switch
+        {
+            "advanced-white"=>("cat-sora",1,0,false,0,0,100,0),
+            "advanced-quiet"=>("cat-mugi",0,0,true,3,0,150,3),
+            "advanced-play"=>("cat-mugi",0,0,true,4,0,180,4),
+            "advanced-contact"=>("cat-mugi",0,0,true,3,0,160,3),
+            "advanced-longhair"=>("cat-kohaku",0,0,false,3,0,120,2),
+            "vip-calico"=>("cat-mike",1,1,false,0,1,400,10),
+            _=>throw new ArgumentException("Unknown specialist customer",nameof(customer))
+        };
+        var flags=System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic;
+        var result=typeof(CafeSimulation).GetMethod("SpecialistResult",flags);
+        var success=(string)result.Invoke(sim,new object[]{sim.State,customer,sample.cat,sample.connect,sample.open,
+            sample.equipment,sample.actions,sample.simultaneous});
+        var failure=(string)result.Invoke(sim,new object[]{sim.State,customer,sample.cat,0,0,false,0,0});
+        Assert(success=="success" && failure=="failure","Specialist service conditions changed: "+customer);
+        var bonus=typeof(CafeSimulation).GetMethod("SpecialistBonus",flags);
+        var popularity=typeof(CafeSimulation).GetMethod("SpecialistPopularity",flags);
+        Assert((double)bonus.Invoke(sim,new object[]{customer,success})==sample.bonus
+            && (double)popularity.Invoke(sim,new object[]{customer,success})==sample.popularity,
+            "Specialist service rewards changed: "+customer);
     }
 
     static void AssertDispatchCapacityBoundary(CafeSimulation fixture,string customer,int seats)
