@@ -116,21 +116,29 @@ namespace CatCafePreview
 
         private IEnumerator Run()
         {
-            foreach(var customer in CafeSimulation.NamedDispatchCustomers)
-            foreach(var route in new[]{"normal","decline","expired","refused"})
+            var content=JsonUtility.FromJson<ContentCatalog>(Resources.Load<TextAsset>("CatCafeContent/catalog").text);
+            var configured=JsonUtility.FromJson<ContentBundle>(Resources.Load<TextAsset>(content.bundleResource).text).named_dispatch;
+            var guests=CafeSimulation.NamedDispatchCustomers.Concat((configured??Array.Empty<CafeNamedDispatchSettings>())
+                .Where(r=>r.enabled && !CafeSimulation.NamedDispatchCustomers.Contains(r.customer_id)).Select(r=>r.customer_id)).ToArray();
+            foreach(var customer in guests)
+            foreach(var route in new[]{"normal","decline","expired","refused","repeat"})
             {
                 var rules=JsonUtility.FromJson<CafeRules>(Resources.Load<TextAsset>("CatCafeStandalone/rules").text);
                 rules.store_events.probability=0;
-                if(route=="expired")rules.satisfaction.satisfied_score=1;
+                if(route=="expired" || route=="repeat")rules.satisfaction.satisfied_score=1;
                 rules.starting_funds=100000;
                 // Force suspension in one missed visit for the refusal fixture.
                 if(route=="refused")rules.discontent.waiting_gain=100;
-                if(customer==CafeSimulation.Suzuki)
+                var setting=configured?.SingleOrDefault(r=>r.customer_id==customer);
+                if(setting!=null)rules.named_dispatch=new[]{setting};
+                int slot=Array.IndexOf(guests,customer);
+                if(slot>0)
                 {
-                    (rules.arrival_ticks[0],rules.arrival_ticks[1])=(rules.arrival_ticks[1],rules.arrival_ticks[0]);
-                    (rules.patterns[0],rules.patterns[1])=(rules.patterns[1],rules.patterns[0]);
+                    (rules.arrival_ticks[0],rules.arrival_ticks[slot])=(rules.arrival_ticks[slot],rules.arrival_ticks[0]);
+                    int pattern=slot%rules.patterns.Length;
+                    (rules.patterns[0],rules.patterns[pattern])=(rules.patterns[pattern],rules.patterns[0]);
                 }
-                string customerName=CafeSimulation.NamedCustomerName(customer);
+                string customerName=setting?.name??CafeSimulation.NamedCustomerName(customer);
                 var backend=new LocalCafeBackend(Path.Combine(output,customer,route),rules);
                 var sim=backend.Simulation;
                 string cat=sim.State.cats[0].id;
@@ -196,7 +204,7 @@ namespace CatCafePreview
                 yield return null;
                 OpenRow(list,customerName+(route=="refused"?"からの催促":"からの指名依頼"));
                 Check(dialogue.PlaybackKey==position,"Request page was lost");
-                if(route=="expired")
+                if(route=="expired" || route=="repeat")
                 {
                     dialogue.Close();
                     sim.Execute("day_off");
@@ -259,7 +267,7 @@ namespace CatCafePreview
                     yield return null;
                 }
                 Check(returnDialog.PlaybackChoosing,"Return access choices did not open");
-                bool allow=route=="expired";
+                bool allow=route=="expired" || route=="repeat";
                 var returnText=returnDialog.PlaybackHost.GetComponentsInChildren<Text>().Select(t=>t.text).ToArray();
                 Check(returnText.Contains("指名猫の帰還") && returnText.Any(t=>t.Contains(allow?"連れ去り":"返還拒否")),"Wrong named return heading");
                 Check(returnText.All(t=>!t.Contains("家出")),"Named return used runaway wording");
@@ -320,6 +328,30 @@ namespace CatCafePreview
                     continue;
                 }
                 yield return new WaitUntil(()=>client.UIStateReady);
+                if(route=="repeat")
+                {
+                    int retryDay=sim.NamedRequest(customer).returned_day+8;
+                    while(sim.State.day<retryDay)
+                    {
+                        Check(!sim.NamedDispatchAwaitingAnswer(customer),"Request reissued early");
+                        Prepare(sim);
+                        sim.Execute("day_off");
+                        if(sim.State.phase=="closed" && sim.GrowthWaiting)
+                        {
+                            sim.Execute("resolve_growth_auto");
+                            sim.Execute("resolve_growth_batch");
+                            sim.Execute("next_day");
+                        }
+                    }
+                    Check(sim.NamedDispatchAwaitingAnswer(customer) && !sim.CustomerTrustWaiting,"Request was not reissued on day eight");
+                    Command(backend,"save_game");
+                    Command(backend,"load_game");
+                    Apply(client,backend);
+                    OpenRow(list,customerName+"からの指名依頼");
+                    Check(dialogue.Showing,"Reissued request did not open after reload");
+                    dialogue.Close();
+                    continue;
+                }
                 sim.Execute("configure_adoption",choice:"on");
                 sim.Execute("day_off");
                 var offer=sim.State.adoption.events.Single(e=>CafeSimulation.IsNamedAdoption(e.source) && e.customer_id==customer);
@@ -342,7 +374,7 @@ namespace CatCafePreview
                 Check(entry.GetComponentInChildren<Text>().text=="後日談・未読","Unread epilogue button absent");
                 entry.onClick.Invoke();
                 var reader=client.GetComponent<SatoEpiloguePanel>();
-                Check(reader.PlaybackKey.StartsWith(customer==CafeSimulation.Suzuki?"suzuki.epilogue.v1":"sato.epilogue.v1"),"Wrong epilogue customer");
+                Check(reader.PlaybackKey.StartsWith(CafeSimulation.NamedEpilogueId(customer)),"Wrong epilogue customer");
                 Check(reader.Showing && !details.panel.activeSelf,"Cat details cover the epilogue");
                 for(int frame=0;frame<40 && reader.Showing;frame++){reader.Next();yield return null;}
                 Check(!reader.Showing,$"Epilogue did not finish: {reader.PlaybackKey}, ready={client.CanManageSaves}, visible={details.panel.activeSelf}, key={client.CurrentState.instance_id}");

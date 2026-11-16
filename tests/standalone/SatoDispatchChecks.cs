@@ -7,9 +7,13 @@ static partial class Program
         const string cat="タマ";
         var baseline=CafeNamedDispatchDialogue.Request(null,customer.customer_id,cat,customer.name,true,false,false);
         var lines=CafeNamedDispatchDialogue.Request(settings,customer.customer_id,cat,customer.name,true,false,false);
-        Assert(lines[0].text.Contains(cat) && lines[0].text.Contains(customer.name) && lines[0].text!=baseline[0].text,
-            "Customer request override did not expand both names");
-        Assert(lines[1].text==baseline[1].text,"Blank request line failed to use its default");
+        var request = customer.scenes.Single(scene=>scene.id=="request");
+        for (int i=0; i<lines.Length; i++)
+        {
+            var expected = string.IsNullOrWhiteSpace(request.lines[i]) ? baseline[i].text
+                : request.lines[i].Replace("{cat}",cat).Replace("{customer}",customer.name);
+            Assert(lines[i].text==expected,"Request override or default differs from its setting");
+        }
         var reminder=CafeNamedDispatchDialogue.Request(settings,customer.customer_id,cat,customer.name,true,true,false);
         Assert(reminder[0].text==CafeNamedDispatchDialogue.Request(null,customer.customer_id,cat,customer.name,true,true,false)[0].text,
             "Request override spilled into reminder");
@@ -22,20 +26,21 @@ static partial class Program
         RepeatedSuspensionChecks(rulesPath);
         var json=bundlePath==null?null:System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(bundlePath));
         var configured=json==null?null:Decode<CafeNamedDispatchSettings[]>(json["named_dispatch"].ToJsonString());
-        var third=configured?.Single(r=>r.enabled && !CafeSimulation.NamedDispatchCustomers.Contains(r.customer_id));
-        if(third!=null)
+        var additional=configured?.Where(r=>r.enabled && !CafeSimulation.NamedDispatchCustomers.Contains(r.customer_id)).ToArray()
+            ?? Array.Empty<CafeNamedDispatchSettings>();
+        foreach(var guest in additional)
         {
-            NamedDispatchTextChecks(configured,third);
+            NamedDispatchTextChecks(configured,guest);
             var disabledRules=Decode<CafeRules>(File.ReadAllText(rulesPath));
             disabledRules.named_dispatch=new[]{
-                new CafeNamedDispatchSettings {customer_id=third.customer_id,name=third.name,scenes=third.scenes},
+                new CafeNamedDispatchSettings {customer_id=guest.customer_id,name=guest.name,scenes=guest.scenes},
                 new CafeNamedDispatchSettings {customer_id=CafeSimulation.Sato,name="佐藤さん",scenes=Array.Empty<CafeNamedDispatchScene>()}};
             var disabled=new CafeSimulation(disabledRules);
             Assert(disabled.NamedCustomers.Contains(CafeSimulation.Suzuki) &&
                 !disabled.EnabledNamedCustomers.Contains(CafeSimulation.Sato) &&
-                !disabled.EnabledNamedCustomers.Contains(third.customer_id),"Explicit disabled settings were ignored");
+                !disabled.EnabledNamedCustomers.Contains(guest.customer_id),"Explicit disabled settings were ignored");
         }
-        var customers=third==null?CafeSimulation.NamedDispatchCustomers:CafeSimulation.NamedDispatchCustomers.Concat(new[]{third.customer_id});
+        var customers=CafeSimulation.NamedDispatchCustomers.Concat(additional.Select(r=>r.customer_id)).ToArray();
         foreach (var customer in customers)
         foreach (var route in new[]{"normal","decline","expired","refused","adopt","decline-adoption","ban","low-score","legacy-return"})
         {
@@ -45,8 +50,9 @@ static partial class Program
             // Force suspension in one missed visit for the refusal fixture.
             if(route=="refused")rules.discontent.waiting_gain=100;
             rules.store_events.probability=0;
-            if(customer==third?.customer_id)rules.named_dispatch=configured;
-            int slot=Array.IndexOf(customers.ToArray(),customer);
+            var setting=additional.SingleOrDefault(r=>r.customer_id==customer);
+            if(setting!=null)rules.named_dispatch=new[]{setting};
+            int slot=Array.IndexOf(customers,customer);
             if(slot>0)
             {
                 // Give the customer under test the standard fixture's arrival slot and calendar.
@@ -72,7 +78,7 @@ static partial class Program
                 var copy=Decode<CafeSnapshot>(encoded);
                 copy.NormalizeJsonStrings();
                 sim.Restore(copy);
-                if(customer==third?.customer_id)
+                if(setting!=null)
                 {
                     var withoutPack=Decode<CafeRules>(Encode(rules));
                     withoutPack.named_dispatch=null;
@@ -292,25 +298,43 @@ static partial class Program
                 .Invoke(conflict,new object[]{sharedCat,customer,90.0});
             conflict.ChangeDiscontent(conflict.State.discontent,conflict.State.day,customer,50);
         }
-        if(conflict.StoreEventWaiting)conflict.Execute("resolve_store_event",choice:"patch");
-        conflict.Execute("day_off");
-        Assert(conflict.NamedRequest(CafeSimulation.Sato)?.cat_id==sharedCat
-            && conflict.NamedRequest(CafeSimulation.Suzuki)==null,"Two customers can claim the same cat");
-        conflict.Execute("resolve_sato_dispatch",catId:CafeSimulation.Sato,choice:"decline");
-        if(conflict.StoreEventWaiting)conflict.Execute("resolve_store_event",choice:"patch");
-        conflict.Execute("day_off");
-        Assert(conflict.NamedRequest(CafeSimulation.Suzuki)?.cat_id==sharedCat,"Held request did not recheck after first request ended");
-        if(third!=null)
+        foreach(var customer in customers)
         {
-            Assert(conflict.NamedRequest(third.customer_id)==null,"Third customer reserved the same cat");
-            conflict.Execute("resolve_sato_dispatch",catId:CafeSimulation.Suzuki,choice:"decline");
+            if(conflict.IntakeWaiting)conflict.Execute("resolve_intake",choice:"decline");
             if(conflict.StoreEventWaiting)conflict.Execute("resolve_store_event",choice:"patch");
             conflict.Execute("day_off");
-            Assert(conflict.NamedRequest(third.customer_id)?.cat_id==sharedCat,"Third customer did not recheck released cat");
-            Assert(conflict.NamedRequest(CafeSimulation.Sato).declined_day!=0 &&
-                conflict.NamedRequest(CafeSimulation.Suzuki).declined_day!=0,"Third request overwrote a previous customer");
+            Assert(conflict.NamedCustomers.Where(conflict.NamedDispatchAwaitingAnswer).SequenceEqual(new[]{customer})
+                && conflict.NamedRequest(customer)?.cat_id==sharedCat,"Wrong priority or overlapping requests for "+customer);
+            conflict.Execute("resolve_sato_dispatch",catId:customer,choice:"decline");
         }
+        Assert(customers.All(c=>conflict.NamedRequest(c).declined_day>0),"Later request overwrote another customer's record");
+        if (customers.Length==6) InitialGuestDispatchFrequency(rulesPath,configured,customers);
         Console.WriteLine($"PASS named dispatch: {assertions} assertions");
+    }
+
+    static void InitialGuestDispatchFrequency(string rulesPath,CafeNamedDispatchSettings[] configured,string[] customers)
+    {
+        foreach(var mode in new[]{"clear","basic"})
+        foreach(int seed in new[]{0,1,42})
+        {
+            var rules=Decode<CafeRules>(File.ReadAllText(rulesPath));
+            rules.stamina_growth=Decode<CafeStaminaRules>(File.ReadAllText(Path.Combine(Path.GetDirectoryName(rulesPath),"stamina_growth.json")));
+            rules.named_dispatch=configured;
+            var sim=new CafeSimulation(rules,seed);
+            int operations=0;
+            while(sim.State.day<=60 && sim.State.game_over==null && operations++<50000)
+            {
+                var customer=customers.FirstOrDefault(sim.NamedDispatchAwaitingAnswer);
+                if(customer!=null && sim.State.phase=="preparation")
+                    sim.Execute("resolve_sato_dispatch",catId:customer,choice:"decline");
+                else
+                    BalanceExecute(sim,BalanceOp(sim,"popularity",mode,false));
+            }
+            Assert(sim.State.day==61,"Frequency run stopped before 60 days: "+mode+"/"+seed);
+            sim.Validate(sim.State);
+            string requested=string.Join(", ",customers.Where(c=>sim.NamedRequest(c)!=null));
+            Console.WriteLine($"60-day {mode}/{seed}: {(requested.Length==0?"no requests":requested)}");
+        }
     }
 
     static void RepeatedSuspensionChecks(string rulesPath)
