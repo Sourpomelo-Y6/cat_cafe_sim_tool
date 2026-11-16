@@ -372,4 +372,140 @@ static partial class Program
         copy.NormalizeJsonStrings();
         new CafeSimulation(rules).Restore(copy);
     }
+
+    static void InitialGuestDispatchBalance(string rulesPath,string bundlePath)
+    {
+        var bundle=System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(bundlePath));
+        var settings=Decode<CafeNamedDispatchSettings[]>(bundle["named_dispatch"].ToJsonString());
+        var guests=Enumerable.Range(1,6).Select(i=>"guest-"+i).ToArray();
+        var preferredSeat=typeof(CafeSimulation).GetMethod("PreferredSeat",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic);
+        foreach(int seed in new[]{0,1,42})
+        foreach(string target in new string[]{null}.Concat(guests))
+        {
+            var rules=Decode<CafeRules>(File.ReadAllText(rulesPath));
+            rules.stamina_growth=Decode<CafeStaminaRules>(File.ReadAllText(Path.Combine(Path.GetDirectoryName(rulesPath),"stamina_growth.json")));
+            rules.named_dispatch=settings;
+            var sim=new CafeSimulation(rules,seed);
+            string favorite=target==null?null:sim.State.cats.OrderByDescending(c=>sim.AssignmentMatched(c.id,target))
+                .ThenBy(c=>c.id,StringComparer.Ordinal).First().id;
+            if(target!=null)sim.Execute("set_auto_assignment",choice:"manual");
+            var rows=guests.ToDictionary(c=>c,c=>new DispatchBalanceRow());
+            int observedDay=0, operations=0;
+            while(sim.State.day<=60 && sim.State.game_over==null && operations++<50000)
+            {
+                var state=sim.State;
+                if(state.phase=="preparation" && state.day!=observedDay)
+                {
+                    observedDay=state.day;
+                    foreach(string guest in guests)rows[guest].Observe(sim,guest);
+                }
+                if(target!=null && sim.AssignmentWaiting)
+                {
+                    var available=sim.AssignmentCats;
+                    string guest=state.queue[0];
+                    // Give the chosen pair first refusal when both are available.
+                    bool prefer=state.queue.Contains(target) && available.Any(c=>c.id==favorite);
+                    if(prefer)guest=target;
+                    var cat=prefer?available.Single(c=>c.id==favorite):
+                        available.OrderByDescending(c=>sim.AssignmentMatched(c.id,guest))
+                            .ThenByDescending(c=>c.stamina).ThenBy(c=>c.id,StringComparer.Ordinal).First();
+                    int seat=(int)preferredSeat.Invoke(sim,new object[]{guest,sim.AssignmentFreeSeats});
+                    sim.Execute("assign_service",catId:cat.id,seatId:"seat-"+(seat+1),customerId:guest);
+                    continue;
+                }
+                string request=guests.FirstOrDefault(sim.NamedDispatchAwaitingAnswer);
+                if(request!=null && state.phase=="preparation")
+                {
+                    if(target==null)
+                        NaturalNamedDispatchContinuation(sim,seed,request);
+                    sim.Execute("resolve_sato_dispatch",catId:request,choice:"decline");
+                }
+                else
+                    BalanceExecute(sim,BalanceOp(sim,"popularity","clear",false));
+            }
+            Assert(sim.State.day==61,"Comparison did not finish 60 days: "+seed+"/"+target);
+            sim.Validate(sim.State);
+            foreach(string guest in target==null?guests:new[]{target})
+            {
+                var visits=sim.State.history.SelectMany(d=>d.customer_records)
+                    .Where(v=>v.customer_id==guest && v.satisfaction!=null).ToArray();
+                Console.WriteLine(Encode(new{seed,policy=target==null?"auto":"same-cat",guest,favorite,
+                    services=visits.Length,favorite_services=visits.Count(v=>v.cat_id==favorite),rows[guest].affinity_day,
+                    rows[guest].discontent_day,rows[guest].request_day,rows[guest].max_affinity,rows[guest].max_discontent,
+                    rows[guest].overlap_days,rows[guest].cat_block_days,rows[guest].staff_block_days,rows[guest].competition_days}));
+            }
+        }
+    }
+
+    static void NaturalNamedDispatchContinuation(CafeSimulation baseline,int seed,string guest)
+    {
+        var branches=new[]{"open-as-usual","close-after-return","close-from-request"};
+        foreach(string branch in branches)
+        {
+            var sim=new CafeSimulation(baseline.Rules);
+            var saved=Decode<CafeSnapshot>(Encode(baseline.State));
+            saved.NormalizeJsonStrings();
+            sim.Restore(saved);
+            var original=sim.NamedRequest(guest);
+            int operations=0;
+            while(sim.State.game_over==null && operations++<30000)
+            {
+                var state=sim.State;
+                if(original.returned_day>0 && state.day>=original.returned_day+8)break;
+                if(sim.NamedReturnAccessPending(guest))
+                {
+                    sim.Execute("resolve_named_return_access",catId:guest,choice:"allow");
+                    continue;
+                }
+                var other=sim.NamedCustomers.FirstOrDefault(c=>c!=guest && sim.NamedDispatchAwaitingAnswer(c));
+                if(other!=null && state.phase=="preparation")
+                {
+                    sim.Execute("resolve_sato_dispatch",catId:other,choice:"decline");
+                    continue;
+                }
+                var op=BalanceOp(sim,"popularity","clear",false);
+                bool close=branch=="close-from-request" ||
+                    branch=="close-after-return" && original.return_access==CafeSimulation.AllowReturnAccess;
+                if(close && state.phase=="preparation" && op.kind=="start_business")
+                    op=new CafeAutoOperation {kind="day_off"};
+                BalanceExecute(sim,op);
+            }
+            Assert(original.returned_day>0 && sim.State.day==original.returned_day+8,"Natural continuation did not reach day eight");
+            sim.Validate(sim.State);
+            var repeat=sim.NamedRequest(guest);
+            Console.WriteLine(Encode(new{seed,branch,guest,request_day=original.requested_day,cat=original.cat_id,
+                missing_day=sim.State.missing_cases.Single(m=>CafeSimulation.NamedMissingCustomer(m.reason)==guest).departed_day,
+                return_day=original.returned_day,check_day=sim.State.day,discontent=sim.DiscontentScore(guest,sim.State.day),
+                reissue_day=repeat==original?(int?)null:repeat.requested_day}));
+        }
+    }
+
+    sealed class DispatchBalanceRow
+    {
+        public int? affinity_day, discontent_day, request_day;
+        public double max_affinity, max_discontent;
+        public int overlap_days, cat_block_days, staff_block_days, competition_days;
+
+        public void Observe(CafeSimulation sim,string guest)
+        {
+            var s=sim.State;
+            double score=sim.DiscontentScore(guest,s.day);
+            var affinity=s.relationships.Where(r=>r.customer_id==guest).ToArray();
+            max_affinity=Math.Max(max_affinity,affinity.Select(r=>r.affinity).DefaultIfEmpty().Max());
+            max_discontent=Math.Max(max_discontent,score);
+            if(max_affinity>=80)affinity_day??=s.day;
+            if(score>=50)discontent_day??=s.day;
+            if(sim.NamedRequest(guest) is CafeSatoDispatch request){request_day??=request.requested_day;return;}
+            var pairs=affinity.Where(r=>r.affinity>=80 && sim.NamedAffinity(guest).Any(e=>e.cat_id==r.cat_id)).ToArray();
+            if(pairs.Length==0 || score<50)return;
+            overlap_days++;
+            var available=s.cats.Where(c=>c.activity=="cafe" && c.health=="healthy" && !c.cannot_continue && c.stamina>0).ToArray();
+            var eligible=available.Where(c=>c.fatigue<=CafeSimulation.SatoVisit.max_fatigue && pairs.Any(r=>r.cat_id==c.id)).ToArray();
+            if(eligible.Length==0)cat_block_days++;
+            if(available.Length<=s.seat_count)staff_block_days++;
+            if(eligible.Length>0 && eligible.All(c=>sim.NamedCustomers.Any(other=>
+                sim.NamedRequest(other) is CafeSatoDispatch active && active.cat_id==c.id && active.returned_day==0 && active.declined_day==0)))
+                competition_days++;
+        }
+    }
 }
