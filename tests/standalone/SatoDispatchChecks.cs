@@ -313,7 +313,12 @@ static partial class Program
         Assert(customers.All(c=>conflict.NamedRequest(c).declined_day>0),"Later request overwrote another customer's record");
         if (customers.Length==6) InitialGuestDispatchFrequency(rulesPath,configured,customers);
         foreach(var guest in additional.Where(r=>!initialIds.Contains(r.customer_id)))
-            GoalUnlockedDispatchChecks(rulesPath,configured,guest.customer_id,checkpointDirectory);
+        {
+            if(guest.customer_id.StartsWith("expanded-guest-",StringComparison.Ordinal))
+                ExpandedCapacityDispatchChecks(rulesPath,configured,guest.customer_id,checkpointDirectory);
+            else
+                GoalUnlockedDispatchChecks(rulesPath,configured,guest.customer_id,checkpointDirectory);
+        }
         if(additional.Any(r=>r.customer_id=="guest-9") && additional.Any(r=>r.customer_id=="guest-11"))
             GoalUnlockedRequestsCompete(rulesPath,configured);
         Console.WriteLine($"PASS named dispatch: {assertions} assertions");
@@ -429,7 +434,7 @@ static partial class Program
                 shortage.Restore(unlockCheckpoint);
                 var fixtureAffinity=ExerciseUnlockedDispatch(shortage,customer,seed);
                 Assert(shortage.NamedDispatchAwaitingAnswer(customer),"The unlocked guest fixture did not trigger a request");
-                if(expanded)AssertFourSeatDispatchBoundary(shortage,customer);
+                if(expanded)AssertDispatchCapacityBoundary(shortage,customer,4);
                 bool reissued=NaturalNamedDispatchContinuation(shortage,seed,customer,null,null,preferredSeat,50,checkpoints,"clear");
                 receivedRequest=true;
                 if(checkpoints!=null && reissued)
@@ -444,7 +449,98 @@ static partial class Program
         Assert(checkpointDirectory==null || checkpointsWritten,"No reissue to verify in Windows: "+customer);
     }
 
-    static void AssertFourSeatDispatchBoundary(CafeSimulation fixture,string customer)
+    static void ExpandedCapacityDispatchChecks(string rulesPath,CafeNamedDispatchSettings[] settings,string customer,string checkpointDirectory)
+    {
+        int seats=3+int.Parse(customer.Substring("expanded-guest-".Length));
+        var rules=Decode<CafeRules>(File.ReadAllText(rulesPath));
+        rules.stamina_growth=Decode<CafeStaminaRules>(File.ReadAllText(Path.Combine(Path.GetDirectoryName(rulesPath),"stamina_growth.json")));
+        rules.named_dispatch=settings;
+        var sim=new CafeSimulation(rules,0,"popularity");
+        int purchaseDay=0, operations=0;
+        while(sim.State.day<=90 && sim.State.game_over==null && operations++<50000)
+        {
+            var s=sim.State;
+            if(purchaseDay>0 && s.day>purchaseDay)break;
+            var pending=sim.NamedCustomers.FirstOrDefault(sim.NamedDispatchAwaitingAnswer);
+            if(pending!=null && s.phase=="preparation")
+            {
+                sim.Execute("resolve_sato_dispatch",catId:pending,choice:"decline");
+                continue;
+            }
+            if(sim.ItemsReason()=="" && s.funds>=6000)
+            {
+                if(sim.HousingCapacity(s,s.day)<=seats)
+                {
+                    sim.Execute(sim.NextHousingKind);
+                    continue;
+                }
+                if(sim.ActiveCatCount(s)<=seats)
+                {
+                    var recruit=sim.RecruitmentCandidates(s).FirstOrDefault(r=>sim.RecruitReason(r.cat.id)=="");
+                    if(recruit!=null)
+                    {
+                        sim.Execute("recruit_cat",catId:recruit.cat.id);
+                        continue;
+                    }
+                    if(sim.RecruitmentRefreshReason()=="")
+                    {
+                        sim.Execute("open_recruitment");
+                        continue;
+                    }
+                }
+                else if(s.seat_count<seats && sim.ExpansionReason()=="")
+                {
+                    sim.Execute("expand_seats");
+                    if(s.seat_count==seats)
+                    {
+                        purchaseDay=s.day;
+                        Assert(!sim.CustomerSchedule(s.day).Any(a=>a.customer_id==customer),
+                            "Expanded guest appeared on the purchase day: "+customer);
+                        sim.Execute("day_off");
+                    }
+                    continue;
+                }
+            }
+            var op=BalanceOp(sim,"popularity","clear",false);
+            if(op.kind=="expand_seats")
+            {
+                var workers=s.cats.Where(c=>c.activity=="cafe" && c.health=="healthy" && c.fatigue<60 && c.stress<60)
+                    .Select(c=>c.id).ToArray();
+                op=workers.Length==0?new CafeAutoOperation {kind="day_off"}:
+                    s.cats.Where(c=>c.working).Select(c=>c.id).SequenceEqual(workers)?new CafeAutoOperation {kind="start_business"}:
+                    new CafeAutoOperation {kind="set_shifts",working=workers};
+            }
+            BalanceExecute(sim,op);
+        }
+        var state=sim.State;
+        Assert(purchaseDay>0 && state.day==purchaseDay+1 && state.seat_count==seats
+            && sim.CustomerSchedule(state.day).Any(a=>a.customer_id==customer && a.tick==(seats-4)*6),
+            "Expanded guest was not scheduled the day after purchase: "+customer);
+        int roster=sim.ActiveCatCount(state), capacity=sim.HousingCapacity(state,state.day);
+        Assert(roster>=seats+1 && roster<=capacity,"Could not build the required roster: "+customer);
+        Assert(sim.NamedAffinity(customer).Count==0 && sim.NamedRequest(customer)==null,"Expanded guest issued an event before service");
+        sim.Validate(state);
+
+        var affinity=ExerciseUnlockedDispatch(sim,customer,0);
+        Assert(!sim.State.history.Take(purchaseDay).Any(h=>h.customer_records.Any(v=>v.customer_id==customer)),
+            "Expanded guest visited on or before the purchase day: "+customer);
+        Assert(sim.State.history[purchaseDay].customer_records.Any(v=>v.customer_id==customer),
+            "Expanded guest did not visit on the day after purchase: "+customer);
+        Assert(affinity!=null && sim.NamedDispatchAwaitingAnswer(customer),"Expanded guest did not receive a request: "+customer);
+        AssertDispatchCapacityBoundary(sim,customer,seats);
+        string checkpoints=checkpointDirectory==null?null:Path.Combine(checkpointDirectory,customer);
+        bool reissued=NaturalNamedDispatchContinuation(sim,0,customer,null,null,null,50,checkpoints);
+        Assert(checkpoints==null || reissued,"No expanded guest reissue to verify in Windows: "+customer);
+        if(checkpoints!=null)
+        {
+            SaveDispatchCheckpoint(sim,checkpoints,"affinity",affinity);
+            SaveDispatchCheckpoint(sim,checkpoints,"request");
+        }
+        Console.WriteLine(Encode(new{customer,seats,purchase_day=purchaseDay,roster,capacity,
+            affinity_day=affinity.day,request_day=sim.NamedRequest(customer).requested_day}));
+    }
+
+    static void AssertDispatchCapacityBoundary(CafeSimulation fixture,string customer,int seats)
     {
         var sim=new CafeSimulation(fixture.Rules);
         sim.Restore(CloneDispatchSnapshot(fixture.State));
@@ -452,16 +548,16 @@ static partial class Program
         var request=sim.NamedRequest(customer);
         var available=s.cats.Where(c=>c.activity=="cafe" && c.health=="healthy" && !c.cannot_continue && c.stamina>0)
             .OrderByDescending(c=>c.id==request.cat_id).ToArray();
-        Assert(s.seat_count==4 && available.Length>=5,"Expected four seats and five available cats");
+        Assert(s.seat_count==seats && available.Length>seats,"Expected at least one more available cat than seats");
         s.named_dispatch.Single(row=>row.customer_id==customer).request=null;
-        foreach(var cat in available.Skip(4))cat.cannot_continue=true;
+        foreach(var cat in available.Skip(seats))cat.cannot_continue=true;
         var present=typeof(CafeSimulation).GetMethod("PresentNamedDispatch",System.Reflection.BindingFlags.Instance
             | System.Reflection.BindingFlags.NonPublic);
         present.Invoke(sim,new object[]{customer});
-        Assert(sim.NamedRequest(customer)==null,"Four available cats must not permit a dispatch in a four-seat cafe");
-        available[4].cannot_continue=false;
+        Assert(sim.NamedRequest(customer)==null,"The same number of available cats and seats must not permit a dispatch");
+        available[seats].cannot_continue=false;
         present.Invoke(sim,new object[]{customer});
-        Assert(sim.NamedDispatchAwaitingAnswer(customer),"Five available cats should permit the request");
+        Assert(sim.NamedDispatchAwaitingAnswer(customer),"One extra available cat should permit the request");
     }
 
     static CafeSnapshot CloneDispatchSnapshot(CafeSnapshot state)

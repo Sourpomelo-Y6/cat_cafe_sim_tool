@@ -135,8 +135,11 @@ namespace CatCafePreview
 
                 var sim=backend.Simulation;
                 bool unlocked;
-                if(guest.customer_id=="expanded-guest")
-                    unlocked=sim.State.expansion.Any(p=>p.seats==4 && p.day<sim.State.day);
+                if(guest.customer_id.StartsWith("expanded-guest",StringComparison.Ordinal))
+                {
+                    int seats=guest.customer_id=="expanded-guest"?4:3+int.Parse(guest.customer_id.Substring("expanded-guest-".Length));
+                    unlocked=sim.State.expansion.Any(p=>p.seats==seats && p.day<sim.State.day);
+                }
                 else
                 {
                     int guestNumber=int.Parse(guest.customer_id.Substring("guest-".Length));
