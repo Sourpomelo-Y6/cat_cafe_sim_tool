@@ -50,6 +50,34 @@ namespace CatCafePreview.Editor
         {
             var folder = EditorUtility.OpenFolderPanel("制作ツールで書き出した素材パックを選ぶ", "", "");
             if (folder == "") return;
+            if (File.Exists(Path.Combine(folder, "bundle.json")))
+            {
+                try
+                {
+                    var comparison = ContentImportComparison.Compare(folder, Path.Combine(Application.dataPath, "Resources"));
+                    if (comparison.Count == 0)
+                    {
+                        EditorUtility.DisplayDialog("取り込みを省略しました", "現行の素材パックと同じ内容です。現在の素材を使います。", "OK");
+                        return;
+                    }
+                    int choice = EditorUtility.DisplayDialogComplex("本番パックとの差分",
+                        "差分 " + comparison.Count + " 件\n\n" + comparison.Summary,
+                        "取り込む", "キャンセル", "全差分をコンソールへ");
+                    if (choice == 2)
+                    {
+                        foreach (var change in comparison.FullSummary.Split('\n')) Debug.Log(change);
+                        EditorUtility.DisplayDialog("差分を出力しました", "コンソールで全差分を確認してから、取り込みを開き直してください。", "OK");
+                        return;
+                    }
+                    if (choice != 0) return;
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogException(ex);
+                    EditorUtility.DisplayDialog("比較できません", ex.Message, "OK");
+                    return;
+                }
+            }
             if(File.Exists(Path.Combine(folder,"state_images.json")))
             {
                 try{if(!EditorUtility.DisplayDialog("状態画像の全体置換",CatStateImageImport.ReplacementSummary(folder),"取り込む","キャンセル"))return;}
