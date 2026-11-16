@@ -373,27 +373,32 @@ static partial class Program
         new CafeSimulation(rules).Restore(copy);
     }
 
-    static void InitialGuestDispatchBalance(string rulesPath,string bundlePath)
+    static void InitialGuestDispatchBalance(string rulesPath,string bundlePath,string focus=null)
     {
         var bundle=System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(bundlePath));
         var settings=Decode<CafeNamedDispatchSettings[]>(bundle["named_dispatch"].ToJsonString());
         var guests=Enumerable.Range(1,6).Select(i=>"guest-"+i).ToArray();
+        if(focus!=null && !guests.Contains(focus))throw new ArgumentException("Choose an initial guest",nameof(focus));
+        int lastDay=focus==null?60:120;
         var preferredSeat=typeof(CafeSimulation).GetMethod("PreferredSeat",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic);
         var threshold=(double)typeof(CafeSimulation).GetField("SatoDiscontent",System.Reflection.BindingFlags.Static
             | System.Reflection.BindingFlags.NonPublic).GetRawConstantValue();
         foreach(int seed in Enumerable.Range(0,10).Append(42))
-        foreach(string target in new string[]{null}.Concat(guests))
+        foreach(string target in new string[]{null}.Concat(focus==null?guests:new[]{focus}))
         {
             var rules=Decode<CafeRules>(File.ReadAllText(rulesPath));
             rules.stamina_growth=Decode<CafeStaminaRules>(File.ReadAllText(Path.Combine(Path.GetDirectoryName(rulesPath),"stamina_growth.json")));
             rules.named_dispatch=settings;
             var sim=new CafeSimulation(rules,seed);
-            string favorite=target==null?null:sim.State.cats.OrderByDescending(c=>sim.AssignmentMatched(c.id,target))
+            string chosenGuest=target??focus;
+            string favorite=chosenGuest==null?null:sim.State.cats.OrderByDescending(c=>sim.AssignmentMatched(c.id,chosenGuest))
                 .ThenBy(c=>c.id,StringComparer.Ordinal).First().id;
             if(target!=null)sim.Execute("set_auto_assignment",choice:"manual");
             var rows=guests.ToDictionary(c=>c,c=>new DispatchBalanceRow());
+            var assignmentReasons=focus==null?null:new Dictionary<int,string>();
+            var dailyConditions=focus==null?null:new List<object>();
             int observedDay=0, operations=0, multiRequestDays=0, maxSameDayRequests=0;
-            while(sim.State.day<=60 && sim.State.game_over==null && operations++<50000)
+            while(sim.State.day<=lastDay && sim.State.game_over==null && operations++<100000)
             {
                 var state=sim.State;
                 if(state.phase=="preparation" && state.day!=observedDay)
@@ -403,24 +408,27 @@ static partial class Program
                     if(requests>1)multiRequestDays++;
                     maxSameDayRequests=Math.Max(requests,maxSameDayRequests);
                     foreach(string guest in guests)rows[guest].Observe(sim,guest,threshold);
+                    if(focus!=null)
+                        dailyConditions.Add(new{day=state.day,discontent=sim.DiscontentScore(focus,state.day),
+                            affinity=state.relationships.Where(r=>r.customer_id==focus).Select(r=>new{r.cat_id,r.affinity}).ToArray()});
                 }
-                if(AssignBalancePair(sim,target,favorite,preferredSeat))continue;
+                if(AssignBalancePair(sim,target,favorite,preferredSeat,assignmentReasons))continue;
                 string request=guests.FirstOrDefault(sim.NamedDispatchAwaitingAnswer);
                 if(request!=null && state.phase=="preparation")
                 {
-                    if(target==null || request==target)
+                    if(focus!=null?request==focus:target==null || request==target)
                         NaturalNamedDispatchContinuation(sim,seed,request,target,favorite,preferredSeat,threshold);
                     sim.Execute("resolve_sato_dispatch",catId:request,choice:"decline");
                 }
                 else
                     BalanceExecute(sim,BalanceOp(sim,"popularity","clear",false));
             }
-            Assert(sim.State.day==61,"Comparison did not finish 60 days: "+seed+"/"+target);
+            Assert(sim.State.day==lastDay+1,"Comparison did not finish "+lastDay+" days: "+seed+"/"+target);
             sim.Validate(sim.State);
             string policy=target==null?"auto":"same-cat";
             Console.WriteLine(Encode(new{threshold,seed,policy,target,multi_request_days=multiRequestDays,
                 max_same_day_requests=maxSameDayRequests}));
-            foreach(string guest in target==null?guests:new[]{target})
+            foreach(string guest in focus!=null?new[]{focus}:target==null?guests:new[]{target})
             {
                 var visits=sim.State.history.SelectMany(d=>d.customer_records)
                     .Where(v=>v.customer_id==guest && v.satisfaction!=null).ToArray();
@@ -429,10 +437,19 @@ static partial class Program
                     rows[guest].discontent_day,rows[guest].request_day,rows[guest].max_affinity,rows[guest].max_discontent,
                     rows[guest].overlap_days,rows[guest].cat_block_days,rows[guest].staff_block_days,rows[guest].competition_days}));
             }
+            if(focus!=null)
+            {
+                var visits=sim.State.history.SelectMany(h=>h.customer_records.Where(v=>v.customer_id==focus)
+                    .Select(v=>new {h.day,v.cat_id,v.satisfaction,v.departure,v.affinity_delta,
+                        matched=v.cat_id==null?(bool?)null:sim.AssignmentMatched(v.cat_id,focus),
+                        favorite_unavailable=assignmentReasons.GetValueOrDefault(h.day)})).ToArray();
+                Console.WriteLine(Encode(new{threshold,seed,policy,guest=focus,favorite,visits,daily_conditions=dailyConditions}));
+            }
         }
     }
 
-    static bool AssignBalancePair(CafeSimulation sim,string target,string favorite,System.Reflection.MethodInfo preferredSeat)
+    static bool AssignBalancePair(CafeSimulation sim,string target,string favorite,System.Reflection.MethodInfo preferredSeat,
+        Dictionary<int,string> assignmentReasons=null)
     {
         if(target==null || !sim.AssignmentWaiting)return false;
         var available=sim.AssignmentCats;
@@ -442,6 +459,8 @@ static partial class Program
         var cat=prefer?available.Single(c=>c.id==favorite):
             available.OrderByDescending(c=>sim.AssignmentMatched(c.id,guest))
                 .ThenByDescending(c=>c.stamina).ThenBy(c=>c.id,StringComparer.Ordinal).First();
+        if(assignmentReasons!=null && guest==target && cat.id!=favorite)
+            assignmentReasons.Add(sim.State.day,sim.AssignmentCatReason(favorite));
         int seat=(int)preferredSeat.Invoke(sim,new object[]{guest,sim.AssignmentFreeSeats});
         sim.Execute("assign_service",catId:cat.id,seatId:"seat-"+(seat+1),customerId:guest);
         return true;
