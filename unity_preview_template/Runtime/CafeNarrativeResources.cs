@@ -29,6 +29,6 @@ namespace CatCafePreview
             var scene=cat==null?null:Array.Find(cat.scenes,s=>s.key==sceneKey);
             return string.IsNullOrEmpty(scene?.image)?null:root+scene.image.Substring(0,scene.image.Length-4);
         }
-        public static Texture2D Texture(string resource)=>CafeNarrativeCatalog.Resource(resource)?Resources.Load<Texture2D>(resource):null;
+        public static Texture2D Texture(string resource)=>CafeNarrativeCatalog.Resource(resource)?SharedPackImages.Load(resource):null;
     }
 }

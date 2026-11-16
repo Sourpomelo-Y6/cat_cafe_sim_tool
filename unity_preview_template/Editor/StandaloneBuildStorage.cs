@@ -9,7 +9,7 @@ namespace CatCafePreview.Editor
     // All verification entry points share one output, even with legacy environment variables.
     public static class StandaloneBuildStorage
     {
-        public static void Build(string[] scenes, string[] extraScriptingDefines = null)
+        public static void Build(string[] scenes, string[] extraScriptingDefines = null, bool shareImagePair = false)
         {
             string workspace = Environment.GetEnvironmentVariable("CATCAFE_WORKSPACE_ROOT");
             string legacy = Environment.GetEnvironmentVariable("CATCAFE_STANDALONE_BUILD");
@@ -32,6 +32,7 @@ namespace CatCafePreview.Editor
             // An exclusive lock prevents concurrent builds from replacing each other's output.
             using (var buildLock = new FileStream(Path.Combine(root, "build.lock"), FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None))
             {
+                SharedPackBuildImages.Recover();
                 string pending = Path.Combine(root, "Pending");
                 string latest = Path.Combine(root, "Latest");
                 string previous = Path.Combine(root, "Previous");
@@ -43,7 +44,9 @@ namespace CatCafePreview.Editor
                 try
                 {
                     Directory.CreateDirectory(pending);
-                    var report = BuildPipeline.BuildPlayer(new BuildPlayerOptions { scenes=scenes, locationPathName=Path.Combine(pending, "CatCafeStandalone.exe"), target=BuildTarget.StandaloneWindows64, options=BuildOptions.None, extraScriptingDefines=extraScriptingDefines??new string[0] });
+                    var options = new BuildPlayerOptions { scenes=scenes, locationPathName=Path.Combine(pending, "CatCafeStandalone.exe"), target=BuildTarget.StandaloneWindows64, options=BuildOptions.None, extraScriptingDefines=extraScriptingDefines??new string[0] };
+                    var report = shareImagePair ? SharedPackBuildImages.Run(scenes, () => BuildPipeline.BuildPlayer(options))
+                        : BuildPipeline.BuildPlayer(options);
                     if (report.summary.result != BuildResult.Succeeded)
                         throw new Exception("Standalone build failed: " + report.summary.result);
                     if (!File.Exists(Path.Combine(pending, "CatCafeStandalone.exe")))

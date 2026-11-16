@@ -54,7 +54,7 @@ namespace CatCafePreview
         protected override void SetOpen(bool open){Backend.OptionalEventOpen=open;}
         protected override CafeConversationLine[] Lines(string branch)=>CafeOptionalEvents.Lines(Row,branch);
         protected override PythonIntakeState Request=>new PythonIntakeState{cat_id=Row.content_cat_id,name=Row.cat_name,personality="開始時の記録",can_decline=true};
-        protected override Texture2D PortraitTexture(string id)=>string.IsNullOrEmpty(Row.image_resource)?null:Resources.Load<Texture2D>(Row.image_resource);
+        protected override Texture2D PortraitTexture(string id)=>string.IsNullOrEmpty(Row.image_resource)?null:SharedPackImages.Load(Row.image_resource);
         protected override string Title=>Row.title;
         protected override string SceneLabel=>Row.started_day+"日目 · 開始時の記録";
         protected override string ChoicePrompt=>Row.cat_name+"と、どのように過ごしますか。";

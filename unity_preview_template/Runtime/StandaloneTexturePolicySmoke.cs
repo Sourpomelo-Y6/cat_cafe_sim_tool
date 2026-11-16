@@ -22,15 +22,102 @@ namespace CatCafePreview
         {
             var run = Run(); while (true) { bool more; try { more = run.MoveNext(); } catch (Exception e) { File.WriteAllText(Path.Combine(output, "failure.txt"), e.ToString()); Debug.LogException(e); Application.Quit(1); yield break; } if (!more) yield break; yield return run.Current; }
         }
+        IEnumerator VerifySharedPair(LocalCafeBackend backend)
+        {
+            CafeBackends.UseLocal(backend);
+            SceneManager.LoadScene("CatCafePythonState");
+            yield return new WaitForSecondsRealtime(2);
+            var client = FindObjectOfType<PythonStateClient>();
+            var accept = typeof(PythonStateClient).GetMethod("Accept", BindingFlags.Instance | BindingFlags.NonPublic);
+            var panel = client.GetComponent<PythonSeatNarrativePanel>() ?? client.gameObject.AddComponent<PythonSeatNarrativePanel>();
+            var lines = new List<string>();
+            string prefix = SharedPackImages.Root + SharedPackImages.PreviousPack + SharedPackImages.ImageFolder;
+            string shared = SharedPackImages.Root + SharedPackImages.SharedPack + SharedPackImages.ImageFolder;
+            foreach (int slot in new[] {2, 6})
+            {
+                StandaloneDispatchConversationSmoke.Good(backend, "load_game", slot:slot);
+                var oldRows = backend.Narratives.Rows.Where(row => row.image_resource?.StartsWith(prefix, StringComparison.Ordinal) == true).ToArray();
+                if (oldRows.Length == 0) throw new Exception("Old save has no historical image receipt: " + slot);
+                foreach (var path in oldRows.Select(row => row.image_resource).Distinct())
+                {
+                    var expected = Resources.Load<Texture2D>(shared + path.Substring(prefix.Length));
+                    if (Resources.Load<Texture2D>(path) != null || expected == null || CafeNarrativeResources.Texture(path) != expected)
+                        throw new Exception("Historical path does not share the expected texture: " + path);
+                }
+                var view = backend.View();
+                accept.Invoke(client, new object[] {view});
+                var example = oldRows.Last();
+                var cat = view.cats.First(row => row.cat_id == example.cat_id);
+                panel.Open(new PythonSeatState { narrative_image = example.image_resource, narrative = example.text,
+                    customer_name = backend.Details.CustomerName(example.customer_id) }, 0, cat);
+                if (!panel.panel.activeInHierarchy || !panel.picture.enabled ||
+                    panel.picture.texture != Resources.Load<Texture2D>(shared + example.image_resource.Substring(prefix.Length)))
+                    throw new Exception("Saved texture is not displayed in the seat history panel: " + slot);
+                yield return new WaitForEndOfFrame();
+                CaptureCanvas(panel.panel.GetComponentInParent<Canvas>().rootCanvas, Path.Combine(output, "old-slot-" + slot + ".png"));
+                panel.panel.SetActive(false);
+                lines.Add("slot " + slot + ": loaded " + oldRows.Length + " old image receipts; verified shared asset in seat history.");
+            }
+            File.WriteAllLines(Path.Combine(output, "shared-pair-result.txt"), lines);
+        }
+
+        private static void CaptureCanvas(Canvas canvas, string path)
+        {
+            var oldMode = canvas.renderMode;
+            var oldCamera = canvas.worldCamera;
+            var oldDistance = canvas.planeDistance;
+            var previous = RenderTexture.active;
+            var camera = new GameObject("Shared image QA camera").AddComponent<Camera>();
+            var target = new RenderTexture(Screen.width, Screen.height, 24);
+            var image = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
+            try
+            {
+                camera.targetTexture = target;
+                camera.clearFlags = CameraClearFlags.SolidColor;
+                camera.backgroundColor = Color.black;
+                canvas.renderMode = RenderMode.ScreenSpaceCamera;
+                canvas.worldCamera = camera;
+                canvas.planeDistance = 1;
+                Canvas.ForceUpdateCanvases();
+                camera.Render();
+                RenderTexture.active = target;
+                image.ReadPixels(new Rect(0, 0, target.width, target.height), 0, 0);
+                image.Apply();
+                var pixels = image.GetPixels32();
+                if (!pixels.Any(pixel => pixel.r != pixels[0].r || pixel.g != pixels[0].g || pixel.b != pixels[0].b))
+                    throw new Exception("Captured seat history was blank.");
+                File.WriteAllBytes(path, image.EncodeToPNG());
+            }
+            finally
+            {
+                RenderTexture.active = previous;
+                canvas.renderMode = oldMode;
+                canvas.worldCamera = oldCamera;
+                canvas.planeDistance = oldDistance;
+                camera.targetTexture = null;
+                target.Release();
+                Destroy(target);
+                Destroy(image);
+                Destroy(camera.gameObject);
+            }
+        }
+
         IEnumerator Run()
         {
             File.WriteAllText(Path.Combine(output, "environment.txt"), SystemInfo.graphicsDeviceName + "\n" + SystemInfo.graphicsDeviceType + "\nBC7 supported=" + SystemInfo.SupportsTextureFormat(TextureFormat.BC7) + "\n" + SystemInfo.operatingSystem);
             var b = new LocalCafeBackend(Path.Combine(output, "save"));
+            if (Environment.GetCommandLineArgs().Contains("--shared-pair-old-saves"))
+            {
+                var verification = VerifySharedPair(b);
+                while (verification.MoveNext()) yield return verification.Current;
+                Application.Quit(0);
+                yield break;
+            }
             if (Environment.GetCommandLineArgs().Contains("--texture-resume"))
             {
                 string saved = File.ReadAllText(Path.Combine(output, "saved-image.txt"));
                 StandaloneDispatchConversationSmoke.Good(b, "load_game", slot:2);
-                if (b.Narratives.Rows.Last().image_resource != saved || Resources.Load<Texture2D>(saved) == null) throw new Exception("Historical image receipt changed across process");
+                if (b.Narratives.Rows.Last().image_resource != saved || SharedPackImages.Load(saved) == null) throw new Exception("Historical image receipt changed across process");
                 File.WriteAllText(Path.Combine(output, "resume.txt"), "PASS: exact historical image reference restored in separate process"); Application.Quit(0); yield break;
             }
             StandaloneDispatchConversationSmoke.Good(b, "new_game", "free");
@@ -63,7 +150,7 @@ namespace CatCafePreview
                 var old = JsonUtility.FromJson<ContentBundle>(text.text);
                 var scene = old.cats.SelectMany(c => c.scenes).First(s => !string.IsNullOrEmpty(s.image));
                 string resource = "CatCafeContent/Imports/" + old.pack_id + "/" + scene.image.Substring(0, scene.image.Length - 4);
-                if (Resources.Load<Texture2D>(resource) == null) throw new Exception("Historical resource missing: " + resource);
+                if (SharedPackImages.Load(resource) == null) throw new Exception("Historical resource missing: " + resource);
                 historical.Add(resource);
             }
             File.WriteAllLines(Path.Combine(output, "historical-paths.txt"), historical);

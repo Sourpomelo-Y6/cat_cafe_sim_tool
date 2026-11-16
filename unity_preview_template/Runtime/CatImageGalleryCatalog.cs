@@ -7,7 +7,7 @@ namespace CatCafePreview
     public sealed class CatGalleryImage
     {
         public string key,name,resource,cat_id;
-        public Texture2D Texture()=>Resources.Load<Texture2D>(resource);
+        public Texture2D Texture()=>SharedPackImages.Load(resource);
     }
     public static class CatImageGalleryCatalog
     {

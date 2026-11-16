@@ -50,7 +50,7 @@ namespace CatCafePreview
         protected override void AfterClose(){closed?.Invoke();}
         protected override Texture2D PortraitTexture(string id)
         {
-            if(CafeReplayCatalog.IsOptional(entry?.conversation_id))return string.IsNullOrEmpty(entry.image_resource)?null:Resources.Load<Texture2D>(entry.image_resource);
+            if(CafeReplayCatalog.IsOptional(entry?.conversation_id))return string.IsNullOrEmpty(entry.image_resource)?null:SharedPackImages.Load(entry.image_resource);
             if(entry?.conversation_id?.StartsWith(CafeReservationDialogue.Id)==true || entry?.conversation_id?.StartsWith(CafeTrustDialogue.Id)==true)return HumanPortraitResources.Resolve(entry.customer_id);
             if(!portraitLoaded){portraitLoaded=true;cachedPortrait=LoadPortrait(id);}
             return cachedPortrait;
@@ -63,7 +63,7 @@ namespace CatCafePreview
                 var bundle=JsonUtility.FromJson<ContentBundle>(Resources.Load<TextAsset>(catalog.bundleResource).text);
                 var cat=Array.Find(bundle.cats,c=>c.cat_id==id);var scene=cat==null?null:Array.Find(cat.scenes,s=>s.key=="normal");
                 if(scene==null || string.IsNullOrEmpty(scene.image))return ContentPreview.CatPlaceholderTexture();
-                return Resources.Load<Texture2D>(catalog.bundleResource.Substring(0,catalog.bundleResource.Length-"bundle".Length)+scene.image.Substring(0,scene.image.Length-4));
+                return SharedPackImages.Load(catalog.bundleResource.Substring(0,catalog.bundleResource.Length-"bundle".Length)+scene.image.Substring(0,scene.image.Length-4));
             }
             catch(Exception){return ContentPreview.CatPlaceholderTexture();}
         }

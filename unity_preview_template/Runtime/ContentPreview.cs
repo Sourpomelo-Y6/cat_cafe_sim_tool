@@ -98,7 +98,7 @@ namespace CatCafePreview
             description.text = cat.name + "\n\n" + cat.introduction + "\n\n" + scene.label + "\n" + scene.text;
             if (Application.isPlaying && !PythonMode) description.text += "\n\n" + CurrentInteraction.Summary;
             scroll.verticalNormalizedPosition = 1;
-            var texture = scene.image == "" ? null : Resources.Load<Texture2D>(resourceRoot + scene.image.Substring(0, scene.image.Length - 4));
+            var texture = scene.image == "" ? null : SharedPackImages.Load(resourceRoot + scene.image.Substring(0, scene.image.Length - 4));
             var registeredTexture = texture;
             texture = texture ?? CatPlaceholderTexture();
             picture.texture = texture;
@@ -237,7 +237,7 @@ namespace CatCafePreview
             {
                 var scene = Array.Find(cat.scenes, item => item.key == candidate);
                 if (scene == null || string.IsNullOrEmpty(scene.image)) continue;
-                var texture = Resources.Load<Texture2D>(resourceRoot + scene.image.Substring(0, scene.image.Length - 4));
+                var texture = SharedPackImages.Load(resourceRoot + scene.image.Substring(0, scene.image.Length - 4));
                 if (texture != null) return texture;
             }
             return CatPlaceholderTexture();
@@ -245,7 +245,7 @@ namespace CatCafePreview
 
         public static Texture2D CatPlaceholderTexture()
         {
-            return Resources.Load<Texture2D>("CatCafeDefaults/cat-silhouette-v1");
+            return SharedPackImages.Load("CatCafeDefaults/cat-silhouette-v1");
         }
 
         public Texture2D CandidateCatTexture(string catId)
@@ -253,7 +253,7 @@ namespace CatCafePreview
             var content = bundle == null ? null : Array.Find(bundle.cats, item => item.cat_id == catId);
             var scene = content == null ? null : Array.Find(content.scenes, item => item.key == "normal");
             var texture = scene == null || string.IsNullOrEmpty(scene.image) ? null
-                : Resources.Load<Texture2D>(resourceRoot + scene.image.Substring(0, scene.image.Length - 4));
+                : SharedPackImages.Load(resourceRoot + scene.image.Substring(0, scene.image.Length - 4));
             return texture ?? CatPlaceholderTexture();
         }
 
@@ -264,7 +264,7 @@ namespace CatCafePreview
             string key = cat.working && cat.health_status == "healthy" && cat.activity == "cafe" ? "normal" : "sleep";
             var scene = Array.Find(content.scenes, item => item.key == key);
             var texture = scene == null || string.IsNullOrEmpty(scene.image) ? null
-                : Resources.Load<Texture2D>(resourceRoot + scene.image.Substring(0, scene.image.Length - 4));
+                : SharedPackImages.Load(resourceRoot + scene.image.Substring(0, scene.image.Length - 4));
             return texture ?? CatPlaceholderTexture();
         }
 
