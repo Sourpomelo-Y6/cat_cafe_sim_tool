@@ -755,6 +755,111 @@ static partial class Program
     static void SaveDispatchCheckpoint(CafeSimulation sim,string directory,string stage,CafeSnapshot snapshot=null)
         => new CafeSaveStore(Path.Combine(directory,stage),ReplayEncode,ReplayDecode,sim.Validate).Save(9,snapshot??sim.State);
 
+    static void AllGuestDispatchPlaythrough(string rulesPath,string bundlePath,string output)
+    {
+        var bundle=System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(bundlePath));
+        var configured=Decode<CafeNamedDispatchSettings[]>(bundle["named_dispatch"].ToJsonString());
+        bool windowsSampleSaved=false;
+        foreach(string mode in new[]{"clear","fast"})
+        foreach(int seed in new[]{0,1,42})
+        {
+            var rules=Decode<CafeRules>(File.ReadAllText(rulesPath));
+            rules.stamina_growth=Decode<CafeStaminaRules>(File.ReadAllText(Path.Combine(Path.GetDirectoryName(rulesPath),"stamina_growth.json")));
+            rules.named_dispatch=configured;
+            var sim=new CafeSimulation(rules,seed,"popularity");
+            var guests=sim.EnabledNamedCustomers.ToArray();
+            Assert(guests.Length==23 && !guests.Contains("reservation-longhair"),"Unexpected live dispatch roster");
+            var initialGuests=Enumerable.Range(1,rules.arrival_ticks.Length).Select(i=>"guest-"+i).ToHashSet();
+            var rows=guests.ToDictionary(c=>c,c=>new DispatchBalanceRow());
+            var affinitySaves=new Dictionary<string,CafeSnapshot>();
+            var initialRequests=new Dictionary<string,CafeSnapshot>();
+            int observedDay=0, operations=0, firstRequests=0, reissues=0, simultaneousDays=0, affinityGuests=0;
+            var trace=new List<object>();
+            while(sim.State.day<=120 && sim.State.game_over==null && operations++<100000)
+            {
+                var s=sim.State;
+                if(s.phase=="preparation" && s.day!=observedDay)
+                {
+                    observedDay=s.day;
+                    var active=guests.Select(sim.NamedRequest).Where(r=>r!=null && r.returned_day==0 && r.declined_day==0).ToArray();
+                    Assert(active.Select(r=>r.cat_id).Distinct().Count()==active.Length,"Overlapping named requests");
+                    var issued=guests.Where(c=>sim.NamedRequest(c)?.requested_day==s.day).ToArray();
+                    if(issued.Length>1)simultaneousDays++;
+                    foreach(var guest in guests)
+                    {
+                        var row=rows[guest];
+                        row.Observe(sim,guest,50);
+                        if(row.affinity_day==s.day)
+                        {
+                            affinityGuests++;
+                            if(!windowsSampleSaved && !initialGuests.Contains(guest))
+                                affinitySaves[guest]=CloneDispatchSnapshot(s);
+                        }
+                    }
+                    foreach(string guest in issued)
+                    {
+                        var request=sim.NamedRequest(guest);
+                        var previous=s.named_dispatch_archive.LastOrDefault(r=>r.customer_id==guest)?.request;
+                        trace.Add(new{guest,day=s.day,request.cat_id,returned_day=previous?.returned_day,
+                            discontent=sim.DiscontentScore(guest,s.day)});
+                        if(previous==null)
+                        {
+                            firstRequests++;
+                            if(affinitySaves.ContainsKey(guest))initialRequests[guest]=CloneDispatchSnapshot(s);
+                        }
+                        else
+                        {
+                            reissues++;
+                            Assert(s.day==previous.returned_day+8,"Wrong reissue day");
+                            if(!windowsSampleSaved && initialRequests.TryGetValue(guest,out var initial))
+                            {
+                                string folder=Path.Combine(output,"natural-checkpoints",guest);
+                                SaveDispatchCheckpoint(sim,folder,"affinity",affinitySaves[guest]);
+                                SaveDispatchCheckpoint(sim,folder,"request",initial);
+                                SaveDispatchCheckpoint(sim,folder,"reissue");
+                                Console.WriteLine(Encode(new{windows_sample=guest,mode,seed,request_day=initial.day,reissue_day=s.day}));
+                                windowsSampleSaved=true;
+                                initialRequests.Clear();
+                                affinitySaves.Clear();
+                            }
+                        }
+                    }
+                    if(s.day==60)
+                    {
+                        var store=new CafeSaveStore(Path.Combine(output,mode+"-"+seed),ReplayEncode,ReplayDecode,sim.Validate);
+                        store.Save(9,s);
+                        var restored=store.Load(9).state;
+                        Assert(CafeReplayJournal.Digest(restored)==CafeReplayJournal.Digest(s),"Day 60 reload changed gameplay");
+                        sim.Restore(restored);
+                    }
+                }
+                string returnGuest=guests.FirstOrDefault(sim.NamedReturnAccessPending);
+                if(returnGuest!=null)
+                {
+                    sim.Execute("resolve_named_return_access",catId:returnGuest,choice:"allow");
+                    continue;
+                }
+                // Leave first requests unanswered; decline reissues so that each first return is observed once.
+                string repeat=guests.FirstOrDefault(c=>sim.NamedDispatchAwaitingAnswer(c)
+                    && sim.State.named_dispatch_archive.Any(r=>r.customer_id==c));
+                if(repeat!=null && sim.State.phase=="preparation")
+                    sim.Execute("resolve_sato_dispatch",catId:repeat,choice:"decline");
+                else
+                    BalanceExecute(sim,BalanceOp(sim,"popularity",mode,false));
+            }
+            Assert(sim.State.day==121,"Playthrough stopped before day 120: "+mode+"/"+seed);
+            Assert(sim.State.trust_events.Count==0,"Obsolete trust event was generated: "+mode+"/"+seed);
+            sim.Validate(sim.State);
+            var missing=sim.State.missing_cases.Where(m=>m.departed_day<=120 && CafeSimulation.NamedMissingCustomer(m.reason)!=null).ToArray();
+            Console.WriteLine(Encode(new{mode,seed,day=sim.State.day-1,affinity_guests=affinityGuests,
+                first_requests=firstRequests,reissues,simultaneous_days=simultaneousDays,
+                competition_guest_days=rows.Values.Sum(r=>r.competition_days),
+                missing=missing.Length,returned=missing.Count(m=>m.resolved_day>0 && m.resolved_day<=120),sim.State.seat_count,
+                cleared=new[]{sim.ClearedGoalDay(1),sim.ClearedGoalDay(2),sim.ClearedGoalDay(3)},trace}));
+        }
+        Assert(windowsSampleSaved,"No natural reissue checkpoint was created for Windows");
+    }
+
     static void RemainingGuestDispatchBalance(string rulesPath,string bundlePath)
     {
         var bundle=System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(bundlePath));

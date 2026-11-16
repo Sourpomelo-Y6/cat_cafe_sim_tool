@@ -176,6 +176,7 @@ static partial class Program
         if(args.Length>0 && args[0]=="--sato-dispatch"){SatoDispatchChecks(args[1],args.Length>2?args[2]:null,args.Length>3?args[3]:null);return;}
         if(args.Length>0 && args[0]=="--initial-guest-dispatch-balance"){InitialGuestDispatchBalance(args[1],args[2],args.Length>3?args[3]:null);return;}
         if(args.Length>0 && args[0]=="--remaining-guest-dispatch-balance"){RemainingGuestDispatchBalance(args[1],args[2]);return;}
+        if(args.Length>0 && args[0]=="--all-guest-dispatch-playthrough"){AllGuestDispatchPlaythrough(args[1],args[2],args[3]);return;}
         if(args.Length>0 && args[0]=="--optional-authoring"){OptionalAuthoringChecks(args[1]);return;}
         if(args.Length>0 && args[0]=="--optional-authoring"){OptionalAuthoringChecks(args[1]);return;}
         if(args.Length>0 && args[0]=="--optional-all"){AllOptionalEventChecks(args[1]);return;}

@@ -114,7 +114,7 @@ namespace CatCafePreview
             button.onClick.Invoke();
         }
 
-        private IEnumerator CheckUnlockedGuestSaves(string checkpoints,CafeNamedDispatchSettings guest)
+        private IEnumerator CheckUnlockedGuestSaves(string checkpoints,CafeNamedDispatchSettings guest,bool verifyRoundTrip)
         {
             var folder=Path.Combine(output,guest.customer_id);
             var backend=new LocalCafeBackend(folder);
@@ -130,6 +130,16 @@ namespace CatCafePreview
                 Directory.CreateDirectory(folder);
                 File.Copy(Path.Combine(checkpoints,guest.customer_id,stage,"slot-9.json"),Path.Combine(folder,"slot-9.json"),true);
                 Command(backend,"load_game");
+                if(verifyRoundTrip)
+                {
+                    int day=backend.Simulation.State.day;
+                    int? requested=backend.Simulation.NamedRequest(guest.customer_id)?.requested_day;
+                    Command(backend,"save_game");
+                    Command(backend,"load_game");
+                    Check(backend.Simulation.State.day==day &&
+                        backend.Simulation.NamedRequest(guest.customer_id)?.requested_day==requested,
+                        "Windows save and reload changed the dispatch checkpoint");
+                }
                 Apply(client,backend);
                 yield return null;
 
@@ -177,13 +187,18 @@ namespace CatCafePreview
                 .Select(r=>r.customer_id)).ToArray();
             var args=Environment.GetCommandLineArgs();
             int checkpointArgument=Array.IndexOf(args,"--catcafe-named-dispatch-checkpoints");
+            int guestArgument=Array.IndexOf(args,"--catcafe-named-dispatch-guest");
             if(checkpointArgument>=0)
             {
-                foreach(var guest in settings.Where(r=>r.enabled && !initial.Contains(r.customer_id)))
+                var unlocked=settings.Where(r=>r.enabled && !initial.Contains(r.customer_id));
+                if(guestArgument>=0)
+                    unlocked=new[]{unlocked.Single(r=>r.customer_id==args[guestArgument+1])};
+                foreach(var guest in unlocked)
                 {
-                    var check=CheckUnlockedGuestSaves(args[checkpointArgument+1],guest);
+                    var check=CheckUnlockedGuestSaves(args[checkpointArgument+1],guest,guestArgument>=0);
                     while(check.MoveNext())yield return check.Current;
                 }
+                if(guestArgument>=0)yield break;
             }
             foreach(var customer in guests)
             foreach(var route in new[]{"normal","decline","expired","refused","repeat"})
