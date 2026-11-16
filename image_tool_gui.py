@@ -611,17 +611,20 @@ class ContentImageToolWindow:
         import tkinter as tk
         from tkinter import filedialog, ttk
         from tkinter.scrolledtext import ScrolledText
-        from production_comparison import compare_production, format_comparison
+        from production_comparison import StaleProductionReview, compare_production, format_comparison, verify_review
 
         path = filedialog.askopenfilename(parent=self.window,
             title='本番のCatCafeContent/catalog.json または書き出し済みのbundle.jsonを選ぶ',
             filetypes=[('Unity素材のJSON', '*.json')])
         if not path:
             return
-        try:
+        def read_report():
             catalog = self.catalog_provider()
-            report = compare_production(path, catalog, self.registry, self.published_texts,
-                                        profiles=self.unity_profiles(catalog), interaction_texts=self.interaction_published)
+            return compare_production(path, catalog, self.registry, self.published_texts,
+                                      profiles=self.unity_profiles(catalog), interaction_texts=self.interaction_published)
+
+        try:
+            report = read_report()
         except (OSError, ValueError) as exc:
             self.notice.set(f'本番パックと照合できません：{exc}')
             return
@@ -633,24 +636,69 @@ class ContentImageToolWindow:
         ttk.Label(frame, text='対象は猫の紹介文・場面・画像参照、任意イベント、指名派遣、採用済み交流文です。').pack(anchor='w')
         body = ScrolledText(frame, width=94, height=26, wrap='word')
         body.pack(fill='both', expand=True, pady=8)
-        body.insert('1.0', format_comparison(report))
-        body.configure(state='disabled')
-        ttk.Button(frame, text='閉じる', command=window.destroy).pack(anchor='e')
+        message = tk.StringVar(master=window)
+        ttk.Label(frame, textvariable=message, wraplength=780).pack(anchor='w')
+        controls = ttk.Frame(frame)
+        controls.pack(fill='x', pady=(6, 0))
 
-    def export_unity(self):
+        def show_report():
+            body.configure(state='normal')
+            body.delete('1.0', 'end')
+            body.insert('1.0', format_comparison(report))
+            body.configure(state='disabled')
+            export_button.state(['!disabled'])
+            message.set('')
+
+        def refresh():
+            nonlocal report
+            try:
+                report = read_report()
+            except (OSError, ValueError) as exc:
+                export_button.state(['disabled'])
+                message.set(f'再照合できません：{exc}')
+                return
+            show_report()
+
+        def verify_candidate(bundle, events, interactions):
+            verify_review(path, report, bundle, events, interactions)
+
+        def export_reviewed():
+            try:
+                written = self.export_unity(parent_window=window, verify_candidate=verify_candidate)
+            except StaleProductionReview as exc:
+                export_button.state(['disabled'])
+                message.set(str(exc))
+                return
+            except (OSError, ValueError) as exc:
+                message.set(f'書き出せません：{exc}')
+                return
+            if written:
+                window.destroy()
+
+        export_button = ttk.Button(controls, text='この内容で書き出す…', command=export_reviewed)
+        export_button.pack(side='left')
+        ttk.Button(controls, text='再照合', command=refresh).pack(side='left', padx=8)
+        ttk.Button(controls, text='閉じる', command=window.destroy).pack(side='right')
+        show_report()
+
+    def export_unity(self, *, parent_window=None, verify_candidate=None):
         from tkinter import filedialog
         from unity_export import export_bundle
-        parent = filedialog.askdirectory(parent=self.window, title='新しい素材パックを作る保存先を選ぶ')
+        parent = filedialog.askdirectory(parent=parent_window or self.window, title='新しい素材パックを作る保存先を選ぶ')
         if not parent:
-            return
+            return False
         try:
             catalog = self.catalog_provider()
             folder, report = export_bundle(catalog, self.registry, self.published_texts, parent, profiles=self.unity_profiles(catalog),
-                                           interaction_texts=self.interaction_published)
+                                           interaction_texts=self.interaction_published, verify_candidate=verify_candidate)
             self.notice.set(f"書き出しました：{folder}\n猫{report['cat_count']}匹・画像{report['image_count']}枚・交流文{report['interactions']['candidate_count']}案。")
             self.show_export_report(folder, report)
+            return True
         except (OSError, ValueError) as exc:
+            if verify_candidate is not None:
+                raise
             self.notice.set(f'書き出せません：{exc}')
+            return False
 
     def show_export_report(self, folder, report):
         import tkinter as tk

@@ -56,8 +56,9 @@ def image_choices(mode, action):
     return list(dict.fromkeys([requested, mode] + (['play'] if mode == 'teaser' else []) + ['normal']))
 
 
-def resolve_image(registry, content_id, mode, action):
-    images = registry.read()['cats'].get(content_id, {})
+def resolve_image(registry, content_id, mode, action, *, registered_images=None):
+    source = registry.read()['cats'] if registered_images is None else registered_images
+    images = source.get(content_id, {})
     choices = image_choices(mode, action)
     warnings = []
     for scene in choices:
@@ -247,10 +248,11 @@ def build_registered_catalog(catalog, registry, store, entries, *, rows, text_on
     if text_only:
         return result, {}, {}
     blobs,warnings={},[]
+    registered_images=registry.read()['cats'] if cats else {}
     for cat in cats:
         for mode in MODES:
             for action in actions(mode):
-                image=resolve_image(registry,cat['content_id'],mode,action)
+                image=resolve_image(registry,cat['content_id'],mode,action,registered_images=registered_images)
                 result['image_bindings'].append(dict(cat_id=cat['game_id'],content_cat_id=cat['content_id'],scene_key=image['requested_scene_key'],resolved_scene_key=image['resolved_scene_key'],image=image['image']))
                 warnings.extend(cat['name']+' / '+image['requested_scene_key']+'：'+w for w in image['warnings'])
                 if image['data'] is not None:blobs[image['image']]=image['data']

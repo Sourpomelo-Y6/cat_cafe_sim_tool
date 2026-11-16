@@ -1,4 +1,5 @@
 """Read-only comparison of selected production Unity content."""
+import hashlib
 import json
 import re
 from collections import Counter
@@ -14,6 +15,27 @@ from unity_export import build_cat_catalog
 BUNDLE_RESOURCE = r'CatCafeContent/Imports/[a-f0-9]{32}/bundle'
 EVENT_RESOURCE = r'CatCafeEvents/Imports/[a-f0-9]{32}/optional_events'
 INTERACTION_RESOURCE = r'CatCafeContent/Imports/[a-f0-9]{32}/interaction_texts'
+
+
+class StaleProductionReview(ValueError):
+    pass
+
+
+def fingerprint(value):
+    serialized = json.dumps(value, sort_keys=True, ensure_ascii=True, separators=(',', ':'))
+    return hashlib.sha256(serialized.encode('utf-8')).hexdigest()
+
+
+def candidate_fingerprint(cats, events, dispatch, interactions):
+    return fingerprint((cats, events, dispatch,
+                        {key: interactions[key] for key in ('entries', 'cat_bindings', 'people')}))
+
+
+def verify_review(path, review, bundle, events, interactions):
+    candidate = candidate_fingerprint(bundle['cats'], events['events'], bundle.get('named_dispatch', []), interactions)
+    if (candidate != review['candidate_fingerprint']
+            or fingerprint(read_baseline(path)) != review['baseline_fingerprint']):
+        raise StaleProductionReview('照合後に比較元または書き出し候補が変わりました。「再照合」で内容を確認してください。')
 
 
 def read_json(path):
@@ -185,7 +207,8 @@ def compare_interactions(before, after, add, field):
 
 
 def compare_production(path, catalog, registry, texts, *, profiles=None, optional_events=None, interaction_texts=None):
-    old_cats, old_events, old_dispatch, old_interactions = read_baseline(path)
+    baseline = read_baseline(path)
+    old_cats, old_events, old_dispatch, old_interactions = baseline
     cats, _, _, defaults = build_cat_catalog(catalog, registry, texts, profiles=profiles, retain_images=False)
     store = optional_events or OptionalEventStore(registry.directory / 'optional_events.json')
     new_events = store.export_data(catalog)['events']
@@ -242,6 +265,8 @@ def compare_production(path, catalog, registry, texts, *, profiles=None, optiona
     interaction_counts = compare_interactions(old_interactions, interactions, add, field)
     return {
         'changes': changes,
+        'baseline_fingerprint': fingerprint(baseline),
+        'candidate_fingerprint': candidate_fingerprint(cats, new_events, dispatch, interactions),
         'interactions': interaction_counts,
         'counts': Counter(row['kind'] for row in changes),
         'cats': (len(old_cats), len(new_cats)),

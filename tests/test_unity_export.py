@@ -131,6 +131,25 @@ class UnityExportTests(unittest.TestCase):
             speech_changes = {(row['field'], row['kind']) for row in report['changes'] if row['item'].startswith('交流文')}
             self.assertEqual(speech_changes, {('条件', '追加'), ('条件', '欠落'), ('候補1', '変更'), ('候補2', '欠落')})
 
+    def test_reviewed_export_rejects_a_changed_baseline_before_creating_files(self):
+        from functools import partial
+        from production_comparison import StaleProductionReview, compare_production, verify_review
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            registry = ImageRegistry(root / 'source')
+            texts = TextStore(registry.directory / 'texts.json')
+            catalog = {'a': 'ミケ'}
+            live, _ = export_bundle(catalog, registry, texts, root / 'baseline')
+            baseline = live / 'bundle.json'
+            reviewed = compare_production(baseline, catalog, registry, texts)
+            data = json.loads(baseline.read_text(encoding='utf-8'))
+            data['cats'][0]['introduction'] = '新しい本番文'
+            baseline.write_text(json.dumps(data), encoding='utf-8')
+            destination = root / 'out'
+            with self.assertRaises(StaleProductionReview):
+                export_bundle(catalog, registry, texts, destination, verify_candidate=partial(verify_review, baseline, reviewed))
+            self.assertFalse(destination.exists())
+
     def test_interaction_images_are_optional_and_exported(self):
         from prompt_presets import PromptPresets, DEFAULTS
         from interaction_scenes import ACTION_PROMPTS
@@ -236,7 +255,28 @@ class UnityExportTests(unittest.TestCase):
             self.assertIn('書き出しました', tool.notice.get())
             with patch('tkinter.filedialog.askopenfilename', return_value=str(folders[0] / 'bundle.json')):
                 tool.compare_unity()
-            self.assertTrue(any(w.winfo_class() == 'Toplevel' and w.title() == '本番パックとの照合結果'
-                                for w in tool.window.winfo_children()))
+            review, = [w for w in tool.window.winfo_children()
+                       if w.winfo_class() == 'Toplevel' and w.title() == '本番パックとの照合結果']
+
+            def descendants(widget):
+                for child in widget.winfo_children():
+                    yield child
+                    yield from descendants(child)
+
+            buttons = {button['text']: button for button in descendants(review) if button.winfo_class() == 'TButton'}
+            tool.published_texts.save('a', {'introduction': '再照合で確認する新しい紹介文', 'scenes': {}})
+            destination = Path(directory) / 'reviewed'
+            approved = buttons['この内容で書き出す…']
+            with patch('tkinter.filedialog.askdirectory', return_value=str(destination)):
+                approved.invoke()
+                self.assertFalse(destination.exists())
+                self.assertTrue(approved.instate(['disabled']))
+                buttons['再照合'].invoke()
+                self.assertFalse(approved.instate(['disabled']))
+                approved.invoke()
+            self.assertFalse(review.winfo_exists())
+            written, = destination.glob('CatCafeContent-*/bundle.json')
+            self.assertEqual(json.loads(written.read_text(encoding='utf-8'))['cats'][0]['introduction'],
+                             '再照合で確認する新しい紹介文')
             tool.window.destroy()
             root.update()

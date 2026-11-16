@@ -74,7 +74,7 @@ def build_cat_catalog(catalog, registry, texts, *, profiles=None, retain_images=
     return cats, warnings, blobs, defaults
 
 
-def export_bundle(catalog, registry, texts, destination, *, profiles=None, interaction_texts=None, interaction_bindings=None, display_labels=None, optional_events=None):
+def export_bundle(catalog, registry, texts, destination, *, profiles=None, interaction_texts=None, interaction_bindings=None, display_labels=None, optional_events=None, verify_candidate=None):
     destination = Path(destination).resolve()
     if destination == registry.directory.resolve() or registry.directory.resolve() in destination.parents:
         raise ValueError('書き出し先は登録素材のフォルダとは別にしてください。')
@@ -113,6 +113,8 @@ def export_bundle(catalog, registry, texts, destination, *, profiles=None, inter
     if named_dispatch:
         bundle['named_dispatch'] = named_dispatch
     report = {'version': 1, 'cat_count': len(cats), 'image_count': len(blobs), 'warnings': warnings, 'interactions': interaction_report}
+    if verify_candidate is not None:
+        verify_candidate(bundle, events, interactions)
     folder.mkdir(parents=True, exist_ok=False)
     try:
         (folder / 'images').mkdir()
