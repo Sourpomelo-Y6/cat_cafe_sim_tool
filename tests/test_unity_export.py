@@ -90,6 +90,47 @@ class UnityExportTests(unittest.TestCase):
                                        ('画像参照', '欠落'), ('イベント', '欠落')})
             self.assertEqual(before, {p: p.read_bytes() for p in root.rglob('*') if p.is_file()})
 
+    def test_comparison_finds_dispatch_toggles_and_published_narrative_changes(self):
+        from interaction_subjects import SubjectRegistry, game_subjects
+        from interaction_texts import InteractionTextStore, condition, make_entry
+        from production_comparison import compare_production
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            registry = ImageRegistry(root / 'source')
+            texts = TextStore(registry.directory / 'texts.json')
+            subjects = SubjectRegistry(registry.directory / 'interaction_subjects.json')
+            sato = subjects.get('guest-1')
+            sato['named_dispatch'] = {'enabled': True, 'scenes': {'request': ['{cat}ちゃんにお願いします。', '']}}
+            subjects.save(sato)
+            original = InteractionTextStore(registry.directory / 'interaction_texts.json', published=True, subject_registry=subjects)
+            speech = condition(target_cat='*')
+            removed = condition(mode='pause', action='pause')
+            original.save_many([make_entry(speech, ['おいで。', '一緒に遊ぼう。', '']),
+                                make_entry(removed, ['休もうね。', '', ''])])
+            catalog = {'playtest-mike': 'ミケ'}
+            folder, _ = export_bundle(catalog, registry, texts, root / 'exports', interaction_texts=original)
+            baseline = folder / 'bundle.json'
+            self.assertEqual(compare_production(baseline, catalog, registry, texts)['changes'], [])
+            sato.pop('named_dispatch')
+            subjects.save(sato)
+            third = dict(sato, id='guest-3', **game_subjects()['speech']['guest-3'])
+            third['named_dispatch'] = {'enabled': True, 'scenes': {}}
+            subjects.save(third)
+            candidate = InteractionTextStore(root / 'other-published.json', published=True, subject_registry=subjects)
+            candidate.save_many([make_entry(speech, ['ここにおいで。', '', '']),
+                                 make_entry(condition(mode='brush'), ['ブラシをしよう。', '', ''])])
+            with patch('interaction_presentation.resolve_image', side_effect=AssertionError('unrelated image lookup')):
+                report = compare_production(baseline, catalog, registry, texts, interaction_texts=candidate)
+            self.assertEqual(report['interactions'], (2, 2))
+            dispatch = [row for row in report['changes'] if row['item'].startswith('指名派遣')]
+            self.assertTrue(any(row['kind'] == '欠落' and '最初の依頼' in row['field']
+                                and 'guest-1' in row['item'] for row in dispatch))
+            self.assertTrue(any(row['field'] == '有効・無効' and row['old'] == '無効' and row['new'] == '有効'
+                                and 'guest-3' in row['item'] for row in dispatch))
+            self.assertFalse(any(row['field'] == '有効・無効' and 'guest-1' in row['item'] for row in dispatch))
+            speech_changes = {(row['field'], row['kind']) for row in report['changes'] if row['item'].startswith('交流文')}
+            self.assertEqual(speech_changes, {('条件', '追加'), ('条件', '欠落'), ('候補1', '変更'), ('候補2', '欠落')})
+
     def test_interaction_images_are_optional_and_exported(self):
         from prompt_presets import PromptPresets, DEFAULTS
         from interaction_scenes import ACTION_PROMPTS

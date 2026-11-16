@@ -621,7 +621,7 @@ class ContentImageToolWindow:
         try:
             catalog = self.catalog_provider()
             report = compare_production(path, catalog, self.registry, self.published_texts,
-                                        profiles=self.unity_profiles(catalog))
+                                        profiles=self.unity_profiles(catalog), interaction_texts=self.interaction_published)
         except (OSError, ValueError) as exc:
             self.notice.set(f'本番パックと照合できません：{exc}')
             return
@@ -630,7 +630,7 @@ class ContentImageToolWindow:
         frame = ttk.Frame(window, padding=12)
         frame.pack(fill='both', expand=True)
         ttk.Label(frame, text=path, wraplength=780).pack(anchor='w')
-        ttk.Label(frame, text='対象は猫の紹介文・場面・画像参照と任意イベントです。').pack(anchor='w')
+        ttk.Label(frame, text='対象は猫の紹介文・場面・画像参照、任意イベント、指名派遣、採用済み交流文です。').pack(anchor='w')
         body = ScrolledText(frame, width=94, height=26, wrap='word')
         body.pack(fill='both', expand=True, pady=8)
         body.insert('1.0', format_comparison(report))

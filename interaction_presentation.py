@@ -203,7 +203,7 @@ def compose_preview(human, mode, action, reaction, speech, cat_response, cat_nam
         + (cat_response or '（未制作：'+cat_name+'の反応）') + '\n\n' + narration
 
 
-def build_interaction_catalog(catalog, registry, *, store=None, bindings=None):
+def build_interaction_catalog(catalog, registry, *, store=None, bindings=None, text_only=False):
     if store is None:
         from interaction_subjects import SubjectRegistry
         subjects=SubjectRegistry(registry.directory/'interaction_subjects.json')
@@ -220,10 +220,10 @@ def build_interaction_catalog(catalog, registry, *, store=None, bindings=None):
         rows=copy.deepcopy(rows)
         for row in rows:
             if row['id']==CAT_ID:row['content_id']=content_id
-    return build_registered_catalog(catalog,registry,store,entries,rows=rows)
+    return build_registered_catalog(catalog,registry,store,entries,rows=rows,text_only=text_only)
 
 
-def build_registered_catalog(catalog, registry, store, entries, *, rows):
+def build_registered_catalog(catalog, registry, store, entries, *, rows, text_only=False):
     all_rows=rows
     rows=[r for r in all_rows if r['enabled'] and r['game_id']]
     cats=[r for r in rows if r['kind']=='cat_response']
@@ -244,6 +244,8 @@ def build_registered_catalog(catalog, registry, store, entries, *, rows):
         result['entries'].append(dict(c,target_cat=target,pool_key=key(c),variants=[copy.deepcopy(v) for v in entry['variants'] if v['text']]))
         if special:result['entries'][-1]['narrative_scene']=c.get('narrative_scene','normal')
         else:result['entries'][-1].pop('narrative_scene',None)
+    if text_only:
+        return result, {}, {}
     blobs,warnings={},[]
     for cat in cats:
         for mode in MODES:
