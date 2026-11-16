@@ -199,6 +199,7 @@ class ContentImageToolWindow:
         from tkinter.scrolledtext import ScrolledText
         self.export_summary = ScrolledText(review, height=8, wrap='word', state='disabled')
         self.export_summary.pack(fill='both', expand=True, pady=8)
+        ttk.Button(review, text='本番パックと照合…', command=self.compare_unity).pack(anchor='w', pady=4)
         ttk.Button(review, text='全素材をUnity向けに書き出す…', command=self.export_unity).pack(anchor='w', pady=4)
         ttk.Button(review, text='人物画像だけを書き出す…', command=self.export_people).pack(anchor='w', pady=4)
         ttk.Label(review, text='書き出し後、Unityの「Cat Cafe → 素材 → 素材パックを取り込む…」で取り込みます。Unity収録状態：未確認', wraplength=760).pack(anchor='w', pady=8)
@@ -600,6 +601,42 @@ class ContentImageToolWindow:
         except (OSError, ValueError) as exc:
             self.notice.set(f'交流文を開けません：{exc}')
 
+    def unity_profiles(self, catalog):
+        from cat_appearance import catalog_profiles
+        defaults = catalog_profiles()
+        return {key: dict(defaults.get(key, {}), appearance=self.presets.appearance_profile(key))
+                for key in catalog}
+
+    def compare_unity(self):
+        import tkinter as tk
+        from tkinter import filedialog, ttk
+        from tkinter.scrolledtext import ScrolledText
+        from production_comparison import compare_production, format_comparison
+
+        path = filedialog.askopenfilename(parent=self.window,
+            title='本番のCatCafeContent/catalog.json または書き出し済みのbundle.jsonを選ぶ',
+            filetypes=[('Unity素材のJSON', '*.json')])
+        if not path:
+            return
+        try:
+            catalog = self.catalog_provider()
+            report = compare_production(path, catalog, self.registry, self.published_texts,
+                                        profiles=self.unity_profiles(catalog))
+        except (OSError, ValueError) as exc:
+            self.notice.set(f'本番パックと照合できません：{exc}')
+            return
+        window = tk.Toplevel(self.window)
+        window.title('本番パックとの照合結果')
+        frame = ttk.Frame(window, padding=12)
+        frame.pack(fill='both', expand=True)
+        ttk.Label(frame, text=path, wraplength=780).pack(anchor='w')
+        ttk.Label(frame, text='対象は猫の紹介文・場面・画像参照と任意イベントです。').pack(anchor='w')
+        body = ScrolledText(frame, width=94, height=26, wrap='word')
+        body.pack(fill='both', expand=True, pady=8)
+        body.insert('1.0', format_comparison(report))
+        body.configure(state='disabled')
+        ttk.Button(frame, text='閉じる', command=window.destroy).pack(anchor='e')
+
     def export_unity(self):
         from tkinter import filedialog
         from unity_export import export_bundle
@@ -607,11 +644,8 @@ class ContentImageToolWindow:
         if not parent:
             return
         try:
-            from cat_appearance import catalog_profiles
-            defaults = catalog_profiles()
-            profiles = {key: dict(defaults.get(key, {}), appearance=self.presets.appearance_profile(key))
-                        for key in self.catalog_provider()}
-            folder, report = export_bundle(self.catalog_provider(), self.registry, self.published_texts, parent, profiles=profiles,
+            catalog = self.catalog_provider()
+            folder, report = export_bundle(catalog, self.registry, self.published_texts, parent, profiles=self.unity_profiles(catalog),
                                            interaction_texts=self.interaction_published)
             self.notice.set(f"書き出しました：{folder}\n猫{report['cat_count']}匹・画像{report['image_count']}枚・交流文{report['interactions']['candidate_count']}案。")
             self.show_export_report(folder, report)

@@ -61,6 +61,35 @@ class UnityExportTests(unittest.TestCase):
             self.assertEqual(cat['scenes'][0]['label'], '本番の表示名')
             self.assertEqual(cat['scenes'][0]['text'], '本番の場面説明')
 
+    def test_production_comparison_is_read_only_and_detects_missing_material(self):
+        from optional_events import OptionalEventStore
+        from production_comparison import compare_production
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            registry = ImageRegistry(root / 'source')
+            texts = TextStore(registry.directory / 'texts.json')
+            image = registry.register('playtest-mike', 'ball', ASSET)
+            catalog = {'playtest-mike': 'ミケ'}
+            texts.save('playtest-mike', {
+                'introduction': '本番の紹介文', 'scenes': {'play': '本番の遊びの説明'},
+            })
+            folder, _ = export_bundle(catalog, registry, texts, root / 'exports')
+            baseline = folder / 'bundle.json'
+            self.assertFalse(compare_production(baseline, catalog, registry, texts)['changes'])
+            texts.save('playtest-mike', {'introduction': '', 'scenes': {'play': '新しい説明'}})
+            image.unlink()
+            events = OptionalEventStore(registry.directory / 'optional_events.json')
+            data = events.read_all()
+            data['entries'][0]['enabled'] = False
+            events.save_all(data)
+            before = {p: p.read_bytes() for p in root.rglob('*') if p.is_file()}
+            diff = compare_production(baseline, catalog, registry, texts)
+            self.assertEqual(diff['events'], (1, 0))
+            changes = {(row['field'], row['kind']) for row in diff['changes']}
+            self.assertEqual(changes, {('紹介文', '欠落'), ('説明文', '変更'),
+                                       ('画像参照', '欠落'), ('イベント', '欠落')})
+            self.assertEqual(before, {p: p.read_bytes() for p in root.rglob('*') if p.is_file()})
+
     def test_interaction_images_are_optional_and_exported(self):
         from prompt_presets import PromptPresets, DEFAULTS
         from interaction_scenes import ACTION_PROMPTS
@@ -164,5 +193,9 @@ class UnityExportTests(unittest.TestCase):
             data = json.loads((folders[0] / 'bundle.json').read_text(encoding='utf-8'))
             self.assertEqual(data['cats'][0]['scenes'][0]['image'], '')
             self.assertIn('書き出しました', tool.notice.get())
+            with patch('tkinter.filedialog.askopenfilename', return_value=str(folders[0] / 'bundle.json')):
+                tool.compare_unity()
+            self.assertTrue(any(w.winfo_class() == 'Toplevel' and w.title() == '本番パックとの照合結果'
+                                for w in tool.window.winfo_children()))
             tool.window.destroy()
             root.update()

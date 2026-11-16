@@ -17,45 +17,28 @@ SCENES = (
 )
 
 
-def export_bundle(catalog, registry, texts, destination, *, profiles=None, interaction_texts=None, interaction_bindings=None, display_labels=None, optional_events=None):
+def build_cat_catalog(catalog, registry, texts, *, profiles=None, retain_images=True):
     if (not isinstance(catalog, dict) or not catalog or any(
             not isinstance(key, str) or not key or not isinstance(name, str) or not name
             for key, name in catalog.items())):
         raise ValueError('有効な猫一覧が必要です。')
-    from display_labels import DisplayLabelStore
-    label_store = display_labels or DisplayLabelStore()
-    exported_labels = label_store.export_data()
-    images = registry.read()
     from cat_appearance import catalog_profiles, validate_appearance
+    from interaction_scenes import INTERACTION_SCENES, COMBINATION_SCENES, SPECIAL_SCENES
+
+    images = registry.read()
     profiles = catalog_profiles() if profiles is None else profiles
     records = texts.read()
-    from interaction_presentation import build_interaction_catalog
-    interactions, interaction_report, interaction_blobs = build_interaction_catalog(
-        catalog, registry, store=interaction_texts, bindings=interaction_bindings)
-    destination = Path(destination).resolve()
-    if destination == registry.directory.resolve() or registry.directory.resolve() in destination.parents:
-        raise ValueError('書き出し先は登録素材のフォルダとは別にしてください。')
-    pack_id = uuid.uuid4().hex
-    interactions['pack_id'] = pack_id
-    from optional_events import OptionalEventStore
-    event_store = optional_events or OptionalEventStore(registry.directory / 'optional_events.json')
-    events = event_store.export_data(catalog, pack_id)
-    from state_images import StateImageStore
-    state_images, state_blobs = StateImageStore(registry.directory).export_data(catalog, pack_id)
-    from cat_outfits import CatOutfitStore
-    cat_outfits, outfit_blobs = CatOutfitStore(registry.directory).export_data(catalog, pack_id)
-    folder = destination / f'CatCafeContent-{pack_id}'
-    warnings, cats, blobs = [], [], {}
+    warnings, cats, blobs, defaults = [], [], {}, set()
     for cat_id, name in catalog.items():
         record = records['cats'].get(cat_id, {})
         introduction = record.get('introduction', '').strip()
         if not introduction:
+            defaults.add((cat_id, None))
             warnings.append(f'{name}（{cat_id}）：紹介文が未登録。定型文を使用します。')
         cat = {'cat_id': cat_id, 'name': name, 'introduction': introduction or f'{name}の様子をご覧ください。', 'scenes': []}
         profile = profiles.get(cat_id, {})
         cat['appearance'] = validate_appearance(profile.get('appearance', {}))
         cat['features'] = list(profile.get('features', []))
-        from interaction_scenes import INTERACTION_SCENES, COMBINATION_SCENES, SPECIAL_SCENES
         extra = tuple((key, label, label + 'をしています。') for key, label in INTERACTION_SCENES + COMBINATION_SCENES + SPECIAL_SCENES
                       if key in images['cats'].get(cat_id, {}))
         scenes = {key: (label, fallback) for key, label, fallback in SCENES + extra}
@@ -68,6 +51,7 @@ def export_bundle(catalog, registry, texts, destination, *, profiles=None, inter
             label = record.get('scene_labels', {}).get(key, label)
             text = scene_texts.get(key, '').strip()
             if not text:
+                defaults.add((cat_id, key))
                 warnings.append(f'{name} / {label}：描写が未登録。定型文を使用します。')
             image = ''
             value = images['cats'].get(cat_id, {}).get(key)
@@ -79,13 +63,38 @@ def export_bundle(catalog, registry, texts, destination, *, profiles=None, inter
                             or min(struct.unpack('>II', data[16:24])) <= 0):
                         raise ValueError('PNGヘッダーが不正です。')
                     image = f'images/{hashlib.sha256(data).hexdigest()}.png'
-                    blobs[image] = data
+                    if retain_images:
+                        blobs[image] = data
                 except (OSError, ValueError) as exc:
                     warnings.append(f'{name} / {label}：登録画像を読み込めません（{exc}）。画像なしで書き出します。')
             else:
                 warnings.append(f'{name} / {label}：画像が未登録。画像なしで書き出します。')
             cat['scenes'].append({'key': key, 'label': label, 'text': text or fallback, 'image': image})
         cats.append(cat)
+    return cats, warnings, blobs, defaults
+
+
+def export_bundle(catalog, registry, texts, destination, *, profiles=None, interaction_texts=None, interaction_bindings=None, display_labels=None, optional_events=None):
+    destination = Path(destination).resolve()
+    if destination == registry.directory.resolve() or registry.directory.resolve() in destination.parents:
+        raise ValueError('書き出し先は登録素材のフォルダとは別にしてください。')
+    cats, warnings, blobs, _ = build_cat_catalog(catalog, registry, texts, profiles=profiles)
+    from display_labels import DisplayLabelStore
+    label_store = display_labels or DisplayLabelStore()
+    exported_labels = label_store.export_data()
+    from interaction_presentation import build_interaction_catalog
+    interactions, interaction_report, interaction_blobs = build_interaction_catalog(
+        catalog, registry, store=interaction_texts, bindings=interaction_bindings)
+    pack_id = uuid.uuid4().hex
+    interactions['pack_id'] = pack_id
+    from optional_events import OptionalEventStore
+    event_store = optional_events or OptionalEventStore(registry.directory / 'optional_events.json')
+    events = event_store.export_data(catalog, pack_id)
+    from state_images import StateImageStore
+    state_images, state_blobs = StateImageStore(registry.directory).export_data(catalog, pack_id)
+    from cat_outfits import CatOutfitStore
+    cat_outfits, outfit_blobs = CatOutfitStore(registry.directory).export_data(catalog, pack_id)
+    folder = destination / f'CatCafeContent-{pack_id}'
     from human_portraits import HumanPortraitStore
     people, people_blobs, people_warnings = HumanPortraitStore(registry.directory).export_data()
     people['pack_id'] = pack_id
