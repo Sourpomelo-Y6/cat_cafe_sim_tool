@@ -314,6 +314,8 @@ static partial class Program
         if (customers.Length==6) InitialGuestDispatchFrequency(rulesPath,configured,customers);
         foreach(var guest in additional.Where(r=>!initialIds.Contains(r.customer_id)))
             GoalUnlockedDispatchChecks(rulesPath,configured,guest.customer_id,checkpointDirectory);
+        if(additional.Any(r=>r.customer_id=="guest-9") && additional.Any(r=>r.customer_id=="guest-11"))
+            GoalUnlockedRequestsCompete(rulesPath,configured);
         Console.WriteLine($"PASS named dispatch: {assertions} assertions");
     }
 
@@ -345,53 +347,178 @@ static partial class Program
     static void GoalUnlockedDispatchChecks(string rulesPath,CafeNamedDispatchSettings[] settings,string customer,string checkpointDirectory)
     {
         var preferredSeat=typeof(CafeSimulation).GetMethod("PreferredSeat",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic);
+        bool checkpointsWritten=false, receivedRequest=false;
         foreach(int seed in new[]{0,1,42})
         {
             var rules=Decode<CafeRules>(File.ReadAllText(rulesPath));
             rules.stamina_growth=Decode<CafeStaminaRules>(File.ReadAllText(Path.Combine(Path.GetDirectoryName(rulesPath),"stamina_growth.json")));
             rules.named_dispatch=settings;
+            int stage=int.Parse(customer.Substring("guest-".Length))>rules.arrival_ticks.Length+rules.popular_customer_count?2:1;
+            string mode=stage==2?"fast":"clear";
             var sim=new CafeSimulation(rules,seed,"popularity");
-            string checkpoints=checkpointDirectory!=null && seed==0?Path.Combine(checkpointDirectory,customer):null;
+            string checkpoints=checkpointDirectory!=null && !checkpointsWritten?Path.Combine(checkpointDirectory,customer):null;
+            CafeSnapshot affinityCheckpoint=null, unlockCheckpoint=null;
             Assert(!sim.CustomerSchedule(1).Any(a=>a.customer_id==customer),"Guest could visit before goal clearance");
-            int affinityDay=0, operations=0;
+            var observed=new DispatchBalanceRow();
+            int affinityDay=0, operations=0, observedDay=0;
             bool issuedWhileLocked=false;
             while(sim.State.day<=120 && sim.State.game_over==null && operations++<100000)
             {
                 var s=sim.State;
-                if(sim.ClearedGoalDay(1)==0)
-                    issuedWhileLocked|=sim.NamedRequest(customer)!=null || sim.NamedAffinity(customer).Count>0;
+                if(s.phase=="preparation" && s.day!=observedDay)
+                {
+                    observedDay=s.day;
+                    observed.Observe(sim,customer,50);
+                }
+                if(sim.ClearedGoalDay(stage)==0)
+                    issuedWhileLocked|=sim.CustomerSchedule(s.day).Any(a=>a.customer_id==customer)
+                        || sim.NamedRequest(customer)!=null || sim.NamedAffinity(customer).Count>0;
+                if(stage==2 && seed==0 && unlockCheckpoint==null && s.phase=="preparation" && sim.ClearedGoalDay(stage)>0)
+                    unlockCheckpoint=CloneDispatchSnapshot(s);
                 if(s.phase=="preparation" && affinityDay==0 && sim.NamedAffinity(customer).Count>0)
                 {
                     affinityDay=s.day;
-                    if(checkpoints!=null)SaveDispatchCheckpoint(sim,checkpoints,"affinity");
+                    if(checkpoints!=null)affinityCheckpoint=CloneDispatchSnapshot(s);
                 }
                 var request=sim.NamedCustomers.FirstOrDefault(sim.NamedDispatchAwaitingAnswer);
                 if(request!=null && s.phase=="preparation")
                 {
                     if(request==customer)
                     {
-                        if(checkpoints!=null)SaveDispatchCheckpoint(sim,checkpoints,"request");
-                        NaturalNamedDispatchContinuation(sim,seed,customer,null,null,preferredSeat,50,checkpoints);
+                        bool reissued=NaturalNamedDispatchContinuation(sim,seed,customer,null,null,preferredSeat,50,checkpoints,mode);
+                        if(checkpoints!=null && reissued)
+                        {
+                            SaveDispatchCheckpoint(sim,checkpoints,"affinity",affinityCheckpoint);
+                            SaveDispatchCheckpoint(sim,checkpoints,"request");
+                            checkpointsWritten=true;
+                        }
                     }
                     sim.Execute("resolve_sato_dispatch",catId:request,choice:"decline");
                 }
                 else
-                    BalanceExecute(sim,BalanceOp(sim,"popularity","clear",false));
+                    BalanceExecute(sim,BalanceOp(sim,"popularity",mode,false));
             }
             Assert(!issuedWhileLocked,"Locked guest issued an event");
-            Assert(sim.State.day==121 && sim.ClearedGoalDay(1)>0 && affinityDay>sim.ClearedGoalDay(1),
+            Assert(sim.State.day==121 && sim.ClearedGoalDay(stage)>0 && affinityDay>sim.ClearedGoalDay(stage),
                 "Unlocked guest did not develop an affinity scene in seed "+seed);
-            Assert(sim.NamedRequest(customer) is CafeSatoDispatch requestAfterUnlock && requestAfterUnlock.requested_day>=affinityDay,
+            var requestAfterUnlock=sim.NamedRequest(customer);
+            Assert(requestAfterUnlock==null || requestAfterUnlock.requested_day>=affinityDay,
                 "Unlocked guest did not receive a request after the affinity scene in seed "+seed);
+            receivedRequest|=requestAfterUnlock!=null;
             sim.Validate(sim.State);
             var visits=sim.State.history.SelectMany(h=>h.customer_records).Where(v=>v.customer_id==customer).ToArray();
-            Console.WriteLine(Encode(new{customer,seed,unlocked_after=sim.ClearedGoalDay(1),affinity_day=affinityDay,
-                visits=visits.Length,services=visits.Count(v=>v.satisfaction!=null),request_day=sim.NamedRequest(customer)?.requested_day}));
+            Console.WriteLine(Encode(new{customer,seed,stage,unlocked_after=sim.ClearedGoalDay(stage),affinity_day=affinityDay,
+                visits=visits.Length,services=visits.Count(v=>v.satisfaction!=null),request_day=sim.NamedRequest(customer)?.requested_day,
+                observed.max_discontent,observed.overlap_days,observed.staff_block_days}));
+            if(stage==2 && seed==0 && requestAfterUnlock==null)
+            {
+                var shortage=new CafeSimulation(rules);
+                shortage.Restore(unlockCheckpoint);
+                var fixtureAffinity=ExerciseUnlockedDispatch(shortage,customer,seed);
+                Assert(shortage.NamedDispatchAwaitingAnswer(customer),"The unlocked guest fixture did not trigger a request");
+                bool reissued=NaturalNamedDispatchContinuation(shortage,seed,customer,null,null,preferredSeat,50,checkpoints,"clear");
+                receivedRequest=true;
+                if(checkpoints!=null && reissued)
+                {
+                    SaveDispatchCheckpoint(shortage,checkpoints,"affinity",fixtureAffinity);
+                    SaveDispatchCheckpoint(shortage,checkpoints,"request");
+                    checkpointsWritten=true;
+                }
+            }
         }
+        Assert(receivedRequest,"No unlocked guest request in the tested seeds: "+customer);
+        Assert(checkpointDirectory==null || checkpointsWritten,"No reissue to verify in Windows: "+customer);
     }
 
-    static void SaveDispatchCheckpoint(CafeSimulation sim,string directory,string stage)
-        => new CafeSaveStore(Path.Combine(directory,stage),ReplayEncode,ReplayDecode,sim.Validate).Save(9,sim.State);
+    static CafeSnapshot CloneDispatchSnapshot(CafeSnapshot state)
+    {
+        var copy=Decode<CafeSnapshot>(Encode(state));
+        copy.NormalizeJsonStrings();
+        return copy;
+    }
+
+    static CafeSnapshot ExerciseUnlockedDispatch(CafeSimulation sim,string customer,int seed)
+    {
+        CafeSnapshot affinity=null;
+        int started=sim.State.day, operations=0;
+        while(sim.State.day<started+10 && !sim.NamedDispatchAwaitingAnswer(customer)
+            && sim.State.game_over==null && operations++<20000)
+        {
+            var s=sim.State;
+            if(affinity==null && s.phase=="preparation" && sim.NamedAffinity(customer).Count>0)
+                affinity=CloneDispatchSnapshot(s);
+            if(affinity==null && s.phase=="open")
+            {
+                var exchange=s.exchanges.FirstOrDefault(e=>e.customer_id==customer);
+                if(exchange!=null)exchange.affinity_pending=100;
+            }
+            var other=sim.NamedCustomers.FirstOrDefault(c=>c!=customer && sim.NamedDispatchAwaitingAnswer(c));
+            if(other!=null && s.phase=="preparation")
+            {
+                sim.Execute("resolve_sato_dispatch",catId:other,choice:"decline");
+                continue;
+            }
+            var op=BalanceOp(sim,"popularity","fast",false);
+            if(s.phase=="preparation" && (op.kind=="set_shifts" || op.kind=="start_business" || op.kind=="expand_seats"))
+            {
+                var available=s.cats.Where(c=>c.activity=="cafe" && c.health=="healthy").ToArray();
+                var workers=(affinity==null?available:available.Take(1)).ToArray();
+                if(s.cats.Where(c=>c.working).Select(c=>c.id).SequenceEqual(workers.Select(c=>c.id)))
+                {
+                    if(affinity!=null)
+                    {
+                        workers[0].stamina=0;
+                        workers[0].cannot_continue=true;
+                    }
+                    op=new CafeAutoOperation {kind="start_business"};
+                }
+                else op=new CafeAutoOperation {kind="set_shifts",working=workers.Select(c=>c.id).ToArray()};
+            }
+            BalanceExecute(sim,op);
+        }
+        Console.WriteLine(Encode(new{customer,seed,policy="controlled-fixture-after-unlock",affinity_day=affinity?.day,
+            request_day=sim.NamedRequest(customer)?.requested_day,sim.State.seat_count,
+            discontent=sim.DiscontentScore(customer,sim.State.day)}));
+        return affinity;
+    }
+
+    static void GoalUnlockedRequestsCompete(string rulesPath,CafeNamedDispatchSettings[] settings)
+    {
+        var rules=Decode<CafeRules>(File.ReadAllText(rulesPath));
+        rules.named_dispatch=settings;
+        rules.store_events.probability=0;
+        rules.goal_stages[0].target=1;
+        rules.goal_stages[1].target=2;
+        var sim=new CafeSimulation(rules,objective:"popularity");
+        sim.Execute("day_off");
+        sim.Execute("advance_goal");
+        sim.Execute("day_off");
+        if(sim.ReservationWaiting)sim.Execute("resolve_reservation",choice:"decline");
+        sim.Execute("continue_goal");
+        Assert(sim.ClearedGoalDay(2)>0 && new[]{"guest-9","guest-11"}.All(c=>sim.CustomerSchedule(sim.State.day).Any(a=>a.customer_id==c)),
+            "Both guests must be unlocked for the conflict fixture");
+        string cat=sim.State.cats[0].id;
+        var observe=typeof(CafeSimulation).GetMethod("ObserveSatoAffinity",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic);
+        foreach(string guest in new[]{"guest-9","guest-11"})
+        {
+            sim.State.relationships.Add(new CafeRelationship {cat_id=cat,customer_id=guest,affinity=90});
+            observe.Invoke(sim,new object[]{cat,guest,90.0});
+            sim.ChangeDiscontent(sim.State.discontent,sim.State.day,guest,50);
+        }
+        sim.Execute("day_off");
+        var guests=new[]{"guest-9","guest-11"};
+        var pending=guests.Where(sim.NamedDispatchAwaitingAnswer).ToArray();
+        Assert(pending.Length==1 && sim.NamedRequest(pending[0]).cat_id==cat,"Two unlocked guests reserved the same cat");
+        string first=pending[0], other=guests.Single(c=>c!=first);
+        sim.Execute("resolve_sato_dispatch",catId:first,choice:"decline");
+        if(sim.IntakeWaiting)sim.Execute("resolve_intake",choice:"decline");
+        sim.Execute("day_off");
+        Assert(sim.NamedDispatchAwaitingAnswer(other) && sim.NamedRequest(other).cat_id==cat,
+            "The other guest did not receive the released cat on the next day");
+    }
+
+    static void SaveDispatchCheckpoint(CafeSimulation sim,string directory,string stage,CafeSnapshot snapshot=null)
+        => new CafeSaveStore(Path.Combine(directory,stage),ReplayEncode,ReplayDecode,sim.Validate).Save(9,snapshot??sim.State);
 
     static void RepeatedSuspensionChecks(string rulesPath)
     {
@@ -522,10 +649,11 @@ static partial class Program
         return true;
     }
 
-    static void NaturalNamedDispatchContinuation(CafeSimulation baseline,int seed,string guest,
-        string target,string favorite,System.Reflection.MethodInfo preferredSeat,double threshold,string checkpoints=null)
+    static bool NaturalNamedDispatchContinuation(CafeSimulation baseline,int seed,string guest,
+        string target,string favorite,System.Reflection.MethodInfo preferredSeat,double threshold,string checkpoints=null,string mode="clear")
     {
         var branches=new[]{"open-as-usual","close-after-return","close-from-request"};
+        bool savedReissue=false;
         foreach(string branch in branches)
         {
             var sim=new CafeSimulation(baseline.Rules);
@@ -550,20 +678,20 @@ static partial class Program
                     sim.Execute("resolve_sato_dispatch",catId:other,choice:"decline");
                     continue;
                 }
-                var op=BalanceOp(sim,"popularity","clear",false);
+                var op=BalanceOp(sim,"popularity",mode,false);
                 bool close=branch=="close-from-request" ||
                     branch=="close-after-return" && original.return_access==CafeSimulation.AllowReturnAccess;
-                if(close && state.phase=="preparation" && op.kind=="start_business")
+                if(close && state.phase=="preparation" && (op.kind=="start_business" || op.kind=="expand_seats"))
                     op=new CafeAutoOperation {kind="day_off"};
                 BalanceExecute(sim,op);
             }
             Assert(original.returned_day>0 && sim.State.day==original.returned_day+8,"Natural continuation did not reach day eight");
             sim.Validate(sim.State);
             var repeat=sim.NamedRequest(guest);
-            if(checkpoints!=null && branch=="close-from-request")
+            if(checkpoints!=null && branch=="close-from-request" && repeat!=original && sim.NamedDispatchAwaitingAnswer(guest))
             {
-                Assert(repeat!=original && sim.NamedDispatchAwaitingAnswer(guest),"Expected a reissue to save for Windows");
                 SaveDispatchCheckpoint(sim,checkpoints,"reissue");
+                savedReissue=true;
             }
             Console.WriteLine(Encode(new{threshold,seed,policy=target==null?"auto":"same-cat",branch,guest,
                 request_day=original.requested_day,cat=original.cat_id,
@@ -571,6 +699,7 @@ static partial class Program
                 return_day=original.returned_day,check_day=sim.State.day,discontent=sim.DiscontentScore(guest,sim.State.day),
                 reissue_day=repeat==original?(int?)null:repeat.requested_day}));
         }
+        return savedReissue;
     }
 
     sealed class DispatchBalanceRow
