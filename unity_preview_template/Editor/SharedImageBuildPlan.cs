@@ -93,7 +93,9 @@ namespace CatCafePreview.Editor
             try
             {
                 Directory.CreateDirectory(Stash);
-                File.WriteAllText(PlanFile, json);
+                string pendingPlan = Path.Combine(Stash, "plan.tmp");
+                File.WriteAllText(pendingPlan, json);
+                File.Move(pendingPlan, PlanFile);
                 WithRefresh(() =>
                 {
                     foreach (var alias in plan.aliases)
@@ -101,8 +103,12 @@ namespace CatCafePreview.Editor
                         string from = AssetPath(alias.from);
                         string staged = StagedPath(alias.from);
                         Directory.CreateDirectory(Path.GetDirectoryName(staged));
-                        File.Move(from + ".meta", staged + ".meta");
+                        string pendingMeta = Path.Combine(Stash, "metadata.tmp");
+                        // Unity may delete an orphan .meta on startup. Secure a copy before moving the PNG.
+                        File.Copy(from + ".meta", pendingMeta);
+                        File.Move(pendingMeta, staged + ".meta");
                         File.Move(from, staged);
+                        File.Delete(from + ".meta");
                     }
                     var pending = Path.Combine(Stash, "publish.tmp");
                     File.WriteAllText(pending, json);
@@ -120,7 +126,12 @@ namespace CatCafePreview.Editor
             RequireLocalPath(PlanFile);
             RequireLocalPath(Published);
             RequireLocalPath(Published + ".meta");
-            if (!File.Exists(PlanFile)) { Directory.Delete(Stash); return; }
+            if (!File.Exists(PlanFile))
+            {
+                DeleteTemporaryFile("plan.tmp");
+                Directory.Delete(Stash);
+                return;
+            }
             string json = File.ReadAllText(PlanFile);
             var plan = JsonUtility.FromJson<SharedPackImages.AliasCatalog>(json);
             if (plan?.aliases == null || plan.aliases.Any(alias => !SharedPackImages.ValidAlias(alias)))
@@ -142,10 +153,10 @@ namespace CatCafePreview.Editor
                     RequireLocalPath(original);
                     RequireLocalPath(original + ".meta");
                     if (File.Exists(staged)) File.Move(staged, original);
-                    if (File.Exists(staged + ".meta")) File.Move(staged + ".meta", original + ".meta");
+                    RestoreMetadata(staged + ".meta", original, alias);
                 }
-                string pending = Path.Combine(Stash, "publish.tmp");
-                if (File.Exists(pending)) File.Delete(pending);
+                DeleteTemporaryFile("publish.tmp");
+                DeleteTemporaryFile("metadata.tmp");
                 // Only now discard the plan. Empty directories are owned by this build.
                 foreach (var parent in plan.aliases.Select(alias => Path.GetDirectoryName(StagedPath(alias.from))).Distinct())
                     if (Directory.Exists(parent)) Directory.Delete(parent);
@@ -155,6 +166,47 @@ namespace CatCafePreview.Editor
                 Directory.Delete(Stash);
             });
             Debug.Log("CATCAFE_SHARED_IMAGE_PLAN_RESTORED");
+        }
+
+        private static void DeleteTemporaryFile(string name)
+        {
+            string path = Path.Combine(Stash, name);
+            RequireLocalPath(path);
+            File.Delete(path);
+        }
+
+        private static void RestoreMetadata(string staged, string image, SharedPackImages.Alias alias)
+        {
+            if (!File.Exists(staged)) return;
+            string original = image + ".meta";
+            if (!File.Exists(original))
+            {
+                File.Move(staged, original);
+                return;
+            }
+            if (File.ReadAllBytes(staged).SequenceEqual(File.ReadAllBytes(original)))
+            {
+                File.Delete(staged);
+                return;
+            }
+
+            // A restart can import the PNG while its original .meta is staged and assign a new GUID.
+            // Preserve the conflicting file before restoring the journaled metadata for the exact PNG.
+            using (var sha = System.Security.Cryptography.SHA256.Create())
+            using (var input = File.OpenRead(image))
+                if (input.Length != alias.sourceBytes ||
+                    !string.Concat(sha.ComputeHash(input).Select(value => value.ToString("x2")))
+                        .Equals(Path.GetFileNameWithoutExtension(image), StringComparison.Ordinal))
+                    throw new IOException("Cannot restore metadata for a changed image: " + image);
+
+            string workspace = Environment.GetEnvironmentVariable("CATCAFE_WORKSPACE_ROOT");
+            if (string.IsNullOrEmpty(workspace)) throw new IOException("Missing verification log root.");
+            string logs = Path.Combine(workspace, "Logs", "StandaloneBuild", "Runs");
+            Directory.CreateDirectory(logs);
+            string backup = Path.Combine(logs, "SharedImageRecovery-" + Guid.NewGuid().ToString("N") + ".meta");
+            File.Copy(original, backup);
+            File.Replace(staged, original, null);
+            Debug.Log("CATCAFE_SHARED_IMAGE_METADATA_RESTORED: " + alias.from + ", previous metadata: " + backup);
         }
 
         private static string AssetPath(string resource) => Path.Combine(Application.dataPath, "Resources", resource + ".png");
