@@ -248,7 +248,6 @@ namespace CatCafePreview.Standalone
             PresentDispatchIntroductions();
             PresentSatoDispatch();
             PresentSatoAdoption();
-            PresentCustomerTrust();
             PresentReservation();
         }
         private string Preference(string customer) => State.goal.Count>0 && customer=="advanced-longhair"?"long_hair":State.goal.Count>0 && customer=="vip-calico"?Rules.vip_customer.feature:State.goal.Count>0 && customer=="advanced-white" ? Rules.advanced_customer.feature : State.goal.Count>0 && customer=="reservation-longhair" ? Rules.reservation.feature : Rules.preference_pool[(int)(PythonRandom.Hash64(State.seed + ":" + customer) % (ulong)Rules.preference_pool.Length)];

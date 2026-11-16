@@ -69,6 +69,7 @@ namespace CatCafePreview.Standalone
             text.Append('{');foreach(var field in Fields(value.GetType()))
             {if(field.Name=="missing_cases" && value is CafeSnapshot)continue;
                 if(value is CafeSnapshot && (field.Name=="sato_affinity" || field.Name=="sato_dispatch" || field.Name=="suzuki_dispatch" && field.GetValue(value)==null || field.Name=="suzuki_affinity" && (((CafeSnapshot)value).suzuki_affinity?.Count??0)==0))continue;
+                if(value is CafeSnapshot snapshot && field.Name=="named_dispatch_archive" && (snapshot.named_dispatch_archive?.Count??0)==0)continue;
                 if(value is CafeSnapshot && field.Name=="named_dispatch" && (((CafeSnapshot)value).named_dispatch?.Count??0)==0)continue;
                 if(value is CafeSatoDispatch && field.Name=="return_access" && (int)field.GetValue(value)==0)continue;
                 if(value is CafeReplayOperation && field.Name=="named_return_policy_version" && (int)field.GetValue(value)==0)continue;

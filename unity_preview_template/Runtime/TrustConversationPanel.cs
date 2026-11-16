@@ -28,7 +28,7 @@ namespace CatCafePreview {
   private CafeConversationLine[] TrustLines(bool result,string branch)
       =>CafeTrustDialogue.EventLines(Backend.Simulation.State,Event,result,branch,Backend.Details.CustomerName(Event.customer_id),Backend.Simulation.Rules.trust.popularity_loss);
   protected override CafeConversationLine[] Lines(string branch)=>TrustLines(Result,branch);
-  protected override PythonIntakeState Request=>new PythonIntakeState{cat_id="",name=Backend.Details.CustomerName(Event.customer_id),personality=Result?"接客結果 · "+Event.resolved_day+"日目":CafeSimulation.IsNamedReturnTrustEvent(Backend.Simulation.State,Event)?"帰還後の信頼確認":"信頼警告 · 来店停止累計 "+Event.suspensions+"回",can_decline=true};
+  protected override PythonIntakeState Request=>new PythonIntakeState{cat_id="",name=Backend.Details.CustomerName(Event.customer_id),personality=Result?"接客結果 · "+Event.resolved_day+"日目":"帰還後の信頼確認",can_decline=true};
   protected override bool CanAnswer(bool yes)=>Event?.status=="waiting" && Client.CanRespondTrust(Event.id);
   protected override string Title=>"顧客の信頼回復";
   protected override string SceneLabel=>Event.day+"日目の警告 · "+Backend.Details.CustomerName(Event.customer_id)+" · "+(Result?Event.outcome=="recovered"?"回復済み":"永久離脱":Event.status=="waiting"?"回答待ち":Event.choice=="recover"?"回復中":"永久離脱");

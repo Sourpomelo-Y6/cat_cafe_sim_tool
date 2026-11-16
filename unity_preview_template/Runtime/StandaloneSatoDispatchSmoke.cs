@@ -363,36 +363,14 @@ namespace CatCafePreview
 
                 int due=sim.NamedRequest(customer).returned_day+8;
                 while(sim.State.day<due-1){Prepare(sim);sim.Execute("day_off");}
-                Check(!sim.CustomerTrustWaiting,"Trust warning opened before day eight");
+                Check(!sim.NamedDispatchAwaitingAnswer(customer),"Request opened before day eight");
                 Prepare(sim);
                 sim.Execute("day_off");
-                var warning=sim.State.trust_events.Single(e=>e.customer_id==customer && e.day==due);
-                Apply(client,backend);
-                var trust=client.GetComponent<TrustConversationPanel>();
-                CafeOptions.Current.instant=true;
-                Check(trust.OpenEvent(warning.id),"Return trust conversation did not open");
-                Check(trust.PlaybackHost.GetComponentsInChildren<Text>().Any(t=>t.text.Contains("来店を受け入れることにした")),"Trust conversation did not recall the return choice");
-                for(int frame=0;frame<30 && !trust.PlaybackChoosing;frame++){trust.Next();yield return null;}
-                Check(trust.PlaybackChoosing,"Trust response choices did not open");
-                Check(trust.PlaybackHost.GetComponentsInChildren<Text>().All(t=>!t.text.Contains("来店停止期限")),"Inactive suspension still displayed a deadline");
-                yield return new WaitUntil(()=>client.UIStateReady && client.CurrentState.revision==sim.State.revision);
-                trust.Answer(true);
-                yield return new WaitUntil(()=>client.UIStateReady);
-                Check(warning.status=="recovery","Trust recovery answer was not applied");
-                for(int frame=0;frame<30 && trust.Showing;frame++){trust.Next();yield return null;}
-                Check(!trust.Showing && !backend.TrustResultPending,"Trust answer conversation did not finish");
-
-                var serviceCat=sim.State.cats.First(c=>c.activity=="cafe" && c.health=="healthy").id;
-                while(warning.status=="recovery" && sim.State.day<due+8)Serve(sim,serviceCat,false,customer);
-                Check(warning.outcome=="recovered","Satisfied service did not restore trust");
-                Apply(client,backend);
-                Check(trust.OpenEvent(warning.id),"Recovery result conversation did not open");
-                Check(trust.PlaybackHost.GetComponentsInChildren<Text>().Any(t=>t.text.Contains("「満足」") && t.text.Contains("回復済み")),"Recovery result did not explain the satisfied visit");
-                for(int frame=0;frame<30 && trust.Showing;frame++){trust.Next();yield return null;}
-                Check(!trust.Showing && !backend.TrustResultPending,"Recovery result conversation did not finish");
+                Check(!sim.CustomerTrustWaiting && sim.State.trust_events.Count==0,"Return generated a trust conversation");
+                Check(!sim.NamedDispatchAwaitingAnswer(customer),"Adopted cat was requested again");
                 Command(backend,"save_game");
                 Command(backend,"load_game");
-                Check(sim.State.trust_events.Single(e=>e.id==warning.id).outcome=="recovered","Recovery result did not persist");
+                Check(sim.NamedEpilogueRequest(cat)?.epilogue_read==true,"Epilogue read state was lost");
             }
         }
     }

@@ -193,6 +193,7 @@ namespace CatCafePreview.Standalone
         public CafeVisitingCat visiting_cat = new CafeVisitingCat();
         public List<CafeShopPurchase> shop_purchases = new List<CafeShopPurchase>();
         public CafeSatoDispatch sato_dispatch, suzuki_dispatch;
+        public List<CafeNamedDispatchArchive> named_dispatch_archive = new List<CafeNamedDispatchArchive>();
         public List<CafeNamedDispatchState> named_dispatch = new List<CafeNamedDispatchState>();
         public List<CafeSatoAffinityScene> suzuki_affinity = new List<CafeSatoAffinityScene>();
         public List<CafeSatoAffinityScene> sato_affinity = new List<CafeSatoAffinityScene>();
@@ -200,6 +201,7 @@ namespace CatCafePreview.Standalone
         // Unity JsonUtility materializes JSON null strings as empty strings.
         public void NormalizeJsonStrings()
         {
+            if(named_dispatch_archive==null)named_dispatch_archive=new List<CafeNamedDispatchArchive>();
             if(named_dispatch==null)named_dispatch=new List<CafeNamedDispatchState>();
             foreach(var row in named_dispatch)
                 if(row?.request!=null && string.IsNullOrEmpty(row.request.cat_id) && row.request.requested_day==0)row.request=null;

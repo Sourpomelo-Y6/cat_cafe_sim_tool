@@ -12,6 +12,12 @@ namespace CatCafePreview.Standalone
         public CafeConversationProgress conversation;
     }
 
+    [Serializable] public sealed class CafeNamedDispatchArchive
+    {
+        public string customer_id;
+        public CafeSatoDispatch request;
+    }
+
     [Serializable] public sealed class CafeSatoAffinityScene
     {
         public string cat_id;
@@ -79,6 +85,18 @@ namespace CatCafePreview.Standalone
             => customer==Sato?state.sato_dispatch:customer==Suzuki?state.suzuki_dispatch:
                 state.named_dispatch?.Find(row=>row.customer_id==customer)?.request;
 
+        private static IEnumerable<CafeSatoDispatch> NamedRequests(CafeSnapshot state,string customer)
+            => state.named_dispatch_archive.Where(row=>row.customer_id==customer).Select(row=>row.request)
+                .Append(NamedRequest(state,customer)).Where(request=>request!=null);
+
+        internal CafeSatoDispatch NamedTripRequest(CafeDispatch trip)
+            => NamedTripRequest(State,trip);
+
+        private static CafeSatoDispatch NamedTripRequest(CafeSnapshot state,CafeDispatch trip)
+            => NamedDestinationCustomer(trip.destination) is string customer
+                ? NamedRequests(state,customer).SingleOrDefault(request=>request.accepted_day==trip.started_day)
+                : null;
+
         public List<CafeSatoAffinityScene> NamedAffinity(string customer)
             => NamedAffinity(State,customer) ?? new List<CafeSatoAffinityScene>();
         private static List<CafeSatoAffinityScene> NamedAffinity(CafeSnapshot state,string customer)
@@ -117,12 +135,15 @@ namespace CatCafePreview.Standalone
         {
             if (State.import_history != null) return;
             var request = NamedRequest(customer);
-            if (request != null)
+            bool reissue = request?.return_access == AllowReturnAccess
+                && State.day == request.returned_day + NamedDispatchRetryDelay;
+            if (request != null && !reissue)
             {
+                if (request.returned_day != 0 || request.declined_day != 0) return;
                 if (State.day == request.requested_day + 1 && request.accepted_day == 0 && request.declined_day == 0)
                     request.conversation = SatoScene(NamedPrefix(customer)+".request.v1","introduction");
                 if (request.accepted_day != 0 || request.declined_day != 0 || State.day < request.requested_day + 2
-                    || NamedMissing(State,customer) != null) return;
+                    || NamedMissing(State,customer,request) != null) return;
                 var cat = State.cats.Single(c => c.id == request.cat_id);
                 if (cat.activity == "adopted") request.declined_day = State.day;
                 else if (cat.activity == "cafe") StartSatoMissing(cat, NamedPrefix(customer)+"_expired");
@@ -142,6 +163,8 @@ namespace CatCafePreview.Standalone
                 .OrderByDescending(r => r.affinity).ThenBy(r => r.cat_id, StringComparer.Ordinal).FirstOrDefault();
             if (candidate == null) return;
             if (State.cats.Count(c => c.activity == "cafe" && c.health == "healthy" && !c.cannot_continue && c.stamina > 0) <= State.seat_count) return;
+            if (reissue)
+                State.named_dispatch_archive.Add(new CafeNamedDispatchArchive {customer_id=customer,request=request});
             request = new CafeSatoDispatch { cat_id=candidate.cat_id, requested_day=State.day,
                 conversation=SatoScene(NamedPrefix(customer)+".request.v1","introduction") };
             if(customer==Sato)State.sato_dispatch=request;
@@ -152,8 +175,7 @@ namespace CatCafePreview.Standalone
         // Zero identifies returns resolved before this choice was introduced.
         public const int AwaitingReturnAccess=1, AllowReturnAccess=2, BanReturnAccess=3;
         internal bool LegacyNamedReturnReplay;
-        private const int ReturnTrustDelay=8;
-        private const double ReturnTrustDiscontent=50;
+        private const int NamedDispatchRetryDelay=8;
 
         public bool NamedReturnAccessWaiting => NamedCustomers.Any(NamedReturnAccessPending);
 
@@ -175,31 +197,6 @@ namespace CatCafePreview.Standalone
         private bool NamedCustomerBanned(string customer,int day)
             => NamedRequest(customer) is CafeSatoDispatch e && e.return_access==BanReturnAccess && day>=e.returned_day;
 
-        internal static bool UsesReturnTrustRules(CafeSnapshot s,CafeTrustEvent e)
-            => ReturnTrustDay(s,e.customer_id) is int day && day>0 && e.day>=day;
-
-        internal static bool IsNamedReturnTrustEvent(CafeSnapshot s,CafeTrustEvent e)
-            => ReturnTrustDay(s,e.customer_id)==e.day;
-
-        private static int ReturnTrustDay(CafeSnapshot s,string customer)
-        {
-            var e=NamedRequest(s,customer);
-            return e?.return_access==AllowReturnAccess?e.returned_day+ReturnTrustDelay:0;
-        }
-
-        private static int OrdinaryTrustDay(CafeSnapshot s,CafeDiscontent d,int due)
-        {
-            if(due==int.MaxValue)return due;
-            var e=NamedRequest(s,d.customer_id);
-            if(e==null || due<e.requested_day)return due;
-            if(e.return_access==BanReturnAccess || e.return_access==AwaitingReturnAccess)return int.MaxValue;
-            int recheck=ReturnTrustDay(s,d.customer_id);
-            if(recheck==0)return SatoTrustDay(s,d.customer_id,due);
-            // Ignore old stops after the return check or a later successful recovery.
-            return d.suspensions.Where(stop=>stop.day>=Math.Max(recheck,due-1))
-                .Select(stop=>stop.day+1).DefaultIfEmpty(int.MaxValue).Min();
-        }
-
         public const string SatoAdoptionSource = "sato-return";
 
         private void PresentSatoAdoption()
@@ -209,7 +206,7 @@ namespace CatCafePreview.Standalone
 
         private void PresentNamedAdoption(string customer)
         {
-            var missing = NamedMissing(State,customer);
+            var missing = NamedMissing(State,customer,NamedRequest(customer));
             if (missing == null || missing.resolved_day == 0 || missing.resolved_day + 1 != State.day
                 || State.adoption?.enabled != true || NamedRequest(customer).return_access>=BanReturnAccess
                 || NamedReturnAccessPending(customer)) return;
@@ -231,8 +228,22 @@ namespace CatCafePreview.Standalone
             => s.adoption?.events.Any(e => e.source == NamedAdoptionSource(customer) && e.customer_id==customer && e.cat_id == catId
                 && e.status == "resolved" && e.choice == "accept" && s.day - e.resolved_day >= 3) == true;
 
-        private static CafeMissingCase NamedMissing(CafeSnapshot state,string customer)
-            => state.missing_cases?.SingleOrDefault(e => NamedMissingCustomer(e.reason)==customer);
+        internal CafeSatoDispatch NamedEpilogueRequest(string catId)
+        {
+            var customer = NamedEpilogueCustomer(catId);
+            if (customer == null) return null;
+            var adoption = State.adoption.events.Single(e=>e.cat_id==catId && e.choice=="accept");
+            return NamedRequests(State,customer).Single(e=>e.cat_id==catId && e.returned_day==adoption.day-1);
+        }
+
+        private static CafeMissingCase NamedMissing(CafeSnapshot state,string customer,CafeSatoDispatch request)
+        {
+            if (request == null) return null;
+            int next = NamedRequests(state,customer).Where(e=>e.requested_day>request.requested_day)
+                .Select(e=>e.requested_day).DefaultIfEmpty(int.MaxValue).Min();
+            return state.missing_cases.SingleOrDefault(e=>NamedMissingCustomer(e.reason)==customer
+                && e.departed_day>=request.requested_day && e.departed_day<next);
+        }
 
         private static int SatoTrustDay(CafeSnapshot state, string customer, int day)
         {
@@ -276,7 +287,7 @@ namespace CatCafePreview.Standalone
         }
 
         private bool SatoRefusal(CafeSnapshot state, CafeDispatch e)
-            => NamedRequest(state,NamedDestinationCustomer(e.destination))?.refused_return == true;
+            => NamedTripRequest(state,e)?.refused_return == true;
 
         private void FinishSatoDispatch(CafeDispatch e, CafeCat cat)
         {
@@ -295,11 +306,9 @@ namespace CatCafePreview.Standalone
         private void ReplaySatoReturn(CafeSnapshot s, List<CafeDiscontent> scores, int day, bool afterService)
         {
             foreach(var customer in RecordedNamedCustomers(s))
-            {
-                var e=NamedRequest(s,customer);
-                if (e?.accepted_day > 0 && !e.refused_return && e.returned_day == day && e.returned_after_service == afterService)
+            foreach(var e in NamedRequests(s,customer))
+                if (e.accepted_day > 0 && !e.refused_return && e.returned_day == day && e.returned_after_service == afterService)
                     ChangeDiscontent(scores, day, customer, -Rules.discontent.good_service_recovery);
-            }
         }
 
         private void ValidateSatoDispatch(CafeSnapshot s)
@@ -311,6 +320,8 @@ namespace CatCafePreview.Standalone
                 || s.dispatches.Any(e=>NamedDestinationCustomer(e.destination) is string id && !customers.Contains(id))
                 || s.missing_cases.Any(e=>NamedMissingCustomer(e.reason) is string id && !customers.Contains(id)))
                 throw new ArgumentException("Invalid named dispatch customers");
+            if(s.named_dispatch_archive.Any(row=>row?.request==null || !customers.Contains(row.customer_id)))
+                throw new ArgumentException("Invalid named dispatch history");
             foreach(var customer in customers)ValidateNamedDispatch(s,customer);
             var active=customers.Select(c=>NamedRequest(s,c)).Where(e=>e!=null && e.returned_day==0 && e.declined_day==0);
             if(active.GroupBy(e=>e.cat_id).Any(g=>g.Count()>1))throw new ArgumentException("Overlapping named requests");
@@ -323,24 +334,35 @@ namespace CatCafePreview.Standalone
                 || NamedAffinity(s,customer).Select(e => e.cat_id).Distinct().Count() != NamedAffinity(s,customer).Count)
                 throw new ArgumentException("Invalid Sato affinity scenes");
 
-            var request = NamedRequest(s,customer);
-            var trips = s.dispatches.Where(e => NamedDestinationCustomer(e.destination)==customer).ToArray();
-            if (s.missing_cases.Count(e => NamedMissingCustomer(e.reason)==customer) > 1)
-                throw new ArgumentException("Duplicate named missing case");
-            var missing = NamedMissing(s,customer);
-            if (request == null)
+            var requests = NamedRequests(s,customer).ToArray();
+            var trips = s.dispatches.Where(e=>NamedDestinationCustomer(e.destination)==customer).ToArray();
+            if ((requests.Length>0 && NamedRequest(s,customer)==null)
+                || trips.Length!=requests.Count(e=>e.accepted_day>0))
+                throw new ArgumentException("Missing named dispatch request");
+            int missingCount = 0;
+            for (int i=0; i<requests.Length; i++)
             {
-                if (trips.Length != 0 || missing != null) throw new ArgumentException("Missing Sato request");
-                return;
+                var request = requests[i];
+                if (i>0 && (requests[i-1].return_access!=AllowReturnAccess
+                    || request.requested_day!=requests[i-1].returned_day+NamedDispatchRetryDelay))
+                    throw new ArgumentException("Invalid named dispatch reissue");
+                var trip = trips.SingleOrDefault(e=>e.started_day==request.accepted_day);
+                var missing = NamedMissing(s,customer,request);
+                if (missing!=null) missingCount++;
+                ValidateNamedRequest(s,customer,request,trip,missing);
             }
+            if (missingCount!=s.missing_cases.Count(e=>NamedMissingCustomer(e.reason)==customer))
+                throw new ArgumentException("Missing named dispatch for a return record");
+        }
 
+        private void ValidateNamedRequest(CafeSnapshot s,string customer,CafeSatoDispatch request,CafeDispatch trip,CafeMissingCase missing)
+        {
             if (request.epilogue_read && !NamedEpilogueAvailable(s,request.cat_id,customer))
                 throw new ArgumentException("Sato epilogue read before unlock");
             if(request.return_access<0 || request.return_access>BanReturnAccess
                 || request.return_access!=0 && (missing==null || missing.resolved_day==0)
                 || request.return_access==AwaitingReturnAccess && request.returned_day!=s.day)
                 throw new ArgumentException("Invalid access decision for named return");
-            var trip = trips.SingleOrDefault();
             if (!NamedAffinity(s,customer).Any(e => e.cat_id == request.cat_id) || request.requested_day < 2 || request.requested_day > s.day
                 || request.accepted_day < 0 || request.accepted_day > s.day || request.declined_day < 0 || request.declined_day > s.day
                 || request.returned_day < 0 || request.returned_day > s.day

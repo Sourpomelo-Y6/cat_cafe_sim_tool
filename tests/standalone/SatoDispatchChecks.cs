@@ -19,6 +19,7 @@ static partial class Program
 
     static void SatoDispatchChecks(string rulesPath,string bundlePath=null)
     {
+        RepeatedSuspensionChecks(rulesPath);
         var json=bundlePath==null?null:System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(bundlePath));
         var configured=json==null?null:Decode<CafeNamedDispatchSettings[]>(json["named_dispatch"].ToJsonString());
         var third=configured?.Single(r=>r.enabled && !CafeSimulation.NamedDispatchCustomers.Contains(r.customer_id));
@@ -89,7 +90,20 @@ static partial class Program
             {
                 Prepare();
                 if (sim.StoreEventWaiting) sim.Execute("resolve_store_event",choice:"repair");
-                if (!serve) { sim.Execute("day_off"); return; }
+                if (!serve)
+                {
+                    sim.Execute("day_off");
+                    if (sim.State.phase=="closed")
+                    {
+                        if (sim.GrowthWaiting)
+                        {
+                            sim.Execute("resolve_growth_auto");
+                            sim.Execute("resolve_growth_batch");
+                        }
+                        sim.Execute("next_day");
+                    }
+                    return;
+                }
                 var cat=sim.State.cats.Single(c=>c.id==catId);
                 if(cat.activity=="missing" && cat.missing_remaining==0) sim.Execute("resolve_missing",catId:catId);
                 if(cat.activity!="cafe" || cat.health!="healthy") { sim.Execute("day_off"); return; }
@@ -193,7 +207,8 @@ static partial class Program
                 for(int i=0;i<9;i++)Day(false);
                 Assert(Enumerable.Range(returnedDay,14).All(day=>!sim.CustomerAvailable(customer,day)
                     && sim.CustomerSchedule(day).All(row=>row.customer_id!=customer)),"Banned customer returned");
-                Assert(sim.State.adoption.events.Count==0 && !sim.State.trust_events.Any(e=>e.customer_id==customer),"Banned customer received new event");
+                Assert(sim.State.adoption.events.Count==0 && !sim.State.trust_events.Any(e=>e.customer_id==customer)
+                    && sim.NamedRequest(customer).requested_day<returnedDay,"Banned customer received new event");
                 RoundTrip();
                 continue;
             }
@@ -211,31 +226,38 @@ static partial class Program
                     Assert(sim.DiscontentScore(customer,sim.State.day)<50,"Low-score route did not improve");
                 }
                 while(sim.State.day<returnedDay+7)Day(false);
-                Assert(!sim.State.trust_events.Any(e=>e.customer_id==customer),"Early return warning");
+                Assert(sim.NamedRequest(customer).requested_day<returnedDay,"Reissued before day eight");
                 RoundTrip();
                 Day(false);
-                Assert(sim.State.trust_events.Count(e=>e.customer_id==customer)==(route=="low-score"?0:1),"Wrong return warning on day eight");
+                Assert(!sim.CustomerTrustWaiting && sim.State.trust_events.Count==0,"Return generated a trust conversation");
+                Assert(sim.NamedDispatchAwaitingAnswer(customer)==(route!="low-score"),"Wrong reissue on day eight");
                 RoundTrip();
-                if(sim.CustomerTrustWaiting)
+                if(route=="expired")
                 {
-                    var warning=sim.State.trust_events.Single(e=>e.customer_id==customer);
-                    if(route=="expired")
-                    {
-                        var view=Decode<CafeSnapshot>(Encode(sim.State));
-                        var stops=view.discontent.Single(d=>d.customer_id==customer).suspensions;
-                        var last=new CafeSuspension {day=warning.day-2,until=warning.day-1};
-                        stops.Add(last);
-                        var introduction=CafeTrustDialogue.EventLines(view,warning,false,"introduction",CafeSimulation.NamedCustomerName(customer),rules.trust.popularity_loss);
-                        Assert(introduction[0].text.Contains("来店を受け入れることにした") && introduction.All(l=>!l.text.Contains("来店停止期間")),
-                            "Return warning did not explain why it was shown, or mentioned an expired stop");
-                        last.until=warning.day;
-                        var recovery=CafeTrustDialogue.EventLines(view,warning,false,"recover",CafeSimulation.NamedCustomerName(customer),rules.trust.popularity_loss);
-                        Assert(recovery.Any(l=>l.text.Contains("現在の来店停止期間")), "Active stop was missing from recovery dialogue");
-                    }
-                    sim.Execute("resolve_customer_trust",choice:"recover",source:warning.id);
+                    Assert(sim.State.named_dispatch_archive.Single().request.returned_day==returnedDay,"Previous return was lost");
                     Day(false);
-                    Assert(sim.State.trust_events.Count(e=>e.customer_id==customer)==1,"Duplicate return warning");
+                    Day(false);
+                    var secondMissing=sim.State.missing_cases.Single(e=>e.resolved_day==0);
+                    Assert(secondMissing.departed_day==returnedDay+10,"Reissued request did not expire normally");
+                    while(sim.State.cats.Single(c=>c.id==secondMissing.cat_id).missing_remaining>0)Day(false);
+                    sim.Execute("resolve_missing",catId:secondMissing.cat_id);
+                    sim.Execute("resolve_named_return_access",catId:customer,choice:"allow");
                     RoundTrip();
+                    int secondReturn=sim.State.day;
+                    while(sim.State.day<secondReturn+8)Day(false);
+                    Assert(sim.NamedDispatchAwaitingAnswer(customer) && sim.State.named_dispatch_archive.Count==2,
+                        "Second return did not reissue the same event");
+                    RoundTrip();
+                }
+                if(route=="expired" || route=="refused")
+                {
+                    sim.Execute("resolve_sato_dispatch",catId:customer,choice:"accept");
+                    Day(false);
+                    var dispatch=sim.State.dispatches.Last();
+                    sim.Execute("resolve_activity",source:dispatch.id,choice:"receive");
+                    RoundTrip();
+                    Assert(sim.NamedRequest(customer).returned_day==sim.State.day &&
+                        sim.DiscontentScore(customer,sim.State.day)==25,"Reissued dispatch did not return normally");
                 }
                 continue;
             }
@@ -289,5 +311,41 @@ static partial class Program
                 conflict.NamedRequest(CafeSimulation.Suzuki).declined_day!=0,"Third request overwrote a previous customer");
         }
         Console.WriteLine($"PASS named dispatch: {assertions} assertions");
+    }
+
+    static void RepeatedSuspensionChecks(string rulesPath)
+    {
+        var rules = Decode<CafeRules>(File.ReadAllText(rulesPath));
+        rules.starting_funds = 100000;
+        rules.store_events.probability = 0;
+        rules.discontent.waiting_gain = rules.discontent.threshold;
+        rules.growth.threshold = int.MaxValue;
+        var sim = new CafeSimulation(rules);
+        var customers = Enumerable.Range(1, rules.arrival_ticks.Length).Select(i => "guest-" + i).ToArray();
+        var cat = sim.State.cats[0];
+
+        for (int i = 0; i <= rules.discontent.suspension_days * 3; i++)
+        {
+            if (sim.IntakeWaiting) sim.Execute("resolve_intake", choice: "decline");
+            sim.Execute("set_shifts", working: new[] { cat.id });
+            cat.stamina = 0;
+            cat.cannot_continue = true;
+            sim.Execute("start_business");
+            while (sim.State.phase == "open") sim.Execute("advance_business");
+            sim.Execute("next_day");
+        }
+
+        foreach (var customer in customers)
+        {
+            var stops = sim.State.discontent.Single(d => d.customer_id == customer).suspensions;
+            Assert(stops.Count >= 2, "Expected repeat suspensions for " + customer);
+            Assert(!sim.CustomerAvailable(customer, stops[1].until), "Customer could visit during suspension");
+            Assert(sim.CustomerAvailable(customer, stops[1].until + 1), "Customer could not return after suspension");
+            Assert(sim.NamedRequest(customer) == null, "Unexpected named dispatch for " + customer);
+        }
+        Assert(sim.State.trust_events.Count == 0, "Repeated suspension generated a trust event");
+        var copy = Decode<CafeSnapshot>(Encode(sim.State));
+        copy.NormalizeJsonStrings();
+        new CafeSimulation(rules).Restore(copy);
     }
 }

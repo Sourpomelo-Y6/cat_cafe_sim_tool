@@ -127,7 +127,7 @@ namespace CatCafePreview
             var b=CafeBackends.Local as LocalCafeBackend;
             var candidate=b.OptionalForCat(selectedId);bool epilogue=b.Simulation.SatoEpilogueAvailable(selectedId);
             optionalEventEntry.GetComponentInChildren<Text>().text=epilogue
-                ? (b.Simulation.NamedRequest(b.Simulation.NamedEpilogueCustomer(selectedId)).epilogue_read?"後日談":"後日談・未読") : "個別イベント";
+                ? (b.Simulation.NamedEpilogueRequest(selectedId).epilogue_read?"後日談":"後日談・未読") : "個別イベント";
             bool visible=epilogue || candidate!=null;optionalEventEntry.gameObject.SetActive(visible);
             if(care!=null){care.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,visible?144:304);care.GetComponentInChildren<Text>().text=visible?"用品・ケア":"用品・ケアを開く";}
             optionalEventEntry.interactable=GetComponent<PythonStateClient>().CanManageSaves && !GetComponent<PythonStateClient>().AutoPlayExecuting && (epilogue || b.OptionalReason(candidate)=="");

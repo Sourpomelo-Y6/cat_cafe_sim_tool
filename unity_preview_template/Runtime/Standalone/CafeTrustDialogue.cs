@@ -12,13 +12,12 @@ namespace CatCafePreview.Standalone {
   public static bool HasVisitSuspension(CafeSnapshot state,CafeTrustEvent e)
       => state.discontent.Any(d=>d.customer_id==e.customer_id && d.suspensions.Any(p=>p.day<e.day && e.day<=p.until));
   public static CafeConversationLine[] EventLines(CafeSnapshot state,CafeTrustEvent e,bool result,string branch,string name,double loss)
-      => Lines(result,branch,name,loss,CafeSimulation.IsNamedReturnTrustEvent(state,e),
-          HasVisitSuspension(state,e),CafeSimulation.UsesReturnTrustRules(state,e));
-  public static CafeConversationLine[] Lines(bool result,string branch,string name,double loss,bool afterNamedReturn=false,bool visitSuspended=false,bool returnTrustRules=false) {
+      => Lines(result,branch,name,loss,HasVisitSuspension(state,e));
+  public static CafeConversationLine[] Lines(bool result,string branch,string name,double loss,bool visitSuspended=false) {
    if(result)return branch=="recovered"?new[]{
     new CafeConversationLine("",name+"への接客は「満足」と記録された。信頼は回復済みになった。"),
     new CafeConversationLine("あなた","今回の接客結果を受け止めて、これからも一回ずつ丁寧に対応していきましょう。"),
-    new CafeConversationLine("",returnTrustRules?"不満は回復時の値に戻った。この先、新たな来店停止が起きたときに信頼を確認する。":"不満の値は既定の回復値へ反映済み。来店停止の累計は残るため、次の準備日に再び信頼警告が出る場合がある。")}:new[]{
+    new CafeConversationLine("","累積不満が下がった。次の来店からは、いつもどおりお迎えしよう。")}:new[]{
     new CafeConversationLine("",name+"への接客は「不満」と記録された。回復中だった信頼は、永久離脱という結果になった。"),
     new CafeConversationLine("あなた",name+"は今後の来店対象から外れます。この結果を確認しておきましょう。"),
     new CafeConversationLine("","永久離脱による人気低下（"+loss.ToString("0.#")+"、下限0）と経営終了判定は反映済み。この会話で再び差し引くことはない。")};
@@ -30,7 +29,7 @@ namespace CatCafePreview.Standalone {
     new CafeConversationLine("あなた",name+"の信頼回復は見送ります。"),
     new CafeConversationLine("",name+"の永久離脱が確定した。今後の来店対象から外れ、人気低下（"+loss.ToString("0.#")+"、下限0）と経営終了判定は反映済み。"),
     new CafeConversationLine("あなた","この回答を記録しました。会話を終えて、店の状態を確認しましょう。")};
-   return new[]{new CafeConversationLine("",afterNamedReturn?"猫が店に戻ったあとも、"+name+"の来店を受け入れることにした。"+name+"は店での過ごし方にまだ不満を抱えている。":name+"は来店停止を繰り返し、信頼警告の対象になっている。"),
+   return new[]{new CafeConversationLine("","猫が店に戻ったあとも、"+name+"の来店を受け入れることにした。"+name+"は店での過ごし方にまだ不満を抱えている。"),
     new CafeConversationLine("あなた",name+"への対応方針を決めましょう。回復を試みても、ここで直ちに信頼が戻るわけではありません。"),
     new CafeConversationLine("",(visitSuspended?"来店停止期間が明けるのを待つ。":"")+"回復を試みる場合は、来店後の接客結果を待つ。見送る場合は永久離脱となる。")};
   }

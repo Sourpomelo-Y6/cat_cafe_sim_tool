@@ -46,7 +46,7 @@ namespace CatCafePreview.Standalone
                 double player=s.player_sessions.Where(p=>p.cat_id==e.cat_id && p.day<=e.day && p.exchange.end_reason!=null).Select(PlayerAffinityAfter).LastOrDefault();
                 if(IsNamedAdoption(e.source))
                 {
-                    var missing=NamedMissing(s,e.customer_id);
+                    var missing=s.missing_cases.SingleOrDefault(m=>NamedMissingCustomer(m.reason)==e.customer_id && m.resolved_day==e.day-1 && m.cat_id==e.cat_id);
                     affinity=s.history.Where(h=>h.day<e.day).SelectMany(h=>h.customer_records)
                         .Where(v=>v.customer_id==e.customer_id && v.cat_id==e.cat_id).Sum(v=>v.affinity_delta);
                     player=s.player_sessions.Where(p=>p.cat_id==e.cat_id && p.day<e.day && p.exchange.end_reason!=null)

@@ -63,7 +63,7 @@ namespace CatCafePreview
         {
             CafeMissingDialogue.Finish(reading);
             if(Backend?.Simulation.SatoEpilogueAvailable(cat.cat_id)==true)
-                Backend.Simulation.NamedRequest(customer).epilogue_read=true;
+                Backend.Simulation.NamedEpilogueRequest(cat.cat_id).epilogue_read=true;
 
         }
     }

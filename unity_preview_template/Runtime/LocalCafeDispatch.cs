@@ -18,7 +18,7 @@ namespace CatCafePreview
         private string NamedReturnText(CafeDispatch trip)
         {
             string customer=CafeSimulation.NamedDestinationCustomer(trip.destination);
-            if(customer==null || trip.status!="resolved" || Simulation.NamedRequest(customer)?.refused_return!=false)return "";
+            if(customer==null || trip.status!="resolved" || Simulation.NamedTripRequest(trip)?.refused_return!=false)return "";
             return "\n"+CafeNamedDispatchDialogue.NormalReturn(Simulation.Rules.named_dispatch,customer,
                 Simulation.Definition(trip.cat_id).name,Details.CustomerName(customer));
         }
