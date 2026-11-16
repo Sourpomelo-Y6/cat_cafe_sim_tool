@@ -12,6 +12,11 @@ namespace CatCafePreview.Editor {
    return pack;
   }
   public static void Import(string folder){
+   var activation = new ContentImportActivation();
+   Prepare(folder, activation);
+   activation.Publish();
+  }
+  internal static void Prepare(string folder, ContentImportActivation activation){
    var pack=Validate(folder);string json=File.ReadAllText(Path.Combine(folder,"human_portraits.json"));
    string root=Path.Combine(Application.dataPath,"Resources/CatCafeContent");string target=Path.Combine(root,"People",pack.pack_id);string marker=Path.Combine(target,"human_portraits.json");
    if(Directory.Exists(target)){
@@ -25,8 +30,7 @@ namespace CatCafePreview.Editor {
    }
    AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
    foreach(var r in pack.people){string asset="Assets/Resources/CatCafeContent/People/"+pack.pack_id+"/"+r.image;var importer=(TextureImporter)AssetImporter.GetAtPath(asset);if(importer==null)throw new ArgumentException("Human texture importer missing");importer.textureType=TextureImporterType.Default;importer.alphaSource=TextureImporterAlphaSource.FromInput;importer.alphaIsTransparency=true;importer.mipmapEnabled=false;importer.isReadable=false;importer.maxTextureSize=1024;importer.textureCompression=TextureImporterCompression.Uncompressed;importer.SaveAndReimport();}
-   string catalog=Path.Combine(root,"human_portraits.json"),temp=catalog+".tmp";File.WriteAllText(temp,json);if(File.Exists(catalog))File.Replace(temp,catalog,null);else File.Move(temp,catalog);AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
-   Debug.Log("Imported human portraits: "+pack.pack_id+" / "+pack.people.Length);
+   activation.Add(Path.Combine(root, "human_portraits.json"), json);
   }
  }
 }

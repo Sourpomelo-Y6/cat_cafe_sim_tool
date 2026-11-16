@@ -55,6 +55,13 @@ namespace CatCafePreview.Editor
         }
         public static void Import(string folder,ContentBundle bundle=null,bool full=false)
         {
+            var activation = new ContentImportActivation();
+            Prepare(folder, bundle, full, activation);
+            activation.Publish();
+        }
+
+        internal static void Prepare(string folder, ContentBundle bundle, bool full, ContentImportActivation activation)
+        {
             if(bundle==null)bundle=CurrentBundle();
             string json;var data=Validate(folder,bundle,full,out json);string target=Path.Combine(Root,"Imports",data.pack_id);
             if(!Directory.Exists(target))
@@ -70,10 +77,8 @@ namespace CatCafePreview.Editor
                 string path="Assets/Resources/CatCafeOutfits/Imports/"+data.pack_id+"/"+image;
                 var importer=(TextureImporter)AssetImporter.GetAtPath(path);importer.textureType=TextureImporterType.Default;importer.mipmapEnabled=false;importer.alphaIsTransparency=true;importer.npotScale=TextureImporterNPOTScale.None;importer.maxTextureSize=2048;importer.textureCompression=TextureImporterCompression.Uncompressed;importer.SaveAndReimport();
             }
-            string catalog=Path.Combine(Root,"catalog.json"),temp=catalog+".tmp";
-            try{File.WriteAllText(temp,JsonUtility.ToJson(new CatOutfitPointer{resource="CatCafeOutfits/Imports/"+data.pack_id+"/cat_outfits"},true),new System.Text.UTF8Encoding(false));if(File.Exists(catalog))File.Replace(temp,catalog,null);else File.Move(temp,catalog);}
-            finally{if(File.Exists(temp))File.Delete(temp);}
-            AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
+            activation.Add(Path.Combine(Root, "catalog.json"),
+                JsonUtility.ToJson(new CatOutfitPointer { resource = "CatCafeOutfits/Imports/" + data.pack_id + "/cat_outfits" }, true));
         }
     }
 }

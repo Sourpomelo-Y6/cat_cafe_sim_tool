@@ -87,6 +87,13 @@ namespace CatCafePreview.Editor
         }
         public static void Import(string folder,ContentBundle bundle=null)
         {
+            var activation = new ContentImportActivation();
+            Prepare(folder, bundle, activation);
+            activation.Publish();
+        }
+
+        internal static void Prepare(string folder, ContentBundle bundle, ContentImportActivation activation)
+        {
             if(bundle==null)bundle=CatOutfitImport.CurrentBundle();
             var data=ValidatePack(folder,bundle,out string json);
             string target=Path.Combine(Root,"Imports",data.pack_id);
@@ -125,9 +132,8 @@ namespace CatCafePreview.Editor
             AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
             foreach(string asset in Backgrounds(data))ConfigureBackground(StoredBackground(asset));
             if(File.Exists(targetShared))ConfigureBackground(targetShared);
-            Directory.CreateDirectory(Root);string path=Path.Combine(Root,"catalog.json"),temp=path+".tmp";
-            try{File.WriteAllText(temp,JsonUtility.ToJson(new OptionalEventPointer{eventResource="CatCafeEvents/Imports/"+data.pack_id+"/optional_events"},true),new System.Text.UTF8Encoding(false));if(File.Exists(path))File.Replace(temp,path,null);else File.Move(temp,path);}
-            finally{if(File.Exists(temp))File.Delete(temp);}AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
+            activation.Add(Path.Combine(Root, "catalog.json"),
+                JsonUtility.ToJson(new OptionalEventPointer { eventResource = "CatCafeEvents/Imports/" + data.pack_id + "/optional_events" }, true));
         }
     }
 }

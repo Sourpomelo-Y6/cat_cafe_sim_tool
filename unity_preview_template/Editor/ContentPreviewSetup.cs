@@ -179,19 +179,19 @@ namespace CatCafePreview.Editor
                         && Path.GetFileName(pending).StartsWith(bundle.pack_id+".pending-",StringComparison.Ordinal))Directory.Delete(pending,true);
                 }
             }
-            // 全素材を配置した後に参照先だけを切り替える。以前のパックは保持する。
-            var catalog = new ContentCatalog { bundleResource = "CatCafeContent/Imports/" + bundle.pack_id + "/bundle", interactionResource=interactionJson==null?null:"CatCafeContent/Imports/"+bundle.pack_id+"/interaction_texts" };
-            var catalogPath = Path.Combine(root, "catalog.json");
-            var temporary = catalogPath + ".tmp";
-            File.WriteAllText(temporary, JsonUtility.ToJson(catalog, true), new System.Text.UTF8Encoding(false));
-            if (File.Exists(catalogPath)) File.Replace(temporary, catalogPath, null);
-            else File.Move(temporary, catalogPath);
-            if(hasOutfits)CatOutfitImport.Import(folder,bundle,true);
-            if(hasStateImages)CatStateImageImport.Import(folder,bundle,true);
+            var activation = new ContentImportActivation();
+            var catalog = new ContentCatalog {
+                bundleResource = "CatCafeContent/Imports/" + bundle.pack_id + "/bundle",
+                interactionResource = interactionJson == null ? null : "CatCafeContent/Imports/" + bundle.pack_id + "/interaction_texts"
+            };
+            activation.Add(Path.Combine(root, "catalog.json"), JsonUtility.ToJson(catalog, true));
+            if (hasOutfits) CatOutfitImport.Prepare(folder, bundle, true, activation);
+            if (hasStateImages) CatStateImageImport.Prepare(folder, bundle, true, activation);
             AssetDatabase.Refresh(ImportAssetOptions.ForceSynchronousImport);
             CatTexturePolicy.ApplyPack(target);
-            if(File.Exists(Path.Combine(folder,"human_portraits.json")))HumanPortraitImport.Import(folder);
-            if(hasOptional)OptionalEventImport.Import(folder,bundle);
+            if (File.Exists(Path.Combine(folder, "human_portraits.json"))) HumanPortraitImport.Prepare(folder, activation);
+            if (hasOptional) OptionalEventImport.Prepare(folder, bundle, activation);
+            activation.Publish();
             Debug.Log("Imported cat cafe pack: " + bundle.pack_id);
         }
 
