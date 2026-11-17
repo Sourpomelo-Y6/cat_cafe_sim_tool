@@ -35,7 +35,7 @@ namespace CatCafePreview
         private void ResetScroll(){Canvas.ForceUpdateCanvases();listContent.GetComponentInParent<ScrollRect>(true).verticalNormalizedPosition=1;ResetDetailsScroll();}
         public void Today(){if(!Available)return;showTomorrow=false;Render();ResetScroll();}
         public void Tomorrow(){if(!Available)return;showTomorrow=true;Render();ResetScroll();}
-        public void ToggleAdopted(){if(!Available)return;showAdopted=!showAdopted;RenderDetails();RefreshControls();}
+        public void ToggleAdopted(){if(!Available || !CafeOptions.DebugLists)return;showAdopted=!showAdopted;RenderDetails();RefreshControls();}
         public void Select(string id){if(!Available || !visible.Any(r=>r.customer_id==id))return;selected=id;RenderDetails();Canvas.ForceUpdateCanvases();details.transform.parent.parent.GetComponent<ScrollRect>().verticalNormalizedPosition=1;}
         public void Apply(PythonCafeState state)
         {
@@ -90,7 +90,7 @@ namespace CatCafePreview
             if(filters!=null)for(int i=0;i<filters.Length;i++){filters[i].interactable=available;filters[i].image.color=filter==i ? new Color(.88f,.93f,.8f) : Color.white;}
             if(tabs!=null)for(int i=0;i<tabs.Length;i++){tabs[i].interactable=available;tabs[i].image.color=section==i ? new Color(.88f,.93f,.8f) : Color.white;}
             if(sort!=null){sort.gameObject.SetActive(section==3);sort.interactable=available && (Data.rows ?? new PythonDirectoryCustomer[0]).Any(r=>r.customer_id==selected && r.presentation_version>0);sort.GetComponentInChildren<Text>().text="並び："+new[]{"登録順","好み一致→親しみ","親しみ順"}[sortMode];}
-            today.interactable=available && showTomorrow;tomorrow.interactable=available && !showTomorrow;adopted.interactable=available;adopted.gameObject.SetActive(section==3 || Data?.rows?.Any(r=>r.customer_id==selected && r.presentation_version<1)==true);close.interactable=true;
+            today.interactable=available && showTomorrow;tomorrow.interactable=available && !showTomorrow;adopted.interactable=available;adopted.gameObject.SetActive(CafeOptions.DebugLists && (section==3 || Data?.rows?.Any(r=>r.customer_id==selected && r.presentation_version<1)==true));close.interactable=true;
             adopted.GetComponentInChildren<Text>().text="譲渡済みの猫："+(showAdopted ? "表示" : "非表示");
             foreach(var b in entries)b.interactable=available;
             notice.text=!online ? "Python未接続です。表示は最後に取得した状態です。" : !available ? "操作の完了後に名簿を更新します。" : filter>0 && (Data.rows ?? new PythonDirectoryCustomer[0]).Any(r=>r.presentation_version<1) ? "分類情報のない旧接続は「全員」で確認できます。" : "閲覧操作では営業を進めません。休業日は来店しません。";

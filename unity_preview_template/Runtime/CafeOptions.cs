@@ -69,6 +69,26 @@ namespace CatCafePreview
     }
     public static class CafeOptions
     {
+        public static bool DebugLists => DebugListLaunch || (!Application.isEditor && Debug.isDebugBuild)
+#if UNITY_EDITOR
+            || UnityEditor.SessionState.GetBool(DebugListsMenu, false)
+#endif
+            ;
+#if UNITY_EDITOR
+        private const string DebugListsMenu = "Cat Cafe/Debug/Show hidden cats and events";
+        [UnityEditor.MenuItem(DebugListsMenu)]
+        private static void ToggleDebugLists() => UnityEditor.SessionState.SetBool(DebugListsMenu, !UnityEditor.SessionState.GetBool(DebugListsMenu, false));
+        [UnityEditor.MenuItem(DebugListsMenu, true)]
+        private static bool ValidateDebugLists()
+        {
+            UnityEditor.Menu.SetChecked(DebugListsMenu, UnityEditor.SessionState.GetBool(DebugListsMenu, false));
+            return !Application.isPlaying;
+        }
+#endif
+        private static readonly bool DebugListLaunch = Array.Exists(Environment.GetCommandLineArgs(), arg =>
+            arg == "--catcafe-debug-lists" || arg.StartsWith("--catcafe-dev-", StringComparison.Ordinal)
+            || (arg.StartsWith("--catcafe-", StringComparison.Ordinal) && arg.EndsWith("-check", StringComparison.Ordinal)));
+
         public static CafeOptionsData Current {get;private set;}=new CafeOptionsData();
         public static CafeOptionsStore Store {get;private set;}
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]static void Initialize()

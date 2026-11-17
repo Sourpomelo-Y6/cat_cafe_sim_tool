@@ -211,6 +211,21 @@ namespace CatCafePreview
             notice.text=!online ? "Python未接続です。再接続後にイベントを開けます。" : client.HasPendingResults ? "接客結果が未保存です。保存待ちの内容を確認してください。" : client.AutoPlayRunning ? "おまかせ実行中です。停止後に回答できます。" : !client.CanManageSaves ? "操作を送信しています。完了するまでお待ちください。" : group==0 && PendingCount==0 ? "回答待ちはありません。出会い・交流や記録は別の分類で確認できます。" : "未完了 "+PendingCount+"件。回答・結果会話を完了すると営業を再開できます。店先の猫との交流は任意です。";if(online && client.CanManageSaves && !string.IsNullOrEmpty(resolution))notice.text=resolution+"\n"+notice.text;
             RefreshCaseRows();
         }
+        private bool EventVisible(int index)
+        {
+            if (CafeOptions.DebugLists || PendingFor(index) > 0 || ResultPending(index)) return true;
+            switch (index)
+            {
+                case 0: return current.visiting_cat != null && current.visiting_cat.status != "untriggered";
+                case 5: return current.adoption?.events?.Length > 0;
+                case 6: return current.patron_dispatch?.events?.Length > 0;
+                case 7: return current.regular_introduction != null && current.regular_introduction.status != "untriggered";
+                case 8: return current.reservation != null && current.reservation.status != "untriggered";
+                case 9: return current.customer_trust?.events?.Length > 0;
+                case 10: return current.general_dispatch?.events?.Length > 0 || current.general_dispatch?.options?.Any(option => option.can_select) == true;
+                default: return Available(index);
+            }
+        }
         private void RefreshGroups()
         {
             int total=PendingCount;var caption=open.GetComponentInChildren<Text>();int required=RequiredPendingCount;caption.text=total>0?"イベント一覧\n"+(required>0?"要確認 "+required+"件":"任意 "+total+"件"):"イベント一覧";if(CafeBackends.Standalone && current?.phase=="preparation" && PendingCases().Any(r=>r.timedRequest))
@@ -219,12 +234,12 @@ namespace CatCafePreview
             if(tabs==null || tabs.Length!=4)return;
             int rows=0;for(int i=0;i<entries.Length;i++)
             {
-                bool visible=i<14 && GroupFor(i)==group;entries[i].gameObject.SetActive(visible);
+                bool visible=i<14 && GroupFor(i)==group && EventVisible(i);entries[i].gameObject.SetActive(visible);
                 if(visible){entries[i].GetComponent<RectTransform>().anchoredPosition=new Vector2(4,-rows*72);entries[i].GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,64);rows++;int pending=PendingFor(i);var label=entries[i].GetComponentInChildren<Text>();label.text=(pending>0 ? ResultPending(i)?"【回答済み・結果会話の続き】":"【回答待ち "+pending+"件】" : group==3 ? Available(i) ? "【記録・閲覧】" : "【現在の記録なし】" : group==2 ? "【派遣・帰還】" : "【任意の交流・候補】")+"\n"+label.text;label.fontSize=16;label.resizeTextForBestFit=true;label.resizeTextMinSize=13;label.resizeTextMaxSize=16;entries[i].GetComponent<Image>().color=pending>0?new Color(1f,.94f,.77f):group==3?new Color(.91f,.94f,.98f):Color.white;}
             }
             content.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,Mathf.Max(342,rows*72));
             title.text="イベント一覧 / "+GroupNames[group];
-            for(int i=0;i<4;i++){int count=i==0?total:Enumerable.Range(0,14).Count(r=>GroupFor(r)==i);tabs[i].GetComponentInChildren<Text>().text=GroupNames[i]+"（"+count+(i==0?"件":"項目")+"）";tabs[i].GetComponentInChildren<Text>().fontSize=16;tabs[i].GetComponent<Image>().color=i==group?new Color(.78f,.88f,.74f):Color.white;tabs[i].interactable=current!=null;}
+            for(int i=0;i<4;i++){int count=i==0?total:Enumerable.Range(0,14).Count(r=>GroupFor(r)==i && EventVisible(r));tabs[i].GetComponentInChildren<Text>().text=GroupNames[i]+"（"+count+(i==0?"件":"項目")+"）";tabs[i].GetComponentInChildren<Text>().fontSize=16;tabs[i].GetComponent<Image>().color=i==group?new Color(.78f,.88f,.74f):Color.white;tabs[i].interactable=current!=null;}
             if(panel.activeSelf)panel.transform.SetAsLastSibling();
         }
         public void Disconnect(){online=false;RefreshControls();}

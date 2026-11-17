@@ -444,7 +444,7 @@ namespace CatCafePreview
         private void DisplayPythonCat(int index)
         {
             var visible=VisiblePythonCats;
-            if (visible.Length==0){selectedPythonId=null;description.text="表示できる猫がいません。「譲渡済みも表示」で過去の猫を確認できます。";picture.texture=null;picture.enabled=false;emptyImage.enabled=false;return;}
+            if (visible.Length==0){selectedPythonId=null;description.text="表示できる猫がいません。";picture.texture=null;picture.enabled=false;emptyImage.enabled=false;return;}
             if (index < 0 || index >= visible.Length) return;
             cats.SetValueWithoutNotify(index);
             var cat = visible[index];selectedPythonId=cat.cat_id;

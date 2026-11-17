@@ -19,7 +19,7 @@ namespace CatCafePreview.Standalone
                 new CafeConversationLine("あなた",name+"の譲渡を確定しました。これまで店で一緒に過ごした時間も、大切な記録です。"),
                 new CafeConversationLine("",customer+"への譲渡が成立した。"+name+"は接客・派遣・個別交流の対象から外れる。金銭報酬はなく、猫の詳細と関係の記録は残る。"),
                 new CafeConversationLine("あなた",CafeSimulation.IsNamedAdoption(e.source)
-                    ? "3日後から、"+name+"の近況を読めます。猫一覧で「譲渡済みも表示」を選び、この子の詳細から「後日談」を開けます。"
+                    ? "3日後から、"+name+"の近況を読めます。イベント一覧の「記録」で譲渡の申し出を開き、この子の記録から「後日談を読む」を選べます。"
                     : "送り出すと決めたことを、大切に受け止めます。"+name+"との記録は、これからもここで見返せます。")};
             if(branch=="decline")return new[]{
                 new CafeConversationLine("あなた","今回は譲渡を見送ります。"+name+"とは、引き続きこの店で過ごすことにします。"),

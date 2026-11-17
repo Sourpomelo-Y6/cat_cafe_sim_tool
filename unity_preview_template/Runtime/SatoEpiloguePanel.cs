@@ -46,7 +46,7 @@ namespace CatCafePreview
         protected override string Title=>Backend.Details.CustomerName(customer)+"からの便り";
         protected override string HistoryPrefix=>"";
         protected override string Notice=>"譲渡後の後日談";
-        protected override string EndText=>"猫の詳細へ戻ります。";
+        protected override string EndText=>GetComponent<PythonAdoptionPanel>()?.panel.activeSelf == true ? "譲渡の記録へ戻ります。" : "猫の詳細へ戻ります。";
         protected override PythonIntakeState Request=>new PythonIntakeState {cat_id=cat.content_cat_id,name=cat.name};
 
         protected override CafeConversationLine[] Lines(string branch)

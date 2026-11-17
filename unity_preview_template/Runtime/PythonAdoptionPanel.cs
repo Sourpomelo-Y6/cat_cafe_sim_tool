@@ -41,8 +41,22 @@ namespace CatCafePreview
         public void Select(int index)
         { if(index>=0 && index<rows.Length)selected=rows[index].event_id;ResetConfirmation();RenderDetails();if(CafeBackends.Standalone && selected!=null)Dialogue.OpenEvent(selected); }
         public void Decline() { if(CafeBackends.Standalone && Dialogue.OpenEvent(selected))return;if(selected!=null)GetComponent<PythonStateClient>().ResolveAdoption(selected,"decline"); }
+        private bool HasLetter(PythonAdoptionEvent row) => row?.choice == "accept" && CafeBackends.Standalone
+            && (CafeBackends.Local as LocalCafeBackend)?.Simulation.SatoEpilogueAvailable(row.cat_id) == true;
+
         public void BeginAccept()
         {
+            var record = Array.Find(rows, r => r.event_id == selected);
+            if (HasLetter(record))
+            {
+                var cat = GetComponent<PythonStateClient>().CurrentState.cats.FirstOrDefault(c => c.cat_id == record.cat_id);
+                if (cat != null)
+                {
+                    var letter = GetComponent<SatoEpiloguePanel>() ?? gameObject.AddComponent<SatoEpiloguePanel>();
+                    letter.OpenCat(cat);
+                }
+                return;
+            }
             if(CafeBackends.Standalone && !Dialogue.Showing && Dialogue.OpenEvent(selected))return;
             var row=Array.Find(rows,r=>r.event_id==selected);
             if(row==null || !row.can_accept || !GetComponent<PythonStateClient>().CanManageSaves)return;
@@ -90,7 +104,7 @@ namespace CatCafePreview
             bool ready=GetComponent<PythonStateClient>().CanManageSaves;var row=Array.Find(rows,r=>r.event_id==selected);
             configure.interactable=ready && current!=null && current.can_configure && confirming==null;
             events.interactable=ready && rows.Length>0 && confirming==null;
-            accept.interactable=ready && row!=null && row.can_accept && confirming==null;decline.interactable=ready && row!=null && row.can_decline && confirming==null;
+            bool letter=HasLetter(row);accept.GetComponentInChildren<Text>().text=letter ? "後日談を読む" : "譲渡する（確認へ）";accept.interactable=ready && row!=null && (row.can_accept || letter) && confirming==null;decline.interactable=ready && row!=null && row.can_decline && confirming==null;
             close.interactable=confirming==null && (CafeBackends.Standalone || !rows.Any(r=>r.status=="waiting" && (r.can_accept || r.can_decline)));
             var pending=Array.Find(rows,r=>r.event_id==confirming);confirmAccept.interactable=ready && pending!=null && pending.can_accept && Identity(pending)==confirmationIdentity;
             cancel.interactable=ready;

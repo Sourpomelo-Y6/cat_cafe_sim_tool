@@ -16,15 +16,15 @@ namespace CatCafePreview
         }
         public void Change(bool value)
         {
-            if(current==null)return;showAdopted=value;RefreshControls();
+            if(current==null)return;showAdopted=CafeOptions.DebugLists && value;RefreshControls();
             GetComponent<ContentPreview>().RefreshCatVisibility();
             GetComponent<PythonPreparationPanel>()?.RefreshVisibility();
             GetComponent<PythonCatDetailsPanel>()?.RefreshVisibility();
         }
         public void RefreshControls()
         {
-            if(rosterToggle!=null){rosterToggle.SetIsOnWithoutNotify(showAdopted);rosterToggle.interactable=current!=null;rosterToggle.gameObject.SetActive(current!=null && GetComponent<PythonServiceScreen>()?.ShowingSeats!=true);}
-            if(preparationToggle!=null){preparationToggle.SetIsOnWithoutNotify(showAdopted);preparationToggle.interactable=current!=null;}
+            if(rosterToggle!=null){rosterToggle.SetIsOnWithoutNotify(showAdopted);rosterToggle.interactable=current!=null;rosterToggle.gameObject.SetActive(CafeOptions.DebugLists && current!=null && GetComponent<PythonServiceScreen>()?.ShowingSeats!=true);}
+            if(preparationToggle!=null){preparationToggle.gameObject.SetActive(CafeOptions.DebugLists);preparationToggle.SetIsOnWithoutNotify(showAdopted);preparationToggle.interactable=current!=null;}
         }
     }
 }
