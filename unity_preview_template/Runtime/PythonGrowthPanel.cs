@@ -23,10 +23,16 @@ namespace CatCafePreview
         void Controls()
         {
             if(manual!=null)return;
+            var returnButton = title.transform.parent.Find("Event List Return") as RectTransform;
+            if (returnButton != null)
+            {
+                returnButton.anchoredPosition = new Vector2(736, -548);
+                returnButton.sizeDelta = new Vector2(180, 36);
+            }
             previous=Add("前の成長",24,104,()=>Move(-1));
-            manual=Add("自分で選ぶ：次の成長",136,214,()=>Move(1));
-            automatic=Add("猫に合う内容で自動決定",358,290,()=>GetComponent<PythonStateClient>().GrowthBatch("resolve_growth_auto"));
-            confirm=Add("一覧をまとめて確定",656,260,()=>GetComponent<PythonStateClient>().GrowthBatch("resolve_growth_batch"));
+            manual=Add("自分で選ぶ：次の成長",136,186,()=>Move(1));
+            automatic=Add("猫に合う内容で自動決定",330,204,()=>GetComponent<PythonStateClient>().GrowthBatch("resolve_growth_auto"));
+            confirm=Add("一覧をまとめて確定",542,186,()=>GetComponent<PythonStateClient>().GrowthBatch("resolve_growth_batch"));
         }
         void Move(int delta)
         {
