@@ -486,7 +486,7 @@ namespace CatCafePreview
             description.text="";
             AppendObjectiveProgress();
             GetComponent<PythonBusinessHeader>()?.RefreshControls();
-            status.text = (CafeBackends.Standalone ? "営業中：" : "Python接続中：") + pythonState.day + "日目 / 時刻 " + pythonState.tick + "/" + pythonState.opening_ticks
+            status.text = (CafeBackends.Standalone ? (pythonState.game_over != null ? "経営終了：" : pythonState.closed ? "閉店後：" : pythonState.can_set_shifts ? "営業準備：" : "営業中：") : "Python接続中：") + pythonState.day + "日目 / 時刻 " + pythonState.tick + "/" + pythonState.opening_ticks
                 + " / 資金 " + pythonState.funds + (pythonState.closed ? " / 閉店" : pythonState.can_set_shifts ? " / 営業準備" : " / 営業中");
             if (!string.IsNullOrEmpty(pythonState.required_action))
                 description.text += "\n\n進行に必要な操作\n" + pythonState.required_action;

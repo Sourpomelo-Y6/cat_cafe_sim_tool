@@ -32,10 +32,13 @@ namespace CatCafePreview
             if(attention==null || !attention.interactable)return;
             switch(destination){case Destination.Goal:var goal=GetComponent<PythonGoalPanel>();goal.Apply(GetComponent<PythonStateClient>().CurrentState);goal.panel.transform.SetAsLastSibling();break;case Destination.Events:GetComponent<PythonEventListPanel>()?.Open();break;case Destination.Assignment:GetComponent<PythonServiceAssignmentPanel>()?.Open();break;case Destination.Persist:GetComponent<PythonPersistPanel>()?.Open();break;case Destination.Player:GetComponent<PythonPlayerPanel>()?.Open();break;case Destination.Closing:GetComponent<PythonClosingPanel>()?.Open();break;}
         }
-        void AlignCommands()
+        void AlignCommands(PythonCafeState state)
         {
             var root=transform.Find("Content Canvas/Background");
             if(root==null)return;
+            root.GetComponent<Image>().color = state.closed ? new Color32(184, 198, 222, 255)
+                : state.can_set_shifts ? new Color32(249, 228, 181, 255)
+                : new Color32(245, 242, 232, 255);
             var buttons=new[]{GetComponent<ContentPreview>().GetSceneButton(3),root.Find("Open Save Browser")?.GetComponent<Button>(),root.Find("Return To Title")?.GetComponent<Button>(),GetComponent<PythonMenuPanel>()?.open,GetComponent<PythonEventListPanel>()?.open,GetComponent<PythonHousingPanel>()?.open};
             var speed=auto.speed.GetComponent<RectTransform>();speed.anchoredPosition=new Vector2(554,-44);speed.sizeDelta=new Vector2(124,38);
             for(int i=0;i<buttons.Length;i++)
@@ -56,7 +59,7 @@ namespace CatCafePreview
             if(state==null){summary.text="接続を待っています";hint.text="再接続後に営業状況を表示します。";if(attention!=null)attention.gameObject.SetActive(false);return;}
             string phase=state.game_over!=null ? "経営終了" : state.closed ? "閉店後" : state.can_set_shifts ? "営業準備" : "営業中";
             summary.text=!Connected ? "未接続 / 再接続を待っています" : state.day+"日目 / "+phase+" / 資金 "+state.funds.ToString("0.#");
-            AlignCommands();
+            AlignCommands(state);
             bool running=client.AutoPlayExecuting || client.BatchAutomatic || client.BatchStopping;
             preparation.gameObject.SetActive(state.can_set_shifts && !state.closed && state.game_over==null && !running);
             progress.gameObject.SetActive(state.game_over==null && !running);progress.interactable=Connected && client.CanProgressBusiness;

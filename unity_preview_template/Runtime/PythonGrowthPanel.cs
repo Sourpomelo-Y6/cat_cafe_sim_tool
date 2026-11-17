@@ -30,7 +30,7 @@ namespace CatCafePreview
                 returnButton.sizeDelta = new Vector2(180, 36);
             }
             previous=Add("前の成長",24,104,()=>Move(-1));
-            manual=Add("自分で選ぶ：次の成長",136,186,()=>Move(1));
+            manual=Add("次の成長",136,186,()=>Move(1));
             automatic=Add("猫に合う内容で自動決定",330,204,()=>GetComponent<PythonStateClient>().GrowthBatch("resolve_growth_auto"));
             confirm=Add("一覧をまとめて確定",542,186,()=>GetComponent<PythonStateClient>().GrowthBatch("resolve_growth_batch"));
         }
