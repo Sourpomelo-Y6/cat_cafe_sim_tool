@@ -35,7 +35,7 @@ namespace CatCafePreview
         {
             if (kind == value) return;
             kind = value;
-            color = kind == 3 ? new Color(.72f,.18f,.3f) : new Color(.4f,.27f,.16f);
+            color = kind == 3 ? new Color(.72f,.18f,.3f) : kind == 2 ? new Color(.06f,.43f,.69f) : new Color(.4f,.27f,.16f);
             SetVerticesDirty();
         }
         protected override void OnPopulateMesh(VertexHelper mesh)
@@ -47,9 +47,32 @@ namespace CatCafePreview
                 for(int i=0;i<points.Length;i++)Triangle(mesh,new Vector2(.5f,.55f),points[i],points[(i+1)%points.Length]);
             }
             else if(kind==1)
-            {Line(mesh,.18f,.82f,.48f,.6f);Line(mesh,.48f,.6f,.3f,.44f);Line(mesh,.3f,.44f,.78f,.18f);}
+            {
+                Line(mesh,.27f,.10f,.41f,.90f);
+                Line(mesh,.59f,.10f,.73f,.90f);
+                Line(mesh,.13f,.34f,.84f,.34f);
+                Line(mesh,.18f,.65f,.89f,.65f);
+            }
             else if(kind==2)
-            {Line(mesh,.18f,.76f,.4f,.44f);Line(mesh,.4f,.44f,.4f,.22f);Line(mesh,.58f,.76f,.8f,.44f);Line(mesh,.8f,.44f,.8f,.22f);}
+            {
+                Drop(mesh, new Vector2(.32f,.32f), .21f);
+                Drop(mesh, new Vector2(.73f,.55f), .17f);
+            }
+        }
+
+        // A pointed tip and a rounded base stay legible at legend size.
+        void Drop(VertexHelper mesh, Vector2 center, float radius)
+        {
+            var tip = center + new Vector2(.55f, 2.25f) * radius;
+            var previous = center + Vector2.right * radius;
+            const int segments = 8;
+            for (int i = 1; i <= segments; i++)
+            {
+                float angle = -Mathf.PI * i / segments;
+                var next = center + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius;
+                Triangle(mesh, tip, previous, next);
+                previous = next;
+            }
         }
         Vector2 Point(Vector2 p){var r=rectTransform.rect;return new Vector2(r.xMin+p.x*r.width,r.yMin+p.y*r.height);}
         void Triangle(VertexHelper m,Vector2 a,Vector2 b,Vector2 c){int n=m.currentVertCount;m.AddVert(Point(a),color,Vector2.zero);m.AddVert(Point(b),color,Vector2.zero);m.AddVert(Point(c),color,Vector2.zero);m.AddTriangle(n,n+1,n+2);}
