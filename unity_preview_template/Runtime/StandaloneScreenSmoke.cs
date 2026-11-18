@@ -220,6 +220,12 @@ namespace CatCafePreview
             revision=Client.CurrentState.revision;yield return Click(owner.GetComponent<PythonPreparationRoster>().WorkButton(0),"work first cat");yield return Changed(revision);Check(Client.CurrentState.cats[0].working,"work command mapped");
             reference.Execute("set_shifts",working:reference.State.cats.Where(c=>c.id!=reference.State.cats[0].id && c.working).Select(c=>c.id).ToArray());reference.Execute("set_shifts",working:backend.Simulation.State.cats.Where(c=>c.working).Select(c=>c.id).ToArray());reference.Execute("start_business");
             var details=owner.GetComponent<PythonCatDetailsPanel>();details.Open(Client.CurrentState.cats[0].cat_id);Check(details.panel.activeSelf && !string.IsNullOrEmpty(details.details.text),"cat details rendered");yield return Capture("03-cat-details");foreach(int tab in new[]{1,2,3,4}){yield return Click(details.recordTabs[tab],"detail tab "+tab);Check(!string.IsNullOrWhiteSpace(details.details.text),"detail tab content "+tab);yield return Capture("03-details-tab-"+tab);if(tab==4){Canvas.ForceUpdateCanvases();Check(details.scroll.content.rect.height>details.scroll.viewport.rect.height,"long profile scrolls");details.scroll.verticalNormalizedPosition=0;yield return Capture("03-profile-end");}}details.Close();
+            var saveSlots=owner.GetComponent<PythonSaveBrowser>();
+            int beforeSave=Client.CurrentState.revision;
+            yield return Click(owner.GetComponent<ContentPreview>().GetSceneButton(3),"open save slots from business header");
+            Check(saveSlots.panel.activeInHierarchy && !saveSlots.confirmation.activeSelf && Client.CurrentState.revision==beforeSave,"header save opens slots before confirmation");
+            yield return Capture("business-save-slots");
+            saveSlots.Close();
             var events=owner.GetComponent<PythonEventListPanel>();events.Open();Check(events.panel.activeSelf,"event list rendered");events.Close();
             revision=Client.CurrentState.revision;yield return Click(prep.start,"start business");yield return Changed(revision);Check(!Client.CurrentState.can_set_shifts && !Client.CurrentState.closed,"business started");
             prep.Close();yield return Capture("04-service");
