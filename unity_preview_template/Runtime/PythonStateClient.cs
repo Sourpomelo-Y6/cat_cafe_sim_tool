@@ -223,7 +223,12 @@ namespace CatCafePreview
             preview.RefreshPythonControls();
         }
         public bool CanSaveNow => online && current!=null && !HasPendingResults && !deferredSaveSlot.HasValue && !batchStopRequested && (!AutoPlayRunning || CafeBackends.Standalone) && (pending==null || (CafeBackends.Standalone && batchAutomatic && pending.kind=="step_autoplay"));
-        public void SaveGame() { QueueSave("save_game", ""); }
+        public void SaveGame()
+        {
+            var browser = GetComponent<PythonSaveBrowser>();
+            if (browser != null) browser.OpenSave();
+            else QueueSave("save_game", "");
+        }
         public void SaveToSlot(int slot){if(slot<1 || slot>10 || !CanSaveNow)return;QueueSave("save_game", "",slot);}
         public void LoadSaved(string id) { QueueSave("load_game", id); }
         public void LoadPythonSaved(string id) { QueueSave("load_python_game", id); }
