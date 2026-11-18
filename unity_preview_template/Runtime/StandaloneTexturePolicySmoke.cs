@@ -151,6 +151,45 @@ namespace CatCafePreview
         {
             File.WriteAllText(Path.Combine(output, "environment.txt"), SystemInfo.graphicsDeviceName + "\n" + SystemInfo.graphicsDeviceType + "\nBC7 supported=" + SystemInfo.SupportsTextureFormat(TextureFormat.BC7) + "\n" + SystemInfo.operatingSystem);
             var b = new LocalCafeBackend(Path.Combine(output, "save"));
+            if (Environment.GetCommandLineArgs().Contains("--retired-image-save-check"))
+            {
+                bool resume = Environment.GetCommandLineArgs().Contains("--texture-resume");
+                StandaloneDispatchConversationSmoke.Good(b, "load_game", slot:resume ? 3 : 2);
+                CafeBackends.UseLocal(b);
+                SceneManager.LoadScene("CatCafePythonState");
+                yield return new WaitForSecondsRealtime(2);
+                var loadedClient = FindObjectOfType<PythonStateClient>();
+                var view = b.View();
+                typeof(PythonStateClient).GetMethod("Accept", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(loadedClient, new object[] { view });
+                var history = loadedClient.GetComponent<PythonSeatNarrativePanel>() ?? loadedClient.gameObject.AddComponent<PythonSeatNarrativePanel>();
+                var expected = File.ReadAllLines(Path.Combine(output,"expected.tsv"));
+                if (expected.Length != 9) throw new Exception("Incomplete retired image fixture");
+                foreach (var line in expected)
+                {
+                    var fields = line.Split('\t');
+                    var original = fields[0];
+                    var replacement = Resources.Load<Texture2D>(fields[1]);
+                    if (Resources.Load<Texture2D>(original) != null || replacement == null || SharedPackImages.Load(original) != replacement)
+                        throw new Exception("Retired image exclusion or redirect failed: " + fields[2]);
+                    if (original.StartsWith("CatCafeContent/People/", StringComparison.Ordinal))
+                    {
+                        if (HumanPortraitResources.Resolve(fields[2]) != replacement) throw new Exception("Wrong customer portrait");
+                        continue;
+                    }
+                    var receipt = b.Narratives.Rows.First(row => row.image_resource == original);
+                    var savedCat = view.cats.First(row => row.cat_id == receipt.cat_id);
+                    history.Open(new PythonSeatState { narrative_image=receipt.image_resource, narrative=receipt.text,
+                        customer_name=b.Details.CustomerName(receipt.customer_id) },0,savedCat);
+                    if (!history.panel.activeInHierarchy || !history.picture.enabled || history.picture.texture != replacement)
+                        throw new Exception("Wrong seat history image: " + fields[2]);
+                    if (new CatGalleryImage {resource=original}.Texture() != replacement) throw new Exception("Wrong gallery image");
+                    history.panel.SetActive(false);
+                }
+                if (!resume) StandaloneDispatchConversationSmoke.Good(b,"save_game",slot:3);
+                File.WriteAllText(Path.Combine(output,resume ? "resume.txt" : "result.txt"),"PASS: 9 retired resources absent; 8 saved cat image paths rendered; customer portrait resolved.");
+                Application.Quit(0);
+                yield break;
+            }
             if (Environment.GetCommandLineArgs().Contains("--shared-pair-old-saves"))
             {
                 var verification = VerifySharedPair(b);

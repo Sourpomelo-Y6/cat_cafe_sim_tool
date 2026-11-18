@@ -23,7 +23,7 @@ namespace CatCafePreview {
    try {
     var asset=Resources.Load<TextAsset>("CatCafeContent/human_portraits");string json=asset==null?"":asset.text;
     if(json!=loaded){loaded=json;pack=null;if(json!=""){var next=JsonUtility.FromJson<HumanPortraitPack>(json);next.Validate();pack=next;}}
-    if(!string.IsNullOrEmpty(gameId) && pack!=null)foreach(var r in pack.people)if(r.game_id==gameId){var texture=Resources.Load<Texture2D>("CatCafeContent/People/"+pack.pack_id+"/"+r.image.Substring(0,r.image.Length-4));return texture!=null?texture:Placeholder();}
+    if(!string.IsNullOrEmpty(gameId) && pack!=null)foreach(var r in pack.people)if(r.game_id==gameId){var texture=SharedPackImages.Load("CatCafeContent/People/"+pack.pack_id+"/"+r.image.Substring(0,r.image.Length-4));return texture!=null?texture:Placeholder();}
    }catch(Exception e){Debug.LogWarning("Human portrait fallback: "+e.Message);pack=null;}
    return Placeholder();
   }
