@@ -173,7 +173,15 @@ namespace CatCafePreview
                 case 10:var general=GetComponent<PythonGeneralDispatchPanel>();general.Open("");target=general.panel;break;
                 case 0:var v=GetComponent<PythonVisitingCatPanel>();v.Open();target=v.panel;break;
                 case 7:var r=GetComponent<PythonRegularIntroductionPanel>();r.Open();target=r.panel;break;
-                case 8:var reservation=GetComponent<PythonReservationPanel>();reservation.Open();target=reservation.panel;break;
+                case 8:
+                    var reservation=GetComponent<PythonReservationPanel>();
+                    GetComponent<PythonMenuPanel>()?.Close();
+                    Close();
+                    reservation.Open();
+                    // The conversation owns navigation while the reservation details are hidden.
+                    if(GetComponent<ReservationConversationPanel>()?.Showing==true)return;
+                    target=reservation.panel;
+                    break;
                 case 9:var trust=GetComponent<PythonCustomerTrustPanel>();trust.Open();target=trust.panel;break;
                 case 1:target=GetComponent<PythonIntakePanel>().panel;break;
                 case 2:target=GetComponent<PythonStoreEventPanel>().panel;break;

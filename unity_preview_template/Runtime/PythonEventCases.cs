@@ -19,8 +19,8 @@ namespace CatCafePreview {
    Func<string,string> cat=id=>current.cats?.FirstOrDefault(c=>c.cat_id==id)?.name ?? id;
    string priority=b.EquipmentResultPending?"店舗イベントの結果会話を完了してください。":"";
    string safe=current.phase=="open"?"営業を閉店まで進めてください。":priority;
-   if(current.intake_request?.status=="waiting" || b.IntakeResultPending)add(1,"intake", "保護猫の受け入れ",current.intake_request.name,b.IntakeResultPending,priority,()=>Show(1));
-   if(current.regular_introduction?.status=="waiting" || b.RegularResultPending)add(7,"regular", "常連からの猫紹介",current.regular_introduction.name,b.RegularResultPending,priority,()=>Show(7));
+   if(current.intake_request?.status=="waiting" || b.IntakeResultPending)add(1,"intake", "保護猫の受け入れ",current.intake_request?.name ?? "",b.IntakeResultPending,priority,()=>Show(1));
+   if(current.regular_introduction?.status=="waiting" || b.RegularResultPending)add(7,"regular", "常連からの猫紹介",current.regular_introduction?.name ?? "",b.RegularResultPending,priority,()=>Show(7));
    foreach(var r in b.EquipmentConversations.Where(r=>!r.progress.completed)){
     var row=r;bool result=r.progress.branch_id!="introduction";
     add(2,r.event_id,CafeEquipmentDialogue.Title(r),r.day+"日目",result,!result && b.EquipmentResultPending?"先の店舗イベントの結果会話を完了してください。":!result && !string.IsNullOrEmpty(current.required_action) && current.required_action!="store_event"?ActionLabel(current.required_action)+"を先に確認してください。":"",()=>{b.SelectEquipmentConversation(row.event_id);GetComponent<PythonStoreEventPanel>().Dialogue.OpenPending();});
@@ -40,7 +40,14 @@ namespace CatCafePreview {
     bool result=b.TrustConversations.Any(r=>r.event_id==e.event_id && CafeTrustDialogue.Pending(r));if(e.status!="waiting" && !result)continue;var id=e.event_id;
     add(9,id,"顧客の信頼回復",e.day+"日目 / "+e.name,result,safe!=""?safe:!result && !e.can_respond?e.reason:"",()=>GetComponent<PythonCustomerTrustPanel>().Dialogue.OpenEvent(id));
    }
-   if(current.reservation?.status=="waiting" || b.ReservationResultPending)add(8,"reservation","特別予約",current.reservation.visit_day+"日目の来店",b.ReservationResultPending,safe,()=>Show(8));
+   var reservationResult=b.ReservationConversations.FirstOrDefault(CafeReservationDialogue.Pending);
+   if(reservationResult!=null)
+    add(8,"reservation","特別予約",reservationResult.visit_day+"日目の来店",true,safe,()=>{
+     if(b.BeginReservationConversation(reservationResult.event_id))
+      GetComponent<PythonReservationPanel>().Dialogue.OpenPending();
+    });
+   else if(current.reservation?.status=="waiting")
+    add(8,"reservation","特別予約",current.reservation.visit_day+"日目の来店",false,safe,()=>Show(8));
    foreach(var e in b.Simulation.State.dispatches){
     var id=e.id;var subject=e.started_day+"日目発 / "+cat(e.cat_id)+" / "+b.DispatchNameForEvent(e);
     var dispatch=b.DispatchConversations.FirstOrDefault(r=>r.DispatchId==id && r.Destination==e.destination);bool result=dispatch!=null && CafeDispatchDialogue.ResultPending(dispatch);
