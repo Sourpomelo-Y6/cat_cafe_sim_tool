@@ -16,11 +16,11 @@ namespace CatCafePreview.Standalone {
   public static CafeConversationProgress Start(string type){var p=Start();if(type=="support")p.conversation_id=SupportId;return p;}
   public static CafeConversationLine[] SupportLines(CafeEquipmentConversation r,string branch)=>branch=="introduction"?new[]{
    new CafeConversationLine("","保護団体から、活動への支援をお願いする連絡が届いた。"),
-   new CafeConversationLine("あなた","店の資金を確認して、支援するか、少額を支援するか、今回は見送るかを決めましょう。"),
-   new CafeConversationLine("",r.explanation)}:new[]{
+   new CafeConversationLine("あなた","いくら支援しよう？"),
+   new CafeConversationLine("","支援額を選んでください。")}:new[]{
    new CafeConversationLine("あなた",r.day+"日目の支援依頼は「"+(branch=="full"?"支援":branch=="small"?"少額支援":"見送り")+"」で回答しました。"),
    new CafeConversationLine("",r.result),
-   new CafeConversationLine("あなた",branch=="decline"?"今回は見送りとして記録しました。店の状態を確認して、これからの予定を決めましょう。":"回答は記録済みです。店の状態を確認して、これからの予定を決めましょう。")};
+   new CafeConversationLine("あなた",branch=="decline"?"今回は見送ります。":"お役に立てますように。")};
   public static string EventId(int day)=>"equipment-trouble-"+day;
   public static CafeConversationProgress Start()=>new CafeConversationProgress{conversation_id=Id,branch_id="introduction",viewed_branches=new string[0]};
   public static CafeConversationLine[] Lines(CafeEquipmentConversation r,string branch)=>IsSupport(r)?SupportLines(r,branch):branch=="introduction"?new[]{

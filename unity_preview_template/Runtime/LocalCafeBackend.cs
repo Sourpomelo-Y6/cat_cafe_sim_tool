@@ -119,6 +119,11 @@ namespace CatCafePreview
                     var updated=CafeCatOutfits.Copy(next.ToArray());CafeCatOutfits.Validate(updated,s);catOutfits=updated;
                     var changed=Success(JsonUtility.ToJson(new PythonCommandReply{state=View()}));replies.Add(cmd.request_id,new KeyValuePair<string,CafeResponse>(json,changed));return changed;
                 }
+                if(cmd.kind=="step_autoplay" && s.autoplay?.running==true && !s.autoplay.paused)
+                {
+                    CompleteAutoplayConversations();
+                    CompleteAutoplayMilestones();
+                }
                 // A newly pending conversation must yield control, not reject a step while
                 // leaving the UI locked in an executing run. Record the actual pause in replay.
                 if(cmd.kind=="step_autoplay" && s.autoplay?.running==true && !s.autoplay.paused && ConversationBlocksProgress && (!(OutcomePending || PopularityEndingPending || BondEndingPending || PatronEndingPending) || ConversationProgressReason!=""))cmd.kind="pause_autoplay";

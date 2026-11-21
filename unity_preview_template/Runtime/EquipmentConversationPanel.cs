@@ -19,7 +19,7 @@ namespace CatCafePreview {
   protected override PythonIntakeState Request=>new PythonIntakeState{cat_id="",name=CafeEquipmentDialogue.Title(Row),personality=Row.day+"日目の案件",can_decline=true};
   protected override string Title=>CafeEquipmentDialogue.Title(Row);
   protected override string SceneLabel=>Row.event_id+" · "+(progress.branch_id=="introduction"?"回答待ち":"対応確定・結果会話");
-  protected override string ChoicePrompt=>Support?"支援額・支出後の資金・閉店時の人気加算を確認してください。選択後に最終確認します。":"費用・停止席・休業時の変化を確認して対応を選んでください。休業は確認画面を経て確定します。";
+  protected override string ChoicePrompt=>Support?"支援額を選んでください。":"費用・停止席・休業時の変化を確認して対応を選んでください。休業は確認画面を経て確定します。";
   PythonEventChoice Option(int index)=>state.store_event?.kind==(Support?"support":"trouble") && state.store_event.day==Row.day?state.store_event.choices[index]:null;
   string Effect(int index){var o=Option(index);return o==null?"回答済みです。":o.detail+(o.can_select?"":"\n選べない理由："+o.reason);}
   protected override bool CanAnswer(bool yes)=>Client.CanRespondStore(yes?0:1) && Option(yes?0:1)!=null;

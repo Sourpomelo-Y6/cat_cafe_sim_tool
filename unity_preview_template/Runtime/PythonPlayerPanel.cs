@@ -58,7 +58,7 @@ namespace CatCafePreview
             var rect=preparation.GetComponent<RectTransform>();rect.anchoredPosition=new Vector2(24,-478);rect.sizeDelta=new Vector2(432,40);
             preparation.GetComponentInChildren<Text>().text="営業準備・出勤／休養の設定へ";
         }
-        public void Finish() { GetComponent<PythonStateClient>().FinishPlayer(); }
+        public void Finish() { var client=GetComponent<PythonStateClient>(); if(client.AutoPlayRunning)client.StopAutoPlay();else client.FinishPlayer(); }
         public void SelectAction(int index)
         {
             if(current==null || current.actions==null || index<0 || index>=current.actions.Length || !GetComponent<PythonStateClient>().CanPlayerAction(current.actions[index].choice))return;
@@ -174,7 +174,8 @@ namespace CatCafePreview
             if(preparation!=null)preparation.interactable=!disconnected && current!=null && !current.active && state?.can_set_shifts==true && !client.AutoPlayRunning && client.CanManageSaves;
             if(current?.active==true && targets.value==0 && notice!=null && !disconnected && client.CanManageSaves)notice.text="交流終了後に営業準備で予定変更できます。";
             if(back!=null)back.interactable=!disconnected && current!=null && client.CanManageSaves;
-            targets.interactable=!disconnected && client.CanPlayerAction("switch");finish.interactable=!disconnected && client.CanFinishPlayer;
+            targets.interactable=!disconnected && client.CanPlayerAction("switch");finish.interactable=!disconnected && (client.AutoPlayRunning ? !client.BatchStopping : client.CanFinishPlayer);
+            finish.GetComponentInChildren<Text>(true).text=client.AutoPlayRunning ? "おまかせ停止" : "このセットを切り上げる";
         }
         public void Disconnect()
         {

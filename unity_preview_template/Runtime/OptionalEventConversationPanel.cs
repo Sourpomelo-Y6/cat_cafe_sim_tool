@@ -30,7 +30,7 @@ namespace CatCafePreview
             if(target==null || !Backend.BeginOptionalEvent(target.cat_id,target.event_id,target.revision,value.instance_id,value.revision,NormalImage(target.content_cat_id)))return false;
             selected=Backend.OptionalEvent;requested=true;Apply(value);Open();return Showing;
         }
-        string NormalImage(string contentId)
+        internal static string NormalImage(string contentId)
         {
             try {
             var catalog=JsonUtility.FromJson<ContentCatalog>(Resources.Load<TextAsset>("CatCafeContent/catalog").text);

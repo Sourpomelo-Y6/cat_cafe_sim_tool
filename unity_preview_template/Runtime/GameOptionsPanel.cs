@@ -10,7 +10,7 @@ namespace CatCafePreview
         public GameObject Panel {get;private set;}
         public Button Entry {get;private set;}public Slider Speed {get;private set;}public Toggle Instant {get;private set;}public Toggle Fullscreen {get;private set;}
         public Text Preview {get;private set;}public Text Status {get;private set;}
-        PythonStateClient client;PythonTitleScreen title;Font font;Text speedLabel;CafeOptionsData draft;float previewCount;bool refreshing;
+        PythonStateClient client;PythonTitleScreen title;Font font;Toggle stopAtEnding;Text speedLabel;CafeOptionsData draft;float previewCount;bool refreshing;
         const string Sample="窓辺にやわらかな光が差し込みます。\n猫はゆっくりと目を細め、あなたのほうを見ました。";
         public static GameOptionsPanel Attach(PythonTitleScreen owner)
         {
@@ -30,8 +30,8 @@ namespace CatCafePreview
         public void Cancel(){if(!Panel.activeSelf)return;Panel.SetActive(false);active=null;client?.GetComponent<ContentPreview>().RefreshPythonControls();}
         public void Save(){if(!Panel.activeSelf)return;if(CafeOptions.Save(draft))Cancel();else Status.text=CafeOptions.Store.Notice;}
         public void Defaults(){draft=new CafeOptionsData();Refresh();Status.text="初期設定を選びました。保存すると反映します。";}
-        void Refresh(){refreshing=true;Speed.SetValueWithoutNotify(draft.charactersPerSecond);Instant.SetIsOnWithoutNotify(draft.instant);Fullscreen.SetIsOnWithoutNotify(draft.fullscreen);refreshing=false;Changed();}
-        void Changed(){if(refreshing || draft==null)return;draft.charactersPerSecond=(int)Speed.value;draft.instant=Instant.isOn;draft.fullscreen=Fullscreen.isOn;Speed.interactable=!draft.instant;speedLabel.text="文字表示速度　"+(draft.instant?"全文を即時表示":draft.charactersPerSecond+" 文字／秒");previewCount=0;Preview.text="";}
+        void Refresh(){refreshing=true;Speed.SetValueWithoutNotify(draft.charactersPerSecond);Instant.SetIsOnWithoutNotify(draft.instant);Fullscreen.SetIsOnWithoutNotify(draft.fullscreen);stopAtEnding.SetIsOnWithoutNotify(!draft.skipAutoplayEnding);refreshing=false;Changed();}
+        void Changed(){if(refreshing || draft==null)return;draft.charactersPerSecond=(int)Speed.value;draft.instant=Instant.isOn;draft.fullscreen=Fullscreen.isOn;draft.skipAutoplayEnding=!stopAtEnding.isOn;Speed.interactable=!draft.instant;speedLabel.text="文字表示速度　"+(draft.instant?"全文を即時表示":draft.charactersPerSecond+" 文字／秒");previewCount=0;Preview.text="";}
         void Update()
         {
             if(Entry!=null)Entry.interactable=CanOpen;
@@ -50,7 +50,8 @@ namespace CatCafePreview
             speedLabel=Label(card.transform,"Speed Label","",32,124,880,32,20);
             var slider=DefaultControls.CreateSlider(new DefaultControls.Resources());slider.name="Text Speed";slider.transform.SetParent(card.transform,false);Place(slider.GetComponent<RectTransform>(),40,174,860,32);Speed=slider.GetComponent<Slider>();Speed.minValue=10;Speed.maxValue=80;Speed.wholeNumbers=true;slider.transform.Find("Background").GetComponent<Image>().color=new Color(.82f,.85f,.77f);Speed.fillRect.GetComponent<Image>().color=new Color(.43f,.54f,.34f);Speed.handleRect.GetComponent<Image>().color=new Color(.28f,.38f,.22f);Speed.onValueChanged.AddListener(_=>Changed());
             Instant=Toggle(card.transform,"Instant","会話を全文即時表示する",32,226);Fullscreen=Toggle(card.transform,"Fullscreen","全画面で表示する（OFF：ウィンドウ）",32,284);
-            Label(card.transform,"Audio","BGM・効果音：現在の配布版は音声未対応です。",32,350,880,32,18);
+            stopAtEnding=Toggle(card.transform,"Stop At Ending","おまかせ中、エンディングで止めて読む",32,334);
+            Label(card.transform,"Audio","BGM・効果音：現在の配布版は音声未対応です。",32,380,880,28,18);
             Label(card.transform,"Sample Label","文章プレビュー",32,404,880,32,18);Preview=Label(card.transform,"Sample","",32,448,880,88,22);Preview.lineSpacing=1.2f;
             Button(card.transform,"Preview Again","もう一度読む",32,550,200,40,()=>{previewCount=0;});
             Status=Label(card.transform,"Status","",32,602,880,40,16);

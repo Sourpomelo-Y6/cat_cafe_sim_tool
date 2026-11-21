@@ -34,6 +34,44 @@ namespace CatCafePreview
             }
             return checks;
         }
+        public static void VerifyEventProgress()
+        {
+            var root=Environment.GetEnvironmentVariable("CATCAFE_AUTOPLAY_SMOKE");
+            var b=StandaloneOptionalEventSmoke.Create(root);
+            Good(b,"new_game",target:"bond");
+            b.Simulation.Rules.bond.target=1;
+            b.Simulation.Rules.bond.affinity=21;
+            b.SetOptionalCatalog(null);
+            Good(b,"day_off");
+            if(b.Simulation.State.phase=="closed")Good(b,"next_day");
+            foreach(var kind in new[]{"player_begin","player_step","player_finish"}){
+                if(kind=="player_finish" && !b.Simulation.PlayerActive)continue;
+                var cmd=Command(b,kind);
+                cmd.cat_id="cat-mike";cmd.choice="direct";
+                Check(Send(b,cmd).result==UnityWebRequest.Result.Success,kind);
+            }
+            Check(b.Simulation.PlayerAtAffinityMilestone("cat-mike"),"Fixture must reach the affinity cap");
+            Good(b,"start_autoplay",target:"bond");
+            Good(b,"step_autoplay");
+            Check(b.OptionalEvents.Any(e=>e.cat_id=="cat-mike" && e.progress.completed),"Automatic milestone was not completed");
+            Check(!b.Simulation.PlayerAtAffinityMilestone("cat-mike"),"Affinity cap remained");
+            Good(b,"save_game",2);
+            Good(b,"load_game",2);
+            Check(b.OptionalEvents.Any(e=>e.progress.completed),"Milestone receipt lost on load");
+            bool prior=CafeOptions.Current.skipAutoplayEnding;
+            try{
+                foreach(bool skip in new[]{false,true}){
+                    CafeOptions.Current.skipAutoplayEnding=skip;
+                    Good(b,"load_game",2);
+                    Good(b,"resume_autoplay");
+                    int steps=0;
+                    while(b.Simulation.State.autoplay.running && steps++<300)Good(b,"step_autoplay");
+                    Check(b.Simulation.State.autoplay.reason=="completed","Bond objective did not finish");
+                    Check(b.BondEndingPending!=skip,"Ending option did not take effect");
+                }
+            }finally{CafeOptions.Current.skipAutoplayEnding=prior;}
+            Debug.Log("CAT_CAFE_AUTOPLAY_EVENT_PASS");
+        }
         public static void Verify(){string root=Environment.GetEnvironmentVariable("CATCAFE_AUTOPLAY_SMOKE")??Path.Combine(Application.temporaryCachePath,"autoplay-smoke");Directory.CreateDirectory(root);int count=Run(root);File.WriteAllText(Path.Combine(root,"result.json"),"{\"checks\":"+count+"}");Debug.Log("Standalone autoplay PASS: "+count);}
     }
 }

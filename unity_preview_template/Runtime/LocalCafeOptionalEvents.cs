@@ -92,7 +92,8 @@ namespace CatCafePreview
         public OptionalEventCandidate OptionalForCat(string cat)=>OptionalCandidates.FirstOrDefault(r=>r.cat_id==cat);
         public bool OptionalEventListed=>OptionalCandidates.Length!=0;
         public string OptionalEventReason=>OptionalCandidates.Length==0?"開始条件を満たしていません。":OptionalReason(OptionalCandidates[0]);
-        public string OptionalReason(OptionalEventCandidate candidate)
+        public string OptionalReason(OptionalEventCandidate candidate)=>OptionalReason(candidate,false);
+        string OptionalReason(OptionalEventCandidate candidate,bool automatic)
         {
             if(candidate==null)return "開始条件を満たしていません。";
             if(Simulation.State.phase!="preparation")return "営業準備で確認してください。";
@@ -104,7 +105,7 @@ namespace CatCafePreview
                 if(!Simulation.State.cats.Any(c=>c.id==candidate.cat_id && c.activity=="cafe" && c.health=="healthy"))
                     return "猫が健康で在店しているときに読めます。";
             }
-            if(Simulation.PlayerActive || (Simulation.State.autoplay?.running==true && !Simulation.State.autoplay.paused))return "交流・自動進行を止めてから確認してください。";
+            if(Simulation.PlayerActive || (!automatic && Simulation.State.autoplay?.running==true && !Simulation.State.autoplay.paused))return "交流・自動進行を止めてから確認してください。";
             if(OpeningPending || OutcomePending || PatronEndingPending || BondEndingPending || PopularityEndingPending
                 || EquipmentResultPending || IntakeResultPending || RegularResultPending || DispatchResultPending || EncounterResultPending
                 || AdoptionResultPending || TrustBlocksProgress || ReservationBlocksProgress || MissingBlocksProgress || LodgeResultPending || DispatchIntroductionResultPending
@@ -115,11 +116,11 @@ namespace CatCafePreview
         }
         public bool BeginOptionalEvent(string instance,int revision,string imageResource)
         {var c=OptionalCandidates.FirstOrDefault();return c!=null && BeginOptionalEvent(c.cat_id,c.event_id,c.revision,instance,revision,imageResource);}
-        public bool BeginOptionalEvent(string cat,string eventId,string contentRevision,string instance,int revision,string imageResource)
+        public bool BeginOptionalEvent(string cat,string eventId,string contentRevision,string instance,int revision,string imageResource,bool automatic=false)
         {
             if(instance!=Simulation.State.instance_id || revision!=Simulation.State.revision)return false;
             var candidate=OptionalCandidates.FirstOrDefault(c=>c.cat_id==cat && c.event_id==eventId && c.revision==contentRevision);
-            if(candidate==null || OptionalReason(candidate)!="")return false;
+            if(candidate==null || OptionalReason(candidate,automatic)!="")return false;
             var existing=optionalEvents.FirstOrDefault(r=>r.cat_id==cat && r.event_id==eventId);
             if(existing!=null){selectedOptional=existing;return !existing.progress.completed;}
             var d=DefinitionFor(cat,eventId);
@@ -128,6 +129,24 @@ namespace CatCafePreview
                 && (d==null || d.target_kind!="content"))
                 created.scene_art=CafeOptionalEvents.MikeWindowArt;
             var next=optionalEvents.Concat(new[]{created}).ToArray();CafeOptionalEvents.Validate(next);optionalEvents=next;selectedOptional=created;return true;
+        }
+        void CompleteAutoplayMilestones()
+        {
+            if(Simulation.PlayerActive || Simulation.State.phase!="preparation")return;
+            foreach(var candidate in OptionalCandidates.Where(c=>c.milestone>0))
+            {
+                if(OptionalReason(candidate,true)!="")continue;
+                var s=Simulation.State;
+                if(!BeginOptionalEvent(candidate.cat_id,candidate.event_id,candidate.revision,s.instance_id,s.revision,OptionalEventConversationPanel.NormalImage(candidate.content_cat_id),true))continue;
+                var row=OptionalEvent;
+                var p=row.progress;
+                if(p.branch_id=="introduction"){
+                    p.node=row.introduction.Length;
+                    CafeOptionalEvents.Choose(row,true);
+                }
+                p.node=CafeOptionalEvents.Lines(row,p.branch_id).Length;
+                FinishOptionalEvent(row);
+            }
         }
         void RestoreOptionalEvents(CafeOptionalEvent[] rows)
         {CafeOptionalEvents.Validate(rows);optionalEvents=rows??new CafeOptionalEvent[0];selectedOptional=null;OptionalEventOpen=false;SyncAffinityMilestones();}

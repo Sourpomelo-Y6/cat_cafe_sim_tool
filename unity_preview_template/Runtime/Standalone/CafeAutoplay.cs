@@ -60,12 +60,33 @@ namespace CatCafePreview.Standalone
             string terminal=State.game_over!=null?"game_over":State.goal.LastOrDefault()?.status=="expired" && (run.objective=="popularity" || !State.goal.Last().continued)?"expired":AutoTargetStatus(run.objective)=="cleared" && (run.objective!="popularity" || State.goal.Count==Rules.goal_stages.Length)?"completed":GoalWaiting || BondWaiting || PatronWaiting?"goal_cleared":AutoDayCount()-run.start_days>=run.limit?"day_limit":run.operations>=10000?"operation_limit":null;
             if(terminal!=null && (LegacyGrowthReplay || !GrowthWaiting || terminal=="operation_limit")){StopAutoplay(terminal);return null;}
             if(!LegacyGrowthReplay && GrowthWaiting){GrowthBatchCommand("resolve_growth_auto",null,null);GrowthBatchCommand("resolve_growth_batch",null,null);run.operations++;run.days=AutoDayCount()-run.start_days;run.lines.Add(State.day+":resolve_growth_batch::");UpdateAutoSummary();if(terminal!=null && !GrowthWaiting)StopAutoplay(terminal);return AutoOp("resolve_growth_batch");}
-            // Other pending events still yield to the user.
-            if(!PlayerActive && AutoStartReason()!=""){StopAutoplay("blocked",AutoStartReason());return null;}
-            var op=PlanAutoplay(run.objective,run.mode);
+            var answer=LegacyAutoplayEvents?null:PlanAutoplayEvent();
+            if(answer==null && !PlayerActive && AutoStartReason()!=""){StopAutoplay("blocked",AutoStartReason());return null;}
+            var op=answer??PlanAutoplay(run.objective,run.mode);
             try{Execute(op.kind,op.working,op.cat_id,op.choice,op.source,op.seat_id);run.operations++;run.days=AutoDayCount()-run.start_days;run.lines.Add(State.day+":"+op.kind+":"+op.cat_id+":"+op.choice);UpdateAutoSummary();}
             catch(InvalidOperationException e){StopAutoplay("blocked",e.Message);}
             return op;
+        }
+        internal bool LegacyAutoplayEvents;
+        private CafeAutoOperation PlanAutoplayEvent()
+        {
+            if(NamedReturnAccessWaiting)return AutoOp("resolve_named_return_access",NamedCustomers.First(NamedReturnAccessPending),"allow");
+            if(AdoptionWaiting)return AutoOp("resolve_adoption",choice:"decline",source:State.adoption.events.First(e=>e.status=="waiting").id);
+            if(DispatchTroubleWaiting)return AutoOp("resolve_dispatch_trouble",choice:"wait",source:State.dispatches.First(e=>e.trouble?.status=="waiting").id);
+            if(DispatchChoiceWaiting){
+                var e=State.dispatches.First(d=>d.encounter?.status=="waiting");
+                return AutoOp("resolve_dispatch_choice",choice:DispatchEncounterDefinition(e.destination,e.started_day).choices.First().id,source:e.id);
+            }
+            if(DispatchWaiting)return AutoOp("resolve_activity",choice:"receive",source:State.dispatches.First(e=>e.status=="waiting").id);
+            if(ReservationWaiting)return AutoOp("resolve_reservation",choice:"decline");
+            if(CustomerTrustWaiting)return AutoOp("resolve_customer_trust",choice:"recover",source:State.trust_events.First(e=>e.status=="waiting").id);
+            var missing=State.cats.FirstOrDefault(c=>c.activity=="missing" && c.missing_remaining==0 && !DispatchMissing(State,c.id));
+            if(missing!=null)return AutoOp("resolve_missing",missing.id);
+            if(StoreEventWaiting)return AutoOp("resolve_store_event",choice:CurrentStoreEvent.type=="support"?"decline":"patch");
+            if(DispatchIntroductionWaiting)return AutoOp("resolve_dispatch_introduction",choice:"decline",source:State.dispatches.First(e=>e.introduction?.status=="waiting").id);
+            if(IntakeWaiting)return AutoOp("resolve_intake",choice:"decline");
+            if(RegularIntroductionWaiting)return AutoOp("resolve_regular_introduction",choice:"decline");
+            return null;
         }
         private CafeAutoOperation AutoOp(string kind,string cat=null,string choice=null,string source=null,string seat=null,string[] workers=null)=>new CafeAutoOperation {kind=kind,cat_id=cat,choice=choice,source=source,seat_id=seat,working=workers};
         private void AutoDecision(string subject,string choice,string reason)

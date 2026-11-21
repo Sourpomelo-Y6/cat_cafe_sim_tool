@@ -581,6 +581,7 @@ namespace CatCafePreview
         }
         private IEnumerator Start()
         {
+            Application.runInBackground=true;
             // ContentPreview.Start binds the saved UI before the first response.
             yield return null;
             preview = GetComponent<ContentPreview>();

@@ -7,8 +7,8 @@ namespace CatCafePreview
     [Serializable] public sealed class CafeOptionsData
     {
         public int version=1,charactersPerSecond=40;
-        public bool instant,fullscreen;
-        public CafeOptionsData Copy()=>new CafeOptionsData{version=version,charactersPerSecond=charactersPerSecond,instant=instant,fullscreen=fullscreen};
+        public bool instant,fullscreen,skipAutoplayEnding;
+        public CafeOptionsData Copy()=>new CafeOptionsData{version=version,charactersPerSecond=charactersPerSecond,instant=instant,fullscreen=fullscreen,skipAutoplayEnding=skipAutoplayEnding};
         public void Validate(){if(version!=1 || charactersPerSecond<10 || charactersPerSecond>80)throw new ArgumentException("設定ファイルの形式が不正です。");}
     }
     public sealed class CafeOptionsStore

@@ -96,7 +96,7 @@ namespace CatCafePreview
             bool available=Available;
             if(GetComponent<PythonEventListPanel>()?.HoldConversations==true && EventConversation && !manualSelected)hidden=true;
             if(available && GetComponents<AcquisitionConversationPanel>().Any(other=>other!=this && other.Showing))hidden=true;
-            panel.SetActive(available && !hidden && !AutoRunning);
+            panel.SetActive(available && !hidden && !AutoRunning && !Client.AutoPlayExecuting);
             if(confirmation!=null)confirmation.SetActive(false);
             Refresh();
             if(Showing && !GameOptionsPanel.IsOpen && CanRaise && (Request.can_decline || progress.branch_id!="introduction") && GetComponent<PythonSavePanel>()?.panel.activeSelf!=true)panel.transform.SetAsLastSibling();
@@ -263,7 +263,7 @@ namespace CatCafePreview
         bool EventConversation=>this is SatoDispatchConversationPanel || this is OptionalEventConversationPanel || this is IntakeConversationPanel || this is RegularConversationPanel || this is DispatchConversationPanel || this is EquipmentConversationPanel || this is TrustConversationPanel || this is AdoptionConversationPanel || this is MissingConversationPanel || this is ReservationConversationPanel || this is LodgeConversationPanel || this is EncounterConversationPanel || this is DispatchIntroductionConversationPanel;
         protected virtual bool ShowEventListAfterClose=>EventConversation;
         void ReturnToEvents(){if(!Ready)return;var list=GetComponent<PythonEventListPanel>();bool returnToList=ShowEventListAfterClose && list!=null;if(EventConversation && list!=null)list.HoldConversations=true;Close();if(returnToList)list.ConversationReturned();}
-        public virtual void Open(){manualSelected=true;foreach(var other in GetComponents<AcquisitionConversationPanel>())if(other!=this && other.Showing)other.Close();hidden=false;OriginalShowing=false;if(card!=null){card.SetActive(true);foreach(var child in originalChildren)child.gameObject.SetActive(false);Stretch(panel.GetComponent<RectTransform>());}panel.SetActive(Available);panel.transform.SetAsLastSibling();Refresh();}
+        public virtual void Open(){if(Client.AutoPlayExecuting)return;manualSelected=true;foreach(var other in GetComponents<AcquisitionConversationPanel>())if(other!=this && other.Showing)other.Close();hidden=false;OriginalShowing=false;if(card!=null){card.SetActive(true);foreach(var child in originalChildren)child.gameObject.SetActive(false);Stretch(panel.GetComponent<RectTransform>());}panel.SetActive(Available);panel.transform.SetAsLastSibling();Refresh();}
         public virtual void Close(){if(!Ready)return;if(answerConfirmation!=null){Destroy(answerConfirmation);answerConfirmation=null;}hidden=true;manualSelected=false;panel.SetActive(false);SetOpen(false);AfterClose();}
         void ToggleHistory(){if(!Click())return;history=!history;Refresh();}
         public void ShowOriginal()
