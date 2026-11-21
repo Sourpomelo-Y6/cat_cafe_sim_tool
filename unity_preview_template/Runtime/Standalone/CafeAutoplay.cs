@@ -74,12 +74,12 @@ namespace CatCafePreview.Standalone
         }
         public CafeAutoOperation PlanAutoplay(string objective,string mode)
         {
-            if(PlayerActive)return objective=="bond" && mode!="basic"?PlanAutoPlayer(mode=="clear"):AutoOp("player_finish");
+            if(PlayerActive)return objective=="bond"?PlanAutoPlayer(mode!="fast"):AutoOp("player_finish");
             if(State.phase=="closed")return AutoOp("next_day");
             if(State.phase!="preparation")return AutoOp("advance_business");
-            if(mode!="basic" && objective=="bond")
+            if(objective=="bond")
             {
-                if(ActiveCatCount(State)<Rules.bond.target && ActiveCatCount(State)<HousingCapacity(State,State.day))
+                if(mode!="basic" && ActiveCatCount(State)<Rules.bond.target && ActiveCatCount(State)<HousingCapacity(State,State.day))
                 {
                     if(State.recruitment==null)return AutoOp("open_recruitment");
                     var recruit=RecruitmentCandidates(State).OrderBy(r=>r.cat.id,StringComparer.Ordinal).FirstOrDefault(r=>RecruitReason(r.cat.id)=="" && State.funds-r.cost>=AutoReserve());if(recruit!=null)return AutoOp("recruit_cat",recruit.cat.id);

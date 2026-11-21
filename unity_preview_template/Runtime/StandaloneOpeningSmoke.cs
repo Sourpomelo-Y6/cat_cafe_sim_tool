@@ -26,7 +26,7 @@ namespace CatCafePreview
                 Good(b,"load_game");check(b.OpeningPending && b.Opening.mode==mode && before==Facts(b),"Initial autosave lost opening");
                 foreach(var kind in new[]{"start_business","advance_business","day_off","next_day","start_autoplay","step_autoplay","set_shifts","player_start"})check(Send(b,kind).result==UnityWebRequest.Result.ProtocolError && before==Facts(b),"Opening advanced/mutated: "+kind);
                 string invalidBefore=Facts(b);check(Send(b,"new_game","invalid").result==UnityWebRequest.Result.ProtocolError && invalidBefore==Facts(b) && b.OpeningPending,"Invalid new start changed state");
-                var lines=CafeOpening.Lines(b.Opening);check(b.Opening.cat_ids.SequenceEqual(b.Simulation.State.cats.Where(c=>c.activity=="cafe").Select(c=>c.id)),"Roster fabricated");
+                var lines=CafeOpening.Lines(b.Opening);check(b.Opening.cat_ids.SequenceEqual(b.Simulation.State.cats.Where(c=>c.activity=="cafe").Take(1).Select(c=>c.id)),"Roster fabricated");
                 for(int node=0;node<=lines.Length;node++)
                 {
                     b.Opening.progress.node=node;b.Opening.progress.page_offset=node<lines.Length?3:0;Good(b,"save_game",slot:3);Good(b,"load_game",slot:3);
@@ -61,7 +61,7 @@ namespace CatCafePreview
         IEnumerator Run()
         {
             Screen.SetResolution(1280,800,false);backend=new LocalCafeBackend(Path.Combine(output,"ui-"+Guid.NewGuid().ToString("N")),playOpening:true);CafeBackends.UseLocal(backend);SceneManager.LoadScene("CatCafeTitle");yield return new WaitForSecondsRealtime(2);
-            var title=FindObjectOfType<PythonTitleScreen>();title.newGame.onClick.Invoke();title.objectives.value=Array.FindIndex(title.CurrentState.new_game_options,o=>o.choice=="free");title.startGame.onClick.Invoke();yield return null;Check(title.ConfirmingStart,"Start confirmation absent");title.startGame.onClick.Invoke();yield return new WaitForSecondsRealtime(3);
+            var title=FindObjectOfType<PythonTitleScreen>();title.newGame.onClick.Invoke();Check(title.CurrentState.new_game_options[title.objectives.value].choice=="popularity","Management goal was not selected by default");title.objectives.value=Array.FindIndex(title.CurrentState.new_game_options,o=>o.choice=="free");title.startGame.onClick.Invoke();yield return null;Check(title.ConfirmingStart,"Start confirmation absent");title.startGame.onClick.Invoke();yield return new WaitForSecondsRealtime(3);
             var preview=FindObjectOfType<ContentPreview>();var ui=preview.GetComponent<OpeningPanel>();var client=preview.GetComponent<PythonStateClient>();Check(ui!=null && ui.Showing,"Title did not open opening");string before=Facts(backend);ScreenCapture.CaptureScreenshot(Path.Combine(output,"opening.png"));yield return new WaitForEndOfFrame();
             ui.Panel.GetComponentsInChildren<Button>(true).Single(b=>b.name=="バックログ").onClick.Invoke();yield return null;Check(ui.HistoryScroll.gameObject.activeInHierarchy,"Backlog absent");ui.Panel.GetComponentsInChildren<Button>(true).Single(b=>b.name=="バックログ").onClick.Invoke();yield return null;
             bool original=CafeOptions.Current.instant;CafeOptions.Current.instant=true;int steps=0;while(ui.Showing && steps++<200){ui.Next();yield return null;}CafeOptions.Current.instant=original;Check(!ui.Showing && backend.Opening.outcome=="viewed" && before==Facts(backend),"Natural reading changed rules/failed completion");
@@ -71,7 +71,7 @@ namespace CatCafePreview
             ui.Close();yield return null;SceneManager.LoadScene("CatCafeTitle");yield return new WaitForSecondsRealtime(2);var extra=FindObjectOfType<PythonTitleScreen>().GetComponent<TitleExtraPanel>();extra.Open();extra.OpenReplay(CafeOpening.Id+"/free");yield return null;Check(extra.Replay.Showing,"Opening Extra unavailable");extra.Replay.Close();
             // Render a genuinely unregistered content ID without changing game rules.
             var catalogField=typeof(CafeDetailPresentation).GetField("catalog",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic);
-            var catalog=(CafePresentationCatalog)catalogField.GetValue(backend.Details);var mapping=catalog.content_ids[0];string oldImage=mapping.label;mapping.label="opening-unregistered-image";
+            var catalog=(CafePresentationCatalog)catalogField.GetValue(backend.Details);var mapping=catalog.content_ids.Single(entry=>entry.id==backend.Opening.cat_ids.Single());string oldImage=mapping.label;mapping.label="opening-unregistered-image";
             Good(backend,"new_game","free");SceneManager.LoadScene("CatCafePythonState");yield return new WaitForSecondsRealtime(2);preview=FindObjectOfType<ContentPreview>();ui=preview.GetComponent<OpeningPanel>();
             backend.Opening.progress.node=2+2*Array.IndexOf(backend.Opening.cat_ids,mapping.id);ui.Refresh();yield return null;
             var portrait=(RawImage)typeof(AcquisitionConversationPanel).GetField("portrait",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic).GetValue(ui);

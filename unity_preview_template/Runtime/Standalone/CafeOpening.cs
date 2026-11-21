@@ -15,7 +15,7 @@ namespace CatCafePreview.Standalone
         public static readonly string[] Modes={"popularity","patron","bond","free"};
         public static CafeOpeningProgress Start(CafeSnapshot state,string mode,Func<string,string> name,bool play)
         {
-            var cats=state.cats.Where(c=>c.activity=="cafe").ToArray();
+            var cats=state.cats.Where(c=>c.activity=="cafe").Take(1).ToArray();
             var row=new CafeOpeningProgress{mode=mode,outcome="",cat_ids=cats.Select(c=>c.id).ToArray(),cat_names=cats.Select(c=>name(c.id)).ToArray(),progress=new CafeConversationProgress{conversation_id=Id,branch_id=mode,viewed_branches=new string[0]}};
             if(!play)Finish(row,"debug_omitted");return row;
         }

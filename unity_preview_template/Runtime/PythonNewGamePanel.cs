@@ -23,7 +23,7 @@ namespace CatCafePreview
         }
         public void Apply(PythonCafeState state)
         {
-            string previous=options.Length>0 ? options[Math.Min(objectives.value,options.Length-1)].choice : state.objective;
+            string previous=options.Length>0 ? options[Math.Min(objectives.value,options.Length-1)].choice : "popularity";
             options=state.new_game_options ?? new PythonNewGameOption[0];objectives.options.Clear();
             foreach(var row in options)objectives.options.Add(new Dropdown.OptionData(row.label));
             objectives.SetValueWithoutNotify(Math.Max(0,Array.FindIndex(options,row=>row.choice==previous)));objectives.RefreshShownValue();

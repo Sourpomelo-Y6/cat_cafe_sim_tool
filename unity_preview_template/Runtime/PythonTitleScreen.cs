@@ -49,7 +49,7 @@ namespace CatCafePreview
         public void Apply(PythonCafeState latest)
         {
             PythonStateClient.Validate(latest);string previous=state!=null && state.new_game_options!=null && objectives.value>=0 && objectives.value<state.new_game_options.Length ? state.new_game_options[objectives.value].choice : "";
-            string identity=latest.instance_id+"/"+latest.revision;if(stateIdentity!=identity){stateIdentity=identity;confirming=false;}if(instance!=latest.instance_id){instance=latest.instance_id;previous="";ShowHome();}state=latest;online=true;GetComponent<PythonLegacySavePanel>()?.Apply(latest);objectives.options.Clear();
+            string identity=latest.instance_id+"/"+latest.revision;if(stateIdentity!=identity){stateIdentity=identity;confirming=false;}if(instance!=latest.instance_id){instance=latest.instance_id;previous="popularity";ShowHome();}state=latest;online=true;GetComponent<PythonLegacySavePanel>()?.Apply(latest);objectives.options.Clear();
             foreach(var row in latest.new_game_options ?? new PythonNewGameOption[0])objectives.options.Add(new Dropdown.OptionData(row.label));
             objectives.SetValueWithoutNotify(Math.Max(0,Array.FindIndex(latest.new_game_options ?? new PythonNewGameOption[0],row=>row.choice==previous)));
             objectives.RefreshShownValue();RenderObjective(objectives.value);RefreshControls();

@@ -689,9 +689,10 @@ namespace CatCafePreview
                 refreshingState=false;
                 GetComponent<CatOutfitPanel>()?.RefreshControls();
                 yield return null;
+                float nextBatchStep = current?.player_interaction?.active==true && current.autoplay?.report?.objective=="bond" ? Time.realtimeSinceStartup + 1f : 0f;
                 while (pending == null && Time.realtimeSinceStartup < until)
                 {
-                    if(batchAutomatic || batchStopRequested){QueueAutoPlay();if(pending!=null)break;}
+                    if((batchAutomatic && Time.realtimeSinceStartup >= nextBatchStep) || batchStopRequested){QueueAutoPlay();if(pending!=null)break;}
                     if(automatic && CanStartAutomatic && Time.realtimeSinceStartup >= nextAutomaticTick)
                     {
                         pendingAutomatic=true; QueueBusiness("advance_business");
