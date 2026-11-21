@@ -17,9 +17,10 @@ namespace CatCafePreview
         public void Initialize(PythonTitleScreen owner)
         {
             if(Entry!=null)return;title=owner;font=owner.newGame.GetComponentInChildren<Text>().font;
-            Entry=UnityEngine.Object.Instantiate(owner.newGame,owner.home.transform);Entry.name="Extra";Entry.GetComponentInChildren<Text>().text="Extra";Entry.GetComponent<RectTransform>().anchoredPosition=new Vector2(260,-215);Entry.onClick=new Button.ButtonClickedEvent();Entry.onClick.AddListener(Open);
-            var quit=MakeButton(owner.home.transform,"Quit","ゲームを終える",635,305,235,56);
-            quit.onClick.AddListener(()=>Application.Quit());
+            owner.EnsureHomeButtons();
+            Entry=owner.extraButton;
+            Entry.onClick.AddListener(Open);
+            owner.quitButton.onClick.AddListener(()=>Application.Quit());
             surface=Box(transform,"Extra Conversations");Stretch(surface.GetComponent<RectTransform>());Label(surface.transform,"Heading",48,32,1000,44,28).text="Extra · 会話の回想";
             notice=Label(surface.transform,"Notice",48,86,1184,68,17);
             var go=Box(surface.transform,"List");var rect=go.GetComponent<RectTransform>();rect.anchorMin=new Vector2(0,0);rect.anchorMax=Vector2.one;rect.offsetMin=new Vector2(48,104);rect.offsetMax=new Vector2(-48,-160);list=go.AddComponent<ScrollRect>();list.horizontal=false;list.scrollSensitivity=36;

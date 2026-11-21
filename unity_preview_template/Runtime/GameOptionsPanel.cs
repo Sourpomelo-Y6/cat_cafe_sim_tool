@@ -15,7 +15,7 @@ namespace CatCafePreview
         public static GameOptionsPanel Attach(PythonTitleScreen owner)
         {
             var ui=owner.GetComponent<GameOptionsPanel>()??owner.gameObject.AddComponent<GameOptionsPanel>();if(ui.Panel!=null)return ui;ui.title=owner;ui.font=owner.newGame.GetComponentInChildren<Text>().font;ui.Build(owner.transform);
-            ui.Entry=UnityEngine.Object.Instantiate(owner.newGame,owner.home.transform);ui.Entry.name="Options";ui.Entry.GetComponentInChildren<Text>().text="オプション";ui.Entry.GetComponent<RectTransform>().anchoredPosition=new Vector2(260,-305);ui.Entry.onClick=new Button.ButtonClickedEvent();ui.Entry.onClick.AddListener(ui.Open);return ui;
+            owner.EnsureHomeButtons();ui.Entry=owner.optionsButton;ui.Entry.onClick.AddListener(ui.Open);return ui;
         }
         public static GameOptionsPanel Attach(ContentPreview owner)
         {

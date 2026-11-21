@@ -18,6 +18,28 @@ namespace CatCafePreview
         private string Guide=>conditionsPanel.activeSelf?(confirming?"開始内容を確認しています。「この内容で開始する」で確定できます。":"目標と開始条件を確認して、開始の確認へ進んでください。"):savesPanel.activeSelf?"スロットを選び、内容を確認してロードしてください。":"はじめから：目標を選んで新しいカフェを作ります。つづきから：保存したカフェや終了結果を読み込みます。";
         public void SelectSave(int index) { if(saveDetails!=null)saveDetails.text=index>=0 && index<entries.Length ? entries[index].Details() : "保存したゲームはありません。"; }
         public Button newGame, continueGame, startGame, resume;
+        public Button extraButton, optionsButton, quitButton;
+
+        public void EnsureHomeButtons()
+        {
+            if(extraButton!=null && optionsButton!=null && quitButton!=null)return;
+            var rect=home.GetComponent<RectTransform>();
+            rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,460);
+            if(extraButton==null)extraButton=CreateHomeButton("Extra","Extra",215);
+            if(optionsButton==null)optionsButton=CreateHomeButton("Options","オプション",305);
+            if(quitButton==null)quitButton=CreateHomeButton("Quit","ゲームを終える",395);
+        }
+
+        private Button CreateHomeButton(string objectName,string caption,float top)
+        {
+            var button=Instantiate(newGame,home.transform);
+            button.name=objectName;
+            button.GetComponentInChildren<Text>().text=caption;
+            button.GetComponent<RectTransform>().anchoredPosition=new Vector2(newGame.GetComponent<RectTransform>().anchoredPosition.x,-top);
+            button.onClick=new Button.ButtonClickedEvent();
+            return button;
+        }
+
         public int port=8190;
         public PythonCafeState CurrentState => state;
         public bool CanManageSaves => online && !busy && state!=null;

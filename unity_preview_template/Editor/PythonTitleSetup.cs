@@ -41,6 +41,15 @@ namespace CatCafePreview.Editor
         }
         [MenuItem("Cat Cafe/プレビュー/タイトル画面を開く",false,0)]
         public static void Open() {if(EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())EditorSceneManager.OpenScene(TitlePath);}
+        public static void SaveHomeButtons()
+        {
+            var scene=EditorSceneManager.OpenScene(TitlePath);
+            var title=UnityEngine.Object.FindObjectOfType<PythonTitleScreen>();
+            title.EnsureHomeButtons();
+            EditorSceneManager.MarkSceneDirty(scene);
+            if(!EditorSceneManager.SaveScene(scene))throw new Exception("Could not save title menu");
+        }
+
         static Button MakeButton(Transform parent,string name,string caption,float x,float y)
         {
             var result=Button(parent,name,caption,x,y);Place(result.GetComponent<RectTransform>(),x,y,360,56);return result;
@@ -107,7 +116,8 @@ namespace CatCafePreview.Editor
             UnityEventTools.AddPersistentListener(panel.saves.onValueChanged,panel.SelectSave);
             panel.resume=MakeButton(panel.savesPanel.transform,"Resume","このゲームを再開",40,340);UnityEventTools.AddPersistentListener(panel.resume.onClick,panel.Resume);
             back=MakeButton(panel.savesPanel.transform,"Back","戻る",440,340);UnityEventTools.AddPersistentListener(back.onClick,panel.ShowHome);
-            panel.notice=Label(background.transform,"Connection Notice",220,710,840,70,18);
+            panel.notice=Label(background.transform,"Connection Notice",220,744,840,48,18);
+            panel.EnsureHomeButtons();
             PythonStartFlowLayout.RefreshTitle(panel);panel.ShowHome();EditorSceneManager.SaveScene(scene,TitlePath);
             var business=EditorSceneManager.OpenScene(BusinessPath);var preview=UnityEngine.Object.FindObjectOfType<ContentPreview>();var bg=preview.transform.Find("Content Canvas/Background");
             foreach(string name in new[]{"New Game","New Game Entry","Return To Title","Title Save Hint"}){var old=bg.Find(name);if(old!=null)UnityEngine.Object.DestroyImmediate(old.gameObject);}
