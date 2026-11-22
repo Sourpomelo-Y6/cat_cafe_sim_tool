@@ -9,6 +9,14 @@ SCENES = tuple((key, display_label('modes', key, value)) for key, value in SCENE
 
 
 class ContentImageToolWindow:
+    def open_image_matrix(self):
+        from image_matrix_gui import ImageMatrix
+        existing = getattr(self, 'image_matrix', None)
+        if existing is not None and existing.window.winfo_exists():
+            existing.window.lift()
+            return
+        self.image_matrix = ImageMatrix(self)
+
     def open_cat_outfits(self):
         from cat_outfit_editor_gui import CatOutfitEditorWindow
         from cat_outfits import CatOutfitStore
@@ -138,6 +146,7 @@ class ContentImageToolWindow:
         controls.pack(fill='x', pady=10)
         ttk.Button(controls, text='画像を選ぶ…', command=self.choose).pack(side='left')
         ttk.Button(controls, text='ComfyUIで生成…', command=self.open_generation).pack(side='left', padx=8)
+        ttk.Button(controls, text='行動・反応別の画像表…', command=self.open_image_matrix).pack(side='left')
         self.save_button = ttk.Button(controls, text='この画像を登録', command=self.save)
         self.save_button.pack(side='right')
         images = ttk.Frame(image_page)
