@@ -9,17 +9,18 @@ from tkinter import ttk
 from comfy_client import ComfyClient, GENERATED_DIRECTORY, random_seed, workflow_defaults
 from content_images import load_display_image
 from interaction_texts import MODES, NARRATIVE_SCENES, REACTIONS, reactions, scene_actions
-from interaction_scenes import SPECIAL_ACTIONS
+from interaction_scenes import ACTION_LABELS, MODE_ACTIONS, SPECIAL_ACTIONS
 
 
 SPECIAL_ROWS = {key: label for key, label in NARRATIVE_SCENES.items() if key != "normal"}
 SPECIAL_ROWS.update(SPECIAL_ACTIONS)
-ROW_LABELS = {**REACTIONS, **SPECIAL_ROWS}
+OPERATION_ROWS = {key: label for key, label in ACTION_LABELS.items() if key not in SPECIAL_ROWS}
+ROW_LABELS = {**REACTIONS, **OPERATION_ROWS, **SPECIAL_ROWS}
 
 
 def scene_key(key):
     mode, row = key
-    return f"{mode}__{row}" if row in SPECIAL_ROWS else mode
+    return f"{mode}__{row}" if row not in REACTIONS else mode
 
 
 POSE = {
@@ -45,6 +46,7 @@ class ImageMatrix:
         self.cat.set(owner.cat.get())
         self.cat.pack(side='left')
         self.cat.bind('<<ComboboxSelected>>', lambda _: self.refresh())
+        ttk.Button(bar, text='猫のベースプロンプト…', command=self.edit_cat_prompt).pack(side='left', padx=4)
         ttk.Label(bar, text='ComfyUI 接続先').pack(side='left', padx=8)
         self.url = ttk.Entry(bar, width=26)
         self.url.insert(0, 'http://127.0.0.1:8188')
@@ -71,14 +73,20 @@ class ImageMatrix:
         self.messages = queue.Queue()
         self.cancel = threading.Event()
         self.window.bind('<Destroy>', self.destroyed)
-        ttk.Label(self.grid, text='反応・特別行動 ＼ 行動').grid(row=0, column=0)
+        ttk.Label(self.grid, text='反応・操作 ＼ 行動').grid(row=0, column=0)
         for col, (mode, label) in enumerate(MODES.items(), 1):
-            ttk.Label(self.grid, text=label).grid(row=0, column=col, pady=6)
+            ttk.Button(self.grid, text=label, command=lambda k=mode: self.edit_prompt(
+                'matrix_columns', k, MODES[k])).grid(row=0, column=col, pady=6, sticky='ew')
             for row, (reaction, title) in enumerate(ROW_LABELS.items(), 1):
                 if col == 1:
-                    ttk.Label(self.grid, text=title).grid(row=row, column=0, padx=6)
-                supported = (scene_actions(mode, reaction) if reaction in SPECIAL_ROWS
-                             else reaction in reactions('cat_response', mode))
+                    ttk.Button(self.grid, text=title, command=lambda k=reaction: self.edit_prompt(
+                        'matrix_rows', k, ROW_LABELS[k])).grid(row=row, column=0, padx=6, sticky='ew')
+                if reaction in OPERATION_ROWS:
+                    supported = reaction in MODE_ACTIONS.get(mode, ())
+                elif reaction in SPECIAL_ROWS:
+                    supported = scene_actions(mode, reaction)
+                else:
+                    supported = reaction in reactions('cat_response', mode)
                 if not supported:
                     ttk.Label(self.grid, text='対象外').grid(row=row, column=col)
                     continue
@@ -107,7 +115,7 @@ class ImageMatrix:
                 # A metadata file is written after its PNG has finished saving.
                 records = sorted(self.folder(key).glob('*.json'), key=lambda p: p.stat().st_mtime_ns, reverse=True)
                 path = next((p.with_suffix('.png') for p in records if p.with_suffix('.png').is_file()), None)
-                if path is None and (key[1] == 'neutral' or key[1] in SPECIAL_ROWS):
+                if path is None and (key[1] == 'neutral' or key[1] not in REACTIONS):
                     path = self.owner.registry.image_path(self.cats[self.cat.get()], scene_key(key))
                 if path and path.is_file():
                     btn.preview = load_display_image(self.window, path, 100, 78)
@@ -134,8 +142,10 @@ class ImageMatrix:
                 ttk.Label(win, text=str(path), wraplength=620).pack()
                 record = path.with_suffix('.json')
                 if record.is_file() and path.parent == self.folder(key):
-                    prompt = json.loads(record.read_text(encoding='utf-8'))['settings']['positive']
-            ttk.Label(win, text=prompt, wraplength=620, padding=10).pack()
+                    previous = json.loads(record.read_text(encoding='utf-8'))['settings']['positive']
+                    if previous != prompt:
+                        ttk.Label(win, text='前回の生成プロンプト\n' + previous, wraplength=620).pack()
+            ttk.Label(win, text='次回の生成プロンプト\n' + prompt, wraplength=620, padding=10).pack()
         except (OSError, ValueError, KeyError, tk.TclError) as exc:
             ttk.Label(win, text=str(exc)).pack()
         def generate():
@@ -148,9 +158,54 @@ class ImageMatrix:
         win.transient(self.window)
         win.grab_set()
 
+    def edit_cat_prompt(self):
+        cat = self.cats.get(self.cat.get())
+        if cat:
+            self.edit_prompt('cats', cat, self.cat.get())
+
+    def edit_prompt(self, section, key, label):
+        presets = self.owner.presets
+        try:
+            if section == 'cats':
+                initial = presets.fields(key, 'normal')['appearance']
+                scope = 'この猫のベースプロンプト'
+            else:
+                default = POSE.get(key, '') if section == 'matrix_rows' else ''
+                initial = presets.read().get(section, {}).get(key, default)
+                scope = '全ての猫に共通する' + ('行' if section == 'matrix_rows' else '列') + 'の追加プロンプト'
+        except (ValueError, OSError) as exc:
+            self.status.set(str(exc))
+            return
+        win = tk.Toplevel(self.window)
+        win.title(label + ' ／ ' + scope)
+        ttk.Label(win, text=label + ' ／ ' + scope, padding=8).pack(anchor='w')
+        editor = tk.Text(win, width=68, height=7, wrap='word', undo=True)
+        editor.pack(fill='both', expand=True, padx=8)
+        editor.insert('1.0', initial)
+        error = ttk.Label(win)
+        error.pack(anchor='w', padx=8)
+        def save():
+            try:
+                presets.save_matrix_field(section, key, editor.get('1.0', 'end-1c'))
+            except (ValueError, OSError) as exc:
+                error.configure(text=str(exc))
+                return
+            self.status.set(label + 'のプロンプトを保存しました。次に開始する生成から反映します。')
+            win.destroy()
+        controls = ttk.Frame(win, padding=8)
+        controls.pack(fill='x')
+        ttk.Button(controls, text='保存', command=save).pack(side='right')
+        ttk.Button(controls, text='キャンセル', command=win.destroy).pack(side='right', padx=8)
+        win.transient(self.window)
+        win.grab_set()
+        editor.focus_set()
+
     def prompt(self, key):
         base = self.owner.presets.assemble(self.cats[self.cat.get()], scene_key(key))
-        return base if key[1] in SPECIAL_ROWS else base + ', ' + POSE[key[1]]
+        data = self.owner.presets.read()
+        column = data.get('matrix_columns', {}).get(key[0], '')
+        row = data.get('matrix_rows', {}).get(key[1], POSE.get(key[1], ''))
+        return ', '.join(part for part in (base, column, row) if part)
 
     def fill(self):
         self.start([key for key in self.cells if key not in self.paths])

@@ -88,6 +88,22 @@ class PromptPresets:
         data['cats'][cat_id] = fields['appearance'].strip()
         data['actions'][scene] = fields['action'].strip()
         data.update(background=fields['background'].strip(), style=fields['style'].strip())
+        self._write(data)
+
+    def save_matrix_field(self, section, key, text):
+        data = self.read()
+        value = text.strip()
+        if section == 'cats':
+            if not value:
+                raise ValueError('猫のベースプロンプトを入力してください。')
+            data['cats'][key] = value
+        elif section in ('matrix_rows', 'matrix_columns'):
+            data.setdefault(section, {})[key] = value
+        else:
+            raise ValueError('編集対象が不正です。')
+        self._write(data)
+
+    def _write(self, data):
         self.path.parent.mkdir(parents=True, exist_ok=True)
         temporary = self.path.with_name(f'{uuid.uuid4().hex}.tmp')
         try:
