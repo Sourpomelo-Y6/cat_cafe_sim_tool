@@ -771,6 +771,153 @@
         ],
         "revision": "ef63c4c7ead5827cb862ce06bc33702fe006a00e77ca56e69531d4534b39b249"
       }
+    },
+    {
+      "enabled": true,
+      "event": {
+        "event_id": "optional.playtest-mike.affinity-0",
+        "target_kind": "content",
+        "content_cat_id": "playtest-mike",
+        "min_day": 1,
+        "min_affinity": 0,
+        "title": "初対面・椅子の下から",
+        "accept_caption": "少し離れて座る",
+        "decline_caption": "そっと名前を呼ぶ",
+        "milestone": 0,
+        "introduction": [
+          {
+            "speaker": "",
+            "text": "窓際の椅子の下に、三色の前足がそろっている。"
+          },
+          {
+            "speaker": "",
+            "text": "あなたが腰を下ろすと、片方の耳だけがこちらを向いた。"
+          },
+          {
+            "speaker": "",
+            "text": "椅子と椅子の間に、猫一匹ぶんの隙間がある。"
+          }
+        ],
+        "accepted": [
+          {
+            "speaker": "",
+            "text": "隣の椅子に座って待つと、隙間から鼻先がのぞいた。"
+          },
+          {
+            "speaker": "",
+            "text": "あなたの靴のにおいを一度確かめて、三色の前足が光の中へ出た。"
+          }
+        ],
+        "declined": [
+          {
+            "speaker": "",
+            "text": "名前を小さく呼ぶと、椅子の下で両耳がそろって動いた。"
+          },
+          {
+            "speaker": "",
+            "text": "もう一度呼ぶ前に、小さな「にゃ」が返ってきた。今日はそれで挨拶にした。"
+          }
+        ],
+        "revision": "95d27968d1adfad88b8df1baf97e161a3d9737c98864ea4016c38a198126def2"
+      }
+    },
+    {
+      "enabled": true,
+      "event": {
+        "event_id": "optional.playtest-tama.affinity-0",
+        "target_kind": "content",
+        "content_cat_id": "playtest-tama",
+        "min_day": 1,
+        "min_affinity": 0,
+        "title": "初対面・ころがる鈴",
+        "accept_caption": "鈴を転がし返す",
+        "decline_caption": "手のひらに載せる",
+        "milestone": 0,
+        "introduction": [
+          {
+            "speaker": "",
+            "text": "足もとで鈴がひとつ鳴った。見上げると、丸い目があなたを見ている。"
+          },
+          {
+            "speaker": "",
+            "text": "前足が鈴をちょんと押す。鈴はあなたの靴に当たって止まった。"
+          },
+          {
+            "speaker": "",
+            "text": "押した本人はもう、お尻を振って待ち構えている。"
+          }
+        ],
+        "accepted": [
+          {
+            "speaker": "",
+            "text": "床を指で軽く弾くと、鈴の横を前足が勢いよく通り過ぎた。"
+          },
+          {
+            "speaker": "",
+            "text": "急いで引き返した猫と目が合う。今度はふたりで鈴の行方を見届けた。"
+          }
+        ],
+        "declined": [
+          {
+            "speaker": "",
+            "text": "開いた手に鈴を載せると、猫はそっと肉球を重ねた。"
+          },
+          {
+            "speaker": "",
+            "text": "手の中でちりんと鳴る。びっくりした顔のまま、もう一度だけ触れてきた。"
+          }
+        ],
+        "revision": "96f6b671c5ca1874782076454654aed26d5a9982943f07701895ec1ed74ea9dd"
+      }
+    },
+    {
+      "enabled": true,
+      "event": {
+        "event_id": "optional.playtest-sora.affinity-0",
+        "target_kind": "content",
+        "content_cat_id": "playtest-sora",
+        "min_day": 1,
+        "min_affinity": 0,
+        "title": "初対面・棚の上のまばたき",
+        "accept_caption": "ゆっくり瞬きをする",
+        "decline_caption": "窓辺に場所を空ける",
+        "milestone": 0,
+        "introduction": [
+          {
+            "speaker": "",
+            "text": "棚の上から、あなたのエプロンのひもを目で追う猫がいる。"
+          },
+          {
+            "speaker": "",
+            "text": "あなたが顔を上げると、猫は視線を窓のほうへ移した。"
+          },
+          {
+            "speaker": "",
+            "text": "窓からの風に、ひげの先が少し揺れた。"
+          }
+        ],
+        "accepted": [
+          {
+            "speaker": "",
+            "text": "見上げたまま目を細める。棚の上でも、まぶたがゆっくり閉じた。"
+          },
+          {
+            "speaker": "",
+            "text": "目を開けると、さっきまで畳んでいた前足が一本、棚の縁から垂れていた。"
+          }
+        ],
+        "declined": [
+          {
+            "speaker": "",
+            "text": "窓際の丸椅子を空けると、棚から音もなく猫が降りた。"
+          },
+          {
+            "speaker": "",
+            "text": "あなたの隣で風のにおいを嗅ぎながら、しっぽの先だけが一度こちらを向いた。"
+          }
+        ],
+        "revision": "8c65b30a678614118c523b85ee683bf2e468cdfa60e598d581eb9ba5d88cdefe"
+      }
     }
   ]
 }

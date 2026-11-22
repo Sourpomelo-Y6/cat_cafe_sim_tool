@@ -39,6 +39,25 @@ static partial class Program
         }
         CafeOptionalEvents.Validate(Decode<CafeSaveEnvelope>("{}").optional_events);
         Assert(Encode(state)==before,"Story never changes gameplay state");
+        var meeting=new CafeOptionalDefinition{schema_version=2,target_kind="content",event_id="optional.tama.first",
+            content_cat_id="playtest-tama",first_meeting=true,min_day=1,title="初対面",accept_caption="待つ",decline_caption="呼ぶ",
+            introduction=new[]{new CafeConversationLine("","出会い")},accepted=new[]{new CafeConversationLine("","近づいた")},
+            declined=new[]{new CafeConversationLine("","顔を上げた")}};
+        meeting.revision=meeting.Digest();
+        var individuals=new List<CafeOptionalEvent>();
+        foreach(string cat in new[]{"cat-tama","rescue-100"})
+        {
+            state.cats.Add(new CafeCat{id=cat});
+            state.player_cats.Add(new CafePlayerCat{cat_id=cat,affinity=0});
+            Assert(meeting.Matches(cat,"playtest-tama") && meeting.Eligible(state,cat),"New arrival shares first meeting at zero");
+            individuals.Add(meeting.Start(state,cat,cat,""));
+        }
+        var original=individuals[0];original.progress.node=1;CafeOptionalEvents.Choose(original,true);
+        original.progress.node=1;CafeOptionalEvents.Finish(original);
+        CafeOptionalEvents.Validate(individuals.ToArray());
+        Assert(original.progress.completed && !individuals[1].progress.completed,"Admitted cat has an independent first meeting");
+        state.player_cats.Last().affinity=0.1;
+        Assert(!meeting.Eligible(state,"rescue-100"),"Positive saved affinity skips the introduction");
         Console.WriteLine("PASS optional events: "+assertions+" assertions.");
     }
 }

@@ -38,7 +38,7 @@ namespace CatCafePreview
         }
         CafeOptionalDefinition DefinitionFor(string cat,string id)=>DefinitionsFor(cat).FirstOrDefault(d=>d.event_id==id);
         CafeOptionalEvent ReceiptFor(string cat,string id,int milestone)=>optionalEvents.FirstOrDefault(
-            r=>r.cat_id==cat && (r.event_id==id || milestone>0 && r.Milestone()==milestone));
+            r=>r.cat_id==cat && (r.event_id==id || milestone>=0 && r.Milestone()==milestone));
         void SyncAffinityMilestones()
         {
             var caps=new List<CafeAffinityCap>();
@@ -49,9 +49,9 @@ namespace CatCafePreview
             {
                 double current=Simulation.PlayerCat(cat.id).affinity;
                 double reached=historical.TryGetValue(cat.id,out var prior)?Math.Max(prior,current):current;
-                int limit=0;
-                foreach(var d in DefinitionsFor(cat.id).Where(d=>d.Milestone()>0 && d.Milestone()<100
-                    && (d.milestone>0 || cat.id==CafeOptionalEvents.MikeCatId)).OrderBy(d=>d.Milestone()))
+                int limit=-1;
+                foreach(var d in DefinitionsFor(cat.id).Where(d=>d.Milestone()>=0 && d.Milestone()<100
+                    && (d.first_meeting || d.milestone>0 || cat.id==CafeOptionalEvents.MikeCatId)).OrderBy(d=>d.Milestone()))
                 {
                     var receipt=ReceiptFor(cat.id,d.event_id,d.Milestone());
                     if(reached<=d.Milestone() && (receipt!=null?!receipt.progress.completed:canStart)){limit=d.Milestone();break;}
@@ -61,7 +61,7 @@ namespace CatCafePreview
                     var receipt=ReceiptFor(cat.id,CafeOptionalEvents.MikeId,20);
                     if(receipt!=null?!receipt.progress.completed:canStart)limit=20;
                 }
-                if(limit>0)caps.Add(new CafeAffinityCap{cat_id=cat.id,affinity=limit});
+                if(limit>=0)caps.Add(new CafeAffinityCap{cat_id=cat.id,affinity=limit});
             }
             Simulation.AffinityCaps=caps.ToArray();
         }
@@ -89,7 +89,7 @@ namespace CatCafePreview
         }
         bool AtCap(string cat,int milestone)=>Simulation.AffinityCaps.Any(cap=>cap.cat_id==cat && cap.affinity==milestone)
             && Simulation.PlayerAtAffinityMilestone(cat);
-        public OptionalEventCandidate OptionalForCat(string cat)=>OptionalCandidates.FirstOrDefault(r=>r.cat_id==cat);
+        public OptionalEventCandidate OptionalForCat(string cat)=>OptionalCandidates.Where(r=>r.cat_id==cat).OrderByDescending(r=>r.milestone==0).FirstOrDefault();
         public bool OptionalEventListed=>OptionalCandidates.Length!=0;
         public string OptionalEventReason=>OptionalCandidates.Length==0?"開始条件を満たしていません。":OptionalReason(OptionalCandidates[0]);
         public string OptionalReason(OptionalEventCandidate candidate)=>OptionalReason(candidate,false);
@@ -98,7 +98,7 @@ namespace CatCafePreview
             if(candidate==null)return "開始条件を満たしていません。";
             if(Simulation.State.phase!="preparation")return "営業準備で確認してください。";
             if(!string.IsNullOrEmpty(Simulation.State.game_over))return "営業を終了しています。";
-            if(!candidate.resume && candidate.milestone>0)
+            if(!candidate.resume && candidate.milestone>=0)
             {
                 int day = DefinitionFor(candidate.cat_id,candidate.event_id)?.min_day ?? 2;
                 if(Simulation.State.day < day)return day+"日目以降に読めます。";
@@ -110,7 +110,7 @@ namespace CatCafePreview
                 || EquipmentResultPending || IntakeResultPending || RegularResultPending || DispatchResultPending || EncounterResultPending
                 || AdoptionResultPending || TrustBlocksProgress || ReservationBlocksProgress || MissingBlocksProgress || LodgeResultPending || DispatchIntroductionResultPending
                 || (Simulation.AdoptionWaiting || Simulation.PlayerActive || Simulation.BondWaiting || Simulation.DispatchTroubleWaiting || Simulation.DispatchChoiceWaiting || Simulation.DispatchWaiting || MissingWaiting || Simulation.ReservationWaiting || Simulation.PatronWaiting || Simulation.GoalWaiting || Simulation.DispatchIntroductionWaiting || Simulation.IntakeWaiting || Simulation.RegularIntroductionWaiting || Simulation.CustomerTrustWaiting || Simulation.StoreEventWaiting || Simulation.GrowthWaiting || Simulation.AssignmentWaiting))return "必須の回答・結果会話を先に確認してください。";
-            if(!candidate.resume && candidate.milestone==0 && optionalEvents.Any(r=>r.Milestone()==0 && !r.progress.completed))return "進行中の個別イベントを先に完了してください。";
+            if(!candidate.resume && candidate.milestone<0 && optionalEvents.Any(r=>r.Milestone()<0 && !r.progress.completed))return "進行中の個別イベントを先に完了してください。";
             if(!candidate.resume && optionalEvents.Length>=CafeOptionalEvents.MaxRecords)return "個別イベントの保存上限512件に達しています。";
             return "";
         }
@@ -133,7 +133,7 @@ namespace CatCafePreview
         void CompleteAutoplayMilestones()
         {
             if(Simulation.PlayerActive || Simulation.State.phase!="preparation")return;
-            foreach(var candidate in OptionalCandidates.Where(c=>c.milestone>0))
+            foreach(var candidate in OptionalCandidates.Where(c=>c.milestone>=0))
             {
                 if(OptionalReason(candidate,true)!="")continue;
                 var s=Simulation.State;

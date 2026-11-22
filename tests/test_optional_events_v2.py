@@ -20,6 +20,21 @@ def authored(cid):
 
 
 class OptionalEventsV2Tests(unittest.TestCase):
+    def test_first_meeting_and_legacy_zero_condition_round_trip(self):
+        content = 'playtest-tama'
+        legacy = authored(content)
+        legacy.update(min_affinity=0)
+        first = dict(legacy, **{key: value for key, value in blank_event(content, 0).items()
+                                if key in ('event_id', 'milestone', 'min_day')})
+        for event in (legacy, first):
+            self.store.save(dict(version=1, enabled=True, event=event))
+        catalog = {'playtest-mike': '', content: ''}
+        pack = read_pack(definition_text(self.store.export_data(catalog)), catalog)
+        rows = [event for event in pack['events'] if event['content_cat_id'] == content]
+        self.assertEqual(len(rows), 2)
+        self.assertEqual(self.store.read(content, 0)['event']['min_day'], 1)
+        self.assertEqual({event.get('milestone') for event in rows}, {None, 0})
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory(); self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)

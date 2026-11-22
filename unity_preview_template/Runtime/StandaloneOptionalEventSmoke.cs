@@ -86,6 +86,7 @@ namespace CatCafePreview
             bool accepted=args.Contains("--optional-accept");
             string branch=accepted?"accepted":"declined";
             if(variant>=0)b.SetOptionalCatalog(CafeOptionalEventJson.Parse(File.ReadAllText(args[variant+1])));
+            else b.SetOptionalCatalog(null); // This scenario exercises the built-in legacy Mike story.
             if(resume)Good(b,"load_game",slot:3);
             else
             {
@@ -174,7 +175,22 @@ namespace CatCafePreview
             }
             double Affinity(string cat)=>b.Simulation.PlayerCat(cat).affinity;
             string[] cats={"cat-mike","cat-tama","cat-sora"};
-            Check(!b.OptionalEventListed,"No pending milestone below its threshold");
+            Check(b.OptionalCandidates.Length==3, "Three first meetings on day one");
+            foreach(string cat in cats)
+            {
+                var pending=b.OptionalForCat(cat);
+                Check(b.BeginOptionalEvent(cat,pending.event_id,pending.revision,b.Simulation.State.instance_id,b.Simulation.State.revision,""),"Start first meeting: "+cat);
+                b.OptionalEvent.progress.node=1;
+            }
+            Good(b,"save_game",slot:5);Good(b,"load_game",slot:5);
+            Check(b.OptionalEvents.All(r=>r.first_meeting && r.progress.node==1),"First meetings retain their individual pages");
+            foreach(string cat in cats)
+            {
+                var first=b.OptionalForCat(cat);
+                Check(first?.milestone==0 && b.Simulation.PlayerAtAffinityMilestone(cat), "First meeting blocks exchange: "+cat);
+                CompleteMilestone(b,first,cat!="cat-tama");
+                Check(!b.Simulation.PlayerAtAffinityMilestone(cat), "First meeting releases exchange: "+cat);
+            }
             NextDay();
             foreach(string cat in cats)
             {
@@ -196,7 +212,7 @@ namespace CatCafePreview
                 b.OptionalEvent.progress.node=1;view.Close();
             }
             Good(b,"save_game",slot:5);Good(b,"load_game",slot:5);apply();
-            Check(b.OptionalEvents.Length==3 && b.OptionalEvents.All(r=>r.progress.node==1 && !r.progress.completed),"All positions survive save and load");
+            Check(b.OptionalEvents.Count(r=>!r.progress.completed)==3 && b.OptionalEvents.Where(r=>!r.progress.completed).All(r=>r.progress.node==1 && !r.progress.completed),"All positions survive save and load");
             var mike=b.OptionalForCat(cats[0]);
             Check(view.OpenEvent(mike.cat_id,mike.event_id,mike.revision) && b.OptionalEvent.progress.node==1,"Resume Mike's first story");
             var row=b.OptionalEvent;row.progress.node=row.introduction.Length;row.progress.page_offset=0;view.Refresh();
@@ -230,11 +246,12 @@ namespace CatCafePreview
                     CompleteMilestone(b,candidate,cat!="cat-tama");
                 }
             }
-            Check(b.OptionalEvents.Count(r=>r.progress.completed)==15,"All fifteen priority stories completed independently");
+            Check(b.OptionalEvents.Count(r=>r.progress.completed)==18,"All eighteen priority stories completed independently");
             b.Journal.Verify(b.Journal.Document);
             Good(b,"save_game",slot:7);Good(b,"load_game",slot:7);
-            Check(b.OptionalEvents.Count(r=>r.progress.completed)==15 && !b.OptionalEventListed,"Fifteen completions persist after reload");
+            Check(b.OptionalEvents.Count(r=>r.progress.completed)==18 && !b.OptionalEventListed,"Eighteen completions persist after reload");
             var archive=b.Replays.Load().entries;
+            Check(b.OptionalEvents.Where(r=>r.first_meeting).All(r=>archive.Any(e=>e.conversation_id==r.progress.conversation_id && e.branch_id==r.progress.branch_id)),"First meeting branches are available in Extra");
             var finale=b.OptionalEvents.Where(r=>r.milestone==100).ToArray();
             Check(finale.Length==3 && finale.All(r=>archive.Any(e=>e.conversation_id==r.progress.conversation_id &&
                 e.branch_id==r.progress.branch_id && e.lines.Last().text==CafeOptionalEvents.Lines(r,r.progress.branch_id).Last().text)),
@@ -357,7 +374,7 @@ namespace CatCafePreview
                     if(pending!=null && b.OptionalReason(pending)=="")
                         Record(pending);
                 }
-                if(b.OptionalEvents.Count(r=>r.progress.completed)==15)break;
+                if(b.OptionalEvents.Count(r=>r.progress.completed)==18)break;
                 var workers=state.cats.Where(c=>c.activity=="cafe" && c.health=="healthy" && c.stamina>0 && !c.cannot_continue)
                     .OrderBy(c=>cats.Contains(c.id)).ThenBy(c=>c.fatigue+c.stress).Take(sim.State.seat_count).Select(c=>c.id).ToArray();
                 if(workers.Length==0)sim.Execute("day_off");
@@ -371,7 +388,7 @@ namespace CatCafePreview
                 if(state.phase=="closed")sim.Execute("next_day");
             }
             File.WriteAllLines(report,rows);
-            Check(b.OptionalEvents.Count(r=>r.progress.completed)==15,"All fifteen milestones reached under shipped rules");
+            Check(b.OptionalEvents.Count(r=>r.progress.completed)==18,"All eighteen milestones reached under shipped rules");
         }
     }
 }

@@ -1,6 +1,6 @@
 """Edit optional stories by image family."""
 import copy
-from optional_events import BRANCHES, MAX_BRANCH_LINES, MILESTONES, ARTWORK_SLOTS, EVENT_BACKGROUNDS, EVENT_STILLS, EVENT_ID, custom_background, event_slot, export_event_pack
+from optional_events import NO_MILESTONE, BRANCHES, MAX_BRANCH_LINES, MILESTONES, ARTWORK_SLOTS, EVENT_BACKGROUNDS, EVENT_STILLS, EVENT_ID, custom_background, event_slot, export_event_pack
 
 
 class OptionalEventEditorWindow:
@@ -26,7 +26,7 @@ class OptionalEventEditorWindow:
         self.content=tk.StringVar(master=self.window)
         self.selector=ttk.Combobox(outer,textvariable=self.content,state='readonly')
         self.selector.pack(fill='x');self.selector.bind('<<ComboboxSelected>>',self.change_target)
-        self.milestones = {'従来の開始条件': 0, **{f'好感度 {value}': value for value in MILESTONES}}
+        self.milestones = {'従来の開始条件': NO_MILESTONE, **{('初対面（好感度0）' if value == 0 else f'好感度 {value}'): value for value in MILESTONES}}
         self.milestone_choice = ttk.Combobox(outer, values=list(self.milestones), state='readonly')
         self.milestone_choice.pack(fill='x')
         self.milestone_choice.bind('<<ComboboxSelected>>', self.change_milestone)
@@ -159,7 +159,7 @@ class OptionalEventEditorWindow:
             variable.set(options[asset])
         for key, value in self.values.items():
             value.set(str(data['event'][key]))
-        self.affinity_entry.configure(state='readonly' if self.slot else 'normal')
+        self.affinity_entry.configure(state='readonly' if self.slot != NO_MILESTONE else 'normal')
         for branch in BRANCHES:
             for frame, _, _ in self.lines[branch]:
                 frame.destroy()
@@ -262,7 +262,7 @@ class OptionalEventEditorWindow:
                 raise ValueError('日数・好感度は整数で入力してください。')
             data['event'][key] = int(data['event'][key])
         data['event'].pop('revision', None)
-        if self.slot and data['event']['min_affinity'] != self.slot:
+        if self.slot != NO_MILESTONE and data['event']['min_affinity'] != self.slot:
             raise ValueError('開始好感度は選択中の節目と一致させてください。')
         if 'artwork' not in data['event'] and any(self.artwork_for(data['event'])):
             data['event']['artwork'] = self.artwork_for(data['event'])
@@ -470,7 +470,7 @@ class OptionalEventEditorWindow:
             self.content_id = content_id
             registered = rows + self.effective_published()['entries']
             slots = [event_slot(row['event']) for row in registered]
-            self.slot = min((slot for cid, slot in slots if cid == content_id), default=0)
+            self.slot = min((slot for cid, slot in slots if cid == content_id), default=NO_MILESTONE)
         self.show_milestone()
         saved=next((r for r in rows if event_slot(r['event']) == (self.content_id, self.slot)),None)
         self.populate(dict(version=1,enabled=saved['enabled'],event=saved['event']) if saved else self.published.read(self.content_id, self.slot))

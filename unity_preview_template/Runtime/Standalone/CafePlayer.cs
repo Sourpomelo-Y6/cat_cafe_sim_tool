@@ -31,11 +31,11 @@ namespace CatCafePreview.Standalone
         public CafeAffinityCap[] AffinityCaps { get; set; } = new CafeAffinityCap[0];
 
         int PlayerAffinityLimit(string id) => AffinityCaps.FirstOrDefault(cap=>cap.cat_id==id)?.affinity
-            ?? (MikeMilestoneLocked && id==CafeOptionalEvents.MikeCatId?CafeOptionalEvents.MikeAffinityMilestone:0);
+            ?? (MikeMilestoneLocked && id==CafeOptionalEvents.MikeCatId?CafeOptionalEvents.MikeAffinityMilestone:-1);
         public bool PlayerAtAffinityMilestone(string id)
         {
             int limit=PlayerAffinityLimit(id);
-            return limit>0 && PlayerCat(id).affinity==limit;
+            return limit>=0 && PlayerCat(id).affinity==limit;
         }
 
         public double PlayerAffinityAfter(CafePlayerSession session)
@@ -95,7 +95,12 @@ namespace CatCafePreview.Standalone
             if(BondWaiting)return "好感度目標の結果を確認してください。";
             string reason=ItemsReason();if(reason!="")return reason;
             var c=State.cats.SingleOrDefault(c=>c.id==id);if(c==null || c.activity!="cafe")return "在店している猫を選んでください。";
-            if(PlayerAtAffinityMilestone(id))return "好感度"+PlayerAffinityLimit(id)+"で上限です。イベント一覧で個別イベントを読み終えると、交流を再開できます。";
+            if(PlayerAtAffinityMilestone(id))
+            {
+                int limit=PlayerAffinityLimit(id);
+                if(limit==0)return "初対面イベントを読むと好感度が上がるようになります。";
+                return "好感度"+limit+"で上限です。イベント一覧で個別イベントを読み終えると、交流を再開できます。";
+            }
             if(c.health!="healthy" || c.cannot_continue || c.stamina<=0)return "療養中・体力切れの猫は遊べません。";
             return PlayerRemaining<=0?"本日の交流回数を使い切りました。":"";
         }

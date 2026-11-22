@@ -14,7 +14,8 @@ FIELDS = ('event_id', 'cat_id', 'content_cat_id', 'min_day', 'min_affinity', 'ti
 BRANCHES = ('introduction', 'accepted', 'declined')
 DEFAULT_LINE_COUNTS = (3, 2, 2)
 MAX_BRANCH_LINES = 20
-MILESTONES = (20, 40, 60, 80, 100)
+NO_MILESTONE = -1
+MILESTONES = (0, 20, 40, 60, 80, 100)
 MAX_FAMILIES = 64
 MAX_DEFINITIONS = MAX_FAMILIES * (len(MILESTONES) + 1)
 EVENT_BACKGROUNDS = {'': '標準の店内', 'mike-window-v1': 'カフェの窓辺'}
@@ -148,7 +149,7 @@ def validate_event(event, *, require_revision=True):
 
 def event_slot(event):
     legacy_mike = event['event_id'] == EVENT_ID and event['min_affinity'] == 20
-    return event['content_cat_id'], event.get('milestone', 20 if legacy_mike else 0)
+    return event['content_cat_id'], event.get('milestone', 20 if legacy_mike else NO_MILESTONE)
 
 
 def validate_pack(data, catalog=None):
@@ -196,13 +197,13 @@ def normalize_event(event):
     return validate_event(clean, require_revision=False)
 
 
-def blank_event(content_id, milestone=0):
+def blank_event(content_id, milestone=NO_MILESTONE):
     if not isinstance(content_id, str) or not re.fullmatch('[a-z][a-z0-9_-]{0,63}',content_id):
         raise ValueError('画像IDが不正です。')
-    return dict(event_id='optional.'+content_id+(f'.affinity-{milestone}' if milestone else '.story'),
+    return dict(event_id='optional.'+content_id+(f'.affinity-{milestone}' if milestone != NO_MILESTONE else '.story'),
                 target_kind='content',content_cat_id=content_id,
-                min_day=2,min_affinity=milestone or 20,title='',accept_caption='',decline_caption='',
-                **({'milestone': milestone} if milestone else {}),
+                min_day=1 if milestone == 0 else 2,min_affinity=20 if milestone == NO_MILESTONE else milestone,title='',accept_caption='',decline_caption='',
+                **({'milestone': milestone} if milestone != NO_MILESTONE else {}),
                 **{branch: [dict(speaker='', text='') for _ in range(count)]
                    for branch, count in zip(BRANCHES, DEFAULT_LINE_COUNTS)})
 
@@ -298,7 +299,7 @@ class OptionalEventStore:
     def read(self, content_id='playtest-mike', milestone=None):
         rows = [r for r in self.read_all()['entries'] if r['event']['content_cat_id'] == content_id]
         if milestone is None:
-            milestone = 20 if content_id == 'playtest-mike' and any(event_slot(r['event'])[1] == 20 for r in rows) else 0
+            milestone = 20 if content_id == 'playtest-mike' and any(event_slot(r['event'])[1] == 20 for r in rows) else min((event_slot(r["event"])[1] for r in rows), default=NO_MILESTONE)
         row = next((r for r in rows if event_slot(r['event'])[1] == milestone), None)
         return dict(version=1,enabled=row['enabled'],event=row['event']) if row else dict(version=1,enabled=True,event=blank_event(content_id, milestone))
 
