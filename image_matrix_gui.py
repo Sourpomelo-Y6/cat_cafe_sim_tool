@@ -8,7 +8,18 @@ from tkinter import ttk
 
 from comfy_client import ComfyClient, GENERATED_DIRECTORY, random_seed, workflow_defaults
 from content_images import load_display_image
-from interaction_texts import MODES, REACTIONS, reactions
+from interaction_texts import MODES, NARRATIVE_SCENES, REACTIONS, reactions, scene_actions
+from interaction_scenes import SPECIAL_ACTIONS
+
+
+SPECIAL_ROWS = {key: label for key, label in NARRATIVE_SCENES.items() if key != "normal"}
+SPECIAL_ROWS.update(SPECIAL_ACTIONS)
+ROW_LABELS = {**REACTIONS, **SPECIAL_ROWS}
+
+
+def scene_key(key):
+    mode, row = key
+    return f"{mode}__{row}" if row in SPECIAL_ROWS else mode
 
 
 POSE = {
@@ -60,13 +71,15 @@ class ImageMatrix:
         self.messages = queue.Queue()
         self.cancel = threading.Event()
         self.window.bind('<Destroy>', self.destroyed)
-        ttk.Label(self.grid, text='反応 ＼ 行動').grid(row=0, column=0)
+        ttk.Label(self.grid, text='反応・特別行動 ＼ 行動').grid(row=0, column=0)
         for col, (mode, label) in enumerate(MODES.items(), 1):
             ttk.Label(self.grid, text=label).grid(row=0, column=col, pady=6)
-            for row, (reaction, title) in enumerate(REACTIONS.items(), 1):
+            for row, (reaction, title) in enumerate(ROW_LABELS.items(), 1):
                 if col == 1:
                     ttk.Label(self.grid, text=title).grid(row=row, column=0, padx=6)
-                if reaction not in reactions('cat_response', mode):
+                supported = (scene_actions(mode, reaction) if reaction in SPECIAL_ROWS
+                             else reaction in reactions('cat_response', mode))
+                if not supported:
                     ttk.Label(self.grid, text='対象外').grid(row=row, column=col)
                     continue
                 key = mode, reaction
@@ -94,8 +107,8 @@ class ImageMatrix:
                 # A metadata file is written after its PNG has finished saving.
                 records = sorted(self.folder(key).glob('*.json'), key=lambda p: p.stat().st_mtime_ns, reverse=True)
                 path = next((p.with_suffix('.png') for p in records if p.with_suffix('.png').is_file()), None)
-                if path is None and key[1] == 'neutral':
-                    path = self.owner.registry.image_path(self.cats[self.cat.get()], key[0])
+                if path is None and (key[1] == 'neutral' or key[1] in SPECIAL_ROWS):
+                    path = self.owner.registry.image_path(self.cats[self.cat.get()], scene_key(key))
                 if path and path.is_file():
                     btn.preview = load_display_image(self.window, path, 100, 78)
                     btn.configure(image=btn.preview, text='')
@@ -111,7 +124,7 @@ class ImageMatrix:
         if self.cat.get() not in self.cats:
             return
         win = tk.Toplevel(self.window)
-        win.title(f'{self.cat.get()} ／ {MODES[key[0]]} ／ {REACTIONS[key[1]]}')
+        win.title(f'{self.cat.get()} ／ {MODES[key[0]]} ／ {ROW_LABELS[key[1]]}')
         path = self.paths.get(key)
         try:
             prompt = self.prompt(key)
@@ -136,7 +149,8 @@ class ImageMatrix:
         win.grab_set()
 
     def prompt(self, key):
-        return self.owner.presets.assemble(self.cats[self.cat.get()], key[0]) + ', ' + POSE[key[1]]
+        base = self.owner.presets.assemble(self.cats[self.cat.get()], scene_key(key))
+        return base if key[1] in SPECIAL_ROWS else base + ', ' + POSE[key[1]]
 
     def fill(self):
         self.start([key for key in self.cells if key not in self.paths])
@@ -153,7 +167,7 @@ class ImageMatrix:
             jobs = []
             for key in keys:
                 settings = dict(defaults, seed=random_seed(), positive=self.prompt(key),
-                                loras=self.owner.lora_settings.active(cat, key[0]))
+                                loras=self.owner.lora_settings.active(cat, scene_key(key)))
                 if ref:
                     settings.update(reference_path=str(ref), denoise=0.65)
                 jobs.append((key, ComfyClient(self.url.get().strip(), self.folder(key)), settings))
@@ -168,12 +182,12 @@ class ImageMatrix:
                 for i, (key, client, settings) in enumerate(jobs, 1):
                     if self.cancel.is_set():
                         return
-                    self.messages.put(('status', f'{i}/{len(jobs)} 生成中　{MODES[key[0]]} ／ {REACTIONS[key[1]]}'))
+                    self.messages.put(('status', f'{i}/{len(jobs)} 生成中　{MODES[key[0]]} ／ {ROW_LABELS[key[1]]}'))
                     path = client.generate(settings, self.cancel)
                     self.messages.put(('image', (key, path)))
                 self.messages.put(('done', f'{len(jobs)}枚の生成が完了しました。'))
             except Exception as exc:
-                self.messages.put(('done', f'{MODES[key[0]]} ／ {REACTIONS[key[1]]} で停止しました：{exc}'))
+                self.messages.put(('done', f'{MODES[key[0]]} ／ {ROW_LABELS[key[1]]} で停止しました：{exc}'))
         threading.Thread(target=work, daemon=True).start()
         self.poll()
 
